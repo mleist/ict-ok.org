@@ -1,0 +1,13 @@
+<div class="bg-315-top">
+  <div class="bg-315-bottom">
+    <h1 i18n:translate="">Console</h1>
+    <!--ul class="state_error">
+      <li>Error...</li>
+      <li>Error...</li>
+      <li>Error...</li>
+    </ul>
+    <ul class="state_warn">
+      <li>Warning...</li>
+    </ul -->
+  </div>
+</div>

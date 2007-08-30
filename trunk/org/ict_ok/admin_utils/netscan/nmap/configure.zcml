@@ -1,0 +1,62 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <class class=".nmap.AdmUtilNMap">
+        <factory
+            id="org.ict_ok.admin_utils.netscan.nmap.nmap.AdmUtilNMap" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.View"
+            interface=".interfaces.IAdmUtilNMap"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.View"
+            set_schema=".interfaces.IAdmUtilNMap"
+            />
+    </class>
+
+    <!--adapter
+        for="org.ict_ok.superclass.interfaces.ISuperclass"
+        provides="org.ict_ok.admin_utils.netscan.nmap.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.netscan.nmap.nmap.SuperclassGenHoneyd"
+        permission="org.ict_ok.admin_utils.netscan.View"
+    />
+
+    <adapter
+        for="org.ict_ok.supernode.interfaces.ISupernode"
+        provides="org.ict_ok.admin_utils.netscan.nmap.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.netscan.nmap.nmap.SupernodeGenHoneyd"
+        permission="org.ict_ok.admin_utils.netscan.View"
+    />
+
+    <adapter
+        for="org.ict_ok.dummycontainer.interfaces.IDummyContainer"
+        provides="org.ict_ok.admin_utils.netscan.nmap.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.netscan.nmap.nmap.DummyContainerGenHoneyd"
+        permission="org.ict_ok.admin_utils.netscan.View"
+    />
+
+    <adapter
+        for="org.ict_ok.dummy.interfaces.IDummy"
+        provides="org.ict_ok.admin_utils.netscan.nmap.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.netscan.nmap.nmap.DummyGenHoneyd"
+        permission="org.ict_ok.admin_utils.netscan.View"
+    /-->
+
+    <!-- setup local utilities -->
+    <subscriber
+                handler=".bootstrap.bootStrapSubscriberDatabase"
+                for="zope.app.appsetup.IDatabaseOpenedEvent"
+                />
+
+    <include package=".browser" />
+    
+</configure>

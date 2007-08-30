@@ -1,0 +1,13 @@
+<html metal:use-macro="views/standard_macros/view">
+    <body>
+        <div metal:fill-slot="body" i18n:domain="ict-ok.org">
+            <h1 i18n:translate="">Interface Details</h1>
+            <!--table>
+                <tr>
+                    <td class="label" i18n:translate="">ikAttr</td>
+                    <td tal:content="context/ikAttr" />
+                </tr>
+            </table-->
+        </div>
+    </body>
+</html>

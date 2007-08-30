@@ -1,0 +1,59 @@
+<html metal:use-macro="views/standard_macros/view">
+    <body>
+        <div metal:fill-slot="body" i18n:domain="ict-ok.org">
+            <h1 i18n:translate="">Jabber Connector Details</h1>
+                <table id="sortable"
+                       class="listing"
+                       tal:condition="context/enableConnector|nothing">
+                       
+                    <tr class="cb_wht">
+                        <td class="label" i18n:translate="">Connector OID</td>
+                        <td tal:content="python: context.getObjectId()" />
+                    </tr>
+                    <tr class="cb_wht" tal:condition="context/ipv4Connector|nothing">
+                        <td class="label" i18n:translate="">Connector IP</td>
+                        <td tal:content="structure context/ipv4Connector" />
+                    </tr>
+                    <tr class="cb_ilx" tal:condition="context/portConnector|nothing">
+                        <td class="label" i18n:translate="">Connector Port</td>
+                        <td tal:content="structure context/portConnector" />
+                    </tr>
+                    <tr class="cb_wht" tal:condition="context/connectorType|nothing">
+                        <td class="label" i18n:translate="">Connector Type</td>
+                        <td tal:content="structure context/connectorType" />
+                    </tr>
+                    <tr class="cb_ilx" tal:condition="context/connectorVersion|nothing">
+                        <td class="label" i18n:translate="">Connector Version</td>
+                        <td tal:content="structure context/connectorVersion" />
+                    </tr>
+                    <tr class="cb_wht" tal:condition="context/hostnameServer|nothing">
+                        <td class="label" i18n:translate="">Jabber servername</td>
+                        <td tal:content="structure context/hostnameServer" />
+                    </tr>
+                    <tr class="cb_ilx" tal:condition="context/portServer|nothing">
+                        <td class="label" i18n:translate="">Jabber serverport</td>
+                        <td tal:content="structure context/portServer" />
+                    </tr>
+                    <tr class="cb_wht" tal:condition="context/authname|nothing">
+                        <td class="label" i18n:translate="">Username</td>
+                        <td tal:content="structure context/authname" />
+                    </tr>
+                    <tr class="cb_ilx" tal:condition="context/authpasswd|nothing">
+                        <td class="label" i18n:translate="">Password</td>
+                        <td tal:content="python: '**' * len(context.authpasswd)" />
+                    </tr>
+                    <tr class="cb_wht" tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+                        <td i18n:translate="">lastSeenConnector</td>
+                        <div tal:omit-tag=""  tal:condition="context/lastSeenConnector">
+                            <td tal:content="python: dateform.format(context.lastSeenConnector)">test</td>
+                        </div>
+                        <div tal:omit-tag=""  tal:condition="not: context/lastSeenConnector">
+                            <td>---</td>
+                        </div>
+                    </tr>
+                </table>
+                <p tal:condition="not: context/enableConnector|nothing"
+                   i18n:translate="">Jabber connector not enabled</p>
+        </div>
+    </body>
+</html>

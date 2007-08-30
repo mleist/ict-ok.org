@@ -1,0 +1,7 @@
+<span tal:omit-tag="" tal:condition="context/@@actions | nothing">
+  <span tal:replace="structure python: '<script type=\'text/javascript\'>'" />
+    <div tal:omit-tag="" tal:repeat="action context/@@actions">
+      <span tal:condition="python: action.has_key('tooltip')" tal:replace="structure python: 'tt%s = new YAHOO.widget.Tooltip(\'tt%s\', { autodismissdelay:\'15000\', context:\'%s\', text:\'%s\' });' % (action['oid'],action['oid'],action['oid'],action['tooltip'].replace('\047', '\\\047'))" />
+    </div>
+  <span tal:replace="structure python: '</script>'" />
+</span>

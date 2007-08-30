@@ -1,0 +1,61 @@
+<i18n:block domain="jsa.key">
+  <!--<div class="message"-->
+       <!--tal:condition="view/status"-->
+       <!--tal:content="view/status"-->
+       <!--i18n:translate="">-->
+    <!--Something happened.-->
+  <!--</div>-->
+  <div class="error" tal:condition="request/expired | nothing">
+    Your session has expired.
+  </div>
+  <div class="error" tal:condition="request/forbidden | nothing">
+    You are not allowed to access this page.  You can click on the back
+    button in your browser to go back, or ask a more privileged user to log
+    in.
+  </div>
+  <!--<div class="error" tal:condition="view/error" tal:content="view/error" />-->
+  <h1 i18n:translate="">
+    Please enter your username and password.<br />
+  </h1>
+  <form action="@@login.html" method="post">
+    <input type="hidden" name="nexturl"
+          tal:condition="request/nexturl | nothing"
+          tal:attributes="value request/nexturl" />
+    <table class="form-login">
+      <tr class="row">
+        <td class="label">
+          <label for="form-widgets-sitename">
+            <span i18n:translate="">Username</span>
+          </label>
+        </td>
+        <td class="fields">
+          <div class="widget">
+            <input type="text" id="form-username" size="30" 
+               name="username"
+               tal:attributes="value request/username|nothing" />
+          </div>
+        </td>
+      </tr>
+      <tr class="row">
+        <td class="label">
+          <label for="form-widgets-sitename">
+            <span i18n:translate="">Password</span>
+          </label>
+        </td>
+        <td class="fields">
+          <div class="widget">
+            <input type="password" id="form-password" size="30" 
+               name="password" />
+          </div>
+        </td>
+      </tr>
+        <td class="label">
+        </td>
+        <td class="field">
+          <input type="submit" name="LOGIN" value="Log in" accesskey="L" />
+        </td>
+      <tr class="row">
+      </tr>
+    </table>
+  </form>
+</i18n:block>

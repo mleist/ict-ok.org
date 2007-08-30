@@ -1,0 +1,69 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <!--subscriber
+        handler=".objmq.objCreatedEventSubscriber"
+        for="zope.lifecycleevent.interfaces.IObjectCreatedEvent"
+        /-->
+
+    <!--subscriber
+        handler=".objmq.objModifiedEventSubscriber"
+        for="zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        /-->
+
+    <!--<browser:page-->
+        <!--name="history.html"-->
+        <!--for="org.ict_ok.components.superclass.interfaces.ISuperclass"-->
+        <!--template="history.pt"-->
+        <!--class=".superclass.SuperclassDetails"-->
+        <!--permission="zope.View"-->
+        <!--menu="zmi_views" title="History"-->
+    <!--/>-->
+
+    <!--<browser:page-->
+        <!--name="dumpdata.html"-->
+        <!--for="org.ict_ok.components.superclass.interfaces.ISuperclass"-->
+        <!--template="dumpdata.pt"-->
+        <!--class=".superclass.SuperclassDetails"-->
+        <!--permission="zope.Security"-->
+        <!--menu="zmi_views" title="Dump Data"-->
+    <!--/>-->
+
+    <!--<adapter-->
+        <!--factory=".adapter.ikpickle.Pickle"-->
+    <!--/>-->
+    <adapter
+        factory=".adapter.ticker.Ticker"
+    />
+    <adapter
+        factory=".adapter.search.Searchable"
+    />
+    <adapter
+        factory=".adapter.namechooser.SuperclassNameChooser"
+        />
+    <adapter
+        factory=".adapter.namechooser.ZRootFolderNameChooser"
+        />
+    <adapter
+        factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"
+        provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
+        for=".interfaces.ISuperclass"
+    />
+
+    <subscriber handler=".objmq.notifyCopiedEvent" />
+    <subscriber handler=".objmq.notifyCreatedEvent" />
+    <subscriber handler=".objmq.notifyModifiedEvent" />
+    <subscriber handler=".dublincore.updateSuperclassDCTitle" />
+    <subscriber handler=".dublincore.createSuperclassDCTitle" />
+
+    <include package=".browser" />
+
+</configure>

@@ -1,0 +1,9 @@
+<div id="header-breadcrumbs">
+  <tal:block tal:repeat="crumb context/@@breadcrumbs/crumbs">
+    <a href=""
+        tal:content="string:${crumb/name}"
+        tal:attributes="href string:${crumb/url}"
+        >item</a>
+    <tal:block condition="not:repeat/crumb/end">&gt;</tal:block>
+  </tal:block>
+</div>

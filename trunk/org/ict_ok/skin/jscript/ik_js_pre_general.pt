@@ -1,0 +1,12 @@
+<script type="text/javascript" src="js/yahoo.js"
+        tal:attributes="src context/++resource++yui/yahoo/yahoo.js"></script>
+<script type="text/javascript" src="js/dom.js"
+        tal:attributes="src context/++resource++yui/dom/dom.js"></script>
+<script type="text/javascript" src="js/event.js"
+        tal:attributes="src context/++resource++yui/event/event.js"></script>
+<script type="text/javascript" src="js/container.js"
+        tal:attributes="src context/++resource++yui/container/container.js"></script>
+<script type="text/javascript" src="js/connection.js"
+        tal:attributes="src context/++resource++yui/connection/connection.js"></script>
+<script type="text/javascript" src="js/treeview.js"
+        tal:attributes="src context/++resource++yui/treeview/treeview.js"></script>

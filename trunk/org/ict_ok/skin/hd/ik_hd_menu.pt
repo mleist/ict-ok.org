@@ -1,0 +1,11 @@
+<i18n:block domain="ict_ok.org">
+  <DIV id="header-help">
+    <ul>
+      <li><!--a i18n:translate="" href="#"-->[Version]<!--/a--></li>
+      <li><!--a i18n:translate="" href="#"-->[Hilfe]<!--/a--></li>
+      <li><a i18n:translate="" href="/@@preferences">[Preferences]</a></li>
+      <li id="ikh_login"><a tal:omit-tag="" tal:content="structure context/@@login_logout">Login</a></li>
+      <li class="mp0 noborder"><!--a i18n:translate="" href="#"-->[Sprache]<!--/a--></li>
+    </ul>
+  </DIV>
+</i18n:block>

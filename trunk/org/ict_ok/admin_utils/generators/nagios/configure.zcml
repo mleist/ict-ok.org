@@ -1,0 +1,80 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <permission
+        id="org.ict_ok.admin_utils.generators.nagios.View"
+        title="View from AdmUtilGeneratorNagios"
+        description="View from AdmUtilGeneratorNagios."
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.generators.nagios.Edit"
+        title="Edit from AdmUtilGeneratorNagios"
+        description="Edit from AdmUtilGeneratorNagios."
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.generators.nagios.Add"
+        title="Add from AdmUtilGeneratorNagios"
+        description="Add from AdmUtilGeneratorNagios."
+    />
+
+    <class class=".nagios.AdmUtilGeneratorNagios">
+        <factory
+            id="org.ict_ok.admin_utils.generators.nagios.nagios.AdmUtilGeneratorNagios" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.generators.nagios.View"
+            interface=".interfaces.IAdmUtilGeneratorNagios"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.generators.nagios.View"
+            set_schema=".interfaces.IAdmUtilGeneratorNagios"
+            />
+    </class>
+
+    <adapter
+        for="org.ict_ok.superclass.interfaces.ISuperclass"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IIKGenNagios"
+        factory="org.ict_ok.admin_utils.generators.nagios.nagios.SuperclassGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+    <adapter
+        for="org.ict_ok.supernode.interfaces.ISupernode"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IIKGenNagios"
+        factory="org.ict_ok.admin_utils.generators.nagios.nagios.SupernodeGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+    <!--adapter
+        for="org.ict_ok.dummycontainer.interfaces.IDummyContainer"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IIKGenNagios"
+        factory="org.ict_ok.admin_utils.generators.nagios.nagios.DummyContainerGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+    <adapter
+        for="org.ict_ok.dummy.interfaces.IDummy"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IIKGenNagios"
+        factory="org.ict_ok.admin_utils.generators.nagios.nagios.DummyGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    /-->
+
+    <!-- setup local utilities -->
+    <subscriber
+                handler=".bootstrap.bootStrapSubscriberDatabase"
+                for="zope.app.appsetup.IDatabaseOpenedEvent"
+                />
+
+    <include package=".browser" />
+    
+</configure>

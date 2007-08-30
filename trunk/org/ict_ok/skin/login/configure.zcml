@@ -1,0 +1,43 @@
+<configure
+	xmlns="http://namespaces.zope.org/browser"
+	xmlns:z3c="http://namespaces.zope.org/z3c"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+	<page
+		name="login_logout"
+		for="*"
+		class="zope.app.security.browser.auth.LoginLogout"
+		layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+		permission="zope.Public"
+		/>
+	<page
+		name="loginForm.html"
+		for="*"
+		permission="zope.Public"
+		template="loginform.pt"
+		layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+		/>
+	<z3c:pagelet
+		name="login.html"
+		for="*"
+		class="org.ict_ok.skin.login.AuthenticationLogin"
+		layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+		permission="zope.Public"
+		/>
+	<z3c:pagelet
+		name="logout.html"
+		for="*"
+		class="org.ict_ok.skin.login.AuthenticationLogout"
+		layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+		permission="zope.Public"
+		/>
+    <z3c:template
+		template="login.pt"
+		for="org.ict_ok.skin.login.AuthenticationLogin"
+		layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+		/>
+
+</configure>

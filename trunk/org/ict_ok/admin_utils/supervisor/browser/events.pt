@@ -1,0 +1,22 @@
+<html metal:use-macro="views/standard_macros/view">
+<body>
+    <div metal:fill-slot="body" i18n:domain="ict-ok.org">
+	  <h1 i18n:translate="">Events</h1>
+      <table id="sortable" class="listing" summary="Content listing"
+                   i18n:attributes="summary">
+        <tr>
+          <th i18n:translate="">Start number</th>
+          <th i18n:translate="">Date</th>
+          <th i18n:translate="">Message</th>
+        </tr>
+	      <span tal:omit-tag="" tal:repeat="Event view/getlastEvents">
+          <tr>
+            <td tal:content="structure python:Event['nbr']" />
+            <td tal:content="structure python:Event['date'].strftime('%d.%m.%Y %H:%M:%S (%Z)')" />
+            <td tal:content="structure python:Event['msg']" />
+          </tr>
+        </span>
+      </table>
+    </div>
+	</body>
+</html>

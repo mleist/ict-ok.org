@@ -1,0 +1,68 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <class class=".jabber.NotifierJabber">
+        <factory
+            id="org.ict_ok.admin_utils.notifier.jabber.jabber.NotifierJabber" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.View"
+            interface=".interfaces.INotifierJabber"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.View"
+            set_schema=".interfaces.INotifierJabber"
+            />
+    </class>
+
+    <!--adapter
+        for="org.ict_ok.superclass.interfaces.ISuperclass"
+        provides="org.ict_ok.admin_utils.notifier.jabber.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.jabber.jabber.SuperclassGenHoneyd"
+        permission="org.ict_ok.admin_utils.notifier.View"
+    />
+
+    <adapter
+        for="org.ict_ok.supernode.interfaces.ISupernode"
+        provides="org.ict_ok.admin_utils.notifier.jabber.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.jabber.jabber.SupernodeGenHoneyd"
+        permission="org.ict_ok.admin_utils.notifier.View"
+    />
+
+    <adapter
+        for="org.ict_ok.dummycontainer.interfaces.IDummyContainer"
+        provides="org.ict_ok.admin_utils.notifier.jabber.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.jabber.jabber.DummyContainerGenHoneyd"
+        permission="org.ict_ok.admin_utils.notifier.View"
+    />
+
+    <adapter
+        for="org.ict_ok.dummy.interfaces.IDummy"
+        provides="org.ict_ok.admin_utils.notifier.jabber.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.jabber.jabber.DummyGenHoneyd"
+        permission="org.ict_ok.admin_utils.notifier.View"
+    /-->
+
+    <subscriber handler=".jabber.notifyModifiedEvent" />
+
+    <!-- setup local utilities -->
+    <subscriber
+                handler=".bootstrap.bootStrapSubscriberDatabase_step1"
+                for="zope.app.appsetup.IDatabaseOpenedEvent"
+                />
+    <subscriber
+                handler=".bootstrap.bootStrapSubscriberDatabase_step2"
+                for="zope.app.appsetup.IDatabaseOpenedEvent"
+                />
+
+    <include package=".browser" />
+    
+</configure>
