@@ -17,7 +17,7 @@ Version information
 """
 
 ##
-## Do 15 MÃ¤r 17:24:24 CET 2007
+## 3.14
 ##
 
 import re
