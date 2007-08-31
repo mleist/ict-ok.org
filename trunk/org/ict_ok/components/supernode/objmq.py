@@ -41,7 +41,7 @@ def notifyAddedEvent(instance, event):
     """
     #logger.info(u"supernode.objmq.notifyAddedEvent: event: %s" % event)
     supervisor = queryUtility(IAdmUtilSupervisor)
-    if supervisor.isSlave():
+    if supervisor and supervisor.isSlave():
         if hasattr(event.object, "getObjectId"):
             objectOid = event.object.getObjectId()
         else:
@@ -101,7 +101,7 @@ def notifyRemovedEvent(instance, event):
     """
     #logger.info(u"supernode.objmq.notifyRemovedEvent: event: %s" % event)
     supervisor = queryUtility(IAdmUtilSupervisor, context=instance)
-    if supervisor.isSlave():
+    if supervisor and supervisor.isSlave():
         if hasattr(event.object, "getObjectId"):
             objectOid = event.object.getObjectId()
         else:
