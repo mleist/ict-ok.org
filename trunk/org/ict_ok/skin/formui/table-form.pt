@@ -1,12 +1,12 @@
 <form action="." method="post" enctype="multipart/form-data" class="edit-form"
       metal:define-macro="form"
-      tal:attributes="method view/method;
-                      enctype view/enctype;
-                      acceptCharset view/acceptCharset;
-                      accept view/accept;
-                      action view/action;
-                      name view/name;
-                      id view/id">
+      tal:attributes="method view/method|nothing;
+                      enctype view/enctype|nothing;
+                      acceptCharset view/acceptCharset|nothing;
+                      accept view/accept|nothing;
+                      action view/action|nothing;
+                      name view/name|nothing;
+                      id view/id|nothing">
   <div class="viewspace" metal:define-slot="viewspace">
     <metal:block define-slot="label">
       <h1 metal:define-macro="label"
@@ -111,7 +111,8 @@
   </div>
   <metal:block define-slot="buttons">
     <div metal:define-macro="buttons">
-      <div class="buttons" metal:define-slot="bottom-buttons">
+      <div class="buttons" tal:condition="view/actions|nothing"
+          metal:define-slot="bottom-buttons">
         <input tal:repeat="action view/actions/values"
                tal:replace="structure action/render" />
       </div>
