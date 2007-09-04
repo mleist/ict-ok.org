@@ -74,12 +74,12 @@ class GlobalCronUtility(object):
         super(GlobalCronUtility, self).__init__(self)
 
     def subscribeToCron(self, obj):
-        logger.info(u"GlobalCronUtility::subscribe2cron(%s)" % obj)
+        #logger.info(u"GlobalCronUtility::subscribe2cron(%s)" % obj)
         if obj not in self.subscriber_list:
             self.subscriber_list.append(obj)
 
     def unsubscribeFromCron(self, obj):
-        logger.info(u"GlobalCronUtility::unsubscribeFromCron(%s)" % obj)
+        #logger.info(u"GlobalCronUtility::unsubscribeFromCron(%s)" % obj)
         if obj in self.subscriber_list:
             self.subscriber_list.remove(obj)
 

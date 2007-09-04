@@ -84,14 +84,14 @@ class GlobalEventCrossbarUtility(object):
         super(GlobalEventCrossbarUtility, self).__init__(self)
 
     def subscribeToEventCrossbar(self, obj):
-        logger.info(u"GlobalEventCrossbarUtility::"
-                    u"subscribe2eventcrossbar(%s)" % obj)
+        #logger.info(u"GlobalEventCrossbarUtility::"
+                    #u"subscribe2eventcrossbar(%s)" % obj)
         if obj not in self.subscriber_list:
             self.subscriber_list.append(obj)
 
     def unsubscribeFromEventCrossbar(self, obj):
-        logger.info(u"GlobalEventCrossbarUtility::"
-                    u"unsubscribeFromEventCrossbar(%s)" % obj)
+        #logger.info(u"GlobalEventCrossbarUtility::"
+                    #u"unsubscribeFromEventCrossbar(%s)" % obj)
         if obj in self.subscriber_list:
             self.subscriber_list.remove(obj)
 

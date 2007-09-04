@@ -114,7 +114,7 @@ class ApplicationBase:
     zope.interface.implements(interfaces.IWorkItem)
 
     def __init__(self, participant):
-        print "ApplicationBase::__init__"
+        #print "ApplicationBase::__init__"
         self.participant = participant
         work_list.append(self)
         #participant.user.work_list.append(self)
@@ -132,16 +132,17 @@ class service_nagios1_app1(ApplicationBase):
     """ """
     implements(IAppService_Init)
     def __init__(self, participant):
-        print "%%%%%%%%%%%% service_nagios1_app1::__init__(1)"
+        #print "%%%%%%%%%%%% service_nagios1_app1::__init__(1)"
         self.process = participant.activity.process
         setattr(self.process.workflowRelevantData, 'transitionName', "-")
         #super(AppService_Init, self).__init__(participant)
         ApplicationBase.__init__(self, participant)
     def start(self, *arguments):
-        print "%%%%%%%%%%%% service_nagios1_app1::start(1)"
+        #print "%%%%%%%%%%%% service_nagios1_app1::start(1)"
         self.addStartedWorkitem()
     def addStartedWorkitem(self):
-        print "%%%%%%%%%%%% service_nagios1_app1::addStartedWorkitem()"
+        #print "%%%%%%%%%%%% service_nagios1_app1::addStartedWorkitem()"
+        pass
 
 integration.service_nagios1_app1 = service_nagios1_app1
 
@@ -149,36 +150,37 @@ class service_nagios1_app1WorkItem(ApplicationBase):
     """ """
     implements(IAppService_Init)
     def __init__(self, participant):
-        print "%%%%%%%%%%%% service_nagios1_app1WorkItem::__init__(1)"
+        #print "%%%%%%%%%%%% service_nagios1_app1WorkItem::__init__(1)"
         self.process = participant.activity.process
         setattr(self.process.workflowRelevantData, 'transitionName', "-")
         #super(AppService_Init, self).__init__(participant)
         ApplicationBase.__init__(self, participant)
     def start(self, *arguments):
-        print "%%%%%%%%%%%% service_nagios1_app1WorkItem::start(1)"
+        #print "%%%%%%%%%%%% service_nagios1_app1WorkItem::start(1)"
         self.addStartedWorkitem()
     def addStartedWorkitem(self):
-        print "%%%%%%%%%%%% service_nagios1_app1WorkItem::addStartedWorkitem()"
+        #print "%%%%%%%%%%%% service_nagios1_app1WorkItem::addStartedWorkitem()"
+        pass
 
 integration.service_nagios1_app1WorkItem = service_nagios1_app1WorkItem
 
 
 proc = pd()
 
-print "----------->"
-print dir(pd)
+#print "----------->"
+#print dir(pd)
 
 from zope.component import queryUtility
 from org.ict_ok.admin_utils.wfmc.interfaces import \
      IAdmUtilWFMC
 
 utilWFMC = queryUtility(IAdmUtilWFMC)
-print "utilWFMC: %s" % utilWFMC
+#print "utilWFMC: %s" % utilWFMC
 
 from zope.app import zapi
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 mq_utility = zapi.queryUtility(IAdmUtilObjMQ)
-print "mq_utility: %s" % mq_utility
+#print "mq_utility: %s" % mq_utility
 
 proc.start()
 

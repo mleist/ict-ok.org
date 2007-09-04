@@ -35,6 +35,11 @@
             />
     </class>
 
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
     <adapter
         factory=".adapter.sized.NetSized"
         />
@@ -53,11 +58,6 @@
     <!--<adapter-->
         <!--factory=".adapter.ticker.Ticker"-->
     <!--/>-->
-
-    <subscriber
-        handler=".bootstrap.bootStrapSubscriber"
-        for="zope.app.appsetup.IDatabaseOpenedEvent"
-        />
 
     <adapter
         factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"

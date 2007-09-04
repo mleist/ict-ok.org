@@ -79,7 +79,7 @@ class HostDetails(SupernodeDetails):
              IAdmUtilWFMC
         
         utilWFMC = queryUtility(IAdmUtilWFMC)
-        print "utilWFMC: %s" % utilWFMC
+        #print "utilWFMC: %s" % utilWFMC
         
         from org.ict_ok.components.host.wf import pd
         return pd.activities

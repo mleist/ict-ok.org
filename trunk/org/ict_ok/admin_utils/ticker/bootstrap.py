@@ -20,6 +20,7 @@ import transaction
 from datetime import datetime
 
 # zope imports
+from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
@@ -33,10 +34,11 @@ from org.ict_ok.admin_utils.ticker.ticker import AdmUtilTicker
 
 logger = logging.getLogger("AdmUtilTicker")
 
-
 def bootStrapSubscriberDatabase(event):
     """initialisation of ict_ok supervisor on first database startup
     """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     TickerThread.database = event.database
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)

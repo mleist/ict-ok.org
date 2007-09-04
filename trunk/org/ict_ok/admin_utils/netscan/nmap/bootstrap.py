@@ -7,6 +7,8 @@
 #
 # $Id$
 #
+# pylint: disable-msg=E1101
+#
 """startup of subsystem"""
 
 __version__ = "$Id$"
@@ -17,6 +19,7 @@ import transaction
 from datetime import datetime
 
 # zope imports
+from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
@@ -33,6 +36,8 @@ logger = logging.getLogger("AdmUtilNMap")
 def bootStrapSubscriberDatabase(event):
     """initialisation of nmap-generator utility on first database startup
     """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 

@@ -7,6 +7,8 @@
 #
 # $Id$
 #
+# pylint: disable-msg=E1101
+#
 """startup of subsystem"""
 
 __version__ = "$Id$"
@@ -18,6 +20,7 @@ from datetime import datetime
 from pytz import timezone
 
 # zope imports
+from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
@@ -32,12 +35,14 @@ from zope.index.text.interfaces import ISearchableText
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 
-logger = logging.getLogger("Supernode")
+logger = logging.getLogger("Compon. Supernode")
 berlinTZ = timezone('Europe/Berlin')
 
 def bootStrapSubscriber(event):
     """initialisation of IntId utility on first database startup
     """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 
@@ -85,7 +90,6 @@ def bootStrapSubscriber(event):
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made ICatalog-Utility")
         
-    print "################################################org"
     # search in global component registry
     sitem = root_folder.getSiteManager()
     # search for ICatalog

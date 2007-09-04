@@ -7,14 +7,18 @@
 #
 # $Id$
 #
+# pylint: disable-msg=E1101
+#
 """startup of subsystem"""
 
 __version__ = "$Id$"
 
 # phython imports
+import logging
 import transaction
 
 # zope imports
+from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
@@ -23,10 +27,13 @@ from zope.index.text.interfaces import ISearchableText
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 
+logger = logging.getLogger("Compon. Service")
 
 def bootStrapSubscriber(event):
     """initialisation of IntId utility on first database startup
     """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
     # search in global component registry

@@ -137,13 +137,13 @@ class GlobalEsxVimUtility(object):
         return datetime.utcnow() - self.timeStarted
 
     def subscribeToEsxVim(self, obj):
-        logger.info(u"GlobalEsxVimUtility::subscribe2esx_vim(%s)" % obj)
+        #logger.info(u"GlobalEsxVimUtility::subscribe2esx_vim(%s)" % obj)
         if obj not in self.subscriber_list:
             self.subscriber_list.append(obj)
             self.connection_dict[obj.getObjectId()] = None
 
     def unsubscribeFromEsxVim(self, obj):
-        logger.info(u"GlobalEsxVimUtility::unsubscribeFromEsxVim(%s)" % obj)
+        #logger.info(u"GlobalEsxVimUtility::unsubscribeFromEsxVim(%s)" % obj)
         if obj in self.subscriber_list:
             self.subscriber_list.remove(obj)
             del self.connection_dict[obj.getObjectId()]

@@ -19,6 +19,7 @@ import transaction
 from datetime import datetime
 
 # zope imports
+from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
@@ -36,6 +37,8 @@ logger = logging.getLogger("NotifierJabber")
 def bootStrapSubscriberDatabase_step1(event):
     """initialisation of jabber-generator utility on first database startup
     """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     print "bootStrapSubscriberDatabase_step1"
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)

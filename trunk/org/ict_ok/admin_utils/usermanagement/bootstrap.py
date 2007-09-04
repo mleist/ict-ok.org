@@ -19,6 +19,7 @@ import transaction
 from datetime import datetime
 
 # zope imports
+from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
@@ -39,6 +40,8 @@ logger = logging.getLogger("AdmUtilUserManagement")
 def bootStrapSubscriberDatabase(event):
     """initialisation of usermanagement utility on first database startup
     """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 
@@ -85,10 +88,18 @@ def bootStrapSubscriberDatabase(event):
         principals[u'Manager'] = p_manager
         principals[u'Administrator'] = p_admin
         principals[u'Developer'] = p_developer
-        grp_usr = GroupInformation(u'User', u'view & analyse data, generate reports & leave notes at any object')
-        grp_mgr = GroupInformation(u'Manager', u'search, connect, configure & delete devices')
-        grp_adm = GroupInformation(u'Administrator', u'install, configure & administrate System')
-        grp_dvl = GroupInformation(u'Developer', u'individual adaption & development on System')
+        grp_usr = GroupInformation(u'User',
+                                   u'view & analyse data, generate reports '
+                                   u'& leave notes at any object')
+        grp_mgr = GroupInformation(u'Manager',
+                                   u'search, connect, configure '
+                                   u'& delete devices')
+        grp_adm = GroupInformation(u'Administrator',
+                                   u'install, configure '
+                                   u'& administrate System')
+        grp_dvl = GroupInformation(u'Developer',
+                                   u'individual adaption '
+                                   u'& development on System')
         grp_usr.principals = [u'principal.User']
         grp_mgr.principals = [u'principal.Manager']
         grp_adm.principals = [u'principal.Administrator']

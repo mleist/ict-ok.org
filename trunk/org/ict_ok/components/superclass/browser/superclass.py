@@ -264,7 +264,7 @@ class SuperclassDetails:
         """
         import pprint
         obj = removeAllProxies(self.context)
-        print "1------------------------------->", obj
+        #print "1------------------------------->", obj
         pickleAdapter = IPickle(obj)
         if pickleAdapter:
             return pprint.pformat(pickleAdapter.exportAsDict(), \

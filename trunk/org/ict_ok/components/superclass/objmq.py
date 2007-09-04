@@ -34,7 +34,7 @@ from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 #from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 
-logger = logging.getLogger("Superclass")
+logger = logging.getLogger("Compon. Superclass")
 
 
 @adapter(ISuperclass, IObjectCopiedEvent)
@@ -51,7 +51,7 @@ def notifyCopiedEvent(instance, event):
         originalOid = None
     print "originalOid: %s" % originalOid
     mq_utility = queryUtility(IAdmUtilObjMQ)
-    print "mq_utility: %s" % mq_utility
+    #print "mq_utility: %s" % mq_utility
     
 
 @adapter(ISuperclass, IObjectCreatedEvent)

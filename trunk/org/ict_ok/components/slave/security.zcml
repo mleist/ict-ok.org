@@ -8,8 +8,6 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007 Ingenieurbuero IKOM,
          Markus Leist <leist at ikom-online.de> -->
 
-    <include package="org.ict_ok.components.supernode"/>
-
     <permission
         id="org.ict_ok.slave.View"
         title="View Dummy Entry"

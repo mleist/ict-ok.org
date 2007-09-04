@@ -18,8 +18,8 @@ import logging
 import transaction
 from datetime import datetime
 
-
 # zope imports
+from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
@@ -35,6 +35,8 @@ logger = logging.getLogger("Notifier")
 def bootStrapSubscriberDatabase(event):
     """initialisation of Message-Queue-Utility on first database startup
     """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 

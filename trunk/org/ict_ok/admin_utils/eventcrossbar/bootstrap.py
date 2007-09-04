@@ -19,6 +19,7 @@ import transaction
 from datetime import datetime
 
 # zope imports
+from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
@@ -28,10 +29,15 @@ from zope.app.container.interfaces import IContainer
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
-from org.ict_ok.admin_utils.eventcrossbar.interfaces import IAdmUtilEventCrossbar
-from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import AdmUtilEventCrossbar
-from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import globalEventCrossbarUtility
-from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import ContentDDD
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEventCrossbar
+from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import \
+     AdmUtilEventCrossbar
+from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import \
+     globalEventCrossbarUtility
+# TODO ContentDDD grrrr
+from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import \
+     ContentDDD
 
 logger = logging.getLogger("AdmUtilEventCrossbar")
 
@@ -52,6 +58,8 @@ def recursiveEventCrossbarSubscriber(obj):
 def bootStrapSubscriberDatabase(event):
     """initialisation of eventcrossbar utility on first database startup
     """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 
