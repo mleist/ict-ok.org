@@ -38,8 +38,8 @@ _ = MessageFactory('org.ict_ok')
 class AdmUtilWFMCDetails(SupernodeDetails):
     """Browser implementation of WFMC picture generator
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
     def getIMGFile(self):
         """get dot file and convert to png
@@ -79,13 +79,13 @@ class AdmUtilWFMCDetails(SupernodeDetails):
 
 class ViewAdmUtilWFMCForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of graphviz adapter')
+    label = _(u'settings of workflow manager')
     fields = field.Fields(IAdmUtilWFMC).omit(\
         *AdmUtilWFMCDetails.omit_viewfields)
 
 
 class EditAdmUtilWFMCForm(EditForm):
     """ Edit for for net """
-    label = _(u'edit graphviz adapter')
+    label = _(u'edit workflow manager')
     fields = field.Fields(IAdmUtilWFMC).omit(\
         *AdmUtilWFMCDetails.omit_editfields)

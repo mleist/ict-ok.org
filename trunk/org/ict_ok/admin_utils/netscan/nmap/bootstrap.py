@@ -52,7 +52,7 @@ def bootStrapSubscriberDatabase(event):
     if isinstance(madeNmap, AdmUtilNMap):
         logger.info(u"bootstrap: Ensure named AdmUtilNMap")
         dcore = IWriteZopeDublinCore(madeNmap)
-        dcore.title = u"Net Scanner"
+        dcore.title = u"Net Scanner (NMap)"
         dcore.created = datetime.utcnow()
         madeNmap.__post_init__()
         sitem = root_folder.getSiteManager()

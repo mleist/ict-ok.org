@@ -65,8 +65,8 @@ class MSubEvents(GlobalMenuSubItem):
 class AdmUtilSupervisorDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
     def getlastEvents(self):
         """convert event history for display
@@ -201,13 +201,13 @@ class Events(BrowserPagelet):
 
 class ViewAdmUtilSupervisorForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of graphviz adapter')
+    label = _(u'settings of supervisor')
     fields = field.Fields(IAdmUtilSupervisor).omit(\
         *AdmUtilSupervisorDetails.omit_viewfields)
 
 
 class EditAdmUtilSupervisorForm(EditForm):
     """ Edit for for net """
-    label = _(u'edit graphviz adapter')
+    label = _(u'edit supervisor')
     fields = field.Fields(IAdmUtilSupervisor).omit(\
         *AdmUtilSupervisorDetails.omit_editfields)

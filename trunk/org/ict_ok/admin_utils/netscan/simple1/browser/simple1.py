@@ -37,8 +37,8 @@ class AdmUtilSimple1Details(SupernodeDetails):
     """
     Browser details for simple1-generator
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
     def getConfig(self):
         """Trigger configuration by web browser
@@ -51,13 +51,13 @@ class AdmUtilSimple1Details(SupernodeDetails):
 
 class ViewAdmUtilSimple1Form(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of graphviz adapter')
+    label = _(u'settings of simple scanner')
     fields = field.Fields(IAdmUtilSimple1).omit(\
         *AdmUtilSimple1Details.omit_viewfields)
 
 
 class EditAdmUtilSimple1Form(EditForm):
     """ Edit for for net """
-    label = _(u'edit graphviz adapter')
+    label = _(u'edit simple scanner')
     fields = field.Fields(IAdmUtilSimple1).omit(\
         *AdmUtilSimple1Details.omit_editfields)

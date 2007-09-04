@@ -37,8 +37,8 @@ class AdmUtilNMapDetails(SupernodeDetails):
     """
     Browser details for nmap-generator
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
     def getConfig(self):
         """Trigger configuration by web browser
@@ -51,13 +51,13 @@ class AdmUtilNMapDetails(SupernodeDetails):
 
 class ViewAdmUtilNMapForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of graphviz adapter')
+    label = _(u'settings of nmap scanner')
     fields = field.Fields(IAdmUtilNMap).omit(\
         *AdmUtilNMapDetails.omit_viewfields)
 
 
 class EditAdmUtilNMapForm(EditForm):
     """ Edit for for net """
-    label = _(u'edit graphviz adapter')
+    label = _(u'edit nmap scanner')
     fields = field.Fields(IAdmUtilNMap).omit(\
         *AdmUtilNMapDetails.omit_editfields)

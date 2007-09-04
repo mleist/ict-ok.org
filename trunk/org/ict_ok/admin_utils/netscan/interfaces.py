@@ -27,14 +27,13 @@ class INetScan(ISupernode):
     """
     component for scanning local network
     """
-    
     scannerSet = Set (
         title = _("Network Scanners"),
         description = _("Which network scanners should be triggerd"),
         value_type = Choice(
             title = _("Network Scanner"),
-            vocabulary = "NetScannerInstances",),
-            #values = [ u"nmap", u"kmap", u"omap"]),
+            vocabulary="NetScannerInstances"),
+        default=set([]),
         readonly = False,
         required = True)
     

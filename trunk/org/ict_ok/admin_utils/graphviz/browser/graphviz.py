@@ -36,8 +36,8 @@ _ = MessageFactory('org.ict_ok')
 class AdmUtilGraphvizDetails(SupernodeDetails):
     """Browser implementation of Graphviz picture generator
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
     def getPngFile(self):
         """get dot file and convert to png

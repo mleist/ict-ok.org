@@ -19,7 +19,7 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
-from zope.component import queryUtility
+from zope.component import queryUtility, getAllUtilitiesRegisteredFor
 from zope.i18nmessageid import MessageFactory
 
 
@@ -30,6 +30,7 @@ from zc.table.column import GetterColumn
 from z3c.form import field
 
 # ict-ok.org imports
+from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -57,6 +58,8 @@ from org.ict_ok.components.superclass.browser import \
      superclass
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
+from org.ict_ok.admin_utils.ticker.interfaces import \
+     IAdmUtilTicker
 
 _ = MessageFactory('org.ict_ok')
 
@@ -68,8 +71,8 @@ _ = MessageFactory('org.ict_ok')
 class AdmUtilManagerDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
 
 
@@ -219,6 +222,7 @@ class AdmUtilManagerDetails(SupernodeDetails):
         #self.supervisor = queryUtility(IAdmUtilSupervisor)
         #self.rows = ["1", "2", "3"]
 
+
 class Overview(SuperclassOverview):
     """Overview Pagelet"""
     columns = (
@@ -237,50 +241,10 @@ class Overview(SuperclassOverview):
                      getter=superclass.getActionBottons,
                      cell_formatter=superclass.raw_cell_formatter),
         )
+
     def objs(self):
         """List of Content objects"""
-        retList = []
-        tmp_util = queryUtility(IUtilManager)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        tmp_util = queryUtility(IAdmUtilSupervisor)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        tmp_util = queryUtility(IAdmUtilCron)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        tmp_util = queryUtility(IAdmUtilGeneratorNagios)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        tmp_util = queryUtility(IAdmUtilGraphviz)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        tmp_util = queryUtility(INetScan)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        tmp_util = queryUtility(IAdmUtilNMap)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        tmp_util = queryUtility(IAdmUtilSimple1)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        tmp_util = queryUtility(IAdmUtilUserManagement)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        #tmp_util = queryUtility(IAdmUtilSupport)
-        #if tmp_util is not None:
-            #retList.append(tmp_util)
-        #tmp_util = queryUtility(IAdmUtilSupportUsr)
-        #if tmp_util is not None:
-            #retList.append(tmp_util)
-        tmp_util = queryUtility(IAdmUtilWFMC)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        tmp_util = queryUtility(IAdmUtilEventCrossbar)
-        if tmp_util is not None:
-            retList.append(tmp_util)
-        return retList
-
+        return getAllUtilitiesRegisteredFor(ISupernode)
 
 
 # --------------- forms ------------------------------------
@@ -288,13 +252,13 @@ class Overview(SuperclassOverview):
 
 class ViewAdmUtilManagerForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of graphviz adapter')
+    label = _(u'settings of utility manager')
     fields = field.Fields(IUtilManager).omit(\
         *AdmUtilManagerDetails.omit_viewfields)
 
 
 class EditAdmUtilManagerForm(EditForm):
     """ Edit for for net """
-    label = _(u'edit graphviz adapter')
+    label = _(u'edit utility manager')
     fields = field.Fields(IUtilManager).omit(\
         *AdmUtilManagerDetails.omit_editfields)

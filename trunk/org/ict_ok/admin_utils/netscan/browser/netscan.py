@@ -36,8 +36,8 @@ _ = MessageFactory('org.ict_ok')
 class NetScanDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
     _zopeRuntimeInfoFields = (
         "ZopeVersion",
@@ -121,13 +121,13 @@ class NetScanDetails(SupernodeDetails):
 
 class ViewNetScanForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of graphviz adapter')
+    label = _(u'settings of all net scanner')
     fields = field.Fields(INetScan).omit(\
         *NetScanDetails.omit_viewfields)
 
 
 class EditNetScanForm(EditForm):
     """ Edit for for net """
-    label = _(u'edit graphviz adapter')
+    label = _(u'edit central net scanner')
     fields = field.Fields(INetScan).omit(\
         *NetScanDetails.omit_editfields)

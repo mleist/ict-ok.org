@@ -53,7 +53,7 @@ def bootStrapSubscriberDatabase(event):
     if isinstance(madeSimple, AdmUtilSimple1):
         logger.info(u"bootstrap: Ensure named AdmUtilSimple1")
         dcore = IWriteZopeDublinCore(madeSimple)
-        dcore.title = u"Net Scanner"
+        dcore.title = u"Net Scanner (Simple1)"
         dcore.created = datetime.utcnow()
         madeSimple.__post_init__()
         sitem = root_folder.getSiteManager()

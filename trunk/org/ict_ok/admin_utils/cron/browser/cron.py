@@ -36,8 +36,8 @@ _ = MessageFactory('org.ict_ok')
 class AdmUtilCronDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
     def getInstanceCounter(self):
         """convert instance counter for display
