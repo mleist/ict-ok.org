@@ -44,7 +44,7 @@ _ = MessageFactory('org.ict_ok')
 class MSubAddSnmpValue(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add SNMP Value')
-    viewURL = 'add_snmp_value.html'
+    viewURL = 'add_snmpvalue.html'
     weight = 50
 
 
