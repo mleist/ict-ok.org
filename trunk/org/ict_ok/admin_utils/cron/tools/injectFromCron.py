@@ -11,12 +11,12 @@
 """implementation of a "cron signal injector" in ICT_Ok
 
 $ crontab -l
-*   *   *   *   * /home/markus/Projekte/ICT_Ok-hp/injectFromCron.py minute
-0   *   *   *   * /home/markus/Projekte/ICT_Ok-hp/injectFromCron.py hour
-0   0   *   *   * /home/markus/Projekte/ICT_Ok-hp/injectFromCron.py day
-0   0   1   *   * /home/markus/Projekte/ICT_Ok-hp/injectFromCron.py month
-0   0   1   1   * /home/markus/Projekte/ICT_Ok-hp/injectFromCron.py year
-12  2   *   *   * /home/markus/Projekte/ICT_Ok-hp/injectFromCron.py db_pack
+*   *   *   *   * /home/markus/tmp/injectFromCron8081.py minute
+0   *   *   *   * /home/markus/tmp/injectFromCron8081.py hour
+0   0   *   *   * /home/markus/tmp/injectFromCron8081.py day
+0   0   1   *   * /home/markus/tmp/injectFromCron8081.py month
+0   0   1   1   * /home/markus/tmp/injectFromCron8081.py year
+12  2   *   *   * /home/markus/tmp/injectFromCron8081.py db_pack
 
 """
 
@@ -24,7 +24,8 @@ __version__ = "$Id$"
 
 import sys
 #sys.path.append("/opt/ikom/Zope3/src")
-sys.path.append("/home/markus/Projekte/ICT_Ok-hp/zope_b33/src/")
+#TODO fix this
+sys.path.append("/home/markus/Projekte/dev_Zope_br34/dev_Zope_branch3.4/src/")
 
 import httplib
 import xmlrpclib
@@ -32,6 +33,7 @@ from datetime import datetime
 from pytz import timezone
 from base64 import encodestring
 
+#TODO clean up and delete berlinTZ
 utcTZ = timezone('UTC')
 berlinTZ = timezone('Europe/Berlin')
 
@@ -41,6 +43,7 @@ class BasicAuthTransport(xmlrpclib.Transport):
         self.username = arg_username
         self.password = arg_password
         self.verbose = arg_verbose
+        self._use_datetime = 0 # Needed for Python 2.5 `Transport`
 
     def request(self, arg_host, handler,
                 request_body, verbose=0):
@@ -80,14 +83,15 @@ class BasicAuthTransport(xmlrpclib.Transport):
 
 if __name__ == '__main__':
     args = sys.argv
-    print "aa: %s" % args
+    #print "aa: %s" % args
     modeString = ""
     if len(args) > 1:
         modeString = args[1]
-    print "modeString: %s" % modeString
+    #print "modeString: %s" % modeString
     url = 'http://localhost:8080/++etc++site/default/AdmUtilCron'
-    username = 'admin'
-    password = 'admin'
+    # TODO hook in a checker for "only permit cron@localhost" in zope3/ict-ok.org
+    username = 'cron'
+    password = '59d2d6db79b3'
     host = xmlrpclib.Server(
         url, transport = BasicAuthTransport(username, password)
         )

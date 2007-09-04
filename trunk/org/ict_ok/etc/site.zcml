@@ -164,6 +164,20 @@
         <!--password="admin"-->
         <!--/>-->
 
+    <principal
+      id="ict.cron"
+      title="Cron User"
+      login="cron"
+      password="ab16178ffe2d489acc434722cf4caeaa9552e270"
+      password_manager="MD5"
+      />
+
+    <!--TODO create an own cron role-->
+    <grant
+        role="zope.Manager"
+        principal="ict.cron"
+        />
+
     <!--<grant-->
         <!--role="zope.Manager"-->
         <!--principal="zope.manager"-->
