@@ -18,11 +18,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.ticker.View"
     />
-    <z3c:template
-        template="details.pt"
-        for="com.ikomtrol.admin_utils.ticker.browser.ticker.IkAdmUtilTickerDetails"
-        layer="com.ikomtrol.skin.interfaces.IIKOMtrolBrowserLayer"
-        />
+    <!--<z3c:template-->
+        <!--template="details.pt"-->
+        <!--for="org.ict_ok.admin_utils.ticker.browser.ticker.AdmUtilTickerDetails"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--/>-->
 
     <z3c:pagelet
         name="edit.html"

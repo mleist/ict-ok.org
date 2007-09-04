@@ -9,8 +9,6 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007,
         Markus Leist <leist@ikom-online.de> -->
 
-    <include file="security.zcml" />
-
     <interface
         interface=".interfaces.ISnmpValue"
         type="zope.app.content.interfaces.IContentType"

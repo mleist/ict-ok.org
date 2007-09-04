@@ -1,0 +1,39 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict-ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <permission
+        id="org.ict_ok.admin_utils.ticker.View"
+        title="viewTickerUtil"
+        description="view Ticker Utility."
+    />
+    <permission
+        id="org.ict_ok.admin_utils.ticker.Edit"
+        title="editTickerUtil"
+        description="edit Ticker Utility."
+    />
+    <permission
+        id="org.ict_ok.admin_utils.ticker.Send"
+        title="sendEvents"
+        description="send Ticker Events."
+    />
+
+    <grant permission="org.ict_ok.admin_utils.ticker.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.ticker.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.ticker.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.ticker.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.ticker.Edit"
+                    role="org.ict_ok.adm" />
+
+</configure>

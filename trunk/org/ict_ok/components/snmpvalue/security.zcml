@@ -30,11 +30,6 @@
         description="Delete Template Entry."
     />
 
-    <interface
-        interface=".interfaces.ISnmpValue"
-        type="zope.app.content.interfaces.IContentType"
-        />
-    
     <grant permission="org.ict_ok.components.snmpvalue.View"
                     role="org.ict_ok.usr" />
     <grant permission="org.ict_ok.components.snmpvalue.View"

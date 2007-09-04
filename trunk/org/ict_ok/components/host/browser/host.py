@@ -49,12 +49,12 @@ class MSubAddHost(GlobalMenuSubItem):
 class HostDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    #omit_viewfields = SupernodeDetails.omit_viewfields + ['osList']
-    #omit_addfields = SupernodeDetails.omit_addfields + ['osList']
-    #omit_editfields = SupernodeDetails.omit_editfields + ['osList']
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_addfields = SupernodeDetails.omit_addfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['osList']
+    omit_addfields = SupernodeDetails.omit_addfields + ['osList']
+    omit_editfields = SupernodeDetails.omit_editfields + ['osList']
+    #omit_viewfields = SupernodeDetails.omit_viewfields + []
+    #omit_addfields = SupernodeDetails.omit_addfields + []
+    #omit_editfields = SupernodeDetails.omit_editfields + []
 
     def getHistory(self):
         """

@@ -1,6 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="ict-ok.org">
+    i18n_domain="org.ict-ok"
+    >
 
     <!-- Copyright (c) 2004, 2005, 2006, 2007,
          Markus Leist <leist@ikom-online.de> -->
@@ -16,6 +17,7 @@
         title="Edit from IkNotifier"
         description="Edit from IkNotifier."
     />
+    
     <grant permission="org.ict_ok.admin_utils.notifier.View"
                     role="org.ict_ok.usr" />
     <grant permission="org.ict_ok.admin_utils.notifier.View"

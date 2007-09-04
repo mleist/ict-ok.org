@@ -9,8 +9,6 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007 Ingenieurbuero IKOM,
         Markus Leist <leist at ikom-online.de> -->
 
-    <include file="security.zcml" />
-
     <interface
         interface=".interfaces.ISite"
         type="zope.app.content.interfaces.IContentType"

@@ -9,36 +9,6 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007,
          Markus Leist <leist@ikom-online.de> -->
 
-    <permission
-        id="org.ict_ok.admin_utils.event.View"
-        title="View from AdmUtilEvent"
-        description="View from AdmUtilEvent."
-    />
-    
-    <permission
-        id="org.ict_ok.admin_utils.event.Add"
-        title="Add an AdmUtilEvent"
-        description="Add an AdmUtilEvent for Crossbar."
-    />
-
-    <permission
-        id="org.ict_ok.admin_utils.event.Edit"
-        title="Edit from AdmUtilEvent"
-        description="Edit from AdmUtilEvent."
-    />
-
-    <permission
-        id="org.ict_ok.admin_utils.eventcrossbar.View"
-        title="View from AdmUtilEventCrossbar"
-        description="View from AdmUtilEventCrossbar."
-    />
-
-    <permission
-        id="org.ict_ok.admin_utils.eventcrossbar.Edit"
-        title="Edit from AdmUtilEventCrossbar"
-        description="Edit from AdmUtilEventCrossbar."
-    />
-
     <class class=".eventcrossbar.AdmUtilEventCrossbar">
         <factory
             id="org.ict_ok.admin_utils.eventcrossbar.eventcrossbar.AdmUtilEventCrossbar" />

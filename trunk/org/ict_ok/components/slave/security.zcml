@@ -1,0 +1,49 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict-ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007 Ingenieurbuero IKOM,
+         Markus Leist <leist at ikom-online.de> -->
+
+    <include package="org.ict_ok.components.supernode"/>
+
+    <permission
+        id="org.ict_ok.slave.View"
+        title="View Dummy Entry"
+        description="View the Dummy Entry and all its content."
+    />
+
+    <permission
+        id="org.ict_ok.slave.Add"
+        title="Add Dummy Entry"
+        description="Add Dummy Entry."
+    />
+
+    <permission
+        id="org.ict_ok.slave.Edit"
+        title="Edit Dummy Entry"
+        description="Edit Dummy Entry."
+    />
+
+    <permission
+        id="org.ict_ok.slave.Delete"
+        title="Delete Dummy Entry"
+        description="Delete Dummy Entry."
+    />
+
+    <grant permission="org.ict_ok.slave.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.slave.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.slave.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.slave.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.slave.Edit"
+                    role="org.ict_ok.adm" />
+
+</configure>

@@ -8,18 +8,6 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007,
          Markus Leist <leist@ikom-online.de> -->
 
-    <permission
-        id="org.ict_ok.admin_utils.netscan.View"
-        title="View from NetScan"
-        description="View from NetScan."
-    />
-
-    <permission
-        id="org.ict_ok.admin_utils.netscan.Edit"
-        title="Edit from NetScan"
-        description="Edit from NetScan."
-    />
-
     <class class=".netscan.NetScan">
         <factory
             id="org.ict_ok.admin_utils.netscan.netscan.NetScan" />

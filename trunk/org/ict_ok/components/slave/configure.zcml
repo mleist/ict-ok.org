@@ -11,30 +11,6 @@
 
     <include package="org.ict_ok.components.supernode"/>
 
-    <permission
-        id="org.ict_ok.slave.View"
-        title="View Dummy Entry"
-        description="View the Dummy Entry and all its content."
-    />
-
-    <permission
-        id="org.ict_ok.slave.Add"
-        title="Add Dummy Entry"
-        description="Add Dummy Entry."
-    />
-
-    <permission
-        id="org.ict_ok.slave.Edit"
-        title="Edit Dummy Entry"
-        description="Edit Dummy Entry."
-    />
-
-    <permission
-        id="org.ict_ok.slave.Delete"
-        title="Delete Dummy Entry"
-        description="Delete Dummy Entry."
-    />
-
     <interface
         interface=".interfaces.ISlave"
         type="zope.app.content.interfaces.IContentType"
