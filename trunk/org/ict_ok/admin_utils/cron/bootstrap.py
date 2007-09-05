@@ -66,6 +66,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeAdmUtilCron)
         dcore.title = u"Timer"
         dcore.created = datetime.utcnow()
+        madeAdmUtilCron.ikName = dcore.title
         madeAdmUtilCron.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

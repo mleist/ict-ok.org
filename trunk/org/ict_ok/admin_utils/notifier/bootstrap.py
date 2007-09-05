@@ -49,6 +49,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeNotifier)
         dcore.title = u"Notifier"
         dcore.created = datetime.utcnow()
+        madeNotifier.ikName = dcore.title
         madeNotifier.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

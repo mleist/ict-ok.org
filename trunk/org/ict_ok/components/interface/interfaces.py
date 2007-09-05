@@ -56,6 +56,7 @@ class IInterface(ISupernode):
             description=_("IP address of the host."),
             default=u"192.168.1.100",
             required=True),
+        default = [],
         required = False)
 
     #connectedInterfaces

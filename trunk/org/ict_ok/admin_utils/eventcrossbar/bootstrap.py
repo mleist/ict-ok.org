@@ -77,6 +77,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeAdmUtilEventCrossbar)
         dcore.title = u"Event Crossbar"
         dcore.created = datetime.utcnow()
+        madeAdmUtilEventCrossbar.ikName = dcore.title
         madeAdmUtilEventCrossbar.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

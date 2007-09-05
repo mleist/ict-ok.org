@@ -64,6 +64,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeAdmUtilEsxVim)
         dcore.title = u"ESX VIM"
         dcore.created = datetime.utcnow()
+        madeAdmUtilEsxVim.ikName = dcore.title
         madeAdmUtilEsxVim.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

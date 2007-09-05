@@ -106,6 +106,7 @@ class IHost(ISupernode):
             description = _("The OS Description."),
             default = u"",
             required = False),
+        default = [],
         required = False)
 
     url = TextLine(

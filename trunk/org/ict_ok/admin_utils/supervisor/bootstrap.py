@@ -62,6 +62,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeAdmUtilSupervisor)
         dcore.title = u"ICT_Ok Supervisor"
         dcore.created = datetime.utcnow()
+        madeAdmUtilSupervisor.ikName = dcore.title
         madeAdmUtilSupervisor.__post_init__()
     else:
         # search in global component registry

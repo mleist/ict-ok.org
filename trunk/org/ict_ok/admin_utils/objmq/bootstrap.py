@@ -49,6 +49,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeAdmUtilObjMQ)
         dcore.title = u"Object Message Queue"
         dcore.created = datetime.utcnow()
+        madeAdmUtilObjMQ.ikName = dcore.title
         madeAdmUtilObjMQ.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

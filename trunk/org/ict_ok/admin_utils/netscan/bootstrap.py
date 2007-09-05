@@ -49,6 +49,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeNetScan)
         dcore.title = u"Net Scanner"
         dcore.created = datetime.utcnow()
+        madeNetScan.ikName = dcore.title
         madeNetScan.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

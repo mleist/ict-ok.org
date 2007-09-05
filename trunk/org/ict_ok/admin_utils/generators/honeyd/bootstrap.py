@@ -54,6 +54,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeAdmUtilGeneratorHoneyd)
         dcore.title = u"Honeyd"
         dcore.created = datetime.utcnow()
+        madeAdmUtilGeneratorHoneyd.ikName = dcore.title
         madeAdmUtilGeneratorHoneyd.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

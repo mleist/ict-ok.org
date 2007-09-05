@@ -50,6 +50,7 @@ def bootStrapSubscriberDatabase(event):
         dcore.title = u"ICT_Ok Utility Manager"
         dcore.creators = (u"bootstrap auto-adder",)
         dcore.created = datetime.utcnow()
+        madeUtilManager.ikName = dcore.title
         madeUtilManager.__post_init__()
         
     transaction.get().commit()

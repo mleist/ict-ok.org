@@ -1,0 +1,20 @@
+<zope:configure
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <page
+        name="status"
+        for="org.ict_ok.admin_utils.netscan.demo1.interfaces.IAdmUtilDemo1"
+        class=".demo1.AdmUtilDemo1Details"
+        template="status.pt"
+        permission="org.ict_ok.admin_utils.netscan.View"
+        menu="zmi_views" title="Status"/>
+
+</zope:configure>

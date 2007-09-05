@@ -81,7 +81,7 @@ class NetDetails(SupernodeDetails):
             tmpDict = {}
             tmpDict['oid'] = u"c%s" % objId
             tmpDict['title'] = _(u"start scanner")
-            tmpDict['href'] = u"%s/@@start_scanner" % \
+            tmpDict['href'] = u"%s/@@start_scanner.html" % \
                    zapi.getPath(self.context)
             tmpDict['tooltip'] = _(u"starts the network scanner (as user:%s)"\
                                    % self.request.principal.title)
@@ -104,12 +104,13 @@ class NetDetails(SupernodeDetails):
         """
         starts all configured scanners for this net
         """
+        #import pdb; pdb.set_trace()
         objNetScanner = getUtility(INetScan)
-        if objNetScanner:
+        if objNetScanner is not None:
             scannerList = objNetScanner.getScannerObjs()
             for (name, obj) in scannerList:
                 obj.startScan(self.context)
-        return self.request.response.redirect('./@@contents.html')
+        return self.request.response.redirect('./@@overview.html')
     
     def getDDD(self):
         """TODO: must check"""
@@ -139,19 +140,19 @@ class EditNetForm(EditForm):
     label = _(u'Hello Net Edit Form')
     fields = field.Fields(INet).omit(*NetDetails.omit_editfields)
     
-    #TODO: Test-Button
-    @button.buttonAndHandler(u'test', name='test')
-    def handleApplyView(self, action):
-        self.handleApply(self, action)
-        my_catalog = zapi.getUtility(ICatalog)
-        ee=my_catalog[u'net_oid_index']
-        idUtil = getUtility(IIntIds)
+    ##TODO: Test-Button
+    #@button.buttonAndHandler(u'test', name='test')
+    #def handleApplyView(self, action):
+        #self.handleApply(self, action)
+        #my_catalog = zapi.getUtility(ICatalog)
+        #ee=my_catalog[u'net_oid_index']
+        #idUtil = getUtility(IIntIds)
 
-        for (oid) in ee.lexicon.words():
-            ointid = ee.index.search_phrase(oid).minKey()
-            oobj = idUtil.refs[ointid]
-            print "oobj: ", oobj
-            ##print "ddd: ", (oid, idUtil.getObject(intid))
+        #for (oid) in ee.lexicon.words():
+            #ointid = ee.index.search_phrase(oid).minKey()
+            #oobj = idUtil.refs[ointid]
+            #print "oobj: ", oobj
+            ###print "ddd: ", (oid, idUtil.getObject(intid))
 
 
 class DeleteNetForm(DeleteForm):

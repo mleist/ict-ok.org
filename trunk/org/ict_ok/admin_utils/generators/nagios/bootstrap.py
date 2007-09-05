@@ -54,6 +54,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeAdmUtilGeneratorNagios)
         dcore.title = u"Nagios Scanner"
         dcore.created = datetime.utcnow()
+        madeAdmUtilGeneratorNagios.ikName = dcore.title
         madeAdmUtilGeneratorNagios.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

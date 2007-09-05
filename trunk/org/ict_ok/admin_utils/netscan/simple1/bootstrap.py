@@ -55,6 +55,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeSimple)
         dcore.title = u"Net Scanner (Simple1)"
         dcore.created = datetime.utcnow()
+        madeSimple.ikName = dcore.title
         madeSimple.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

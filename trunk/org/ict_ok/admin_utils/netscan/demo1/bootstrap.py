@@ -7,12 +7,11 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0232
+# pylint: disable-msg=E1101
 #
 """startup of subsystem"""
 
 __version__ = "$Id$"
-
 
 # phython imports
 import logging
@@ -25,41 +24,44 @@ from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
 
-# ict_ok.org imports
-from org.ict_ok.admin_utils.ticker.ticker import TickerThread
+# ict_ok imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
-from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
-from org.ict_ok.admin_utils.ticker.ticker import AdmUtilTicker
+from org.ict_ok.admin_utils.netscan.demo1.interfaces import \
+     IAdmUtilDemo1
+from org.ict_ok.admin_utils.netscan.demo1.demo1 import AdmUtilDemo1
 
-logger = logging.getLogger("AdmUtilTicker")
+logger = logging.getLogger("AdmUtilDemo1")
 
 def bootStrapSubscriberDatabase(event):
-    """initialisation of ict_ok supervisor on first database startup
+    """initialisation of demo1-generator utility on first database startup
     """
     if appsetup.getConfigContext().hasFeature('devmode'):
         logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    TickerThread.database = event.database
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 
-    madeAdmUtilTicker = ensureUtility(root_folder, IAdmUtilTicker,
-                                       'AdmUtilTicker', AdmUtilTicker, '',
-                                       copy_to_zlog=False, asObject=True)
+    madeNmap = ensureUtility(root_folder, 
+                             IAdmUtilDemo1,
+                             'AdmUtilDemo1', 
+                             AdmUtilDemo1,
+                             name='NetScanner:Demo1',
+                             copy_to_zlog=False, 
+                             asObject=True)
 
-    if isinstance(madeAdmUtilTicker, AdmUtilTicker):
-        logger.info(u"bootstrap: Ensure named AdmUtilTicker")
-        dcore = IWriteZopeDublinCore(madeAdmUtilTicker)
-        dcore.title = u"Ticker Utility"
+    if isinstance(madeNmap, AdmUtilDemo1):
+        logger.info(u"bootstrap: Ensure named AdmUtilDemo1")
+        dcore = IWriteZopeDublinCore(madeNmap)
+        dcore.title = u"Net Scanner (Demo1)"
         dcore.created = datetime.utcnow()
-        madeAdmUtilTicker.ikName = dcore.title
-        madeAdmUtilTicker.__post_init__()
+        madeNmap.ikName = dcore.title
+        madeNmap.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()
                     if util.provided.isOrExtends(IAdmUtilSupervisor)]
-        instAdmUtilSupervisor = utils[0].component
-        instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: made IAdmUtilTicker-Utility")
+        instIkAdmUtilSupervisor = utils[0].component
+        instIkAdmUtilSupervisor.appendEventHistory( \
+            u" bootstrap: made IAdmUtilDemo1-Utility")
 
     transaction.get().commit()
     connection.close()

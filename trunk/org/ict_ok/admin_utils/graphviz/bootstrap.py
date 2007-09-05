@@ -54,6 +54,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeAdmUtilGraphviz)
         dcore.title = u"Graphviz Converter"
         dcore.created = datetime.utcnow()
+        madeAdmUtilGraphviz.ikName = dcore.title
         madeAdmUtilGraphviz.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

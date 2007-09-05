@@ -54,6 +54,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madeNmap)
         dcore.title = u"Email Notifier"
         dcore.created = datetime.utcnow()
+        madeNmap.ikName = dcore.title
         madeNmap.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

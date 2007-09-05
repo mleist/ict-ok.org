@@ -317,7 +317,8 @@ class AddForm(layout.FormLayoutSupport, form.AddForm):
 
     def nextURL(self):
         """ forward the browser """
-        return absoluteURL(self.context, self.request)
+        return absoluteURL(self.context[self._newObjectID],
+                           self.request)
 
     def create(self, data):
         """ will create the object """
@@ -329,6 +330,8 @@ class AddForm(layout.FormLayoutSupport, form.AddForm):
     def add(self, obj):
         """ will store the new one in object tree """
         travp = self.context
+        # store obj id for nextURL()
+        self._newObjectID = obj.objectID
         while IPagelet.providedBy(travp):
             travp = self.context.__parent__
         travp[obj.objectID] = obj

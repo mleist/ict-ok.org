@@ -58,6 +58,7 @@ def bootStrapSubscriberDatabase(event):
         dcore = IWriteZopeDublinCore(madePluggableAuthentication)
         dcore.title = u"User Authentication"
         dcore.created = datetime.utcnow()
+        madePluggableAuthentication.ikName = dcore.title
         # madePluggableAuthentication.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()
