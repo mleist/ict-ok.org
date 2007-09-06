@@ -21,6 +21,7 @@ from org.ict_ok.skin.interfaces import IMasterMenu
 from zope.i18nmessageid import MessageFactory
 from zope.viewlet import manager
 from zope.app.component import hooks
+from zope.component import getUtility
 from zope.traversing.browser import absoluteURL
 from zope.app.pagetemplate import viewpagetemplatefile
 
@@ -29,6 +30,9 @@ from z3c.menu.simple.menu import TabMenu
 from z3c.menu.simple import menu
 from z3c.menu.simple import ITab
 from z3c.menu.simple.menu import Tab
+
+# ict_ok.org imports
+from org.ict_ok.admin_utils.util_manager.interfaces import IUtilManager
 
 _ = MessageFactory('org.ict_ok')
 
@@ -128,6 +132,21 @@ class HostsItem(GlobalMenuMainItem):
     title = _(u'Hosts')
     viewURL = 'hosts.html'
     weight = 2000
+
+class AdmUtilManagerItem(GlobalMenuMainItem):
+    title = _(u'Utilities')
+    weight = 8000
+    
+    @property
+    def url(self):
+        utilManager = getUtility(IUtilManager)
+        if utilManager is not None:
+            return absoluteURL(utilManager, self.request) + \
+                   u'/@@overview.html'
+        else:
+            return absoluteURL(hooks.getSite(), self.request) + \
+                   '/NoUtilManager'
+
 
 class MenuMainTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_main_tab.pt')

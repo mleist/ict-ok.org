@@ -73,6 +73,15 @@
         />
         
     <viewlet
+        name="view_util_manager"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.skin.menu.AdmUtilManagerItem"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.util_manager.View"
+        />
+        
+    <viewlet
         name="help"
         for="*"
         manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
@@ -107,6 +116,5 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.site.Add"
         />
-
 
 </configure>
