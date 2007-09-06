@@ -48,6 +48,20 @@
         factory=".adapter.state.State"
         />
 
+    <adapter
+        factory="org.ict_ok.components.service.adapter.ipickle.Pickle"
+    />
+
+    <adapter
+        factory="org.ict_ok.components.service.adapter.search.Searchable"
+    />
+    
+    <adapter
+        factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"
+        provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
+        for=".interfaces.IService"
+    />
+
     <include package=".browser" />
     <!--include package=".generations" /-->
 

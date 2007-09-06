@@ -47,6 +47,14 @@
     <adapter
         factory=".adapter.state.State"
         />
+        
+    <adapter
+        factory="org.ict_ok.components.snmpvalue.adapter.search.Searchable"
+    />
+
+    <adapter
+        factory="org.ict_ok.components.snmpvalue.adapter.ipickle.Pickle"
+    />
 
     <include package=".browser" />
     <include package=".generations" />

@@ -48,6 +48,13 @@
         factory=".adapter.state.State"
         />
 
+    <adapter
+        factory="org.ict_ok.components.interface.adapter.search.Searchable"
+    />
+    <adapter
+        factory="org.ict_ok.components.interface.adapter.ipickle.Pickle"
+    />
+    
     <include package=".browser" />
     <include package=".generations" />
 

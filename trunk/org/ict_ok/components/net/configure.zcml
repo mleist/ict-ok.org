@@ -47,7 +47,7 @@
         factory=".adapter.state.State"
         />
     <adapter
-        factory=".adapter.search.Searchable"
+        factory="org.ict_ok.components.net.adapter.search.Searchable"
     />
     <adapter
         factory=".adapter.namechooser.NetNameChooser"
