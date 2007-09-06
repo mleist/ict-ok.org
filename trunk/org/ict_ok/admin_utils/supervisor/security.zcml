@@ -20,6 +20,12 @@
         description="Edit from AdmUtilSupervisor."
     />
 
+    <permission
+        id="org.ict_ok.admin_utils.supervisor.DataDump"
+        title="Data Dump"
+        description="Dump of system data."
+    />
+
     <grant permission="org.ict_ok.admin_utils.supervisor.View"
                     role="org.ict_ok.usr" />
     <grant permission="org.ict_ok.admin_utils.supervisor.View"
@@ -30,6 +36,9 @@
     <grant permission="org.ict_ok.admin_utils.supervisor.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.supervisor.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.supervisor.DataDump"
                     role="org.ict_ok.adm" />
 
 </configure>
