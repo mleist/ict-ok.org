@@ -55,6 +55,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.interface.Add"
     />
+    
+    <!--<z3c:pagelet-->
+        <!--name="dumpdata.html"-->
+        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
+        <!--class="org.ict_ok.components.superclass.browser.superclass.DumpData"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.components.host.View"-->
+    <!--/>-->
 
     <!--##### Sub Menu ##### -->
 

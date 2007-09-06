@@ -27,6 +27,20 @@
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--/>-->
 
+    <z3c:pagelet
+        name="dumpdata.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.DumpData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="zope.Security"
+    />
+
+    <z3c:template
+        template="dumpdata.pt"
+        for="org.ict_ok.components.superclass.browser.superclass.DumpData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <z3c:template
         template="overview.pt"
         for="org.ict_ok.components.superclass.browser.superclass.Overview"

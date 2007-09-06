@@ -54,12 +54,16 @@ class Pickle(object):
         retVal['listAttr']['ikAuthor'] = self.context.ikAuthor
         retVal['history'] = []
         print "exportAsDict - self.context.history: %s" % self.context.history
-        for entry in self.context.history:
-            entry = removeSecurityProxy(entry)
-            retVal['history'].append(entry.exportAsDict(mode))
+        if hasattr(self.context, 'history') and \
+           self.context.history is not None:
+            for entry in self.context.history:
+                entry = removeSecurityProxy(entry)
+                retVal['history'].append(entry.exportAsDict(mode))
         retVal['notes'] = []
-        for note in self.context.ikNotes:
-            retVal['notes'].append(note)
+        if hasattr(self.context, 'ikNotes') and \
+           self.context.ikNotes is not None:
+            for note in self.context.ikNotes:
+                retVal['notes'].append(note)
         retVal['children'] = []
         for name, obj in self.context.items():
             recPickle = IPickle(obj)

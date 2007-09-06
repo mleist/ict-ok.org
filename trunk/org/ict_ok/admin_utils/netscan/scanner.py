@@ -42,7 +42,7 @@ class Scanner(Supernode):
     def __init__(self):
         Supernode.__init__(self)
 
-    def createObjects( self, dataDict, containerObject):
+    def createObjects(self, dataDict, containerObject):
         """
         will use factories to create the objects from the dataDict
         """
@@ -50,9 +50,9 @@ class Scanner(Supernode):
             dateNow = datetime.utcnow()
             newHost = createObject(u'org.ict_ok.components.host.host.Host')
             notify(ObjectCreatedEvent(newHost))
-            containerObject.__setitem__( newHost.getObjectId(), 
+            containerObject.__setitem__(newHost.getObjectId(), 
                                          newHost)
-            dcore = IZopeDublinCore( newHost, None)
+            dcore = IZopeDublinCore(newHost, None)
             dcore.creators = [u'ikportscan']
             newHost.ikComment += u"scanner: %s" % (dateNow)
             if host.has_key('hostname'):
@@ -81,28 +81,28 @@ class Scanner(Supernode):
                 #newHost.__setattr__("room", host['room'])
             if host.has_key('oss'):
                 for i_os in host['oss']:
-                    os_string = u"%s %s (%s) (%s)" % ( i_os['osfamily'],
-                                                       i_os['osgen'],
-                                                       i_os['type'],
-                                                       i_os['vendor'])
-                    newHost.osList.append( os_string)
+                    os_string = u"%s %s (%s) (%s)" % (i_os['osfamily'],
+                                                      i_os['osgen'],
+                                                      i_os['type'],
+                                                      i_os['vendor'])
+                    newHost.osList.append(os_string)
             newHost.__setattr__("genNagios", True)
             dcore.created = dateNow
                 
-            if host.has_key("interfaces") and len( host['interfaces'])>0:
+            if host.has_key("interfaces") and len(host['interfaces'])>0:
                 for interfaceDict in host['interfaces']:
                     #print "interfaceDict: ", interfaceDict
                     dateNow = datetime.utcnow()
-                    newInterface = zapi.createObject( \
+                    newInterface = zapi.createObject(\
                         u'org.ict_ok.components.interface.interface.Interface')
-                    notify( ObjectCreatedEvent( newInterface))
+                    notify(ObjectCreatedEvent(newInterface))
                     newInterfaceId=u"If%s" % (interfaceDict['nbr'])
-                    newHost.__setitem__( newInterfaceId, newInterface)
-                    #newInterface.__setattr__( "description", interfaceDict['name'])
-                    #newInterface.__setattr__( "ifindex", interfaceDict['nbr'])
+                    newHost.__setitem__(newInterfaceId, newInterface)
+                    #newInterface.__setattr__("description", interfaceDict['name'])
+                    #newInterface.__setattr__("ifindex", interfaceDict['nbr'])
                     newInterface.__setattr__("ikName", interfaceDict['name'])
                     newInterface.ikComment += u"scanner: %s" % (dateNow)
-                    newInterfaceDc = IZopeDublinCore( newInterface, None)
+                    newInterfaceDc = IZopeDublinCore(newInterface, None)
                     newInterfaceDc.title = u"%s" % interfaceDict['name']
                     newInterfaceDc.created = datetime.utcnow()
                     newInterfaceDc.creators = [u'ikportscan']
@@ -117,8 +117,8 @@ class Scanner(Supernode):
                             u'org.ict_ok.components.service.service.Service')
                         notify(ObjectCreatedEvent(newService))
                         newServiceId=u"%s" % (service['port'])
-                        newInterface.__setitem__( newServiceId, newService)
-                        newServiceDc = IZopeDublinCore( newService, None)
+                        newInterface.__setitem__(newServiceId, newService)
+                        newServiceDc = IZopeDublinCore(newService, None)
                         newServiceDc.creators = [u'ikportscan']
                         newServiceDc.created = datetime.utcnow()
                         tmpString = u""
@@ -137,33 +137,33 @@ class Scanner(Supernode):
                             newService.__setattr__("ikName", service['service'])
                         else:
                             newServiceDc.title = u"%s" % service['port']
-                        #newHost.__setitem__( newServiceId, newService)
-                    #containerObject.__setitem__( new_id, newHost)
+                        #newHost.__setitem__(newServiceId, newService)
+                    #containerObject.__setitem__(new_id, newHost)
                     ### SNMP-Liste aufbauen
-                    #if interfaceDict.has_key("snmplist") and len( interfaceDict['snmplist'])>0:
+                    #if interfaceDict.has_key("snmplist") and len(interfaceDict['snmplist'])>0:
                         #for snmpDict in interfaceDict['snmplist']:
                             ### oid-Test
                             #newSnmp = zapi.createObject(None, 'ikom.iksnmp.IkSnmp')
-                            #notify( ObjectCreatedEvent( newSnmp))
-                            #newSnmp.__setattr__( "description", snmpDict['name'])
-                            #newSnmp.__setattr__( "checktype", "oid")
-                            #newSnmp.__setattr__( "inputtype", "abs")
-                            #newSnmp.__setattr__( "oid1", snmpDict['oid1'])
-                            #newSnmp.__setattr__( "oid2", snmpDict['oid2'])
+                            #notify(ObjectCreatedEvent(newSnmp))
+                            #newSnmp.__setattr__("description", snmpDict['name'])
+                            #newSnmp.__setattr__("checktype", "oid")
+                            #newSnmp.__setattr__("inputtype", "abs")
+                            #newSnmp.__setattr__("oid1", snmpDict['oid1'])
+                            #newSnmp.__setattr__("oid2", snmpDict['oid2'])
                             #for i in ["cmd", "inptype", "inpUnit", "displayUnitNumerator", "displayUnitDenominator",
                                       #"checkMax", "checkMaxLevel", "checkMaxLevelUnitNumerator", "checkMaxLevelUnitDenominator"]:
-                                #newSnmp.__setattr__( i, snmpDict[i])
-                            #newSnmpDc = IZopeDublinCore( newSnmp, None)
+                                #newSnmp.__setattr__(i, snmpDict[i])
+                            #newSnmpDc = IZopeDublinCore(newSnmp, None)
                             #newSnmpId=u"%s" % (snmpDict['name'])
                             #newSnmpDc.title = u"%s" % (snmpDict['name'])
                             #newSnmpDc.created = datetime.utcnow()
                             #newSnmpDc.creators = [u'ikportscan']
-                            #newInterface.__setitem__( newSnmpId, newSnmp)
-                    #newHost.__setitem__( newInterfaceId, newInterface)
+                            #newInterface.__setitem__(newSnmpId, newSnmp)
+                    #newHost.__setitem__(newInterfaceId, newInterface)
             #if host.has_key("building"):
                 #newHost.__setattr__("building", host['building'])
 
-            #if host.has_key( 'oss') and len(host['oss'])>0:
+            #if host.has_key('oss') and len(host['oss'])>0:
                 #hostOs = host['oss'][0]
                 #firstOs = "%s - %s - %s - %s - %s" % (hostOs['vendor'],hostOs['osfamily'],hostOs['osgen'],hostOs['accuracy'],hostOs['type'])
                 #newHost.__setattr__("os", firstOs)
@@ -174,10 +174,10 @@ class Scanner(Supernode):
             ####### Interface
             ####portsInterface = zapi.createObject(\
                 ####u'org.ikomtrol.ikinterface.ikinterface.IkInterface')
-            ####notify( ObjectCreatedEvent(portsInterface))
+            ####notify(ObjectCreatedEvent(portsInterface))
             ####newHost.__setitem__(portsInterface.getObjectId(), 
                                 ####portsInterface)
-            ####newInterfaceDc = IZopeDublinCore( portsInterface, None)
+            ####newInterfaceDc = IZopeDublinCore(portsInterface, None)
             ####newInterfaceDc.title = u"If10000"
             ####portsInterface.__setattr__("ikName", u"If10000")
             ####newInterfaceDc.created = dateNow

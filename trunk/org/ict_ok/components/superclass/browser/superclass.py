@@ -28,6 +28,7 @@ from zope.component import getAdapter
 from zope.proxy import removeAllProxies
 from zope.app.applicationcontrol.interfaces import IRuntimeInfo
 from zope.size.interfaces import ISized
+from zope.security.checker import canAccess
 
 # z3c imports
 from z3c.form import button, field, form
@@ -67,26 +68,38 @@ class CheckboxColumn(Column):
 def getActionBottons(item, formatter):
     """Action Buttons for Overview in Web-Browser"""
     resource_path = getAdapter(formatter.request, name='pics')()
+
     view_url = absoluteURL(item, formatter.request) + '/@@details.html'
-    if zapi.queryMultiAdapter((item, formatter.request), name='details.html') is not None:
+    myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                       name='details.html')
+    if myAdapter is not None and canAccess(myAdapter,'render'):
         view_html = u'<a href="%s"><img alt="Info" src="%s/Info.png" /></a>' % \
                   (view_url, resource_path)
     else:
         view_html = u'<img alt="Info" src="%s/Info_gr.png" />' % (resource_path)
+
     edit_url = absoluteURL(item, formatter.request) + '/@@edit.html'
-    if zapi.queryMultiAdapter((item, formatter.request), name='edit.html') is not None:
+    myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                       name='edit.html')
+    if myAdapter is not None and canAccess(myAdapter,'render'):
         edit_html = u'<a href="%s"><img alt="Edit" src="%s/Hand.png" /></a>' % \
                   (edit_url, resource_path)
     else:
         edit_html = u'<img alt="Info" src="%s/Hand_gr.png" />' % (resource_path)
+
     hist_url = absoluteURL(item, formatter.request) + '/@@history.html'
-    if zapi.queryMultiAdapter((item, formatter.request), name='history.html') is not None:
+    myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                       name='history.html')
+    if myAdapter is not None and canAccess(myAdapter,'render'):
         hist_html = u'<a href="%s"><img alt="History" src="%s/Doc.png" /></a>' % \
                   (hist_url, resource_path)
     else:
         hist_html = u'<img alt="Info" src="%s/Doc_gr.png" />' % (resource_path)
+
     trash_url = absoluteURL(item, formatter.request) + '/@@delete.html'
-    if zapi.queryMultiAdapter((item, formatter.request), name='delete.html') is not None:
+    myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                       name='delete.html')
+    if myAdapter is not None and canAccess(myAdapter,'render'):
         trash_html = u'<a href="%s"><img alt="Trash" src="%s/Trash.png" /></a>' % \
                    (trash_url, resource_path)
     else:
@@ -295,6 +308,23 @@ class SuperclassDetails:
         return localTimestmp.strftime('%d.%m.%Y %H:%M:%S %Z')
 
 
+class DumpData:
+    """ Class for Web-Browser-Details
+    """
+    def dumpData(self):
+        """
+        pretty print for web-interface
+        """
+        import pprint
+        obj = removeAllProxies(self.context)
+        pickleAdapter = IPickle(obj)
+        if pickleAdapter:
+            return pprint.pformat(pickleAdapter.exportAsDict(), \
+                                   width=60, depth=6)
+        else:
+            return _(u"no pickle adapter")
+
+
 # --------------- forms ------------------------------------
 
 
@@ -391,7 +421,7 @@ class Overview(BrowserPagelet):
                      cell_formatter=raw_cell_formatter),
         GetterColumn(title=_('Title'),
                      getter=getTitel,
-                     cell_formatter=link('edit.html')),
+                     cell_formatter=link('overview.html')),
         GetterColumn(title=_('Modified On'),
                      getter=getModifiedDate,
                      cell_formatter=raw_cell_formatter),

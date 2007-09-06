@@ -67,7 +67,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1525,7 +1525,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1560,7 +1560,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1595,7 +1595,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1630,7 +1630,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1665,7 +1665,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1700,7 +1700,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1735,7 +1735,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1770,7 +1770,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1805,7 +1805,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1840,7 +1840,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1875,7 +1875,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1910,7 +1910,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1945,7 +1945,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -1980,7 +1980,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -2015,7 +2015,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -2050,7 +2050,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -2085,7 +2085,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -2120,7 +2120,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -2155,7 +2155,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -2190,7 +2190,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -2225,7 +2225,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -2260,7 +2260,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },
@@ -2295,7 +2295,7 @@ class AdmUtilDemo1(Scanner):
                     {
                         'type': u'os_type',
                         'vendor': u'os_vendor',
-                        'osfamily': u'os_family',
+                        'osfamily': u'Win32',
                         'osgen': u'os_gen',
                         'accuracy': u'os_accuracy',
                         },

@@ -46,7 +46,7 @@ class Net(Supernode):
         Supernode.__init__(self, **data)
         # find our correct factory, is there a better solution?
         for (fact_name, fact_obj) in zapi.getFactoriesFor(INet):
-            if (len(fact_name) > 13) and (fact_name[:13]=='org.ict_ok.'):
+            if (len(fact_name) > 11) and (fact_name[:11]=='org.ict_ok.'):
                 self.myFactory = unicode(fact_name)
         print "INet.names(): ", list(INet.names())
         for (name, value) in data.items():
