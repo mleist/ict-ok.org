@@ -27,7 +27,6 @@ import transaction
 from transaction.interfaces import IDataManager
 from zope.app.component.hooks import getSite, setSite
 from zope.app.intid.interfaces import IIntIds
-from zope.app.appsetup.appsetup import SystemConfigurationParticipation
 from zope.security.simplepolicies import ParanoidSecurityPolicy
 from zope.security.interfaces import IParticipation
 
@@ -158,13 +157,13 @@ class TickerThread(threading.Thread):
                             print "Error xxx: ", err
                         
                     #setSite(old_site)
-                    transaction.commit()
+                    self.transaction_manager.commit()
                     conn.close()
                     # Blanket except because we don't want
                     # this thread to ever die
                 except:
                     self.log.error("Error in Ticker", exc_info=True)
-                    transaction.abort()
+                    self.transaction_manager.abort()
                     conn.close()
             if forever:
                 time.sleep(1)
