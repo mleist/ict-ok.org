@@ -26,8 +26,8 @@
         description="Administration of hosts and virtual machines (e.g. restart, shutdown)"
     />
 
-    <grant permission="org.ict_ok.admin_utils.esx_vim.View"
-                    role="org.ict_ok.usr" />
+    <!--<grant permission="org.ict_ok.admin_utils.esx_vim.View"-->
+                    <!--role="org.ict_ok.usr" />-->
     <grant permission="org.ict_ok.admin_utils.esx_vim.View"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.esx_vim.View"

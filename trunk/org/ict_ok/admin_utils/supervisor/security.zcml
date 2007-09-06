@@ -26,8 +26,8 @@
         description="Dump of system data."
     />
 
-    <grant permission="org.ict_ok.admin_utils.supervisor.View"
-                    role="org.ict_ok.usr" />
+    <!--<grant permission="org.ict_ok.admin_utils.supervisor.View"-->
+                    <!--role="org.ict_ok.usr" />-->
     <grant permission="org.ict_ok.admin_utils.supervisor.View"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.supervisor.View"

@@ -20,8 +20,8 @@
         description="Edit from AdmUtilObjMQ."
     />
 
-    <grant permission="org.ict_ok.admin_utils.objmq.View"
-                    role="org.ict_ok.usr" />
+    <!--<grant permission="org.ict_ok.admin_utils.objmq.View"-->
+                    <!--role="org.ict_ok.usr" />-->
     <grant permission="org.ict_ok.admin_utils.objmq.View"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.objmq.View"

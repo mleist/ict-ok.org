@@ -26,8 +26,8 @@
         description="Add from AdmUtilGeneratorNagios."
     />
 
-    <grant permission="org.ict_ok.admin_utils.generators.nagios.View"
-                    role="org.ict_ok.usr" />
+    <!--<grant permission="org.ict_ok.admin_utils.generators.nagios.View"-->
+                    <!--role="org.ict_ok.usr" />-->
     <grant permission="org.ict_ok.admin_utils.generators.nagios.View"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.generators.nagios.View"

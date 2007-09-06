@@ -18,8 +18,8 @@
         description="Edit from IkNotifier."
     />
     
-    <grant permission="org.ict_ok.admin_utils.notifier.View"
-                    role="org.ict_ok.usr" />
+    <!--<grant permission="org.ict_ok.admin_utils.notifier.View"-->
+                    <!--role="org.ict_ok.usr" />-->
     <grant permission="org.ict_ok.admin_utils.notifier.View"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.notifier.View"
