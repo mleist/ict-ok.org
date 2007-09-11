@@ -69,7 +69,7 @@
         manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
         class="org.ict_ok.skin.menu.DashboardItem"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.site.View"
+        permission="org.ict_ok.admin_utils.dashboard.View"
         />
         
     <viewlet

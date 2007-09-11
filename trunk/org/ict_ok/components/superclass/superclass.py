@@ -39,7 +39,8 @@ class Superclass(Persistent):
     the superclass
     """
 
-    implements(IKeyReference, ISuperclass)
+#    implements(IKeyReference, ISuperclass)
+    implements(ISuperclass)
     key_type_id = 'org.ict_ok.components.superclass.keyreference'
     
     objectID = FieldProperty(ISuperclass['objectID'])

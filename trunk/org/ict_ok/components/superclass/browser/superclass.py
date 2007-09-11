@@ -29,6 +29,8 @@ from zope.proxy import removeAllProxies
 from zope.app.applicationcontrol.interfaces import IRuntimeInfo
 from zope.size.interfaces import ISized
 from zope.security.checker import canAccess
+from zope.app.catalog.interfaces import ICatalog
+from zope.app.intid.interfaces import IIntIds
 
 # z3c imports
 from z3c.form import button, field, form
@@ -46,6 +48,8 @@ from org.ict_ok.components.superclass.interfaces import IPickle, ISuperclass
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.supernode.interfaces import IState
+from org.ict_ok.admin_utils.usermanagement.usermanagement import \
+     AdmUtilUserProperties
 
 # ict_ok imports
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -325,6 +329,31 @@ class DumpData:
             return _(u"no pickle adapter")
 
 
+class AddDashboard(BrowserPagelet):
+    def update(self):
+        #import pdb; pdb.set_trace()
+        testObjId = self.context.getObjectId()
+        userProps = AdmUtilUserProperties(self.request.principal)
+        userProps.dashboard_obj_ids.add(testObjId)
+        userProps.mapping._p_changed=True
+
+    def render(self):
+        return self.request.response.redirect('./overview.html')
+
+
+class DelDashboard(BrowserPagelet):
+    def update(self):
+        #import pdb; pdb.set_trace()
+        testObjId = self.context.getObjectId()
+        userProps = AdmUtilUserProperties(self.request.principal)
+        if testObjId in userProps.dashboard_obj_ids:
+            userProps.dashboard_obj_ids.remove(testObjId)
+            userProps.mapping._p_changed=True
+        
+    def render(self):
+        return self.request.response.redirect('./overview.html')
+
+
 # --------------- forms ------------------------------------
 
 
@@ -452,6 +481,25 @@ class Overview(BrowserPagelet):
             columns=self.columns, sort_on=((_('Title'), False),))
         formatter.cssClasses['table'] = 'listing'
         return formatter()
+
+
+class ViewDashboard(Overview):
+    label = _(u"Dashboard")
+    def update(self):
+        self.label = _(u"Dashboard of %s") % \
+            self.request.principal.title
+        Overview.update(self)
+    def objs(self):
+        """List of Content objects"""
+        retList = []
+        userProps = AdmUtilUserProperties(self.request.principal)
+        my_catalog = zapi.getUtility(ICatalog)
+        uidutil = zapi.getUtility(IIntIds)
+        print "oid_list: ", list(userProps.dashboard_obj_ids)
+        for obj_id in userProps.dashboard_obj_ids:
+            retList.extend(list(my_catalog.searchResults(oid_index=obj_id)))
+        print "retList: ", retList
+        return retList
 
 
 class History(BrowserPagelet):

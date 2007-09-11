@@ -1,9 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
-      metal:use-macro="context/@@standard_macros/view">
+>
 <body>
-<div metal:fill-slot="body">
+<div>
 <form class="edit-form" enctype="multipart/form-data" method="post"
       action="." tal:attributes="action request/URL">
 
@@ -28,11 +28,11 @@
     </div>
   </div>
 
-  <span class="actionButtons" tal:condition="view/availableActions">
+  <!--span class="actionButtons" tal:condition="view/availableActions">
     <input tal:repeat="action view/actions"
            tal:replace="structure action/render"
            />
-  </span>
+  </span-->
 
 </form>
 </div>

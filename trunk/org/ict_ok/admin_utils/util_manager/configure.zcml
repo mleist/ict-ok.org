@@ -34,7 +34,12 @@
             set_schema=".interfaces.IUtilManager"
             />
     </class>
-    
+
+    <adapter
+        factory="org.ict_ok.components.superclass.adapter.search.Searchable"
+        for=".interfaces.IUtilManager"
+    />
+
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"
         for="zope.app.appsetup.IDatabaseOpenedEvent"

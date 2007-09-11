@@ -35,6 +35,35 @@
         permission="zope.Security"
     />
 
+    <z3c:pagelet
+        name="add_dashboard.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.AddDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+    />
+    
+    <z3c:pagelet
+        name="del_dashboard.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.DelDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+    />
+
+    <z3c:pagelet
+        name="view_dashboard.html"
+        for="*"
+        class="org.ict_ok.components.superclass.browser.superclass.ViewDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.View"
+    />
+    <z3c:template
+        template="overview.pt"
+        for="org.ict_ok.components.superclass.browser.superclass.ViewDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <z3c:template
         template="dumpdata.pt"
         for="org.ict_ok.components.superclass.browser.superclass.DumpData"
@@ -58,6 +87,4 @@
         for="org.ict_ok.components.superclass.browser.superclass.EditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
-        
-        
 </configure>

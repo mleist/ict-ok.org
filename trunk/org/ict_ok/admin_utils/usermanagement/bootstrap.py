@@ -32,8 +32,12 @@ from zope.app.authentication.groupfolder import GroupInformation, \
 from zope.app.securitypolicy.interfaces import IPrincipalRoleManager
 
 # ict_ok.org imports
+from org.ict_ok.admin_utils.usermanagement.interfaces import \
+     IAdmUtilUserManagement
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
+from org.ict_ok.admin_utils.usermanagement.usermanagement import \
+     AdmUtilUserManagement
 
 logger = logging.getLogger("AdmUtilUserManagement")
 
@@ -45,11 +49,18 @@ def bootStrapSubscriberDatabase(event):
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 
+    #madePluggableAuthentication = ensureUtility(\
+        #root_folder,
+        #IAuthentication,
+        #'',
+        #PluggableAuthentication,
+        #copy_to_zlog=False,
+        #asObject=True)
     madePluggableAuthentication = ensureUtility(\
         root_folder,
-        IAuthentication,
-        '',
-        PluggableAuthentication,
+        IAdmUtilUserManagement,
+        'AdmUtilUserManagement',
+        AdmUtilUserManagement,
         copy_to_zlog=False,
         asObject=True)
 

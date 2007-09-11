@@ -14,8 +14,10 @@
 __version__ = "$Id$"
 
 # zope imports
-from zope.schema import TextLine
+from zope.interface import Attribute, Interface
+from zope.schema import List, Object, TextLine
 from zope.i18nmessageid import MessageFactory
+from zope.app.security.interfaces import IAuthentication
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import ISupernode
@@ -23,12 +25,29 @@ from org.ict_ok.components.supernode.interfaces import ISupernode
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilUserManagement(ISupernode):
+class IAdmUtilUserProperties(Interface):
     """
-    major component for user registration and management
+    major component for user properties
     """
 
     email = TextLine(
         title = _(u"Email address"),
         required=True
         )
+
+    #dashboard_obj_ids = List(
+        #title = _("listoh objects for the dashboard"),
+        #value_type = Object(
+            #title = _("Object"))
+    #)
+    dashboard_obj_ids = Attribute("list of object ids for the dashboard")
+
+
+class IAdmUtilUserManagement(ISupernode, IAuthentication):
+    """
+    major component for user registration and management
+    """
+
+class IAdmUtilUserDashboard(Interface):
+    """ user dashboard """
+

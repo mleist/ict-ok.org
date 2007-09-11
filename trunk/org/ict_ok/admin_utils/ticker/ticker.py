@@ -139,9 +139,10 @@ class TickerThread(threading.Thread):
                     tmp_util = queryUtility(IAdmUtilSupervisor)
                     #print "IAdmUtilSupervisor: ", tmp_util
                     uidutil = getUtility(IIntIds)
+                    #import pdb; pdb.set_trace()
                     for (myid, myobj) in uidutil.items():
                         try:
-                            tickerAdapter = ITicker(myobj)
+                            tickerAdapter = ITicker(myobj.object)
                             if tickerAdapter:
                                 tickerAdapter.triggered()
                         except TypeError, err:

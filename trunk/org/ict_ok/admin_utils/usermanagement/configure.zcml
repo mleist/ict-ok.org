@@ -28,13 +28,16 @@
         handler=".bootstrap.bootStrapSubscriberDatabase"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
-    <adapter
-        factory=".browser.usermanagement.form_template"
-        for=".browser.usermanagement.AdmUtilUserManagementForm"
-        name="org.ict_ok.admin_utils.usermanagement.form"
-    />
+    <!--<adapter-->
+        <!--factory=".browser.usermanagement.form_template"-->
+        <!--for=".browser.usermanagement.AdmUtilUserPropertiesForm"-->
+        <!--name="org.ict_ok.admin_utils.userproperties.form"-->
+    <!--/>-->
     <adapter factory=".usermanagement.AdmUtilUserManagement"
         provides=".interfaces.IAdmUtilUserManagement"
+        />
+    <adapter factory=".usermanagement.AdmUtilUserProperties"
+        provides=".interfaces.IAdmUtilUserProperties"
         />
 
     <include package=".browser" />

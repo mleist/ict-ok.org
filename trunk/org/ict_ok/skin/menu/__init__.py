@@ -115,7 +115,7 @@ class GlobalMenuSubItem(ContextMenuItem):
     
 class DashboardItem(GlobalMenuMainItem):
     title = _(u'Dashboard')
-    viewURL = 'dashboard.html'
+    viewURL = 'view_dashboard.html'
     weight = 5
 
 class HelpItem(GlobalMenuMainItem):
