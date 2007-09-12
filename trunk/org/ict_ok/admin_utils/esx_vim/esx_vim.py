@@ -73,13 +73,23 @@ class AdmUtilEsxVim(Supernode):
         '''See interface `IReadContainer`'''
         print "AdmUtilEsxVim.__getitem__(%s)" % (key)
         #myDict = globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)
+        #import pdb;pdb.set_trace()
+        if self.has_key(key):
+            print "__getitem__ 1"
+            return self[key]
         myDict = globalEsxVimUtility.get_EsxVimAllDict(self, self)
         print "myDict:", myDict
-        myObj = myDict[key]
-        print "myObj:", myObj
-        return myObj
-        #return globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)[key]
-        #return globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)[key]
+        if myDict.has_key(key):
+            print "__getitem__ 2"
+            return myDict[key]
+        raise KeyError
+        #return super(AdmUtilEsxVim).__getitem__(self, key)
+    
+    #def get(self, key, default=None):
+        #print "AdmUtilEsxVim.get(%s)" % (key)
+        #if self.has_key(key):
+            #return self[key]
+        #return super(AdmUtilEsxVim).get(self, key, default)
         
     #def __getattr__(self, name):
         #print "AdmUtilEsxVim.__getattr__(%s)" % (name)
