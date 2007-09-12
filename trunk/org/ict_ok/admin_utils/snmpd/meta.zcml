@@ -4,10 +4,10 @@
     >
 
   <meta:directive 
-      namespace="http://namespaces.zope.org/ticker"
-      name="admUtilTicker"
-      schema=".zcml.IAdmUtilTickerDirective"
-      handler=".zcml.admUtilTicker"
+      namespace="http://namespaces.zope.org/snmpd"
+      name="admUtilSnmpd"
+      schema=".zcml.IAdmUtilSnmpdDirective"
+      handler=".zcml.admUtilSnmpd"
       />
 
 </configure>

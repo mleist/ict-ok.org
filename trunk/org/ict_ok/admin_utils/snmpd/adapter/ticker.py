@@ -21,21 +21,21 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ITicker
-from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
+from org.ict_ok.components.superclass.interfaces import ISnmpd
+from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 
 
-class Ticker(object):
-    """Ticker-Adapter."""
+class Snmpd(object):
+    """Snmpd-Adapter."""
 
-    implements(ITicker)
-    adapts(IAdmUtilTicker)
+    implements(ISnmpd)
+    adapts(IAdmUtilSnmpd)
 
     def __init__(self, context):
         self.context = context
 
     def triggered(self):
         """
-        got ticker event from ticker thread
+        got snmpd event from snmpd thread
         """
-        print "AdmUtilTicker: '%s' triggered!!" % self.context
+        print "AdmUtilSnmpd: '%s' triggered!!" % self.context

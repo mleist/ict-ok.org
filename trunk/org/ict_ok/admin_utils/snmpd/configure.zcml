@@ -1,6 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:ticker="http://namespaces.zope.org/ticker"
+    xmlns:snmpd="http://namespaces.zope.org/snmpd"
     i18n_domain="org.ict_ok"
     >
 
@@ -9,18 +9,18 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007,
          Markus Leist <leist@ikom-online.de> -->
 
-    <class class=".ticker.AdmUtilTicker">
+    <class class=".snmpd.AdmUtilSnmpd">
         <factory
-            id="org.ict_ok.admin_utils.ticker.ticker.AdmUtilTicker" />
+            id="org.ict_ok.admin_utils.snmpd.snmpd.AdmUtilSnmpd" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <require
-            permission="org.ict_ok.admin_utils.ticker.View"
-            interface=".interfaces.IAdmUtilTicker"
+            permission="org.ict_ok.admin_utils.snmpd.View"
+            interface=".interfaces.IAdmUtilSnmpd"
             />
         <require
-            permission="org.ict_ok.admin_utils.ticker.Edit"
-            set_schema=".interfaces.IAdmUtilTicker"
+            permission="org.ict_ok.admin_utils.snmpd.Edit"
+            set_schema=".interfaces.IAdmUtilSnmpd"
             />
     </class>
 
@@ -57,12 +57,12 @@
         <!--hostname="dddhost"-->
         <!--/>-->
     <adapter
-        factory=".adapter.ticker.Ticker"
+        factory=".adapter.snmpd.Snmpd"
         />
 
-    <ticker:admUtilTicker
-        name="ikTicker"
-        permission="org.ict_ok.admin_utils.ticker.Send"
+    <snmpd:admUtilSnmpd
+        name="ikSnmpd"
+        permission="org.ict_ok.admin_utils.snmpd.Send"
         />
 
     <include package=".browser" />

@@ -9,31 +9,31 @@
          Markus Leist <leist@ikom-online.de> -->
 
     <permission
-        id="org.ict_ok.admin_utils.ticker.View"
-        title="viewTickerUtil"
-        description="view Ticker Utility."
+        id="org.ict_ok.admin_utils.snmpd.View"
+        title="viewSnmpdUtil"
+        description="view Snmpd Utility."
     />
     <permission
-        id="org.ict_ok.admin_utils.ticker.Edit"
-        title="editTickerUtil"
-        description="edit Ticker Utility."
+        id="org.ict_ok.admin_utils.snmpd.Edit"
+        title="editSnmpdUtil"
+        description="edit Snmpd Utility."
     />
     <permission
-        id="org.ict_ok.admin_utils.ticker.Send"
+        id="org.ict_ok.admin_utils.snmpd.Send"
         title="sendEvents"
-        description="send Ticker Events."
+        description="send Snmpd Events."
     />
 
-    <!--<grant permission="org.ict_ok.admin_utils.ticker.View"-->
+    <!--<grant permission="org.ict_ok.admin_utils.snmpd.View"-->
                     <!--role="org.ict_ok.usr" />-->
-    <grant permission="org.ict_ok.admin_utils.ticker.View"
+    <grant permission="org.ict_ok.admin_utils.snmpd.View"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.ticker.View"
+    <grant permission="org.ict_ok.admin_utils.snmpd.View"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.admin_utils.ticker.Edit"
+    <grant permission="org.ict_ok.admin_utils.snmpd.Edit"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.ticker.Edit"
+    <grant permission="org.ict_ok.admin_utils.snmpd.Edit"
                     role="org.ict_ok.adm" />
 
 </configure>

@@ -33,15 +33,15 @@ from zope.security.interfaces import IParticipation
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
-from org.ict_ok.components.superclass.interfaces import ITicker
-from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
+from org.ict_ok.components.superclass.interfaces import ISnmpd
+from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 from org.ict_ok.components.supernode.supernode import Supernode
 
 
-class AdmUtilTicker(Supernode):
-    """Implementation of local Ticker-Utility"""
+class AdmUtilSnmpd(Supernode):
+    """Implementation of local Snmpd-Utility"""
 
-    implements(IAdmUtilTicker)
+    implements(IAdmUtilSnmpd)
 
     def __init__(self):
         Supernode.__init__(self)
@@ -49,36 +49,36 @@ class AdmUtilTicker(Supernode):
 
 
 
-class SystemTickerPrincipal(object):
+class SystemSnmpdPrincipal(object):
     implements(IParticipation)
-    id = "idSystemTickerPrincipal"
-    title = "Ticker User"
+    id = "idSystemSnmpdPrincipal"
+    title = "Snmpd User"
     description = ""
  
-systemTickerPrincipal = SystemTickerPrincipal()
+systemSnmpdPrincipal = SystemSnmpdPrincipal()
     
     
-class SystemTickerParticipation(object):
+class SystemSnmpdParticipation(object):
     implements(IParticipation)
-    principal = systemTickerPrincipal
+    principal = systemSnmpdPrincipal
     interaction = None
 
 
-class TickerThread(threading.Thread):
+class SnmpdThread(threading.Thread):
     """This thread is started at configuration time from the
     `mail:queuedDelivery` directive handler.
     """
     implements(IDataManager)
 
     database = None
-    log = logging.getLogger("TickerThread")
+    log = logging.getLogger("SnmpdThread")
     __stopped = False
 
     def __init__(self):
         self.log.info("started (org)")
         # Use the default thread transaction manager.
         self.transaction_manager = transaction.manager
-        self.interaction = ParanoidSecurityPolicy(SystemTickerParticipation())
+        self.interaction = ParanoidSecurityPolicy(SystemSnmpdParticipation())
         threading.Thread.__init__(self)
 
     #def setMaildir(self, maildir):
@@ -123,16 +123,16 @@ class TickerThread(threading.Thread):
     def run(self, forever=True):
         atexit.register(self.stop)
         while not self.__stopped:
-            if TickerThread.database:
+            if SnmpdThread.database:
                 try:
-                    conn = TickerThread.database.open()
+                    conn = SnmpdThread.database.open()
                     root = conn.root()
                     root_folder = root['Application']
                     #self.interaction = ParanoidSecurityPolicy(SystemConfigurationParticipation())
                     #self.log.info("dddd: %s" % root_folder)
                     #my_obj = root_folder['0bbe5e583af8492266f91c90e87ce5690']
                     #self.log.info("ddd2: %s" % my_obj)
-                    #my_obj.tickerEvent()
+                    #my_obj.snmpdEvent()
                     #site = root_folder
                     old_site = getSite()
                     setSite(root_folder)
@@ -142,18 +142,18 @@ class TickerThread(threading.Thread):
                     #import pdb; pdb.set_trace()
                     for (myid, myobj) in uidutil.items():
                         try:
-                            tickerAdapter = ITicker(myobj.object)
-                            if tickerAdapter:
-                                tickerAdapter.triggered()
+                            snmpdAdapter = ISnmpd(myobj.object)
+                            if snmpdAdapter:
+                                snmpdAdapter.triggered()
                         except TypeError, err:
                             print "Error xxx: ", err
-                    tmp_util = queryUtility(IAdmUtilTicker)
+                    tmp_util = queryUtility(IAdmUtilSnmpd)
                     if tmp_util:
                         print "1:", tmp_util
                         try:
-                            tickerAdapter = ITicker(tmp_util)
-                            if tickerAdapter:
-                                tickerAdapter.triggered()
+                            snmpdAdapter = ISnmpd(tmp_util)
+                            if snmpdAdapter:
+                                snmpdAdapter.triggered()
                         except TypeError, err:
                             print "Error xxx: ", err
                         
@@ -163,7 +163,7 @@ class TickerThread(threading.Thread):
                     # Blanket except because we don't want
                     # this thread to ever die
                 except:
-                    self.log.error("Error in Ticker", exc_info=True)
+                    self.log.error("Error in Snmpd", exc_info=True)
                     self.transaction_manager.abort()
                     conn.close()
             if forever:

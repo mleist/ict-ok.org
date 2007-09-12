@@ -26,40 +26,40 @@ from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.ticker.ticker import TickerThread
+from org.ict_ok.admin_utils.snmpd.snmpd import SnmpdThread
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
-from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
-from org.ict_ok.admin_utils.ticker.ticker import AdmUtilTicker
+from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
+from org.ict_ok.admin_utils.snmpd.snmpd import AdmUtilSnmpd
 
-logger = logging.getLogger("AdmUtilTicker")
+logger = logging.getLogger("AdmUtilSnmpd")
 
 def bootStrapSubscriberDatabase(event):
     """initialisation of ict_ok supervisor on first database startup
     """
     if appsetup.getConfigContext().hasFeature('devmode'):
         logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    TickerThread.database = event.database
+    SnmpdThread.database = event.database
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 
-    madeAdmUtilTicker = ensureUtility(root_folder, IAdmUtilTicker,
-                                       'AdmUtilTicker', AdmUtilTicker, '',
+    madeAdmUtilSnmpd = ensureUtility(root_folder, IAdmUtilSnmpd,
+                                       'AdmUtilSnmpd', AdmUtilSnmpd, '',
                                        copy_to_zlog=False, asObject=True)
 
-    if isinstance(madeAdmUtilTicker, AdmUtilTicker):
-        logger.info(u"bootstrap: Ensure named AdmUtilTicker")
-        dcore = IWriteZopeDublinCore(madeAdmUtilTicker)
-        dcore.title = u"Ticker Utility"
+    if isinstance(madeAdmUtilSnmpd, AdmUtilSnmpd):
+        logger.info(u"bootstrap: Ensure named AdmUtilSnmpd")
+        dcore = IWriteZopeDublinCore(madeAdmUtilSnmpd)
+        dcore.title = u"Snmpd Utility"
         dcore.created = datetime.utcnow()
-        madeAdmUtilTicker.ikName = dcore.title
-        madeAdmUtilTicker.__post_init__()
+        madeAdmUtilSnmpd.ikName = dcore.title
+        madeAdmUtilSnmpd.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()
                     if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: made IAdmUtilTicker-Utility")
+            u" bootstrap: made IAdmUtilSnmpd-Utility")
 
     transaction.get().commit()
     connection.close()

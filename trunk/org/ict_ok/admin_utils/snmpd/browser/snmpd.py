@@ -31,7 +31,7 @@ from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
+from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 
 _ = MessageFactory('org.ict_ok')
 
@@ -40,7 +40,7 @@ _ = MessageFactory('org.ict_ok')
 # --------------- object details ---------------------------
 
 
-class AdmUtilTickerDetails(SupernodeDetails):
+class AdmUtilSnmpdDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
     omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
@@ -49,14 +49,14 @@ class AdmUtilTickerDetails(SupernodeDetails):
 
 # --------------- forms ------------------------------------
 
-class DetailsAdmUtilTickerForm(DisplayForm):
+class DetailsAdmUtilSnmpdForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of ticker')
-    fields = field.Fields(IAdmUtilTicker).omit(\
-        *AdmUtilTickerDetails.omit_viewfields)
+    label = _(u'settings of snmpd')
+    fields = field.Fields(IAdmUtilSnmpd).omit(\
+        *AdmUtilSnmpdDetails.omit_viewfields)
 
-class EditAdmUtilTickerForm(EditForm):
+class EditAdmUtilSnmpdForm(EditForm):
     """ Edit for for site """
-    label = _(u'edit ticker settings')
-    fields = field.Fields(IAdmUtilTicker).omit(\
-        *AdmUtilTickerDetails.omit_editfields)
+    label = _(u'edit snmpd settings')
+    fields = field.Fields(IAdmUtilSnmpd).omit(\
+        *AdmUtilSnmpdDetails.omit_editfields)

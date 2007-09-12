@@ -19,5 +19,5 @@ __version__ = "$Id$"
 from org.ict_ok.components.supernode.interfaces import ISupernode
 
 
-class IAdmUtilTicker(ISupernode):
+class IAdmUtilSnmpd(ISupernode):
     """A pseudo-mailer that delivers objects by xmlrpc."""
