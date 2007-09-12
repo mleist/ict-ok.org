@@ -24,38 +24,12 @@
             />
     </class>
 
-
-    <!--<permission-->
-        <!--id="org.ict_ok.admin_utils.objmq.Edit"-->
-        <!--title="Edit from AdmUtilObjMQ"-->
-        <!--description="Edit from AdmUtilObjMQ."-->
-    <!--/>-->
-
-    <!--<class class=".objmq.AdmUtilObjMQ">-->
-        <!--<factory-->
-            <!--id="org.ict_ok.admin_utils.objmq.objmq.AdmUtilObjMQ" />-->
-        <!--<implements-->
-            <!--interface="zope.annotation.interfaces.IAttributeAnnotatable" />-->
-        <!--<require-->
-            <!--permission="org.ict_ok.admin_utils.objmq.View"-->
-            <!--interface=".interfaces.IAdmUtilObjMQ"-->
-            <!--/>-->
-        <!--<require-->
-            <!--permission="org.ict_ok.admin_utils.objmq.View"-->
-            <!--set_schema=".interfaces.IAdmUtilObjMQ"-->
-            <!--/>-->
-    <!--</class>-->
-
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <!--<mail:ikAdmUtilObjTransport-->
-        <!--name="dddObjTransport"-->
-        <!--hostname="dddhost"-->
-        <!--/>-->
     <adapter
         factory=".adapter.snmpd.Snmpd"
         />

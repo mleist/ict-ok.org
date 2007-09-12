@@ -39,11 +39,12 @@ from zope.app.container.contained import contained
 logger = logging.getLogger("AdmUtilEsxVim")
 _ = MessageFactory('org.ict_ok')
 
+from zope.annotation.interfaces import IAnnotations
 
 class AdmUtilEsxVim(Supernode):
     """Implementation of local EsxVim Utility"""
 
-    implements(IAdmUtilEsxVim, IReadContainer)
+    implements(IAdmUtilEsxVim, IReadContainer, IAnnotations)
 
     esxVimServerActive = FieldProperty(IAdmUtilEsxVim['esxVimServerActive'])
     esxVimServerIp = FieldProperty(IAdmUtilEsxVim['esxVimServerIp'])
@@ -86,6 +87,10 @@ class AdmUtilEsxVim(Supernode):
         myDict = globalEsxVimUtility.get_EsxVimAllDict(self, self)
         if myDict.has_key(key):
             return myDict[key]
+        if key == '__annotations__':
+            return None
+        if key == '__getnewargs__':
+            return None
         raise KeyError
  
     def values(self):

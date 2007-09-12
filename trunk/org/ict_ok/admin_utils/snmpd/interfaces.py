@@ -14,6 +14,7 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import ISupernode
@@ -21,3 +22,12 @@ from org.ict_ok.components.supernode.interfaces import ISupernode
 
 class IAdmUtilSnmpd(ISupernode):
     """A pseudo-mailer that delivers objects by xmlrpc."""
+
+class ISnmpd(Interface):
+    """Interface of Ticker-Adapter
+    will arrive every second
+    """
+    def triggered(self):
+        """
+        got ticker event from ticker thread
+        """

@@ -23,17 +23,14 @@ from zope.interface import Interface
 from zope.schema import TextLine
 from zope.security.zcml import Permission
 
+# pysnmp imports
+from pysnmp.v4.carrier.asynsock.dispatch import AsynsockDispatcher
+from pysnmp.v4.carrier.asynsock.dgram import udp
+from pyasn1.codec.ber import decoder
+from pysnmp.v4.proto import api
+
 # ict_ok.org imports
 from org.ict_ok.admin_utils.snmpd.snmpd import SnmpdThread
-
-
-#def _assertPermission(permission, interfaces, component):
-    #if permission is not None:
-        #if permission == PublicPermission:
-            #permission = CheckerPublic
-        #checker = InterfaceChecker(interfaces, permission)
-
-    #return proxify(component, checker)
 
 
 class IAdmUtilSnmpdDirective(Interface):
@@ -57,8 +54,7 @@ def admUtilSnmpd(_context, permission, name="Snmpd"):
 
     def createSnmpd():
         thread = SnmpdThread()
-        #thread.setMailer(mailerObject)
-        #thread.setQueuePath(queuePath)
+        thread.setDaemon(1)
         thread.start()
 
     _context.action(

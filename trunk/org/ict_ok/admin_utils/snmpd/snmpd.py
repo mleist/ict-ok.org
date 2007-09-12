@@ -30,11 +30,16 @@ from zope.app.intid.interfaces import IIntIds
 from zope.security.simplepolicies import ParanoidSecurityPolicy
 from zope.security.interfaces import IParticipation
 
+# pysnmp imports
+from pysnmp.v4.carrier.asynsock.dispatch import AsynsockDispatcher
+from pysnmp.v4.carrier.asynsock.dgram import udp
+from pyasn1.codec.ber import decoder
+from pysnmp.v4.proto import api
+
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
-from org.ict_ok.components.superclass.interfaces import ISnmpd
-from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
+from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd, ISnmpd
 from org.ict_ok.components.supernode.supernode import Supernode
 
 
@@ -79,93 +84,21 @@ class SnmpdThread(threading.Thread):
         # Use the default thread transaction manager.
         self.transaction_manager = transaction.manager
         self.interaction = ParanoidSecurityPolicy(SystemSnmpdParticipation())
+        self.transportDispatcher = AsynsockDispatcher()
+        self.transportDispatcher.registerTransport(
+            #    udp.domainName, udp.UdpSocketTransport().openServerMode(('localhost', 162))
+            udp.domainName, udp.UdpSocketTransport().openServerMode(('', 1620))
+        )
+        self.transportDispatcher.registerRecvCbFun(self.cbFun)
+        self.transportDispatcher.jobStarted(1) # this job would never finish
         threading.Thread.__init__(self)
-
-    #def setMaildir(self, maildir):
-        #"""Set the maildir.
-
-        #This method is used just to provide a `maildir` stubs ."""
-        #self.maildir = maildir
-
-    #def setQueuePath(self, path):
-        #self.maildir = Maildir(path, True)
-
-    #def setMailer(self, mailer):
-        #self.mailer = mailer
-
-    #def _parseMessage(self, message):
-        #"""Extract fromaddr and toaddrs from the first two lines of
-        #the `message`.
-
-        #Returns a fromaddr string, a toaddrs tuple and the message
-        #string.
-        #"""
-
-        #fromaddr = ""
-        #toaddrs = ()
-        #rest = ""
-
-        #try:
-            #first, second, rest = message.split('\n', 2)
-        #except ValueError:
-            #return fromaddr, toaddrs, message
-
-        #if first.startswith("X-Zope-From: "):
-            #i = len("X-Zope-From: ")
-            #fromaddr = first[i:]
-
-        #if second.startswith("X-Zope-To: "):
-            #i = len("X-Zope-To: ")
-            #toaddrs = tuple(second[i:].split(", "))
-
-        #return fromaddr, toaddrs, rest
 
     def run(self, forever=True):
         atexit.register(self.stop)
         while not self.__stopped:
-            if SnmpdThread.database:
-                try:
-                    conn = SnmpdThread.database.open()
-                    root = conn.root()
-                    root_folder = root['Application']
-                    #self.interaction = ParanoidSecurityPolicy(SystemConfigurationParticipation())
-                    #self.log.info("dddd: %s" % root_folder)
-                    #my_obj = root_folder['0bbe5e583af8492266f91c90e87ce5690']
-                    #self.log.info("ddd2: %s" % my_obj)
-                    #my_obj.snmpdEvent()
-                    #site = root_folder
-                    old_site = getSite()
-                    setSite(root_folder)
-                    tmp_util = queryUtility(IAdmUtilSupervisor)
-                    #print "IAdmUtilSupervisor: ", tmp_util
-                    uidutil = getUtility(IIntIds)
-                    #import pdb; pdb.set_trace()
-                    for (myid, myobj) in uidutil.items():
-                        try:
-                            snmpdAdapter = ISnmpd(myobj.object)
-                            if snmpdAdapter:
-                                snmpdAdapter.triggered()
-                        except TypeError, err:
-                            print "Error xxx: ", err
-                    tmp_util = queryUtility(IAdmUtilSnmpd)
-                    if tmp_util:
-                        print "1:", tmp_util
-                        try:
-                            snmpdAdapter = ISnmpd(tmp_util)
-                            if snmpdAdapter:
-                                snmpdAdapter.triggered()
-                        except TypeError, err:
-                            print "Error xxx: ", err
-                        
-                    #setSite(old_site)
-                    self.transaction_manager.commit()
-                    conn.close()
-                    # Blanket except because we don't want
-                    # this thread to ever die
-                except:
-                    self.log.error("Error in Snmpd", exc_info=True)
-                    self.transaction_manager.abort()
-                    conn.close()
+            print "+++++++++++++++++++++++++++++++++++++9a"
+            self.transportDispatcher.runDispatcher()
+            print "+++++++++++++++++++++++++++++++++++++9b"
             if forever:
                 time.sleep(1)
             else:
@@ -174,3 +107,69 @@ class SnmpdThread(threading.Thread):
     def stop(self):
         self.log.info("stopped (org)")
         self.__stopped = True
+
+    def cbFun(self, transportDispatcher, transportDomain, transportAddress, wholeMsg):
+        while wholeMsg:
+            msgVer = int(api.decodeMessageVersion(wholeMsg))
+            if api.protoModules.has_key(msgVer):
+                pMod = api.protoModules[msgVer]
+            else:
+                print 'Unsupported SNMP version %s' % msgVer
+                return
+            reqMsg, wholeMsg = decoder.decode(
+                wholeMsg, asn1Spec=pMod.Message(),
+                )
+            print 'Notification message from %s:%s: ' % (
+                transportDomain, transportAddress
+                )
+            reqPDU = pMod.apiMessage.getPDU(reqMsg)
+            if reqPDU.isSameTypeWith(pMod.TrapPDU()):
+                if msgVer == api.protoVersion1:
+                    print 'Enterprise: %s' % (
+                        pMod.apiTrapPDU.getEnterprise(reqPDU).prettyPrint()
+                        )
+                    print 'Agent Address: %s' % (
+                        pMod.apiTrapPDU.getAgentAddr(reqPDU).prettyPrint()
+                        )
+                    print 'Generic Trap: %s' % (
+                        pMod.apiTrapPDU.getGenericTrap(reqPDU).prettyPrint()
+                        )
+                    print 'Specific Trap: %s' % (
+                        pMod.apiTrapPDU.getSpecificTrap(reqPDU).prettyPrint()
+                        )
+                    print 'Uptime: %s' % (
+                        pMod.apiTrapPDU.getTimeStamp(reqPDU).prettyPrint()
+                        )
+                    varBinds = pMod.apiTrapPDU.getVarBindList(reqPDU)
+                else:
+                    varBinds = pMod.apiPDU.getVarBindList(reqPDU)
+                print 'Var-binds:'
+                for oid, val in varBinds:
+                    print '%s = %s' % (oid.prettyPrint(), val.prettyPrint())
+                # ---------------------------------------------------
+                if SnmpdThread.database:
+                    conn = SnmpdThread.database.open()
+                    root = conn.root()
+                    root_folder = root['Application']
+                    old_site = getSite()
+                    setSite(root_folder)
+                    tmp_util = queryUtility(IAdmUtilSupervisor)
+                    print "IAdmUtilSupervisor: ", tmp_util
+                    uidutil = getUtility(IIntIds)
+                    for (myid, myobj) in uidutil.items():
+                        print "ddd:", myobj
+                        try:
+                            tickerAdapter = ISnmpd(myobj)
+                            if tickerAdapter:
+                                tickerAdapter.triggered(reqPDU)
+                        except TypeError, err:
+                            print "Error xxx: ", err
+                    tmp_util = queryUtility(IAdmUtilSnmpd)
+                    if tmp_util:
+                        print "1:", tmp_util
+                    setSite(old_site)
+                    transaction.commit()
+                    conn.close()
+                # ---------------------------------------------------
+
+        return wholeMsg

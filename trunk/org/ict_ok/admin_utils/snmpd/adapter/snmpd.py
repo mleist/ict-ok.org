@@ -21,8 +21,7 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISnmpd
-from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
+from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd, ISnmpd
 
 
 class Snmpd(object):

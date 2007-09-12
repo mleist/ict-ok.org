@@ -22,6 +22,7 @@
     <include package="z3c.pagelet" file="meta.zcml" />
     <include package="z3c.template" file="meta.zcml" />
     <include package="org.ict_ok.admin_utils.objmq" file="meta.zcml"/>
+    <include package="org.ict_ok.admin_utils.snmpd" file="meta.zcml"/>
     <include package="org.ict_ok.admin_utils.ticker" file="meta.zcml"/>
 
     <!--global security setting e.g. roles-->
@@ -38,6 +39,7 @@
     <include file="../lib/python/org/ict_ok/admin_utils/notifier/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/objmq/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/supervisor/security.zcml" />
+    <include file="../lib/python/org/ict_ok/admin_utils/snmpd/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/ticker/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/usermanagement/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/util_manager/security.zcml" />
@@ -101,6 +103,7 @@
     <!--<include package="org.ict_ok.admin_utils.notifier.jabber" />-->
     <!--<include package="org.ict_ok.admin_utils.notifier.email" />-->
     <include package="org.ict_ok.admin_utils.objmq" />
+    <include package="org.ict_ok.admin_utils.snmpd" />
     <include package="org.ict_ok.admin_utils.ticker" />
     <include package="org.ict_ok.admin_utils.usermanagement" />
     <include package="org.ict_ok.admin_utils.util_manager" />
