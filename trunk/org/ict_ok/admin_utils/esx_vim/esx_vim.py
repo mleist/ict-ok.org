@@ -71,45 +71,22 @@ class AdmUtilEsxVim(Supernode):
 
     def __getitem__(self, key):
         '''See interface `IReadContainer`'''
-        print "AdmUtilEsxVim.__getitem__(%s)" % (key)
-        #myDict = globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)
-        #import pdb;pdb.set_trace()
+        #print "AdmUtilEsxVim.__getitem__(%s)" % (key)
         if self.has_key(key):
-            print "__getitem__ 1"
             return self[key]
         myDict = globalEsxVimUtility.get_EsxVimAllDict(self, self)
-        print "myDict:", myDict
         if myDict.has_key(key):
-            print "__getitem__ 2"
             return myDict[key]
         raise KeyError
-        #return super(AdmUtilEsxVim).__getitem__(self, key)
     
-    #def get(self, key, default=None):
-        #print "AdmUtilEsxVim.get(%s)" % (key)
-        #if self.has_key(key):
-            #return self[key]
-        #return super(AdmUtilEsxVim).get(self, key, default)
-        
-    #def __getattr__(self, name):
-        #print "AdmUtilEsxVim.__getattr__(%s)" % (name)
-        #myDict = globalEsxVimUtility.get_EsxVimAllDict(self, self)
-        #if myDict.has_key(name):
-            #return myDict[name]
-        #import pdb;pdb.set_trace()
-        #return False
-        ##attr = getattr(self, name)
-        ##if attr is not None:
-            ##return attr
-        ##raise AttributeError(name)
-
-    #def get(self, key, default=None):
-        #'''See interface `IReadContainer`'''
-        #print "AdmUtilEsxVim.get(%s)" % (key)
-        #if key in self:
-            #return self.__data.get(key, default)
-        #else:
-            #return self.__getitem__(key)
+    def __getattr__(self, key):
+        #print "AdmUtilEsxVim.__getattr__(%s)" % (key)
+        if self.has_key(key):
+            return self[key]
+        myDict = globalEsxVimUtility.get_EsxVimAllDict(self, self)
+        if myDict.has_key(key):
+            return myDict[key]
+        raise KeyError
  
     def values(self):
         '''See interface `IReadContainer`'''
