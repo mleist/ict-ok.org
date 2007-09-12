@@ -66,12 +66,19 @@ def bootStrapSubscriberDatabase(event):
         dcore.created = datetime.utcnow()
         madeAdmUtilEsxVim.ikName = dcore.title
         madeAdmUtilEsxVim.__post_init__()
+        #madeAdmUtilEsxVim.connect2VimServer()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()
                     if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made IAdmUtilEsxVim-Utility")
+    #else:
+        #sitem = root_folder.getSiteManager()
+        #utils = [ util for util in sitem.registeredUtilities()
+                  #if util.provided.isOrExtends(IAdmUtilEsxVim)]
+        #instAdmUtilEsxVim = utils[0].component
+        #instAdmUtilEsxVim.connect2VimServer()
 
     recursiveEsxVimSubscriber(root_folder)
     

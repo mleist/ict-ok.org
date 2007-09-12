@@ -39,6 +39,7 @@ from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.schema.ipvalid import IpValid
+from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
@@ -71,7 +72,7 @@ class IAaa(Interface):
         '''See interface `IReadContainer`'''
 
 
-class IAdmUtilEsxVim(Interface):
+class IAdmUtilEsxVim(ISupernode):
     """
     major component for registration and event distribution 
     """

@@ -1,0 +1,14 @@
+<i18n:block domain="ikomtrol.com">
+  <h1 tal:content="view/title">Overview ESX</h1>
+  <form action="" method="post"
+        tal:attributes="action request/URL">
+    <tal:block
+        condition="view/objs"
+        replace="structure view/table" />
+    <div
+        tal:condition="not: view/objs"
+        i18n:translate="">
+      There are no objects.
+    </div>
+    </form>
+</i18n:block>

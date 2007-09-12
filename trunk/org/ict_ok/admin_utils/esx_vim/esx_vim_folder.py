@@ -56,6 +56,14 @@ class EsxVimFolder(EsxVimObj):
         return myObj
         #return globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)[key]
         #return globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)[key]
+        
+    def get(self, key, default=None):
+        '''See interface `IReadContainer`'''
+        #if self.__data.has_key(key):
+            #return self.__data.get(key, default)
+        #else:
+        return self.__getitem__(key)
+
 
     def values(self):
         '''See interface `IReadContainer`'''

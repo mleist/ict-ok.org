@@ -62,9 +62,8 @@ class MSubAddDashboard(GlobalMenuSubItem):
     
     def render(self):
         """Return the template with the option 'menus'"""
-        testObjId = self.context.getObjectId()
         userProps = AdmUtilUserProperties(self.request.principal)
-        if testObjId in userProps.dashboard_obj_ids:
+        if self.context in userProps.dashboard_objs:
             return
         else:
             return self.template()
@@ -77,9 +76,8 @@ class MSubDelDashboard(GlobalMenuSubItem):
 
     def render(self):
         """Return the template with the option 'menus'"""
-        testObjId = self.context.getObjectId()
         userProps = AdmUtilUserProperties(self.request.principal)
-        if testObjId in userProps.dashboard_obj_ids:
+        if self.context in userProps.dashboard_objs:
             return self.template()
         else:
             return

@@ -9,6 +9,20 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007,
          Markus Leist <leist@ikom-online.de> -->
 
+    <subscriber handler="org.ict_ok.admin_utils.esx_vim.esx_vim.notifyAdmUtilEsxVimModifiedEvent" />
+
+    <adapter
+        factory="org.ict_ok.admin_utils.esx_vim.adapter.states.State"
+        />
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+    <subscriber handler="org.ict_ok.admin_utils.esx_vim.esx_vim.notifyAdmUtilEsxVimModifiedEvent" />
+
+
     <class class="org.ict_ok.admin_utils.esx_vim.esx_vim.AdmUtilEsxVim">
         <factory
             id="org.ict_ok.admin_utils.esx_vim.esx_vim.AdmUtilEsxVim" />
@@ -26,14 +40,6 @@
             set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IAdmUtilEsxVim"
             />
     </class>
-
-    <!-- setup local utilities -->
-    <subscriber
-        handler=".bootstrap.bootStrapSubscriberDatabase"
-        for="zope.app.appsetup.IDatabaseOpenedEvent"
-        />
-    <subscriber handler="org.ict_ok.admin_utils.esx_vim.esx_vim.notifyAdmUtilEsxVimModifiedEvent" />
-
 
     <class class="org.ict_ok.admin_utils.esx_vim.esx_vim_datacenter.EsxVimDatacenter">
         <factory

@@ -18,17 +18,47 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.app import zapi
+from zope.interface import directlyProvides
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 from zope.security import checkPermission
 from zope.i18nmessageid import MessageFactory
 
+# zc imports
+from zc.table.column import Column, GetterColumn
+from zc.table.table import StandaloneFullFormatter
+from zc.table.interfaces import ISortableColumn
+
+# z3c imports
+from z3c.form import button, field, form
+from z3c.formui import layout
+from z3c.pagelet.interfaces import IPagelet
+from z3c.pagelet.browser import BrowserPagelet
+
 # ict_ok.org imports
+from org.ict_ok.admin_utils.esx_vim.interfaces import \
+     IAdmUtilEsxVim
+from org.ict_ok.components.superclass.browser.superclass import \
+     getActionBottons, getStateIcon, link, raw_cell_formatter, \
+     DisplayForm, EditForm
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 #from org.ict_ok.admin_utils.esx_vim.esx_vim import globalEsxVimUtility
 
 _ = MessageFactory('org.ict_ok')
+
+def getTitel(item, formatter):
+    """
+    Titel for Overview
+    """
+    try:
+        if item.name:
+            return u"%s" % item.name
+        else:
+            return None
+    except AttributeError:
+        return None
+
 
 class AdmUtilEsxVimDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
@@ -60,6 +90,10 @@ class EsxVimObjDetails(object):
 class EsxVimDatacenterDetails(EsxVimObjDetails):
     """ Class for Web-Browser-Details """
     displayName = u"Display: EsxVimDatacenterDetails"
+
+class EsxVimDatacentersDetails(EsxVimObjDetails):
+    """ Class for Web-Browser-Details """
+    displayName = u"Display: EsxVimDatacentersDetails"
 
 class EsxVimDatastoreDetails(EsxVimObjDetails):
     """ Class for Web-Browser-Details """
@@ -102,3 +136,72 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
 class EsxVimHostSystemDetails(EsxVimObjDetails):
     """ Class for Web-Browser-Details """
     displayName = u"Display: EsxVimHostSystemDetails"
+
+    
+class Overview(BrowserPagelet):
+    """Overview Pagelet"""
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Title'),
+                     getter=getTitel,
+                     cell_formatter=link('overview.html')),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+
+    def update(self):
+        self.title = _(u"Overview ESX VIM")
+
+    def objs(self):
+        """List of Content objects"""
+        retList = []
+        #try:
+            #for obj in self.context.values():
+                #if ISuperclass.providedBy(obj):
+                    #retList.append(obj)
+        #except:
+            #pass
+        for obj in self.context.values():
+            #if IEsxVimObj.providedBy(obj):
+            retList.append(obj)
+        return retList
+        #return [obj
+                #for obj in self.context.values()
+                #if ISuperclass.providedBy(obj)]
+
+    def table(self):
+        """ Properties of table are defined here"""
+        directlyProvides(self.columns[1], ISortableColumn)
+        formatter = StandaloneFullFormatter(
+            self.context, self.request, self.objs(),
+            columns=self.columns, sort_on=((_('Title'), False),))
+        formatter.cssClasses['table'] = 'listing'
+        return formatter()
+
+class OverviewEsxVimDatacenters(Overview):
+    """Overview Pagelet"""
+    def update(self):
+        self.title = _(u"Overview ESX VIM Datacenters")
+
+class OverviewEsxVimFolder(Overview):
+    """Overview Pagelet"""
+    def update(self):
+        self.title = _(u"Overview ESX VIM %s" % self.context.name)
+
+# --------------- forms ------------------------------------
+
+class ViewAdmUtilEsxVimForm(DisplayForm):
+    """ Display form for the object """
+    label = _(u'settings of esx_vim')
+    fields = field.Fields(IAdmUtilEsxVim).omit(\
+        *AdmUtilEsxVimDetails.omit_viewfields)
+
+
+class EditAdmUtilEsxVimForm(EditForm):
+    """ Edit for for net """
+    label = _(u'edit esx_vim')
+    fields = field.Fields(IAdmUtilEsxVim).omit(\
+        *AdmUtilEsxVimDetails.omit_editfields)

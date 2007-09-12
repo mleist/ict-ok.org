@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1111,E0611,W0613,W0231
+# pylint: disable-msg=E1111,E1101,E0611,W0613,W0231
 #
 """implementation of an usermanagement 
 """
@@ -17,7 +17,6 @@ __version__ = "$Id$"
 # phython imports
 import logging
 from persistent.dict import PersistentDict
-from persistent import Persistent
 from zope.app.container.contained import Contained
 
 # zope imports
@@ -55,7 +54,6 @@ class MappingProperty(object):
         inst.mapping[self.name] = value
 
 
-
 class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     """Implementation of local UserManagement Utility"""
 
@@ -68,6 +66,7 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         self.ikRevision = __version__
 
 class AdmUtilUserDashboardSet(set):
+    """ instance for storing dashboard items """
     def __contains__(self, obj):
         print "__contains__(%s, %s)" % (self, obj)
         for item in self:
@@ -75,29 +74,22 @@ class AdmUtilUserDashboardSet(set):
                 return True
         return False
     def add(self, obj, arg_request=None):
+        """ add a dashboard item to the dashboard set """
         if hasattr(obj, 'objectID'):
             my_catalog = zapi.getUtility(ICatalog)
             if len(my_catalog.searchResults(oid_index=obj.objectID)):
-                set.add(self, AdmUtilUserDashboardItem(obj, 'oid'))
-                return True
+                return set.add(self, AdmUtilUserDashboardItem(obj, 'oid'))
             else: # object not in Catalog
-                set.add(self, AdmUtilUserDashboardItem(obj, 'path'))
-                from zope.traversing.api import getPath
-                aa=getPath(obj)
-                from zope.traversing.api import getRoot,traverse
-                if arg_request is not None:
-                    bb=traverse(getRoot(obj), aa, request=arg_request)
-                return True
+                return set.add(self, AdmUtilUserDashboardItem(obj, 'path'))
         raise Exception, "wrong type for AdmUtilUserDashboardSet"
     def remove(self, obj, arg_request=None):
-        import pdb;pdb.set_trace()
+        """ remove a dashboard item from the dashboard set """
         for item in self:
-            if item == obj:
-                return set.remove(item)
+            if item == AdmUtilUserDashboardItem(obj, item.stype):
+                return set.remove(self, item)
         return False
 
 
-#class AdmUtilUserProperties(Persistent, Contained):
 class AdmUtilUserProperties(object):
     """major component for user properties"""
 
@@ -116,6 +108,7 @@ class AdmUtilUserProperties(object):
     email = MappingProperty('email')
     dashboard_objs = MappingProperty('dashboard_objs')
 
+
 class AdmUtilUserDashboard(Contained):
     """ user dashboard """
     implements(IAdmUtilUserDashboard, IReadContainer)
@@ -131,6 +124,7 @@ class AdmUtilUserDashboard(Contained):
         '''See interface `IReadContainer`'''
         print "AdmUtilUserDashboard.values"
 
+
 class AdmUtilUserDashboardItem(object):
     """ item of user dashboard """
     implements(IAdmUtilUserDashboardItem)
@@ -141,14 +135,22 @@ class AdmUtilUserDashboardItem(object):
             self.value = obj.getObjectId()
         elif self.stype == 'path':
             self.value = getPath(obj)
+
     def __cmp__(self, other):
         if self.stype == 'oid':
             if hasattr(other, 'objectID'):
                 return cmp(self.value, other.objectID)
         elif self.stype == 'path':
-            return cmp(self.value,getPath(other))
+            if type(other) == type(u''):
+                return cmp(self.value, other)
+            elif type(other) == type(self):
+                return cmp(self.value, other.value)
+            else:
+                return cmp(self.value, getPath(other))
         raise Exception, "wrong type for compare@AdmUtilUserDashboardItem"
+
     def getObject(self, some_obj=None, arg_request=None):
+        """ get object from dashboard item """
         if self.stype == 'oid':
             my_catalog = zapi.getUtility(ICatalog)
             resultList = my_catalog.searchResults(oid_index=self.value)

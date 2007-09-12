@@ -49,7 +49,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
-     AdmUtilUserProperties
+     AdmUtilUserDashboardItem, AdmUtilUserDashboardSet, AdmUtilUserProperties
 
 # ict_ok imports
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -332,9 +332,10 @@ class DumpData:
 class AddDashboard(BrowserPagelet):
     def update(self):
         #import pdb; pdb.set_trace()
-        testObjId = self.context.getObjectId()
+        #testObjId = self.context.getObjectId()
         userProps = AdmUtilUserProperties(self.request.principal)
-        userProps.dashboard_obj_ids.add(testObjId)
+        #userProps.dashboard_obj_ids.add(testObjId)
+        userProps.dashboard_objs.add(self.context, self.request)
         userProps.mapping._p_changed=True
 
     def render(self):
@@ -344,11 +345,13 @@ class AddDashboard(BrowserPagelet):
 class DelDashboard(BrowserPagelet):
     def update(self):
         #import pdb; pdb.set_trace()
-        testObjId = self.context.getObjectId()
+        #testObjId = self.context.getObjectId()
         userProps = AdmUtilUserProperties(self.request.principal)
-        if testObjId in userProps.dashboard_obj_ids:
-            userProps.dashboard_obj_ids.remove(testObjId)
-            userProps.mapping._p_changed=True
+        #if testObjId in userProps.dashboard_obj_ids:
+            #userProps.dashboard_obj_ids.remove(testObjId)
+            #userProps.mapping._p_changed=True
+        userProps.dashboard_objs.remove(self.context, self.request)
+        userProps.mapping._p_changed=True
         
     def render(self):
         return self.request.response.redirect('./overview.html')
@@ -493,11 +496,16 @@ class ViewDashboard(Overview):
         """List of Content objects"""
         retList = []
         userProps = AdmUtilUserProperties(self.request.principal)
-        my_catalog = zapi.getUtility(ICatalog)
-        uidutil = zapi.getUtility(IIntIds)
-        print "oid_list: ", list(userProps.dashboard_obj_ids)
-        for obj_id in userProps.dashboard_obj_ids:
-            retList.extend(list(my_catalog.searchResults(oid_index=obj_id)))
+        #print "oid_list: ", list(userProps.dashboard_objs)
+        for dashboardItem in userProps.dashboard_objs:
+            myObj = dashboardItem.getObject(some_obj=self,
+                                            arg_request=self.request)
+            if myObj is not None:
+                retList.append(myObj)
+        #my_catalog = zapi.getUtility(ICatalog)
+        #uidutil = zapi.getUtility(IIntIds)
+        #for obj_id in userProps.dashboard_objs:
+            #retList.extend(list(my_catalog.searchResults(oid_index=obj_id)))
         print "retList: ", retList
         return retList
 

@@ -24,6 +24,21 @@
             />
     </class>
 
+    <class class=".event.AdmUtilEvent">
+        <factory
+            id="org.ict_ok.admin_utils.eventcrossbar.event.AdmUtilEvent" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.event.View"
+            interface=".interfaces.IAdmUtilEvent"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event.View"
+            set_schema=".interfaces.IAdmUtilEvent"
+            />
+    </class>
+
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"

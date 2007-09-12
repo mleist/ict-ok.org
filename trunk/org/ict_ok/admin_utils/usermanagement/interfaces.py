@@ -40,7 +40,7 @@ class IAdmUtilUserProperties(Interface):
         #value_type = Object(
             #title = _("Object"))
     #)
-    dashboard_obj_ids = Attribute("list of object ids for the dashboard")
+    dashboard_objs = Attribute("list of object ids for the dashboard")
 
 
 class IAdmUtilUserManagement(ISupernode, IAuthentication):
@@ -49,5 +49,8 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
     """
 
 class IAdmUtilUserDashboard(Interface):
+    """ user dashboard """
+
+class IAdmUtilUserDashboardItem(Interface):
     """ user dashboard """
 

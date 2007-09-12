@@ -67,6 +67,7 @@ class AdmUtilEsxVim(Supernode):
     def setConnStatus(self, connString):
         if self.connStatus != connString:
             self.connStatus = connString
+            #self._p_changed = True
 
     def __getitem__(self, key):
         '''See interface `IReadContainer`'''
@@ -79,7 +80,27 @@ class AdmUtilEsxVim(Supernode):
         return myObj
         #return globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)[key]
         #return globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)[key]
+        
+    #def __getattr__(self, name):
+        #print "AdmUtilEsxVim.__getattr__(%s)" % (name)
+        #myDict = globalEsxVimUtility.get_EsxVimAllDict(self, self)
+        #if myDict.has_key(name):
+            #return myDict[name]
+        #import pdb;pdb.set_trace()
+        #return False
+        ##attr = getattr(self, name)
+        ##if attr is not None:
+            ##return attr
+        ##raise AttributeError(name)
 
+    #def get(self, key, default=None):
+        #'''See interface `IReadContainer`'''
+        #print "AdmUtilEsxVim.get(%s)" % (key)
+        #if key in self:
+            #return self.__data.get(key, default)
+        #else:
+            #return self.__getitem__(key)
+ 
     def values(self):
         '''See interface `IReadContainer`'''
         print "AdmUtilEsxVim.values"
@@ -119,11 +140,11 @@ class GlobalEsxVimUtility(object):
         super(GlobalEsxVimUtility, self).__init__(self)
         self.subscriber_list = []
         self.connection_dict = {}
-        self.esxThread = None
-        #self.esxThread = EsxVimConnectionThread()
-        #self.esxThread.globalEsxVim = self
-        #self.esxThread.setDaemon(0)
-        #self.esxThread.start()
+        #self.esxThread = None
+        self.esxThread = EsxVimConnectionThread()
+        self.esxThread.globalEsxVim = self
+        self.esxThread.setDaemon(0)
+        self.esxThread.start()
         self.timeStarted = datetime.utcnow()
         self.ikRevision = __version__
 
@@ -140,13 +161,13 @@ class GlobalEsxVimUtility(object):
         #logger.info(u"GlobalEsxVimUtility::subscribe2esx_vim(%s)" % obj)
         if obj not in self.subscriber_list:
             self.subscriber_list.append(obj)
-            self.connection_dict[obj.getObjectId()] = None
+            #self.connection_dict[obj.getObjectId()] = None
 
     def unsubscribeFromEsxVim(self, obj):
         #logger.info(u"GlobalEsxVimUtility::unsubscribeFromEsxVim(%s)" % obj)
         if obj in self.subscriber_list:
             self.subscriber_list.remove(obj)
-            del self.connection_dict[obj.getObjectId()]
+            #del self.connection_dict[obj.getObjectId()]
 
     def connectToEsxVim(self, obj):
         logger.info(u"GlobalEsxVimUtility::connectToEsxVim(%s)" % obj)
@@ -165,8 +186,10 @@ class GlobalEsxVimUtility(object):
                     self.esxThread.globalEsxVim = self
                     self.esxThread.createQueue(obj.getObjectId())
 #                    self.esxThread.localEsxVim = obj
-                    self.esxThread.setDaemon(1)
+                    self.esxThread.setDaemon(0)
                     self.esxThread.start()
+                else:
+                    print "esxThread already active?"
                 #perl.require("VMware::VIM2Runtime")
                 #perl.require("VMware::VILib")
                 #perl.call("Vim::login",
@@ -225,6 +248,8 @@ class GlobalEsxVimUtility(object):
 
     def get_EsxVimObject_Dict(self, myParams, parentObj):
         print "get_EsxVimDatacenter_Dict"
+        if self.esxThread is None:
+            return {}
         localEsxUtil = myParams['admUtilEsxVim']
         utilOId = localEsxUtil.getObjectId()
         print "aa12"

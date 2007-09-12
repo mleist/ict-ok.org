@@ -124,11 +124,11 @@ class EsxVimConnectionThread(threading.Thread):
             myErrorText = errStringList[0] + '/' + errStringList[1]
             myAdmUtilEsxVim.setConnStatus(u"connect error:" + myErrorText)
             self.del_logged_in(myAdmUtilEsxVim)
-            time.sleep(1)
+            time.sleep(3)
         return False
 
     def esx_logout(self, myAdmUtilEsxVim):
-        #print "esx_logout"
+        print "esx_logout"
         if self.globalEsxVim:
             if self.perl is not None:
                 try:
@@ -145,7 +145,7 @@ class EsxVimConnectionThread(threading.Thread):
         return False
 
     def getAllEsxVimDatacenter(self, myAdmUtilEsxVim):
-        #print "EsxVimConnectionThread.getAllEsxVimDatacenter"
+        print "EsxVimConnectionThread.getAllEsxVimDatacenter"
         if self.globalEsxVim:
             self.esx_login(myAdmUtilEsxVim)
             try:
@@ -162,7 +162,9 @@ class EsxVimConnectionThread(threading.Thread):
     def getAllEsxVimEntityViews(self, myParams):
         print "EsxVimConnectionThread.getAllEsxVimEntityViews"
         if self.globalEsxVim:
+            #print "77777a1"
             self.esx_login(myParams['admUtilEsxVim'])
+            #print "77777a2"
             try:
                 if self.perl is not None:
                     if myParams['cmd'] == 'find_entity_views':
@@ -170,6 +172,7 @@ class EsxVimConnectionThread(threading.Thread):
                                                  view_type=myParams['view_type'])
                         return retList
             except self.perl.PerlError, err:
+                #print "77777: ", err
                 errStringList = str(err).split('\n')
                 myErrorText = errStringList[0] + '/' + errStringList[1]
                 if myParams.has_key('admUtilEsxVim') and \
@@ -181,13 +184,15 @@ class EsxVimConnectionThread(threading.Thread):
     def executeMyQueue(self, myAdmUtilEsxVim):
         utilOId = myAdmUtilEsxVim.getObjectId()
         if not self.getQueue(utilOId)['in'].empty():
-            print "th04"
+            #print "th04"
+            print "executeMyQueue"
             #sourceAdmUtilEsxVim = self.getQueue(utilOId)['in'].get(True, 5)
             #sourceOId = sourceAdmUtilEsxVim.getObjectId()
             myParams = self.getQueue(utilOId)['in'].get(True, 15)
+            print "cmd: ", myParams['cmd']
             sourceAdmUtilEsxVim = myParams['admUtilEsxVim']
             sourceOId = sourceAdmUtilEsxVim.getObjectId()
-            print "uuuu1:", sourceAdmUtilEsxVim
+            #print "uuuu1:", sourceAdmUtilEsxVim
             #datacenterList = self.getAllEsxVimDatacenter(sourceAdmUtilEsxVim)
             #myParams = {\
                 #'cmd': 'find_entity_views',
@@ -197,7 +202,7 @@ class EsxVimConnectionThread(threading.Thread):
             if myParams.has_key('cmd'):
                 if myParams['cmd'] == 'find_entity_views':
                     esxObjList = self.getAllEsxVimEntityViews(myParams)
-                    print "uuuu2:", sourceAdmUtilEsxVim
+                    #print "uuuu2:", sourceAdmUtilEsxVim
                     myList = []
                     for esxObj in esxObjList:
                         myList.append({\
@@ -208,41 +213,41 @@ class EsxVimConnectionThread(threading.Thread):
                         })
                     self.getQueue(sourceOId)['out'].put(myList, True, 15)
                 elif myParams['cmd'] == 'call_fcnt_on_obj':
-                    print "uuuu3b:", myParams
+                    #print "uuuu3b:", myParams
                     if myParams.has_key('perlRef') and \
                        myParams.has_key('fnct_name') and \
                        myParams.has_key('fnct_args') and \
                        type(myParams['fnct_name']) == type('') and \
                        type(myParams['fnct_args']) == type([]):
-                        print "uuuu3c1"
+                        #print "uuuu3c1"
                         myObj = myParams['perlRef']
-                        print "uuuu3c2"
+                        #print "uuuu3c2"
                         myFnctName = myParams['fnct_name']
-                        print "uuuu3c3"
+                        #print "uuuu3c3"
                         myFnctArgs = myParams['fnct_args']
-                        print "pppp1"
+                        #print "pppp1"
                         retVal = getattr(myObj, myFnctName)(*myFnctArgs)
-                        print "pppp2"
+                        #print "pppp2"
                         self.getQueue(sourceOId)['out'].put(retVal, True, 15)
-                        print "pppp3"
+                        #print "pppp3"
                     else:
-                        print "uuuu3d"
+                        #print "uuuu3d"
                         self.getQueue(sourceOId)['out'].put(None, True, 15)
                 elif myParams['cmd'] == 'eval_on_obj':
-                    print "uuuu3b:", myParams
+                    #print "uuuu3b:", myParams
                     if myParams.has_key('perlRef') and \
                        myParams.has_key('eval_text') and \
                        myParams.has_key('fnct_args') and \
                        type(myParams['eval_text']) == type('') and \
                        (type(myParams['fnct_args']) == type([]) or \
                         type(myParams['fnct_args']) == type(None)):
-                        print "2uuuu3c1"
+                        #print "2uuuu3c1"
                         myObj = myParams['perlRef']
-                        print "2uuuu3c2"
+                        #print "2uuuu3c2"
                         myEvalText = myParams['eval_text']
-                        print "2uuuu3c3"
+                        #print "2uuuu3c3"
                         myFnctArgs = myParams['fnct_args']
-                        print "2pppp1"
+                        #print "2pppp1"
                         try:
                             if myFnctArgs is None:
                                 retVal = eval(myEvalText, {\
@@ -254,15 +259,15 @@ class EsxVimConnectionThread(threading.Thread):
                                     'perl':self.perl})(*myFnctArgs)
                         except Exception,err:
                             retVal = err
-                        print "2pppp2"
+                        #print "2pppp2"
                         self.getQueue(sourceOId)['out'].put(retVal, True, 15)
-                        print "2pppp3"
+                        #print "2pppp3"
                     else:
-                        print "2uuuu3d"
+                        #print "2uuuu3d"
                         self.getQueue(sourceOId)['out'].put(None, True, 15)
                 else: # unknown command cmd
                     self.getQueue(sourceOId)['out'].put(None, True, 15)
-            print "uuuu4"
+            #print "uuuu4"
             self.getQueue(utilOId)['in'].task_done()
 
     def run(self, forever=True):
@@ -276,19 +281,20 @@ class EsxVimConnectionThread(threading.Thread):
                     old_site = getSite()
                     setSite(root_folder)
                     myAdmUtilEsxVim = queryUtility(IAdmUtilEsxVim)
-                    utilOId = myAdmUtilEsxVim.getObjectId()
-                    if myAdmUtilEsxVim.esxVimServerActive:
-                        if not self.is_logged_in(myAdmUtilEsxVim):
-                            if not self.perl_imports():
-                                logger.error("Perl Error: imports")
-                                raise Exception, "Perl Error: imports"
-                            if not self.esx_login(myAdmUtilEsxVim):
-                                logger.info("ESX Vim Error on login()")
-                        self.executeMyQueue(myAdmUtilEsxVim)
-                    else:
-                        if not self.getQueue(utilOId)['in'].empty():
-                            self.getQueue(utilOId)['in'].get(True, 5)
-                            self.getQueue(utilOId)['in'].task_done()
+                    if myAdmUtilEsxVim is not None:
+                        utilOId = myAdmUtilEsxVim.getObjectId()
+                        if myAdmUtilEsxVim.esxVimServerActive:
+                            if not self.is_logged_in(myAdmUtilEsxVim):
+                                if not self.perl_imports():
+                                    logger.error("Perl Error: imports")
+                                    raise Exception, "Perl Error: imports"
+                                if not self.esx_login(myAdmUtilEsxVim):
+                                    logger.info("ESX Vim Error on login()")
+                            self.executeMyQueue(myAdmUtilEsxVim)
+                        else:
+                            if not self.getQueue(utilOId)['in'].empty():
+                                self.getQueue(utilOId)['in'].get(True, 5)
+                                self.getQueue(utilOId)['in'].task_done()
                     #setSite(old_site)
                     #transaction.get().commit()
                     transaction.commit()
@@ -296,8 +302,8 @@ class EsxVimConnectionThread(threading.Thread):
                     # Blanket except because we don't want
                     # this thread to ever die
                 except Exception, err:
-                    print "eeeeeee: ", err
-                    #logger.error("Error in ESX VIM", exc_info=True)
+                    #print "eeeeeee: ", err
+                    logger.error("Error in ESX VIM (%s)" % err, exc_info=True)
                     transaction.abort()
                     conn.close()
 #--------------------------------------------------------------------------------
@@ -321,8 +327,8 @@ class EsxVimConnectionThread(threading.Thread):
         EsxVimConnectionThread.__stopped = True
         #self.esx_logout()
         #time.sleep(2)
-        #print "id(perl):", id(perl)
-        #print "thread: ", threading.currentThread().getName()
+        ##print "id(perl):", id(perl)
+        ##print "thread: ", threading.currentThread().getName()
         print "EsxVimConnectionThread stopped"
         #signal.alarm(0)
         #signal.signal(signal.SIGALRM, self.old)
