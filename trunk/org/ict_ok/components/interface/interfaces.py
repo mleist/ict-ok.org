@@ -46,17 +46,25 @@ class IInterface(ISupernode):
         default=u"00:00:00:00:00:00",
         required=False)
 
-    ipv4List = List (
-        title = _("IPv4 addresses"),
-        description = _("list of all configured IPv4 addresses"),
-        value_type = IpValid(
+    #wait for z3c.form list of textlines
+    #ipv4List = List (
+        #title = _("IPv4 addresses"),
+        #description = _("list of all configured IPv4 addresses"),
+        #value_type = IpValid(
+            #min_length=1,
+            #max_length=30,
+            #title=_("IP address"),
+            #description=_("IP address of the host."),
+            #default=u"192.168.1.100",
+            #required=True),
+        #default = [],
+        #required = False)
+    ipv4List = IpValid(
             min_length=1,
             max_length=30,
             title=_("IP address"),
             description=_("IP address of the host."),
             default=u"192.168.1.100",
-            required=True),
-        default = [],
-        required = False)
+            required=False)
 
     #connectedInterfaces

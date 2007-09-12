@@ -50,9 +50,12 @@ class MSubAddInterface(GlobalMenuSubItem):
 class InterfaceDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + ['ipv4List']
-    omit_addfields = SupernodeDetails.omit_addfields + ['ipv4List']
-    omit_editfields = SupernodeDetails.omit_editfields + ['ipv4List']
+    #omit_viewfields = SupernodeDetails.omit_viewfields + ['ipv4List']
+    #omit_addfields = SupernodeDetails.omit_addfields + ['ipv4List']
+    #omit_editfields = SupernodeDetails.omit_editfields + ['ipv4List']
+    omit_viewfields = SupernodeDetails.omit_viewfields + []
+    omit_addfields = SupernodeDetails.omit_addfields + []
+    omit_editfields = SupernodeDetails.omit_editfields + []
 
 # --------------- forms ------------------------------------
 
