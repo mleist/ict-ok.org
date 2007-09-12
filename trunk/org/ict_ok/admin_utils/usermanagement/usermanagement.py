@@ -21,17 +21,21 @@ from persistent import Persistent
 from zope.app.container.contained import Contained
 
 # zope imports
+from zope.app import zapi
 from zope.interface import implements
 from zope.component import adapts
 from zope.security.interfaces import IPrincipal
 from zope.annotation.interfaces import IAnnotations
 from zope.app.authentication.authentication import PluggableAuthentication
 from zope.app.container.interfaces import IReadContainer
+from zope.app.catalog.interfaces import ICatalog
+from zope.traversing.api import getPath, getRoot, traverse
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
-     IAdmUtilUserDashboard, IAdmUtilUserProperties, IAdmUtilUserManagement
+     IAdmUtilUserDashboard, IAdmUtilUserDashboardItem,\
+     IAdmUtilUserProperties, IAdmUtilUserManagement
 
 logger = logging.getLogger("AdmUtilUserManagement")
 
@@ -63,6 +67,36 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         Supernode.__init__(self)
         self.ikRevision = __version__
 
+class AdmUtilUserDashboardSet(set):
+    def __contains__(self, obj):
+        print "__contains__(%s, %s)" % (self, obj)
+        for item in self:
+            if item == obj:
+                return True
+        return False
+    def add(self, obj, arg_request=None):
+        if hasattr(obj, 'objectID'):
+            my_catalog = zapi.getUtility(ICatalog)
+            if len(my_catalog.searchResults(oid_index=obj.objectID)):
+                set.add(self, AdmUtilUserDashboardItem(obj, 'oid'))
+                return True
+            else: # object not in Catalog
+                set.add(self, AdmUtilUserDashboardItem(obj, 'path'))
+                from zope.traversing.api import getPath
+                aa=getPath(obj)
+                from zope.traversing.api import getRoot,traverse
+                if arg_request is not None:
+                    bb=traverse(getRoot(obj), aa, request=arg_request)
+                return True
+        raise Exception, "wrong type for AdmUtilUserDashboardSet"
+    def remove(self, obj, arg_request=None):
+        import pdb;pdb.set_trace()
+        for item in self:
+            if item == obj:
+                return set.remove(item)
+        return False
+
+
 #class AdmUtilUserProperties(Persistent, Contained):
 class AdmUtilUserProperties(object):
     """major component for user properties"""
@@ -74,12 +108,13 @@ class AdmUtilUserProperties(object):
         annotations = IAnnotations(context)
         mapping = annotations.get(KEY)
         if mapping is None:
-            blank = { 'email': u'', 'dashboard_obj_ids': set([])}
+            blank = { 'email': u'', 
+                      'dashboard_objs': AdmUtilUserDashboardSet()}
             mapping = annotations[KEY] = PersistentDict(blank)
         self.mapping = mapping
             
     email = MappingProperty('email')
-    dashboard_obj_ids = MappingProperty('dashboard_obj_ids')
+    dashboard_objs = MappingProperty('dashboard_objs')
 
 class AdmUtilUserDashboard(Contained):
     """ user dashboard """
@@ -95,3 +130,37 @@ class AdmUtilUserDashboard(Contained):
     def values(self):
         '''See interface `IReadContainer`'''
         print "AdmUtilUserDashboard.values"
+
+class AdmUtilUserDashboardItem(object):
+    """ item of user dashboard """
+    implements(IAdmUtilUserDashboardItem)
+
+    def __init__(self, obj, stype='oid'):
+        self.stype = stype
+        if self.stype == 'oid':
+            self.value = obj.getObjectId()
+        elif self.stype == 'path':
+            self.value = getPath(obj)
+    def __cmp__(self, other):
+        if self.stype == 'oid':
+            if hasattr(other, 'objectID'):
+                return cmp(self.value, other.objectID)
+        elif self.stype == 'path':
+            return cmp(self.value,getPath(other))
+        raise Exception, "wrong type for compare@AdmUtilUserDashboardItem"
+    def getObject(self, some_obj=None, arg_request=None):
+        if self.stype == 'oid':
+            my_catalog = zapi.getUtility(ICatalog)
+            resultList = my_catalog.searchResults(oid_index=self.value)
+            if len(resultList) > 0:
+                return iter(resultList).next()
+            else:
+                return None
+        elif self.stype == 'path':
+            if some_obj is not None and arg_request is not None:
+                return traverse(getRoot(some_obj),
+                                self.value,
+                                request=arg_request)
+        raise Exception, "wrong type for getObject@AdmUtilUserDashboardItem"
+        
+        
