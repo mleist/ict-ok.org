@@ -68,7 +68,6 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
 class AdmUtilUserDashboardSet(set):
     """ instance for storing dashboard items """
     def __contains__(self, obj):
-        print "__contains__(%s, %s)" % (self, obj)
         for item in self:
             if item == obj:
                 return True

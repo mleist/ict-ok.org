@@ -116,6 +116,7 @@
     <!--<include package="org.ict_ok.components.slave" />-->
     <include package="org.ict_ok.components.net" />
     <include package="org.ict_ok.components.host" />
+    <include package="org.ict_ok.components.host.special" />
     <include package="org.ict_ok.components.interface" />
     <include package="org.ict_ok.components.service" />
     <include package="org.ict_ok.components.snmpvalue" />

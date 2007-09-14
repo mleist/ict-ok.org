@@ -128,6 +128,13 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
     />
+    <z3c:pagelet
+        name="add_host_mge_ups.html"
+        for="org.ict_ok.components.net.interfaces.INet"
+        class="org.ict_ok.components.host.special.mge_ups.browser.host.AddHostForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Add"
+    />
 
     <!--##### Sub Menu ##### -->
 
@@ -184,6 +191,14 @@
         for="org.ict_ok.components.net.interfaces.INet"
         manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
         class="org.ict_ok.components.host.browser.host.MSubAddHost"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Add"
+        />
+    <viewlet
+        name="add_host_mge_ups"
+        for="org.ict_ok.components.net.interfaces.INet"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.host.special.mge_ups.browser.host.MSubAddHost"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
         />
