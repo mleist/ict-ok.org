@@ -45,11 +45,11 @@
         menu="zmi_views" title="Details"
     />
 
-    <containerViews
+    <!--containerViews
         for="org.ict_ok.slave.interfaces.ISlave"
         index="org.ict_ok.slave.View"
         contents="org.ict_ok.slave.Edit"
         add="org.ict_ok.slave.Add"
-        />
+        /-->
 
 </configure>

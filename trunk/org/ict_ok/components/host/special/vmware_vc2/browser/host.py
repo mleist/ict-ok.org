@@ -20,19 +20,17 @@ __version__ = "$Id$"
 from zope.i18nmessageid import MessageFactory
 
 # z3c imports
-from z3c.form import form, field
+from z3c.form import field
 
 # ict_ok.org imports
-from org.ict_ok.components.host.special.mge_ups.interfaces import IHostMgeUps
-from org.ict_ok.components.host.special.mge_ups.host import Host
+from org.ict_ok.components.host.special.vmware_vc2.interfaces import \
+     IHostVMwareVC2
+from org.ict_ok.components.host.special.vmware_vc2.host import Host
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm, DeleteForm, DisplayForm, EditForm
+     AddForm
 from org.ict_ok.components.host.browser.host import \
      HostDetails
-#from org.ict_ok.components.host.browser.host import \
-     #AddHostForm, DeleteForm, DetailsHostForm, HostDetails
-
 
 _ = MessageFactory('org.ict_ok')
 
@@ -41,14 +39,15 @@ _ = MessageFactory('org.ict_ok')
 
 class MSubAddHost(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'Add MGE UPS')
-    viewURL = 'add_host_mge_ups.html'
+    title = _(u'Add VMware VirtualCenter 2')
+    viewURL = 'add_host_vmware_vc2.html'
     weight = 50
 
 # --------------- forms ------------------------------------
 
+
 class AddHostForm(AddForm):
     """Add form."""
-    label = _(u'Add MGE UPS')
-    fields = field.Fields(IHostMgeUps).omit(*HostDetails.omit_addfields)
+    label = _(u'Add VMware VirtualCenter 2')
+    fields = field.Fields(IHostVMwareVC2).omit(*HostDetails.omit_addfields)
     factory = Host

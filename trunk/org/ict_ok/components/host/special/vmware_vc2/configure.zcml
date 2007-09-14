@@ -10,7 +10,7 @@
         Markus Leist <leist@ikom-online.de> -->
 
     <interface
-        interface=".interfaces.IHostMgeUps"
+        interface=".interfaces.IHostVMwareVC2"
         type="zope.app.content.interfaces.IContentType"
         />
     
@@ -22,8 +22,8 @@
             interface="zope.app.container.interfaces.IContentContainer"
             />
         <factory
-            id="org.ict_ok.components.host.host.HostMgeUps"
-            description="HostMgeUps"
+            id="org.ict_ok.components.host.host.HostVMwareVC2"
+            description="HostVMwareVC2"
             />
         <require
             permission="org.ict_ok.components.host.View"

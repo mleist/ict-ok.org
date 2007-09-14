@@ -22,5 +22,5 @@ from org.ict_ok.components.host.interfaces import IHost
 _ = MessageFactory('org.ict_ok')
 
 
-class IHostMgeUps(IHost):
+class IHostVMwareVC2(IHost):
     """A host object."""

@@ -10,5 +10,6 @@
         Markus Leist <leist@ikom-online.de> -->
 
     <include package=".mge_ups" />
+    <include package=".vmware_vc2" />
 
 </configure>

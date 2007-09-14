@@ -16,119 +16,22 @@
         name="details.html"
         />
 
-    <!--<z3c:pagelet-->
-        <!--name="overview.html"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.Overview"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.View"-->
-        <!--/>-->
-
-    <!--<z3c:pagelet-->
-        <!--name="history.html"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.History"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.View"-->
-        <!--/>-->
-
-    <!--<z3c:pagelet-->
-        <!--name="details.html"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--class=".host.DetailsHostForm"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.View"-->
-    <!--/>-->
-
-    <!--<z3c:pagelet-->
-        <!--name="edit.html"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--class=".host.EditHostForm"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.Edit"-->
-    <!--/>-->
-
-    <!--<z3c:pagelet-->
-        <!--name="add_interface.html"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--class="org.ict_ok.components.interface.browser.interface.AddInterfaceForm"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.interface.Add"-->
-    <!--/>-->
-    
-    <!--<z3c:pagelet-->
-        <!--name="dumpdata.html"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.DumpData"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.View"-->
-    <!--/>-->
+    <z3c:pagelet
+        name="add_host_mge_ups.html"
+        for="org.ict_ok.components.net.interfaces.INet"
+        class="org.ict_ok.components.host.special.mge_ups.browser.host.AddHostForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Add"
+    />
 
     <!--##### Sub Menu ##### -->
-
-    <!--<viewlet-->
-        <!--name="details"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.View"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="overview"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.View"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="history"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.View"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="edit"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.Edit"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="editcontent"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.host.Edit"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="add_interface"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
-        <!--class="org.ict_ok.components.interface.browser.interface.MSubAddInterface"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.interface.Add"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="add_dashboard"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
-        <!--class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubAddDashboard"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.admin_utils.dashboard.Edit"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="del_dashboard"-->
-        <!--for="org.ict_ok.components.host.interfaces.IHost"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
-        <!--class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.admin_utils.dashboard.Edit"-->
-        <!--/>-->
+    <viewlet
+        name="add_host_mge_ups"
+        for="org.ict_ok.components.net.interfaces.INet"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.host.special.mge_ups.browser.host.MSubAddHost"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Add"
+        />
 
 </configure>
