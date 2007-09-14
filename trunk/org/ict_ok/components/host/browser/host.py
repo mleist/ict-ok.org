@@ -30,7 +30,7 @@ from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm, DeleteForm, DisplayForm, EditForm
+     AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 
 _ = MessageFactory('org.ict_ok')
 

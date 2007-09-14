@@ -49,6 +49,14 @@
     />
 
     <z3c:pagelet
+        name="edit_content.html"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        class=".host.EditContent"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Edit"
+    />
+
+    <z3c:pagelet
         name="add_interface.html"
         for="org.ict_ok.components.host.interfaces.IHost"
         class="org.ict_ok.components.interface.browser.interface.AddInterfaceForm"
