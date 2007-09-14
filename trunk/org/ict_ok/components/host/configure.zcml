@@ -56,6 +56,10 @@
         factory="org.ict_ok.components.host.adapter.search.Searchable"
     />
     <adapter
+        factory="org.ict_ok.components.host.adapter.snmp.Snmptrapd"
+    />
+    
+    <adapter
         factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"
         provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
         for=".interfaces.IHost"

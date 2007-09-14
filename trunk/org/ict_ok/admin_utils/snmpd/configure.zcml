@@ -31,7 +31,7 @@
         />
 
     <adapter
-        factory=".adapter.snmpd.Snmpd"
+        factory=".adapter.snmpd.Snmptrapd"
         />
 
     <snmpd:admUtilSnmpd

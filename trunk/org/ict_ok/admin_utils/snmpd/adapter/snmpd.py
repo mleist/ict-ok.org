@@ -21,13 +21,13 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd, ISnmpd
+from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd, ISnmptrapd
 
 
-class Snmpd(object):
-    """Snmpd-Adapter."""
+class Snmptrapd(object):
+    """Snmptrapd-Adapter."""
 
-    implements(ISnmpd)
+    implements(ISnmptrapd)
     adapts(IAdmUtilSnmpd)
 
     def __init__(self, context):

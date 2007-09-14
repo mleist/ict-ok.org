@@ -21,6 +21,7 @@ import atexit
 import time
 
 # zope imports
+from zope.app import zapi
 from zope.interface import implements
 from zope.component import getUtility, queryUtility
 import transaction
@@ -29,6 +30,7 @@ from zope.app.component.hooks import getSite, setSite
 from zope.app.intid.interfaces import IIntIds
 from zope.security.simplepolicies import ParanoidSecurityPolicy
 from zope.security.interfaces import IParticipation
+from zope.app.catalog.interfaces import ICatalog
 
 # pysnmp imports
 from pysnmp.v4.carrier.asynsock.dispatch import AsynsockDispatcher
@@ -39,8 +41,9 @@ from pysnmp.v4.proto import api
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
-from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd, ISnmpd
+from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd, ISnmptrapd
 from org.ict_ok.components.supernode.supernode import Supernode
+from org.ict_ok.components.interface.adapter.search import convertIpV4
 
 
 class AdmUtilSnmpd(Supernode):
@@ -53,8 +56,8 @@ class AdmUtilSnmpd(Supernode):
         self.ikRevision = __version__
 
 
-
 class SystemSnmpdPrincipal(object):
+    """ this principal is used for internal security system """
     implements(IParticipation)
     id = "idSystemSnmpdPrincipal"
     title = "Snmpd User"
@@ -64,6 +67,7 @@ systemSnmpdPrincipal = SystemSnmpdPrincipal()
     
     
 class SystemSnmpdParticipation(object):
+    """ this participation is used for internal security system """
     implements(IParticipation)
     principal = systemSnmpdPrincipal
     interaction = None
@@ -72,6 +76,7 @@ class SystemSnmpdParticipation(object):
 class SnmpdThread(threading.Thread):
     """This thread is started at configuration time from the
     `mail:queuedDelivery` directive handler.
+    this thread will handle all the incomming snmptraps
     """
     implements(IDataManager)
 
@@ -94,21 +99,22 @@ class SnmpdThread(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self, forever=True):
+        """ forever loop which will run the snmptrapd dispatcher """
         atexit.register(self.stop)
         while not self.__stopped:
-            print "+++++++++++++++++++++++++++++++++++++9a"
             self.transportDispatcher.runDispatcher()
-            print "+++++++++++++++++++++++++++++++++++++9b"
             if forever:
                 time.sleep(1)
             else:
                 break
 
     def stop(self):
+        """ stop the displatcher """
         self.log.info("stopped (org)")
         self.__stopped = True
 
     def cbFun(self, transportDispatcher, transportDomain, transportAddress, wholeMsg):
+        """ this callback function which will handle the snmptrap message from pysnmp stack """
         while wholeMsg:
             msgVer = int(api.decodeMessageVersion(wholeMsg))
             if api.protoModules.has_key(msgVer):
@@ -124,52 +130,21 @@ class SnmpdThread(threading.Thread):
                 )
             reqPDU = pMod.apiMessage.getPDU(reqMsg)
             if reqPDU.isSameTypeWith(pMod.TrapPDU()):
-                if msgVer == api.protoVersion1:
-                    print 'Enterprise: %s' % (
-                        pMod.apiTrapPDU.getEnterprise(reqPDU).prettyPrint()
-                        )
-                    print 'Agent Address: %s' % (
-                        pMod.apiTrapPDU.getAgentAddr(reqPDU).prettyPrint()
-                        )
-                    print 'Generic Trap: %s' % (
-                        pMod.apiTrapPDU.getGenericTrap(reqPDU).prettyPrint()
-                        )
-                    print 'Specific Trap: %s' % (
-                        pMod.apiTrapPDU.getSpecificTrap(reqPDU).prettyPrint()
-                        )
-                    print 'Uptime: %s' % (
-                        pMod.apiTrapPDU.getTimeStamp(reqPDU).prettyPrint()
-                        )
-                    varBinds = pMod.apiTrapPDU.getVarBindList(reqPDU)
-                else:
-                    varBinds = pMod.apiPDU.getVarBindList(reqPDU)
-                print 'Var-binds:'
-                for oid, val in varBinds:
-                    print '%s = %s' % (oid.prettyPrint(), val.prettyPrint())
-                # ---------------------------------------------------
                 if SnmpdThread.database:
                     conn = SnmpdThread.database.open()
                     root = conn.root()
                     root_folder = root['Application']
                     old_site = getSite()
                     setSite(root_folder)
-                    tmp_util = queryUtility(IAdmUtilSupervisor)
-                    print "IAdmUtilSupervisor: ", tmp_util
-                    uidutil = getUtility(IIntIds)
-                    for (myid, myobj) in uidutil.items():
-                        print "ddd:", myobj
-                        try:
-                            tickerAdapter = ISnmpd(myobj)
-                            if tickerAdapter:
-                                tickerAdapter.triggered(reqPDU)
-                        except TypeError, err:
-                            print "Error xxx: ", err
-                    tmp_util = queryUtility(IAdmUtilSnmpd)
-                    if tmp_util:
-                        print "1:", tmp_util
+                    my_catalog = zapi.getUtility(ICatalog)
+                    search_ip = pMod.apiTrapPDU.getAgentAddr(reqPDU).prettyPrint()
+                    search_ip_conv = convertIpV4(search_ip)
+                    for result in my_catalog.searchResults(\
+                        interface_ip_index=search_ip_conv):
+                        parentObj = result.__parent__
+                        snmpAdapter = ISnmptrapd(parentObj)
+                        snmpAdapter.triggered(reqPDU, msgVer, pMod)
                     setSite(old_site)
                     transaction.commit()
                     conn.close()
-                # ---------------------------------------------------
-
         return wholeMsg

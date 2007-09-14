@@ -29,6 +29,15 @@ from org.ict_ok.components.interface.interfaces import IInterface
 
 _ = MessageFactory('org.ict_ok')
 
+def convertIpV4(inp):
+    """convert string or list of strings from ipv4-addresses """
+    if type(inp) == type([]):
+        return ' '.join([str(ip).replace(".", "_").replace("/", "__") \
+                         for ip in inp])
+    elif type(inp) == type(u'') or \
+         type(inp) == type(''):
+        return str(inp).replace(".", "_").replace("/", "__")
+
 
 class Searchable(SuperSearchable):
     """Searchable-Adapter."""
@@ -46,12 +55,7 @@ class Searchable(SuperSearchable):
         return self.context.getObjectId()
 
     def getSearchableInterfaceIp(self):
-        if type(self.context.ipv4List) == type([]):
-            return ' '.join([str(ip).replace(".", "_").replace("/", "__") \
-                             for ip in self.context.ipv4List])
-        elif type(self.context.ipv4List) == type(u''):
-            ip = self.context.ipv4List
-            return str(ip).replace(".", "_").replace("/", "__")
-            
+        return convertIpV4(self.context.ipv4List)
+
     def getSearchableInterfaceMac(self):
         return self.context.mac
