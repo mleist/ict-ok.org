@@ -1,0 +1,33 @@
+Fragen zu public_viewing
+------------------------
+
+was sind die Klassen, von denen Attribute gezeigt werden sollen?
+
+supernodeDetails, was zeigt diese view?
+
+DisplayForm und EditForm sind von browser.superclass abgeleitet
+
+
+Es wird ein schattenobjekt angelegt, welches andere Rechte hat als ???
+
+- SupernodeDetails
+
+Ich brauche erst mal eine Erklärung der ict-ok-GUI anhand eines minimalen Netzwerkes
+
+1. Anlage eines minimalen Netzwerkes
+2. Editieren eines Knotesn in diesem Netzwerk
+3. Überwachung??? Was wird wie überwacht?
+   - wie sieht das aus?
+   
+4. Was davon soll der public_viewer sehen?
+
+5. sieht man jetzt schon irgend etwas? Was ist die View von public_viewing?
+
+für mich zum lernen:
+was ist ein locales Utility
+nein das ist ja ein event subscriber
+wieso ist der in bootstrap? ist das eine art installationsmechanismus?
+
+.public_viewing.AdmUtilPublicViewing
+------------------------------------
+

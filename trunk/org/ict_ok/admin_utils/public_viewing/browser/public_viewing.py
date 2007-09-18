@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Copyright (c) 2004, 2005, 2006, 2007,
-#               Thomas Richter <thomas.richter at xwml.de>,
+#               Thomas Richter <thomas.richter@xwml.de>,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -56,7 +56,7 @@ class ViewAdmUtilPublicViewingForm(DisplayForm):
 
 
 class EditAdmUtilPublicViewingForm(EditForm):
-    """ Edit for for net """
+    """ Edit form for net """
     label = _(u'edit public viewing')
     fields = field.Fields(IAdmUtilPublicViewing).omit(\
         *AdmUtilPublicViewingDetails.omit_editfields)
