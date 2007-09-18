@@ -38,6 +38,7 @@
     <include file="../lib/python/org/ict_ok/admin_utils/netscan/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/notifier/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/objmq/security.zcml" />
+    <include file="../lib/python/org/ict_ok/admin_utils/public_viewing/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/supervisor/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/snmpd/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/ticker/security.zcml" />
@@ -103,6 +104,7 @@
     <!--<include package="org.ict_ok.admin_utils.notifier.jabber" />-->
     <!--<include package="org.ict_ok.admin_utils.notifier.email" />-->
     <include package="org.ict_ok.admin_utils.objmq" />
+    <include package="org.ict_ok.admin_utils.public_viewing" />
     <include package="org.ict_ok.admin_utils.snmpd" />
     <include package="org.ict_ok.admin_utils.ticker" />
     <include package="org.ict_ok.admin_utils.usermanagement" />

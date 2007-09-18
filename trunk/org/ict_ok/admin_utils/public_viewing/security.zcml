@@ -4,56 +4,31 @@
     >
 
     <!-- Copyright (c) 2004, 2005, 2006, 2007,
+         Thomas Richter <thomas.richter at xwml.de>,
          Markus Leist <leist@ikom-online.de> -->
 
     <permission
-        id="org.ict_ok.admin_utils.usermanagement.View"
-        title="View from AdmUtilUserManagement"
-        description="View from AdmUtilUserManagement."
+        id="org.ict_ok.admin_utils.public_viewing.View"
+        title="View from AdmUtilPublicViewing"
+        description="View from AdmUtilPublicViewing."
     />
 
     <permission
-        id="org.ict_ok.admin_utils.usermanagement.Edit"
-        title="Edit from AdmUtilUserManagement"
-        description="Edit from AdmUtilUserManagement."
+        id="org.ict_ok.admin_utils.public_viewing.Edit"
+        title="Edit from AdmUtilPublicViewing"
+        description="Edit from AdmUtilPublicViewing."
     />
 
-    <permission
-        id="org.ict_ok.admin_utils.dashboard.View"
-        title="View from UserDashboard"
-        description="View from user dashboard."
-    />
-
-    <permission
-        id="org.ict_ok.admin_utils.dashboard.Edit"
-        title="Edit from UserDashboard"
-        description="Edit from user dashboard."
-    />
-
-    <!--<grant permission="org.ict_ok.admin_utils.usermanagement.View"-->
-                    <!--role="org.ict_ok.usr" />-->
-    <grant permission="org.ict_ok.admin_utils.usermanagement.View"
-                    role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.usermanagement.View"
-                    role="org.ict_ok.adm" />
-
-    <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"
-                    role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"
-                    role="org.ict_ok.adm" />
-
-    <grant permission="org.ict_ok.admin_utils.dashboard.View"
+    <grant permission="org.ict_ok.admin_utils.public_viewing.View"
                     role="org.ict_ok.usr" />
-    <grant permission="org.ict_ok.admin_utils.dashboard.View"
+    <grant permission="org.ict_ok.admin_utils.public_viewing.View"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.dashboard.View"
+    <grant permission="org.ict_ok.admin_utils.public_viewing.View"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.admin_utils.dashboard.Edit"
-                    role="org.ict_ok.usr" />
-    <grant permission="org.ict_ok.admin_utils.dashboard.Edit"
+    <grant permission="org.ict_ok.admin_utils.public_viewing.Edit"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.dashboard.Edit"
+    <grant permission="org.ict_ok.admin_utils.public_viewing.Edit"
                     role="org.ict_ok.adm" />
 
 </configure>

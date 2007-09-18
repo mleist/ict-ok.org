@@ -5,21 +5,22 @@
 
     <!-- $Id$ -->
 
-    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+    <!-- Copyright (c) 2007,
+         Thomas Richter <thomas.richter at xwml.de>,
          Markus Leist <leist@ikom-online.de> -->
 
-    <class class=".usermanagement.AdmUtilUserManagement">
+    <class class=".public_viewing.AdmUtilPublicViewing">
         <factory
-            id="org.ict_ok.admin_utils.usermanagement.usermanagement.AdmUtilUserManagement" />
+            id="org.ict_ok.admin_utils.public_viewing.public_viewing.AdmUtilPublicViewing" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <require
-            permission="org.ict_ok.admin_utils.usermanagement.View"
-            interface=".interfaces.IAdmUtilUserManagement"
+            permission="org.ict_ok.admin_utils.public_viewing.View"
+            interface=".interfaces.IAdmUtilPublicViewing"
             />
         <require
-            permission="org.ict_ok.admin_utils.usermanagement.View"
-            set_schema=".interfaces.IAdmUtilUserManagement"
+            permission="org.ict_ok.admin_utils.public_viewing.View"
+            set_schema=".interfaces.IAdmUtilPublicViewing"
             />
     </class>
 
@@ -27,17 +28,6 @@
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
-        />
-    <!--<adapter-->
-        <!--factory=".browser.usermanagement.form_template"-->
-        <!--for=".browser.usermanagement.AdmUtilUserPropertiesForm"-->
-        <!--name="org.ict_ok.admin_utils.userproperties.form"-->
-    <!--/>-->
-    <adapter factory=".usermanagement.AdmUtilUserManagement"
-        provides=".interfaces.IAdmUtilUserManagement"
-        />
-    <adapter factory=".usermanagement.AdmUtilUserProperties"
-        provides=".interfaces.IAdmUtilUserProperties"
         />
 
     <include package=".browser" />
