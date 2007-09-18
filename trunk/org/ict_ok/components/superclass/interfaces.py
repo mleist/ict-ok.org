@@ -78,6 +78,9 @@ class ISuperclass(Interface):
     history = Attribute("history list")
     dbgLevel = Attribute("Object Debug Level")
     ikEventTarget = Attribute("target list for events")
+    inpEQueue = Attribute("input event queue")
+    outEQueue = Attribute("output event queue")
+    outEReceiver = Attribute("receiver object for output events")
 
     def getObjectId(self):
         """
@@ -128,3 +131,8 @@ class IBrwsOverview(Interface):
         set Title of the Object
         """
         
+
+class IMsgEvent(Interface):
+    """ Interface of an async event event
+    """
+    transmissionHistory = Attribute("list of objects which have seen this event")
