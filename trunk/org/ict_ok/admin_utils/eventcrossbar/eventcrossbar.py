@@ -18,11 +18,17 @@ __version__ = "$Id$"
 import logging
 from datetime import datetime
 from pytz import timezone
+from persistent.dict import PersistentDict
 
 # zope imports
 from zope.interface import implements
 from zope.app.publisher.xmlrpc import MethodPublisher
 from zope.dublincore.interfaces import IWriteZopeDublinCore
+from zope.app.catalog.interfaces import ICatalog
+
+# zc imports
+from zc.queue.interfaces import IQueue
+from zc.queue import Queue
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -53,6 +59,8 @@ class AdmUtilEventCrossbar(Supernode):
         #IAdmUtilEventCrossbar.__init__(self)
         Supernode.__init__(self)
         self.ikRevision = __version__
+        self.inpEQueues = PersistentDict()
+        self.outEQueues = PersistentDict()
 
     def receiveEventCrossbar(self, request, str_time, mode=None):
         """receive eventcrossbar signal
@@ -71,6 +79,70 @@ class AdmUtilEventCrossbar(Supernode):
             retVal = self.lastEventCrossbar
         return retVal
 
+    def makeNewObjQueue(self, senderObj):
+        """ will create a new input and output queue for this sender object """
+        objId = senderObj.getObjectId()
+        if not self.inpEQueues.has_key(objId):
+            self.inpEQueues[objId] = Queue()
+        if not self.outEQueues.has_key(objId):
+            self.outEQueues[objId] = Queue()
+        return True
+
+    def destroyObjQueue(self, senderObj):
+        """ will destroy the input and output queue for this sender object """
+        objId = senderObj.getObjectId()
+        if self.inpEQueues.has_key(objId):
+            del self.inpEQueues[objId]
+        if self.outEQueues.has_key(objId):
+            del self.outEQueues[objId]
+        return True
+
+    def injectEventFromObj(self, senderObj, event):
+        """ will inject an event from the sender object into the accordant queue """
+        objId = senderObj.getObjectId()
+        print "injectEventFromObj / %s" % (objId)
+        for i in self.inpEQueues:
+            print "i: ", i
+        if self.inpEQueues.has_key(objId):
+            self.inpEQueues[objId].put(event)
+            return True
+        return False
+
+    def processOutEQueues(self):
+        print "processOutEQueues(%s)" % (self.getDcTitle())
+        for objId in self.outEQueues:
+            outQueue = self.outEQueues[objId]
+            if len(outQueue) > 0:
+                my_catalog = zapi.getUtility(ICatalog)
+                for result in my_catalog.searchResults(oid_index=objId):
+                    event = iter(outQueue).next() # don't delete
+                    if result.injectFromEventXbar(self, event):
+                        outQueue.pull() # now delete
+    
+    def processEvents(self):
+        print "processEvents(%s)" % (self.getDcTitle())
+        
+    def processInpEQueues(self):
+        pass
+
+    def tickerEvent(self):
+        #print "AdmUtilEventCrossbar.tickerEvent: (%s, %s)" % \
+              #(self.inpEQueues, self.outEQueues)
+        #for i in self.inpEQueues:
+            #print "i:", i
+        for qid in self.inpEQueues:
+            if len(self.inpEQueues[qid]) > 0:
+                logger.info("tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
+                            (qid,
+                             len(self.inpEQueues[qid]),
+                             len(self.outEQueues[qid])
+                             ))
+            #else:
+                #logger.info("tickerEvent (n:%s, n(i):%s)" % \
+                            #(qid, len(self.inpEQueues[qid])))
+        self.processOutEQueues()
+        self.processEvents()
+        self.processInpEQueues()
 
 class GlobalEventCrossbarUtility(object):
 

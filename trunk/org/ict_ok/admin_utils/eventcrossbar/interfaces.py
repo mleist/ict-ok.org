@@ -14,7 +14,7 @@
 __version__ = "$Id$"
 
 # zope imports
-from zope.interface import Interface
+from zope.interface import Attribute, Interface
 from zope.schema import TextLine
 from zope.i18nmessageid import MessageFactory
 
@@ -40,6 +40,8 @@ class IAdmUtilEventCrossbar(ISupernode):
     """
     major component for registration and event distribution 
     """
+    inpEQueues = Attribute("dict of input event queues")
+    outEQueues = Attribute("dict of output event queues")
 
     def receiveEventCrossbar(self, str_time):
         """receive eventcrossbar signal
@@ -48,6 +50,18 @@ class IAdmUtilEventCrossbar(ISupernode):
     def getEventCrossbarTime(self):
         """get last eventcrossbar timestamp
         """
+        
+    def makeNewObjQueue(self, senderObj):
+        """ will create a new input and output queue for this sender object """
+
+    def destroyObjQueue(self, senderObj):
+        """ will destroy the input and output queue for this sender object """
+
+    def injectEventFromObj(self, senderObj, event):
+        """ will inject an event from the sender object into the accordant queue """
+
+    def tickerEvent(self):
+        """ event """
 
 
 class IGlobalEventCrossbarUtility(Interface):

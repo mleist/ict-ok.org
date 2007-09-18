@@ -50,6 +50,10 @@
         methods="triggerEventCrossbarEvent isUp"
         class=".eventcrossbar.AdmUtilEventCrossbarRpcMethods"
         />
+        
+    <adapter
+        factory=".adapter.ticker.Ticker"
+    />
 
     <include package=".browser" />
     

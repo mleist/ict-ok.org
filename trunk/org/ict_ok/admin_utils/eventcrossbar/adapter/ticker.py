@@ -21,14 +21,16 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass, ITicker
+from org.ict_ok.components.superclass.interfaces import ITicker
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEventCrossbar
 
 
 class Ticker(object):
     """Ticker-Adapter."""
 
     implements(ITicker)
-    adapts(ISuperclass)
+    adapts(IAdmUtilEventCrossbar)
 
     def __init__(self, context):
         self.context = context
@@ -37,5 +39,4 @@ class Ticker(object):
         """
         got ticker event from ticker thread
         """
-        #print "%s triggered!!" % self.context
-        pass
+        self.context.tickerEvent()

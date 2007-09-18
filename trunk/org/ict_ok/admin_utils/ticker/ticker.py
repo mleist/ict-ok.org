@@ -35,6 +35,8 @@ from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.components.superclass.interfaces import ITicker
 from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEventCrossbar
 from org.ict_ok.components.supernode.supernode import Supernode
 
 
@@ -81,45 +83,6 @@ class TickerThread(threading.Thread):
         self.interaction = ParanoidSecurityPolicy(SystemTickerParticipation())
         threading.Thread.__init__(self)
 
-    #def setMaildir(self, maildir):
-        #"""Set the maildir.
-
-        #This method is used just to provide a `maildir` stubs ."""
-        #self.maildir = maildir
-
-    #def setQueuePath(self, path):
-        #self.maildir = Maildir(path, True)
-
-    #def setMailer(self, mailer):
-        #self.mailer = mailer
-
-    #def _parseMessage(self, message):
-        #"""Extract fromaddr and toaddrs from the first two lines of
-        #the `message`.
-
-        #Returns a fromaddr string, a toaddrs tuple and the message
-        #string.
-        #"""
-
-        #fromaddr = ""
-        #toaddrs = ()
-        #rest = ""
-
-        #try:
-            #first, second, rest = message.split('\n', 2)
-        #except ValueError:
-            #return fromaddr, toaddrs, message
-
-        #if first.startswith("X-Zope-From: "):
-            #i = len("X-Zope-From: ")
-            #fromaddr = first[i:]
-
-        #if second.startswith("X-Zope-To: "):
-            #i = len("X-Zope-To: ")
-            #toaddrs = tuple(second[i:].split(", "))
-
-        #return fromaddr, toaddrs, rest
-
     def run(self, forever=True):
         atexit.register(self.stop)
         while not self.__stopped:
@@ -128,18 +91,10 @@ class TickerThread(threading.Thread):
                     conn = TickerThread.database.open()
                     root = conn.root()
                     root_folder = root['Application']
-                    #self.interaction = ParanoidSecurityPolicy(SystemConfigurationParticipation())
-                    #self.log.info("dddd: %s" % root_folder)
-                    #my_obj = root_folder['0bbe5e583af8492266f91c90e87ce5690']
-                    #self.log.info("ddd2: %s" % my_obj)
-                    #my_obj.tickerEvent()
-                    #site = root_folder
                     old_site = getSite()
                     setSite(root_folder)
                     tmp_util = queryUtility(IAdmUtilSupervisor)
-                    #print "IAdmUtilSupervisor: ", tmp_util
                     uidutil = getUtility(IIntIds)
-                    #import pdb; pdb.set_trace()
                     for (myid, myobj) in uidutil.items():
                         try:
                             tickerAdapter = ITicker(myobj.object)
@@ -147,17 +102,17 @@ class TickerThread(threading.Thread):
                                 tickerAdapter.triggered()
                         except TypeError, err:
                             print "Error xxx: ", err
-                    tmp_util = queryUtility(IAdmUtilTicker)
-                    if tmp_util:
-                        print "1:", tmp_util
-                        try:
-                            tickerAdapter = ITicker(tmp_util)
-                            if tickerAdapter:
-                                tickerAdapter.triggered()
-                        except TypeError, err:
-                            print "Error xxx: ", err
-                        
-                    #setSite(old_site)
+                    for utilInterface in (IAdmUtilEventCrossbar,
+                                          ):
+                        tmp_util = queryUtility(utilInterface)
+                        if tmp_util:
+                            try:
+                                tickerAdapter = ITicker(tmp_util)
+                                if tickerAdapter:
+                                    tickerAdapter.triggered()
+                            except TypeError, err:
+                                print "Error xxx: ", err
+                    setSite(old_site)
                     self.transaction_manager.commit()
                     conn.close()
                     # Blanket except because we don't want
