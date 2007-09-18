@@ -154,13 +154,13 @@ class Superclass(Persistent):
         dcore.title = unicode(title)
 
     def processEvents(self):
-        print "processEvents(%s)" % (self.getDcTitle())
+        #print "processEvents(%s)" % (self.getDcTitle())
         while len(self.inpEQueue) > 0:
             # temp. direct connect
             self.outEQueue.put(self.inpEQueue.pull())
 
     def processOutEQueue(self):
-        print "processOutEQueue(%s)" % (self.getDcTitle())
+        #print "processOutEQueue(%s)" % (self.getDcTitle())
         if self.outEReceiver is not None and \
            len(self.outEQueue) > 0:
             utilXbar = queryUtility(IAdmUtilEventCrossbar)
@@ -169,11 +169,12 @@ class Superclass(Persistent):
                 self.outEQueue.pull() # now delete
 
     def processInpEQueue(self):
-        print "processInpEQueue(%s)" % (self.getDcTitle())
+        #print "processInpEQueue(%s)" % (self.getDcTitle())
+        pass
         
 
     def injectInpEQueue(self, event):
-        print "injectInpEQueue(%s, %s)" % (self.getDcTitle(), event)
+        #print "injectInpEQueue(%s, %s)" % (self.getDcTitle(), event)
         self.inpEQueue.put(event)
 
     def tickerEvent(self):
@@ -186,9 +187,9 @@ class Superclass(Persistent):
         self.processOutEQueue()
         self.processEvents()
         self.processInpEQueue()
-        import time
-        if time.gmtime()[5] == 10:
-            self.injectInpEQueue(u'event0815')
+        #import time
+        #if time.gmtime()[5] == 10:
+            #self.injectInpEQueue(u'event0815')
 
     def connectToEventXbar(self):
         if self.outEReceiver is None:

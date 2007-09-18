@@ -100,7 +100,7 @@ class AdmUtilEventCrossbar(Supernode):
     def injectEventFromObj(self, senderObj, event):
         """ will inject an event from the sender object into the accordant queue """
         objId = senderObj.getObjectId()
-        print "injectEventFromObj / %s" % (objId)
+        #print "injectEventFromObj / %s" % (objId)
         for i in self.inpEQueues:
             print "i: ", i
         if self.inpEQueues.has_key(objId):
@@ -109,7 +109,7 @@ class AdmUtilEventCrossbar(Supernode):
         return False
 
     def processOutEQueues(self):
-        print "processOutEQueues(%s)" % (self.getDcTitle())
+        #print "processOutEQueues(%s)" % (self.getDcTitle())
         for objId in self.outEQueues:
             outQueue = self.outEQueues[objId]
             if len(outQueue) > 0:
@@ -120,7 +120,8 @@ class AdmUtilEventCrossbar(Supernode):
                         outQueue.pull() # now delete
     
     def processEvents(self):
-        print "processEvents(%s)" % (self.getDcTitle())
+        #print "processEvents(%s)" % (self.getDcTitle())
+        pass
         
     def processInpEQueues(self):
         pass
