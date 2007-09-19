@@ -21,30 +21,42 @@ from pytz import timezone
 from persistent.dict import PersistentDict
 
 # zope imports
+from zope.app import zapi
 from zope.interface import implements
 from zope.app.publisher.xmlrpc import MethodPublisher
 from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.catalog.interfaces import ICatalog
+from zope.app.intid.interfaces import IIntIds
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # zc imports
-from zc.queue.interfaces import IQueue
 from zc.queue import Queue
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IGlobalEventCrossbarUtility
-from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
-     IContentDDD
 
 logger = logging.getLogger("AdmUtilEventCrossbar")
 berlinTZ = timezone('Europe/Berlin')
 
 
-
-
+def AllEventObjectInstances(dummy_context):
+    """Which objects are there
+    """
+    #print "AllEventObjectInstances   ################"
+    iid = zapi.getUtility(IIntIds, '')
+    terms = []
+    for (oid, oobj) in iid.items():
+        if ISuperclass.providedBy(oobj.object):
+            terms.append(\
+                SimpleTerm(oobj.object.objectID,
+                           str(oobj.object.objectID),
+                           oobj.object.getDcTitle()))
+    return SimpleVocabulary(terms)
 
 
 class AdmUtilEventCrossbar(Supernode):
@@ -101,8 +113,8 @@ class AdmUtilEventCrossbar(Supernode):
         """ will inject an event from the sender object into the accordant queue """
         objId = senderObj.getObjectId()
         #print "injectEventFromObj / %s" % (objId)
-        for i in self.inpEQueues:
-            print "i: ", i
+        #for i in self.inpEQueues:
+            #print "i: ", i
         if self.inpEQueues.has_key(objId):
             self.inpEQueues[objId].put(event)
             return True
@@ -116,7 +128,7 @@ class AdmUtilEventCrossbar(Supernode):
                 my_catalog = zapi.getUtility(ICatalog)
                 for result in my_catalog.searchResults(oid_index=objId):
                     event = iter(outQueue).next() # don't delete
-                    if result.injectFromEventXbar(self, event):
+                    if result.injectInpEQueue(event):
                         outQueue.pull() # now delete
     
     def processEvents(self):
@@ -124,7 +136,20 @@ class AdmUtilEventCrossbar(Supernode):
         pass
         
     def processInpEQueues(self):
-        pass
+        #print "processInpEQueues(%s)" % (self.getDcTitle())
+        #import pdb;pdb.set_trace()
+        my_catalog = zapi.getUtility(ICatalog)
+        for senderOid in self.inpEQueues:
+            inpQueue = self.inpEQueues[senderOid]
+            if len(inpQueue) > 0:
+                #print "processInpEQueues(%s) / %s" % (self.getDcTitle(), senderOid)
+                inpEvent = inpQueue.pull()
+                for eventObj in self.values():
+                    if senderOid in eventObj.inpObjects:
+                        for receiverOid in eventObj.outObjects:
+                            for receiverObj in my_catalog.searchResults(\
+                                oid_index=receiverOid):
+                                receiverObj.injectInpEQueue(inpEvent)
 
     def tickerEvent(self):
         #print "AdmUtilEventCrossbar.tickerEvent: (%s, %s)" % \
@@ -144,6 +169,7 @@ class AdmUtilEventCrossbar(Supernode):
         self.processOutEQueues()
         self.processEvents()
         self.processInpEQueues()
+
 
 class GlobalEventCrossbarUtility(object):
 
@@ -217,8 +243,4 @@ class AdmUtilEventCrossbarRpcMethods(MethodPublisher):
         return True
 
 globalEventCrossbarUtility = GlobalEventCrossbarUtility()
-
-class ContentDDD(object):
-    implements(IContentDDD)
-    var = True
     

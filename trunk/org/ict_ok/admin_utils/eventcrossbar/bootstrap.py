@@ -35,9 +35,6 @@ from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import \
      AdmUtilEventCrossbar
 from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import \
      globalEventCrossbarUtility
-# TODO ContentDDD grrrr
-from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import \
-     ContentDDD
 
 logger = logging.getLogger("AdmUtilEventCrossbar")
 
@@ -69,11 +66,6 @@ def bootStrapSubscriberDatabase(event):
 
     if isinstance(madeAdmUtilEventCrossbar, AdmUtilEventCrossbar):
         logger.info(u"bootstrap: Ensure named AdmUtilEventCrossbar")
-        contentDDD = ContentDDD()
-        setattr(madeAdmUtilEventCrossbar, 'ddd', contentDDD)
-        
-        from zope.app.container.contained import contained, setitem
-        madeAdmUtilEventCrossbar['ddd'] = contentDDD
         dcore = IWriteZopeDublinCore(madeAdmUtilEventCrossbar)
         dcore.title = u"Event Crossbar"
         dcore.created = datetime.utcnow()

@@ -21,6 +21,7 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.superclass import isOidInCatalog
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import IAdmUtilEvent
 
@@ -31,6 +32,8 @@ class AdmUtilEvent(Supernode):
     implements(IAdmUtilEvent)
     
     title = FieldProperty(IAdmUtilEvent['title'])
+    inpObjects = FieldProperty(IAdmUtilEvent['inpObjects'])
+    outObjects = FieldProperty(IAdmUtilEvent['outObjects'])
 
     def __init__(self, **data):
         """
@@ -41,3 +44,18 @@ class AdmUtilEvent(Supernode):
             if name in IAdmUtilEvent.names():
                 setattr(self, name, value)
         self.ikRevision = __version__
+
+    def removeInvalidOidFromInpOutObjects(self):
+        """ delete all invalid oids """
+        removeIDs = []
+        for oid in self.inpObjects:
+            if not isOidInCatalog(oid):
+                removeIDs.append(oid)
+        for oid in removeIDs:
+            self.inpObjects.remove(oid)
+        removeIDs = []
+        for oid in self.outObjects:
+            if not isOidInCatalog(oid):
+                removeIDs.append(oid)
+        for oid in removeIDs:
+            self.outObjects.remove(oid)

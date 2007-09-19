@@ -50,6 +50,11 @@
         methods="triggerEventCrossbarEvent isUp"
         class=".eventcrossbar.AdmUtilEventCrossbarRpcMethods"
         />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".eventcrossbar.AllEventObjectInstances"
+        name="AllEventObjectInstances"
+        />
         
     <adapter
         factory=".adapter.ticker.Ticker"

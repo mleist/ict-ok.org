@@ -21,6 +21,7 @@ __version__ = "$Id$"
 from logging import INFO, log, NOTSET
 
 # zope imports
+from zope.app import zapi
 from persistent import Persistent
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
@@ -28,6 +29,7 @@ from zope.security.management import queryInteraction
 from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.keyreference.interfaces import IKeyReference
 from zope.component import queryUtility
+from zope.app.catalog.interfaces import ICatalog
 
 # zc imports
 from zc.queue.interfaces import IQueue
@@ -35,7 +37,7 @@ from zc.queue import Queue
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import IMsgEvent, ISuperclass
-from org.ict_ok.libs.lib import generateOid
+from org.ict_ok.libs.lib import generateOid, oidIsValid
 from org.ict_ok.libs.history.entry import Entry
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
@@ -176,6 +178,7 @@ class Superclass(Persistent):
     def injectInpEQueue(self, event):
         #print "injectInpEQueue(%s, %s)" % (self.getDcTitle(), event)
         self.inpEQueue.put(event)
+        return True
 
     def tickerEvent(self):
         """
@@ -187,9 +190,12 @@ class Superclass(Persistent):
         self.processOutEQueue()
         self.processEvents()
         self.processInpEQueue()
-        #import time
-        #if time.gmtime()[5] == 10:
-            #self.injectInpEQueue(u'event0815')
+        # TODO test pupose
+        import time
+        if time.gmtime()[5] == 10:
+            if self.getDcTitle()==u'Host1':
+                #import pdb;pdb.set_trace()
+                self.injectInpEQueue(u'event0815')
 
     def connectToEventXbar(self):
         if self.outEReceiver is None:
@@ -235,3 +241,11 @@ class MsgEvent:
         else:
             self.transmissionHistory.append(obj.getObjectId())
             return False
+
+def isOidInCatalog(arg_oid):
+    """can arg_oid be found in Catalog"""
+    if oidIsValid(arg_oid):
+        my_catalog = zapi.getUtility(ICatalog)
+        if len(my_catalog.searchResults(oid_index=arg_oid)) > 0:
+            return True
+    return False

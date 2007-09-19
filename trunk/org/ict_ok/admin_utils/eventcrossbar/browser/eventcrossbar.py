@@ -20,8 +20,13 @@ __version__ = "$Id$"
 from zope.i18nmessageid import MessageFactory
 from zope.dublincore.interfaces import IZopeDublinCore
 
+# zc imports
+from zc.table.column import GetterColumn
+from zc.table.table import StandaloneFullFormatter
+
 # z3c imports
 from z3c.form import field
+from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
@@ -43,6 +48,13 @@ class MSubAddEvent(GlobalMenuSubItem):
     title = _(u'Add Event')
     viewURL = 'add_event.html'
     weight = 50
+
+class MSubCrossBar(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Crossbar')
+    viewURL = 'crossbar.html'
+    weight = 20
+
 
 
 class AdmUtilEventDetails(SupernodeDetails):
@@ -73,6 +85,42 @@ class AdmUtilEventCrossbarDetails(SupernodeDetails):
         return self.context.getEventCrossbarTime()
 
 
+class CrossBar(BrowserPagelet):
+    label = _(u'event crossbar')
+    mytest = [u'a', u'b', u'c', u'd', u'e', u'f', u'g']
+    def update(self):
+        self.columns = (\
+            GetterColumn(title="1111",
+                         ),
+            GetterColumn(title="2222",
+                         ),
+            GetterColumn(title="3333",
+                         ),
+        )
+    def objs(self):
+        """List of Content objects"""
+        retList = []
+        try:
+            for obj in self.mytest:
+                retList.append(obj)
+        except:
+            pass
+        #try:
+            #for obj in self.context.values():
+                #if ISuperclass.providedBy(obj):
+                    #retList.append(obj)
+        #except:
+            #pass
+        return retList
+
+    def table(self):
+        """ Properties of table are defined here"""
+        formatter = StandaloneFullFormatter(
+            self.context, self.request, self.objs(),
+            columns=self.columns)
+        formatter.cssClasses['table'] = 'listing'
+        return formatter()
+
 # --------------- forms ------------------------------------
 
 
@@ -95,8 +143,11 @@ class DetailsAdmUtilEventForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of Event')
     fields = field.Fields(IAdmUtilEvent).omit(\
-        *AdmUtilEventDetails.omit_viewfields) + \
-           field.Fields(IZopeDublinCore).select('modified')
+        *AdmUtilEventDetails.omit_viewfields) #+ \
+           #field.Fields(IZopeDublinCore).select('modified')
+    def update(self):
+        self.context.removeInvalidOidFromInpOutObjects()
+        DisplayForm.update(self)
 
 
 class AddAdmUtilEventForm(AddForm):
@@ -111,3 +162,6 @@ class EditAdmUtilEventForm(EditForm):
     label = _(u'edit event properties')
     fields = field.Fields(IAdmUtilEvent).omit(\
         *AdmUtilEventDetails.omit_editfields)
+    def update(self):
+        self.context.removeInvalidOidFromInpOutObjects()
+        EditForm.update(self)
