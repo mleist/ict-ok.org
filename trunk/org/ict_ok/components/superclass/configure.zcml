@@ -58,6 +58,7 @@
         for=".interfaces.ISuperclass"
     />
 
+    <subscriber handler=".superclass.notifyModifiedEvent" />
     <subscriber handler=".objmq.notifyCopiedEvent" />
     <subscriber handler=".objmq.notifyCreatedEvent" />
     <subscriber handler=".objmq.notifyModifiedEvent" />

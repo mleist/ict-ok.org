@@ -32,7 +32,8 @@ from z3c.form import button, field
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
-from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+from org.ict_ok.components.superclass.interfaces import \
+     IBrwsOverview, IEventIfSuperclass
 from org.ict_ok.admin_utils.netscan.interfaces import INetScan
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -163,6 +164,10 @@ class DeleteNetForm(DeleteForm):
         return _(u"Delete this net: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
+class EditNetEventIfForm(EditForm):
+    """ Edit for for net """
+    label = _(u'Net Event Interfaces Form')
+    fields = field.Fields(IEventIfSuperclass)
 
 def NetScannerInstances2(dummy_context):
     """Which types of network scanners are there

@@ -52,10 +52,14 @@
         />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".eventcrossbar.AllEventObjectInstances"
-        name="AllEventObjectInstances"
+        component=".eventcrossbar.AllObjectInstances"
+        name="AllObjectInstances"
         />
-        
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".eventcrossbar.AllEventInstances"
+        name="AllEventInstances"
+        />
     <adapter
         factory=".adapter.ticker.Ticker"
     />

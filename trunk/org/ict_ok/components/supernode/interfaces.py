@@ -19,7 +19,8 @@ from zope.app.container.interfaces import IContainer
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.components.superclass.interfaces import \
+     IEventIfSuperclass, ISuperclass
 
 # ict_ok.org imports
 #from org.ict_ok.components.superclass.interfaces import ISuperclass
@@ -30,6 +31,8 @@ _ = MessageFactory('org.ict_ok')
 class ISupernode(ISuperclass, IContainer):
     """A generator object."""
 
+class IEventIfSupernode(IEventIfSuperclass):
+    """ event interface of object """
 
 class IState(Interface):
     """Interface of State-Adapter

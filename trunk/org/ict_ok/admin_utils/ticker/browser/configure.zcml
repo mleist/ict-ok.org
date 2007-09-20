@@ -32,6 +32,13 @@
         permission="org.ict_ok.admin_utils.ticker.Edit"
     />
     <z3c:pagelet
+        name="edit_event_if.html"
+        for="org.ict_ok.admin_utils.ticker.interfaces.IAdmUtilTicker"
+        class=".ticker.EditAdmUtilTickerEventIfForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+    />
+    <z3c:pagelet
         name="history.html"
         for="org.ict_ok.admin_utils.ticker.interfaces.IAdmUtilTicker"
         class="org.ict_ok.components.superclass.browser.superclass.History"
@@ -63,6 +70,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.ticker.Edit"
+        />
+    <viewlet
+        name="edit_event_if"
+        for="org.ict_ok.admin_utils.ticker.interfaces.IAdmUtilTicker"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
         />
 
 </configure>

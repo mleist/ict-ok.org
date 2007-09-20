@@ -16,7 +16,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Attribute, Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import List, Text, TextLine
+from zope.schema import Choice, List, Text, TextLine, Set
 
 # z3c imports
 from z3c.reference.schema import ViewReferenceField
@@ -87,15 +87,21 @@ class ISuperclass(Interface):
         get 'Universe ID' of object
         returns str
         """
-        
     def getDcTitle(self):
         """
         get the Title from Dublin Core
         """
-
     def setDcTitle(self, title):
         """
         set the Title to Dublin Core
+        """
+    def getAllOutEventObjs(self):
+        """ returns a list of all active referenced event object oids for update purpose
+        attribute name must start with 'eventOutObjs_'
+        """
+    def getAllInpEventObjs(self):
+        """ returns a list of all active referenced event object oids for update purpose
+        attribute name must start with 'eventInpObjs_'
         """
 
 
@@ -130,9 +136,35 @@ class IBrwsOverview(Interface):
         """
         set Title of the Object
         """
-        
+
 
 class IMsgEvent(Interface):
     """ Interface of an async event event
     """
     transmissionHistory = Attribute("list of objects which have seen this event")
+    timeToLive = Attribute("hop count of routing objects")
+    oidEventObject = Attribute("Oid from the Event message")
+
+
+class IEventIfSuperclass(Interface):
+    """ event interface of object """
+    eventInpObjs_Ping = Set(
+        title = _("ping event <-"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = True)
+    eventOutObjs_Pong = Set(
+        title = _("pong event ->"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = True)
+    def eventInp_Ping(self):
+        """ trigger ping request in object """
+    def eventOut_Pong(self):
+        """ sends a ping response """

@@ -19,11 +19,13 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.component import queryUtility
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.superclass import isOidInCatalog
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import IAdmUtilEvent
+from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
 
 
 class AdmUtilEvent(Supernode):
@@ -32,6 +34,7 @@ class AdmUtilEvent(Supernode):
     implements(IAdmUtilEvent)
     
     title = FieldProperty(IAdmUtilEvent['title'])
+    logAllEvents = FieldProperty(IAdmUtilEvent['logAllEvents'])
     inpObjects = FieldProperty(IAdmUtilEvent['inpObjects'])
     outObjects = FieldProperty(IAdmUtilEvent['outObjects'])
 
@@ -45,17 +48,40 @@ class AdmUtilEvent(Supernode):
                 setattr(self, name, value)
         self.ikRevision = __version__
 
+    def addOidToInpObjects(self, oid):
+        """ delete oid from set """
+        self.inpObjects.add(oid)
+
+    def addOidToOutObjects(self, oid):
+        """ delete oid from set """
+        self.outObjects.add(oid)
+
+    def removeOidFromInpObjects(self, oid):
+        """ delete oid from set """
+        self.inpObjects.remove(oid)
+
+    def removeOidFromOutObjects(self, oid):
+        """ delete oid from set """
+        self.outObjects.remove(oid)
+
     def removeInvalidOidFromInpOutObjects(self):
-        """ delete all invalid oids """
+        """ delete all invalid oids 
+        oids not in catalog will be deleted (exclude ticker)
+        """
+        utilTicker = queryUtility(IAdmUtilTicker)
         removeIDs = []
         for oid in self.inpObjects:
             if not isOidInCatalog(oid):
                 removeIDs.append(oid)
+        if utilTicker.getObjectId() in removeIDs:
+            removeIDs.remove(utilTicker.getObjectId())
         for oid in removeIDs:
             self.inpObjects.remove(oid)
         removeIDs = []
         for oid in self.outObjects:
             if not isOidInCatalog(oid):
                 removeIDs.append(oid)
+        if utilTicker.getObjectId() in removeIDs:
+            removeIDs.remove(utilTicker.getObjectId())
         for oid in removeIDs:
             self.outObjects.remove(oid)

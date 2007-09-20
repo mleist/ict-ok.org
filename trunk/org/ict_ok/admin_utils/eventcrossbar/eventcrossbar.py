@@ -33,7 +33,15 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zc.queue import Queue
 
 # ict_ok.org imports
+from org.ict_ok.libs.history.entry import Entry
 from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.components.site.interfaces import ISite
+from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.host.interfaces import IHost
+from org.ict_ok.components.interface.interfaces import IInterface
+from org.ict_ok.components.service.interfaces import IService
+from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
@@ -44,20 +52,42 @@ logger = logging.getLogger("AdmUtilEventCrossbar")
 berlinTZ = timezone('Europe/Berlin')
 
 
-def AllEventObjectInstances(dummy_context):
+def AllObjectInstances(dummy_context):
     """Which objects are there
     """
-    #print "AllEventObjectInstances   ################"
+    #print "AllObjectInstances   ################"
     iid = zapi.getUtility(IIntIds, '')
     terms = []
     for (oid, oobj) in iid.items():
-        if ISuperclass.providedBy(oobj.object):
+        if ISite.providedBy(oobj.object) or \
+           INet.providedBy(oobj.object) or \
+           IHost.providedBy(oobj.object) or \
+           IInterface.providedBy(oobj.object) or \
+           IService.providedBy(oobj.object) or \
+           ISnmpValue.providedBy(oobj.object):
             terms.append(\
                 SimpleTerm(oobj.object.objectID,
                            str(oobj.object.objectID),
                            oobj.object.getDcTitle()))
+    my_util = zapi.getUtility(IAdmUtilTicker)
+    terms.append(\
+        SimpleTerm(my_util.objectID,
+                   str(my_util.objectID),
+                   my_util.getDcTitle()))
     return SimpleVocabulary(terms)
 
+def AllEventInstances(dummy_context):
+    """Which events are there
+    """
+    eventXbar = zapi.getUtility(IAdmUtilEventCrossbar, '')
+    terms = []
+    for (oid, oobj) in eventXbar.items():
+        if ISuperclass.providedBy(oobj):
+            terms.append(\
+                SimpleTerm(oobj.objectID,
+                           str(oobj.objectID),
+                           oobj.getDcTitle()))
+    return SimpleVocabulary(terms)
 
 class AdmUtilEventCrossbar(Supernode):
     """Implementation of local EventCrossbar Utility"""
@@ -124,7 +154,7 @@ class AdmUtilEventCrossbar(Supernode):
         #print "processOutEQueues(%s)" % (self.getDcTitle())
         for objId in self.outEQueues:
             outQueue = self.outEQueues[objId]
-            if len(outQueue) > 0:
+            while len(outQueue) > 0:
                 my_catalog = zapi.getUtility(ICatalog)
                 for result in my_catalog.searchResults(oid_index=objId):
                     event = iter(outQueue).next() # don't delete
@@ -141,15 +171,19 @@ class AdmUtilEventCrossbar(Supernode):
         my_catalog = zapi.getUtility(ICatalog)
         for senderOid in self.inpEQueues:
             inpQueue = self.inpEQueues[senderOid]
-            if len(inpQueue) > 0:
+            while len(inpQueue) > 0:
                 #print "processInpEQueues(%s) / %s" % (self.getDcTitle(), senderOid)
                 inpEvent = inpQueue.pull()
+                processed = False
                 for eventObj in self.values():
                     if senderOid in eventObj.inpObjects:
                         for receiverOid in eventObj.outObjects:
                             for receiverObj in my_catalog.searchResults(\
                                 oid_index=receiverOid):
+                                processed = True
                                 receiverObj.injectInpEQueue(inpEvent)
+                if not processed:
+                    inpEvent.stopit(self)
 
     def tickerEvent(self):
         #print "AdmUtilEventCrossbar.tickerEvent: (%s, %s)" % \
@@ -169,6 +203,15 @@ class AdmUtilEventCrossbar(Supernode):
         self.processOutEQueues()
         self.processEvents()
         self.processInpEQueues()
+        
+    def logIntoEvent(self, oidEventObject, logEntry):
+        if self.has_key(oidEventObject):
+            eventObject = self[oidEventObject]
+            if eventObject.logAllEvents:
+                newEntry = Entry(logEntry, eventObject, level=u"info")
+                eventObject.history.append(newEntry)
+                eventObject._p_changed = True
+
 
 
 class GlobalEventCrossbarUtility(object):

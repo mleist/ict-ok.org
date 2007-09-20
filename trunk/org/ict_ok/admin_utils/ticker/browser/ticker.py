@@ -24,14 +24,17 @@ from zope.i18nmessageid import MessageFactory
 # zc imports
 
 # z3c imports
-from z3c.form import field
+from z3c.form import button, field, interfaces, util
 
 # ict-ok.org imports
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
+from org.ict_ok.admin_utils.ticker.interfaces import \
+     IAdmUtilTicker, IEventIfAdmUtilTicker
+from org.ict_ok.components.superclass.interfaces import \
+     IEventIfSuperclass
 
 _ = MessageFactory('org.ict_ok')
 
@@ -60,3 +63,27 @@ class EditAdmUtilTickerForm(EditForm):
     label = _(u'edit ticker settings')
     fields = field.Fields(IAdmUtilTicker).omit(\
         *AdmUtilTickerDetails.omit_editfields)
+    
+class EditAdmUtilTickerEventIfForm(EditForm):
+    """ Edit Event Interface of object """
+    label = _(u'AdmUtilTicker Event Interfaces Form')
+    fields = field.Fields(IEventIfAdmUtilTicker)
+    
+    @button.buttonAndHandler(_('Apply'), name='apply')
+    def handleApply(self, action):
+        data, errors = self.extractData()
+        if errors:
+            self.status = self.formErrorsMessage
+            return
+        changes = self.applyChanges(data)
+        if changes:
+            #import pdb;pdb.set_trace()
+            for interf in changes:
+                for attr in changes[interf]:
+                    print "attr: %s" % (attr)
+                #if interf == IEventIfAdmUtilTicker:
+                    #for eventObj in self.context.eventObjs_1sec:
+                        #print "------------:", eventObj
+            self.status = self.successMessage
+        else:
+            self.status = self.noChangesMessage

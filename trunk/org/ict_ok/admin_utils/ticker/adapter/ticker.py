@@ -38,4 +38,5 @@ class Ticker(object):
         """
         got ticker event from ticker thread
         """
-        print "AdmUtilTicker: '%s' triggered!!" % self.context
+        #print "AdmUtilTicker: '%s' triggered!!" % self.context
+        self.context.tickerEvent()

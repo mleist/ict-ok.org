@@ -31,6 +31,8 @@ from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
 from org.ict_ok.admin_utils.ticker.ticker import AdmUtilTicker
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEventCrossbar
 
 logger = logging.getLogger("AdmUtilTicker")
 
@@ -55,6 +57,11 @@ def bootStrapSubscriberDatabase(event):
         madeAdmUtilTicker.ikName = dcore.title
         madeAdmUtilTicker.__post_init__()
         sitem = root_folder.getSiteManager()
+        utils = [ util for util in sitem.registeredUtilities()
+                    if util.provided.isOrExtends(IAdmUtilEventCrossbar)]
+        utilEventXbar = utils[0].component
+        if utilEventXbar.makeNewObjQueue(madeAdmUtilTicker):
+            madeAdmUtilTicker.outEReceiver = utilEventXbar.getObjectId()
         utils = [ util for util in sitem.registeredUtilities()
                     if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component

@@ -24,6 +24,7 @@ import time
 from zope.interface import implements
 from zope.component import getUtility, queryUtility
 import transaction
+from zope.schema.fieldproperty import FieldProperty
 from transaction.interfaces import IDataManager
 from zope.app.component.hooks import getSite, setSite
 from zope.app.intid.interfaces import IIntIds
@@ -34,21 +35,30 @@ from zope.security.interfaces import IParticipation
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.components.superclass.interfaces import ITicker
-from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
+from org.ict_ok.admin_utils.ticker.interfaces import \
+     IAdmUtilTicker, IEventIfAdmUtilTicker
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
 from org.ict_ok.components.supernode.supernode import Supernode
+from org.ict_ok.components.superclass.superclass import MsgEvent
 
 
 class AdmUtilTicker(Supernode):
     """Implementation of local Ticker-Utility"""
 
-    implements(IAdmUtilTicker)
+    implements(IAdmUtilTicker, IEventIfAdmUtilTicker)
+
+    eventOutObjs_1sec = FieldProperty(IEventIfAdmUtilTicker['eventOutObjs_1sec'])
 
     def __init__(self):
         Supernode.__init__(self)
         self.ikRevision = __version__
 
+    def eventOut_1sec(self):
+        """ sends one-second event """
+        for my_event in self.eventOutObjs_1sec:
+            inst_event = MsgEvent(self, my_event)
+            self.injectOutEQueue(inst_event)
 
 
 class SystemTickerPrincipal(object):
@@ -93,6 +103,10 @@ class TickerThread(threading.Thread):
                     root_folder = root['Application']
                     old_site = getSite()
                     setSite(root_folder)
+                    # Utility Ticker
+                    tmp_util = queryUtility(IAdmUtilTicker)
+                    tmp_util.eventOut_1sec()
+                    # Utility Supervisor
                     tmp_util = queryUtility(IAdmUtilSupervisor)
                     uidutil = getUtility(IIntIds)
                     for (myid, myobj) in uidutil.items():
@@ -103,9 +117,10 @@ class TickerThread(threading.Thread):
                         except TypeError, err:
                             print "Error xxx: ", err
                     for utilInterface in (IAdmUtilEventCrossbar,
+                                          IAdmUtilTicker,
                                           ):
                         tmp_util = queryUtility(utilInterface)
-                        if tmp_util:
+                        if tmp_util is not None:
                             try:
                                 tickerAdapter = ITicker(tmp_util)
                                 if tickerAdapter:

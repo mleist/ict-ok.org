@@ -230,6 +230,13 @@ class MSubEdit(GlobalMenuSubItem):
     weight = 20
 
 
+class MSubEditEventIf(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Event Interface')
+    viewURL = 'edit_event_if.html'
+    weight = 25
+
+
 class MSubEditContent(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Edit Content')
@@ -524,7 +531,7 @@ class History(BrowserPagelet):
     def objs(self):
         """List of Content objects"""
         obj = removeAllProxies(self.context)
-        historyList = obj.history
+        historyList = obj.history.data
         #return [entry.getList(['date', 'text', 'level', 'version', 'bgcolor'])\
                 #for entry in historyList]
         return historyList

@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Attribute, Interface
-from zope.schema import Choice, Set, TextLine
+from zope.schema import Bool, Choice, Set, TextLine
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -34,11 +34,15 @@ class IAdmUtilEvent(ISupernode):
         description = _("Title of the event"),
         default = _("event_01"),
         required = True)
+    logAllEvents = Bool(
+        title = _("log events"),
+        description = _("log all events"),
+        default = False)
     inpObjects = Set(
         title = _("sender objects"),
         value_type = Choice(
             title = _("objects"),
-            vocabulary="AllEventObjectInstances"),
+            vocabulary="AllObjectInstances"),
         default = set([]),
         readonly = False,
         required = True)
@@ -46,10 +50,19 @@ class IAdmUtilEvent(ISupernode):
         title = _("receiver objects"),
         value_type = Choice(
             title = _("objects"),
-            vocabulary="AllEventObjectInstances"),
+            vocabulary="AllObjectInstances"),
         default = set([]),
         readonly = False,
         required = True)
+
+    def addOidToInpObjects(self, oid):
+        """ delete oid from set """
+    def addOidToOutObjects(self, oid):
+        """ delete oid from set """
+    def removeOidFromInpObjects(self, oid):
+        """ delete oid from set """
+    def removeOidFromOutObjects(self, oid):
+        """ delete oid from set """
     def removeInvalidOidFromInpOutObjects(self):
         """ delete all invalid oids """
 

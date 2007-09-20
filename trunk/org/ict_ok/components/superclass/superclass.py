@@ -28,16 +28,18 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.security.management import queryInteraction
 from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.keyreference.interfaces import IKeyReference
-from zope.component import queryUtility
+from zope.component import adapter, queryUtility
 from zope.app.catalog.interfaces import ICatalog
+from zope.app.container.interfaces import IObjectModifiedEvent
 
 # zc imports
 from zc.queue.interfaces import IQueue
 from zc.queue import Queue
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import IMsgEvent, ISuperclass
-from org.ict_ok.libs.lib import generateOid, oidIsValid
+from org.ict_ok.components.superclass.interfaces import \
+     IEventIfSuperclass, IMsgEvent, ISuperclass
+from org.ict_ok.libs.lib import generateOid, oidIsValid, RingBuffer
 from org.ict_ok.libs.history.entry import Entry
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
@@ -49,7 +51,7 @@ class Superclass(Persistent):
     """
 
 #    implements(IKeyReference, ISuperclass)
-    implements(ISuperclass)
+    implements(ISuperclass, IEventIfSuperclass)
     key_type_id = 'org.ict_ok.components.superclass.keyreference'
     
     objectID = FieldProperty(ISuperclass['objectID'])
@@ -59,6 +61,10 @@ class Superclass(Persistent):
     ikAuthor = FieldProperty(ISuperclass['ikAuthor'])
     ikEventTarget = FieldProperty(ISuperclass['ikEventTarget'])
     ref = FieldProperty(ISuperclass['ref'])
+    
+    # IEventIfSuperclass
+    eventInpObjs_Ping = FieldProperty(IEventIfSuperclass['eventInpObjs_Ping'])
+    eventOutObjs_Pong = FieldProperty(IEventIfSuperclass['eventOutObjs_Pong'])
 
     def __init__(self, **data):
         """
@@ -74,7 +80,7 @@ class Superclass(Persistent):
                 setattr(self, name, value)
         self.ikAuthor = u""
         self.dbgLevel = NOTSET
-        self.history = []
+        self.history = RingBuffer(20)
         self.inpEQueue = Queue()
         self.outEQueue = Queue()
         self.outEReceiver = None
@@ -159,16 +165,20 @@ class Superclass(Persistent):
         #print "processEvents(%s)" % (self.getDcTitle())
         while len(self.inpEQueue) > 0:
             # temp. direct connect
-            self.outEQueue.put(self.inpEQueue.pull())
+            eventMsg = self.inpEQueue.pull()
+            if not eventMsg.hasSeen(self):
+                self.outEQueue.put(eventMsg)
+            else:
+                eventMsg.stopit(self, "cycle!")
 
     def processOutEQueue(self):
         #print "processOutEQueue(%s)" % (self.getDcTitle())
-        if self.outEReceiver is not None and \
-           len(self.outEQueue) > 0:
-            utilXbar = queryUtility(IAdmUtilEventCrossbar)
-            event = iter(self.outEQueue).next() # don't delete
-            if utilXbar.injectEventFromObj(self, event):
-                self.outEQueue.pull() # now delete
+        if self.outEReceiver is not None:
+            while len(self.outEQueue) > 0:
+                utilXbar = queryUtility(IAdmUtilEventCrossbar)
+                event = iter(self.outEQueue).next() # don't delete
+                if utilXbar.injectEventFromObj(self, event):
+                    self.outEQueue.pull() # now delete
 
     def processInpEQueue(self):
         #print "processInpEQueue(%s)" % (self.getDcTitle())
@@ -180,6 +190,11 @@ class Superclass(Persistent):
         self.inpEQueue.put(event)
         return True
 
+    def injectOutEQueue(self, event):
+        if self.outEReceiver is not None:
+           self.outEQueue.put(event)
+        return True
+    
     def tickerEvent(self):
         """
         got ticker event from ticker thread
@@ -224,16 +239,57 @@ class Superclass(Persistent):
                 raise Exception, "destruction failed"
         return False
 
+    def getAllOutEventObjs(self):
+        """ returns a list of all active referenced event object oids for update purpose
+        attribute name must start with 'eventOutObjs_'
+        """
+        retSet = set([])
+        for attrName in self.__dict__:
+            if attrName.find("eventOutObjs_") == 0: # attribute name starts with ...
+                for tmpOid in self.__dict__[attrName]:
+                    retSet.add(tmpOid)
+        return retSet
+
+    def getAllInpEventObjs(self):
+        """ returns a list of all active referenced event object oids for update purpose
+        attribute name must start with 'eventInpObjs_'
+        """
+        retSet = set([])
+        for attrName in self.__dict__:
+            if attrName.find("eventInpObjs_") == 0: # attribute name starts with ...
+                for tmpOid in self.__dict__[attrName]:
+                    retSet.add(tmpOid)
+        return retSet
 
 class MsgEvent:
     """ Interface of an async event event
     """
     implements(IMsgEvent)
 
-    def __init__(self, senderObj = None):
+    def __init__(self, senderObj = None, oidEventObject = None):
+        print "MsgEvent.__init__"
         self.transmissionHistory = []
+        self.timeToLive = 10
+        self.oidEventObject = oidEventObject
+        utilEventXbar = queryUtility(IAdmUtilEventCrossbar)
         if senderObj is not None:
             self.transmissionHistory.append(senderObj.getObjectId())
+            logText = u"'%s' creates event" % (senderObj.getDcTitle())
+        else:
+            logText = u"new event"
+        if self.oidEventObject is not None:
+            utilEventXbar.logIntoEvent(self.oidEventObject, logText)
+
+    def stopit(self, stopperObj, additionalText=u""):
+        print "MsgEvent.stopit"
+        utilEventXbar = queryUtility(IAdmUtilEventCrossbar)
+        if utilEventXbar is not None:
+            logText = u"event destroyed by '%s' (Hops: %d) " % \
+                    (stopperObj.getDcTitle(),
+                     len(self.transmissionHistory))
+            logText += additionalText
+            if self.oidEventObject is not None:
+                utilEventXbar.logIntoEvent(self.oidEventObject, logText)
 
     def hasSeen(self, obj):
         if obj.getObjectId() in self.transmissionHistory:
@@ -249,3 +305,13 @@ def isOidInCatalog(arg_oid):
         if len(my_catalog.searchResults(oid_index=arg_oid)) > 0:
             return True
     return False
+
+@adapter(ISuperclass, IObjectModifiedEvent)
+def notifyModifiedEvent(instance, event):
+    """
+    Node was modified
+    """
+    allEventObjs = event.object.getAllOutEventObjs()
+    utilXbar = queryUtility(IAdmUtilEventCrossbar)
+    for eventObj in allEventObjs:
+        utilXbar[eventObj].addOidToInpObjects(event.object.objectID)
