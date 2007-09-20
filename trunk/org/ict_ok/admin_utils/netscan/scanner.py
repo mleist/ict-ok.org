@@ -110,7 +110,8 @@ class Scanner(Supernode):
                     if interfaceDict.has_key('macAddress'):
                         newInterface.mac = interfaceDict['macAddress']
                     if interfaceDict.has_key('ipAddressType') and interfaceDict['ipAddressType'] == 'ipv4' and interfaceDict.has_key('ipAddress'):
-                        newInterface.ipv4List.append(interfaceDict['ipAddress'])
+                        #newInterface.ipv4List.append(interfaceDict['ipAddress'])
+                        newInterface.ipv4List = interfaceDict['ipAddress']
                     #### services
                     for service in interfaceDict['services']:
                         newService = zapi.createObject(\

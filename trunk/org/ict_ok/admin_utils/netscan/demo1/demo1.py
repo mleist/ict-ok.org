@@ -42,38 +42,6 @@ class AdmUtilDemo1(Scanner):
         fill our data dictonary
         """
         resultList = [
-            # host 1
-            {
-                'hostname': u'win-xp-1',
-                'interfaces': [
-                    {
-                        'nbr': u'01',
-                        'name': u'Port 01',
-                        'netType': u'ethernet',
-                        'macAddress': u'00:08:00:01:02:01',
-                        'ipAddress': u'192.168.0.',
-                        'ipAddressType': u'ipv4',
-                        'services': [
-                            # port p22
-                            {
-                                'port': u'p22',
-                                'service': u'ssh',
-                            }
-                            ],
-                    }
-                    ],
-
-                'oss': [
-                    {
-                        'type': u'os_type',
-                        'vendor': u'os_vendor',
-                        'osfamily': u'Win32',
-                        'osgen': u'os_gen',
-                        'accuracy': u'os_accuracy',
-                        },
-                    ]
-         },
-
             # Router
             {
                 'hostname': u'router01',
@@ -107,7 +75,7 @@ class AdmUtilDemo1(Scanner):
                             ],
                     }
                     ],
-         },
+                },
                 
             # Server (Linux) virtual Machines 1
             {
