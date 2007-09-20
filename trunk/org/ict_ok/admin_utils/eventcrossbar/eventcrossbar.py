@@ -55,7 +55,6 @@ berlinTZ = timezone('Europe/Berlin')
 def AllObjectInstances(dummy_context):
     """Which objects are there
     """
-    #print "AllObjectInstances   ################"
     iid = zapi.getUtility(IIntIds, '')
     terms = []
     for (oid, oobj) in iid.items():
@@ -97,8 +96,6 @@ class AdmUtilEventCrossbar(Supernode):
     lastEventCrossbar = "no signal since start"
 
     def __init__(self):
-        #super(AdmUtilEventCrossbar, self).__init__(self)
-        #IAdmUtilEventCrossbar.__init__(self)
         Supernode.__init__(self)
         self.ikRevision = __version__
         self.inpEQueues = PersistentDict()
@@ -140,18 +137,15 @@ class AdmUtilEventCrossbar(Supernode):
         return True
 
     def injectEventFromObj(self, senderObj, event):
-        """ will inject an event from the sender object into the accordant queue """
+        """ will inject an event from the sender object
+        into the accordant queue """
         objId = senderObj.getObjectId()
-        #print "injectEventFromObj / %s" % (objId)
-        #for i in self.inpEQueues:
-            #print "i: ", i
         if self.inpEQueues.has_key(objId):
             self.inpEQueues[objId].put(event)
             return True
         return False
 
     def processOutEQueues(self):
-        #print "processOutEQueues(%s)" % (self.getDcTitle())
         for objId in self.outEQueues:
             outQueue = self.outEQueues[objId]
             while len(outQueue) > 0:
@@ -162,17 +156,13 @@ class AdmUtilEventCrossbar(Supernode):
                         outQueue.pull() # now delete
     
     def processEvents(self):
-        #print "processEvents(%s)" % (self.getDcTitle())
         pass
         
     def processInpEQueues(self):
-        #print "processInpEQueues(%s)" % (self.getDcTitle())
-        #import pdb;pdb.set_trace()
         my_catalog = zapi.getUtility(ICatalog)
         for senderOid in self.inpEQueues:
             inpQueue = self.inpEQueues[senderOid]
             while len(inpQueue) > 0:
-                #print "processInpEQueues(%s) / %s" % (self.getDcTitle(), senderOid)
                 inpEvent = inpQueue.pull()
                 processed = False
                 for eventObj in self.values():
@@ -186,10 +176,6 @@ class AdmUtilEventCrossbar(Supernode):
                     inpEvent.stopit(self)
 
     def tickerEvent(self):
-        #print "AdmUtilEventCrossbar.tickerEvent: (%s, %s)" % \
-              #(self.inpEQueues, self.outEQueues)
-        #for i in self.inpEQueues:
-            #print "i:", i
         for qid in self.inpEQueues:
             if len(self.inpEQueues[qid]) > 0:
                 logger.info("tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
@@ -197,9 +183,6 @@ class AdmUtilEventCrossbar(Supernode):
                              len(self.inpEQueues[qid]),
                              len(self.outEQueues[qid])
                              ))
-            #else:
-                #logger.info("tickerEvent (n:%s, n(i):%s)" % \
-                            #(qid, len(self.inpEQueues[qid])))
         self.processOutEQueues()
         self.processEvents()
         self.processInpEQueues()
@@ -221,19 +204,14 @@ class GlobalEventCrossbarUtility(object):
     lastEventCrossbar = "no signal since start"
 
     def __init__(self):
-        #logger.info(u"GlobalEventCrossbarUtility started")
         self.subscriber_list = []
         super(GlobalEventCrossbarUtility, self).__init__(self)
 
     def subscribeToEventCrossbar(self, obj):
-        #logger.info(u"GlobalEventCrossbarUtility::"
-                    #u"subscribe2eventcrossbar(%s)" % obj)
         if obj not in self.subscriber_list:
             self.subscriber_list.append(obj)
 
     def unsubscribeFromEventCrossbar(self, obj):
-        #logger.info(u"GlobalEventCrossbarUtility::"
-                    #u"unsubscribeFromEventCrossbar(%s)" % obj)
         if obj in self.subscriber_list:
             self.subscriber_list.remove(obj)
 
@@ -256,8 +234,6 @@ class GlobalEventCrossbarUtility(object):
             logger.info(u"GlobalEventCrossbarUtility / "
                         u"zodb packed %d -> %d" % \
                         (size_pre, size_post))
-        #from pprint import pprint
-        #pprint(self.subscriber_list)
         for obj in self.subscriber_list:
             obj.receiveEventCrossbar(request, str_time, mode)
 

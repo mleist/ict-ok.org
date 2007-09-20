@@ -44,12 +44,12 @@ def notifyCopiedEvent(instance, event):
         objectOid = event.object.getObjectId()
     else:
         objectOid = None
-    print "objectOid: %s" % objectOid
+    #print "objectOid: %s" % objectOid
     if hasattr(event.original, "getObjectId"):
         originalOid = event.original.getObjectId()
     else:
         originalOid = None
-    print "originalOid: %s" % originalOid
+    #print "originalOid: %s" % originalOid
     mq_utility = queryUtility(IAdmUtilObjMQ)
     #print "mq_utility: %s" % mq_utility
     
@@ -61,9 +61,9 @@ def notifyCreatedEvent(instance, event):
         objectOid = event.object.getObjectId()
     else:
         objectOid = None
-    print "objectOid: %s" % objectOid
+    #print "objectOid: %s" % objectOid
     mq_utility = queryUtility(IAdmUtilObjMQ)
-    print "mq_utility: %s" % mq_utility
+    #print "mq_utility: %s" % mq_utility
 
 @adapter(ISuperclass, IObjectRemovedEvent)
 def notifyRemovedEvent(instance, event):
@@ -72,7 +72,7 @@ def notifyRemovedEvent(instance, event):
         objectOid = event.object.getObjectId()
     else:
         objectOid = None
-    print "objectOid: %s" % objectOid
+    #print "objectOid: %s" % objectOid
     #mq_utility = queryUtility(IAdmUtilObjMQ)
     #print "mq_utility: %s" % mq_utility
 

@@ -87,12 +87,12 @@ def notifyModifiedEvent(instance, event):
         objectOid = event.object.getObjectId()
     else:
         objectOid = None
-    print "objectOid: %s" % objectOid
+    #print "objectOid: %s" % objectOid
     mq_utility = queryUtility(IAdmUtilObjMQ)
-    print "mq_utility: %s" % mq_utility
+    #print "mq_utility: %s" % mq_utility
     sv_utility = queryUtility(IAdmUtilSupervisor, context=instance)
-    print "sv_utility: %s" % sv_utility
-    print "sv_utility.objectID: %s" % sv_utility.objectID
+    #print "sv_utility: %s" % sv_utility
+    #print "sv_utility.objectID: %s" % sv_utility.objectID
 
 @adapter(ISupernode, IObjectRemovedEvent)
 def notifyRemovedEvent(instance, event):

@@ -29,8 +29,6 @@ from zope.proxy import removeAllProxies
 from zope.app.applicationcontrol.interfaces import IRuntimeInfo
 from zope.size.interfaces import ISized
 from zope.security.checker import canAccess
-from zope.app.catalog.interfaces import ICatalog
-from zope.app.intid.interfaces import IIntIds
 
 # z3c imports
 from z3c.form import button, field, form
@@ -49,7 +47,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
-     AdmUtilUserDashboardItem, AdmUtilUserDashboardSet, AdmUtilUserProperties
+     AdmUtilUserProperties
 
 # ict_ok imports
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -149,7 +147,7 @@ def formatEntryDate(entry, formatter):
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'long')
         longTimeString = my_formatter.format(berlinTZ.fromutc(entry.getTime()))
-        ttid = u"id" + str(abs(hash(timeString)))
+        ttid = u"id" + str(abs(hash(entry)))
         tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
                 u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
                 u"context:'%s', text:'%s' });</script>" \
@@ -331,19 +329,16 @@ class DumpData:
         pickleAdapter = IPickle(obj)
         if pickleAdapter:
             return pprint.pformat(pickleAdapter.exportAsDict(), \
-                                   width=60, depth=6)
+                                   width = 60, depth = 6)
         else:
             return _(u"no pickle adapter")
 
 
 class AddDashboard(BrowserPagelet):
     def update(self):
-        #import pdb; pdb.set_trace()
-        #testObjId = self.context.getObjectId()
         userProps = AdmUtilUserProperties(self.request.principal)
-        #userProps.dashboard_obj_ids.add(testObjId)
         userProps.dashboard_objs.add(self.context, self.request)
-        userProps.mapping._p_changed=True
+        userProps.mapping._p_changed = True
 
     def render(self):
         return self.request.response.redirect('./overview.html')
@@ -351,14 +346,9 @@ class AddDashboard(BrowserPagelet):
 
 class DelDashboard(BrowserPagelet):
     def update(self):
-        #import pdb; pdb.set_trace()
-        #testObjId = self.context.getObjectId()
         userProps = AdmUtilUserProperties(self.request.principal)
-        #if testObjId in userProps.dashboard_obj_ids:
-            #userProps.dashboard_obj_ids.remove(testObjId)
-            #userProps.mapping._p_changed=True
         userProps.dashboard_objs.remove(self.context, self.request)
-        userProps.mapping._p_changed=True
+        userProps.mapping._p_changed = True
         
     def render(self):
         return self.request.response.redirect('./overview.html')
@@ -503,17 +493,11 @@ class ViewDashboard(Overview):
         """List of Content objects"""
         retList = []
         userProps = AdmUtilUserProperties(self.request.principal)
-        #print "oid_list: ", list(userProps.dashboard_objs)
         for dashboardItem in userProps.dashboard_objs:
             myObj = dashboardItem.getObject(some_obj=self,
                                             arg_request=self.request)
             if myObj is not None:
                 retList.append(myObj)
-        #my_catalog = zapi.getUtility(ICatalog)
-        #uidutil = zapi.getUtility(IIntIds)
-        #for obj_id in userProps.dashboard_objs:
-            #retList.extend(list(my_catalog.searchResults(oid_index=obj_id)))
-        print "retList: ", retList
         return retList
 
 
@@ -531,9 +515,7 @@ class History(BrowserPagelet):
     def objs(self):
         """List of Content objects"""
         obj = removeAllProxies(self.context)
-        historyList = obj.history.data
-        #return [entry.getList(['date', 'text', 'level', 'version', 'bgcolor'])\
-                #for entry in historyList]
+        historyList = obj.history.get()
         return historyList
 
     def table(self):
@@ -546,19 +528,6 @@ class History(BrowserPagelet):
             columns=self.columns, sort_on=((_('Date'), False),))
         formatter.cssClasses['table'] = 'listing'
         return formatter()
-    #def getHistory(self):
-        #"""
-        #special format list of the history for web-view
-        #"""
-        #retList = []
-        #obj = removeAllProxies(self.context)
-        #historyList = obj.history
-        #for entry in historyList:
-            #tmpList = entry.getList(['date', 'text', 'level', \
-                                     #'version', 'bgcolor'])
-            #retList.append(tmpList )
-        #retList.sort(lambda a, b: cmp(b[0], a[0]))
-        #return retList
 
 
 class EditContent(BrowserPagelet):
@@ -602,8 +571,6 @@ class EditContent(BrowserPagelet):
                 return
             if 'selected' in self.request:
                 for myid in self.request['selected']:
-                    #print "delete myid: ", myid
-                    #print "       obj: ", self.context[myid]
                     del self.context[myid]
                 self.status = _('Objects were successfully deleted.')
             else:

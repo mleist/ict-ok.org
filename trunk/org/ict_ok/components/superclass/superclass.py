@@ -15,6 +15,8 @@ Superclass for non containing objects
 
 """
 
+# TODO move MsgEvent to other file
+
 __version__ = "$Id$"
 
 # phython imports
@@ -96,10 +98,6 @@ class Superclass(Persistent):
         """
         triggerd after constructor has been finished
         """
-        #myName = str(self.__class__).replace('<','').replace('>','')
-        #newEntry = Entry(u"created object: %s [%s]" % \
-                         #(myName, self.ikRevision),\
-                         #self, level=u"info")
         newEntry = Entry(u"Object created", self, level=u"info")
         newEntry.setObjVersion(self.ikRevision)
         self.history.append(newEntry)
@@ -162,7 +160,6 @@ class Superclass(Persistent):
         dcore.title = unicode(title)
 
     def processEvents(self):
-        #print "processEvents(%s)" % (self.getDcTitle())
         while len(self.inpEQueue) > 0:
             # temp. direct connect
             eventMsg = self.inpEQueue.pull()
@@ -172,7 +169,6 @@ class Superclass(Persistent):
                 eventMsg.stopit(self, "cycle!")
 
     def processOutEQueue(self):
-        #print "processOutEQueue(%s)" % (self.getDcTitle())
         if self.outEReceiver is not None:
             while len(self.outEQueue) > 0:
                 utilXbar = queryUtility(IAdmUtilEventCrossbar)
@@ -181,12 +177,10 @@ class Superclass(Persistent):
                     self.outEQueue.pull() # now delete
 
     def processInpEQueue(self):
-        #print "processInpEQueue(%s)" % (self.getDcTitle())
         pass
         
 
     def injectInpEQueue(self, event):
-        #print "injectInpEQueue(%s, %s)" % (self.getDcTitle(), event)
         self.inpEQueue.put(event)
         return True
 

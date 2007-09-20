@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,E0611,W0142
+# pylint: disable-msg=E1101,E0611,W0142,C0103
 #
 """implementation of a "eventcrossbar daemon" 
 """

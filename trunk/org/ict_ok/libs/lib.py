@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0702
+# pylint: disable-msg=E1101,E0203,W0702,W0201
 #
 """
 iklib contains some often used functions from/for System
@@ -52,6 +52,7 @@ def generateOid(*args ):
     return u"%s%x" % (data, crc)
 
 def oidIsValid(arg_oid):
+    """ check the arg_oid for valid oid string """
     try:
         oid = str(arg_oid)
         uid = oid[:-1]
@@ -89,14 +90,15 @@ def convertSystemUptime2String(uptime_sec):
     return upstr
 
 class RingBuffer:
-    def __init__(self,size_max):
+    """ Ringbuffer class for history """
+    def __init__(self, size_max):
         self.max = size_max
         self.data = []
-    def append(self,x):
+    def append(self, item):
         """append an element at the end of the buffer"""
-        self.data.append(x)
+        self.data.append(item)
         if len(self.data) == self.max:
-            self.cur=0
+            self.cur = 0
             self.__class__ = RingBufferFull
     def get(self):
         """ return a list of elements from the oldest to the newest"""
@@ -104,10 +106,14 @@ class RingBuffer:
 
 
 class RingBufferFull:
-    def __init__(self,n):
-        raise "you should use RingBuffer"
-    def append(self,x):             
-        self.data[self.cur]=x
-        self.cur=(self.cur+1) % self.max
+    """ Instance of RingBuffer will be change the __class__ to
+    RingBufferFull when size_max is reached"""
+    def __init__(self, arg_n):
+        raise Exception, "you should use RingBuffer"
+    def append(self, item):
+        """append means rotate"""
+        self.data[self.cur] = item
+        self.cur = (self.cur + 1) % self.max
     def get(self):
-        return self.data[self.cur:]+self.data[:self.cur]
+        """ return a list of elements from the oldest to the newest"""
+        return self.data[self.cur:] + self.data[:self.cur]

@@ -68,22 +68,3 @@ class EditAdmUtilTickerEventIfForm(EditForm):
     """ Edit Event Interface of object """
     label = _(u'AdmUtilTicker Event Interfaces Form')
     fields = field.Fields(IEventIfAdmUtilTicker)
-    
-    @button.buttonAndHandler(_('Apply'), name='apply')
-    def handleApply(self, action):
-        data, errors = self.extractData()
-        if errors:
-            self.status = self.formErrorsMessage
-            return
-        changes = self.applyChanges(data)
-        if changes:
-            #import pdb;pdb.set_trace()
-            for interf in changes:
-                for attr in changes[interf]:
-                    print "attr: %s" % (attr)
-                #if interf == IEventIfAdmUtilTicker:
-                    #for eventObj in self.context.eventObjs_1sec:
-                        #print "------------:", eventObj
-            self.status = self.successMessage
-        else:
-            self.status = self.noChangesMessage

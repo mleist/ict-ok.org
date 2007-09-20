@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E0213,W0232,W0622
+# pylint: disable-msg=E0213,W0232,W0622,C0103
 #
 """Interface of EventCrossbar-Utility"""
 
@@ -34,10 +34,12 @@ class IAdmUtilEvent(ISupernode):
         description = _("Title of the event"),
         default = _("event_01"),
         required = True)
+    
     logAllEvents = Bool(
         title = _("log events"),
         description = _("log all events"),
         default = False)
+    
     inpObjects = Set(
         title = _("sender objects"),
         value_type = Choice(
@@ -46,6 +48,7 @@ class IAdmUtilEvent(ISupernode):
         default = set([]),
         readonly = False,
         required = True)
+    
     outObjects = Set(
         title = _("receiver objects"),
         value_type = Choice(
@@ -57,12 +60,16 @@ class IAdmUtilEvent(ISupernode):
 
     def addOidToInpObjects(self, oid):
         """ delete oid from set """
+
     def addOidToOutObjects(self, oid):
         """ delete oid from set """
+
     def removeOidFromInpObjects(self, oid):
         """ delete oid from set """
+
     def removeOidFromOutObjects(self, oid):
         """ delete oid from set """
+
     def removeInvalidOidFromInpOutObjects(self):
         """ delete all invalid oids """
 
@@ -72,6 +79,7 @@ class IAdmUtilEventCrossbar(ISupernode):
     major component for registration and event distribution 
     """
     inpEQueues = Attribute("dict of input event queues")
+    
     outEQueues = Attribute("dict of output event queues")
 
     def receiveEventCrossbar(self, str_time):
@@ -89,7 +97,8 @@ class IAdmUtilEventCrossbar(ISupernode):
         """ will destroy the input and output queue for this sender object """
 
     def injectEventFromObj(self, senderObj, event):
-        """ will inject an event from the sender object into the accordant queue """
+        """ will inject an event from the sender object
+        into the accordant queue """
 
     def tickerEvent(self):
         """ event """
@@ -106,22 +115,3 @@ class IGlobalEventCrossbarUtility(Interface):
         description = _("Date of last EventCrossbar-Start"),
         default = _("00.00.0000"),
         required = True)
-
-
-class IContentDDD(Interface):
-    pass
-
-#from zope.component import provideSubscriptionAdapter
-#from zope.publisher.interfaces import IPublisherRequest
-#from z3c.traverser.traverser import AttributeTraverserPlugin
-
-#provideSubscriptionAdapter(AttributeTraverserPlugin,
-                           #(IContentDDD, IPublisherRequest))
-
-#from z3c.traverser.traverser import ContainerTraverserPlugin
-#from z3c.traverser.interfaces import ITraverserPlugin
-
-#provideSubscriptionAdapter(ContainerTraverserPlugin,
-#                           (IContentDDD, IPublisherRequest),
-#                           ITraverserPlugin)
-

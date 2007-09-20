@@ -32,6 +32,7 @@ _ = MessageFactory('org.ict_ok')
 
 
 class ISuperclass(Interface):
+    """Interface for all Objects"""
     objectID = ObjectIdValid(
         title = _("Object id"),
         description = _("Oid of this object"),
@@ -96,11 +97,13 @@ class ISuperclass(Interface):
         set the Title to Dublin Core
         """
     def getAllOutEventObjs(self):
-        """ returns a list of all active referenced event object oids for update purpose
+        """ returns a list of all active referenced event
+        object oids for update purpose
         attribute name must start with 'eventOutObjs_'
         """
     def getAllInpEventObjs(self):
-        """ returns a list of all active referenced event object oids for update purpose
+        """ returns a list of all active referenced event
+        object oids for update purpose
         attribute name must start with 'eventInpObjs_'
         """
 
@@ -141,13 +144,14 @@ class IBrwsOverview(Interface):
 class IMsgEvent(Interface):
     """ Interface of an async event event
     """
-    transmissionHistory = Attribute("list of objects which have seen this event")
+    transmissionHistory = Attribute("objects which have seen this event")
     timeToLive = Attribute("hop count of routing objects")
     oidEventObject = Attribute("Oid from the Event message")
 
 
 class IEventIfSuperclass(Interface):
     """ event interface of object """
+
     eventInpObjs_Ping = Set(
         title = _("ping event <-"),
         value_type = Choice(
@@ -156,6 +160,7 @@ class IEventIfSuperclass(Interface):
         default = set([]),
         readonly = False,
         required = True)
+    
     eventOutObjs_Pong = Set(
         title = _("pong event ->"),
         value_type = Choice(
@@ -164,6 +169,7 @@ class IEventIfSuperclass(Interface):
         default = set([]),
         readonly = False,
         required = True)
+    
     def eventInp_Ping(self):
         """ trigger ping request in object """
     def eventOut_Pong(self):
