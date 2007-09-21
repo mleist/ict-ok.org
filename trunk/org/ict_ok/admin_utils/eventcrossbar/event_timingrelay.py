@@ -28,6 +28,7 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IEventTimingRelay, IEventIfEventTimingRelay
 from org.ict_ok.admin_utils.eventcrossbar.event_logic import \
      EventLogic
+from org.ict_ok.components.superclass.superclass import MsgEvent
 
 
 class EventTimingRelay(EventLogic):
@@ -63,29 +64,43 @@ class EventTimingRelay(EventLogic):
         """ got ticker event from ticker thread """
         utcNow = datetime.datetime.utcnow()
         if self.isRunning:
-            print "EventTimingRelay.tickerEvent (%s) running" % (self.getDcTitle())
+            #remainingTime = self.timeStart + self.timeDelta - utcNow
+            #if remainingTime > datetime.timedelta(0,0,0):
+                #print "EventTimingRelay.tickerEvent (%s) running (%s)" % \
+                      #(self.getDcTitle(), remainingTime)
+            #else:
+                #print "EventTimingRelay.tickerEvent (%s) running" % \
+                      #(self.getDcTitle())
             if self.timeStart + self.timeDelta <= utcNow:
                 self.eventOut_delayed()
                 self.isRunning = False
         else:
             pass
-            print "EventTimingRelay.tickerEvent (%s)" % (self.getDcTitle())
+            #print "EventTimingRelay.tickerEvent (%s)" % (self.getDcTitle())
+        # and up to superclass
         EventLogic.tickerEvent(self)
 
     def eventInp_trigger(self):
         """ sends delayed event """
-        print "EventTimingRelay.eventInp_trigger"
-        pass
+        #print "EventTimingRelay.eventInp_trigger"
+        if not self.isRunning:
+            self.isRunning = True
+            IEventTimingRelay['timeStart'].readonly = False
+            self.timeStart = datetime.datetime.utcnow()
+            IEventTimingRelay['timeStart'].readonly = True
 
     def eventInp_reset(self):
         """ sends delayed event """
-        print "EventTimingRelay.eventInp_reset"
-        pass
+        #print "EventTimingRelay.eventInp_reset"
+        if self.isRunning:
+            self.isRunning = False
+            IEventTimingRelay['timeStart'].readonly = False
+            self.timeStart = datetime.datetime(1901, 1, 1, 0, 0)
+            IEventTimingRelay['timeStart'].readonly = True
 
     def eventOut_delayed(self):
         """ sends delayed event """
-        print "EventTimingRelay.eventOut_delayed"
-        pass
-        #for my_event in self.eventOutObjs_1sec:
-            #inst_event = MsgEvent(self, my_event)
-            #self.injectOutEQueue(inst_event)
+        #print "EventTimingRelay.eventOut_delayed"
+        for my_event in self.eventOutObjs_delayed:
+            inst_event = MsgEvent(self, my_event)
+            self.injectOutEQueue(inst_event)

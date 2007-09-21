@@ -203,9 +203,9 @@ class Superclass(Persistent):
         """
         got ticker event from ticker thread
         """
-        if len(self.inpEQueue) + len(self.outEQueue) > 0:
-            log(INFO, "tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
-                (self.getDcTitle(), len(self.inpEQueue), len(self.outEQueue)))
+        #if len(self.inpEQueue) + len(self.outEQueue) > 0:
+            #log(INFO, "tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
+                #(self.getDcTitle(), len(self.inpEQueue), len(self.outEQueue)))
         self.processOutEQueue()
         self.processEvents()
         self.processInpEQueue()
@@ -271,7 +271,6 @@ class MsgEvent:
     implements(IMsgEvent)
 
     def __init__(self, senderObj = None, oidEventObject = None):
-        print "MsgEvent.__init__"
         self.transmissionHistory = []
         self.timeToLive = 10
         self.oidEventObject = oidEventObject

@@ -168,7 +168,6 @@ class AdmUtilEventCrossbar(Supernode):
                 inpEvent = inpQueue.pull()
                 processed = False
                 for eventObj in self.values():
-                    #import pdb;pdb.set_trace()
                     if IAdmUtilEvent.providedBy(eventObj):
                         if senderOid in eventObj.inpObjects:
                             for receiverOid in eventObj.outObjects:
@@ -180,13 +179,13 @@ class AdmUtilEventCrossbar(Supernode):
                     inpEvent.stopit(self)
 
     def tickerEvent(self):
-        for qid in self.inpEQueues:
-            if len(self.inpEQueues[qid]) > 0:
-                logger.info("tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
-                            (qid,
-                             len(self.inpEQueues[qid]),
-                             len(self.outEQueues[qid])
-                             ))
+        #for qid in self.inpEQueues:
+            #if len(self.inpEQueues[qid]) > 0:
+                #logger.info("tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
+                            #(qid,
+                             #len(self.inpEQueues[qid]),
+                             #len(self.outEQueues[qid])
+                             #))
         self.processOutEQueues()
         self.processEvents()
         self.processInpEQueues()
