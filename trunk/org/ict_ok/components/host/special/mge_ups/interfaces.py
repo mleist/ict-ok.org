@@ -15,12 +15,38 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.schema import Choice, Set
 
 # ict_ok.org imports
+from org.ict_ok.components.supernode.interfaces import \
+     IEventIfSupernode
 from org.ict_ok.components.host.interfaces import IHost
 
 _ = MessageFactory('org.ict_ok')
 
 
 class IHostMgeUps(IHost):
-    """A host object."""
+    """A MGE UPS object."""
+
+class IEventIfHostMgeUps(IEventIfSupernode):
+    """ event interface of object """
+    eventOutObjs_onBattery = Set(
+        title = _("on battery ->"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = False)
+    eventOutObjs_powerReturned = Set(
+        title = _("power returned ->"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = False)
+    def eventOut_onBattery(self):
+        """ sends 'on battery' event """
+    def eventOut_powerReturned(self):
+        """ sends 'power returned' event """

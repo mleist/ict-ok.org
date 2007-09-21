@@ -35,12 +35,14 @@ class Snmptrapd(object):
     adapts(IHost)
 
     def __init__(self, context):
+        print "Snmptrapd.__init__ host"
         self.context = context
 
     def triggered(self, reqPDU, msgVer, pMod):
         """
         got ticker event from ticker thread
         """
+        #import pdb;pdb.set_trace()
         print "Snmptrapd %s triggered (reqPDU:%s)!!" % (self.context, reqPDU)
         print '-' * 80
         if reqPDU.isSameTypeWith(pMod.TrapPDU()):

@@ -24,7 +24,9 @@ from z3c.form import field
 
 # ict_ok.org imports
 from org.ict_ok.components.host.special.mge_ups.interfaces import \
-     IHostMgeUps
+     IHostMgeUps, IEventIfHostMgeUps
+from org.ict_ok.components.superclass.browser.superclass import \
+     DisplayForm, EditForm
 from org.ict_ok.components.host.special.mge_ups.host import Host
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -51,3 +53,8 @@ class AddHostForm(AddForm):
     label = _(u'Add MGE UPS')
     fields = field.Fields(IHostMgeUps).omit(*HostDetails.omit_addfields)
     factory = Host
+
+class EditHostEventIfForm(EditForm):
+    """ Edit Event Interface of object """
+    label = _(u'HostMgeUps Event Interfaces Form')
+    fields = field.Fields(IEventIfHostMgeUps)

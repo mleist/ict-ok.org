@@ -167,6 +167,7 @@ class Superclass(Persistent):
                 # direct input to output
                 self.outEQueue.put(eventMsg)
                 # and call possible event ipnut methods by name
+                fnctList = []
                 for attrName in self.__dict__:
                     attrObjsPrefix = "eventInpObjs_"
                     attrFnctPrefix = "eventInp_"
@@ -174,7 +175,9 @@ class Superclass(Persistent):
                         fnctName = attrFnctPrefix + attrName[len(attrObjsPrefix):]
                         fnct = getattr(self, fnctName, None)
                         if fnct is not None:
-                            fnct()
+                            fnctList.append(fnct)
+                for fnct in fnctList:
+                    fnct()
             else:
                 eventMsg.stopit(self, "cycle!")
 
@@ -203,9 +206,9 @@ class Superclass(Persistent):
         """
         got ticker event from ticker thread
         """
-        #if len(self.inpEQueue) + len(self.outEQueue) > 0:
-            #log(INFO, "tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
-                #(self.getDcTitle(), len(self.inpEQueue), len(self.outEQueue)))
+        if len(self.inpEQueue) + len(self.outEQueue) > 0:
+            log(INFO, "tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
+                (self.getDcTitle(), len(self.inpEQueue), len(self.outEQueue)))
         self.processOutEQueue()
         self.processEvents()
         self.processInpEQueue()

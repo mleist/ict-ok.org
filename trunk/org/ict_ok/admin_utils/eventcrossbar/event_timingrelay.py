@@ -64,13 +64,13 @@ class EventTimingRelay(EventLogic):
         """ got ticker event from ticker thread """
         utcNow = datetime.datetime.utcnow()
         if self.isRunning:
-            #remainingTime = self.timeStart + self.timeDelta - utcNow
-            #if remainingTime > datetime.timedelta(0,0,0):
-                #print "EventTimingRelay.tickerEvent (%s) running (%s)" % \
-                      #(self.getDcTitle(), remainingTime)
-            #else:
-                #print "EventTimingRelay.tickerEvent (%s) running" % \
-                      #(self.getDcTitle())
+            remainingTime = self.timeStart + self.timeDelta - utcNow
+            if remainingTime > datetime.timedelta(0,0,0):
+                print "EventTimingRelay.tickerEvent (%s) running (%s)" % \
+                      (self.getDcTitle(), remainingTime)
+            else:
+                print "EventTimingRelay.tickerEvent (%s) running" % \
+                      (self.getDcTitle())
             if self.timeStart + self.timeDelta <= utcNow:
                 self.eventOut_delayed()
                 self.isRunning = False
@@ -82,7 +82,7 @@ class EventTimingRelay(EventLogic):
 
     def eventInp_trigger(self):
         """ sends delayed event """
-        #print "EventTimingRelay.eventInp_trigger"
+        print "EventTimingRelay.eventInp_trigger"
         if not self.isRunning:
             self.isRunning = True
             IEventTimingRelay['timeStart'].readonly = False
@@ -91,7 +91,7 @@ class EventTimingRelay(EventLogic):
 
     def eventInp_reset(self):
         """ sends delayed event """
-        #print "EventTimingRelay.eventInp_reset"
+        print "EventTimingRelay.eventInp_reset"
         if self.isRunning:
             self.isRunning = False
             IEventTimingRelay['timeStart'].readonly = False
@@ -100,7 +100,7 @@ class EventTimingRelay(EventLogic):
 
     def eventOut_delayed(self):
         """ sends delayed event """
-        #print "EventTimingRelay.eventOut_delayed"
+        print "EventTimingRelay.eventOut_delayed"
         for my_event in self.eventOutObjs_delayed:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)

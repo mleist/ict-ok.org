@@ -23,6 +23,13 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
     />
+    <z3c:pagelet
+        name="edit_event_if.html"
+        for="org.ict_ok.components.host.special.mge_ups.interfaces.IHostMgeUps"
+        class=".host.EditHostEventIfForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+    />
 
     <!--##### Sub Menu ##### -->
     <viewlet
@@ -32,6 +39,14 @@
         class="org.ict_ok.components.host.special.mge_ups.browser.host.MSubAddHost"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
+        />
+    <viewlet
+        name="edit_event_if"
+        for="org.ict_ok.components.host.special.mge_ups.interfaces.IHostMgeUps"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
         />
 
 </configure>

@@ -45,7 +45,7 @@ from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import IEventTimingRelay
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
-     IAdmUtilEvent, IAdmUtilEventCrossbar
+     IAdmUtilEvent, IAdmUtilEventCrossbar, IEventTimingRelay
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IGlobalEventCrossbarUtility
 
@@ -179,16 +179,19 @@ class AdmUtilEventCrossbar(Supernode):
                     inpEvent.stopit(self)
 
     def tickerEvent(self):
-        #for qid in self.inpEQueues:
-            #if len(self.inpEQueues[qid]) > 0:
-                #logger.info("tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
-                            #(qid,
-                             #len(self.inpEQueues[qid]),
-                             #len(self.outEQueues[qid])
-                             #))
+        for qid in self.inpEQueues:
+            if len(self.inpEQueues[qid]) > 0:
+                logger.info("tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
+                            (qid,
+                             len(self.inpEQueues[qid]),
+                             len(self.outEQueues[qid])
+                             ))
         self.processOutEQueues()
         self.processEvents()
         self.processInpEQueues()
+        #for eventObj in self.values():
+            #if IEventTimingRelay.providedBy(eventObj):
+                #eventObj.tickerEvent()
         
     def logIntoEvent(self, oidEventObject, logEntry):
         if self.has_key(oidEventObject):
