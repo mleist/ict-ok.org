@@ -65,8 +65,8 @@ class Superclass(Persistent):
     ref = FieldProperty(ISuperclass['ref'])
     
     # IEventIfSuperclass
-    eventInpObjs_Ping = FieldProperty(IEventIfSuperclass['eventInpObjs_Ping'])
-    eventOutObjs_Pong = FieldProperty(IEventIfSuperclass['eventOutObjs_Pong'])
+    #eventInpObjs_Ping = FieldProperty(IEventIfSuperclass['eventInpObjs_Ping'])
+    #eventOutObjs_Pong = FieldProperty(IEventIfSuperclass['eventOutObjs_Pong'])
 
     def __init__(self, **data):
         """
