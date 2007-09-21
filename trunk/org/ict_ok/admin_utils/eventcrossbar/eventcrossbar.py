@@ -23,6 +23,7 @@ from persistent.dict import PersistentDict
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
+from zope.schema.fieldproperty import FieldProperty
 from zope.app.publisher.xmlrpc import MethodPublisher
 from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.catalog.interfaces import ICatalog
@@ -47,6 +48,10 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IGlobalEventCrossbarUtility
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IEventLogic, IEventIfEventLogic
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IEventTimingRelay, IEventIfEventTimingRelay
 
 logger = logging.getLogger("AdmUtilEventCrossbar")
 berlinTZ = timezone('Europe/Berlin')
@@ -195,6 +200,55 @@ class AdmUtilEventCrossbar(Supernode):
                 eventObject.history.append(newEntry)
                 eventObject._p_changed = True
 
+
+class EventLogic(Supernode):
+    """
+    superclass for any kind of 'logical' event objects
+    """
+    implements(IEventLogic, IEventIfEventLogic)
+
+
+class EventTimingRelay(EventLogic):
+    """
+    timing relay with trigger- and reset-input and
+    one delayed output
+    """
+
+    implements(IEventTimingRelay, IEventIfEventTimingRelay)
+
+    timeDelta = FieldProperty(IEventTimingRelay['timeDelta'])
+    eventInpObjs_trigger = FieldProperty(\
+        IEventIfEventTimingRelay['eventInpObjs_trigger'])
+    eventInpObjs_reset = FieldProperty(\
+        IEventIfEventTimingRelay['eventInpObjs_reset'])
+    eventOutObjs_delayed = FieldProperty(\
+        IEventIfEventTimingRelay['eventOutObjs_delayed'])
+
+    def __init__(self):
+        EventLogic.__init__(self)
+        self.ikRevision = __version__
+        
+    def tickerEvent(self):
+        """ got ticker event from ticker thread """
+        print "EventTimingRelay.tickerEvent"
+
+    def eventInp_trigger(self):
+        """ sends delayed event """
+        print "EventTimingRelay.eventInp_trigger"
+        pass
+
+    def eventInp_reset(self):
+        """ sends delayed event """
+        print "EventTimingRelay.eventInp_reset"
+        pass
+
+    def eventOut_delayed(self):
+        """ sends delayed event """
+        print "EventTimingRelay.eventOut_delayed"
+        pass
+        #for my_event in self.eventOutObjs_1sec:
+            #inst_event = MsgEvent(self, my_event)
+            #self.injectOutEQueue(inst_event)
 
 
 class GlobalEventCrossbarUtility(object):

@@ -13,9 +13,12 @@
 
 __version__ = "$Id$"
 
+# python imports
+from datetime import timedelta
+
 # zope imports
 from zope.interface import Attribute, Interface
-from zope.schema import Bool, Choice, Set, TextLine
+from zope.schema import Bool, Choice, Set, TextLine, Timedelta
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -102,6 +105,64 @@ class IAdmUtilEventCrossbar(ISupernode):
 
     def tickerEvent(self):
         """ event """
+
+
+class IEventLogic(ISupernode):
+    """
+    superclass for any kind of 'logical' event objects
+    """
+    pass
+
+
+class IEventIfEventLogic(IEventIfSupernode):
+    """ event interface of object """
+    pass
+
+
+class IEventTimingRelay(IAdmUtilEventLogic):
+    """
+    timing relay with trigger- and reset-input and
+    one delayed output
+    """
+    timeDelta = Timedelta(
+        title = _("delay time"),
+        description = _("delayed time for output event"),
+        default = timedelta(0,60,0),
+        required = True)
+
+
+class IEventIfEventTimingRelay(IEventIfEventLogic):
+    """ event interface of object """
+    eventInpObjs_trigger = Set(
+        title = _("trigger event <-"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = True)
+    eventInpObjs_reset = Set(
+        title = _("reset event <-"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = True)
+    eventOutObjs_delayed = Set(
+        title = _("delayed event ->"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = True)
+    def eventInp_trigger(self):
+        """ start the timer """
+    def eventInp_reset(self):
+        """ reset the timer """
+    def eventOut_1sec(self):
+        """ sends one-second event """
 
 
 class IGlobalEventCrossbarUtility(Interface):
