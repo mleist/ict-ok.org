@@ -69,7 +69,8 @@ class EventTimingRelay(EventLogic):
                 self.isRunning = False
         else:
             pass
-            #print "EventTimingRelay.tickerEvent (%s)" % (self.getDcTitle())
+            print "EventTimingRelay.tickerEvent (%s)" % (self.getDcTitle())
+        EventLogic.tickerEvent(self)
 
     def eventInp_trigger(self):
         """ sends delayed event """

@@ -164,7 +164,17 @@ class Superclass(Persistent):
             # temp. direct connect
             eventMsg = self.inpEQueue.pull()
             if not eventMsg.hasSeen(self):
+                # direct input to output
                 self.outEQueue.put(eventMsg)
+                # and call possible event ipnut methods by name
+                for attrName in self.__dict__:
+                    attrObjsPrefix = "eventInpObjs_"
+                    attrFnctPrefix = "eventInp_"
+                    if attrName.find(attrObjsPrefix) == 0: # attribute name starts with ...
+                        fnctName = attrFnctPrefix + attrName[len(attrObjsPrefix):]
+                        fnct = getattr(self, fnctName, None)
+                        if fnct is not None:
+                            fnct()
             else:
                 eventMsg.stopit(self, "cycle!")
 
@@ -186,7 +196,7 @@ class Superclass(Persistent):
 
     def injectOutEQueue(self, event):
         if self.outEReceiver is not None:
-           self.outEQueue.put(event)
+            self.outEQueue.put(event)
         return True
     
     def tickerEvent(self):
@@ -275,7 +285,6 @@ class MsgEvent:
             utilEventXbar.logIntoEvent(self.oidEventObject, logText)
 
     def stopit(self, stopperObj, additionalText=u""):
-        print "MsgEvent.stopit"
         utilEventXbar = queryUtility(IAdmUtilEventCrossbar)
         if utilEventXbar is not None:
             logText = u"event destroyed by '%s' (Hops: %d) " % \

@@ -168,6 +168,7 @@ class AdmUtilEventCrossbar(Supernode):
                 inpEvent = inpQueue.pull()
                 processed = False
                 for eventObj in self.values():
+                    #import pdb;pdb.set_trace()
                     if IAdmUtilEvent.providedBy(eventObj):
                         if senderOid in eventObj.inpObjects:
                             for receiverOid in eventObj.outObjects:
