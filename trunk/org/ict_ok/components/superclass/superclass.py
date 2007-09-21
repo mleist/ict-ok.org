@@ -164,8 +164,8 @@ class Superclass(Persistent):
             # temp. direct connect
             eventMsg = self.inpEQueue.pull()
             if not eventMsg.hasSeen(self):
-                print ">>> %s / %s" % (self.getObjectId(),
-                                       eventMsg.oidEventObject)
+                #print ">>> %s / %s" % (self.getObjectId(),
+                                       #eventMsg.oidEventObject)
                 # direct input to output
                 self.outEQueue.put(eventMsg)
                 # and call possible event ipnut methods by name
@@ -175,8 +175,11 @@ class Superclass(Persistent):
                     attrFnctPrefix = "eventInp_"
                     if attrName.find(attrObjsPrefix) == 0: # attribute name starts with ...
                         fnctName = attrFnctPrefix + attrName[len(attrObjsPrefix):]
+                        objs = getattr(self, attrName, None)
                         fnct = getattr(self, fnctName, None)
-                        if fnct is not None:
+                        if fnct is not None and \
+                           objs is not None and \
+                           eventMsg.oidEventObject in objs: # find the RIGHT object list
                             fnctList.append(fnct)
                 for fnct in fnctList:
                     fnct()
