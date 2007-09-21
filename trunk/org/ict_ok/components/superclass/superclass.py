@@ -164,6 +164,8 @@ class Superclass(Persistent):
             # temp. direct connect
             eventMsg = self.inpEQueue.pull()
             if not eventMsg.hasSeen(self):
+                print ">>> %s / %s" % (self.getObjectId(),
+                                       eventMsg.oidEventObject)
                 # direct input to output
                 self.outEQueue.put(eventMsg)
                 # and call possible event ipnut methods by name
