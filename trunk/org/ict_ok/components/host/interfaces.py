@@ -15,12 +15,13 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Attribute
-from zope.schema import Bool, Choice, List, Password, TextLine
+from zope.schema import Bool, Choice, List, Password, Set, TextLine
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
+from org.ict_ok.components.supernode.interfaces import \
+     IEventIfSupernode, ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
@@ -149,3 +150,26 @@ class IHost(ISupernode):
         description = _("enabled in Nagios"),
         default = True,
         required = False)
+
+    # TODO move to own Interface towards admin_util.esx...
+    esxUuid = TextLine(
+        max_length = 80,
+        title = _("ESX UUID"),
+        description = _("UUID of virtual machine in ESX."),
+        default = u"",
+        required = False)
+
+class IEventIfEventHost(IEventIfSupernode):
+    """ event interface of object """
+    
+    eventInpObjs_shutdown = Set(
+        title = _("shutdown event <-"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = True)
+    
+    def eventInp_shutdown(self):
+        """ start the shutdown of the host """

@@ -24,7 +24,7 @@ from zope.i18nmessageid import MessageFactory
 from z3c.form import form, field
 
 # ict_ok.org imports
-from org.ict_ok.components.host.interfaces import IHost
+from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
 from org.ict_ok.components.host.host import Host
 from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
@@ -117,4 +117,9 @@ class DeleteHostForm(DeleteForm):
         return _(u"Delete this net: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
+
+class EditEventHostEventIfForm(EditForm):
+    """ Edit Event Interface of object """
+    label = _(u'host event interfaces form')
+    fields = field.Fields(IEventIfEventHost)
 

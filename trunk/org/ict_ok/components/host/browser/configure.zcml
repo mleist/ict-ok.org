@@ -57,6 +57,14 @@
     />
 
     <z3c:pagelet
+        name="edit_event_if.html"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        class=".host.EditEventHostEventIfForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+    />
+
+    <z3c:pagelet
         name="add_interface.html"
         for="org.ict_ok.components.host.interfaces.IHost"
         class="org.ict_ok.components.interface.browser.interface.AddInterfaceForm"
@@ -113,6 +121,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Edit"
+        />
+    <viewlet
+        name="edit_event_if"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
         />
     <viewlet
         name="add_interface"

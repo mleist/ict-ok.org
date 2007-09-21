@@ -152,25 +152,25 @@ class IMsgEvent(Interface):
 class IEventIfSuperclass(Interface):
     """ event interface of object """
 
-    eventInpObjs_Ping = Set(
-        title = _("ping event <-"),
-        value_type = Choice(
-            title = _("objects"),
-            vocabulary="AllEventInstances"),
-        default = set([]),
-        readonly = False,
-        required = True)
+    #eventInpObjs_Ping = Set(
+        #title = _("ping event <-"),
+        #value_type = Choice(
+            #title = _("objects"),
+            #vocabulary="AllEventInstances"),
+        #default = set([]),
+        #readonly = False,
+        #required = True)
     
-    eventOutObjs_Pong = Set(
-        title = _("pong event ->"),
-        value_type = Choice(
-            title = _("objects"),
-            vocabulary="AllEventInstances"),
-        default = set([]),
-        readonly = False,
-        required = True)
+    #eventOutObjs_Pong = Set(
+        #title = _("pong event ->"),
+        #value_type = Choice(
+            #title = _("objects"),
+            #vocabulary="AllEventInstances"),
+        #default = set([]),
+        #readonly = False,
+        #required = True)
     
-    def eventInp_Ping(self):
-        """ trigger ping request in object """
-    def eventOut_Pong(self):
-        """ sends a ping response """
+    #def eventInp_Ping(self):
+        #""" trigger ping request in object """
+    #def eventOut_Pong(self):
+        #""" sends a ping response """

@@ -25,7 +25,7 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
-from org.ict_ok.components.host.interfaces import IHost
+from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.components.host.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
@@ -36,7 +36,7 @@ class Host(Supernode):
     the template instance
     """
 
-    implements(IHost)
+    implements(IHost, IEventIfEventHost)
     # for ..Contained we have to:
     __name__ = __parent__ = None
     hostname = FieldProperty(IHost['hostname'])
@@ -55,6 +55,11 @@ class Host(Supernode):
     url_authpasswd = FieldProperty(IHost['url_authpasswd'])
     console = FieldProperty(IHost['console'])
     genNagios = FieldProperty(IHost['genNagios'])
+    esxUuid = FieldProperty(IHost['esxUuid'])
+    
+    eventInpObjs_shutdown = FieldProperty(\
+        IEventIfEventHost['eventInpObjs_shutdown'])
+    
     wf_pd_dict = {}
     wf_pd_dict[WfPdNagios.id] = WfPdNagios
     AdmUtilWFMC.wf_pd_dict[WfPdNagios.id] = WfPdNagios
