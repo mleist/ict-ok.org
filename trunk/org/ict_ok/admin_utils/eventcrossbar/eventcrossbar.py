@@ -169,7 +169,8 @@ class AdmUtilEventCrossbar(Supernode):
                 processed = False
                 for eventObj in self.values():
                     if IAdmUtilEvent.providedBy(eventObj):
-                        if senderOid in eventObj.inpObjects:
+                        if (senderOid in eventObj.inpObjects) and \
+                           (eventObj.objectID == inpEvent.oidEventObject):
                             for receiverOid in eventObj.outObjects:
                                 for receiverObj in my_catalog.searchResults(\
                                     oid_index=receiverOid):
