@@ -37,5 +37,9 @@
             <td class="label" i18n:translate="">Host Machine</td>
             <td tal:content="python: context.eval_on_obj('perl.call(\'Vim::get_view\', mo_ref = obj.runtime().host()).name()')" />
         </tr>
-    </table>
+        <tr class="cb_ilx">
+            <td class="label" i18n:translate="">UUID</td>
+            <td tal:content="python: context.eval_on_obj('obj.config().uuid()')" />
+        </tr>
+        </table>
 </i18n:block>
