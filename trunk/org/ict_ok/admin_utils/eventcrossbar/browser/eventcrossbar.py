@@ -30,9 +30,7 @@ from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
-     IAdmUtilEvent, IAdmUtilEventCrossbar
-from org.ict_ok.admin_utils.eventcrossbar.event import \
-     AdmUtilEvent
+     IAdmUtilEventCrossbar
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -43,11 +41,6 @@ _ = MessageFactory('org.ict_ok')
 
 # --------------- menu entries -----------------------------
 
-class MSubAddEvent(GlobalMenuSubItem):
-    """ Menu Item """
-    title = _(u'Add Event')
-    viewURL = 'add_event.html'
-    weight = 50
 
 class MSubCrossBar(GlobalMenuSubItem):
     """ Menu Item """
@@ -55,13 +48,6 @@ class MSubCrossBar(GlobalMenuSubItem):
     viewURL = 'crossbar.html'
     weight = 20
 
-
-
-class AdmUtilEventDetails(SupernodeDetails):
-    """ Class for Web-Browser-Details
-    """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
 
 
 class AdmUtilEventCrossbarDetails(SupernodeDetails):
@@ -137,31 +123,3 @@ class EditAdmUtilEventCrossbarForm(EditForm):
     label = _(u'edit crossbar properties')
     fields = field.Fields(IAdmUtilEventCrossbar).omit(\
         *AdmUtilEventCrossbarDetails.omit_editfields)
-
-
-class DetailsAdmUtilEventForm(DisplayForm):
-    """ Display form for the object """
-    label = _(u'settings of Event')
-    fields = field.Fields(IAdmUtilEvent).omit(\
-        *AdmUtilEventDetails.omit_viewfields) #+ \
-           #field.Fields(IZopeDublinCore).select('modified')
-    def update(self):
-        self.context.removeInvalidOidFromInpOutObjects()
-        DisplayForm.update(self)
-
-
-class AddAdmUtilEventForm(AddForm):
-    """Add form."""
-    label = _(u'add event')
-    fields = field.Fields(IAdmUtilEvent).omit(*AdmUtilEventDetails.omit_addfields)
-    factory = AdmUtilEvent
-
-
-class EditAdmUtilEventForm(EditForm):
-    """ Edit form for the object """
-    label = _(u'edit event properties')
-    fields = field.Fields(IAdmUtilEvent).omit(\
-        *AdmUtilEventDetails.omit_editfields)
-    def update(self):
-        self.context.removeInvalidOidFromInpOutObjects()
-        EditForm.update(self)

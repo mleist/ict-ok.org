@@ -20,7 +20,7 @@
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
-        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.DetailsAdmUtilEventForm"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.DetailsAdmUtilEventForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.View"
         />
@@ -35,7 +35,7 @@
     <z3c:pagelet
         name="edit.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
-        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.EditAdmUtilEventForm"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.EditAdmUtilEventForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.Edit"
     />
@@ -75,7 +75,7 @@
     <z3c:pagelet
         name="add_event.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        class=".eventcrossbar.AddAdmUtilEventForm"
+        class=".event.AddAdmUtilEventForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.Add"
     />
@@ -190,7 +190,7 @@
         name="add_event"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
         manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
-        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.MSubAddEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.MSubAddEvent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.Add"
         />

@@ -22,7 +22,8 @@ from zope.schema import Bool, Choice, Set, TextLine, Timedelta
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
+from org.ict_ok.components.supernode.interfaces import \
+     IEventIfSupernode, ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
@@ -119,7 +120,7 @@ class IEventIfEventLogic(IEventIfSupernode):
     pass
 
 
-class IEventTimingRelay(IAdmUtilEventLogic):
+class IEventTimingRelay(IEventLogic):
     """
     timing relay with trigger- and reset-input and
     one delayed output
