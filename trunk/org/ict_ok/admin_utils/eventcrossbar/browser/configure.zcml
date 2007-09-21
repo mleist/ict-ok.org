@@ -46,6 +46,44 @@
         name="overview.html"
         />
 
+    <!--##### Event Timing Relay ##### -->
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.DetailsEventTimingRelayForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.View"
+        />
+        
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.View"
+        />
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.EditEventTimingRelayForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
+    />
+    
+    <z3c:pagelet
+        name="edit_event_if.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.EditEventTimingRelayEventIfForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+    />
+    
+    <defaultView
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        name="details.html"
+        />
+
     <!--##### Event Crossbar ##### -->
 
     <z3c:pagelet
@@ -78,6 +116,14 @@
         class=".event.AddAdmUtilEventForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.Add"
+    />
+
+    <z3c:pagelet
+        name="add_event_timingrelay.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class=".event_timingrelay.AddEventTimingRelayForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.Add"
     />
 
     <z3c:pagelet
@@ -133,6 +179,42 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.Edit"
+        />
+
+
+    <!--##### Event Timing Relay ##### -->
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
+        />
+    <viewlet
+        name="edit_event_if"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
         />
 
 
@@ -194,5 +276,12 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.Add"
         />
-
+    <viewlet
+        name="add_event_timingrelay"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.MSubAddEventTimingRelay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.Add"
+        />
 </zope:configure>

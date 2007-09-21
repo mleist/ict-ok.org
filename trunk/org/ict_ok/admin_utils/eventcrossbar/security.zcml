@@ -27,6 +27,21 @@
     />
 
     <permission
+        id="org.ict_ok.admin_utils.event_timingrelay.View"
+        title="View from EventTimingRelay"
+    />
+    
+    <permission
+        id="org.ict_ok.admin_utils.event_timingrelay.Add"
+        title="Add an EventTimingRelay"
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.event_timingrelay.Edit"
+        title="Edit from EventTimingRelay"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.eventcrossbar.View"
         title="View from AdmUtilEventCrossbar"
         description="View from AdmUtilEventCrossbar."
@@ -57,5 +72,12 @@
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.eventcrossbar.Edit"
                     role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.event_timingrelay.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.event_timingrelay.Add"
+                    role="org.ict_ok.mgr" />
 
 </configure>

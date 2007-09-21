@@ -14,11 +14,11 @@
 __version__ = "$Id$"
 
 # python imports
-from datetime import timedelta
+import datetime
 
 # zope imports
 from zope.interface import Attribute, Interface
-from zope.schema import Bool, Choice, Set, TextLine, Timedelta
+from zope.schema import Bool, Choice, Datetime, Set, TextLine, Timedelta
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -112,12 +112,10 @@ class IEventLogic(ISupernode):
     """
     superclass for any kind of 'logical' event objects
     """
-    pass
 
 
 class IEventIfEventLogic(IEventIfSupernode):
     """ event interface of object """
-    pass
 
 
 class IEventTimingRelay(IEventLogic):
@@ -125,11 +123,20 @@ class IEventTimingRelay(IEventLogic):
     timing relay with trigger- and reset-input and
     one delayed output
     """
+    timeStart = Datetime(
+        title = _("start time"),
+        description = _("last trigger received at"),
+        default = datetime.datetime(1901, 1, 1, 0, 0),
+        readonly = True,
+        required = False)
     timeDelta = Timedelta(
         title = _("delay time"),
         description = _("delayed time for output event"),
-        default = timedelta(0,60,0),
+        default = datetime.timedelta(days=1),
         required = True)
+    isRunning = Bool(
+        title = _("timer is running"),
+        default = False)
 
 
 class IEventIfEventTimingRelay(IEventIfEventLogic):

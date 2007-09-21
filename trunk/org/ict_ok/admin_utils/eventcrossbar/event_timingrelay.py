@@ -15,6 +15,7 @@
 __version__ = "$Id$"
 
 # phython imports
+import datetime
 
 # zope imports
 from zope.interface import implements
@@ -37,7 +38,9 @@ class EventTimingRelay(EventLogic):
 
     implements(IEventTimingRelay, IEventIfEventTimingRelay)
 
+    timeStart = FieldProperty(IEventTimingRelay['timeStart'])
     timeDelta = FieldProperty(IEventTimingRelay['timeDelta'])
+    isRunning = FieldProperty(IEventTimingRelay['isRunning'])
     eventInpObjs_trigger = FieldProperty(\
         IEventIfEventTimingRelay['eventInpObjs_trigger'])
     eventInpObjs_reset = FieldProperty(\
@@ -45,13 +48,28 @@ class EventTimingRelay(EventLogic):
     eventOutObjs_delayed = FieldProperty(\
         IEventIfEventTimingRelay['eventOutObjs_delayed'])
 
-    def __init__(self):
-        EventLogic.__init__(self)
+    def __init__(self, **data):
+        """
+        constructor of the object
+        """
+        EventLogic.__init__(self, **data)
+        for (name, value) in data.items():
+            if name in IEventTimingRelay.names():
+                setattr(self, name, value)
+
         self.ikRevision = __version__
-        
+
     def tickerEvent(self):
         """ got ticker event from ticker thread """
-        print "EventTimingRelay.tickerEvent"
+        utcNow = datetime.datetime.utcnow()
+        if self.isRunning:
+            print "EventTimingRelay.tickerEvent (%s) running" % (self.getDcTitle())
+            if self.timeStart + self.timeDelta <= utcNow:
+                self.eventOut_delayed()
+                self.isRunning = False
+        else:
+            pass
+            #print "EventTimingRelay.tickerEvent (%s)" % (self.getDcTitle())
 
     def eventInp_trigger(self):
         """ sends delayed event """

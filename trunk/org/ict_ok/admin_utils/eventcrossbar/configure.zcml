@@ -39,6 +39,21 @@
             />
     </class>
 
+    <class class=".event_timingrelay.EventTimingRelay">
+        <factory
+            id="org.ict_ok.admin_utils.eventcrossbar.event_timingrelay.EventTimingRelay" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.event_timingrelay.View"
+            interface=".interfaces.IEventTimingRelay"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
+            set_schema=".interfaces.IEventTimingRelay"
+            />
+    </class>
+
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"

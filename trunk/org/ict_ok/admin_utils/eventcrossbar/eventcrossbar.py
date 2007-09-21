@@ -42,9 +42,10 @@ from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.service.interfaces import IService
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import IEventTimingRelay
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
-     IAdmUtilEventCrossbar
+     IAdmUtilEvent, IAdmUtilEventCrossbar
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IGlobalEventCrossbarUtility
 
@@ -63,7 +64,8 @@ def AllObjectInstances(dummy_context):
            IHost.providedBy(oobj.object) or \
            IInterface.providedBy(oobj.object) or \
            IService.providedBy(oobj.object) or \
-           ISnmpValue.providedBy(oobj.object):
+           ISnmpValue.providedBy(oobj.object) or \
+           IEventTimingRelay.providedBy(oobj.object):
             terms.append(\
                 SimpleTerm(oobj.object.objectID,
                            str(oobj.object.objectID),
@@ -166,12 +168,13 @@ class AdmUtilEventCrossbar(Supernode):
                 inpEvent = inpQueue.pull()
                 processed = False
                 for eventObj in self.values():
-                    if senderOid in eventObj.inpObjects:
-                        for receiverOid in eventObj.outObjects:
-                            for receiverObj in my_catalog.searchResults(\
-                                oid_index=receiverOid):
-                                processed = True
-                                receiverObj.injectInpEQueue(inpEvent)
+                    if IAdmUtilEvent.providedBy(eventObj):
+                        if senderOid in eventObj.inpObjects:
+                            for receiverOid in eventObj.outObjects:
+                                for receiverObj in my_catalog.searchResults(\
+                                    oid_index=receiverOid):
+                                    processed = True
+                                    receiverObj.injectInpEQueue(inpEvent)
                 if not processed:
                     inpEvent.stopit(self)
 

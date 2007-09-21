@@ -33,3 +33,12 @@ class EventLogic(Supernode):
     """
     implements(IEventLogic, IEventIfEventLogic)
     
+    def __init__(self, **data):
+        """
+        constructor of 'logical' event objects
+        """
+        Supernode.__init__(self, **data)
+        for (name, value) in data.items():
+            if name in IEventLogic.names():
+                setattr(self, name, value)
+        self.ikRevision = __version__
