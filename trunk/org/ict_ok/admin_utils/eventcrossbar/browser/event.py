@@ -17,7 +17,11 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
+from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
+import zope.event
+from zope.lifecycleevent import Attributes, ObjectModifiedEvent
+from zope.app.catalog.interfaces import ICatalog
 
 # zc imports
 
@@ -33,7 +37,10 @@ from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
+from org.ict_ok.components.superclass.browser.superclass import applyChanges
 from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.components.superclass.interfaces import \
+     IEventIfSuperclass
 
 _ = MessageFactory('org.ict_ok')
 
@@ -50,7 +57,8 @@ class AdmUtilEventDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
     omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_addfields = SupernodeDetails.omit_addfields + ['inpObjects']
+    omit_editfields = SupernodeDetails.omit_editfields + ['inpObjects']
 
 # --------------- forms ------------------------------------
 
@@ -81,3 +89,44 @@ class EditAdmUtilEventForm(EditForm):
     def update(self):
         self.context.removeInvalidOidFromInpOutObjects()
         EditForm.update(self)
+    def applyChanges(self, data):
+        content = self.getContent()
+        changes = applyChanges(self, content, data)
+        # ``changes`` is a dictionary; if empty, there were no changes
+        if changes:
+            #import pdb;pdb.set_trace()
+            # Construct change-descriptions for the object-modified event
+            descriptions = []
+            for interface, attrs in changes.items():
+                if interface == IAdmUtilEvent and \
+                   'outObjects' in attrs:
+                    print "##### Event 3 #######"
+                    newSet = attrs['outObjects']['newval']
+                    oldSet = attrs['outObjects']['oldval']
+                    if type(newSet) == type(set()) and \
+                       type(oldSet) == type(set()):
+                        newEntries = newSet.difference(oldSet)
+                        oldEntries = oldSet.difference(newSet)
+                        #print "oldEntries", oldEntries
+                        #print "newEntries", newEntries
+                        for myString in oldEntries:
+                            [oid, funct] = myString.split('.', 2)
+                            my_catalog = zapi.getUtility(ICatalog)
+                            for resObj in my_catalog.searchResults(oid_index=oid):
+                                #print "delete from ", resObj
+                                resObj.delFromEventInpObjs(funct, content)
+                        for myString in newEntries:
+                            [oid, funct] = myString.split('.', 2)
+                            my_catalog = zapi.getUtility(ICatalog)
+                            for resObj in my_catalog.searchResults(oid_index=oid):
+                                #print "add to ", resObj
+                                resObj.addToEventInpObjs(funct, content)
+                names = attrs.keys()
+                #for attr in attrs:
+                    #print "attr: %s (I:%s)" % (attr, interface)
+                    #print "   old: ", attrs[attr]['oldval']
+                    #print "   new: ", attrs[attr]['newval']
+                descriptions.append(Attributes(interface, *names))
+            # Send out a detailed object-modified event
+            zope.event.notify(ObjectModifiedEvent(content, *descriptions))
+        return changes

@@ -77,17 +77,46 @@ def AllObjectInstances(dummy_context):
                    my_util.getDcTitle()))
     return SimpleVocabulary(terms)
 
+def AllObjectInstancesWithEventInputs(dummy_context):
+    """Which objects are there
+    """
+    iid = zapi.getUtility(IIntIds, '')
+    terms = []
+    for (oid, oobj) in iid.items():
+        if ISite.providedBy(oobj.object) or \
+           INet.providedBy(oobj.object) or \
+           IHost.providedBy(oobj.object) or \
+           IInterface.providedBy(oobj.object) or \
+           IService.providedBy(oobj.object) or \
+           ISnmpValue.providedBy(oobj.object) or \
+           IEventTimingRelay.providedBy(oobj.object):
+            inpEventNames = oobj.object.getAllInpEventNames()
+            if len(inpEventNames) > 0:
+                for inpEventName in inpEventNames:
+                    myId = oobj.object.objectID + u'.' + inpEventName
+                    terms.append(\
+                        SimpleTerm(myId,
+                                   str(myId),
+                                   oobj.object.getDcTitle()+ u'->' + inpEventName))
+    return SimpleVocabulary(terms)
+
 def AllEventInstances(dummy_context):
     """Which events are there
     """
     eventXbar = zapi.getUtility(IAdmUtilEventCrossbar, '')
     terms = []
     for (oid, oobj) in eventXbar.items():
-        if ISuperclass.providedBy(oobj):
-            terms.append(\
-                SimpleTerm(oobj.objectID,
-                           str(oobj.objectID),
-                           oobj.getDcTitle()))
+        if IAdmUtilEvent.providedBy(oobj):
+            if oobj.ikComment is None:
+                terms.append(\
+                    SimpleTerm(oobj.objectID,
+                               str(oobj.objectID),
+                               oobj.getDcTitle()))
+            else:
+                terms.append(\
+                    SimpleTerm(oobj.objectID,
+                               str(oobj.objectID),
+                               oobj.getDcTitle() + u' - ' + oobj.ikComment))
     return SimpleVocabulary(terms)
 
 class AdmUtilEventCrossbar(Supernode):

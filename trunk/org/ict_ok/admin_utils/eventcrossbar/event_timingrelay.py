@@ -54,8 +54,12 @@ class EventTimingRelay(EventLogic):
         constructor of the object
         """
         EventLogic.__init__(self, **data)
+        self.eventInpObjs_trigger = set([])
+        self.eventInpObjs_reset = set([])
+        self.eventOutObjs_delayed = set([])
         for (name, value) in data.items():
-            if name in IEventTimingRelay.names():
+            if name in IEventTimingRelay.names() or \
+               name in IEventIfEventTimingRelay.names():
                 setattr(self, name, value)
 
         self.ikRevision = __version__

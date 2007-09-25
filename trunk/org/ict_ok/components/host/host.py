@@ -75,7 +75,9 @@ class Host(Supernode):
                 self.myFactory = unicode(fact_name)
         # initialize OS List
         self.osList = []
+        self.eventInpObjs_shutdown = set([])
         for (name, value) in data.items():
-            if name in IHost.names():
+            if name in IHost.names() or \
+               name in IEventIfEventHost.names():
                 setattr(self, name, value)
         self.ikRevision = __version__

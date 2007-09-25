@@ -78,10 +78,9 @@ class AdmUtilEvent(Supernode):
         for oid in removeIDs:
             self.inpObjects.remove(oid)
         removeIDs = []
-        for oid in self.outObjects:
+        for oidPlusFunct in self.outObjects:
+            oid = oidPlusFunct.split('.', 2)[0]
             if not isOidInCatalog(oid):
-                removeIDs.append(oid)
-        if utilTicker.getObjectId() in removeIDs:
-            removeIDs.remove(utilTicker.getObjectId())
+                removeIDs.append(oidPlusFunct)
         for oid in removeIDs:
             self.outObjects.remove(oid)

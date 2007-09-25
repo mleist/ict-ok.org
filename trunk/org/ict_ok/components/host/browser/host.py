@@ -17,8 +17,10 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
+import zope.event
 from zope.proxy import removeAllProxies
 from zope.i18nmessageid import MessageFactory
+from zope.lifecycleevent import Attributes, ObjectModifiedEvent
 
 # z3c imports
 from z3c.form import form, field
@@ -28,9 +30,14 @@ from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
 from org.ict_ok.components.host.host import Host
 from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+from org.ict_ok.components.superclass.browser.superclass import applyChanges
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEvent
+from org.ict_ok.components.superclass.interfaces import \
+     IEventIfSuperclass
 
 _ = MessageFactory('org.ict_ok')
 
@@ -122,4 +129,27 @@ class EditEventHostEventIfForm(EditForm):
     """ Edit Event Interface of object """
     label = _(u'host event interfaces form')
     fields = field.Fields(IEventIfEventHost)
+    
+    def applyChanges(self, data):
+        content = self.getContent()
+        changes = applyChanges(self, content, data)
+        # ``changes`` is a dictionary; if empty, there were no changes
+        if changes:
+            #import pdb;pdb.set_trace()
+            # Construct change-descriptions for the object-modified event
+            descriptions = []
+            for interface, attrs in changes.items():
+                if interface == IAdmUtilEvent:
+                    print "##### Event 2 #######"
+                elif IEventIfSuperclass.isEqualOrExtendedBy(interface):
+                    print "##### Superclass 2 #######"
+                names = attrs.keys()
+                for attr in attrs:
+                    print "attr: %s (I:%s)" % (attr, interface)
+                    print "   old: ", attrs[attr]['oldval']
+                    print "   new: ", attrs[attr]['newval']
+                descriptions.append(Attributes(interface, *names))
+            # Send out a detailed object-modified event
+            zope.event.notify(ObjectModifiedEvent(content, *descriptions))
+        return changes
 

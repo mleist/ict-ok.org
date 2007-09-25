@@ -222,7 +222,9 @@ class Superclass(Persistent):
         if time.gmtime()[5] == 10:
             if self.getDcTitle()==u'Host1':
                 #import pdb;pdb.set_trace()
-                self.injectInpEQueue(u'event0815')
+                #self.injectInpEQueue(u'event0815')
+                inst_event = MsgEvent(self)
+                self.injectOutEQueue(inst_event)
 
     def connectToEventXbar(self):
         if self.outEReceiver is None:
@@ -272,6 +274,39 @@ class Superclass(Persistent):
                 for tmpOid in self.__dict__[attrName]:
                     retSet.add(tmpOid)
         return retSet
+
+    def getAllInpEventNames(self):
+        """ returns a list of all input event methods
+        attribute name must start with 'eventInpObjs_'
+        """
+        retList = []
+        for attrName in self.__dict__:
+            if attrName.find("eventInpObjs_") == 0: # attribute name starts with ...
+                retList.append(attrName[len('eventInpObjs_'):])
+        return retList
+
+
+    def addToEventInpObjs(self, inputName, eventObj):
+        """ add the event to the list of inp event object oids
+        """
+        if "eventInpObjs_"+inputName in self.__dict__:
+            myObjIdSet = self.__dict__["eventInpObjs_"+inputName]
+            print "myObjIdSet 1 :", myObjIdSet
+            newOid = eventObj.getObjectId()
+            if newOid not in myObjIdSet:
+                myObjIdSet.add(newOid)
+            print "myObjIdSet 2 :", myObjIdSet
+
+    def delFromEventInpObjs(self, inputName, eventObj):
+        """ add the event to the list of inp event object oids
+        """
+        if "eventInpObjs_"+inputName in self.__dict__:
+            myObjIdSet = self.__dict__["eventInpObjs_"+inputName]
+            print "myObjIdSet 1 :", myObjIdSet
+            oldOid = eventObj.getObjectId()
+            if oldOid in myObjIdSet:
+                myObjIdSet.remove(oldOid)
+            print "myObjIdSet 2 :", myObjIdSet
 
 class MsgEvent:
     """ Interface of an async event event

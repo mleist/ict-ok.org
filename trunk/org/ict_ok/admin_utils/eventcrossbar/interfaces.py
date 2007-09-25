@@ -57,7 +57,7 @@ class IAdmUtilEvent(ISupernode):
         title = _("receiver objects"),
         value_type = Choice(
             title = _("objects"),
-            vocabulary="AllObjectInstances"),
+            vocabulary="AllObjectInstancesWithEventInputs"),
         default = set([]),
         readonly = False,
         required = True)

@@ -17,6 +17,7 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
+import zope.interface
 from zope.app import zapi
 from pytz import timezone
 from zope.traversing.browser import absoluteURL
@@ -29,9 +30,12 @@ from zope.proxy import removeAllProxies
 from zope.app.applicationcontrol.interfaces import IRuntimeInfo
 from zope.size.interfaces import ISized
 from zope.security.checker import canAccess
+from zope.component import getMultiAdapter
+#import zope.event
+from zope.lifecycleevent import Attributes, ObjectModifiedEvent
 
 # z3c imports
-from z3c.form import button, field, form
+from z3c.form import button, field, form, interfaces
 from z3c.formui import layout
 from z3c.pagelet.interfaces import IPagelet
 from z3c.pagelet.browser import BrowserPagelet
@@ -48,6 +52,10 @@ from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      AdmUtilUserProperties
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEvent
+from org.ict_ok.components.superclass.interfaces import \
+     IEventIfSuperclass
 
 # ict_ok imports
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -195,6 +203,26 @@ def getTitel(item, formatter):
         return IBrwsOverview(item).getTitle()
     except TypeError:
         return str(item.__class__.__name__)
+
+def applyChanges(form, content, data):
+    # copied from z3c.form.form
+    changes = {}
+    for name, field in form.fields.items():
+        # If the field is not in the data, then go on to the next one
+        if name not in data:
+            continue
+        # Get the datamanager and get the original value
+        dm = getMultiAdapter(
+            (content, field.field), interfaces.IDataManager)
+        oldValue = dm.get()
+        # Only update the data, if it is different
+        if dm.get() != data[name]:
+            dm.set(data[name])
+            # Record the change using information required later
+            #changes.setdefault(dm.field.interface, []).append(name)
+            changes.setdefault(dm.field.interface, {}).setdefault(name, {})['newval'] = data[name]
+            changes.setdefault(dm.field.interface, {}).setdefault(name, {})['oldval'] = oldValue
+    return changes
 
 
 # --------------- menu entries -----------------------------
@@ -404,6 +432,30 @@ class EditForm(layout.FormLayoutSupport, form.EditForm):
     label = _(u'Edit Superclass')
     fields = field.Fields(ISuperclass).omit(\
         *SuperclassDetails.omit_editfields)
+    
+    def applyChanges(self, data):
+        content = self.getContent()
+        changes = applyChanges(self, content, data)
+        # ``changes`` is a dictionary; if empty, there were no changes
+        if changes:
+            #import pdb;pdb.set_trace()
+            # Construct change-descriptions for the object-modified event
+            descriptions = []
+            for interface, attrs in changes.items():
+                if interface == IAdmUtilEvent:
+                    print "##### Event #######"
+                elif IEventIfSuperclass.isEqualOrExtendedBy(interface):
+                    print "##### Superclass #######"
+                names = attrs.keys()
+                for attr in attrs:
+                    print "attr: %s (I:%s)" % (attr, interface)
+                    print "   old: ", attrs[attr]['oldval']
+                    print "   new: ", attrs[attr]['newval']
+                descriptions.append(Attributes(interface, *names))
+            # Send out a detailed object-modified event
+            zope.event.notify(ObjectModifiedEvent(content, *descriptions))
+        return changes
+
 
 
 class DeleteForm(layout.FormLayoutSupport, form.Form):

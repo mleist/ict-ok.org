@@ -72,6 +72,11 @@
         />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".eventcrossbar.AllObjectInstancesWithEventInputs"
+        name="AllObjectInstancesWithEventInputs"
+        />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
         component=".eventcrossbar.AllEventInstances"
         name="AllEventInstances"
         />
