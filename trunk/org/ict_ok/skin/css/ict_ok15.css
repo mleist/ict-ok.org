@@ -472,7 +472,7 @@ input.required {
 }
 
 input.file-widget {
-  width: 300px;
+  width: 400px;
 }
 
 input.checkBox-widget {
@@ -480,7 +480,7 @@ input.checkBox-widget {
 }
 
 input.password-widget {
-  width: 300px;
+  width: 400px;
 }
 
 input.radio-widget {
@@ -494,22 +494,22 @@ input.button-field {
 
 
 select.select-widget {
-  width: 300px;
+  width: 400px;
   border: 1px solid #BBB;
 }
 
 input.text-widget {
-  width: 300px;
+  width: 400px;
 }
 
 /*span.text-widget {*/
-  /*width: 300px;*/
+  /*width: 400px;*/
   /*font-weight:bold;*/
 /*}*/
 
 
 textarea.textarea-widget {
-  width: 300px;
+  width: 400px;
   height: 100px;
 }
 
