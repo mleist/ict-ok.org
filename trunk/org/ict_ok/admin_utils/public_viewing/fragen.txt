@@ -3,31 +3,35 @@ Fragen zu public_viewing
 
 was sind die Klassen, von denen Attribute gezeigt werden sollen?
 
-supernodeDetails, was zeigt diese view?
+Das sind alle von Superclass abgeleiteten Inhaltsklassen, die zuvor
+von einem berechtigten Admin als Public_viewable markiert wurden.
+Von jeder dieser Inhaltsobjekte wird ein Schattenobjekt erzeugt.
+Das Schattenobjekt wird in einen Container innerhalb von AdmUtilPublicViewing
+abgelegt.
+Es wird eine zusätzliche View für das Inhaltsobjekt erzeugt (PublicDisplay), die
+dann im Submenü des Inhaltsobjektes angezeigt wird (als Menüeintrag) wenn
+zuvor für dieses Inhaltsobjekt ein Schattenobjekt erzeugt wurde. In 
+PublicDisplay wird zuerst mit getUtility(IAdmUtilPublicViewing) ein
+Utilityobjekt geholt und dann aus diesem das zu dem Inhaltsobjekt via
+objektId korrespondierende Schattenobjekt geholt. Dieses Schattenobjekt wird
+dann im View dargestellt.
 
-DisplayForm und EditForm sind von browser.superclass abgeleitet
+Wie erfolgt der Eventaustausch zwischen dem Inhaltsobjekt und dem
+korrespondierenden Schattenobjekt?
 
+Wie wird ein Schattenobjekt erzeugt (spezieller Menüeintrag im Submenü des
+Inhaltsobjektes)?
 
-Es wird ein schattenobjekt angelegt, welches andere Rechte hat als ???
+[P+]
+Es öffnet sich ein Form, in dem können folgende Felder festgelegt werden:
+1. Neuer Name
+2. Description (evtl. Wiki)
+3. es werden über den Adapter IState alle Zustandsdaten des Inhaltsobjektes
+   in das neue Schattenobjekt eingefügt
 
-- SupernodeDetails
+Es braucht noch eine OverView der Schattenobjekte, evtl. noch verschiedene Dar-
+stellungen über deren Zustand (rot, gelb,grün)
 
-Ich brauche erst mal eine Erklärung der ict-ok-GUI anhand eines minimalen Netzwerkes
-
-1. Anlage eines minimalen Netzwerkes
-2. Editieren eines Knotesn in diesem Netzwerk
-3. Überwachung??? Was wird wie überwacht?
-   - wie sieht das aus?
-   
-4. Was davon soll der public_viewer sehen?
-
-5. sieht man jetzt schon irgend etwas? Was ist die View von public_viewing?
-
-für mich zum lernen:
-was ist ein locales Utility
-nein das ist ja ein event subscriber
-wieso ist der in bootstrap? ist das eine art installationsmechanismus?
-
-.public_viewing.AdmUtilPublicViewing
-------------------------------------
+Ein Schattenobjekt sollte von dem Admin auch wieder gelöscht werden können:
+[P-]
 
