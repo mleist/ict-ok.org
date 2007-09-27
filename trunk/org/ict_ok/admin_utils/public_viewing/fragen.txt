@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 Fragen zu public_viewing
 ------------------------
 
