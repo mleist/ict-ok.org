@@ -24,12 +24,12 @@ class IAdmUtilPublicViewing(ISupernode):
     """
     major component for viewing by non authorized user
     """
-	def getShadow(objId)
+    def getShadow(objId)
         """returns the public shadow object of the contentobject
         objId
         """
 	
-	def getAllShadows()
+    def getAllShadows()
         """
         returns a list of all shadow objects
         """
