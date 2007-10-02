@@ -139,6 +139,11 @@ class AdmUtilUserDashboardItem(object):
         if self.stype == 'oid':
             if hasattr(other, 'objectID'):
                 return cmp(self.value, other.objectID)
+            elif hasattr(other, 'value'):
+                return cmp(self.value, other.value)
+            else:
+                raise Exception, "other object '%s' doesn't have objectID" %\
+                      other
         elif self.stype == 'path':
             if type(other) == type(u''):
                 return cmp(self.value, other)
@@ -146,7 +151,9 @@ class AdmUtilUserDashboardItem(object):
                 return cmp(self.value, other.value)
             else:
                 return cmp(self.value, getPath(other))
-        raise Exception, "wrong type for compare@AdmUtilUserDashboardItem"
+        raise Exception, "wrong type for compare@AdmUtilUserDashboardItem"\
+              " (%s[stype=%s], %s)" % (type(self), self.stype, \
+                                       type(other))
 
     def getObject(self, some_obj=None, arg_request=None):
         """ get object from dashboard item """

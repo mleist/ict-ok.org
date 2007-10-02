@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-"""What to do when upgrade SnmpValue from gen 0 to gen 1
+"""What to do when upgrade Building from gen 0 to gen 1
 """
 
 __version__ = "$Id$"
@@ -17,7 +17,7 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.components.building.interfaces import IBuilding
 
 generation = 1
 
@@ -28,6 +28,6 @@ def evolve(context):
     
     root = getRootFolder(context) # the Zope-Root-Folders
 
-    for iksnmpvalue in findObjectsProviding(root, ISnmpValue):
+    for ikbuilding in findObjectsProviding(root, IBuilding):
         # convert this object
         pass

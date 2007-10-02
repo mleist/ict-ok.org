@@ -138,7 +138,7 @@ class AddNetForm(AddForm):
 
 class EditNetForm(EditForm):
     """ Edit for for net """
-    label = _(u'Hello Net Edit Form')
+    label = _(u'Net Edit Form')
     fields = field.Fields(INet).omit(*NetDetails.omit_editfields)
     
     ##TODO: Test-Button

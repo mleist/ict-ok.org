@@ -54,6 +54,9 @@
     <include file="../lib/python/org/ict_ok/components/interface/security.zcml" />
     <include file="../lib/python/org/ict_ok/components/service/security.zcml" />
     <include file="../lib/python/org/ict_ok/components/snmpvalue/security.zcml" />
+    <include file="../lib/python/org/ict_ok/components/location/security.zcml" />
+    <include file="../lib/python/org/ict_ok/components/building/security.zcml" />
+    <include file="../lib/python/org/ict_ok/components/room/security.zcml" />
 
     <!--registration of core components-->
     <include package="zope.sendmail"/>
@@ -122,6 +125,9 @@
     <include package="org.ict_ok.components.interface" />
     <include package="org.ict_ok.components.service" />
     <include package="org.ict_ok.components.snmpvalue" />
+    <include package="org.ict_ok.components.location" />
+    <include package="org.ict_ok.components.building" />
+    <include package="org.ict_ok.components.room" />
 
     <!--registration of ict-ok.org skin-->
     <include package="org.ict_ok.skin" />

@@ -85,6 +85,13 @@
         permission="org.ict_ok.components.net.Add"
     />
     <z3c:pagelet
+        name="add_location.html"
+        for="zope.app.folder.interfaces.IRootFolder"
+        class="org.ict_ok.components.location.browser.location.AddLocationForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+    />
+    <z3c:pagelet
         name="edit_content.html"
         for="zope.app.folder.interfaces.IRootFolder"
         class="org.ict_ok.components.superclass.browser.superclass.EditContent"

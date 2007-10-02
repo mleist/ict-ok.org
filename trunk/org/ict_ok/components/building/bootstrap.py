@@ -27,7 +27,7 @@ from zope.index.text.interfaces import ISearchableText
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 
-logger = logging.getLogger("Compon. SnmpValue")
+logger = logging.getLogger("Compon. Building")
 
 def bootStrapSubscriber(event):
     """initialisation of IntId utility on first database startup
@@ -42,17 +42,17 @@ def bootStrapSubscriber(event):
     utils = [ util for util in sitem.registeredUtilities()
               if util.provided.isOrExtends(ICatalog)]
     instUtilityICatalog = utils[0].component
-    if not "snmpvalue_oid_index" in instUtilityICatalog.keys():
-        snmpvalue_oid_index = TextIndex(interface=ISearchableText,
-                                        field_name='getSearchableSnmpvalueOid',
+    if not "building_oid_index" in instUtilityICatalog.keys():
+        building_oid_index = TextIndex(interface=ISearchableText,
+                                        field_name='getSearchableBuildingOid',
                                         field_callable=True)
-        instUtilityICatalog['snmpvalue_oid_index'] = snmpvalue_oid_index
+        instUtilityICatalog['building_oid_index'] = building_oid_index
         # search for IAdmUtilSupervisor
         utils = [ util for util in sitem.registeredUtilities()
                   if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create index for entry type 'snmpvalue'")
+            u" bootstrap: ICatalog - create index for entry type 'building'")
         
     transaction.get().commit()
     connection.close()

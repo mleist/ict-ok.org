@@ -105,7 +105,8 @@ class TickerThread(threading.Thread):
                     setSite(root_folder)
                     # Utility Ticker
                     tmp_util = queryUtility(IAdmUtilTicker)
-                    tmp_util.eventOut_1sec()
+                    if tmp_util is not None:
+                        tmp_util.eventOut_1sec()
                     # Utility Supervisor
                     tmp_util = queryUtility(IAdmUtilSupervisor)
                     uidutil = getUtility(IIntIds)

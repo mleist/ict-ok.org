@@ -167,7 +167,7 @@ class AddSnmpValueForm(AddForm):
 
 class EditSnmpValueForm(EditForm):
     """ Edit for for net """
-    label = _(u'Hello SnmpValue Edit Form')
+    label = _(u'SnmpValue Edit Form')
     fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_editfields)
 
 

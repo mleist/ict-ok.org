@@ -7,24 +7,28 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0232,W0142
+# pylint: disable-msg=E1101,E0611,W0232,W0142
 #
-"""implementation of browser class of Service object
+"""implementation of browser class of Building object
 """
 
 __version__ = "$Id$"
 
 # phython imports
+import time
+import rrdtool
 
 # zope imports
+from zope.app import zapi
+from zope.proxy import removeAllProxies
 from zope.i18nmessageid import MessageFactory
 
 # z3c imports
 from z3c.form import field
 
 # ict_ok.org imports
-from org.ict_ok.components.service.interfaces import IService
-from org.ict_ok.components.service.service import Service
+from org.ict_ok.components.building.interfaces import IBuilding
+from org.ict_ok.components.building.building import Building
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -37,17 +41,17 @@ _ = MessageFactory('org.ict_ok')
 # --------------- menu entries -----------------------------
 
 
-class MSubAddService(GlobalMenuSubItem):
+class MSubAddBuilding(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'Add Service')
-    viewURL = 'add_service.html'
+    title = _(u'Add Building')
+    viewURL = 'add_building.html'
     weight = 50
 
 
 # --------------- object details ---------------------------
 
 
-class ServiceDetails(ComponentDetails):
+class BuildingDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
     omit_viewfields = ComponentDetails.omit_viewfields + []
@@ -57,31 +61,31 @@ class ServiceDetails(ComponentDetails):
 # --------------- forms ------------------------------------
 
 
-class DetailsServiceForm(DisplayForm):
+class DetailsBuildingForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of net')
-    fields = field.Fields(IService).omit(*ServiceDetails.omit_viewfields)
+    label = _(u'settings of building')
+    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_viewfields)
 
 
-class AddServiceForm(AddForm):
+class AddBuildingForm(AddForm):
     """Add form."""
-    label = _(u'Add Service')
-    fields = field.Fields(IService).omit(*ServiceDetails.omit_addfields)
-    factory = Service
+    label = _(u'Add Building')
+    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_addfields)
+    factory = Building
 
 
-class EditServiceForm(EditForm):
+class EditBuildingForm(EditForm):
     """ Edit for for net """
-    label = _(u'Service Edit Form')
-    fields = field.Fields(IService).omit(*ServiceDetails.omit_editfields)
+    label = _(u'Building Edit Form')
+    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_editfields)
 
 
-class DeleteServiceForm(DeleteForm):
+class DeleteBuildingForm(DeleteForm):
     """ Delete the net """
     
     def getTitel(self):
         """this title will be displayed in the head of form"""
-        return _(u"Delete this net: '%s'?") % \
+        return _(u"Delete this building: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
 

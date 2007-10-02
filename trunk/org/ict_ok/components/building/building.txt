@@ -2,7 +2,7 @@ This is an snmp value object ....
 
 Our Setup will look like this:
 
-  >>> from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
+  >>> from org.ict_ok.components.building.building import Building
 
 more text ...
 

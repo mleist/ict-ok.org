@@ -10,11 +10,11 @@
         Markus Leist <leist@ikom-online.de> -->
 
     <interface
-        interface=".interfaces.ISnmpValue"
+        interface=".interfaces.ILocation"
         type="zope.app.content.interfaces.IContentType"
         />
     
-    <class class=".snmpvalue.SnmpValue">
+    <class class=".location.Location">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
@@ -22,16 +22,16 @@
             interface="zope.app.container.interfaces.IContentContainer"
             />
         <factory
-            id="org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue"
-            description="SnmpValue"
+            id="org.ict_ok.components.location.location.Location"
+            description="Location"
             />
         <require
-            permission="org.ict_ok.components.snmpvalue.View"
-            interface=".interfaces.ISnmpValue"
+            permission="org.ict_ok.components.location.View"
+            interface=".interfaces.ILocation"
             />
         <require
-            permission="org.ict_ok.components.snmpvalue.Edit"
-            set_schema=".interfaces.ISnmpValue"
+            permission="org.ict_ok.components.location.Edit"
+            set_schema=".interfaces.ILocation"
             />
     </class>
 
@@ -41,22 +41,14 @@
         />
 
     <adapter
-        factory=".adapter.sized.SnmpValueSized"
-        />
-
-    <adapter
-        factory=".adapter.state.State"
-        />
-        
-    <adapter
-        factory="org.ict_ok.components.snmpvalue.adapter.search.Searchable"
+        factory="org.ict_ok.components.location.adapter.search.Searchable"
     />
 
     <adapter
-        factory="org.ict_ok.components.snmpvalue.adapter.ipickle.Pickle"
+        factory="org.ict_ok.components.location.adapter.ipickle.Pickle"
     />
 
     <include package=".browser" />
-    <include package=".generations" />
+    <!-- include package=".generations" / -->
 
 </configure>

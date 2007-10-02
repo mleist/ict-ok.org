@@ -9,12 +9,13 @@
 #
 # pylint: disable-msg=W0232
 #
-"""Interface of SnmpValue"""
+"""Interface of Location"""
 
 __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.schema import TextLine
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
@@ -22,5 +23,12 @@ from org.ict_ok.components.interfaces import IComponent
 _ = MessageFactory('org.ict_ok')
 
 
-class ISnmpValue(IComponent):
+class ILocation(IComponent):
     """A service object."""
+
+    coordinates = TextLine(
+        max_length = 80,
+        title = _("coordinates"),
+        description = _("Coordinates of the location."),
+        default = u"",
+        required = False)

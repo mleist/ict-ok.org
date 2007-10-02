@@ -22,7 +22,7 @@ from zope.component import adapts
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.components.room.interfaces import IRoom
 from org.ict_ok.components.superclass.interfaces import IPickle
 from org.ict_ok.components.supernode.adapter.ipickle import \
      Pickle as PickleSupernode
@@ -34,7 +34,7 @@ class Pickle(PickleSupernode):
     """Pickle-Adapter."""
 
     implements(IPickle)
-    adapts(ISnmpValue)
+    adapts(IRoom)
 
     def exportAsDict(self, mode='backup'):
         """

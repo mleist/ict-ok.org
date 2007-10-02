@@ -75,7 +75,7 @@ class AddInterfaceForm(AddForm):
 
 class EditInterfaceForm(EditForm):
     """ Edit for for net """
-    label = _(u'Hello Interface Edit Form')
+    label = _(u'Interface Edit Form')
     fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_editfields)
 
 

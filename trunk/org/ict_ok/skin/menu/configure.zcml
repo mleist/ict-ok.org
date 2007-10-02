@@ -116,5 +116,13 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.site.Add"
         />
+    <viewlet
+        name="add_location"
+        for="zope.app.folder.interfaces.IRootFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.location.browser.location.MSubAddLocation"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+        />
 
 </configure>
