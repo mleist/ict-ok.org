@@ -23,6 +23,9 @@ from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
+from zope.app.catalog.field import FieldIndex
+from zope.app.catalog.interfaces import ICatalog
+from zope.index.text.interfaces import ISearchableText
 from zope.app.component.interfaces import ISite
 
 # ict_ok.org imports
@@ -79,6 +82,24 @@ def bootStrapSubscriberDatabase(event):
                   #if util.provided.isOrExtends(IAdmUtilEsxVim)]
         #instAdmUtilEsxVim = utils[0].component
         #instAdmUtilEsxVim.connect2VimServer()
+
+    sitem = root_folder.getSiteManager()
+    # search for ICatalog
+    utils = [ util for util in sitem.registeredUtilities()
+              if util.provided.isOrExtends(ICatalog)]
+    instUtilityICatalog = utils[0].component
+    if not "host_esx_uuid_index" in instUtilityICatalog.keys():
+        host_esx_uuid_index = FieldIndex(interface=ISearchableText,
+                                         field_name='getSearchableEsxUuid',
+                                         field_callable=True)
+        instUtilityICatalog['host_esx_uuid_index'] = host_esx_uuid_index
+        # search for IAdmUtilSupervisor
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: ICatalog - create esx uuid index for entry type 'host'")
+
 
     recursiveEsxVimSubscriber(root_folder)
     

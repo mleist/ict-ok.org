@@ -50,3 +50,10 @@ class Searchable(SuperSearchable):
         get hostname as string for catalog
         """
         return self.context.hostname
+
+
+    def getSearchableEsxUuid(self):
+        """
+        get hostname as string for catalog
+        """
+        return self.context.esxUuid
