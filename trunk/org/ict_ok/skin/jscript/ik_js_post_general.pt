@@ -1,4 +1,6 @@
 <script type="text/javascript">
+  my_form_widget = document.getElementById("form-widgets-ikName");
+  my_form_widget.focus();
   ik_el_ikh_time = document.getElementById("ikh_time");
   //ik_el_status_pic = document.getElementById("statusPic");
   //ik_el_status_pic.ik_stat = true;
