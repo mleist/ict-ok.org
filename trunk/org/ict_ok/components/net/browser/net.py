@@ -31,7 +31,7 @@ from z3c.form import button, field
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
-from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
+from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import \
      IBrwsOverview, IEventIfSuperclass
 from org.ict_ok.admin_utils.netscan.interfaces import INetScan
@@ -59,12 +59,12 @@ class MSubAddNet(GlobalMenuSubItem):
 # --------------- object details ---------------------------
 
 
-class NetDetails(SupernodeDetails):
+class NetDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_addfields = SupernodeDetails.omit_addfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = ComponentDetails.omit_viewfields + []
+    omit_addfields = ComponentDetails.omit_addfields + []
+    omit_editfields = ComponentDetails.omit_editfields + []
     
     def actions(self):
         """

@@ -25,7 +25,7 @@ from z3c.form import field
 # ict_ok.org imports
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.interface.interface import Interface
-from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
+from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -47,15 +47,15 @@ class MSubAddInterface(GlobalMenuSubItem):
 # --------------- object details ---------------------------
 
 
-class InterfaceDetails(SupernodeDetails):
+class InterfaceDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
-    #omit_viewfields = SupernodeDetails.omit_viewfields + ['ipv4List']
-    #omit_addfields = SupernodeDetails.omit_addfields + ['ipv4List']
-    #omit_editfields = SupernodeDetails.omit_editfields + ['ipv4List']
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_addfields = SupernodeDetails.omit_addfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    #omit_viewfields = ComponentDetails.omit_viewfields + ['ipv4List']
+    #omit_addfields = ComponentDetails.omit_addfields + ['ipv4List']
+    #omit_editfields = ComponentDetails.omit_editfields + ['ipv4List']
+    omit_viewfields = ComponentDetails.omit_viewfields + []
+    omit_addfields = ComponentDetails.omit_addfields + []
+    omit_editfields = ComponentDetails.omit_editfields + []
 
 # --------------- forms ------------------------------------
 

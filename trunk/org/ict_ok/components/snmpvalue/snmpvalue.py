@@ -24,11 +24,11 @@ from zope.app import zapi
 from zope.interface import implements
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.supernode import Supernode
+from org.ict_ok.components.component import Component
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 
 
-class SnmpValue(Supernode):
+class SnmpValue(Component):
     """
     the template instance
     """
@@ -42,7 +42,7 @@ class SnmpValue(Supernode):
         """
         constructor of the object
         """
-        Supernode.__init__(self, **data)
+        Component.__init__(self, **data)
         # find our correct factory, is there a better solution?
         for (fact_name, fact_obj) in zapi.getFactoriesFor(ISnmpValue):
             if (len(fact_name) > 11) and (fact_name[:11]=='org.ict_ok.'):

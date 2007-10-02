@@ -20,20 +20,18 @@ from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
 # ict_ok.org imports
+from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.interfaces import \
-     IEventIfSupernode, ISupernode
+     IEventIfSupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IHost(ISupernode):
+class IHost(IComponent):
     """A host object."""
 
     contains('org.ict_ok.components.interface.interfaces.IInterface')
 
-    myFactory = Attribute("Factory String of this object")
-    ikRevision = Attribute("Class-Revision of this object")
-    
     hostname = TextLine(
         max_length = 80,
         title = _("Hostname"),

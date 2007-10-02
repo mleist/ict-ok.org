@@ -24,13 +24,13 @@ from zope.app import zapi
 from zope.interface import implements
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.supernode import Supernode
+from org.ict_ok.components.component import Component
 from org.ict_ok.components.service.interfaces import IService
 from org.ict_ok.components.service.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 
 
-class Service(Supernode):
+class Service(Component):
     """
     the template instance
     """
@@ -47,7 +47,7 @@ class Service(Supernode):
         """
         constructor of the object
         """
-        Supernode.__init__(self, **data)
+        Component.__init__(self, **data)
         # find our correct factory, is there a better solution?
         for (fact_name, fact_obj) in zapi.getFactoriesFor(IService):
             if (len(fact_name) > 11) and (fact_name[:11]=='org.ict_ok.'):

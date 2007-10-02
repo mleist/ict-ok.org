@@ -29,7 +29,7 @@ from z3c.form import field
 # ict_ok.org imports
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
-from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
+from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -51,12 +51,12 @@ class MSubAddSnmpValue(GlobalMenuSubItem):
 # --------------- object details ---------------------------
 
 
-class SnmpValueDetails(SupernodeDetails):
+class SnmpValueDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_addfields = SupernodeDetails.omit_addfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = ComponentDetails.omit_viewfields + []
+    omit_addfields = ComponentDetails.omit_addfields + []
+    omit_editfields = ComponentDetails.omit_editfields + []
     
     def getValuePngDeltaT(self):
         """get Picture for special time interval"""

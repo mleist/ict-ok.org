@@ -20,12 +20,12 @@ from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
+from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class ISite(ISupernode):
+class ISite(IComponent):
     """
     The interface of Site-objects
     """

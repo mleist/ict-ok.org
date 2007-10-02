@@ -26,12 +26,12 @@ from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
 from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
-from org.ict_ok.components.supernode.supernode import Supernode
+from org.ict_ok.components.component import Component
 from org.ict_ok.components.host.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 
 
-class Host(Supernode):
+class Host(Component):
     """
     the template instance
     """
@@ -68,7 +68,7 @@ class Host(Supernode):
         """
         constructor of the object
         """
-        Supernode.__init__(self, **data)
+        Component.__init__(self, **data)
         # find our correct factory, is there a better solution?
         for (fact_name, fact_obj) in zapi.getFactoriesFor(IHost):
             if (len(fact_name) > 11) and (fact_name[:11]=='org.ict_ok.'):

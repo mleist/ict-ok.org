@@ -19,7 +19,7 @@ __version__ = "$Id$"
 # zope imports
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
+from org.ict_ok.components.browser.component import ComponentDetails
 
 
 # --------------- menu entries -----------------------------
@@ -31,6 +31,9 @@ from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
 # --------------- object details ---------------------------
 
 
-class SlaveDetails(SupernodeDetails):
+class SlaveDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
+    omit_viewfields = ComponentDetails.omit_viewfields + []
+    omit_addfields = ComponentDetails.omit_addfields + []
+    omit_editfields = ComponentDetails.omit_editfields + []

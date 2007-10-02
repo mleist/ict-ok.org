@@ -28,7 +28,7 @@ from z3c.form import form, field
 # ict_ok.org imports
 from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
 from org.ict_ok.components.host.host import Host
-from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
+from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.superclass.browser.superclass import applyChanges
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -53,15 +53,15 @@ class MSubAddHost(GlobalMenuSubItem):
 # --------------- object details ---------------------------
 
 
-class HostDetails(SupernodeDetails):
+class HostDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + ['osList']
-    omit_addfields = SupernodeDetails.omit_addfields + ['osList']
-    omit_editfields = SupernodeDetails.omit_editfields + ['osList']
-    #omit_viewfields = SupernodeDetails.omit_viewfields + []
-    #omit_addfields = SupernodeDetails.omit_addfields + []
-    #omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = ComponentDetails.omit_viewfields + ['osList']
+    omit_addfields = ComponentDetails.omit_addfields + ['osList']
+    omit_editfields = ComponentDetails.omit_editfields + ['osList']
+    #omit_viewfields = ComponentDetails.omit_viewfields + []
+    #omit_addfields = ComponentDetails.omit_addfields + []
+    #omit_editfields = ComponentDetails.omit_editfields + []
 
     def getHistory(self):
         """

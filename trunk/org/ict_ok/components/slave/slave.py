@@ -31,28 +31,25 @@ from zope.app.catalog.text import TextIndex
 from zope.index.text.interfaces import ISearchableText
 
 # ict_ok imports
-from org.ict_ok.components.supernode.supernode import Supernode
+from org.ict_ok.components.component import Component
 from org.ict_ok.components.slave.interfaces import INewSlaveEvent, ISlave
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 from org.ict_ok.admin_utils.supervisor.supervisor import AdmUtilSupervisor
 
 
-class Slave(SiteManagerContainer, Supernode):
+class Slave(SiteManagerContainer, Component):
     """A objectcontainer for new slave data."""
 
     implements(ISlave)
     # for ..Contained we have to:
     __name__ = __parent__ = None
     title = FieldProperty(ISlave['title'])
-    omit_viewfields = Supernode.omit_viewfields + []
-    omit_addfields = Supernode.omit_addfields + []
-    omit_editfields = Supernode.omit_editfields + []
 
     def __init__(self, **data):
         """
         constructor of Slave
         """
-        Supernode.__init__(self, **data)
+        Component.__init__(self, **data)
         for (name, value) in data.items():
             if name in ISlave.names():
                 setattr(self, name, value)

@@ -28,7 +28,7 @@ from z3c.form import field
 # ict_ok imports
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
-from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
+from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.site.interfaces import ISite
 from org.ict_ok.components.site.site import Site
@@ -51,12 +51,12 @@ class MSubAddSite(GlobalMenuSubItem):
 # --------------- object details ---------------------------
 
 
-class SiteDetails(SupernodeDetails):
+class SiteDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_addfields = SupernodeDetails.omit_addfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = ComponentDetails.omit_viewfields + []
+    omit_addfields = ComponentDetails.omit_addfields + []
+    omit_editfields = ComponentDetails.omit_editfields + []
 
 
 # --------------- forms ------------------------------------

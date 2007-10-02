@@ -20,11 +20,11 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 
 # ict-ok.org imports
-from org.ict_ok.components.supernode.supernode import Supernode
+from org.ict_ok.components.component import Component
 from org.ict_ok.components.site.interfaces import ISite
 
 
-class Site(Supernode):
+class Site(Component):
     """ ICT_Ok site object """
     implements(ISite)
     sitename = FieldProperty(ISite['sitename'])
@@ -33,7 +33,7 @@ class Site(Supernode):
         """
         constructor of the object
         """
-        Supernode.__init__(self, **data)
+        Component.__init__(self, **data)
         for (name, value) in data.items():
             if name in ISite.names():
                 setattr(self, name, value)

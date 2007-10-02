@@ -22,12 +22,12 @@ from zope.component.interfaces import IObjectEvent
 from zope.app.component.interfaces import IPossibleSite
 
 # ict_ok imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
+from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class ISlave(IPossibleSite, ISupernode):
+class ISlave(IPossibleSite, IComponent):
     """A objectcontainer for new slave data."""
 
     contains('org.ict_ok.components.net.interfaces.INet')

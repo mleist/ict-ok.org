@@ -19,14 +19,14 @@ from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
+from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.schema.ipvalid import IpValid
 from org.ict_ok.schema.macvalid import MacValid
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IInterface(ISupernode):
+class IInterface(IComponent):
     """A interface object."""
 
     contains('org.ict_ok.components.service.interfaces.IService',

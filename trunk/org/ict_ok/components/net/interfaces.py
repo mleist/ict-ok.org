@@ -18,13 +18,13 @@ from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
+from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.schema.ipvalid import IpValid
 
 _ = MessageFactory('org.ict_ok')
 
 
-class INet(ISupernode):
+class INet(IComponent):
     """A network object."""
 
     contains('org.ict_ok.components.host.interfaces.IHost')

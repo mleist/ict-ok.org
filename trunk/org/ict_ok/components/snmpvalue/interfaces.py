@@ -17,10 +17,10 @@ __version__ = "$Id$"
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
+from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class ISnmpValue(ISupernode):
+class ISnmpValue(IComponent):
     """A service object."""
