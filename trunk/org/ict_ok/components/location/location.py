@@ -22,10 +22,28 @@ __version__ = "$Id$"
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
+from zope.component import getUtility
+from zope.app.intid.interfaces import IIntIds
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # ict_ok.org imports
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.location.interfaces import ILocation
+
+
+
+def AllLocationsVocab(dummy_context):
+    """Which locations are there
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if ILocation.providedBy(oobj.object):
+            terms.append(\
+                SimpleTerm(oobj.object.objectID,
+                           str(oobj.object.objectID),
+                           oobj.object.getDcTitle()))
+    return SimpleVocabulary(terms)
 
 
 class Location(Component):

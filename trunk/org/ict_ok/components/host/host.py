@@ -58,7 +58,6 @@ class Host(Component):
     hardware = FieldProperty(IHost['hardware'])
     user = FieldProperty(IHost['user'])
     inv_id = FieldProperty(IHost['inv_id'])
-    building = FieldProperty(IHost['building'])
     room = FieldProperty(IHost['room'])
     osList = FieldProperty(IHost['osList'])
     url = FieldProperty(IHost['url'])

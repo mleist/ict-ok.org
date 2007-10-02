@@ -48,6 +48,12 @@
         factory="org.ict_ok.components.room.adapter.ipickle.Pickle"
     />
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".room.AllRoomsVocab"
+        name="AllRoomsVocab"
+        />
+
     <include package=".browser" />
     <!-- include package=".generations" / -->
 

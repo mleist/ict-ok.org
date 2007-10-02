@@ -91,18 +91,10 @@ class IHost(IComponent):
         default = u"",
         required = False)
 
-    building = TextLine(
-        max_length = 80,
-        title = _("Building"),
-        description = _("The Building."),
-        default = u"",
-        required = False)
-
-    room = TextLine(
-        max_length = 80,
+    room = Choice(
         title = _("Room"),
         description = _("The Room Description."),
-        default = u"",
+        vocabulary="AllRoomsVocab",
         required = False)
 
     osList = List (

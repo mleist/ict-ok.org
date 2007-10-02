@@ -61,6 +61,34 @@ class IAdmUtilEvent(ISupernode):
         default = set([]),
         readonly = False,
         required = True)
+    
+    hostGroup = Set(
+        title = _("host groups"),
+        value_type = Choice(
+            title = _("host"),
+            vocabulary="AllHostGroups"),
+        default = set([]),
+        readonly = False,
+        required = True)
+
+    location = Choice(
+        title = _("Location"),
+        description = _("The Location."),
+        vocabulary="AllLocationsVocab",
+        required = False)
+
+    building = Choice(
+        title = _("Building"),
+        description = _("The Building."),
+        vocabulary="AllBuildingsVocab",
+        required = False)
+
+    room = Choice(
+        title = _("Room"),
+        description = _("The Room Description."),
+        vocabulary="AllRoomsVocab",
+        required = False)
+
 
     def addOidToInpObjects(self, oid):
         """ delete oid from set """
