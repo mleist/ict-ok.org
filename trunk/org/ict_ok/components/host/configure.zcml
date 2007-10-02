@@ -65,6 +65,12 @@
         for=".interfaces.IHost"
     />
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".host.AllHostGroups"
+        name="AllHostGroups"
+        />
+
 
     <!--subscriber handler=".objmq.notifyAddedEvent" /-->
     <!--subscriber handler=".objmq.notifyModifiedEvent" /-->

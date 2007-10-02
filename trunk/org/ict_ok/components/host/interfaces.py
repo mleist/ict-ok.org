@@ -53,6 +53,15 @@ class IHost(IComponent):
         default = u"",
         required = False)
 
+    hostGroup = Set(
+        title = _("host groups"),
+        value_type = Choice(
+            title = _("host"),
+            vocabulary="AllHostGroups"),
+        default = set([]),
+        readonly = False,
+        required = True)
+
     workinggroup = TextLine(
         max_length = 80,
         title = _("Workinggroup"),

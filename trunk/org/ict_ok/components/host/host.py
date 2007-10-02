@@ -23,12 +23,24 @@ __version__ = "$Id$"
 from zope.app import zapi
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # ict_ok.org imports
 from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.host.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
+
+
+def AllHostGroups(dummy_context):
+    """Which host group are there
+    """
+    terms = []
+    for (gkey, gname) in {
+        u'dns': u'name server',
+        u'smtp': u'smtp-server'}.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
 
 
 class Host(Component):
