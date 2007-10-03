@@ -22,8 +22,10 @@ from random import random
 from md5 import md5
 
 # zope imports
+from zope.app import zapi
 from zope.exceptions.interfaces import UserError
 from zope.i18nmessageid import MessageFactory
+from zope.app.catalog.interfaces import ICatalog
 
 # ict_ok.org imports
 
@@ -117,3 +119,49 @@ class RingBufferFull:
     def get(self):
         """ return a list of elements from the oldest to the newest"""
         return self.data[self.cur:] + self.data[:self.cur]
+
+def _helperNodeIsUnder(underObj, upperObj):
+    print "_helperNodeIsUnder(%s,%s)" % (underObj, upperObj)
+    if underObj.__parent__ == None:
+        return False
+    elif underObj.__parent__ == upperObj:
+        return True
+    else:
+        return _helperNodeIsUnder(underObj.__parent__, upperObj)
+
+def nodeIsUnder(underNodeOid, upperNodeOid):
+    """ checks if the underNode is contained in the upperNode """
+    print "nodeIsUnder(%s, %s)" % (underNodeOid, upperNodeOid)
+    if underNodeOid is None:
+        return False
+    if upperNodeOid is None:
+        return False
+    if not oidIsValid(underNodeOid):
+        return False
+    if not oidIsValid(upperNodeOid):
+        return False
+    underObj = None
+    upperObj = None
+    my_catalog = zapi.getUtility(ICatalog)
+    res = my_catalog.searchResults(oid_index=underNodeOid)
+    if len(res) > 0:
+        underObj = iter(res).next()
+    res = my_catalog.searchResults(oid_index=upperNodeOid)
+    if len(res) > 0:
+        upperObj = iter(res).next()
+    if underObj is not None and \
+       upperObj is not None:
+        return _helperNodeIsUnder(underObj, upperObj)
+
+
+def oid2dcTitle(arg_oid):
+    """ converts an oid into the object dc title """
+    if arg_oid is None:
+        return "Oid is None"
+    if not oidIsValid(arg_oid):
+        return "Oid is not valid"
+    my_catalog = zapi.getUtility(ICatalog)
+    res = my_catalog.searchResults(oid_index=arg_oid)
+    if len(res) > 0:
+        return iter(res).next().getDcTitle()
+    return "Oid not found"

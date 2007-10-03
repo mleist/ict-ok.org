@@ -17,13 +17,14 @@ __version__ = "$Id$"
 import datetime
 
 # zope imports
-from zope.interface import Attribute, Interface
+from zope.interface import Attribute, Interface, Invalid, invariant
 from zope.schema import Bool, Choice, Datetime, Set, TextLine, Timedelta
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import \
      IEventIfSupernode, ISupernode
+from org.ict_ok.libs.lib import oid2dcTitle, nodeIsUnder
 
 _ = MessageFactory('org.ict_ok')
 
@@ -89,22 +90,45 @@ class IAdmUtilEvent(ISupernode):
         vocabulary="AllRoomsVocab",
         required = False)
 
+    @invariant
+    def ensureRoomInBuilding(event):
+        if event.room is not None and \
+           event.building is not None and \
+           not nodeIsUnder(event.room, event.building):
+            raise Invalid(
+                "Room '%s' not in this building." % \
+                oid2dcTitle(event.room))
 
-    def addOidToInpObjects(self, oid):
+    @invariant
+    def ensureBuildingInLocation(event):
+        if event.building is not None and \
+           event.location is not None and \
+           not nodeIsUnder(event.building, event.location):
+            raise Invalid(
+                "Building not at this location.")
+        
+    @invariant
+    def ensureRoomAtLocation(event):
+        if event.room is not None and \
+           event.location is not None and \
+           not nodeIsUnder(event.room, event.location):
+            raise Invalid(
+                "Room not at this location.")
+        
+    def addOidToInpObjects(oid):
         """ delete oid from set """
 
-    def addOidToOutObjects(self, oid):
+    def addOidToOutObjects(oid):
         """ delete oid from set """
 
-    def removeOidFromInpObjects(self, oid):
+    def removeOidFromInpObjects(oid):
         """ delete oid from set """
 
-    def removeOidFromOutObjects(self, oid):
+    def removeOidFromOutObjects(oid):
         """ delete oid from set """
 
-    def removeInvalidOidFromInpOutObjects(self):
+    def removeInvalidOidFromInpOutObjects():
         """ delete all invalid oids """
-
 
 class IAdmUtilEventCrossbar(ISupernode):
     """
