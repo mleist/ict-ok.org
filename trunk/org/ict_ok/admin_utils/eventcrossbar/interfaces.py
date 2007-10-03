@@ -97,7 +97,7 @@ class IAdmUtilEvent(ISupernode):
            not nodeIsUnder(event.room, event.building):
             raise Invalid(
                 "Room '%s' is not in building '%s'." % \
-                oid2dcTitle(event.room), oid2dcTitle(event.building))
+                (oid2dcTitle(event.room), oid2dcTitle(event.building)))
 
     @invariant
     def ensureBuildingInLocation(event):
@@ -106,7 +106,7 @@ class IAdmUtilEvent(ISupernode):
            not nodeIsUnder(event.building, event.location):
             raise Invalid(
                 "Building '%s' is not in location '%s'." % \
-                oid2dcTitle(event.building), oid2dcTitle(event.location))
+                (oid2dcTitle(event.building), oid2dcTitle(event.location)))
         
     @invariant
     def ensureRoomAtLocation(event):
@@ -115,7 +115,7 @@ class IAdmUtilEvent(ISupernode):
            not nodeIsUnder(event.room, event.location):
             raise Invalid(
                 "Room '%s' is not in location '%s'." % \
-                oid2dcTitle(event.room), oid2dcTitle(event.location))
+                (oid2dcTitle(event.room), oid2dcTitle(event.location)))
         
     def addOidToInpObjects(oid):
         """ delete oid from set """
