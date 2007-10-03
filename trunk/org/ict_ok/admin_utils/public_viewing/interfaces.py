@@ -8,7 +8,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0232
+# pylint: disable-msg=E0213,E0211,W0232
 #
 """Interface of PublicViewing-Utility"""
 
