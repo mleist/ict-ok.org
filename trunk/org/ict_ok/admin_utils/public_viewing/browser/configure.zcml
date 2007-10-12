@@ -12,6 +12,14 @@
          Markus Leist <leist@ikom-online.de> -->
 
     <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
+        class=".public_viewing.AdmUtilPublicViewingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.public_viewing.View"
+    />
+
+    <z3c:pagelet
         name="history.html"
         for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
         class="org.ict_ok.components.superclass.browser.superclass.History"
@@ -26,6 +34,21 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.public_viewing.Edit"
     />
+
+    <z3c:pagelet
+        name="public.html"
+        for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
+        class=".public_viewing.AdmUtilPublicViewingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.public.View"
+    />
+
+    <z3c:template
+        template="publicview.pt"
+        for=".public_viewing.AdmUtilPublicViewingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
 
     <!--##### Sub Menu ##### -->
     <viewlet

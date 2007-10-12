@@ -149,6 +149,8 @@
 
     <grantAll role="zope.Manager" />
     <grantAll role="org.ict_ok.dvl" />
+    <grant permission="org.ict_ok.public.View"
+                    role="zope.Anonymous" />
 
     <unauthenticatedPrincipal
         id="zope.anybody"

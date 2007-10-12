@@ -8,6 +8,11 @@
          Markus Leist <leist@ikom-online.de> -->
 
     <permission
+        id="org.ict_ok.public.View"
+        title="View for Nonmembers"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.public_viewing.View"
         title="View from AdmUtilPublicViewing"
         description="View from AdmUtilPublicViewing."
