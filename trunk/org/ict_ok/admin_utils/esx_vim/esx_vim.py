@@ -235,6 +235,15 @@ class GlobalEsxVimUtility(object):
         contained(objFolder, parentObj, u'VirtualMachines')
         objFolder.__parent__ = parentObj
         retDict[u'VirtualMachines'] = objFolder
+        
+        objFolder = createObject(\
+            "org.ict_ok.admin_utils.esx_vim.esx_vim_folder.EsxVimFolder")
+        objFolder.localEsxUtil = localEsxUtil
+        objFolder.name = u'Folder'
+        objFolder.esxObjectTypes = r'Folder'
+        contained(objFolder, parentObj, u'Folder')
+        objFolder.__parent__ = parentObj
+        retDict[u'Folder'] = objFolder
         return retDict
         
 
@@ -274,6 +283,9 @@ class GlobalEsxVimUtility(object):
             elif esxObj['esxType'] == 'VirtualMachine':
                 newObj = createObject(\
                     "org.ict_ok.admin_utils.esx_vim.esx_vim_virtual_machine.EsxVimVirtualMachine")
+            elif esxObj['esxType'] == 'Folder':
+                newObj = createObject(\
+                    "org.ict_ok.admin_utils.esx_vim.esx_vim_folder.EsxVimFolder")
             if newObj:
                 contained(newObj, parentObj, esxObj['name'])
                 newObj.localEsxUtil = localEsxUtil
