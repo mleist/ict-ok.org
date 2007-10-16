@@ -4,7 +4,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: component.py 73 2007-10-02 09:37:48Z markusleist $
+# $Id$
 #
 
 PYTHON=/usr/bin/python2.4

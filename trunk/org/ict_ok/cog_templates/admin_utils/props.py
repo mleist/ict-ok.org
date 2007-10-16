@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: bootstrap.py 47 2007-09-19 03:04:52Z markusleist $
+# $Id$
 #
 
 authors = [
