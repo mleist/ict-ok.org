@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: cog_template.py_cog 88 2007-10-16 13:36:24Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E1101,E0611
 """Interface of compliance utility
@@ -14,7 +14,7 @@ the compliance utility should store the compliance/requirement-templates
 for the host- or service-instances
 """
 
-__version__ = "$Id: cog_template.py_cog 88 2007-10-16 13:36:24Z markusleist $"
+__version__ = "$Id$"
 
 # phython imports
 import logging
