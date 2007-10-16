@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
 # [[[cog
 #    import props
-#    uname_len = len(props.utilityname)
 #    import cog
 #    cog.out("# Copyright (c) ")
 #    for year in props.copyrights:
@@ -61,8 +59,8 @@ from org.ict_ok.admin_utils.testmod.testmod import \
      AdmUtilTestMod
 #[[[end]]]
 
-#[[[cog cog.outl('logger = logging.getLogger(%s)' % props.loggername)]]]
-logger = logging.getLogger(AdmUtilTestMod)
+#[[[cog cog.outl('logger = logging.getLogger("%s")' % props.loggername)]]]
+logger = logging.getLogger("AdmUtilTestMod")
 #[[[end]]]
 
 def bootStrapSubscriberDatabase(event):

@@ -14,8 +14,9 @@ authors = [
     ]
 
 filename = r'testmod'
-longpath_interface = r'org.ict_ok.admin_utils.%s.interfaces' % (filename)
-longpath_file = r'org.ict_ok.admin_utils.%s.%s' % (filename, filename)
+longpath = r'org.ict_ok.admin_utils'
+longpath_interface = longpath + r'.%s.interfaces' % (filename)
+longpath_file = longpath + r'.%s.%s' % (filename, filename)
 
 modulename = r'TestMod'
 utilityname = r'AdmUtil' + modulename
