@@ -4,6 +4,7 @@
     i18n_domain="org.ict_ok"
     >
     <!-- [[[cog
+            import sys; sys.path.extend(['.'])
             import props
             import cog
          ]]] -->
@@ -17,93 +18,54 @@
                 cog.out("%4d, " % year)
             cog.outl()
             for author in props.authors:
-                cog.outl("                 %s <"\
+                cog.outl("                   %s <"\
                          "%s>" % (author['name'], author['email']))
             cog.outl("--"+">")
          ]]] -->
     <!-- Copyright (c) 2006, 2007, 
-                     Markus Leist <leist@ikom-online.de>
+                       Markus Leist <leist@ikom-online.de>
     -->
     <!-- [[[end]]] -->
 
     <!-- [[[cog
             cog.out("""\
-                    <class class=".eventcrossbar.AdmUtilEventCrossbar">
+                    <class class=".%(filename)s.%(utilityname)s">
                         <factory
-                            id="org.ict_ok.admin_utils.eventcrossbar.eventcrossbar.AdmUtilEventCrossbar" />
+                            id="%(longpath_file)s.%(utilityname)s" />
                         <implements
                             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
                         <require
-                            permission="org.ict_ok.admin_utils.eventcrossbar.View"
-                            interface=".interfaces.IAdmUtilEventCrossbar"
+                            permission="%(longpath)s.%(filename)s.View"
+                            interface=".interfaces.I%(utilityname)s"
                             />
                         <require
-                            permission="org.ict_ok.admin_utils.eventcrossbar.View"
-                            set_schema=".interfaces.IAdmUtilEventCrossbar"
+                            permission="%(longpath)s.%(filename)s.View"
+                            set_schema=".interfaces.I%(utilityname)s"
                             />
                     </class>
             """ % props.__dict__, dedent=True)
          ]]] -->
-    <class class=".eventcrossbar.AdmUtilEventCrossbar">
+    <class class=".testmod.AdmUtilTestMod">
         <factory
-            id="org.ict_ok.admin_utils.eventcrossbar.eventcrossbar.AdmUtilEventCrossbar" />
+            id="org.ict_ok.admin_utils.testmod.testmod.AdmUtilTestMod" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <require
-            permission="org.ict_ok.admin_utils.eventcrossbar.View"
-            interface=".interfaces.IAdmUtilEventCrossbar"
+            permission="org.ict_ok.admin_utils.testmod.View"
+            interface=".interfaces.IAdmUtilTestMod"
             />
         <require
-            permission="org.ict_ok.admin_utils.eventcrossbar.View"
-            set_schema=".interfaces.IAdmUtilEventCrossbar"
+            permission="org.ict_ok.admin_utils.testmod.View"
+            set_schema=".interfaces.IAdmUtilTestMod"
             />
     </class>
     <!-- [[[end]]] -->
-    <class class=".eventcrossbar.AdmUtilEventCrossbar">
-        <factory
-            id="org.ict_ok.admin_utils.eventcrossbar.eventcrossbar.AdmUtilEventCrossbar" />
-        <implements
-            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
-        <require
-            permission="org.ict_ok.admin_utils.eventcrossbar.View"
-            interface=".interfaces.IAdmUtilEventCrossbar"
-            />
-        <require
-            permission="org.ict_ok.admin_utils.eventcrossbar.View"
-            set_schema=".interfaces.IAdmUtilEventCrossbar"
-            />
-    </class>
-
 
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
-    <xmlrpc:view
-        for=".interfaces.IAdmUtilEventCrossbar"
-        permission="org.ict_ok.admin_utils.eventcrossbar.View"
-        methods="triggerEventCrossbarEvent isUp"
-        class=".eventcrossbar.AdmUtilEventCrossbarRpcMethods"
-        />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".eventcrossbar.AllObjectInstances"
-        name="AllObjectInstances"
-        />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".eventcrossbar.AllObjectInstancesWithEventInputs"
-        name="AllObjectInstancesWithEventInputs"
-        />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".eventcrossbar.AllEventInstances"
-        name="AllEventInstances"
-        />
-    <adapter
-        factory=".adapter.ticker.Ticker"
-    />
 
     <include package=".browser" />
     

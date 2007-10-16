@@ -53,7 +53,7 @@
                     <z3c:pagelet
                         name="details.html"
                         for="%(longpath_interface)s.I%(utilityname)s"
-                        class="%(longpath_file)s.browser.Details%(utilityname)sForm"
+                        class="%(longpath)s.%(filename)s.browser.%(filename)s.Details%(utilityname)sForm"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="%(longpath)s.%(filename)s.View"
                         />
@@ -77,7 +77,7 @@
                     <z3c:pagelet
                         name="edit.html"
                         for="%(longpath_interface)s.I%(utilityname)s"
-                        class="%(longpath_file)s.browser.Edit%(utilityname)sForm"
+                        class="%(longpath)s.%(filename)s.browser.%(filename)s.Edit%(utilityname)sForm"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="%(longpath)s.%(filename)s.Edit"
                         />
@@ -86,7 +86,7 @@
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.testmod.interfaces.IAdmUtilTestMod"
-        class="org.ict_ok.admin_utils.testmod.testmod.browser.DetailsAdmUtilTestModForm"
+        class="org.ict_ok.admin_utils.testmod.browser.testmod.DetailsAdmUtilTestModForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.testmod.View"
         />
@@ -110,7 +110,7 @@
     <z3c:pagelet
         name="edit.html"
         for="org.ict_ok.admin_utils.testmod.interfaces.IAdmUtilTestMod"
-        class="org.ict_ok.admin_utils.testmod.testmod.browser.EditAdmUtilTestModForm"
+        class="org.ict_ok.admin_utils.testmod.browser.testmod.EditAdmUtilTestModForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.testmod.Edit"
         />
