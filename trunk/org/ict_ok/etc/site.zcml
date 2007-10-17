@@ -29,6 +29,7 @@
     <include file="../lib/python/org/ict_ok/admin_utils/usermanagement/security-global.zcml" />
 
     <!--security settings of utilities (alphabetical)-->
+    <include file="../lib/python/org/ict_ok/admin_utils/compliance/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/cron/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/esx_vim/security.zcml" />
     <include file="../lib/python/org/ict_ok/admin_utils/eventcrossbar/security.zcml" />
@@ -94,6 +95,7 @@
     <include package="org.ict_ok.admin_utils.supervisor" />
 
     <!--registration of utilities (alphabetical)-->
+    <include package="org.ict_ok.admin_utils.compliance" />
     <include package="org.ict_ok.admin_utils.cron" />
     <include package="org.ict_ok.admin_utils.esx_vim" />
     <include package="org.ict_ok.admin_utils.eventcrossbar" />
