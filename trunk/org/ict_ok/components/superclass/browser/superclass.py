@@ -400,6 +400,7 @@ class AddForm(layout.FormLayoutSupport, form.AddForm):
     label = _(u'Add Superclass')
     fields = field.Fields(ISuperclass).omit(\
         *SuperclassDetails.omit_addfields)
+    # factory stores the class, which will instanciated in AddForm.create()
     factory = Superclass
 
     def nextURL(self):
