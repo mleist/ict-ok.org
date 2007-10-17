@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-Fragen zu public_viewing
+
+README zu public_viewing
 ------------------------
 
 was sind die Klassen, von denen Attribute gezeigt werden sollen?
@@ -37,3 +38,14 @@ stellungen über deren Zustand (rot, gelb,grün)
 Ein Schattenobjekt sollte von dem Admin auch wieder gelöscht werden können:
 [P-]
 
+TODO:
+-----
+
+- ShadowObject implementieren
+- AddShadowObjectForm implementieren
+   weitere Infos: ... Menüthema???
+- EditShadowObjectForm implementieren
+- DetailsShadowObjectForm (für Admin) implementieren
+- public.html implementieren (Template) siehe superclass.browser.superclass.Overview
+- Event-mechanismus implementieren (durch dem ModifiyEvent wird der Inhalt des
+  InhalteObject.State in das ShadowObject.State übertragen.)

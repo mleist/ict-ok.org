@@ -20,8 +20,11 @@ import logging
 
 # zope imports
 from zope.interface import implements
+from zope.app.container.interfaces import IObjectModifiedEvent
+from zope.component import adapter
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.public_viewing.interfaces import \
      IAdmUtilPublicViewing
@@ -37,3 +40,11 @@ class AdmUtilPublicViewing(Supernode):
     def __init__(self):
         Supernode.__init__(self)
         self.ikRevision = __version__
+
+@adapter(ISuperclass, IObjectModifiedEvent)
+def notifyModifiedEvent(instance, event):
+    """
+    Node was modified
+    """
+    #import pdb; pdb.set_trace()
+    print "AdmUtilPublicViewing.notifyModifiedEvent"

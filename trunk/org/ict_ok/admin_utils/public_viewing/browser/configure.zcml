@@ -75,5 +75,13 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.public_viewing.Edit"
         />
+    <viewlet
+        name="add_shadow"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.admin_utils.public_viewing.browser.public_viewing.MSubAddShadow"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.public_viewing.Edit"
+        />
 
 </zope:configure>

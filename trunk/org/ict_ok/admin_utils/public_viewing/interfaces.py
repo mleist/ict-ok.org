@@ -34,3 +34,7 @@ class IAdmUtilPublicViewing(ISupernode):
         returns a list of all shadow objects
         """
 
+class IShadowObject(ISupernode):
+    """
+    
+    """
