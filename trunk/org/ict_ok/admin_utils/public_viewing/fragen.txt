@@ -9,7 +9,7 @@ von einem berechtigten Admin als Public_viewable markiert wurden.
 Von jeder dieser Inhaltsobjekte wird ein Schattenobjekt erzeugt.
 Das Schattenobjekt wird in einen Container innerhalb von AdmUtilPublicViewing
 abgelegt.
-Es wird eine zusätzliche View für das Inhaltsobjekt erzeugt (PublicDisplay), die
+Es wird eine zusätzliche View für das Inhaltsobjekt erzeugt (public.html), die
 dann im Submenü des Inhaltsobjektes angezeigt wird (als Menüeintrag) wenn
 zuvor für dieses Inhaltsobjekt ein Schattenobjekt erzeugt wurde. In 
 PublicDisplay wird zuerst mit getUtility(IAdmUtilPublicViewing) ein
@@ -25,10 +25,11 @@ Inhaltsobjektes)?
 
 [P+]
 Es öffnet sich ein Form, in dem können folgende Felder festgelegt werden:
-1. Neuer Name
-2. Description (evtl. Wiki)
-3. es werden über den Adapter IState alle Zustandsdaten des Inhaltsobjektes
-   in das neue Schattenobjekt eingefügt
+1. Neuer Name (self.ikName)
+2. DAU-Description (self.ikComment)
+3. aktualisierbare Kopie des Inhalteobjektes.State
+   (es werden über den Adapter IState alle Zustandsdaten des Inhaltsobjektes
+   bei jeder Änderung in dieses Schattenobjekt eingefügt)
 
 Es braucht noch eine OverView der Schattenobjekte, evtl. noch verschiedene Dar-
 stellungen über deren Zustand (rot, gelb,grün)
