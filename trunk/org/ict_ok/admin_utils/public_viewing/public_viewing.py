@@ -41,6 +41,9 @@ class AdmUtilPublicViewing(Supernode):
         Supernode.__init__(self)
         self.ikRevision = __version__
 
+class ShadowObject(Supernode):
+    """ """
+
 @adapter(ISuperclass, IObjectModifiedEvent)
 def notifyModifiedEvent(instance, event):
     """

@@ -30,7 +30,9 @@ from org.ict_ok.components.supernode.browser.supernode import \
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 from org.ict_ok.admin_utils.public_viewing.interfaces import \
-     IAdmUtilPublicViewing
+     IAdmUtilPublicViewing, IShadowObject
+from org.ict_ok.admin_utils.public_viewing.public_viewing import \
+     ShadowObject
 
 _ = MessageFactory('org.ict_ok')
 
