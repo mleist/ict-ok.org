@@ -48,6 +48,10 @@
 <FinishMode>
 <Automatic/>
 </FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="167,6"/>
+<ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="host_nagios1_par1"/>
+</ExtendedAttributes>
 </Activity>
 <Activity Id="host_nagios1_act1" Name="Start Host">
 <Implementation>
@@ -60,6 +64,10 @@
 <FinishMode>
 <Automatic/>
 </FinishMode>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="183,85"/>
+<ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="host_nagios1_par1"/>
+</ExtendedAttributes>
 </Activity>
 <Activity Id="host_nagios1_act2" Name="Nagios Check">
 <Implementation>
@@ -84,6 +92,10 @@
 </Split>
 </TransitionRestriction>
 </TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="209,27"/>
+<ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="host_nagios1_par2"/>
+</ExtendedAttributes>
 </Activity>
 <Activity Id="host_nagios1_act11" Name="Stop Host">
 <Implementation>
@@ -101,6 +113,10 @@
 <Join Type="XOR"/>
 </TransitionRestriction>
 </TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="500,29"/>
+<ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="host_nagios1_par1"/>
+</ExtendedAttributes>
 </Activity>
 <Activity Id="host_nagios1_act4" Name="Trigger online">
 <Implementation>
@@ -125,6 +141,10 @@
 </Split>
 </TransitionRestriction>
 </TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="343,158"/>
+<ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="host_nagios1_par2"/>
+</ExtendedAttributes>
 </Activity>
 <Activity Id="host_nagios1_act5" Name="Trigger offline">
 <Implementation>
@@ -149,6 +169,10 @@
 </Split>
 </TransitionRestriction>
 </TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="588,124"/>
+<ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="host_nagios1_par2"/>
+</ExtendedAttributes>
 </Activity>
 <Activity Id="host_nagios1_act6" Name="Trigger notification1">
 <Implementation>
@@ -173,55 +197,111 @@
 </Split>
 </TransitionRestriction>
 </TransitionRestrictions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="483,22"/>
+<ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="host_nagios1_par2"/>
+</ExtendedAttributes>
 </Activity>
 </Activities>
 <Transitions>
 <Transition From="initialize" Id="host_nagios1_tra2" To="host_nagios1_act1">
 <Condition Type="CONDITION">new_state == "2_start"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act2" Id="host_nagios1_tra1" To="host_nagios1_act4">
 <Condition Type="CONDITION">new_state=="online"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act2" Id="host_nagios_tra3" To="host_nagios1_act5">
 <Condition Type="CONDITION">new_state=="offline"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act2" Id="host_nagios1_tra4" To="host_nagios1_act6">
 <Condition Type="CONDITION">new_state=="notification1"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act1" Id="host_nagios1_tra8" To="host_nagios1_act2">
 <Condition Type="CONDITION">new_state == "2_nagios_check"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act2" Id="host_nagios1_tra9" To="host_nagios1_act11">
 <Condition Type="CONDITION">new_state=="stop"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act5" Id="host_nagios1_tra3" To="host_nagios1_act4">
 <Condition Type="CONDITION">new_state=="online"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act6" Id="host_nagios1_tra10" To="host_nagios1_act4">
 <Condition Type="CONDITION">new_state=="online"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act4" Id="host_nagios1_tra11" To="host_nagios1_act6">
 <Condition Type="CONDITION">new_state=="notification1"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act5" Id="host_nagios1_tra12" To="host_nagios1_act6">
 <Condition Type="CONDITION">new_state=="notification1"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act4" Id="host_nagios1_tra13" To="host_nagios1_act5">
 <Condition Type="CONDITION">new_state=="offline"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act6" Id="host_nagios1_tra14" To="host_nagios1_act5">
 <Condition Type="CONDITION">new_state=="offline"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act4" Id="host_nagios1_tra5" To="host_nagios1_act11">
 <Condition Type="CONDITION">new_state=="stop"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act6" Id="host_nagios1_tra6" To="host_nagios1_act11">
 <Condition Type="CONDITION">new_state=="stop"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 <Transition From="host_nagios1_act5" Id="host_nagios1_tra7" To="host_nagios1_act11">
 <Condition Type="CONDITION">new_state=="stop"</Condition>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+</ExtendedAttributes>
 </Transition>
 </Transitions>
+<ExtendedAttributes>
+<ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="host_nagios1_par1;host_nagios1_par2"/>
+</ExtendedAttributes>
 </WorkflowProcess>
 </WorkflowProcesses>
+<ExtendedAttributes>
+<ExtendedAttribute Name="EDITING_TOOL" Value="JPEd - JaWE based Process Editor"/>
+<ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="2.0-2(4?)-C-20071017-2158"/>
+</ExtendedAttributes>
 </Package>

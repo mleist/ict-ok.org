@@ -86,6 +86,8 @@ class Superclass(Persistent):
         self.inpEQueue = Queue()
         self.outEQueue = Queue()
         self.outEReceiver = None
+        self.workflows = {}
+        self.wf_worklist = []
         interaction = queryInteraction()
         if interaction is not None:
             for participation in interaction.participations:

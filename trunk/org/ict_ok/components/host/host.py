@@ -92,3 +92,9 @@ class Host(Component):
                name in IEventIfEventHost.names():
                 setattr(self, name, value)
         self.ikRevision = __version__
+        self.workflows[WfPdNagios.id] = nagios_wf = WfPdNagios()
+        setattr(nagios_wf.workflowRelevantData, "ddd", 5)
+        setattr(nagios_wf.workflowRelevantData, "state", "-")
+        setattr(nagios_wf.workflowRelevantData, "object", self)
+        setattr(nagios_wf.workflowRelevantData, "new_state", "2_start")
+        nagios_wf.start()

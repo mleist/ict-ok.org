@@ -82,6 +82,8 @@ class ISuperclass(Interface):
     inpEQueue = Attribute("input event queue")
     outEQueue = Attribute("output event queue")
     outEReceiver = Attribute("receiver object for output events")
+    workflows = Attribute("dict of object workflows")
+    wf_worklist = Attribute("list of ongoing workflow apps")
 
     def getObjectId(self):
         """
