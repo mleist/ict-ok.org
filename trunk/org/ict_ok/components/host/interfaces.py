@@ -157,6 +157,21 @@ class IHost(IComponent):
         description = _("UUID of virtual machine in ESX."),
         default = u"",
         required = False)
+        
+    def trigger_online(self):
+        """
+        trigger workflow
+        """
+
+    def trigger_offline(self):
+        """
+        trigger workflow
+        """
+
+    def trigger_not1(self):
+        """
+        trigger workflow
+        """
 
 class IEventIfEventHost(IEventIfSupernode):
     """ event interface of object """

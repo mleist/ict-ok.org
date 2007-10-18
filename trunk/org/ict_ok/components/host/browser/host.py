@@ -18,14 +18,21 @@ __version__ = "$Id$"
 
 # zope imports
 import zope.event
+from zope.app import zapi
+from zope.component import getUtility
 from zope.proxy import removeAllProxies
 from zope.i18nmessageid import MessageFactory
+from zope.security import checkPermission
 from zope.lifecycleevent import Attributes, ObjectModifiedEvent
+from zope.app.intid.interfaces import IIntIds
+from zope.app.pagetemplate.urlquote import URLQuote
+from zope.app.appsetup import appsetup
 
 # z3c imports
 from z3c.form import form, field
 
 # ict_ok.org imports
+from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
 from org.ict_ok.components.host.host import Host
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -62,7 +69,84 @@ class HostDetails(ComponentDetails):
     #omit_viewfields = ComponentDetails.omit_viewfields + []
     #omit_addfields = ComponentDetails.omit_addfields + []
     #omit_editfields = ComponentDetails.omit_editfields + []
+    
+    def actions(self):
+        """
+        gives us the action dict of the object
+        """
+        try:
+            objId = getUtility(IIntIds).getId(self.context)
+        except:
+            objId = 1000
+        retList = []
+        if appsetup.getConfigContext().hasFeature('devmode') and \
+           checkPermission('org.ict_ok.components.host.Edit', self.context):
+            quoter = URLQuote(self.request.getURL())
+            tmpDict = {}
+            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['title'] = _(u"Trigger online")
+            tmpDict['href'] = u"%s/@@trigger_online?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
+            retList.append(tmpDict)
+            tmpDict = {}
+            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['title'] = _(u"Trigger offline")
+            tmpDict['href'] = u"%s/@@trigger_offline?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
+            retList.append(tmpDict)
+            tmpDict = {}
+            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['title'] = _(u"Trigger notification1")
+            tmpDict['href'] = u"%s/@@trigger_not1?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
+            retList.append(tmpDict)
+        return retList
 
+    def state(self):
+        """
+        gives us the state dict of the object
+        """
+        return IState(self.context).getStateDict()
+
+    def trigger_online(self):
+        """
+        trigger workflow
+        """
+        print "trigger_online@browser"
+        self.context.trigger_online()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    def trigger_offline(self):
+        """
+        trigger workflow
+        """
+        print "trigger_offline@browser"
+        self.context.trigger_offline()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    def trigger_not1(self):
+        """
+        trigger workflow
+        """
+        print "trigger_not1@browser"
+        self.context.trigger_not1()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+        
     def getHistory(self):
         """
         return List of history entries for the browser
@@ -91,6 +175,14 @@ class HostDetails(ComponentDetails):
         from org.ict_ok.components.host.wf import pd
         return pd.activities
         #return utilWFMC
+        
+    def getWFMCs(self):
+        """
+        return list of Workflows of this object
+        """
+        obj = removeAllProxies(self.context)
+        owfs = obj.workflows
+        return owfs
 
 
 # --------------- forms ------------------------------------

@@ -98,3 +98,33 @@ class Host(Component):
         setattr(nagios_wf.workflowRelevantData, "object", self)
         setattr(nagios_wf.workflowRelevantData, "new_state", "2_start")
         nagios_wf.start()
+        
+    def trigger_online(self):
+        """
+        trigger workflow
+        """
+        print "trigger_online"
+        lastWorkItem = list(self.wf_worklist)[-1]
+        wfd = lastWorkItem.participant.activity.process.workflowRelevantData
+        wfd.new_state = "online"
+        lastWorkItem.change()
+
+    def trigger_offline(self):
+        """
+        trigger workflow
+        """
+        print "trigger_offline"
+        lastWorkItem = list(self.wf_worklist)[-1]
+        wfd = lastWorkItem.participant.activity.process.workflowRelevantData
+        wfd.new_state = "offline"
+        lastWorkItem.change()
+
+    def trigger_not1(self):
+        """
+        trigger workflow
+        """
+        print "trigger_not1"
+        lastWorkItem = list(self.wf_worklist)[-1]
+        wfd = lastWorkItem.participant.activity.process.workflowRelevantData
+        wfd.new_state = "notification1"
+        lastWorkItem.change()

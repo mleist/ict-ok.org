@@ -50,7 +50,7 @@ class State(object):
         """
         overviewNum = parentOverviewNum # 0: ok, 1: warn, 2: error
         obj = removeAllProxies(self.context)
-        wfrd = obj.getWFMCdata('ikhost_nagios1')
+        wfrd = obj.getWFMCdata('host_nagios1')
         if wfrd.state == "offline":
             if overviewNum < 1:
                 overviewNum = 1
@@ -68,7 +68,7 @@ class State(object):
         retDict = {}
         obj = removeAllProxies(self.context)
         owfs = obj.workflows
-        wfrd = owfs['ikhost_nagios1'].workflowRelevantData
+        wfrd = owfs['host_nagios1'].workflowRelevantData
         if wfrd.state == "offline":
             if overviewNum < 1:
                 overviewNum = 1
