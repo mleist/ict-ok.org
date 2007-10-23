@@ -41,14 +41,14 @@
         />
 
     <!--adapter
-        for="org.ict_ok.superclass.interfaces.ISuperclass"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         provides="org.ict_ok.admin_utils.wfmc.interfaces.IIkGenGraphvizDot"
         factory="org.ict_ok.admin_utils.wfmc.adapter.superclass.SuperclassGenGraphvizDot"
         permission="org.ict_ok.admin_utils.wfmc.View"
         />
 
     <adapter
-        for="org.ict_ok.supernode.interfaces.ISupernode"
+        for="org.ict_ok.components.supernode.interfaces.ISupernode"
         provides="org.ict_ok.admin_utils.wfmc.interfaces.IIkGenGraphvizDot"
         factory="org.ict_ok.admin_utils.wfmc.adapter.supernode.SupernodeGenGraphvizDot"
         permission="org.ict_ok.admin_utils.wfmc.View"

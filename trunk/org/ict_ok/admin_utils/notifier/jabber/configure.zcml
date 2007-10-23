@@ -24,14 +24,14 @@
     </class>
 
     <!--adapter
-        for="org.ict_ok.superclass.interfaces.ISuperclass"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         provides="org.ict_ok.admin_utils.notifier.jabber.interfaces.IIKGenHoneyd"
         factory="org.ict_ok.admin_utils.notifier.jabber.jabber.SuperclassGenHoneyd"
         permission="org.ict_ok.admin_utils.notifier.View"
     />
 
     <adapter
-        for="org.ict_ok.supernode.interfaces.ISupernode"
+        for="org.ict_ok.components.supernode.interfaces.ISupernode"
         provides="org.ict_ok.admin_utils.notifier.jabber.interfaces.IIKGenHoneyd"
         factory="org.ict_ok.admin_utils.notifier.jabber.jabber.SupernodeGenHoneyd"
         permission="org.ict_ok.admin_utils.notifier.View"

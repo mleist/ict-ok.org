@@ -1,4 +1,4 @@
-<i18n:block domain="ikomtrol.com">
+<i18n:block domain="org.ict_ok">
   <h1 tal:content="view/title">Overview ESX</h1>
   <form action="" method="post"
         tal:attributes="action request/URL">

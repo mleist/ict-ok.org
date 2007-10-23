@@ -1,4 +1,4 @@
-<i18n:block domain="ikomtrol.com">
+<i18n:block domain="org.ict_ok">
     <h1>Details</h1>
     <table id="sortable" class="listing" >
         <tr class="cb_wht" tal:condition="context/esxVimServerIp|nothing">

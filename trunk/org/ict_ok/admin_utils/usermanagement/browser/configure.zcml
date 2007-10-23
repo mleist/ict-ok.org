@@ -35,31 +35,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.usermanagement.View"
     />
-    <z3c:template
-        name="2org.ikomtrol.ikadmin_utils.usermanagement.form"
-        template="form2.pt"
-        for="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.AdmUtilUserPropertiesForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        />
-    <z3c:layout
-        name="org.ikomtrol.ikadmin_utils.usermanagement.form"
-        for="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.AdmUtilUserPropertiesForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        template="../../../skin/layoutTemplate.pt"
-        />
-
-    <!--<zope:adapter-->
-        <!--factory="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.form_template"-->
-        <!--for="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.AdmUtilUserPropertiesForm"-->
-        <!--name="org.ikomtrol.ikadmin_utils.usermanagement.form"-->
-    <!--/>-->
-
-    <!--adapter
-        factory=".recipe.form_template"
-        for=".usermanagement.AdmUtilUserManagementForm"
-        name="org.ict_ok.admin_utils.userproperties.form"
-    /-->
-
 
 
     <!--======================================================-->

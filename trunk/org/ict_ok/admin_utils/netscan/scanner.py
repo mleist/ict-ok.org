@@ -174,7 +174,7 @@ class Scanner(Supernode):
             ### add services to interface if1
             ####### Interface
             ####portsInterface = zapi.createObject(\
-                ####u'org.ikomtrol.ikinterface.ikinterface.IkInterface')
+                ####u'org.ict_ok.ikinterface.ikinterface.Interface')
             ####notify(ObjectCreatedEvent(portsInterface))
             ####newHost.__setitem__(portsInterface.getObjectId(), 
                                 ####portsInterface)

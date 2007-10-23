@@ -1,4 +1,4 @@
-<i18n:block domain="ikomtrol.com">
+<i18n:block domain="org.ict_ok">
     <h1>Details ESX Virtual Maschine</h1>
     <table id="sortable" class="listing"
            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">

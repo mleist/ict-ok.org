@@ -1,6 +1,6 @@
 <html metal:use-macro="views/standard_macros/view">
 <body>
-    <div metal:fill-slot="body" i18n:domain="ikomtrol.org">
+    <div metal:fill-slot="body" i18n:domain="org.ict_ok">
   		<!-- $Id$ -->
 			<h3>Systeminfo</h3>
 				<table id="sortable" class="listing" summary="Content listing"

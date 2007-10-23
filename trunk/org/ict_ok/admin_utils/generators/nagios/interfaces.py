@@ -31,7 +31,7 @@ class IAdmUtilGeneratorNagios(IAdmUtilGenerators):
         """
 
 
-class IIKGenNagios(Interface):
+class IGenNagios(Interface):
     """Interface of nagios-Adapter
     """
     def traverse4nagiosGeneratorPre(self, cfgFile, level, comments):

@@ -99,11 +99,11 @@ class AdmUtilUserPropertiesForm(FormBase):
     form_fields = Fields(IAdmUtilUserProperties)
     label = _(u"Edit your user data")
     template_l = z3ctemplate.getLayoutTemplate(
-        'org.ikomtrol.ikadmin_utils.usermanagement.form')
+        'org.ict_ok.ikadmin_utils.usermanagement.form')
     #getPageTemplate(
-        #'org.ikomtrol.ikadmin_utils.usermanagement.form')
+        #'org.ict_ok.ikadmin_utils.usermanagement.form')
     #template = NamedTemplate( \
-        #'org.ikomtrol.ikadmin_utils.usermanagement.form')
+        #'org.ict_ok.ikadmin_utils.usermanagement.form')
     
     def setUpWidgets(self, ignore_request=False):
         #import pdb; pdb.set_trace()

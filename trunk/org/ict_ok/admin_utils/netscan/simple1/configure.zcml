@@ -24,14 +24,14 @@
     </class>
 
     <!--adapter
-        for="org.ict_ok.superclass.interfaces.ISuperclass"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         provides="org.ict_ok.admin_utils.netscan.simple1.interfaces.IIKGenHoneyd"
         factory="org.ict_ok.admin_utils.netscan.simple1.simple1.SuperclassGenHoneyd"
         permission="org.ict_ok.admin_utils.netscan.View"
     />
 
     <adapter
-        for="org.ict_ok.supernode.interfaces.ISupernode"
+        for="org.ict_ok.components.supernode.interfaces.ISupernode"
         provides="org.ict_ok.admin_utils.netscan.simple1.interfaces.IIKGenHoneyd"
         factory="org.ict_ok.admin_utils.netscan.simple1.simple1.SupernodeGenHoneyd"
         permission="org.ict_ok.admin_utils.netscan.View"
