@@ -100,7 +100,7 @@
     <include package="org.ict_ok.admin_utils.esx_vim" />
     <include package="org.ict_ok.admin_utils.eventcrossbar" />
     <!--<include package="org.ict_ok.admin_utils.generators/honeyd" />-->
-    <!--<include package="org.ict_ok.admin_utils.generators/nagios" />-->
+    <include package="org.ict_ok.admin_utils.generators/nagios" />
     <include package="org.ict_ok.admin_utils.graphviz" />
     <include package="org.ict_ok.admin_utils.netscan" />
     <include package="org.ict_ok.admin_utils.netscan.nmap" />

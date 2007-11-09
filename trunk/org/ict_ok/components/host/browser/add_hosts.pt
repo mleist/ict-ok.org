@@ -1,0 +1,14 @@
+<i18n:block domain="ict_ok.org">
+  <h3>Add Hosts</h3>
+  <div class="message"
+    tal:condition="view/status|nothing"
+    tal:content="view/status"
+    i18n:translate="">
+  Something happened.
+  </div>
+  <ul>
+    <li><a href="ddd1">unspecific host</a></li>
+    <li><a href="ddd"></a>ddd</li>
+    <li><a href="ddd"></a>ddd</li>
+  </ul>
+</i18n:block>

@@ -25,7 +25,7 @@ from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.components.supernode.interfaces import IState
 
 # ict_ok.org imports
-#from org.ict_ok.supernode.interfaces import IIKState
+#from org.ict_ok.components.supernode.interfaces import IIKState
 #from org.ict_ok.host.interfaces import IHost
 
 _ = MessageFactory('org.ict_ok')

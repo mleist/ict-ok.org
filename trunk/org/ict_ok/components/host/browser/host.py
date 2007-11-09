@@ -30,6 +30,7 @@ from zope.app.appsetup import appsetup
 
 # z3c imports
 from z3c.form import form, field
+from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
@@ -183,6 +184,11 @@ class HostDetails(ComponentDetails):
         obj = removeAllProxies(self.context)
         owfs = obj.workflows
         return owfs
+
+
+class AddHostClass(BrowserPagelet):
+    def update(self):
+        pass
 
 
 # --------------- forms ------------------------------------

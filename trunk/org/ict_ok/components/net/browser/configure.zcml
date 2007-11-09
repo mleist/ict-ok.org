@@ -136,6 +136,20 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
     />
+    <z3c:pagelet
+        name="add_hosts.html"
+        for="org.ict_ok.components.net.interfaces.INet"
+        class="org.ict_ok.components.host.browser.host.AddHostClass"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Add"
+    />
+    <z3c:template
+        template="../../host/browser/add_hosts.pt"
+        for="org.ict_ok.components.host.browser.host.AddHostClass"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+
 
     <!--##### Sub Menu ##### -->
 

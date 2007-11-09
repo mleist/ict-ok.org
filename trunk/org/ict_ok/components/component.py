@@ -39,3 +39,5 @@ class Component(Supernode):
         for (name, value) in data.items():
             if name in IComponent.names():
                 setattr(self, name, value)
+        if not hasattr(self, 'isTemplate'):
+            self.isTemplate = False

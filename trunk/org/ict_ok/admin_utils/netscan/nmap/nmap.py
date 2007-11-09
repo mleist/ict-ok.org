@@ -54,7 +54,7 @@ class AdmUtilNMap(Scanner):
         """
         fill our data dictonary
         """
-        doc = xml.dom.minidom.parse("/home/markus/Projekte/python_nmap/3.xml")
+        doc = xml.dom.minidom.parse("/home/markus/Projekte/python_nmap/172_16_10.xml")
         hosts = doc.getElementsByTagName('host')
         resultList = []
         
@@ -119,11 +119,11 @@ class AdmUtilNMap(Scanner):
                         resultList.append(result)
         return resultList
 
-    def createObjects(self, dataDict, containerObject):
+    def createObjects(self, hostList, containerObject):
         """
         will use factories to create the objects from the dataDict
         """
-        for host in dataDict:
+        for host in hostList:
             dateNow = datetime.now(berlinTZ)
             newHost = createObject(u'org.ict_ok.components.host.host.Host')
             notify(ObjectCreatedEvent(newHost))
@@ -150,7 +150,7 @@ class AdmUtilNMap(Scanner):
                 
             if host.has_key("interfaces") and len(host['interfaces'])>0:
                 for interfaceDict in host['interfaces']:
-                    newInterface = zapi.createObject(\
+                    newInterface = createObject(\
                         u'org.ict_ok.components.interface.interface.Interface')
                     notify(ObjectCreatedEvent(newInterface))
                     newInterfaceId=u"If%s" % (interfaceDict['nbr'])
@@ -206,7 +206,8 @@ class AdmUtilNMap(Scanner):
             newInterfaceDc.created = dateNow
             newInterfaceDc.creators = [u'ikportscan']
             portsInterface.ikComment += u"scanner: %s" % (dateNow)
-            portsInterface.ipv4List.append(host['ipAddress'])
+            #portsInterface.ipv4List.append(host['ipAddress'])
+            portsInterface.ipv4List = host['ipAddress']
             portsInterface.netType = 'ethernet'
             if host.has_key('macAddress'):
                 portsInterface.mac = host['macAddress']

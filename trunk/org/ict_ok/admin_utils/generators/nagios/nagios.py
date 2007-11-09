@@ -90,7 +90,7 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
                     if adapterGenNagios:
                         adapterGenNagios.traverse4nagiosGenerator(fileDict,
                                                                   level=1, 
-                                                                  comments=True)
+                                                                  comments=False)
                 except TypeError, errText:
                     logger.error(u"Problem in adaption of nagios config: %s" %\
                                  (errText))

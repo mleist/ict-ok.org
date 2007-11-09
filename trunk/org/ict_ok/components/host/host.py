@@ -54,6 +54,7 @@ class Host(Component):
     hostname = FieldProperty(IHost['hostname'])
     manufacturer = FieldProperty(IHost['manufacturer'])
     vendor = FieldProperty(IHost['vendor'])
+    hostGroup = FieldProperty(IHost['hostGroup'])
     workinggroup = FieldProperty(IHost['workinggroup'])
     hardware = FieldProperty(IHost['hardware'])
     user = FieldProperty(IHost['user'])

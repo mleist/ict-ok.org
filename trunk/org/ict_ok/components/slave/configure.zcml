@@ -18,7 +18,7 @@
 
     <!--adapter
         for=".interfaces.ISlave"
-        provides="org.ict_ok.supernode.interfaces.IIKState"
+        provides="org.ict_ok.components.supernode.interfaces.IIKState"
         factory="org.ict_ok.slave.adapter.ikstate.IKState"
         /-->
     <adapter
