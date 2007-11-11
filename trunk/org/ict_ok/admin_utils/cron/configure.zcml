@@ -29,11 +29,19 @@
         handler=".bootstrap.bootStrapSubscriberDatabase"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
+
     <xmlrpc:view
-        for=".interfaces.IAdmUtilCron"
+        for="org.ict_ok.admin_utils.cron.interfaces.IAdmUtilCron"
         permission="org.ict_ok.admin_utils.cron.View"
-        methods="triggerCronEvent isUp"
-        class=".cron.AdmUtilCronRpcMethods"
+        methods="isUp"
+        class="org.ict_ok.admin_utils.cron.cron.AdmUtilCronRpcMethods"
+        />
+
+    <xmlrpc:view
+        for="org.ict_ok.admin_utils.cron.interfaces.IAdmUtilCron"
+        permission="org.ict_ok.admin_utils.cron.Edit"
+        methods="triggerCronEvent"
+        class="org.ict_ok.admin_utils.cron.cron.AdmUtilCronRpcMethods"
         />
 
     <include package=".browser" />

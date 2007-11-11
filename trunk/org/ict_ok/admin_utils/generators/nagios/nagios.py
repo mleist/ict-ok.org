@@ -22,7 +22,6 @@ from pytz import timezone
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
-from zope.annotation.interfaces import IAttributeAnnotatable
 
 # ict_ok.org imports
 from org.ict_ok.version import getIkVersion
@@ -39,12 +38,10 @@ berlinTZ = timezone('Europe/Berlin')
 class AdmUtilGeneratorNagios(AdmUtilGenerators):
     """Implementation of nagios configuration generator
     """
-    implements(IAdmUtilGeneratorNagios, IAttributeAnnotatable)
-    #implements(IAdmUtilGeneratorNagios)
+    implements(IAdmUtilGeneratorNagios)
 
     def __init__(self):
-        super(AdmUtilGeneratorNagios, self).__init__()
-        #AdmUtilGenerators.__init__(self)
+        AdmUtilGenerators.__init__(self)
         self.ikRevision = __version__
 
     def getConfig(self):

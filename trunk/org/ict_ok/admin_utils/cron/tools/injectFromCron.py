@@ -88,7 +88,7 @@ if __name__ == '__main__':
     if len(args) > 1:
         modeString = args[1]
     #print "modeString: %s" % modeString
-    url = 'http://localhost:8080/++etc++site/default/AdmUtilCron'
+    url = 'http://localhost:8081/++etc++site/default/AdmUtilCron'
     # TODO hook in a checker for "only permit cron@localhost" in zope3/ict-ok.org
     username = 'cron'
     password = '59d2d6db79b3'

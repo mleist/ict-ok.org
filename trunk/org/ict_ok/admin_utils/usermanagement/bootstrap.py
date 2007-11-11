@@ -23,13 +23,12 @@ from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
-from zope.app.security.interfaces import IAuthentication
 from zope.app.authentication.authentication import PluggableAuthentication
 from zope.app.authentication.principalfolder import InternalPrincipal
 from zope.app.authentication.principalfolder import PrincipalFolder
 from zope.app.authentication.groupfolder import GroupInformation, \
      GroupFolder
-from zope.app.securitypolicy.interfaces import IPrincipalRoleManager
+from zope.securitypolicy.interfaces import IPrincipalRoleManager
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
@@ -49,13 +48,6 @@ def bootStrapSubscriberDatabase(event):
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 
-    #madePluggableAuthentication = ensureUtility(\
-        #root_folder,
-        #IAuthentication,
-        #'',
-        #PluggableAuthentication,
-        #copy_to_zlog=False,
-        #asObject=True)
     madePluggableAuthentication = ensureUtility(\
         root_folder,
         IAdmUtilUserManagement,

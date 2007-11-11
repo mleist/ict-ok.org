@@ -63,6 +63,8 @@ class AdmUtilCron(Supernode):
 
 
 class GlobalCronUtility(object):
+    """ Class for singleton utility
+    """
 
     implements(IGlobalCronUtility)
 
@@ -114,17 +116,17 @@ class GlobalCronUtility(object):
 
 
 class AdmUtilCronRpcMethods(MethodPublisher):
-    def triggerCronEvent(self, str_time, str_mode):
-        #print "AdmUtilCronRpcMethods.triggerCronEvent(%s, %s)" % \
-              #(str_time, str_mode)
-        from zope.proxy import removeAllProxies
-        obj = removeAllProxies(self.context)
-        obj.__setattr__("lastCron", str_time)
-        globalCronUtility.receiveCron(self.request, str_time, str_mode)
-        
     def isUp(self):
         """reachable check on the XMLRPC-Interface"""
         logger.info(u"AdmUtilCronRpcMethods::isUp (%s)" % self.__name__)
         return True
 
+    def triggerCronEvent(self, str_time, str_mode):
+        print "AdmUtilCronRpcMethods.triggerCronEvent(%s, %s)" % \
+              (str_time, str_mode)
+        from zope.proxy import removeAllProxies
+        obj = removeAllProxies(self.context)
+        obj.__setattr__("lastCron", str_time)
+        globalCronUtility.receiveCron(self.request, str_time, str_mode)
+        
 globalCronUtility = GlobalCronUtility()

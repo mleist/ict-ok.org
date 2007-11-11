@@ -30,9 +30,9 @@ __versRevision = "$LastChangedRevision$"
 __versAuthor = "$LastChangedBy$"
 __versHeadURL = "$HeadURL$"
 
-def getVersRevision():
+def getVersRevision(versText = __versRevision):
     """ get actual revision """
-    result = re.match("\$LastChangedRevision:\ (\d*)(.*)", __versRevision)
+    result = re.match("\$LastChangedRevision:\ (\d*)(.*)", versText)
     if result:
         return result.group(1).strip()
     else:
