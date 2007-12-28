@@ -23,6 +23,7 @@ __version__ = "$Id$"
 from zope.app import zapi
 from zope.interface import implements
 from zope.component import getUtility
+from zope.schema.fieldproperty import FieldProperty
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
@@ -55,6 +56,8 @@ class Location(Component):
     # for ..Contained we have to:
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(ILocation['ikAttr'])
+    coordinates = FieldProperty(ILocation['coordinates'])
+    gmapsurl = FieldProperty(ILocation['gmapsurl'])
 
     def __init__(self, **data):
         """

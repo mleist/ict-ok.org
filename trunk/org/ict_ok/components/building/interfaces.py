@@ -32,3 +32,10 @@ class IBuilding(IComponent):
         description = _("Coordinates of the building."),
         default = u"",
         required = False)
+
+    gmapsurl = TextLine(
+        max_length = 200,
+        title = _("GoogleMap URL"),
+        description = _("URL of the location at google maps."),
+        default = u"",
+        required = False)
