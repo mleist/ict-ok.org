@@ -11,5 +11,6 @@
 
     <include package=".mge_ups" />
     <include package=".vmware_vc2" />
+    <include package=".vmware_esx" />
 
 </configure>
