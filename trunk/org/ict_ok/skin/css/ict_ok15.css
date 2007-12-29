@@ -213,6 +213,16 @@ div#header-breadcrumbs{
   font-weight:bold;
 }
 
+#addmenu ul {
+  margin: 2px 0px 7px 15px;
+  padding:0;
+  width:100%;
+}
+
+#addmenu h4 {
+  font-weight:bold;
+}
+
 .bg-315-top {
   background:url(../pics/bg_box_315_shaddow_top.gif) no-repeat top; 
   padding:6px 0 0 0;
