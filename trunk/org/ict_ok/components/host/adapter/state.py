@@ -50,11 +50,15 @@ class State(object):
         """
         overviewNum = parentOverviewNum # 0: ok, 1: warn, 2: error
         obj = removeAllProxies(self.context)
-        wfrd = obj.getWFMCdata('host_nagios1')
-        if wfrd.state == "offline":
+        owfs = obj.workflows
+        wfrd = owfs['host_nagios1'].workflowRelevantData
+        if wfrd.state == "online":
+            if overviewNum < 0:
+                overviewNum = 0
+        elif wfrd.state == "offline":
             if overviewNum < 1:
                 overviewNum = 1
-        if wfrd.state == "notification1":
+        elif wfrd.state == "notification1":
             if overviewNum < 2:
                 overviewNum = 2
         return overviewNum
@@ -91,4 +95,14 @@ class State(object):
     def getIconName(self):
         """get the icon name of the object state
         """
+        try:
+            stateNum = self.getStateOverview(-1)
+            if stateNum == 2:
+                return u"Host_red.png"
+            elif stateNum == 1:
+                return u"Host_yel.png"
+            elif stateNum == 0:
+                return u"Host_green.png"
+        except AttributeError:
+            return u"Host_gr.png"
         return u"Host_gr.png"

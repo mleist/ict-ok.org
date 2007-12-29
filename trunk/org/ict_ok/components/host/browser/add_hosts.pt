@@ -6,9 +6,28 @@
     i18n:translate="">
   Something happened.
   </div>
-  <ul>
-    <li><a href="ddd1">unspecific host</a></li>
-    <li><a href="ddd"></a>ddd</li>
-    <li><a href="ddd"></a>ddd</li>
-  </ul>
+  <br />
+  <div id="addmenu">
+    <h4>Linux</h4>
+    <ul>
+      <li><a href="add_host_linux_server.html">Linux Server</a></li>
+      <li><a href="add_host_linux_workstation.html">Linux Workstation</a></li>
+    </ul>
+    
+    <h4>VmWare Hosts</h4>
+    <ul>
+      <li><a href="add_host_vmware_esx.html">VMware ESX Server</a></li>
+      <li><a href="add_host_vmware_vc2.html">VMware VirtualCenter 2</a></li>
+    </ul>
+    
+    <h4>UPS</h4>
+    <ul>
+      <li><a href="add_host_mge_ups.html">MGE UPS</a></li>
+    </ul>
+    
+    <h4>misc.</h4>
+    <ul>
+      <li><a href="add_host.html">normal Host</a></li>
+    </ul>
+  </div>
 </i18n:block>

@@ -55,7 +55,7 @@ _ = MessageFactory('org.ict_ok')
 class MSubAddHost(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Host')
-    viewURL = 'add_host.html'
+    viewURL = 'add_hosts.html'
     weight = 50
 
 # --------------- object details ---------------------------

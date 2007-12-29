@@ -26,13 +26,13 @@
 
     <!--##### Sub Menu ##### -->
 
-    <viewlet
+    <!--viewlet
         name="add_host_vmware_esx"
         for="org.ict_ok.components.net.interfaces.INet"
         manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
         class="org.ict_ok.components.host.special.vmware_esx.browser.host.MSubAddHost"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
-        />
+        /-->
 
 </configure>
