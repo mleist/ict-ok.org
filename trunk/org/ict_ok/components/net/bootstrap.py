@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101
+# pylint: disable-msg=E1101,E0611
 #
 """startup of subsystem"""
 
@@ -16,6 +16,7 @@ __version__ = "$Id$"
 # phython imports
 import logging
 import transaction
+from datetime import datetime
 
 # zope imports
 from zope.app.appsetup import appsetup
@@ -23,11 +24,18 @@ from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
+from zope.dublincore.interfaces import IZopeDublinCore
+from zope.lifecycleevent import ObjectCreatedEvent
+from zope.event import notify
+from zope.component import createObject
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 
 logger = logging.getLogger("Compon. Net")
+
+def createLocalSystem(root_folder):
+    pass
 
 def bootStrapSubscriber(event):
     """initialisation of IntId utility on first database startup
@@ -64,6 +72,8 @@ def bootStrapSubscriber(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create ip index for 'net'")
-        
+
+    createLocalSystem(root_folder)
+
     transaction.get().commit()
     connection.close()
