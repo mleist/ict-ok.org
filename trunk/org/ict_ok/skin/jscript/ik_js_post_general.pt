@@ -1,9 +1,14 @@
 <script type="text/javascript">
-  my_form_widget = document.getElementById("form-widgets-ikName");
-  my_form_widget.focus();
   ik_el_ikh_time = document.getElementById("ikh_time");
-  //ik_el_status_pic = document.getElementById("statusPic");
-  //ik_el_status_pic.ik_stat = true;
+  ik_el_status_pic = document.getElementById("statusPic");
+  if ( ik_el_status_pic ) {
+    ik_el_status_pic.ik_stat = true;
+  }
+  // must be at the end of this javascript
+  my_form_widget = document.getElementById("form-widgets-ikName");
+  if ( my_form_widget ) {
+    my_form_widget.focus();
+  }
 </script>
 <script type="text/javascript">
   function loadNodeData(node, fnLoadComplete) {
