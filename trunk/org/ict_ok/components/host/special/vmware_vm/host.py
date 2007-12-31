@@ -27,6 +27,7 @@ from zope.schema.fieldproperty import FieldProperty
 from org.ict_ok.components.host.special.vmware_vm.interfaces import \
      IHostVMwareVm, IEventIfHostVMwareVm
 from org.ict_ok.components.host.host import Host as HostBase
+from org.ict_ok.admin_utils.esx_vim.interfaces import IAdmUtilEsxVim
 
 class Host(HostBase):
     """
@@ -54,22 +55,16 @@ class Host(HostBase):
         """
         trigger poweroff
         """
-        print "poweroff@browser"
-        self.context.poweroff()
-        nextURL = self.request.get('nextURL', default=None)
-        if nextURL:
-            return self.request.response.redirect(nextURL)
-        else:
-            return self.request.response.redirect('./@@details.html')
-
-    def poweroff(self):
-        """
-        trigger poweroff
-        """
         print "poweroff"
+        esx_utility = queryUtility(IAdmUtilEsxVim)
+        if esx_utility and len(self.esxUuid) > 0:
+            esx_utility.powerOffVm(self.esxUuid)
         
     def poweron(self):
         """
         trigger poweron
         """
         print "poweron"
+        esx_utility = queryUtility(IAdmUtilEsxVim)
+        if esx_utility and len(self.esxUuid) > 0:
+            esx_utility.powerOnVm(self.esxUuid)
