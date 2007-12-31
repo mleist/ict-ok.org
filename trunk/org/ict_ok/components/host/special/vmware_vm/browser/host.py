@@ -87,6 +87,30 @@ class HostDetails(SuperHostDetails):
             retList.append(tmpDict)
         return SuperHostDetails.actions(self) + retList
 
+    def poweroff(self):
+        """
+        trigger poweroff
+        """
+        print "poweroff@browser"
+        self.context.poweroff()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    def poweron(self):
+        """
+        trigger poweron
+        """
+        print "poweron@browser"
+        self.context.poweron()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
 # --------------- forms ------------------------------------
 
 

@@ -19,6 +19,24 @@
         permission="org.ict_ok.components.host.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
     />
+    
+    <page
+        name="poweroff.html"
+        for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.HostDetails"
+        attribute="poweroff"
+        permission="org.ict_ok.components.host.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    
+    <page
+        name="poweron.html"
+        for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.HostDetails"
+        attribute="poweron"
+        permission="org.ict_ok.components.host.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
 
     <defaultView
         for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"

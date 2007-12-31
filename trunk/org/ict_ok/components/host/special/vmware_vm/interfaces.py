@@ -34,6 +34,15 @@ class IHostVMwareVm(IHost):
         description = _("UUID of virtual machine in ESX."),
         default = u"",
         required = False)
+    
+    def poweroff():
+        """
+        trigger poweroff
+        """
+    def poweron():
+        """
+        trigger poweron
+        """
 
 class IEventIfHostVMwareVm(IEventIfSupernode):
     """ event interface of object """

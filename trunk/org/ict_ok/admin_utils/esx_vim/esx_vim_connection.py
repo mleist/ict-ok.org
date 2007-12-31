@@ -168,8 +168,13 @@ class EsxVimConnectionThread(threading.Thread):
             try:
                 if self.perl is not None:
                     if myParams['cmd'] == 'find_entity_views':
-                        retList = self.perl.call("Vim::find_entity_views", \
-                                                 view_type=myParams['view_type'])
+                        if myParams.has_key('filter'):
+                            retList = self.perl.call("Vim::find_entity_views", \
+                                                     view_type=myParams['view_type'], \
+                                                 filter=myParams['filter'])
+                        else:
+                            retList = self.perl.call("Vim::find_entity_views", \
+                                                     view_type=myParams['view_type'])
                         return retList
             except self.perl.PerlError, err:
                 #print "77777: ", err

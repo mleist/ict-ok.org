@@ -92,6 +92,12 @@ class AdmUtilEsxVim(Supernode):
         if key == '__getnewargs__':
             return None
         raise KeyError
+    
+    def powerOffVm(self, uuid):
+        globalEsxVimUtility.powerOffVm(self, uuid, self.objectID)
+ 
+    def powerOnVm(self, uuid):
+        globalEsxVimUtility.powerOnVm(self, uuid, self.objectID)
  
     def values(self):
         '''See interface `IReadContainer`'''
@@ -296,6 +302,31 @@ class GlobalEsxVimUtility(object):
                 newObj.__parent__ = parentObj
                 retDict[esxObj['name']] = newObj
         return retDict
+
+    def powerOffVm(self, uuid, localEsxUtilOId):
+        print "powerOffVm"
+        if self.esxThread is None:
+            return {}
+        print "3aa12"
+        myParams = {\
+            'cmd': 'find_entity_views',
+            'view_type': 'VirtualMachine',
+            'filter': {'config.uuid':uuid},
+            }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        print "3aa13:", localEsxUtilOId
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        print "3aa14"
+        #self.esxThread.queue1_in.put(localEsxUtil, True, 5)
+        #self.esxThread.queue1_in.join()
+        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        print "3esxObjList: ", esxObjList
+        print "3aa15"
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        print "3aa16"
+ 
+    def powerOnVm(self, uuid):
+        pass
 
 
 globalEsxVimUtility = GlobalEsxVimUtility()

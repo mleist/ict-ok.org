@@ -49,3 +49,27 @@ class Host(HostBase):
             if name in IHostVMwareVm.names() or \
                name in IEventIfHostVMwareVm.names():
                 setattr(self, name, value)
+
+    def poweroff(self):
+        """
+        trigger poweroff
+        """
+        print "poweroff@browser"
+        self.context.poweroff()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    def poweroff(self):
+        """
+        trigger poweroff
+        """
+        print "poweroff"
+        
+    def poweron(self):
+        """
+        trigger poweron
+        """
+        print "poweron"
