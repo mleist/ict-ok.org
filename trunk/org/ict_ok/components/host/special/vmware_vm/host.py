@@ -20,6 +20,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.app import zapi
+from zope.component import queryUtility
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 
