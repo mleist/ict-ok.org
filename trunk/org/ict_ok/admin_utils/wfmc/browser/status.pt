@@ -1,6 +1,6 @@
-<html metal:use-macro="views/standard_macros/view">
+<html>
     <body>
-        <div metal:fill-slot="body" i18n:domain="ict-ok.org">
+        <div i18n:domain="ict-ok.org">
             <h3>Systeminfo</h3>
             <table id="sortable" class="listing" summary="Content listing"
                     i18n:attributes="summary">

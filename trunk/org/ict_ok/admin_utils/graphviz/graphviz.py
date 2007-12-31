@@ -63,7 +63,7 @@ class AdmUtilGraphviz(Supernode):
                     adapterGenGraphvizDot = IGenGraphvizDot(oobj)
                     if adapterGenGraphvizDot:
                         adapterGenGraphvizDot.setParent(zapi.getRoot(self))
-                        adapterGenGraphvizDot.traverse4GraphvizDotGenerator(\
+                        adapterGenGraphvizDot.traverse4DotGenerator(\
                             dotFile,
                             level=1, 
                             comments=False)

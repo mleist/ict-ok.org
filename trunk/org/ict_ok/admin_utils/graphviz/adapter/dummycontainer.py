@@ -27,7 +27,7 @@ class DummyContainerGenGraphvizDot(SupernodeGenGraphvizDot):
 
     implements(IGenGraphvizDot)
 
-    def traverse4GraphvizDotGeneratorPre(self, 
+    def traverse4DotGeneratorPre(self, 
                                          cfgFile, 
                                          level=0, 
                                          comments=True):

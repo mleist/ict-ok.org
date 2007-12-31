@@ -67,7 +67,6 @@ class Host(Component):
     url_authpasswd = FieldProperty(IHost['url_authpasswd'])
     console = FieldProperty(IHost['console'])
     genNagios = FieldProperty(IHost['genNagios'])
-    esxUuid = FieldProperty(IHost['esxUuid'])
     
     eventInpObjs_shutdown = FieldProperty(\
         IEventIfEventHost['eventInpObjs_shutdown'])
@@ -129,3 +128,8 @@ class Host(Component):
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "notification1"
         lastWorkItem.change()
+
+    def eventInp_shutdown(self, eventMsg=None):
+        """ start the shutdown of the host """
+        eventMsg.stopit(self, "Host.eventInp_shutdown")
+        print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)

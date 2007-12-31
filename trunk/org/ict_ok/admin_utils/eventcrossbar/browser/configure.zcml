@@ -84,6 +84,44 @@
         name="details.html"
         />
 
+    <!--##### Event Timer ##### -->
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timer.DetailsEventTimerForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.View"
+        />
+        
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.View"
+        />
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timer.EditEventTimerForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.Edit"
+    />
+    
+    <z3c:pagelet
+        name="edit_event_if.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timer.EditEventTimerEventIfForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+    />
+    
+    <defaultView
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        name="details.html"
+        />
+
     <!--##### Event Crossbar ##### -->
 
     <z3c:pagelet
@@ -127,6 +165,14 @@
     />
 
     <z3c:pagelet
+        name="add_event_timer.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class=".event_timer.AddEventTimerForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.Add"
+    />
+
+    <z3c:pagelet
         name="edit.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
         class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.EditAdmUtilEventCrossbarForm"
@@ -151,6 +197,18 @@
     <z3c:template
         template="crossbar.pt"
         for="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.CrossBar"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <z3c:pagelet
+        name="signalgraph.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.SignalGraph"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+    <z3c:template
+        template="signalgraph.pt"
+        for="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.SignalGraph"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
@@ -218,6 +276,42 @@
         />
 
 
+    <!--##### Event Timer ##### -->
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.Edit"
+        />
+    <viewlet
+        name="edit_event_if"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+        />
+
+
     <!--##### Event Crossbar ##### -->
     <!--##### Sub Menu ##### -->
     <viewlet
@@ -269,6 +363,14 @@
         permission="org.ict_ok.admin_utils.eventcrossbar.View"
         />
     <viewlet
+        name="signalgraph"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.MSubCrossBarSignalGraph"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+    <viewlet
         name="add_event"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
         manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
@@ -283,5 +385,13 @@
         class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.MSubAddEventTimingRelay"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event_timingrelay.Add"
+        />
+    <viewlet
+        name="add_event_timer"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timer.MSubAddEventTimer"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.Add"
         />
 </zope:configure>

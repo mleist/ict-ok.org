@@ -14,6 +14,7 @@
         name="status"
         for="org.ict_ok.admin_utils.wfmc.interfaces.IAdmUtilWFMC"
         class=".wfmc.AdmUtilWFMCDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         template="status.pt"
         permission="org.ict_ok.admin_utils.wfmc.View"
         menu="zmi_views" title="Status"
@@ -23,6 +24,7 @@
         name="viewwf"
         for="org.ict_ok.admin_utils.wfmc.interfaces.IAdmUtilWFMC"
         class=".wfmc.AdmUtilWFMCDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         template="viewwf.pt"
         permission="org.ict_ok.admin_utils.wfmc.View"
     />
@@ -31,6 +33,7 @@
         name="getIMG"
         for="org.ict_ok.admin_utils.wfmc.interfaces.IAdmUtilWFMC"
         class=".wfmc.AdmUtilWFMCDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.wfmc.View"
         attribute="getIMGFile"
     />

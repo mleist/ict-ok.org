@@ -37,36 +37,44 @@ class SuperclassGenGraphvizDot(object):
         """
         self.parent = parent
 
-    def traverse4GraphvizDotGeneratorPre(self,
-                                         cfgFile, 
-                                         level=0, 
-                                         comments=True):
+    def traverse4DotGeneratorPre(self,
+                                 cfgFile, 
+                                 level=0, 
+                                 comments=True,
+                                 signalsOutput=False):
         """generate pre-text in graphviz dot-file"""
         if comments:
             print >> cfgFile, "%s// Pre (%s,%d) - SuperclassGenGraphvizDot" \
                   % ("\t" * level, self.context.__name__, level)
-            print >> cfgFile, "%s// Parent = %s" \
-                  % ("\t" * level, self.parent.__name__)
+            if hasattr(self, "parent") and self.parent is not None:
+                print >> cfgFile, "%s// Parent = %s" \
+                      % ("\t" * level, self.parent.__name__)
 
-    def traverse4GraphvizDotGeneratorPost(self, 
-                                          cfgFile, 
-                                          level=0, 
-                                          comments=True):
+    def traverse4DotGeneratorPost(self, 
+                                  cfgFile, 
+                                  level=0, 
+                                  comments=True,
+                                  signalsOutput=False):
         """generate post-text in graphviz dot-file"""
         if comments:
             print >> cfgFile, "%s// Post (%s,%d) - SuperclassGenGraphvizDot" \
                   % ("\t" * level, self.context.__name__, level)
-        try:
-            print >> cfgFile, '%s"%s" -- "%s"' \
-                  % ("\t" * level, self.parent.objectID, self.context.objectID)
-        except Exception, err:
-            print >> cfgFile, '%s"%s" -- "%s"' \
-                  % ("\t" * level, self.parent.__name__, self.context.objectID)
+        #if hasattr(self, "parent") and self.parent is not None:
+            #try:
+                #print >> cfgFile, '%s"%s" -- "%s"' \
+                      #% ("\t" * level, self.parent.objectID, self.context.objectID)
+            #except Exception, err:
+                #print >> cfgFile, '%s"%s" -- "%s"' \
+                      #% ("\t" * level, self.parent.__name__, self.context.objectID)
+        #else:
+            #print >> cfgFile, '%s -- "%s"' \
+                  #% ("\t" * level, self.context.objectID)
 
-    def traverse4GraphvizDotGeneratorBody(self, 
-                                          cfgFile, 
-                                          level=0, 
-                                          comments=True):
+    def traverse4DotGeneratorBody(self, 
+                                  cfgFile, 
+                                  level=0, 
+                                  comments=True,
+                                  signalsOutput=False):
         """generate body-text in graphviz dot-file"""
         if comments:
             print >> cfgFile, "%s// Body (%s,%d) - " \
@@ -82,14 +90,18 @@ class SuperclassGenGraphvizDot(object):
               % ("\t" * (level + 1), zapi.getPath(self.context))
         print >> cfgFile, '%slabel = <<TABLE BORDER = "0" CELLBORDER = "0" ' \
               'CELLPADDING = "0" CELLSPACING = "0"><TR><TD>' \
-              '<IMG SRC = "/home/markus/Projekte/ICT_Ok-hp/apple-red.png"/>' \
+              '<IMG SRC = "/home/markus/Projekte/IKOMtrol-hp/apple-red.png"/>' \
               '</TD></TR><TR><TD><FONT FACE = "Arial" POINT-SIZE = "10">%s' \
               '</FONT></TD></TR></TABLE>>' \
-              % ("\t" * (level + 1), self.context.__name__)
+              % ("\t" * (level + 1), self.context.ikName)
         print >> cfgFile, '%s]; // %s' % ("\t" * level, self.context.__name__)
 
-    def traverse4GraphvizDotGenerator(self, cfgFile, level=0, comments=True):
+    def traverse4DotGenerator(self, cfgFile, level=0,
+                              comments=True, signalsOutput=False):
         """generate text structure in graphviz dot-file"""
-        self.traverse4GraphvizDotGeneratorPre(cfgFile, level, comments)
-        self.traverse4GraphvizDotGeneratorBody(cfgFile, level, comments)
-        self.traverse4GraphvizDotGeneratorPost(cfgFile, level, comments)
+        self.traverse4DotGeneratorPre(cfgFile, level,
+                                      comments, signalsOutput)
+        self.traverse4DotGeneratorBody(cfgFile, level,
+                                       comments, signalsOutput)
+        self.traverse4DotGeneratorPost(cfgFile, level,
+                                       comments, signalsOutput)

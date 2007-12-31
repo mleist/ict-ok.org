@@ -27,11 +27,11 @@
             />
         <require
             permission="org.ict_ok.components.host.View"
-            interface=".interfaces.IHost"
+            interface=".interfaces.IHostLinuxWorkstation"
             />
         <require
             permission="org.ict_ok.components.host.Edit"
-            set_schema=".interfaces.IHost"
+            set_schema=".interfaces.IHostLinuxWorkstation"
             />
     </class>
 

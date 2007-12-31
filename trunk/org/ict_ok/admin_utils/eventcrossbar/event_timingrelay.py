@@ -84,7 +84,7 @@ class EventTimingRelay(EventLogic):
         # and up to superclass
         EventLogic.tickerEvent(self)
 
-    def eventInp_trigger(self):
+    def eventInp_trigger(self, eventMsg=None):
         """ sends delayed event """
         print "EventTimingRelay.eventInp_trigger"
         if not self.isRunning:
@@ -93,7 +93,7 @@ class EventTimingRelay(EventLogic):
             self.timeStart = datetime.datetime.utcnow()
             IEventTimingRelay['timeStart'].readonly = True
 
-    def eventInp_reset(self):
+    def eventInp_reset(self, eventMsg=None):
         """ sends delayed event """
         print "EventTimingRelay.eventInp_reset"
         if self.isRunning:

@@ -27,10 +27,10 @@ class DummyGenGraphvizDot(SuperclassGenGraphvizDot):
 
     implements(IGenGraphvizDot)
 
-    def traverse4GraphvizDotGeneratorPre(self, 
-                                         cfgFile, 
-                                         level=0, 
-                                         comments=True):
+    def traverse4DotGeneratorPre(self, 
+                                 cfgFile, 
+                                 level=0, 
+                                 comments=True):
         """Pre-Text in graphviz dot-file"""
         if comments:
             print >> cfgFile, "%s// Pre (%s,%d) DummyGenGraphvizDot" \

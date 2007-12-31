@@ -10,7 +10,7 @@
         Markus Leist <leist@ikom-online.de> -->
 
     <interface
-        interface=".interfaces.IHostVMwareVC2"
+        interface=".interfaces.IHostVMwareVm"
         type="zope.app.content.interfaces.IContentType"
         />
     
@@ -22,18 +22,22 @@
             interface="zope.app.container.interfaces.IContentContainer"
             />
         <factory
-            id="org.ict_ok.components.host.host.HostVMwareVC2"
-            description="HostVMwareVC2"
+            id="org.ict_ok.components.host.host.HostVMwareVm"
+            description="HostVMwareVm"
             />
         <require
             permission="org.ict_ok.components.host.View"
-            interface=".interfaces.IHostVMwareVC2"
+            interface=".interfaces.IHostVMwareVm"
             />
         <require
             permission="org.ict_ok.components.host.Edit"
-            set_schema=".interfaces.IHostVMwareVC2"
+            set_schema=".interfaces.IHostVMwareVm"
             />
     </class>
+    
+    <adapter
+        factory="org.ict_ok.components.host.special.vmware_vm.adapter.search.Searchable"
+    />
 
     <include package=".browser" />
     <!--<include package=".generations" />-->

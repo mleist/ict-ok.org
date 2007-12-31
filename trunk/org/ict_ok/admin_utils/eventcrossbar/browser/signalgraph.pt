@@ -1,0 +1,12 @@
+<i18n:block domain="ict_ok.org">
+  <h3>ddd3</h3>
+  <div class="message"
+    tal:condition="view/status|nothing"
+    tal:content="view/status"
+    i18n:translate="">
+  Something happened.
+  </div>
+  <div>ddd1a</div>
+  <div tal:content="view/genDotFile"></div>
+  <div>ddd1c</div>
+</i18n:block>

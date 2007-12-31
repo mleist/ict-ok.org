@@ -51,7 +51,7 @@ class AdminGraphvizIkDummyTestCase(PlacefulSetup, unittest.TestCase):
         #tmpFile = os.tmpfile()
         #adapterGenGraphvizDot = IIkGenGraphvizDot(self.ikdummy11)
         #adapterGenGraphvizDot.setParent(self.root)
-        #adapterGenGraphvizDot.traverse4GraphvizDotGenerator(tmpFile, \
+        #adapterGenGraphvizDot.traverse4DotGenerator(tmpFile, \
                                                             #level=1, \
                                                             #comments=False)
         #tmpFile.seek(0)
@@ -76,7 +76,7 @@ class AdminGraphvizIkDummyTestCase(PlacefulSetup, unittest.TestCase):
         #tmpFile = os.tmpfile()
         #adapterGenGraphvizDot = IIkGenGraphvizDot(self.ikdummy12)
         #adapterGenGraphvizDot.setParent(self.root)
-        #adapterGenGraphvizDot.traverse4GraphvizDotGenerator(tmpFile, \
+        #adapterGenGraphvizDot.traverse4DotGenerator(tmpFile, \
                                                             #level=1, \
                                                             #comments=False)
         #tmpFile.seek(0)
@@ -101,7 +101,7 @@ class AdminGraphvizIkDummyTestCase(PlacefulSetup, unittest.TestCase):
         #tmpFile = os.tmpfile()
         #adapterGenGraphvizDot = IIkGenGraphvizDot(self.ikdummy13)
         #adapterGenGraphvizDot.setParent(self.root)
-        #adapterGenGraphvizDot.traverse4GraphvizDotGenerator(tmpFile, \
+        #adapterGenGraphvizDot.traverse4DotGenerator(tmpFile, \
                                                             #level=1, \
                                                             #comments=False)
         #tmpFile.seek(0)

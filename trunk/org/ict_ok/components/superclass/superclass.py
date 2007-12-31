@@ -168,9 +168,7 @@ class Superclass(Persistent):
             if not eventMsg.hasSeen(self):
                 #print ">>> %s / %s" % (self.getObjectId(),
                                        #eventMsg.oidEventObject)
-                # direct input to output
-                self.outEQueue.put(eventMsg)
-                # and call possible event ipnut methods by name
+                # call possible event ipnut methods by name
                 fnctList = []
                 for attrName in self.__dict__:
                     attrObjsPrefix = "eventInpObjs_"
@@ -184,7 +182,10 @@ class Superclass(Persistent):
                            eventMsg.oidEventObject in objs: # find the RIGHT object list
                             fnctList.append(fnct)
                 for fnct in fnctList:
-                    fnct()
+                    fnct(eventMsg)
+                if len(fnctList) == 0:
+                    # direct input to output
+                    self.outEQueue.put(eventMsg)
             else:
                 eventMsg.stopit(self, "cycle!")
 
@@ -281,11 +282,25 @@ class Superclass(Persistent):
         """ returns a list of all input event methods
         attribute name must start with 'eventInpObjs_'
         """
-        retList = []
+        retDict = {}
         for attrName in self.__dict__:
             if attrName.find("eventInpObjs_") == 0: # attribute name starts with ...
-                retList.append(attrName[len('eventInpObjs_'):])
-        return retList
+                retDict[attrName[len('eventInpObjs_'):]] =  \
+                       self.__dict__[attrName]
+                #retList.append(attrName[len('eventInpObjs_'):])
+        return retDict
+
+    def getAllOutEventNames(self):
+        """ returns a list of all output event methods
+        attribute name must start with 'eventOutObjs_'
+        """
+        retDict = {}
+        for attrName in self.__dict__:
+            if attrName.find("eventOutObjs_") == 0: # attribute name starts with ...
+                retDict[attrName[len('eventOutObjs_'):]] =  \
+                       self.__dict__[attrName]
+                #retList.append(attrName[len('eventOutObjs_'):])
+        return retDict
 
 
     def addToEventInpObjs(self, inputName, eventObj):
@@ -297,6 +312,7 @@ class Superclass(Persistent):
             newOid = eventObj.getObjectId()
             if newOid not in myObjIdSet:
                 myObjIdSet.add(newOid)
+                self._p_changed = True
             print "myObjIdSet 2 :", myObjIdSet
 
     def delFromEventInpObjs(self, inputName, eventObj):
@@ -308,10 +324,11 @@ class Superclass(Persistent):
             oldOid = eventObj.getObjectId()
             if oldOid in myObjIdSet:
                 myObjIdSet.remove(oldOid)
+                self._p_changed = True
             print "myObjIdSet 2 :", myObjIdSet
 
 class MsgEvent:
-    """ Interface of an async event event
+    """ Interface of an async event message
     """
     implements(IMsgEvent)
 
@@ -337,6 +354,7 @@ class MsgEvent:
             logText += additionalText
             if self.oidEventObject is not None:
                 utilEventXbar.logIntoEvent(self.oidEventObject, logText)
+            #utilEventXbar.debugEventHistory(self)
 
     def hasSeen(self, obj):
         if obj.getObjectId() in self.transmissionHistory:
@@ -361,4 +379,7 @@ def notifyModifiedEvent(instance, event):
     allEventObjs = event.object.getAllOutEventObjs()
     utilXbar = queryUtility(IAdmUtilEventCrossbar)
     for eventObj in allEventObjs:
-        utilXbar[eventObj].addOidToInpObjects(event.object.objectID)
+        try:
+            utilXbar[eventObj].addOidToInpObjects(event.object.objectID)
+        except KeyError:
+            pass

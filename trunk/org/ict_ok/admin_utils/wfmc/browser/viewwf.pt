@@ -1,6 +1,6 @@
-<html metal:use-macro="views/standard_macros/view">
+<html>
     <body tal:condition="request/name|nothing">
-        <div metal:fill-slot="body" i18n:domain="ict-ok.org" tal:condition="request/pdid|nothing">
+        <div i18n:domain="ict-ok.org" tal:condition="request/pdid|nothing">
             <h1 tal:content="python: 'Workflow of \'%s\':' % request['name']" />
             <img tal:attributes="src python: '%s/@@getIMG?type=png&pdid=%s' % (view.getValuePngHref(), request['pdid'])" />
             <a href="#" tal:attributes="href python: '%s/@@getIMG?type=png&pdid=%s&mode=fview' % (view.getValuePngHref(), request['pdid'])">[PNG]</a>

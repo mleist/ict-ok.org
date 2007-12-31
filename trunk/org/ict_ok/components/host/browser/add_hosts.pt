@@ -17,6 +17,7 @@
     <h4>VmWare Hosts</h4>
     <ul>
       <li><a href="add_host_vmware_esx.html">VMware ESX Server</a></li>
+      <li><a href="add_host_vmware_vm.html">VMware Virtual Machine</a></li>
       <li><a href="add_host_vmware_vc2.html">VMware VirtualCenter 2</a></li>
     </ul>
     

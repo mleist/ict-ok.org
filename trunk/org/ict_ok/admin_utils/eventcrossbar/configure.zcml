@@ -54,6 +54,21 @@
             />
     </class>
 
+    <class class=".event_timer.EventTimer">
+        <factory
+            id="org.ict_ok.admin_utils.eventcrossbar.event_timer.EventTimer" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.event_timer.View"
+            interface=".interfaces.IEventTimer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timer.Edit"
+            set_schema=".interfaces.IEventTimer"
+            />
+    </class>
+
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"
@@ -83,6 +98,10 @@
     <adapter
         factory=".adapter.ticker.Ticker"
     />
+    <adapter
+        factory=".adapter.event.AdmUtilEventGenDot"
+        permission="org.ict_ok.admin_utils.wfmc.View"
+        />
 
     <include package=".browser" />
     

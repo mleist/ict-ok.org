@@ -150,25 +150,17 @@ class IHost(IComponent):
         default = True,
         required = False)
 
-    # TODO move to own Interface towards admin_util.esx...
-    esxUuid = TextLine(
-        max_length = 80,
-        title = _("ESX UUID"),
-        description = _("UUID of virtual machine in ESX."),
-        default = u"",
-        required = False)
-        
-    def trigger_online(self):
+    def trigger_online():
         """
         trigger workflow
         """
 
-    def trigger_offline(self):
+    def trigger_offline():
         """
         trigger workflow
         """
 
-    def trigger_not1(self):
+    def trigger_not1():
         """
         trigger workflow
         """
@@ -185,5 +177,5 @@ class IEventIfEventHost(IEventIfSupernode):
         readonly = False,
         required = True)
     
-    def eventInp_shutdown(self):
+    def eventInp_shutdown(eventMsg):
         """ start the shutdown of the host """

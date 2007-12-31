@@ -49,11 +49,11 @@ class AdmUtilEvent(Supernode):
         self.ikRevision = __version__
 
     def addOidToInpObjects(self, oid):
-        """ delete oid from set """
+        """ add oid to set """
         self.inpObjects.add(oid)
 
     def addOidToOutObjects(self, oid):
-        """ delete oid from set """
+        """ add oid to set """
         self.outObjects.add(oid)
 
     def removeOidFromInpObjects(self, oid):

@@ -51,19 +51,19 @@ class IGenGraphvizDot(Interface):
         """set Parent-Object
         """
 
-    def traverse4GraphvizDotGeneratorPre(self, cfgFile, level):
+    def traverse4DotGeneratorPre(self, cfgFile, level):
         """graphviz configuration preamble
         """
 
-    def traverse4GraphvizDotGeneratorPost(self, cfgFile, level):
+    def traverse4DotGeneratorPost(self, cfgFile, level):
         """graphviz configurations text after object
         """
 
-    def traverse4GraphvizDotGeneratorBody(self, cfgFile, level):
+    def traverse4DotGeneratorBody(self, cfgFile, level):
         """graphviz configuration data of object
         """
 
-    def traverse4GraphvizDotGenerator(self, cfgFile, level):
+    def traverse4DotGenerator(self, cfgFile, level):
         """
         cfgFile: handle to open file
         level: indent-level

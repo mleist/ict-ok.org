@@ -90,7 +90,7 @@ def AllObjectInstancesWithEventInputs(dummy_context):
            IService.providedBy(oobj.object) or \
            ISnmpValue.providedBy(oobj.object) or \
            IEventTimingRelay.providedBy(oobj.object):
-            inpEventNames = oobj.object.getAllInpEventNames()
+            inpEventNames = oobj.object.getAllInpEventNames().keys()
             if len(inpEventNames) > 0:
                 for inpEventName in inpEventNames:
                     myId = oobj.object.objectID + u'.' + inpEventName
@@ -206,6 +206,14 @@ class AdmUtilEventCrossbar(Supernode):
                                     processed = True
                                     receiverObj.injectInpEQueue(inpEvent)
                 if not processed:
+                    for oid in self.outEQueues:
+                        for receiverObj in my_catalog.searchResults(\
+                            oid_index=oid):
+                            if (inpEvent.oidEventObject in \
+                                receiverObj.getAllInpEventObjs()):
+                                processed = True
+                                receiverObj.injectInpEQueue(inpEvent)
+                if not processed:
                     inpEvent.stopit(self)
 
     def tickerEvent(self):
@@ -230,6 +238,16 @@ class AdmUtilEventCrossbar(Supernode):
                 newEntry = Entry(logEntry, eventObject, level=u"info")
                 eventObject.history.append(newEntry)
                 eventObject._p_changed = True
+
+    def debugEventHistory(self, eventObject=None):
+        if eventObject is not None:
+            my_catalog = zapi.getUtility(ICatalog)
+            print "debugEventHistory:"
+            print "-" * 40
+            for entry in eventObject.transmissionHistory:
+                for obj in my_catalog.searchResults(oid_index=entry):
+                    print " -> ", obj.getDcTitle()
+            print "-" * 40
 
 
 class GlobalEventCrossbarUtility(object):

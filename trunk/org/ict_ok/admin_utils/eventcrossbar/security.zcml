@@ -42,6 +42,21 @@
     />
 
     <permission
+        id="org.ict_ok.admin_utils.event_timer.View"
+        title="View from EventTimer"
+    />
+    
+    <permission
+        id="org.ict_ok.admin_utils.event_timer.Add"
+        title="Add an EventTimer"
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.event_timer.Edit"
+        title="Edit from EventTimer"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.eventcrossbar.View"
         title="View from AdmUtilEventCrossbar"
         description="View from AdmUtilEventCrossbar."
@@ -78,6 +93,13 @@
     <grant permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.event_timingrelay.Add"
+                    role="org.ict_ok.mgr" />
+
+    <grant permission="org.ict_ok.admin_utils.event_timer.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.event_timer.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.event_timer.Add"
                     role="org.ict_ok.mgr" />
 
 </configure>
