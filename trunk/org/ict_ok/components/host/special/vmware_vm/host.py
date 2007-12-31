@@ -69,3 +69,10 @@ class Host(HostBase):
         esx_utility = queryUtility(IAdmUtilEsxVim)
         if esx_utility and len(self.esxUuid) > 0:
             esx_utility.powerOnVm(self.esxUuid)
+
+    def eventInp_shutdown(self, eventMsg=None):
+        """ start the shutdown of the host """
+        eventMsg.stopit(self, "Host.eventInp_shutdown")
+        print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
+        self.poweroff()
+
