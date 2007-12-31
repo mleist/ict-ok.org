@@ -231,10 +231,12 @@ class EsxVimConnectionThread(threading.Thread):
                         #print "uuuu3c3"
                         myFnctArgs = myParams['fnct_args']
                         #print "pppp1"
-                        retVal = getattr(myObj, myFnctName)(*myFnctArgs)
-                        #print "pppp2"
-                        self.getQueue(sourceOId)['out'].put(retVal, True, 15)
-                        #print "pppp3"
+                        try:
+                            retVal = getattr(myObj, myFnctName)(*myFnctArgs)
+                            self.getQueue(sourceOId)['out'].put(retVal, True, 15)
+                        except self.perl.PerlError, err:
+                            print "My Perl Error: ", err
+                            self.getQueue(sourceOId)['out'].put(None, True, 15)
                     else:
                         #print "uuuu3d"
                         self.getQueue(sourceOId)['out'].put(None, True, 15)

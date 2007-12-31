@@ -63,15 +63,18 @@ class Snmptrapd(BaseSnmptrapd):
                     #pMod.apiTrapPDU.getTimeStamp(reqPDU).prettyPrint()
                     #)
                 varBinds = pMod.apiTrapPDU.getVarBindList(reqPDU)
+                # AT
+                #if pMod.apiTrapPDU.getEnterprise(reqPDU).prettyPrint() == \
+                   #u'1.3.6.1.4.1.207.1.4.29':
                 # TODO remove this big fake
                 if pMod.apiTrapPDU.getEnterprise(reqPDU).prettyPrint() == \
-                   u'1.3.6.1.4.1.207.1.4.29':
-                    print "AT - Switch!!!"
+                   u'1.3.6.1.4.1.9.1.516':
+                    print "Cisco - Switch!!!"
                     if pMod.apiTrapPDU.getGenericTrap(reqPDU).prettyPrint() == 'linkUp(3)':
-                        print "1111a"
+                        #print "UP"
                         self.context.eventOut_powerReturned()
                     if pMod.apiTrapPDU.getGenericTrap(reqPDU).prettyPrint() == 'linkDown(2)':
-                        print "1111b"
+                        #print "DOWN"
                         self.context.eventOut_onBattery()
             else:
                 varBinds = pMod.apiPDU.getVarBindList(reqPDU)

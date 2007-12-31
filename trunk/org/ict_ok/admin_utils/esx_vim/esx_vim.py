@@ -94,10 +94,10 @@ class AdmUtilEsxVim(Supernode):
         raise KeyError
     
     def powerOffVm(self, uuid):
-        globalEsxVimUtility.powerOffVm(self, uuid, self.objectID)
+        globalEsxVimUtility.powerOffVm(uuid, self)
  
     def powerOnVm(self, uuid):
-        globalEsxVimUtility.powerOnVm(self, uuid, self.objectID)
+        globalEsxVimUtility.powerOnVm(uuid, self)
  
     def values(self):
         '''See interface `IReadContainer`'''
@@ -303,30 +303,62 @@ class GlobalEsxVimUtility(object):
                 retDict[esxObj['name']] = newObj
         return retDict
 
-    def powerOffVm(self, uuid, localEsxUtilOId):
+    def powerOffVm(self, uuid, localEsxUtil):
         print "powerOffVm"
+        localEsxUtilOId = localEsxUtil.objectID
         if self.esxThread is None:
             return {}
-        print "3aa12"
         myParams = {\
             'cmd': 'find_entity_views',
+            'admUtilEsxVim': localEsxUtil,
             'view_type': 'VirtualMachine',
             'filter': {'config.uuid':uuid},
             }
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
-        print "3aa13:", localEsxUtilOId
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
-        print "3aa14"
-        #self.esxThread.queue1_in.put(localEsxUtil, True, 5)
-        #self.esxThread.queue1_in.join()
         esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
-        print "3esxObjList: ", esxObjList
-        print "3aa15"
         self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
-        print "3aa16"
+        esxObj = esxObjList[0]
+        myParams = {\
+            'admUtilEsxVim': localEsxUtil,
+            'cmd': 'call_fcnt_on_obj',
+            'perlRef': esxObj['perlRef'],
+            'fnct_name': 'ShutdownGuest',
+            'fnct_args': [],
+            }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+
  
-    def powerOnVm(self, uuid):
-        pass
+    def powerOnVm(self, uuid, localEsxUtil):
+        print "powerOnVm"
+        localEsxUtilOId = localEsxUtil.objectID
+        if self.esxThread is None:
+            return {}
+        myParams = {\
+            'cmd': 'find_entity_views',
+            'admUtilEsxVim': localEsxUtil,
+            'view_type': 'VirtualMachine',
+            'filter': {'config.uuid':uuid},
+            }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        esxObj = esxObjList[0]
+        myParams = {\
+            'admUtilEsxVim': localEsxUtil,
+            'cmd': 'call_fcnt_on_obj',
+            'perlRef': esxObj['perlRef'],
+            'fnct_name': 'PowerOnVM_Task',
+            'fnct_args': [],
+            }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
 
 
 globalEsxVimUtility = GlobalEsxVimUtility()
