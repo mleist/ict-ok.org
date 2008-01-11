@@ -161,6 +161,14 @@ class Superclass(Persistent):
         dcore = IWriteZopeDublinCore(self)
         dcore.title = unicode(title)
 
+    def appendHistoryEntry(self, entryText):
+        """
+        append an text entry to the history
+        """
+        newEntry = Entry(entryText, self, level=u"info")
+        newEntry.setObjVersion(self.ikRevision)
+        self.history.append(newEntry)
+
     def processEvents(self):
         while len(self.inpEQueue) > 0:
             # temp. direct connect

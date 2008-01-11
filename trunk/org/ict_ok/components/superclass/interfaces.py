@@ -85,25 +85,29 @@ class ISuperclass(Interface):
     workflows = Attribute("dict of object workflows")
     wf_worklist = Attribute("list of ongoing workflow apps")
 
-    def getObjectId(self):
+    def getObjectId():
         """
         get 'Universe ID' of object
         returns str
         """
-    def getDcTitle(self):
+    def getDcTitle():
         """
         get the Title from Dublin Core
         """
-    def setDcTitle(self, title):
+    def setDcTitle(title):
         """
         set the Title to Dublin Core
         """
-    def getAllOutEventObjs(self):
+    def appendHistoryEntry(entryText):
+        """
+        append an text entry to the history
+        """
+    def getAllOutEventObjs():
         """ returns a list of all active referenced event
         object oids for update purpose
         attribute name must start with 'eventOutObjs_'
         """
-    def getAllInpEventObjs(self):
+    def getAllInpEventObjs():
         """ returns a list of all active referenced event
         object oids for update purpose
         attribute name must start with 'eventInpObjs_'

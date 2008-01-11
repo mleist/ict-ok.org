@@ -522,107 +522,107 @@ class IEventIfHostMgeUps(IEventIfSupernode):
         readonly = False,
         required = False)
 
-    def eventOut_upsBatteryFault(self):
+    def eventOut_upsBatteryFault():
         """ sends event (source is snmp """
-    def eventOut_upsBatteryOK(self):
+    def eventOut_upsBatteryOK():
         """ sends event (source is snmp """
-    def eventOut_upsBatteryReplacementIndicated(self):
+    def eventOut_upsBatteryReplacementIndicated():
         """ sends event (source is snmp """
-    def eventOut_upsBatteryReplacementNotIndicated(self):
+    def eventOut_upsBatteryReplacementNotIndicated():
         """ sends event (source is snmp """
-    def eventOut_upsAtLowBattery(self):
+    def eventOut_upsAtLowBattery():
         """ sends event (source is snmp """
-    def eventOut_upsFromLowBattery(self):
+    def eventOut_upsFromLowBattery():
         """ sends event (source is snmp """
-    def eventOut_upsChargerFault(self):
+    def eventOut_upsChargerFault():
         """ sends event (source is snmp """
-    def eventOut_upsChargerOK(self):
+    def eventOut_upsChargerOK():
         """ sends event (source is snmp """
-    def eventOut_upsAtLowCondition(self):
+    def eventOut_upsAtLowCondition():
         """ sends event (source is snmp """
-    def eventOut_upsFromLowCondition(self):
+    def eventOut_upsFromLowCondition():
         """ sends event (source is snmp """
-    def eventOut_upsOnBattery(self):
+    def eventOut_upsOnBattery():
         """ sends event (source is snmp """
-    def eventOut_upsReturnFromBattery(self):
+    def eventOut_upsReturnFromBattery():
         """ sends event (source is snmp """
-    def eventOut_upsOnByPass(self):
+    def eventOut_upsOnByPass():
         """ sends event (source is snmp """
-    def eventOut_upsReturnFromByPass(self):
+    def eventOut_upsReturnFromByPass():
         """ sends event (source is snmp """
-    def eventOut_upsByPassUnavailable(self):
+    def eventOut_upsByPassUnavailable():
         """ sends event (source is snmp """
-    def eventOut_upsByPassAvailable(self):
+    def eventOut_upsByPassAvailable():
         """ sends event (source is snmp """
-    def eventOut_upsUtilityFailure(self):
+    def eventOut_upsUtilityFailure():
         """ sends event (source is snmp """
-    def eventOut_upsUtilityRestored(self):
+    def eventOut_upsUtilityRestored():
         """ sends event (source is snmp """
-    def eventOut_upsOnBoost(self):
+    def eventOut_upsOnBoost():
         """ sends event (source is snmp """
-    def eventOut_upsReturnFromBoost(self):
+    def eventOut_upsReturnFromBoost():
         """ sends event (source is snmp """
-    def eventOut_upsOverLoad(self):
+    def eventOut_upsOverLoad():
         """ sends event (source is snmp """
-    def eventOut_upsLoadOK(self):
+    def eventOut_upsLoadOK():
         """ sends event (source is snmp """
-    def eventOut_upsOverTemperature(self):
+    def eventOut_upsOverTemperature():
         """ sends event (source is snmp """
-    def eventOut_upsTemperatureOK(self):
+    def eventOut_upsTemperatureOK():
         """ sends event (source is snmp """
-    def eventOut_upsCommunicationFailure(self):
+    def eventOut_upsCommunicationFailure():
         """ sends event (source is snmp """
-    def eventOut_upsCommunicationRestored(self):
+    def eventOut_upsCommunicationRestored():
         """ sends event (source is snmp """
-    def eventOut_upsInputBad(self):
+    def eventOut_upsInputBad():
         """ sends event (source is snmp """
-    def eventOut_upsInputOK(self):
+    def eventOut_upsInputOK():
         """ sends event (source is snmp """
-    def eventOut_upsBatteryUnavailable(self):
+    def eventOut_upsBatteryUnavailable():
         """ sends event (source is snmp """
-    def eventOut_upsBatteryAvailable(self):
+    def eventOut_upsBatteryAvailable():
         """ sends event (source is snmp """
-    def eventOut_upsAtLowRecharge(self):
+    def eventOut_upsAtLowRecharge():
         """ sends event (source is snmp """
-    def eventOut_upsFromLowRecharge(self):
+    def eventOut_upsFromLowRecharge():
         """ sends event (source is snmp """
-    def eventOut_upsDiagnosticTestFail(self):
+    def eventOut_upsDiagnosticTestFail():
         """ sends event (source is snmp """
-    def eventOut_upsDiagnosticTestOK(self):
+    def eventOut_upsDiagnosticTestOK():
         """ sends event (source is snmp """
-    def eventOut_upsBatteryTestOK(self):
+    def eventOut_upsBatteryTestOK():
         """ sends event (source is snmp """
-    def eventOut_upsBatteryTestFail(self):
+    def eventOut_upsBatteryTestFail():
         """ sends event (source is snmp """
-    def eventOut_upsExternalAlarmActive(self):
+    def eventOut_upsExternalAlarmActive():
         """ sends event (source is snmp """
-    def eventOut_upsExternalAlarmInactive(self):
+    def eventOut_upsExternalAlarmInactive():
         """ sends event (source is snmp """
-    def eventOut_upsOnBuck(self):
+    def eventOut_upsOnBuck():
         """ sends event (source is snmp """
-    def eventOut_upsReturnFromBuck(self):
+    def eventOut_upsReturnFromBuck():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentComFailure(self):
+    def eventOut_upsmgEnvironmentComFailure():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentComOK(self):
+    def eventOut_upsmgEnvironmentComOK():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentTemperatureLow(self):
+    def eventOut_upsmgEnvironmentTemperatureLow():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentTemperatureHigh(self):
+    def eventOut_upsmgEnvironmentTemperatureHigh():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentTemperatureOK(self):
+    def eventOut_upsmgEnvironmentTemperatureOK():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentHumidityLow(self):
+    def eventOut_upsmgEnvironmentHumidityLow():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentHumidityHigh(self):
+    def eventOut_upsmgEnvironmentHumidityHigh():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentHumidityOK(self):
+    def eventOut_upsmgEnvironmentHumidityOK():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentInput1Closed(self):
+    def eventOut_upsmgEnvironmentInput1Closed():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentInput1Open(self):
+    def eventOut_upsmgEnvironmentInput1Open():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentInput2Closed(self):
+    def eventOut_upsmgEnvironmentInput2Closed():
         """ sends event (source is snmp """
-    def eventOut_upsmgEnvironmentInput2Open(self):
+    def eventOut_upsmgEnvironmentInput2Open():
         """ sends event (source is snmp """
