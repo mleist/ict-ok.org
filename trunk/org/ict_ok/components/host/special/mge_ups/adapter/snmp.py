@@ -41,7 +41,7 @@ class Snmptrapd(BaseSnmptrapd):
 
     def triggered(self, reqPDU, msgVer, pMod):
         """
-        got ticker event from ticker thread
+        got snmp event from snmp thread
         """
         #print "Snmptrapd %s triggered (reqPDU:%s)!!" % (self.context, reqPDU)
         #print '-' * 80
@@ -85,3 +85,56 @@ class Snmptrapd(BaseSnmptrapd):
                     #print '%s = %s' % (oid.prettyPrint(), val.prettyPrint())
                     #print '-' * 40
         #print '-' * 80
+
+#1:upsBatteryFault (level 2) UPS battery fault status
+#2:upsBatteryOK
+#3:upsBatteryReplacementIndicated (level 3) UPS battery replacement indicator
+#4:upsBatteryReplacementNotIndicated
+#5:upsAtLowBattery (level 1) UPS low battery internal indicator
+#6:upsFromLowBattery
+#7:upsChargerFault (level 3) UPS battery charger fault status
+#8:upsChargerOK
+#9:upsAtLowCondition (level 1) UPS battery minimum condition status
+#10:upsFromLowCondition
+#11:upsOnBattery (level 1) UPS on battery backup status
+#12:upsReturnFromBattery
+#13:upsOnByPass (level 2) UPS on bypass status
+#14:upsReturnFromByPass
+#15:upsByPassUnavailable (level 3) UPS bypass unavailable/available
+#16:upsByPassAvailable
+#17:upsUtilityFailure (level 2) UPS mains input failure indicator
+#18:upsUtilityRestored
+#19:upsOnBoost (level 3) UPS booster feature enabled
+#20:upsReturnFromBoost
+#21:upsOverLoad (level 2) UPS load in excess of rated value
+#22:upsLoadOK
+#23:upsOverTemperature (level 2) Incorrect UPS internal temperature
+#24:upsTemperatureOK
+#37:upsCommunicationFailure (level 1) State of serial communication with UPS
+#38:upsCommunicationRestored
+#39:upsInputBad (level 3) Incorrect input voltage or frequency
+#40:upsInputOK
+#41:upsBatteryUnavailable (level 3) UPS battery unavailable
+#42:upsBatteryAvailable
+#43:upsAtLowRecharge (level 4) UPS awaiting restart condition
+#44:upsFromLowRecharge
+#45:upsDiagnosticTestFail (level 3) UPS internal self test state
+#46:upsDiagnosticTestOK
+#47:upsBatteryTestOK (level 3) UPS battery test state
+#48:upsBatteryTestFail
+#49:upsExternalAlarmActive (level 2) External alarm state
+#50:upsExternalAlarmInactive
+#51:upsOnBuck (level 3) Activation of UPS fader
+#52:upsReturnFromBuck
+#53: upsmgEnvironmentComFailure (level 2) Environment Probe communication failure.
+#54: upsmgEnvironmentComOK Environment Probe communication restored.
+#55: upsmgEnvironmentTemperatureLow (level 2) Temperature is below low threshold.
+#56: upsmgEnvironmentTemperatureHigh (level 2) Temperature is above high threshold.
+#57: upsmgEnvironmentTemperatureOK Temperature is in normal range.
+#58: upsmgEnvironmentHumidityLow (level 2) Humidity is below low threshold.
+#59: upsmgEnvironmentHumidityHigh (level 2) Humidity is above high threshold.
+#60: upsmgEnvironmentHumidityOK Humidity is in normal range.
+#61: upsmgEnvironmentInput1Closed (level 2) Input #1 is Closed.
+#62: upsmgEnvironmentInput1Open (level 2) Input #1 is Open.
+#63: upsmgEnvironmentInput2Closed (level 2) Input #2 is Closed.
+#64: upsmgEnvironmentInput2Open (level 2) Input #2 is Open.
