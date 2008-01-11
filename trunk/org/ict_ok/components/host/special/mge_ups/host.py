@@ -40,6 +40,114 @@ class Host(HostBase):
     eventOutObjs_powerReturned = FieldProperty(\
         IEventIfHostMgeUps['eventOutObjs_powerReturned'])
 
+
+    eventOutObjs_upsBatteryFault = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsBatteryFault'])
+    eventOutObjs_upsBatteryOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsBatteryOK'])
+    eventOutObjs_upsBatteryReplacementIndicated = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsBatteryReplacementIndicated'])
+    eventOutObjs_upsBatteryReplacementNotIndicated = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsBatteryReplacementNotIndicated'])
+    eventOutObjs_upsAtLowBattery = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsAtLowBattery'])
+    eventOutObjs_upsFromLowBattery = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsFromLowBattery'])
+    eventOutObjs_upsChargerFault = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsChargerFault'])
+    eventOutObjs_upsChargerOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsChargerOK'])
+    eventOutObjs_upsAtLowCondition = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsAtLowCondition'])
+    eventOutObjs_upsFromLowCondition = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsFromLowCondition'])
+    eventOutObjs_upsOnBattery = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsOnBattery'])
+    eventOutObjs_upsReturnFromBattery = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsReturnFromBattery'])
+    eventOutObjs_upsOnByPass = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsOnByPass'])
+    eventOutObjs_upsReturnFromByPass = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsReturnFromByPass'])
+    eventOutObjs_upsByPassUnavailable = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsByPassUnavailable'])
+    eventOutObjs_upsByPassAvailable = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsByPassAvailable'])
+    eventOutObjs_upsUtilityFailure = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsUtilityFailure'])
+    eventOutObjs_upsUtilityRestored = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsUtilityRestored'])
+    eventOutObjs_upsOnBoost = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsOnBoost'])
+    eventOutObjs_upsReturnFromBoost = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsReturnFromBoost'])
+    eventOutObjs_upsOverLoad = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsOverLoad'])
+    eventOutObjs_upsLoadOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsLoadOK'])
+    eventOutObjs_upsOverTemperature = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsOverTemperature'])
+    eventOutObjs_upsTemperatureOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsTemperatureOK'])
+    eventOutObjs_upsCommunicationFailure = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsCommunicationFailure'])
+    eventOutObjs_upsCommunicationRestored = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsCommunicationRestored'])
+    eventOutObjs_upsInputBad = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsInputBad'])
+    eventOutObjs_upsInputOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsInputOK'])
+    eventOutObjs_upsBatteryUnavailable = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsBatteryUnavailable'])
+    eventOutObjs_upsBatteryAvailable = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsBatteryAvailable'])
+    eventOutObjs_upsAtLowRecharge = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsAtLowRecharge'])
+    eventOutObjs_upsFromLowRecharge = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsFromLowRecharge'])
+    eventOutObjs_upsDiagnosticTestFail = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsDiagnosticTestFail'])
+    eventOutObjs_upsDiagnosticTestOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsDiagnosticTestOK'])
+    eventOutObjs_upsBatteryTestOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsBatteryTestOK'])
+    eventOutObjs_upsBatteryTestFail = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsBatteryTestFail'])
+    eventOutObjs_upsExternalAlarmActive = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsExternalAlarmActive'])
+    eventOutObjs_upsExternalAlarmInactive = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsExternalAlarmInactive'])
+    eventOutObjs_upsOnBuck = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsOnBuck'])
+    eventOutObjs_upsReturnFromBuck = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsReturnFromBuck'])
+    eventOutObjs_upsmgEnvironmentComFailure = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentComFailure'])
+    eventOutObjs_upsmgEnvironmentComOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentComOK'])
+    eventOutObjs_upsmgEnvironmentTemperatureLow = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentTemperatureLow'])
+    eventOutObjs_upsmgEnvironmentTemperatureHigh = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentTemperatureHigh'])
+    eventOutObjs_upsmgEnvironmentTemperatureOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentTemperatureOK'])
+    eventOutObjs_upsmgEnvironmentHumidityLow = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentHumidityLow'])
+    eventOutObjs_upsmgEnvironmentHumidityHigh = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentHumidityHigh'])
+    eventOutObjs_upsmgEnvironmentHumidityOK = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentHumidityOK'])
+    eventOutObjs_upsmgEnvironmentInput1Closed = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentInput1Closed'])
+    eventOutObjs_upsmgEnvironmentInput1Open = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentInput1Open'])
+    eventOutObjs_upsmgEnvironmentInput2Closed = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentInput2Closed'])
+    eventOutObjs_upsmgEnvironmentInput2Open = FieldProperty(\
+        IEventIfHostMgeUps['eventOutObjs_upsmgEnvironmentInput2Open'])
+
+
+
     #def eventOut_onBattery(self):
         #""" sends 'on battery' event """
         #print "Host.eventOut_onBattery   (MGE)"
