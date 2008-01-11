@@ -48,21 +48,21 @@ class Snmptrapd(BaseSnmptrapd):
         print '-' * 80
         if reqPDU.isSameTypeWith(pMod.TrapPDU()):
             if msgVer == api.protoVersion1:
-                print 'Enterprise: %s' % (
-                    pMod.apiTrapPDU.getEnterprise(reqPDU).prettyPrint()
-                    )
-                print 'Agent Address: %s' % (
-                    pMod.apiTrapPDU.getAgentAddr(reqPDU).prettyPrint()
-                    )
-                print 'Generic Trap: %s' % (
-                    pMod.apiTrapPDU.getGenericTrap(reqPDU).prettyPrint()
-                    )
-                print 'Specific Trap: %s' % (
-                    pMod.apiTrapPDU.getSpecificTrap(reqPDU).prettyPrint()
-                    )
-                print 'Uptime: %s' % (
-                    pMod.apiTrapPDU.getTimeStamp(reqPDU).prettyPrint()
-                    )
+                #print 'Enterprise: %s' % (
+                    #pMod.apiTrapPDU.getEnterprise(reqPDU).prettyPrint()
+                    #)
+                #print 'Agent Address: %s' % (
+                    #pMod.apiTrapPDU.getAgentAddr(reqPDU).prettyPrint()
+                    #)
+                #print 'Generic Trap: %s' % (
+                    #pMod.apiTrapPDU.getGenericTrap(reqPDU).prettyPrint()
+                    #)
+                #print 'Specific Trap: %s' % (
+                    #pMod.apiTrapPDU.getSpecificTrap(reqPDU).prettyPrint()
+                    #)
+                #print 'Uptime: %s' % (
+                    #pMod.apiTrapPDU.getTimeStamp(reqPDU).prettyPrint()
+                    #)
                 varBinds = pMod.apiTrapPDU.getVarBindList(reqPDU)
                 # AT
                 #if pMod.apiTrapPDU.getEnterprise(reqPDU).prettyPrint() == \
@@ -70,12 +70,9 @@ class Snmptrapd(BaseSnmptrapd):
                 # TODO remove this big fake
                 if pMod.apiTrapPDU.getEnterprise(reqPDU).prettyPrint() == \
                    u'1.3.6.1.4.1.705.1.11':
-                    print "MGE UPS <----"
-                    import pdb; pdb.set_trace()
+                    #print "MGE UPS <----"
+                    #import pdb; pdb.set_trace()
                     #self.context.trigger_offline()
-                    #newEntry = Entry(u"Object created", self, level=u"info")
-                    #newEntry.setObjVersion(self.context.ikRevision)
-                    #self.context.history.append(newEntry)
                     specificTrap = pMod.apiTrapPDU.getSpecificTrap(reqPDU)
                     if specificTrap == 1:
                         self.context.eventOut_upsBatteryFault()

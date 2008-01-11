@@ -92,7 +92,7 @@ class SnmpdThread(threading.Thread):
         self.transportDispatcher = AsynsockDispatcher()
         self.transportDispatcher.registerTransport(
             #    udp.domainName, udp.UdpSocketTransport().openServerMode(('localhost', 162))
-            udp.domainName, udp.UdpSocketTransport().openServerMode(('', 1162))
+            udp.domainName, udp.UdpSocketTransport().openServerMode(('', 162))
         )
         self.transportDispatcher.registerRecvCbFun(self.cbFun)
         self.transportDispatcher.jobStarted(1) # this job would never finish

@@ -35,10 +35,10 @@ class Host(HostBase):
 
     implements(IHostMgeUps, IEventIfHostMgeUps)
 
-    eventOutObjs_onBattery = FieldProperty(\
-        IEventIfHostMgeUps['eventOutObjs_onBattery'])
-    eventOutObjs_powerReturned = FieldProperty(\
-        IEventIfHostMgeUps['eventOutObjs_powerReturned'])
+    #eventOutObjs_onBattery = FieldProperty(\
+        #IEventIfHostMgeUps['eventOutObjs_onBattery'])
+    #eventOutObjs_powerReturned = FieldProperty(\
+        #IEventIfHostMgeUps['eventOutObjs_powerReturned'])
 
 
     eventOutObjs_upsBatteryFault = FieldProperty(\
@@ -165,6 +165,7 @@ class Host(HostBase):
     def eventOut_upsBatteryFault(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsBatteryFault")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsBatteryFault:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -172,6 +173,7 @@ class Host(HostBase):
     def eventOut_upsBatteryOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsBatteryOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsBatteryOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -179,6 +181,7 @@ class Host(HostBase):
     def eventOut_upsBatteryReplacementIndicated(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsBatteryReplacementIndicated")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsBatteryReplacementIndicated:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -186,6 +189,7 @@ class Host(HostBase):
     def eventOut_upsBatteryReplacementNotIndicated(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsBatteryReplacementNotIndicated")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsBatteryReplacementNotIndicated:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -193,6 +197,7 @@ class Host(HostBase):
     def eventOut_upsAtLowBattery(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsAtLowBattery")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsAtLowBattery:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -200,6 +205,7 @@ class Host(HostBase):
     def eventOut_upsFromLowBattery(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsFromLowBattery")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsFromLowBattery:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -207,6 +213,7 @@ class Host(HostBase):
     def eventOut_upsChargerFault(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsChargerFault")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsChargerFault:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -214,6 +221,7 @@ class Host(HostBase):
     def eventOut_upsChargerOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsChargerOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsChargerOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -221,6 +229,7 @@ class Host(HostBase):
     def eventOut_upsAtLowCondition(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsAtLowCondition")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsAtLowCondition:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -228,6 +237,7 @@ class Host(HostBase):
     def eventOut_upsFromLowCondition(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsFromLowCondition")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsFromLowCondition:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -235,6 +245,7 @@ class Host(HostBase):
     def eventOut_upsOnBattery(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsOnBattery")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsOnBattery:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -242,6 +253,7 @@ class Host(HostBase):
     def eventOut_upsReturnFromBattery(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsReturnFromBattery")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsReturnFromBattery:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -249,6 +261,7 @@ class Host(HostBase):
     def eventOut_upsOnByPass(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsOnByPass")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsOnByPass:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -256,6 +269,7 @@ class Host(HostBase):
     def eventOut_upsReturnFromByPass(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsReturnFromByPass")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsReturnFromByPass:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -263,6 +277,7 @@ class Host(HostBase):
     def eventOut_upsByPassUnavailable(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsByPassUnavailable")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsByPassUnavailable:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -270,6 +285,7 @@ class Host(HostBase):
     def eventOut_upsByPassAvailable(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsByPassAvailable")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsByPassAvailable:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -277,6 +293,7 @@ class Host(HostBase):
     def eventOut_upsUtilityFailure(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsUtilityFailure")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsUtilityFailure:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -284,6 +301,7 @@ class Host(HostBase):
     def eventOut_upsUtilityRestored(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsUtilityRestored")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsUtilityRestored:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -291,6 +309,7 @@ class Host(HostBase):
     def eventOut_upsOnBoost(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsOnBoost")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsOnBoost:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -298,6 +317,7 @@ class Host(HostBase):
     def eventOut_upsReturnFromBoost(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsReturnFromBoost")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsReturnFromBoost:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -305,6 +325,7 @@ class Host(HostBase):
     def eventOut_upsOverLoad(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsOverLoad")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsOverLoad:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -312,6 +333,7 @@ class Host(HostBase):
     def eventOut_upsLoadOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsLoadOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsLoadOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -319,6 +341,7 @@ class Host(HostBase):
     def eventOut_upsOverTemperature(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsOverTemperature")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsOverTemperature:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -326,6 +349,7 @@ class Host(HostBase):
     def eventOut_upsTemperatureOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsTemperatureOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsTemperatureOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -333,6 +357,7 @@ class Host(HostBase):
     def eventOut_upsCommunicationFailure(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsCommunicationFailure")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsCommunicationFailure:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -340,6 +365,7 @@ class Host(HostBase):
     def eventOut_upsCommunicationRestored(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsCommunicationRestored")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsCommunicationRestored:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -347,6 +373,7 @@ class Host(HostBase):
     def eventOut_upsInputBad(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsInputBad")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsInputBad:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -354,6 +381,7 @@ class Host(HostBase):
     def eventOut_upsInputOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsInputOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsInputOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -361,6 +389,7 @@ class Host(HostBase):
     def eventOut_upsBatteryUnavailable(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsBatteryUnavailable")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsBatteryUnavailable:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -368,6 +397,7 @@ class Host(HostBase):
     def eventOut_upsBatteryAvailable(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsBatteryAvailable")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsBatteryAvailable:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -375,6 +405,7 @@ class Host(HostBase):
     def eventOut_upsAtLowRecharge(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsAtLowRecharge")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsAtLowRecharge:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -382,6 +413,7 @@ class Host(HostBase):
     def eventOut_upsFromLowRecharge(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsFromLowRecharge")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsFromLowRecharge:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -389,6 +421,7 @@ class Host(HostBase):
     def eventOut_upsDiagnosticTestFail(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsDiagnosticTestFail")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsDiagnosticTestFail:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -396,6 +429,7 @@ class Host(HostBase):
     def eventOut_upsDiagnosticTestOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsDiagnosticTestOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsDiagnosticTestOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -403,6 +437,7 @@ class Host(HostBase):
     def eventOut_upsBatteryTestOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsBatteryTestOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsBatteryTestOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -410,6 +445,7 @@ class Host(HostBase):
     def eventOut_upsBatteryTestFail(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsBatteryTestFail")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsBatteryTestFail:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -417,6 +453,7 @@ class Host(HostBase):
     def eventOut_upsExternalAlarmActive(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsExternalAlarmActive")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsExternalAlarmActive:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -424,6 +461,7 @@ class Host(HostBase):
     def eventOut_upsExternalAlarmInactive(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsExternalAlarmInactive")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsExternalAlarmInactive:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -431,6 +469,7 @@ class Host(HostBase):
     def eventOut_upsOnBuck(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsOnBuck")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsOnBuck:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -438,6 +477,7 @@ class Host(HostBase):
     def eventOut_upsReturnFromBuck(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsReturnFromBuck")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsReturnFromBuck:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -445,6 +485,7 @@ class Host(HostBase):
     def eventOut_upsmgEnvironmentComFailure(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsmgEnvironmentComFailure")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsmgEnvironmentComFailure:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -452,6 +493,7 @@ class Host(HostBase):
     def eventOut_upsmgEnvironmentComOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsmgEnvironmentComOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsmgEnvironmentComOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -459,6 +501,7 @@ class Host(HostBase):
     def eventOut_upsmgEnvironmentTemperatureLow(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsmgEnvironmentTemperatureLow")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsmgEnvironmentTemperatureLow:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -466,6 +509,7 @@ class Host(HostBase):
     def eventOut_upsmgEnvironmentTemperatureHigh(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsmgEnvironmentTemperatureHigh")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsmgEnvironmentTemperatureHigh:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -473,6 +517,7 @@ class Host(HostBase):
     def eventOut_upsmgEnvironmentTemperatureOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsmgEnvironmentTemperatureOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsmgEnvironmentTemperatureOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -480,6 +525,7 @@ class Host(HostBase):
     def eventOut_upsmgEnvironmentHumidityLow(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsmgEnvironmentHumidityLow")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsmgEnvironmentHumidityLow:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -487,6 +533,7 @@ class Host(HostBase):
     def eventOut_upsmgEnvironmentHumidityHigh(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsmgEnvironmentHumidityHigh")
+        self.trigger_offline()
         for my_event in self.eventOutObjs_upsmgEnvironmentHumidityHigh:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
@@ -494,6 +541,7 @@ class Host(HostBase):
     def eventOut_upsmgEnvironmentHumidityOK(self):
         """ sends event (source is snmp """
         self.appendHistoryEntry(u"upsmgEnvironmentHumidityOK")
+        self.trigger_online()
         for my_event in self.eventOutObjs_upsmgEnvironmentHumidityOK:
             inst_event = MsgEvent(self, my_event)
             self.injectOutEQueue(inst_event)
