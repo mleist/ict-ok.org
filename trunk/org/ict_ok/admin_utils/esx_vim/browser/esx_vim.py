@@ -161,12 +161,14 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
         converts this esx object to an internal object
         """
         print("EsxVimVirtualMachineDetails.convertobj")
-        self.context.convertobj()
-        nextURL = self.request.get('nextURL', default=None)
-        if nextURL:
-            return self.request.response.redirect(nextURL)
-        else:
-            return self.request.response.redirect('./@@details.html')
+        r_obj = self.context.convertobj()
+        return self.request.response.redirect(zapi.getPath(r_obj)+\
+                                              '/@@details.html')
+        #nextURL = self.request.get('nextURL', default=None)
+        #if nextURL:
+            #return self.request.response.redirect(nextURL)
+        #else:
+            #return self.request.response.redirect('./@@details.html')
         
         
 class EsxVimHostSystemDetails(EsxVimObjDetails):

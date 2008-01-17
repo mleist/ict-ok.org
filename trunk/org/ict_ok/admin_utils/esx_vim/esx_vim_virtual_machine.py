@@ -209,4 +209,5 @@ class EsxVimVirtualMachine(EsxVimObj):
                         newInterface.mac = interf['mac']
                         #newInterface.ipv4List.append(interfaceDict['ipAddress'])
                         newInterface.ipv4List = interf['ips'][0]
-                    break
+                    return newHost
+        return None
