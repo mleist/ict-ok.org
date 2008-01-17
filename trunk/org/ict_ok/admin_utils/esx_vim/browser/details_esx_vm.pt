@@ -15,12 +15,44 @@
             <td tal:content="python: context.eval_on_obj('obj.runtime().powerState().val()')" />
         </tr>
         <tr class="cb_ilx">
+            <td class="label" i18n:translate="">max CPU usage</td>
+            <td tal:content="python: context.eval_on_obj('obj.runtime().maxCpuUsage()')" />
+        </tr>
+        <tr class="cb_wht">
+            <td class="label" i18n:translate="">max memory usage</td>
+            <td tal:content="python: context.eval_on_obj('obj.runtime().maxMemoryUsage()') + ' MB'" />
+        </tr>
+        <tr class="cb_ilx">
             <td class="label" i18n:translate="">Heartbeat</td>
             <td tal:content="python: context.eval_on_obj('obj.guestHeartbeatStatus().val()')" />
         </tr>
         <tr class="cb_wht">
-            <td class="label" i18n:translate="">Guest</td>
+            <td class="label" i18n:translate="">Guest full name</td>
             <td tal:content="python: context.eval_on_obj('obj.config().guestFullName()')" />
+        </tr>
+        <tr class="cb_ilx">
+            <td class="label" i18n:translate="">Guest family</td>
+            <td tal:content="python: context.eval_on_obj('obj.guest().guestFamily()')" />
+        </tr>
+        <tr class="cb_wht">
+            <td class="label" i18n:translate="">Guest ip address</td>
+            <td tal:content="python: context.eval_on_obj('obj.guest().ipAddress()')" />
+        </tr>
+        <tr class="cb_ilx">
+            <td class="label" i18n:translate="">Guest hostname</td>
+            <td tal:content="python: context.eval_on_obj('obj.guest().hostName()')" />
+        </tr>
+        <tr class="cb_wht">
+            <td class="label" i18n:translate="">Guest mac address (net0)</td>
+            <td tal:content="python: context.eval_on_obj('obj.guest().net()[0].macAddress()')" />
+        </tr>
+        <tr class="cb_ilx">
+            <td class="label" i18n:translate="">Guest network connected (net0)</td>
+            <td tal:content="python: context.eval_on_obj('obj.guest().net()[0].network()')" />
+        </tr>
+        <tr class="cb_wht">
+            <td class="label" i18n:translate="">Guest tool Version</td>
+            <td tal:content="python: context.eval_on_obj('obj.guest().toolsVersion()')" />
         </tr>
         <span tal:omit-tag="" tal:define="esxtime python: context.eval_on_obj('obj.runtime().bootTime()')">
             <tr class="cb_ilx" tal:condition="esxtime|nothing">
@@ -44,10 +76,6 @@
         <tr class="cb_wht">
             <td class="label" i18n:translate="">locationId</td>
             <td tal:content="python: context.eval_on_obj('obj.config().locationId()')" />
-        </tr>
-        <tr class="cb_ilx">
-            <td class="label" i18n:translate="">maxMemoryUsage</td>
-            <td tal:content="python: context.eval_on_obj('obj.runtime().maxMemoryUsage()')" />
         </tr>
         </table>
 </i18n:block>
