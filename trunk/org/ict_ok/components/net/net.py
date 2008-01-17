@@ -27,6 +27,7 @@ from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
+from org.ict_ok.schema.IPy import IP
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.net.interfaces import INet
 
@@ -55,6 +56,13 @@ class Net(Component):
             if name in INet.names():
                 setattr(self, name, value)
         self.ikRevision = __version__
+
+    def containsIp(self, ipString):
+        """ is ip(String) part of this network?
+        """
+        myIp = IP(self.ipv4)
+        testIp = IP(ipString)
+        return testIp in myIp
 
 def getAllNetworks():
     """ get a list of all Nets

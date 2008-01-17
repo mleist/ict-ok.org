@@ -38,3 +38,6 @@ class INet(IComponent):
         readonly = False,
         required = True)
     
+    def containsIp(ipString):
+        """ is ip(String) part of this network?
+        """
