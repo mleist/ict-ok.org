@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101
+# pylint: disable-msg=E1101,E0611
 #
 """implementation of a "esx_vim daemon" 
 """
@@ -17,15 +17,21 @@
 __version__ = "$Id$"
 
 # phython imports
+from datetime import datetime
 
 # zope imports
 from zope.interface import implements
+from zope.dublincore.interfaces import IZopeDublinCore
+from zope.lifecycleevent import ObjectCreatedEvent
+from zope.event import notify
+from zope.component import createObject
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.esx_vim.esx_vim_obj import EsxVimObj
 from org.ict_ok.admin_utils.esx_vim.interfaces import \
      IEsxVimVirtualMachine
 from org.ict_ok.admin_utils.esx_vim.esx_vim import globalEsxVimUtility
+from org.ict_ok.components.net.net import getAllNetworks
 
 
 class EsxVimVirtualMachine(EsxVimObj):
@@ -64,14 +70,14 @@ class EsxVimVirtualMachine(EsxVimObj):
             'fnct_args': [],
             }
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].put(myParams, True, 15)
-        print "bbbaa13"
+        #print "bbbaa13"
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].join()
-        print "bbbaa14"
+        #print "bbbaa14"
         #self.esxThread.queue1_in.put(localEsxUtil, True, 5)
         #self.esxThread.queue1_in.join()
         retValue = globalEsxVimUtility.esxThread.getQueue(utilOId)['out'].get(True, 15)
-        print "retValue: ", retValue
-        print "bbbaa15"
+        #print "retValue: ", retValue
+        #print "bbbaa15"
         return "zzzuio"
         #return {}.get(key, default)
 
@@ -124,7 +130,7 @@ class EsxVimVirtualMachine(EsxVimObj):
         """
         converts this esx object to an internal object
         """
-        name = self.eval_on_obj('obj.name()')
+        hostname = self.eval_on_obj('obj.name()')
         ip = self.eval_on_obj('obj.guest().ipAddress()')
         hardware = "ESX virtual machine (%s MB)" % \
             self.eval_on_obj('obj.runtime().maxMemoryUsage()')
@@ -163,3 +169,42 @@ class EsxVimVirtualMachine(EsxVimObj):
         # uuid: '500c4d26-525f-ab35-b2ee-9f77842f65b9'
         # netList: [{'index': 0, 'mac': '00:50:56:8c:63:77', 'name': 'CBW Servers', 'ips': ['192.168.157.98']}]
 
+        if len(netList) > 0 and len(netList[0]['ips']) > 0:
+            firstIp = netList[0]['ips'][0]
+            allNetworks = getAllNetworks()
+            for network in allNetworks:
+                if network.containsIp(firstIp):
+                    print "create here:", network.ikName
+                    dateNow = datetime.utcnow()
+                    newHost = createObject(\
+                        u'org.ict_ok.components.host.host.HostVMwareVm')
+                    notify(ObjectCreatedEvent(newHost))
+                    network.__setitem__(newHost.getObjectId(), 
+                                        newHost)
+                    dcore = IZopeDublinCore(newHost, None)
+                    #dcore.creators = [u'ikportscan']
+                    newHost.ikComment += u"esx scanner: %s" % (dateNow)
+                    newHost.__setattr__("ikName", hostname)
+                    newHost.__setattr__("hostname", hostname)
+                    dcore.title = hostname
+                    newHost.__setattr__("hardware", hardware)
+                    newHost.__setattr__("genNagios", False)
+                    dcore.created = dateNow
+                    for interf in netList:
+                        newInterface = createObject(\
+                            u'org.ict_ok.components.interface.interface.Interface')
+                        notify(ObjectCreatedEvent(newInterface))
+                        newInterfaceId=u"If%s" % (interf['index'])
+                        newHost.__setitem__(newInterfaceId, newInterface)
+                        newInterface.__setattr__("description", interf['name'])
+                        newInterface.__setattr__("ikName", interf['name'])
+                        newInterface.ikComment += u"esx scanner: %s" % (dateNow)
+                        newInterfaceDc = IZopeDublinCore(newInterface, None)
+                        newInterfaceDc.title = u"%s" % interf['name']
+                        newInterfaceDc.created = datetime.utcnow()
+                        #newInterfaceDc.creators = [u'ikportscan']
+                        newInterface.netType = "ethernet"
+                        newInterface.mac = interf['mac']
+                        #newInterface.ipv4List.append(interfaceDict['ipAddress'])
+                        newInterface.ipv4List = interf['ips'][0]
+                    break
