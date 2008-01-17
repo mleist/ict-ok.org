@@ -131,8 +131,44 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
                    zapi.getPath(self.context)
             tmpDict['tooltip'] = _(u"shutdow the virtual machine")
             retList.append(tmpDict)
+        if checkPermission('org.ict_ok.admin_utils.esx_vim.Admin',
+                           self.context) and\
+           zapi.queryMultiAdapter((self.context, self.request),
+                                  name='convertobj.html') is not None:
+            tmpDict = {}
+            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['title'] = _(u"convert to intern")
+            tmpDict['href'] = u"%s/@@convertobj.html" % \
+                   zapi.getPath(self.context)
+            tmpDict['tooltip'] = _(u"convert to internal object")
+            retList.append(tmpDict)
         return retList
 
+    def shutdown(self):
+        """
+        shutdown this esx object to an internal object
+        """
+        print("EsxVimVirtualMachineDetails.shutdown")
+        self.context.shutdown()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    def convertobj(self):
+        """
+        converts this esx object to an internal object
+        """
+        print("EsxVimVirtualMachineDetails.convertobj")
+        self.context.convertobj()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+        
+        
 class EsxVimHostSystemDetails(EsxVimObjDetails):
     """ Class for Web-Browser-Details """
     displayName = u"Display: EsxVimHostSystemDetails"

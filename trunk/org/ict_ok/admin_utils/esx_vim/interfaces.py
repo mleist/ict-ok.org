@@ -235,6 +235,15 @@ class IEsxVimVirtualMachine(IEsxVimObj):
     virtual machines. This type provides methods for configuring and
     controlling a virtual machine.
     """
+    def shutdown():
+        """
+        shutdown this esx object to an internal object
+        """
+
+    def convertobj():
+        """
+        converts this esx object to an internal object
+        """
 
 class IEsxVimHostSystem(IEsxVimObj):
     """

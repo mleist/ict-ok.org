@@ -94,8 +94,6 @@ class EsxVimVirtualMachine(EsxVimObj):
         print "call_esxfcnt_on_obj - retValue: ", retValue
         return retValue
 
-
-
     def values(self):
         '''See interface `IReadContainer`'''
         print "EsxVimVirtualMachine.values"
@@ -115,3 +113,53 @@ class EsxVimVirtualMachine(EsxVimObj):
         '''See interface `IReadContainer`'''
         print "EsxVimVirtualMachine.__contains__(%s)" % key
         return {}.has_key(key)
+
+    def shutdown(self):
+        """
+        shutdown this esx object to an internal object
+        """
+        print("EsxVimVirtualMachine.shutdown")
+
+    def convertobj(self):
+        """
+        converts this esx object to an internal object
+        """
+        name = self.eval_on_obj('obj.name()')
+        ip = self.eval_on_obj('obj.guest().ipAddress()')
+        hardware = "ESX virtual machine (%s MB)" % \
+            self.eval_on_obj('obj.runtime().maxMemoryUsage()')
+        uuid = self.eval_on_obj('obj.config().uuid()')
+        netList = []
+        index = 0
+        while True:
+            mac = self.eval_on_obj('obj.guest().net()[%s].macAddress()' % index)
+            name = self.eval_on_obj('obj.guest().net()[%s].network()' % index)
+            if type(mac) == type('') and \
+                type(name) == type(''):
+                ipList = []
+                ipIndex = 0
+                while True:
+                    ip = self.eval_on_obj('obj.guest().net()[%s].ipAddress()[%s]' %\
+                        (index, ipIndex))
+                    if type(ip) == type(''):
+                        ipList.append(ip)
+                        ipIndex += 1
+                    else:
+                        break
+            else:
+                break
+            net = {}
+            net['index'] = index
+            net['mac'] = mac
+            net['name'] = name
+            net['ips'] = ipList
+            netList.append(net)
+            index += 1
+            if index > 10:
+                break
+        # name: 'cbw-ikomtrol01'
+        # ip: '192.168.157.98'
+        # hardware: 'ESX virtual machine (384 MB)'
+        # uuid: '500c4d26-525f-ab35-b2ee-9f77842f65b9'
+        # netList: [{'index': 0, 'mac': '00:50:56:8c:63:77', 'name': 'CBW Servers', 'ips': ['192.168.157.98']}]
+

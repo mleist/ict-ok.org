@@ -174,13 +174,29 @@
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
         name="details.html"
         />
-    <z3c:pagelet
+    <!--z3c:pagelet
         name="shutdown.html"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
         class="org.ict_ok.admin_utils.esx_vim.browser.esx_vim.EsxVimVirtualMachineDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.esx_vim.View"
-        />
+        /-->
+    <page
+        name="shutdown.html"
+        for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
+        class="org.ict_ok.admin_utils.esx_vim.browser.esx_vim.EsxVimVirtualMachineDetails"
+        attribute="shutdown"
+        permission="org.ict_ok.admin_utils.esx_vim.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="convertobj.html"
+        for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
+        class="org.ict_ok.admin_utils.esx_vim.browser.esx_vim.EsxVimVirtualMachineDetails"
+        attribute="convertobj"
+        permission="org.ict_ok.admin_utils.esx_vim.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
