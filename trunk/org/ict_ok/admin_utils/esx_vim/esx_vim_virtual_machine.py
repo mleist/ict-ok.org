@@ -130,11 +130,11 @@ class EsxVimVirtualMachine(EsxVimObj):
         """
         converts this esx object to an internal object
         """
-        hostname = self.eval_on_obj('obj.name()')
-        ip = self.eval_on_obj('obj.guest().ipAddress()')
-        hardware = "ESX virtual machine (%s MB)" % \
+        hostname = u"%s" % self.eval_on_obj('obj.name()')
+        ip = u"%s" % self.eval_on_obj('obj.guest().ipAddress()')
+        hardware = u"ESX virtual machine (%s MB)" % \
             self.eval_on_obj('obj.runtime().maxMemoryUsage()')
-        uuid = self.eval_on_obj('obj.config().uuid()')
+        uuid = u"%s" % self.eval_on_obj('obj.config().uuid()')
         netList = []
         index = 0
         while True:
@@ -148,7 +148,7 @@ class EsxVimVirtualMachine(EsxVimObj):
                     ip = self.eval_on_obj('obj.guest().net()[%s].ipAddress()[%s]' %\
                         (index, ipIndex))
                     if type(ip) == type(''):
-                        ipList.append(ip)
+                        ipList.append(u"%s" % ip)
                         ipIndex += 1
                     else:
                         break
@@ -156,8 +156,8 @@ class EsxVimVirtualMachine(EsxVimObj):
                 break
             net = {}
             net['index'] = index
-            net['mac'] = mac
-            net['name'] = name
+            net['mac'] = u"%s" % mac
+            net['name'] = u"%s" % name
             net['ips'] = ipList
             netList.append(net)
             index += 1
@@ -184,10 +184,12 @@ class EsxVimVirtualMachine(EsxVimObj):
                     dcore = IZopeDublinCore(newHost, None)
                     #dcore.creators = [u'ikportscan']
                     newHost.ikComment += u"esx scanner: %s" % (dateNow)
+                    #import pdb;pdb.set_trace()
                     newHost.__setattr__("ikName", hostname)
                     newHost.__setattr__("hostname", hostname)
                     dcore.title = hostname
                     newHost.__setattr__("hardware", hardware)
+                    newHost.__setattr__("esxUuid", uuid)
                     newHost.__setattr__("genNagios", False)
                     dcore.created = dateNow
                     for interf in netList:
@@ -197,10 +199,10 @@ class EsxVimVirtualMachine(EsxVimObj):
                         newInterfaceId=u"If%s" % (interf['index'])
                         newHost.__setitem__(newInterfaceId, newInterface)
                         newInterface.__setattr__("description", interf['name'])
-                        newInterface.__setattr__("ikName", interf['name'])
+                        newInterface.__setattr__("ikName", newInterfaceId)
                         newInterface.ikComment += u"esx scanner: %s" % (dateNow)
                         newInterfaceDc = IZopeDublinCore(newInterface, None)
-                        newInterfaceDc.title = u"%s" % interf['name']
+                        newInterfaceDc.title = newInterfaceId
                         newInterfaceDc.created = datetime.utcnow()
                         #newInterfaceDc.creators = [u'ikportscan']
                         newInterface.netType = "ethernet"
