@@ -39,10 +39,11 @@ from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 from org.ict_ok.components.net.interfaces import INet
-from org.ict_ok.components.net.net import Net
+from org.ict_ok.components.net.net import getAllNetworks, Net
 from org.ict_ok.admin_utils.netscan.interfaces import \
      IScanner
-
+from org.ict_ok.components.superclass.browser.superclass import \
+     Overview
 
 _ = MessageFactory('org.ict_ok')
 
@@ -168,6 +169,14 @@ class EditNetEventIfForm(EditForm):
     """ Edit for for net """
     label = _(u'Net Event Interfaces Form')
     fields = field.Fields(IEventIfSuperclass)
+
+
+class AllNetworks(Overview):
+    """Overview Pagelet"""
+    def objs(self):
+        """List of Content objects"""
+        return getAllNetworks()
+
 
 def NetScannerInstances2(dummy_context):
     """Which types of network scanners are there

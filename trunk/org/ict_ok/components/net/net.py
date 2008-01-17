@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,W0142
+# pylint: disable-msg=E1101,E0611,W0142
 #
 """implementation of Net
 
@@ -23,6 +23,8 @@ __version__ = "$Id$"
 from zope.app import zapi
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.component import getUtility
+from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
 from org.ict_ok.components.component import Component
@@ -53,3 +55,13 @@ class Net(Component):
             if name in INet.names():
                 setattr(self, name, value)
         self.ikRevision = __version__
+
+def getAllNetworks():
+    """ get a list of all Nets
+    """
+    retList = []
+    uidutil = getUtility(IIntIds)
+    for (myid, myobj) in uidutil.items():
+        if INet.providedBy(myobj.object):
+            retList.append(myobj.object)
+    return retList

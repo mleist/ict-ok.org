@@ -53,6 +53,19 @@
         for="org.ict_ok.components.net.interfaces.INet"
         name="overview.html"
         />
+        
+    <z3c:pagelet
+        name="all_networks.html"
+        for="*"
+        class="org.ict_ok.components.net.browser.net.AllNetworks"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.View"
+    />
+    <z3c:template
+        template="../../superclass/browser/overview.pt"
+        for="org.ict_ok.components.net.browser.net.AllNetworks"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="overview.html"

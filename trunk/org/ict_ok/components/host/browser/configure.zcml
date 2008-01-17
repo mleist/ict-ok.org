@@ -60,6 +60,19 @@
         for="org.ict_ok.components.host.interfaces.IHost"
         name="overview.html"
         />
+        
+    <z3c:pagelet
+        name="all_hosts.html"
+        for="*"
+        class="org.ict_ok.components.host.browser.host.AllHosts"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.View"
+    />
+    <z3c:template
+        template="../../superclass/browser/overview.pt"
+        for="org.ict_ok.components.host.browser.host.AllHosts"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="overview.html"

@@ -35,7 +35,7 @@ from z3c.pagelet.browser import BrowserPagelet
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
-from org.ict_ok.components.host.host import Host
+from org.ict_ok.components.host.host import getAllHosts, Host
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.superclass.browser.superclass import applyChanges
@@ -46,6 +46,8 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEvent
 from org.ict_ok.components.superclass.interfaces import \
      IEventIfSuperclass
+from org.ict_ok.components.superclass.browser.superclass import \
+     Overview
 
 _ = MessageFactory('org.ict_ok')
 
@@ -250,4 +252,12 @@ class EditEventHostEventIfForm(EditForm):
             # Send out a detailed object-modified event
             zope.event.notify(ObjectModifiedEvent(content, *descriptions))
         return changes
+
+
+class AllHosts(Overview):
+    """Overview Pagelet"""
+    def objs(self):
+        """List of Content objects"""
+        return getAllHosts()
+
 

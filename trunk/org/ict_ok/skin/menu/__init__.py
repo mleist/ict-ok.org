@@ -125,12 +125,12 @@ class HelpItem(GlobalMenuMainItem):
 
 class NetworksItem(GlobalMenuMainItem):
     title = _(u'Networks')
-    viewURL = 'networks.html'
+    viewURL = 'all_networks.html'
     weight = 1000
 
 class HostsItem(GlobalMenuMainItem):
     title = _(u'Hosts')
-    viewURL = 'hosts.html'
+    viewURL = 'all_hosts.html'
     weight = 2000
 
 class AdmUtilManagerItem(GlobalMenuMainItem):

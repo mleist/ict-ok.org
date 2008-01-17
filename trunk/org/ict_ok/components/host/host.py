@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,W0612,W0142
+# pylint: disable-msg=E1101,E0611,W0612,W0142
 #
 """implementation of host object
 
@@ -24,6 +24,8 @@ from zope.app import zapi
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.component import getUtility
+from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
 from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
@@ -132,4 +134,16 @@ class Host(Component):
     def eventInp_shutdown(self, eventMsg=None):
         """ start the shutdown of the host """
         eventMsg.stopit(self, "Host.eventInp_shutdown")
-        print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
+        print "Host.eventInp_shutdown (%s)       " \
+        "       ############## <-" % (self.ikName)
+
+
+def getAllHosts():
+    """ get a list of all Hosts
+    """
+    retList = []
+    uidutil = getUtility(IIntIds)
+    for (myid, myobj) in uidutil.items():
+        if IHost.providedBy(myobj.object):
+            retList.append(myobj.object)
+    return retList
