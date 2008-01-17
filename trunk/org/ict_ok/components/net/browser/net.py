@@ -25,9 +25,15 @@ from zope.i18nmessageid import MessageFactory
 from zope.security import checkPermission
 from zope.app.catalog.interfaces import ICatalog
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.interface import directlyProvides
 
 # z3c imports
 from z3c.form import button, field
+
+# zc imports
+from zc.table.column import Column, GetterColumn
+from zc.table.table import StandaloneFullFormatter
+from zc.table.interfaces import ISortableColumn
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
@@ -43,7 +49,9 @@ from org.ict_ok.components.net.net import getAllNetworks, Net
 from org.ict_ok.admin_utils.netscan.interfaces import \
      IScanner
 from org.ict_ok.components.superclass.browser.superclass import \
-     Overview
+     Overview, \
+     getStateIcon, getTitel, getModifiedDate, getActionBottons, \
+     raw_cell_formatter
 
 _ = MessageFactory('org.ict_ok')
 
@@ -56,6 +64,14 @@ class MSubAddNet(GlobalMenuSubItem):
     title = _(u'Add Net')
     viewURL = 'add_net.html'
     weight = 50
+
+# --------------- helper funktions -----------------------------
+
+def getNetworkIp(item, formatter):
+    """
+    Ip for Overview
+    """
+    return item.ipv4
 
 # --------------- object details ---------------------------
 
@@ -173,9 +189,36 @@ class EditNetEventIfForm(EditForm):
 
 class AllNetworks(Overview):
     """Overview Pagelet"""
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Title'),
+                     getter=getTitel),
+        GetterColumn(title=_('Network'),
+                     getter=getNetworkIp),
+        GetterColumn(title=_('Modified On'),
+                     getter=getModifiedDate,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    
     def objs(self):
         """List of Content objects"""
         return getAllNetworks()
+    
+    def table(self):
+        """ Properties of table are defined here"""
+        directlyProvides(self.columns[1], ISortableColumn)
+        directlyProvides(self.columns[2], ISortableColumn)
+        directlyProvides(self.columns[3], ISortableColumn)
+        formatter = StandaloneFullFormatter(
+            self.context, self.request, self.objs(),
+            columns=self.columns, sort_on=((_('Title'), False),))
+        formatter.cssClasses['table'] = 'listing'
+        return formatter()
 
 
 def NetScannerInstances2(dummy_context):
