@@ -254,28 +254,30 @@ class GlobalEsxVimUtility(object):
         
 
     def get_EsxVimObject_Dict(self, myParams, parentObj):
+        """ TODO: caching here please
+        """
         print "get_EsxVimDatacenter_Dict"
         if self.esxThread is None:
             return {}
         localEsxUtil = myParams['admUtilEsxVim']
         utilOId = localEsxUtil.getObjectId()
-        print "aa12"
+        #print "aa12"
         #myParams = {\
             #'cmd': 'find_entity_views',
             #'view_type': 'Datacenter',
             #'admUtilEsxVim': localEsxUtil,
             #}
         self.esxThread.getQueue(utilOId)['in'].put(myParams, True, 15)
-        print "aa13:", utilOId
+        #print "aa13:", utilOId
         self.esxThread.getQueue(utilOId)['in'].join()
-        print "aa14"
+        #print "aa14"
         #self.esxThread.queue1_in.put(localEsxUtil, True, 5)
         #self.esxThread.queue1_in.join()
         esxObjList = self.esxThread.getQueue(utilOId)['out'].get(True, 15)
-        print "esxObjList: ", esxObjList
-        print "aa15"
+        #print "esxObjList: ", esxObjList
+        #print "aa15"
         self.esxThread.getQueue(utilOId)['out'].task_done()
-        print "aa16"
+        #print "aa16"
         retDict = {}
         for esxObj in esxObjList:
             #print "datacenter0123:", datacenter
