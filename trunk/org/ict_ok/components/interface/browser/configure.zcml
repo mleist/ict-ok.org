@@ -8,7 +8,7 @@
 
     <!-- $Id$ -->
 
-    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
     <defaultView
@@ -57,6 +57,19 @@
     />
 
     <z3c:pagelet
+        name="add_services.html"
+        for="org.ict_ok.components.interface.interfaces.IInterface"
+        class="org.ict_ok.components.service.browser.service.AddServiceClass"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Add"
+    />
+    <z3c:template
+        template="../../service/browser/add_services.pt"
+        for="org.ict_ok.components.service.browser.service.AddServiceClass"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
         name="add_snmpvalue.html"
         for="org.ict_ok.components.interface.interfaces.IInterface"
         class="org.ict_ok.components.snmpvalue.browser.snmpvalue.AddSnmpValueForm"
@@ -74,6 +87,14 @@
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--permission="org.ict_ok.components.interface.View"-->
         <!--/>-->
+    <viewlet
+        name="details"
+        for="org.ict_ok.components.interface.interfaces.IInterface"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.interface.View"
+        />
     <viewlet
         name="overview"
         for="org.ict_ok.components.interface.interfaces.IInterface"
@@ -114,14 +135,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.service.Add"
         />
-    <viewlet
-        name="add_snmpvalue"
-        for="org.ict_ok.components.interface.interfaces.IInterface"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
-        class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubAddSnmpValue"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.snmpvalue.Add"
-        />
+    <!--<viewlet-->
+        <!--name="add_snmpvalue"-->
+        <!--for="org.ict_ok.components.interface.interfaces.IInterface"-->
+        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
+        <!--class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubAddSnmpValue"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.components.snmpvalue.Add"-->
+        <!--/>-->
     <viewlet
         name="add_dashboard"
         for="org.ict_ok.components.interface.interfaces.IInterface"

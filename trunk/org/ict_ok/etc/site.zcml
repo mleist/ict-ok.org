@@ -4,7 +4,7 @@
 >
     <!-- $Id$ -->
         
-    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
                 Markus Leist <leist@ikom-online.de> -->
                                 
     <!--all meta definitions-->
@@ -81,6 +81,8 @@
              file="security.zcml" />
 
     <!--security settings of components (hierarchical)-->
+    <include package="org.ict_ok.components.superclass"
+             file="security.zcml" />
     <include package="org.ict_ok.components.site"
              file="security.zcml" />
     <include package="org.ict_ok.components.slave"
@@ -160,6 +162,7 @@
     <include package="org.ict_ok.admin_utils.wfmc" />
 
     <!--registration of components (hierarchical)-->
+    <include package="org.ict_ok.components.browser" />
     <include package="org.ict_ok.components.superclass" />
     <include package="org.ict_ok.components.supernode" />
     <include package="org.ict_ok.components.site" />
@@ -169,6 +172,7 @@
     <include package="org.ict_ok.components.host.special" />
     <include package="org.ict_ok.components.interface" />
     <include package="org.ict_ok.components.service" />
+    <include package="org.ict_ok.components.service.special" />
     <include package="org.ict_ok.components.snmpvalue" />
     <include package="org.ict_ok.components.location" />
     <include package="org.ict_ok.components.building" />

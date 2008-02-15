@@ -8,7 +8,7 @@
 
     <!-- $Id$ -->
 
-    <!-- Copyright (c) 2004, 2005, 2006, 2007,
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
     <!--<page-->
@@ -27,12 +27,22 @@
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--/>-->
 
-    <z3c:pagelet
+    <page
         name="dumpdata.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
-        class="org.ict_ok.components.superclass.browser.superclass.DumpData"
+        class=".superclass.SuperclassDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="zope.Security"
+        attribute="dumpData"
+        permission="org.ict_ok.components.superclass.exportxml"
+    />
+
+    <page
+        name="exportxmldata.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class=".superclass.SuperclassDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXmlData"
+        permission="org.ict_ok.components.superclass.exportxml"
     />
 
     <z3c:pagelet
