@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -19,7 +19,7 @@ from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import ISupernode
-from org.ict_ok.schema.ipvalid import IpValid
+from org.ict_ok.schema.ipvalid import HostIpValid
 from org.ict_ok.schema.objectidvalid import ObjectIdValid
 
 _ = MessageFactory('org.ict_ok')
@@ -38,7 +38,7 @@ class IAdmUtilSupervisor(ISupernode):
         readonly = True,
         required = True)
 
-    ipv4My = IpValid(
+    ipv4My = HostIpValid(
         min_length = 1,
         max_length = 30,
         title = _("My active IP"),
@@ -53,7 +53,7 @@ class IAdmUtilSupervisor(ISupernode):
         readonly = True,
         required = True)
     
-    ipv4Master = IpValid(
+    ipv4Master = HostIpValid(
         min_length = 1,
         max_length = 30,
         title = _("Master IP"),
@@ -82,7 +82,7 @@ class IAdmUtilSupervisor(ISupernode):
         readonly = False,
         required = False )
 
-    ipv4Slave = IpValid(
+    ipv4Slave = HostIpValid(
         min_length = 1,
         max_length = 30,
         title = _("Slave IP"),
@@ -207,7 +207,7 @@ class IAdmUtilSupervisor(ISupernode):
         """
         revert message header and sends a pong as response to the ping
         """
-        
+
     def receivedPing(self, msgHeader):
         """
         we have received a ping request
@@ -243,3 +243,9 @@ class IAdmUtilSupervisor(ISupernode):
         #"""
         #setter for status2master
         #"""
+
+    def reindex_db(self):
+        """
+        will reindex the catalogs of all tables in database
+        """
+

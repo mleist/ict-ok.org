@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -31,6 +31,7 @@ from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
 
 # ict_ok.org imports
+from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 from org.ict_ok.admin_utils.supervisor.supervisor import AdmUtilSupervisor
 
@@ -58,7 +59,8 @@ def bootStrapSubscriberDatabase(event):
         IAdmUtilSupervisor['nbrStarts'].readonly = False
         instAdmUtilSupervisor.nbrStarts += 1
         IAdmUtilSupervisor['nbrStarts'].readonly = True
-        instAdmUtilSupervisor.appendEventHistory(u"Database started")
+        instAdmUtilSupervisor.appendEventHistory(u"Database started (Vers. %s)" \
+                                                 % getIkVersion())
         dcore = IWriteZopeDublinCore(madeAdmUtilSupervisor)
         dcore.title = u"ICT_Ok Supervisor"
         dcore.created = datetime.utcnow()
@@ -74,7 +76,8 @@ def bootStrapSubscriberDatabase(event):
         IAdmUtilSupervisor['nbrStarts'].readonly = False
         instAdmUtilSupervisor.nbrStarts += 1
         IAdmUtilSupervisor['nbrStarts'].readonly = True
-        instAdmUtilSupervisor.appendEventHistory(u"Database started")
+        instAdmUtilSupervisor.appendEventHistory(u"Database started (Vers. %s)" \
+                                                 % getIkVersion())
         dcore = IWriteZopeDublinCore(instAdmUtilSupervisor)
         dcore.title = u"ICT_Ok Supervisor"
         dcore.modified = datetime.utcnow()

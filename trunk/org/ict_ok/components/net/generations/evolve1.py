@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -23,11 +23,13 @@ generation = 1
 
 def evolve(context):
     u"""
-    convert ddd to new format
+    convert object to new standard
     """
-    
     root = getRootFolder(context) # the Zope-Root-Folders
 
     for net in findObjectsProviding(root, INet):
         # convert this object
-        pass
+        evolve_msg = "gen. %d (%s)" % \
+                   (generation, evolve.__doc__.strip())
+        print "Net(%s): " % net.ikName + evolve_msg
+        net.appendHistoryEntry(evolve_msg)

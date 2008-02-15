@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -53,11 +53,12 @@ class Pickle(object):
         retVal['listAttr']['ikComment'] = self.context.ikComment
         retVal['listAttr']['ikAuthor'] = self.context.ikAuthor
         retVal['history'] = []
-        print "exportAsDict - self.context.history: %s" % self.context.history
+        #print "exportAsDict - self.context.history: %s" % self.context.history
         if hasattr(self.context, 'history') and \
            self.context.history is not None:
-            for entry in self.context.history:
-                entry = removeSecurityProxy(entry)
+            ringBuffer = self.context.history
+            historyList = ringBuffer.get()
+            for entry in historyList:
                 retVal['history'].append(entry.exportAsDict(mode))
         retVal['notes'] = []
         if hasattr(self.context, 'ikNotes') and \

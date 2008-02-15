@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -43,7 +43,7 @@ from org.ict_ok.admin_utils.graphviz.interfaces import \
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import IAdmUtilEvent
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IEventLogic
-from org.ict_ok.components.host.interfaces import IHost
+from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
@@ -154,8 +154,9 @@ class SignalGraph(BrowserPagelet):
                     objSet.add(result)
                 elif IEventLogic.providedBy(result):
                     objSet.add(result)
-                elif IHost.providedBy(result):
-                    objSet.add(result)
+                elif IComponent.providedBy(result):
+                    if result.isConnectedToEvent():
+                        objSet.add(result)
                 else:
                     pass
         dotFile = open("/tmp/dotSignals.dot", 'w')
@@ -175,7 +176,8 @@ class SignalGraph(BrowserPagelet):
             #try:
             objGraphvizDot.traverse4DotGenerator(dotFile, level=1,
                                                  comments=True,
-                                                 signalsOutput=True)
+                                                 signalsOutput=True,
+                                                 recursive=False)
             #except AttributeError:
                 #print >> dotFile, '\t ^^ (%s)' % objGraphvizDot
         print >> dotFile, '\t// events ----------------------------------'

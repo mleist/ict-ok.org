@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -19,10 +19,15 @@ from pytz import timezone
 
 # zope imports
 from zope.app import zapi
+from zope.component import getUtility
+from zope.size.interfaces import ISized
+from zope.app.intid.interfaces import IIntIds
 from zope.i18nmessageid import MessageFactory
+from zope.security import checkPermission
 from zope.sendmail.interfaces import IMailDelivery
 from zope.app.zapi import getPath
 from zope.interface import directlyProvides
+from zope.app.pagetemplate.urlquote import URLQuote
 
 # z3c imports
 from z3c.form import field
@@ -34,6 +39,7 @@ from zc.table.table import StandaloneFullFormatter
 from zc.table.interfaces import ISortableColumn
 
 # ict_ok.org imports
+from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -67,6 +73,48 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
     """
     omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
     omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
+
+    def actions(self):
+        """
+        gives us the action dict of the object
+        """
+        try:
+            objId = getUtility(IIntIds).getId(self.context)
+        except KeyError:
+            objId = 1000
+        retList = []
+        adapSize = ISized(self.context)
+        if checkPermission('org.ict_ok.admin_utils.supervisor.ReindexDB',
+                           self.context):
+            quoter = URLQuote(self.request.getURL())
+            tmpDict = {}
+            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['title'] = _(u"reindex database")
+            tmpDict['href'] = u"%s/@@reindex_db?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
+            tmpDict['tooltip'] = _(u"will reindex the catalogs of all "\
+                                   u"tables in database")
+            retList.append(tmpDict)
+        return retList
+    
+    def state(self):
+        """
+        gives us the state dict of the object
+        """
+        return IState(self.context).getStateDict()
+
+    def reindex_db(self):
+        """
+        will reindex the catalogs of all tables in database
+        """
+        print "reindex_db@browser"
+        self.context.reindex_db()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
 
     def getlastEvents(self):
         """convert event history for display
@@ -168,8 +216,10 @@ def formatEntryNbr(entry, formatter):
 def formatEntryMessage(entry, formatter):
     return entry['msg']
 
-class Events(BrowserPagelet):
+#class Events(BrowserPagelet):
+class ViewAdmUtilSupervisorEventsForm(BrowserPagelet):
     """History Pagelet"""
+    label = _(u'Supervisor events')
     columns = (
         GetterColumn(title=_('Start number'),
                      getter=formatEntryNbr),

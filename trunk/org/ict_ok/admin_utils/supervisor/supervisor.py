@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -418,6 +418,18 @@ class AdmUtilSupervisor(Supernode):
             if newParentObj and newParentObj.has_key(newOid):
                 newParentObj.__delitem__(newOid)
             newParentObj[newOid] = newObj
+
+    def reindex_db(self):
+        """
+        will reindex the catalogs of all tables in database
+        """
+        print "reindex_db"
+        my_catalog = zapi.getUtility(ICatalog)
+        #import pdb
+        #pdb.set_trace()
+        my_catalog.updateIndexes()
+        self.appendEventHistory(\
+            u"reindex the catalogs of all tables in database")
 
     def removeObject(self, msgHeader, msgOldparent,
                      msgNewparent, msgObjectOid):

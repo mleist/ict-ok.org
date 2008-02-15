@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -23,24 +23,24 @@ from zope.index.text.interfaces import ISearchableText
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.adapter.search \
-     import Searchable as SuperSearchable
+from org.ict_ok.components.superclass.adapter.search import \
+     Searchable as SuperSearchable
 from org.ict_ok.components.room.interfaces import IRoom
 
 _ = MessageFactory('org.ict_ok')
 
 
 class Searchable(SuperSearchable):
-    """Searchable-Adapter."""
+     """Searchable-Adapter."""
 
-    implements(ISearchableText)
-    adapts(IRoom)
+     implements(ISearchableText)
+     adapts(IRoom)
 
-    def __init__(self, context):
-        SuperSearchable.__init__(self, context)
+     def __init__(self, context):
+          SuperSearchable.__init__(self, context)
 
-    def getSearchableRoomOid(self):
-        """
+     def getSearchableRoomOid(self):
+          """
         get Object id as string for catalog
         """
-        return self.context.getObjectId()
+          return self.context.getObjectId()

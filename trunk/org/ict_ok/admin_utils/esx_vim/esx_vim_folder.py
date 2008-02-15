@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -15,6 +15,7 @@
 __version__ = "$Id$"
 
 # phython imports
+from datetime import datetime, timedelta
 
 # zope imports
 from zope.interface import implements
@@ -30,6 +31,10 @@ from org.ict_ok.admin_utils.esx_vim.esx_vim import globalEsxVimUtility
 
 _ = MessageFactory('org.ict_ok')
 
+dictEsxVimFolderGetItems = {}
+dictEsxVimFolderGetItemCacheTime = {}
+dictEsxVimFolderValues = {}
+dictEsxVimFolderValuesCacheTime = {}
 
 class EsxVimFolder(EsxVimObj):
     """
@@ -39,21 +44,36 @@ class EsxVimFolder(EsxVimObj):
     def __init__(self):
         EsxVimObj.__init__(self)
         self.esxObjectTypes = None
-        
+        dictEsxVimFolderGetItemCacheTime[self.objectID] = datetime.utcnow() \
+                                        - timedelta(seconds=60)
+        dictEsxVimFolderValuesCacheTime[self.objectID] = \
+                                       dictEsxVimFolderGetItemCacheTime[self.objectID]
+        dictEsxVimFolderGetItems[self.objectID] = None
+        dictEsxVimFolderValues[self.objectID] = None
+
     def __getitem__(self, key):
         '''See interface `IReadContainer`'''
         print "EsxVimFolder.__getitem__(%s)" % (key)
-        myParams = {\
-            'cmd': 'find_entity_views',
-            'view_type': self.esxObjectTypes,
-            'admUtilEsxVim': self.localEsxUtil,
-            }
-        myDict = globalEsxVimUtility.get_EsxVimObject_Dict(myParams, self)
-        #myDict = globalEsxVimUtility.get_EsxVimAllDict(self, self)
-        print "myDict:", myDict
-        myObj = myDict[key]
-        print "myObj:", myObj
-        return myObj
+        nowTime = datetime.utcnow()
+        deltaTime = nowTime - dictEsxVimFolderGetItemCacheTime[self.objectID]
+        if deltaTime > timedelta(seconds=30):
+            print "in cache"
+            dictEsxVimFolderGetItemCacheTime[self.objectID] = nowTime
+            myParams = {\
+                'cmd': 'find_entity_views',
+                'view_type': self.esxObjectTypes,
+                'admUtilEsxVim': self.localEsxUtil,
+                }
+            myDict = globalEsxVimUtility.get_EsxVimObject_Dict(myParams, self)
+            #myDict = globalEsxVimUtility.get_EsxVimAllDict(self, self)
+            print "myDict:", myDict
+            myObj = myDict[key]
+            print "myObj:", myObj
+            dictEsxVimFolderGetItems[self.objectID] = myObj
+            #return myObj
+        else:
+            print "Cached"
+        return dictEsxVimFolderGetItems[self.objectID]
         #return globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)[key]
         #return globalEsxVimUtility.get_EsxVimDatacenter_Dict(self, self)[key]
         
@@ -69,12 +89,19 @@ class EsxVimFolder(EsxVimObj):
         '''See interface `IReadContainer`'''
         print "EsxVimFolder.values"
         #return globalEsxVimUtility.get_EsxVimDatacenter_values(self)
-        myParams = {\
-            'cmd': 'find_entity_views',
-            'view_type': self.esxObjectTypes,
-            'admUtilEsxVim': self.localEsxUtil,
-            }
-        return globalEsxVimUtility.get_EsxVimObject_Dict(myParams,
-                                                         self).values()
-        #return globalEsxVimUtility.get_EsxVimAllDict(self, self).values()
-        #return getTestDict(self).values()
+        nowTime = datetime.utcnow()
+        deltaTime = nowTime - dictEsxVimFolderValuesCacheTime[self.objectID]
+        if deltaTime > timedelta(seconds=30):
+            print "in cache"
+            dictEsxVimFolderValuesCacheTime[self.objectID] = nowTime
+            myParams = {\
+                'cmd': 'find_entity_views',
+                'view_type': self.esxObjectTypes,
+                'admUtilEsxVim': self.localEsxUtil,
+                }
+            dictEsxVimFolderValues[self.objectID] = \
+                                  globalEsxVimUtility.get_EsxVimObject_Dict(myParams,
+                                                                            self).values()
+        else:
+            print "Cached"
+        return dictEsxVimFolderValues[self.objectID]

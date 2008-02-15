@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -92,7 +92,7 @@ class SnmpdThread(threading.Thread):
         self.transportDispatcher = AsynsockDispatcher()
         self.transportDispatcher.registerTransport(
             #    udp.domainName, udp.UdpSocketTransport().openServerMode(('localhost', 162))
-            udp.domainName, udp.UdpSocketTransport().openServerMode(('', 162))
+            udp.domainName, udp.UdpSocketTransport().openServerMode(('', 11162))
         )
         self.transportDispatcher.registerRecvCbFun(self.cbFun)
         self.transportDispatcher.jobStarted(1) # this job would never finish

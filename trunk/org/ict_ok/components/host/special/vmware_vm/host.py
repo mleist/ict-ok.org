@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -43,14 +43,11 @@ class Host(HostBase):
         constructor of the object
         """
         HostBase.__init__(self, **data)
-        # find our correct factory, is there a better solution?
-        for (fact_name, fact_obj) in zapi.getFactoriesFor(IHostVMwareVm):
-            if (len(fact_name) > 11) and (fact_name[:11]=='org.ict_ok.'):
-                self.myFactory = unicode(fact_name)
         for (name, value) in data.items():
             if name in IHostVMwareVm.names() or \
                name in IEventIfHostVMwareVm.names():
                 setattr(self, name, value)
+        self.ikRevision = __version__
 
     def poweroff(self):
         """

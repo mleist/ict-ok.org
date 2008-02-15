@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -53,12 +53,19 @@ class IHost(IComponent):
         default = u"",
         required = False)
 
-    hostGroup = Set(
+    hostGroups = Set(
         title = _("host groups"),
         value_type = Choice(
             title = _("host"),
             vocabulary="AllHostGroups"),
         default = set([]),
+        readonly = False,
+        required = True)
+
+    productionState = Choice(
+        title = _("Production state"),
+        vocabulary="AllHostProductionStates",
+        default = 'production',
         readonly = False,
         required = True)
 

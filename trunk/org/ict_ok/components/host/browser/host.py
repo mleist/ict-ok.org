@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -27,6 +27,7 @@ from zope.lifecycleevent import Attributes, ObjectModifiedEvent
 from zope.app.intid.interfaces import IIntIds
 from zope.app.pagetemplate.urlquote import URLQuote
 from zope.app.appsetup import appsetup
+from zope.app.catalog.interfaces import ICatalog
 
 # z3c imports
 from z3c.form import form, field
@@ -198,7 +199,7 @@ class AddHostClass(BrowserPagelet):
 
 class DetailsHostForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of net')
+    label = _(u'settings of host')
     fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
 
 
@@ -244,10 +245,34 @@ class EditEventHostEventIfForm(EditForm):
                 elif IEventIfSuperclass.isEqualOrExtendedBy(interface):
                     print "##### Superclass 2 #######"
                 names = attrs.keys()
-                for attr in attrs:
-                    print "attr: %s (I:%s)" % (attr, interface)
-                    print "   old: ", attrs[attr]['oldval']
-                    print "   new: ", attrs[attr]['newval']
+                for attr in attrs: 
+                    if attr.find("eventInpObjs_") == 0: # attribute name starts with ...
+                        functionName = attr[len('eventInpObjs_'):]
+                        print "attr: %s (I:%s)" % (attr, interface)
+                        print "   old: ", attrs[attr]['oldval']
+                        print "   new: ", attrs[attr]['newval']
+                        newSet = attrs[attr]['newval']
+                        oldSet = attrs[attr]['oldval']
+                        if type(newSet) == type(set()) and \
+                           type(oldSet) == type(set()):
+                            newEntries = newSet.difference(oldSet)
+                            oldEntries = oldSet.difference(newSet)
+                            for oldOid in oldEntries:
+                                my_catalog = zapi.getUtility(ICatalog)
+                                for resObj in my_catalog.searchResults(oid_index=oldOid):
+                                    if IAdmUtilEvent.providedBy(resObj):
+                                        resObj.removeOidFromOutObjects(
+                                            content.objectID + "." + functionName)
+                                        resObj.removeInvalidOidFromInpOutObjects()
+                                        resObj._p_changed = True
+                            for newOid in newEntries:
+                                my_catalog = zapi.getUtility(ICatalog)
+                                for resObj in my_catalog.searchResults(oid_index=newOid):
+                                    if IAdmUtilEvent.providedBy(resObj):
+                                        resObj.addOidToOutObjects(
+                                            content.objectID + "." + functionName)
+                                        resObj.removeInvalidOidFromInpOutObjects()
+                                        resObj._p_changed = True
                 descriptions.append(Attributes(interface, *names))
             # Send out a detailed object-modified event
             zope.event.notify(ObjectModifiedEvent(content, *descriptions))

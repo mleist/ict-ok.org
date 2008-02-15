@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -37,6 +37,10 @@ class AdmUtilEvent(Supernode):
     logAllEvents = FieldProperty(IAdmUtilEvent['logAllEvents'])
     inpObjects = FieldProperty(IAdmUtilEvent['inpObjects'])
     outObjects = FieldProperty(IAdmUtilEvent['outObjects'])
+    hostGroup = FieldProperty(IAdmUtilEvent['hostGroup'])
+    location = FieldProperty(IAdmUtilEvent['location'])
+    building = FieldProperty(IAdmUtilEvent['building'])
+    room = FieldProperty(IAdmUtilEvent['room'])
 
     def __init__(self, **data):
         """
@@ -52,17 +56,17 @@ class AdmUtilEvent(Supernode):
         """ add oid to set """
         self.inpObjects.add(oid)
 
-    def addOidToOutObjects(self, oid):
-        """ add oid to set """
-        self.outObjects.add(oid)
+    def addOidToOutObjects(self, oidDotFct):
+        """ add oid plus function name to set """
+        self.outObjects.add(oidDotFct)
 
     def removeOidFromInpObjects(self, oid):
         """ delete oid from set """
         self.inpObjects.remove(oid)
 
-    def removeOidFromOutObjects(self, oid):
-        """ delete oid from set """
-        self.outObjects.remove(oid)
+    def removeOidFromOutObjects(self, oidDotFct):
+        """ delete oid plus function name from set """
+        self.outObjects.remove(oidDotFct)
 
     def removeInvalidOidFromInpOutObjects(self):
         """ delete all invalid oids 

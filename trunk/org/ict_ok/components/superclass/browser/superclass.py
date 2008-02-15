@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -15,6 +15,7 @@
 __version__ = "$Id$"
 
 # phython imports
+from datetime import datetime
 
 # zope imports
 import zope.interface
@@ -33,6 +34,7 @@ from zope.security.checker import canAccess
 from zope.component import getMultiAdapter
 #import zope.event
 from zope.lifecycleevent import Attributes, ObjectModifiedEvent
+from zope.app.rotterdam.xmlobject import translate, setNoCacheHeaders
 
 # z3c imports
 from z3c.form import button, field, form, interfaces
@@ -249,6 +251,20 @@ class MSubHistory(GlobalMenuSubItem):
     weight = 50
 
 
+class MSubDumpData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Dump data')
+    viewURL = 'dumpdata.html'
+    weight = 60
+
+
+class MSubExportXmlData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Export XML')
+    viewURL = 'exportxmldata.html'
+    weight = 60
+
+
 class MSubEdit(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Edit')
@@ -313,12 +329,37 @@ class SuperclassDetails:
         pretty print for web-interface
         """
         import pprint
-        obj = removeAllProxies(self.context)
+        #obj = removeAllProxies(self.context)
+        obj = self.context
         #print "1------------------------------->", obj
         pickleAdapter = IPickle(obj)
         if pickleAdapter:
             return pprint.pformat(pickleAdapter.exportAsDict(), \
-                                   width=60, depth=6)
+                                   width=80, depth=3)
+        else:
+            return _(u"no pickle adapter")
+
+    def exportXmlData(self):
+        """
+        export data as XML to the web browser
+        """
+        from zope.xmlpickle import toxml
+        import pickle
+        obj = self.context
+        pickleAdapter = IPickle(obj)
+        if pickleAdapter:
+            self.request.response.setHeader('Content-Type', 'application/ict-xml')
+            filename = datetime.now().strftime('ictxml_%Y%m%d%H%M%S.xml')
+            self.request.response.setHeader('Content-Disposition', 'attachment; filename=\"%s\"' % filename)
+            setNoCacheHeaders(self.request.response)
+            pickleDump = pickle.dumps(pickleAdapter.exportAsDict())
+            #return xmlEscapeWithCData(
+                    ##u'<?xml version="1.0" encoding="ISO-8859-1"?>'
+                    ##u'<datadump>%s</datadump>',
+                    #toxml(pickleDump))
+            #return pprint.pformat(pickleAdapter.exportAsDict(), \
+                                   #width=60, depth=6)
+            return toxml(pickleDump)
         else:
             return _(u"no pickle adapter")
 

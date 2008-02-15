@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -318,20 +318,22 @@ class GlobalEsxVimUtility(object):
             }
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
-        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
-        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
-        esxObj = esxObjList[0]
-        myParams = {\
-            'admUtilEsxVim': localEsxUtil,
-            'cmd': 'call_fcnt_on_obj',
-            'perlRef': esxObj['perlRef'],
-            'fnct_name': 'ShutdownGuest',
-            'fnct_args': [],
-            }
-        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
-        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
-        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
-        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        if self.esxThread.getQueue(localEsxUtilOId)['out'].qsize() > 0:
+            esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+            self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+            esxObj = esxObjList[0]
+            myParams = {\
+                'admUtilEsxVim': localEsxUtil,
+                'cmd': 'call_fcnt_on_obj',
+                'perlRef': esxObj['perlRef'],
+                'fnct_name': 'ShutdownGuest',
+                'fnct_args': [],
+                }
+            self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+            self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+            if self.esxThread.getQueue(localEsxUtilOId)['out'].qsize() > 0:
+                esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+                self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
 
  
     def powerOnVm(self, uuid, localEsxUtil):

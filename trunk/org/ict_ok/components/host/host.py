@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -39,8 +39,27 @@ def AllHostGroups(dummy_context):
     """
     terms = []
     for (gkey, gname) in {
-        u'dns': u'name server',
-        u'smtp': u'smtp-server'}.items():
+        u'dns': u'DNS-Server',
+        u'file': u'File-Server',
+        u'misc': u'Miscellaneous-Server',
+        u'smtp': u'SMTP-Server',
+        u'terminal': u'Terminal-Server',
+        u'util': u'Utility-Server',
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
+
+def AllHostProductionStates(dummy_context):
+    """In which production state a host may be
+    """
+    terms = []
+    for (gkey, gname) in {
+        u'production': u'Production',
+        u'preproduction': u'Pre-Production',
+        u'test': u'Test',
+        u'maintenance': u'Maintenance',
+        u'decommissioned': u'Decommissioned',
+        }.items():
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)
 
@@ -56,7 +75,8 @@ class Host(Component):
     hostname = FieldProperty(IHost['hostname'])
     manufacturer = FieldProperty(IHost['manufacturer'])
     vendor = FieldProperty(IHost['vendor'])
-    hostGroup = FieldProperty(IHost['hostGroup'])
+    hostGroups = FieldProperty(IHost['hostGroups'])
+    productionState = FieldProperty(IHost['productionState'])
     workinggroup = FieldProperty(IHost['workinggroup'])
     hardware = FieldProperty(IHost['hardware'])
     user = FieldProperty(IHost['user'])
@@ -82,10 +102,6 @@ class Host(Component):
         constructor of the object
         """
         Component.__init__(self, **data)
-        # find our correct factory, is there a better solution?
-        for (fact_name, fact_obj) in zapi.getFactoriesFor(IHost):
-            if (len(fact_name) > 11) and (fact_name[:11]=='org.ict_ok.'):
-                self.myFactory = unicode(fact_name)
         # initialize OS List
         self.osList = []
         self.eventInpObjs_shutdown = set([])

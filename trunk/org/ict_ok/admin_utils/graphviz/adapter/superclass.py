@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -74,7 +74,8 @@ class SuperclassGenGraphvizDot(object):
                                   cfgFile, 
                                   level=0, 
                                   comments=True,
-                                  signalsOutput=False):
+                                  signalsOutput=False,
+                                  recursive=True):
         """generate body-text in graphviz dot-file"""
         if comments:
             print >> cfgFile, "%s// Body (%s,%d) - " \
@@ -97,11 +98,12 @@ class SuperclassGenGraphvizDot(object):
         print >> cfgFile, '%s]; // %s' % ("\t" * level, self.context.__name__)
 
     def traverse4DotGenerator(self, cfgFile, level=0,
-                              comments=True, signalsOutput=False):
+                              comments=True, signalsOutput=False,
+                              recursive=True):
         """generate text structure in graphviz dot-file"""
         self.traverse4DotGeneratorPre(cfgFile, level,
                                       comments, signalsOutput)
         self.traverse4DotGeneratorBody(cfgFile, level,
-                                       comments, signalsOutput)
+                                       comments, signalsOutput, recursive)
         self.traverse4DotGeneratorPost(cfgFile, level,
                                        comments, signalsOutput)

@@ -1,22 +1,22 @@
-<html metal:use-macro="views/standard_macros/view">
-<body>
-    <div metal:fill-slot="body" i18n:domain="ict-ok.org">
-	  <h1 i18n:translate="">Events</h1>
-      <table id="sortable" class="listing" summary="Content listing"
-                   i18n:attributes="summary">
-        <tr>
-          <th i18n:translate="">Start number</th>
-          <th i18n:translate="">Date</th>
-          <th i18n:translate="">Message</th>
-        </tr>
-	      <span tal:omit-tag="" tal:repeat="Event view/getlastEvents">
-          <tr>
-            <td tal:content="structure python:Event['nbr']" />
-            <td tal:content="structure python:Event['date'].strftime('%d.%m.%Y %H:%M:%S (%Z)')" />
-            <td tal:content="structure python:Event['msg']" />
-          </tr>
-        </span>
-      </table>
+<i18n:block domain="org.ict_ok">
+    <h3 tal:condition="view/label|nothing"
+        tal:content="view/label" />
+    <div class="message"
+      tal:condition="view/status|nothing"
+      tal:content="view/status"
+      i18n:translate="">
+        Something happened.
     </div>
-	</body>
-</html>
+
+    <form action="" method="post"
+      tal:attributes="action request/URL">
+    <tal:block
+      condition="view/objs|nothing"
+      replace="structure view/table" />
+    <div
+      tal:condition="not: view/objs|nothing"
+      i18n:translate="">
+      There are no objects.
+    </div>
+    </form>
+</i18n:block>

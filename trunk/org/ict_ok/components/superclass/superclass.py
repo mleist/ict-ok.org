@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -94,6 +94,7 @@ class Superclass(Persistent):
                 #principalid = participation.principal.id
                 principal_title = participation.principal.title
                 self.ikAuthor += unicode(principal_title)
+        self.myFactory = str(self.__class__).split("'")[1]
         self.ikRevision = __version__
 
     def __post_init__(self, **data):
@@ -169,6 +170,20 @@ class Superclass(Persistent):
         newEntry.setObjVersion(self.ikRevision)
         self.history.append(newEntry)
 
+    def isConnectedToEvent(self):
+        for attrName in self.__dict__:
+            attrObjsPrefix = "eventInpObjs_"
+            if attrName.find(attrObjsPrefix) == 0: # attribute name starts with ...
+                objs = getattr(self, attrName, None)
+                if len(objs) > 0:
+                    return True
+            attrObjsPrefix = "eventOutObjs_"
+            if attrName.find(attrObjsPrefix) == 0: # attribute name starts with ...
+                objs = getattr(self, attrName, None)
+                if len(objs) > 0:
+                    return True
+        return False
+        
     def processEvents(self):
         while len(self.inpEQueue) > 0:
             # temp. direct connect

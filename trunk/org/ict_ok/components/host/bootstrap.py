@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -22,6 +22,7 @@ from datetime import datetime
 from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.catalog.field import FieldIndex
+from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
 from zope.dublincore.interfaces import IZopeDublinCore
@@ -76,7 +77,7 @@ def bootStrapSubscriber(event):
                   if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create index for entry type 'host'")
+            u" bootstrap: ICatalog - create oid index for entry type 'host'")
     if not "host_hostname_index" in instUtilityICatalog.keys():
         host_hostname_index = FieldIndex(interface=ISearchableText,
                                          field_name='getSearchableHostHostname',
@@ -87,7 +88,18 @@ def bootStrapSubscriber(event):
                   if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create index for entry type 'host'")
+            u" bootstrap: ICatalog - create hostname index for entry type 'host'")
+    if not "host_room_oid_index" in instUtilityICatalog.keys():
+        host_room_oid_index = TextIndex(interface=ISearchableText,
+                                        field_name='getSearchableHostRoomOid',
+                                        field_callable=True)
+        instUtilityICatalog['host_room_oid_index'] = host_room_oid_index
+        # search for IAdmUtilSupervisor
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: ICatalog - create room index for entry type 'host'")
 
     # creates and stores the local system in ZODB
     # createLocalSystem(root_folder)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -23,20 +23,12 @@ from zope.index.text.interfaces import ISearchableText
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.adapter.search \
-     import Searchable as SuperSearchable
-from org.ict_ok.components.interface.interfaces import IInterface
+from org.ict_ok.components.superclass.adapter.search import \
+     Searchable as SuperSearchable
+from org.ict_ok.components.interface.interfaces import \
+     IInterface, convertIpV4
 
 _ = MessageFactory('org.ict_ok')
-
-def convertIpV4(inp):
-    """convert string or list of strings from ipv4-addresses """
-    if type(inp) == type([]):
-        return ' '.join([str(ip).replace(".", "_").replace("/", "__") \
-                         for ip in inp])
-    elif type(inp) == type(u'') or \
-         type(inp) == type(''):
-        return str(inp).replace(".", "_").replace("/", "__")
 
 
 class Searchable(SuperSearchable):

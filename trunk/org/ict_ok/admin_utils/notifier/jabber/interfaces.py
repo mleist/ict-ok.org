@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -21,7 +21,7 @@ from zope.i18nmessageid import MessageFactory
 # ict_ok.org imports
 from org.ict_ok.admin_utils.notifier.interfaces import \
      INotifier
-from org.ict_ok.schema.ipvalid import IpValid
+from org.ict_ok.schema.ipvalid import HostIpValid
 
 _ = MessageFactory('org.ict_ok')
 
@@ -35,7 +35,7 @@ class INotifierJabber(INotifier):
         #default = False,
         #required = False)
 
-    ipv4Connector = IpValid(
+    ipv4Connector = HostIpValid(
         min_length = 1,
         max_length = 30,
         title = _("Connector IP"),

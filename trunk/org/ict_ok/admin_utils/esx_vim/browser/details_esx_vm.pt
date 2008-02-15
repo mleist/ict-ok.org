@@ -77,5 +77,5 @@
             <td class="label" i18n:translate="">locationId</td>
             <td tal:content="python: context.eval_on_obj('obj.config().locationId()')" />
         </tr>
-        </table>
+    </table>
 </i18n:block>

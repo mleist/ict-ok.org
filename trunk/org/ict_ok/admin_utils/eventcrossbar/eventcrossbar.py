@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -23,6 +23,7 @@ from persistent.dict import PersistentDict
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
+from zope.component.interfaces import ComponentLookupError
 from zope.app.publisher.xmlrpc import MethodPublisher
 from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.catalog.interfaces import ICatalog
@@ -45,7 +46,7 @@ from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import IEventTimingRelay
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
-     IAdmUtilEvent, IAdmUtilEventCrossbar, IEventTimingRelay
+     IAdmUtilEvent, IAdmUtilEventCrossbar, IEventTimingRelay, IEventLogic
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IGlobalEventCrossbarUtility
 
@@ -65,7 +66,7 @@ def AllObjectInstances(dummy_context):
            IInterface.providedBy(oobj.object) or \
            IService.providedBy(oobj.object) or \
            ISnmpValue.providedBy(oobj.object) or \
-           IEventTimingRelay.providedBy(oobj.object):
+           IEventLogic.providedBy(oobj.object):
             terms.append(\
                 SimpleTerm(oobj.object.objectID,
                            str(oobj.object.objectID),
@@ -89,7 +90,7 @@ def AllObjectInstancesWithEventInputs(dummy_context):
            IInterface.providedBy(oobj.object) or \
            IService.providedBy(oobj.object) or \
            ISnmpValue.providedBy(oobj.object) or \
-           IEventTimingRelay.providedBy(oobj.object):
+           IEventLogic.providedBy(oobj.object):
             inpEventNames = oobj.object.getAllInpEventNames().keys()
             if len(inpEventNames) > 0:
                 for inpEventName in inpEventNames:
@@ -103,7 +104,10 @@ def AllObjectInstancesWithEventInputs(dummy_context):
 def AllEventInstances(dummy_context):
     """Which events are there
     """
-    eventXbar = zapi.getUtility(IAdmUtilEventCrossbar, '')
+    try:
+        eventXbar = zapi.getUtility(IAdmUtilEventCrossbar, '')
+    except ComponentLookupError:
+        return SimpleVocabulary([])
     terms = []
     for (oid, oobj) in eventXbar.items():
         if IAdmUtilEvent.providedBy(oobj):
@@ -181,10 +185,15 @@ class AdmUtilEventCrossbar(Supernode):
             outQueue = self.outEQueues[objId]
             while len(outQueue) > 0:
                 my_catalog = zapi.getUtility(ICatalog)
+                foundObj = False
                 for result in my_catalog.searchResults(oid_index=objId):
                     event = iter(outQueue).next() # don't delete
                     if result.injectInpEQueue(event):
+                        foundObj = True
                         outQueue.pull() # now delete
+                #if not foundObj:
+                    #print "delete trash"
+                    #outQueue.pull() # delete trash
     
     def processEvents(self):
         pass

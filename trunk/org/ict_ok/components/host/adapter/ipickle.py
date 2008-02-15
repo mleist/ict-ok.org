@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -52,7 +52,6 @@ class Pickle(PickleSupernode):
         retVal['listAttr']['hardware'] = self.context.hardware
         retVal['listAttr']['user'] = self.context.user
         retVal['listAttr']['inv_id'] = self.context.inv_id
-        retVal['listAttr']['building'] = self.context.building
         retVal['listAttr']['room'] = self.context.room
         retVal['listAttr']['osList'] = osList = []
         for i in self.context.osList:

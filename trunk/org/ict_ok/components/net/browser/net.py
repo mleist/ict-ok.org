@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -44,7 +44,7 @@ from org.ict_ok.admin_utils.netscan.interfaces import INetScan
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.net.interfaces import INet, IEventIfEventNet
 from org.ict_ok.components.net.net import getAllNetworks, Net
 from org.ict_ok.admin_utils.netscan.interfaces import \
      IScanner
@@ -184,7 +184,7 @@ class DeleteNetForm(DeleteForm):
 class EditNetEventIfForm(EditForm):
     """ Edit for for net """
     label = _(u'Net Event Interfaces Form')
-    fields = field.Fields(IEventIfSuperclass)
+    fields = field.Fields(IEventIfEventNet)
 
 
 class AllNetworks(Overview):

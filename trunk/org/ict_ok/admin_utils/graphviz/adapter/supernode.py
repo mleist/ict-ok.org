@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -47,7 +47,8 @@ class SupernodeGenGraphvizDot(SuperclassGenGraphvizDot):
                                   cfgFile, \
                                   level=0, \
                                   comments=True,
-                                  signalsOutput=False):
+                                  signalsOutput=False,
+                                  recursive=True):
         """Pre-Text in graphviz dot-file"""
         if comments:
             print >> cfgFile, "%s// Body (%s,%d) - SupernodeGenGraphvizDot" \
@@ -88,7 +89,10 @@ class SupernodeGenGraphvizDot(SuperclassGenGraphvizDot):
         #print >> cfgFile, '%s<TR><TD ALIGN="RIGHT" PORT="sig_out1" BGCOLOR="orange">sig_out1</TD></TR>' % ("\t" * (level + 1))
         print >> cfgFile, '%s</TABLE>>' % ("\t" * (level + 1))
         print >> cfgFile, '%s]; // %s' % ("\t" * level, self.context.__name__)
-        its = self.context.items()
+        if recursive:
+            its = self.context.items()
+        else:
+            its = []
         for (dummy_name, oobj) in its:
             if ISuperclass.providedBy(oobj):
                 try:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -15,13 +15,11 @@
 __version__ = "$Id$"
 
 # phython imports
-import time
-import rrdtool
 
 # zope imports
 from zope.app import zapi
-from zope.proxy import removeAllProxies
 from zope.i18nmessageid import MessageFactory
+from zope.app.catalog.interfaces import ICatalog
 
 # z3c imports
 from z3c.form import field
@@ -30,10 +28,13 @@ from z3c.form import field
 from org.ict_ok.components.room.interfaces import IRoom
 from org.ict_ok.components.room.room import Room
 from org.ict_ok.components.browser.component import ComponentDetails
+from org.ict_ok.components.supernode.interfaces import IContentList
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.superclass.browser.superclass import \
+     Overview as SuperclassOverview
 
 _ = MessageFactory('org.ict_ok')
 
@@ -89,3 +90,11 @@ class DeleteRoomForm(DeleteForm):
                IBrwsOverview(self.context).getTitle()
 
 
+class Overview(SuperclassOverview):
+    """Overview Pagelet"""
+    def objs(self):
+        """List of Content objects"""
+        try:
+            return IContentList(self.context).getContentList()
+        except TypeError:
+            return []
