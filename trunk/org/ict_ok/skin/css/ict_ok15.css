@@ -382,7 +382,8 @@ table.form-login tr td.fields {
 ul.errors {
   margin-left:-3px; 
   padding: 5px 0px 5px 4px;
-  background-color:#CFD138;
+  /*background-color:#CFD138;*/
+  background-color:#E07771;
 }
 
 
