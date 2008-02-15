@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2004, 2005, 2006, 2007,
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
@@ -25,9 +25,11 @@ from zope.component.interfaces import ComponentLookupError
 from zope.dublincore.interfaces import IGeneralDublinCore
 from zope.app import zapi
 from zope.security import checkPermission
+from zope.app.catalog.interfaces import ICatalog
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
+from org.ict_ok.components.supernode.interfaces import IContentList
 
 _ = MessageFactory('org.ict_ok')
 
@@ -89,7 +91,11 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         """Return an XML document that contains the children of an object."""
         result = []
 
-        keys = list(container.keys())
+        try:
+            keys = [obj.objectID for \
+                    obj in IContentList(container).getContentList()]
+        except TypeError:
+            keys = list(container.keys())
 
         # include the site manager
         keys.append(u'++etc++site')
@@ -99,7 +105,12 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             # Only include items we can traverse to
             item = traverse(container, name, None)
             if item is None:
-                continue
+                my_catalog = zapi.getUtility(ICatalog)
+                res = my_catalog.searchResults(oid_index=name)
+                if len(res) > 0:
+                    item = iter(res).next()
+                if item is None:
+                    continue
             if name == u'++etc++site' and \
                not checkPermission(\
                    'org.ict_ok.ikadmin_utils.usermanagement.Edit', item):
