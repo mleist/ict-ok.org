@@ -331,8 +331,14 @@ table.listing tr.odd {
   background-color:#FFFFFF;
 }
 
+table.listing tr th {
+  padding:2px 8px 2px 0px;
+  vertical-align:top;
+  white-space:nowrap;
+}
+
 table.listing tr td {
-  padding:2px 0px 2px 0px;
+  padding:2px 8px 2px 0px;
   vertical-align:top;
 }
 

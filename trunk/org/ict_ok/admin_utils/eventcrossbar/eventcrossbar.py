@@ -226,19 +226,17 @@ class AdmUtilEventCrossbar(Supernode):
                     inpEvent.stopit(self)
 
     def tickerEvent(self):
-        for qid in self.inpEQueues:
-            if len(self.inpEQueues[qid]) > 0:
-                logger.info("tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
-                            (qid,
-                             len(self.inpEQueues[qid]),
-                             len(self.outEQueues[qid])
-                             ))
+        ## debug if queue not empty
+        #for qid in self.inpEQueues:
+            #if len(self.inpEQueues[qid]) > 0:
+                #logger.info("tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
+                            #(qid,
+                             #len(self.inpEQueues[qid]),
+                             #len(self.outEQueues[qid])
+                             #))
         self.processOutEQueues()
         self.processEvents()
         self.processInpEQueues()
-        #for eventObj in self.values():
-            #if IEventTimingRelay.providedBy(eventObj):
-                #eventObj.tickerEvent()
         
     def logIntoEvent(self, oidEventObject, logEntry):
         if self.has_key(oidEventObject):
@@ -247,6 +245,12 @@ class AdmUtilEventCrossbar(Supernode):
                 newEntry = Entry(logEntry, eventObject, level=u"info")
                 eventObject.history.append(newEntry)
                 eventObject._p_changed = True
+
+    def getEvent(self, oidEventObject):
+        if self.has_key(oidEventObject):
+            return self[oidEventObject]
+        else:
+            return None
 
     def debugEventHistory(self, eventObject=None):
         if eventObject is not None:

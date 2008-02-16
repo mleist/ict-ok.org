@@ -237,9 +237,10 @@ class Superclass(Persistent):
         """
         got ticker event from ticker thread
         """
-        if len(self.inpEQueue) + len(self.outEQueue) > 0:
-            log(INFO, "tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
-                (self.getDcTitle(), len(self.inpEQueue), len(self.outEQueue)))
+        ## debug if queue not empty
+        #if len(self.inpEQueue) + len(self.outEQueue) > 0:
+            #log(INFO, "tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
+                #(self.getDcTitle(), len(self.inpEQueue), len(self.outEQueue)))
         self.processOutEQueue()
         self.processEvents()
         self.processInpEQueue()
@@ -247,8 +248,6 @@ class Superclass(Persistent):
         import time
         if time.gmtime()[5] == 10:
             if self.getDcTitle()==u'Host1':
-                #import pdb;pdb.set_trace()
-                #self.injectInpEQueue(u'event0815')
                 inst_event = MsgEvent(self)
                 self.injectOutEQueue(inst_event)
 

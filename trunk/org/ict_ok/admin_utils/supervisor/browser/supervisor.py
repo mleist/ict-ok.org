@@ -18,6 +18,7 @@ __version__ = "$Id$"
 from pytz import timezone
 
 # zope imports
+from zope.interface import implements
 from zope.app import zapi
 from zope.component import getUtility
 from zope.size.interfaces import ISized
@@ -196,6 +197,7 @@ def formatEntryDate(entry, formatter):
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'short')
         timeString = my_formatter.format(berlinTZ.fromutc(entry['date']))
+        timeStringHTML = timeString.replace(" ", "&nbsp;")
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'long')
         longTimeString = my_formatter.format(berlinTZ.fromutc(entry['date']))
@@ -204,7 +206,7 @@ def formatEntryDate(entry, formatter):
                 u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
                 u"context:'%s', text:'%s' });</script>" \
                 % (ttid, ttid, ttid, longTimeString)
-        resString = u'<span id="%s">%s</span>' % (ttid, timeString)
+        resString = u'<span id="%s">%s</span>' % (ttid, timeStringHTML)
     except AttributeError:
         resString = u"---"
         tooltip = u""
@@ -216,6 +218,14 @@ def formatEntryNbr(entry, formatter):
 def formatEntryMessage(entry, formatter):
     return entry['msg']
 
+
+class DateGetterColumn(GetterColumn):
+    """Getter columnt that has locale aware sorting."""
+    implements(ISortableColumn)
+    def getSortKey(self, item, formatter):
+        return item['date']
+
+    
 #class Events(BrowserPagelet):
 class ViewAdmUtilSupervisorEventsForm(BrowserPagelet):
     """History Pagelet"""
@@ -223,7 +233,7 @@ class ViewAdmUtilSupervisorEventsForm(BrowserPagelet):
     columns = (
         GetterColumn(title=_('Start number'),
                      getter=formatEntryNbr),
-        GetterColumn(title=_('Date'),
+        DateGetterColumn(title=_('Date'),
                      getter=formatEntryDate,
                      cell_formatter=superclass.raw_cell_formatter),
         GetterColumn(title=_('Message'),
@@ -241,7 +251,8 @@ class ViewAdmUtilSupervisorEventsForm(BrowserPagelet):
         directlyProvides(self.columns[2], ISortableColumn)
         formatter = StandaloneFullFormatter(
             self.context, self.request, self.objs(),
-            columns=self.columns, sort_on=((_('Start number'), False),))
+            columns=self.columns, sort_on=((_('Start number'), True),))
+        formatter.batch_size = 20
         formatter.cssClasses['table'] = 'listing'
         return formatter()
 

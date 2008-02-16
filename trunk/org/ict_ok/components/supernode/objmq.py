@@ -78,11 +78,13 @@ def notifyModifiedEvent(instance, event):
     """
     #logger.info(u"supernode.objmq.notifyModifiedEvent: event: %s" % event)
     for i in event.descriptions:
-        logger.info(u"descr: %s" %i)
-        logger.info(u"descr.interface: %s" % str(i.interface))
+        pass
+        #logger.info(u"descr: %s" %i)
+        #logger.info(u"descr.interface: %s" % str(i.interface))
         for j in i.attributes:
-            logger.info(u"    attribute / j: %s" % j)
-            logger.info(u"    attribute / type(j): %s" % (type(j)))
+            pass
+            #logger.info(u"    attribute / j: %s" % j)
+            #logger.info(u"    attribute / type(j): %s" % (type(j)))
     if hasattr(event.object, "getObjectId"):
         objectOid = event.object.getObjectId()
     else:

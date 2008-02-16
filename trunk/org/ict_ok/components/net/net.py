@@ -69,14 +69,19 @@ class Net(Component):
         forward the event to all objects in this container through the signal filter
         """
         #eventMsg.stopit(self, "Net.eventInp_inward_relaying_shutdown")
-        print "Net.eventInp_inward_relaying_shutdown (%s)       " \
-        "       ############## <-" % (self.ikName)
+        #print "Net.eventInp_inward_relaying_shutdown (%s)       " \
+        #"       ############## <-" % (self.ikName)
+        hostsProcessed = []
         for name, obj in self.items():
-            print "-> ", obj
+            #print "-> ", obj
             try:
-                obj.eventInp_shutdown(eventMsg)
+                if obj.eventInp_shutdown(eventMsg):
+                    hostsProcessed.append(obj.ikName)
             except AttributeError:
                 print "Dont find method"
+        if len(hostsProcessed) > 0:
+            eventMsg.stopit(self, "Net.inward_relaying_shutdown "\
+                            "processed @ %s" % ",".join(hostsProcessed))
             #for attrName in obj.__dict__:
                 #print "attr:   %s" % (attrName)
                 #if attrName.find("eventInp_shutdown") == 0: # attribute name starts with ...

@@ -132,6 +132,7 @@ def getModifiedDate(item, formatter):
             'dateTime', 'short')
         timeString = my_formatter.format(berlinTZ.fromutc(
             IZopeDublinCore(item).modified))
+        timeStringHTML = timeString.replace(" ", "&nbsp;")
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'long')
         longTimeString = my_formatter.format(
@@ -142,7 +143,7 @@ def getModifiedDate(item, formatter):
                 u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
                 u"context:'%s', text:'%s' });</script>" \
                 % (ttid, ttid, ttid, longTimeString)
-        resString = u'<span id="%s">%s</span>' % (ttid, timeString)
+        resString = u'<span id="%s">%s</span>' % (ttid, timeStringHTML)
     except AttributeError:
         resString = u"---"
         tooltip = u""
@@ -154,6 +155,7 @@ def formatEntryDate(entry, formatter):
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'short')
         timeString = my_formatter.format(berlinTZ.fromutc(entry.getTime()))
+        timeStringHTML = timeString.replace(" ", "&nbsp;")
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'long')
         longTimeString = my_formatter.format(berlinTZ.fromutc(entry.getTime()))
@@ -162,7 +164,7 @@ def formatEntryDate(entry, formatter):
                 u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
                 u"context:'%s', text:'%s' });</script>" \
                 % (ttid, ttid, ttid, longTimeString)
-        resString = u'<span id="%s">%s</span>' % (ttid, timeString)
+        resString = u'<span id="%s">%s</span>' % (ttid, timeStringHTML)
     except AttributeError:
         resString = u"---"
         tooltip = u""
@@ -546,6 +548,7 @@ class Overview(BrowserPagelet):
                      getter=getTitel),
         GetterColumn(title=_('Modified On'),
                      getter=getModifiedDate,
+                     subsort=True,
                      cell_formatter=raw_cell_formatter),
         GetterColumn(title=_('Actions'),
                      getter=getActionBottons,
@@ -593,13 +596,18 @@ class ViewDashboard(Overview):
                 retList.append(myObj)
         return retList
 
+class DateGetterColumn(GetterColumn):
+    """Getter columnt that has locale aware sorting."""
+    zope.interface.implements(ISortableColumn)
+    def getSortKey(self, item, formatter):
+        return item.getTime()
 
 class History(BrowserPagelet):
     """History Pagelet"""
     columns = (
         GetterColumn(title=_('Level'),
                      getter=formatEntryLevel),
-        GetterColumn(title=_('Date'),
+        DateGetterColumn(title=_('Date'),
                      getter=formatEntryDate,
                      cell_formatter=raw_cell_formatter),
         GetterColumn(title=_('Text'),
@@ -614,11 +622,11 @@ class History(BrowserPagelet):
     def table(self):
         """ Properties of table are defined here"""
         directlyProvides(self.columns[0], ISortableColumn)
-        directlyProvides(self.columns[1], ISortableColumn)
+        #directlyProvides(self.columns[1], ISortableColumn)
         directlyProvides(self.columns[2], ISortableColumn)
         formatter = StandaloneFullFormatter(
             self.context, self.request, self.objs(),
-            columns=self.columns, sort_on=((_('Date'), False),))
+            columns=self.columns, sort_on=((_('Date'), True),))
         formatter.cssClasses['table'] = 'listing'
         return formatter()
 

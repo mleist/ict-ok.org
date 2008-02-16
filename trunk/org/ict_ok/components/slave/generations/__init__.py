@@ -14,7 +14,6 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.app.generations.generations import SchemaManager
-from zope.app.publication.zopepublication import ZopePublication
 
 key = 'org.ict_ok.slave.ikgenerations'
 
@@ -22,7 +21,3 @@ IkAppSchemaManager = SchemaManager(
     minimum_generation = 1,
     generation = 1,
     package_name=key)
-
-def getRootFolder(context):
-    """ get root folder by ZopePublication """
-    return context.connection.root().get(ZopePublication.root_name, None)

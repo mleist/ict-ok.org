@@ -73,18 +73,21 @@ class IAdmUtilEvent(ISupernode):
         title = _("Location"),
         description = _("The Location."),
         vocabulary="AllLocationsVocab",
+        readonly = False,
         required = False)
 
     building = Choice(
         title = _("Building"),
         description = _("The Building."),
         vocabulary="AllBuildingsVocab",
+        readonly = False,
         required = False)
 
     room = Choice(
         title = _("Room"),
         description = _("The Room Description."),
         vocabulary="AllRoomsVocab",
+        readonly = False,
         required = False)
 
     @invariant
@@ -154,6 +157,9 @@ class IAdmUtilEventCrossbar(ISupernode):
     def injectEventFromObj(senderObj, event):
         """ will inject an event from the sender object
         into the accordant queue """
+
+    def getEvent(oidEventObject):
+        """ will return the event with given oid or None """
 
     def tickerEvent():
         """ event """

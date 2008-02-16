@@ -121,7 +121,7 @@ class RingBufferFull:
         return self.data[self.cur:] + self.data[:self.cur]
 
 def _helperNodeIsUnder(underObj, upperObj):
-    print "_helperNodeIsUnder(%s,%s)" % (underObj, upperObj)
+    #print "_helperNodeIsUnder(%s,%s)" % (underObj, upperObj)
     if underObj.__parent__ == None:
         return False
     elif underObj.__parent__ == upperObj:
@@ -131,7 +131,7 @@ def _helperNodeIsUnder(underObj, upperObj):
 
 def nodeIsUnder(underNodeOid, upperNodeOid):
     """ checks if the underNode is contained in the upperNode """
-    print "nodeIsUnder(%s, %s)" % (underNodeOid, upperNodeOid)
+    #print "nodeIsUnder(%s, %s)" % (underNodeOid, upperNodeOid)
     if underNodeOid is None:
         return False
     if upperNodeOid is None:

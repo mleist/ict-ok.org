@@ -28,10 +28,13 @@ from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import nodeIsUnder
 from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.host.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEventCrossbar
 
 
 def AllHostGroups(dummy_context):
@@ -45,6 +48,7 @@ def AllHostGroups(dummy_context):
         u'smtp': u'SMTP-Server',
         u'terminal': u'Terminal-Server',
         u'util': u'Utility-Server',
+        u'workstation': u'Workstation',
         }.items():
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)
@@ -147,11 +151,52 @@ class Host(Component):
         wfd.new_state = "notification1"
         lastWorkItem.change()
 
+    def inEventMask(self, eventMsg=None):
+        if eventMsg:
+            utilXbar = getUtility(IAdmUtilEventCrossbar)
+            if utilXbar is not None:
+                origEvent = utilXbar.getEvent(eventMsg.oidEventObject)
+                if origEvent is not None:
+                    eventHostGroup = origEvent.hostGroup
+                    eventLocation = origEvent.location
+                    eventBuilding = origEvent.building
+                    eventRoom = origEvent.room
+                    # event for special hostgroup?
+                    if eventHostGroup is not None and \
+                       len(eventHostGroup) > 0:
+                        if not eventHostGroup in self.hostGroups:
+                            return False
+                    # event for special location
+                    if eventLocation is not None and \
+                       len(eventLocation) > 0:
+                        if not nodeIsUnder(self.room, eventLocation):
+                            return False
+                    # event for special building
+                    if eventBuilding is not None and \
+                       len(eventBuilding) > 0:
+                        if not nodeIsUnder(self.room, eventBuilding):
+                            return False
+                    # event for special room
+                    if eventRoom is not None and \
+                       len(eventRoom) > 0:
+                        if self.room != eventRoom:
+                            return False
+                    return True
+        return False
+        
     def eventInp_shutdown(self, eventMsg=None):
         """ start the shutdown of the host """
-        eventMsg.stopit(self, "Host.eventInp_shutdown")
-        print "Host.eventInp_shutdown (%s)       " \
-        "       ############## <-" % (self.ikName)
+        eventProcessed = False
+        if self.inEventMask(eventMsg):
+            eventProcessed = True
+            #eventMsg.stopit(self, "Host.eventInp_shutdown")
+            print "Host.eventInp_shutdown (%s)       " \
+            "       ############## <-" % (self.ikName)
+            print "eventMsg: ", eventMsg
+        return eventProcessed
+        #import pdb
+        #pdb.set_trace()
+        #print "inEventMask", self.inEventMask(eventMsg)
 
 
 def getAllHosts():
