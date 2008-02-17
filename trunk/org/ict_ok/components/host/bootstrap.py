@@ -32,6 +32,7 @@ from zope.component import createObject
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
+from org.ict_ok.components.host.interfaces import IHost
 
 logger = logging.getLogger("Compon. Host")
 

@@ -30,6 +30,7 @@ from zc.table.column import GetterColumn
 from z3c.form import field
 
 # ict-ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
@@ -231,7 +232,7 @@ class Overview(SuperclassOverview):
                      cell_formatter=superclass.raw_cell_formatter),
         GetterColumn(title=_('Title'),
                      getter=superclass.getTitel,
-                     cell_formatter=superclass.link('edit.html')),
+                     cell_formatter=superclass.link('')),
         GetterColumn(title=_('Modified On'),
                      getter=superclass.getModifiedDate,
                      cell_formatter=superclass.raw_cell_formatter),
@@ -244,7 +245,7 @@ class Overview(SuperclassOverview):
 
     def objs(self):
         """List of Content objects"""
-        return getAllUtilitiesRegisteredFor(ISupernode)
+        return getAllUtilitiesRegisteredFor(ISuperclass)
 
 
 # --------------- forms ------------------------------------

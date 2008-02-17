@@ -37,21 +37,21 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
 
 
-def AllHostGroups(dummy_context):
-    """Which host group are there
-    """
-    terms = []
-    for (gkey, gname) in {
-        u'dns': u'DNS-Server',
-        u'file': u'File-Server',
-        u'misc': u'Miscellaneous-Server',
-        u'smtp': u'SMTP-Server',
-        u'terminal': u'Terminal-Server',
-        u'util': u'Utility-Server',
-        u'workstation': u'Workstation',
-        }.items():
-        terms.append(SimpleTerm(gkey, str(gkey), gname))
-    return SimpleVocabulary(terms)
+#def AllHostGroups(dummy_context):
+    #"""Which host group are there
+    #"""
+    #terms = []
+    #for (gkey, gname) in {
+        #u'dns': u'DNS-Server',
+        #u'file': u'File-Server',
+        #u'misc': u'Miscellaneous-Server',
+        #u'smtp': u'SMTP-Server',
+        #u'terminal': u'Terminal-Server',
+        #u'util': u'Utility-Server',
+        #u'workstation': u'Workstation',
+        #}.items():
+        #terms.append(SimpleTerm(gkey, str(gkey), gname))
+    #return SimpleVocabulary(terms)
 
 def AllHostProductionStates(dummy_context):
     """In which production state a host may be

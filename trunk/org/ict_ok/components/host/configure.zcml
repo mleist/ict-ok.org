@@ -65,11 +65,11 @@
         for=".interfaces.IHost"
     />
 
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".host.AllHostGroups"
-        name="AllHostGroups"
-        />
+    <!--<utility-->
+        <!--provides="zope.schema.interfaces.IVocabularyFactory"-->
+        <!--component=".host.AllHostGroups"-->
+        <!--name="AllHostGroups"-->
+        <!--/>-->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"

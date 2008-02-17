@@ -48,7 +48,13 @@ class Breadcrumbs(browser.BrowserView):
         for myobject in myobjects:
             info = zapi.getMultiAdapter((myobject, self.request),
                                         IBreadcrumbInfo)
-            yield {'name': info.name, 'url': info.url, 'active': info.active}
+            if info.name == u'++etc++site':
+                pass
+            elif info.name == u'default':
+                pass
+            else:
+                yield {'name': info.name, 'url': info.url,
+                       'active': info.active}
 
 
 class GenericBreadcrumbInfo(object):

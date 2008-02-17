@@ -81,7 +81,7 @@ class Net(Component):
                 print "Dont find method"
         if len(hostsProcessed) > 0:
             eventMsg.stopit(self, "Net.inward_relaying_shutdown "\
-                            "processed @ %s" % ",".join(hostsProcessed))
+                            "processed @ %s" % " ,".join(hostsProcessed))
             #for attrName in obj.__dict__:
                 #print "attr:   %s" % (attrName)
                 #if attrName.find("eventInp_shutdown") == 0: # attribute name starts with ...

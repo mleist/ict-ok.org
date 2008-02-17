@@ -1,6 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:ticker="http://namespaces.zope.org/ticker"
+    xmlns:categories="http://namespaces.zope.org/categories"
     i18n_domain="org.ict_ok"
     >
 
@@ -9,60 +9,46 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
          Markus Leist <leist@ikom-online.de> -->
 
-    <class class=".ticker.AdmUtilTicker">
+    <class class=".categories.AdmUtilCategories">
         <factory
-            id="org.ict_ok.admin_utils.ticker.ticker.AdmUtilTicker" />
+            id="org.ict_ok.admin_utils.categories.categories.AdmUtilCategories" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <require
-            permission="org.ict_ok.admin_utils.ticker.View"
-            interface=".interfaces.IAdmUtilTicker"
+            permission="org.ict_ok.admin_utils.categories.View"
+            interface=".interfaces.IAdmUtilCategories"
             />
         <require
-            permission="org.ict_ok.admin_utils.ticker.Edit"
-            set_schema=".interfaces.IAdmUtilTicker"
+            permission="org.ict_ok.admin_utils.categories.Edit"
+            set_schema=".interfaces.IAdmUtilCategories"
             />
     </class>
 
-
-    <!--<permission-->
-        <!--id="org.ict_ok.admin_utils.objmq.Edit"-->
-        <!--title="Edit from AdmUtilObjMQ"-->
-        <!--description="Edit from AdmUtilObjMQ."-->
-    <!--/>-->
-
-    <!--<class class=".objmq.AdmUtilObjMQ">-->
-        <!--<factory-->
-            <!--id="org.ict_ok.admin_utils.objmq.objmq.AdmUtilObjMQ" />-->
-        <!--<implements-->
-            <!--interface="zope.annotation.interfaces.IAttributeAnnotatable" />-->
-        <!--<require-->
-            <!--permission="org.ict_ok.admin_utils.objmq.View"-->
-            <!--interface=".interfaces.IAdmUtilObjMQ"-->
-            <!--/>-->
-        <!--<require-->
-            <!--permission="org.ict_ok.admin_utils.objmq.View"-->
-            <!--set_schema=".interfaces.IAdmUtilObjMQ"-->
-            <!--/>-->
-    <!--</class>-->
+    <class class=".cat_hostgroup.AdmUtilCatHostGroup">
+        <factory
+            id="org.ict_ok.admin_utils.categories.cat_hostgroup.AdmUtilCatHostGroup" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.categories.Read"
+            interface=".interfaces.IAdmUtilCatHostGroup"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.categories.Edit"
+            set_schema=".interfaces.IAdmUtilCatHostGroup"
+            />
+    </class>
 
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
-
-    <!--<mail:ikAdmUtilObjTransport-->
-        <!--name="dddObjTransport"-->
-        <!--hostname="dddhost"-->
-        <!--/>-->
-    <adapter
-        factory=".adapter.ticker.Ticker"
-        />
-
-    <ticker:admUtilTicker
-        name="ikTicker"
-        permission="org.ict_ok.admin_utils.ticker.Send"
+        
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".cat_hostgroup.AllHostGroups"
+        name="AllHostGroups"
         />
 
     <include package=".browser" />

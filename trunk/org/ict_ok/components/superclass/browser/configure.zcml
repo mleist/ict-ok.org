@@ -46,6 +46,22 @@
     />
 
     <z3c:pagelet
+        name="moveup.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.MoveUp"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+    />
+
+    <z3c:pagelet
+        name="movedown.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.MoveDown"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+    />
+
+    <z3c:pagelet
         name="add_dashboard.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         class="org.ict_ok.components.superclass.browser.superclass.AddDashboard"

@@ -35,6 +35,7 @@ from zope.component import getMultiAdapter
 #import zope.event
 from zope.lifecycleevent import Attributes, ObjectModifiedEvent
 from zope.app.rotterdam.xmlobject import translate, setNoCacheHeaders
+from zope.app.container.interfaces import IOrderedContainer
 
 # z3c imports
 from z3c.form import button, field, form, interfaces
@@ -79,6 +80,10 @@ class CheckboxColumn(Column):
 
 def getActionBottons(item, formatter):
     """Action Buttons for Overview in Web-Browser"""
+    #import pdb
+    #pdb.set_trace()
+    retHtml = u""
+    parentIsOrderd = IOrderedContainer.providedBy(item.__parent__)
     resource_path = getAdapter(formatter.request, name='pics')()
 
     view_url = absoluteURL(item, formatter.request) + '/@@details.html'
@@ -88,7 +93,8 @@ def getActionBottons(item, formatter):
         view_html = u'<a href="%s"><img alt="Info" src="%s/Info.png" /></a>' % \
                   (view_url, resource_path)
     else:
-        view_html = u'<img alt="Info" src="%s/Info_gr.png" />' % (resource_path)
+        view_html = u'<img alt="Details" src="%s/Info_gr.png" />' % (resource_path)
+    retHtml += view_html
 
     edit_url = absoluteURL(item, formatter.request) + '/@@edit.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
@@ -97,7 +103,8 @@ def getActionBottons(item, formatter):
         edit_html = u'<a href="%s"><img alt="Edit" src="%s/Hand.png" /></a>' % \
                   (edit_url, resource_path)
     else:
-        edit_html = u'<img alt="Info" src="%s/Hand_gr.png" />' % (resource_path)
+        edit_html = u'<img alt="Edit" src="%s/Hand_gr.png" />' % (resource_path)
+    retHtml += edit_html
 
     hist_url = absoluteURL(item, formatter.request) + '/@@history.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
@@ -106,7 +113,8 @@ def getActionBottons(item, formatter):
         hist_html = u'<a href="%s"><img alt="History" src="%s/Doc.png" /></a>' % \
                   (hist_url, resource_path)
     else:
-        hist_html = u'<img alt="Info" src="%s/Doc_gr.png" />' % (resource_path)
+        hist_html = u'<img alt="History" src="%s/Doc_gr.png" />' % (resource_path)
+    retHtml += hist_html
 
     trash_url = absoluteURL(item, formatter.request) + '/@@delete.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
@@ -115,8 +123,33 @@ def getActionBottons(item, formatter):
         trash_html = u'<a href="%s"><img alt="Trash" src="%s/Trash.png" /></a>' % \
                    (trash_url, resource_path)
     else:
-        trash_html = u'<img alt="Info" src="%s/Trash_gr.png" />' % (resource_path)
-    return view_html + edit_html + hist_html + trash_html
+        trash_html = u'<img alt="Trash" src="%s/Trash_gr.png" />' % (resource_path)
+    retHtml += trash_html
+
+    if parentIsOrderd:
+        up_url = absoluteURL(item, formatter.request) + '/@@moveup.html'
+        myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                           name='moveup.html')
+        if myAdapter is not None and canAccess(myAdapter,'render') and \
+           item.__parent__.keys()[0] != item.objectID: # not the first element
+            up_html = u'<a href="%s"><img alt="Up" src="%s/Up.png" /></a>' % \
+                       (up_url, resource_path)
+        else:
+            up_html = u'<img alt="Up" src="%s/Up_gray.png" />' % (resource_path)
+        retHtml += up_html
+
+        down_url = absoluteURL(item, formatter.request) + '/@@movedown.html'
+        myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                           name='movedown.html')
+        if myAdapter is not None and canAccess(myAdapter,'render') and \
+           item.__parent__.keys()[-1] != item.objectID: # not the last element
+            down_html = u'<a href="%s"><img alt="Down" src="%s/Down.png" /></a>' % \
+                       (down_url, resource_path)
+        else:
+            down_html = u'<img alt="Down" src="%s/Down_gray.png" />' % (resource_path)
+        retHtml += down_html
+
+    return retHtml
 
 def getSize(item, formatter):
     """display size of object"""
@@ -207,6 +240,12 @@ def getTitel(item, formatter):
         return IBrwsOverview(item).getTitle()
     except TypeError:
         return str(item.__class__.__name__)
+
+def getPosition(item, formatter):
+    """
+    Titel for Overview
+    """
+    return item.__parent__.keys().index(item.objectID)
 
 def applyChanges(form, content, data):
     # copied from z3c.form.form
@@ -404,6 +443,33 @@ class DumpData:
         else:
             return _(u"no pickle adapter")
 
+class MoveUp(BrowserPagelet):
+    def update(self):
+        parentObj = self.context.__parent__
+        itemIndex = parentObj.keys().index(self.context.objectID)
+        if itemIndex > 0:
+            keyList = [i for i in parentObj.keys()]
+            keyList.remove(self.context.objectID)
+            keyList.insert(itemIndex - 1, self.context.objectID)
+            parentObj.updateOrder(keyList)
+    def render(self):
+        parentObj = self.context.__parent__
+        parentUrl = absoluteURL(parentObj, self.request) + '/@@overview.html'
+        return self.request.response.redirect(parentUrl)
+
+class MoveDown(BrowserPagelet):
+    def update(self):
+        parentObj = self.context.__parent__
+        itemIndex = parentObj.keys().index(self.context.objectID)
+        if itemIndex + 1 < len(parentObj):
+            keyList = [i for i in parentObj.keys()]
+            keyList.remove(self.context.objectID)
+            keyList.insert(itemIndex + 1, self.context.objectID)
+            parentObj.updateOrder(keyList)
+    def render(self):
+        parentObj = self.context.__parent__
+        parentUrl = absoluteURL(parentObj, self.request) + '/@@overview.html'
+        return self.request.response.redirect(parentUrl)
 
 class AddDashboard(BrowserPagelet):
     def update(self):
@@ -570,11 +636,21 @@ class Overview(BrowserPagelet):
 
     def table(self):
         """ Properties of table are defined here"""
-        directlyProvides(self.columns[1], ISortableColumn)
-        directlyProvides(self.columns[2], ISortableColumn)
-        formatter = StandaloneFullFormatter(
-            self.context, self.request, self.objs(),
-            columns=self.columns, sort_on=((_('Title'), False),))
+        columnList = list(self.columns)
+        containerIsOrderd = IOrderedContainer.providedBy(self.context)
+        directlyProvides(columnList[1], ISortableColumn)
+        directlyProvides(columnList[2], ISortableColumn)
+        if containerIsOrderd:
+            columnList.insert(1, GetterColumn(title=_('Pos'),
+                                              getter=getPosition))
+            directlyProvides(columnList[3], ISortableColumn)
+            formatter = StandaloneFullFormatter(
+                self.context, self.request, self.objs(),
+                columns=columnList, sort_on=((_('Pos'), False),))
+        else:
+            formatter = StandaloneFullFormatter(
+                self.context, self.request, self.objs(),
+                columns=columnList, sort_on=((_('Title'), False),))
         formatter.cssClasses['table'] = 'listing'
         return formatter()
 

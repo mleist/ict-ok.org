@@ -45,6 +45,8 @@
              file="security-global.zcml" />
 
     <!--security settings of utilities (alphabetical)-->
+    <include package="org.ict_ok.admin_utils.categories"
+             file="security.zcml" />
     <include package="org.ict_ok.admin_utils.compliance"
              file="security.zcml" />
     <include package="org.ict_ok.admin_utils.cron"
@@ -140,6 +142,7 @@
     <include package="org.ict_ok.admin_utils.supervisor" />
 
     <!--registration of utilities (alphabetical)-->
+    <include package="org.ict_ok.admin_utils.categories" />
     <include package="org.ict_ok.admin_utils.compliance" />
     <include package="org.ict_ok.admin_utils.cron" />
     <include package="org.ict_ok.admin_utils.esx_vim" />

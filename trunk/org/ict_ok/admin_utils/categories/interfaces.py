@@ -15,27 +15,22 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Set
+from zope.schema import TextLine, Set
+from zope.app.container.interfaces import IOrderedContainer
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import \
-     IEventIfSupernode, ISupernode
+from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilTicker(ISupernode):
-    """A pseudo-mailer that delivers objects by xmlrpc."""
+class IAdmUtilCategories(ISuperclass, IOrderedContainer):
+    """A configuration utility."""
 
-class IEventIfAdmUtilTicker(IEventIfSupernode):
-    """ event interface of object """
-    eventOutObjs_1sec = Set(
-        title = _("1sec. event ->"),
-        value_type = Choice(
-            title = _("objects"),
-            vocabulary="AllEventInstances"),
-        default = set([]),
-        readonly = False,
-        required = True)
-    def eventOut_1sec(self):
-        """ sends one-second event """
+class IAdmUtilCatHostGroup(ISupernode):
+    """A host group entry."""
+    def isUsedIn(self):
+        """
+        this object is used at least in one host (returns object list)
+        """
