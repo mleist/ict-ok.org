@@ -190,9 +190,16 @@ class Host(Component):
         if self.inEventMask(eventMsg):
             eventProcessed = True
             #eventMsg.stopit(self, "Host.eventInp_shutdown")
-            print "Host.eventInp_shutdown (%s)       " \
-            "       ############## <-" % (self.ikName)
-            print "eventMsg: ", eventMsg
+            utilXbar = getUtility(IAdmUtilEventCrossbar)
+            utilEvent = utilXbar[eventMsg.oidEventObject]
+            if utilEvent.dryRun:
+                print "Host.eventInp_shutdown (%s) (dry run)      " \
+                "       ############## <-" % (self.ikName)
+                print "eventMsg: ", eventMsg
+            else:
+                print "Host.eventInp_shutdown (%s)       " \
+                "       ############## <-" % (self.ikName)
+                print "eventMsg: ", eventMsg
         return eventProcessed
         #import pdb
         #pdb.set_trace()

@@ -35,6 +35,7 @@ class AdmUtilEvent(Supernode):
     
     title = FieldProperty(IAdmUtilEvent['title'])
     logAllEvents = FieldProperty(IAdmUtilEvent['logAllEvents'])
+    dryRun = FieldProperty(IAdmUtilEvent['dryRun'])
     inpObjects = FieldProperty(IAdmUtilEvent['inpObjects'])
     outObjects = FieldProperty(IAdmUtilEvent['outObjects'])
     hostGroup = FieldProperty(IAdmUtilEvent['hostGroup'])

@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,W0612,W0142
+# pylint: disable-msg=E1101,E0611,W0612,W0142
 #
 """implementation of host object
 
@@ -29,6 +29,8 @@ from org.ict_ok.components.host.special.vmware_vm.interfaces import \
      IHostVMwareVm, IEventIfHostVMwareVm
 from org.ict_ok.components.host.host import Host as HostBase
 from org.ict_ok.admin_utils.esx_vim.interfaces import IAdmUtilEsxVim
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEventCrossbar
 
 class Host(HostBase):
     """
@@ -70,6 +72,11 @@ class Host(HostBase):
     def eventInp_shutdown(self, eventMsg=None):
         """ start the shutdown of the host """
         eventMsg.stopit(self, "Host.eventInp_shutdown")
-        print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
-        self.poweroff()
+        utilXbar = queryUtility(IAdmUtilEventCrossbar)
+        utilEvent = utilXbar[eventMsg.oidEventObject]
+        if utilEvent.dryRun:
+            print "Host.eventInp_shutdown (%s) (dry run)             ############## <-" % (self.ikName)
+        else:
+            print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
+            self.poweroff()
 

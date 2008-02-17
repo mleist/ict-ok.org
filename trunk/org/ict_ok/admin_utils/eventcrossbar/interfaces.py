@@ -45,6 +45,11 @@ class IAdmUtilEvent(ISupernode):
         description = _("log all events"),
         default = False)
     
+    dryRun = Bool(
+        title = _("dry run"),
+        description = _("don't do anything"),
+        default = True)
+    
     inpObjects = Set(
         title = _("sender objects"),
         value_type = Choice(
