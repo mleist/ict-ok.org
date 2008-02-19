@@ -59,6 +59,7 @@ class Host(HostBase):
         print "poweroff"
         esx_utility = queryUtility(IAdmUtilEsxVim)
         if esx_utility and len(self.esxUuid) > 0:
+            self.appendHistoryEntry("Power OFF")
             esx_utility.powerOffVm(self.esxUuid)
         
     def poweron(self):
@@ -68,6 +69,7 @@ class Host(HostBase):
         print "poweron"
         esx_utility = queryUtility(IAdmUtilEsxVim)
         if esx_utility and len(self.esxUuid) > 0:
+            self.appendHistoryEntry("Power ON")
             esx_utility.powerOnVm(self.esxUuid)
 
     def eventInp_shutdown(self, eventMsg=None):
@@ -79,10 +81,13 @@ class Host(HostBase):
             utilXbar = queryUtility(IAdmUtilEventCrossbar)
             utilEvent = utilXbar[eventMsg.oidEventObject]
             if utilEvent.dryRun:
+                msgText = u"Shutdown (dry run)"
                 print "Host.eventInp_shutdown (%s) (dry run)             ############## <-" % (self.ikName)
             else:
+                msgText = u"Shutdown"
                 print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
                 self.poweroff()
+                self.appendHistoryEntry(msgText)
         return eventProcessed
 
     @property
