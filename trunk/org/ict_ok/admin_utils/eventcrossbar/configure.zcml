@@ -75,6 +75,14 @@
             permission="org.ict_ok.admin_utils.event_timer.Edit"
             set_schema=".interfaces.IEventTimer"
             />
+        <require
+            permission="org.ict_ok.admin_utils.event_timer.View"
+            interface=".interfaces.IEventIfEventTimer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timer.Edit"
+            set_schema=".interfaces.IEventIfEventTimer"
+            />
     </class>
 
     <!-- setup local utilities -->

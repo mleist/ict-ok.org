@@ -33,6 +33,14 @@
             permission="org.ict_ok.components.net.Edit"
             set_schema=".interfaces.INet"
             />
+        <require
+            permission="org.ict_ok.components.net.View"
+            interface=".interfaces.IEventIfEventNet"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            set_schema=".interfaces.IEventIfEventNet"
+            />
     </class>
 
     <subscriber
