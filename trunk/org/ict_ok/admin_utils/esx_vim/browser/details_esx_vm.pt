@@ -75,9 +75,9 @@
             <td class="label" i18n:translate="">UUID</td>
             <td tal:content="python: context.eval_on_obj('obj.config().uuid()')" />
         </tr>
-        <tr class="cb_wht">
+        <!--tr class="cb_wht">
             <td class="label" i18n:translate="">locationId</td>
             <td tal:content="python: context.eval_on_obj('obj.config().locationId()')" />
-        </tr>
+        </tr-->
     </table>
 </i18n:block>

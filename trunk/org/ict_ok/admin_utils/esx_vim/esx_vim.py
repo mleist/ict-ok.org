@@ -387,7 +387,7 @@ class GlobalEsxVimUtility(object):
             'admUtilEsxVim': localEsxUtil,
             'cmd': 'eval_on_obj',
             'perlRef': esxObj['perlRef'],
-            'eval_text': 'obj.config().locationId',
+            'eval_text': 'perl.call(\'Vim::get_view\', mo_ref = obj.runtime().host()).name',
             'fnct_args': [],
             }
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
