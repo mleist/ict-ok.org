@@ -18,8 +18,7 @@ from zope.i18nmessageid import MessageFactory
 from zope.schema import TextLine
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import \
-     IEventIfSupernode
+from org.ict_ok.components.host.interfaces import IEventIfEventHost
 from org.ict_ok.components.host.interfaces import IHost
 
 _ = MessageFactory('org.ict_ok')
@@ -44,5 +43,5 @@ class IHostVMwareVm(IHost):
         trigger poweron
         """
 
-class IEventIfHostVMwareVm(IEventIfSupernode):
+class IEventIfHostVMwareVm(IEventIfEventHost):
     """ event interface of object """
