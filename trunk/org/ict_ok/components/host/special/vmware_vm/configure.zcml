@@ -33,6 +33,14 @@
             permission="org.ict_ok.components.host.Edit"
             set_schema=".interfaces.IHostVMwareVm"
             />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface=".interfaces.IEventIfHostVMwareVm"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema=".interfaces.IEventIfHostVMwareVm"
+            />
     </class>
     
     <adapter

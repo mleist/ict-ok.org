@@ -94,10 +94,13 @@ class AdmUtilEsxVim(Supernode):
         raise KeyError
     
     def powerOffVm(self, uuid):
-        globalEsxVimUtility.powerOffVm(uuid, self)
+        return globalEsxVimUtility.powerOffVm(uuid, self)
  
     def powerOnVm(self, uuid):
-        globalEsxVimUtility.powerOnVm(uuid, self)
+        return globalEsxVimUtility.powerOnVm(uuid, self)
+
+    def getEsxRoomUuid(self, uuid):
+        return globalEsxVimUtility.getEsxRoomUuid(uuid, self)
  
     def values(self):
         '''See interface `IReadContainer`'''
@@ -363,6 +366,35 @@ class GlobalEsxVimUtility(object):
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+
+    def getEsxRoomUuid(self, uuid, localEsxUtil):
+        print "getEsxRoomUuid"
+        localEsxUtilOId = localEsxUtil.objectID
+        if self.esxThread is None:
+            return {}
+        myParams = {\
+            'cmd': 'find_entity_views',
+            'admUtilEsxVim': localEsxUtil,
+            'view_type': 'VirtualMachine',
+            'filter': {'config.uuid':uuid},
+            }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        esxObj = esxObjList[0]
+        myParams = {\
+            'admUtilEsxVim': localEsxUtil,
+            'cmd': 'eval_on_obj',
+            'perlRef': esxObj['perlRef'],
+            'eval_text': 'obj.config().locationId',
+            'fnct_args': [],
+            }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        esxServerUuid = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+	return esxServerUuid
 
 
 globalEsxVimUtility = GlobalEsxVimUtility()

@@ -33,6 +33,14 @@
             permission="org.ict_ok.components.host.Edit"
             set_schema=".interfaces.IHostMgeUps"
             />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface=".interfaces.IEventIfHostMgeUps"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema=".interfaces.IEventIfHostMgeUps"
+            />
     </class>
     
     <adapter

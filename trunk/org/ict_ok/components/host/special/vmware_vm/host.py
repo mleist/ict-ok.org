@@ -80,3 +80,11 @@ class Host(HostBase):
             print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
             self.poweroff()
 
+
+    @property
+    def room(self):
+        esx_utility = queryUtility(IAdmUtilEsxVim)
+        if esx_utility and len(self.esxUuid) > 0:
+            esxRoomUuid = esx_utility.getEsxRoomUuid(self.esxUuid)
+            print "getEsxRoomUuid: ", esxRoomUuid
+        return u"baf5beb6d7df058890ed9f9c5c5cf615a"

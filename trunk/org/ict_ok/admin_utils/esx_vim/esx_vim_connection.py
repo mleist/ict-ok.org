@@ -250,11 +250,11 @@ class EsxVimConnectionThread(threading.Thread):
                         type(myParams['fnct_args']) == type(None)):
                         #print "2uuuu3c1"
                         myObj = myParams['perlRef']
-                        #print "2uuuu3c2"
+                        #print "2uuuu3c2:", myObj
                         myEvalText = myParams['eval_text']
-                        #print "2uuuu3c3"
+                        #print "2uuuu3c3:", myEvalText
                         myFnctArgs = myParams['fnct_args']
-                        #print "2pppp1"
+                        #print "2pppp1:", myFnctArgs
                         try:
                             if myFnctArgs is None:
                                 retVal = eval(myEvalText, {\
@@ -266,7 +266,7 @@ class EsxVimConnectionThread(threading.Thread):
                                     'perl':self.perl})(*myFnctArgs)
                         except Exception,err:
                             retVal = err
-                        #print "2pppp2"
+                        #print "2pppp2:", retVal
                         self.getQueue(sourceOId)['out'].put(retVal, True, 15)
                         #print "2pppp3"
                     else:
