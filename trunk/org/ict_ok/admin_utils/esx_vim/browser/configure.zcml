@@ -273,5 +273,28 @@
         for="org.ict_ok.admin_utils.esx_vim.browser.esx_vim.EsxVimHostSystemDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimHostSystem"
+        class="org.ict_ok.admin_utils.esx_vim.browser.esx_vim.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.esx_vim.View"
+        />
+    <viewlet
+        name="details"
+        for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimHostSystem"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.esx_vim.View"
+        />
+    <viewlet
+        name="overview"
+        for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimHostSystem"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.esx_vim.View"
+        />
 
 </zope:configure>

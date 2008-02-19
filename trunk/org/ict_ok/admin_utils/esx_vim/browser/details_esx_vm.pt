@@ -20,7 +20,9 @@
         </tr>
         <tr class="cb_wht">
             <td class="label" i18n:translate="">max memory usage</td>
-            <td tal:content="python: context.eval_on_obj('obj.runtime().maxMemoryUsage()') + ' MB'" />
+            <div tal:omit-tag="" tal:condition="python: context.eval_on_obj('obj.runtime().maxMemoryUsage()')">
+                <td tal:content="python: context.eval_on_obj('obj.runtime().maxMemoryUsage()') + ' MB'" />
+            </div>
         </tr>
         <tr class="cb_ilx">
             <td class="label" i18n:translate="">Heartbeat</td>

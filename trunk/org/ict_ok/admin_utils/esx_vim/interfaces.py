@@ -250,3 +250,5 @@ class IEsxVimHostSystem(IEsxVimObj):
     Represents a set of physical compute resources for a set of virtual
     machines.
     """
+    def values(self):
+        '''See interface `IReadContainer`'''

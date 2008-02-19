@@ -52,6 +52,14 @@
             permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
             set_schema=".interfaces.IEventTimingRelay"
             />
+        <require
+            permission="org.ict_ok.admin_utils.event_timingrelay.View"
+            interface=".interfaces.IEventIfEventTimingRelay"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
+            set_schema=".interfaces.IEventIfEventTimingRelay"
+            />
     </class>
 
     <class class=".event_timer.EventTimer">

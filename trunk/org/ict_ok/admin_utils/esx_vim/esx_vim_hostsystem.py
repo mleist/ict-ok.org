@@ -20,6 +20,7 @@ __version__ = "$Id$"
 from zope.interface import implements
 
 # ict_ok.org imports
+from org.ict_ok.admin_utils.esx_vim.esx_vim import globalEsxVimUtility
 from org.ict_ok.admin_utils.esx_vim.esx_vim_obj import EsxVimObj
 from org.ict_ok.admin_utils.esx_vim.interfaces import \
      IEsxVimHostSystem
@@ -31,3 +32,9 @@ class EsxVimHostSystem(EsxVimObj):
     machines.
     """
     implements(IEsxVimHostSystem)
+    
+    def values(self):
+        '''See interface `IReadContainer`'''
+        print "EsxVimHostSystem.values"
+        return globalEsxVimUtility.get_EsxVimAllDict(self, self).values()
+

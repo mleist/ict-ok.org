@@ -274,56 +274,56 @@ def applyChanges(form, content, data):
 class MSubDetails(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Details')
-    viewURL = 'details.html'
+    viewURL = '@@details.html'
     weight = 10
 
 
 class MSubOverview(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Overview')
-    viewURL = 'overview.html'
+    viewURL = '@@overview.html'
     weight = 10
 
 
 class MSubHistory(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'History')
-    viewURL = 'history.html'
+    viewURL = '@@history.html'
     weight = 50
 
 
 class MSubDumpData(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Dump data')
-    viewURL = 'dumpdata.html'
+    viewURL = '@@dumpdata.html'
     weight = 60
 
 
 class MSubExportXmlData(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Export XML')
-    viewURL = 'exportxmldata.html'
+    viewURL = '@@exportxmldata.html'
     weight = 60
 
 
 class MSubEdit(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Edit')
-    viewURL = 'edit.html'
+    viewURL = '@@edit.html'
     weight = 20
 
 
 class MSubEditEventIf(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Event Interface')
-    viewURL = 'edit_event_if.html'
+    viewURL = '@@edit_event_if.html'
     weight = 25
 
 
 class MSubEditContent(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Edit Content')
-    viewURL = 'edit_content.html'
+    viewURL = '@@edit_content.html'
     weight = 30
 
 
@@ -478,7 +478,7 @@ class AddDashboard(BrowserPagelet):
         userProps.mapping._p_changed = True
 
     def render(self):
-        return self.request.response.redirect('./overview.html')
+        return self.request.response.redirect('./@@overview.html')
 
 
 class DelDashboard(BrowserPagelet):
@@ -488,7 +488,7 @@ class DelDashboard(BrowserPagelet):
         userProps.mapping._p_changed = True
         
     def render(self):
-        return self.request.response.redirect('./overview.html')
+        return self.request.response.redirect('./@@overview.html')
 
 
 # --------------- forms ------------------------------------
