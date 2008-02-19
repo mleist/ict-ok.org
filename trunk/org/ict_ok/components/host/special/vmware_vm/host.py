@@ -23,6 +23,7 @@ from zope.app import zapi
 from zope.component import queryUtility
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.app.catalog.interfaces import ICatalog
 
 # ict_ok.org imports
 from org.ict_ok.components.host.special.vmware_vm.interfaces import \
@@ -86,5 +87,10 @@ class Host(HostBase):
         esx_utility = queryUtility(IAdmUtilEsxVim)
         if esx_utility and len(self.esxUuid) > 0:
             esxRoomUuid = esx_utility.getEsxRoomUuid(self.esxUuid)
-            print "getEsxRoomUuid: ", esxRoomUuid
-        return u"baf5beb6d7df058890ed9f9c5c5cf615a"
+            my_catalog = zapi.getUtility(ICatalog)
+            res = my_catalog.searchResults(host_esxuuid_index=str(esxRoomUuid))
+            if len(res) > 0:
+                return list(res)[0].room
+            else:
+                return None
+        return None

@@ -56,7 +56,7 @@ class Pickle(object):
         #print "exportAsDict - self.context.history: %s" % self.context.history
         if hasattr(self.context, 'history') and \
            self.context.history is not None:
-            ringBuffer = self.context.history
+            ringBuffer = removeSecurityProxy(self.context.history)
             historyList = ringBuffer.get()
             for entry in historyList:
                 retVal['history'].append(entry.exportAsDict(mode))

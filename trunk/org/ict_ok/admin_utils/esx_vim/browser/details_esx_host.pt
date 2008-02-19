@@ -6,10 +6,18 @@
             <td class="label" i18n:translate="">Name</td>
             <td tal:content="python: context.eval_on_obj('obj.name()')" />
         </tr>
-        <tr class="cb_ilx">
+        <!--tr class="cb_ilx">
             <td class="label" i18n:translate="">UUID</td>
             <td tal:content="python: context.eval_on_obj('obj.config().uuid()')" />
         </tr>
+        <tr class="cb_ilx">
+            <td class="label" i18n:translate="">UUID</td>
+            <td tal:content="python: context.eval_on_obj('obj.hardware().systemInfo().uuid()')" />
+        </tr>
+        <tr class="cb_ilx">
+            <td class="label" i18n:translate="">UUID</td>
+            <td tal:content="python: context.eval_on_obj('obj.summary().config().product().fullName()')" />
+        </tr-->
         <span tal:omit-tag="" tal:define="esxtime python: context.eval_on_obj('obj.runtime().bootTime()')">
             <tr class="cb_ilx" tal:condition="esxtime|nothing">
                 <td class="label" i18n:translate="">Uptime</td>

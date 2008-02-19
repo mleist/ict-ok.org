@@ -20,7 +20,7 @@ import transaction
 # zope imports
 from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
-from zope.app.catalog.field import FieldIndex
+from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
 
@@ -44,9 +44,9 @@ def bootStrapSubscriber(event):
               if util.provided.isOrExtends(ICatalog)]
     instUtilityICatalog = utils[0].component
     if not "host_esxuuid_index" in instUtilityICatalog.keys():
-        host_esxuuid_index = FieldIndex(interface=ISearchableText,
-                                        field_name='esxUuid',
-                                        field_callable=False)
+        host_esxuuid_index = TextIndex(interface=ISearchableText,
+                                        field_name='getSearchableHostEsxUuid',
+                                        field_callable=True)
         instUtilityICatalog['host_esxuuid_index'] = host_esxuuid_index
         # search for IAdmUtilSupervisor
         utils = [ util for util in sitem.registeredUtilities()
