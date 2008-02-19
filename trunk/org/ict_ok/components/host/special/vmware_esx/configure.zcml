@@ -35,6 +35,11 @@
             />
     </class>
 
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
     <include package=".browser" />
     <!--<include package=".generations" />-->
 

@@ -19,10 +19,19 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
+from zope.interface import implements
+from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
+from org.ict_ok.components.host.special.vmware_esx.interfaces import \
+     IHostVMwareEsx
 from org.ict_ok.components.host.host import Host as HostBase
 
 
 class Host(HostBase):
-    pass
+    """
+    the VmWare host instance
+    """
+    implements(IHostVMwareEsx)
+
+    esxUuid = FieldProperty(IHostVMwareEsx['esxUuid'])
