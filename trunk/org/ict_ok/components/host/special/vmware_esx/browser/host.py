@@ -20,7 +20,7 @@ __version__ = "$Id$"
 from zope.i18nmessageid import MessageFactory
 
 # z3c imports
-from z3c.form import field
+from z3c.form import form, field
 
 # ict_ok.org imports
 from org.ict_ok.components.host.special.vmware_esx.interfaces import \
@@ -28,7 +28,7 @@ from org.ict_ok.components.host.special.vmware_esx.interfaces import \
 from org.ict_ok.components.host.special.vmware_esx.host import Host
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm
+     AddForm, DisplayForm, EditForm
 from org.ict_ok.components.host.browser.host import \
      HostDetails
 
@@ -46,8 +46,21 @@ class MSubAddHost(GlobalMenuSubItem):
 # --------------- forms ------------------------------------
 
 
+class DetailsHostForm(DisplayForm):
+    """ Display form for the object """
+    label = _(u'settings of VMware ESX Server')
+    fields = field.Fields(IHostVMwareEsx).omit(*HostDetails.omit_viewfields)
+
+
 class AddHostForm(AddForm):
     """Add form."""
     label = _(u'Add VMware ESX Server')
     fields = field.Fields(IHostVMwareEsx).omit(*HostDetails.omit_addfields)
     factory = Host
+
+
+class EditHostForm(EditForm):
+    """ Edit form for host """
+    form.extends(form.EditForm)
+    label = _(u'VMware ESX Server Edit Form')
+    fields = field.Fields(IHostVMwareEsx).omit(*HostDetails.omit_editfields)
