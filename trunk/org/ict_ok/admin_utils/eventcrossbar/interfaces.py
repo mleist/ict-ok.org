@@ -257,6 +257,11 @@ class IEventTimer(IEventLogic):
     isRunning = Bool(
         title = _("timer is running"),
         default = False)
+        
+    def removeInvalidOidFromInpOutObjects(self):
+        """ delete all invalid oids 
+        oids not in catalog will be deleted (exclude ticker)
+        """
 
 
 class IEventIfEventTimer(IEventIfEventLogic):

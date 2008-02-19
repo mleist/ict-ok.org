@@ -56,8 +56,8 @@ class HostDetails(SuperHostDetails):
     """ Class for Web-Browser-Details
     """
     omit_viewfields = SuperHostDetails.omit_viewfields + []
-    omit_addfields = SuperHostDetails.omit_addfields + []
-    omit_editfields = SuperHostDetails.omit_editfields + []
+    omit_addfields = SuperHostDetails.omit_addfields + ['room']
+    omit_editfields = SuperHostDetails.omit_editfields + ['room']
     
     def actions(self):
         """
