@@ -72,6 +72,7 @@ class Host(HostBase):
 
     def eventInp_shutdown(self, eventMsg=None):
         """ start the shutdown of the host """
+        eventProcessed = False
         if self.inEventMask(eventMsg):
             eventProcessed = True
             eventMsg.stopit(self, "Host.eventInp_shutdown")
