@@ -79,7 +79,7 @@ class AdmUtilEsxVim(Supernode):
         if myDict.has_key(key):
             return myDict[key]
         raise KeyError
-    
+
     def __getattr__(self, key):
         #print "AdmUtilEsxVim.__getattr__(%s)" % (key)
         if self.has_key(key):
@@ -92,16 +92,16 @@ class AdmUtilEsxVim(Supernode):
         if key == '__getnewargs__':
             return None
         raise KeyError
-    
+
     def powerOffVm(self, uuid):
         return globalEsxVimUtility.powerOffVm(uuid, self)
- 
+
     def powerOnVm(self, uuid):
         return globalEsxVimUtility.powerOnVm(uuid, self)
 
     def getEsxRoomUuid(self, uuid):
         return globalEsxVimUtility.getEsxRoomUuid(uuid, self)
- 
+
     def values(self):
         '''See interface `IReadContainer`'''
         print "AdmUtilEsxVim.values"
@@ -194,9 +194,9 @@ class GlobalEsxVimUtility(object):
                 #perl.require("VMware::VIM2Runtime")
                 #perl.require("VMware::VILib")
                 #perl.call("Vim::login",
-                          #service_url = "https://192.168.154.10:443/sdk/webService",
-                          #user_name="ikom.trol",
-                          #password="ikom.trol")
+                            #service_url = "https://192.168.154.10:443/sdk/webService",
+                            #user_name="ikom.trol",
+                            #password="ikom.trol")
             else:
                 print "check con if already up"
 
@@ -217,7 +217,7 @@ class GlobalEsxVimUtility(object):
 
     def get_EsxVimAllDict(self, localEsxUtil, parentObj):
         retDict = {}
-        
+
         objFolder = createObject(\
             "org.ict_ok.admin_utils.esx_vim.esx_vim_folder.EsxVimFolder")
         objFolder.localEsxUtil = localEsxUtil
@@ -235,7 +235,7 @@ class GlobalEsxVimUtility(object):
         contained(objFolder, parentObj, u'HostSystems')
         objFolder.__parent__ = parentObj
         retDict[u'HostSystems'] = objFolder
-        
+
         objFolder = createObject(\
             "org.ict_ok.admin_utils.esx_vim.esx_vim_folder.EsxVimFolder")
         objFolder.localEsxUtil = localEsxUtil
@@ -244,7 +244,7 @@ class GlobalEsxVimUtility(object):
         contained(objFolder, parentObj, u'VirtualMachines')
         objFolder.__parent__ = parentObj
         retDict[u'VirtualMachines'] = objFolder
-        
+
         objFolder = createObject(\
             "org.ict_ok.admin_utils.esx_vim.esx_vim_folder.EsxVimFolder")
         objFolder.localEsxUtil = localEsxUtil
@@ -254,7 +254,7 @@ class GlobalEsxVimUtility(object):
         objFolder.__parent__ = parentObj
         retDict[u'Folder'] = objFolder
         return retDict
-        
+
 
     def get_EsxVimObject_Dict(self, myParams, parentObj):
         """ TODO: caching here please
@@ -270,16 +270,24 @@ class GlobalEsxVimUtility(object):
             #'view_type': 'Datacenter',
             #'admUtilEsxVim': localEsxUtil,
             #}
+        print "aa0a"
+        if self.esxThread.getQueue(utilOId)['in'].join():
+            print "aa0b"
+        print "aa1"
         self.esxThread.getQueue(utilOId)['in'].put(myParams, True, 15)
+        print "aa2"
         #print "aa13:", utilOId
         self.esxThread.getQueue(utilOId)['in'].join()
+        print "aa3"
         #print "aa14"
         #self.esxThread.queue1_in.put(localEsxUtil, True, 5)
         #self.esxThread.queue1_in.join()
         esxObjList = self.esxThread.getQueue(utilOId)['out'].get(True, 15)
+        print "aa4"
         #print "esxObjList: ", esxObjList
         #print "aa15"
         self.esxThread.getQueue(utilOId)['out'].task_done()
+        print "aa5"
         #print "aa16"
         retDict = {}
         for esxObj in esxObjList:
@@ -318,7 +326,8 @@ class GlobalEsxVimUtility(object):
             'admUtilEsxVim': localEsxUtil,
             'view_type': 'VirtualMachine',
             'filter': {'config.uuid':uuid},
-            }
+        }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         if self.esxThread.getQueue(localEsxUtilOId)['out'].qsize() > 0:
@@ -331,14 +340,15 @@ class GlobalEsxVimUtility(object):
                 'perlRef': esxObj['perlRef'],
                 'fnct_name': 'ShutdownGuest',
                 'fnct_args': [],
-                }
+            }
+            self.esxThread.getQueue(localEsxUtilOId)['in'].join()
             self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
             self.esxThread.getQueue(localEsxUtilOId)['in'].join()
             if self.esxThread.getQueue(localEsxUtilOId)['out'].qsize() > 0:
                 esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
                 self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
 
- 
+
     def powerOnVm(self, uuid, localEsxUtil):
         print "powerOnVm"
         localEsxUtilOId = localEsxUtil.objectID
@@ -349,7 +359,8 @@ class GlobalEsxVimUtility(object):
             'admUtilEsxVim': localEsxUtil,
             'view_type': 'VirtualMachine',
             'filter': {'config.uuid':uuid},
-            }
+        }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
@@ -361,7 +372,8 @@ class GlobalEsxVimUtility(object):
             'perlRef': esxObj['perlRef'],
             'fnct_name': 'PowerOnVM_Task',
             'fnct_args': [],
-            }
+        }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
@@ -377,7 +389,8 @@ class GlobalEsxVimUtility(object):
             'admUtilEsxVim': localEsxUtil,
             'view_type': 'VirtualMachine',
             'filter': {'config.uuid':uuid},
-            }
+        }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
@@ -389,12 +402,13 @@ class GlobalEsxVimUtility(object):
             'perlRef': esxObj['perlRef'],
             'eval_text': 'perl.call(\'Vim::get_view\', mo_ref = obj.runtime().host()).name',
             'fnct_args': [],
-            }
+        }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         esxServerUuid = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
-	return esxServerUuid
+        return esxServerUuid
 
 
 globalEsxVimUtility = GlobalEsxVimUtility()

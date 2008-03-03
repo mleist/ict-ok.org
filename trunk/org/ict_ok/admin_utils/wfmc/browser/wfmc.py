@@ -31,8 +31,22 @@ from org.ict_ok.admin_utils.wfmc.interfaces import \
      IAdmUtilWFMC
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 #from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
+from org.ict_ok.skin.menu import GlobalMenuSubItem
 
 _ = MessageFactory('org.ict_ok')
+
+
+# --------------- menu entries -----------------------------
+
+
+class MSubWfList(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Workflows')
+    viewURL = 'wflist.html'
+    weight = 90
+
+
+# --------------- object details ---------------------------
 
 
 class AdmUtilWFMCDetails(SupernodeDetails):
@@ -76,6 +90,14 @@ class AdmUtilWFMCDetails(SupernodeDetails):
 
 # --------------- forms ------------------------------------
 
+
+
+
+class AdmUtilWFMCWfList(AdmUtilWFMCDetails):
+    label = _(u'Workflow List')
+
+class AdmUtilWFMCWfView(AdmUtilWFMCDetails):
+    label = _(u'Workflow View')
 
 class ViewAdmUtilWFMCForm(DisplayForm):
     """ Display form for the object """

@@ -199,6 +199,14 @@
         for="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.CrossBar"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
+    <page
+        name="getIMG"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.AdmUtilEventCrossbarDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        attribute="getIMGFile"
+    />
     <z3c:pagelet
         name="signalgraph.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"

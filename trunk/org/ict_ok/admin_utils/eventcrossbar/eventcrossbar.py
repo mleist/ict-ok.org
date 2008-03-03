@@ -16,6 +16,7 @@ __version__ = "$Id$"
 
 # phython imports
 import logging
+import os
 from datetime import datetime
 from pytz import timezone
 from persistent.dict import PersistentDict
@@ -49,6 +50,9 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEvent, IAdmUtilEventCrossbar, IEventTimingRelay, IEventLogic
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IGlobalEventCrossbarUtility
+from org.ict_ok.admin_utils.graphviz.interfaces import \
+     IGenGraphvizDot
+from org.ict_ok.components.interfaces import IComponent
 
 logger = logging.getLogger("AdmUtilEventCrossbar")
 berlinTZ = timezone('Europe/Berlin')
@@ -152,6 +156,100 @@ class AdmUtilEventCrossbar(Supernode):
             self.__setattr__("lastEventCrossbar", "not set")
             retVal = self.lastEventCrossbar
         return retVal
+
+    def fillDotFile(self, dotFile, mode=None):
+        """generate the dot file
+        """
+        my_catalog = zapi.getUtility(ICatalog)
+        objIdSet = set()
+        objSet = set()
+        eventSet = set()
+        for (oid, oobj) in self.items():
+            objIdSet.add(oid)
+        for objId in self.inpEQueues:
+            objIdSet.add(objId)
+        for objId in self.outEQueues:
+            objIdSet.add(objId)
+        for objId in objIdSet:
+            for result in my_catalog.searchResults(oid_index=objId):
+                if IAdmUtilEvent.providedBy(result):
+                    eventSet.add(result)
+                elif IEventLogic.providedBy(result):
+                    objSet.add(result)
+                elif IEventLogic.providedBy(result):
+                    objSet.add(result)
+                elif IComponent.providedBy(result):
+                    if result.isConnectedToEvent():
+                        objSet.add(result)
+                else:
+                    pass
+        print >> dotFile, '// GraphViz DOT-File'
+        print >> dotFile, 'digraph "%s" {' % (zapi.getRoot(self).__name__)
+        if mode and mode.lower() == "fview":
+            print >> dotFile, '\tgraph [bgcolor="#E5FFF9", dpi="100.0"];'
+        else:
+            print >> dotFile, '\tgraph [bgcolor="#E5FFF9", size="6.2,5.2",' +\
+            ' splines="true", ratio = "auto", dpi="100.0"];'
+        print >> dotFile, '\tnode [fontname = "Helvetica",fontsize = 10];'
+        print >> dotFile, '\tedge [style = "setlinewidth(2)", color = black];'
+        print >> dotFile, '\trankdir = LR;'
+        print >> dotFile, '\t// objects ----------------------------------'
+        for obj in objSet:
+            objGraphvizDot = IGenGraphvizDot(obj)
+            objGraphvizDot.traverse4DotGenerator(dotFile, level=1,
+                                                 comments=True,
+                                                 signalsOutput=True,
+                                                 recursive=False)
+        print >> dotFile, '\t// events ----------------------------------'
+        for event in eventSet:
+            eventGraphvizDot = IGenGraphvizDot(event)
+            eventGraphvizDot.traverse4DotGenerator(dotFile, level=1, comments=True)
+        for obj in objSet:
+            allInpNamesDict = obj.getAllInpEventNames()
+            allOutNamesDict = obj.getAllOutEventNames()
+            for inpName in allInpNamesDict.keys():
+                for iObj in allInpNamesDict[inpName]:
+                    print >> dotFile, '\t "%s"-> "%s":"%s"' % (iObj, obj.objectID, inpName)
+            for outName in allOutNamesDict.keys():
+                for iObj in allOutNamesDict[outName]:
+                    print >> dotFile, '\t "%s":"%s"-> "%s"' % (obj.objectID, outName, iObj)
+        print >> dotFile, '}'
+        dotFile.flush()
+
+        
+    def getIMGFile(self, imgtype, mode=None):
+        """get dot file and convert to png
+        """
+        dotFileName = '/tmp/dotFile_%s.dot' % os.getpid()
+        outFileName = '/tmp/dotFile_%s.out' % os.getpid()
+        dotFile = open(dotFileName, 'w')
+        self.fillDotFile(dotFile, mode)
+        dotFile.close()
+        os.system("dot -T%s -o %s %s" % (imgtype,
+                                         outFileName, 
+                                         dotFileName))
+        pic = open(outFileName, "r")
+        picMem = pic.read()
+        pic.close()
+        return picMem
+
+    def getCmapxText(self, root_obj):
+        """get dot file and convert to client side image map
+        """
+        its = root_obj.items()
+        dotFileName = '/tmp/dotFile_%s.dot' % os.getpid()
+        outFileName = '/tmp/dotFile_%s.out' % os.getpid()
+        dotFile = open(dotFileName, 'w')
+        self.fillDotFile(its, dotFile)
+        dotFile.close()
+        os.system("%s -Tcmapx -o %s %s" % (self.graphviz_type, 
+                                           outFileName, 
+                                           dotFileName))
+        mymap = open(outFileName, "r")
+        mapMem = mymap.read()
+        mymap.close()
+        return mapMem
+
 
     def makeNewObjQueue(self, senderObj):
         """ will create a new input and output queue for this sender object """

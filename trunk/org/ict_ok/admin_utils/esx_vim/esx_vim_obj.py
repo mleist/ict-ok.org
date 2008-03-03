@@ -67,6 +67,8 @@ class EsxVimObj(Contained):
             'fnct_args': fnct_args,
             }
         globalEsxVimUtility.esxThread.getQueue(\
+            utilOId)['in'].join()
+        globalEsxVimUtility.esxThread.getQueue(\
             utilOId)['in'].put(myParams, True, 15)
         globalEsxVimUtility.esxThread.getQueue(\
             utilOId)['in'].join()

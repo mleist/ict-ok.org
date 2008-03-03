@@ -145,6 +145,14 @@ class IAdmUtilEventCrossbar(ISupernode):
     
     outEQueues = Attribute("dict of output event queues")
 
+    def fillDotFile(dotFile, mode=None):
+        """generate the dot file
+        """
+
+    def getIMGFile(imgtype, mode=None):
+        """get dot file and convert to png
+        """
+
     def receiveEventCrossbar(str_time):
         """receive eventcrossbar signal
         """

@@ -137,6 +137,8 @@ class IAdmUtilEsxVim(ISupernode):
     def __contains__(self, key):
         '''See interface `IReadContainer`'''
 
+    def connect2VimServer(self):
+        ''' '''
 
 class IAdmUtilEsxVim2(Interface):
     """

@@ -75,7 +75,7 @@ class ActivityDefinitionGenDot(object):
         print >> cfgFile, '%smargin = 0,' % ("\t" * (level + 2))
         print >> cfgFile, '%slabel=<<TABLE BORDER="0" CELLBORDER="0" ' \
               'CELLPADDING="1px" CELLSPACING="3px"><TR><TD VALIGN="TOP">' \
-              '<IMG SRC="/home/markus/Projekte/ICT_Ok-hp/activitytool.gif"/>' \
+              '<IMG SRC="lib/python/org/ict_ok/admin_utils/wfmc/pics/activitytool.png"/>' \
               '</TD><TD ALIGN="LEFT" VALIGN="TOP" HEIGHT="30px" WIDTH="50px" BGCOLOR="#E5FFF9">'\
               '<FONT FACE="arial,helvetica,clean,sans-serif" POINT-SIZE="10px">' \
               '%s</FONT></TD></TR></TABLE>>' \

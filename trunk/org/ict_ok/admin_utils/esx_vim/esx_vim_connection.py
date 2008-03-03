@@ -189,25 +189,14 @@ class EsxVimConnectionThread(threading.Thread):
     def executeMyQueue(self, myAdmUtilEsxVim):
         utilOId = myAdmUtilEsxVim.getObjectId()
         if not self.getQueue(utilOId)['in'].empty():
-            #print "th04"
             print "executeMyQueue"
-            #sourceAdmUtilEsxVim = self.getQueue(utilOId)['in'].get(True, 5)
-            #sourceOId = sourceAdmUtilEsxVim.getObjectId()
             myParams = self.getQueue(utilOId)['in'].get(True, 15)
             print "cmd: ", myParams['cmd']
             sourceAdmUtilEsxVim = myParams['admUtilEsxVim']
             sourceOId = sourceAdmUtilEsxVim.getObjectId()
-            #print "uuuu1:", sourceAdmUtilEsxVim
-            #datacenterList = self.getAllEsxVimDatacenter(sourceAdmUtilEsxVim)
-            #myParams = {\
-                #'cmd': 'find_entity_views',
-                #'view_type': 'Datacenter',
-                #'admUtilEsxVim': sourceAdmUtilEsxVim,
-                #}
             if myParams.has_key('cmd'):
                 if myParams['cmd'] == 'find_entity_views':
                     esxObjList = self.getAllEsxVimEntityViews(myParams)
-                    #print "uuuu2:", sourceAdmUtilEsxVim
                     myList = []
                     for esxObj in esxObjList:
                         myList.append({\
@@ -218,19 +207,14 @@ class EsxVimConnectionThread(threading.Thread):
                         })
                     self.getQueue(sourceOId)['out'].put(myList, True, 15)
                 elif myParams['cmd'] == 'call_fcnt_on_obj':
-                    #print "uuuu3b:", myParams
                     if myParams.has_key('perlRef') and \
                        myParams.has_key('fnct_name') and \
                        myParams.has_key('fnct_args') and \
                        type(myParams['fnct_name']) == type('') and \
                        type(myParams['fnct_args']) == type([]):
-                        #print "uuuu3c1"
                         myObj = myParams['perlRef']
-                        #print "uuuu3c2"
                         myFnctName = myParams['fnct_name']
-                        #print "uuuu3c3"
                         myFnctArgs = myParams['fnct_args']
-                        #print "pppp1"
                         try:
                             retVal = getattr(myObj, myFnctName)(*myFnctArgs)
                             self.getQueue(sourceOId)['out'].put(retVal, True, 15)
@@ -238,23 +222,18 @@ class EsxVimConnectionThread(threading.Thread):
                             print "My Perl Error: ", err
                             self.getQueue(sourceOId)['out'].put(None, True, 15)
                     else:
-                        #print "uuuu3d"
                         self.getQueue(sourceOId)['out'].put(None, True, 15)
                 elif myParams['cmd'] == 'eval_on_obj':
-                    #print "uuuu3b:", myParams
                     if myParams.has_key('perlRef') and \
                        myParams.has_key('eval_text') and \
                        myParams.has_key('fnct_args') and \
                        type(myParams['eval_text']) == type('') and \
                        (type(myParams['fnct_args']) == type([]) or \
                         type(myParams['fnct_args']) == type(None)):
-                        #print "2uuuu3c1"
                         myObj = myParams['perlRef']
-                        #print "2uuuu3c2:", myObj
                         myEvalText = myParams['eval_text']
-                        #print "2uuuu3c3:", myEvalText
+                        print "myEvalText:", myEvalText
                         myFnctArgs = myParams['fnct_args']
-                        #print "2pppp1:", myFnctArgs
                         try:
                             if myFnctArgs is None:
                                 retVal = eval(myEvalText, {\
@@ -266,15 +245,11 @@ class EsxVimConnectionThread(threading.Thread):
                                     'perl':self.perl})(*myFnctArgs)
                         except Exception,err:
                             retVal = err
-                        #print "2pppp2:", retVal
                         self.getQueue(sourceOId)['out'].put(retVal, True, 15)
-                        #print "2pppp3"
                     else:
-                        #print "2uuuu3d"
                         self.getQueue(sourceOId)['out'].put(None, True, 15)
                 else: # unknown command cmd
                     self.getQueue(sourceOId)['out'].put(None, True, 15)
-            #print "uuuu4"
             self.getQueue(utilOId)['in'].task_done()
 
     def run(self, forever=True):
@@ -302,20 +277,17 @@ class EsxVimConnectionThread(threading.Thread):
                             if not self.getQueue(utilOId)['in'].empty():
                                 self.getQueue(utilOId)['in'].get(True, 5)
                                 self.getQueue(utilOId)['in'].task_done()
-                    #setSite(old_site)
-                    #transaction.get().commit()
                     transaction.commit()
                     conn.close()
                     # Blanket except because we don't want
                     # this thread to ever die
                 except Exception, err:
-                    #print "eeeeeee: ", err
                     logger.error("Error in ESX VIM (%s)" % err, exc_info=True)
                     transaction.abort()
                     conn.close()
 #--------------------------------------------------------------------------------
             if forever:
-                time.sleep(0.1)
+                time.sleep(0.01)
             else:
                 break
         if EsxVimConnectionThread.database:
@@ -332,12 +304,5 @@ class EsxVimConnectionThread(threading.Thread):
 
     def stop(self):
         EsxVimConnectionThread.__stopped = True
-        #self.esx_logout()
-        #time.sleep(2)
-        ##print "id(perl):", id(perl)
-        ##print "thread: ", threading.currentThread().getName()
         print "EsxVimConnectionThread stopped"
-        #signal.alarm(0)
-        #signal.signal(signal.SIGALRM, self.old)
-        #self.__stopped = True
         

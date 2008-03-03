@@ -69,6 +69,7 @@ class EsxVimVirtualMachine(EsxVimObj):
             'fnct_name': 'name',
             'fnct_args': [],
             }
+        globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].join()
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].put(myParams, True, 15)
         #print "bbbaa13"
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].join()
@@ -94,6 +95,7 @@ class EsxVimVirtualMachine(EsxVimObj):
             'fnct_name': fnct_name,
             'fnct_args': fnct_args,
             }
+        globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].join()
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].put(myParams, True, 15)
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].join()
         retValue = globalEsxVimUtility.esxThread.getQueue(utilOId)['out'].get(True, 15)
