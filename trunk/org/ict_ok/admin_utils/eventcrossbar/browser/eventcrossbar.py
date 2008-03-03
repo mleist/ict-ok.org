@@ -64,7 +64,6 @@ class MSubCrossBarSignalGraph(GlobalMenuSubItem):
     weight = 30
 
 
-
 class AdmUtilEventCrossbarDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
@@ -139,106 +138,10 @@ class CrossBar(BrowserPagelet):
 
 class SignalGraph(BrowserPagelet):
     label = _(u'Signal Overview')
-    #def genDotFile(self):
-        #print "genDotFile"
-        #my_catalog = zapi.getUtility(ICatalog)
-        #objIdSet = set()
-        #objSet = set()
-        #eventSet = set()
-        ##print "all items."
-        #for (oid, oobj) in self.context.items():
-            #objIdSet.add(oid)
-            ##print "%s: %s" % (oid, oobj)
-        ##print "inp queue 1:"
-        #for objId in self.context.inpEQueues:
-            #objIdSet.add(objId)
-            ##print "%s: %s" % (objId, self.context.inpEQueues[objId])
-        ##print "inp queue 2:"
-        ##for inpObjId in iter(self.context.inpEQueues):
-            ##print "%s" % (type(inpObjId))
-            ##for result in my_catalog.searchResults(oid_index=inpObjId):
-                ##print "result: %s [%s]" % (result, type(result))
-        ##print "out queue:"
-        #for objId in self.context.outEQueues:
-            #objIdSet.add(objId)
-            ##print "%s: %s" % (objId, self.context.outEQueues[objId])
-        #for objId in objIdSet:
-            #for result in my_catalog.searchResults(oid_index=objId):
-                #if IAdmUtilEvent.providedBy(result):
-                    #eventSet.add(result)
-                #elif IEventLogic.providedBy(result):
-                    #objSet.add(result)
-                #elif IEventLogic.providedBy(result):
-                    #objSet.add(result)
-                #elif IComponent.providedBy(result):
-                    #if result.isConnectedToEvent():
-                        #objSet.add(result)
-                #else:
-                    #pass
-        #dotFile = open("/tmp/dotSignals.dot", 'w')
-        #print >> dotFile, '// GraphViz DOT-File'
-        #print >> dotFile, 'digraph "%s" {' % (zapi.getRoot(self).__name__)
-        ##print >> dotFile, '\tgraph [bgcolor="#E5FFF9", size="6.2,5.2",' +\
-        ##' splines="true", ratio = "auto", dpi="100.0"];'
-        #print >> dotFile, '\tgraph [bgcolor="#E5FFF9", dpi="100.0"];'
-        #print >> dotFile, '\tnode [fontname = "Helvetica",fontsize = 10];'
-        #print >> dotFile, '\tedge [style = "setlinewidth(2)", color = black];'
-        #print >> dotFile, '\trankdir = LR;'
-        #print >> dotFile, '\t// objects ----------------------------------'
-        #for obj in objSet:
-            ##print >> dotFile, '\t"%s" [' % (obj.objectID)
-            ##print >> dotFile, '\t ]'
-            #objGraphvizDot = IGenGraphvizDot(obj)
-            ##try:
-            #objGraphvizDot.traverse4DotGenerator(dotFile, level=1,
-                                                 #comments=True,
-                                                 #signalsOutput=True,
-                                                 #recursive=False)
-            ##except AttributeError:
-                ##print >> dotFile, '\t ^^ (%s)' % objGraphvizDot
-        #print >> dotFile, '\t// events ----------------------------------'
-        #for event in eventSet:
-            ##for inp in event.inpObjects:
-                ##print >> dotFile, "\t//\tinp: %s" % (inp)
-            ##for out in event.outObjects:
-                ##print >> dotFile, "\t//\tout: %s" % (out)
-            #eventGraphvizDot = IGenGraphvizDot(event)
-            #eventGraphvizDot.traverse4DotGenerator(dotFile, level=1, comments=True)
-            ##try:
-                ##eventGraphvizDot.traverse4DotGenerator(dotFile, level=1, comments=True)
-            ##except AttributeError:
-                ##print >> dotFile, '\t ^^ (%s)' % objGraphvizDot
-                
-        ##for obj in objSet:
-            ##print >> dotFile, '\t//getAllOutEventObjs:'
-            ##for i in obj.getAllOutEventObjs():
-                ##print >> dotFile, '\t//\t -> %s' % i
-                ##print >> dotFile, '\t "%s"-> "%s"' % (obj.objectID, i)
-            ##print >> dotFile, '\t//getAllInpEventObjs:'
-            ##for i in obj.getAllInpEventObjs():
-                ##print >> dotFile, '\t//\t -> %s' % i
-                ##print >> dotFile, '\t "%s"-> "%s"' % (i, obj.objectID)
-
-        #for obj in objSet:
-            #allInpNamesDict = obj.getAllInpEventNames()
-            #allOutNamesDict = obj.getAllOutEventNames()
-            ##import pdb; pdb.set_trace()
-            #for inpName in allInpNamesDict.keys():
-                #for iObj in allInpNamesDict[inpName]:
-                    #print >> dotFile, '\t "%s"-> "%s":"%s"' % (iObj, obj.objectID, inpName)
-            #for outName in allOutNamesDict.keys():
-                #for iObj in allOutNamesDict[outName]:
-                    #print >> dotFile, '\t "%s":"%s"-> "%s"' % (obj.objectID, outName, iObj)
-        #print >> dotFile, '}'
-        #dotFile.flush()
-        #dotFile.close()
 
     def getValuePngHref(self):
         """get path of object as string
         """
-        #from zope.proxy import removeAllProxies
-        #obj = removeAllProxies(self.context)
-        #return zapi.getPath(obj)
         return zapi.getPath(self.context)
 
 
