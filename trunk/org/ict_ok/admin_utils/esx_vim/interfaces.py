@@ -229,6 +229,8 @@ class IEsxVimFolder(IEsxVimObj):
     """
     These are generic folders for storing inventory objects.
     """
+    def values(self):
+        '''See interface `IReadContainer`'''
 
 class IEsxVimVirtualMachine(IEsxVimObj):
     """

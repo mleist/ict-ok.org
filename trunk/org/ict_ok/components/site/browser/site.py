@@ -30,7 +30,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.components.site.interfaces import ISite
+from org.ict_ok.components.site.interfaces import ISite, IEventIfEventSite
 from org.ict_ok.components.site.site import Site
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 
@@ -86,3 +86,8 @@ class DeleteSiteForm(DeleteForm):
         """this title will be displayed in the head of form"""
         return _(u"Delete this site: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
+
+class EditSiteEventIfForm(EditForm):
+    """ Event edit for site """
+    label = _(u'Site Event Interfaces Form')
+    fields = field.Fields(IEventIfEventSite)

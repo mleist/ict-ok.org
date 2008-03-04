@@ -34,9 +34,10 @@ from org.ict_ok.components.host.special.vmware_vm.interfaces import \
 from org.ict_ok.components.host.special.vmware_vm.host import Host
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm, DisplayForm, EditForm
+     AddForm, DisplayForm, EditForm, DeleteForm
 from org.ict_ok.components.host.browser.host import \
      HostDetails as SuperHostDetails
+from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 
 _ = MessageFactory('org.ict_ok')
 
@@ -72,14 +73,14 @@ class HostDetails(SuperHostDetails):
            checkPermission('org.ict_ok.components.host.Edit', self.context):
             quoter = URLQuote(self.request.getURL())
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%spoweroff" % objId
             tmpDict['title'] = _(u"Power off")
             tmpDict['href'] = u"%s/@@poweroff.html?nextURL=%s" % \
                    (zapi.getPath( self.context),
                     quoter.quote())
             retList.append(tmpDict)
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%spoweron" % objId
             tmpDict['title'] = _(u"Power on")
             tmpDict['href'] = u"%s/@@poweron.html?nextURL=%s" % \
                    (zapi.getPath( self.context),
@@ -133,3 +134,11 @@ class EditHostForm(EditForm):
     form.extends(form.EditForm)
     label = _(u'VMware Virtual Machine Edit Form')
     fields = field.Fields(IHostVMwareVm).omit(*HostDetails.omit_editfields)
+
+
+class DeleteHostForm(DeleteForm):
+    """ Delete the host """
+    def getTitel(self):
+        """this title will be displayed in the head of form"""
+        return _(u"Delete this host: '%s'?") % \
+               IBrwsOverview(self.context).getTitle()

@@ -189,8 +189,10 @@ class Superclass(Persistent):
             # temp. direct connect
             eventMsg = self.inpEQueue.pull()
             if not eventMsg.hasSeen(self):
-                #print ">>> %s / %s" % (self.getObjectId(),
-                                       #eventMsg.oidEventObject)
+                #print ">>> %s / %s [fnctName:%s]" % \
+                      #(self.getObjectId(),
+                       #eventMsg.oidEventObject,
+                       #eventMsg.targetFunctionName)
                 # call possible event ipnut methods by name
                 fnctList = []
                 for attrName in self.__dict__:
@@ -201,9 +203,13 @@ class Superclass(Persistent):
                         objs = getattr(self, attrName, None)
                         fnct = getattr(self, fnctName, None)
                         if fnct is not None and \
-                           objs is not None and \
-                           eventMsg.oidEventObject in objs: # find the RIGHT object list
-                            fnctList.append(fnct)
+                           objs is not None:
+                            # find the RIGHT object list
+                            if eventMsg.oidEventObject in objs: 
+                                fnctList.append(fnct)
+                            elif eventMsg.targetFunctionName == \
+                                 attrName[len(attrObjsPrefix):]:
+                                fnctList.append(fnct)
                 for fnct in fnctList:
                     fnct(eventMsg)
                 if len(fnctList) == 0:
@@ -238,18 +244,18 @@ class Superclass(Persistent):
         got ticker event from ticker thread
         """
         ## debug if queue not empty
-        #if len(self.inpEQueue) + len(self.outEQueue) > 0:
-            #log(INFO, "tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
-                #(self.getDcTitle(), len(self.inpEQueue), len(self.outEQueue)))
+        if len(self.inpEQueue) + len(self.outEQueue) > 0:
+            log(INFO, "tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
+                (self.getDcTitle(), len(self.inpEQueue), len(self.outEQueue)))
         self.processOutEQueue()
         self.processEvents()
         self.processInpEQueue()
-        # TODO test pupose
-        import time
-        if time.gmtime()[5] == 10:
-            if self.getDcTitle()==u'Host1':
-                inst_event = MsgEvent(self)
-                self.injectOutEQueue(inst_event)
+        ## TODO test pupose
+        #import time
+        #if time.gmtime()[5] == 10:
+            #if self.getDcTitle()==u'Host1':
+                #inst_event = MsgEvent(self)
+                #self.injectOutEQueue(inst_event)
 
     def connectToEventXbar(self):
         if self.outEReceiver is None:
@@ -354,16 +360,18 @@ class MsgEvent:
     """
     implements(IMsgEvent)
 
-    def __init__(self, senderObj = None, oidEventObject = None):
+    def __init__(self, senderObj = None,
+                 oidEventObject = None,
+                 logText=u"new event",
+                 targetFunctionName = None):
         self.transmissionHistory = []
         self.timeToLive = 10
         self.oidEventObject = oidEventObject
+        self.targetFunctionName = targetFunctionName
         utilEventXbar = queryUtility(IAdmUtilEventCrossbar)
         if senderObj is not None:
             self.transmissionHistory.append(senderObj.getObjectId())
             logText = u"'%s' creates event" % (senderObj.getDcTitle())
-        else:
-            logText = u"new event"
         if self.oidEventObject is not None:
             utilEventXbar.logIntoEvent(self.oidEventObject, logText)
 

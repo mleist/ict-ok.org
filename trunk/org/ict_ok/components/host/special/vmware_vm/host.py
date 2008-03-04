@@ -93,7 +93,7 @@ class Host(HostBase):
     @property
     def room(self):
         esx_utility = queryUtility(IAdmUtilEsxVim)
-        if esx_utility and len(self.esxUuid) > 0:
+        if esx_utility and self.esxUuid and len(self.esxUuid) > 0:
             esxRoomUuid = esx_utility.getEsxRoomUuid(self.esxUuid)
             my_catalog = zapi.getUtility(ICatalog)
             res = my_catalog.searchResults(host_esxuuid_index=str(esxRoomUuid))

@@ -49,6 +49,14 @@
     />
 
     <z3c:pagelet
+        name="edit_event_if.html"
+        for="org.ict_ok.components.site.interfaces.ISite"
+        class=".site.EditSiteEventIfForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.EditEventIf"
+    />
+
+    <z3c:pagelet
         name="edit_content.html"
         for="org.ict_ok.components.site.interfaces.ISite"
         class=".site.EditContent"
@@ -111,6 +119,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.site.Edit"
+        />
+    <viewlet
+        name="edit_event_if"
+        for="org.ict_ok.components.site.interfaces.ISite"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.EditEventIf"
         />
     <viewlet
         name="editcontent"

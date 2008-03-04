@@ -125,7 +125,7 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
            zapi.queryMultiAdapter((self.context, self.request),
                                   name='shutdown.html') is not None:
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%sshutdown" % objId
             tmpDict['title'] = _(u"shutdown")
             tmpDict['href'] = u"%s/@@shutdown.html" % \
                    zapi.getPath(self.context)
@@ -136,7 +136,7 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
            zapi.queryMultiAdapter((self.context, self.request),
                                   name='convertobj.html') is not None:
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%sconvertobj" % objId
             tmpDict['title'] = _(u"convert to intern")
             tmpDict['href'] = u"%s/@@convertobj.html" % \
                    zapi.getPath(self.context)

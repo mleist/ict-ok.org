@@ -26,6 +26,11 @@
     />
 
     <permission
+        id="org.ict_ok.admin_utils.supervisor.PackDB"
+        title="pack the database"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.supervisor.DataDump"
         title="Data Dump"
         description="Dump of system data."
@@ -46,6 +51,11 @@
     <grant permission="org.ict_ok.admin_utils.supervisor.ReindexDB"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.supervisor.ReindexDB"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.supervisor.PackDB"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.supervisor.PackDB"
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.supervisor.DataDump"

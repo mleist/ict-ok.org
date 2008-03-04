@@ -153,6 +153,7 @@ class IMsgEvent(Interface):
     transmissionHistory = Attribute("objects which have seen this event")
     timeToLive = Attribute("hop count of routing objects")
     oidEventObject = Attribute("Oid from the Event message")
+    targetFunctionName = Attribute("function name for lookup in receiver")
     # DontDoitFlag
 
 

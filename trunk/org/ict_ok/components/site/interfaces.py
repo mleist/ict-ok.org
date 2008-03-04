@@ -15,12 +15,14 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface
-from zope.schema import Bool, TextLine
+from zope.schema import Bool, TextLine, Set, Choice
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.components.supernode.interfaces import \
+     IEventIfSupernode
 
 _ = MessageFactory('org.ict_ok')
 
@@ -38,6 +40,24 @@ class ISite(IComponent):
         default = _("mysite"),
         required = True)
 
+    
+class IEventIfEventSite(IEventIfSupernode):
+    """ event interface of object """
+    
+    eventInpObjs_inward_relaying_shutdown = Set(
+        title = _("inward relaying shutdown <-"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = True)
+    
+    def eventInp_inward_relaying_shutdown(eventMsg):
+        """
+        forward the event to all objects in this container through the signal filter
+        """
+
 
 class IIkDeleteConfirm(Interface):
     """ Confirm the delete """
@@ -45,3 +65,4 @@ class IIkDeleteConfirm(Interface):
         title = _(u"Confirm"),
         description = _(u"please confirm"),
         default = False)
+

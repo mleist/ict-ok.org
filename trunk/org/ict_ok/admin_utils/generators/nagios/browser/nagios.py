@@ -60,7 +60,7 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
            #zapi.queryMultiAdapter((self.context, self.request),
                                   #name='shutdown.html') is not None:
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%sgenerate" % objId
             tmpDict['title'] = _(u"generate")
             tmpDict['href'] = u"%s/generate.html" % \
                    zapi.getPath(self.context)

@@ -87,21 +87,21 @@ class HostDetails(ComponentDetails):
            checkPermission('org.ict_ok.components.host.Edit', self.context):
             quoter = URLQuote(self.request.getURL())
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%strigger_online" % objId
             tmpDict['title'] = _(u"Trigger online")
             tmpDict['href'] = u"%s/@@trigger_online?nextURL=%s" % \
                    (zapi.getPath( self.context),
                     quoter.quote())
             retList.append(tmpDict)
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%strigger_offline" % objId
             tmpDict['title'] = _(u"Trigger offline")
             tmpDict['href'] = u"%s/@@trigger_offline?nextURL=%s" % \
                    (zapi.getPath( self.context),
                     quoter.quote())
             retList.append(tmpDict)
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%strigger_not1" % objId
             tmpDict['title'] = _(u"Trigger notification1")
             tmpDict['href'] = u"%s/@@trigger_not1?nextURL=%s" % \
                    (zapi.getPath( self.context),

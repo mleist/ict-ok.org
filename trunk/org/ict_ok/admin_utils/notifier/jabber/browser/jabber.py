@@ -52,7 +52,7 @@ class NotifierJabberDetails(SupernodeDetails):
             if self.context.enableConnector:
                 tmpDict = {}
                 #tmpDict['oid'] = u"c%s" % objId
-                tmpDict['oid'] = u"c000"
+                tmpDict['oid'] = u"c000stop_connector"
                 tmpDict['title'] = _(u"stop jabber-connector")
                 tmpDict['href'] = u"%s/@@stop_connector?nextURL=%s" % \
                        (zapi.getPath(self.context),
@@ -61,7 +61,7 @@ class NotifierJabberDetails(SupernodeDetails):
                                        % self.request.principal.title)
                 retList.append(tmpDict)
                 tmpDict = {}
-                tmpDict['oid'] = u"c000"
+                tmpDict['oid'] = u"c000get_isup"
                 tmpDict['title'] = _(u"is jabber-connector up")
                 tmpDict['href'] = u"%s/@@get_isup?nextURL=%s" % \
                        (zapi.getPath(self.context),
@@ -69,7 +69,7 @@ class NotifierJabberDetails(SupernodeDetails):
                 tmpDict['tooltip'] = _(u"ask the jabber-connector for watchdog")
                 retList.append(tmpDict)
                 tmpDict = {}
-                tmpDict['oid'] = u"c000"
+                tmpDict['oid'] = u"c000send_test"
                 tmpDict['title'] = _(u"send test message")
                 tmpDict['href'] = u"%s/@@send_test?nextURL=%s" % \
                        (zapi.getPath(self.context),
@@ -79,7 +79,7 @@ class NotifierJabberDetails(SupernodeDetails):
             else:
                 tmpDict = {}
                 #tmpDict['oid'] = u"c%s" % objId
-                tmpDict['oid'] = u"c000"
+                tmpDict['oid'] = u"c000start_connector"
                 tmpDict['title'] = _(u"start jabber-connector")
                 tmpDict['href'] = u"%s/@@start_connector?nextURL=%s" % \
                        (zapi.getPath(self.context),

@@ -18,10 +18,14 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.app import zapi
+from zope.component import getUtility
+from zope.app.intid.interfaces import IIntIds
 from zope.i18nmessageid import MessageFactory
 import zope.event
 from zope.lifecycleevent import Attributes, ObjectModifiedEvent
 from zope.app.catalog.interfaces import ICatalog
+from zope.security import checkPermission
+from zope.app.pagetemplate.urlquote import URLQuote
 
 # zc imports
 
@@ -59,6 +63,40 @@ class AdmUtilEventDetails(SupernodeDetails):
     omit_viewfields = SupernodeDetails.omit_viewfields + []
     omit_addfields = SupernodeDetails.omit_addfields + ['inpObjects']
     omit_editfields = SupernodeDetails.omit_editfields + ['inpObjects']
+    
+    def actions(self):
+        """
+        gives us the action dict of the object
+        """
+        try:
+            objId = getUtility(IIntIds).getId(self.context)
+        except KeyError:
+            objId = 1000
+        retList = []
+        if checkPermission('org.ict_ok.admin_utils.event.Send', self.context):
+            quoter = URLQuote(self.request.getURL())
+            tmpDict = {}
+            tmpDict['oid'] = u"c%ssend_event" % objId
+            tmpDict['title'] = _(u"send it")
+            tmpDict['href'] = u"%s/@@send_event.html?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
+            tmpDict['tooltip'] = _(u"sends an the event to the list of receivers")
+            retList.append(tmpDict)
+        return retList
+    
+    def send_event(self):
+        """
+        sends an the event to the list of receivers
+        """
+        self.context.send_event(\
+            logText=u"event manually triggered by %s" % \
+            self.request.principal.title)
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
 
 # --------------- forms ------------------------------------
 

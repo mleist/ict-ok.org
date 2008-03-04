@@ -137,6 +137,10 @@ class IAdmUtilEvent(ISupernode):
     def removeInvalidOidFromInpOutObjects():
         """ delete all invalid oids """
 
+    def send_event(self):
+        """ sends an the event to the list of ALL receivers
+        """
+
 class IAdmUtilEventCrossbar(ISupernode):
     """
     major component for registration and event distribution 

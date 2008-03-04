@@ -97,7 +97,7 @@ class NetDetails(ComponentDetails):
         if checkPermission('org.ict_ok.components.net.Add', self.context) and \
            (adapSize.sizeForSorting()[1] < 1):
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%sstart_scanner" % objId
             tmpDict['title'] = _(u"start scanner")
             tmpDict['href'] = u"%s/@@start_scanner.html" % \
                    zapi.getPath(self.context)

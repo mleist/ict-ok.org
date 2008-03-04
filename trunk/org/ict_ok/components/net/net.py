@@ -29,6 +29,7 @@ from zope.app.intid.interfaces import IIntIds
 # ict_ok.org imports
 from org.ict_ok.schema.IPy import IP
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.superclass.superclass import MsgEvent
 from org.ict_ok.components.net.interfaces import INet, IEventIfEventNet
 
 
@@ -50,7 +51,6 @@ class Net(Component):
         constructor of the object
         """
         Component.__init__(self, **data)
-        print "INet.names(): ", list(INet.names())
         for (name, value) in data.items():
             if name in INet.names():
                 setattr(self, name, value)
@@ -64,30 +64,56 @@ class Net(Component):
         testIp = IP(ipString)
         return testIp in myIp
 
+    #def eventInp_inward_relaying_shutdown(self, eventMsg=None):
+        #"""
+        #forward the event to all objects in this container through the signal filter
+        #"""
+        ##eventMsg.stopit(self, "Net.eventInp_inward_relaying_shutdown")
+        ##print "Net.eventInp_inward_relaying_shutdown (%s)       " \
+        ##"       ############## <-" % (self.ikName)
+        #hostsProcessed = []
+        #for name, obj in self.items():
+            ##print "-> ", obj
+            #try:
+                #if obj.eventInp_shutdown(eventMsg):
+                    #hostsProcessed.append(obj.ikName)
+            #except AttributeError:
+                #print "Dont find method"
+        #if len(hostsProcessed) > 0:
+            #eventMsg.stopit(self, "Net.inward_relaying_shutdown "\
+                            #"processed @ %s" % " ,".join(hostsProcessed))
+            ##for attrName in obj.__dict__:
+                ##print "attr:   %s" % (attrName)
+                ##if attrName.find("eventInp_shutdown") == 0: # attribute name starts with ...
+                    ##fnct = getattr(obj, "eventInp_shutdown", None)
+                    ##if fnct is not None:
+                        ##fnct(eventMsg)
+
     def eventInp_inward_relaying_shutdown(self, eventMsg=None):
         """
         forward the event to all objects in this container through the signal filter
         """
-        #eventMsg.stopit(self, "Net.eventInp_inward_relaying_shutdown")
-        #print "Net.eventInp_inward_relaying_shutdown (%s)       " \
-        #"       ############## <-" % (self.ikName)
-        hostsProcessed = []
+        print "Net.eventInp_inward_relaying_shutdown()"
         for name, obj in self.items():
-            #print "-> ", obj
-            try:
-                if obj.eventInp_shutdown(eventMsg):
-                    hostsProcessed.append(obj.ikName)
-            except AttributeError:
-                print "Dont find method"
-        if len(hostsProcessed) > 0:
-            eventMsg.stopit(self, "Net.inward_relaying_shutdown "\
-                            "processed @ %s" % " ,".join(hostsProcessed))
-            #for attrName in obj.__dict__:
-                #print "attr:   %s" % (attrName)
-                #if attrName.find("eventInp_shutdown") == 0: # attribute name starts with ...
-                    #fnct = getattr(obj, "eventInp_shutdown", None)
-                    #if fnct is not None:
-                        #fnct(eventMsg)
+            if INet.providedBy(obj):
+                targetFunctionName = "inward_relaying_shutdown"
+            else:
+                targetFunctionName = "shutdown"
+            if eventMsg is not None:
+                inst_event = MsgEvent(senderObj = self,
+                                      oidEventObject = eventMsg.oidEventObject,
+                                      logText = u"inward relaying by net '%s'"\
+                                      % self.ikName,
+                                      targetFunctionName = targetFunctionName)
+                eventMsg.stopit(self,
+                                u"relaying by site '%s'" % self.ikName)
+            else:
+                inst_event = MsgEvent(senderObj = self,
+                                      logText = u"inward relaying by net '%s'"\
+                                      % self.ikName,
+                                      targetFunctionName = targetFunctionName)
+            obj.injectInpEQueue(inst_event)
+
 
 def getAllNetworks():
     """ get a list of all Nets

@@ -49,6 +49,14 @@
     />
 
     <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.location.interfaces.ILocation"
+        class=".location.DeleteLocationForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Delete"
+    />
+
+    <z3c:pagelet
         name="add_building.html"
         for="org.ict_ok.components.location.interfaces.ILocation"
         class="org.ict_ok.components.building.browser.building.AddBuildingForm"

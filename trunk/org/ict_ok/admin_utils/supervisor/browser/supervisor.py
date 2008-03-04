@@ -89,13 +89,25 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
                            self.context):
             quoter = URLQuote(self.request.getURL())
             tmpDict = {}
-            tmpDict['oid'] = u"c%s" % objId
+            tmpDict['oid'] = u"c%sreindex_db" % objId
             tmpDict['title'] = _(u"reindex database")
             tmpDict['href'] = u"%s/@@reindex_db?nextURL=%s" % \
                    (zapi.getPath( self.context),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"will reindex the catalogs of all "\
                                    u"tables in database")
+            retList.append(tmpDict)
+        if checkPermission('org.ict_ok.admin_utils.supervisor.PackDB',
+                           self.context):
+            quoter = URLQuote(self.request.getURL())
+            tmpDict = {}
+            tmpDict['oid'] = u"c%spack_db" % objId
+            tmpDict['title'] = _(u"pack database")
+            tmpDict['href'] = u"%s/@@pack_db?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
+            tmpDict['tooltip'] = _(u"will pack the database and delete "\
+                                   u"all backups")
             retList.append(tmpDict)
         return retList
     
@@ -109,7 +121,6 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         """
         will reindex the catalogs of all tables in database
         """
-        print "reindex_db@browser"
         self.context.reindex_db()
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:
@@ -117,6 +128,23 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         else:
             return self.request.response.redirect('./@@details.html')
 
+    def pack_db(self):
+        """
+        will pack the database
+        """
+        size_pre = self.request.publication.db.getSize()
+        self.request.publication.db.pack(days=0)
+        size_post = self.request.publication.db.getSize()
+        self.context.appendEventHistory(\
+            u"zodb packed by '%s' (%d bytes -> %d bytes)" % \
+            (self.request.principal.title, size_pre, size_post))
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+        
+        
     def getlastEvents(self):
         """convert event history for display
         """
@@ -251,8 +279,8 @@ class ViewAdmUtilSupervisorEventsForm(BrowserPagelet):
         directlyProvides(self.columns[2], ISortableColumn)
         formatter = StandaloneFullFormatter(
             self.context, self.request, self.objs(),
-            columns=self.columns, sort_on=((_('Start number'), True),))
-        formatter.batch_size = 20
+            columns=self.columns, sort_on=((_('Date'), True),))
+        formatter.batch_size = 30
         formatter.cssClasses['table'] = 'listing'
         return formatter()
 

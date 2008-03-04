@@ -17,15 +17,20 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
+from zope.app import zapi
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.component import queryUtility
+from zope.app.catalog.interfaces import ICatalog
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.superclass import isOidInCatalog
+from org.ict_ok.components.superclass.superclass import \
+     isOidInCatalog, MsgEvent
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import IAdmUtilEvent
 from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEventCrossbar, IEventLogic
 
 
 class AdmUtilEvent(Supernode):
@@ -89,3 +94,25 @@ class AdmUtilEvent(Supernode):
                 removeIDs.append(oidPlusFunct)
         for oid in removeIDs:
             self.outObjects.remove(oid)
+
+    def send_event(self,
+                   logText=u"event triggered by call of send_event"):
+        """ sends an the event to the list of ALL receivers
+        """
+        for oidPlusFunct in self.outObjects:
+            oid = oidPlusFunct.split('.', 2)[0]
+            # normal component objects
+            my_catalog = zapi.getUtility(ICatalog)
+            for resObj in my_catalog.searchResults(oid_index=oid):
+                inst_event = MsgEvent(oidEventObject = self.objectID,
+                                      logText=logText)
+                resObj.injectInpEQueue(inst_event)
+            # already in the above search results
+            ## special event receivers
+            #eventXbar = zapi.getUtility(IAdmUtilEventCrossbar, '')
+            #for (i_oid, i_oobj) in eventXbar.items():
+                #if IEventLogic.providedBy(i_oobj) and \
+                   #i_oid == oid:
+                    #print "2: ", i_oobj
+                    #inst_event = MsgEvent(oidEventObject = self.objectID)
+                    #i_oobj.injectInpEQueue(inst_event)

@@ -26,12 +26,20 @@
             description="Site"
             />
         <require
-            permission="zope.View"
+            permission="org.ict_ok.components.site.View"
             interface=".interfaces.ISite"
             />
         <require
-            permission="zope.View"
+            permission="org.ict_ok.components.site.Edit"
             set_schema=".interfaces.ISite"
+            />
+        <require
+            permission="org.ict_ok.components.site.View"
+            interface=".interfaces.IEventIfEventSite"
+            />
+        <require
+            permission="org.ict_ok.components.site.Edit"
+            set_schema=".interfaces.IEventIfEventSite"
             />
     </class>
     <!--<class class=".site.Site">-->
@@ -56,11 +64,15 @@
         factory=".adapter.ikstate.State"
         />
     <adapter
+        factory=".adapter.ipickle.Pickle"
+    />
+    <adapter
         factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"
         provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
         for=".interfaces.ISite"
     />
 
     <include package=".browser" />
+    <include package=".generations" />
 
 </configure>

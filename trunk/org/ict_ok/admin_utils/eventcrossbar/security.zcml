@@ -25,6 +25,10 @@
         title="Edit from AdmUtilEvent"
         description="Edit from AdmUtilEvent."
     />
+    <permission
+        id="org.ict_ok.admin_utils.event.Send"
+        title="Send an event from AdmUtilEvent"
+    />
 
     <permission
         id="org.ict_ok.admin_utils.event_timingrelay.View"
@@ -75,6 +79,10 @@
     <grant permission="org.ict_ok.admin_utils.event.View"
                     role="org.ict_ok.adm" />
 
+    <grant permission="org.ict_ok.admin_utils.event.Send"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.event.Send"
+                    role="org.ict_ok.adm" />
 
     <!--<grant permission="org.ict_ok.admin_utils.eventcrossbar.View"-->
                     <!--role="org.ict_ok.usr" />-->

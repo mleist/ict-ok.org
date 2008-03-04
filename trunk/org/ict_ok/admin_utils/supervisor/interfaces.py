@@ -102,11 +102,16 @@ class IAdmUtilSupervisor(ISupernode):
         description=_("Time since last contact with the slave"),
         required=False)
 
-    def getlastEvents(self):
+    def appendEventHistory(msg):
+        """
+        This method will append a text on the application history
+        """
+
+    def getlastEvents():
         """getter for event list
         """
 
-    def getStartCnt(self):
+    def getStartCnt():
         """getter for start counter of all starts
         """
 
@@ -116,124 +121,124 @@ class IAdmUtilSupervisor(ISupernode):
           Any arguments only create more randomness.
         """
 
-    def getSystemVersion(self):
+    def getSystemVersion():
         """
         Version string of System
         no args, returns string
         """
         
-    def getNetworkDevList(self):
+    def getNetworkDevList():
         """
         get a list of network device names
         no args, returns list of strings
         """
     
-    def getLocalMacAddress(self, dev="eth0"):
+    def getLocalMacAddress(dev="eth0"):
         """
         get the mac address of the running system device
         argument is device name, default is 'eth0'
         returns string
         """
     
-    def getLocalIpV4AddressList(self, dev="eth0"):
+    def getLocalIpV4AddressList(dev="eth0"):
         """
         get the IpV4 addresses of the running system device
         argument is device name, default is 'eth0'
         returns list of strings
         """
         
-    def getNetworkInfoDict(slef):
+    def getNetworkInfoDict():
         """
         returns an informational dictonary with network device settings
         """
         
-    def getCpuVendorId(self):
+    def getCpuVendorId():
         """
         get the cpu vendor of the running system
         no args, returns string
         """
     
-    def getCpuModelName(self):
+    def getCpuModelName():
         """
         get the cpu model of the running system
         no args, returns string
         """
     
-    def getKernelVersion(self):
+    def getKernelVersion():
         """
         get the kernel version of the running system
         no args, returns string
         """
         
-    def getNodeName(self):
+    def getNodeName():
         """
         get the name of the running system
         no args, returns string
         """
     
-    def getSystemUptime(self):
+    def getSystemUptime():
         """
         get the uptime of the running system
         no args, returns string
         """
     
-    def getSystemLoad(self):
+    def getSystemLoad():
         """
         get the cpu load of the running system
         no args, returns string
         """
         
-    def appendSlave(self, msgHeader):
+    def appendSlave(msgHeader):
         """
         append oid to slave list
         """
         
-    def isMaster(self):
+    def isMaster():
         """
         this supervisor is a master?
         """
 
-    def isSlave(self):
+    def isSlave():
         """
         this supervisor is a slave?
         """
 
-    def sendPing(self):
+    def sendPing():
         """
         send ping request
         """
             
-    def sendPong(self, msgHeader, nodename=None):
+    def sendPong(msgHeader, nodename=None):
         """
         revert message header and sends a pong as response to the ping
         """
 
-    def receivedPing(self, msgHeader):
+    def receivedPing(msgHeader):
         """
         we have received a ping request
         """
 
-    def receivedPong(self, msgHeader):
+    def receivedPong(msgHeader):
         """
         we have received a pong response
         """
 
-    def addObject(self, msgHeader, msgOldparent, msgNewparent, msgObj):
+    def addObject(msgHeader, msgOldparent, msgNewparent, msgObj):
         """
         a new object should be created
         """
 
-    def removeObject(self, msgHeader, msgOldparent, msgNewparent, msgObjectOid):
+    def removeObject(msgHeader, msgOldparent, msgNewparent, msgObjectOid):
         """
         an object should be removed
         """
         
-    def modifyObject(self, msgHeader, msgObj):
+    def modifyObject(msgHeader, msgObj):
         """
         an object should be modified
         """
 
-    def moveObject(self, msgHeader, msgOldparent,
+    def moveObject(msgHeader, msgOldparent,
                    msgNewparent, msgObjectOid):
         """
         an object should be moved
@@ -244,7 +249,7 @@ class IAdmUtilSupervisor(ISupernode):
         #setter for status2master
         #"""
 
-    def reindex_db(self):
+    def reindex_db():
         """
         will reindex the catalogs of all tables in database
         """

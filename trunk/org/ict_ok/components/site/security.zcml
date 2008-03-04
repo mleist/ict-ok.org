@@ -25,6 +25,11 @@
     />
 
     <permission
+        id="org.ict_ok.components.site.EditEventIf"
+        title="Edit Event Interface"
+    />
+
+    <permission
         id="org.ict_ok.components.site.Delete"
         title="Delete Template Entry"
         description="Delete Template Entry."
@@ -45,6 +50,8 @@
     <grant permission="org.ict_ok.components.site.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.components.site.Edit"
+                    role="org.ict_ok.adm" />
+    <grant permission="org.ict_ok.components.site.EditEventIf"
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.components.site.Delete"
