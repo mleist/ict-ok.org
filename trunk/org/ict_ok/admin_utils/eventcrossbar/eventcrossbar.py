@@ -53,6 +53,9 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
 from org.ict_ok.admin_utils.graphviz.interfaces import \
      IGenGraphvizDot
 from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.components.location.interfaces import  ILocation
+from org.ict_ok.components.building.interfaces import  IBuilding
+from org.ict_ok.components.room.interfaces import  IRoom
 
 logger = logging.getLogger("AdmUtilEventCrossbar")
 berlinTZ = timezone('Europe/Berlin')
@@ -200,6 +203,20 @@ class AdmUtilEventCrossbar(Supernode):
                                                  comments=True,
                                                  signalsOutput=True,
                                                  recursive=False)
+        #print "-" * 80
+        #uidutil = zapi.getUtility(IIntIds)
+        #print >> dotFile, '\t// locations ----------------------------------'
+        #for (oid, oobj) in uidutil.items():
+            #if ILocation.providedBy(oobj.object):
+                #print "Location: ", oobj.object.ikName
+                #print >> dotFile, \
+                      #'\tsubgraph "cluster_location" { color=blue; label="location"};'
+            ##elif IRoom.providedBy(oobj.object):
+                ##print "Room: ", oobj.object.ikName
+            ##elif ILocation.providedBy(oobj.object):
+                ##print "Location: ", oobj.object.ikName
+        #print "-" * 80
+
         print >> dotFile, '\t// events ----------------------------------'
         for event in eventSet:
             eventGraphvizDot = IGenGraphvizDot(event)

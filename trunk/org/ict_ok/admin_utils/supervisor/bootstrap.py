@@ -76,8 +76,9 @@ def bootStrapSubscriberDatabase(event):
         IAdmUtilSupervisor['nbrStarts'].readonly = False
         instAdmUtilSupervisor.nbrStarts += 1
         IAdmUtilSupervisor['nbrStarts'].readonly = True
-        instAdmUtilSupervisor.appendEventHistory(u"Database started (Vers. %s)" \
-                                                 % getIkVersion())
+        instAdmUtilSupervisor.appendEventHistory(\
+            u"Database started (Vers. %s) (%d bytes) (%d objects)" \
+            % (getIkVersion(), dummy_db.getSize(), dummy_db.objectCount()))
         dcore = IWriteZopeDublinCore(instAdmUtilSupervisor)
         dcore.title = u"ICT_Ok Supervisor"
         dcore.modified = datetime.utcnow()
