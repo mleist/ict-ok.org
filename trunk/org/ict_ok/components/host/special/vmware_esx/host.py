@@ -17,6 +17,7 @@ host object represents a VMware ESX Server
 __version__ = "$Id$"
 
 # phython imports
+import time
 
 # zope imports
 from zope.app import zapi
@@ -73,11 +74,6 @@ class Host(HostBase):
         if esx_utility and len(self.esxUuid) > 0:
             self.appendHistoryEntry("enter maintenance mode")
             esx_utility.enterMaintenanceModeEsxHost(self.esxUuid)
-
-
-#shutdownHost
-
-#enterMaintenanceMode
 
     def eventInp_inward_relaying_shutdown(self, eventMsg=None):
         """
@@ -137,7 +133,9 @@ class Host(HostBase):
                 print "Host.eventInp_shutdown (%s) (dry run)             ############## <-" % (self.ikName)
             else:
                 msgText = u"Shutdown"
-                print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
-                self.poweroff()
+                print "Host.eventnp_shutdown (%s)              ############## <-" % (self.ikName)
+                self.enterMaintenanceMode()
+                time.sleep(60)
+                self.shutdownHost()
             self.appendHistoryEntry(msgText)
         return eventProcessed
