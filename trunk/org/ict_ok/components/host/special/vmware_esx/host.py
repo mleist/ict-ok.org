@@ -57,53 +57,49 @@ class Host(HostBase):
         """
         forward the event to all objects in this container through the signal filter
         """
-        print "HostVMwareEsx.eventInp_inward_relaying_shutdown() [%s]" % self.ikName
-        #if self.inEventMask(eventMsg):
-            #print "Filter **match**"
-        #else:
-            #print "Filter ** doesn't match**"
-        esx_utility = zapi.getUtility(IAdmUtilEsxVim)
-        if esx_utility and len(self.esxUuid) > 0:
-            self.appendHistoryEntry("inward relaying shutdown")
-            #esx_utility.getFilteredList(self.esxUuid)
-            myParams = {\
-                'cmd': 'find_entity_views',
-                'view_type': 'HostSystem',
-                'admUtilEsxVim': esx_utility,
-                'filter': {'name':self.esxUuid},
-                }
-            myEsxDict = esx_utility.get_EsxVimObject_Dict(myParams, None)
-            if not myEsxDict.has_key(self.esxUuid):
-                print "dont find"
-                return None
-            myEsxObj = myEsxDict[self.esxUuid]
-            myParams = {\
-                'cmd': 'find_entity_views',
-                'view_type': 'VirtualMachine',
-                'admUtilEsxVim': esx_utility,
-                'begin_entity': myEsxObj.perlEsxObjRef,
-                'filter': {'runtime.powerState':'poweredOn'},
-                }
-            myVmDict = esx_utility.get_EsxVimObject_Dict(myParams, None)
-            my_catalog = zapi.getUtility(ICatalog)
-            for vmName, vmObj in myVmDict.items():
-                #print "----->", vmObj.uuid
-                res = my_catalog.searchResults(host_vmuuid_index=str(vmObj.uuid))
-                #import pdb
-                #pdb.set_trace()
-                if len(res) > 0:
-                    internalVmObj = list(res)[0]
-                    #print "ref-->", internalVmObj
-                    inst_event = MsgEvent(senderObj = self,
-                                          oidEventObject = eventMsg.oidEventObject,
-                                          logText = u"inward relaying by esx host '%s'"\
-                                          % self.ikName,
-                                          targetFunctionName = 'shutdown')
-                    internalVmObj.injectInpEQueue(inst_event)
+        if self.inEventMask(eventMsg):
+            print "HostVMwareEsx.eventInp_inward_relaying_shutdown() [%s]" % self.ikName
+            esx_utility = zapi.getUtility(IAdmUtilEsxVim)
+            if esx_utility and len(self.esxUuid) > 0:
+                self.appendHistoryEntry("inward relaying shutdown")
+                #esx_utility.getFilteredList(self.esxUuid)
+                myParams = {\
+                    'cmd': 'find_entity_views',
+                    'view_type': 'HostSystem',
+                    'admUtilEsxVim': esx_utility,
+                    'filter': {'name':self.esxUuid},
+                    }
+                myEsxDict = esx_utility.get_EsxVimObject_Dict(myParams, None)
+                if not myEsxDict.has_key(self.esxUuid):
+                    print "dont find"
+                    return None
+                myEsxObj = myEsxDict[self.esxUuid]
+                myParams = {\
+                    'cmd': 'find_entity_views',
+                    'view_type': 'VirtualMachine',
+                    'admUtilEsxVim': esx_utility,
+                    'begin_entity': myEsxObj.perlEsxObjRef,
+                    'filter': {'runtime.powerState':'poweredOn'},
+                    }
+                myVmDict = esx_utility.get_EsxVimObject_Dict(myParams, None)
+                my_catalog = zapi.getUtility(ICatalog)
+                for vmName, vmObj in myVmDict.items():
+                    #print "----->", vmObj.uuid
+                    res = my_catalog.searchResults(host_vmuuid_index=str(vmObj.uuid))
+                    #import pdb
+                    #pdb.set_trace()
+                    if len(res) > 0:
+                        internalVmObj = list(res)[0]
+                        #print "ref-->", internalVmObj
+                        inst_event = MsgEvent(senderObj = self,
+                                              oidEventObject = eventMsg.oidEventObject,
+                                              logText = u"inward relaying by esx host '%s'"\
+                                              % self.ikName,
+                                              targetFunctionName = 'shutdown')
+                        internalVmObj.injectInpEQueue(inst_event)
 
     def eventInp_shutdown(self, eventMsg=None):
         """ start the shutdown of the host """
-        print "HostVMwareEsx.eventInp_shutdown()"
         eventProcessed = False
         if self.inEventMask(eventMsg):
             eventProcessed = True
