@@ -31,7 +31,8 @@ from org.ict_ok.schema.IPy import IP
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.superclass.superclass import MsgEvent
 from org.ict_ok.components.net.interfaces import INet, IEventIfEventNet
-
+from org.ict_ok.components.host.special.vmware_vm.interfaces import \
+     IHostVMwareVm
 
 class Net(Component):
     """
@@ -97,22 +98,25 @@ class Net(Component):
         for name, obj in self.items():
             if INet.providedBy(obj):
                 targetFunctionName = "inward_relaying_shutdown"
+            elif IHostVMwareVm.providedBy(obj):
+                targetFunctionName = None
             else:
                 targetFunctionName = "shutdown"
-            if eventMsg is not None:
-                inst_event = MsgEvent(senderObj = self,
-                                      oidEventObject = eventMsg.oidEventObject,
-                                      logText = u"inward relaying by net '%s'"\
-                                      % self.ikName,
-                                      targetFunctionName = targetFunctionName)
-                eventMsg.stopit(self,
-                                u"relaying by site '%s'" % self.ikName)
-            else:
-                inst_event = MsgEvent(senderObj = self,
-                                      logText = u"inward relaying by net '%s'"\
-                                      % self.ikName,
-                                      targetFunctionName = targetFunctionName)
-            obj.injectInpEQueue(inst_event)
+            if targetFunctionName is not None:
+                if eventMsg is not None:
+                    inst_event = MsgEvent(senderObj = self,
+                                          oidEventObject = eventMsg.oidEventObject,
+                                          logText = u"inward relaying by net '%s'"\
+                                          % self.ikName,
+                                          targetFunctionName = targetFunctionName)
+                    eventMsg.stopit(self,
+                                    u"relaying by site '%s'" % self.ikName)
+                else:
+                    inst_event = MsgEvent(senderObj = self,
+                                          logText = u"inward relaying by net '%s'"\
+                                          % self.ikName,
+                                          targetFunctionName = targetFunctionName)
+                obj.injectInpEQueue(inst_event)
 
 
 def getAllNetworks():
