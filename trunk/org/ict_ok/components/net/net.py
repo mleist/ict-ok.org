@@ -20,7 +20,6 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
-from zope.app import zapi
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.component import getUtility
@@ -33,6 +32,8 @@ from org.ict_ok.components.superclass.superclass import MsgEvent
 from org.ict_ok.components.net.interfaces import INet, IEventIfEventNet
 from org.ict_ok.components.host.special.vmware_vm.interfaces import \
      IHostVMwareVm
+from org.ict_ok.components.host.special.vmware_esx.interfaces import \
+     IHostVMwareEsx
 
 class Net(Component):
     """
@@ -65,56 +66,54 @@ class Net(Component):
         testIp = IP(ipString)
         return testIp in myIp
 
-    #def eventInp_inward_relaying_shutdown(self, eventMsg=None):
-        #"""
-        #forward the event to all objects in this container through the signal filter
-        #"""
-        ##eventMsg.stopit(self, "Net.eventInp_inward_relaying_shutdown")
-        ##print "Net.eventInp_inward_relaying_shutdown (%s)       " \
-        ##"       ############## <-" % (self.ikName)
-        #hostsProcessed = []
-        #for name, obj in self.items():
-            ##print "-> ", obj
-            #try:
-                #if obj.eventInp_shutdown(eventMsg):
-                    #hostsProcessed.append(obj.ikName)
-            #except AttributeError:
-                #print "Dont find method"
-        #if len(hostsProcessed) > 0:
-            #eventMsg.stopit(self, "Net.inward_relaying_shutdown "\
-                            #"processed @ %s" % " ,".join(hostsProcessed))
-            ##for attrName in obj.__dict__:
-                ##print "attr:   %s" % (attrName)
-                ##if attrName.find("eventInp_shutdown") == 0: # attribute name starts with ...
-                    ##fnct = getattr(obj, "eventInp_shutdown", None)
-                    ##if fnct is not None:
-                        ##fnct(eventMsg)
-
     def eventInp_inward_relaying_shutdown(self, eventMsg=None):
         """
         forward the event to all objects in this container through the signal filter
         """
         print "Net.eventInp_inward_relaying_shutdown()"
         for name, obj in self.items():
+            # first call
             if INet.providedBy(obj):
                 targetFunctionName = "inward_relaying_shutdown"
+                logText = u"inward relaying to net '%s'" % obj.ikName
+            elif IHostVMwareEsx.providedBy(obj):
+                targetFunctionName = "inward_relaying_shutdown"
+                logText = u"inward relaying to esx host '%s'" % obj.ikName
             elif IHostVMwareVm.providedBy(obj):
                 targetFunctionName = None
             else:
                 targetFunctionName = "shutdown"
+                logText = u"send shutdown to '%s'" % obj.ikName
             if targetFunctionName is not None:
                 if eventMsg is not None:
                     inst_event = MsgEvent(senderObj = self,
                                           oidEventObject = eventMsg.oidEventObject,
-                                          logText = u"inward relaying by net '%s'"\
-                                          % self.ikName,
+                                          logText = logText,
                                           targetFunctionName = targetFunctionName)
                     eventMsg.stopit(self,
                                     u"relaying by site '%s'" % self.ikName)
                 else:
                     inst_event = MsgEvent(senderObj = self,
-                                          logText = u"inward relaying by net '%s'"\
-                                          % self.ikName,
+                                          logText = logText,
+                                          targetFunctionName = targetFunctionName)
+                obj.injectInpEQueue(inst_event)
+            # second call
+            if IHostVMwareEsx.providedBy(obj):
+                targetFunctionName = "shutdown"
+                logText = u"send shutdown to esx host '%s'" % obj.ikName
+            else:
+                targetFunctionName = None
+            if targetFunctionName is not None:
+                if eventMsg is not None:
+                    inst_event = MsgEvent(senderObj = self,
+                                          oidEventObject = eventMsg.oidEventObject,
+                                          logText = logText,
+                                          targetFunctionName = targetFunctionName)
+                    eventMsg.stopit(self,
+                                    u"relaying by site '%s'" % self.ikName)
+                else:
+                    inst_event = MsgEvent(senderObj = self,
+                                          logText = logText,
                                           targetFunctionName = targetFunctionName)
                 obj.injectInpEQueue(inst_event)
 

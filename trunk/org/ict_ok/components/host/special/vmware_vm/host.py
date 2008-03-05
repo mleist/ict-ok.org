@@ -87,7 +87,7 @@ class Host(HostBase):
                 msgText = u"Shutdown"
                 print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
                 self.poweroff()
-                self.appendHistoryEntry(msgText)
+            self.appendHistoryEntry(msgText)
         return eventProcessed
 
     @property

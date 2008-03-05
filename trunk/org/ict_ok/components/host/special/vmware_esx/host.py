@@ -100,23 +100,22 @@ class Host(HostBase):
                                           % self.ikName,
                                           targetFunctionName = 'shutdown')
                     internalVmObj.injectInpEQueue(inst_event)
-            
 
     def eventInp_shutdown(self, eventMsg=None):
         """ start the shutdown of the host """
         print "HostVMwareEsx.eventInp_shutdown()"
-        #eventProcessed = False
-        #if self.inEventMask(eventMsg):
-            #eventProcessed = True
-            #eventMsg.stopit(self, "Host.eventInp_shutdown")
-            #utilXbar = queryUtility(IAdmUtilEventCrossbar)
-            #utilEvent = utilXbar[eventMsg.oidEventObject]
-            #if utilEvent.dryRun:
-                #msgText = u"Shutdown (dry run)"
-                #print "Host.eventInp_shutdown (%s) (dry run)             ############## <-" % (self.ikName)
-            #else:
-                #msgText = u"Shutdown"
-                #print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
-                #self.poweroff()
-                #self.appendHistoryEntry(msgText)
-        #return eventProcessed
+        eventProcessed = False
+        if self.inEventMask(eventMsg):
+            eventProcessed = True
+            eventMsg.stopit(self, "Host.eventInp_shutdown")
+            utilXbar = queryUtility(IAdmUtilEventCrossbar)
+            utilEvent = utilXbar[eventMsg.oidEventObject]
+            if utilEvent.dryRun:
+                msgText = u"Shutdown (dry run)"
+                print "Host.eventInp_shutdown (%s) (dry run)             ############## <-" % (self.ikName)
+            else:
+                msgText = u"Shutdown"
+                print "Host.eventInp_shutdown (%s)              ############## <-" % (self.ikName)
+                self.poweroff()
+            self.appendHistoryEntry(msgText)
+        return eventProcessed
