@@ -17,7 +17,13 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
+from zope.app import zapi
+from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
+from zope.security import checkPermission
+from zope.app.intid.interfaces import IIntIds
+from zope.app.pagetemplate.urlquote import URLQuote
+from zope.app.appsetup import appsetup
 
 # z3c imports
 from z3c.form import form, field
@@ -30,7 +36,7 @@ from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
 from org.ict_ok.components.host.browser.host import \
-     HostDetails
+     HostDetails as SuperHostDetails
 from org.ict_ok.components.host.browser.host import \
      EditEventHostEventIfForm as SuperEditEventIfForm
 
@@ -44,6 +50,68 @@ class MSubAddHost(GlobalMenuSubItem):
     title = _(u'Add VMware ESX Server')
     viewURL = 'add_host_vmware_esx.html'
     weight = 50
+
+# --------------- object details ---------------------------
+
+
+class HostDetails(SuperHostDetails):
+    """ Class for Web-Browser-Details
+    """
+    omit_viewfields = SuperHostDetails.omit_viewfields + []
+    omit_addfields = SuperHostDetails.omit_addfields + []
+    omit_editfields = SuperHostDetails.omit_editfields + []
+    
+    def actions(self):
+        """
+        gives us the action dict of the object
+        """
+        try:
+            objId = getUtility(IIntIds).getId(self.context)
+        except:
+            objId = 1000
+        retList = []
+        if appsetup.getConfigContext().hasFeature('devmode') and \
+           checkPermission('org.ict_ok.components.host.Edit', self.context):
+            quoter = URLQuote(self.request.getURL())
+            tmpDict = {}
+            tmpDict['oid'] = u"c%sshutdownHost" % objId
+            tmpDict['title'] = _(u"shutdown host")
+            tmpDict['href'] = u"%s/@@shutdownHost.html?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
+            retList.append(tmpDict)
+            tmpDict = {}
+            tmpDict['oid'] = u"c%senterMaintenanceMode" % objId
+            tmpDict['title'] = _(u"enter maintenance mode")
+            tmpDict['href'] = u"%s/@@enterMaintenanceMode.html?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
+            retList.append(tmpDict)
+        return SuperHostDetails.actions(self) + retList
+
+    def shutdownHost(self):
+        """
+        trigger shutdownHost
+        """
+        print "shutdownHost@browser"
+        self.context.shutdownHost()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    def enterMaintenanceMode(self):
+        """
+        trigger enterMaintenanceMode
+        """
+        print "enterMaintenanceMode@browser"
+        self.context.enterMaintenanceMode()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
 
 # --------------- forms ------------------------------------
 

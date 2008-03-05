@@ -34,6 +34,15 @@ class IHostVMwareEsx(IHost):
         default = u"",
         required = False)
 
+    def shutdownHost(self):
+        """
+        trigger shutdownHost
+        """
+    def enterMaintenanceMode(self):
+        """
+        trigger enterMaintenanceMode
+        """
+
 
 class IEventIfHostVMwareEsx(IEventIfEventHost):
     """ event interface of object """

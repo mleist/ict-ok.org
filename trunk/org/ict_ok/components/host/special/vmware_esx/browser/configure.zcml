@@ -11,6 +11,33 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
+    <page
+        name="actions"
+        for="org.ict_ok.components.host.special.vmware_esx.interfaces.IHostVMwareEsx"
+        class="org.ict_ok.components.host.special.vmware_esx.browser.host.HostDetails"
+        attribute="actions"
+        permission="org.ict_ok.components.host.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    
+    <page
+        name="shutdownHost.html"
+        for="org.ict_ok.components.host.special.vmware_esx.interfaces.IHostVMwareEsx"
+        class="org.ict_ok.components.host.special.vmware_esx.browser.host.HostDetails"
+        attribute="shutdownHost"
+        permission="org.ict_ok.components.host.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    
+    <page
+        name="enterMaintenanceMode.html"
+        for="org.ict_ok.components.host.special.vmware_esx.interfaces.IHostVMwareEsx"
+        class="org.ict_ok.components.host.special.vmware_esx.browser.host.HostDetails"
+        attribute="enterMaintenanceMode"
+        permission="org.ict_ok.components.host.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+
     <defaultView
         for="org.ict_ok.components.host.special.vmware_esx.interfaces.IHostVMwareEsx"
         name="details.html"

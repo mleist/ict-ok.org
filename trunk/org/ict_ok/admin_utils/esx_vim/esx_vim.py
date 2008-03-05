@@ -99,6 +99,12 @@ class AdmUtilEsxVim(Supernode):
     def powerOnVm(self, uuid):
         return globalEsxVimUtility.powerOnVm(uuid, self)
 
+    def shutdownHostEsxHost(self, esxName):
+        return globalEsxVimUtility.shutdownHostEsxHost(esxName, self)
+
+    def enterMaintenanceModeEsxHost(self, esxName):
+        return globalEsxVimUtility.enterMaintenanceModeEsxHost(esxName, self)
+
     def get_EsxVimObject_Dict(self, myParams, parentObj):
         return globalEsxVimUtility.get_EsxVimObject_Dict(myParams,
                                                          parentObj)
@@ -377,6 +383,66 @@ class GlobalEsxVimUtility(object):
             'cmd': 'call_fcnt_on_obj',
             'perlRef': esxObj['perlRef'],
             'fnct_name': 'PowerOnVM_Task',
+            'fnct_args': [],
+        }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+
+    def shutdownHostEsxHost(self, esxName, localEsxUtil):
+        print "shutdownHostEsxHost"
+        localEsxUtilOId = localEsxUtil.objectID
+        if self.esxThread is None:
+            return {}
+        myParams = {\
+            'cmd': 'find_entity_views',
+            'admUtilEsxVim': localEsxUtil,
+            'view_type': 'HostSystem',
+            'filter': {'name':esxName},
+        }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        esxObj = esxObjList[0]
+        myParams = {\
+            'admUtilEsxVim': localEsxUtil,
+            'cmd': 'call_fcnt_on_obj',
+            'perlRef': esxObj['perlRef'],
+            'fnct_name': 'ShutdownHost_Task',
+            'fnct_args': [],
+        }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+
+    def enterMaintenanceModeEsxHost(self, esxName, localEsxUtil):
+        print "enterMaintenanceModeEsxHost"
+        localEsxUtilOId = localEsxUtil.objectID
+        if self.esxThread is None:
+            return {}
+        myParams = {\
+            'cmd': 'find_entity_views',
+            'admUtilEsxVim': localEsxUtil,
+            'view_type': 'HostSystem',
+            'filter': {'name':esxName},
+        }
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['in'].join()
+        esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
+        self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        esxObj = esxObjList[0]
+        myParams = {\
+            'admUtilEsxVim': localEsxUtil,
+            'cmd': 'call_fcnt_on_obj',
+            'perlRef': esxObj['perlRef'],
+            'fnct_name': 'EnterMaintenanceMode_Task',
             'fnct_args': [],
         }
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()

@@ -54,6 +54,31 @@ class Host(HostBase):
         self.eventInpObjs_inward_relaying_shutdown = set([])
         self.ikRevision = __version__
 
+    def shutdownHost(self):
+        """
+        trigger shutdownHost
+        """
+        print "HostVMwareEsx shutdownHost"
+        esx_utility = zapi.queryUtility(IAdmUtilEsxVim)
+        if esx_utility and len(self.esxUuid) > 0:
+            self.appendHistoryEntry("shutdown Host")
+            esx_utility.shutdownHostEsxHost(self.esxUuid)
+        
+    def enterMaintenanceMode(self):
+        """
+        trigger enterMaintenanceMode
+        """
+        print "HostVMwareEsx enterMaintenanceMode"
+        esx_utility = zapi.queryUtility(IAdmUtilEsxVim)
+        if esx_utility and len(self.esxUuid) > 0:
+            self.appendHistoryEntry("enter maintenance mode")
+            esx_utility.enterMaintenanceModeEsxHost(self.esxUuid)
+
+
+#shutdownHost
+
+#enterMaintenanceMode
+
     def eventInp_inward_relaying_shutdown(self, eventMsg=None):
         """
         forward the event to all objects in this container through the signal filter
