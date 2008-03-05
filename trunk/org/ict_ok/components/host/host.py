@@ -151,7 +151,7 @@ class Host(Component):
         wfd.new_state = "notification1"
         lastWorkItem.change()
 
-    def inEventMask(self, eventMsg=None):
+    def inEventMask(self, eventMsg=None, testHostGroup=True):
         if eventMsg:
             utilXbar = getUtility(IAdmUtilEventCrossbar)
             if utilXbar is not None:
@@ -162,7 +162,8 @@ class Host(Component):
                     eventBuilding = origEvent.building
                     eventRoom = origEvent.room
                     # event for special hostgroup?
-                    if eventHostGroup is not None and \
+                    if testHostGroup and \
+                       eventHostGroup is not None and \
                        len(eventHostGroup) > 0:
                         if not eventHostGroup in self.hostGroups:
                             return False

@@ -30,7 +30,8 @@ from org.ict_ok.components.host.special.vmware_esx.interfaces import \
      IHostVMwareEsx, IEventIfHostVMwareEsx
 from org.ict_ok.components.host.host import Host as HostBase
 from org.ict_ok.admin_utils.esx_vim.interfaces import IAdmUtilEsxVim
-
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEventCrossbar
 
 class Host(HostBase):
     """
@@ -57,7 +58,7 @@ class Host(HostBase):
         """
         forward the event to all objects in this container through the signal filter
         """
-        if self.inEventMask(eventMsg):
+        if self.inEventMask(eventMsg, testHostGroup=False):
             print "HostVMwareEsx.eventInp_inward_relaying_shutdown() [%s]" % self.ikName
             esx_utility = zapi.getUtility(IAdmUtilEsxVim)
             if esx_utility and len(self.esxUuid) > 0:
@@ -104,7 +105,7 @@ class Host(HostBase):
         if self.inEventMask(eventMsg):
             eventProcessed = True
             eventMsg.stopit(self, "Host.eventInp_shutdown")
-            utilXbar = queryUtility(IAdmUtilEventCrossbar)
+            utilXbar = zapi.queryUtility(IAdmUtilEventCrossbar)
             utilEvent = utilXbar[eventMsg.oidEventObject]
             if utilEvent.dryRun:
                 msgText = u"Shutdown (dry run)"
