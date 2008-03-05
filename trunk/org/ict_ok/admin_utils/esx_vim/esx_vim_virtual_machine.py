@@ -67,7 +67,7 @@ class EsxVimVirtualMachine(EsxVimObj):
             'cmd': 'call_fcnt_on_obj',
             'perlRef': self.perlEsxObjRef,
             'fnct_name': 'name',
-            'fnct_args': [],
+            'fnct_args': {},
             }
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].join()
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].put(myParams, True, 15)
@@ -82,7 +82,7 @@ class EsxVimVirtualMachine(EsxVimObj):
         return "zzzuio"
         #return {}.get(key, default)
 
-    def call_esxfcnt_on_obj(self, fnct_name='name', fnct_args=[]):
+    def call_esxfcnt_on_obj(self, fnct_name='name', fnct_args={}):
         """ call an esx function on this object """
         #print "EsxVimVirtualMachine.call_esxfcnt_on_obj(%s,%s)" % (fnct_name, fnct_args)
         if self.localEsxUtil is None:

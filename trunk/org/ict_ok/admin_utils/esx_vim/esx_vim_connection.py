@@ -227,12 +227,12 @@ class EsxVimConnectionThread(threading.Thread):
                        myParams.has_key('fnct_name') and \
                        myParams.has_key('fnct_args') and \
                        type(myParams['fnct_name']) == type('') and \
-                       type(myParams['fnct_args']) == type([]):
+                       type(myParams['fnct_args']) == type({}):
                         myObj = myParams['perlRef']
                         myFnctName = myParams['fnct_name']
                         myFnctArgs = myParams['fnct_args']
                         try:
-                            retVal = getattr(myObj, myFnctName)(*myFnctArgs)
+                            retVal = getattr(myObj, myFnctName)(**myFnctArgs)
                             self.getQueue(sourceOId)['out'].put(retVal, True, 15)
                         except self.perl.PerlError, err:
                             print "My Perl Error: ", err
@@ -244,7 +244,7 @@ class EsxVimConnectionThread(threading.Thread):
                        myParams.has_key('eval_text') and \
                        myParams.has_key('fnct_args') and \
                        type(myParams['eval_text']) == type('') and \
-                       (type(myParams['fnct_args']) == type([]) or \
+                       (type(myParams['fnct_args']) == type({}) or \
                         type(myParams['fnct_args']) == type(None)):
                         myObj = myParams['perlRef']
                         myEvalText = myParams['eval_text']
@@ -258,7 +258,7 @@ class EsxVimConnectionThread(threading.Thread):
                             else:
                                 retVal = eval(myEvalText, {\
                                     'obj':myObj,
-                                    'perl':self.perl})(*myFnctArgs)
+                                    'perl':self.perl})(**myFnctArgs)
                         except Exception,err:
                             retVal = err
                         self.getQueue(sourceOId)['out'].put(retVal, True, 15)

@@ -351,7 +351,7 @@ class GlobalEsxVimUtility(object):
                 'cmd': 'call_fcnt_on_obj',
                 'perlRef': esxObj['perlRef'],
                 'fnct_name': 'ShutdownGuest',
-                'fnct_args': [],
+                'fnct_args': {},
             }
             self.esxThread.getQueue(localEsxUtilOId)['in'].join()
             self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
@@ -383,7 +383,7 @@ class GlobalEsxVimUtility(object):
             'cmd': 'call_fcnt_on_obj',
             'perlRef': esxObj['perlRef'],
             'fnct_name': 'PowerOnVM_Task',
-            'fnct_args': [],
+            'fnct_args': {},
         }
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
@@ -413,7 +413,7 @@ class GlobalEsxVimUtility(object):
             'cmd': 'call_fcnt_on_obj',
             'perlRef': esxObj['perlRef'],
             'fnct_name': 'ShutdownHost_Task',
-            'fnct_args': [],
+            'fnct_args': {},
         }
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
@@ -443,7 +443,7 @@ class GlobalEsxVimUtility(object):
             'cmd': 'call_fcnt_on_obj',
             'perlRef': esxObj['perlRef'],
             'fnct_name': 'EnterMaintenanceMode_Task',
-            'fnct_args': [],
+            'fnct_args': {},
         }
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
@@ -473,7 +473,7 @@ class GlobalEsxVimUtility(object):
             'cmd': 'eval_on_obj',
             'perlRef': esxObj['perlRef'],
             'eval_text': 'perl.call(\'Vim::get_view\', mo_ref = obj.runtime().host()).name',
-            'fnct_args': [],
+            'fnct_args': {},
         }
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
