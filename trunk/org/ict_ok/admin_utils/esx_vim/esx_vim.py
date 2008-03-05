@@ -298,6 +298,8 @@ class GlobalEsxVimUtility(object):
         #print "esxObjList: ", esxObjList
         #print "aa15"
         self.esxThread.getQueue(utilOId)['out'].task_done()
+        if len(esxObjList) == 0:
+            return None
         #print "aa5"
         #print "aa16"
         retDict = {}
@@ -345,6 +347,8 @@ class GlobalEsxVimUtility(object):
         if self.esxThread.getQueue(localEsxUtilOId)['out'].qsize() > 0:
             esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
             self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+            if len(esxObjList) == 0:
+                return None
             esxObj = esxObjList[0]
             myParams = {\
                 'admUtilEsxVim': localEsxUtil,
@@ -377,6 +381,8 @@ class GlobalEsxVimUtility(object):
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        if len(esxObjList) == 0:
+            return None
         esxObj = esxObjList[0]
         myParams = {\
             'admUtilEsxVim': localEsxUtil,
@@ -407,6 +413,8 @@ class GlobalEsxVimUtility(object):
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        if len(esxObjList) == 0:
+            return None
         esxObj = esxObjList[0]
         myParams = {\
             'admUtilEsxVim': localEsxUtil,
@@ -437,6 +445,8 @@ class GlobalEsxVimUtility(object):
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        if len(esxObjList) == 0:
+            return None
         esxObj = esxObjList[0]
         myParams = {\
             'admUtilEsxVim': localEsxUtil,
@@ -467,6 +477,8 @@ class GlobalEsxVimUtility(object):
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         esxObjList = self.esxThread.getQueue(localEsxUtilOId)['out'].get(True, 15)
         self.esxThread.getQueue(localEsxUtilOId)['out'].task_done()
+        if len(esxObjList) == 0:
+            return None
         esxObj = esxObjList[0]
         myParams = {\
             'admUtilEsxVim': localEsxUtil,
