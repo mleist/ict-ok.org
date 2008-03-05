@@ -105,20 +105,21 @@ class Host(HostBase):
                     }
                 myVmDict = esx_utility.get_EsxVimObject_Dict(myParams, None)
                 my_catalog = zapi.getUtility(ICatalog)
-                for vmName, vmObj in myVmDict.items():
-                    #print "----->", vmObj.uuid
-                    res = my_catalog.searchResults(host_vmuuid_index=str(vmObj.uuid))
-                    #import pdb
-                    #pdb.set_trace()
-                    if len(res) > 0:
-                        internalVmObj = list(res)[0]
-                        #print "ref-->", internalVmObj
-                        inst_event = MsgEvent(senderObj = self,
-                                              oidEventObject = eventMsg.oidEventObject,
-                                              logText = u"inward relaying by esx host '%s'"\
-                                              % self.ikName,
-                                              targetFunctionName = 'shutdown')
-                        internalVmObj.injectInpEQueue(inst_event)
+                if myVmDict is not None and len(myVmDict) > 0:
+                    for vmName, vmObj in myVmDict.items():
+                        #print "----->", vmObj.uuid
+                        res = my_catalog.searchResults(host_vmuuid_index=str(vmObj.uuid))
+                        #import pdb
+                        #pdb.set_trace()
+                        if len(res) > 0:
+                            internalVmObj = list(res)[0]
+                            #print "ref-->", internalVmObj
+                            inst_event = MsgEvent(senderObj = self,
+                                                  oidEventObject = eventMsg.oidEventObject,
+                                                  logText = u"inward relaying by esx host '%s'"\
+                                                  % self.ikName,
+                                                  targetFunctionName = 'shutdown')
+                            internalVmObj.injectInpEQueue(inst_event)
 
     def eventInp_shutdown(self, eventMsg=None):
         """ start the shutdown of the host """
