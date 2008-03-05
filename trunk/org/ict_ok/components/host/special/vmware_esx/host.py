@@ -57,11 +57,11 @@ class Host(HostBase):
         """
         forward the event to all objects in this container through the signal filter
         """
-        print "HostVMwareEsx.eventInp_inward_relaying_shutdown()"
-        if self.inEventMask(eventMsg):
-            print "Filter **match**"
-        else:
-            print "Filter ** doesn't match**"
+        print "HostVMwareEsx.eventInp_inward_relaying_shutdown() [%s]" % self.ikName
+        #if self.inEventMask(eventMsg):
+            #print "Filter **match**"
+        #else:
+            #print "Filter ** doesn't match**"
         esx_utility = zapi.getUtility(IAdmUtilEsxVim)
         if esx_utility and len(self.esxUuid) > 0:
             self.appendHistoryEntry("inward relaying shutdown")
@@ -87,13 +87,13 @@ class Host(HostBase):
             myVmDict = esx_utility.get_EsxVimObject_Dict(myParams, None)
             my_catalog = zapi.getUtility(ICatalog)
             for vmName, vmObj in myVmDict.items():
-                print "----->", vmObj.uuid
+                #print "----->", vmObj.uuid
                 res = my_catalog.searchResults(host_vmuuid_index=str(vmObj.uuid))
                 #import pdb
                 #pdb.set_trace()
                 if len(res) > 0:
                     internalVmObj = list(res)[0]
-                    print "ref-->", internalVmObj
+                    #print "ref-->", internalVmObj
                     inst_event = MsgEvent(senderObj = self,
                                           oidEventObject = eventMsg.oidEventObject,
                                           logText = u"inward relaying by esx host '%s'"\

@@ -160,7 +160,7 @@ class EsxVimConnectionThread(threading.Thread):
         return []
 
     def getAllEsxVimEntityViews(self, myParams):
-        print "EsxVimConnectionThread.getAllEsxVimEntityViews(%s)" % myParams
+        #print "EsxVimConnectionThread.getAllEsxVimEntityViews(%s)" % myParams
         if self.globalEsxVim:
             #print "77777a1"
             self.esx_login(myParams['admUtilEsxVim'])
@@ -200,9 +200,9 @@ class EsxVimConnectionThread(threading.Thread):
     def executeMyQueue(self, myAdmUtilEsxVim):
         utilOId = myAdmUtilEsxVim.getObjectId()
         if not self.getQueue(utilOId)['in'].empty():
-            print "executeMyQueue"
+            #print "executeMyQueue"
             myParams = self.getQueue(utilOId)['in'].get(True, 15)
-            print "cmd: ", myParams['cmd']
+            #print "cmd: ", myParams['cmd']
             sourceAdmUtilEsxVim = myParams['admUtilEsxVim']
             sourceOId = sourceAdmUtilEsxVim.getObjectId()
             if myParams.has_key('cmd'):

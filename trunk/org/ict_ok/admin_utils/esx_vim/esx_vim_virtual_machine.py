@@ -84,7 +84,7 @@ class EsxVimVirtualMachine(EsxVimObj):
 
     def call_esxfcnt_on_obj(self, fnct_name='name', fnct_args=[]):
         """ call an esx function on this object """
-        print "EsxVimVirtualMachine.call_esxfcnt_on_obj(%s,%s)" % (fnct_name, fnct_args)
+        #print "EsxVimVirtualMachine.call_esxfcnt_on_obj(%s,%s)" % (fnct_name, fnct_args)
         if self.localEsxUtil is None:
             return None
         utilOId = self.localEsxUtil.getObjectId()
@@ -99,27 +99,27 @@ class EsxVimVirtualMachine(EsxVimObj):
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].put(myParams, True, 15)
         globalEsxVimUtility.esxThread.getQueue(utilOId)['in'].join()
         retValue = globalEsxVimUtility.esxThread.getQueue(utilOId)['out'].get(True, 15)
-        print "call_esxfcnt_on_obj - retValue: ", retValue
+        #print "call_esxfcnt_on_obj - retValue: ", retValue
         return retValue
 
     def values(self):
         '''See interface `IReadContainer`'''
-        print "EsxVimVirtualMachine.values"
+        #print "EsxVimVirtualMachine.values"
         return {}.values()
 
     def __len__(self):
         '''See interface `IReadContainer`'''
-        print "EsxVimVirtualMachine.__len__"
+        #print "EsxVimVirtualMachine.__len__"
         return len({})+1
 
     def items(self):
         '''See interface `IReadContainer`'''
-        print "EsxVimVirtualMachine.items"
+        #print "EsxVimVirtualMachine.items"
         return {}.items()
 
     def __contains__(self, key):
         '''See interface `IReadContainer`'''
-        print "EsxVimVirtualMachine.__contains__(%s)" % key
+        #print "EsxVimVirtualMachine.__contains__(%s)" % key
         return {}.has_key(key)
 
     def shutdown(self):

@@ -274,24 +274,25 @@ class GlobalEsxVimUtility(object):
             #'view_type': 'Datacenter',
             #'admUtilEsxVim': localEsxUtil,
             #}
-        print "aa0a"
+        #print "aa0a"
         if self.esxThread.getQueue(utilOId)['in'].join():
-            print "aa0b"
-        print "aa1"
+            pass
+            #print "aa0b"
+        #print "aa1"
         self.esxThread.getQueue(utilOId)['in'].put(myParams, True, 15)
-        print "aa2"
+        #print "aa2"
         #print "aa13:", utilOId
         self.esxThread.getQueue(utilOId)['in'].join()
-        print "aa3"
+        #print "aa3"
         #print "aa14"
         #self.esxThread.queue1_in.put(localEsxUtil, True, 5)
         #self.esxThread.queue1_in.join()
         esxObjList = self.esxThread.getQueue(utilOId)['out'].get(True, 15)
-        print "aa4"
+        #print "aa4"
         #print "esxObjList: ", esxObjList
         #print "aa15"
         self.esxThread.getQueue(utilOId)['out'].task_done()
-        print "aa5"
+        #print "aa5"
         #print "aa16"
         retDict = {}
         for esxObj in esxObjList:
