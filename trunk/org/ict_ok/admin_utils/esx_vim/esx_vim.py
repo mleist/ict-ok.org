@@ -269,7 +269,7 @@ class GlobalEsxVimUtility(object):
     def get_EsxVimObject_Dict(self, myParams, parentObj):
         """ TODO: caching here please
         """
-        print "get_EsxVimDatacenter_Dict"
+        #print "get_EsxVimDatacenter_Dict"
         if self.esxThread is None:
             return {}
         localEsxUtil = myParams['admUtilEsxVim']
@@ -413,7 +413,7 @@ class GlobalEsxVimUtility(object):
             'cmd': 'call_fcnt_on_obj',
             'perlRef': esxObj['perlRef'],
             'fnct_name': 'ShutdownHost_Task',
-            'fnct_args': {},
+            'fnct_args': {'force':1},
         }
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
@@ -443,7 +443,7 @@ class GlobalEsxVimUtility(object):
             'cmd': 'call_fcnt_on_obj',
             'perlRef': esxObj['perlRef'],
             'fnct_name': 'EnterMaintenanceMode_Task',
-            'fnct_args': {},
+            'fnct_args': {'timeout': 30},
         }
         self.esxThread.getQueue(localEsxUtilOId)['in'].join()
         self.esxThread.getQueue(localEsxUtilOId)['in'].put(myParams, True, 15)
