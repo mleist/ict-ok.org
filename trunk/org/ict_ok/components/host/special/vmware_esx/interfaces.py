@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0232
+# pylint: disable-msg=E0213,W0232
 #
 """Interface of host object"""
 
@@ -15,9 +15,10 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.schema import TextLine
+from zope.schema import TextLine, Set, Choice
 
 # ict_ok.org imports
+from org.ict_ok.components.host.interfaces import IEventIfEventHost
 from org.ict_ok.components.host.interfaces import IHost
 
 _ = MessageFactory('org.ict_ok')
@@ -32,3 +33,20 @@ class IHostVMwareEsx(IHost):
         description = _("UUID of virtual machine in ESX."),
         default = u"",
         required = False)
+
+
+class IEventIfHostVMwareEsx(IEventIfEventHost):
+    """ event interface of object """
+    eventInpObjs_inward_relaying_shutdown = Set(
+        title = _("inward relaying shutdown <-"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = True)
+    
+    def eventInp_inward_relaying_shutdown(eventMsg):
+        """
+        forward the event to all objects in this container through the signal filter
+        """

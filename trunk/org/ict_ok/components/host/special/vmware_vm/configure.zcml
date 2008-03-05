@@ -43,6 +43,10 @@
             />
     </class>
     
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
     <adapter
         factory="org.ict_ok.components.host.special.vmware_vm.adapter.search.Searchable"
     />

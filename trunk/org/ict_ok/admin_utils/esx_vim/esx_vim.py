@@ -99,6 +99,10 @@ class AdmUtilEsxVim(Supernode):
     def powerOnVm(self, uuid):
         return globalEsxVimUtility.powerOnVm(uuid, self)
 
+    def get_EsxVimObject_Dict(self, myParams, parentObj):
+        return globalEsxVimUtility.get_EsxVimObject_Dict(myParams,
+                                                         parentObj)
+
     def getEsxRoomUuid(self, uuid):
         return globalEsxVimUtility.getEsxRoomUuid(uuid, self)
 
@@ -310,6 +314,7 @@ class GlobalEsxVimUtility(object):
                 newObj.localEsxUtil = localEsxUtil
                 newObj.overallStatus = esxObj['overallStatus']
                 newObj.name = esxObj['name']
+                newObj.uuid = esxObj['uuid']
                 if esxObj.has_key('perlRef'):
                     newObj.perlEsxObjRef = esxObj['perlRef']
                 newObj.__parent__ = parentObj

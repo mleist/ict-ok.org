@@ -33,6 +33,14 @@
             permission="org.ict_ok.components.host.Edit"
             set_schema=".interfaces.IHostVMwareEsx"
             />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface=".interfaces.IEventIfHostVMwareEsx"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema=".interfaces.IEventIfHostVMwareEsx"
+            />
     </class>
 
     <subscriber
@@ -44,6 +52,6 @@
     />
 
     <include package=".browser" />
-    <!--<include package=".generations" />-->
+    <include package=".generations" />
 
 </configure>

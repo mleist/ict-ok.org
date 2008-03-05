@@ -24,13 +24,15 @@ from z3c.form import form, field
 
 # ict_ok.org imports
 from org.ict_ok.components.host.special.vmware_esx.interfaces import \
-     IHostVMwareEsx
+     IHostVMwareEsx, IEventIfHostVMwareEsx
 from org.ict_ok.components.host.special.vmware_esx.host import Host
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
 from org.ict_ok.components.host.browser.host import \
      HostDetails
+from org.ict_ok.components.host.browser.host import \
+     EditEventHostEventIfForm as SuperEditEventIfForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -64,3 +66,10 @@ class EditHostForm(EditForm):
     form.extends(form.EditForm)
     label = _(u'VMware ESX Server Edit Form')
     fields = field.Fields(IHostVMwareEsx).omit(*HostDetails.omit_editfields)
+
+
+class EditEventHostEventIfForm(SuperEditEventIfForm):
+    """ Edit Event Interface of object """
+    label = _(u'esx host event interfaces form')
+    fields = field.Fields(IEventIfHostVMwareEsx)
+    

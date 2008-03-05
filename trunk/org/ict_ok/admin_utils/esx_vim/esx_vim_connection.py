@@ -169,12 +169,23 @@ class EsxVimConnectionThread(threading.Thread):
                 if self.perl is not None:
                     if myParams['cmd'] == 'find_entity_views':
                         if myParams.has_key('filter'):
-                            retList = self.perl.call("Vim::find_entity_views", \
-                                                     view_type=myParams['view_type'], \
-                                                 filter=myParams['filter'])
+                            if myParams.has_key('begin_entity'):
+                                retList = self.perl.call("Vim::find_entity_views", \
+                                                         view_type=myParams['view_type'], \
+                                                         begin_entity=myParams['begin_entity'], \
+                                                         filter=myParams['filter'])
+                            else:
+                                retList = self.perl.call("Vim::find_entity_views", \
+                                                         view_type=myParams['view_type'], \
+                                                         filter=myParams['filter'])
                         else:
-                            retList = self.perl.call("Vim::find_entity_views", \
-                                                     view_type=myParams['view_type'])
+                            if myParams.has_key('begin_entity'):
+                                retList = self.perl.call("Vim::find_entity_views", \
+                                                         begin_entity=myParams['begin_entity'], \
+                                                         view_type=myParams['view_type'])
+                            else:
+                                retList = self.perl.call("Vim::find_entity_views", \
+                                                         view_type=myParams['view_type'])
                         return retList
             except self.perl.PerlError, err:
                 #print "77777: ", err
@@ -199,9 +210,14 @@ class EsxVimConnectionThread(threading.Thread):
                     esxObjList = self.getAllEsxVimEntityViews(myParams)
                     myList = []
                     for esxObj in esxObjList:
+                        try:
+                            tmpUuid = esxObj.config().uuid()
+                        except Exception:
+                            tmpUuid = None
                         myList.append({\
                             'name': u"%s" % (esxObj.name()),
                             'overallStatus': u"%s" % (esxObj.overallStatus().val()),
+                            'uuid': tmpUuid,
                             'esxType': myParams['view_type'],
                             'perlRef': esxObj,
                         })

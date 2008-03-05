@@ -135,9 +135,10 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         size_pre = self.request.publication.db.getSize()
         self.request.publication.db.pack(days=0)
         size_post = self.request.publication.db.getSize()
+        ratio = float(size_post)/size_pre*100
         self.context.appendEventHistory(\
-            u"zodb packed by '%s' (%d bytes -> %d bytes)" % \
-            (self.request.principal.title, size_pre, size_post))
+            u"zodb packed by '%s'; %d bytes -> %d bytes (%.1f%%)" % \
+            (self.request.principal.title, size_pre, size_post, ratio))
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:
             return self.request.response.redirect(nextURL)

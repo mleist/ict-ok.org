@@ -23,10 +23,10 @@ from zope.index.text.interfaces import ISearchableText
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.host.adapter.search \
-     import Searchable as SuperSearchable
-from org.ict_ok.components.host.special.vmware_vm.interfaces \
-     import IHostVMwareVm
+from org.ict_ok.components.host.adapter.search import \
+     Searchable as SuperSearchable
+from org.ict_ok.components.host.special.vmware_vm.interfaces import \
+     IHostVMwareVm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -40,7 +40,13 @@ class Searchable(SuperSearchable):
     def __init__(self, context):
         SuperSearchable.__init__(self, context)
 
-    def getSearchableEsxUuid(self):
+    def getSearchableHostRoomOid(self):
+        """
+        get Object id as string for catalog
+        """
+        return None
+
+    def getSearchableHostVmUuid(self):
         """
         get hostname as string for catalog
         """
