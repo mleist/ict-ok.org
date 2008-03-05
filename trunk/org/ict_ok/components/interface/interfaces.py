@@ -86,6 +86,7 @@ class IInterface(IComponent):
     @invariant
     def ensureMyIpInNetIpRange(intfc):
         if intfc.netType == 'ethernet' and \
+           intfc.__context__ is not None and \
            intfc.ipv4List is not None:
             if IHost.providedBy(intfc.__context__):
                 host = intfc.__context__
@@ -99,6 +100,7 @@ class IInterface(IComponent):
     @invariant
     def ensureMyIpNotAlreadyUsed(intfc):
         if intfc.netType == 'ethernet' and \
+             intfc.__context__ is not None and \
            intfc.ipv4List is not None:
             my_catalog = zapi.getUtility(ICatalog)
             alreadyFound = []
