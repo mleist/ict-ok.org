@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0232
+# pylint: disable-msg=E0211,W0232
 #
 """Interface of host object"""
 
@@ -35,3 +35,15 @@ class IComponent(ISupernode):
         description = _("object is a template"),
         default = False,
         required = False)
+    
+    def get_health():
+        """
+        output of health, 0-1 (float)
+        !!!!!! has to be implemented by subclass !!!!!!
+        """
+
+    def get_wcnt():
+        """
+        weighted count of accesses
+        !!!!!! has to be implemented by subclass !!!!!!
+        """

@@ -62,5 +62,7 @@ class Pickle(PickleSupernode):
         retVal['listAttr']['url_authpasswd'] = self.context.url_authpasswd
         retVal['listAttr']['console'] = self.context.console
         retVal['listAttr']['genNagios'] = self.context.genNagios
+        retVal['listAttr']['health'] = self.context.get_health()
+        retVal['listAttr']['wcnt'] = self.context.get_wcnt()
         del pickler
         return retVal

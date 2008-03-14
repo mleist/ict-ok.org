@@ -117,6 +117,28 @@ class Net(Component):
                                           targetFunctionName = targetFunctionName)
                 obj.injectInpEQueue(inst_event)
 
+    def get_wcnt(self):
+        """
+        weighted count of accesses
+        """
+        sum_wcnt = 0
+        for host in self.values():
+            sum_wcnt += host.get_wcnt()
+        return sum_wcnt
+    
+    def get_health(self):
+        """
+        output of health, 0-1 (float)
+        """
+        if len(self.keys()) > 0:
+            health = 0.0
+            for host in self.values():
+                health += host.get_health() * \
+                       (float(host.get_wcnt()) / self.get_wcnt())
+        else:
+            health = None
+        return health
+
 
 def getAllNetworks():
     """ get a list of all Nets

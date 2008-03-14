@@ -31,6 +31,7 @@ from zope.app.intid.interfaces import IIntIds
 from org.ict_ok.libs.lib import nodeIsUnder
 from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.host.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
@@ -93,7 +94,6 @@ class Host(Component):
     url_authpasswd = FieldProperty(IHost['url_authpasswd'])
     console = FieldProperty(IHost['console'])
     genNagios = FieldProperty(IHost['genNagios'])
-    
     eventInpObjs_shutdown = FieldProperty(\
         IEventIfEventHost['eventInpObjs_shutdown'])
     
@@ -120,12 +120,20 @@ class Host(Component):
         setattr(nagios_wf.workflowRelevantData, "object", self)
         setattr(nagios_wf.workflowRelevantData, "new_state", "2_start")
         nagios_wf.start()
-        
+        #health
+        self._counter = {'r': 500}
+        self._health = 1.0
+        self._weight = {'r': 1.0}
+        self._weight_user = 0.5
+
     def trigger_online(self):
         """
         trigger workflow
         """
         print "trigger_online"
+        self._counter['r'] += 10
+        print '$$$ self.get_health():', self.get_health()
+        print '$$$ self.get_wcnt():', self.get_wcnt()
         lastWorkItem = list(self.wf_worklist)[-1]
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "online"
@@ -136,6 +144,9 @@ class Host(Component):
         trigger workflow
         """
         print "trigger_offline"
+        self._counter['r'] -= 10
+        print '§§§ self.get_health():', self.get_health()
+        print '§§§ self.get_wcnt():', self.get_wcnt()
         lastWorkItem = list(self.wf_worklist)[-1]
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "offline"
@@ -205,6 +216,34 @@ class Host(Component):
         #import pdb
         #pdb.set_trace()
         #print "inEventMask", self.inEventMask(eventMsg)
+    
+    def get_health(self):
+        #return self._health
+        stateAdapter = IState(self)
+        stateNum = stateAdapter.getStateOverview(-1)
+        if stateNum == 0:
+            return 1.0
+        elif stateNum == 1:
+            return 0.5
+        elif stateNum == 2:
+            return 0.0
+        else:
+            return None
+        return None
+
+    def get_wcnt(self):
+        """
+        weighted count of accesses
+        """
+        #import pdb
+        #pdb.set_trace()
+        wcnt = 0
+        #net = zapi.getParent(self)
+        for c_name, c_val in self._counter.items():
+            #specifc counter * specific weight
+            wcnt += self._weight[c_name]*c_val
+        wcnt = wcnt * self._weight_user
+        return int(wcnt)
 
 
 def getAllHosts():
