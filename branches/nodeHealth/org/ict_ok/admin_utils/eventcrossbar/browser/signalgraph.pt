@@ -1,0 +1,12 @@
+<i18n:block domain="ict_ok.org">
+  <h3 tal:condition="view/label|nothing"
+      tal:content="view/label" />
+  <div class="message"
+    tal:condition="view/status|nothing"
+    tal:content="view/status"
+    i18n:translate="">
+  Something happened.
+  </div>
+  <img tal:attributes="src python: '%s/@@getIMG?type=png' % (view.getValuePngHref())" />
+  <a href="#" tal:attributes="href python: '%s/@@getIMG?type=png&mode=fview' % (view.getValuePngHref())">[PNG]</a>
+</i18n:block>

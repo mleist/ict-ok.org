@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package Id="Supernode" Name="Supernode" xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+    <PackageHeader>
+        <XPDLVersion>1.0</XPDLVersion>
+        <Vendor>ICT_Ok</Vendor>
+        <Created>2006-01-24 12:38:31</Created>
+    </PackageHeader>
+    <RedefinableHeader PublicationStatus="UNDER_TEST">
+        <Author>IKOM</Author>
+        <Version>0.1a</Version>
+    </RedefinableHeader>
+    <ConformanceClass GraphConformance="NON_BLOCKED"/>
+    <DataFields>
+        <DataField Id="object" IsArray="FALSE" Name="object">
+            <DataType>
+                <BasicType Type="REFERENCE"/>
+            </DataType>
+        </DataField>
+    </DataFields>
+    <WorkflowProcesses>
+        <WorkflowProcess AccessLevel="PUBLIC" Id="iklogbook" Name="Logbook">
+            <ProcessHeader>
+                <Created>2006-01-20 15:16:50</Created>
+            </ProcessHeader>
+            <RedefinableHeader>
+                <Author>IKOM</Author>
+            </RedefinableHeader>
+            <FormalParameters>
+                <FormalParameter Id="object" Index="1" Mode="IN">
+                    <DataType>
+                        <BasicType Type="REFERENCE"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <DataFields>
+                <DataField Id="document" IsArray="FALSE" Name="document">
+                    <DataType>
+                        <BasicType Type="REFERENCE"/>
+                    </DataType>
+                </DataField>
+            </DataFields>
+            <Participants>
+                <Participant Id="iklogbook_admin" Name="Administrator">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Applications>
+                <Application Id="iklogbook_app1" Name="Start Logbook"/>
+                <Application Id="initialize" Name="initialize"/>
+            </Applications>
+            <Activities>
+                <Activity Id="iklogbook_initialize" Name="initialize">
+                    <Implementation>
+                        <Tool Id="initialize" Type="APPLICATION"/>
+                    </Implementation>
+                    <Performer>iklogbook_admin</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iklogbook_admin"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="149,77"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="iklogbook_start" Name="Start Logbook">
+                    <Implementation>
+                        <Tool Id="iklogbook_app1" Type="APPLICATION"/>
+                    </Implementation>
+                    <Performer>iklogbook_admin</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iklogbook_admin"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="373,77"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="iklogbook_initialize" Id="iklogbook_tra1" To="iklogbook_start">
+                    <Condition Type="CONDITION">transitionName == 'start'</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="iklogbook_admin"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_START_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=iklogbook_admin,CONNECTING_ACTIVITY_ID=iklogbook_initialize,X_OFFSET=0,Y_OFFSET=77,JaWE_GRAPH_TRANSITION_STYLE=NO_ROUTING_ORTHOGONAL,TYPE=START_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=iklogbook_admin,CONNECTING_ACTIVITY_ID=iklogbook_start,X_OFFSET=543,Y_OFFSET=77,JaWE_GRAPH_TRANSITION_STYLE=NO_ROUTING_ORTHOGONAL,TYPE=END_DEFAULT"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+    </WorkflowProcesses>
+    <ExtendedAttributes>
+        <ExtendedAttribute Name="EDITING_TOOL" Value="Together Workflow Editor Community Edition"/>
+        <ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="2.0-beta2"/>
+    </ExtendedAttributes>
+</Package>

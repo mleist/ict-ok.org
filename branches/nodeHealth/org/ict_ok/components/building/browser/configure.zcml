@@ -1,0 +1,126 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:help="http://namespaces.zope.org/help"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <defaultView
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        name="overview.html"
+        />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        class=".building.DetailsBuildingForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+    />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        class=".building.EditBuildingForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Edit"
+    />
+
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        class=".building.DeleteBuildingForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Delete"
+    />
+
+    <z3c:pagelet
+        name="add_room.html"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        class="org.ict_ok.components.room.browser.room.AddRoomForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.Add"
+    />
+
+    <!--##### Sub Menu ##### -->
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Edit"
+        />
+    <viewlet
+        name="editcontent"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Edit"
+        />
+    <viewlet
+        name="add_room"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.room.browser.room.MSubAddRoom"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.Add"
+        />
+    <viewlet
+        name="add_dashboard"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubAddDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+        />
+    <viewlet
+        name="del_dashboard"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+        />
+
+</configure>

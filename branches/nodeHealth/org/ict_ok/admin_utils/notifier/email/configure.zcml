@@ -1,0 +1,81 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:mail="http://namespaces.zope.org/mail"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <class class=".email.NotifierEmail">
+        <factory
+            id="org.ict_ok.admin_utils.notifier.email.email.NotifierEmail" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.View"
+            interface=".interfaces.INotifierEmail"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.View"
+            set_schema=".interfaces.INotifierEmail"
+            />
+    </class>
+
+    <!--adapter
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        provides="org.ict_ok.admin_utils.notifier.email.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.email.email.SuperclassGenHoneyd"
+        permission="org.ict_ok.admin_utils.notifier.View"
+    />
+
+    <adapter
+        for="org.ict_ok.components.supernode.interfaces.ISupernode"
+        provides="org.ict_ok.admin_utils.notifier.email.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.email.email.SupernodeGenHoneyd"
+        permission="org.ict_ok.admin_utils.notifier.View"
+    />
+
+    <adapter
+        for="org.ict_ok.dummycontainer.interfaces.IDummyContainer"
+        provides="org.ict_ok.admin_utils.notifier.email.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.email.email.DummyContainerGenHoneyd"
+        permission="org.ict_ok.admin_utils.notifier.View"
+    />
+
+    <adapter
+        for="org.ict_ok.dummy.interfaces.IDummy"
+        provides="org.ict_ok.admin_utils.notifier.email.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.email.email.DummyGenHoneyd"
+        permission="org.ict_ok.admin_utils.notifier.View"
+    /-->
+
+    <!-- setup local utilities -->
+    <subscriber
+                handler=".bootstrap.bootStrapSubscriberDatabase"
+                for="zope.app.appsetup.IDatabaseOpenedEvent"
+                />
+
+    <!--mail:ikAdmUtilEmailNotifier
+        name="eeeEmailNotifier"
+        hostname="localhost"
+        /-->
+
+    <mail:smtpMailer
+        name="eeeEmailNotifier"
+        hostname="localhost"
+        port="25"
+        />
+
+    <mail:queuedDelivery
+        name="ikEmailNotifierQueue"
+        permission="zope.View"
+        queuePath="eee-queue"
+        mailer="eeeEmailNotifier"
+        />
+
+    <include package=".browser" />
+    
+</configure>

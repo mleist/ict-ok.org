@@ -1,0 +1,33 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:help="http://namespaces.zope.org/help"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <!--##### Sub Menu ##### -->
+
+    <viewlet
+        name="dumpdata"
+        for="org.ict_ok.components.interfaces.IComponent"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDumpData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.superclass.exportxml"
+        />
+    <viewlet
+        name="exportxmldata"
+        for="org.ict_ok.components.interfaces.IComponent"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXmlData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.superclass.exportxml"
+        />
+
+</configure>

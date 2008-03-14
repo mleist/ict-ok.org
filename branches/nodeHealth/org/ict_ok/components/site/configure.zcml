@@ -1,0 +1,78 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007 Ingenieurbuero IKOM,
+        Markus Leist <leist at ikom-online.de> -->
+
+    <interface
+        interface=".interfaces.ISite"
+        type="zope.app.content.interfaces.IContentType"
+        />
+        
+    <class class=".site.Site">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.site.site.Site"
+            description="Site"
+            />
+        <require
+            permission="org.ict_ok.components.site.View"
+            interface=".interfaces.ISite"
+            />
+        <require
+            permission="org.ict_ok.components.site.Edit"
+            set_schema=".interfaces.ISite"
+            />
+        <require
+            permission="org.ict_ok.components.site.View"
+            interface=".interfaces.IEventIfEventSite"
+            />
+        <require
+            permission="org.ict_ok.components.site.Edit"
+            set_schema=".interfaces.IEventIfEventSite"
+            />
+    </class>
+    <!--<class class=".site.Site">-->
+        <!--<allow-->
+            <!--interface=".interfaces.ISite"-->
+        <!--/>-->
+        <!--<require-->
+            <!--permission="zope.View"-->
+            <!--interface=".interfaces.ISite"-->
+            <!--/>-->
+        <!--<require-->
+            <!--permission="zope.View"-->
+            <!--set_schema=".interfaces.ISite"-->
+        <!--/>-->
+    <!--</class>-->
+
+
+    <!--<adapter-->
+        <!--factory=".adapter.sized.SiteSized"-->
+        <!--/>-->
+    <adapter
+        factory=".adapter.ikstate.State"
+        />
+    <adapter
+        factory=".adapter.ipickle.Pickle"
+    />
+    <adapter
+        factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"
+        provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
+        for=".interfaces.ISite"
+    />
+
+    <include package=".browser" />
+    <include package=".generations" />
+
+</configure>

@@ -1,0 +1,11 @@
+<div class="bg-315-top" tal:condition="context/@@actions | nothing">
+  <div class="bg-315-bottom">
+    <h1 i18n:translate="">Actions</h1>
+    <ul class="sb_actions">
+      <li tal:repeat="action context/@@actions">
+        <a id="z_0" href="#" tal:content="python:action['title']"
+          tal:attributes="href python:action['href']; id python:action['oid']">Action1</a>
+      </li>
+    </ul>
+  </div>
+</div>

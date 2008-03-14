@@ -1,0 +1,183 @@
+<html metal:use-macro="views/standard_macros/view">
+    <body>
+        <div metal:fill-slot="body" i18n:domain="ict-ok.org">
+            <h1 i18n:translate="">Systeminfo</h1>
+            <table id="sortable" class="listing" summary="Content listing"
+                i18n:attributes="summary">
+                <tr>
+                    <th i18n:translate="">Name</th>
+                    <th i18n:translate="">Value</th>
+                </tr>
+    <!-- objectID = TextLine(
+        oidMaster = TextLine(
+        uidSlaveList = List ( -->
+                            
+                <tr class="cb_wht">
+                    <td i18n:translate="">Node Name</td>
+                    <td tal:content="context/getNodeName">test</td>
+                </tr>
+                <tr class="cb_ilx">
+                    <td i18n:translate="">Version System</td>
+                    <td tal:content="context/getSystemVersion">test</td>
+                </tr>
+                <!--tr class="cb_wht">
+                    <td i18n:translate="">getNetworkDevList</td>
+                    <td tal:content="context/getNetworkDevList">test</td>
+                </tr>
+                <tr class="cb_wht">
+                    <td i18n:translate="">Local IP-Addresses</td>
+                    <td tal:content="context/getLocalIpV4AddressList">test</td>
+                </tr>
+                <tr class="cb_ilx">
+                    <td i18n:translate="">Local MAC-Address</td>
+                    <td tal:content="context/getLocalMacAddress">test</td>
+                </tr-->
+                <!--tr class="cb_r">
+                    <td i18n:translate="">getNetworkInfoDict</td>
+                    <td tal:content="context/getNetworkInfoDict">test</td>
+                </tr-->
+                <tr class="cb_wht">
+                    <td i18n:translate="">Network</td>
+                    <td>
+                        <table id="sortable" class="listing"
+                                tal:define="dev_dict context/getNetworkInfoDict">
+                            <tr>
+                                <th i18n:translate="">Device</th>
+                                <th i18n:translate="">Mac-Address</th>
+                                <th i18n:translate="">IPv4-Addresses</th>
+                            </tr>
+                            <tr tal:repeat="dev dev_dict">
+                                <td tal:content="dev">eth0</td>
+                                <td tal:content="python: dev_dict[dev]['mac']">12:34:56:78:90:12</td>
+                                <td tal:define="ip4list python: dev_dict[dev]['ipv4s']">
+                                    <ul tal:repeat="ip4 ip4list">
+                                        <li tal:content="ip4">192.168.1.1</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="cb_ilx" tal:condition="context/ipv4Master|nothing">
+                    <td i18n:translate="">ipv4My</td>
+                    <td tal:content="context/ipv4My" />
+                </tr>
+                <tr class="cb_wht">
+                    <td i18n:translate="">objectID</td>
+                    <td tal:content="context/objectID" />
+                </tr>
+                <tr class="cb_ilx">
+                    <td i18n:translate="">isMaster</td>
+                    <td tal:content="context/isMaster" />
+                </tr>
+                <tr class="cb_wht" tal:condition="context/ipv4Master|nothing">
+                    <td i18n:translate="">ipv4Master</td>
+                    <td tal:content="context/ipv4Master" />
+                </tr>
+                <tr class="cb_ilx" tal:condition="context/oidMaster|nothing">
+                    <td i18n:translate="">oidMaster</td>
+                    <td tal:content="context/oidMaster" />
+                </tr>
+                <tr class="cb_wht" tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+                    <td i18n:translate="">lastSeenMaster</td>
+                    <div tal:omit-tag=""  tal:condition="context/lastSeenMaster">
+                        <td tal:content="python: dateform.format(context.lastSeenMaster)">test</td>
+                    </div>
+                    <div tal:omit-tag=""  tal:condition="not: context/lastSeenMaster">
+                        <td>---</td>
+                    </div>
+                </tr>
+                <tr class="cb_ilx">
+                    <td i18n:translate="">status2Master</td>
+                    <td tal:content="context/status2Master" />
+                </tr>
+                <tr class="cb_wht">
+                    <td i18n:translate="">isSlave</td>
+                    <td tal:content="context/isSlave" />
+                </tr>
+                <tr class="cb_ilx" tal:condition="context/ipv4Slave|nothing">
+                    <td i18n:translate="">ipv4Slave</td>
+                    <td tal:content="context/ipv4Slave">test</td>
+                </tr>
+                <tr class="cb_wht" tal:condition="context/oidSlave|nothing">
+                    <td i18n:translate="">oidSlave</td>
+                    <td tal:content="context/oidSlave" />
+                </tr>
+                <tr class="cb_ilx" tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+                    <td i18n:translate="">lastSeenSlave</td>
+                    <div tal:omit-tag=""  tal:condition="context/lastSeenSlave">
+                        <td tal:content="python: dateform.format(context.lastSeenSlave)">test</td>
+                    </div>
+                    <div tal:omit-tag=""  tal:condition="not: context/lastSeenSlave">
+                        <td>---</td>
+                    </div>
+                </tr>
+                <!--tr class="cb_ilx">
+                    <td i18n:translate="">oidSlaveList</td>
+                    <td>
+                        <ul tal:repeat="uid context/oidSlaveList">
+                            <li tal:content="uid">aaaaa1</li>
+                        </ul>
+                    </td>
+                </tr-->
+                <tr class="cb_wht">
+                    <td i18n:translate="">CpuVendorId</td>
+                    <td tal:content="context/getCpuVendorId">test</td>
+                </tr>
+                <tr class="cb_ilx">
+                    <td i18n:translate="">CpuModelName</td>
+                    <td tal:content="context/getCpuModelName">test</td>
+                </tr>
+                <tr class="cb_wht">
+                    <td i18n:translate="">Kernel Version</td>
+                    <td tal:content="context/getKernelVersion">test</td>
+                </tr>
+                <tr class="cb_ilx">
+                    <td i18n:translate="">System Uptime</td>
+                    <td tal:content="view/getSystemUptime">test</td>
+                </tr>
+                <tr class="cb_wht">
+                    <td i18n:translate="">System Load</td>
+                    <td tal:define="load context/getSystemLoad">
+                        <span tal:content="structure python: '1 min: %d %%<br>' % (load[0]*100)"/>
+                        <span tal:content="structure python: '5 min: %d %%<br>' % (load[1]*100)"/>
+                        <span tal:content="structure python: '15 min: %d %%' % (load[2]*100)"/>
+                    </td>
+                </tr>
+                <tr class="cb_ilx">
+                    <td i18n:translate="">Start Counter</td>
+                    <td tal:content="view/getStartCnt">test</td>
+                </tr>
+                <!--tr class="cb_wht">
+                    <td i18n:translate="">principal</td>
+                    <td tal:content="request/principal">test</td>
+                </tr>
+                <tr class="cb_wht">
+                    <td i18n:translate="">annotations</td>
+                    <td tal:content="request/annotations">test</td>
+                </tr>
+                <tr class="cb_wht">
+                    <td i18n:translate="">debug</td>
+                    <td tal:content="request/debug">test</td>
+                </tr>
+                <tr class="cb_wht">
+                    <td i18n:translate="">environment</td>
+                    <td tal:content="request/environment/items">test</td>
+                </tr>
+                <tr class="cb_wht">
+                    <td i18n:translate="">REMOTE_ADDR</td>
+                    <td tal:content="request/environment/REMOTE_ADDR">test</td>
+                </tr-->
+
+                <!--tr i18n:translate="">
+                    <td>Zope Version</td>
+                    <td tal:content="runtime_info/ZopeVersion">test</td>
+                </tr-->
+                <!--tr i18n:translate="">
+                    <td>Process id</td>
+                    <td tal:content="runtime_info/ProcessId">test</td>
+                </tr-->
+            </table>
+        </div>
+    </body>
+</html>

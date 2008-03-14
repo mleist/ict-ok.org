@@ -1,0 +1,128 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- viewlet manager -->
+
+    <viewletManager
+        name="ict_ok.menu"
+        provides="org.ict_ok.skin.menu.interfaces.IMenu"
+        class="z3c.viewlet.manager.WeightOrderedViewletManager"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+        
+    <viewletManager
+        name="ict_ok.menumain"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.skin.menu.MenuMainTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+        
+    <viewletManager
+        name="ict_ok.menusub"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.skin.menu.MenuSubTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    
+    <!-- viewlets -->
+
+    <viewlet
+        name="menu"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenu"
+        template="menu.pt"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="zope.View"
+        weight="10"
+        />
+        
+    <!--  main menu  -->
+    
+    <viewlet
+        name="networks"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.skin.menu.NetworksItem"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.View"
+        />
+        
+    <viewlet
+        name="hosts"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.skin.menu.HostsItem"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.View"
+        />
+        
+    <viewlet
+        name="dashboard"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.skin.menu.DashboardItem"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.View"
+        />
+        
+    <viewlet
+        name="view_util_manager"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.skin.menu.AdmUtilManagerItem"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.util_manager.View"
+        />
+        
+    <viewlet
+        name="help"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.skin.menu.HelpItem"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+
+    <!--  sub menu  -->
+    
+    <viewlet
+        name="overview"
+        for="zope.app.folder.interfaces.IRootFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="zope.View"
+        />
+    <viewlet
+        name="add_net"
+        for="zope.app.folder.interfaces.IRootFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.net.browser.net.MSubAddNet"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.Add"
+        />
+    <viewlet
+        name="add_site"
+        for="zope.app.folder.interfaces.IRootFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.site.browser.site.MSubAddSite"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.Add"
+        />
+    <viewlet
+        name="add_location"
+        for="zope.app.folder.interfaces.IRootFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.location.browser.location.MSubAddLocation"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+        />
+
+</configure>

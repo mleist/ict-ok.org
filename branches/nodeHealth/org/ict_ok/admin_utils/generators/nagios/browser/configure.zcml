@@ -1,0 +1,86 @@
+<zope:configure
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+    <page
+        name="actions"
+        for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"
+        class="org.ict_ok.admin_utils.generators.nagios.browser.nagios.AdmUtilGeneratorNagiosDetails"
+        attribute="actions"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+    <page
+        name="generate.html"
+        for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"
+        class="org.ict_ok.admin_utils.generators.nagios.browser.nagios.AdmUtilGeneratorNagiosDetails"
+        attribute="generate"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"
+        class="org.ict_ok.admin_utils.generators.nagios.browser.nagios.AdmUtilGeneratorNagiosDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+        />
+
+    <!--<z3c:template-->
+        <!--template="details.pt"-->
+        <!--for="org.ict_ok.admin_utils.cron.browser.cron.AdmUtilCronDetails"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--/>-->
+
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+        />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"
+        class="org.ict_ok.admin_utils.generators.nagios.browser.nagios.EditAdmUtilGeneratorNagiosForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.generators.nagios.Edit"
+    />
+
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.generators.nagios.Edit"
+        />
+
+</zope:configure>

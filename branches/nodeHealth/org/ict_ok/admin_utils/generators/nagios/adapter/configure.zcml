@@ -1,0 +1,46 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <adapter
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IGenNagios"
+        factory=".superclass.SuperclassGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+    <adapter
+        for="org.ict_ok.components.supernode.interfaces.ISupernode"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IGenNagios"
+        factory=".supernode.SupernodeGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+    <adapter
+        for="org.ict_ok.components.host.interfaces.IHost"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IGenNagios"
+        factory=".host.HostGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+    <adapter
+        for="org.ict_ok.components.interface.interfaces.IInterface"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IGenNagios"
+        factory=".interface.InterfaceGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+    <adapter
+        for="org.ict_ok.components.service.interfaces.IService"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IGenNagios"
+        factory=".service.ServiceGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
+</configure>

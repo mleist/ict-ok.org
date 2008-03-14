@@ -1,0 +1,116 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:help="http://namespaces.zope.org/help"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <!--<page-->
+        <!--name="dumpdata"-->
+        <!--for="org.ict_ok.components.superclass.interfaces.ISuperclass"-->
+        <!--template="dumpdata.pt"-->
+        <!--class=".superclass.SuperclassDetails"-->
+        <!--permission="zope.Security"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+    <!--/>-->
+
+
+    <!--<z3c:template-->
+        <!--template="display.pt"-->
+        <!--for="org.ict_ok.components.superclass.browser.superclass.DisplayForm"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--/>-->
+
+    <page
+        name="dumpdata.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class=".superclass.SuperclassDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="dumpData"
+        permission="org.ict_ok.components.superclass.exportxml"
+    />
+
+    <page
+        name="exportxmldata.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class=".superclass.SuperclassDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXmlData"
+        permission="org.ict_ok.components.superclass.exportxml"
+    />
+
+    <z3c:pagelet
+        name="moveup.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.MoveUp"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+    />
+
+    <z3c:pagelet
+        name="movedown.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.MoveDown"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+    />
+
+    <z3c:pagelet
+        name="add_dashboard.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.AddDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+    />
+    
+    <z3c:pagelet
+        name="del_dashboard.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.DelDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+    />
+
+    <z3c:pagelet
+        name="view_dashboard.html"
+        for="*"
+        class="org.ict_ok.components.superclass.browser.superclass.ViewDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.View"
+    />
+    <z3c:template
+        template="overview.pt"
+        for="org.ict_ok.components.superclass.browser.superclass.ViewDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:template
+        template="dumpdata.pt"
+        for="org.ict_ok.components.superclass.browser.superclass.DumpData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:template
+        template="overview.pt"
+        for="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:template
+        template="history.pt"
+        for="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:template
+        template="edit_content.pt"
+        for="org.ict_ok.components.superclass.browser.superclass.EditContent"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+</configure>
