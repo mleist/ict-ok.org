@@ -133,7 +133,7 @@
     <include package="zc.table"/>
 
     <include package="z3c.form" />
-    <include package="z3checkins" />
+    <!--include package="z3checkins" /-->
     <include package="z3c.layer.pagelet" />
     <include package="z3c.macro" />
     <include package="z3c.pagelet" />
