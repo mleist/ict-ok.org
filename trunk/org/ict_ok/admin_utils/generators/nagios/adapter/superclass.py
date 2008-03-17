@@ -34,10 +34,15 @@ class SuperclassGenNagios(object):
     implements(IGenNagios)
     
     def __init__(self, context):
-        print "SuperclassGenNagios.__init__"
+        #print "SuperclassGenNagios.__init__"
         self.context = context
         self.ikRevision = __version__
-    
+
+    def wantsCheck(self):
+        """object is configured to be checked?
+        """
+        return False
+
     def traverse4nagiosGeneratorPre(self, fileDict, level=0, comments=True):
         """graphviz configuration preamble
         """

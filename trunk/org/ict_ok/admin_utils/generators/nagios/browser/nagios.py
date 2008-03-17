@@ -22,6 +22,7 @@ from zope.i18nmessageid import MessageFactory
 from zope.component import getUtility
 from zope.security import checkPermission
 from zope.app.intid.interfaces import IIntIds
+from zope.app.pagetemplate.urlquote import URLQuote
 
 # z3c imports
 from z3c.form import field
@@ -59,11 +60,13 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
                            #self.context) and\
            #zapi.queryMultiAdapter((self.context, self.request),
                                   #name='shutdown.html') is not None:
+            quoter = URLQuote(self.request.getURL())
             tmpDict = {}
             tmpDict['oid'] = u"c%sgenerate" % objId
             tmpDict['title'] = _(u"generate")
-            tmpDict['href'] = u"%s/generate.html" % \
-                   zapi.getPath(self.context)
+            tmpDict['href'] = u"%s/@@generate.html?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
             tmpDict['tooltip'] = _(u"generate nagios cfg")
             retList.append(tmpDict)
         return retList
@@ -72,16 +75,14 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
         """
         starts all configured scanners for this net
         """
-        #import pdb; pdb.set_trace()
         print "AdmUtilGeneratorNagiosDetails.generate start"
         print self.getConfig()
         print "AdmUtilGeneratorNagiosDetails.generate stop"
-        #objNetScanner = getUtility(INetScan)
-        #if objNetScanner is not None:
-            #scannerList = objNetScanner.getScannerObjs()
-            #for (name, obj) in scannerList:
-                #obj.startScan(self.context)
-        return self.request.response.redirect('./details.html')
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
 
     def getConfig(self):
         """Trigger configuration by web browser

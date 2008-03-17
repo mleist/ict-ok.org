@@ -37,7 +37,7 @@ class SupernodeGenNagios(SuperclassGenNagios):
     implements(IGenNagios)
     
     def __init__(self, context):
-        print "SupernodeGenNagios.__init__"
+        #print "SupernodeGenNagios.__init__"
         SuperclassGenNagios.__init__(self, context)
     
     def traverse4nagiosGeneratorBody(self, fileDict, level=0, comments=True):

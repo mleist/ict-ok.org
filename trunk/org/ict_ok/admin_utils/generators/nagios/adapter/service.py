@@ -40,7 +40,7 @@ class ServiceGenNagios(SupernodeGenNagios):
     adapts(IService)
     
     def __init__(self, context):
-        print "ServiceGenNagios.__init__"
+        #print "ServiceGenNagios.__init__"
         SupernodeGenNagios.__init__( self, context)
 
     def traverse4nagiosGeneratorPre(self, fileDict, level=0, comments=True):
