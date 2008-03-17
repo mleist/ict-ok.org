@@ -127,8 +127,9 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
             tmpDict = {}
             tmpDict['oid'] = u"c%sshutdown" % objId
             tmpDict['title'] = _(u"shutdown")
-            tmpDict['href'] = u"%s/@@shutdown.html" % \
-                   zapi.getPath(self.context)
+            tmpDict['href'] = u"%s/@@shutdown.html?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
             tmpDict['tooltip'] = _(u"shutdow the virtual machine")
             retList.append(tmpDict)
         if checkPermission('org.ict_ok.admin_utils.esx_vim.Admin',
@@ -138,8 +139,9 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
             tmpDict = {}
             tmpDict['oid'] = u"c%sconvertobj" % objId
             tmpDict['title'] = _(u"convert to intern")
-            tmpDict['href'] = u"%s/@@convertobj.html" % \
-                   zapi.getPath(self.context)
+            tmpDict['href'] = u"%s/@@convertobj.html?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
             tmpDict['tooltip'] = _(u"convert to internal object")
             retList.append(tmpDict)
         return retList
