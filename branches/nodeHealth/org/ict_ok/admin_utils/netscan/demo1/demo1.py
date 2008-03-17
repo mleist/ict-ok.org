@@ -53,7 +53,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'1441213',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -88,7 +88,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                ##'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -123,7 +123,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -158,7 +158,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -193,7 +193,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -228,7 +228,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -263,7 +263,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -298,7 +298,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -333,7 +333,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -368,7 +368,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -403,7 +403,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -438,7 +438,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -473,7 +473,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -508,7 +508,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -543,7 +543,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -578,7 +578,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -613,7 +613,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -648,7 +648,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -683,7 +683,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -718,7 +718,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -753,7 +753,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -788,7 +788,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -823,7 +823,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -858,7 +858,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -893,7 +893,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -928,7 +928,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -963,7 +963,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -998,7 +998,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1033,7 +1033,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1068,7 +1068,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1103,7 +1103,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Hauptgebäude',
-                'room': u'A1',
+                #'room': u'A1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1138,7 +1138,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Hauptgebäude',
-                'room': u'A1',
+                #'room': u'A1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1173,7 +1173,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Produktion',
-                'room': u'B22',
+                #'room': u'B22',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1208,7 +1208,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Service-Center',
-                'room': u'A4',
+                #'room': u'A4',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1243,7 +1243,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 1 Service Center',
-                'room': u'B1',
+                #'room': u'B1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1278,7 +1278,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 2 Service Center',
-                'room': u'B2',
+                #'room': u'B2',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1313,7 +1313,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 3 Service Center',
-                'room': u'B3',
+                #'room': u'B3',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1348,7 +1348,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 4 Service Center',
-                'room': u'B4',
+                #'room': u'B4',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1383,7 +1383,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1418,7 +1418,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1453,7 +1453,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Hauptgebäude technische Zentrale',
-                'room': u'E1',
+                #'room': u'E1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1488,7 +1488,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Hauptgebäude',
-                'room': u'A1',
+                #'room': u'A1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1523,7 +1523,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Hauptgebäude',
-                'room': u'A1',
+                #'room': u'A1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1558,7 +1558,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Hauptgebäude',
-                'room': u'A1',
+                #'room': u'A1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1593,7 +1593,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Produktion',
-                'room': u'B22',
+                #'room': u'B22',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1628,7 +1628,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Produktion',
-                'room': u'B22',
+                #'room': u'B22',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1663,7 +1663,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Service-Center',
-                'room': u'A4',
+                #'room': u'A4',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1698,7 +1698,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Sekretariat Service-Center',
-                'room': u'A4',
+                #'room': u'A4',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1733,7 +1733,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 1 Service Center',
-                'room': u'B1',
+                #'room': u'B1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1768,7 +1768,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 1 Service Center',
-                'room': u'B1',
+                #'room': u'B1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1803,7 +1803,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 1 Service Center',
-                'room': u'B1',
+                #'room': u'B1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1838,7 +1838,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 1 Service Center',
-                'room': u'B1',
+                #'room': u'B1',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1873,7 +1873,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 2 Service Center',
-                'room': u'B2',
+                #'room': u'B2',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1908,7 +1908,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 2 Service Center',
-                'room': u'B2',
+                #'room': u'B2',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1943,7 +1943,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 2 Service Center',
-                'room': u'B2',
+                #'room': u'B2',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -1978,7 +1978,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 2 Service Center',
-                'room': u'B2',
+                #'room': u'B2',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -2013,7 +2013,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 3 Service Center',
-                'room': u'B3',
+                #'room': u'B3',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -2048,7 +2048,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 3 Service Center',
-                'room': u'B3',
+                #'room': u'B3',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -2083,7 +2083,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 3 Service Center',
-                'room': u'B3',
+                #'room': u'B3',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -2118,7 +2118,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 3 Service Center',
-                'room': u'B3',
+                #'room': u'B3',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -2153,7 +2153,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 4 Service Center',
-                'room': u'B4',
+                #'room': u'B4',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -2188,7 +2188,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 4 Service Center',
-                'room': u'B4',
+                #'room': u'B4',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -2223,7 +2223,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 4 Service Center',
-                'room': u'B4',
+                #'room': u'B4',
                 'oss': [
                     {
                         'type': u'os_type',
@@ -2258,7 +2258,7 @@ class AdmUtilDemo1(Scanner):
                 'user': u'',
                 'inv_id': u'',
                 'building': u'Team 4 Service Center',
-                'room': u'B4',
+                #'room': u'B4',
                 'oss': [
                     {
                         'type': u'os_type',
