@@ -50,8 +50,11 @@ class InterfaceGenNagios(SupernodeGenNagios):
                   "%s## Pre (%s,%d) - InterfaceGenNagios" % \
                   ("\t" * level, self.context.ikName, level)
         if len(self.context.ipv4List) > 0:
+            #ipv4List should be a list
+            #fileDict['HostCfg'].write("    address %s\n" % \
+                                      #self.context.ipv4List[0])
             fileDict['HostCfg'].write("    address %s\n" % \
-                                      self.context.ipv4List[0])
+                                      self.context.ipv4List)
 
 
     def traverse4nagiosGeneratorPost(self, fileDict, level=0, comments=True):
