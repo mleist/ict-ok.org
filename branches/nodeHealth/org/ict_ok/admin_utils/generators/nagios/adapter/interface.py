@@ -39,7 +39,7 @@ class InterfaceGenNagios(SupernodeGenNagios):
     adapts(IInterface)
     
     def __init__(self, context):
-        print "InterfaceGenNagios.__init__"
+        #print "InterfaceGenNagios.__init__"
         SupernodeGenNagios.__init__( self, context)
 
     def traverse4nagiosGeneratorPre(self, fileDict, level=0, comments=True):

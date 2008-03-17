@@ -39,8 +39,13 @@ class HostGenNagios(SupernodeGenNagios):
     adapts(IHost)
     
     def __init__(self, context):
-        print "HostGenNagios.__init__"
+        #print "HostGenNagios.__init__"
         SupernodeGenNagios.__init__( self, context)
+
+    def wantsCheck(self):
+        """object is configured to be checked?
+        """
+        return self.context.genNagios
 
     def traverse4nagiosGeneratorPre(self, fileDict, level=0, comments=True):
         """graphviz configuration preamble
@@ -49,15 +54,14 @@ class HostGenNagios(SupernodeGenNagios):
             print >> fileDict['HostCfg'], \
                   "%s## Pre (%s,%d) - HostGenNagios" % \
                   ("\t" * level, self.context.ikName, level)
-        fileDict['HostCfg'].write(u"define host {\n")
-        fileDict['HostCfg'].write(u"    use generic-host\n")
-        fileDict['HostCfg'].write(u"    host_name %s\n" % \
-                                  (self.context.objectID))
-        fileDict['HostCfg'].write(u"    alias %s\n" % self.context.hostname)
-        #fileDict['HostCfg'].write("    address %s\n" % realObj.ip)
-        fileDict['HostGroupCfg'].write(u"%s," % self.context.objectID)
-        
-
+        if self.wantsCheck():
+            fileDict['HostCfg'].write(u"define host {\n")
+            fileDict['HostCfg'].write(u"    use generic-host\n")
+            fileDict['HostCfg'].write(u"    host_name %s\n" % \
+                                      (self.context.objectID))
+            fileDict['HostCfg'].write(u"    alias %s\n" % self.context.hostname)
+            #fileDict['HostCfg'].write("    address %s\n" % realObj.ip)
+            fileDict['HostGroupCfg'].write(u"%s," % self.context.objectID)
 
     def traverse4nagiosGeneratorPost(self, fileDict, level=0, comments=True):
         """graphviz configurations text after object
@@ -66,10 +70,11 @@ class HostGenNagios(SupernodeGenNagios):
             print >> fileDict['HostCfg'], \
                   "%s## Post (%s,%d) - HostGenNagios" % \
                   ("\t" * level, self.context.ikName, level)
-        fileDict['HostCfg'].write(u"    check_command check-host-alive\n")
-        fileDict['HostCfg'].write(u"    max_check_attempts 3\n")
-        fileDict['HostCfg'].write(u"    contact_groups admins\n")
-        fileDict['HostCfg'].write(u"    notification_interval 0\n")
-        fileDict['HostCfg'].write(u"    notification_period 24x7\n")
-        fileDict['HostCfg'].write(u"    notification_options d,u,r\n")
-        fileDict['HostCfg'].write(u"}\n\n")
+        if self.wantsCheck():
+            fileDict['HostCfg'].write(u"    check_command check-host-alive\n")
+            fileDict['HostCfg'].write(u"    max_check_attempts 3\n")
+            fileDict['HostCfg'].write(u"    contact_groups admins\n")
+            fileDict['HostCfg'].write(u"    notification_interval 0\n")
+            fileDict['HostCfg'].write(u"    notification_period 24x7\n")
+            fileDict['HostCfg'].write(u"    notification_options d,u,r\n")
+            fileDict['HostCfg'].write(u"}\n\n")
