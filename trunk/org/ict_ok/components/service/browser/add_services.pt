@@ -16,6 +16,10 @@
     <ul>
       <li><a href="add_snmpvalue.html">general SNMP check</a></li>
     </ul>
+    <h4>Console checks</h4>
+    <ul>
+      <li><a href="add_ssh_service.html">SSH check</a></li>
+    </ul>
     <h4>general checks</h4>
     <ul>
       <li><a href="add_service.html">general service</a></li>

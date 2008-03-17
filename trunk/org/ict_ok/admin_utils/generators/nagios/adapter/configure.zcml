@@ -43,4 +43,11 @@
         permission="org.ict_ok.admin_utils.generators.nagios.View"
     />
 
+    <adapter
+        for="org.ict_ok.components.service.special.ssh.interfaces.IServiceSsh"
+        provides="org.ict_ok.admin_utils.generators.nagios.interfaces.IGenNagios"
+        factory=".service_ssh.ServiceSshGenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+
 </configure>

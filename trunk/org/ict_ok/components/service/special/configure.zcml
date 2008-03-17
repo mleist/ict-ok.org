@@ -10,5 +10,6 @@
         Markus Leist <leist@ikom-online.de> -->
 
     <include package=".icmp_latency" />
+    <include package=".ssh" />
 
 </configure>

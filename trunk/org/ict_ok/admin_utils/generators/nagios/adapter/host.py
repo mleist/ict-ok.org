@@ -78,3 +78,10 @@ class HostGenNagios(SupernodeGenNagios):
             fileDict['HostCfg'].write(u"    notification_period 24x7\n")
             fileDict['HostCfg'].write(u"    notification_options d,u,r\n")
             fileDict['HostCfg'].write(u"}\n\n")
+
+    def traverse4nagiosGeneratorBody(self, fileDict, level=0, comments=True):
+        """graphviz configuration data of/in object
+        """
+        if self.wantsCheck():
+            SupernodeGenNagios.traverse4nagiosGeneratorBody(self, fileDict,
+                                                            level, comments)
