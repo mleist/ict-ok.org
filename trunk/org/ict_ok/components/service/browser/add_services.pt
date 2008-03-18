@@ -19,6 +19,8 @@
     <h4>Console checks</h4>
     <ul>
       <li><a href="add_ssh_service.html">SSH check</a></li>
+      <li><a href="add_http_service.html">HTTP check</a></li>
+      <li><a href="add_dns_service.html">DNS check</a></li>
     </ul>
     <h4>general checks</h4>
     <ul>

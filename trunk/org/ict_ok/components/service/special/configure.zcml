@@ -11,5 +11,7 @@
 
     <include package=".icmp_latency" />
     <include package=".ssh" />
+    <include package=".http" />
+    <include package=".dns" />
 
 </configure>

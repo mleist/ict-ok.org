@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id: configure.zcml_cog 192 2008-03-18 17:08:45Z markusleist $ -->
+
+    <!-- Copyright (c) 2008, 
+                     Markus Leist <leist@ikom-online.de>
+                     Sebastian Napiorkowski <->
+    -->
+
+    <utility
+        name="org.ict_ok.components.service.special.dns" 
+        provides="zope.app.generations.interfaces.ISchemaManager"
+        component=".AppSchemaManager"
+    />
+
+</configure>
