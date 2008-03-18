@@ -15,6 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.schema import Int
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
@@ -25,3 +26,10 @@ _ = MessageFactory('org.ict_ok')
 class IService(IComponent):
     """A service object."""
 
+    port = Int(
+        min = 1,
+        max = 65535,
+        title = _("Port"),
+        description = _("Number of port."),
+        default = 65535,
+        required = True)

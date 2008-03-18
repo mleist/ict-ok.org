@@ -17,6 +17,19 @@
         />
 
     <z3c:pagelet
+        name="all_services.html"
+        for="*"
+        class="org.ict_ok.components.service.browser.service.AllServices"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+    />
+    <z3c:template
+        template="../../superclass/browser/overview.pt"
+        for="org.ict_ok.components.service.browser.service.AllServices"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.components.service.interfaces.IService"
         class="org.ict_ok.components.superclass.browser.superclass.Overview"
@@ -46,6 +59,14 @@
         class=".service.EditServiceForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.service.Edit"
+    />
+
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.service.interfaces.IService"
+        class="org.ict_ok.components.service.browser.service.DeleteServiceForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Delete"
     />
 
     <!--##### Sub Menu ##### -->

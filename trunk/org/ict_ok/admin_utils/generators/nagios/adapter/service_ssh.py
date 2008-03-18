@@ -52,7 +52,6 @@ class ServiceSshGenNagios(SupernodeGenNagios):
                   "%s## Pre (%s,%d) - ServiceGenNagios" % \
                   ("\t" * level, self.context.ikName, level)
         fileDict['ServiceCfg'].write( "define service {\n")
-        fileDict['ServiceCfg'].write( "    # Huhu\n")
         fileDict['ServiceCfg'].write( "    use generic-service\n")
         fileDict['ServiceCfg'].write( "    host_name %s\n" % tmp_host.objectID)
         fileDict['ServiceCfg'].write( "    service_description %s\n" % \
@@ -62,7 +61,8 @@ class ServiceSshGenNagios(SupernodeGenNagios):
         fileDict['ServiceCfg'].write( "    notification_interval    0\n")
         fileDict['ServiceCfg'].write( "    notification_options    w,u,c,r\n")
         fileDict['ServiceCfg'].write( "    notification_period    24x7\n")
-        fileDict['ServiceCfg'].write( "    check_command    check_ssh\n")
+        fileDict['ServiceCfg'].write( \
+            "    check_command    check_ssh_ict!5!%d\n" % self.context.port)
         fileDict['ServiceCfg'].write( "    max_check_attempts    3\n")
         fileDict['ServiceCfg'].write( "    normal_check_interval    5\n")
         fileDict['ServiceCfg'].write( "    retry_check_interval    1\n")

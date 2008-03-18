@@ -15,6 +15,7 @@ __version__ = "$Id: interfaces.py 73 2007-10-02 09:37:48Z markusleist $"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.schema import Int
 
 # ict_ok.org imports
 from org.ict_ok.components.service.interfaces import IService
@@ -24,3 +25,11 @@ _ = MessageFactory('org.ict_ok')
 
 class IServiceSsh(IService):
     """A ssh service check object."""
+
+    port = Int(
+        min = 1,
+        max = 65535,
+        title = _("Port"),
+        description = _("Number of port."),
+        default = 22,
+        required = True)

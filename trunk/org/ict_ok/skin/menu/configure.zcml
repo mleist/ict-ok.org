@@ -64,6 +64,15 @@
         />
         
     <viewlet
+        name="services"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.skin.menu.ServicesItem"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+        />
+        
+    <viewlet
         name="dashboard"
         for="*"
         manager="org.ict_ok.skin.menu.interfaces.IMenuMain"

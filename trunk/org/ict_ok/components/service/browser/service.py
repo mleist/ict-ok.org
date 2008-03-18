@@ -25,12 +25,14 @@ from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
 from org.ict_ok.components.service.interfaces import IService
-from org.ict_ok.components.service.service import Service
+from org.ict_ok.components.service.service import Service, getAllServices
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.superclass.browser.superclass import \
+     Overview
 
 _ = MessageFactory('org.ict_ok')
 
@@ -64,7 +66,7 @@ class AddServiceClass(BrowserPagelet):
 
 class DetailsServiceForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of net')
+    label = _(u'settings of service')
     fields = field.Fields(IService).omit(*ServiceDetails.omit_viewfields)
 
 
@@ -86,7 +88,14 @@ class DeleteServiceForm(DeleteForm):
     
     def getTitel(self):
         """this title will be displayed in the head of form"""
-        return _(u"Delete this net: '%s'?") % \
+        return _(u"Delete this service: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
+
+
+class AllServices(Overview):
+    """Overview Pagelet"""
+    def objs(self):
+        """List of Content objects"""
+        return getAllServices()
 
 

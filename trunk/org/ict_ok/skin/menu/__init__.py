@@ -133,6 +133,11 @@ class HostsItem(GlobalMenuMainItem):
     viewURL = 'all_hosts.html'
     weight = 2000
 
+class ServicesItem(GlobalMenuMainItem):
+    title = _(u'Services')
+    viewURL = 'all_services.html'
+    weight = 2000
+
 class AdmUtilManagerItem(GlobalMenuMainItem):
     title = _(u'Utilities')
     weight = 8000

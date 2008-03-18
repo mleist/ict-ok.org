@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-"""What to do when upgrade Service from gen 0 to gen 1
+"""What to do when upgrade Host from gen 0 to gen 1
 """
 
 __version__ = "$Id$"
@@ -17,7 +17,8 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.components.service.interfaces import IService
+from org.ict_ok.components.service.special.ssh.interfaces import \
+     IServiceSsh
 
 generation = 1
 
@@ -25,10 +26,9 @@ def evolve(context):
     u"""
     convert object to new standard
     """
-    
     root = getRootFolder(context) # the Zope-Root-Folders
 
-    for service in findObjectsProviding(root, IService):
+    for service in findObjectsProviding(root, IServiceSsh):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())

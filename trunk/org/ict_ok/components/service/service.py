@@ -21,6 +21,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.app import zapi
+from zope.schema.fieldproperty import FieldProperty
 from zope.interface import implements
 
 # ict_ok.org imports
@@ -28,6 +29,8 @@ from org.ict_ok.components.component import Component
 from org.ict_ok.components.service.interfaces import IService
 from org.ict_ok.components.service.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
+from zope.component import getUtility
+from zope.app.intid.interfaces import IIntIds
 
 
 class Service(Component):
@@ -36,6 +39,7 @@ class Service(Component):
     """
 
     implements(IService)
+    port = FieldProperty(IService['port'])
     # for ..Contained we have to:
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(IService['ikAttr'])
@@ -52,3 +56,14 @@ class Service(Component):
             if name in IService.names():
                 setattr(self, name, value)
         self.ikRevision = __version__
+
+
+def getAllServices():
+    """ get a list of all services
+    """
+    retList = []
+    uidutil = getUtility(IIntIds)
+    for (myid, myobj) in uidutil.items():
+        if IService.providedBy(myobj.object):
+            retList.append(myobj.object)
+    return retList
