@@ -1,0 +1,82 @@
+# -*- coding: utf-8 -*-
+#
+# [[[cog
+#    import sys; sys.path.extend(['.'])
+#    import props
+#    import cog
+#    cog.out("# Copyright (c) ")
+#    for year in props.copyrights:
+#        cog.out("%4d, " % year)
+#    cog.outl()
+#    for author in props.authors:
+#       cog.outl("#               %s <%s>" % (author['name'], author['email']))
+#    cog.out("%s" % props.filename ) ]]]
+# Copyright (c) 2006, 2007, 
+#               Markus Leist <leist@ikom-online.de>
+# [[[end]]]
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=W0232,W0142
+#
+# [[[cog cog.outl('"""implementation of browser class of %(servicetitle)s"""' % props.__dict__)]]]
+# [[[end]]]
+
+__version__ = "$Id$"
+
+# phython imports
+
+# zope imports
+from zope.i18nmessageid import MessageFactory
+
+# z3c imports
+from z3c.form import field
+
+# ict_ok.org imports
+#[[[cog
+#   cog.out("""\
+#   from %(longpath_interface)s import \\
+#        IService%(servicename)s
+#   from %(longpath_file)s import \\
+#        Service
+#   """ % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]
+from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.components.superclass.browser.superclass import \
+     AddForm
+from org.ict_ok.components.service.browser.service import \
+     ServiceDetails
+
+_ = MessageFactory('org.ict_ok')
+
+
+# --------------- menu entries -----------------------------
+
+
+class MSubAddService(GlobalMenuSubItem):
+    """ Menu Item """
+    #[[[cog
+    #   cog.out("""\
+    #   title = _(u'Add %(servicename)s check')
+    #   viewURL = 'add_%(filename)s_service.html'
+    #   """ % props.__dict__, dedent=True)
+    #]]]
+    #[[[end]]]
+    weight = 50
+
+# --------------- forms ------------------------------------
+
+
+class AddServiceForm(AddForm):
+    """Add form."""
+    #[[[cog
+    #   cog.out("""\
+    #   label = _(u'Add %(servicename)s Service Check')
+    #   fields = field.Fields(IService%(servicename)s).omit(*ServiceDetails.omit_addfields)
+    #   """ % props.__dict__, dedent=True)
+    #]]]
+    #[[[end]]]
+    factory = Service
