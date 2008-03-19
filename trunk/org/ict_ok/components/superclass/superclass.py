@@ -433,6 +433,9 @@ def notifyModifiedEvent(instance, event):
             utilXbar[eventObj].addOidToInpObjects(event.object.objectID)
         except KeyError:
             pass
+    nagiosAdapter = IGenNagios(event.object)
+    if nagiosAdapter is not None:
+        nagiosAdapter.nagiosConfigFileOut()
 
 @adapter(ISuperclass, IObjectMovedEvent)
 def notifyMovedEvent(instance, event):

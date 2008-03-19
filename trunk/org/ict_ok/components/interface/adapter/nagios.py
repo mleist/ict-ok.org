@@ -20,6 +20,7 @@ import logging
 # zope imports
 from zope.interface import implements
 from zope.component import adapts
+from zope.app import zapi
 
 # ict_ok.org imports
 from org.ict_ok.components.interface.interfaces import IInterface
@@ -64,3 +65,22 @@ class GenNagios(ParentGenNagios):
             print >> fileDict['HostCfg'], \
                   "%s## Post (%s,%d) - InterfaceGenNagios" % \
                   ("\t" * level, self.context.ikName, level)
+
+    def nagiosConfigFileOut(self):
+        """Nagios-Filegenerator for this host object
+        """
+        host = zapi.getParent(self.context)
+        nagiosAdapter = IGenNagios(host)
+        if nagiosAdapter is not None:
+            nagiosAdapter.nagiosConfigFileOut()
+
+    def nagiosConfigFileRemove(self):
+        """remove old nagios configuration file for this object
+        """
+        host = zapi.getParent(self.context)
+        nagiosAdapter = IGenNagios(host)
+        if nagiosAdapter is not None:
+            nagiosAdapter.nagiosConfigFileOut()
+            
+
+    

@@ -75,8 +75,8 @@ class IGenNagios(Interface):
         
         will produce the nagios configuration files
         """
-        
+
     def nagiosConfigFileRemove():
         """remove old nagios configuration file for this object
         """
-        pass
+
