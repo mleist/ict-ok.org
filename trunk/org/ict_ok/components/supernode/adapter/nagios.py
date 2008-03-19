@@ -19,10 +19,12 @@ import logging
 
 # zope imports
 from zope.interface import implements
+from zope.component import adapts
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.admin_utils.generators.nagios.adapter.superclass import \
+from org.ict_ok.components.supernode.interfaces import ISupernode
+from org.ict_ok.components.superclass.adapter.nagios import \
      GenNagios as ParentGenNagios
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IGenNagios
@@ -35,6 +37,7 @@ class GenNagios(ParentGenNagios):
     """
 
     implements(IGenNagios)
+    adapts(ISupernode)
     
     def __init__(self, context):
         #print "SupernodeGenNagios.__init__"

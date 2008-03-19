@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E0213,W0232,W0622
+# pylint: disable-msg=E0213,E0211,W0232,W0622
 #
 """Interface to nagios generator"""
 
@@ -34,7 +34,7 @@ class IAdmUtilGeneratorNagios(IAdmUtilGenerators):
 class IGenNagios(Interface):
     """Interface of nagios-Adapter
     """
-    def traverse4nagiosGeneratorPre(self, cfgFile, level, comments):
+    def traverse4nagiosGeneratorPre(cfgFile, level, comments):
         """graphviz configuration preamble
         
         cfgFile: handle to open file
@@ -43,7 +43,7 @@ class IGenNagios(Interface):
 
         """
 
-    def traverse4nagiosGeneratorPost(self, cfgFile, level, comments):
+    def traverse4nagiosGeneratorPost(cfgFile, level, comments):
         """graphviz configurations text after object
         
         cfgFile: handle to open file
@@ -52,7 +52,7 @@ class IGenNagios(Interface):
 
         """
 
-    def traverse4nagiosGeneratorBody(self, cfgFile, level, comments):
+    def traverse4nagiosGeneratorBody(cfgFile, level, comments):
         """graphviz configuration data of/in object
         
         cfgFile: handle to open file
@@ -61,7 +61,7 @@ class IGenNagios(Interface):
 
         """
 
-    def traverse4nagiosGenerator(self, cfgFile, level, comments):
+    def traverse4nagiosGenerator(cfgFile, level, comments):
         """Configuration generator
         
         cfgFile: handle to open file
@@ -69,3 +69,14 @@ class IGenNagios(Interface):
         comments: should there comments are in the output?
 
         """
+
+    def nagiosConfigFileOut():
+        """Nagios-Filegenerator
+        
+        will produce the nagios configuration files
+        """
+        
+    def nagiosConfigFileRemove():
+        """remove old nagios configuration file for this object
+        """
+        pass

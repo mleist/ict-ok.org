@@ -23,7 +23,7 @@ from zope.component import adapts
 
 # ict_ok.org imports
 from org.ict_ok.components.interface.interfaces import IInterface
-from org.ict_ok.admin_utils.generators.nagios.adapter.supernode import \
+from org.ict_ok.components.supernode.adapter.nagios import \
      GenNagios as ParentGenNagios
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IGenNagios

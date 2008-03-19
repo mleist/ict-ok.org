@@ -23,7 +23,7 @@ from zope.component import adapts
 
 # ict_ok.org imports
 from org.ict_ok.components.host.interfaces import IHost
-from org.ict_ok.admin_utils.generators.nagios.adapter.supernode import \
+from org.ict_ok.components.supernode.adapter.nagios import \
      GenNagios as ParentGenNagios
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IGenNagios
@@ -85,3 +85,15 @@ class GenNagios(ParentGenNagios):
         if self.wantsCheck():
             ParentGenNagios.traverse4nagiosGeneratorBody(self, fileDict,
                                                             level, comments)
+
+    def nagiosConfigFileOut(self):
+        """Nagios-Filegenerator for this host object
+        """
+        print "HostGenNagios.nagiosConfigFileOut [%s]  -----------------------" % self.context.ikName
+        #self.traverse4nagiosGenerator(.....)
+
+    def nagiosConfigFileRemove(self):
+        """remove old nagios configuration file for this object
+        """
+        print "HostGenNagios.nagiosConfigFileRemove [%s]  -----------------------" % self.context.ikName
+        

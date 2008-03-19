@@ -222,7 +222,7 @@ class DeleteHostForm(DeleteForm):
     
     def getTitel(self):
         """this title will be displayed in the head of form"""
-        return _(u"Delete this net: '%s'?") % \
+        return _(u"Delete this host: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
 

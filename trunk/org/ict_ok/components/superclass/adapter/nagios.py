@@ -81,3 +81,13 @@ class GenNagios(object):
         self.traverse4nagiosGeneratorPre(fileDict, level, comments)
         self.traverse4nagiosGeneratorBody(fileDict, level, comments)
         self.traverse4nagiosGeneratorPost(fileDict, level, comments)
+        
+    def nagiosConfigFileOut(self):
+        """Nagios-Filegenerator for this object
+        """
+        pass
+
+    def nagiosConfigFileRemove(self):
+        """remove old nagios configuration file for this object
+        """
+        pass

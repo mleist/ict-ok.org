@@ -32,7 +32,11 @@ from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.keyreference.interfaces import IKeyReference
 from zope.component import adapter, queryUtility
 from zope.app.catalog.interfaces import ICatalog
-from zope.app.container.interfaces import IObjectModifiedEvent
+from zope.app.container.interfaces import \
+     IObjectAddedEvent, \
+     IObjectModifiedEvent, \
+     IObjectMovedEvent, \
+     IObjectRemovedEvent
 
 # zc imports
 from zc.queue.interfaces import IQueue
@@ -45,7 +49,8 @@ from org.ict_ok.libs.lib import generateOid, oidIsValid, RingBuffer
 from org.ict_ok.libs.history.entry import Entry
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
-
+from org.ict_ok.admin_utils.generators.nagios.interfaces import \
+     IGenNagios
 
 class Superclass(Persistent):
     """
@@ -401,11 +406,26 @@ def isOidInCatalog(arg_oid):
             return True
     return False
 
+@adapter(ISuperclass, IObjectAddedEvent)
+def notifyAddedEvent(instance, event):
+    """
+    Node was added
+    """
+    print "Superclass.notifyAddedEvent"
+    #import pdb
+    #pdb.set_trace()
+    nagiosAdapter = IGenNagios(event.object)
+    if nagiosAdapter is not None:
+        nagiosAdapter.nagiosConfigFileOut()
+
 @adapter(ISuperclass, IObjectModifiedEvent)
 def notifyModifiedEvent(instance, event):
     """
     Node was modified
     """
+    print "Superclass.notifyModifiedEvent"
+    #import pdb
+    #pdb.set_trace()
     allEventObjs = event.object.getAllOutEventObjs()
     utilXbar = queryUtility(IAdmUtilEventCrossbar)
     for eventObj in allEventObjs:
@@ -413,3 +433,28 @@ def notifyModifiedEvent(instance, event):
             utilXbar[eventObj].addOidToInpObjects(event.object.objectID)
         except KeyError:
             pass
+
+@adapter(ISuperclass, IObjectMovedEvent)
+def notifyMovedEvent(instance, event):
+    """
+    Node was moved
+    """
+    print "Superclass.notifyMovedEvent"
+    #import pdb
+    #pdb.set_trace()
+
+@adapter(ISuperclass, IObjectRemovedEvent)
+def notifyRemovedEvent(instance, event):
+    """
+    Node was removed
+    """
+    print "Superclass.notifyRemovedEvent"
+    print "ikName:", event.object.ikName
+    print "getObjectId():", event.object.getObjectId()
+    nagiosAdapter = IGenNagios(event.object)
+    if nagiosAdapter is not None:
+        nagiosAdapter.nagiosConfigFileRemove()
+    
+    #import pdb
+    #pdb.set_trace()
+

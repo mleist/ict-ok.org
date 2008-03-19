@@ -23,7 +23,7 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.service.special.ssh.interfaces import IServiceSsh
+from org.ict_ok.components.service.special.dns.interfaces import IServiceDns
 from org.ict_ok.components.supernode.adapter.nagios import \
      GenNagios as ParentGenNagios
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
@@ -37,7 +37,7 @@ class GenNagios(ParentGenNagios):
     """
 
     implements(IGenNagios)
-    adapts(IServiceSsh)
+    adapts(IServiceDns)
     
     def __init__(self, context):
         ParentGenNagios.__init__( self, context)
@@ -62,7 +62,7 @@ class GenNagios(ParentGenNagios):
         fileDict['ServiceCfg'].write( "    notification_options    w,u,c,r\n")
         fileDict['ServiceCfg'].write( "    notification_period    24x7\n")
         fileDict['ServiceCfg'].write( \
-            "    check_command    check_ssh_ict!5!%d\n" % self.context.port)
+            "    check_command    check_dns_ict!5!%d\n" % self.context.port)
         fileDict['ServiceCfg'].write( "    max_check_attempts    3\n")
         fileDict['ServiceCfg'].write( "    normal_check_interval    5\n")
         fileDict['ServiceCfg'].write( "    retry_check_interval    1\n")

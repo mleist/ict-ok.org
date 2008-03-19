@@ -62,7 +62,12 @@
         permission="org.ict_ok.admin_utils.generators.nagios.View"
     />
 
+    <subscriber handler=".superclass.notifyAddedEvent" />
     <subscriber handler=".superclass.notifyModifiedEvent" />
+    <subscriber handler=".superclass.notifyMovedEvent" />
+    <subscriber handler=".superclass.notifyRemovedEvent" />
+    
+    
     <subscriber handler=".objmq.notifyCopiedEvent" />
     <subscriber handler=".objmq.notifyCreatedEvent" />
     <subscriber handler=".objmq.notifyModifiedEvent" />
