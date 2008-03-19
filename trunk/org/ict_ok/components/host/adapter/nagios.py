@@ -24,14 +24,14 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.admin_utils.generators.nagios.adapter.supernode import \
-     SupernodeGenNagios
+     GenNagios as ParentGenNagios
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IGenNagios
 
 logger = logging.getLogger("HostGenNagios")
 
 
-class HostGenNagios(SupernodeGenNagios):
+class GenNagios(ParentGenNagios):
     """adapter implementation of Host -> nagios
     """
 
@@ -40,7 +40,7 @@ class HostGenNagios(SupernodeGenNagios):
     
     def __init__(self, context):
         #print "HostGenNagios.__init__"
-        SupernodeGenNagios.__init__( self, context)
+        ParentGenNagios.__init__( self, context)
 
     def wantsCheck(self):
         """object is configured to be checked?
@@ -83,5 +83,5 @@ class HostGenNagios(SupernodeGenNagios):
         """graphviz configuration data of/in object
         """
         if self.wantsCheck():
-            SupernodeGenNagios.traverse4nagiosGeneratorBody(self, fileDict,
+            ParentGenNagios.traverse4nagiosGeneratorBody(self, fileDict,
                                                             level, comments)

@@ -66,6 +66,10 @@
     <adapter
         factory="org.ict_ok.components.host.adapter.snmp.Snmptrapd"
     />
+    <adapter
+        factory=".adapter.nagios.GenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
     
     <adapter
         factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"

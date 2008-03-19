@@ -61,6 +61,10 @@
         provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
         for=".interfaces.IService"
     />
+    <adapter
+        factory=".adapter.nagios.GenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
 
     <include package=".browser" />
     <include package=".generations" />

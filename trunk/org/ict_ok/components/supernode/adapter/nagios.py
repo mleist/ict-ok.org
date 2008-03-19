@@ -23,14 +23,14 @@ from zope.interface import implements
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.admin_utils.generators.nagios.adapter.superclass import \
-     SuperclassGenNagios
+     GenNagios as ParentGenNagios
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IGenNagios
 
 logger = logging.getLogger("SupernodeGenNagios")
 
 
-class SupernodeGenNagios(SuperclassGenNagios):
+class GenNagios(ParentGenNagios):
     """adapter implementation of Supernode -> nagios
     """
 
@@ -38,7 +38,7 @@ class SupernodeGenNagios(SuperclassGenNagios):
     
     def __init__(self, context):
         #print "SupernodeGenNagios.__init__"
-        SuperclassGenNagios.__init__(self, context)
+        ParentGenNagios.__init__(self, context)
     
     def traverse4nagiosGeneratorBody(self, fileDict, level=0, comments=True):
         """graphviz configuration data of/in object

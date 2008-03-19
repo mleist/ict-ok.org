@@ -57,6 +57,10 @@
         provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
         for=".interfaces.ISuperclass"
     />
+    <adapter
+        factory=".adapter.nagios.GenNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
 
     <subscriber handler=".superclass.notifyModifiedEvent" />
     <subscriber handler=".objmq.notifyCopiedEvent" />

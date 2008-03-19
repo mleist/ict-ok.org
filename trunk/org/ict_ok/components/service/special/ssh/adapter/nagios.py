@@ -25,14 +25,14 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.service.special.ssh.interfaces import IServiceSsh
 from org.ict_ok.admin_utils.generators.nagios.adapter.supernode import \
-     SupernodeGenNagios
+     GenNagios as ParentGenNagios
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IGenNagios
 
 logger = logging.getLogger("ServiceGenNagios")
 
 
-class ServiceSshGenNagios(SupernodeGenNagios):
+class GenNagios(ParentGenNagios):
     """adapter implementation of SSH-Service -> nagios
     """
 
@@ -40,7 +40,7 @@ class ServiceSshGenNagios(SupernodeGenNagios):
     adapts(IServiceSsh)
     
     def __init__(self, context):
-        SupernodeGenNagios.__init__( self, context)
+        ParentGenNagios.__init__( self, context)
 
     def traverse4nagiosGeneratorPre(self, fileDict, level=0, comments=True):
         """graphviz configuration preamble
