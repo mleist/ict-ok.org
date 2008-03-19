@@ -33,5 +33,6 @@
     <subscriber handler=".public_viewing.notifyModifiedEvent" />
 
     <include package=".browser" />
+    <include package=".generations" />
     
 </configure>

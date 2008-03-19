@@ -49,6 +49,6 @@
     
 
     <include package=".browser" />
-    <!--<include package=".generations" />-->
+    <include package=".generations" />
 
 </configure>

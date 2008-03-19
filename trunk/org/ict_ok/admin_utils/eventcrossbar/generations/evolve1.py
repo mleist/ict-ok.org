@@ -21,13 +21,10 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import IAdmUtilEvent
 
 generation = 1
 
-print "aaaaaaaaaaaaaa2"
-
 def evolve(context):
     u"""
-    event stores one hostgroup (not set of groups)
+    initial generation
     """
-    print "aaaaaaaaaaaaaa3"
     
     root = getRootFolder(context) # the Zope-Root-Folders
 
@@ -38,4 +35,3 @@ def evolve(context):
         print "Event(%s): " % event.ikName + evolve_msg
         event.appendHistoryEntry(evolve_msg)
 
-    print 1/0

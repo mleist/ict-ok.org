@@ -17,25 +17,18 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.eventcrossbar.interfaces import IAdmUtilEvent
+from org.ict_ok.admin_utils.categories.interfaces import IAdmUtilCategories
 
 generation = 1
 
-print "aaaaaaaaaaaaaa2"
-
 def evolve(context):
     u"""
-    event stores one hostgroup (not set of groups)
+    initial generation
     """
-    print "aaaaaaaaaaaaaa3"
-    
     root = getRootFolder(context) # the Zope-Root-Folders
-
-    for event in findObjectsProviding(root, IAdmUtilEvent):
+    for event in findObjectsProviding(root, IAdmUtilCategories):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
         print "Event(%s): " % event.ikName + evolve_msg
         event.appendHistoryEntry(evolve_msg)
-
-    print 1/0

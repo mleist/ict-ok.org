@@ -15,9 +15,9 @@ __version__ = "$Id$"
 # zope imports
 from zope.app.generations.generations import SchemaManager
 
-key = 'org.ict_ok.admin_utils.eventcrossbar.generations'
+key = 'org.ict_ok.admin_utils.categories.generations'
 
 AppSchemaManager = SchemaManager(
-    minimum_generation = 4,
-    generation = 4,
+    minimum_generation = 1,
+    generation = 1,
     package_name=key)

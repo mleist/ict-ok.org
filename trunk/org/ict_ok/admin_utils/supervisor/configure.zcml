@@ -44,5 +44,6 @@
         class=".xmlrpc.RpcMethods" />
 
     <include package=".browser" />
+    <include package=".generations" />
     
 </configure>

@@ -32,5 +32,6 @@
         />
 
     <include package=".browser" />
+    <include package=".generations" />
     
 </configure>
