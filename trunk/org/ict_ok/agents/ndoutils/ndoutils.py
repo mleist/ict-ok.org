@@ -20,6 +20,8 @@ __versRevision = "$LastChangedRevision$"
 import sys
 import time
 
+sys.path.append("/home/markus/Projekte/dev_Zope_br34/inst_ict_ok_1.5/lib/python")
+
 # zope imports
 
 # ict_ok.org imports

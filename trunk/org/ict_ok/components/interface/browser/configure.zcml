@@ -57,6 +57,14 @@
     />
 
     <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.interface.interfaces.IInterface"
+        class=".interface.DeleteInterfaceForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.interface.Delete"
+    />
+
+    <z3c:pagelet
         name="add_service.html"
         for="org.ict_ok.components.interface.interfaces.IInterface"
         class="org.ict_ok.components.service.browser.service.AddServiceForm"

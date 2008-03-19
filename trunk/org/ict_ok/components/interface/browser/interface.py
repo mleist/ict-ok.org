@@ -84,7 +84,7 @@ class DeleteInterfaceForm(DeleteForm):
     
     def getTitel(self):
         """this title will be displayed in the head of form"""
-        return _(u"Delete this net: '%s'?") % \
+        return _(u"Delete this interface: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
 

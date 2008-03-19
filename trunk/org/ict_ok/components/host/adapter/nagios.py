@@ -75,7 +75,7 @@ class GenNagios(ParentGenNagios):
             print >> fileDict['HostCfg'], \
                   "%s## Post (%s,%d) - HostGenNagios" % \
                   ("\t" * level, self.context.ikName, level)
-        if self.wantsCheck():systemname
+        if self.wantsCheck():
             fileDict['HostCfg'].write(u"    check_command check-host-alive\n")
             fileDict['HostCfg'].write(u"    max_check_attempts 3\n")
             fileDict['HostCfg'].write(u"    contact_groups admins\n")

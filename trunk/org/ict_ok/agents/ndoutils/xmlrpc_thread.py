@@ -101,11 +101,11 @@ class XmlRpcThread(threading.Thread):
                 tmpObj = self.pQueue.get()
                 errorFlag = False
                 try:
-                    print "2a"
-                    self.host.ddd(1)
-                    print "2b"
+                    #print "2a"
+                    #self.host.isUp()
+                    #print "2b"
                     self.host.triggerNdoEvent(tmpObj)
-                    print "2c"
+                    #print "2c"
                 except socket.error, errText:
                     errorFlag = True
                     self.logger.log.error("Error in XML-RPC call: %s" % errText)

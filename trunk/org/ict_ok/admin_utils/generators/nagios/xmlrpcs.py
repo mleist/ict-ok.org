@@ -21,6 +21,8 @@ from pytz import timezone
 
 # zope imports
 from zope.app.publisher.xmlrpc import MethodPublisher
+from zope.app import zapi
+from zope.app.catalog.interfaces import ICatalog
 
 # ict_ok.org imports
 
@@ -159,7 +161,7 @@ class AdmUtilGeneratorNagiosRpcMethods(MethodPublisher):
     def triggerNdoEvent( self, arg_dict):
         """
         """
-        print "triggerNdoEvent                              <-----------------"
+        #print "triggerNdoEvent                              <-----------------"
         #if arg_dict.has_key('114') and arg_dict['114'] == "1234567890as" \
         if False and \
            (arg_dict.has_key('1')) and \
@@ -267,7 +269,7 @@ class AdmUtilGeneratorNagiosRpcMethods(MethodPublisher):
                 pass
             print "dict: %s" % arg_dict
         
-        print "arg_dict: %s" % arg_dict
+        #print "arg_dict: %s" % arg_dict
         #globalNagiosUtility.lastSeen(arg_dict)
 
         ##ndo_event_types: NEBTYPE_HOSTCHECK_PROCESSED (801)
@@ -282,22 +284,48 @@ class AdmUtilGeneratorNagiosRpcMethods(MethodPublisher):
         ##('118': 0  [NDO_DATA_STATE])
         ##('121': 1  [NDO_DATA_STATETYPE])
 
-        #my_catalog = zapi.getUtility( ICatalog)
-        #if (arg_dict.has_key('1')) and \
-           #(arg_dict['1'] in ["801"]) and \
-           #(arg_dict['99999'] in ["207"]):
-            #res = my_catalog.searchResults(oid_index=arg_dict['53'])
-            #if len(res) > 0:
-                #hostObj = iter(res).next()
-                ##print "hostObj: %s" % hostObj
-                #if arg_dict['118'] == "0":
-                    #hostObj.trigger_online()
-                #elif arg_dict['118'] == "1":
-                    #hostObj.trigger_offline()
-                #elif arg_dict['118'] == "2":
-                    #hostObj.trigger_not1()
-                #else:
-                    #pass
+        # with new nagios
+        #'99999': '207',
+        #'99997': 45,
+        #'117': '1205935461.56343',
+        #'110': '0',
+        #'118': '1',
+        #'25': '1',
+        #'42': '0.00000',
+        #'1': '800',
+        #'3': '0',
+        #'2': '0',
+        #'4': '1205935461.56538',
+        #'99': '', 
+        #'121': '1', 
+        #'123': '30',
+        #'71': '0.05600', 
+        #'127': 'check-host-alive', 
+        #'95': '', 
+        #'13': '', 
+        #'12': '0', 
+        #'14': '/opt/nagios/libexec/check_ping -H 172.16.64.210 -w 3000.0,80% -c 5000.0,100% -p 5', 
+        #'76': '10', 
+        #'33': '0.0', 
+        #'32': '0', 
+        #'53': 'windschrott'}
+
+        my_catalog = zapi.getUtility(ICatalog)
+        if (arg_dict.has_key('1')) and \
+           (arg_dict['1'] in ["801"]) and \
+           (arg_dict['99999'] in ["207"]):
+            res = my_catalog.searchResults(oid_index=arg_dict['53'])
+            if len(res) > 0:
+                hostObj = iter(res).next()
+                #print "hostObj: %s" % hostObj
+                if arg_dict['118'] == "0":
+                    hostObj.trigger_online()
+                elif arg_dict['118'] == "1":
+                    hostObj.trigger_offline()
+                elif arg_dict['118'] == "2":
+                    hostObj.trigger_not1()
+                else:
+                    pass
 
         
         
