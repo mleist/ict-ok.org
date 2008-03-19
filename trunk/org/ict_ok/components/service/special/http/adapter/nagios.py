@@ -42,36 +42,34 @@ class GenNagios(ParentGenNagios):
     def __init__(self, context):
         ParentGenNagios.__init__( self, context)
 
-    def traverse4nagiosGeneratorPre(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorPre(self, level=0, comments=True):
         """graphviz configuration preamble
         """
         tmp_interface = zapi.getParent(self.context)
         tmp_host = zapi.getParent(tmp_interface)
         if comments:
-            print >> fileDict['ServiceCfg'], \
-                  "%s## Pre (%s,%d) - ServiceGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
-        fileDict['ServiceCfg'].write( "define service {\n")
-        fileDict['ServiceCfg'].write( "    use generic-service\n")
-        fileDict['ServiceCfg'].write( "    host_name %s\n" % tmp_host.objectID)
-        fileDict['ServiceCfg'].write( "    service_description %s\n" % \
-                                      (self.context.getDcTitle()))
-        fileDict['ServiceCfg'].write( "    contact_groups    admins\n")
-        fileDict['ServiceCfg'].write( "    check_period    24x7\n")
-        fileDict['ServiceCfg'].write( "    notification_interval    0\n")
-        fileDict['ServiceCfg'].write( "    notification_options    w,u,c,r\n")
-        fileDict['ServiceCfg'].write( "    notification_period    24x7\n")
-        fileDict['ServiceCfg'].write( \
-            "    check_command    check_http_ict!5!%d\n" % self.context.port)
-        fileDict['ServiceCfg'].write( "    max_check_attempts    3\n")
-        fileDict['ServiceCfg'].write( "    normal_check_interval    5\n")
-        fileDict['ServiceCfg'].write( "    retry_check_interval    1\n")
-        fileDict['ServiceCfg'].write( "}\n\n")
+            self.write(u"%s## Pre (%s,%d) - ServiceGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))
+        self.write("define service {\n")
+        self.write("    use generic-service\n")
+        self.write("    host_name %s\n" % tmp_host.objectID)
+        self.write("    service_description %s\n" % \
+                    (self.context.getDcTitle()))
+        self.write("    contact_groups    admins\n")
+        self.write("    check_period    24x7\n")
+        self.write("    notification_interval    0\n")
+        self.write("    notification_options    w,u,c,r\n")
+        self.write("    notification_period    24x7\n")
+        self.write("    check_command    check_http_ict!5!%d\n" % \
+                    self.context.port)
+        self.write("    max_check_attempts    3\n")
+        self.write("    normal_check_interval    5\n")
+        self.write("    retry_check_interval    1\n")
+        self.write("}\n\n")
 
-    def traverse4nagiosGeneratorPost(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorPost(self, level=0, comments=True):
         """graphviz configurations text after object
         """
         if comments:
-            print >> fileDict['ServiceCfg'], \
-                  "%s## Post (%s,%d) - ServiceGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
+            self.write(u"%s## Post (%s,%d) - ServiceGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))

@@ -43,21 +43,19 @@ class GenNagios(ParentGenNagios):
         #print "SupernodeGenNagios.__init__"
         ParentGenNagios.__init__(self, context)
     
-    def traverse4nagiosGeneratorBody(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorBody(self, level=0, comments=True):
         """graphviz configuration data of/in object
         """
         if comments:
-            print >> fileDict['HostCfg'], \
-                  "%s## Body (%s,%d) - SupernodeGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
+            self.write("%s## Body (%s,%d) - SupernodeGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))
         its = self.context.items()
         for (dummy_name, oobj) in its:
             if ISuperclass.providedBy(oobj):
                 try:
                     adapterGenNagios = IGenNagios(oobj)
                     if adapterGenNagios:
-                        adapterGenNagios.traverse4nagiosGenerator(fileDict,
-                                                                  level + 1,
+                        adapterGenNagios.traverse4nagiosGenerator(level + 1,
                                                                   comments)
                 except TypeError:
                     logger.error(u"Problem in adaption of nagios config")

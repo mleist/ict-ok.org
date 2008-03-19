@@ -38,49 +38,64 @@ class GenNagios(object):
     
     def __init__(self, context):
         #print "SuperclassGenNagios.__init__"
+        self.fpCfg = None
         self.context = context
         self.ikRevision = __version__
+        
+    def fileOpen(self):
+        """will open a filehandle to the specific object
+        """
+        self.fpCfg = open(u'/opt/nagios/etc/ict_ok/%s.cfg' % \
+                          self.context.getObjectId(), 'w')
+    
+    def fileClose(self):
+        """will close the filehandle to the specific object
+        """
+        if self.fpCfg is not None:
+            self.fpCfg.close()
+
+    def write(self, text_arg):
+        """will write the text_arg into the configuration file
+        """
+        if self.fpCfg is not None:
+            self.fpCfg.write(text_arg)
 
     def wantsCheck(self):
         """object is configured to be checked?
         """
         return False
 
-    def traverse4nagiosGeneratorPre(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorPre(self, level=0, comments=True):
         """graphviz configuration preamble
         """
         if comments:
-            print >> fileDict['HostCfg'], \
-                  "%s## Pre (%s,%d) - SuperclassGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
+            self.write(u"%s## Pre (%s,%d) - SuperclassGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))
 
-    def traverse4nagiosGeneratorPost(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorPost(self, level=0, comments=True):
         """graphviz configurations text after object
         """
         if comments:
-            print >> fileDict['HostCfg'], \
-                  "%s## Post (%s,%d) - SuperclassGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
+            self.write(u"%s## Post (%s,%d) - SuperclassGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))
 
-    def traverse4nagiosGeneratorBody(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorBody(self, level=0, comments=True):
         """graphviz configuration data of/in object
         """
         if comments:
-            print >> fileDict['HostCfg'], \
-                  "%s## Body (%s,%d) - SuperclassGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
+            self.write(u"%s## Body (%s,%d) - SuperclassGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))
 
-    def traverse4nagiosGenerator(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGenerator(self, level=0, comments=True):
         """Configuration generator
         
-        cfgFile: handle to open file
         level: indent-level
         comments: should there comments are in the output?
 
         """
-        self.traverse4nagiosGeneratorPre(fileDict, level, comments)
-        self.traverse4nagiosGeneratorBody(fileDict, level, comments)
-        self.traverse4nagiosGeneratorPost(fileDict, level, comments)
+        self.traverse4nagiosGeneratorPre(level, comments)
+        self.traverse4nagiosGeneratorBody(level, comments)
+        self.traverse4nagiosGeneratorPost(level, comments)
         
     def nagiosConfigFileOut(self):
         """Nagios-Filegenerator for this object

@@ -34,37 +34,45 @@ class IAdmUtilGeneratorNagios(IAdmUtilGenerators):
 class IGenNagios(Interface):
     """Interface of nagios-Adapter
     """
-    def traverse4nagiosGeneratorPre(cfgFile, level, comments):
+    def fileOpen():
+        """will open a filehandle to the specific object
+        """
+
+    def fileClose():
+        """will close the filehandle to the specific object
+        """
+
+    def write(text_arg):
+        """will write the text_arg into the configuration file
+        """
+
+    def traverse4nagiosGeneratorPre(level, comments):
         """graphviz configuration preamble
         
-        cfgFile: handle to open file
         level: indent-level
         comments: should there comments are in the output?
 
         """
 
-    def traverse4nagiosGeneratorPost(cfgFile, level, comments):
+    def traverse4nagiosGeneratorPost(level, comments):
         """graphviz configurations text after object
         
-        cfgFile: handle to open file
         level: indent-level
         comments: should there comments are in the output?
 
         """
 
-    def traverse4nagiosGeneratorBody(cfgFile, level, comments):
+    def traverse4nagiosGeneratorBody(level, comments):
         """graphviz configuration data of/in object
         
-        cfgFile: handle to open file
         level: indent-level
         comments: should there comments are in the output?
 
         """
 
-    def traverse4nagiosGenerator(cfgFile, level, comments):
+    def traverse4nagiosGenerator(level, comments):
         """Configuration generator
         
-        cfgFile: handle to open file
         level: indent-level
         comments: should there comments are in the output?
 

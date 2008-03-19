@@ -43,28 +43,24 @@ class GenNagios(ParentGenNagios):
         #print "InterfaceGenNagios.__init__"
         ParentGenNagios.__init__( self, context)
 
-    def traverse4nagiosGeneratorPre(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorPre(self, level=0, comments=True):
         """graphviz configuration preamble
         """
         if comments:
-            print >> fileDict['HostCfg'], \
-                  "%s## Pre (%s,%d) - InterfaceGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
+            self.write(u"%s## Pre (%s,%d) - InterfaceGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))
         if len(self.context.ipv4List) > 0:
             #ipv4List should be a list
             #fileDict['HostCfg'].write("    address %s\n" % \
                                       #self.context.ipv4List[0])
-            fileDict['HostCfg'].write("    address %s\n" % \
-                                      self.context.ipv4List)
+            self.write("    address %s\n" % self.context.ipv4List)
 
-
-    def traverse4nagiosGeneratorPost(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorPost(self, level=0, comments=True):
         """graphviz configurations text after object
         """
         if comments:
-            print >> fileDict['HostCfg'], \
-                  "%s## Post (%s,%d) - InterfaceGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
+            self.write(u"%s## Post (%s,%d) - InterfaceGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))
 
     def nagiosConfigFileOut(self):
         """Nagios-Filegenerator for this host object
@@ -81,6 +77,3 @@ class GenNagios(ParentGenNagios):
         nagiosAdapter = IGenNagios(host)
         if nagiosAdapter is not None:
             nagiosAdapter.nagiosConfigFileOut()
-            
-
-    

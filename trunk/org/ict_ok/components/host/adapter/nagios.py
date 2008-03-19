@@ -22,7 +22,6 @@ from pytz import timezone
 # zope imports
 from zope.interface import implements
 from zope.component import adapts
-from zope.app import zapi
 
 # ict_ok.org imports
 from org.ict_ok.components.interface.interfaces import IInterface
@@ -52,45 +51,40 @@ class GenNagios(ParentGenNagios):
         """
         return self.context.genNagios
 
-    def traverse4nagiosGeneratorPre(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorPre(self, level=0, comments=True):
         """graphviz configuration preamble
         """
         if comments:
-            print >> fileDict['HostCfg'], \
-                  "%s## Pre (%s,%d) - HostGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
+            self.write(u"%s## Pre (%s,%d) - HostGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))
         if self.wantsCheck():
-            fileDict['HostCfg'].write(u"define host {\n")
-            fileDict['HostCfg'].write(u"    use generic-host\n")
-            fileDict['HostCfg'].write(u"    host_name %s\n" % \
-                                      (self.context.objectID))
-            fileDict['HostCfg'].write(u"    alias %s\n" % self.context.hostname)
-            #fileDict['HostCfg'].write("    address %s\n" % realObj.ip)
-            #fileDict['HostGroupCfg'].write(u"%s," % self.context.objectID)
+            self.write(u"define host {\n")
+            self.write(u"    use generic-host\n")
+            self.write(u"    host_name %s\n" % (self.context.objectID))
+            self.write(u"    alias %s\n" % self.context.hostname)
 
-    def traverse4nagiosGeneratorPost(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorPost(self, level=0, comments=True):
         """graphviz configurations text after object
         """
         if comments:
-            print >> fileDict['HostCfg'], \
-                  "%s## Post (%s,%d) - HostGenNagios" % \
-                  ("\t" * level, self.context.ikName, level)
+            self.write(u"%s## Post (%s,%d) - HostGenNagios" % \
+                       ("\t" * level, self.context.ikName, level))
         if self.wantsCheck():
-            fileDict['HostCfg'].write(u"    check_command check-host-alive\n")
-            fileDict['HostCfg'].write(u"    max_check_attempts 3\n")
-            fileDict['HostCfg'].write(u"    contact_groups admins\n")
-            fileDict['HostCfg'].write(u"    notification_interval 0\n")
-            fileDict['HostCfg'].write(u"    notification_period 24x7\n")
-            fileDict['HostCfg'].write(u"    notification_options d,u,r\n")
-            fileDict['HostCfg'].write(u"}\n\n")
+            self.write(u"    check_command check-host-alive\n")
+            self.write(u"    max_check_attempts 3\n")
+            self.write(u"    contact_groups admins\n")
+            self.write(u"    notification_interval 0\n")
+            self.write(u"    notification_period 24x7\n")
+            self.write(u"    notification_options d,u,r\n")
+            self.write(u"}\n\n")
 
-    def traverse4nagiosGeneratorBody(self, fileDict, level=0, comments=True):
+    def traverse4nagiosGeneratorBody(self, level=0, comments=True):
         """graphviz configuration data of/in object
         """
         #if self.wantsCheck(from org.ict_ok.version import getIkVersion):
         if self.wantsCheck():
-            ParentGenNagios.traverse4nagiosGeneratorBody(self, fileDict,
-                                                            level, comments)
+            ParentGenNagios.traverse4nagiosGeneratorBody(self,
+                                                         level, comments)
 
     
     def nagiosConfigFileOut(self):
