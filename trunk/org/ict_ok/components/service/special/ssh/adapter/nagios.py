@@ -24,7 +24,7 @@ from zope.component import adapts
 
 # ict_ok.org imports
 from org.ict_ok.components.service.special.ssh.interfaces import IServiceSsh
-from org.ict_ok.components.supernode.adapter.nagios import \
+from org.ict_ok.components.service.adapter.nagios import \
      GenNagios as ParentGenNagios
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IGenNagios

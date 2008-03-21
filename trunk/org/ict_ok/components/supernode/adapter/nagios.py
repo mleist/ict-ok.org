@@ -57,6 +57,7 @@ class GenNagios(ParentGenNagios):
                     if adapterGenNagios:
                         adapterGenNagios.traverse4nagiosGenerator(level + 1,
                                                                   comments)
-                except TypeError:
-                    logger.error(u"Problem in adaption of nagios config")
+                except TypeError, errText:
+                    logger.error(u"Problem in nagios adaption: '%s'" % \
+                                 errText)
 
