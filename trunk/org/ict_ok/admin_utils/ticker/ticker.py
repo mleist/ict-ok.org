@@ -39,6 +39,8 @@ from org.ict_ok.admin_utils.ticker.interfaces import \
      IAdmUtilTicker, IEventIfAdmUtilTicker
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
+from org.ict_ok.admin_utils.generators.nagios.interfaces import \
+     IAdmUtilGeneratorNagios
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.components.superclass.superclass import MsgEvent
 
@@ -119,6 +121,7 @@ class TickerThread(threading.Thread):
                             print "Error xxx: ", err
                     for utilInterface in (IAdmUtilEventCrossbar,
                                           IAdmUtilTicker,
+                                          IAdmUtilGeneratorNagios,
                                           ):
                         tmp_util = queryUtility(utilInterface)
                         if tmp_util is not None:

@@ -18,6 +18,6 @@ from zope.app.generations.generations import SchemaManager
 key = 'org.ict_ok.admin_utils.generators.nagios.generations'
 
 AppSchemaManager = SchemaManager(
-    minimum_generation = 1,
-    generation = 1,
+    minimum_generation = 2,
+    generation = 2,
     package_name=key)

@@ -16,7 +16,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.schema.interfaces import ITextLine
-from zope.schema.interfaces import IText
+from zope.schema.interfaces import IText, IDatetime
 from zope.schema._bootstrapinterfaces import ValidationError
 from zope.i18nmessageid import MessageFactory
 
@@ -67,4 +67,8 @@ class IV4NetsValid(IText):
 
 class IObjectIdValid(ITextLine):
     """A field containing an Universe ID
+    """
+
+class IIctDatetime(IDatetime):
+    """Interface for special ict-ok purpose
     """

@@ -17,21 +17,24 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.cron.interfaces import IAdmUtilCron
+from org.ict_ok.admin_utils.generators.nagios.interfaces import \
+     IAdmUtilGeneratorNagios
 
-generation = 1
+generation = 2
+
 
 def evolve(context):
     u"""
-    initial generation
+    nagios utility now supports nagios init-script
     """
     
     root = getRootFolder(context) # the Zope-Root-Folders
 
-    for obj in findObjectsProviding(root, IAdmUtilCron):
+    for obj in findObjectsProviding(root, IAdmUtilGeneratorNagios):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
+        obj.pathInitScript = u"/etc/init.d/nagios"
         print "Object(%s): " % obj.ikName + evolve_msg
         obj.appendHistoryEntry(evolve_msg)
 

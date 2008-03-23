@@ -30,7 +30,7 @@ def evolve(context):
     default = sitemanager['default']
     eventUtil = default[u'AdmUtilEventCrossbar']
 
-    for event in findObjectsProviding(eventUtil, IAdmUtilEvent):
+    for obj in findObjectsProviding(eventUtil, IAdmUtilEvent):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
@@ -43,5 +43,5 @@ def evolve(context):
             else:
                 event.hostGroup = list(event.hostGroup)[0]
                 evolve_msg += "**** Error: HostGroup was configured with more than one entry ****"
-        print "Event(%s): " % event.ikName + evolve_msg
-        event.appendHistoryEntry(evolve_msg)
+        print "Object(%s): " % obj.ikName + evolve_msg
+        obj.appendHistoryEntry(evolve_msg)

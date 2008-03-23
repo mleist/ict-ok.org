@@ -29,10 +29,10 @@ def evolve(context):
     
     root = getRootFolder(context) # the Zope-Root-Folders
 
-    for event in findObjectsProviding(root, IAdmUtilObjMQ):
+    for obj in findObjectsProviding(root, IAdmUtilObjMQ):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
-        print "Event(%s): " % event.ikName + evolve_msg
-        event.appendHistoryEntry(evolve_msg)
+        print "Object(%s): " % obj.ikName + evolve_msg
+        obj.appendHistoryEntry(evolve_msg)
 

@@ -15,19 +15,50 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface
+from zope.schema import Datetime, TextLine
+from org.ict_ok.schema.datetime import IctDatetime
+from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.generators.interfaces import \
      IAdmUtilGenerators
+
+_ = MessageFactory('org.ict_ok')
 
 
 class IAdmUtilGeneratorNagios(IAdmUtilGenerators):
     """
     major component for registration and event distribution 
     """
-    def getConfig(self):
-        """make configuration file
-        TODO filename or filehandle must be an argument
+    pathInitScript = TextLine(
+        max_length = 200,
+        title = _("init script"),
+        description = _("nagios init script with path"),
+        default = _("/etc/init.d/nagios"),
+        required = True)
+
+    lastConfigFileChange = IctDatetime(
+        title=_("last change"),
+        description=_("last change of configuration file"),
+        required=False)
+
+    lastDeamonReload = IctDatetime(
+        title=_("last reload"),
+        description=_("last reload of nagios deamon"),
+        required=False)
+
+    def touchLastConfigFile():
+        """change timestamp in the utility
+        
+        will trigger a reload of the nagios-daemon on cron
+        """
+
+    def reloadDaemon():
+        """ reload the nagios daemon
+        """
+
+    def allConfigFilesOut():
+        """make all configuration files
         """
 
 
@@ -78,13 +109,22 @@ class IGenNagios(Interface):
 
         """
 
-    def nagiosConfigFileOut():
+    def nagiosConfigFileOut(forceOutput=False, event=None):
         """Nagios-Filegenerator
         
         will produce the nagios configuration files
-        """
+        
+        forceOutput: False will check for a relevant attribute change
+        True will alway generate a new config file
+         
+        event: None or the zope event from lifecycle
+       """
 
     def nagiosConfigFileRemove():
         """remove old nagios configuration file for this object
+        """
+
+    def eventModifiesCfgFile(event):
+        """check for attribute changes
         """
 

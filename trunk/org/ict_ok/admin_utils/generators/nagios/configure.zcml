@@ -38,6 +38,10 @@
         class=".xmlrpcs.AdmUtilGeneratorNagiosRpcMethods"
         />
 
+    <adapter
+        factory=".adapter.ticker.Ticker"
+    />
+
     <include package=".adapter" />
     <include package=".browser" />
     <include package=".generations" />

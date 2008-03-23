@@ -43,6 +43,21 @@ class GenNagios(ParentGenNagios):
         #print "InterfaceGenNagios.__init__"
         ParentGenNagios.__init__( self, context)
 
+    # modification of this attributes will trigger an new generation of
+    # the config file
+    attrList = ['objectID', 'ipv4List']
+
+    def fileOpen(self):
+        """will open a filehandle to the specific object
+        """
+        if self.parentAdapter is not None:
+            self.fpCfg = self.parentAdapter.fpCfg
+    
+    def fileClose(self):
+        """will close the filehandle to the specific object
+        """
+        pass
+
     def traverse4nagiosGeneratorPre(self, level=0, comments=True):
         """graphviz configuration preamble
         """
@@ -62,13 +77,20 @@ class GenNagios(ParentGenNagios):
             self.write(u"%s## Post (%s,%d) - InterfaceGenNagios" % \
                        ("\t" * level, self.context.ikName, level))
 
-    def nagiosConfigFileOut(self):
-        """Nagios-Filegenerator for this host object
+    def nagiosConfigFileOut(self, forceOutput=False, event=None):
+        """Nagios-Filegenerator
+        
+        will produce the nagios configuration files
+        
+        forceOutput: False will check for a relevant attribute change
+        True will alway generate a new config file
+         
+        event: None or the zope event from lifecycle
         """
         host = zapi.getParent(self.context)
         nagiosAdapter = IGenNagios(host)
         if nagiosAdapter is not None:
-            nagiosAdapter.nagiosConfigFileOut()
+            nagiosAdapter.nagiosConfigFileOut(True, event)
 
     def nagiosConfigFileRemove(self):
         """remove old nagios configuration file for this object
@@ -76,4 +98,4 @@ class GenNagios(ParentGenNagios):
         host = zapi.getParent(self.context)
         nagiosAdapter = IGenNagios(host)
         if nagiosAdapter is not None:
-            nagiosAdapter.nagiosConfigFileOut()
+            nagiosAdapter.nagiosConfigFileOut(True, None)

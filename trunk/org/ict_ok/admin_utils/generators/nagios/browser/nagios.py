@@ -44,7 +44,8 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
     Browser details for nagios-generator
     """
     omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_editfields = SupernodeDetails.omit_editfields + \
+                    ['lastConfigFileChange', 'lastDeamonReload']
 
     def actions(self):
         """
@@ -76,7 +77,7 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
         starts all configured scanners for this net
         """
         print "AdmUtilGeneratorNagiosDetails.generate start"
-        print self.getConfig()
+        print self.allConfigFilesOut()
         print "AdmUtilGeneratorNagiosDetails.generate stop"
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:
@@ -84,21 +85,24 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
         else:
             return self.request.response.redirect('./@@details.html')
 
-    def getConfig(self):
+    def allConfigFilesOut(self):
         """Trigger configuration by web browser
         """
-        return self.context.getConfig()
+        return self.context.allConfigFilesOut()
 
 
 # --------------- forms ------------------------------------
 
 
-class ViewAdmUtilGeneratorNagiosForm(DisplayForm):
+class DetailsAdmUtilGeneratorNagiosForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of graphviz adapter')
+    label = _(u'settings of nagios generator')
     fields = field.Fields(IAdmUtilGeneratorNagios).omit(\
         *AdmUtilGeneratorNagiosDetails.omit_viewfields)
-
+    #def update(self):
+        #import pdb
+        #pdb.set_trace()
+        #DisplayForm.update(self)
 
 class EditAdmUtilGeneratorNagiosForm(EditForm):
     """ Edit for for net """

@@ -42,6 +42,10 @@ class GenNagios(ParentGenNagios):
     implements(IGenNagios)
     adapts(IService)
     
+    # modification of this attributes will trigger an new generation of
+    # the config file
+    attrList = ['objectID', 'ikName']
+    
     def __init__(self, context):
         #print "ServiceGenNagios.__init__"
         ParentGenNagios.__init__( self, context)
@@ -51,7 +55,6 @@ class GenNagios(ParentGenNagios):
         """
         objId = self.context.getObjectId()
         self.fileName = u'/opt/nagios/etc/ict_ok/Services/%s.cfg' % objId
-        print "s"*40 + self.fileName
         ParentGenNagios.fileOpen(self)
         
     def traverse4nagiosGeneratorPre(self, level=0, comments=True):
@@ -62,20 +65,21 @@ class GenNagios(ParentGenNagios):
         if comments:
             self.write(u"%s## Pre (%s,%d) - ServiceGenNagios" % \
                        ("\t" * level, self.context.ikName, level))
-        self.write("define service {\n")
-        self.write("    use generic-ping\n")
-        self.write("    host_name %s\n" % tmp_host.objectID)
-        self.write("    service_description %s\n" % (self.context.getDcTitle()))
-        self.write("    contact_groups    admins\n")
-        self.write("    check_period    24x7\n")
-        self.write("    notification_interval    0\n")
-        self.write("    notification_options    w,u,c,r\n")
-        self.write("    notification_period    24x7\n")
-        self.write("    check_command    check_ssh!1!22\n")
-        self.write("    max_check_attempts    3\n")
-        self.write("    normal_check_interval    5\n")
-        self.write("    retry_check_interval    1\n")
-        self.write("}\n\n")
+        self.write(u"define service {\n")
+        self.write(u"    use generic-ping\n")
+        self.write(u"    host_name %s\n" % tmp_host.objectID)
+        self.write(u"    service_description %s\n" % (self.context.objectID))
+        self.write(u"    display_name %s\n" % (self.context.ikName))
+        self.write(u"    contact_groups    admins\n")
+        self.write(u"    check_period    24x7\n")
+        self.write(u"    notification_interval    0\n")
+        self.write(u"    notification_options    w,u,c,r\n")
+        self.write(u"    notification_period    24x7\n")
+        self.write(u"    check_command    check_ssh!1!22\n")
+        self.write(u"    max_check_attempts    3\n")
+        self.write(u"    normal_check_interval    5\n")
+        self.write(u"    retry_check_interval    1\n")
+        self.write(u"}\n\n")
 
 
     def traverse4nagiosGeneratorPost(self, level=0, comments=True):

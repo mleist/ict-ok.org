@@ -416,7 +416,7 @@ def notifyAddedEvent(instance, event):
     #pdb.set_trace()
     nagiosAdapter = IGenNagios(event.object)
     if nagiosAdapter is not None:
-        nagiosAdapter.nagiosConfigFileOut()
+        nagiosAdapter.nagiosConfigFileOut(True, event)
 
 @adapter(ISuperclass, IObjectModifiedEvent)
 def notifyModifiedEvent(instance, event):
@@ -435,7 +435,7 @@ def notifyModifiedEvent(instance, event):
             pass
     nagiosAdapter = IGenNagios(event.object)
     if nagiosAdapter is not None:
-        nagiosAdapter.nagiosConfigFileOut()
+        nagiosAdapter.nagiosConfigFileOut(False, event)
 
 @adapter(ISuperclass, IObjectMovedEvent)
 def notifyMovedEvent(instance, event):

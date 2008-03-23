@@ -55,6 +55,7 @@ class GenNagios(ParentGenNagios):
                 try:
                     adapterGenNagios = IGenNagios(oobj)
                     if adapterGenNagios:
+                        adapterGenNagios.parentAdapter = self
                         adapterGenNagios.traverse4nagiosGenerator(level + 1,
                                                                   comments)
                 except TypeError, errText:
