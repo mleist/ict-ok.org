@@ -29,6 +29,8 @@ from zope.app.authentication.authentication import PluggableAuthentication
 from zope.app.container.interfaces import IReadContainer
 from zope.app.catalog.interfaces import ICatalog
 from zope.traversing.api import getPath, getRoot, traverse
+from zope.security.management import getInteraction
+from zope.publisher.interfaces import IRequest
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -46,12 +48,8 @@ class MappingProperty(object):
     """
     def __init__(self, name):
         self.name = name
-    
     def __get__(self, inst, class_=None):
-        #import pdb
-        #pdb.set_trace()
         return inst.mapping[self.name]
-    
     def __set__(self, inst, value):
         inst.mapping[self.name] = value
 
@@ -62,36 +60,30 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     implements(IAdmUtilUserManagement)
     adapts(IPrincipal)
 
-    #email = MappingProperty('email')
-    #email = AdmUtilUserProperties(self.request.principal).email
-
     def __init__(self):
         PluggableAuthentication.__init__(self)
         Supernode.__init__(self)
         self.ikRevision = __version__
 
+    def getRequest(self):
+        """ this trick will return the request from the working interaction
+        """
+        i = getInteraction() # raises NoInteraction
+        for i_request in i.participations:
+            if IRequest.providedBy(i_request):
+                return i_request
+        raise RuntimeError('Could not find current request.')
+
+    # temp. workaround for "user specific email" in normal form
     def get_email(self):
-        import pdb
-        pdb.set_trace()
+        """ property getter"""
+        return AdmUtilUserProperties(self.getRequest().principal).email
+    def set_email(self, my_val):
+        """ property setter"""
+        AdmUtilUserProperties(self.getRequest().principal).email = my_val
+    email = property(get_email, set_email)
 
-    def set_email(self):
-        import pdb
-        pdb.set_trace()
 
-    def del_email(self):
-        import pdb
-        pdb.set_trace()
-
-    email = property(get_email, set_email, del_email)
-
-    #@property
-    #def email(self, a=None, b=None):
-        #import pdb
-        #pdb.set_trace()
-        #email = AdmUtilUserProperties(self.request.principal).email
-        #return email
-    
-    
 class AdmUtilUserDashboardSet(set):
     """ instance for storing dashboard items """
     def __contains__(self, obj):
@@ -169,7 +161,7 @@ class AdmUtilUserDashboardItem(object):
             elif hasattr(other, 'value'):
                 return cmp(self.value, other.value)
             else:
-                raise Exception, "other object '%s' doesn't have objectID" %\
+                raise Exception, "other object '%s' doesn't have objectID" % \
                       other
         elif self.stype == 'path':
             if type(other) == type(u''):
@@ -197,5 +189,3 @@ class AdmUtilUserDashboardItem(object):
                                 self.value,
                                 request=arg_request)
         raise Exception, "wrong type for getObject@AdmUtilUserDashboardItem"
-        
-        
