@@ -48,6 +48,8 @@ class MappingProperty(object):
         self.name = name
     
     def __get__(self, inst, class_=None):
+        #import pdb
+        #pdb.set_trace()
         return inst.mapping[self.name]
     
     def __set__(self, inst, value):
@@ -60,11 +62,36 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     implements(IAdmUtilUserManagement)
     adapts(IPrincipal)
 
+    #email = MappingProperty('email')
+    #email = AdmUtilUserProperties(self.request.principal).email
+
     def __init__(self):
         PluggableAuthentication.__init__(self)
         Supernode.__init__(self)
         self.ikRevision = __version__
 
+    def get_email(self):
+        import pdb
+        pdb.set_trace()
+
+    def set_email(self):
+        import pdb
+        pdb.set_trace()
+
+    def del_email(self):
+        import pdb
+        pdb.set_trace()
+
+    email = property(get_email, set_email, del_email)
+
+    #@property
+    #def email(self, a=None, b=None):
+        #import pdb
+        #pdb.set_trace()
+        #email = AdmUtilUserProperties(self.request.principal).email
+        #return email
+    
+    
 class AdmUtilUserDashboardSet(set):
     """ instance for storing dashboard items """
     def __contains__(self, obj):
