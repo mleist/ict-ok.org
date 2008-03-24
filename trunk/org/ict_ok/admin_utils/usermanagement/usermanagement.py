@@ -67,6 +67,7 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
 
     def getRequest(self):
         """ this trick will return the request from the working interaction
+        see http://wiki.zope.org/zope3/FAQProgramming#how-do-i-get-irequest-object-in-event-handler
         """
         i = getInteraction() # raises NoInteraction
         for i_request in i.participations:
