@@ -111,4 +111,19 @@ class GenNagios(ParentGenNagios):
     def nagiosConfigFileRemove(self):
         """remove old nagios configuration file for this object
         """
-        pass
+        iServicen = self.context.getObjectId() # internal object id as filename
+        import os
+        filename = u'/opt/nagios/etc/ict_ok/Services/'+ iServicen +'.cfg'
+        try:
+            os.remove(filename)
+        except OSError, errtext:
+            raise Exception, "No such configfile: '%s'" % filename
+
+
+def _test():
+    import doctest
+    options = doctest.ELLIPSIS
+    return doctest.testfile('nagios.txt', optionflags=options)
+
+if __name__=="__main__":
+    _test()

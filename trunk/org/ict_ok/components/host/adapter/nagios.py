@@ -38,51 +38,6 @@ logger = logging.getLogger("HostGenNagios")
 
 class GenNagios(ParentGenNagios):
     """adapter implementation of Host -> nagios
-    >>> import logging
-    >>> from datetime import datetime
-    >>> from pytz import timezone
-    >>> from zope.interface import implements
-    >>> from zope.component import adapts
-    >>> from org.ict_ok.components.interface.interfaces import IInterface
-    >>> from org.ict_ok.components.host.interfaces import IHost
-    >>> from org.ict_ok.components.supernode.adapter.nagios import \
-        GenNagios as ParentGenNagios
-    >>> from org.ict_ok.admin_utils.generators.nagios.interfaces import \
-        IGenNagios
-    >>> from org.ict_ok.version import getIkVersion
-    >>> from zope.interface.verify import verifyObject
-    >>> from org.ict_ok.components.host.host import Host
-    >>> from zope.schema import vocabulary
-    >>> from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import AllEventInstances
-    >>> vr = vocabulary.getVocabularyRegistry()
-    >>> vr.register('AllEventInstances', AllEventInstances)
-    >>> host = Host()
-    ICT_OkInitializeWorkItem.start
-    ICT_OkInitializeWorkItem.finish
-    ICT_OkStartWorkItem.start
-    ICT_OkStartWorkItem.finish
-    NagiosCheckWorkItem.start
-    >>> nagios = GenNagios(host)
-    HostGenNagios.__init__
-    >>> verifyObject(IGenNagios, nagios)
-    True
-    >>> import os.path
-    >>> nagios.fileOpen()
-    >>> if (os.path.isfile('/opt/nagios/etc/ict_ok/Hosts/%s.cfg' % nagios.context.getObjectId())) == True:
-    ...     print "File Exists"
-    ... else:
-    ...     print "File does not exists"
-    File Exists
-    >>> nagios.nagiosConfigFileRemove()
-    >>> if (os.path.isfile('/opt/nagios/etc/ict_ok/Hosts/%s.cfg' % nagios.context.getObjectId())) == True:
-    ...     print "File exists"
-    ... else:
-    ...     print "File does not exists"
-    File does not exists
-    >>> nagios.nagiosConfigFileRemove()
-    Traceback (most recent call last):
-      ...
-    Exception: No such configfile: '...'
     """
 
     implements(IGenNagios)
@@ -181,7 +136,7 @@ class GenNagios(ParentGenNagios):
         ##self.fileClose()
 
     def nagiosConfigFileRemove(self):
-        """remove old nagios configuration>>> nagios.fileClose() file for this object
+        """remove old nagios configuration file for this object
         """
         #print "HostGenNagios.nagiosConfigFileRemove [%s]  -----------------------" % self.context.ikName
         ihostn = self.context.getObjectId() # internal object id as filename
@@ -191,10 +146,11 @@ class GenNagios(ParentGenNagios):
             os.remove(filename)
         except OSError, errtext:
             raise Exception, "No such configfile: '%s'" % filename
+
 def _test():
     import doctest
     options = doctest.ELLIPSIS
-    return doctest.testmod(optionflags=options)
+    return doctest.testfile('nagios.txt', optionflags=options)
 
 if __name__=="__main__":
     _test()
