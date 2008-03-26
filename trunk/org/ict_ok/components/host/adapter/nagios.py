@@ -48,7 +48,7 @@ class GenNagios(ParentGenNagios):
     attrList = ['objectID', 'hostname', 'ikName']
     
     def __init__(self, context):
-        print "HostGenNagios.__init__"
+        #print "HostGenNagios.__init__"
         ParentGenNagios.__init__(self, context)
 
     def fileOpen(self):
@@ -103,6 +103,25 @@ class GenNagios(ParentGenNagios):
         if self.wantsCheck():
             ParentGenNagios.traverse4nagiosGeneratorBody(self,
                                                          level, comments)
+
+    def nagiosConfigFileOut(self, forceOutput=False, event=None):
+        """Nagios-Filegenerator
+        
+        will produce the nagios configuration files
+        
+        forceOutput: False will check for a relevant attribute change
+        True will alway generate a new config file
+        
+        event: None or the zope event from lifecycle
+        """
+        ipv4 = None
+        for if_name, if_obj in self.context.items():
+            if IInterface.providedBy(if_obj):
+                ipv4 = if_obj.ipv4List
+        if ipv4 is not None and len(ipv4) > 0:
+            ParentGenNagios.nagiosConfigFileOut(self,
+                                                forceOutput,
+                                                event)
 
     
     #def nagiosConfigFileOut(self, forceOutput=False, event=None):

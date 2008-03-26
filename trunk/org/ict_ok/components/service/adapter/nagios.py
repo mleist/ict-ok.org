@@ -34,6 +34,11 @@ from org.ict_ok.version import getIkVersion
 
 logger = logging.getLogger("ServiceGenNagios")
 
+#from zope.interface.verify import verifyObject
+#from org.ict_ok.components.service.service import Service
+#from zope.schema import vocabulary
+#from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import AllEventInstances
+
 
 class GenNagios(ParentGenNagios):
     """adapter implementation of Service -> nagios
