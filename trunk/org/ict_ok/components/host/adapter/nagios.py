@@ -12,6 +12,7 @@
 """Adapter implementation for generating graphviz-dot configuration
 """
 
+
 __version__ = "$Id$"
 
 # phython imports
@@ -37,6 +38,51 @@ logger = logging.getLogger("HostGenNagios")
 
 class GenNagios(ParentGenNagios):
     """adapter implementation of Host -> nagios
+    >>> import logging
+    >>> from datetime import datetime
+    >>> from pytz import timezone
+    >>> from zope.interface import implements
+    >>> from zope.component import adapts
+    >>> from org.ict_ok.components.interface.interfaces import IInterface
+    >>> from org.ict_ok.components.host.interfaces import IHost
+    >>> from org.ict_ok.components.supernode.adapter.nagios import \
+        GenNagios as ParentGenNagios
+    >>> from org.ict_ok.admin_utils.generators.nagios.interfaces import \
+        IGenNagios
+    >>> from org.ict_ok.version import getIkVersion
+    >>> from zope.interface.verify import verifyObject
+    >>> from org.ict_ok.components.host.host import Host
+    >>> from zope.schema import vocabulary
+    >>> from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import AllEventInstances
+    >>> vr = vocabulary.getVocabularyRegistry()
+    >>> vr.register('AllEventInstances', AllEventInstances)
+    >>> host = Host()
+    ICT_OkInitializeWorkItem.start
+    ICT_OkInitializeWorkItem.finish
+    ICT_OkStartWorkItem.start
+    ICT_OkStartWorkItem.finish
+    NagiosCheckWorkItem.start
+    >>> nagios = GenNagios(host)
+    HostGenNagios.__init__
+    >>> verifyObject(IGenNagios, nagios)
+    True
+    >>> import os.path
+    >>> nagios.fileOpen()
+    >>> if (os.path.isfile('/opt/nagios/etc/ict_ok/Hosts/%s.cfg' % nagios.context.getObjectId())) == True:
+    ...     print "File Exists"
+    ... else:
+    ...     print "File does not exists"
+    File Exists
+    >>> nagios.nagiosConfigFileRemove()
+    >>> if (os.path.isfile('/opt/nagios/etc/ict_ok/Hosts/%s.cfg' % nagios.context.getObjectId())) == True:
+    ...     print "File exists"
+    ... else:
+    ...     print "File does not exists"
+    File does not exists
+    >>> nagios.nagiosConfigFileRemove()
+    Traceback (most recent call last):
+      ...
+    Exception: No such configfile: '...'
     """
 
     implements(IGenNagios)
@@ -47,12 +93,13 @@ class GenNagios(ParentGenNagios):
     attrList = ['objectID', 'hostname', 'ikName']
     
     def __init__(self, context):
-        #print "HostGenNagios.__init__"
+        print "HostGenNagios.__init__"
         ParentGenNagios.__init__(self, context)
 
     def fileOpen(self):
         """will open a filehandle to the specific object
         """
+        #import pdb;pdb.set_trace()
         objId = self.context.getObjectId()
         self.fileName = u'/opt/nagios/etc/ict_ok/Hosts/%s.cfg' % objId
         ParentGenNagios.fileOpen(self)
@@ -91,7 +138,7 @@ class GenNagios(ParentGenNagios):
             self.write(u"    contact_groups admins\n")
             self.write(u"    notification_interval 0\n")
             self.write(u"    notification_period 24x7\n")
-            self.write(u"    notification_options d,u,r\n")
+            self.fileClosewrite(u"    notification_options d,u,r\n")
             self.write(u"}\n\n")
 
     def traverse4nagiosGeneratorBody(self, level=0, comments=True):
@@ -134,12 +181,20 @@ class GenNagios(ParentGenNagios):
         ##self.fileClose()
 
     def nagiosConfigFileRemove(self):
-        """remove old nagios configuration file for this object
+        """remove old nagios configuration>>> nagios.fileClose() file for this object
         """
-        print "HostGenNagios.nagiosConfigFileRemove [%s]  -----------------------" % self.context.ikName
+        #print "HostGenNagios.nagiosConfigFileRemove [%s]  -----------------------" % self.context.ikName
         ihostn = self.context.getObjectId() # internal object id as filename
         import os
+        filename = u'/opt/nagios/etc/ict_ok/Hosts/'+ ihostn +'.cfg'
         try:
-            os.remove(u'/opt/nagios/etc/ict_ok/'+ ihostn +'.cfg')
+            os.remove(filename)
         except OSError, errtext:
-            print "----------------------------------- %s" % errtext
+            raise Exception, "No such configfile: '%s'" % filename
+def _test():
+    import doctest
+    options = doctest.ELLIPSIS
+    return doctest.testmod(optionflags=options)
+
+if __name__=="__main__":
+    _test()
