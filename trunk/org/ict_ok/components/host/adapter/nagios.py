@@ -138,7 +138,7 @@ class GenNagios(ParentGenNagios):
             self.write(u"    contact_groups admins\n")
             self.write(u"    notification_interval 0\n")
             self.write(u"    notification_period 24x7\n")
-            self.fileClosewrite(u"    notification_options d,u,r\n")
+            self.write(u"    notification_options d,u,r\n")
             self.write(u"}\n\n")
 
     def traverse4nagiosGeneratorBody(self, level=0, comments=True):
