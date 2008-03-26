@@ -333,7 +333,7 @@ class MSubEditContent(GlobalMenuSubItem):
 class SuperclassDetails:
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = ['ikNotes', 'ref', 'history',
+    omit_viewfields = ['objectID', 'ikNotes', 'ref', 'history',
                       'dbgLevel', 'ikEventTarget']
     omit_addfields = ['objectID', 'ikAuthor', 'ikNotes', 'ref', 'history',
                       'dbgLevel', 'ikEventTarget']

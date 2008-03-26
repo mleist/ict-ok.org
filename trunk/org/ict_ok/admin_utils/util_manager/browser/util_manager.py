@@ -19,9 +19,10 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
+from zope.app import zapi
 from zope.component import queryUtility, getAllUtilitiesRegisteredFor
 from zope.i18nmessageid import MessageFactory
-
+from zope.security.checker import canAccess
 
 # zc imports
 from zc.table.column import GetterColumn
@@ -245,7 +246,14 @@ class Overview(SuperclassOverview):
 
     def objs(self):
         """List of Content objects"""
-        return getAllUtilitiesRegisteredFor(ISuperclass)
+        objWithPermisson = []
+        allObj = getAllUtilitiesRegisteredFor(ISuperclass)
+        for obj in allObj:
+            myAdapter = zapi.queryMultiAdapter((obj, self.request),
+                                               name='details.html')
+            if myAdapter is not None and canAccess(myAdapter,'render'):
+                objWithPermisson.append(obj)
+        return objWithPermisson
 
 
 # --------------- forms ------------------------------------

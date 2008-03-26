@@ -30,13 +30,15 @@
         description="Edit from user dashboard."
     />
 
-    <!--<grant permission="org.ict_ok.admin_utils.usermanagement.View"-->
-                    <!--role="org.ict_ok.usr" />-->
+    <grant permission="org.ict_ok.admin_utils.usermanagement.View"
+                    role="org.ict_ok.usr" />
     <grant permission="org.ict_ok.admin_utils.usermanagement.View"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.usermanagement.View"
                     role="org.ict_ok.adm" />
 
+    <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"
+                    role="org.ict_ok.usr" />
     <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"

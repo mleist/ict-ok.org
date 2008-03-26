@@ -47,6 +47,10 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
     """
     major component for user registration and management
     """
+    email = TextLine(
+        title = _(u"Email address"),
+        required=True
+        )
 
 class IAdmUtilUserDashboard(Interface):
     """ user dashboard """

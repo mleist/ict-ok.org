@@ -44,7 +44,7 @@ class GenNagios(ParentGenNagios):
     
     # modification of this attributes will trigger an new generation of
     # the config file
-    attrList = ['objectID', 'hostname']
+    attrList = ['objectID', 'hostname', 'ikName']
     
     def __init__(self, context):
         #print "HostGenNagios.__init__"

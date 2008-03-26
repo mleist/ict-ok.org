@@ -102,7 +102,8 @@ class SnmpdThread(threading.Thread):
         """ forever loop which will run the snmptrapd dispatcher """
         atexit.register(self.stop)
         while not self.__stopped:
-            self.transportDispatcher.runDispatcher()
+            if self.transportDispatcher is not None:
+                self.transportDispatcher.runDispatcher()
             if forever:
                 time.sleep(1)
             else:

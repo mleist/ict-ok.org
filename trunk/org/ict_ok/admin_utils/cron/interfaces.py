@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface
-from zope.schema import TextLine
+from zope.schema import TextLine, Choice
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -23,11 +23,19 @@ from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
+import pytz
+
 
 class IAdmUtilCron(ISupernode):
     """
     major component for registration and event distribution 
     """
+
+    timezone = Choice(
+        title=_("Time Zone"),
+        description=_("Time Zone used to display your calendar"),
+        values=pytz.common_timezones,
+        required = False)
 
     def receiveCron(self, str_time):
         """receive cron signal

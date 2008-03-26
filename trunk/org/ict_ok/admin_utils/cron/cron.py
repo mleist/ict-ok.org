@@ -22,6 +22,7 @@ from datetime import datetime
 from zope.interface import implements
 from zope.app.publisher.xmlrpc import MethodPublisher
 from zope.dublincore.interfaces import IWriteZopeDublinCore
+from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -37,6 +38,7 @@ class AdmUtilCron(Supernode):
     implements(IAdmUtilCron)
 
     lastCron = "no signal since start"
+    timezone = FieldProperty(IAdmUtilCron['timezone'])
 
     def __init__(self):
         Supernode.__init__(self)

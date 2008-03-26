@@ -98,7 +98,8 @@ class DetailsAdmUtilGeneratorNagiosForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of nagios generator')
     fields = field.Fields(IAdmUtilGeneratorNagios).omit(\
-        *AdmUtilGeneratorNagiosDetails.omit_viewfields)
+        *AdmUtilGeneratorNagiosDetails.omit_viewfields) #+ \
+           #field.Fields(IAdmUtilGeneratorNagios).select('objectID')
     #def update(self):
         #import pdb
         #pdb.set_trace()

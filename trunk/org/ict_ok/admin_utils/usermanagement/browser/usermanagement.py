@@ -88,117 +88,34 @@ class MSubDelDashboard(GlobalMenuSubItem):
 class AdmUtilUserManagementDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['objectID']
+    omit_editfields = SupernodeDetails.omit_editfields + ['objectID', 'ikName']
 
+#class AdmUtilUserPropertiesForm(EditForm):
+    #""" Edit form for the object """
+    #label = _(u'edit crossbar properties')
+    #fields = Fields(IAdmUtilUserProperties).omit(['dashboard_objs'])
 
-
-class AdmUtilUserPropertiesForm(FormBase):
-    """ Form for user properties
-    """
-    form_fields = Fields(IAdmUtilUserProperties)
-    label = _(u"Edit your user data")
-    template_l = z3ctemplate.getLayoutTemplate(
-        'org.ict_ok.ikadmin_utils.usermanagement.form')
-    #getPageTemplate(
-        #'org.ict_ok.ikadmin_utils.usermanagement.form')
-    #template = NamedTemplate( \
-        #'org.ict_ok.ikadmin_utils.usermanagement.form')
-    
-    def setUpWidgets(self, ignore_request=False):
-        #import pdb; pdb.set_trace()
-        self.adapters = {}
-        self.widgets = setUpEditWidgets(
-            self.form_fields, self.prefix, self.request.principal,
-            self.request, adapters=self.adapters,
-            ignore_request=ignore_request
-            )
-        
-    @action(_(u"Save"), condition=haveInputWidgets)
-    def handleSaveButton(self, action, data):
-        principal = self.request.principal
-        if applyChanges(principal, self.form_fields, data, self.adapters):
-            self.status = _(u"Changes saved")
-        else:
-            self.status = _(u"No changes")
-        pass
-            
-    def render(self):
-        import pdb; pdb.set_trace()
-        if self.template is None:
-            template = zope.component.getMultiAdapter(
-                (self, self.request), IPageTemplate)
-            return template(self)
-        return self.template()
-
-#form_template = NamedTemplateImplementation( 
-    #ViewPageTemplateFile('form1.pt'))
-
-
-#class AdmUtilUserPropertiesForm(layout.FormLayoutSupport, form.EditForm):
-    #""" Edit for for site """
-    #label = _(u'edit user properties')
-    #fields = field.Fields(IAdmUtilUserProperties)
-    ##fields = field.Fields(AdmUtilUserProperties) #.omit(*SiteDetails.omit_editfields)
-    
-    #def updateWidgets(self):
-        #import pdb; pdb.set_trace()
-        #'''See interfaces.IForm'''
-        ##def getMultiAdapter(objects, interface=Interface, name=u'', context=None):
-        ##self.widgets = zope.component.getMultiAdapter(
-            ##(self, self.request, self.getContent()), interfaces.IWidgets)
-        #self.widgets = zope.component.getMultiAdapter(
-            #(self, self.request, AdmUtilUserProperties), interfaces.IWidgets).items()
-        #self.widgets.mode = self.mode
-        #self.widgets.ignoreContext = self.ignoreContext
-        #self.widgets.ignoreRequest = self.ignoreRequest
-        #self.widgets.ignoreReadonly = self.ignoreReadonly
-        #self.widgets.update()
-        
-    #def render(self):
-        #'''See interfaces.IForm'''
-        #import pdb; pdb.set_trace()
-        ## render content template
-        #if self.template is None:
-            #template = zope.component.getMultiAdapter((self, self.request),
-                #IPageTemplate)
-            #return template(self)
-        #return self.template()
-
-    #def setUpWidgets(self, ignore_request=False):
-        #self.adapters = {}
-        #self.widgets = setUpEditWidgets(
-            #self.form_fields, self.prefix, self.request.principal,
-            #self.request, adapters=self.adapters,
-            #ignore_request=ignore_request
-            #)
-
-    #@action(_(u"Save"), condition=haveInputWidgets)
-    #def handleSaveButton(self, action, data):
-        #principal = self.request.principal
-        #if applyChanges(principal, self.form_fields, data, self.adapters):
-            #self.status = _(u"Changes saved")
-        #else:
-            #self.status = _(u"No changes")
-
-#class AdmUtilUserPropertiesForm(FormBase):
+#class AdmUtilUserPropertiesForm2(FormBase):
     #""" Form for user properties
     #"""
     #form_fields = Fields(IAdmUtilUserProperties)
     #label = _(u"Edit your user data")
-    #template = NamedTemplate(\
-        #'org.ict_ok.admin_utils.userproperties.form')
+    #template_l = z3ctemplate.getLayoutTemplate(
+        #'org.ict_ok.ikadmin_utils.usermanagement.form')
+    ##getPageTemplate(
+        ##'org.ict_ok.ikadmin_utils.usermanagement.form')
+    ##template = NamedTemplate( \
+        ##'org.ict_ok.ikadmin_utils.usermanagement.form')
     
     #def setUpWidgets(self, ignore_request=False):
+        ##import pdb; pdb.set_trace()
         #self.adapters = {}
         #self.widgets = setUpEditWidgets(
             #self.form_fields, self.prefix, self.request.principal,
             #self.request, adapters=self.adapters,
             #ignore_request=ignore_request
             #)
-    #def setUpEditWidgets(form_fields, form_prefix, context, request,
-                         #adapters=None, for_display=False,
-                         #ignore_request=False):
         
     #@action(_(u"Save"), condition=haveInputWidgets)
     #def handleSaveButton(self, action, data):
@@ -207,24 +124,110 @@ class AdmUtilUserPropertiesForm(FormBase):
             #self.status = _(u"Changes saved")
         #else:
             #self.status = _(u"No changes")
+        #pass
+            
+    #def render(self):
+        #import pdb; pdb.set_trace()
+        #if self.template is None:
+            #template = zope.component.getMultiAdapter(
+                #(self, self.request), IPageTemplate)
+            #return template(self)
+        #return self.template()
+
+##form_template = NamedTemplateImplementation( 
+    ##ViewPageTemplateFile('form1.pt'))
+
+
+##class AdmUtilUserPropertiesForm(layout.FormLayoutSupport, form.EditForm):
+    ##""" Edit for for site """
+    ##label = _(u'edit user properties')
+    ##fields = field.Fields(IAdmUtilUserProperties)
+    ###fields = field.Fields(AdmUtilUserProperties) #.omit(*SiteDetails.omit_editfields)
+    
+    ##def updateWidgets(self):
+        ##import pdb; pdb.set_trace()
+        ##'''See interfaces.IForm'''
+        ###def getMultiAdapter(objects, interface=Interface, name=u'', context=None):
+        ###self.widgets = zope.component.getMultiAdapter(
+            ###(self, self.request, self.getContent()), interfaces.IWidgets)
+        ##self.widgets = zope.component.getMultiAdapter(
+            ##(self, self.request, AdmUtilUserProperties), interfaces.IWidgets).items()
+        ##self.widgets.mode = self.mode
+        ##self.widgets.ignoreContext = self.ignoreContext
+        ##self.widgets.ignoreRequest = self.ignoreRequest
+        ##self.widgets.ignoreReadonly = self.ignoreReadonly
+        ##self.widgets.update()
+        
+    ##def render(self):
+        ##'''See interfaces.IForm'''
+        ##import pdb; pdb.set_trace()
+        ### render content template
+        ##if self.template is None:
+            ##template = zope.component.getMultiAdapter((self, self.request),
+                ##IPageTemplate)
+            ##return template(self)
+        ##return self.template()
+
+    ##def setUpWidgets(self, ignore_request=False):
+        ##self.adapters = {}
+        ##self.widgets = setUpEditWidgets(
+            ##self.form_fields, self.prefix, self.request.principal,
+            ##self.request, adapters=self.adapters,
+            ##ignore_request=ignore_request
+            ##)
+
+    ##@action(_(u"Save"), condition=haveInputWidgets)
+    ##def handleSaveButton(self, action, data):
+        ##principal = self.request.principal
+        ##if applyChanges(principal, self.form_fields, data, self.adapters):
+            ##self.status = _(u"Changes saved")
+        ##else:
+            ##self.status = _(u"No changes")
+
+##class AdmUtilUserPropertiesForm(FormBase):
+    ##""" Form for user properties
+    ##"""
+    ##form_fields = Fields(IAdmUtilUserProperties)
+    ##label = _(u"Edit your user data")
+    ##template = NamedTemplate(\
+        ##'org.ict_ok.admin_utils.userproperties.form')
+    
+    ##def setUpWidgets(self, ignore_request=False):
+        ##self.adapters = {}
+        ##self.widgets = setUpEditWidgets(
+            ##self.form_fields, self.prefix, self.request.principal,
+            ##self.request, adapters=self.adapters,
+            ##ignore_request=ignore_request
+            ##)
+    ##def setUpEditWidgets(form_fields, form_prefix, context, request,
+                         ##adapters=None, for_display=False,
+                         ##ignore_request=False):
+        
+    ##@action(_(u"Save"), condition=haveInputWidgets)
+    ##def handleSaveButton(self, action, data):
+        ##principal = self.request.principal
+        ##if applyChanges(principal, self.form_fields, data, self.adapters):
+            ##self.status = _(u"Changes saved")
+        ##else:
+            ##self.status = _(u"No changes")
             
 
-#form_template = NamedTemplateImplementation(
-    #ViewPageTemplateFile('form1.pt'))
+##form_template = NamedTemplateImplementation(
+    ##ViewPageTemplateFile('form1.pt'))
 
 
 # --------------- forms ------------------------------------
 
 
-class ViewAdmUtilUserManagementForm(DisplayForm):
+class DetailsAdmUtilUserManagementForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of graphviz adapter')
+    label = _(u'settings of usermanagement')
     fields = field.Fields(IAdmUtilUserManagement).omit(\
         *AdmUtilUserManagementDetails.omit_viewfields)
 
 
 class EditAdmUtilUserManagementForm(EditForm):
     """ Edit for for net """
-    label = _(u'edit graphviz adapter')
+    label = _(u'edit user management')
     fields = field.Fields(IAdmUtilUserManagement).omit(\
         *AdmUtilUserManagementDetails.omit_editfields)

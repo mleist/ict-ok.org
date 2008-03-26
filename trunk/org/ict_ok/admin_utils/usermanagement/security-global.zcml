@@ -31,5 +31,13 @@
     <grant permission="zope.app.dublincore.view"
                     role="org.ict_ok.dvl" />
 
+    <grant permission="zope.app.dublincore.change"
+                    role="org.ict_ok.usr" />
+    <grant permission="zope.app.dublincore.change"
+                    role="org.ict_ok.mgr" />
+    <grant permission="zope.app.dublincore.change"
+                    role="org.ict_ok.adm" />
+    <grant permission="zope.app.dublincore.change"
+                    role="org.ict_ok.dvl" />
 
 </configure>

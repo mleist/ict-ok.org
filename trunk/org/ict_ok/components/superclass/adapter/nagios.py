@@ -152,7 +152,8 @@ class GenNagios(object):
     def eventModifiesCfgFile(self, event):
         """check for attribute changes
         """
-        if event is not None:
+        if event is not None and \
+           len(event.descriptions) > 0:
             attrInst = list(event.descriptions)[0]
             modAttributes = set(attrInst.attributes)
             adapterAttributes = set(self.attrList)

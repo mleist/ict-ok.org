@@ -18,7 +18,7 @@
             interface=".interfaces.IAdmUtilUserManagement"
             />
         <require
-            permission="org.ict_ok.admin_utils.usermanagement.View"
+            permission="org.ict_ok.admin_utils.usermanagement.Edit"
             set_schema=".interfaces.IAdmUtilUserManagement"
             />
     </class>

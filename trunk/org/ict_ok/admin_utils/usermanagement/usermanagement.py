@@ -31,6 +31,7 @@ from zope.app.catalog.interfaces import ICatalog
 from zope.traversing.api import getPath, getRoot, traverse
 from zope.security.management import getInteraction
 from zope.publisher.interfaces import IRequest
+from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -59,6 +60,8 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
 
     implements(IAdmUtilUserManagement)
     adapts(IPrincipal)
+
+    #email = FieldProperty(IAdmUtilUserManagement['email'])
 
     def __init__(self):
         PluggableAuthentication.__init__(self)

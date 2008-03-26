@@ -25,6 +25,7 @@ from zope.i18nmessageid import MessageFactory
 from org.ict_ok.components.supernode.interfaces import \
      IEventIfSupernode, ISupernode
 from org.ict_ok.libs.lib import oid2dcTitle, nodeIsUnder
+from org.ict_ok.schema.datetime import IctDatetime
 
 _ = MessageFactory('org.ict_ok')
 
@@ -200,7 +201,7 @@ class IEventTimingRelay(IEventLogic):
     timing relay with trigger- and reset-input and
     one delayed output
     """
-    timeStart = Datetime(
+    timeStart = IctDatetime(
         title = _("start time"),
         description = _("last trigger received at"),
         default = datetime.datetime(1901, 1, 1, 0, 0),
@@ -255,7 +256,7 @@ class IEventTimer(IEventLogic):
     timer with start- and stop-input and
     one pulse output
     """
-    timeNext = Datetime(
+    timeNext = IctDatetime(
         title = _("next pulse"),
         description = _("next pulse at"),
         default = datetime.datetime(1901, 1, 1, 0, 0),

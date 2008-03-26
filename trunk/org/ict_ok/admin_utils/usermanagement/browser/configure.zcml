@@ -28,13 +28,13 @@
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--permission="org.ict_ok.admin_utils.usermanagement.View"-->
     <!--/>-->
-    <z3c:pagelet
-        for="*"
-        name="preferences"
-        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.AdmUtilUserPropertiesForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.admin_utils.usermanagement.View"
-    />
+    <!--<z3c:pagelet-->
+        <!--name="preferences"-->
+        <!--for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"-->
+        <!--class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.AdmUtilUserPropertiesForm"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.admin_utils.usermanagement.View"-->
+    <!--/>-->
 
 
     <!--======================================================-->
@@ -46,6 +46,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.usermanagement.View"
         />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"
+        class=".usermanagement.DetailsAdmUtilUserManagementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.usermanagement.View"
+    />
 
     <z3c:pagelet
         name="edit.html"
