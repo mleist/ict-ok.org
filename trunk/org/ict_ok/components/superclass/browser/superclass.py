@@ -553,14 +553,16 @@ class EditForm(layout.FormLayoutSupport, form.EditForm):
             descriptions = []
             for interface, attrs in changes.items():
                 if interface == IAdmUtilEvent:
-                    print "##### Event #######"
+                    #print "##### Event #######"
+                    pass
                 elif IEventIfSuperclass.isEqualOrExtendedBy(interface):
-                    print "##### Superclass #######"
+                    #print "##### Superclass #######"
+                    pass
                 names = attrs.keys()
-                for attr in attrs:
-                    print "attr: %s (I:%s)" % (attr, interface)
-                    print "   old: ", attrs[attr]['oldval']
-                    print "   new: ", attrs[attr]['newval']
+                #for attr in attrs:
+                    #print "attr: %s (I:%s)" % (attr, interface)
+                    #print "   old: ", attrs[attr]['oldval']
+                    #print "   new: ", attrs[attr]['newval']
                 descriptions.append(Attributes(interface, *names))
             # Send out a detailed object-modified event
             zope.event.notify(ObjectModifiedEvent(content, *descriptions))
