@@ -411,7 +411,7 @@ def notifyAddedEvent(instance, event):
     """
     Node was added
     """
-    print "Superclass.notifyAddedEvent"
+    #print "Superclass.notifyAddedEvent"
     nagiosAdapter = IGenNagios(event.object)
     if nagiosAdapter is not None:
         nagiosAdapter.nagiosConfigFileOut(True, event)
@@ -421,7 +421,7 @@ def notifyModifiedEvent(instance, event):
     """
     Node was modified
     """
-    print "Superclass.notifyModifiedEvent"
+    #print "Superclass.notifyModifiedEvent"
     allEventObjs = event.object.getAllOutEventObjs()
     utilXbar = queryUtility(IAdmUtilEventCrossbar)
     for eventObj in allEventObjs:
@@ -438,14 +438,14 @@ def notifyMovedEvent(instance, event):
     """
     Node was moved
     """
-    print "Superclass.notifyMovedEvent"
+    #print "Superclass.notifyMovedEvent"
 
 @adapter(ISuperclass, IObjectRemovedEvent)
 def notifyRemovedEvent(instance, event):
     """
     Node was removed
     """
-    print "Superclass.notifyRemovedEvent"
+    #print "Superclass.notifyRemovedEvent"
     print "ikName:", event.object.ikName
     print "getObjectId():", event.object.getObjectId()
     nagiosAdapter = IGenNagios(event.object)
