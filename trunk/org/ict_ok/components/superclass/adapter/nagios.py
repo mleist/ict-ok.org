@@ -122,7 +122,7 @@ class GenNagios(object):
         comments: should there comments are in the output?
 
         """
-        if IComponent.providedBy(self):
+        if IComponent.providedBy(self.context):
             self.fileOpen()
             self.traverse4nagiosGeneratorPre(level, comments)
             self.traverse4nagiosGeneratorBody(level, comments)
