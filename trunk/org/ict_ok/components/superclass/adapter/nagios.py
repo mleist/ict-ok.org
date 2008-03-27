@@ -30,7 +30,7 @@ from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IGenNagios, IAdmUtilGeneratorNagios
 from org.ict_ok.version import getIkVersion
-
+from org.ict_ok.components.component import IComponent
 logger = logging.getLogger("SuperclassGenNagios")
 
 
@@ -122,11 +122,12 @@ class GenNagios(object):
         comments: should there comments are in the output?
 
         """
-        self.fileOpen()
-        self.traverse4nagiosGeneratorPre(level, comments)
-        self.traverse4nagiosGeneratorBody(level, comments)
-        self.traverse4nagiosGeneratorPost(level, comments)
-        self.fileClose()
+        if IComponent.providedBy(self):
+            self.fileOpen()
+            self.traverse4nagiosGeneratorPre(level, comments)
+            self.traverse4nagiosGeneratorBody(level, comments)
+            self.traverse4nagiosGeneratorPost(level, comments)
+            self.fileClose()
         
     def nagiosConfigFileOut(self, forceOutput=False, event=None):
         """Nagios-Filegenerator
