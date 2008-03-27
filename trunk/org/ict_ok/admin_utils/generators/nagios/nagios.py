@@ -68,12 +68,12 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
         if retInt == 0:
             self.lastDeamonReload = datetime.datetime.utcnow()
         else:
-            print "reloadDaemon Error No: ", retInt
+            logger.warning(u"reloadDaemon Error No: %d", retInt)
         
     def allConfigFilesOut(self):
         """make configuration file
         """
-        self.touchLastConfigFile
+        self.touchLastConfigFile()
         its = zapi.getRoot(self).items()
         for (dummy_name, oobj) in its:
             if ISupernode.providedBy(oobj):
@@ -89,8 +89,6 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
         """check for changes
         """
         if self.lastDeamonReload is None:
-            print "reload it"
             self.reloadDaemon()
         elif self.lastConfigFileChange >= self.lastDeamonReload:
-            print "reload it"
             self.reloadDaemon()
