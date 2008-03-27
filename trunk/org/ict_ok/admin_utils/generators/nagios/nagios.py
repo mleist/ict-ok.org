@@ -23,6 +23,7 @@ import datetime
 from zope.app import zapi
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.component import getUtility
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import ISupernode
@@ -39,6 +40,8 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
     """
     implements(IAdmUtilGeneratorNagios)
     
+    isRunning = FieldProperty(\
+        IAdmUtilGeneratorNagios['isRunning'])
     lastConfigFileChange = FieldProperty(\
         IAdmUtilGeneratorNagios['lastConfigFileChange'])
     pathInitScript = FieldProperty(\
@@ -47,6 +50,7 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
         IAdmUtilGeneratorNagios['lastDeamonReload'])
 
     def __init__(self):
+        self.isRunning = False
         self.lastConfigFileChange = None
         self.lastDeamonReload = None
         self.pathInitScript = u"/etc/init.d/nagios"
@@ -63,12 +67,15 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
     def reloadDaemon(self):
         """ reload the nagios daemon
         """
-        retInt = os.system('echo "" |sudo -S ' + self.pathInitScript + \
-                           ' reload > /dev/null 2>&1')
-        if retInt == 0:
-            self.lastDeamonReload = datetime.datetime.utcnow()
-        else:
-            logger.warning(u"reloadDaemon Error No: %d", retInt)
+        nagiosUtil = getUtility(IAdmUtilGeneratorNagios)
+        if nagiosUtil is not None and \
+           nagiosUtil.isRunning:
+            retInt = os.system('echo "" |sudo -S ' + self.pathInitScript + \
+                               ' reload > /dev/null 2>&1')
+            if retInt == 0:
+                self.lastDeamonReload = datetime.datetime.utcnow()
+            else:
+                logger.warning(u"reloadDaemon Error No: %d", retInt)
         
     def allConfigFilesOut(self):
         """make configuration file

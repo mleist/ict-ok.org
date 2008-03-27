@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface
-from zope.schema import Datetime, TextLine
+from zope.schema import Datetime, TextLine, Bool
 from org.ict_ok.schema.datetime import IctDatetime
 from zope.i18nmessageid import MessageFactory
 
@@ -30,6 +30,10 @@ class IAdmUtilGeneratorNagios(IAdmUtilGenerators):
     """
     major component for registration and event distribution 
     """
+    isRunning = Bool(
+        title = _("nagios is running"),
+        default = False)
+
     pathInitScript = TextLine(
         max_length = 200,
         title = _("init script"),

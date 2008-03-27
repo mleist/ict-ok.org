@@ -25,7 +25,7 @@ generation = 2
 
 def evolve(context):
     u"""
-    nagios utility now supports nagios init-script
+    nagios utility now supports nagios init-script and running flag
     """
     
     root = getRootFolder(context) # the Zope-Root-Folders
@@ -35,6 +35,7 @@ def evolve(context):
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
         obj.pathInitScript = u"/etc/init.d/nagios"
+        obj.isRunning = False
         print "Object(%s): " % obj.ikName + evolve_msg
         obj.appendHistoryEntry(evolve_msg)
 
