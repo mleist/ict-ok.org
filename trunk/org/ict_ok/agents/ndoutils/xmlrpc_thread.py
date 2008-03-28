@@ -85,7 +85,7 @@ class XmlRpcThread(threading.Thread):
         self.username = 'admin'
         self.password = 'admin'
         #self.url = 'http://localhost:8080/++etc++site/default/IkAdmUtilGeneratorNagios'
-        self.url = "http://localhost:8081/++etc++site/default/AdmUtilGeneratorNagios"
+        self.url = "http://localhost:8080/++etc++site/default/AdmUtilGeneratorNagios"
         self.host = xmlrpclib.Server(self.url, transport = \
                                      BasicAuthTransport(self.username,
                                                         self.password))

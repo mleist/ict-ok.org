@@ -18,9 +18,10 @@ __versRevision = "$LastChangedRevision$"
 
 # phython imports
 import sys
+import os
 import time
 
-sys.path.append("/home/markus/Projekte/dev_Zope_br34/inst_ict_ok_1.5/lib/python")
+# sys.path.append("/home/markus/Projekte/dev_Zope_br34/inst_ict_ok_1.5/lib/python")
 
 # zope imports
 
@@ -32,6 +33,9 @@ from org.ict_ok.agents.ndoutils.ndo_thread import NdoThread
 from org.ict_ok.agents.ndoutils.xmlrpc_thread import XmlRpcThread
 
 if __name__ == "__main__":
+    pidFile = open("/var/run/ndoutils.pid", "w")
+    pidFile.write(str(os.getpid()))
+    pidFile.close()
     main_logger = IkLogger("ndoutils")
     main_logger.log.info("Nagios ndoutils Connector (Rev.: %s)" % \
                          getVersRevision(__versRevision) )
@@ -50,7 +54,7 @@ if __name__ == "__main__":
         try:
             time.sleep(600)
             main_logger.log.debug("600 sec trigger")
-        except KeyboardInterrupt:
+        except: # KeyboardInterrupt:
             main_logger.log.info("Interrupted by Keyboard")
             #pQueue.sync()
             #main_logger.log.info("Queue synced")
@@ -62,4 +66,7 @@ if __name__ == "__main__":
     del pQueue
     main_logger.log.info("Logger stopped")
     del main_logger
-    
+    try:
+        os.remove("/var/run/ndoutils.pid")
+    except:
+        pass
