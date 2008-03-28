@@ -20,10 +20,12 @@ import zope.interface
 from zope.wfmc import interfaces
 from zope.interface import implements
 from zope.wfmc import xpdl
+from zope.app.appsetup import appsetup
 
-#package = xpdl.read(open("/home/markus/Projekte/ICT_Ok-hp/service/wf/service_nagios.xpdl"))
-#package = xpdl.read(open("./service_nagios.xpdl"))
-package = xpdl.read(open("./lib/python/org/ict_ok/components/service/wf/service_nagios.xpdl"))
+lenDirName = len('etc/site.zcml') * -1
+instDirName = appsetup.getConfigSource()[:lenDirName]
+package = xpdl.read(open(instDirName + \
+                         "lib/python/org/ict_ok/components/service/wf/service_nagios.xpdl"))
 
 def log_workflow(event):
     print event

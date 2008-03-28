@@ -25,11 +25,15 @@ from zope.wfmc import xpdl
 from zope.wfmc import interfaces
 from zope.wfmc.attributeintegration import AttributeIntegration
 from zope.component import adapts, provideUtility
+from zope.app.appsetup import appsetup
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.notifier.notifier import NotifyUserEvent
 
-package = xpdl.read(open("./lib/python/org/ict_ok/components/host/wf/host_nagios.xpdl"))
+lenDirName = len('etc/site.zcml') * -1
+instDirName = appsetup.getConfigSource()[:lenDirName]
+package = xpdl.read(open(instDirName + \
+                         "lib/python/org/ict_ok/components/host/wf/host_nagios.xpdl"))
 
 
 class Participant(Persistent):
