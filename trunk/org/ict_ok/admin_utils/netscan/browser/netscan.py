@@ -119,7 +119,7 @@ class NetScanDetails(SupernodeDetails):
 # --------------- forms ------------------------------------
 
 
-class ViewNetScanForm(DisplayForm):
+class DetailsNetScanForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of all net scanner')
     fields = field.Fields(INetScan).omit(\

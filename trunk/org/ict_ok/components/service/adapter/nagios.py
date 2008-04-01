@@ -128,7 +128,7 @@ class GenNagios(ParentGenNagios):
 def _test():
     import doctest
     options = doctest.ELLIPSIS
-    return doctest.testfile('nagios.txt', optionflags=options)
+    return doctest.testfile('../../../doctests/nagios-service.txt', optionflags=options)
 
 if __name__=="__main__":
     _test()

@@ -16,10 +16,9 @@ __version__ = "$Id$"
 
 # phython imports
 import logging
-import xml.dom.minidom
 from datetime import datetime
 from pytz import timezone
-from xml.dom.minidom import Node
+from lxml import etree
 from pprint import pprint
 
 # zope imports
@@ -54,198 +53,201 @@ class AdmUtilNMap(Scanner):
         """
         fill our data dictonary
         """
-        doc = xml.dom.minidom.parse("/home/markus/Projekte/python_nmap/172_16_10.xml")
-        hosts = doc.getElementsByTagName('host')
-        resultList = []
+        f = open("/home/sebastian/Desktop/drako.xml", "r")
+        xmlstring = f.read()
+        f.close()
+        tree = etree.fromstring(xmlstring)
+        nmaprun = tree.getchildren()
         
-        for host in hosts:
-            try:
-                del(result)
-            except:
-                pass
-            result = {}        
-            if host.nodeType == Node.ELEMENT_NODE:
-                hostStatusElements = host.getElementsByTagName('status')
-                if hostStatusElements[0].hasAttribute('state'):
-                    hostState = hostStatusElements[0].getAttribute('state')
-                    if hostState == 'up':
-                        ####### Hostinformation
-                        hostAddressElements = host.getElementsByTagName('address')
-                        for addressElement in hostAddressElements:
-                            addressType = addressElement.getAttribute('addrtype')
-                            if addressType == 'ipv4':
-                                result['ipAddress'] =  addressElement.getAttribute('addr')
-                                result['pAddressType'] = addressElement.getAttribute('addrtype')
-                            if addressType == 'mac':
-                                result['macAddress'] =  addressElement.getAttribute('addr')
-                        hostNameElements = host.getElementsByTagName('hostname')
-                        if len(hostNameElements) > 0:
-                            result['hostname'] = hostNameElements[0].getAttribute('name')
-                        ####### Portinformation
-                        result['ports'] = []
-                        hostPorts = host.getElementsByTagName('port')
-                        for hostPort in hostPorts:
-                            portStatusElements = hostPort.getElementsByTagName('state')
-                            if portStatusElements[0].getAttribute('state').find("open") >= 0 : # cause of 'open|filtered'
-                                portServiceElements = hostPort.getElementsByTagName('service')
+        returnList = []
+        for host in nmaprun:
+            if(host.tag == "host"):
+                hostDict = {}
+                for address in host.findall('address'):
+                    if(address.attrib['addrtype'] == 'ipv4'):
+                        ip = address.attrib['addr']
+                    elif(address.attrib['addrtype'] == 'mac'):
+                        mac = address.attrib['addr']
+                hostDict['hostname'] = unicode(ip)
+                hostnames = host.find('hostnames')
+                hostnameschilds = hostnames.getchildren()
+                if(len(hostnameschilds) > 0):
+                    hostname = hostnameschilds[0].get('name')
+                    hostDict['hostname'] = unicode(hostname)
+                hostDict['description'] = u''
+                hostDict['manufacturer'] = u''
+                hostDict['vendor'] = u''
+                hostDict['workinggroup'] = u''
+                hostDict['hardware'] = u''
+                hostDict['user'] = u''
+                hostDict['inv_id'] = u''
+                hostDict['building'] = u''
+                hostDict['room'] = u''
+                hostDict['oss'] = []
+                hostDict['interfaces'] = [
+                    {
+                        'nbr': u'01',
+                        'name': u'lan01',
+                        'netType': u'ethernet',
+                        'macAddress': mac,
+                        'ipAddress': ip,
+                        'ipAddressType': u'ipv4',
+                        'services': []
+                    }
+                ]
+        
+        # service
+        #{
+                #'port': u''
+                #'product': u''
+                #'version': u''
+                #'extrainfo': u''
+                #'method': u''
+                #'service': u''
+            #}
+                #import pdb
+                #pdb.set_trace()
+                for ports in host.findall('ports'):
+                    for port in ports.findall('port'):
+                        serviceDict = {}
+                        serviceDict['port'] = port.attrib['portid']
+                        serviceDict['protocol'] = port.attrib['protocol']
+                        for child in port.getchildren():
+                            if(child.tag == 'service'):
+                                serviceDict['service'] = child.attrib['name']
                                 try:
-                                    del(resultPort)
+                                    serviceDict['product'] = child.attrib['product']
                                 except:
-                                    pass
-                                resultPort = {}
-                                resultPort['port'] = hostPort.getAttribute('portid')
-                                resultPort['state'] = portStatusElements[0].getAttribute('state')
-                                resultPort['protocol'] = hostPort.getAttribute('protocol')
-                                if len(portServiceElements) > 0:
-                                    resultPort['service'] =  portServiceElements[0].getAttribute('name')
-                                else:
-                                    resultPort['service'] = "Port %s" % resultPort['port']
-                                result['ports'].append(resultPort)
-                        ####### Operatingsystem information
-                        result['oss'] = []
-                        hostOss = host.getElementsByTagName('osclass')
-                        for hostOs in hostOss:
-                            try:
-                                del(resultOs)
-                            except:
-                                pass
-                            resultOs = {}
-                            resultOs['type'] = hostOs.getAttribute('type')
-                            resultOs['vendor'] = hostOs.getAttribute('vendor')
-                            resultOs['osfamily'] = hostOs.getAttribute('osfamily')
-                            resultOs['osgen'] = hostOs.getAttribute('osgen')
-                            resultOs['accuracy'] = hostOs.getAttribute('accuracy')
-                            result['oss'].append(resultOs)
-                        resultList.append(result)
-        return resultList
+                                    serviceDict['product'] = u''
+                        hostDict['interfaces'][0]['services'].append(serviceDict)
+                returnList.append(hostDict)
+        return returnList
+
+    def createServiceObject(self, parent, serviceDict):
+        """helper methode to create service instance
+        """
+        dateNow = datetime.utcnow()
+        #if port['port'] == u"389":   ## ldap
+            #newService = zapi.createObject(None, 'ikom.service.ServiceLdap')
+            #newService.__setattr__("basedn", u'dc=domain,dc=tld')
+        if False:
+            pass
+        elif serviceDict['port'] == u"22":   ## ssh
+            newService = zapi.createObject(\
+                u'org.ict_ok.components.service.special.ssh.service.ServiceSsh')
+        elif serviceDict['port'] == u"80":   ## ssh
+            newService = zapi.createObject(\
+                u'org.ict_ok.components.service.special.http.service.ServiceHttp')
+        else:
+            newService = zapi.createObject(\
+                u'org.ict_ok.components.service.service.Service')
+        newServiceId=u"%s" % (serviceDict['port'])
+        parent.__setitem__(newService.getObjectId(), newService)
+        #newService.__setattr__("genNagios", True)
+        newServiceDc = IZopeDublinCore(newService, None)
+        newServiceDc.title = u"%s" % serviceDict['service']
+        newServiceDc.created = datetime.utcnow()
+        newServiceDc.creators = [u'ikportscan']
+        try:
+            intPort = int(serviceDict['port'])
+            newService.__setattr__("port", intPort)
+        except ValueError:
+            raise Exception, "port number isn't valid '%s'" % serviceDict['port']
+        except TypeError:
+            raise Exception, "port number isn't valid '%s'" % serviceDict['port']
+        newService.__setattr__("product", unicode(serviceDict['product']))
+        newService.__setattr__("ipprotocol",
+                               unicode(serviceDict['protocol'.lower()]))
+        if serviceDict.has_key('service'): ## and (len(port['service']) > 0):
+            newServiceDc.title = u"%s" % serviceDict['service']
+        else:
+            newServiceDc.title = u"%s" % serviceDict['port']
+        notify(ObjectCreatedEvent(newService))
+
+    def createInterfaceObject(self, parent, interfaceDict):
+        """helper methode to create interface instance
+        """
+        dateNow = datetime.utcnow()
+        newInterface = createObject(\
+            u'org.ict_ok.components.interface.interface.Interface')
+        newInterfaceId=u"If%s" % (interfaceDict['nbr'])
+        parent.__setitem__(newInterface.getObjectId(), newInterface)
+        newInterfaceDc = IZopeDublinCore(newInterface, None)
+        newInterfaceDc.title = u"%s" % interfaceDict['name']
+        newInterfaceDc.__setattr__("ikName", newInterfaceDc.title)
+        newInterfaceDc.created = datetime.utcnow()
+        newInterfaceDc.creators = [u'ikportscan']
+        newInterface.ikComment += u"scanner: %s" % (dateNow)
+        if interfaceDict.has_key('macAddress'):
+            newInterface.__setattr__("mac", unicode(interfaceDict['macAddress']))
+        if interfaceDict.has_key('ipAddressType') and \
+           interfaceDict['ipAddressType'] == u'ipv4':
+            if interfaceDict.has_key('ipAddress'):
+                #newInterface.ipv4List.append(interfaceDict['ipAddress'])
+                newInterface.ipv4List = unicode(interfaceDict['ipAddress'])
+        ### build snmp objects
+        #if interfaceDict.has_key("snmplist") and len(interfaceDict['snmplist'])>0:
+            #for snmpDict in interfaceDict['snmplist']:
+                ### oid-Test
+                #newSnmp = zapi.createObject(None, 'ikom.snmp.Snmp')
+                #notify(ObjectCreatedEvent(newSnmp))
+                #newSnmp.__setattr__("description", snmpDict['name'])
+                #newSnmp.__setattr__("checktype", "oid")
+                #newSnmp.__setattr__("inputtype", "abs")
+                #newSnmp.__setattr__("oid1", snmpDict['oid1'])
+                #newSnmp.__setattr__("oid2", snmpDict['oid2'])
+                #for i in ["cmd", "inptype", "inpUnit", "displayUnitNumerator", "displayUnitDenominator",
+                          #"checkMax", "checkMaxLevel", "checkMaxLevelUnitNumerator", "checkMaxLevelUnitDenominator"]:
+                    #newSnmp.__setattr__(i, snmpDict[i])
+                #newSnmpDc = IZopeDublinCore(newSnmp, None)
+                #newSnmpId=u"%s" % (snmpDict['name'])
+                #newSnmpDc.title = u"%s" % (snmpDict['name'])
+                #newSnmpDc.created = datetime.utcnow()
+                #newSnmpDc.creators = [u'ikportscan']
+                #newInterface.__setitem__(newSnmpId, newSnmp)
+        ### build services
+        for serviceDict in interfaceDict['services']:
+            self.createServiceObject(newInterface, serviceDict)
+        notify(ObjectCreatedEvent(newInterface))
+
+    def createHostObject(self, parent, hostDict):
+        """helper methode to create host instance
+        """
+        dateNow = datetime.utcnow()
+        newHost = createObject(u'org.ict_ok.components.host.host.Host')
+        notify(ObjectCreatedEvent(newHost))
+        parent.__setitem__(newHost.getObjectId(), 
+                           newHost)
+        dc = IZopeDublinCore(newHost, None)
+        dc.creators = [u'ikportscan']
+        newHost.ikComment += u"scanner: %s" % (dateNow)
+        if hostDict.has_key('hostname'):
+            newHost.__setattr__("ikName", hostDict['hostname'])
+            newHost.__setattr__("hostname", hostDict['hostname'])
+            dc.title = hostDict['hostname']
+        else:
+            newHost.__setattr__("ikName", hostDict['ipAddress'])
+            dc.title = hostDict['ipAddress']
+        for i_os in hostDict['oss']:
+            os_string = u"%s %s (%s) (%s)" % (i_os['osfamily'],
+                                               i_os['osgen'],
+                                               i_os['type'],
+                                               i_os['vendor'])
+            newHost.osList.append(os_string)
+        newHost.__setattr__("genNagios", True)
+        dc.created = dateNow
+        if hostDict.has_key("interfaces") and len(hostDict['interfaces'])>0:
+            for interfaceDict in hostDict['interfaces']:
+                self.createInterfaceObject(newHost, interfaceDict)
+        notify(ObjectCreatedEvent(newHost))
 
     def createObjects(self, hostList, containerObject):
         """
         will use factories to create the objects from the dataDict
         """
-        for host in hostList:
-            dateNow = datetime.now(berlinTZ)
-            newHost = createObject(u'org.ict_ok.components.host.host.Host')
-            notify(ObjectCreatedEvent(newHost))
-            containerObject.__setitem__(newHost.getObjectId(), 
-                                         newHost)
-            dc = IZopeDublinCore(newHost, None)
-            dc.creators = [u'ikportscan']
-            newHost.ikComment += u"scanner: %s" % (dateNow)
-            if host.has_key('hostname'):
-                newHost.__setattr__("ikName", host['hostname'])
-                newHost.__setattr__("hostname", host['hostname'])
-                dc.title = host['hostname']
-            else:
-                newHost.__setattr__("ikName", host['ipAddress'])
-                dc.title = host['ipAddress']
-            for i_os in host['oss']:
-                os_string = u"%s %s (%s) (%s)" % (i_os['osfamily'],
-                                                   i_os['osgen'],
-                                                   i_os['type'],
-                                                   i_os['vendor'])
-                newHost.osList.append(os_string)
-            newHost.__setattr__("genNagios", True)
-            dc.created = dateNow
-                
-            if host.has_key("interfaces") and len(host['interfaces'])>0:
-                for interfaceDict in host['interfaces']:
-                    newInterface = createObject(\
-                        u'org.ict_ok.components.interface.interface.Interface')
-                    notify(ObjectCreatedEvent(newInterface))
-                    newInterfaceId=u"If%s" % (interfaceDict['nbr'])
-                    newHost.__setitem__(newInterfaceId, newInterface)
-                    #newInterface.__setattr__("description", interfaceDict['name'])
-                    #newInterface.__setattr__("ifindex", interfaceDict['nbr'])
-                    newInterfaceDc = IZopeDublinCore(newInterface, None)
-                    newInterfaceDc.title = u"%s" % interfaceDict['name']
-                    newInterfaceDc.created = datetime.utcnow()
-                    newInterfaceDc.creators = [u'ikportscan']
-                    ### SNMP-Liste aufbauen
-                    #if interfaceDict.has_key("snmplist") and len(interfaceDict['snmplist'])>0:
-                        #for snmpDict in interfaceDict['snmplist']:
-                            ### oid-Test
-                            #newSnmp = zapi.createObject(None, 'ikom.snmp.Snmp')
-                            #notify(ObjectCreatedEvent(newSnmp))
-                            #newSnmp.__setattr__("description", snmpDict['name'])
-                            #newSnmp.__setattr__("checktype", "oid")
-                            #newSnmp.__setattr__("inputtype", "abs")
-                            #newSnmp.__setattr__("oid1", snmpDict['oid1'])
-                            #newSnmp.__setattr__("oid2", snmpDict['oid2'])
-                            #for i in ["cmd", "inptype", "inpUnit", "displayUnitNumerator", "displayUnitDenominator",
-                                      #"checkMax", "checkMaxLevel", "checkMaxLevelUnitNumerator", "checkMaxLevelUnitDenominator"]:
-                                #newSnmp.__setattr__(i, snmpDict[i])
-                            #newSnmpDc = IZopeDublinCore(newSnmp, None)
-                            #newSnmpId=u"%s" % (snmpDict['name'])
-                            #newSnmpDc.title = u"%s" % (snmpDict['name'])
-                            #newSnmpDc.created = datetime.utcnow()
-                            #newSnmpDc.creators = [u'ikportscan']
-                            #newInterface.__setitem__(newSnmpId, newSnmp)
-                    #newHost.__setitem__(newInterfaceId, newInterface)
-
-            #if host.has_key("building"):
-                #newHost.__setattr__("building", host['building'])
-
-            #if host.has_key('oss') and len(host['oss'])>0:
-                #hostOs = host['oss'][0]
-                #firstOs = "%s - %s - %s - %s - %s" % (hostOs['vendor'],hostOs['osfamily'],hostOs['osgen'],hostOs['accuracy'],hostOs['type'])
-                #newHost.__setattr__("os", firstOs)
-            #else:
-                #newHost.__setattr__("os", u"unknown")
-                
-            ### add services to interface if1
-            ####### Interface
-            portsInterface = zapi.createObject(\
-                u'org.ict_ok.components.interface.interface.Interface')
-            notify(ObjectCreatedEvent(portsInterface))
-            newHost.__setitem__(portsInterface.getObjectId(), 
-                                portsInterface)
-            newInterfaceDc = IZopeDublinCore(portsInterface, None)
-            newInterfaceDc.title = u"If10000"
-            portsInterface.__setattr__("ikName", u"If10000")
-            newInterfaceDc.created = dateNow
-            newInterfaceDc.creators = [u'ikportscan']
-            portsInterface.ikComment += u"scanner: %s" % (dateNow)
-            #portsInterface.ipv4List.append(host['ipAddress'])
-            portsInterface.ipv4List = host['ipAddress']
-            portsInterface.netType = 'ethernet'
-            if host.has_key('macAddress'):
-                portsInterface.mac = host['macAddress']
-                
-            for port in host['ports']:
-                #if port['protocol'].lower() == "tcp":
-                    #print "tcp"
-                #elif port['protocol'].lower() == "udp":
-                    #print "udp"
-                #if port['port'] == u"389":   ## ldap
-                    #newService = zapi.createObject(None, 'ikom.service.ServiceLdap')
-                    #notify(ObjectCreatedEvent(newService))
-                    #newService.__setattr__("basedn", u'dc=domain,dc=tld')
-                #elif port['port'] == u"1111180":   ## http
-                    #pass
-                #else:
-                    #newService = zapi.createObject(None, 'ikom.service.Service')
-                    #notify(ObjectCreatedEvent(newService))
-                newService = zapi.createObject(\
-                    u'org.ict_ok.components.service.service.Service')
-                notify(ObjectCreatedEvent(newService))
-                newServiceId=u"%s" % (port['port'])
-                portsInterface.__setitem__(newServiceId, newService)
-                #newService.__setattr__("genNagios", True)
-                newServiceDc = IZopeDublinCore(newService, None)
-                #newService.__setattr__("port", port['port'])
-                #newService.__setattr__("protocol", port['protocol'])
-                #newService.__setattr__("description", port['service'])
-                newServiceDc.creators = [u'ikportscan']
-                newServiceDc.created = datetime.utcnow()
-                if port.has_key('service'): ## and (len(port['service']) > 0):
-                    newServiceDc.title = u"%s" % port['service']
-                else:
-                    newServiceDc.title = u"%s" % port['port']
-                #newHost.__setitem__(newServiceId, newService)
-            #containerObject.__setitem__(new_id, newHost)
+        for hostDict in hostList:
+            self.createHostObject(containerObject, hostDict)
         return None
-        
 
     def startScan(self, networkObj):
         """
