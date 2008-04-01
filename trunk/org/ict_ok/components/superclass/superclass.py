@@ -450,8 +450,10 @@ def notifyRemovedEvent(instance, event):
     print "getObjectId():", event.object.getObjectId()
     nagiosAdapter = IGenNagios(event.object)
     if nagiosAdapter is not None:
-        nagiosAdapter.nagiosConfigFileRemove()
-    
+        try:
+            nagiosAdapter.nagiosConfigFileRemove()
+        except Exception: # no such file at this point and/or at this moment
+            pass
     #import pdb
     #pdb.set_trace()
 
