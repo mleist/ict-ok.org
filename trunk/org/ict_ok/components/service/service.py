@@ -40,6 +40,9 @@ class Service(Component):
 
     implements(IService)
     port = FieldProperty(IService['port'])
+    product = FieldProperty(IService['product'])
+    ipprotocol = FieldProperty(IService['ipprotocol'])
+
     # for ..Contained we have to:
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(IService['ikAttr'])
@@ -52,6 +55,8 @@ class Service(Component):
         constructor of the object
         """
         Component.__init__(self, **data)
+        self.product = u""
+        self.ipprotocol = None
         for (name, value) in data.items():
             if name in IService.names():
                 setattr(self, name, value)

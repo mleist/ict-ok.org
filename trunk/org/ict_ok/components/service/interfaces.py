@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Int
+from zope.schema import Int, TextLine, Choice
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
@@ -33,3 +33,16 @@ class IService(IComponent):
         description = _("Number of port."),
         default = 65535,
         required = True)
+
+    product = TextLine(
+        max_length = 80,
+        title = _("Product"),
+        description = _("Which product will serve?"),
+        default = u"",
+        required = False)
+        
+    ipprotocol = Choice(
+        title = _("Protocol"),
+        description = _("IP-Protocol to use with this service."),
+        values = [u"tcp", u"udp", u"tcp/udp"],
+        required = False)
