@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# description: Starts and stops the Nessus Scanner
+# description: Starts and stops the Nagios Scanner
 #
 
 set -e
@@ -10,7 +10,7 @@ set -e
 
 DAEMON=/opt/ict_ok.org/inst/lib/python/org/ict_ok/agents/ndoutils/ndoutils.sh
 NAME=ndoutils
-DESC="nessus ndo daemon for ict-ok.org"
+DESC="Nagios ndo daemon for ict-ok.org"
 PIDFILE=/var/run/$NAME.pid
 
 # Check whether the binary is still present:
@@ -20,7 +20,7 @@ test -f "$DAEMON" || exit 0
 
 
 #test -x /opt/ndoutils/sbin/ndoutilsd || {
-#	echo "Nessus not properly installed"
+#	echo "Nagios not properly installed"
 #	exit 1
 #	}
 
@@ -29,14 +29,14 @@ test -f "$DAEMON" || exit 0
 
 #start() {
 #        KIND="Nessus"
-#	echo -n $"Starting Nessus : "
+#	echo -n $"Starting Nagios : "
 #	/opt/ndoutils/sbin/ndoutilsd -D -q
 #	echo "."
 #	return 0
 #}	
 
 #stop() {
-#	echo -n $"Shutting down Nessus : "
+#	echo -n $"Shutting down Nagios : "
 #	test -f /opt/ndoutils/var/ndoutils/ndoutilsd.pid && kill `cat /opt/ndoutils//var/ndoutils/ndoutilsd.pid`
 #	echo "."
 #	return 0
