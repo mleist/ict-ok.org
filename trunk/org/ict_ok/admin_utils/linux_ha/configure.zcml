@@ -9,23 +9,21 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
          Markus Leist <leist@ikom-online.de> -->
 
-    <subscriber handler="org.ict_ok.admin_utils.linux_ha.linux_ha.notifyAdmUtilEsxVimModifiedEvent" />
-
-    <adapter
+    <!-- adapter
         factory="org.ict_ok.admin_utils.linux_ha.adapter.states.State"
-        />
+        / -->
 
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
-    <subscriber handler="org.ict_ok.admin_utils.linux_ha.linux_ha.notifyAdmUtilEsxVimModifiedEvent" />
 
+    <!-- subscriber handler="org.ict_ok.admin_utils.linux_ha.linux_ha.notifyAdmUtilLinuxHaModifiedEvent" / -->
 
-    <class class="org.ict_ok.admin_utils.linux_ha.linux_ha.AdmUtilEsxVim">
+    <class class="org.ict_ok.admin_utils.linux_ha.linux_ha.AdmUtilLinuxHa">
         <factory
-            id="org.ict_ok.admin_utils.linux_ha.linux_ha.AdmUtilEsxVim" />
+            id="org.ict_ok.admin_utils.linux_ha.linux_ha.AdmUtilLinuxHa" />
         <implements
             interface="zope.app.container.interfaces.IReadContainer"
             />
@@ -33,91 +31,15 @@
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <require
             permission="org.ict_ok.admin_utils.linux_ha.View"
-            interface="org.ict_ok.admin_utils.linux_ha.interfaces.IAdmUtilEsxVim"
+            interface="org.ict_ok.admin_utils.linux_ha.interfaces.IAdmUtilLinuxHa"
             />
         <require
             permission="org.ict_ok.admin_utils.linux_ha.View"
-            set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.IAdmUtilEsxVim"
-            />
-    </class>
-
-    <class class="org.ict_ok.admin_utils.linux_ha.linux_ha_datacenter.EsxVimDatacenter">
-        <factory
-            id="org.ict_ok.admin_utils.linux_ha.linux_ha_datacenter.EsxVimDatacenter" />
-        <implements
-            interface="zope.app.container.interfaces.IReadContainer"
-            />
-        <implements
-            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
-        <require
-            permission="org.ict_ok.admin_utils.linux_ha.View"
-            interface="org.ict_ok.admin_utils.linux_ha.interfaces.IEsxVimDatacenter"
-            />
-        <require
-            permission="org.ict_ok.admin_utils.linux_ha.View"
-            set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.IEsxVimDatacenter"
-            />
-    </class>
-
-
-
-    <class class="org.ict_ok.admin_utils.linux_ha.linux_ha_folder.EsxVimFolder">
-        <factory
-            id="org.ict_ok.admin_utils.linux_ha.linux_ha_folder.EsxVimFolder" />
-        <implements
-            interface="zope.app.container.interfaces.IReadContainer"
-            />
-        <implements
-            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
-        <require
-            permission="org.ict_ok.admin_utils.linux_ha.View"
-            interface="org.ict_ok.admin_utils.linux_ha.interfaces.IEsxVimFolder"
-            />
-        <require
-            permission="org.ict_ok.admin_utils.linux_ha.View"
-            set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.IEsxVimFolder"
-            />
-    </class>
-
-
-    <class class="org.ict_ok.admin_utils.linux_ha.linux_ha_hostsystem.EsxVimHostSystem">
-        <factory
-            id="org.ict_ok.admin_utils.linux_ha.linux_ha_hostsystem.EsxVimHostSystem" />
-        <implements
-            interface="zope.app.container.interfaces.IReadContainer"
-            />
-        <implements
-            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
-        <require
-            permission="org.ict_ok.admin_utils.linux_ha.View"
-            interface="org.ict_ok.admin_utils.linux_ha.interfaces.IEsxVimHostSystem"
-            />
-        <require
-            permission="org.ict_ok.admin_utils.linux_ha.View"
-            set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.IEsxVimHostSystem"
-            />
-    </class>
-
-
-    <class class="org.ict_ok.admin_utils.linux_ha.linux_ha_virtual_machine.EsxVimVirtualMachine">
-        <factory
-            id="org.ict_ok.admin_utils.linux_ha.linux_ha_virtual_machine.EsxVimVirtualMachine" />
-        <implements
-            interface="zope.app.container.interfaces.IReadContainer"
-            />
-        <implements
-            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
-        <require
-            permission="org.ict_ok.admin_utils.linux_ha.View"
-            interface="org.ict_ok.admin_utils.linux_ha.interfaces.IEsxVimVirtualMachine"
-            />
-        <require
-            permission="org.ict_ok.admin_utils.linux_ha.View"
-            set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.IEsxVimVirtualMachine"
+            set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.IAdmUtilLinuxHa"
             />
     </class>
 
     <include package=".browser" />
-    <include package=".generations" />
+    <!--<include package=".generations" />-->
     
 </configure>

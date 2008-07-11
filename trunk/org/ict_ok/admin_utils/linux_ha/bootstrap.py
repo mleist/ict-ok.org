@@ -31,77 +31,76 @@ from zope.app.component.interfaces import ISite
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
-from org.ict_ok.admin_utils.linux_ha.interfaces import IAdmUtilEsxVim
-from org.ict_ok.admin_utils.linux_ha.linux_ha import AdmUtilEsxVim
-from org.ict_ok.admin_utils.linux_ha.linux_ha import globalEsxVimUtility
-from org.ict_ok.admin_utils.linux_ha.linux_ha import EsxVimConnectionThread
+from org.ict_ok.admin_utils.linux_ha.interfaces import IAdmUtilLinuxHa
+from org.ict_ok.admin_utils.linux_ha.linux_ha import AdmUtilLinuxHa
+from org.ict_ok.admin_utils.linux_ha.linux_ha import globalLinuxHaUtility
+from org.ict_ok.admin_utils.linux_ha.linux_ha import LinuxHaConnectionThread
 
-logger = logging.getLogger("AdmUtilEsxVim")
+logger = logging.getLogger("AdmUtilLinuxHa")
 
-def recursiveEsxVimSubscriber(obj):
-    """distibution of linux_ha event
-    """
+#def recursiveLinuxHaSubscriber(obj):
+    #"""distibution of linux_ha event
+    #"""
 
-    if ISite.providedBy(obj):
-        sitem = obj.getSiteManager()
-        smList = list(sitem.getAllUtilitiesRegisteredFor(IAdmUtilEsxVim))
-        for utilObj in smList:
-            if IAdmUtilEsxVim.providedBy(utilObj) :
-                globalEsxVimUtility.subscribeToEsxVim(utilObj)
+    #if ISite.providedBy(obj):
+        #sitem = obj.getSiteManager()
+        #smList = list(sitem.getAllUtilitiesRegisteredFor(IAdmUtilLinuxHa))
+        #for utilObj in smList:
+            #if IAdmUtilLinuxHa.providedBy(utilObj) :
+                #globalLinuxHaUtility.subscribeToLinuxHa(utilObj)
 
 def bootStrapSubscriberDatabase(event):
     """initialisation of linux_ha utility on first database startup
     """
     if appsetup.getConfigContext().hasFeature('devmode'):
         logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    EsxVimConnectionThread.database = event.database
+    LinuxHaConnectionThread.database = event.database
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 
-    madeAdmUtilEsxVim = ensureUtility(root_folder, IAdmUtilEsxVim,
-                                        'AdmUtilEsxVim', AdmUtilEsxVim, '',
-                                        copy_to_zlog=False, asObject=True)
+    madeAdmUtilLinuxHa = ensureUtility(root_folder, IAdmUtilLinuxHa,
+                                       'AdmUtilLinuxHa', AdmUtilLinuxHa, '',
+                                       copy_to_zlog=False, asObject=True)
 
-    if isinstance(madeAdmUtilEsxVim, AdmUtilEsxVim):
-        logger.info(u"bootstrap: Ensure named AdmUtilEsxVim")
-        dcore = IWriteZopeDublinCore(madeAdmUtilEsxVim)
-        dcore.title = u"ESX VIM"
+    if isinstance(madeAdmUtilLinuxHa, AdmUtilLinuxHa):
+        logger.info(u"bootstrap: Ensure named AdmUtilLinuxHa")
+        dcore = IWriteZopeDublinCore(madeAdmUtilLinuxHa)
+        dcore.title = u"Linux HA"
         dcore.created = datetime.utcnow()
-        madeAdmUtilEsxVim.ikName = dcore.title
-        madeAdmUtilEsxVim.__post_init__()
-        #madeAdmUtilEsxVim.connect2VimServer()
+        madeAdmUtilLinuxHa.ikName = dcore.title
+        madeAdmUtilLinuxHa.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()
                     if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: made IAdmUtilEsxVim-Utility")
+            u" bootstrap: made IAdmUtilLinuxHa-Utility")
     #else:
         #sitem = root_folder.getSiteManager()
         #utils = [ util for util in sitem.registeredUtilities()
-                  #if util.provided.isOrExtends(IAdmUtilEsxVim)]
-        #instAdmUtilEsxVim = utils[0].component
-        #instAdmUtilEsxVim.connect2VimServer()
+                  #if util.provided.isOrExtends(IAdmUtilLinuxHa)]
+        #instAdmUtilLinuxHa = utils[0].component
+        #instAdmUtilLinuxHa.connect2VimServer()
 
-    sitem = root_folder.getSiteManager()
-    # search for ICatalog
-    utils = [ util for util in sitem.registeredUtilities()
-              if util.provided.isOrExtends(ICatalog)]
-    instUtilityICatalog = utils[0].component
-    if not "host_esx_uuid_index" in instUtilityICatalog.keys():
-        host_esx_uuid_index = FieldIndex(interface=ISearchableText,
-                                         field_name='getSearchableEsxUuid',
-                                         field_callable=True)
-        instUtilityICatalog['host_esx_uuid_index'] = host_esx_uuid_index
-        # search for IAdmUtilSupervisor
-        utils = [ util for util in sitem.registeredUtilities()
-                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
-        instAdmUtilSupervisor = utils[0].component
-        instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create esx uuid index for entry type 'host'")
+    #sitem = root_folder.getSiteManager()
+    ## search for ICatalog
+    #utils = [ util for util in sitem.registeredUtilities()
+              #if util.provided.isOrExtends(ICatalog)]
+    #instUtilityICatalog = utils[0].component
+    #if not "host_esx_uuid_index" in instUtilityICatalog.keys():
+        #host_esx_uuid_index = FieldIndex(interface=ISearchableText,
+                                         #field_name='getSearchableEsxUuid',
+                                         #field_callable=True)
+        #instUtilityICatalog['host_esx_uuid_index'] = host_esx_uuid_index
+        ## search for IAdmUtilSupervisor
+        #utils = [ util for util in sitem.registeredUtilities()
+                  #if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        #instAdmUtilSupervisor = utils[0].component
+        #instAdmUtilSupervisor.appendEventHistory(\
+            #u" bootstrap: ICatalog - create esx uuid index for entry type 'host'")
 
 
-    recursiveEsxVimSubscriber(root_folder)
+    #recursiveLinuxHaSubscriber(root_folder)
     
     transaction.get().commit()
     connection.close()

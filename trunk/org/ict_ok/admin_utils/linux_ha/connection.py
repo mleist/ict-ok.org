@@ -200,13 +200,7 @@ class LinuxHaConnectionThread(threading.Thread):
                     myAdmUtilLinuxHa = queryUtility(IAdmUtilLinuxHa)
                     if myAdmUtilLinuxHa is not None:
                         utilOId = myAdmUtilLinuxHa.getObjectId()
-                        if myAdmUtilLinuxHa.esxVimServerActive:
-                            if not self.is_logged_in(myAdmUtilLinuxHa):
-                                if not self.perl_imports():
-                                    logger.error("Perl Error: imports")
-                                    raise Exception, "Perl Error: imports"
-                                if not self.esx_login(myAdmUtilLinuxHa):
-                                    logger.info("ESX Vim Error on login()")
+                        if myAdmUtilLinuxHa.LinuxHaServerActive:
                             self.executeMyQueue(myAdmUtilLinuxHa)
                         else:
                             if not self.getQueue(utilOId)['in'].empty():
