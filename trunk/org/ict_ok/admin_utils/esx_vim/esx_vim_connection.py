@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611,W0142
 #
-"""implementation of a "esx_vim connection thread" 
+"""implementation of an "esx_vim connection thread" 
 """
 
 #TODO delete debug statements
