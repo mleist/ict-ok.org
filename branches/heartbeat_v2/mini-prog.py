@@ -77,8 +77,24 @@ def printChildrenRsc(data):
 def setRsc(data):
     rsc = cluster1.getRessources()[0]
     rsc_dict = rsc.getDictMetaAtributesByName("name","description")
-    cluster1.update_rsc_attr(rsc_dict["id"], "description", data)
+    print rsc_dict['id']
+    print rsc_dict['value']
+    print cluster1.update_rsc_attr(rsc_dict['id'], 'value', data)
 
+def mig_z(data):
+    for node in cluster1.getNodes():
+        if(node.name == "hb166.server.ifdd.de"):
+            node1 = node
+    rsc = cluster1.getRessources()[9]
+    cluster1.migrate(rsc, node1)
+
+def mig(data):
+    rsc = cluster1.getRessources()[9]
+    cluster1.migrate(rsc)
+
+def umig(data):
+    rsc = cluster1.getRessources()[9]
+    cluster1.unmigrate(rsc)
 
 def done(data):
     return False
@@ -149,8 +165,23 @@ list = []
 list.append(menusystem.Choice(selector=1, handler=None, description='Cluster Options', subMenu=menu_cluster))
 list.append(menusystem.Choice(selector=2, handler=None, description='Node Options', subMenu=menu_node))
 list.append(menusystem.Choice(selector=3, handler=None, description='Rsc Options', subMenu=menu_rsc))
+list.append(menusystem.Choice(selector=4, handler=mig, description='Rsc R_IP_173:0 migrieren'))
+list.append(menusystem.Choice(selector=5, handler=mig_z, description='Rsc R_IP_173:0 migrieren auf hb166'))
+list.append(menusystem.Choice(selector=6, handler=umig, description='Rsc R_IP_173:0 unmigrieren'))
 list.append(menusystem.Choice(selector=0, value=0, handler=done, description='Exit'))
 menu = menusystem.Menu(title='Information about Cluster: 172.16.10.164', choice_list=list, prompt='What do you want to do? ')
 
 menu.waitForInput()
 
+#cluster1.update_constraint("rsc_location", 
+from pprint import pprint
+pprint(cluster1.get_constraints("rsc_location"))
+pprint("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+pprint(cluster1.get_constraint("rsc_location", "Loc_R_IP_172:0"))
+
+
+
+
+
+
+ 

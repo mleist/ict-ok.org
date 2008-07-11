@@ -11,6 +11,7 @@
 # pylint: disable-msg=E1101,W0612,W0142
 #
 """ Small Python Script for heartbeat Communication
+buggy
 """
 
 __version__ = "$Id$"

@@ -11,6 +11,7 @@
 # pylint: disable-msg=E1101,W0612,W0142
 #
 """ cluster, node, ressource classes
+buggy
 """
 
 __version__ = "$Id$"
@@ -296,6 +297,8 @@ u'deadping']
         return self.__manager.query("crm_nodes")
 
     def get_children(self):
+        """ return a list of node objects
+        """
         retList = []
         nodenames = self.__get_crm_nodes()
         for nodename in nodenames:
@@ -313,6 +316,8 @@ u'deadping']
         return sub_rscs
 
     def getRessources(self):
+        """ returns a list of Rsc running in cluster NO HIERARCHY
+        """
         retList = []
         rscnames = self.__get_all_rsc_id()
         for rscname in rscnames:
@@ -390,6 +395,100 @@ u'deadping']
         """
         dc_node = Node(self.__manager.query("dc"), self.__manager)
         return dc_node # designated coordinator
+    
+    def get_constraints(self, type):
+        """ returns a list of constraint-ids
+        """
+        id_list = self.__manager.query("get_cos\n"+type)
+        constraints = []
+        for id in id_list :
+            constraints.append(self.__get_constraint(type, id))
+        return constraints
+
+    def __get_constraint(self, type, id) :
+        if type == "rsc_location" :
+            location_attr_names = ["id","rsc","score", "boolean_op"]
+            expr_attr_names = ["id","attribute","operation","value"]
+            attrs = self.__manager.query("get_co\nrsc_location\n"+id)
+            if attrs == None :
+                return None
+            location = dict(zip(location_attr_names,attrs[:4]))
+            location["exprs"] = []
+            for i in range((len(attrs)-len(location_attr_names))/len(expr_attr_names)) :
+                expr = dict(zip(expr_attr_names,attrs[4+i*4:8+i*4]))
+                location["exprs"].append(expr)
+            return location
+        elif type == "rsc_order" :
+            order_attr_names = ["id","from","type","to"]
+            attrs = self.__manager.query("get_co\nrsc_order\n" + id)
+            if attrs == None :
+                return None
+            order = dict(zip(order_attr_names,attrs))
+            return order
+        elif type == "rsc_colocation" :
+            colocation_attr_names = ["id","from","to","score"]
+            attrs = self.__manager.query("get_co\nrsc_colocation\n" + id)
+            if attrs == None :
+                return None
+            colocation = dict(zip(colocation_attr_names,attrs))
+            return colocation
+    
+    def update_constraint(self, type, constraint) :
+        """ update a constraint with type ("rsc_location", "rsc_order",
+        "rsc_colocation") and constraint dict (example in migration code)
+        """
+        if constraint["id"] in self.get_constraints(type) :
+            self.__manager.do_cmd("del_co\n"+type+"\n" + constraint["id"])
+        if type == "rsc_location" :
+            self.__manager.do_cmd("del_co\nrsc_location\n"+constraint["id"])
+            cmd = "up_co\nrsc_location\n%s\n%s\n%s\n%s"% \
+                (constraint["id"],constraint["rsc"],constraint["score"],constraint["boolean_op"])
+            for expr in constraint["exprs"] :
+                cmd = cmd + "\n" + expr["id"] + "\n" + expr["attribute"] + \
+                    "\n" + expr["operation"] + "\n" + expr["value"]
+        elif type == "rsc_order" :
+            cmd = "up_co\nrsc_order\n%s\n%s\n%s\n%s"% \
+                (constraint["id"],constraint["from"],constraint["type"],constraint["to"])
+        elif type == "rsc_colocation" :
+            cmd = "up_co\nrsc_colocation\n%s\n%s\n%s\n%s"% 	(constraint["id"],constraint["from"],constraint["to"],constraint["score"])
+        self.__manager.do_cmd(cmd)
+    
+    def unmigrate(self, ressource):
+        """ unmigrate our migration by ressource
+        ressource: object type
+        retruns nothing
+        """
+        constraint_id = "ict-migrate-%s" % ressource.name
+        self.__manager.do_cmd("del_co\nrsc_location\n" + constraint_id)
+
+        
+    def migrate(self, ressource, destinationnode=None):
+        """ migrate by ressource (object) optional with destination Node (object)
+        returns nothing
+        """
+        if(destinationnode != None):
+            checklist = []
+            for node in self.getNodes():
+                checklist.append(node.name)
+            if(destinationnode.name in checklist):
+                dict = {'boolean_op': '',
+                        'exprs': [{'attribute': '#uname', 'id': 'cli-prefer-expr-%s' % ressource.name,
+                                   'operation': 'eq','attribute': "#uname", 'type': 'string',
+                                   'value': destinationnode.name}], 
+                        'id': 'ict-migrate-%s' % ressource.name, 
+                        'rsc': ressource.name, 
+                        'score': 'INFINITY'}
+            else:
+                failed_reason = "Destination node not found (Cluster.migrate())"
+        if(destinationnode == None):
+            dict = {'boolean_op': '',
+                    'exprs': [{'attribute': '#uname', 'id': 'cli-standby-expr-%s' % ressource.name,
+                               'operation': 'eq','attribute': "#uname", 'type': 'string',
+                               'value': ressource.get_rsc_running_on().name}], 
+                    'id': 'ict-migrate-%s' % ressource.name, 
+                    'rsc': ressource.name, 
+                    'score': '-INFINITY'}
+        self.update_constraint("rsc_location", dict)
 
 
 class Node (object):
@@ -403,13 +502,19 @@ class Node (object):
         return u"Node[%s]" % (self.name)
 
     def get_nodetype(self):
+        """returns node type (string)
+        """
         return self.__manager.query("node_type\n%s" % self.name)
     
     def getAttributeNameList(self):
+        """return a list of attributes that u can use with getAttributeByNam
+        """
         return ["uname", "online","standby", "unclean", "shutdown",
                            "expected_up","is_dc","type"]
     
     def getAttributeByName(self, attr):
+        """ returns a Attribute or false by expecting an attrbiutename (string)
+        """
         list = self.__get_node_config()
         if(list.has_key(attr)):
             return list[attr]
@@ -439,16 +544,25 @@ class Ressource(object):
         self.parent = parent
 
     def get_rsc_type(self) :
+        """returns ressource type (string)
+        """
         return self.__manager.query("rsc_type\n"+self.name)[0]
 
     def get_rsc_status(self) :
+        """returns ressource status (string)
+        """
         return self.__manager.query("rsc_status\n"+self.name)[0]
 
     def get_rsc_running_on(self):
-        node = Node(self.__manager.query("rsc_running_on\n"+self.name), self.__manager)
+        """ returns node (object) where the rsc is running
+        """
+        #self.__manager.query("rsc_running_on\n"+self.name) returns List but we think a rsc is exclusive
+        node = Node(self.__manager.query("rsc_running_on\n"+self.name)[0], self.__manager)
         return node
 
     def getchildren(self):
+        """ returns a list of ressources (ocject) that are in rsc
+        """
         retList = []
         sub_rscs = self.__manager.query("sub_rsc\n"+self.name)
         if sub_rscs != None :
@@ -457,6 +571,8 @@ class Ressource(object):
         return retList
 
     def getAttributeNameList(self):
+        """return a list of attributes that u can use with getAttributeByNam
+        """
         retList = []
         rsc_attr_names = ["id", "description", "class", "provider", 
                           "type", "is_managed","restart_type",
@@ -515,6 +631,8 @@ class Ressource(object):
             return False
         
     def getMetaAtributesByName(self, attr):
+        """ returns meta-attribute Value by expecting attribute name
+        """
         (attrs, running_on, metaattrs, params, ops) = self.__get_rsc_info()
         retList = []
         for element in metaattrs:
@@ -523,6 +641,8 @@ class Ressource(object):
         return retList
     
     def getDictMetaAtributesByName(self, attr, value):
+        """ returns meta-attribute dict by expecting attribute name
+        """
         (attrs, running_on, metaattrs, params, ops) = self.__get_rsc_info()
         for element in metaattrs:
             if(element.has_key(attr)):
@@ -531,6 +651,8 @@ class Ressource(object):
         return None
 
     def getMetaAtributes(self, attr):
+        """ returns all meta-attributes
+        """
         (attrs, running_on, metaattrs, params, ops) = self.__get_rsc_info()
         return metaattrs
     
@@ -563,32 +685,3 @@ class Ressource(object):
         raw_ops = raw_ops[1:]
         ops = self.__manager.split_attr_list(raw_ops, op_attr_names)
         return (attrs, running_on, metaattrs, params, ops)
-
-
-
-#nodelist = cluster1.getNodes()
-##nodelist = cluster1.getNodes()
-##nodelist = cluster1.getNodes()
-##nodelist = cluster1.getNodes()
-##nodelist = cluster1.getNodes()
-##nodelist = cluster1.getNodes()
-##nodelist = cluster1.getNodes()
-##for node in nodelist:
-    ##print node
-##for node in nodelist:
-    ##print node
-##for node in nodelist:
-    ##print node
-##for node in nodelist:
-    ##print node
-
-#rsclist = cluster1.getRessources()
-#for rsc in rsclist:
-    #print rsc.getAttributeByName("lol")
-
-#print(cluster1.get_dc().name)
-#glbmanager.logout()
-
-
-
-#print cluster1.getAttributeNameList()
