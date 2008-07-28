@@ -21,6 +21,7 @@ from datetime import datetime
 from pytz import timezone
 
 # zope imports
+from zope.app import zapi
 from zope.interface import implements
 from zope.component import adapts
 
@@ -30,7 +31,7 @@ from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.components.supernode.adapter.nagios import \
      GenNagios as ParentGenNagios
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
-     IGenNagios
+     IGenNagios, IAdmUtilGeneratorNagios
 from org.ict_ok.version import getIkVersion
 
 logger = logging.getLogger("HostGenNagios")
@@ -56,7 +57,8 @@ class GenNagios(ParentGenNagios):
         """
         #import pdb;pdb.set_trace()
         objId = self.context.getObjectId()
-        self.fileName = u'/opt/nagios/etc/ict_ok/Hosts/%s.cfg' % objId
+        utilNagios = zapi.getUtility(IAdmUtilGeneratorNagios, '')
+        self.fileName = utilNagios.pathConfigData + u'/Hosts/%s.cfg' % objId
         ParentGenNagios.fileOpen(self)
         
     def wantsCheck(self):

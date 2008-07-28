@@ -46,6 +46,8 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
         IAdmUtilGeneratorNagios['lastConfigFileChange'])
     pathInitScript = FieldProperty(\
         IAdmUtilGeneratorNagios['pathInitScript'])
+    pathConfigData = FieldProperty(\
+        IAdmUtilGeneratorNagios['pathConfigData'])
     lastDeamonReload = FieldProperty(\
         IAdmUtilGeneratorNagios['lastDeamonReload'])
 
@@ -54,6 +56,7 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
         self.lastConfigFileChange = None
         self.lastDeamonReload = None
         self.pathInitScript = u"/etc/init.d/nagios"
+        self.pathConfigData = u"/opt/nagios/etc/ict_ok"
         AdmUtilGenerators.__init__(self)
         self.ikRevision = __version__
 

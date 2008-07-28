@@ -181,6 +181,14 @@
         permission="org.ict_ok.components.host.View"
         />
     <viewlet
+        name="script"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubScript"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.superclass.exportxml"
+        />
+    <viewlet
         name="dumpdata"
         for="org.ict_ok.components.host.interfaces.IHost"
         manager="org.ict_ok.skin.menu.interfaces.IMenuSub"

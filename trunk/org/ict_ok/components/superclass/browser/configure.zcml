@@ -28,6 +28,15 @@
         <!--/>-->
 
     <page
+        name="python.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class=".superclass.SuperclassDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="dumpData"
+        permission="org.ict_ok.components.superclass.exportxml"
+    />
+
+    <page
         name="dumpdata.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         class=".superclass.SuperclassDetails"

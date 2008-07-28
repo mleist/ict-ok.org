@@ -292,6 +292,13 @@ class MSubHistory(GlobalMenuSubItem):
     weight = 50
 
 
+class MSubScript(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Script')
+    viewURL = '@@python.html'
+    weight = 55
+
+
 class MSubDumpData(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Dump data')

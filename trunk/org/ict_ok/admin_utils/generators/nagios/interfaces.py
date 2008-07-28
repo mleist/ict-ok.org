@@ -36,19 +36,25 @@ class IAdmUtilGeneratorNagios(IAdmUtilGenerators):
 
     pathInitScript = TextLine(
         max_length = 200,
-        title = _("init script"),
-        description = _("nagios init script with path"),
-        default = _("/etc/init.d/nagios"),
+        title = _(u"init script"),
+        description = _(u"nagios init script with path"),
+        default = _(u"/etc/init.d/nagios"),
+        required = True)
+
+    pathConfigData = TextLine(
+        max_length = 200,
+        title = _(u"path to configuration"),
+        default = u"/opt/nagios/etc/ict_ok",
         required = True)
 
     lastConfigFileChange = IctDatetime(
-        title=_("last change"),
-        description=_("last change of configuration file"),
+        title=_(u"last change"),
+        description=_(u"last change of configuration file"),
         required=False)
 
     lastDeamonReload = IctDatetime(
-        title=_("last reload"),
-        description=_("last reload of nagios deamon"),
+        title=_(u"last reload"),
+        description=_(u"last reload of nagios deamon"),
         required=False)
 
     def touchLastConfigFile():

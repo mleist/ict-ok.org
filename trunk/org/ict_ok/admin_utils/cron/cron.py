@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,E0611
+# pylint: disable-msg=E1101,E0611,W0613
 #
 """implementation of a "cron daemon" 
 """
