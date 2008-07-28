@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- viewlet manager -->
+    
+    <!-- viewlets -->
+    
+    <resourceDirectory
+        name="pics"
+        directory="."
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <!--<resourceLibrary-->
+        <!--name="pics"-->
+        <!--directory="."-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--/>-->
+
+</configure>

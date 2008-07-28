@@ -1,0 +1,31 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict-ok"
+    >
+
+    <!-- $Id$ -->
+
+    <permission
+        id="org.ict_ok.admin_utils.compliance.View"
+        title="View from Compliance Utiltiy"
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.compliance.Edit"
+        title="View from Compliance Utiltiy"
+    />
+
+    <!-- Copyright (c) 2007, 
+                     Markus Leist <leist@ikom-online.de>
+    -->
+
+    <grant permission="org.ict_ok.admin_utils.compliance.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.compliance.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.compliance.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.compliance.Edit"
+                    role="org.ict_ok.adm" />
+</configure>

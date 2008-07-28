@@ -1,0 +1,62 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <permission
+        id="org.ict_ok.components.net.View"
+        title="View Template Entry"
+        description="View the Template Entry and all its content."
+    />
+
+    <permission
+        id="org.ict_ok.components.net.Add"
+        title="Add Template Entry"
+        description="Add Template Entry."
+    />
+
+    <permission
+        id="org.ict_ok.components.net.Edit"
+        title="Edit Template Entry"
+        description="Edit Template Entry."
+    />
+
+    <permission
+        id="org.ict_ok.components.net.EditEventIf"
+        title="Edit Event Interface"
+    />
+
+    <permission
+        id="org.ict_ok.components.net.Delete"
+        title="Delete Template Entry"
+        description="Delete Template Entry."
+    />
+
+    <grant permission="org.ict_ok.components.net.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.components.net.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.net.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.net.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.net.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.net.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.net.Edit"
+                    role="org.ict_ok.adm" />
+    <grant permission="org.ict_ok.components.net.EditEventIf"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.net.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.net.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>

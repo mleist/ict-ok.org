@@ -1,0 +1,68 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:help="http://namespaces.zope.org/help"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.snmpd.interfaces.IAdmUtilSnmpd"
+        class=".snmpd.DetailsAdmUtilSnmpdForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.snmpd.View"
+    />
+    <!--<z3c:template-->
+        <!--template="details.pt"-->
+        <!--for="org.ict_ok.admin_utils.snmpd.browser.snmpd.AdmUtilSnmpdDetails"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--/>-->
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.snmpd.interfaces.IAdmUtilSnmpd"
+        class=".snmpd.EditAdmUtilSnmpdForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.snmpd.Edit"
+    />
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.snmpd.interfaces.IAdmUtilSnmpd"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.snmpd.View"
+        />
+
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.snmpd.interfaces.IAdmUtilSnmpd"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.snmpd.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.snmpd.interfaces.IAdmUtilSnmpd"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.snmpd.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.snmpd.interfaces.IAdmUtilSnmpd"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.snmpd.Edit"
+        />
+
+</configure>

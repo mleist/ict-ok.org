@@ -1,0 +1,79 @@
+<html i18n:domain="zope">
+    <head>
+        <title i18n:translate="">Sign in</title>
+    <meta http-equiv="Pragma" content="No-cache" />
+    <tal:providers replace="structure provider:ict_ok.Headers" />
+</head>
+  <body>
+    <DIV id="doc2" class="yui-t3">
+      <DIV class="yui-gd" id="hd" tal:content="structure provider:ict_ok.hd"></DIV>
+      <DIV id="bd">
+        <DIV id="yui-main">
+          <DIV class="yui-b">
+            <DIV class="yui-u first">
+              <div class="bg-650-top">
+                <div class="bg-650-bottom">
+                    <div tal:define="principal python:request.principal.id">
+                        <p i18n:translate="" tal:condition="python: principal == 'zope.anybody'">
+                            Please provide Login Information</p>
+                        <p i18n:translate="" tal:condition="python: principal != 'zope.anybody'">
+                            You are not authorized to perform this action. However, you may login as a 
+                            different user who is authorized.</p>
+                        <form name="login" action="" method="post">
+                            <div tal:omit-tag=""
+                                tal:condition="python:principal != 'zope.anybody' and 'SUBMIT' in request">
+                                <span tal:define="dummy python:request.response.redirect(request.get('camefrom', ''))" />
+                            </div>
+                            
+                            <table class="form-login">
+                              <tr class="row">
+                                <td class="label">
+                                  <label for="form-widgets-sitename">
+                                    <span i18n:translate="">Username</span>
+                                  </label>
+                                </td>
+                                <td class="fields">
+                                  <div class="widget">
+                                    <input type="text" id="login" size="30" 
+                                       name="login" />
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr class="row">
+                                <td class="label">
+                                  <label for="form-widgets-sitename">
+                                    <span i18n:translate="">Password</span>
+                                  </label>
+                                </td>
+                                <td class="fields">
+                                  <div class="widget">
+                                    <input type="password" id="password" size="30" 
+                                       name="password" />
+                                  </div>
+                                </td>
+                              </tr>
+                                <td class="label">
+                                </td>
+                                <td class="field">
+                                  <input class="form-element" type="submit" 
+                                          name="SUBMIT" value="Log in" i18n:attributes="value login-button" />
+                                </td>
+                              <tr class="row">
+                              </tr>
+                            </table>
+                            <input type="hidden" name="camefrom" tal:attributes="value request/camefrom | nothing">
+                        </form>
+                        <script type="text/javascript" language="JavaScript"> document.login.login.focus(); </script>
+                    </div>
+                    </div>
+                </div>
+              </DIV>
+          </DIV>
+        </DIV>
+        <DIV class="yui-b" tal:content="structure provider:ict_ok.Sidebar"></DIV>
+      </DIV>
+      <DIV tal:omit-tag="" tal:content="structure provider:ict_ok.footer"></DIV>
+    </DIV>
+</body>
+</html>
+

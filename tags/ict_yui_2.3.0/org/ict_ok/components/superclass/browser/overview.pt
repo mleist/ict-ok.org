@@ -1,0 +1,21 @@
+<i18n:block domain="ict_ok.org">
+  <h3 tal:condition="view/label|nothing"
+      tal:content="view/label" />
+  <div class="message"
+    tal:condition="view/status|nothing"
+    tal:content="view/status"
+    i18n:translate="">
+  Something happened.
+  </div>
+  <form action="" method="post"
+    tal:attributes="action request/URL">
+  <tal:block
+    condition="view/objs|nothing"
+    replace="structure view/table" />
+  <div
+    tal:condition="not: view/objs|nothing"
+    i18n:translate="">
+    There are no objects.
+  </div>
+  </form>
+</i18n:block>

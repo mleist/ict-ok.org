@@ -1,0 +1,89 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:help="http://namespaces.zope.org/help"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <page
+        name="actions"
+        for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.HostDetails"
+        attribute="actions"
+        permission="org.ict_ok.components.host.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    
+    <page
+        name="poweroff.html"
+        for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.HostDetails"
+        attribute="poweroff"
+        permission="org.ict_ok.components.host.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    
+    <page
+        name="poweron.html"
+        for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.HostDetails"
+        attribute="poweron"
+        permission="org.ict_ok.components.host.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+
+    <defaultView
+        for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"
+        name="details.html"
+        />
+
+    <z3c:pagelet
+        name="add_host_vmware_vm.html"
+        for="org.ict_ok.components.net.interfaces.INet"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.AddHostForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Add"
+    />
+    
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.DetailsHostForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.View"
+    />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.EditHostForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Edit"
+    />
+
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.host.special.vmware_vm.interfaces.IHostVMwareVm"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.DeleteHostForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Delete"
+    />
+
+    <!--##### Sub Menu ##### -->
+
+    <!--viewlet
+        name="add_host_vmware_vm"
+        for="org.ict_ok.components.net.interfaces.INet"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.host.special.vmware_vm.browser.host.MSubAddHost"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Add"
+        /-->
+
+</configure>

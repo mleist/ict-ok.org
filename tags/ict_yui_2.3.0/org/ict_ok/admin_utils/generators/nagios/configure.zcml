@@ -1,0 +1,49 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:xmlrpc="http://namespaces.zope.org/xmlrpc"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <class class=".nagios.AdmUtilGeneratorNagios">
+        <factory
+            id="org.ict_ok.admin_utils.generators.nagios.nagios.AdmUtilGeneratorNagios" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.generators.nagios.View"
+            interface=".interfaces.IAdmUtilGeneratorNagios"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.generators.nagios.Edit"
+            set_schema=".interfaces.IAdmUtilGeneratorNagios"
+            />
+    </class>
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <!-- all XML RPC views -->
+    <xmlrpc:view
+        for=".interfaces.IAdmUtilGeneratorNagios"
+        permission="org.ict_ok.admin_utils.generators.nagios.Edit"
+        methods="isUp triggerNdoEvent"
+        class=".xmlrpcs.AdmUtilGeneratorNagiosRpcMethods"
+        />
+
+    <adapter
+        factory=".adapter.ticker.Ticker"
+    />
+
+    <include package=".adapter" />
+    <include package=".browser" />
+    <include package=".generations" />
+    
+</configure>

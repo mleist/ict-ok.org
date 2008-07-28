@@ -1,0 +1,6 @@
+<div id="navsub">
+  <ul>
+    <tal:block repeat="viewlet view/viewlets"
+               content="structure viewlet/render" />
+  </ul>
+</div>

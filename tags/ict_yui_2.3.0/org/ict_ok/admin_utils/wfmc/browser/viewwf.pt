@@ -1,0 +1,13 @@
+<html>
+    <body tal:condition="request/name|nothing">
+        <div i18n:domain="ict-ok.org" tal:condition="request/pdid|nothing">
+            <h1 tal:content="python: 'Workflow of \'%s\':' % request['name']" />
+            <img tal:attributes="src python: '%s/@@getIMG?type=png&pdid=%s' % (view.getValuePngHref(), request['pdid'])" />
+            <a href="#" tal:attributes="href python: '%s/@@getIMG?type=png&pdid=%s&mode=fview' % (view.getValuePngHref(), request['pdid'])">[PNG]</a>
+            <!--<a href="#" tal:attributes="href python: '%s/@@getIMG?type=svg&pdid=%s&mode=fview' % (view.getValuePngHref(), request['pdid'])">[SVG]</a>-->
+            <!--<a href="#" tal:attributes="href python: '%s/@@getIMG?type=jpg&pdid=%s&mode=fview' % (view.getValuePngHref(), request['pdid'])">[JPG]</a>-->
+            <!--<a href="#" tal:attributes="href python: '%s/@@getIMG?type=gif&pdid=%s&mode=fview' % (view.getValuePngHref(), request['pdid'])">[GIF]</a>-->
+        </div>
+    </body>
+</html>
+

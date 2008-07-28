@@ -1,0 +1,169 @@
+<zope:configure
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <defaultView
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        name="details.html"
+        />
+        
+    <page
+        name="actions"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        attribute="actions"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="state"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        attribute="state"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="reindex_db"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        attribute="reindex_db"
+        permission="org.ict_ok.admin_utils.supervisor.ReindexDB"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="pack_db"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        attribute="pack_db"
+        permission="org.ict_ok.admin_utils.supervisor.PackDB"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <!--<page-->
+        <!--name="status"-->
+        <!--for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"-->
+        <!--class=".supervisor.AdmUtilSupervisorDetails"-->
+        <!--template="status.pt"-->
+        <!--permission="org.ict_ok.admin_utils.supervisor.View"-->
+        <!--menu="zmi_views" title="Status"/>-->
+
+    <page
+        name="objmq"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        template="objmq.pt"
+        permission="org.ict_ok.admin_utils.supervisor.Edit"
+        menu="zmi_views" title="ObjMQ"/>
+
+    <!--page
+        name="events"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        template="events.pt"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        menu="zmi_views" title="Events"/ -->
+
+    <page
+        name="cmd"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        permission="org.ict_ok.admin_utils.supervisor.Edit"
+        attribute="cmd"
+        />
+
+    <!--======================================================-->
+
+        <!-- class="org.ict_ok.admin_utils.supervisor.browser.supervisor.Events" -->
+    <z3c:pagelet
+        name="events.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.ViewAdmUtilSupervisorEventsForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        />
+    <z3c:template
+        template="events.pt"
+        for="org.ict_ok.admin_utils.supervisor.browser.supervisor.ViewAdmUtilSupervisorEventsForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+        
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.ViewAdmUtilSupervisorForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        />
+    <!--z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimHostSystem"
+        class="org.ict_ok.admin_utils.esx_vim.browser.esx_vim.EsxVimHostSystemDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.esx_vim.View"
+        />
+    <z3c:template
+        template="details_esx_host.pt"
+        for="org.ict_ok.admin_utils.esx_vim.browser.esx_vim.EsxVimHostSystemDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        /-->
+
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.EditAdmUtilSupervisorForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.Edit"
+    />
+
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.Edit"
+        />
+    <viewlet
+        name="events"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.MSubEvents"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        />
+
+
+</zope:configure>

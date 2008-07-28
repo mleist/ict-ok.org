@@ -1,0 +1,23 @@
+<html>
+    <body>
+        <div i18n:domain="ict-ok.org">
+            <h3>Systeminfo</h3>
+            <table id="sortable" class="listing" summary="Content listing"
+                    i18n:attributes="summary">
+                <tr class="cb_wht">
+                    <td i18n:translate="">Process definitions</td>
+                    <td>
+                        <table id="sortable" class="listing"
+                                tal:define="pds view/getAllWfmcPDs">
+                            <tr tal:repeat="pd pds">
+                                <td>
+                                    <a href="@@ddd" tal:content="pd" tal:attributes="href python: '@@viewwf?type=png&pdid=%s&name=%s' % (pd, pd)"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

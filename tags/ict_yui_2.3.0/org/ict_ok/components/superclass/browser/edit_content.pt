@@ -1,0 +1,42 @@
+<i18n:block domain="jsa.key">
+
+<h1>Edit Content</h1>
+
+<div class="message"
+     tal:condition="view/status"
+     tal:content="view/status"
+     i18n:translate="">
+  Something happened.
+</div>
+
+<form action="" method="post"
+      tal:attributes="action request/URL">
+
+  <tal:block
+      condition="view/objs"
+      replace="structure view/table" />
+
+  <div
+      tal:condition="not: view/objs"
+      i18n:translate="">
+    There are no objects.
+  </div>
+
+  <div id="actionsView">
+    <span class="actionButtons">
+      <!--<input type="submit" class="button" name="ADD" value="Add"-->
+             <!--i18n:attributes="value" />-->
+      <tal:block condition="view/objs">
+        <input type="submit" class="button" name="DELETE" value="Delete"
+               i18n:attributes="value" />
+        <input type="text" id="confirm_delete" name="confirm_delete"
+               size="5" />
+        <label for="confirm_delete" i18n:translate="">
+          (Type "yes" to delete.)
+        </label>
+    </tal:block>
+    </span>
+  </div>
+
+</form>
+</i18n:block>

@@ -1,0 +1,26 @@
+<html metal:use-macro="views/standard_macros/view">
+    <body tal:define="zmi_views views/@@view_get_menu/zmi_views">
+        <div metal:fill-slot="body" i18n:domain="ict-ok.org">
+            <h1 i18n:translate="">Net Details</h1>
+            <table id="sortable" class="listing" >
+                <tr class="cb_wht">
+                    <td class="label" i18n:translate="">ipv4</td>
+                    <td tal:content="context/ipv4" />
+                </tr>
+                <!--tr class="cb_ilx">
+                    <td class="label" i18n:translate="">zmi_views</td>
+                    <td>
+                        <span repeat="view2 views/@@view_get_menu/zmi_views">
+                            <p tal:content="python: dir(views)" />
+                            <p tal:content="python: views.request" />
+                        </span>
+                    </td>
+                </tr>
+                <tr class="cb_wht">
+                    <td class="label" i18n:translate="">getDDD</td>
+                    <td tal:content="view/getDDD" />
+                </tr-->
+            </table>
+        </div>
+    </body>
+</html>

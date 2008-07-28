@@ -1,0 +1,2 @@
+<DIV class="yui-u" id="iheader" i18n:domain="ict_ok.org" tal:content="structure provider:ict_ok.hd.helper">
+</DIV>
