@@ -43,7 +43,7 @@
     <viewlet
         name="overview"
         for="org.ict_ok.admin_utils.util_manager.interfaces.IUtilManager"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.util_manager.View"
@@ -51,7 +51,7 @@
     <viewlet
         name="details.html"
         for="org.ict_ok.admin_utils.util_manager.interfaces.IUtilManager"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.util_manager.View"
@@ -59,7 +59,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.admin_utils.util_manager.interfaces.IUtilManager"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.util_manager.View"
@@ -67,7 +67,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.util_manager.interfaces.IUtilManager"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.util_manager.Edit"

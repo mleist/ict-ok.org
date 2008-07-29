@@ -135,7 +135,7 @@
     <viewlet
         name="details.html"
         for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.View"
@@ -143,7 +143,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.View"
@@ -151,7 +151,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.Edit"
@@ -159,7 +159,7 @@
     <viewlet
         name="events"
         for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.admin_utils.supervisor.browser.supervisor.MSubEvents"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.View"

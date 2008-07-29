@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="No-cache" />
     <tal:providers replace="structure provider:ict_ok.Headers" />
   </head>
-  <body>
+  <body class="ict_ok-skin">
     <DIV tal:omit-tag="" tal:content="structure provider:ict_ok.js.pre"></DIV>
     <DIV id="doc2" class="yui-t3">
       <DIV class="yui-gd" id="hd" tal:content="structure provider:ict_ok.hd"></DIV>

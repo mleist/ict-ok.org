@@ -76,7 +76,7 @@
     <viewlet
         name="overview"
         for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.categories.View"
@@ -84,7 +84,7 @@
     <viewlet
         name="add_hostgroup"
         for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.admin_utils.categories.browser.categories.MSubAddCatHostGroup"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.cat_hostgroup.Add"
@@ -92,7 +92,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCatHostGroup"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.cat_hostgroup.Edit"
@@ -100,7 +100,7 @@
     <!--<viewlet-->
         <!--name="details.html"-->
         <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
+        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
         <!--class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"-->
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--permission="org.ict_ok.admin_utils.categories.View"-->
@@ -108,7 +108,7 @@
     <!--<viewlet-->
         <!--name="history"-->
         <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
+        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
         <!--class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"-->
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--permission="org.ict_ok.admin_utils.categories.View"-->
@@ -116,7 +116,7 @@
     <!--<viewlet-->
         <!--name="edit"-->
         <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
+        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
         <!--class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"-->
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--permission="org.ict_ok.admin_utils.categories.Edit"-->
@@ -124,7 +124,7 @@
     <!--<viewlet-->
         <!--name="edit_event_if"-->
         <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuSub"-->
+        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"-->
         <!--class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"-->
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--permission="org.ict_ok.components.net.EditEventIf"-->

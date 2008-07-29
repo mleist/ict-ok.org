@@ -16,7 +16,7 @@
     <viewlet
         name="dumpdata"
         for="org.ict_ok.components.interfaces.IComponent"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDumpData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.superclass.exportxml"
@@ -24,7 +24,7 @@
     <viewlet
         name="exportxmldata"
         for="org.ict_ok.components.interfaces.IComponent"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubExportXmlData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.superclass.exportxml"

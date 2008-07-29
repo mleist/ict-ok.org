@@ -35,7 +35,7 @@
     <!--viewlet
         name="add_host_mge_ups"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.host.special.mge_ups.browser.host.MSubAddHost"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
@@ -43,7 +43,7 @@
     <viewlet
         name="edit_event_if"
         for="org.ict_ok.components.host.special.mge_ups.interfaces.IHostMgeUps"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.EditEventIf"

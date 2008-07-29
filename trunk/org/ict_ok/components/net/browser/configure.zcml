@@ -169,7 +169,7 @@
     <viewlet
         name="details"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.View"
@@ -177,7 +177,7 @@
     <viewlet
         name="overview"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.View"
@@ -185,7 +185,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.View"
@@ -193,7 +193,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.Edit"
@@ -201,7 +201,7 @@
     <viewlet
         name="edit_event_if"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.EditEventIf"
@@ -209,7 +209,7 @@
     <viewlet
         name="editcontent"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.Edit"
@@ -217,7 +217,7 @@
     <viewlet
         name="add_net"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.net.browser.net.MSubAddNet"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.Add"
@@ -225,7 +225,7 @@
     <viewlet
         name="add_host"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.host.browser.host.MSubAddHost"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
@@ -233,7 +233,7 @@
     <viewlet
         name="add_dashboard"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubAddDashboard"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.dashboard.Edit"
@@ -241,7 +241,7 @@
     <viewlet
         name="del_dashboard"
         for="org.ict_ok.components.net.interfaces.INet"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.dashboard.Edit"

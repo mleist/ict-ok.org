@@ -156,5 +156,22 @@ class AdmUtilManagerItem(GlobalMenuMainItem):
 class MenuMainTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_main_tab.pt')
 
+class MenuContextTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_context_tab.pt')
+
 class MenuSubTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_tab.pt')
+
+
+
+class MenuSubGeneralTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_general_tab.pt')
+
+class MenuSubEventTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_event_tab.pt')
+
+class MenuSubScriptTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_script_tab.pt')
+
+class MenuSubAdminTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_admin_tab.pt')

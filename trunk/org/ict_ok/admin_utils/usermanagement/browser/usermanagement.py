@@ -58,7 +58,7 @@ class MSubAddDashboard(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'[+]')
     viewURL = 'add_dashboard.html'
-    weight = 900
+    weight = 2
     
     def render(self):
         """Return the template with the option 'menus'"""
@@ -72,7 +72,7 @@ class MSubDelDashboard(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'[-]')
     viewURL = 'del_dashboard.html'
-    weight = 900
+    weight = 2
 
     def render(self):
         """Return the template with the option 'menus'"""

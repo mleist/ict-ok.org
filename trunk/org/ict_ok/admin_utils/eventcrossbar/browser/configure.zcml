@@ -241,7 +241,7 @@
     <viewlet
         name="details.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.View"
@@ -249,7 +249,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.View"
@@ -257,7 +257,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.Edit"
@@ -269,7 +269,7 @@
     <viewlet
         name="details.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event_timingrelay.View"
@@ -277,7 +277,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event_timingrelay.View"
@@ -285,7 +285,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
@@ -293,7 +293,7 @@
     <viewlet
         name="edit_event_if"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.EditEventIf"
@@ -305,7 +305,7 @@
     <viewlet
         name="details.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event_timer.View"
@@ -313,7 +313,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event_timer.View"
@@ -321,7 +321,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event_timer.Edit"
@@ -329,7 +329,7 @@
     <viewlet
         name="edit_event_if"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.EditEventIf"
@@ -341,7 +341,7 @@
     <viewlet
         name="details.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.eventcrossbar.View"
@@ -349,7 +349,7 @@
     <viewlet
         name="overview"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.eventcrossbar.View"
@@ -357,7 +357,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.eventcrossbar.View"
@@ -365,7 +365,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.eventcrossbar.Edit"
@@ -373,7 +373,7 @@
     <viewlet
         name="editcontent"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.eventcrossbar.Edit"
@@ -381,7 +381,7 @@
     <viewlet
         name="crossbar"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.MSubCrossBar"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.eventcrossbar.View"
@@ -389,7 +389,7 @@
     <viewlet
         name="signalgraph"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.MSubCrossBarSignalGraph"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.eventcrossbar.View"
@@ -397,7 +397,7 @@
     <viewlet
         name="add_event"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.admin_utils.eventcrossbar.browser.event.MSubAddEvent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.Add"
@@ -405,7 +405,7 @@
     <viewlet
         name="add_event_timingrelay"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.MSubAddEventTimingRelay"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event_timingrelay.Add"
@@ -413,7 +413,7 @@
     <viewlet
         name="add_event_timer"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timer.MSubAddEventTimer"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event_timer.Add"

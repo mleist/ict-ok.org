@@ -662,3 +662,254 @@ font size is adjusted here (default is 77%) */
 
 /* a style for a custom category */
 .yui-log .mytype {background-color:#FF99CC;} /* FF99CC pink */
+
+
+/* -----------------Menu----------------------------- */
+
+.yuimenuitemlabel,
+.yuimenubaritemlabel {
+    font-size: 100%;
+    text-decoration: none;
+    color:#008263;
+    font-weight:normal;
+}
+
+.yuimenu {
+    background-color: #E5FFF9;
+    border: solid 1px #C0F0E4;
+    padding: 1px;
+    
+}
+
+.yuimenubaritem-selected,
+.yuimenuitem-selected {
+
+    background-color: #7DD0BC;
+
+}
+
+.yuimenubaritem .yuimenubaritemlabel {
+    color:#A0A0A0;
+}
+
+/*{*/
+    /*background-color:#0F0;*/
+/*}*/
+
+.yuimenubaritem-hassubmenu .yuimenubaritemlabel {
+    color:#008263;
+}
+
+/*{*/
+    /*background-color:#F00;*/
+    /*background2: url(menubaritem_submenuindicator.png) right center no-repeat;*/
+
+/*}*/
+
+/* MenuBarItem style rules */
+/*
+.ict_ok-skin .yuimenubarnav .yuimenubaritem {
+
+    border-right: solid 1px #f00;
+
+}
+.ict_ok-skin .yuimenubaritemlabel {
+
+    padding: 0 10px;
+    color: #000;
+    text-decoration: none;
+    cursor: default;
+    border-style: solid;
+    border-color: #808080;
+    border-width: 1px 0;
+    *position: relative; 
+    margin: -1px 0;
+
+}
+
+.ict_ok-skin .yuimenubarnav .yuimenubaritemlabel {
+
+    padding-right: 20px;
+
+    *display: inline-block;
+
+}
+
+.ict_ok-skin .yuimenubarnav .yuimenubaritemlabel-hassubmenu {
+    background3: #8f8;
+    background: url(../pics/menubaritem_submenuindicator.png) right center no-repeat;
+
+}
+
+.ict_ok-skin .yuimenubaritem-hassubmenu {
+
+    background: url(../pics/menubaritem_submenuindicator.png) right center no-repeat;
+
+}
+
+.ict_ok-skin .yuimenuitem-hassubmenu {
+
+    background: url(../pics/menuitem_submenuindicator.png) right center no-repeat;
+
+}
+
+.ict_ok-skin .yuimenu .bd {
+
+    border: solid 1px #E5FFF9;
+    background-color2:#E5FFF9;
+    background-color:#fff;
+}
+
+.ict_ok-skin .yuimenubaritemlabel2-selected,
+.ict_ok-skin .yuimenuitemlabel2-selected {
+
+    text-decoration: underline;
+}
+
+.ict_ok-skin .yuimenuitemlabel {
+    padding: 2px 24px;
+}
+*/
+
+/*/* ------------------------------ */*/
+/*.ict_ok-skin .yuimenu .bd {*/
+
+    /*border: solid 0px #E5FFF9;*/
+    /*background-color:#E5FFF9;*/
+    /*margin:0;*/
+    /*padding:0; /* 2px 8px 2px 8px; */*/
+/*}*/
+
+/*.ict_ok-skin .yuimenubar {*/
+    /*background:url(../pics/bg_top.jpg) no-repeat top left;*/
+    /*list-style:none;*/
+    /*margin:0;*/
+    /*overflow:hidden;*/
+    /*padding: 3px 0 0 0;*/
+    /*width:100%;*/
+/*}*/
+
+
+
+/*/* Menu style rules */*/
+
+/*.ict_ok-skin .yuimenu {*/
+    /*border: solid 0px #c4c4be;*/
+    /*padding: 3px;*/
+    
+/*}*/
+
+/*/* MenuItem and MenuBarItem styles */*/
+
+
+/*.ict_ok-skin .yuimenuitem {*/
+
+    /*/**/
+        /*For IE: Used to collapse superfluous white space between <li> elements*/
+        /*that is triggered by the "display" property of the <a> elements being*/
+        /*set to "block."*/
+    /**/*/
+
+    /**border-bottom: solid 1px #f6f7ee;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenuitemlabel,*/
+/*.ict_ok-skin .yuimenubaritemlabel {*/
+
+    /*color:#008263;*/
+    /*font-weight:normal;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenuitemlabel {*/
+
+    /*padding: 2px 24px;*/
+    
+/*}*/
+
+/*.ict_ok-skin .yuimenubaritemlabel {*/
+
+    /*border-width: 0 0 0 1px;*/
+    /*border-style: solid;*/
+    /*border-color: #c4c4be;*/
+    /*padding: 4px 24px;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenubar li.first-of-type .yuimenubaritemlabel {*/
+
+    /*border-width: 0;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenubaritem-hassubmenu {*/
+
+    /*background: url(menubaritem_submenuindicator.png) right center no-repeat;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenuitem-hassubmenu {*/
+
+    /*background: url(menuitem_submenuindicator.png) right center no-repeat;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenuitem-checked {*/
+
+    /*background: url(menuitem_checkbox.png) left center no-repeat;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenuitemlabel .helptext {*/
+
+    /*margin-top: -1.1em;*/
+    /**margin-top: -1.2em;  /* For IE*/*/
+    
+/*}*/
+
+
+
+/*/* MenuItem states */*/
+
+
+/*/* Selected MenuItem */*/
+
+/*.ict_ok-skin .yuimenubaritem-selected,*/
+/*.ict_ok-skin .yuimenuitem-selected {*/
+
+    /*/*background-color: #8c8ad0;*/*/
+  /*font-weight:bold;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenubaritemlabel-selected,*/
+/*.ict_ok-skin .yuimenuitemlabel-selected {*/
+
+    /*text-decoration: underline;*/
+    /*color: #fff;*/
+  /*font-weight:bold;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenubaritem-hassubmenu-selected {*/
+
+    /*background-image: url(menubaritem_submenuindicator_selected.png);*/
+  /*font-weight:bold;*/
+
+/*}*/
+
+/*.ict_ok-skin .yuimenuitem-hassubmenu-selected {*/
+
+    /*background-image: url(menuitem_submenuindicator_selected.png);*/
+
+  /*font-weight:bold;*/
+/*}*/
+
+/*.ict_ok-skin .yuimenuitem-checked-selected {*/
+
+    /*background-image: url(menuitem_checkbox_selected.png);*/
+  /*font-weight:bold;*/
+
+/*}*/
+

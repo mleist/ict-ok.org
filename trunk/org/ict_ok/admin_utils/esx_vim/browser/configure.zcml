@@ -67,7 +67,7 @@
     <viewlet
         name="details.html"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IAdmUtilEsxVim"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.esx_vim.View"
@@ -75,7 +75,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IAdmUtilEsxVim"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.esx_vim.View"
@@ -83,7 +83,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IAdmUtilEsxVim"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.esx_vim.Edit"
@@ -91,7 +91,7 @@
     <viewlet
         name="overview"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IAdmUtilEsxVim"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.esx_vim.View"
@@ -125,7 +125,7 @@
     <viewlet
         name="overview"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.esx_vim.View"
@@ -234,7 +234,7 @@
     <viewlet
         name="details.html"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.esx_vim.View"
@@ -242,7 +242,7 @@
     <viewlet
         name="add_dashboard"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubAddDashboard"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.dashboard.Edit"
@@ -250,7 +250,7 @@
     <viewlet
         name="del_dashboard"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.dashboard.Edit"
@@ -283,7 +283,7 @@
     <viewlet
         name="details"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimHostSystem"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.esx_vim.View"
@@ -291,7 +291,7 @@
     <viewlet
         name="overview"
         for="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimHostSystem"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.esx_vim.View"

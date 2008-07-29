@@ -67,7 +67,7 @@
     <viewlet
         name="details.html"
         for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.usermanagement.View"
@@ -75,7 +75,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.usermanagement.View"
@@ -83,7 +83,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.usermanagement.Edit"

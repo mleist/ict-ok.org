@@ -48,12 +48,6 @@
         factory="org.ict_ok.components.script.adapter.ipickle.Pickle"
     />
 
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".script.AllScriptsVocab"
-        name="AllScriptsVocab"
-        />
-
     <include package=".browser" />
     <!-- include package=".generations" / -->
 

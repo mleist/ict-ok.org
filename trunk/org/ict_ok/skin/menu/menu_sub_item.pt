@@ -1,5 +1,11 @@
-<li><a class="navsub"
+<li class="yuimenuitem"><a class="yuimenuitemlabel" 
        href="#" 
        tal:attributes="href view/url; class view/menu_class" 
        tal:content="view/title" 
        i18n:translate="">Title</a></li>
+
+<!--<li><a class="navsub"-->
+       <!--href="#" -->
+       <!--tal:attributes="href view/url; class view/menu_class" -->
+       <!--tal:content="view/title" -->
+       <!--i18n:translate="">Title</a></li>-->

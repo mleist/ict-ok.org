@@ -30,3 +30,18 @@ class IMenuMain(IViewletManager):
 
 class IMenuSub(IViewletManager):
     """Menu viewlet manager."""
+
+class IMenuContext(IViewletManager):
+    """Menu viewlet manager."""
+
+class IMenuGeneral(IViewletManager):
+    """Menu viewlet manager."""
+
+class IMenuEvent(IViewletManager):
+    """Menu viewlet manager."""
+
+class IMenuScript(IViewletManager):
+    """Menu viewlet manager."""
+
+class IMenuAdmin(IViewletManager):
+    """Menu viewlet manager."""

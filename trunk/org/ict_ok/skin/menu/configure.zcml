@@ -30,6 +30,51 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.site.View"
         />
+
+    <viewletManager
+        name="ict_ok.menusub.general"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.skin.menu.MenuSubGeneralTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    <viewletManager
+        name="ict_ok.menusub.event"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuEvent"
+        class="org.ict_ok.skin.menu.MenuSubEventTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    <viewletManager
+        name="ict_ok.menusub.script"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuScript"
+        class="org.ict_ok.skin.menu.MenuSubScriptTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    <viewletManager
+        name="ict_ok.menusub.admin"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.skin.menu.MenuSubAdminTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    
+    <!--<viewletManager-->
+        <!--name="ict_ok.menucontext"-->
+        <!--provides="org.ict_ok.skin.menu.interfaces.IMenuContext"-->
+        <!--class="org.ict_ok.skin.menu.MenuContextTab"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.components.site.View"-->
+        <!--/>-->
+    
+    <!--<viewletManager-->
+        <!--name="ict_ok.menugeneral"-->
+        <!--provides="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
+        <!--class="org.ict_ok.skin.menu.MenuGeneralTab"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.components.site.View"-->
+        <!--/>-->
     
     <!-- viewlets -->
 
@@ -104,7 +149,7 @@
     <viewlet
         name="overview"
         for="zope.app.folder.interfaces.IRootFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="zope.View"
@@ -112,7 +157,7 @@
     <viewlet
         name="add_net"
         for="zope.app.folder.interfaces.IRootFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.net.browser.net.MSubAddNet"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.Add"
@@ -120,7 +165,7 @@
     <viewlet
         name="add_site"
         for="zope.app.folder.interfaces.IRootFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.site.browser.site.MSubAddSite"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.site.Add"
@@ -128,7 +173,7 @@
     <viewlet
         name="add_location"
         for="zope.app.folder.interfaces.IRootFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.location.browser.location.MSubAddLocation"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.location.Add"
