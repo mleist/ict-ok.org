@@ -25,20 +25,26 @@
         />
 
     <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.script.interfaces.IScript"
+        class=".script.ScriptDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.script.View"
+        />
+
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.components.script.browser.script.ScriptDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
         name="history.html"
         for="org.ict_ok.components.script.interfaces.IScript"
         class="org.ict_ok.components.superclass.browser.superclass.History"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.script.View"
         />
-
-    <z3c:pagelet
-        name="details.html"
-        for="org.ict_ok.components.script.interfaces.IScript"
-        class=".script.DetailsScriptForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.script.View"
-    />
 
     <z3c:pagelet
         name="edit.html"
@@ -66,6 +72,14 @@
 
     <!--##### Sub Menu ##### -->
 
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.components.script.interfaces.IScript"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.script.View"
+        />
     <viewlet
         name="overview"
         for="org.ict_ok.components.script.interfaces.IScript"

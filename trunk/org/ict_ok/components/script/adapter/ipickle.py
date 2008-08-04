@@ -43,5 +43,6 @@ class Pickle(PickleSupernode):
         pickler = PickleSupernode(self.context)
         retVal = pickler.exportAsDict(mode)
         retVal['myFactory'] = self.context.myFactory
+        retVal['listAttr']['pythonScript'] = self.context.pythonScript
         del pickler
         return retVal

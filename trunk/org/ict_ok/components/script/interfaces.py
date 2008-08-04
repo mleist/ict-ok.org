@@ -15,6 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.interface import Attribute
 from zope.schema import Text
 
 # ict_ok.org imports
@@ -31,3 +32,5 @@ class IScript(IComponent):
         description = _("Python script."),
         default = u"",
         required = False)
+
+    printHistory = Attribute("script print history list")

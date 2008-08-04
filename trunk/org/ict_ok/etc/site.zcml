@@ -51,8 +51,8 @@
              file="security.zcml" />
     <include package="org.ict_ok.admin_utils.cron"
              file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.esx_vim"
-             file="security.zcml" />
+    <!-- <include package="org.ict_ok.admin_utils.esx_vim" -->
+    <!--         file="security.zcml" /> -->
     <include package="org.ict_ok.admin_utils.eventcrossbar"
              file="security.zcml" />
     <include package="org.ict_ok.admin_utils.generators.honeyd"
@@ -105,6 +105,8 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.room"
              file="security.zcml" />
+    <include package="org.ict_ok.components.script"
+             file="security.zcml" />
 
     <!--registration of core components-->
     <include package="zope.sendmail"/>
@@ -145,7 +147,7 @@
     <include package="org.ict_ok.admin_utils.categories" />
     <include package="org.ict_ok.admin_utils.compliance" />
     <include package="org.ict_ok.admin_utils.cron" />
-    <include package="org.ict_ok.admin_utils.esx_vim" />
+    <!-- <include package="org.ict_ok.admin_utils.esx_vim" /> -->
     <include package="org.ict_ok.admin_utils.eventcrossbar" />
     <!--<include package="org.ict_ok.admin_utils.generators/honeyd" />-->
     <include package="org.ict_ok.admin_utils.generators.nagios" />
@@ -174,6 +176,7 @@
     <include package="org.ict_ok.components.host" />
     <include package="org.ict_ok.components.host.special" />
     <include package="org.ict_ok.components.interface" />
+    <include package="org.ict_ok.components.script" />
     <include package="org.ict_ok.components.service" />
     <include package="org.ict_ok.components.service.special" />
     <include package="org.ict_ok.components.snmpvalue" />

@@ -22,11 +22,11 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from RestrictedPython import compile_restricted
 
 # ict_ok.org imports
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.script.interfaces import IScript
-
 
 class Script(Component):
     """
@@ -37,6 +37,7 @@ class Script(Component):
     # for ..Contained we have to:
     __name__ = __parent__ = None
     pythonScript = FieldProperty(IScript['pythonScript'])
+    printHistory = FieldProperty(IScript['printHistory'])
 
     def __init__(self, **data):
         """
@@ -46,4 +47,35 @@ class Script(Component):
         for (name, value) in data.items():
             if name in IScript.names():
                 setattr(self, name, value)
+        self.printHistory = []
         self.ikRevision = __version__
+
+    def appendPrintHistory(self, printString):
+        """
+        will fill a list of 10 entries with the string-output
+        from python functions
+        """
+        self.printHistory.append(printString)
+        if len(self.printHistory) > 10:
+            self.printHistory.pop(0)
+        #print "appendPrintHistory: ", self.printHistory
+        
+    def tickerEvent(self):
+        """
+        got ticker event from ticker thread
+        """
+        print "Script.tickerEvent    ->"
+        self.outputDebug()
+        tmpScript = '''def hello_world():
+                           return "Hello World!"
+                           '''
+        #tmpScript = "1+1"
+        #print "ccc: ", 
+        try:
+            code = compile_restricted(tmpScript, '<string>', 'exec')
+            exec(code)
+            print "ddd: ", hello_world()
+        except Exception, errText:
+            self.appendPrintHistory(str(errText))
+            self.appendHistoryEntry(str(errText))
+        print "<--"

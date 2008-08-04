@@ -128,7 +128,7 @@
                     <viewlet
                         name="details"
                         for="%(longpath_interface)s.I%(utilityname)s"
-                        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
                         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="%(longpath)s.%(filename)s.View"
@@ -137,7 +137,7 @@
                     <viewlet
                         name="overview"
                         for="%(longpath_interface)s.I%(utilityname)s"
-                        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
                         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="%(longpath)s.%(filename)s.View"
@@ -146,7 +146,7 @@
                     <viewlet
                         name="history"
                         for="%(longpath_interface)s.I%(utilityname)s"
-                        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
                         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="%(longpath)s.%(filename)s.View"
@@ -155,7 +155,7 @@
                     <viewlet
                         name="edit"
                         for="%(longpath_interface)s.I%(utilityname)s"
-                        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
                         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="%(longpath)s.%(filename)s.Edit"
@@ -165,7 +165,7 @@
     <viewlet
         name="details"
         for="org.ict_ok.admin_utils.testmod.interfaces.IAdmUtilTestMod"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.testmod.View"
@@ -174,7 +174,7 @@
     <viewlet
         name="overview"
         for="org.ict_ok.admin_utils.testmod.interfaces.IAdmUtilTestMod"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.testmod.View"
@@ -183,7 +183,7 @@
     <viewlet
         name="history"
         for="org.ict_ok.admin_utils.testmod.interfaces.IAdmUtilTestMod"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.testmod.View"
@@ -192,7 +192,7 @@
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.testmod.interfaces.IAdmUtilTestMod"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuSub"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.testmod.Edit"

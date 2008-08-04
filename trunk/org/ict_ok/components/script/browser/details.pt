@@ -1,0 +1,31 @@
+<i18n:block domain="org.ict-ok">
+    <h3>Script ...</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary"
+            tal:define="runtime_info view/getZopeRuntimeInfo">
+        <tr>
+            <th i18n:translate="">Name</th>
+            <th i18n:translate="">State</th>
+        </tr>
+        <!--<tr tal:define="cronTime view/getCronTime">-->
+            <!--<td>last Cron event</td>-->
+            <!--<td tal:content="cronTime" />-->
+        <!--</tr>-->
+        <!-- tr class="cb_wht" tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+            <td i18n:translate="">lastSeenMaster</td>
+            <div tal:omit-tag=""  tal:condition="context/getCronTime">
+                <td tal:content="python: dateform.format(context.getCronTime)">test</td>
+            </div>
+            <div tal:omit-tag=""  tal:condition="not: context/getCronTime">
+                <td>---</td>
+            </div>
+        </tr -->
+    </table>
+    <hr />
+    <div tal:content="context/pythonScript">ddd</div>
+    <hr />
+    <h3>Last 10 outputs:</h3>
+    <div tal:repeat="hentry context/printHistory">
+        <p tal:content="hentry">ddd</p>
+    </div>
+</i18n:block>

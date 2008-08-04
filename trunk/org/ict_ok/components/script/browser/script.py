@@ -57,10 +57,10 @@ class ScriptDetails(ComponentDetails):
 # --------------- forms ------------------------------------
 
 
-class DetailsScriptForm(DisplayForm):
-    """ Display form for the object """
-    label = _(u'settings of script')
-    fields = field.Fields(IScript).omit(*ScriptDetails.omit_viewfields)
+#class DetailsScriptForm(DisplayForm):
+    #""" Display form for the object """
+    #label = _(u'settings of script')
+    #fields = field.Fields(IScript).omit(*ScriptDetails.omit_viewfields)
 
 
 class AddScriptForm(AddForm):
