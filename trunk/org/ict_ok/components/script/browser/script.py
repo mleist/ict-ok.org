@@ -50,9 +50,9 @@ class MSubAddScript(GlobalMenuSubItem):
 class ScriptDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = ComponentDetails.omit_viewfields + []
-    omit_addfields = ComponentDetails.omit_addfields + []
-    omit_editfields = ComponentDetails.omit_editfields + []
+    omit_viewfields = ComponentDetails.omit_viewfields + ['printHistory']
+    omit_addfields = ComponentDetails.omit_addfields + ['printHistory']
+    omit_editfields = ComponentDetails.omit_editfields + ['printHistory']
 
 # --------------- forms ------------------------------------
 

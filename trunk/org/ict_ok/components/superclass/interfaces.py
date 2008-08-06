@@ -90,6 +90,10 @@ class ISuperclass(Interface):
         get 'Universe ID' of object
         returns str
         """
+    def getParent():
+        """
+        returns parent object
+        """
     def getDcTitle():
         """
         get the Title from Dublin Core

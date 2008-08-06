@@ -151,14 +151,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.service.Add"
         />
-    <!--<viewlet-->
-        <!--name="add_snmpvalue"-->
-        <!--for="org.ict_ok.components.interface.interfaces.IInterface"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
-        <!--class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubAddSnmpValue"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.snmpvalue.Add"-->
-        <!--/>-->
+    <viewlet
+        name="add_snmpvalue"
+        for="org.ict_ok.components.interface.interfaces.IInterface"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubAddSnmpValue"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.Add"
+        />
     <viewlet
         name="add_dashboard"
         for="org.ict_ok.components.interface.interfaces.IInterface"

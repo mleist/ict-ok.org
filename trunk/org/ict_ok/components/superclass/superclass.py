@@ -136,6 +136,12 @@ class Superclass(Persistent):
         returns str
         """
         return self.objectID
+    
+    def getParent(self):
+        """
+        returns parent object
+        """
+        return zapi.getParent(self)
 
     def outputDebug(self):
         """
@@ -167,13 +173,19 @@ class Superclass(Persistent):
         dcore = IWriteZopeDublinCore(self)
         dcore.title = unicode(title)
 
-    def appendHistoryEntry(self, entryText):
+    def appendHistoryEntry(self, entryText, level=u"info"):
         """
         append an text entry to the history
         """
-        newEntry = Entry(entryText, self, level=u"info")
-        newEntry.setObjVersion(self.ikRevision)
-        self.history.append(newEntry)
+        lastEntry = self.history.get()[-1]
+        if entryText == lastEntry.getText():
+            lastEntry.appendRepeatCounter()
+            lastEntry._p_changed = 1
+        else:
+            newEntry = Entry(entryText, self, level)
+            newEntry.setObjVersion(self.ikRevision)
+            self.history.append(newEntry)
+        self._p_changed = 1
 
     def isConnectedToEvent(self):
         for attrName in self.__dict__:

@@ -22,11 +22,86 @@ __version__ = "$Id$"
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
+from zope.schema.fieldproperty import FieldProperty
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # ict_ok.org imports
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 
+def SnmpCheckTypes(dummy_context):
+    """In which production state a host may be
+    """
+    terms = []
+    for (gkey, gname) in {
+        u'oid': u'OID',
+        u'cmd': u'Command',
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
+
+def SnmpCheckCmds(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        u"none": u"None",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
+
+def SnmpInpTypes(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        u"cnt": u"Counter",
+        u"gauge": u"Gauge",
+        u"rel": u"Relative",
+        u"relperc": u"Percent",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
+
+def SnmpDimensionUnits(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        u"bit": u"bit",
+        u"kbit": u"kbit",
+        u"Mbit": u"Mbit",
+        u"Kibit": u"Kibit",
+        u"Mibit": u"Mibit",
+        u"byte": u"byte",
+        u"kbyte": u"kbyte",
+        u"Mbyte": u"Mbyte",
+        u"Kibyte": u"Kibyte",
+        u"Mibyte": u"Mibyte",
+        u"event": u"event",
+        u"cnt": u"cnt",
+        u"degC": u"degC",
+        u"degF": u"degF",
+        u"V": u"V",
+        u"A": u"A",
+        u"dA": u"dA",
+        u"Hz": u"Hz",
+        u"dHz": u"dHz",
+        u"W": u"W",
+        u"kW": u"kW",
+        u"s": u"s",
+        u"min": u"min",
+        u"h": u"h",
+        u"%": u"%",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
+
+def SnmpTimeDimensionUnits(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        u"1": u"1",
+        u"s": u"s",
+        u"min": u"min",
+        u"h": u"h",
+        u"d": u"d",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
 
 class SnmpValue(Component):
     """
@@ -36,7 +111,18 @@ class SnmpValue(Component):
     implements(ISnmpValue)
     # for ..Contained we have to:
     __name__ = __parent__ = None
-    #ikAttr = FieldProperty(ISnmpValue['ikAttr'])
+    checktype = FieldProperty(ISnmpValue['checktype'])
+    oid1 = FieldProperty(ISnmpValue['oid1'])
+    oid2 = FieldProperty(ISnmpValue['oid2'])
+    cmd = FieldProperty(ISnmpValue['cmd'])
+    inptype = FieldProperty(ISnmpValue['inptype'])
+    inpUnit = FieldProperty(ISnmpValue['inpUnit'])
+    #displayUnitNumerator = FieldProperty(ISnmpValue['displayUnitNumerator'])
+    #displayUnitDenominator = FieldProperty(ISnmpValue['displayUnitDenominator'])
+    #checkMax = FieldProperty(ISnmpValue['checkMax'])
+    #checkMaxLevel = FieldProperty(ISnmpValue['checkMaxLevel'])
+    #checkMaxLevelUnitNumerator = FieldProperty(ISnmpValue['checkMaxLevelUnitNumerator'])
+    #checkMaxLevelUnitDenominator = FieldProperty(ISnmpValue['checkMaxLevelUnitDenominator'])
 
     def __init__(self, **data):
         """

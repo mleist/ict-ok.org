@@ -36,6 +36,7 @@ class Entry(Persistent):
             self._version = self.entryVersion
             self._objversion = None
             self._time = datetime.utcnow()
+            self._repeated = None # list of datetimes or None
             self._level = u"%s" % level
             self._object = inObject
         # init with pickle
@@ -46,6 +47,7 @@ class Entry(Persistent):
                 self._version = inData['version']
                 self._objversion = inData['objversion']
                 self._time = inData['date']
+                self._repeated = inData['repeated']
                 self._level = inData['level']
                 self._object = inObject
 
@@ -63,7 +65,18 @@ class Entry(Persistent):
 
     def getLevel(self):
         return self._level
+    
+    def getRepeatCounter(self):
+        if self._repeated:
+            return len(self._repeated)
+        else:
+            return 0
 
+    def appendRepeatCounter(self):
+        if self._repeated == None:
+            self._repeated = []
+        self._repeated.append(datetime.utcnow())
+        
     def getList(self, fields=['date', 'text']):
         """
         return a list with history entries for html
@@ -76,6 +89,8 @@ class Entry(Persistent):
                 retList.append(self._text)
             elif field == 'version':
                 retList.append(self._version)
+            elif field == 'repeated':
+                retList.append(len(self._repeated))
             elif field == 'level':
                 try:
                     retList.append(self._level)
@@ -104,6 +119,7 @@ class Entry(Persistent):
         retVal = {}
         retVal['objClass'] = self.__class__.__name__
         retVal['date'] = self._time
+        retVal['repeated'] = self._repeated
         retVal['text'] = self._text
         retVal['version'] = self._version
         retVal['objversion'] = self._objversion

@@ -29,6 +29,7 @@ from zope.sendmail.interfaces import IMailDelivery
 from zope.app.zapi import getPath
 from zope.interface import directlyProvides
 from zope.app.pagetemplate.urlquote import URLQuote
+from zope.app.generations.generations import findManagers
 
 # z3c imports
 from z3c.form import field
@@ -64,6 +65,12 @@ class MSubEvents(GlobalMenuSubItem):
     title = _(u'Events')
     viewURL = 'events.html'
     weight = 90
+
+class MSubGenerations(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Generations')
+    viewURL = 'generations.html'
+    weight = 50
 
 
 # --------------- object details ---------------------------
@@ -247,6 +254,14 @@ def formatEntryNbr(entry, formatter):
 def formatEntryMessage(entry, formatter):
     return entry['msg']
 
+def formatGenerationNbr(genManager, formatter):
+    return genManager.generation
+
+def formatGenerationMinimum(genManager, formatter):
+    return genManager.minimum_generation
+
+def formatGenerationName(genManager, formatter):
+    return genManager.package_name
 
 class DateGetterColumn(GetterColumn):
     """Getter columnt that has locale aware sorting."""
@@ -281,6 +296,37 @@ class ViewAdmUtilSupervisorEventsForm(BrowserPagelet):
         formatter = StandaloneFullFormatter(
             self.context, self.request, self.objs(),
             columns=self.columns, sort_on=((_('Date'), True),))
+        formatter.batch_size = 30
+        formatter.cssClasses['table'] = 'listing'
+        return formatter()
+
+
+class ViewAdmUtilSupervisorGenerationsForm(BrowserPagelet):
+    """Generation Pagelet"""
+    label = _(u'Generations')
+    columns = (
+        GetterColumn(title=_('Name'),
+                     getter=formatGenerationName),
+        GetterColumn(title=_('Generation'),
+                     getter=formatGenerationNbr),
+        GetterColumn(title=_('Minimum Generation'),
+                     getter=formatGenerationMinimum),
+    )
+    def objs(self):
+        """list of generation manager objects"""
+        retList =[]
+        for (genManagerName, genManagerObj) in findManagers():
+            retList.append(genManagerObj)
+        return retList
+
+    def table(self):
+        """ Properties of table are defined here"""
+        directlyProvides(self.columns[0], ISortableColumn)
+        directlyProvides(self.columns[1], ISortableColumn)
+        directlyProvides(self.columns[2], ISortableColumn)
+        formatter = StandaloneFullFormatter(
+            self.context, self.request, self.objs(),
+            columns=self.columns, sort_on=((_('Name'), False),))
         formatter.batch_size = 30
         formatter.cssClasses['table'] = 'listing'
         return formatter()

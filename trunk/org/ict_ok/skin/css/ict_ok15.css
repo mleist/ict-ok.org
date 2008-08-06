@@ -328,7 +328,11 @@ table.listing {
 }
 
 table.listing tr.odd {
-  background-color:#FFFFFF;
+  background-color:#C0F0E4;
+}
+
+table.listing tr.even {
+  background-color:#FFF;
 }
 
 table.listing tr th {
@@ -470,6 +474,27 @@ ul.state_error li{
 
 pre.dumpdata {
   font-size:80%;
+}
+
+pre.history {
+  font-size:100%;
+}
+
+pre.err {
+  background-color:#E07771;
+  padding: 2px;
+}
+
+pre.warn {
+  background-color:#CFD138;
+  padding: 2px;
+}
+
+pre.source {
+  font-size:100%;
+  background-color:#C0F0E4;
+  padding: 4px 2px 4px 2px;
+  margin:4px 2px 4px 2px;
 }
 
 /*input, textarea, select {*/

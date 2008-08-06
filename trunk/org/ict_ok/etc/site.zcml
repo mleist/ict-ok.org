@@ -140,6 +140,8 @@
     <include package="z3c.macro" />
     <include package="z3c.pagelet" />
 
+    <include package="org.ict_ok.libs.history.generations" />
+
     <!--registration of supervisor must be first-->
     <include package="org.ict_ok.admin_utils.supervisor" />
 

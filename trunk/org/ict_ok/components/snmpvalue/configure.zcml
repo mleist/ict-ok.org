@@ -40,6 +40,31 @@
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".snmpvalue.SnmpCheckTypes"
+        name="SnmpCheckTypes"
+        />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".snmpvalue.SnmpCheckCmds"
+        name="SnmpCheckCmds"
+        />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".snmpvalue.SnmpInpTypes"
+        name="SnmpInpTypes"
+        />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".snmpvalue.SnmpDimensionUnits"
+        name="SnmpDimensionUnits"
+        />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".snmpvalue.SnmpTimeDimensionUnits"
+        name="SnmpTimeDimensionUnits"
+        />
     <adapter
         factory=".adapter.sized.SnmpValueSized"
         />

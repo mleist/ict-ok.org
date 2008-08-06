@@ -203,13 +203,30 @@ def formatEntryDate(entry, formatter):
         tooltip = u""
     return resString + tooltip
 
+def formatEntryTextSplit(full_text, split_size):
+    for line in full_text.splitlines(False):
+        pos = 0
+        while pos < len(line):
+            pos = pos + split_size
+            yield line[pos-split_size:pos]+"\n"
+
 def formatEntryText(entry, formatter):
     """Entry Date for history in Web-Browser"""
-    return entry.getText()
+    textList = entry.getList(['level', 'text'])
+    return u"<pre class='history %s' >%s</pre>" % \
+           (textList[0],
+            u"".join(formatEntryTextSplit(textList[1].strip(), 60)))
 
 def formatEntryLevel(entry, formatter):
     """Entry Date for history in Web-Browser"""
     return entry.getLevel()
+
+def formatEntryRepeatCounter(entry, formatter):
+    """Entry Repeat Counter for a history entry"""
+    if entry.getRepeatCounter() > 0:
+        return str(entry.getRepeatCounter())
+    else:
+        return ""
 
 def getStateIcon(item, formatter):
     """State Icon of Object"""
@@ -695,8 +712,11 @@ class History(BrowserPagelet):
         DateGetterColumn(title=_('Date'),
                      getter=formatEntryDate,
                      cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('R'),
+                     getter=formatEntryRepeatCounter),
         GetterColumn(title=_('Text'),
-                     getter=formatEntryText),
+                     getter=formatEntryText,
+                     cell_formatter=raw_cell_formatter),
                      )
     def objs(self):
         """List of Content objects"""
@@ -708,7 +728,7 @@ class History(BrowserPagelet):
         """ Properties of table are defined here"""
         directlyProvides(self.columns[0], ISortableColumn)
         #directlyProvides(self.columns[1], ISortableColumn)
-        directlyProvides(self.columns[2], ISortableColumn)
+        directlyProvides(self.columns[3], ISortableColumn)
         formatter = StandaloneFullFormatter(
             self.context, self.request, self.objs(),
             columns=self.columns, sort_on=((_('Date'), True),))
