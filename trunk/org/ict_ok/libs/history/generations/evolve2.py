@@ -17,27 +17,21 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.components.host.interfaces import IHost
 
 generation = 2
 
 def evolve(context):
     u"""
-    convert this all history-entries, additional 'repeated data'
+    host object now with production state
     """
+    
     root = getRootFolder(context) # the Zope-Root-Folders
-    sm = root.getSiteManager()
-    # convert this all history-entries
-    for obj in findObjectsProviding(root, ISuperclass):
-        for historyEntry in obj.history.get():
-            try:
-                tmp = historyEntry._repeated
-            except AttributeError:
-                historyEntry._repeated = None
-    for utility in sm.registeredUtilities():
-        if hasattr(utility.component, "history"):
-            for historyEntry in utility.component.history.get():
-                try:
-                    tmp = historyEntry._repeated
-                except AttributeError:
-                    historyEntry._repeated = None
+
+    for host in findObjectsProviding(root, IHost):
+        # convert this object
+        evolve_msg = "gen. %d (%s)" % \
+                   (generation, evolve.__doc__.strip())
+        print "Host(%s): " % host.ikName + evolve_msg
+        host.productionState = u'production'
+        host.appendHistoryEntry(evolve_msg)
