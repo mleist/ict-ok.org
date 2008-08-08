@@ -12,9 +12,8 @@
 
 import urllib2
 import re
-from pprint import pprint
-from BeautifulSoup import BeautifulSoup
 import pickle
+from BeautifulSoup import BeautifulSoup
 from gzip import GzipFile
 
 def begin_marker(textvar):
@@ -90,20 +89,17 @@ def parse_template(soup, outp_dict):
                 outp_dict[str(miscMatch.groups()[0])] = miscMatch.groups()[1]
 
 
+# open files
 page = urllib2.urlopen("http://www.plixer.com/support/mrtg_repository.php")
-soup_p = BeautifulSoup(page,
-                       convertEntities=BeautifulSoup.HTML_ENTITIES)
-
-#snmp_data_mrtg = open("./snmp_mrtg_data.py", "w", False)
-#snmp_data_mrtg.write("snmp_mrtg_data = ")
 dataFile = GzipFile("snmp_mrtg_data.gz", "wb")
 
 all_templ_data = {}
+
+# parse input data and form out dict
+soup_p = BeautifulSoup(page,
+                       convertEntities=BeautifulSoup.HTML_ENTITIES)
 parse_vendors(soup_p, all_templ_data)
 
-#pprint(all_templ_data, stream=snmp_data_mrtg,
-       #indent=4, width=400)
+# write in a gzipped pickle
 pickle.dump(all_templ_data, dataFile)
-
-#snmp_data_mrtg.close()
 dataFile.close()
