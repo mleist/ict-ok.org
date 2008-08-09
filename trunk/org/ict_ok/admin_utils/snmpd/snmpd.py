@@ -19,6 +19,7 @@ import logging
 import threading
 import atexit
 import time
+from datetime import datetime
 
 # zope imports
 from zope.app import zapi
@@ -56,6 +57,11 @@ class AdmUtilSnmpd(Supernode):
         self.ikRevision = __version__
         self.mrtg_data = None
         self.mrtg_data_timestamp = 0.0
+
+    def getMrtgDataUpdateDatetime(self):
+        """ update time of mrtg data as datetime object
+        """
+        return(datetime.fromtimestamp(self.mrtg_data_timestamp))
 
 
 class SystemSnmpdPrincipal(object):

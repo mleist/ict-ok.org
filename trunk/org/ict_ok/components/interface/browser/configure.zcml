@@ -86,6 +86,19 @@
         />
 
     <z3c:pagelet
+        name="add_snmps_by_vendor.html"
+        for="org.ict_ok.components.interface.interfaces.IInterface"
+        class="org.ict_ok.components.snmpvalue.browser.snmpvalue.AddSnmpByVendorClass"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.Add"
+    />
+    <z3c:template
+        template="../../snmpvalue/browser/add_snmps_by_vendor.pt"
+        for="org.ict_ok.components.snmpvalue.browser.snmpvalue.AddSnmpByVendorClass"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
         name="add_snmpvalue.html"
         for="org.ict_ok.components.interface.interfaces.IInterface"
         class="org.ict_ok.components.snmpvalue.browser.snmpvalue.AddSnmpValueForm"

@@ -449,6 +449,9 @@ class SuperclassDetails:
         localTZ = timezone('Europe/Berlin')
         localTimestmp = argdatetime.astimezone(localTZ)
         return localTimestmp.strftime('%d.%m.%Y %H:%M:%S %Z')
+    
+    def getModifiedTime(self):
+        return IZopeDublinCore(self.context).modified
 
 
 class DumpData:

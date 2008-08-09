@@ -24,6 +24,9 @@ class IAdmUtilSnmpd(ISupernode):
     """A pseudo-mailer that delivers objects by xmlrpc."""
     mrtg_data = Attribute("mrtg data dict")
     mrtg_data_timestamp = Attribute("timestamp of last mrtd data update")
+    def getMrtgDataUpdateDatetime(self):
+        """ update time of mrtg data as datetime object
+        """
 
 
 class ISnmptrapd(Interface):

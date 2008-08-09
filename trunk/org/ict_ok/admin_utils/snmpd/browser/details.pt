@@ -17,13 +17,9 @@
                 <td>---</td>
             </div>
         </tr>
-        <!--<tr>-->
-            <!--<td i18n:translate="">ddd</td>-->
-            <!--<td tal:content="view/test" />-->
-        <!--</tr>-->
         <tr>
-            <td i18n:translate="">ddd</td>
-            <td tal:content="context/mrtg_data_timestamp" />
+            <td i18n:translate="">Last update of mrtg data</td>
+            <td tal:content="python: dateform.format(context.getMrtgDataUpdateDatetime())">test</td>
         </tr>
     </table>
 

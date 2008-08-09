@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,E0611,W0232,W0142
+# pylint: disable-msg=F0401,E1101,E0611,W0232,W0142
 #
 """implementation of browser class of SnmpValue object
 """
@@ -21,12 +21,22 @@ import rrdtool
 # zope imports
 from zope.app import zapi
 from zope.proxy import removeAllProxies
+from zope.interface import directlyProvides
+from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
+from zope.app.container.interfaces import IOrderedContainer
+
+# zc imports
+from zc.table.column import Column, GetterColumn
+from zc.table.table import StandaloneFullFormatter
+from zc.table.interfaces import ISortableColumn
 
 # z3c imports
 from z3c.form import field
+from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
+from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -44,7 +54,8 @@ _ = MessageFactory('org.ict_ok')
 class MSubAddSnmpValue(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add SNMP Value')
-    viewURL = 'add_snmpvalue.html'
+    #viewURL = 'add_snmpvalue.html'
+    viewURL = 'add_snmps_by_vendor.html'
     weight = 50
 
 
@@ -149,6 +160,49 @@ class SnmpValueDetails(ComponentDetails):
         obj = removeAllProxies(self.context)
         return zapi.getPath(obj)
 
+def getTitel(item, formatter):
+    """
+    Titel for Overview
+    """
+    return item
+
+
+class AddSnmpByVendorClass(BrowserPagelet):
+    columns = (
+        GetterColumn(title=_('Title'),
+                     getter=getTitel),
+        )
+    label = "aaa"
+    ddd = None
+    def update(self):
+        self.label = "zzzz"
+        if self.request.has_key('ictvendor'):
+            self.ddd = self.request['ictvendor']
+            #self.label = _(u"Dashboard of %s") % \
+                #self.request.principal.title
+        BrowserPagelet.update(self)
+
+    def objs(self):
+        """List of Content objects"""
+        retList = [1,2,3]
+        if self.request.has_key('ictvendor'):
+            retList = [self.request['ictvendor'] for i in [1,2,3,4] ]
+        else:
+            snmpd_utility = getUtility(IAdmUtilSnmpd)
+            retList = snmpd_utility.mrtg_data.keys()
+            print retList
+        return retList
+
+    def table(self):
+        """ Properties of table are defined here"""
+        columnList = list(self.columns)
+        directlyProvides(columnList[0], ISortableColumn)
+        formatter = StandaloneFullFormatter(
+            self.context, self.request, self.objs(),
+            columns=columnList, sort_on=((_('Title'), False),))
+        formatter.cssClasses['table'] = 'listing'
+        return formatter()
+
 # --------------- forms ------------------------------------
 
 
@@ -156,6 +210,25 @@ class DetailsSnmpValueForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of net')
     fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_viewfields)
+    
+    def update(self):
+        print "--" * 30
+        print self.context.oid1
+        from pysnmp.entity.rfc3413.oneliner import cmdgen
+        oidStringList = self.context.oid1.strip(".").split(".")
+        oidIntList = [ int(i) for i in oidStringList]
+        errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
+            cmdgen.CommunityData('my-agent', 'public01', 0),
+            cmdgen.UdpTransportTarget(('localhost', 161)),
+            tuple(oidIntList)
+        )
+        print "1", errorIndication
+        print "2", errorStatus
+        print "3", varBinds
+        print "--" * 30
+        DisplayForm.update(self)
+        import pdb
+        pdb.set_trace()
 
 
 class AddSnmpValueForm(AddForm):
@@ -178,5 +251,4 @@ class DeleteSnmpValueForm(DeleteForm):
         """this title will be displayed in the head of form"""
         return _(u"Delete this net: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
-
 

@@ -1,5 +1,5 @@
 <i18n:block domain="ict_ok.org">
-  <h3>Add Hosts</h3>
+  <h3 i18n:translate="">Add Hosts</h3>
   <div class="message"
     tal:condition="view/status|nothing"
     tal:content="view/status"

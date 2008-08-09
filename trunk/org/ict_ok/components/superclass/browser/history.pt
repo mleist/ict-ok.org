@@ -1,5 +1,5 @@
 <i18n:block domain="ict-ok.org">
-        <h1>History</h1>
+        <h1 i18n:translate="">History</h1>
     <form action="" method="post" tal:attributes="action request/URL">
         <tal:block
             condition="view/objs"

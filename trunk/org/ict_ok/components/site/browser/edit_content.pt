@@ -1,6 +1,6 @@
 <i18n:block domain="jsa.key">
 
-<h1>Edit Content</h1>
+<h1 i18n:translate="">Edit Content</h1>
 
 <div class="message"
      tal:condition="view/status"

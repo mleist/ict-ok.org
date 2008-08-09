@@ -1,6 +1,6 @@
 <div class="bg-315-top">
   <div class="bg-315-bottom">
-    <h1><a href="/">Navigation</h1>
+    <h1 i18n:translate=""><a href="/">Navigation</h1>
     <div id="treeDiv1"></div>
   </div>
 </div>

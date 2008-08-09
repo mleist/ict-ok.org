@@ -59,6 +59,14 @@
         <!--permission="org.ict_ok.components.snmpvalue.View"-->
         <!--/>-->
     <viewlet
+        name="details"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.View"
+        />
+    <viewlet
         name="overview"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
