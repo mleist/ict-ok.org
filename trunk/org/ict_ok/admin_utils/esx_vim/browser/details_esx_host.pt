@@ -1,5 +1,5 @@
 <i18n:block domain="org.ict_ok">
-    <h1>Details ESX Host</h1>
+    <h1 i18n:translate="">Details ESX Host</h1>
     <table id="sortable" class="listing"
            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
         <tr class="cb_wht">

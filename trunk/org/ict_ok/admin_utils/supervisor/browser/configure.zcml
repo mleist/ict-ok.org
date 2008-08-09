@@ -110,7 +110,7 @@
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
-        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.ViewAdmUtilSupervisorForm"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.AdmUtilSupervisorDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.View"
         />
@@ -126,6 +126,11 @@
         for="org.ict_ok.admin_utils.esx_vim.browser.esx_vim.EsxVimHostSystemDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         /-->
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.admin_utils.supervisor.browser.supervisor.AdmUtilSupervisorDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="history.html"

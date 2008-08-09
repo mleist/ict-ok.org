@@ -35,10 +35,15 @@
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"
-        class=".nagios.DetailsAdmUtilGeneratorNagiosForm"
+        class=".nagios.AdmUtilGeneratorNagiosDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.generators.nagios.View"
     />
+    <z3c:template
+        template="details.pt"
+        for=".nagios.AdmUtilGeneratorNagiosDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
     <!--<z3c:pagelet-->
         <!--name="details.html"-->
         <!--for="org.ict_ok.admin_utils.generators.nagios.interfaces.IAdmUtilGeneratorNagios"-->

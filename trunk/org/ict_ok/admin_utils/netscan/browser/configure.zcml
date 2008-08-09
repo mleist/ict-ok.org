@@ -32,10 +32,15 @@
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.netscan.interfaces.INetScan"
-        class="org.ict_ok.admin_utils.netscan.browser.netscan.DetailsNetScanForm"
+        class="org.ict_ok.admin_utils.netscan.browser.netscan.NetScanDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.netscan.View"
     />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.admin_utils.netscan.browser.netscan.NetScanDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="edit.html"

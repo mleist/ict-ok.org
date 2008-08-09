@@ -54,6 +54,8 @@ class AdmUtilSnmpd(Supernode):
     def __init__(self):
         Supernode.__init__(self)
         self.ikRevision = __version__
+        self.mrtg_data = None
+        self.mrtg_data_timestamp = 0.0
 
 
 class SystemSnmpdPrincipal(object):

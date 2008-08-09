@@ -14,7 +14,7 @@
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.snmpd.interfaces.IAdmUtilSnmpd"
-        class=".snmpd.DetailsAdmUtilSnmpdForm"
+        class=".snmpd.AdmUtilSnmpdDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.snmpd.View"
     />
@@ -23,6 +23,11 @@
         <!--for="org.ict_ok.admin_utils.snmpd.browser.snmpd.AdmUtilSnmpdDetails"-->
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--/>-->
+    <z3c:template
+        template="details.pt"
+        for=".snmpd.AdmUtilSnmpdDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="edit.html"

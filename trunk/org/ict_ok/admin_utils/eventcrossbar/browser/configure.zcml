@@ -37,9 +37,14 @@
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
-        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.DetailsAdmUtilEventForm"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.AdmUtilEventDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.event.View"
+        />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.admin_utils.eventcrossbar.browser.event.AdmUtilEventDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
         
     <z3c:pagelet

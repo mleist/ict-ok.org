@@ -45,6 +45,13 @@ class AdmUtilSnmpdDetails(SupernodeDetails):
     """
     omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
     omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
+    
+    def test(self):
+        zzz = self.context
+        print "ZU:", zzz
+        import pdb
+        pdb.set_trace()
+        return "zulu"
 
 
 # --------------- forms ------------------------------------

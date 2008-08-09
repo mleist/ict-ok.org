@@ -1,5 +1,5 @@
 <i18n:block domain="org.ict_ok">
-    <h1>Details 111</h1>
+    <h1 i18n:translate="">Details 111</h1>
     <table id="sortable" class="listing" >
         <tr class="cb_wht" tal:condition="context/LinuxHaServerIp|nothing">
             <td class="label" i18n:translate="">Server IP</td>

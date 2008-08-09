@@ -11,13 +11,18 @@
          Thomas Richter <thomas.richter at xwml.de>
          Markus Leist <leist@ikom-online.de> -->
 
-    <z3c:pagelet
-        name="details.html"
-        for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
-        class=".public_viewing.AdmUtilPublicViewingDetails"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.admin_utils.public_viewing.View"
-    />
+    <!--<z3c:pagelet-->
+        <!--name="details.html"-->
+        <!--for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"-->
+        <!--class=".public_viewing.AdmUtilPublicViewingDetails"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.admin_utils.public_viewing.View"-->
+    <!--/>-->
+    <!--<z3c:template-->
+        <!--template="details.pt"-->
+        <!--for=".public_viewing.AdmUtilPublicViewingDetails"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--/>-->
 
     <z3c:pagelet
         name="history.html"

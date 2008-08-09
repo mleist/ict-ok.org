@@ -1,7 +1,7 @@
 <html>
     <body>
         <div i18n:domain="ict-ok.org">
-            <h3>Systeminfo</h3>
+            <h3 i18n:translate="">Systeminfo</h3>
             <table id="sortable" class="listing" summary="Content listing"
                     i18n:attributes="summary">
                 <tr class="cb_wht">

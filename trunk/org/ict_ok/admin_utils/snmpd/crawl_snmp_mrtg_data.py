@@ -15,6 +15,7 @@ import re
 import pickle
 from BeautifulSoup import BeautifulSoup
 from gzip import GzipFile
+import time
 
 def begin_marker(textvar):
     return textvar == "<--- BEGIN COPY AND PASTE --->"
@@ -26,12 +27,13 @@ def parse_vendors(soup, outp_dict):
     vendor_tds = soup.findAll("td", { "class" : "focustext" })
     for vendor_td in vendor_tds:
         # for testing don't crawl all
-         #for vendor_a in vendor_td.findAll("a")[:1]:
+        #for vendor_a in vendor_td.findAll("a")[:1]:
         for vendor_a in vendor_td.findAll("a"):
             if len(vendor_a.contents) > 0:
                 print "vendor: ", vendor_a.contents
                 vendor_dict = outp_dict[str(vendor_a.contents)] = {}
-                products_href = u"http://www.plixer.com/support/" + vendor_a['href']
+                products_href = u"http://www.plixer.com/support/" + \
+                              vendor_a['href']
                 products_page = urllib2.urlopen(products_href)
                 soup = BeautifulSoup(products_page,
                                      convertEntities=BeautifulSoup.HTML_ENTITIES)
@@ -89,17 +91,20 @@ def parse_template(soup, outp_dict):
                 outp_dict[str(miscMatch.groups()[0])] = miscMatch.groups()[1]
 
 
-# open files
-page = urllib2.urlopen("http://www.plixer.com/support/mrtg_repository.php")
-dataFile = GzipFile("snmp_mrtg_data.gz", "wb")
-
-all_templ_data = {}
-
-# parse input data and form out dict
-soup_p = BeautifulSoup(page,
-                       convertEntities=BeautifulSoup.HTML_ENTITIES)
-parse_vendors(soup_p, all_templ_data)
-
-# write in a gzipped pickle
-pickle.dump(all_templ_data, dataFile)
-dataFile.close()
+if __name__ == "__main__":
+    # open files
+    page = urllib2.urlopen("http://www.plixer.com/support/mrtg_repository.php")
+    dataFile = GzipFile("snmp_mrtg_data.gz", "wb")
+    
+    dataFile.write("## mrtg data file for ict_ok.org\n")
+    dataFile.write("%f\n" % (time.mktime(time.gmtime())))
+    all_templ_data = {}
+    
+    # parse input data and form out dict
+    soup_p = BeautifulSoup(page,
+                           convertEntities=BeautifulSoup.HTML_ENTITIES)
+    parse_vendors(soup_p, all_templ_data)
+    
+    # write in a gzipped pickle
+    pickle.dump(all_templ_data, dataFile)
+    dataFile.close()

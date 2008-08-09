@@ -1,0 +1,26 @@
+<i18n:block domain="org.ict-ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+    <h3 i18n:translate="">details of supervisor</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary"
+            tal:define="runtime_info view/getZopeRuntimeInfo">
+        <tr>
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+        <tr class="cb_wht">
+            <td i18n:translate="">Modification time</td>
+            <div tal:omit-tag=""  tal:condition="view/getModifiedTime">
+                <td tal:content="python: dateform.format(view.getModifiedTime())">test</td>
+            </div>
+            <div tal:omit-tag=""  tal:condition="not: view/getModifiedTime">
+                <td>---</td>
+            </div>
+        </tr>
+        <tr>
+            <td i18n:translate="">System uptime</td>
+            <td tal:content="view/getSystemUptime" />
+        </tr>
+    </table>
+
+</i18n:block>

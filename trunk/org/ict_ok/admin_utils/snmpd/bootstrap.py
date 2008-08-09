@@ -18,6 +18,10 @@ __version__ = "$Id$"
 import logging
 import transaction
 from datetime import datetime
+import time
+import pickle
+import copy
+from gzip import GzipFile
 
 # zope imports
 from zope.app.appsetup import appsetup
@@ -31,8 +35,49 @@ from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 from org.ict_ok.admin_utils.snmpd.snmpd import AdmUtilSnmpd
+from org.ict_ok.admin_utils.snmpd.crawl_snmp_mrtg_data import BeautifulSoup, parse_vendors
 
 logger = logging.getLogger("AdmUtilSnmpd")
+
+def getNewMrtgData(madeAdmUtilSnmpd):
+    try:
+        dbgOut = u" bootstrap: there was an error on mrtg data"
+        dataFile = GzipFile("lib/python/org/ict_ok/admin_utils/snmpd/snmp_mrtg_data.gz", "rb")
+        if dataFile.readline() == "## mrtg data file for ict_ok.org\n":
+            timeStamp = float(dataFile.readline())
+            all_templ_data = pickle.load(dataFile)
+            dataFile.close()
+            madeAdmUtilSnmpd.mrtg_data = copy.deepcopy(all_templ_data)
+            madeAdmUtilSnmpd.mrtg_data_timestamp = timeStamp
+            dbgOut = u" bootstrap: new mrtg data (%s) loaded" % \
+                   (time.strftime("%Y-%m-%d %H:%M:%S +00",time.gmtime(timeStamp)))
+    except ValueError:
+        dbgOut = u" bootstrap: Hmm, format of mrtg data file incorrect"
+    except IOError:
+        dbgOut = u" bootstrap: Hmm, no mrtg data file"
+    return dbgOut
+
+def updateMrtgData(madeAdmUtilSnmpd):
+    try:
+        dbgOut = u" bootstrap: there was an error on mrtg data"
+        dataFile = GzipFile("lib/python/org/ict_ok/admin_utils/snmpd/snmp_mrtg_data.gz", "rb")
+        if dataFile.readline() == "## mrtg data file for ict_ok.org\n":
+            timeStamp = float(dataFile.readline())
+            if timeStamp > madeAdmUtilSnmpd.mrtg_data_timestamp:
+                all_templ_data = pickle.load(dataFile)
+                dataFile.close()
+                del madeAdmUtilSnmpd.mrtg_data
+                madeAdmUtilSnmpd.mrtg_data = copy.deepcopy(all_templ_data)
+                madeAdmUtilSnmpd.mrtg_data_timestamp = timeStamp
+                dbgOut = u" bootstrap: update mrtg data (%s)" % \
+                       (time.strftime("%Y-%m-%d %H:%M:%S +00",time.gmtime(timeStamp)))
+            else:
+                dbgOut = None
+    except ValueError:
+        dbgOut = u" bootstrap: Hmm, format of mrtg data file incorrect"
+    except IOError:
+        dbgOut = u" bootstrap: Hmm, no mrtg data file"
+    return dbgOut
 
 def bootStrapSubscriberDatabase(event):
     """initialisation of ict_ok supervisor on first database startup
@@ -60,6 +105,21 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made IAdmUtilSnmpd-Utility")
+        dbgOut = getNewMrtgData(madeAdmUtilSnmpd)
+        if dbgOut:
+            instAdmUtilSupervisor.appendEventHistory(dbgOut)
+    else:
+        # search in global component registry
+        sitem = root_folder.getSiteManager()
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSnmpd)]
+        instAdmUtilSnmpd = utils[0].component
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        dbgOut = updateMrtgData(instAdmUtilSnmpd)
+        if dbgOut:
+            instAdmUtilSupervisor.appendEventHistory(dbgOut)
 
     transaction.get().commit()
     connection.close()
