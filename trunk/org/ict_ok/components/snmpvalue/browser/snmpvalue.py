@@ -25,6 +25,8 @@ from zope.interface import directlyProvides
 from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.interfaces import IOrderedContainer
+from zope.app.pagetemplate.urlquote import URLQuote
+#from zope.session.interfaces import ISession
 
 # zc imports
 from zc.table.column import Column, GetterColumn
@@ -43,9 +45,11 @@ from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm, DeleteForm, DisplayForm, EditForm
+     AddForm, DeleteForm, DisplayForm, EditForm, raw_cell_formatter
 
 _ = MessageFactory('org.ict_ok')
+
+#SESSION_KEY = 'org.ict_ok.components.snmpvalue'
 
 
 # --------------- menu entries -----------------------------
@@ -164,13 +168,24 @@ def getTitel(item, formatter):
     """
     Titel for Overview
     """
-    return item
+    if item.has_key('vendor'):
+        retString = u"<a href='%s?ictvendor=%s" % \
+                  (item['view'],
+                   item['vendor'])
+        if item.has_key('product'):
+            retString += u"&ictproduct=%s" % item['product']
+            if item.has_key('template'):
+                retString += u"&icttemplate=%s" % item['template']
+        retString += u"'>%s</a>" % item['title']
+        return retString
+    return u"--error--"
 
 
 class AddSnmpByVendorClass(BrowserPagelet):
     columns = (
         GetterColumn(title=_('Title'),
-                     getter=getTitel),
+                     getter=getTitel,
+                     cell_formatter=raw_cell_formatter),
         )
     label = "aaa"
     ddd = None
@@ -183,14 +198,36 @@ class AddSnmpByVendorClass(BrowserPagelet):
         BrowserPagelet.update(self)
 
     def objs(self):
-        """List of Content objects"""
-        retList = [1,2,3]
+        """List of Content objects
+        an object will be: {'title': u'title',
+                            'vendor': u'quoted vendor title',
+                            'product': u'quoted product title',
+        """
+        snmpd_utility = getUtility(IAdmUtilSnmpd)
+        retList = []
         if self.request.has_key('ictvendor'):
-            retList = [self.request['ictvendor'] for i in [1,2,3,4] ]
+            if self.request.has_key('ictproduct'):
+                #session = ISession(self.request)[SESSION_KEY]
+                #session['ictvendor'] = self.request['ictvendor']
+                #session['ictproduct'] = self.request['ictproduct']
+                for name in snmpd_utility.mrtg_data[self.request['ictvendor']]\
+                                                   [self.request['ictproduct']].keys():
+                    retList.append({'title': unicode(name),
+                                    'view': 'add_snmpvalue.html',
+                                    'vendor': URLQuote(self.request['ictvendor']).quote(),
+                                    'product': URLQuote(self.request['ictproduct']).quote(),
+                                    'template': URLQuote(name).quote()})
+            else:
+                for name in snmpd_utility.mrtg_data[self.request['ictvendor']].keys():
+                    retList.append({'title': unicode(name),
+                                    'view': 'add_snmps_by_vendor.html',
+                                    'vendor': URLQuote(self.request['ictvendor']).quote(),
+                                    'product': URLQuote(name).quote()})
         else:
-            snmpd_utility = getUtility(IAdmUtilSnmpd)
-            retList = snmpd_utility.mrtg_data.keys()
-            print retList
+            for name in snmpd_utility.mrtg_data.keys():
+                retList.append({'title': unicode(name),
+                                'view': 'add_snmps_by_vendor.html',
+                                'vendor': URLQuote(name).quote()})
         return retList
 
     def table(self):
@@ -237,6 +274,22 @@ class AddSnmpValueForm(AddForm):
     fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_addfields)
     factory = SnmpValue
 
+    def update(self):
+        #session = ISession(self.request)[SESSION_KEY]
+        #print "ictvendor: ", session.get('ictvendor')
+        #print "ictproduct: ", session.get('ictproduct')
+        snmpd_utility = getUtility(IAdmUtilSnmpd)
+        if self.request.has_key('ictvendor'):
+            if self.request.has_key('ictproduct'):
+                if self.request.has_key('icttemplate'):
+                    templateData = snmpd_utility.mrtg_data[self.request['ictvendor']]\
+                                                          [self.request['ictproduct']]\
+                                                          [self.request['icttemplate']]
+                    if templateData.has_key('oid1') and \
+                       templateData.has_key('oid2'):
+                        print "templateData['oid1']: ", templateData['oid1']
+                        print "templateData['oid2']: ", templateData['oid2']
+        AddForm.update(self)
 
 class EditSnmpValueForm(EditForm):
     """ Edit for for net """
