@@ -1,9 +1,11 @@
-<div id="footer">
-  <div> 
-    ICT_Ok V1.5pre ($Rev$) |
-    <span id="ikh_time">--</span> |
-    <!--<a href="/@@support">Support</a> |-->
-    <a href="http://trac.ict_ok.org">Community</a>
-    <!--<a href="http://www.ict-ok.de">Portal</a>-->
+<i18n:block domain="org.ict_ok">
+  <div id="footer">
+    <div> 
+      ICT_Ok V1.5pre ($Rev$) |
+      <span id="ikh_time">--</span> |
+      <!--<a href="/@@support">Support</a> |-->
+      <a href="http://trac.ict_ok.org">Community</a>
+      <!--<a href="http://www.ict-ok.de">Portal</a>-->
+    </div>
   </div>
-</div>
+</i18n:block>

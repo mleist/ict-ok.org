@@ -1,4 +1,4 @@
-<i18n:block domain="ict_ok.org">
+<i18n:block domain="org.ict_ok">
   <h3 tal:condition="view/label|nothing"
       tal:content="view/label" />
   <div class="message"

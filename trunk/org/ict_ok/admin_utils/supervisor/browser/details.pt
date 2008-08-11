@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td i18n:translate="">System uptime</td>
-            <td tal:content="view/getSystemUptime" />
+            <td tal:content="python: view.getSystemUptime()" />
         </tr>
     </table>
 

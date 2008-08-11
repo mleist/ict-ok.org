@@ -1,4 +1,4 @@
-<i18n:block domain="ict_ok.org">
+<i18n:block domain="org.ict_ok">
   <div class="message"
        tal:condition="view/status"
        tal:content="view/status"

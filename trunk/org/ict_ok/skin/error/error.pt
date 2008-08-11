@@ -1,20 +1,22 @@
-<div class="content">
-	<h1 i18n:translate="">Error type:
-		<span tal:replace="nocall:view/error_type" i18n:name="error_type"/>
-	</h1>
-	<span>&nbsp;</span>
-	<p class="errtracetitle" i18n:translate="">
-		An error occurred, please print out this page
-		and send to your <a href="/yoursupport">Support</a> or
-		<a href="javascript:history.back(1);" i18n:translate="sys-error-try-again">
-        go back and try another URL.</a>
+<i18n:block domain="org.ict_ok">
+  <div class="content">
+    <h1 i18n:translate="">Error type:
+      <span tal:replace="nocall:view/error_type" i18n:name="error_type"/>
+    </h1>
+    <span>&nbsp;</span>
+    <p class="errtracetitle" i18n:translate="">
+      An error occurred, please print out this page
+      and send to your <a href="/yoursupport">Support</a> or
+      <a href="javascript:history.back(1);" i18n:translate="sys-error-try-again">
+      go back and try another URL.</a>
     </p>
-	<span>&nbsp;</span>
-	<h2 class="errtracetitle" i18n:translate="">Error object:
-		<tal:span tal:replace="nocall:view/error_object" i18n:name="error_object"/>
+    <span>&nbsp;</span>
+    <h2 class="errtracetitle" i18n:translate="">Error object:
+      <tal:span tal:replace="nocall:view/error_object" i18n:name="error_object"/>
     </h2>
-	<pre class="traceback" style="font-size:small;">
-		<div tal:repeat="line view/traceback_lines"
-		          tal:content="line">TRACEBACK LINE</div>
+    <pre class="traceback" style="font-size:small;">
+      <div tal:repeat="line view/traceback_lines"
+        tal:content="line">TRACEBACK LINE</div>
     </pre>
-</div>
+  </div>
+</i18n:block>

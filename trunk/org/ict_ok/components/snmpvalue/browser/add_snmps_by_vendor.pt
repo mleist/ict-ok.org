@@ -1,4 +1,4 @@
-<i18n:block domain="ict_ok.org">
+<i18n:block domain="org.ict_ok">
   <h3 i18n:translate="">Add SNMP Vendor</h3>
   <div>ddd</div>
   <div tal:condition="view/label|nothing" tal:content="view/label">ttt1</div>

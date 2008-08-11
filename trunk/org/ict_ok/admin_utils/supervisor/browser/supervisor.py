@@ -16,6 +16,7 @@ __version__ = "$Id$"
 
 # phython imports
 from pytz import timezone
+from datetime import timedelta
 
 # zope imports
 from zope.interface import implements
@@ -39,6 +40,7 @@ from z3c.pagelet.browser import BrowserPagelet
 from zc.table.column import GetterColumn
 from zc.table.table import StandaloneFullFormatter
 from zc.table.interfaces import ISortableColumn
+from zc.i18n.duration import format as i18nformat
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
@@ -169,7 +171,9 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         get the uptime of the running system
         no args, returns string
         """
-        return convertSystemUptime2String(self.context.getSystemUptime())
+        return i18nformat(self.request,
+                          timedelta(seconds=self.context.getSystemUptime()))
+    
 
     def cmd(self):
         """
