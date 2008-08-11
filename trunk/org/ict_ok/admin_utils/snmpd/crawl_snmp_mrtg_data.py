@@ -30,8 +30,8 @@ def parse_vendors(soup, outp_dict):
         #for vendor_a in vendor_td.findAll("a")[:1]:
         for vendor_a in vendor_td.findAll("a"):
             if len(vendor_a.contents) > 0:
-                print "vendor: ", vendor_a.contents
-                vendor_dict = outp_dict[str(vendor_a.contents)] = {}
+                print "vendor: '%s'" % vendor_a.contents[0]
+                vendor_dict = outp_dict[unicode(vendor_a.contents[0]).replace(u'\xa0', ' ')] = {}
                 products_href = u"http://www.plixer.com/support/" + \
                               vendor_a['href']
                 products_page = urllib2.urlopen(products_href)
@@ -43,8 +43,8 @@ def parse_products(soup, outp_dict):
     products_tds = soup.findAll("td", { "class" : "focustext" })
     for products_td in products_tds:
         for products_a in products_td.findAll("a"):
-            print "\tproduct: ", products_a.contents
-            products_dict = outp_dict[str(products_a.contents)] = {}
+            print "\tproduct: '%s'" % products_a.contents[0]
+            products_dict = outp_dict[unicode(products_a.contents[0]).replace(u'\xa0', ' ')] = {}
             product_href = u"http://www.plixer.com/support/" + \
                          products_a['href']
             product_page = urllib2.urlopen(product_href)
@@ -57,7 +57,7 @@ def parse_product(soup, outp_dict):
     for product_td in product_tds:
         for product_a in product_td.findAll("a"):
             if product_a.has_key('onclick'):
-                templ_dict = outp_dict[str(product_a.contents[0])] = {}
+                templ_dict = outp_dict[unicode(product_a.contents[0]).replace(u'\xa0', ' ')] = {}
                 templ_href = "http://www.plixer.com/support/" +\
                            re.match("^window.open\('([^']*)",
                                     product_a['onclick']).groups()[0]
@@ -88,7 +88,7 @@ def parse_template(soup, outp_dict):
             miscParser = '^(.*)\[\$CFGNAME\]\:\ (.*)$'
             miscMatch = re.match(miscParser, templString)
             if miscMatch:
-                outp_dict[str(miscMatch.groups()[0])] = miscMatch.groups()[1]
+                outp_dict[unicode(miscMatch.groups()[0]).replace(u'\xa0', ' ')] = miscMatch.groups()[1]
 
 
 if __name__ == "__main__":
@@ -106,5 +106,5 @@ if __name__ == "__main__":
     parse_vendors(soup_p, all_templ_data)
     
     # write in a gzipped pickle
-    pickle.dump(all_templ_data, dataFile)
+    pickle.dump(all_templ_data, dataFile, 0)
     dataFile.close()
