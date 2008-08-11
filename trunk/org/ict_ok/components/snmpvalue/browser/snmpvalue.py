@@ -26,7 +26,6 @@ from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.interfaces import IOrderedContainer
 from zope.app.pagetemplate.urlquote import URLQuote
-#from zope.session.interfaces import ISession
 
 # zc imports
 from zc.table.column import Column, GetterColumn
@@ -48,8 +47,6 @@ from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm, raw_cell_formatter
 
 _ = MessageFactory('org.ict_ok')
-
-#SESSION_KEY = 'org.ict_ok.components.snmpvalue'
 
 
 # --------------- menu entries -----------------------------
@@ -207,9 +204,6 @@ class AddSnmpByVendorClass(BrowserPagelet):
         retList = []
         if self.request.has_key('ictvendor'):
             if self.request.has_key('ictproduct'):
-                #session = ISession(self.request)[SESSION_KEY]
-                #session['ictvendor'] = self.request['ictvendor']
-                #session['ictproduct'] = self.request['ictproduct']
                 for name in snmpd_utility.mrtg_data[self.request['ictvendor']]\
                                                    [self.request['ictproduct']].keys():
                     retList.append({'title': unicode(name),
@@ -275,9 +269,6 @@ class AddSnmpValueForm(AddForm):
     factory = SnmpValue
 
     def update(self):
-        #session = ISession(self.request)[SESSION_KEY]
-        #print "ictvendor: ", session.get('ictvendor')
-        #print "ictproduct: ", session.get('ictproduct')
         snmpd_utility = getUtility(IAdmUtilSnmpd)
         if self.request.has_key('ictvendor'):
             if self.request.has_key('ictproduct'):
@@ -287,8 +278,8 @@ class AddSnmpValueForm(AddForm):
                                                           [self.request['icttemplate']]
                     if templateData.has_key('oid1') and \
                        templateData.has_key('oid2'):
-                        print "templateData['oid1']: ", templateData['oid1']
-                        print "templateData['oid2']: ", templateData['oid2']
+                        self.fields['oid1'].field.default = u"%s" % templateData['oid1']
+                        self.fields['oid2'].field.default = u"%s" % templateData['oid2']
         AddForm.update(self)
 
 class EditSnmpValueForm(EditForm):
