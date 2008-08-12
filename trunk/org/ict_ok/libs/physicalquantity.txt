@@ -1,19 +1,29 @@
 Computing with physical quantities:
   >>> from org.ict_ok.libs.physicalquantity import PhysicalQuantity
+
+"normal" physical quantities on top of "SI"
   >>> a = PhysicalQuantity( "1 km")
   >>> b = PhysicalQuantity( "1 s")
+
+computing with Units
   >>> c = a/b
   >>> c.convertToUnit( "km/h")
   >>> print c
   3600.0 km/h
+
+our self defined quantities like Mibit
   >>> e = PhysicalQuantity( "8 Mibit/min")
   >>> print "e(bit):%s" % e
   e(bit):8.0 Mibit/min
+
+convert to other selfmade Unit
   >>> e.convertToUnit("kbyte/s")
   >>> print "e(byte):%s" % e
   e(byte):17.4762666667 kbyte/s
   >>> print "e(byte) * 1h :%s" % (e * PhysicalQuantity( "1h"))
   e(byte) * 1h :17.4762666667 h*kbyte/s
+
+our unit "count"
   >>> f1 = PhysicalQuantity( "4 event/Gibyte")
   >>> print "f1: %s" % f1
   f1: 4.0 cnt/Gibyte
@@ -23,6 +33,8 @@ Computing with physical quantities:
   >>> f3 = f1 * f2
   >>> print "f3: %s" % f3
   f3: 400.0 cnt
+
+other conversions
   >>> f4 = PhysicalQuantity( "100 Mibyte")
   >>> print "f4: %s" % f4
   f4: 100.0 Mibyte
@@ -42,6 +54,7 @@ Computing with physical quantities:
   >>> print "f7: %s" % f7
   f7: 4.0 cnt/Gibyte
   >>> 
+comparisons with physical quantities
   >>> g1 = PhysicalQuantity( "1 byte/s")
   >>> g2 = PhysicalQuantity( "7 bit/s")
   >>> print g1<g2
