@@ -10,6 +10,7 @@
 # pylint: disable-msg=W0232
 #
 """Physical quantities for ict-ok.org
+see http://dirac.cnrs-orleans.fr/plone/software/scientificpython
 """
 
 __version__ = "$Id: host.py 174 2008-03-05 17:51:14Z markusleist $"

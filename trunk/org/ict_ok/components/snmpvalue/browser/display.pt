@@ -8,9 +8,17 @@
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <tr class="cb_wht">
+        <tr class="cb_wht" tal:condition="view/getValue">
             <td i18n:translate="">Value</td>
             <td tal:content="python: view.getValue()[1]" />
+        </tr>
+        <tr class="cb_wht" tal:condition="view/getValue">
+            <td i18n:translate="">Value</td>
+            <td tal:content="python: context.getMyFactor()" />
+        </tr>
+        <tr class="cb_wht" tal:condition="view/getValue">
+            <td i18n:translate="">Value</td>
+            <td tal:content="python: context.getMyFactor() * context.getDisplayPhysical() * view.getValue()[1]" />
         </tr>
     </table>
 

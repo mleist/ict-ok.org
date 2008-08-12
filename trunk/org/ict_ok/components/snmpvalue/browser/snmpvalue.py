@@ -175,19 +175,26 @@ class SnmpValueDetails(ComponentDetails):
     def getValue(self):
         from pysnmp.entity.rfc3413.oneliner import cmdgen
         oidStringList = self.context.oid1.strip(".").split(".")
-        oidIntList = [ int(i) for i in oidStringList]
-        errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
-            cmdgen.CommunityData('my-agent', 'public01', 0),
-            cmdgen.UdpTransportTarget(('localhost', 161)),
-            tuple(oidIntList)
-        )
-        print "1", errorIndication
-        print "2", errorStatus
-        print "3", varBinds
-        #import pdb
-        #pdb.set_trace()
-        print "--" * 30
-        return varBinds[0]
+        try:
+            oidIntList = [ int(i) for i in oidStringList]
+            errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
+                cmdgen.CommunityData('my-agent', 'public01', 0),
+                cmdgen.UdpTransportTarget(('localhost', 161)),
+                tuple(oidIntList)
+            )
+            print "1", errorIndication
+            print "2", errorStatus
+            print "3", varBinds
+            #import pdb
+            #pdb.set_trace()
+            print "--" * 30
+            print "getInputPhysical: ", self.context.getInputPhysical()
+            print "--" * 30
+            print "getMyFactor: ", self.context.getMyFactor()
+            print "--" * 30
+            return varBinds[0]
+        except ValueError:
+            return None
         
 def getTitel(item, formatter):
     """

@@ -20,7 +20,6 @@ __version__ = "$Id$"
 # phython imports
 
 # zope imports
-from zope.app import zapi
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
@@ -28,6 +27,7 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 # ict_ok.org imports
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.libs.physicalquantity import PhysicalQuantity
 
 def SnmpCheckTypes(dummy_context):
     """In which production state a host may be
@@ -133,3 +133,50 @@ class SnmpValue(Component):
             if name in ISnmpValue.names():
                 setattr(self, name, value)
         self.ikRevision = __version__
+
+    def getInputPhysical(self):
+        """ return inpunt physical as PhysicalQuantity
+        """
+        if self.inptype == "cnt":
+            tmpDenominator = "s"
+            inpPhys = PhysicalQuantity("1.0 %s/%s" % (str(self.inpUnit),
+                                                      str(tmpDenominator)))
+        elif self.inptype == "relperc":
+            inpPhys = PhysicalQuantity("1.0 cnt/cnt")
+        elif self.inptype == "gauge":
+            if self.inpUnit == "%":
+                inpPhys = PhysicalQuantity("1.0 cnt/cnt")
+            else:
+                inpPhys = PhysicalQuantity("1.0 %s" % (str(self.inpUnit) ))
+        else:
+            tmpDenominator = "1"
+            inpPhys = PhysicalQuantity("1.0 %s/%s" % (str(self.inpUnit),
+                                                      str(tmpDenominator)))
+        return inpPhys
+    
+    def getDisplayPhysical(self):
+        """ return display physical as PhysicalQuantity
+        """
+        if self.displayUnitNumerator == "%":
+            displayPhys = PhysicalQuantity("1 cnt/cnt")
+        else:
+            if self.displayUnitDenominator == "1":
+                displayPhys = PhysicalQuantity("1 %s" %
+                    (str(self.displayUnitNumerator)))
+            else:
+                displayPhys = PhysicalQuantity("1 %s/%s" %
+                    (str(self.displayUnitNumerator),
+                     str(self.displayUnitDenominator)))
+        return displayPhys
+        
+    def getMyFactor(self):
+        """ factor for adaption from inpType to displayType
+        """
+        inpPhys = self.getInputPhysical()
+        displayPhys = self.getDisplayPhysical()
+        try:
+            myFactor = inpPhys / displayPhys
+        except:
+            myFactor = inpPhys.inBaseUnits() / \
+                     displayPhys.inBaseUnits()
+        return myFactor

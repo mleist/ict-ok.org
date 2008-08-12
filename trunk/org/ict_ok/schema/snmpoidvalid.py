@@ -30,6 +30,6 @@ class SnmpOidValid(TextLine):
         """ validation method for forms """
         ## call parent validations
         TextLine._validate(self, value)
-        regStrg = r"^([\.0-9]*)$"
+        regStrg = r"^([\.0-9a-zA-Z\$]*)$"
         if not match(regStrg, value.upper()):
             raise SnmpOidValidError(value, 1)

@@ -109,3 +109,13 @@ class ISnmpValue(IComponent):
         default=u"1",
         required = False,
         vocabulary = "SnmpTimeDimensionUnits")
+
+    def getInputPhysical():
+        """ return inpunt physical as PhysicalQuantity
+        """
+    def getDisplayPhysical():
+        """ return display physical as PhysicalQuantity
+        """
+    def getMyFactor():
+        """ factor for adaption from inpType to displayType
+        """
