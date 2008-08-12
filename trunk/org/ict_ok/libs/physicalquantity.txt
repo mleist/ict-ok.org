@@ -53,8 +53,10 @@ other conversions
   >>> f7.convertToUnit("event/Gibyte")
   >>> print "f7: %s" % f7
   f7: 4.0 cnt/Gibyte
-  >>> 
+
 comparisons with physical quantities
+
+  >>> 
   >>> g1 = PhysicalQuantity( "1 byte/s")
   >>> g2 = PhysicalQuantity( "7 bit/s")
   >>> print g1<g2
