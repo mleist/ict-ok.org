@@ -17,6 +17,7 @@ __version__ = "$Id$"
 # phython imports
 import time
 import rrdtool
+import copy
 
 # zope imports
 from zope.app import zapi
@@ -55,10 +56,20 @@ _ = MessageFactory('org.ict_ok')
 class MSubAddSnmpValue(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add SNMP Value')
-    #viewURL = 'add_snmpvalue.html'
-    viewURL = 'add_snmps_by_vendor.html'
+    viewURL = 'add_snmpvalue.html'
     weight = 50
 
+class MSubAddSnmpValueByVendor(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Add SNMP Value (by template)')
+    viewURL = 'add_snmps_by_vendor.html'
+    weight = 51
+    
+class MSubDisplaySnmpValue(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Display SNMP Value')
+    viewURL = 'display.html'
+    weight = 9
 
 # --------------- object details ---------------------------
 
@@ -161,6 +172,23 @@ class SnmpValueDetails(ComponentDetails):
         obj = removeAllProxies(self.context)
         return zapi.getPath(obj)
 
+    def getValue(self):
+        from pysnmp.entity.rfc3413.oneliner import cmdgen
+        oidStringList = self.context.oid1.strip(".").split(".")
+        oidIntList = [ int(i) for i in oidStringList]
+        errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
+            cmdgen.CommunityData('my-agent', 'public01', 0),
+            cmdgen.UdpTransportTarget(('localhost', 161)),
+            tuple(oidIntList)
+        )
+        print "1", errorIndication
+        print "2", errorStatus
+        print "3", varBinds
+        #import pdb
+        #pdb.set_trace()
+        print "--" * 30
+        return varBinds[0]
+        
 def getTitel(item, formatter):
     """
     Titel for Overview
@@ -184,14 +212,14 @@ class AddSnmpByVendorClass(BrowserPagelet):
                      getter=getTitel,
                      cell_formatter=raw_cell_formatter),
         )
-    label = "aaa"
-    ddd = None
     def update(self):
-        self.label = "zzzz"
         if self.request.has_key('ictvendor'):
-            self.ddd = self.request['ictvendor']
-            #self.label = _(u"Dashboard of %s") % \
-                #self.request.principal.title
+            if self.request.has_key('ictproduct'):
+                self.label = _(u"Please select template for")
+            else:
+                self.label = _(u"Please select product for")
+        else:
+            self.label = _(u"Please select vendor")
         BrowserPagelet.update(self)
 
     def objs(self):
@@ -278,6 +306,8 @@ class AddSnmpValueForm(AddForm):
                                                           [self.request['icttemplate']]
                     if templateData.has_key('oid1') and \
                        templateData.has_key('oid2'):
+                        # must do a copy otherwise all future defaults will change
+                        self.fields = copy.deepcopy(self.fields)
                         self.fields['oid1'].field.default = u"%s" % templateData['oid1']
                         self.fields['oid2'].field.default = u"%s" % templateData['oid2']
         AddForm.update(self)

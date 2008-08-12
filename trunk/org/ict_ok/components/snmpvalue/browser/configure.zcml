@@ -17,6 +17,19 @@
         />
 
     <z3c:pagelet
+        name="display.html"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class=".snmpvalue.SnmpValueDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.View"
+    />
+    <z3c:template
+        template="display.pt"
+        for=".snmpvalue.SnmpValueDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
         class="org.ict_ok.components.superclass.browser.superclass.Overview"
@@ -63,6 +76,14 @@
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.View"
+        />
+    <viewlet
+        name="display"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubDisplaySnmpValue"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.View"
         />

@@ -45,6 +45,10 @@ class MacValidError(ValidationError):
     """Error notification for non valid IPv4-Address"""
     __doc__ = _("""IP-address not ok""")
 
+class SnmpOidValidError(ValidationError):
+    """Error notification for non valid SNMP-OID-Address"""
+    __doc__ = _("""SNMP oid not ok""")
+
 class NetsValidError(ValidationError):
     """Error notification for non valid IPv4-Address-List"""
     __doc__ = _("""netaddress is not ok""")

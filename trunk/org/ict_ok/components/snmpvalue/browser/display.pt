@@ -1,0 +1,17 @@
+<i18n:block domain="org.ict-ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+    <h3 i18n:translate="">Display SNMP Values</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary"
+            tal:define="runtime_info view/getZopeRuntimeInfo">
+        <tr>
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+        <tr class="cb_wht">
+            <td i18n:translate="">Value</td>
+            <td tal:content="python: view.getValue()[1]" />
+        </tr>
+    </table>
+
+</i18n:block>

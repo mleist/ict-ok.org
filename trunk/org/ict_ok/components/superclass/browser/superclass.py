@@ -306,7 +306,7 @@ class MSubHistory(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'History')
     viewURL = '@@history.html'
-    weight = 50
+    weight = 60
 
 
 class MSubScript(GlobalMenuSubItem):

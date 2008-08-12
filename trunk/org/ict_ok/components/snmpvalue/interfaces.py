@@ -19,6 +19,7 @@ from zope.schema import Bool, Choice, Int, TextLine
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.schema.snmpoidvalid import SnmpOidValid
 
 _ = MessageFactory('org.ict_ok')
 
@@ -32,14 +33,14 @@ class ISnmpValue(IComponent):
         required = True,
         vocabulary = "SnmpCheckTypes")
 
-    oid1 = TextLine(
+    oid1 = SnmpOidValid(
         max_length=40,
         title=_("OID1"),
         description=_("OID1"),
         default=u"1.3.6.1.2.1.1.1.0",
         required=False)
 
-    oid2 = TextLine(
+    oid2 = SnmpOidValid(
         max_length=40,
         title=_("OID2"),
         description=_("OID2"),
