@@ -30,6 +30,40 @@
         />
 
     <z3c:pagelet
+        name="trend.html"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class=".snmpvalue.SnmpValueTrend"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.View"
+    />
+    <z3c:template
+        template="trend.pt"
+        for=".snmpvalue.SnmpValueTrend"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <!--<z3c:pagelet-->
+        <!--name="testdata.html"-->
+        <!--for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"-->
+        <!--class=".snmpvalue.SnmpValueTestData"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.components.snmpvalue.View"-->
+    <!--/>-->
+    <!--<z3c:template-->
+        <!--template="testdata.pt"-->
+        <!--for=".snmpvalue.SnmpValueTestData"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--/>-->
+    <page
+        name="getTestData"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class=".snmpvalue.SnmpValueTestData"
+        permission="org.ict_ok.components.snmpvalue.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="getTestData"
+    />
+
+    <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
         class="org.ict_ok.components.superclass.browser.superclass.Overview"
@@ -84,6 +118,14 @@
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubDisplaySnmpValue"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.View"
+        />
+    <viewlet
+        name="trend"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubTrendSnmpValue"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.View"
         />

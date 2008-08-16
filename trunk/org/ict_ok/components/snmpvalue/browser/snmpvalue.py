@@ -71,6 +71,12 @@ class MSubDisplaySnmpValue(GlobalMenuSubItem):
     viewURL = 'display.html'
     weight = 9
 
+class MSubTrendSnmpValue(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Trend of SNMP Value')
+    viewURL = 'trend.html'
+    weight = 21
+
 # --------------- object details ---------------------------
 
 
@@ -212,7 +218,35 @@ def getTitel(item, formatter):
         return retString
     return u"--error--"
 
+class SnmpValueTrend(SnmpValueDetails):
+    pass
 
+class SnmpValueTestData(SnmpValueDetails):
+    def getTestData2(self):
+        return """&title=+,{font-size: 15px}&
+&x_axis_steps=1&
+&y_ticks=5,10,5&
+&line=3,#008263&
+&values=8,9,0,7,0,1,4,18,8,9,0,7,0,1,4,18,8,9,0,7,0,1,4,18,8,9,0,7,0,1,4,18,8&
+&x_labels=8,9,0,7,0,1,4,18,8,9,0,7,0,1,4,18,8,9,0,7,0,1,4,18,8,9,0,7,0,1,4,18,8&
+&y_min=0&
+&y_max=20&
+"""
+    def getTestData(self):
+        print "getTestData()"
+        return """&title=Pie+Chart,{font-size:18px; color: #d01f3c}&
+&x_axis_steps=1&
+&y_ticks=5,10,5&
+&line=3,#87421F&
+&y_min=0&
+&y_max=20&
+&pie=60,#505050,{font-size: 12px; color: #404040;&
+&values=13,12,6,15,8&
+&pie_labels=IE,Firefox,Opera,Wii,Other&
+&colours=#d01f3c,#356aa0,#C79810&
+&links=&
+&tool_tip=%23val%23%25&
+"""
 class AddSnmpByVendorClass(BrowserPagelet):
     columns = (
         GetterColumn(title=_('Title'),
@@ -274,7 +308,7 @@ class AddSnmpByVendorClass(BrowserPagelet):
 
 class DetailsSnmpValueForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of net')
+    label = _(u'Details of Snmp value')
     fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_viewfields)
     
     def update(self):
@@ -282,19 +316,31 @@ class DetailsSnmpValueForm(DisplayForm):
         print self.context.oid1
         from pysnmp.entity.rfc3413.oneliner import cmdgen
         oidStringList = self.context.oid1.strip(".").split(".")
-        oidIntList = [ int(i) for i in oidStringList]
-        errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
-            cmdgen.CommunityData('my-agent', 'public01', 0),
-            cmdgen.UdpTransportTarget(('localhost', 161)),
-            tuple(oidIntList)
-        )
-        print "1", errorIndication
-        print "2", errorStatus
-        print "3", varBinds
-        print "--" * 30
+        try:
+            oidIntList = [ int(i) for i in oidStringList]
+            errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
+                cmdgen.CommunityData('my-agent', 'public01', 0),
+                cmdgen.UdpTransportTarget(('localhost', 161)),
+                tuple(oidIntList)
+            )
+            print "1", errorIndication
+            if errorIndication != None:
+                self.status = u"Error: SNMP connect error: '%s'" % \
+                    (errorIndication)
+            #import pdb
+            #pdb.set_trace()
+            if errorStatus != 0:
+                self.status = u"Error: '%s'" % (errorStatus.prettyPrint())
+            print "2", errorStatus
+            #if errorStatus == 2:
+                #self.status = u"Error: ddd"
+            print "3", varBinds
+            print "--" * 30
+        except ValueError:
+            self.status = u"Error: Value of OID1"
         DisplayForm.update(self)
-        import pdb
-        pdb.set_trace()
+        #import pdb
+        #pdb.set_trace()
 
 
 class AddSnmpValueForm(AddForm):
