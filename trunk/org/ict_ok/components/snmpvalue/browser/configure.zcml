@@ -62,6 +62,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="getTestData"
     />
+      <page
+        name="getPNG"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class=".snmpvalue.SnmpValueDetails"
+        permission="org.ict_ok.components.snmpvalue.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="getValuePngDeltaT"
+    />
 
     <z3c:pagelet
         name="overview.html"

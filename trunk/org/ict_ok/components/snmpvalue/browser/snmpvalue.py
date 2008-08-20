@@ -106,7 +106,8 @@ class SnmpValueDetails(ComponentDetails):
         if 1: ##fileage > 60:
             myDisplayString1 = "bit"
             myDisplayString2 = "bit"
-            rrdFile = "/home/markus/tmp/%s.rrd" % str(obj.objectID)
+            #rrdFile = "/home/markus/tmp/%s.rrd" % str(obj.objectID)
+            rrdFile = "/opt/ict_ok.org/var/mrtg_data/127.0.0.1_2.rrd"
             rrdtool.graph(
                targetPic,
                "DEF:avg0=%s:ds1:AVERAGE" % (rrdFile),
@@ -140,7 +141,8 @@ class SnmpValueDetails(ComponentDetails):
         print "fname: %s" % fname
         print "fname2: %s" % fname2
         
-        rrdFile = "/home/markus/tmp/%s.rrd" % (fname)
+        #rrdFile = "/home/markus/tmp/%s.rrd" % (fname)
+        rrdFile = "/opt/ict_ok.org/var/mrtg_data/127.0.0.1_2.rrd"
         targetPic = "/tmp/%s.png" % (fname)
         myDisplayString1 = "bit"
         myDisplayString2 = "bit"
@@ -175,7 +177,7 @@ class SnmpValueDetails(ComponentDetails):
 
     def getValuePngHref(self):
         """Url to picture"""
-        obj = removeAllProxies(self.context)
+        obj = self.context # removeAllProxies(self.context)
         return zapi.getPath(obj)
 
     def getValue(self):
