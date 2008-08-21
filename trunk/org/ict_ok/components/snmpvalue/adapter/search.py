@@ -23,8 +23,8 @@ from zope.index.text.interfaces import ISearchableText
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.adapter.search \
-     import Searchable as SuperSearchable
+from org.ict_ok.components.superclass.adapter.search import \
+     Searchable as SuperSearchable
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 
 _ = MessageFactory('org.ict_ok')

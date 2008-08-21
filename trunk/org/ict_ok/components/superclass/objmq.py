@@ -81,7 +81,7 @@ def notifyRemovedEvent(instance, event):
 @adapter(ISuperclass, IObjectModifiedEvent)
 def notifyModifiedEvent(instance, event):
     supervisor = queryUtility(IAdmUtilSupervisor, context=instance)
-    if supervisor.isSlave():
+    if supervisor and supervisor.isSlave():
         if hasattr(event.object, "getObjectId"):
             objectOid = event.object.getObjectId()
         else:

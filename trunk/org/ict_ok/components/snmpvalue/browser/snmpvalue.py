@@ -232,6 +232,8 @@ class SnmpValueDetails(ComponentDetails):
                 return errText
         except ValueError:
             return None
+        except TypeError:
+            return None
         
 def getTitel(item, formatter):
     """
@@ -253,7 +255,7 @@ class SnmpValueTrend(SnmpValueDetails):
     pass
 
 class SnmpValueTestData(SnmpValueDetails):
-    def getTestData2(self):
+    def getTestData(self):
         return """&title=+,{font-size: 15px}&
 &x_axis_steps=1&
 &y_ticks=5,10,5&
@@ -263,7 +265,7 @@ class SnmpValueTestData(SnmpValueDetails):
 &y_min=0&
 &y_max=20&
 """
-    def getTestData(self):
+    def getTestData3(self):
         print "getTestData()"
         return """&title=Pie+Chart,{font-size:18px; color: #d01f3c}&
 &x_axis_steps=1&

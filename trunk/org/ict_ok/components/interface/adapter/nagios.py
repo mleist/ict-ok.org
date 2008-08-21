@@ -87,7 +87,10 @@ class GenNagios(ParentGenNagios):
          
         event: None or the zope event from lifecycle
         """
-        host = zapi.getParent(self.context)
+        try:
+            host = zapi.getParent(self.context)
+        except TypeError:
+            return
         nagiosAdapter = IGenNagios(host)
         if nagiosAdapter is not None:
             nagiosAdapter.nagiosConfigFileOut(True, event)

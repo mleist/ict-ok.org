@@ -113,7 +113,7 @@ class SnmpScanWizardForm(AddForm):
             hostSnmpReadCommunity = hostObj.snmpReadCommunity
             errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
                 cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, int(hostSnmpVers)),
-                cmdgen.UdpTransportTarget((searchIp, hostSnmpPort, 3, 1)),
+                cmdgen.UdpTransportTarget((searchIp, hostSnmpPort, 5, 1)),
                 snmpOid_IfNumber
             )
             return int(varBinds[0][1])
@@ -132,7 +132,7 @@ class SnmpScanWizardForm(AddForm):
             hostSnmpReadCommunity = hostObj.snmpReadCommunity
             errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().nextCmd(
                 cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, int(hostSnmpVers)),
-                cmdgen.UdpTransportTarget((searchIp, hostSnmpPort, 4, 2)),
+                cmdgen.UdpTransportTarget((searchIp, hostSnmpPort, 5, 1)),
                 oidTuple
             )
             return varBinds
@@ -227,19 +227,40 @@ class SnmpScanWizardForm(AddForm):
                     return None
             # -------------------------------------------
             retList = []
-            for interfaceKey in interfacesDict.keys()[:1]:
+            for interfaceKey in interfacesDict.keys()[:3]:
                 tmpInterface = interfacesDict[interfaceKey]
                 print "oooo:", tmpInterface
                 dateNow = datetime.utcnow()
                 newInterface = zapi.createObject(\
                     u'org.ict_ok.components.interface.interface.Interface')
-                notify(ObjectCreatedEvent(newInterface))
+                #notify(ObjectCreatedEvent(newInterface))
                 newInterfaceDc = IZopeDublinCore(newInterface, None)
-                newInterfaceDc.title = u"%s" % tmpInterface['name']
+                newInterface.ikName = u"%s" % tmpInterface['desc']
+                newInterfaceDc.title = u"%s" % tmpInterface['desc']
                 newInterfaceDc.created = datetime.utcnow()
-                newInterface.ikComment = u"%s" % tmpInterface['desc']
+                newInterface.ikComment = u"%s" % tmpInterface['name']
                 newInterface.mac = u"%s" % tmpInterface['mac']
                 newInterface.ipv4List = None
+                # -------------------------------
+                #from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
+                #from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+                #from zope.app.keyreference.interfaces import IKeyReference
+                #from zope.interface import directlyProvides
+                #newSnmpvalue = zapi.createObject(\
+                    #u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue')
+                ##directlyProvides(newSnmpvalue, IKeyReference)
+                ##notify(ObjectCreatedEvent(newSnmpvalue))
+                #newSnmpvalueDc = IZopeDublinCore(newSnmpvalue, None)
+                #newSnmpvalueDc.title = u"%s" % "ddd"
+                #newSnmpvalueDc.created = datetime.utcnow()
+                #newSnmpvalue.__post_init__()
+                ##data = {'ikName': u"ddd314"}
+                ##obj = SnmpValue(**data)
+                ##IBrwsOverview(obj).setTitle(data['ikName'])
+                ##obj.__post_init__()
+                ## -------------------------------
+                #newInterface.__setitem__(u"ddd", newSnmpvalue)
+                #newInterface.__setitem__(u"ddd", obj)
                 newInterface.__post_init__()
                 retList.append(newInterface)
             return retList
@@ -256,7 +277,7 @@ class SnmpScanWizardForm(AddForm):
         return None #[1,2,3]
     def add(self, objList):
         """ will store the new one in object tree """
-        print "SnmpScanWizardForm.add(%s)" % objList
+        print "SnmpScanWizardForm.add(%s)" % True #objList
         #import pdb
         #pdb.set_trace()
         for obj in objList:
@@ -266,14 +287,69 @@ class SnmpScanWizardForm(AddForm):
             while IPagelet.providedBy(travp):
                 travp = self.context.__parent__
             travp[obj.ikName] = obj
-        return objList
+            from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
+            #from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+            #from zope.app.keyreference.interfaces import IKeyReference
+            #from zope.interface import directlyProvides
+            #newSnmpvalue = zapi.createObject(\
+                #u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue')
+            ###directlyProvides(newSnmpvalue, IKeyReference)
+            #notify(ObjectCreatedEvent(newSnmpvalue))
+            #newSnmpvalueDc = IZopeDublinCore(newSnmpvalue, None)
+            #newSnmpvalueDc.title = u"%s" % "ddd"
+            #newSnmpvalueDc.created = datetime.utcnow()
+            #oid1 = SnmpOidValid(
+            #oid2 = SnmpOidValid(
+            #cmd = Choice(
+            #inpMultiplier = Float(
+            #inptype = Choice(
+            #inpUnit = Choice(
+            #displayUnitNumerator = Choice(
+            #displayUnitDenominator = Choice(
+            #checkMax = Bool(
+            #checkMaxLevel = Int(
+            #checkMaxLevelUnitNumerator = Choice(
+            #checkMaxLevelUnitDenominator = Choice(
+            #snmpIndexType = Choice(
+
+            #newSnmpvalue.__post_init__()
+            #newSnmpvalue = zapi.createObject(\
+                #u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue')
+            ###directlyProvides(newSnmpvalue, IKeyReference)
+            #notify(ObjectCreatedEvent(newSnmpvalue))
+            data = {'ikName': u"ddd314",
+                    'checktype': u"oid",
+                    'oid1': u"1.3.6.1.2.1.1.1.0",
+                    'oid2': u"1.3.6.1.2.1.1.1.0",
+                    'cmd': u"none",
+                    'inpMultiplier': 1.0,
+                    'inptype': u"cnt",
+                    'inpUnit': u"byte",
+                    'displayUnitNumerator': u"Mbit",
+                    'displayUnitDenominator': u"1",
+                    'checkMax': False,
+                    'checkMaxLevel': 100000,
+                    'checkMaxLevelUnitNumerator': u"bit",
+                    'checkMaxLevelUnitDenominator': u"1",
+                    'snmpIndexType': u"index"
+                    }
+            newSnmpvalue = SnmpValue(**data)
+            newSnmpvalueDc = IZopeDublinCore(newSnmpvalue, None)
+            newSnmpvalueDc.title = u"%s" % "ddd"
+            newSnmpvalueDc.created = datetime.utcnow()
+            IBrwsOverview(newSnmpvalue).setTitle(data['ikName'])
+            newSnmpvalue.__post_init__()
+            # -------------------------------
+            #newInterface.__setitem__(u"ddd", newSnmpvalue)
+            obj.__setitem__(u"ddd", newSnmpvalue)
+        #return objList
         #travp = self.context
         ## store obj id for nextURL()
         #self._newObjectID = obj.objectID
         #while IPagelet.providedBy(travp):
             #travp = self.context.__parent__
         #travp[obj.objectID] = obj
-        #return obj
+        return objList
 
 
 #class AddForm(layout.FormLayoutSupport, form.AddForm):
