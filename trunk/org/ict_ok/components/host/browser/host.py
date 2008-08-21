@@ -20,6 +20,7 @@ __version__ = "$Id$"
 import zope.event
 from zope.app import zapi
 from zope.component import getUtility
+from zope.size.interfaces import ISized
 from zope.proxy import removeAllProxies
 from zope.i18nmessageid import MessageFactory
 from zope.security import checkPermission
@@ -106,6 +107,17 @@ class HostDetails(ComponentDetails):
             tmpDict['href'] = u"%s/@@trigger_not1?nextURL=%s" % \
                    (zapi.getPath( self.context),
                     quoter.quote())
+            retList.append(tmpDict)
+        adapSize = ISized(self.context)
+        if checkPermission('org.ict_ok.components.interface.Add', self.context) and \
+           (adapSize.sizeForSorting()[1] < 1):
+            tmpDict = {}
+            tmpDict['oid'] = u"c%sstart_snmp_if_scanner" % objId
+            tmpDict['title'] = _(u"start snmp interface scanner")
+            tmpDict['href'] = u"%s/@@start_snmp_if_scanner.html" % \
+                   zapi.getPath(self.context)
+            tmpDict['tooltip'] = _(u"starts the interface scanner with snmp scan (as user:%s)"\
+                                   % self.request.principal.title)
             retList.append(tmpDict)
         return retList
 
@@ -284,5 +296,4 @@ class AllHosts(Overview):
     def objs(self):
         """List of Content objects"""
         return getAllHosts()
-
 

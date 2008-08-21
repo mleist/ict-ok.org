@@ -33,6 +33,7 @@ class Ticker(object):
 
     def __init__(self, context):
         self.context = context
+        self.db = None
 
     def triggered(self):
         """
@@ -40,3 +41,33 @@ class Ticker(object):
         """
         #print "AdmUtilTicker: '%s' triggered!!" % self.context
         self.context.tickerEvent()
+        
+    def triggerMin(self):
+        """
+        got ticker event from ticker thread every minute
+        """
+        pass
+
+    def triggerHour(self):
+        """
+        got ticker event from ticker thread every hour
+        """
+        pass
+
+    def triggerDay(self):
+        """
+        got ticker event from ticker thread every day
+        """
+        pass
+
+    def triggerMonth(self):
+        """
+        got ticker event from ticker thread every month
+        """
+        pass
+
+    def triggerYear(self):
+        """
+        got ticker event from ticker thread every year
+        """
+        pass

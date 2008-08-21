@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Attribute
-from zope.schema import Bool, Choice, List, Password, Set, TextLine
+from zope.schema import Bool, Choice, List, Password, Set, TextLine, Int
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
@@ -114,6 +114,31 @@ class IHost(IComponent):
             default = u"",
             required = False),
         default = [],
+        required = False)
+
+    snmpVersion = Choice(
+        title = _("SNMP version"),
+        vocabulary="SnmpVersions",
+        default = u"0", # SNMP V1
+        required = False)
+    
+    snmpPort = Int(
+        min = 1,
+        max = 65535,
+        title = _("SNMP port"),
+        default = 161,
+        required = False)
+
+    snmpReadCommunity = TextLine(
+        max_length = 80,
+        title = _("SNMP read community"),
+        default = u"public",
+        required = False)
+
+    snmpWriteCommunity = TextLine(
+        max_length = 80,
+        title = _("SNMP write community"),
+        default = u"private",
         required = False)
 
     url = TextLine(

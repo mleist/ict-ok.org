@@ -42,6 +42,11 @@
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".snmpvalue.SnmpVersions"
+        name="SnmpVersions"
+        />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
         component=".snmpvalue.SnmpCheckTypes"
         name="SnmpCheckTypes"
         />

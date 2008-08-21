@@ -352,6 +352,26 @@ class AdmUtilSupervisor(Supernode):
         print "SV OID: %s" % self.objectID
         print "event: %s" % event
 
+    def packDbByTicker(self, db=None):
+        """
+        will pack the database
+        """
+        #pass
+        print "ddd: <%s>" % dir(db)
+        if not db:
+            size_pre = db.getSize()
+            db.pack(days=0)
+            size_post = db.getSize()
+            ratio = float(size_post)/size_pre*100
+            self.appendEventHistory(\
+                u"zodb packed on ticker; %d bytes -> %d bytes (%.1f%%)" % \
+                (size_pre, size_post, ratio))
+        #nextURL = self.request.get('nextURL', default=None)
+        #if nextURL:
+            #return self.request.response.redirect(nextURL)
+        #else:
+            #return self.request.response.redirect('./@@details.html')
+
     def receivedPing(self, msgHeader):
         """
         we have received a ping request

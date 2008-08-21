@@ -8,18 +8,30 @@
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
+        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
+            <!--<td i18n:translate="">Value</td>-->
+            <!--<td tal:content="python: view.getValue()[1]" />-->
+        <!--</tr>-->
+        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
+            <!--<td i18n:translate="">Value</td>-->
+            <!--<td tal:content="python: context.getMyFactor()" />-->
+        <!--</tr>-->
+        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
+            <!--<td i18n:translate="">Value1</td>-->
+            <!--<td tal:content="python: context.getMyFactor()" />-->
+        <!--</tr>-->
+        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
+            <!--<td i18n:translate="">Value2</td>-->
+            <!--<td tal:content="python: context.getDisplayPhysical()" />-->
+        <!--</tr>-->
         <tr class="cb_wht" tal:condition="view/getValue">
-            <td i18n:translate="">Value</td>
-            <td tal:content="python: view.getValue()[1]" />
+            <td i18n:translate="">Value3</td>
+            <td tal:content="python: view.getValue()" />
         </tr>
-        <tr class="cb_wht" tal:condition="view/getValue">
-            <td i18n:translate="">Value</td>
-            <td tal:content="python: context.getMyFactor()" />
-        </tr>
-        <tr class="cb_wht" tal:condition="view/getValue">
-            <td i18n:translate="">Value</td>
-            <td tal:content="python: context.getMyFactor() * context.getDisplayPhysical() * view.getValue()[1]" />
-        </tr>
+        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
+            <!--<td i18n:translate="">Value</td>-->
+            <!--<td tal:content="python: context.getMyFactor() * context.getDisplayPhysical() * view.getValue()[1]" />-->
+        <!--</tr>-->
     </table>
     <h3>1h</h3>
     <img tal:attributes="src python: '%s/@@getPNG?hours=1' % (view.getValuePngHref())" />

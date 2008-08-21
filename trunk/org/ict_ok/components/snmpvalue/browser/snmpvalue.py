@@ -184,10 +184,23 @@ class SnmpValueDetails(ComponentDetails):
         from pysnmp.entity.rfc3413.oneliner import cmdgen
         oidStringList = self.context.oid1.strip(".").split(".")
         try:
+            interfaceObj = self.context.getParent()
+            interfaceIp = interfaceObj.ipv4List
+            hostObj = interfaceObj.getParent()
+            hostSnmpVers = hostObj.snmpVersion
+            hostSnmpPort = hostObj.snmpPort
+            hostSnmpReadCommunity = hostObj.snmpReadCommunity
+            hostSnmpWriteCommunity = hostObj.snmpWriteCommunity
             oidIntList = [ int(i) for i in oidStringList]
+            #errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
+                #cmdgen.CommunityData('my-agent', 'public01', 0),
+                #cmdgen.UdpTransportTarget(('localhost', 161)),
+                #tuple(oidIntList)
+            #)
+            print "zuzu: ", hostSnmpVers
             errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
-                cmdgen.CommunityData('my-agent', 'public01', 0),
-                cmdgen.UdpTransportTarget(('localhost', 161)),
+                cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, 0),
+                cmdgen.UdpTransportTarget((interfaceIp, hostSnmpPort)),
                 tuple(oidIntList)
             )
             print "1", errorIndication
@@ -200,7 +213,23 @@ class SnmpValueDetails(ComponentDetails):
             print "--" * 30
             print "getMyFactor: ", self.context.getMyFactor()
             print "--" * 30
-            return varBinds[0]
+            print "tt2: ", self.context.getParent().ipv4List
+            print "--" * 30
+            print "tt3: ", self.context.getParent().getParent()
+            print "tt3a: ", self.context.getParent().getParent().snmpVersion
+            print "tt3b: ", self.context.getParent().getParent().snmpPort
+            print "tt3c: ", self.context.getParent().getParent().snmpReadCommunity
+            print "tt3d: ", self.context.getParent().getParent().snmpWriteCommunity
+
+            print "--" * 30
+            print varBinds[0]
+            try:
+                return self.context.inpMultiplier * \
+                       self.context.getMyFactor() * \
+                       self.context.getDisplayPhysical() * \
+                       float(varBinds[0][1])
+            except Exception, errText:
+                return errText
         except ValueError:
             return None
         

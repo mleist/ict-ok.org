@@ -162,6 +162,14 @@
         <!--permission="org.ict_ok.components.host.View"-->
     <!--/>-->
 
+    <z3c:pagelet
+        name="start_snmp_if_scanner.html"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        class="org.ict_ok.components.interface.browser.interface.SnmpScanWizardForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.interface.Add"
+    />
+
     <!--##### Sub Menu ##### -->
 
     <viewlet

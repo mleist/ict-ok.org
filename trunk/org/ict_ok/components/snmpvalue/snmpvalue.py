@@ -29,6 +29,15 @@ from org.ict_ok.components.component import Component
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.libs.physicalquantity import PhysicalQuantity
 
+def SnmpVersions(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        u"0": u"V1",
+        u"1": u"V2c",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
+
 def SnmpCheckTypes(dummy_context):
     """In which production state a host may be
     """
@@ -83,6 +92,8 @@ def SnmpDimensionUnits(dummy_context):
         u"dHz": u"dHz",
         u"W": u"W",
         u"kW": u"kW",
+        u"W*h": u"W*h",
+        u"kW*h": u"kW*h",
         u"s": u"s",
         u"min": u"min",
         u"h": u"h",
@@ -117,6 +128,7 @@ class SnmpValue(Component):
     cmd = FieldProperty(ISnmpValue['cmd'])
     inptype = FieldProperty(ISnmpValue['inptype'])
     inpUnit = FieldProperty(ISnmpValue['inpUnit'])
+    inpMultiplier = FieldProperty(ISnmpValue['inpMultiplier'])
     #displayUnitNumerator = FieldProperty(ISnmpValue['displayUnitNumerator'])
     #displayUnitDenominator = FieldProperty(ISnmpValue['displayUnitDenominator'])
     #checkMax = FieldProperty(ISnmpValue['checkMax'])
@@ -180,3 +192,31 @@ class SnmpValue(Component):
             myFactor = inpPhys.inBaseUnits() / \
                      displayPhys.inBaseUnits()
         return myFactor
+
+    def getSnmpValue(self):
+        from pysnmp.entity.rfc3413.oneliner import cmdgen
+        oidStringList = self.oid1.strip(".").split(".")
+        try:
+            interfaceObj = self.getParent()
+            interfaceIp = interfaceObj.ipv4List
+            hostObj = interfaceObj.getParent()
+            hostSnmpVers = hostObj.snmpVersion
+            hostSnmpPort = hostObj.snmpPort
+            hostSnmpReadCommunity = hostObj.snmpReadCommunity
+            hostSnmpWriteCommunity = hostObj.snmpWriteCommunity
+            oidIntList = [ int(i) for i in oidStringList]
+            errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
+                cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, int(hostSnmpVers)),
+                cmdgen.UdpTransportTarget((interfaceIp, hostSnmpPort)),
+                tuple(oidIntList)
+            )
+            return self.inpMultiplier * \
+                   self.getMyFactor() * \
+                   self.getDisplayPhysical() * \
+                   float(varBinds[0][1])
+        except:
+            return None
+
+    def tickerEvent(self):
+        pass
+        #print "iiiiiiiiiiiiiiiiiiiiiiiii: ", self.getSnmpValue()

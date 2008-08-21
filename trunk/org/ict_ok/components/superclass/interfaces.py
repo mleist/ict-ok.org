@@ -135,6 +135,26 @@ class ITicker(Interface):
         """
         got ticker event from ticker thread
         """
+    def triggerMin(self):
+        """
+        got ticker event from ticker thread every minute
+        """
+    def triggerHour(self):
+        """
+        got ticker event from ticker thread every hour
+        """
+    def triggerDay(self):
+        """
+        got ticker event from ticker thread every day
+        """
+    def triggerMonth(self):
+        """
+        got ticker event from ticker thread every month
+        """
+    def triggerYear(self):
+        """
+        got ticker event from ticker thread every year
+        """
 
 
 class IBrwsOverview(Interface):

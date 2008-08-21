@@ -85,10 +85,17 @@ if __name__ == '__main__':
     args = sys.argv
     #print "aa: %s" % args
     modeString = ""
-    if len(args) > 1:
-        modeString = args[1]
+    print "tt:", len(args)
+    if len(args) == 3:
+        url = args[1]
+        modeString = args[2]
+    elif len(args) == 2:
+        url = args[1]
+    else:
+        print >>sys.stderr, "Error in arguements"
+        exit(1)
     #print "modeString: %s" % modeString
-    url = 'http://localhost:8081/++etc++site/default/AdmUtilCron'
+    #url = 'http://localhost:8081/++etc++site/default/AdmUtilCron'
     # TODO hook in a checker for "only permit cron@localhost" in zope3/ict-ok.org
     username = 'cron'
     password = '59d2d6db79b3'

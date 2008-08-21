@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Bool, Choice, Int, TextLine
+from zope.schema import Bool, Choice, Int, TextLine, Float
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
@@ -34,14 +34,14 @@ class ISnmpValue(IComponent):
         vocabulary = "SnmpCheckTypes")
 
     oid1 = SnmpOidValid(
-        max_length=40,
+        max_length=400,
         title=_("OID1"),
         description=_("OID1"),
         default=u"1.3.6.1.2.1.1.1.0",
         required=False)
 
     oid2 = SnmpOidValid(
-        max_length=40,
+        max_length=400,
         title=_("OID2"),
         description=_("OID2"),
         default=u"1.3.6.1.2.1.1.1.0",
@@ -53,6 +53,11 @@ class ISnmpValue(IComponent):
         default=u"none",
         required = True,
         vocabulary = "SnmpCheckCmds")
+
+    inpMultiplier = Float(
+        title=_(u"input multiplier"),
+        default=1.0,
+        required = True)
 
     inptype = Choice(
         title=_(u"Input Type"),

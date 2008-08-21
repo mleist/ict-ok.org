@@ -94,7 +94,7 @@ class NetDetails(ComponentDetails):
         retList = []
         adapSize = ISized(self.context)
         # adapSize.sizeForSorting() returns ('item', n)
-        if checkPermission('org.ict_ok.components.net.Add', self.context) and \
+        if checkPermission('org.ict_ok.components.host.Add', self.context) and \
            (adapSize.sizeForSorting()[1] < 1):
             tmpDict = {}
             tmpDict['oid'] = u"c%sstart_scanner" % objId

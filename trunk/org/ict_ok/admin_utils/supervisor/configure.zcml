@@ -30,7 +30,10 @@
     <adapter
         factory=".adapter.state.State"
         />
-    
+    <adapter
+        factory=".adapter.ticker.Ticker"
+    />
+
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"

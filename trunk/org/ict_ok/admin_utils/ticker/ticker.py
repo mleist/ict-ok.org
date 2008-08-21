@@ -93,13 +93,47 @@ class TickerThread(threading.Thread):
         # Use the default thread transaction manager.
         self.transaction_manager = transaction.manager
         self.interaction = ParanoidSecurityPolicy(SystemTickerParticipation())
+        self.timestamp = time.gmtime()
+        self.timestamp_min = self.timestamp[:-4]
+        self.timestamp_hour = self.timestamp[:-5]
+        self.timestamp_day = self.timestamp[:-6]
+        self.timestamp_month = self.timestamp[:-7]
+        self.timestamp_year = self.timestamp[:-8]
         threading.Thread.__init__(self)
-
+    
     def run(self, forever=True):
         atexit.register(self.stop)
         while not self.__stopped:
             if TickerThread.database:
                 try:
+                    signal_min = False
+                    signal_hour = False
+                    signal_day = False
+                    signal_month = False
+                    signal_year = False
+                    now_ts = time.gmtime()
+                    if now_ts[:-4] != self.timestamp_min:
+                        signal_min = True
+                        self.timestamp_min = now_ts[:-4]
+                    if now_ts[:-5] != self.timestamp_hour:
+                        signal_hour = True
+                        self.timestamp_hour = now_ts[:-5]
+                    if now_ts[:-6] != self.timestamp_day:
+                        signal_day = True
+                        self.timestamp_day = now_ts[:-6]
+                    if now_ts[:-7] != self.timestamp_month:
+                        signal_month = True
+                        self.timestamp_month = now_ts[:-7]
+                    if now_ts[:-8] != self.timestamp_year:
+                        signal_year = True
+                        self.timestamp_year = now_ts[:-8]
+                    if signal_min:
+                        size_pre = TickerThread.database.getSize()
+                        TickerThread.database.pack(days=0)
+                        size_post = TickerThread.database.getSize()
+                        ratio = float(size_post)/size_pre*100
+                        print u"zodb packed on ticker; %d bytes -> %d bytes (%.1f%%)" % \
+                              (size_pre, size_post, ratio)
                     conn = TickerThread.database.open()
                     root = conn.root()
                     root_folder = root['Application']
@@ -116,10 +150,22 @@ class TickerThread(threading.Thread):
                         try:
                             tickerAdapter = ITicker(myobj.object)
                             if tickerAdapter:
+                                tickerAdapter.db = TickerThread.database
                                 tickerAdapter.triggered()
+                                if signal_min:
+                                    tickerAdapter.triggerMin()
+                                if signal_hour:
+                                    tickerAdapter.triggerHour()
+                                if signal_day:
+                                    tickerAdapter.triggerDay()
+                                if signal_month:
+                                    tickerAdapter.triggerMonth()
+                                if signal_year:
+                                    tickerAdapter.triggerYear()
                         except TypeError, err:
                             print "Error xxx: ", err
-                    for utilInterface in (IAdmUtilEventCrossbar,
+                    for utilInterface in (IAdmUtilSupervisor,
+                                          IAdmUtilEventCrossbar,
                                           IAdmUtilTicker,
                                           IAdmUtilGeneratorNagios,
                                           ):
@@ -128,7 +174,18 @@ class TickerThread(threading.Thread):
                             try:
                                 tickerAdapter = ITicker(tmp_util)
                                 if tickerAdapter:
+                                    tickerAdapter.db = TickerThread.database
                                     tickerAdapter.triggered()
+                                    if signal_min:
+                                        tickerAdapter.triggerMin()
+                                    if signal_hour:
+                                        tickerAdapter.triggerHour()
+                                    if signal_day:
+                                        tickerAdapter.triggerDay()
+                                    if signal_month:
+                                        tickerAdapter.triggerMonth()
+                                    if signal_year:
+                                        tickerAdapter.triggerYear()
                             except TypeError, err:
                                 print "Error xxx: ", err
                     setSite(old_site)

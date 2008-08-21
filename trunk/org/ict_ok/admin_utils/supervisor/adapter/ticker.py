@@ -21,7 +21,7 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 from org.ict_ok.components.superclass.interfaces import ITicker
 
 
@@ -29,13 +29,48 @@ class Ticker(object):
     """Ticker-Adapter."""
 
     implements(ITicker)
-    adapts(INet)
+    adapts(IAdmUtilSupervisor)
 
     def __init__(self, context):
         self.context = context
+        self.db = None
 
     def triggered(self):
         """
         got ticker event from ticker thread
         """
-        print "Net: '%s' triggered!!" % self.context
+        pass
+        #print "Supervisor: '%s' triggered!!" % self.context
+        
+    def triggerMin(self):
+        """
+        got ticker event from ticker thread every minute
+        """
+        print "Supervisor: '%s' triggerMin!!" % self.context
+        self.context.appendEventHistory(u'minute ticker')
+        #self.context.packDbByTicker(self.db)
+        pass
+
+    def triggerHour(self):
+        """
+        got ticker event from ticker thread every hour
+        """
+        pass
+
+    def triggerDay(self):
+        """
+        got ticker event from ticker thread every day
+        """
+        pass
+
+    def triggerMonth(self):
+        """
+        got ticker event from ticker thread every month
+        """
+        pass
+
+    def triggerYear(self):
+        """
+        got ticker event from ticker thread every year
+        """
+        pass

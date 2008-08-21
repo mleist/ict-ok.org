@@ -123,3 +123,12 @@ class IInterface(IComponent):
             if len(alreadyFound) > 0:
                 raise Invalid("The IP address already used in interface %s" % \
                               " ".join(alreadyFound))
+
+class IInterfaceSnmpScanWizard(Interface):
+    """A interface object."""
+    searchIpV4 = HostIpValid(
+            min_length=1,
+            max_length=30,
+            title=_("IP address"),
+            default=u"127.0.0.1",
+            required=True)
