@@ -46,8 +46,8 @@ class Ticker(object):
         """
         got ticker event from ticker thread every minute
         """
-        print "Supervisor: '%s' triggerMin!!" % self.context
-        self.context.appendEventHistory(u'minute ticker')
+        #print "Supervisor: '%s' triggerMin!!" % self.context
+        #self.context.appendEventHistory(u'minute ticker')
         #self.context.packDbByTicker(self.db)
         pass
 

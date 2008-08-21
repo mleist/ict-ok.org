@@ -127,7 +127,7 @@ class TickerThread(threading.Thread):
                     if now_ts[:-8] != self.timestamp_year:
                         signal_year = True
                         self.timestamp_year = now_ts[:-8]
-                    if signal_min:
+                    if signal_day:
                         size_pre = TickerThread.database.getSize()
                         TickerThread.database.pack(days=0)
                         size_post = TickerThread.database.getSize()
