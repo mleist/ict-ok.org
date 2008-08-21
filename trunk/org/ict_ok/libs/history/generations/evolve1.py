@@ -17,7 +17,7 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.components.host.interfaces import IHost
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 
 generation = 1
 
@@ -25,12 +25,5 @@ def evolve(context):
     u"""
     convert object to new standard
     """
-    
     root = getRootFolder(context) # the Zope-Root-Folders
-
-    for host in findObjectsProviding(root, IHost):
-        # convert this object
-        evolve_msg = "gen. %d (%s)" % \
-                   (generation, evolve.__doc__.strip())
-        print "Host(%s): " % host.ikName + evolve_msg
-        host.appendHistoryEntry(evolve_msg)
+    # don't do anything
