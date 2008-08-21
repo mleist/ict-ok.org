@@ -70,6 +70,12 @@
         component=".snmpvalue.SnmpTimeDimensionUnits"
         name="SnmpTimeDimensionUnits"
         />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".snmpvalue.SnmpIndexTypes"
+        name="SnmpIndexTypes"
+        />
+
     <adapter
         factory=".adapter.sized.SnmpValueSized"
         />

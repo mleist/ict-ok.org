@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0232,W0142
+# pylint: disable-msg=F0401,E1101,E0611,W0232,W0142
 #
 """implementation of browser class of Interface object
 """
@@ -16,13 +16,20 @@ __version__ = "$Id$"
 
 # phython imports
 from pysnmp.entity.rfc3413.oneliner import cmdgen
+from datetime import datetime
 
 # zope imports
+from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
+from zope.dublincore.interfaces import IZopeDublinCore
 from zope.traversing.browser import absoluteURL
+from zope.lifecycleevent import ObjectCreatedEvent
+from zope.event import notify
+from zope.component import createObject
 
 # z3c imports
 from z3c.form import field
+from z3c.pagelet.interfaces import IPagelet
 
 # ict_ok.org imports
 from org.ict_ok.components.interface.interfaces import IInterface, IInterfaceSnmpScanWizard
@@ -187,6 +194,57 @@ class SnmpScanWizardForm(AddForm):
                 for snmpItem in snmpList:
                     interfacesDict[snmpList.index(snmpItem)]['operstat'] = \
                                   snmpItem[0][1] == 1
+            oidTuple = (1, 3, 6, 1, 2, 1, 31, 1, 1, 1, 1) # InterfaceName
+            snmpList = self.getInterfaceVect(data, oidTuple)
+            if snmpList:
+                for snmpItem in snmpList:
+                    interfacesDict[snmpList.index(snmpItem)]['name'] = \
+                                  snmpItem[0][1].prettyPrint().strip("'")
+            # -------------------------------------------
+            if data['indexType'] == u'index':
+                atrList = [i['index'] for i in interfacesDict.values()]
+                atrDict = {}.fromkeys(atrList)
+                if len(atrDict.keys()) != interfaceCnt:
+                    self.status = _(u"Error: interface index type 'Interface index' isn't unique")
+                    return None
+            elif data['indexType'] == u'mac':
+                atrList = [i['mac'] for i in interfacesDict.values()]
+                atrDict = {}.fromkeys(atrList)
+                if len(atrDict.keys()) != interfaceCnt:
+                    self.status = _(u"Error: interface index type 'Ethernet address' isn't unique")
+                    return None
+            elif data['indexType'] == u'desc':
+                atrList = [i['desc'] for i in interfacesDict.values()]
+                atrDict = {}.fromkeys(atrList)
+                if len(atrDict.keys()) != interfaceCnt:
+                    self.status = _(u"Error: interface index type 'Description' isn't unique")
+                    return None
+            elif data['indexType'] == u'name':
+                atrList = [i['name'] for i in interfacesDict.values()]
+                atrDict = {}.fromkeys(atrList)
+                if len(atrDict.keys()) != interfaceCnt:
+                    self.status = _(u"Error: interface index type 'Name' isn't unique")
+                    return None
+            # -------------------------------------------
+            retList = []
+            for interfaceKey in interfacesDict.keys()[:1]:
+                tmpInterface = interfacesDict[interfaceKey]
+                print "oooo:", tmpInterface
+                dateNow = datetime.utcnow()
+                newInterface = zapi.createObject(\
+                    u'org.ict_ok.components.interface.interface.Interface')
+                notify(ObjectCreatedEvent(newInterface))
+                newInterfaceDc = IZopeDublinCore(newInterface, None)
+                newInterfaceDc.title = u"%s" % tmpInterface['name']
+                newInterfaceDc.created = datetime.utcnow()
+                newInterface.ikComment = u"%s" % tmpInterface['desc']
+                newInterface.mac = u"%s" % tmpInterface['mac']
+                newInterface.ipv4List = None
+                newInterface.__post_init__()
+                retList.append(newInterface)
+            return retList
+            # -------------------------------------------
+
         import pprint
         print "-" * 80
         pprint.pprint(interfacesDict)
@@ -196,8 +254,26 @@ class SnmpScanWizardForm(AddForm):
         #pdb.set_trace()
         self.status = _(u"Error: no unique Id")
         return None #[1,2,3]
-    def add(self, obj):
-        print "SnmpScanWizardForm.add(%s)" % obj
+    def add(self, objList):
+        """ will store the new one in object tree """
+        print "SnmpScanWizardForm.add(%s)" % objList
+        #import pdb
+        #pdb.set_trace()
+        for obj in objList:
+            travp = self.context
+            # store obj id for nextURL()
+            self._newObjectID = obj.objectID
+            while IPagelet.providedBy(travp):
+                travp = self.context.__parent__
+            travp[obj.ikName] = obj
+        return objList
+        #travp = self.context
+        ## store obj id for nextURL()
+        #self._newObjectID = obj.objectID
+        #while IPagelet.providedBy(travp):
+            #travp = self.context.__parent__
+        #travp[obj.objectID] = obj
+        #return obj
 
 
 #class AddForm(layout.FormLayoutSupport, form.AddForm):

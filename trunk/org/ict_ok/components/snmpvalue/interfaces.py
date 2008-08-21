@@ -115,6 +115,12 @@ class ISnmpValue(IComponent):
         required = False,
         vocabulary = "SnmpTimeDimensionUnits")
 
+    snmpIndexType = Choice(
+        title = _("SNMP index type"),
+        vocabulary="SnmpIndexTypes",
+        default = u"mac",
+        required = True)
+
     def getInputPhysical():
         """ return inpunt physical as PhysicalQuantity
         """

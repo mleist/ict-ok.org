@@ -114,6 +114,20 @@ def SnmpTimeDimensionUnits(dummy_context):
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)
 
+def SnmpIndexTypes(dummy_context):
+    """what is used to retrieve same ports after rebooting the device
+    """
+    terms = []
+    for (gkey, gname) in {
+        u"index": u"Interface index",
+        #u"ip": u"IP address",
+        u"mac": u"Ethernet address",
+        u"desc": u"Description",
+        u"name": u"Name",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
+
 class SnmpValue(Component):
     """
     the template instance

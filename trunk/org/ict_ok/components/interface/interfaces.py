@@ -132,3 +132,8 @@ class IInterfaceSnmpScanWizard(Interface):
             title=_("IP address"),
             default=u"127.0.0.1",
             required=True)
+    indexType = Choice(
+        title = _("Index type"),
+        vocabulary="SnmpIndexTypes",
+        default = u"mac",
+        required = True)
