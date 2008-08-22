@@ -278,8 +278,8 @@ class SnmpScanWizardForm(AddForm):
     def add(self, objList):
         """ will store the new one in object tree """
         print "SnmpScanWizardForm.add(%s)" % True #objList
-        #import pdb
-        #pdb.set_trace()
+        import pdb
+        pdb.set_trace()
         for obj in objList:
             travp = self.context
             # store obj id for nextURL()
@@ -293,7 +293,6 @@ class SnmpScanWizardForm(AddForm):
             #from zope.interface import directlyProvides
             #newSnmpvalue = zapi.createObject(\
                 #u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue')
-            ###directlyProvides(newSnmpvalue, IKeyReference)
             #notify(ObjectCreatedEvent(newSnmpvalue))
             #newSnmpvalueDc = IZopeDublinCore(newSnmpvalue, None)
             #newSnmpvalueDc.title = u"%s" % "ddd"
