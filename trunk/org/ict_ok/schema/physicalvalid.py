@@ -14,15 +14,14 @@
 
 __version__ = "$Id$"
 
-# python imports
-from magnitude import mg, MagnitudeError
-
 # zope imports
 from zope.schema import TextLine
 
 # ict_ok.org imports
 from org.ict_ok.schema.interfaces import PhysicalQuantityValidError, \
      PhysicalUnitValidError
+from org.ict_ok.libs.physicalquantity import physq, convertQuantity, \
+     convertUnit, MagnitudeError
 
 
 class PhysicalQuantity(TextLine):
@@ -36,7 +35,8 @@ class PhysicalQuantity(TextLine):
         valList = value.split(' ', 1)
         try:
             numerical_value = float(valList[0])
-            physical_unit = mg(numerical_value, valList[1])
+            if len(valList) > 1:
+                physical_unit = physq(numerical_value, valList[1])
         except ValueError:
             raise PhysicalQuantityValidError(value, 1)
         except MagnitudeError:
@@ -49,6 +49,6 @@ class PhysicalUnit(TextLine):
         ## call parent validations
         TextLine._validate(self, value)
         try:
-            physical_quantity = mg(1.0, value)
+            physical_quantity = physq(1.0, value)
         except MagnitudeError:
             raise PhysicalUnitValidError(value, 1)

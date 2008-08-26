@@ -223,10 +223,10 @@ class SnmpValueDetails(ComponentDetails):
             print "1116: ", self.context.getPQmaxQuantityVelocity()
             print "1117: ", self.context.getPQmaxQuantityAcceleration()
 
-            print "--" * 30
-            print "getInputPhysical: ", self.context.getInputPhysical()
-            print "--" * 30
-            print "getMyFactor: ", self.context.getMyFactor()
+            #print "--" * 30
+            #print "getInputPhysical: ", self.context.getInputPhysical()
+            #print "--" * 30
+            #print "getMyFactor: ", self.context.getMyFactor()
             print "--" * 30
             print "tt2: ", self.context.getParent().ipv4List
             print "--" * 30

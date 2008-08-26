@@ -10,31 +10,59 @@
 # pylint: disable-msg=W0232
 #
 """Physical quantities for ict-ok.org
-see http://dirac.cnrs-orleans.fr/plone/software/scientificpython
+see http://juanreyero.com/magnitude/index.html
 """
 
 __version__ = "$Id: host.py 174 2008-03-05 17:51:14Z markusleist $"
 
 # python imports
-from Scientific.Physics.PhysicalQuantities import \
-     PhysicalUnit, \
-     _addUnit, _addPrefixed, _prefixes
-from Scientific.Physics import PhysicalQuantities
+from magnitude import Magnitude, MagnitudeError
 
 
-class PhysicalQuantity(PhysicalQuantities.PhysicalQuantity):
+class PhysicalQuantity(Magnitude):
     """
     """
-    _addUnit('event', PhysicalUnit("event", 1.0, [0,0,0,0,0,0,0,0,1] ))
-    _prefixes.append(('Ki', 2**10) )
-    _prefixes.append(('Mi', 2**20) )
-    _prefixes.append(('Gi', 2**30) )
-    _prefixes.append(('Ti', 2**40) )
-    _prefixes.append(('Pi', 2**50) )
-    _prefixes.append(('Ei', 2**60) )
-    _prefixes.append(('Zi', 2**70) )
-    _addUnit('bit', PhysicalUnit(None, 1.0, [0,0,0,0,0,0,0,1,0]))
-    _addPrefixed( 'bit')
-    _addUnit('byte', '8*bit')
-    _addPrefixed( 'byte')
-    _addUnit('cnt', 'event')
+
+def physq(value, unit='', ounit=''):
+    """Builds a Magnitude from a number and a units string"""
+    pq = PhysicalQuantity(value)
+    if unit:
+        u = pq.sunit2mag(unit)
+        pq.mult_by(u)
+    if not ounit:
+        ounit = unit
+    pq.ounit(ounit)
+    return pq
+
+def convertQuantity(inpString):
+    """converts an input string to the physical quantity
+    """
+    if not inpString:
+        return None
+    try:
+        valList = inpString.split(' ', 1)
+        numerical_value = float(valList[0])
+        if len(valList) > 1:
+            physical_quantity = physq(numerical_value, valList[1])
+        else:
+            physical_quantity = physq(numerical_value, "")
+    except ValueError:
+        return physq(-1.0)
+    except MagnitudeError:
+        return physq(-1.0)
+    return physical_quantity
+
+def convertUnit(inpString):
+    """converts an input string to the physical unit of
+    the quantity 1.0
+    """
+    if not inpString:
+        return None
+    try:
+        physical_quantity = physq(1.0, inpString)
+    except ValueError:
+        return physq(-1.0)
+    except MagnitudeError:
+        return physq(-1.0)
+    return physical_quantity
+

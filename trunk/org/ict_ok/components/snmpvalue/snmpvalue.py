@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,W0612,W0142
+# pylint: disable-msg=F0401,E1101,E0611,W0612,W0142
 #
 """implementation of SnmpValue
 
@@ -17,9 +17,6 @@ SnmpValue does ....
 
 __version__ = "$Id$"
 
-# python imports
-from magnitude import mg, MagnitudeError
-
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
@@ -28,7 +25,8 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 # ict_ok.org imports
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
-from org.ict_ok.libs.physicalquantity import PhysicalQuantity
+from org.ict_ok.libs.physicalquantity import physq, convertQuantity, \
+     convertUnit
 
 def SnmpVersions(dummy_context):
     terms = []
@@ -168,52 +166,52 @@ class SnmpValue(Component):
                 setattr(self, name, value)
         self.ikRevision = __version__
 
-    def getInputPhysical(self):
-        """ return inpunt physical as PhysicalQuantity
-        """
-        if self.inptype == "cnt":
-            tmpDenominator = "s"
-            inpPhys = PhysicalQuantity("1.0 %s/%s" % (str(self.inpUnit),
-                                                      str(tmpDenominator)))
-        elif self.inptype == "relperc":
-            inpPhys = PhysicalQuantity("1.0 cnt/cnt")
-        elif self.inptype == "gauge":
-            if self.inpUnit == "%":
-                inpPhys = PhysicalQuantity("1.0 cnt/cnt")
-            else:
-                inpPhys = PhysicalQuantity("1.0 %s" % (str(self.inpUnit) ))
-        else:
-            tmpDenominator = "1"
-            inpPhys = PhysicalQuantity("1.0 %s/%s" % (str(self.inpUnit),
-                                                      str(tmpDenominator)))
-        return inpPhys
+    #def getInputPhysical(self):
+        #""" return inpunt physical as PhysicalQuantity
+        #"""
+        #if self.inptype == "cnt":
+            #tmpDenominator = "s"
+            #inpPhys = PhysicalQuantity("1.0 %s/%s" % (str(self.inpUnit),
+                                                      #str(tmpDenominator)))
+        #elif self.inptype == "relperc":
+            #inpPhys = PhysicalQuantity("1.0 cnt/cnt")
+        #elif self.inptype == "gauge":
+            #if self.inpUnit == "%":
+                #inpPhys = PhysicalQuantity("1.0 cnt/cnt")
+            #else:
+                #inpPhys = PhysicalQuantity("1.0 %s" % (str(self.inpUnit) ))
+        #else:
+            #tmpDenominator = "1"
+            #inpPhys = PhysicalQuantity("1.0 %s/%s" % (str(self.inpUnit),
+                                                      #str(tmpDenominator)))
+        #return inpPhys
     
-    def getDisplayPhysical(self):
-        """ return display physical as PhysicalQuantity
-        """
-        if self.displayUnitNumerator == "%":
-            displayPhys = PhysicalQuantity("1 cnt/cnt")
-        else:
-            if self.displayUnitDenominator == "1":
-                displayPhys = PhysicalQuantity("1 %s" %
-                    (str(self.displayUnitNumerator)))
-            else:
-                displayPhys = PhysicalQuantity("1 %s/%s" %
-                    (str(self.displayUnitNumerator),
-                     str(self.displayUnitDenominator)))
-        return displayPhys
+    #def getDisplayPhysical(self):
+        #""" return display physical as PhysicalQuantity
+        #"""
+        #if self.displayUnitNumerator == "%":
+            #displayPhys = PhysicalQuantity("1 cnt/cnt")
+        #else:
+            #if self.displayUnitDenominator == "1":
+                #displayPhys = PhysicalQuantity("1 %s" %
+                    #(str(self.displayUnitNumerator)))
+            #else:
+                #displayPhys = PhysicalQuantity("1 %s/%s" %
+                    #(str(self.displayUnitNumerator),
+                     #str(self.displayUnitDenominator)))
+        #return displayPhys
         
-    def getMyFactor(self):
-        """ factor for adaption from inpType to displayType
-        """
-        inpPhys = self.getInputPhysical()
-        displayPhys = self.getDisplayPhysical()
-        try:
-            myFactor = inpPhys / displayPhys
-        except:
-            myFactor = inpPhys.inBaseUnits() / \
-                     displayPhys.inBaseUnits()
-        return myFactor
+    #def getMyFactor(self):
+        #""" factor for adaption from inpType to displayType
+        #"""
+        #inpPhys = self.getInputPhysical()
+        #displayPhys = self.getDisplayPhysical()
+        #try:
+            #myFactor = inpPhys / displayPhys
+        #except:
+            #myFactor = inpPhys.inBaseUnits() / \
+                     #displayPhys.inBaseUnits()
+        #return myFactor
 
     def getSnmpValue(self):
         from pysnmp.entity.rfc3413.oneliner import cmdgen
@@ -243,48 +241,23 @@ class SnmpValue(Component):
         pass
         #print "iiiiiiiiiiiiiiiiiiiiiiiii: ", self.getSnmpValue()
 
-    def convertQuantity(self, inpString):
-        """converts an input string to the physical quantity
-        """
-        try:
-            valList = inpString.split(' ', 1)
-            numerical_value = float(valList[0])
-            physical_quantity = mg(numerical_value, valList[1])
-        except ValueError:
-            return mg(-1.0)
-        except MagnitudeError:
-            return mg(-1.0)
-        return physical_quantity
-
-    def convertUnit(self, inpString):
-        """converts an input string to the physical unit of
-        the quantity 1.0
-        """
-        try:
-            physical_quantity = mg(1.0, inpString)
-        except ValueError:
-            return mg(-1.0)
-        except MagnitudeError:
-            return mg(-1.0)
-        return physical_quantity
-    
     def getPQinpQuantity(self):
-        return self.convertQuantity(self.inpQuantity)
+        return convertQuantity(self.inpQuantity)
 
     def getPUdisplUnitAbs(self):
-        return self.convertUnit(self.displUnitAbs)
+        return convertUnit(self.displUnitAbs)
 
     def getPUdisplUnitVelocity(self):
-        return self.convertUnit(self.displUnitVelocity)
+        return convertUnit(self.displUnitVelocity)
 
     def getPUdisplUnitAcceleration(self):
-        return self.convertUnit(self.displUnitAcceleration)
+        return convertUnit(self.displUnitAcceleration)
 
     def getPQmaxQuantityAbs(self):
-        return self.convertQuantity(self.maxQuantityAbs)
+        return convertQuantity(self.maxQuantityAbs)
 
     def getPQmaxQuantityVelocity(self):
-        return self.convertQuantity(self.maxQuantityVelocity)
+        return convertQuantity(self.maxQuantityVelocity)
 
     def getPQmaxQuantityAcceleration(self):
-        return self.convertQuantity(self.maxQuantityAcceleration)
+        return convertQuantity(self.maxQuantityAcceleration)

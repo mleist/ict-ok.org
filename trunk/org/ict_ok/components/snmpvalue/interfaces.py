@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0232
+# pylint: disable-msg=E1101,E0213,E0211,W0232
 #
 """Interface of SnmpValue"""
 
@@ -15,6 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.interface import Invalid, invariant
 from zope.schema import Bool, Choice, Int, TextLine, Float
 
 # ict_ok.org imports
@@ -22,6 +23,8 @@ from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.schema.snmpoidvalid import SnmpOidValid
 from org.ict_ok.schema.physicalvalid import PhysicalQuantity, \
      PhysicalUnit
+from org.ict_ok.libs.physicalquantity import physq, convertQuantity, \
+     convertUnit
 
 _ = MessageFactory('org.ict_ok')
 
@@ -182,7 +185,92 @@ class ISnmpValue(IComponent):
         title=_("Max. quantity (acceleration)"),
         default=u"1.0 b/s2",
         required=False)
+    
+    @invariant
+    def ensureC1(obj_snmp):
+        convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+        if convPQinpQuantity.dimensionless():
+            raise Invalid("The input quantity '%s' must have a dimension" \
+                          % (convPQinpQuantity))
 
+    @invariant
+    def ensureC3(obj_snmp):
+        convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+        convPUdisplUnitAbs = convertUnit(obj_snmp.displUnitAbs)
+        physFactor = convPUdisplUnitAbs / convPQinpQuantity
+        if not physFactor.dimensionless():
+            raise Invalid("The input quantity '%s' and the "\
+                          "display unit '%s'"\
+                          " must have the same dimension" \
+                          % (convPQinpQuantity, convPUdisplUnitAbs))
+
+    @invariant
+    def ensureC4(obj_snmp):
+        if obj_snmp.displUnitVelocity:
+            convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+            convPUdisplUnitVelocity = convertUnit(obj_snmp.displUnitVelocity)
+            physFactor = convPUdisplUnitVelocity \
+                       / convPQinpQuantity \
+                       * physq(1.0, "s")
+            if not physFactor.dimensionless():
+                raise Invalid("The input quantity '%s' and the "\
+                              "display unit (velocity) '%s' * s"\
+                              " must have the same dimension" \
+                              % (convPQinpQuantity, convPUdisplUnitVelocity))
+
+    @invariant
+    def ensureC5(obj_snmp):
+        if obj_snmp.displUnitAcceleration:
+            convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+            convPUdisplUnitAcceleration = convertUnit(obj_snmp.displUnitAcceleration)
+            physFactor = convPUdisplUnitAcceleration \
+                       / convPQinpQuantity \
+                       * physq(1.0, "s2")
+            if not physFactor.dimensionless():
+                raise Invalid("The input quantity '%s' and the "\
+                              "display unit (acceleration) '%s' * s * s"\
+                              " must have the same dimension" \
+                              % (convPQinpQuantity, convPUdisplUnitAcceleration))
+
+    @invariant
+    def ensureC6(obj_snmp):
+        if obj_snmp.maxQuantityAbs:
+            convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+            convPQmaxQuantityAbs = convertQuantity(obj_snmp.maxQuantityAbs)
+            physFactor = convPQinpQuantity / convPQmaxQuantityAbs
+            if not physFactor.dimensionless():
+                raise Invalid("The input quantity '%s' and the "\
+                              "max unit '%s'"\
+                              " must have the same dimension" \
+                              % (convPQinpQuantity, convPQmaxQuantityAbs))
+
+    @invariant
+    def ensureC7(obj_snmp):
+        if obj_snmp.maxQuantityVelocity:
+            convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+            convPQmaxQuantityVelocity = convertQuantity(obj_snmp.maxQuantityVelocity)
+            physFactor = convPQmaxQuantityVelocity \
+                       / convPQinpQuantity \
+                       * physq(1.0, "s")
+            if not physFactor.dimensionless():
+                raise Invalid("The input quantity '%s' and the "\
+                              "max unit (velocity) '%s' * s"\
+                              " must have the same dimension" \
+                              % (convPQinpQuantity, convPQmaxQuantityVelocity))
+
+    @invariant
+    def ensureC8(obj_snmp):
+        if obj_snmp.maxQuantityAcceleration:
+            convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+            convPQmaxQuantityAcceleration = convertQuantity(obj_snmp.maxQuantityAcceleration)
+            physFactor = convPQmaxQuantityAcceleration \
+                       / convPQinpQuantity \
+                       * physq(1.0, "s2")
+            if not physFactor.dimensionless():
+                raise Invalid("The input quantity '%s' and the "\
+                              "max unit (acceleration) '%s' * s * s"\
+                              " must have the same dimension" \
+                              % (convPQinpQuantity, convPQmaxQuantityAcceleration))
 
     def getInputPhysical():
         """ return inpunt physical as PhysicalQuantity
