@@ -16,7 +16,7 @@ ndo-thread for ndo-agent for IKOMtrol
 __version__ = "$Id$"
 __versRevision = "$LastChangedRevision$"
 
-# phython imports
+# python imports
 import sys
 import time
 import re

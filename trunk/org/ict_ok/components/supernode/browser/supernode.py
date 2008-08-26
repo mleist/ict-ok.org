@@ -17,7 +17,7 @@ Superclass for node objects (containing objects)
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 

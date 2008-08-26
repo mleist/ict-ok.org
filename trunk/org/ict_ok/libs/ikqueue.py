@@ -9,7 +9,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 from collections import deque
 from time import time as _time
 from Queue import Empty, Full

@@ -14,7 +14,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 from pprint import pprint
 
 # zope imports

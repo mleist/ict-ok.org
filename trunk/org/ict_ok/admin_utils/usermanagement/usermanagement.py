@@ -14,7 +14,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import logging
 from persistent.dict import PersistentDict
 from zope.app.container.contained import Contained

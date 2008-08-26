@@ -16,7 +16,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import logging
 import threading
 import atexit

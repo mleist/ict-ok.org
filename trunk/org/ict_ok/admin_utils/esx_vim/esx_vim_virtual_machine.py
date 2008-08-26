@@ -16,7 +16,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 from datetime import datetime
 
 # zope imports

@@ -11,7 +11,7 @@ Helper-Classes for the agents of ict-ok.org
 __version__ = "$Id$"
 __versRevision = "$LastChangedRevision$"
 
-# phython imports
+# python imports
 import logging, logging.handlers
 
 class IkLogger:

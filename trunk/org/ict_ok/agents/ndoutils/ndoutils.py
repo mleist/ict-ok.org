@@ -16,7 +16,7 @@ ndo-agent for ict-ok.org
 __version__ = "$Id$"
 __versRevision = "$LastChangedRevision$"
 
-# phython imports
+# python imports
 import sys
 import os
 import time

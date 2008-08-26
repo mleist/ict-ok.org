@@ -14,7 +14,7 @@
 
 __version__ = "$Id: categories.py 148 2008-02-16 19:19:02Z markusleist $"
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.app import zapi

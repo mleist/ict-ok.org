@@ -18,7 +18,7 @@ will notice special events in an event-history
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.interface import implements

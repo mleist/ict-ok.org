@@ -14,7 +14,7 @@
 
 __version__ = "$Id: service.py_cog 192 2008-03-18 17:08:45Z markusleist $"
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.i18nmessageid import MessageFactory

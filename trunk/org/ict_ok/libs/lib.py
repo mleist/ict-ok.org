@@ -15,7 +15,7 @@ iklib contains some often used functions from/for System
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 from socket import gethostbyname, gethostname
 from time import time
 from random import random

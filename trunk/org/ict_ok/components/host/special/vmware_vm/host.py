@@ -16,7 +16,7 @@ host object represents a VMware Virtual Machine
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.app import zapi

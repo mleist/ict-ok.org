@@ -16,7 +16,7 @@ implementation of a "Object-Message-Queue-Utility"
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.interface import Interface

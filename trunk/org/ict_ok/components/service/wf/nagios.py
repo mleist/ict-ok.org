@@ -12,7 +12,7 @@
 
 #TODO Clean up
 
-# phython imports
+# python imports
 
 # zope imports
 import zope.event

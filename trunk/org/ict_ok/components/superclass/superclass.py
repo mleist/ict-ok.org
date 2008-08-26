@@ -19,7 +19,7 @@ Superclass for non containing objects
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 from logging import INFO, log, NOTSET
 
 # zope imports

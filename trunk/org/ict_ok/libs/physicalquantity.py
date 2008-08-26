@@ -15,7 +15,7 @@ see http://dirac.cnrs-orleans.fr/plone/software/scientificpython
 
 __version__ = "$Id: host.py 174 2008-03-05 17:51:14Z markusleist $"
 
-# phython imports
+# python imports
 from Scientific.Physics.PhysicalQuantities import \
      PhysicalUnit, \
      _addUnit, _addPrefixed, _prefixes

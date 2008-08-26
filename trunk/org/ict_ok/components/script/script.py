@@ -17,7 +17,7 @@ Script does ....
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.interface import implements

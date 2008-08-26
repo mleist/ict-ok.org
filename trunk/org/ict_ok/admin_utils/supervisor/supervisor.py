@@ -18,7 +18,7 @@ will notice special events in an event-history
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 from os import access, getloadavg, popen, uname, R_OK
 from datetime import datetime
 from pytz import timezone

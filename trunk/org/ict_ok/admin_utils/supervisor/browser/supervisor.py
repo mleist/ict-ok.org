@@ -14,7 +14,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 from pytz import timezone
 from datetime import timedelta
 

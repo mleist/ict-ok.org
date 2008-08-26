@@ -14,7 +14,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 from pickle import dumps
 
 # zope imports

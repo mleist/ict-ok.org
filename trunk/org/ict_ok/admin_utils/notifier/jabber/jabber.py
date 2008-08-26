@@ -14,7 +14,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import xmlrpclib
 import logging
 from datetime import datetime

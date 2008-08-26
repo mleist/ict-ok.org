@@ -28,7 +28,7 @@ the test util should demonstrate the use of cog
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import logging
 
 # zope imports

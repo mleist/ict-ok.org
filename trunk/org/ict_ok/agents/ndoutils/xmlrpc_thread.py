@@ -16,7 +16,7 @@ xmlrpc-thread for ndo-agent for IKOMtrol
 __version__ = "$Id$"
 __versRevision = "$LastChangedRevision$"
 
-# phython imports
+# python imports
 import time
 import threading
 import socket

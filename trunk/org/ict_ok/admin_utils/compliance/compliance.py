@@ -16,7 +16,7 @@ for the host- or service-instances
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import logging
 
 # zope imports

@@ -14,7 +14,7 @@
 __version__ = "$Id$"
 
 
-# phython imports
+# python imports
 import logging
 import transaction
 from datetime import datetime

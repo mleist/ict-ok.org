@@ -15,7 +15,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import logging
 from datetime import datetime
 from pytz import timezone

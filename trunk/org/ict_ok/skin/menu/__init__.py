@@ -14,7 +14,7 @@ python package
 """
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 from org.ict_ok.skin.interfaces import IMasterMenu

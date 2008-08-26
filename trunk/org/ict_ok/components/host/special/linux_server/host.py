@@ -16,7 +16,7 @@ host object represents a Linux Server
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 

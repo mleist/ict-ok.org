@@ -14,7 +14,7 @@ python package
 """
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import sys
 import traceback
 

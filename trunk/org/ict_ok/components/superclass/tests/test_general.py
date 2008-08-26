@@ -12,7 +12,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import unittest
 from logging import NOTSET
 

@@ -14,7 +14,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import logging
 from re import  match
 from base64 import encodestring

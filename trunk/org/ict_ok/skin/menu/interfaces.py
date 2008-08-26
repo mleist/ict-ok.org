@@ -14,7 +14,7 @@ skin menu interfaces
 """
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.viewlet.interfaces import IViewletManager

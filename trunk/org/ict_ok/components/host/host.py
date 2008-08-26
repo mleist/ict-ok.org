@@ -17,7 +17,7 @@ this might be: server, switch, router, workstation, notebook etc
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.app import zapi

@@ -14,7 +14,7 @@ skin classes
 """
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 

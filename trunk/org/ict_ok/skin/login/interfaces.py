@@ -14,7 +14,7 @@ skin error interfaces
 """
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 

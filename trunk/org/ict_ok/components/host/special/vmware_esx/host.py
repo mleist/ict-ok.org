@@ -16,7 +16,7 @@ host object represents a VMware ESX Server
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import time
 
 # zope imports

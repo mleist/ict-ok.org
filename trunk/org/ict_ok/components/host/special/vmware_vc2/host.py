@@ -16,7 +16,7 @@ host object represents a VMware VirtualCenter 2
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 
 # zope imports
 

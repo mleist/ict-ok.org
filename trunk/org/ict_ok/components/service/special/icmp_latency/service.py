@@ -17,7 +17,7 @@ Service does ....
 
 __version__ = "$Id: service.py 73 2007-10-02 09:37:48Z markusleist $"
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.interface import implements

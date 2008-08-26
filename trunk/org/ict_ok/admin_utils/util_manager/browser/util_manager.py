@@ -16,7 +16,7 @@ __version__ = "$Id$"
 
 # TODO: clean up
 
-# phython imports
+# python imports
 
 # zope imports
 from zope.app import zapi

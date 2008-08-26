@@ -14,7 +14,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 from pysnmp.entity.rfc3413.oneliner import cmdgen
 from datetime import datetime
 
