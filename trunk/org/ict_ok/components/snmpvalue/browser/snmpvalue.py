@@ -14,7 +14,7 @@
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
 import time
 import rrdtool
 import copy
@@ -197,7 +197,7 @@ class SnmpValueDetails(ComponentDetails):
                 #cmdgen.UdpTransportTarget(('localhost', 161)),
                 #tuple(oidIntList)
             #)
-            print "zuzu: ", hostSnmpVers
+            #print "zuzu: ", hostSnmpVers
             errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
                 cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, 0),
                 cmdgen.UdpTransportTarget((interfaceIp, hostSnmpPort)),
@@ -208,6 +208,21 @@ class SnmpValueDetails(ComponentDetails):
             print "3", varBinds
             #import pdb
             #pdb.set_trace()
+            #aaa1 = self.context.convertQuantity(self.context.inpQuantity)
+            #aaa2 = self.context.convertUnit(self.context.displUnitAbs)
+            #aaa3 = self.context.convertUnit(self.context.displUnitVelocity)
+            #aaa4 = self.context.convertUnit(self.context.displUnitAcceleration)
+            #aaa5 = self.context.convertQuantity(self.context.maxQuantityAbs)
+            #aaa6 = self.context.convertQuantity(self.context.maxQuantityVelocity)
+            #aaa7 = self.context.convertQuantity(self.context.maxQuantityAcceleration)
+            print "1111: ", self.context.getPQinpQuantity()
+            print "1112: ", self.context.getPUdisplUnitAbs()
+            print "1113: ", self.context.getPUdisplUnitVelocity()
+            print "1114: ", self.context.getPUdisplUnitAcceleration()
+            print "1115: ", self.context.getPQmaxQuantityAbs()
+            print "1116: ", self.context.getPQmaxQuantityVelocity()
+            print "1117: ", self.context.getPQmaxQuantityAcceleration()
+
             print "--" * 30
             print "getInputPhysical: ", self.context.getInputPhysical()
             print "--" * 30
@@ -224,10 +239,14 @@ class SnmpValueDetails(ComponentDetails):
             print "--" * 30
             print varBinds[0]
             try:
-                return self.context.inpMultiplier * \
-                       self.context.getMyFactor() * \
-                       self.context.getDisplayPhysical() * \
-                       float(varBinds[0][1])
+                realValue = self.context.getPQinpQuantity() * \
+                          float(varBinds[0][1])
+                realValue.ounit(self.context.displUnitAbs)
+                return realValue
+                #return self.context.inpMultiplier * \
+                       #self.context.getMyFactor() * \
+                       #self.context.getDisplayPhysical() * \
+                       #float(varBinds[0][1])
             except Exception, errText:
                 return errText
         except ValueError:
@@ -255,7 +274,7 @@ class SnmpValueTrend(SnmpValueDetails):
     pass
 
 class SnmpValueTestData(SnmpValueDetails):
-    def getTestData(self):
+    def getTestData2(self):
         return """&title=+,{font-size: 15px}&
 &x_axis_steps=1&
 &y_ticks=5,10,5&
@@ -265,7 +284,7 @@ class SnmpValueTestData(SnmpValueDetails):
 &y_min=0&
 &y_max=20&
 """
-    def getTestData3(self):
+    def getTestData(self):
         print "getTestData()"
         return """&title=Pie+Chart,{font-size:18px; color: #d01f3c}&
 &x_axis_steps=1&

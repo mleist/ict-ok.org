@@ -17,7 +17,8 @@ SnmpValue does ....
 
 __version__ = "$Id$"
 
-# phython imports
+# python imports
+from magnitude import mg, MagnitudeError
 
 # zope imports
 from zope.interface import implements
@@ -141,14 +142,21 @@ class SnmpValue(Component):
     oid2 = FieldProperty(ISnmpValue['oid2'])
     cmd = FieldProperty(ISnmpValue['cmd'])
     inptype = FieldProperty(ISnmpValue['inptype'])
-    inpUnit = FieldProperty(ISnmpValue['inpUnit'])
-    inpMultiplier = FieldProperty(ISnmpValue['inpMultiplier'])
+    #inpUnit = FieldProperty(ISnmpValue['inpUnit'])
+    #inpMultiplier = FieldProperty(ISnmpValue['inpMultiplier'])
     #displayUnitNumerator = FieldProperty(ISnmpValue['displayUnitNumerator'])
     #displayUnitDenominator = FieldProperty(ISnmpValue['displayUnitDenominator'])
     #checkMax = FieldProperty(ISnmpValue['checkMax'])
     #checkMaxLevel = FieldProperty(ISnmpValue['checkMaxLevel'])
     #checkMaxLevelUnitNumerator = FieldProperty(ISnmpValue['checkMaxLevelUnitNumerator'])
     #checkMaxLevelUnitDenominator = FieldProperty(ISnmpValue['checkMaxLevelUnitDenominator'])
+    inpQuantity = FieldProperty(ISnmpValue['inpQuantity'])
+    displUnitAbs = FieldProperty(ISnmpValue['displUnitAbs'])
+    displUnitVelocity = FieldProperty(ISnmpValue['displUnitVelocity'])
+    displUnitAcceleration = FieldProperty(ISnmpValue['displUnitAcceleration'])
+    maxQuantityAbs = FieldProperty(ISnmpValue['maxQuantityAbs'])
+    maxQuantityVelocity = FieldProperty(ISnmpValue['maxQuantityVelocity'])
+    maxQuantityAcceleration = FieldProperty(ISnmpValue['maxQuantityAcceleration'])
 
     def __init__(self, **data):
         """
@@ -234,3 +242,49 @@ class SnmpValue(Component):
     def tickerEvent(self):
         pass
         #print "iiiiiiiiiiiiiiiiiiiiiiiii: ", self.getSnmpValue()
+
+    def convertQuantity(self, inpString):
+        """converts an input string to the physical quantity
+        """
+        try:
+            valList = inpString.split(' ', 1)
+            numerical_value = float(valList[0])
+            physical_quantity = mg(numerical_value, valList[1])
+        except ValueError:
+            return mg(-1.0)
+        except MagnitudeError:
+            return mg(-1.0)
+        return physical_quantity
+
+    def convertUnit(self, inpString):
+        """converts an input string to the physical unit of
+        the quantity 1.0
+        """
+        try:
+            physical_quantity = mg(1.0, inpString)
+        except ValueError:
+            return mg(-1.0)
+        except MagnitudeError:
+            return mg(-1.0)
+        return physical_quantity
+    
+    def getPQinpQuantity(self):
+        return self.convertQuantity(self.inpQuantity)
+
+    def getPUdisplUnitAbs(self):
+        return self.convertUnit(self.displUnitAbs)
+
+    def getPUdisplUnitVelocity(self):
+        return self.convertUnit(self.displUnitVelocity)
+
+    def getPUdisplUnitAcceleration(self):
+        return self.convertUnit(self.displUnitAcceleration)
+
+    def getPQmaxQuantityAbs(self):
+        return self.convertQuantity(self.maxQuantityAbs)
+
+    def getPQmaxQuantityVelocity(self):
+        return self.convertQuantity(self.maxQuantityVelocity)
+
+    def getPQmaxQuantityAcceleration(self):
+        return self.convertQuantity(self.maxQuantityAcceleration)

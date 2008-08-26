@@ -57,12 +57,27 @@ class ObjectIdValidError(ValidationError):
     """Error notification for non valid Universe ID"""
     __doc__ = _("""Universe ID not ok""")
 
+class PhysicalQuantityValidError(ValidationError):
+    """Error notification for non valid physical value"""
+    __doc__ = _("""Physical quantity not ok""")
+class PhysicalUnitValidError(ValidationError):
+    """Error notification for non valid physical value"""
+    __doc__ = _("""Physical unit not ok""")
+
 class IIpV4Valid(ITextLine):
     """A field containing an IPv4-Address
     """
 
 class IMacValid(ITextLine):
     """A field containing an IPv4-Address
+    """
+
+class IPhysicalQuantityValid(ITextLine):
+    """A field containing a physical quantity
+    """
+
+class IPhysicalUnitValid(ITextLine):
+    """A field containing a physical unit
     """
 
 class IV4NetsValid(IText):
