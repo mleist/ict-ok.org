@@ -8,168 +8,25 @@
                 Markus Leist <leist@ikom-online.de> -->
                                 
     <!--all meta definitions-->
-    <include package="zope.app.apidoc"
-             file="meta.zcml" />
-    <include package="zope.app.onlinehelp"
-             file="meta.zcml"/>
-    <include package="zope.app.preference"
-             file="meta.zcml" />
-    <include package="zope.app.renderer"
-             file="meta.zcml"/>
-    <include package="zope.app.securitypolicy"
-             file="meta.zcml" />
-    <include package="zope.sendmail"
-             file="meta.zcml"/>
-    <include package="zope.viewlet"
-             file="meta.zcml" />
-    <include package="zope.app.zcmlfiles" />
-    <include package="zc.resourcelibrary"
-             file="meta.zcml"/>
-    <include package="z3c.form"
-             file="meta.zcml" />
-    <include package="z3c.macro"
-             file="meta.zcml" />
-    <include package="z3c.pagelet"
-             file="meta.zcml" />
-    <include package="z3c.template"
-             file="meta.zcml" />
-
-    <include package="soap"
-             file="meta.zcml" />
-
-    <include package="org.ict_ok.admin_utils.objmq"
-             file="meta.zcml"/>
-    <include package="org.ict_ok.admin_utils.snmpd"
-             file="meta.zcml"/>
-    <!--<include package="org.ict_ok.admin_utils.ticker"-->
-             <!--file="meta.zcml"/>-->
+    <include package="org.ict_ok.etc"
+             file="metas.zcml" />
 
     <!--security settings of ict-ok-->
     <include package="org.ict_ok.etc"
              file="permissions.zcml" />
 
     <!--registration of core components-->
-    <include package="zope.sendmail"/>
-    <include package="zope.contentprovider" />
-    <include package="zope.viewlet" />
-    <include package="zope.app.apidoc"/>
-    <include package="zope.app.onlinehelp"/>
-    <include package="zope.app.preference" />
-    <include package="zope.app.pythonpage"/>
-    <include package="zope.app.renderer"/>
-    <include package="zope.app.workflow"/>
-    <include package="zope.app.authentication" />
-    <include package="zope.app.boston" />
-    <include package="zope.app.catalog"/>
-    <include package="zope.app.intid" />
-    <include package="zope.app.keyreference" />
-    <include package="zope.app.pluggableauth" />
-    <include package="zope.app.schema" />
-    <include package="zope.app.server" />
-    <include package="zope.app.session" />
-    <include package="zope.app.twisted" />
-    <include package="zope.app.wfmc" />
-    <include package="zope.app.securitypolicy" />
+    <include package="org.ict_ok.etc"
+             file="zope_core.zcml" />
 
-    <include package="soap" />
-
-    <include package="zc.resourcelibrary"/>
-    <include package="zc.table"/>
-    <include package="zc.i18n" />
-
-    <include package="z3c.form" />
-    <!-- include package="z3checkins" /-->
-    <include package="z3c.layer.pagelet" />
-    <include package="z3c.macro" />
-    <include package="z3c.pagelet" />
-
-    <include package="org.ict_ok.libs.history.generations" />
-
-    <!--registration of supervisor must be first-->
-    <include package="org.ict_ok.admin_utils.supervisor" />
-
-    <!--registration of utilities (alphabetical)-->
-    <include package="org.ict_ok.admin_utils.categories" />
-    <include package="org.ict_ok.admin_utils.compliance" />
-    <include package="org.ict_ok.admin_utils.cron" />
-    <!-- <include package="org.ict_ok.admin_utils.esx_vim" /> -->
-    <include package="org.ict_ok.admin_utils.eventcrossbar" />
-    <!--<include package="org.ict_ok.admin_utils.generators/honeyd" />-->
-    <include package="org.ict_ok.admin_utils.generators.nagios" />
-    <include package="org.ict_ok.admin_utils.graphviz" />
-    <include package="org.ict_ok.admin_utils.netscan" />
-    <include package="org.ict_ok.admin_utils.netscan.nmap" />
-    <include package="org.ict_ok.admin_utils.netscan.simple1" />
-    <include package="org.ict_ok.admin_utils.netscan.demo1" />
-    <!--<include package="org.ict_ok.admin_utils.notifier.jabber" />-->
-    <!--<include package="org.ict_ok.admin_utils.notifier.email" />-->
-    <include package="org.ict_ok.admin_utils.objmq" />
-    <include package="org.ict_ok.admin_utils.public_viewing" />
-    <include package="org.ict_ok.admin_utils.snmpd" />
-    <!--<include package="org.ict_ok.admin_utils.ticker" />-->
-    <include package="org.ict_ok.admin_utils.usermanagement" />
-    <include package="org.ict_ok.admin_utils.util_manager" />
-    <include package="org.ict_ok.admin_utils.wfmc" />
-
-    <!--registration of components (hierarchical)-->
-    <include package="org.ict_ok.components.browser" />
-    <include package="org.ict_ok.components.superclass" />
-    <include package="org.ict_ok.components.supernode" />
-    <include package="org.ict_ok.components.site" />
-    <!--<include package="org.ict_ok.components.slave" />-->
-    <include package="org.ict_ok.components.net" />
-    <include package="org.ict_ok.components.host" />
-    <include package="org.ict_ok.components.host.special" />
-    <include package="org.ict_ok.components.interface" />
-    <include package="org.ict_ok.components.script" />
-    <include package="org.ict_ok.components.service" />
-    <include package="org.ict_ok.components.service.special" />
-    <include package="org.ict_ok.components.snmpvalue" />
-    <include package="org.ict_ok.components.location" />
-    <include package="org.ict_ok.components.building" />
-    <include package="org.ict_ok.components.room" />
+    <!--registration of ict-ok.org core components-->
+    <include package="org.ict_ok.etc"
+             file="ict_ok_core.zcml" />
 
     
-    <!--registration of browser views-->
-    <include package="org.ict_ok.admin_utils.supervisor.browser" />
-    <include package="org.ict_ok.admin_utils.categories.browser" />
-    <include package="org.ict_ok.admin_utils.compliance.browser" />
-    <include package="org.ict_ok.admin_utils.cron.browser" />
-    <!-- <include package="org.ict_ok.admin_utils.esx_vim.browser" /> -->
-    <include package="org.ict_ok.admin_utils.eventcrossbar.browser" />
-    <!--<include package="org.ict_ok.admin_utils.generators/honeyd.browser" />-->
-    <include package="org.ict_ok.admin_utils.generators.nagios.browser" />
-    <include package="org.ict_ok.admin_utils.graphviz.browser" />
-    <include package="org.ict_ok.admin_utils.netscan.browser" />
-    <include package="org.ict_ok.admin_utils.netscan.nmap.browser" />
-    <include package="org.ict_ok.admin_utils.netscan.simple1.browser" />
-    <include package="org.ict_ok.admin_utils.netscan.demo1.browser" />
-    <!--<include package="org.ict_ok.admin_utils.notifier.jabber.browser" />-->
-    <!--<include package="org.ict_ok.admin_utils.notifier.email.browser" />-->
-    <include package="org.ict_ok.admin_utils.objmq.browser" />
-    <include package="org.ict_ok.admin_utils.public_viewing.browser" />
-    <include package="org.ict_ok.admin_utils.snmpd.browser" />
-    <!--<include package="org.ict_ok.admin_utils.ticker.browser" />-->
-    <include package="org.ict_ok.admin_utils.usermanagement.browser" />
-    <include package="org.ict_ok.admin_utils.util_manager.browser" />
-    <include package="org.ict_ok.admin_utils.wfmc.browser" />
-    <include package="org.ict_ok.components.browser" />
-    <include package="org.ict_ok.components.superclass.browser" />
-    <include package="org.ict_ok.components.site.browser" />
-    <!--<include package="org.ict_ok.components.slave.browser" />-->
-    <include package="org.ict_ok.components.net.browser" />
-    <include package="org.ict_ok.components.host.browser" />
-    <include package="org.ict_ok.components.host.special"
-             file="configure_brws.zcml" />
-    <include package="org.ict_ok.components.interface.browser" />
-    <include package="org.ict_ok.components.script.browser" />
-    <include package="org.ict_ok.components.service.browser" />
-    <include package="org.ict_ok.components.service.special"
-             file="configure_brws.zcml" />
-    <include package="org.ict_ok.components.snmpvalue.browser" />
-    <include package="org.ict_ok.components.location.browser" />
-    <include package="org.ict_ok.components.building.browser" />
-    <include package="org.ict_ok.components.room.browser" />
+    <!--registration of ict-ok.org browser views-->
+    <include package="org.ict_ok.etc"
+             file="ict_ok_browser.zcml" />
 
     <!--registration of ict-ok.org skin-->
     <include package="org.ict_ok.skin" />
@@ -185,60 +42,8 @@
 
     <adapter factory="zope.app.security.LogoutSupported" />
 
-    <role id="zope.Anonymous" title="Everybody"
-        description="All users have this role implicitly" />
-    <role id="zope.Manager" title="Site Manager" />
-    <role id="zope.Member" title="Site Member" />
-
-    <grantAll role="zope.Manager" />
-    <grantAll role="org.ict_ok.dvl" />
-    <grant permission="org.ict_ok.public.View"
-                    role="zope.Anonymous" />
-
-    <unauthenticatedPrincipal
-        id="zope.anybody"
-        title="Unauthenticated User" />
-
-    <unauthenticatedGroup
-        id="zope.Anybody"
-        title="Unauthenticated Users" 
-        />
-
-    <authenticatedGroup
-        id="zope.Authenticated"
-        title="Authenticated Users" 
-        />
-
-    <everybodyGroup
-        id="zope.Everybody"
-        title="All Users" 
-        />
-
-    <!--some Users are defined in org.ict_ok.admin_utils.usermanagement.bootstrap-->
-    <principal
-        id="zope.manager"
-        title="Manager"
-        login="admin"
-        password="admin"
-        />
-
-    <principal
-      id="ict.cron"
-      title="Cron User"
-      login="cron"
-      password="ab16178ffe2d489acc434722cf4caeaa9552e270"
-      password_manager="MD5"
-      />
-
-    <!--TODO create an own cron role-->
-    <grant
-        role="zope.Manager"
-        principal="ict.cron"
-        />
-
-    <grant
-        role="zope.Manager"
-        principal="zope.manager"
-        />
+    <!--registration of ict-ok.org principals-->
+    <include package="org.ict_ok.etc"
+             file="ict_ok_principals.zcml" />
 
 </configure>
