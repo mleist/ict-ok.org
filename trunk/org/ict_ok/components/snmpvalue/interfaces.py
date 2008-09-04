@@ -16,7 +16,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 from zope.interface import Invalid, invariant
-from zope.schema import Bool, Choice, Int, TextLine, Float
+from zope.schema import Bool, Choice
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
@@ -59,38 +59,12 @@ class ISnmpValue(IComponent):
         required = True,
         vocabulary = "SnmpCheckCmds")
 
-    #inpMultiplier = Float(
-        #title=_(u"input multiplier"),
-        #default=1.0,
-        #required = True)
-
     inptype = Choice(
         title=_(u"Input Type"),
         description=_(u"Input Type"),
         default=u"cnt",
         required = True,
         vocabulary = "SnmpInpTypes")
-
-    #inpUnit = Choice(
-        #title=_(u"input dimension"),
-        #description=_(u"input dimension"),
-        #default=u"Mbit",
-        #required = True,
-        #vocabulary = "SnmpDimensionUnits")
-
-    #displayUnitNumerator = Choice(
-        #title=_(u"display dimension numerator"),
-        #description=_(u"input dimension numerator"),
-        #default=u"Mbit",
-        #required = True,
-        #vocabulary = "SnmpDimensionUnits")
-    
-    #displayUnitDenominator = Choice(
-        #title=_(u"display dimension denominator"),
-        #description=_(u"display dimension denominator"),
-        #default=u"1",
-        #required = True,
-        #vocabulary = "SnmpTimeDimensionUnits")
 
     displayMinMax = Bool(
         title=_("diplay min/max"),
@@ -104,51 +78,11 @@ class ISnmpValue(IComponent):
         default=False,
         required=True)
 
-    #checkMaxLevel = Int(
-        #min=0,
-        #max=100000000,
-        #title=_("max level"),
-        #description=_("'max'-level for this entry (bit/s)"),
-        #default=100000,
-        #required=False)
-
-    #checkMaxLevelUnitNumerator = Choice(
-        #title=_(u"max level dimension numerator"),
-        #description=_(u"max level dimension numerator"),
-        #default=u"bit",
-        #required = False,
-        #vocabulary = "SnmpDimensionUnits")
-
-    #checkMaxLevelUnitDenominator = Choice(
-        #title=_(u"max level dimension denominator"),
-        #description=_(u"max level dimension denominator"),
-        #default=u"1",
-        #required = False,
-        #vocabulary = "SnmpTimeDimensionUnits")
-
     snmpIndexType = Choice(
         title = _("SNMP index type"),
         vocabulary="SnmpIndexTypes",
         default = u"mac",
         required = True)
-
-    #pq = PhysicalQuantity(
-        #max_length=400,
-        #title=_("Physical quantity"),
-        #default=u"1.0 m/s",
-        #required=False)
-
-    #pu = PhysicalUnit(
-        #max_length=400,
-        #title=_("Physical unit"),
-        #default=u"m/s",
-        #required=False)
-
-    #pu = PhysicalUnit(
-        #max_length=400,
-        #title=_("Physical unit"),
-        #default=u"m/s",
-        #required=False)
 
     inpQuantity = PhysicalQuantity(
         max_length=400,
@@ -189,6 +123,8 @@ class ISnmpValue(IComponent):
     
     @invariant
     def ensureC1(obj_snmp):
+        """The input quantity must have a dimension
+        """
         convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
         if convPQinpQuantity.dimensionless():
             raise Invalid("The input quantity '%s' must have a dimension" \
@@ -196,6 +132,9 @@ class ISnmpValue(IComponent):
 
     @invariant
     def ensureC3(obj_snmp):
+        """The input quantity and the display unit must
+        have the same dimension
+        """
         convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
         convPUdisplUnitAbs = convertUnit(obj_snmp.displUnitAbs)
         physFactor = convPUdisplUnitAbs / convPQinpQuantity
@@ -207,6 +146,9 @@ class ISnmpValue(IComponent):
 
     @invariant
     def ensureC4(obj_snmp):
+        """The input quantity and the display unit (velocity) * s
+        must have the same dimension
+        """
         if obj_snmp.displUnitVelocity:
             convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
             convPUdisplUnitVelocity = convertUnit(obj_snmp.displUnitVelocity)
@@ -221,9 +163,13 @@ class ISnmpValue(IComponent):
 
     @invariant
     def ensureC5(obj_snmp):
+        """The input quantity and the display unit (acceleration) * s * s
+        must have the same dimension
+        """
         if obj_snmp.displUnitAcceleration:
             convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
-            convPUdisplUnitAcceleration = convertUnit(obj_snmp.displUnitAcceleration)
+            convPUdisplUnitAcceleration = convertUnit(\
+                obj_snmp.displUnitAcceleration)
             physFactor = convPUdisplUnitAcceleration \
                        / convPQinpQuantity \
                        * physq(1.0, "s2")
@@ -231,10 +177,13 @@ class ISnmpValue(IComponent):
                 raise Invalid("The input quantity '%s' and the "\
                               "display unit (acceleration) '%s' * s * s"\
                               " must have the same dimension" \
-                              % (convPQinpQuantity, convPUdisplUnitAcceleration))
+                              % (convPQinpQuantity,
+                                 convPUdisplUnitAcceleration))
 
     @invariant
     def ensureC6(obj_snmp):
+        """The input quantity and the max unit must have the same dimension
+        """
         if obj_snmp.maxQuantityAbs:
             convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
             convPQmaxQuantityAbs = convertQuantity(obj_snmp.maxQuantityAbs)
@@ -247,9 +196,13 @@ class ISnmpValue(IComponent):
 
     @invariant
     def ensureC7(obj_snmp):
+        """The input quantity and the max unit (velocity) '%s' * s
+        must have the same dimension
+        """
         if obj_snmp.maxQuantityVelocity:
             convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
-            convPQmaxQuantityVelocity = convertQuantity(obj_snmp.maxQuantityVelocity)
+            convPQmaxQuantityVelocity = convertQuantity(\
+                obj_snmp.maxQuantityVelocity)
             physFactor = convPQmaxQuantityVelocity \
                        / convPQinpQuantity \
                        * physq(1.0, "s")
@@ -257,13 +210,18 @@ class ISnmpValue(IComponent):
                 raise Invalid("The input quantity '%s' and the "\
                               "max unit (velocity) '%s' * s"\
                               " must have the same dimension" \
-                              % (convPQinpQuantity, convPQmaxQuantityVelocity))
+                              % (convPQinpQuantity,
+                                 convPQmaxQuantityVelocity))
 
     @invariant
     def ensureC8(obj_snmp):
+        """The input quantity and the max unit (acceleration) * s * s
+        must have the same dimension
+        """
         if obj_snmp.maxQuantityAcceleration:
             convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
-            convPQmaxQuantityAcceleration = convertQuantity(obj_snmp.maxQuantityAcceleration)
+            convPQmaxQuantityAcceleration = convertQuantity(\
+                obj_snmp.maxQuantityAcceleration)
             physFactor = convPQmaxQuantityAcceleration \
                        / convPQinpQuantity \
                        * physq(1.0, "s2")
@@ -271,7 +229,8 @@ class ISnmpValue(IComponent):
                 raise Invalid("The input quantity '%s' and the "\
                               "max unit (acceleration) '%s' * s * s"\
                               " must have the same dimension" \
-                              % (convPQinpQuantity, convPQmaxQuantityAcceleration))
+                              % (convPQinpQuantity,
+                                 convPQmaxQuantityAcceleration))
 
     def getInputPhysical():
         """ return inpunt physical as PhysicalQuantity
