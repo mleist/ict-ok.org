@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: categories.py 148 2008-02-16 19:19:02Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E1101,E0611,W0702,W0221
 #
 """implementation of a "Object-Message-Queue-Utility" 
 """
 
-__version__ = "$Id: categories.py 148 2008-02-16 19:19:02Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 

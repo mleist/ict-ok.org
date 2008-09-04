@@ -6,14 +6,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 73 2007-10-02 09:37:48Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E0213,W0232
 #
 """Interface of Service Dns"""
 
 
-__version__ = "$Id: interfaces.py 73 2007-10-02 09:37:48Z markusleist $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory

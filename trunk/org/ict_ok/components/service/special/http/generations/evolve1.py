@@ -6,11 +6,11 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: evolve1.py_cog 192 2008-03-18 17:08:45Z markusleist $
+# $Id$
 #
 """upgrade to initial version 1 of Service Http"""
 
-__version__ = "$Id: evolve1.py_cog 192 2008-03-18 17:08:45Z markusleist $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.app.zopeappgenerations import getRootFolder

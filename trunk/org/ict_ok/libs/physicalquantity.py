@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 145 2008-02-15 20:41:04Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=W0232
 #
@@ -13,7 +13,7 @@
 see http://juanreyero.com/magnitude/index.html
 """
 
-__version__ = "$Id: host.py 174 2008-03-05 17:51:14Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 from magnitude import Magnitude, MagnitudeError

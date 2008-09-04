@@ -6,13 +6,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: service.py 73 2007-10-02 09:37:48Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E1101,W0142
 #
 """implementation of Service Dns"""
 
-__version__ = "$Id: service.py 73 2007-10-02 09:37:48Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 

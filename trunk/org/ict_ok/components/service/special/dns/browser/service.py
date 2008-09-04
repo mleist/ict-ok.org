@@ -6,13 +6,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: service.py_cog 192 2008-03-18 17:08:45Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=W0232,W0142
 #
 """implementation of browser class of Dns Service"""
 
-__version__ = "$Id: service.py_cog 192 2008-03-18 17:08:45Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 
