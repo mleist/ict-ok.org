@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 145 2008-02-15 20:41:04Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=W0621,W0212
 #
 """Cron runner based on gocept.runner
 """
 
-__version__ = "$Id: host.py 174 2008-03-05 17:51:14Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 import time
@@ -90,9 +90,9 @@ def getTimeChangeSignals():
             signal_year)
 
 
-@gocept.runner.appmain(ticks=2.0, principal='zope.mgr')
+@gocept.runner.appmain(ticks=1.0, principal='zope.mgr')
 def runner():
-    """ this function will run every 2 seconds
+    """ this function will run every second
     """
     # import in this context
     from zope.app.intid.interfaces import IIntIds

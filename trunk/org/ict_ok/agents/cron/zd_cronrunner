@@ -13,9 +13,17 @@
 """Startscript for cron runner
 """
 
+#
+# TODO: abs. path are evil hack - have to use buildout
+#
+
 __version__ = "$Id$"
 
-from org.ict_ok.agents.cron.runner import runner
+import sys
+import zdaemon.zdctl
 
 if __name__ == '__main__':
-    runner(appname=None, configfile='./zope.conf')
+    zdaemon.zdctl.main([
+        '-C', '/home/markus/Projekte/ict_ok.org/inst/lib/python/org/ict_ok/agents/cron/zdaemon.conf',
+        ]+sys.argv[1:]
+        )
