@@ -43,5 +43,7 @@
     <img tal:attributes="src python: '%s/@@getPNG?hours=744' % (view.getValuePngHref())" />
     <h3>365d</h3>
     <img tal:attributes="src python: '%s/@@getPNG?hours=8760' % (view.getValuePngHref())" />
+    <h3>10y</h3>
+    <img tal:attributes="src python: '%s/@@getPNG?hours=87600' % (view.getValuePngHref())" />
     <!--http://172./getPNG?hours=24-->
 </i18n:block>

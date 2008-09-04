@@ -72,7 +72,6 @@
         for=".interfaces.ISite"
     />
 
-    <include package=".browser" />
     <include package=".generations" />
 
 </configure>

@@ -46,7 +46,6 @@
         methods="objmq_subscribe"
         class=".xmlrpc.RpcMethods" />
 
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>

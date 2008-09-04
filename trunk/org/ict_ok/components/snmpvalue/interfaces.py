@@ -92,6 +92,12 @@ class ISnmpValue(IComponent):
         #required = True,
         #vocabulary = "SnmpTimeDimensionUnits")
 
+    displayMinMax = Bool(
+        title=_("diplay min/max"),
+        description=_("enable the display of min and max values"),
+        default=False,
+        required=True)
+    
     checkMax = Bool(
         title=_("max-checks"),
         description=_("enable check 'max' for this entry"),
@@ -159,31 +165,26 @@ class ISnmpValue(IComponent):
     displUnitVelocity = PhysicalUnit(
         max_length=400,
         title=_("Display unit (velocity)"),
-        default=u"b/s",
         required=False)
 
     displUnitAcceleration = PhysicalUnit(
         max_length=400,
         title=_("Display unit (acceleration)"),
-        default=u"b/s2",
         required=False)
 
     maxQuantityAbs = PhysicalQuantity(
         max_length=400,
         title=_("Max. quantity"),
-        default=u"1.0 b",
         required=False)
 
     maxQuantityVelocity = PhysicalQuantity(
         max_length=400,
         title=_("Max. quantity (velocity)"),
-        default=u"1.0 b/s",
         required=False)
 
     maxQuantityAcceleration = PhysicalQuantity(
         max_length=400,
         title=_("Max. quantity (acceleration)"),
-        default=u"1.0 b/s2",
         required=False)
     
     @invariant
@@ -287,4 +288,34 @@ class ISnmpValue(IComponent):
     def convertUnit(inpString):
         """converts an input string to the physical unit of
         the quantity 1.0
+        """
+    def getPQinpQuantity(self):
+        """convertQuantity(self.inpQuantity)
+        """
+    def getPUdisplUnitAbs(self):
+        """convertUnit(self.displUnitAbs)
+        """
+    def getPUdisplUnitVelocity(self):
+        """convertUnit(self.displUnitVelocity)
+        """
+    def getPUdisplUnitAcceleration(self):
+        """convertUnit(self.displUnitAcceleration)
+        """
+    def getPQmaxQuantityAbs(self):
+        """convertQuantity(self.maxQuantityAbs)
+        """
+    def getPQmaxQuantityVelocity(self):
+        """convertQuantity(self.maxQuantityVelocity)
+        """
+    def getPQmaxQuantityAcceleration(self):
+        """convertQuantity(self.maxQuantityAcceleration)
+        """
+    def getRrdFilename(self):
+        """ rrd filename incl. path
+        """
+    def getRawSnmpValue(self):
+        """ get raw snmp-Value without multiplier
+        """
+    def getSnmpValue(self):
+        """ get SnmpValue as physical value
         """

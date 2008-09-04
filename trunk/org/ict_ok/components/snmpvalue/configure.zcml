@@ -92,7 +92,10 @@
         factory="org.ict_ok.components.snmpvalue.adapter.ipickle.Pickle"
     />
 
-    <include package=".browser" />
+    <adapter
+        factory=".adapter.ticker.Ticker"
+    />
+
     <include package=".generations" />
 
 </configure>

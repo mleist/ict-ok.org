@@ -40,7 +40,6 @@
         provides=".interfaces.IAdmUtilUserProperties"
         />
 
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>

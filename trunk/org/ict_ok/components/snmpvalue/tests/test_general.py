@@ -17,39 +17,40 @@ import unittest
 
 # zope imports
 from zope.app.testing.placelesssetup import PlacelessSetup
+from zope.schema import vocabulary
 
 # ict_ok.org imports
-from org.ict_ok.components.host.host import Host
+from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
+from org.ict_ok.components.snmpvalue.tests import setUpSnmpCheckTypes
 
-
-class HostGeneralTestCase(PlacelessSetup, unittest.TestCase):
+class GeneralTestCase(PlacelessSetup, unittest.TestCase):
 
     def setUp(self):
-        self.testobj = Host()
-        super(HostGeneralTestCase, self).setUp()
+        setUpSnmpCheckTypes(self)
+        self.testobj = SnmpValue()
+        super(GeneralTestCase, self).setUp()
 
     def test_initial_values(self):
-        self.assertEqual(self.testobj.hostname, u'systemname')
-        self.assertEqual(self.testobj.manufacturer, u"")
-        self.assertEqual(self.testobj.vendor, u"")
-        self.assertEqual(self.testobj.workinggroup, u"")
-        self.assertEqual(self.testobj.hardware, u"")
-        self.assertEqual(self.testobj.user, u"")
-        self.assertEqual(self.testobj.inv_id, u"")
-        self.assertEqual(self.testobj.building, u"")
-        self.assertEqual(self.testobj.room, u"")
-        self.assertEqual(self.testobj.osList, [])
-        self.assertEqual(self.testobj.url, u"")
-        self.assertEqual(self.testobj.url_type, "direct")
-        self.assertEqual(self.testobj.url_authname, u"")
-        self.assertEqual(self.testobj.url_authpasswd, u"")
-        self.assertEqual(self.testobj.console, u"")
-        self.assertEqual(self.testobj.genNagios, True)
+        pass
+        #self.assertEqual(self.testobj.checktype, u"oid")
+        #self.assertEqual(self.testobj.oid1, u"1.3.6.1.2.1.1.1.0")
+        #self.assertEqual(self.testobj.oid2, u"1.3.6.1.2.1.1.1.0")
+        #self.assertEqual(self.testobj.cmd, u"none")
+        #self.assertEqual(self.testobj.inptype, u"cnt")
+        #self.assertEqual(self.testobj.checkMax, False)
+        #self.assertEqual(self.testobj.snmpIndexType, u"mac")
+        #self.assertEqual(self.testobj.inpQuantity, u"8.0 bit")
+        #self.assertEqual(self.testobj.displUnitAbs, u"b")
+        #self.assertEqual(self.testobj.displUnitVelocity, None)
+        #self.assertEqual(self.testobj.displUnitAcceleration, None)
+        #self.assertEqual(self.testobj.maxQuantityAbs, None)
+        #self.assertEqual(self.testobj.maxQuantityVelocity, None)
+        #self.assertEqual(self.testobj.maxQuantityAcceleration, None)
 
 
 def test_suite():
     suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(HostGeneralTestCase))
+    suite.addTest(unittest.makeSuite(GeneralTestCase))
     return suite
 
 if __name__ == '__main__':

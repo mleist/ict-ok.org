@@ -127,3 +127,10 @@ def getAllNetworks():
         if INet.providedBy(myobj.object):
             retList.append(myobj.object)
     return retList
+
+class SoapTest:
+    def __init__(self, context, request):
+        self.context = context
+        self.request = request
+    def echoString(self, value):
+        return value

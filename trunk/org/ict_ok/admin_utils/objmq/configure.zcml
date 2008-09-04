@@ -43,7 +43,6 @@
         mailer="dddObjTransport"
         />
 
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>

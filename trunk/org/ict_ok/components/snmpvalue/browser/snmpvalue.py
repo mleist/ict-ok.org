@@ -38,6 +38,7 @@ from z3c.form import field
 from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
+from org.ict_ok.libs.physicalquantity import convertQuantity, convertUnit
 from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
@@ -103,29 +104,66 @@ class SnmpValueDetails(ComponentDetails):
         obj = removeAllProxies(self.context)
         targetPic = str("/tmp/%s%s.png" % \
                         (str(obj.objectID), params['nameext']))
+        unitInRrd = convertQuantity(self.context.inpQuantity) / convertQuantity("1.0 s")
+        displUnitV = convertUnit(self.context.displUnitVelocity)
+        multiplier = float(unitInRrd / convertUnit(self.context.displUnitVelocity))
         if 1: ##fileage > 60:
-            myDisplayString1 = "bit"
-            myDisplayString2 = "bit"
+            myDisplayString1 = str(self.context.displUnitVelocity)
+            myDisplayString2 = str(self.context.displUnitVelocity)
             #rrdFile = "/home/markus/tmp/%s.rrd" % str(obj.objectID)
-            rrdFile = "/opt/ict_ok.org/var/mrtg_data/127.0.0.1_2.rrd"
-            rrdtool.graph(
-               targetPic,
-               "DEF:avg0=%s:ds1:AVERAGE" % (rrdFile),
-               "DEF:max0=%s:ds1:MAX" % (rrdFile),
-               "CDEF:avg=avg0,%f,*" % (1.0),
-               "CDEF:max=max0,%f,*" % (1.0),
-               "--start=%d" % params['starttime'],
-               "--end=%d" % params['endtime'],
-               "--width=540",
-               "--height=120",
-               "--vertical-label=%s" %myDisplayString1,
-               'GPRINT:avg:AVERAGE:avg\: %%lf %s' %myDisplayString2,
-               'GPRINT:max:MAX:max\: %%lf %s' %myDisplayString2,
-               "AREA:avg#7DD0BC:\"average\"",
-               "LINE1:max#008263:\"max\"",
-               "--imgformat=PNG",
-               "--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
-               "HEIGHT=\"%lu\" ALT=\"Demo\">")
+            #rrdFile = "/opt/ict_ok.org/var/mrtg_data/127.0.0.1_2.rrd"
+            #rrdFile = "/opt/ict_ok.org/var/mrtg_data/172.16.10.243.rrd"
+            rrdFile = self.context.getRrdFilename()
+            argList = []
+            argList.append(targetPic)
+            argList.append("DEF:avg0=%s:ds0:AVERAGE" % (rrdFile))
+            if self.context.displayMinMax:
+                argList.append("DEF:max0=%s:ds0:MAX" % (rrdFile))
+                argList.append("DEF:min0=%s:ds0:MIN" % (rrdFile))
+            argList.append("CDEF:avg=avg0,%f,*" % (multiplier))
+            if self.context.displayMinMax:
+                argList.append("CDEF:max=max0,%f,*" % (multiplier))
+                argList.append("CDEF:min=min0,%f,*" % (multiplier))
+            argList.append("--start=%d" % params['starttime'])
+            argList.append("--end=%d" % params['endtime'])
+            argList.append("--width=540")
+            argList.append("--height=120")
+            argList.append("--watermark=ict-ok.org")
+            argList.append("--vertical-label=%s" %myDisplayString1)
+            argList.append('GPRINT:avg:AVERAGE:avg\: %%6.2lf %s' %myDisplayString2)
+            if self.context.displayMinMax:
+                argList.append('GPRINT:max:MAX:max\: %%6.2lf %s' %myDisplayString2)
+                argList.append('GPRINT:min:MIN:min\: %%6.2lf %s' %myDisplayString2)
+            argList.append("AREA:avg#7DD0BC:\"average\"")
+            if self.context.displayMinMax:
+                argList.append("LINE1:max#008263:\"max\"")
+            argList.append("--imgformat=PNG")
+            argList.append("--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
+                           "HEIGHT=\"%lu\" ALT=\"Demo\">")
+            rrdtool.graph(*argList)
+               #targetPic,
+               ##"DEF:avg0=%s:ds1:AVERAGE" % (rrdFile),
+               ##"DEF:max0=%s:ds1:MAX" % (rrdFile),
+               #"DEF:avg0=%s:ds0:AVERAGE" % (rrdFile),
+               #"DEF:max0=%s:ds0:MAX" % (rrdFile),
+               #"DEF:min0=%s:ds0:MIN" % (rrdFile),
+               #"CDEF:avg=avg0,%f,*" % (multiplier),
+               #"CDEF:max=max0,%f,*" % (multiplier),
+               #"CDEF:min=min0,%f,*" % (multiplier),
+               #"--start=%d" % params['starttime'],
+               #"--end=%d" % params['endtime'],
+               #"--width=540",
+               #"--height=120",
+               #"--watermark=ict-ok.org",
+               #"--vertical-label=%s" %myDisplayString1,
+               #'GPRINT:avg:AVERAGE:avg\: %%6.2lf %s' %myDisplayString2,
+               #'GPRINT:max:MAX:max\: %%6.2lf %s' %myDisplayString2,
+               #'GPRINT:min:MIN:min\: %%6.2lf %s' %myDisplayString2,
+               #"AREA:avg#7DD0BC:\"average\"",
+               #"LINE1:max#008263:\"max\"",
+               #"--imgformat=PNG",
+               #"--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
+               #"HEIGHT=\"%lu\" ALT=\"Demo\">")
         pic = open(targetPic, "r")
         picMem = pic.read()
         pic.close()
@@ -142,7 +180,9 @@ class SnmpValueDetails(ComponentDetails):
         print "fname2: %s" % fname2
         
         #rrdFile = "/home/markus/tmp/%s.rrd" % (fname)
-        rrdFile = "/opt/ict_ok.org/var/mrtg_data/127.0.0.1_2.rrd"
+        #rrdFile = "/opt/ict_ok.org/var/mrtg_data/127.0.0.1_2.rrd"
+        #rrdFile = "/opt/ict_ok.org/var/mrtg_data/172.16.10.243.rrd"
+        rrdFile = self.context.getRrdFilename()
         targetPic = "/tmp/%s.png" % (fname)
         myDisplayString1 = "bit"
         myDisplayString2 = "bit"
@@ -152,10 +192,28 @@ class SnmpValueDetails(ComponentDetails):
         params['endtime'] = currtime
         
         
+        #rrdtool.graph(
+           #targetPic,
+           #"DEF:avg0=%s:ds1:AVERAGE" % (rrdFile),
+           #"DEF:max0=%s:ds1:MAX" % (rrdFile),
+           #"CDEF:avg=avg0,%f,*" % (1.0),
+           #"CDEF:max=max0,%f,*" % (1.0),
+           #"--start=%d" % params['starttime'],
+           #"--end=%d" % params['endtime'],
+           #"--width=600",
+           #"--height=150",
+           #"--vertical-label=%s" %myDisplayString1,
+           #'GPRINT:avg:AVERAGE:avg\: %%lf %s' %myDisplayString2,
+           #'GPRINT:max:MAX:max\: %%lf %s' %myDisplayString2,
+           #"AREA:avg#009783:\"average\"",
+           #"LINE1:max#5020b0:\"max\"",
+           #"--imgformat=PNG",
+           #"--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
+           #"HEIGHT=\"%lu\" ALT=\"Demo\">")
         rrdtool.graph(
            targetPic,
-           "DEF:avg0=%s:ds1:AVERAGE" % (rrdFile),
-           "DEF:max0=%s:ds1:MAX" % (rrdFile),
+           "DEF:avg0=%s:ds0:AVERAGE" % (rrdFile),
+           "DEF:max0=%s:ds0:MAX" % (rrdFile),
            "CDEF:avg=avg0,%f,*" % (1.0),
            "CDEF:max=max0,%f,*" % (1.0),
            "--start=%d" % params['starttime'],
@@ -180,80 +238,90 @@ class SnmpValueDetails(ComponentDetails):
         obj = self.context # removeAllProxies(self.context)
         return zapi.getPath(obj)
 
-    def getValue(self):
-        from pysnmp.entity.rfc3413.oneliner import cmdgen
-        oidStringList = self.context.oid1.strip(".").split(".")
-        try:
-            interfaceObj = self.context.getParent()
-            interfaceIp = interfaceObj.ipv4List
-            hostObj = interfaceObj.getParent()
-            hostSnmpVers = hostObj.snmpVersion
-            hostSnmpPort = hostObj.snmpPort
-            hostSnmpReadCommunity = hostObj.snmpReadCommunity
-            hostSnmpWriteCommunity = hostObj.snmpWriteCommunity
-            oidIntList = [ int(i) for i in oidStringList]
+    #def getValue(self):
+        #from pysnmp.entity.rfc3413.oneliner import cmdgen
+        #oidStringList = self.context.oid1.strip(".").split(".")
+        #try:
+            #interfaceObj = self.context.getParent()
+            #interfaceIp = interfaceObj.ipv4List
+            #hostObj = interfaceObj.getParent()
+            #hostSnmpVers = hostObj.snmpVersion
+            #hostSnmpPort = hostObj.snmpPort
+            #hostSnmpReadCommunity = hostObj.snmpReadCommunity
+            #hostSnmpWriteCommunity = hostObj.snmpWriteCommunity
+            #oidIntList = [ int(i) for i in oidStringList]
+            ##errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
+                ##cmdgen.CommunityData('my-agent', 'public01', 0),
+                ##cmdgen.UdpTransportTarget(('localhost', 161)),
+                ##tuple(oidIntList)
+            ##)
+            ##print "zuzu: ", hostSnmpVers
             #errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
-                #cmdgen.CommunityData('my-agent', 'public01', 0),
-                #cmdgen.UdpTransportTarget(('localhost', 161)),
+                #cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, 0),
+                #cmdgen.UdpTransportTarget((interfaceIp, hostSnmpPort)),
                 #tuple(oidIntList)
             #)
-            #print "zuzu: ", hostSnmpVers
-            errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
-                cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, 0),
-                cmdgen.UdpTransportTarget((interfaceIp, hostSnmpPort)),
-                tuple(oidIntList)
-            )
-            print "1", errorIndication
-            print "2", errorStatus
-            print "3", varBinds
-            #import pdb
-            #pdb.set_trace()
-            #aaa1 = self.context.convertQuantity(self.context.inpQuantity)
-            #aaa2 = self.context.convertUnit(self.context.displUnitAbs)
-            #aaa3 = self.context.convertUnit(self.context.displUnitVelocity)
-            #aaa4 = self.context.convertUnit(self.context.displUnitAcceleration)
-            #aaa5 = self.context.convertQuantity(self.context.maxQuantityAbs)
-            #aaa6 = self.context.convertQuantity(self.context.maxQuantityVelocity)
-            #aaa7 = self.context.convertQuantity(self.context.maxQuantityAcceleration)
-            print "1111: ", self.context.getPQinpQuantity()
-            print "1112: ", self.context.getPUdisplUnitAbs()
-            print "1113: ", self.context.getPUdisplUnitVelocity()
-            print "1114: ", self.context.getPUdisplUnitAcceleration()
-            print "1115: ", self.context.getPQmaxQuantityAbs()
-            print "1116: ", self.context.getPQmaxQuantityVelocity()
-            print "1117: ", self.context.getPQmaxQuantityAcceleration()
+            #print "1", errorIndication
+            #print "2", errorStatus
+            #print "3", varBinds
+            ##import pdb
+            ##pdb.set_trace()
+            ##aaa1 = self.context.convertQuantity(self.context.inpQuantity)
+            ##aaa2 = self.context.convertUnit(self.context.displUnitAbs)
+            ##aaa3 = self.context.convertUnit(self.context.displUnitVelocity)
+            ##aaa4 = self.context.convertUnit(self.context.displUnitAcceleration)
+            ##aaa5 = self.context.convertQuantity(self.context.maxQuantityAbs)
+            ##aaa6 = self.context.convertQuantity(self.context.maxQuantityVelocity)
+            ##aaa7 = self.context.convertQuantity(self.context.maxQuantityAcceleration)
+            #print "1111: ", self.context.getPQinpQuantity()
+            #print "1112: ", self.context.getPUdisplUnitAbs()
+            #print "1113: ", self.context.getPUdisplUnitVelocity()
+            #print "1114: ", self.context.getPUdisplUnitAcceleration()
+            #print "1115: ", self.context.getPQmaxQuantityAbs()
+            #print "1116: ", self.context.getPQmaxQuantityVelocity()
+            #print "1117: ", self.context.getPQmaxQuantityAcceleration()
+
+            ##print "--" * 30
+            ##print "getInputPhysical: ", self.context.getInputPhysical()
+            ##print "--" * 30
+            ##print "getMyFactor: ", self.context.getMyFactor()
+            #print "--" * 30
+            #print "tt2: ", self.context.getParent().ipv4List
+            #print "--" * 30
+            #print "tt3: ", self.context.getParent().getParent()
+            #print "tt3a: ", self.context.getParent().getParent().snmpVersion
+            #print "tt3b: ", self.context.getParent().getParent().snmpPort
+            #print "tt3c: ", self.context.getParent().getParent().snmpReadCommunity
+            #print "tt3d: ", self.context.getParent().getParent().snmpWriteCommunity
 
             #print "--" * 30
-            #print "getInputPhysical: ", self.context.getInputPhysical()
-            #print "--" * 30
-            #print "getMyFactor: ", self.context.getMyFactor()
-            print "--" * 30
-            print "tt2: ", self.context.getParent().ipv4List
-            print "--" * 30
-            print "tt3: ", self.context.getParent().getParent()
-            print "tt3a: ", self.context.getParent().getParent().snmpVersion
-            print "tt3b: ", self.context.getParent().getParent().snmpPort
-            print "tt3c: ", self.context.getParent().getParent().snmpReadCommunity
-            print "tt3d: ", self.context.getParent().getParent().snmpWriteCommunity
+            #print varBinds[0]
+            #try:
+                #realValue = self.context.getPQinpQuantity() * \
+                          #float(varBinds[0][1])
+                #realValue.ounit(self.context.displUnitAbs)
+                #return realValue
+                ##return self.context.inpMultiplier * \
+                       ##self.context.getMyFactor() * \
+                       ##self.context.getDisplayPhysical() * \
+                       ##float(varBinds[0][1])
+            #except Exception, errText:
+                #return errText
+        #except ValueError:
+            #return None
+        #except TypeError:
+            #return None
 
-            print "--" * 30
-            print varBinds[0]
-            try:
-                realValue = self.context.getPQinpQuantity() * \
-                          float(varBinds[0][1])
-                realValue.ounit(self.context.displUnitAbs)
-                return realValue
-                #return self.context.inpMultiplier * \
-                       #self.context.getMyFactor() * \
-                       #self.context.getDisplayPhysical() * \
-                       #float(varBinds[0][1])
-            except Exception, errText:
-                return errText
-        except ValueError:
-            return None
-        except TypeError:
-            return None
-        
+    def getValue(self):
+        retVal = None
+        displayUnit = self.context.getPUdisplUnitAbs()
+        if displayUnit:
+            retVal = self.context.getSnmpValue()
+            if retVal:
+                retVal.ounit(displayUnit.out_unit)
+        return retVal
+
+
 def getTitel(item, formatter):
     """
     Titel for Overview
@@ -274,7 +342,7 @@ class SnmpValueTrend(SnmpValueDetails):
     pass
 
 class SnmpValueTestData(SnmpValueDetails):
-    def getTestData2(self):
+    def getTestData1(self):
         return """&title=+,{font-size: 15px}&
 &x_axis_steps=1&
 &y_ticks=5,10,5&
@@ -284,7 +352,7 @@ class SnmpValueTestData(SnmpValueDetails):
 &y_min=0&
 &y_max=20&
 """
-    def getTestData(self):
+    def getTestData2(self):
         print "getTestData()"
         return """&title=Pie+Chart,{font-size:18px; color: #d01f3c}&
 &x_axis_steps=1&
@@ -299,6 +367,39 @@ class SnmpValueTestData(SnmpValueDetails):
 &links=&
 &tool_tip=%23val%23%25&
 """
+    def getTestData3(self):
+        return """&title=Sketch,{font-size:20px; color: #ffffff; margin:10px; background-color: #d070ac; padding: 5px 15px 5px 15px;}&
+&x_label_style=11,#303030,2&
+&x_ticks=9&
+&x_axis_steps=1&
+&y_label_style=11,#303030&
+&y_ticks=5,10,5&
+&x_labels=January,February,March,April,May,June,July,August,September,October&
+&y_min=0&
+&y_max=10&
+&bg_colour=#FDFDFD&
+&x_axis_colour=#e0e0e0&
+&x_grid_colour=#e0e0e0&
+&y_axis_colour=#e0e0e0&
+&y_grid_colour=#e0e0e0&
+&bar_sketch=55,6,#d070ac,#000000,2006,10&
+&values=4,3,8,8,4,2,4,3,4,6&
+"""
+    def getTestData4(self):
+        return """&title=Pie+Chart,{font-size:18px; color: #d01f3c}&
+&x_axis_steps=1&
+&y_ticks=5,10,5&
+&line=3,#87421F&
+&y_min=0&
+&y_max=20&
+&pie=60,#E4F0DB,{display:none;},1,,1&
+&values=7,7,5,6,10&
+&pie_labels=IE,Firefox,Opera,Wii,Other,Slashdot&
+&colours=#d01f3c,#356aa0,#C79810&
+&links=javascript:alert('7'),javascript:alert('7'),javascript:alert('5'),javascript:alert('6'),javascript:alert('10')&
+&tool_tip=Label%3A+%23x_label%23%3Cbr%3EValue%3A+%23val%23%25%26&
+"""
+    
 class AddSnmpByVendorClass(BrowserPagelet):
     columns = (
         GetterColumn(title=_('Title'),

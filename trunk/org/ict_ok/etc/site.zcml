@@ -33,80 +33,20 @@
              file="meta.zcml" />
     <include package="z3c.template"
              file="meta.zcml" />
+
+    <include package="soap"
+             file="meta.zcml" />
+
     <include package="org.ict_ok.admin_utils.objmq"
              file="meta.zcml"/>
     <include package="org.ict_ok.admin_utils.snmpd"
              file="meta.zcml"/>
-    <include package="org.ict_ok.admin_utils.ticker"
-             file="meta.zcml"/>
+    <!--<include package="org.ict_ok.admin_utils.ticker"-->
+             <!--file="meta.zcml"/>-->
 
-    <!--global security setting e.g. roles-->
-    <include package="org.ict_ok.admin_utils.usermanagement"
-             file="security-global.zcml" />
-
-    <!--security settings of utilities (alphabetical)-->
-    <include package="org.ict_ok.admin_utils.categories"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.compliance"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.cron"
-             file="security.zcml" />
-    <!-- <include package="org.ict_ok.admin_utils.esx_vim" -->
-    <!--         file="security.zcml" /> -->
-    <include package="org.ict_ok.admin_utils.eventcrossbar"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.generators.honeyd"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.generators.nagios"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.graphviz"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.netscan"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.notifier"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.objmq"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.public_viewing"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.supervisor"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.snmpd"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.ticker"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.usermanagement"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.util_manager"
-             file="security.zcml" />
-    <include package="org.ict_ok.admin_utils.wfmc"
-             file="security.zcml" />
-
-    <!--security settings of components (hierarchical)-->
-    <include package="org.ict_ok.components.superclass"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.site"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.slave"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.net"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.host"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.interface"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.service"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.snmpvalue"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.location"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.building"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.room"
-             file="security.zcml" />
-    <include package="org.ict_ok.components.script"
-             file="security.zcml" />
+    <!--security settings of ict-ok-->
+    <include package="org.ict_ok.etc"
+             file="permissions.zcml" />
 
     <!--registration of core components-->
     <include package="zope.sendmail"/>
@@ -130,6 +70,8 @@
     <include package="zope.app.twisted" />
     <include package="zope.app.wfmc" />
     <include package="zope.app.securitypolicy" />
+
+    <include package="soap" />
 
     <include package="zc.resourcelibrary"/>
     <include package="zc.table"/>
@@ -164,7 +106,7 @@
     <include package="org.ict_ok.admin_utils.objmq" />
     <include package="org.ict_ok.admin_utils.public_viewing" />
     <include package="org.ict_ok.admin_utils.snmpd" />
-    <include package="org.ict_ok.admin_utils.ticker" />
+    <!--<include package="org.ict_ok.admin_utils.ticker" />-->
     <include package="org.ict_ok.admin_utils.usermanagement" />
     <include package="org.ict_ok.admin_utils.util_manager" />
     <include package="org.ict_ok.admin_utils.wfmc" />
@@ -186,6 +128,48 @@
     <include package="org.ict_ok.components.location" />
     <include package="org.ict_ok.components.building" />
     <include package="org.ict_ok.components.room" />
+
+    
+    <!--registration of browser views-->
+    <include package="org.ict_ok.admin_utils.supervisor.browser" />
+    <include package="org.ict_ok.admin_utils.categories.browser" />
+    <include package="org.ict_ok.admin_utils.compliance.browser" />
+    <include package="org.ict_ok.admin_utils.cron.browser" />
+    <!-- <include package="org.ict_ok.admin_utils.esx_vim.browser" /> -->
+    <include package="org.ict_ok.admin_utils.eventcrossbar.browser" />
+    <!--<include package="org.ict_ok.admin_utils.generators/honeyd.browser" />-->
+    <include package="org.ict_ok.admin_utils.generators.nagios.browser" />
+    <include package="org.ict_ok.admin_utils.graphviz.browser" />
+    <include package="org.ict_ok.admin_utils.netscan.browser" />
+    <include package="org.ict_ok.admin_utils.netscan.nmap.browser" />
+    <include package="org.ict_ok.admin_utils.netscan.simple1.browser" />
+    <include package="org.ict_ok.admin_utils.netscan.demo1.browser" />
+    <!--<include package="org.ict_ok.admin_utils.notifier.jabber.browser" />-->
+    <!--<include package="org.ict_ok.admin_utils.notifier.email.browser" />-->
+    <include package="org.ict_ok.admin_utils.objmq.browser" />
+    <include package="org.ict_ok.admin_utils.public_viewing.browser" />
+    <include package="org.ict_ok.admin_utils.snmpd.browser" />
+    <!--<include package="org.ict_ok.admin_utils.ticker.browser" />-->
+    <include package="org.ict_ok.admin_utils.usermanagement.browser" />
+    <include package="org.ict_ok.admin_utils.util_manager.browser" />
+    <include package="org.ict_ok.admin_utils.wfmc.browser" />
+    <include package="org.ict_ok.components.browser" />
+    <include package="org.ict_ok.components.superclass.browser" />
+    <include package="org.ict_ok.components.site.browser" />
+    <!--<include package="org.ict_ok.components.slave.browser" />-->
+    <include package="org.ict_ok.components.net.browser" />
+    <include package="org.ict_ok.components.host.browser" />
+    <include package="org.ict_ok.components.host.special"
+             file="configure_brws.zcml" />
+    <include package="org.ict_ok.components.interface.browser" />
+    <include package="org.ict_ok.components.script.browser" />
+    <include package="org.ict_ok.components.service.browser" />
+    <include package="org.ict_ok.components.service.special"
+             file="configure_brws.zcml" />
+    <include package="org.ict_ok.components.snmpvalue.browser" />
+    <include package="org.ict_ok.components.location.browser" />
+    <include package="org.ict_ok.components.building.browser" />
+    <include package="org.ict_ok.components.room.browser" />
 
     <!--registration of ict-ok.org skin-->
     <include package="org.ict_ok.skin" />

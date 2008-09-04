@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0221,W0212
+# pylint: disable-msg=W0221
 #
 
 __version__ = "$Id$"
@@ -16,22 +16,21 @@ __version__ = "$Id$"
 import unittest
 
 # zope imports
+from zope.app.testing.placelesssetup import PlacelessSetup
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.graphviz.tests.test_iikadm_util_graphviz \
-     import TestIAdmUtilGraphviz
-from org.ict_ok.admin_utils.graphviz.graphviz import AdmUtilGraphviz
+from org.ict_ok.components.host.host import Host
 
+    
+class GeneralTestCase(PlacelessSetup, unittest.TestCase):
 
-class TestAdmUtilGraphviz(TestIAdmUtilGraphviz):
-    """Test the AdmUtilGraphviz implementation""" 
-
-    def makeTestObject(self):
-        return AdmUtilGraphviz()
+    def setUp(self):
+        print "+3" * 160
+        super(GeneralTestCase, self).setUp()
 
 def test_suite():
     suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(TestAdmUtilGraphviz))
+    suite.addTest(unittest.makeSuite(GeneralTestCase))
     return suite
 
 if __name__ == '__main__':

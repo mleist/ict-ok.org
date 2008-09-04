@@ -19,8 +19,20 @@ import unittest
 from zope.testing import doctest
 
 # ict_ok.org imports
+from org.ict_ok.admin_utils.eventcrossbar.tests.test_doctests import \
+     setUpAllEventInstancesVocabulary
+from org.ict_ok.components.room.tests import setUpAllRoomsVocab
+
+
+def setUp(test):
+    #test.globs = {'root': setup.placefulSetUp(True)}
+    setUpAllEventInstancesVocabulary(test)
+    #setUpAllRoomsVocab(test)
 
 def test_suite():
     return unittest.TestSuite((
-        doctest.DocFileSuite("host.txt", package = "org.ict_ok.components.host") 
+        doctest.DocFileSuite("host.txt",
+                             package = "org.ict_ok.components.host",
+                             setUp=setUp
+                             ) 
     ))

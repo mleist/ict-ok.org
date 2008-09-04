@@ -40,7 +40,6 @@
         factory=".adapter.sized.NotifierSized"
         />
 
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>

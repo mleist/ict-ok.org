@@ -19,9 +19,16 @@ import unittest
 from zope.testing import doctest
 
 # ict_ok.org imports
+from org.ict_ok.admin_utils.eventcrossbar.tests.test_doctests import \
+     setUpAllEventInstancesVocabulary
+
+def setUp(test):
+    setUpAllEventInstancesVocabulary(test)
 
 def test_suite():
     return unittest.TestSuite((
         doctest.DocFileSuite("snmpvalue.txt",
-                             package = "org.ict_ok.components.snmpvalue") #,
+                             package = "org.ict_ok.components.snmpvalue",
+                             setUp=setUp,
+                             ) #,
         ))

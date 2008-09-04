@@ -19,7 +19,7 @@ import unittest
 from zope.testing.doctestunit import DocTestSuite
 
 def test_suite():
-    return unittest.TestSuite((DocTestSuite('org.ict_ok.ikdummy.ikdummy'),))
+    return unittest.TestSuite((DocTestSuite('org.ict_ok.admin_utils.wfmc.wfmc'),))
 
 if __name__ == '__main__':
     unittest.main(defaultTest = 'test_suite')

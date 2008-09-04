@@ -52,7 +52,6 @@
         / -->
     </class>
 
-    <include package=".browser" />
     <include package=".ikgenerations" />
     
 </configure>

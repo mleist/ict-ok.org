@@ -29,7 +29,7 @@ class SlaveXxxTestCase(PlacelessSetup, unittest.TestCase):
         super(SlaveXxxTestCase, self).setUp()
 
     def test_initial_values(self):
-        self.assertEqual(self.testobj.title, None)
+        self.assertEqual(self.testobj.title, u"Title")
 
     def test_set_title(self):
         self.testobj.title = u"empty"

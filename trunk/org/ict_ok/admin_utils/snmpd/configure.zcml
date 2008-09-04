@@ -42,7 +42,6 @@
         permission="org.ict_ok.admin_utils.snmpd.Send"
         />
 
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>

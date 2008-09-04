@@ -1,0 +1,77 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+>
+    <!-- $Id$ -->
+        
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+                Markus Leist <leist@ikom-online.de> -->
+                                
+    <!--global security setting e.g. roles-->
+    <include package="org.ict_ok.admin_utils.usermanagement"
+             file="security-global.zcml" />
+
+    <!--security settings of utilities (alphabetical)-->
+    <include package="org.ict_ok.admin_utils.categories"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.compliance"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.cron"
+             file="security.zcml" />
+    <!-- <include package="org.ict_ok.admin_utils.esx_vim" -->
+    <!--         file="security.zcml" /> -->
+    <include package="org.ict_ok.admin_utils.eventcrossbar"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.generators.honeyd"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.generators.nagios"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.graphviz"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.netscan"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.notifier"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.objmq"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.public_viewing"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.supervisor"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.snmpd"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.ticker"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.usermanagement"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.util_manager"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.wfmc"
+             file="security.zcml" />
+
+    <!--security settings of components (hierarchical)-->
+    <include package="org.ict_ok.components.superclass"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.site"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.slave"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.net"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.host"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.interface"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.service"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.snmpvalue"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.location"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.building"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.room"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.script"
+             file="security.zcml" />
+</configure>

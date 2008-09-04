@@ -64,7 +64,6 @@
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>

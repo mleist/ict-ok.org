@@ -94,7 +94,6 @@
     <!--subscriber handler=".objmq.notifyMovedEvent" /-->
     <!--subscriber handler=".objmq.notifyRemovedEvent" /-->
 
-    <include package=".browser" />
     <include package=".generations" />
 
 </configure>

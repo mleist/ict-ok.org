@@ -119,7 +119,6 @@
         permission="org.ict_ok.admin_utils.wfmc.View"
         />
 
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>

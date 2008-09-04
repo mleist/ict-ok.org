@@ -43,7 +43,6 @@
     />
 
     <include package=".adapter" />
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>

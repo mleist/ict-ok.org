@@ -613,8 +613,11 @@ class DeleteForm(layout.FormLayoutSupport, form.Form):
         """delete was pressed"""
         if ISuperclass.providedBy(self.context):
             parent = self.getContent().__parent__
-            del parent[self.context.objectID]
-            self.deleted = True
+            try:
+                del parent[self.context.objectID]
+                self.deleted = True
+            except KeyError:
+                pass
             self.context = parent
             url = absoluteURL(parent, self.request)
             self.request.response.redirect(url)
@@ -780,7 +783,10 @@ class EditContent(BrowserPagelet):
                 return
             if 'selected' in self.request:
                 for myid in self.request['selected']:
-                    del self.context[myid]
+                    try:
+                        del self.context[myid]
+                    except KeyError:
+                        pass
                 self.status = _('Objects were successfully deleted.')
             else:
                 self.status = _('No objects were selected.')

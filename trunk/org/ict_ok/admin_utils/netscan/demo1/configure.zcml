@@ -54,7 +54,4 @@
                 handler=".bootstrap.bootStrapSubscriberDatabase"
                 for="zope.app.appsetup.IDatabaseOpenedEvent"
                 />
-
-    <include package=".browser" />
-    
 </configure>

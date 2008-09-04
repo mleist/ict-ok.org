@@ -7,3 +7,14 @@
 #
 # $Id$
 #
+
+# zope imports
+from zope.schema import vocabulary
+
+def AllRoomsVocab(obj):
+    return vocabulary.SimpleVocabulary([])
+
+def setUpAllRoomsVocab(test):
+    vr = vocabulary.getVocabularyRegistry()
+    vr.register('AllRoomsVocab', AllRoomsVocab)
+

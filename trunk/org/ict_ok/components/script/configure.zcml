@@ -48,7 +48,6 @@
         factory="org.ict_ok.components.script.adapter.ipickle.Pickle"
     />
 
-    <include package=".browser" />
     <!-- include package=".generations" / -->
 
 </configure>

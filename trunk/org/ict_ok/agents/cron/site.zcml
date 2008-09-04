@@ -1,0 +1,29 @@
+<configure xmlns='http://namespaces.zope.org/zope'
+           xmlns:meta="http://namespaces.zope.org/meta"
+           >
+  <include package="zope.app.zcmlfiles" />
+  <include package="zope.app.twisted" />
+  <include package="zope.app.securitypolicy"
+           file="meta.zcml" />
+
+  <securityPolicy
+    component="zope.securitypolicy.zopepolicy.ZopeSecurityPolicy" />
+
+  <!--security settings of ict-ok-->
+  <include package="org.ict_ok.etc"
+           file="permissions.zcml" />
+  <include package="org.ict_ok.components.snmpvalue" />
+
+    
+  <subscriber
+    handler="org.ict_ok.admin_utils.cron.tools.cron_runner.bootStrapSubscriber"
+    for="zope.app.appsetup.IDatabaseOpenedEvent"
+  />
+
+  <principal
+    id="zope.mgr"
+    title="Manager"
+    login="zmgr"
+    password="mgrpw" />
+  
+</configure>

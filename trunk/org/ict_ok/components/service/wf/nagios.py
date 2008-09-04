@@ -13,6 +13,7 @@
 #TODO Clean up
 
 # python imports
+import os
 
 # zope imports
 import zope.event
@@ -20,12 +21,17 @@ import zope.interface
 from zope.wfmc import interfaces
 from zope.interface import implements
 from zope.wfmc import xpdl
-from zope.app.appsetup import appsetup
 
-lenDirName = len('etc/site.zcml') * -1
-instDirName = appsetup.getConfigSource()[:lenDirName]
-package = xpdl.read(open(instDirName + \
-                         "lib/python/org/ict_ok/components/service/wf/service_nagios.xpdl"))
+path_splits = os.environ['PYTHONPATH'].split(':')
+for path_split in path_splits:
+    if os.path.exists(path_split + \
+                      '/org/ict_ok/components/service/wf/service_nagios.xpdl'):
+        xpdl_filename = path_split + \
+                      '/org/ict_ok/components/service/wf/service_nagios.xpdl'
+        break
+
+package = xpdl.read(open(xpdl_filename))
+
 
 def log_workflow(event):
     print event

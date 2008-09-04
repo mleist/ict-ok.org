@@ -74,6 +74,4 @@
     <subscriber handler=".dublincore.updateSuperclassDCTitle" />
     <subscriber handler=".dublincore.createSuperclassDCTitle" />
 
-    <include package=".browser" />
-
 </configure>

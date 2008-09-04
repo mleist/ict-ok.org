@@ -55,12 +55,36 @@
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--/>-->
     <page
-        name="getTestData"
+        name="getTestData1"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
         class=".snmpvalue.SnmpValueTestData"
         permission="org.ict_ok.components.snmpvalue.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        attribute="getTestData"
+        attribute="getTestData1"
+    />
+    <page
+        name="getTestData2"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class=".snmpvalue.SnmpValueTestData"
+        permission="org.ict_ok.components.snmpvalue.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="getTestData2"
+    />
+    <page
+        name="getTestData3"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class=".snmpvalue.SnmpValueTestData"
+        permission="org.ict_ok.components.snmpvalue.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="getTestData3"
+    />
+    <page
+        name="getTestData4"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class=".snmpvalue.SnmpValueTestData"
+        permission="org.ict_ok.components.snmpvalue.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="getTestData4"
     />
       <page
         name="getPNG"

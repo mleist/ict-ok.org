@@ -51,7 +51,6 @@
         factory="org.ict_ok.components.host.special.vmware_esx.adapter.search.Searchable"
     />
 
-    <include package=".browser" />
     <include package=".generations" />
 
 </configure>

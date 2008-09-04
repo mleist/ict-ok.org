@@ -17,6 +17,11 @@ SnmpValue does ....
 
 __version__ = "$Id$"
 
+# python imports
+import os
+import rrdtool
+from time import time
+
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
@@ -61,8 +66,8 @@ def SnmpInpTypes(dummy_context):
     for (gkey, gname) in {
         u"cnt": u"Counter",
         u"gauge": u"Gauge",
-        u"rel": u"Relative",
-        u"relperc": u"Percent",
+        #u"rel": u"Relative",
+        #u"relperc": u"Percent",
         }.items():
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)
@@ -144,7 +149,8 @@ class SnmpValue(Component):
     #inpMultiplier = FieldProperty(ISnmpValue['inpMultiplier'])
     #displayUnitNumerator = FieldProperty(ISnmpValue['displayUnitNumerator'])
     #displayUnitDenominator = FieldProperty(ISnmpValue['displayUnitDenominator'])
-    #checkMax = FieldProperty(ISnmpValue['checkMax'])
+    displayMinMax = FieldProperty(ISnmpValue['displayMinMax'])
+    checkMax = FieldProperty(ISnmpValue['checkMax'])
     #checkMaxLevel = FieldProperty(ISnmpValue['checkMaxLevel'])
     #checkMaxLevelUnitNumerator = FieldProperty(ISnmpValue['checkMaxLevelUnitNumerator'])
     #checkMaxLevelUnitDenominator = FieldProperty(ISnmpValue['checkMaxLevelUnitDenominator'])
@@ -213,7 +219,9 @@ class SnmpValue(Component):
                      #displayPhys.inBaseUnits()
         #return myFactor
 
-    def getSnmpValue(self):
+    def getRawSnmpValue(self):
+        """ get raw snmp-Value without multiplier
+        """
         from pysnmp.entity.rfc3413.oneliner import cmdgen
         oidStringList = self.oid1.strip(".").split(".")
         try:
@@ -230,16 +238,36 @@ class SnmpValue(Component):
                 cmdgen.UdpTransportTarget((interfaceIp, hostSnmpPort)),
                 tuple(oidIntList)
             )
-            return self.inpMultiplier * \
-                   self.getMyFactor() * \
-                   self.getDisplayPhysical() * \
-                   float(varBinds[0][1])
-        except:
+            if len(varBinds) > 0:
+                return float(varBinds[0][1])
+            else:
+                return None
+        except Exception, errText:
+            print "getRawSnmpValue-Error: ", errText
             return None
 
+    def getSnmpValue(self):
+        """ get SnmpValue as physical value
+        """
+        try:
+            retVal = self.getPQinpQuantity() * self.getRawSnmpValue()
+            inpUnit = self.getPQinpQuantity().out_unit
+            retVal.ounit(inpUnit)
+            return retVal
+        except Exception, errText:
+            print "getSnmpValue-Error: ", errText
+            return None
+        
     def tickerEvent(self):
         pass
         #print "iiiiiiiiiiiiiiiiiiiiiiiii: ", self.getSnmpValue()
+        
+    def triggerMin(self):
+        """
+        got ticker event from ticker thread every minute
+        """
+        print "triggerMin: ", self.getDcTitle()
+        self.rrd_update()
 
     def getPQinpQuantity(self):
         return convertQuantity(self.inpQuantity)
@@ -261,3 +289,114 @@ class SnmpValue(Component):
 
     def getPQmaxQuantityAcceleration(self):
         return convertQuantity(self.maxQuantityAcceleration)
+
+    def getRrdFilename(self):
+        """ rrd filename incl. path
+        """
+        return "/opt/ict_ok.org/var/mrtg_data/%s.rrd" % \
+               str(self.getObjectId())
+
+    def rrd_create(self, interval=1):
+        if not os.path.exists(self.getRrdFilename()):
+            try:
+                rows = int(4000 / interval)
+                minhb = interval * 60 * 2
+                if minhb <600:
+                    minhb = 600
+                if True: #absi == 0:
+                    absi = 'U'
+                if True: #abso == 0:
+                    abso = 'U'
+                
+                # select whether the datasource gives relative or absolute return values.
+                up_abs="g";
+                #$up_abs='m' if defined $$rcfg{'options'}{'perminute'}{$router};
+                #$up_abs='h' if defined $$rcfg{'options'}{'perhour'}{$router};
+                #$up_abs='d' if defined $$rcfg{'options'}{'derive'}{$router};
+                #$up_abs='a' if defined $$rcfg{'options'}{'absolute'}{$router};
+                #$up_abs='g' if defined $$rcfg{'options'}{'gauge'}{$router};
+                dstype = {
+                    'u': 'COUNTER',
+                    'a': 'ABSOLUTE',
+                    'g': 'GAUGE',
+                    'h': 'COUNTER',
+                    'm': 'COUNTER',
+                    'd': 'DERIVE',
+                    "cnt": 'COUNTER',
+                    "gauge": 'GAUGE',
+                }
+                try:
+                    up_abs = dstype[self.inptype]
+                except KeyError:
+                    up_abs = 'COUNTER'
+                
+                # config values
+                rrd_conf = {
+                    'up_abs': up_abs,
+                    'minhb': minhb,
+                    'absi': absi,
+                    'abso': abso,
+                    'rows': rows,
+                    'interval': interval,
+                    'interval30': 30 / interval,
+                    'interval120': 120 / interval,
+                    'interval1440': 1440 / interval,
+                    'interval7200': 7200 / interval,
+                    }
+                
+                #create the list of create arguments
+                create_args = []
+                
+                #the rrd target file
+                create_args.append(self.getRrdFilename())
+                
+                create_args.append('-s %d' % (interval * 60))
+                
+                # datasources
+                create_args.append("DS:ds0:%(up_abs)s:%(minhb)s:0:%(absi)s" % rrd_conf)
+                #create_args.append("DS:ds1:%(up_abs)s:%(minhb)s:0:%(abso)s" % rrd_conf)
+                
+                # round robin archives
+                create_args.append("RRA:AVERAGE:0.5:1:%(rows)s" % rrd_conf)
+                if interval < 30:
+                    create_args.append("RRA:AVERAGE:0.5:%(interval30)d:800" % rrd_conf)
+                create_args.append("RRA:AVERAGE:0.5:%(interval120)d:800" % rrd_conf)
+                create_args.append("RRA:AVERAGE:0.5:%(interval1440)d:800" % rrd_conf)
+                create_args.append("RRA:AVERAGE:0.5:%(interval7200)d:800" % rrd_conf)
+                
+                create_args.append("RRA:MIN:0.5:1:%(rows)d" % rrd_conf)
+                if interval < 30:
+                    create_args.append("RRA:MIN:0.5:%(interval30)d:800" % rrd_conf)
+                create_args.append("RRA:MIN:0.5:%(interval120)d:800" % rrd_conf)
+                create_args.append("RRA:MIN:0.5:%(interval1440)d:800" % rrd_conf)
+                create_args.append("RRA:MIN:0.5:%(interval7200)d:800" % rrd_conf)
+                
+                create_args.append("RRA:MAX:0.5:1:%(rows)d" % rrd_conf)
+                if interval < 30:
+                    create_args.append("RRA:MAX:0.5:%(interval30)d:800" % rrd_conf)
+                create_args.append("RRA:MAX:0.5:%(interval120)d:800" % rrd_conf)
+                create_args.append("RRA:MAX:0.5:%(interval1440)d:800" % rrd_conf)
+                create_args.append("RRA:MAX:0.5:%(interval7200)d:800" % rrd_conf)
+                
+                rrdtool.create(*create_args)
+            except Exception, errText:
+                print "Exception: %s" % errText
+
+
+    def rrd_update(self):
+        if not os.path.exists(self.getRrdFilename()):
+            self.rrd_create()
+        #create the list of update arguments
+        update_args = []
+        
+        #the rrd target file
+        update_args.append(self.getRrdFilename())
+        # magnitude quantities with "%f"-formatstring will only
+        # result in the value
+        if self.inptype == "cnt":
+            update_args.append('%f:%d' % (time(),
+                                          int(self.getRawSnmpValue())))
+        else:
+            update_args.append('%f:%f' % (time(),
+                                          self.getRawSnmpValue()))
+        return rrdtool.updatev(*update_args)

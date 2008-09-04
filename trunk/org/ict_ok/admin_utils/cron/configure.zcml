@@ -44,7 +44,6 @@
         class="org.ict_ok.admin_utils.cron.cron.AdmUtilCronRpcMethods"
         />
 
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>

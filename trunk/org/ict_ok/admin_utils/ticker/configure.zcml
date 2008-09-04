@@ -65,7 +65,6 @@
         permission="org.ict_ok.admin_utils.ticker.Send"
         />
 
-    <include package=".browser" />
     <include package=".generations" />
     
 </configure>
