@@ -40,7 +40,7 @@ class TimeCheckSpace:
         self.timestamp_month = self.timestamp[:-7]
         self.timestamp_year = self.timestamp[:-8]
 
-# and the real memory
+# and the real memory for cron purpose
 timeSpace = TimeCheckSpace()
 
 def bootStrapSubscriber(event):
@@ -102,32 +102,22 @@ def runner():
     import zope.app.appsetup.product
     from org.ict_ok.components.superclass.interfaces import ITicker
     from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
-    
     (signal_min, signal_hour,
      signal_day, signal_month,
      signal_year) = getTimeChangeSignals()
-    #print "=" * 60
-    #print "signal_min: ", signal_min
-    #print "signal_hour: ", signal_hour
-    #print "signal_day: ", signal_day
-    #print "signal_month: ", signal_month
-    #print "signal_year: ", signal_year
-    #print "=" * 60
     interaction = zope.security.management.getInteraction()
     principal = interaction.participations[0].principal
     site = zope.app.component.hooks.getSite()
     db = site._p_jar.db()
-    sm=site.getSiteManager()
+    sm = site.getSiteManager()
     admSupervisor = sm.getUtility(IAdmUtilSupervisor)
     uidutil = sm.getUtility(IIntIds)
     for (myid, myobj) in uidutil.items():
-        #print "ccc: ", (myobj.object)
         try:
             tickerAdapter = ITicker(myobj.object)
             if tickerAdapter:
                 tickerAdapter.db = db
                 if signal_min:
-                    #print "ddd: ", tickerAdapter
                     tickerAdapter.triggerMin()
                 if signal_hour:
                     tickerAdapter.triggerHour()
@@ -139,20 +129,3 @@ def runner():
                     tickerAdapter.triggerYear()
         except TypeError, err:
             pass
-            #print "Error xxx: ", err
-    #admSupervisor.appendEventHistory(u"ddd")
-    #import pdb
-    #pdb.set_trace()
-    #log.info("Working1")
-    #time.sleep(15)
-    #log.info("Working2")
-    #log.info(zope.app.appsetup.product.getProductConfiguration('test'))
-    #global work_count
-    #work_count += 1
-    #if work_count >= 3:
-    #from guppy import hpy
-    #import pdb
-    #pdb.set_trace()
-    #print hpy().heap() # Show current reachable heap
-
-    #raise SystemExit(1)
