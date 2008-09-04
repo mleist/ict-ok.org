@@ -81,11 +81,26 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     # temp. workaround for "user specific email" in normal form
     def get_email(self):
         """ property getter"""
-        return AdmUtilUserProperties(self.getRequest().principal).email
+        try:
+            return AdmUtilUserProperties(self.getRequest().principal).email
+        except KeyError, errText:
+            AdmUtilUserProperties(self.getRequest().principal).email = u""
     def set_email(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(self.getRequest().principal).email = my_val
     email = property(get_email, set_email)
+    
+    # temp. workaround for "user specific timezone" in normal form
+    def get_timezone(self):
+        """ property getter"""
+        try:
+            return AdmUtilUserProperties(self.getRequest().principal).timezone
+        except KeyError, errText:
+            AdmUtilUserProperties(self.getRequest().principal).timezone = u""
+    def set_timezone(self, my_val):
+        """ property setter"""
+        AdmUtilUserProperties(self.getRequest().principal).timezone = my_val
+    timezone = property(get_timezone, set_timezone)
 
 
 class AdmUtilUserDashboardSet(set):
@@ -123,11 +138,13 @@ class AdmUtilUserProperties(object):
         mapping = annotations.get(KEY)
         if mapping is None:
             blank = { 'email': u'', 
+                      'timezone': u'', 
                       'dashboard_objs': AdmUtilUserDashboardSet()}
             mapping = annotations[KEY] = PersistentDict(blank)
         self.mapping = mapping
             
     email = MappingProperty('email')
+    timezone = MappingProperty('timezone')
     dashboard_objs = MappingProperty('dashboard_objs')
 
 

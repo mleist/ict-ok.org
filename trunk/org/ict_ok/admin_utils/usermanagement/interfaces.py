@@ -13,9 +13,12 @@
 
 __version__ = "$Id$"
 
+# python imports
+import pytz
+
 # zope imports
 from zope.interface import Attribute, Interface
-from zope.schema import List, Object, TextLine
+from zope.schema import List, Object, TextLine, Choice
 from zope.i18nmessageid import MessageFactory
 from zope.app.security.interfaces import IAuthentication
 
@@ -35,6 +38,11 @@ class IAdmUtilUserProperties(Interface):
         required=True
         )
 
+    timezone = Choice(
+        title=_("Time Zone"),
+        values=pytz.common_timezones,
+        required = True)
+
     #dashboard_obj_ids = List(
         #title = _("listoh objects for the dashboard"),
         #value_type = Object(
@@ -51,6 +59,11 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
         title = _(u"Email address"),
         required=True
         )
+    timezone = Choice(
+        title=_("Time Zone"),
+        description=_("Time Zone used to display your calendar"),
+        values=pytz.common_timezones,
+        required = False)
 
 class IAdmUtilUserDashboard(Interface):
     """ user dashboard """
