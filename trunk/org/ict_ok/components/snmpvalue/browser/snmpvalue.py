@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=F0401,E1101,E0611,W0232,W0142
+# pylint: disable-msg=F0401,E1101,E0611,W0232,W0201,W0142
 #
 """implementation of browser class of SnmpValue object
 """
@@ -25,11 +25,10 @@ from zope.proxy import removeAllProxies
 from zope.interface import directlyProvides
 from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
-from zope.app.container.interfaces import IOrderedContainer
 from zope.app.pagetemplate.urlquote import URLQuote
 
 # zc imports
-from zc.table.column import Column, GetterColumn
+from zc.table.column import GetterColumn
 from zc.table.table import StandaloneFullFormatter
 from zc.table.interfaces import ISortableColumn
 
@@ -104,15 +103,13 @@ class SnmpValueDetails(ComponentDetails):
         obj = removeAllProxies(self.context)
         targetPic = str("/tmp/%s%s.png" % \
                         (str(obj.objectID), params['nameext']))
-        unitInRrd = convertQuantity(self.context.inpQuantity) / convertQuantity("1.0 s")
+        unitInRrd = convertQuantity(self.context.inpQuantity) \
+                  / convertQuantity("1.0 s")
         displUnitV = convertUnit(self.context.displUnitVelocity)
-        multiplier = float(unitInRrd / convertUnit(self.context.displUnitVelocity))
+        multiplier = float(unitInRrd / displUnitV)
         if 1: ##fileage > 60:
             myDisplayString1 = str(self.context.displUnitVelocity)
             myDisplayString2 = str(self.context.displUnitVelocity)
-            #rrdFile = "/home/markus/tmp/%s.rrd" % str(obj.objectID)
-            #rrdFile = "/opt/ict_ok.org/var/mrtg_data/127.0.0.1_2.rrd"
-            #rrdFile = "/opt/ict_ok.org/var/mrtg_data/172.16.10.243.rrd"
             rrdFile = self.context.getRrdFilename()
             argList = []
             argList.append(targetPic)
@@ -130,10 +127,13 @@ class SnmpValueDetails(ComponentDetails):
             argList.append("--height=120")
             argList.append("--watermark=ict-ok.org")
             argList.append("--vertical-label=%s" %myDisplayString1)
-            argList.append('GPRINT:avg:AVERAGE:avg\: %%6.2lf %s' %myDisplayString2)
+            argList.append(\
+                'GPRINT:avg:AVERAGE:avg\: %%6.2lf %s' %myDisplayString2)
             if self.context.displayMinMax:
-                argList.append('GPRINT:max:MAX:max\: %%6.2lf %s' %myDisplayString2)
-                argList.append('GPRINT:min:MIN:min\: %%6.2lf %s' %myDisplayString2)
+                argList.append(\
+                    'GPRINT:max:MAX:max\: %%6.2lf %s' %myDisplayString2)
+                argList.append(\
+                    'GPRINT:min:MIN:min\: %%6.2lf %s' %myDisplayString2)
             argList.append("AREA:avg#7DD0BC:\"average\"")
             if self.context.displayMinMax:
                 argList.append("LINE1:max#008263:\"max\"")
@@ -141,93 +141,6 @@ class SnmpValueDetails(ComponentDetails):
             argList.append("--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
                            "HEIGHT=\"%lu\" ALT=\"Demo\">")
             rrdtool.graph(*argList)
-               #targetPic,
-               ##"DEF:avg0=%s:ds1:AVERAGE" % (rrdFile),
-               ##"DEF:max0=%s:ds1:MAX" % (rrdFile),
-               #"DEF:avg0=%s:ds0:AVERAGE" % (rrdFile),
-               #"DEF:max0=%s:ds0:MAX" % (rrdFile),
-               #"DEF:min0=%s:ds0:MIN" % (rrdFile),
-               #"CDEF:avg=avg0,%f,*" % (multiplier),
-               #"CDEF:max=max0,%f,*" % (multiplier),
-               #"CDEF:min=min0,%f,*" % (multiplier),
-               #"--start=%d" % params['starttime'],
-               #"--end=%d" % params['endtime'],
-               #"--width=540",
-               #"--height=120",
-               #"--watermark=ict-ok.org",
-               #"--vertical-label=%s" %myDisplayString1,
-               #'GPRINT:avg:AVERAGE:avg\: %%6.2lf %s' %myDisplayString2,
-               #'GPRINT:max:MAX:max\: %%6.2lf %s' %myDisplayString2,
-               #'GPRINT:min:MIN:min\: %%6.2lf %s' %myDisplayString2,
-               #"AREA:avg#7DD0BC:\"average\"",
-               #"LINE1:max#008263:\"max\"",
-               #"--imgformat=PNG",
-               #"--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
-               #"HEIGHT=\"%lu\" ALT=\"Demo\">")
-        pic = open(targetPic, "r")
-        picMem = pic.read()
-        pic.close()
-        return picMem
-    
-    def getValuePng3(self, params=None):
-        """TODO: test purpose"""
-        self.request.response.setHeader('Content-Type', 'image/png')
-        
-        fname = "c5d37d2528fc45d050c391826787b8813"
-        fname2 = "%s" % self.context.objectID
-        
-        print "fname: %s" % fname
-        print "fname2: %s" % fname2
-        
-        #rrdFile = "/home/markus/tmp/%s.rrd" % (fname)
-        #rrdFile = "/opt/ict_ok.org/var/mrtg_data/127.0.0.1_2.rrd"
-        #rrdFile = "/opt/ict_ok.org/var/mrtg_data/172.16.10.243.rrd"
-        rrdFile = self.context.getRrdFilename()
-        targetPic = "/tmp/%s.png" % (fname)
-        myDisplayString1 = "bit"
-        myDisplayString2 = "bit"
-        currtime = time.time()
-        params = {}
-        params['starttime'] = currtime - 3600*12
-        params['endtime'] = currtime
-        
-        
-        #rrdtool.graph(
-           #targetPic,
-           #"DEF:avg0=%s:ds1:AVERAGE" % (rrdFile),
-           #"DEF:max0=%s:ds1:MAX" % (rrdFile),
-           #"CDEF:avg=avg0,%f,*" % (1.0),
-           #"CDEF:max=max0,%f,*" % (1.0),
-           #"--start=%d" % params['starttime'],
-           #"--end=%d" % params['endtime'],
-           #"--width=600",
-           #"--height=150",
-           #"--vertical-label=%s" %myDisplayString1,
-           #'GPRINT:avg:AVERAGE:avg\: %%lf %s' %myDisplayString2,
-           #'GPRINT:max:MAX:max\: %%lf %s' %myDisplayString2,
-           #"AREA:avg#009783:\"average\"",
-           #"LINE1:max#5020b0:\"max\"",
-           #"--imgformat=PNG",
-           #"--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
-           #"HEIGHT=\"%lu\" ALT=\"Demo\">")
-        rrdtool.graph(
-           targetPic,
-           "DEF:avg0=%s:ds0:AVERAGE" % (rrdFile),
-           "DEF:max0=%s:ds0:MAX" % (rrdFile),
-           "CDEF:avg=avg0,%f,*" % (1.0),
-           "CDEF:max=max0,%f,*" % (1.0),
-           "--start=%d" % params['starttime'],
-           "--end=%d" % params['endtime'],
-           "--width=600",
-           "--height=150",
-           "--vertical-label=%s" %myDisplayString1,
-           'GPRINT:avg:AVERAGE:avg\: %%lf %s' %myDisplayString2,
-           'GPRINT:max:MAX:max\: %%lf %s' %myDisplayString2,
-           "AREA:avg#009783:\"average\"",
-           "LINE1:max#5020b0:\"max\"",
-           "--imgformat=PNG",
-           "--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
-           "HEIGHT=\"%lu\" ALT=\"Demo\">")
         pic = open(targetPic, "r")
         picMem = pic.read()
         pic.close()
@@ -235,82 +148,8 @@ class SnmpValueDetails(ComponentDetails):
 
     def getValuePngHref(self):
         """Url to picture"""
-        obj = self.context # removeAllProxies(self.context)
+        obj = self.context
         return zapi.getPath(obj)
-
-    #def getValue(self):
-        #from pysnmp.entity.rfc3413.oneliner import cmdgen
-        #oidStringList = self.context.oid1.strip(".").split(".")
-        #try:
-            #interfaceObj = self.context.getParent()
-            #interfaceIp = interfaceObj.ipv4List
-            #hostObj = interfaceObj.getParent()
-            #hostSnmpVers = hostObj.snmpVersion
-            #hostSnmpPort = hostObj.snmpPort
-            #hostSnmpReadCommunity = hostObj.snmpReadCommunity
-            #hostSnmpWriteCommunity = hostObj.snmpWriteCommunity
-            #oidIntList = [ int(i) for i in oidStringList]
-            ##errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
-                ##cmdgen.CommunityData('my-agent', 'public01', 0),
-                ##cmdgen.UdpTransportTarget(('localhost', 161)),
-                ##tuple(oidIntList)
-            ##)
-            ##print "zuzu: ", hostSnmpVers
-            #errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
-                #cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, 0),
-                #cmdgen.UdpTransportTarget((interfaceIp, hostSnmpPort)),
-                #tuple(oidIntList)
-            #)
-            #print "1", errorIndication
-            #print "2", errorStatus
-            #print "3", varBinds
-            ##import pdb
-            ##pdb.set_trace()
-            ##aaa1 = self.context.convertQuantity(self.context.inpQuantity)
-            ##aaa2 = self.context.convertUnit(self.context.displUnitAbs)
-            ##aaa3 = self.context.convertUnit(self.context.displUnitVelocity)
-            ##aaa4 = self.context.convertUnit(self.context.displUnitAcceleration)
-            ##aaa5 = self.context.convertQuantity(self.context.maxQuantityAbs)
-            ##aaa6 = self.context.convertQuantity(self.context.maxQuantityVelocity)
-            ##aaa7 = self.context.convertQuantity(self.context.maxQuantityAcceleration)
-            #print "1111: ", self.context.getPQinpQuantity()
-            #print "1112: ", self.context.getPUdisplUnitAbs()
-            #print "1113: ", self.context.getPUdisplUnitVelocity()
-            #print "1114: ", self.context.getPUdisplUnitAcceleration()
-            #print "1115: ", self.context.getPQmaxQuantityAbs()
-            #print "1116: ", self.context.getPQmaxQuantityVelocity()
-            #print "1117: ", self.context.getPQmaxQuantityAcceleration()
-
-            ##print "--" * 30
-            ##print "getInputPhysical: ", self.context.getInputPhysical()
-            ##print "--" * 30
-            ##print "getMyFactor: ", self.context.getMyFactor()
-            #print "--" * 30
-            #print "tt2: ", self.context.getParent().ipv4List
-            #print "--" * 30
-            #print "tt3: ", self.context.getParent().getParent()
-            #print "tt3a: ", self.context.getParent().getParent().snmpVersion
-            #print "tt3b: ", self.context.getParent().getParent().snmpPort
-            #print "tt3c: ", self.context.getParent().getParent().snmpReadCommunity
-            #print "tt3d: ", self.context.getParent().getParent().snmpWriteCommunity
-
-            #print "--" * 30
-            #print varBinds[0]
-            #try:
-                #realValue = self.context.getPQinpQuantity() * \
-                          #float(varBinds[0][1])
-                #realValue.ounit(self.context.displUnitAbs)
-                #return realValue
-                ##return self.context.inpMultiplier * \
-                       ##self.context.getMyFactor() * \
-                       ##self.context.getDisplayPhysical() * \
-                       ##float(varBinds[0][1])
-            #except Exception, errText:
-                #return errText
-        #except ValueError:
-            #return None
-        #except TypeError:
-            #return None
 
     def getValue(self):
         retVal = None
@@ -471,10 +310,13 @@ class DetailsSnmpValueForm(DisplayForm):
         oidStringList = self.context.oid1.strip(".").split(".")
         try:
             oidIntList = [ int(i) for i in oidStringList]
-            errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
-                cmdgen.CommunityData('my-agent', 'public01', 0),
-                cmdgen.UdpTransportTarget(('localhost', 161)),
-                tuple(oidIntList)
+            #TODO: evil dirty hack
+            errorIndication, errorStatus, errorIndex, varBinds = \
+                           cmdgen.CommandGenerator().getCmd(
+                               cmdgen.CommunityData('my-agent',
+                                                    'public01', 0),
+                               cmdgen.UdpTransportTarget(('localhost', 161)),
+                               tuple(oidIntList)
             )
             print "1", errorIndication
             if errorIndication != None:
@@ -514,8 +356,10 @@ class AddSnmpValueForm(AddForm):
                        templateData.has_key('oid2'):
                         # must do a copy otherwise all future defaults will change
                         self.fields = copy.deepcopy(self.fields)
-                        self.fields['oid1'].field.default = u"%s" % templateData['oid1']
-                        self.fields['oid2'].field.default = u"%s" % templateData['oid2']
+                        self.fields['oid1'].field.default = \
+                            u"%s" % templateData['oid1']
+                        self.fields['oid2'].field.default = \
+                            u"%s" % templateData['oid2']
         AddForm.update(self)
 
 class EditSnmpValueForm(EditForm):
