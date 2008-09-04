@@ -17,13 +17,13 @@ Version information
 """
 
 ##
-## ______
+## _______
 ##
 
 import re
 
-__versMajor = "1"
-__versMinor = "5pre"
+__versMajor = "8"
+__versMinor = "10pre"
 __versId = "$Id$"
 __versLastChangedDate = "$LastChangedDate$"
 __versRevision = "$LastChangedRevision$"
