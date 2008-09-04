@@ -62,16 +62,6 @@
         />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".snmpvalue.SnmpDimensionUnits"
-        name="SnmpDimensionUnits"
-        />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".snmpvalue.SnmpTimeDimensionUnits"
-        name="SnmpTimeDimensionUnits"
-        />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
         component=".snmpvalue.SnmpIndexTypes"
         name="SnmpIndexTypes"
         />
