@@ -103,8 +103,6 @@ class IInterface(IComponent):
         if intfc.netType == 'ethernet' and \
              intfc.__context__ is not None and \
            intfc.ipv4List is not None:
-            print "uuuu:", intfc.ipv4List
-            print "uuuu2:", convertIpV4(intfc.ipv4List)
             my_catalog = zapi.getUtility(ICatalog)
             alreadyFound = []
             # new Object
