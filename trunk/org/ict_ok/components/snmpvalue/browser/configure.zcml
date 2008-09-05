@@ -13,7 +13,7 @@
 
     <defaultView
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
-        name="display.html"
+        name="details.html"
         />
 
     <z3c:pagelet
