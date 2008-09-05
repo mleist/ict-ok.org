@@ -105,7 +105,12 @@ class SnmpValueDetails(ComponentDetails):
                         (str(obj.objectID), params['nameext']))
         unitInRrd = convertQuantity(self.context.inpQuantity) \
                   / convertQuantity("1.0 s")
-        displUnitV = convertUnit(self.context.displUnitVelocity)
+        if self.context.inptype == u"cnt":
+            displUnitV = convertUnit(self.context.displUnitVelocity)
+        elif self.context.inptype == u"gauge":
+            displUnitV = convertUnit(self.context.displUnitAbs)
+        else:
+            displUnitV = convertUnit(self.context.displUnitVelocity)
         multiplier = float(unitInRrd / displUnitV)
         if 1: ##fileage > 60:
             myDisplayString1 = str(self.context.displUnitVelocity)
