@@ -107,14 +107,18 @@ class SnmpValueDetails(ComponentDetails):
                   / convertQuantity("1.0 s")
         if self.context.inptype == u"cnt":
             displUnitV = convertUnit(self.context.displUnitVelocity)
-        elif self.context.inptype == u"gauge":
-            displUnitV = convertUnit(self.context.displUnitAbs)
-        else:
-            displUnitV = convertUnit(self.context.displUnitVelocity)
-        multiplier = float(unitInRrd / displUnitV)
-        if 1: ##fileage > 60:
             myDisplayString1 = str(self.context.displUnitVelocity)
             myDisplayString2 = str(self.context.displUnitVelocity)
+        elif self.context.inptype == u"gauge":
+            displUnitV = convertUnit(self.context.displUnitAbs)
+            myDisplayString1 = str(self.context.displUnitAbs)
+            myDisplayString2 = str(self.context.displUnitAbs)
+        else:
+            displUnitV = convertUnit(self.context.displUnitVelocity)
+            myDisplayString1 = str(self.context.displUnitVelocity)
+            myDisplayString2 = str(self.context.displUnitVelocity)
+        multiplier = float(unitInRrd / displUnitV)
+        if 1: ##fileage > 60:
             rrdFile = self.context.getRrdFilename()
             argList = []
             argList.append(targetPic)
