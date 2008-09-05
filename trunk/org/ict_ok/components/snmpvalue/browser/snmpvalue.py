@@ -313,35 +313,35 @@ class DetailsSnmpValueForm(DisplayForm):
     fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_viewfields)
     
     def update(self):
-        print "--" * 30
-        print self.context.oid1
-        from pysnmp.entity.rfc3413.oneliner import cmdgen
-        oidStringList = self.context.oid1.strip(".").split(".")
-        try:
-            oidIntList = [ int(i) for i in oidStringList]
-            #TODO: evil dirty hack
-            errorIndication, errorStatus, errorIndex, varBinds = \
-                           cmdgen.CommandGenerator().getCmd(
-                               cmdgen.CommunityData('my-agent',
-                                                    'public01', 0),
-                               cmdgen.UdpTransportTarget(('localhost', 161)),
-                               tuple(oidIntList)
-            )
-            print "1", errorIndication
-            if errorIndication != None:
-                self.status = u"Error: SNMP connect error: '%s'" % \
-                    (errorIndication)
-            #import pdb
-            #pdb.set_trace()
-            if errorStatus != 0:
-                self.status = u"Error: '%s'" % (errorStatus.prettyPrint())
-            print "2", errorStatus
-            #if errorStatus == 2:
-                #self.status = u"Error: ddd"
-            print "3", varBinds
-            print "--" * 30
-        except ValueError:
-            self.status = u"Error: Value of OID1"
+        #print "--" * 30
+        #print self.context.oid1
+        #from pysnmp.entity.rfc3413.oneliner import cmdgen
+        #oidStringList = self.context.oid1.strip(".").split(".")
+        #try:
+            #oidIntList = [ int(i) for i in oidStringList]
+            ##TODO: evil dirty hack
+            #errorIndication, errorStatus, errorIndex, varBinds = \
+                           #cmdgen.CommandGenerator().getCmd(
+                               #cmdgen.CommunityData('my-agent',
+                                                    #'public01', 0),
+                               #cmdgen.UdpTransportTarget(('localhost', 161)),
+                               #tuple(oidIntList)
+            #)
+            #print "1", errorIndication
+            #if errorIndication != None:
+                #self.status = u"Error: SNMP connect error: '%s'" % \
+                    #(errorIndication)
+            ##import pdb
+            ##pdb.set_trace()
+            #if errorStatus != 0:
+                #self.status = u"Error: '%s'" % (errorStatus.prettyPrint())
+            #print "2", errorStatus
+            ##if errorStatus == 2:
+                ##self.status = u"Error: ddd"
+            #print "3", varBinds
+            #print "--" * 30
+        #except ValueError:
+            #self.status = u"Error: Value of OID1"
         DisplayForm.update(self)
         #import pdb
         #pdb.set_trace()
