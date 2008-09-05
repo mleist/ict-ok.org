@@ -18,7 +18,7 @@
     <include package="org.ict_ok.components.snmpvalue" />
 
     <subscriber
-        handler="org.ict_ok.admin_utils.cron.tools.cron_runner.bootStrapSubscriber"
+        handler="runner.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
     />
 
