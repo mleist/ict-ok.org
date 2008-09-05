@@ -31,7 +31,10 @@ def evolve(context):
     for ikinterface in findObjectsProviding(root, IInterface):
         # convert this object
         if not type(ikinterface.ipv4List) is type(list()):
-            ikinterface.ipv4List = [ikinterface.ipv4List]
+            if ikinterface.ipv4List is not None:
+                ikinterface.ipv4List = [ikinterface.ipv4List]
+            else:
+                ikinterface.ipv4List = []
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
         print "Interface(%s): " % ikinterface.ikName + evolve_msg
