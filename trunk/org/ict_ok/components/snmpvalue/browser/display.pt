@@ -25,7 +25,7 @@
             <!--<td tal:content="python: context.getDisplayPhysical()" />-->
         <!--</tr>-->
         <tr class="cb_wht" tal:condition="view/getValue">
-            <td i18n:translate="">Value3</td>
+            <td i18n:translate="">Value</td>
             <td tal:content="python: view.getValue()" />
         </tr>
         <!--<tr class="cb_wht" tal:condition="view/getValue">-->
