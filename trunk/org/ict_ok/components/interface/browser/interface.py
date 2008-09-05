@@ -113,7 +113,7 @@ class SnmpScanWizardForm(AddForm):
             hostSnmpReadCommunity = hostObj.snmpReadCommunity
             errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().getCmd(
                 cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, int(hostSnmpVers)),
-                cmdgen.UdpTransportTarget((searchIp, hostSnmpPort, 5, 1)),
+                cmdgen.UdpTransportTarget((searchIp, hostSnmpPort, 25, 1)),
                 snmpOid_IfNumber
             )
             return int(varBinds[0][1])
@@ -132,7 +132,7 @@ class SnmpScanWizardForm(AddForm):
             hostSnmpReadCommunity = hostObj.snmpReadCommunity
             errorIndication, errorStatus, errorIndex, varBinds = cmdgen.CommandGenerator().nextCmd(
                 cmdgen.CommunityData('my-agent', hostSnmpReadCommunity, int(hostSnmpVers)),
-                cmdgen.UdpTransportTarget((searchIp, hostSnmpPort, 5, 1)),
+                cmdgen.UdpTransportTarget((searchIp, hostSnmpPort, 25, 1)),
                 oidTuple
             )
             return varBinds
