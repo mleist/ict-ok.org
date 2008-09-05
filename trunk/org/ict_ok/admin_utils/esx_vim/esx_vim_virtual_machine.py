@@ -211,6 +211,6 @@ class EsxVimVirtualMachine(EsxVimObj):
                         newInterface.netType = "ethernet"
                         newInterface.mac = interf['mac']
                         #newInterface.ipv4List.append(interfaceDict['ipAddress'])
-                        newInterface.ipv4List = interf['ips'][0]
+                        newInterface.ipv4List.extend(interf['ips'])
                     return newHost
         return None

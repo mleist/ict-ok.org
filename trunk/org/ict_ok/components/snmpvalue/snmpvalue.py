@@ -133,7 +133,10 @@ class SnmpValue(Component):
         oidStringList = self.oid1.strip(".").split(".")
         try:
             interfaceObj = self.getParent()
-            interfaceIp = interfaceObj.ipv4List
+            if len(interfaceObj.ipv4List) > 0:
+                interfaceIp = interfaceObj.ipv4List[0]
+            else:
+                return None
             hostObj = interfaceObj.getParent()
             hostSnmpVers = hostObj.snmpVersion
             hostSnmpPort = hostObj.snmpPort
@@ -257,6 +260,8 @@ class SnmpValue(Component):
                 # datasources
                 create_args.append(\
                     "DS:ds0:%(up_abs)s:%(minhb)s:0:%(absi)s" % rrd_conf)
+                create_args.append(\
+                    "DS:ds1:GAUGE:%(minhb)s:0:U" % rrd_conf)
                 #create_args.append(\
                     #"DS:ds1:%(up_abs)s:%(minhb)s:0:%(abso)s" % rrd_conf)
                 
@@ -312,9 +317,13 @@ class SnmpValue(Component):
         # magnitude quantities with "%f"-formatstring will only
         # result in the value
         if self.inptype == "cnt":
-            update_args.append('%f:%d' % (time(),
-                                          int(self.getRawSnmpValue())))
+            update_args.append('%f:%d:%d' % (time(),
+                                             int(self.getRawSnmpValue()),
+                                             int(self.getRawSnmpValue()))
+                               )
         else:
-            update_args.append('%f:%f' % (time(),
-                                          self.getRawSnmpValue()))
+            update_args.append('%f:%f:%f' % (time(),
+                                             self.getRawSnmpValue(),
+                                             self.getRawSnmpValue())
+                               )
         return rrdtool.updatev(*update_args)

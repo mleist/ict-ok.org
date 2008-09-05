@@ -68,7 +68,7 @@ class GenNagios(ParentGenNagios):
             #ipv4List should be a list
             #fileDict['HostCfg'].write("    address %s\n" % \
                                       #self.context.ipv4List[0])
-            self.write("    address %s\n" % self.context.ipv4List)
+            self.write("    address %s\n" % self.context.ipv4List[0])
 
     def traverse4nagiosGeneratorPost(self, level=0, comments=True):
         """graphviz configurations text after object

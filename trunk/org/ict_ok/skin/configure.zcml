@@ -191,5 +191,4 @@
         <!--/>-->
 
     <i18n:registerTranslations directory="../locales" />
-        
 </configure>

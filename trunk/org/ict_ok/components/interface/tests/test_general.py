@@ -31,7 +31,12 @@ class GeneralTestCase(PlacelessSetup, unittest.TestCase):
     def test_initial_values(self):
         self.assertEqual(self.testobj.netType, "ethernet")
         self.assertEqual(self.testobj.mac, u"00:00:00:00:00:00")
-        self.assertEqual(self.testobj.ipv4List, u"192.168.1.100")
+        self.assertEqual(self.testobj.ipv4List, [])
+
+    def test_ipv4List(self):
+        self.assertEqual(self.testobj.ipv4List, [])
+        self.testobj.ipv4List.append(u"172.16.1.1")
+        self.assertEqual(self.testobj.ipv4List, [u"172.16.1.1"])
 
 def test_suite():
     suite = unittest.TestSuite()

@@ -32,11 +32,11 @@ _ = MessageFactory('org.ict_ok')
 
 def convertIpV4(inp):
     """convert string or list of strings from ipv4-addresses """
-    if type(inp) == type([]):
+    try:
+        #list of ipv4 addresses
         return ' '.join([str(ip).replace(".", "_").replace("/", "__") \
                          for ip in inp])
-    elif type(inp) == type(u'') or \
-         type(inp) == type(''):
+    except Exception:
         return str(inp).replace(".", "_").replace("/", "__")
 
 
@@ -61,25 +61,25 @@ class IInterface(IComponent):
         required=False)
 
     #wait for z3c.form list of textlines
-    #ipv4List = List (
-        #title = _("IPv4 addresses"),
-        #description = _("list of all configured IPv4 addresses"),
-        #value_type = HostIpValid(
-            #min_length=1,
-            #max_length=30,
-            #title=_("IP address"),
-            #description=_("IP address of the host."),
-            #default=u"192.168.1.100",
-            #required=True),
-        #default = [],
-        #required = False)
-    ipv4List = HostIpValid(
+    ipv4List = List (
+        title = _("IPv4 addresses"),
+        description = _("list of all configured IPv4 addresses"),
+        value_type = HostIpValid(
             min_length=1,
             max_length=30,
             title=_("IP address"),
             description=_("IP address of the host."),
             default=u"192.168.1.100",
-            required=False)
+            required=True),
+        default = [],
+        required = False)
+    #ipv4List = HostIpValid(
+            #min_length=1,
+            #max_length=30,
+            #title=_("IP address"),
+            #description=_("IP address of the host."),
+            #default=u"192.168.1.100",
+            #required=False)
 
     #connectedInterfaces
 
@@ -93,15 +93,18 @@ class IInterface(IComponent):
             else:
                 host = intfc.__context__.__parent__
             net = host.__parent__
-            if not net.containsIp(intfc.ipv4List):
-                raise Invalid("The IP address is not in ip-range %s of the "\
-                              "network '%s'" % (net.ipv4, net.ikName))
+            for ipv4 in intfc.ipv4List:
+                if not net.containsIp(ipv4):
+                    raise Invalid("The IP address %s is not in ip-range %s of the "\
+                                  "network '%s'" % (ipv4, net.ipv4, net.ikName))
 
     @invariant
     def ensureMyIpNotAlreadyUsed(intfc):
         if intfc.netType == 'ethernet' and \
              intfc.__context__ is not None and \
            intfc.ipv4List is not None:
+            print "uuuu:", intfc.ipv4List
+            print "uuuu2:", convertIpV4(intfc.ipv4List)
             my_catalog = zapi.getUtility(ICatalog)
             alreadyFound = []
             # new Object

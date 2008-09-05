@@ -184,7 +184,8 @@ class AdmUtilNMap(Scanner):
            interfaceDict['ipAddressType'] == u'ipv4':
             if interfaceDict.has_key('ipAddress'):
                 #newInterface.ipv4List.append(interfaceDict['ipAddress'])
-                newInterface.ipv4List = unicode(interfaceDict['ipAddress'])
+                newInterface.ipv4List.append(\
+                    unicode(interfaceDict['ipAddress']))
         ### build snmp objects
         #if interfaceDict.has_key("snmplist") and len(interfaceDict['snmplist'])>0:
             #for snmpDict in interfaceDict['snmplist']:
