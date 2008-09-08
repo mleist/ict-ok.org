@@ -45,11 +45,11 @@ class AdmUtilLinuxHa(Supernode):
 
     implements(IAdmUtilLinuxHa, IReadContainer, IAnnotations)
 
-    LinuxHaServerActive = FieldProperty(IAdmUtilLinuxHa['LinuxHaServerActive'])
-    LinuxHaServerIp = FieldProperty(IAdmUtilLinuxHa['LinuxHaServerIp'])
-    LinuxHaServerPort = FieldProperty(IAdmUtilLinuxHa['LinuxHaServerPort'])
-    LinuxHaUsername = FieldProperty(IAdmUtilLinuxHa['LinuxHaUsername'])
-    LinuxHaPassword = FieldProperty(IAdmUtilLinuxHa['LinuxHaPassword'])
+    linuxHaServerActive = FieldProperty(IAdmUtilLinuxHa['linuxHaServerActive'])
+    linuxHaServerIp = FieldProperty(IAdmUtilLinuxHa['linuxHaServerIp'])
+    linuxHaServerPort = FieldProperty(IAdmUtilLinuxHa['linuxHaServerPort'])
+    linuxHaUsername = FieldProperty(IAdmUtilLinuxHa['linuxHaUsername'])
+    linuxHaPassword = FieldProperty(IAdmUtilLinuxHa['linuxHaPassword'])
 
     lastLinuxHa = "no signal since start"
 
@@ -61,8 +61,9 @@ class AdmUtilLinuxHa(Supernode):
         self.ikRevision = __version__
 
     def connect2HaCluster(self):
-        print "#-> AdmUtilLinuxHa.connect2VimServer: ", self.getObjectId()
-        globalLinuxHaUtility.connectToLinuxHa(self)
+        if self.linuxHaServerActive:
+            print "#-> AdmUtilLinuxHa.connect2VimServer: ", self.getObjectId()
+            globalLinuxHaUtility.connectToLinuxHa(self)
 
     def getNodes(self):
         """ list of all cluster nodes objects
@@ -72,7 +73,8 @@ class AdmUtilLinuxHa(Supernode):
     def updateConnState(self):
         """update the connection state with timestamp
         """
-        self.connState = str(datetime.utcnow())
+        if self.linuxHaServerActive:
+            self.connState = str(datetime.utcnow())
 
     #def setConnStatus(self, connString):
         #if self.connStatus != connString:
@@ -81,36 +83,45 @@ class AdmUtilLinuxHa(Supernode):
 
     def __getitem__(self, key):
         '''See interface `IReadContainer`'''
-        print "AdmUtilLinuxHa.__getitem__(%s)" % (key)
-        if self.has_key(key):
-            return self[key]
-        myDict = self.tempNodeGenerator()
-        if myDict.has_key(key):
-            return myDict[key]
-        raise KeyError
+        if self.linuxHaServerActive:
+            print "AdmUtilLinuxHa.__getitem__(%s)" % (key)
+            if self.has_key(key):
+                return self[key]
+            myDict = self.tempNodeGenerator()
+            if myDict.has_key(key):
+                return myDict[key]
+            raise KeyError
+        else:
+            return None
 
     def __getattr__(self, key):
-        print "AdmUtilLinuxHa.__getattr__(%s)" % (key)
-        if self.has_key(key):
-            return self[key]
-        myDict = self.tempNodeGenerator()
-        if myDict.has_key(key):
-            return myDict[key]
-        if key == '__annotations__':
+        if self.linuxHaServerActive:
+            print "AdmUtilLinuxHa.__getattr__(%s)" % (key)
+            if self.has_key(key):
+                return self[key]
+            myDict = self.tempNodeGenerator()
+            if myDict.has_key(key):
+                return myDict[key]
+            if key == '__annotations__':
+                return None
+            if key == '__getnewargs__':
+                return None
+            raise KeyError
+        else:
             return None
-        if key == '__getnewargs__':
-            return None
-        raise KeyError
 
     def values(self):
         '''See interface `IReadContainer`'''
-        print "AdmUtilLinuxHa.values"
-        return self.tempNodeGenerator().values()
-        #Supernode.values(self)
-        #return globalLinuxHaUtility.get_LinuxHaDatacenter_values(self)
-        #return globalLinuxHaUtility.get_LinuxHaDatacenter_Dict(self, self).values()
-        #return globalLinuxHaUtility.get_LinuxHaAllDict(self, self).values()
-        #return getTestDict(self).values()
+        if self.linuxHaServerActive:
+            print "AdmUtilLinuxHa.values"
+            return self.tempNodeGenerator().values()
+            #Supernode.values(self)
+            #return globalLinuxHaUtility.get_LinuxHaDatacenter_values(self)
+            #return globalLinuxHaUtility.get_LinuxHaDatacenter_Dict(self, self).values()
+            #return globalLinuxHaUtility.get_LinuxHaAllDict(self, self).values()
+            #return getTestDict(self).values()
+        else:
+            return None
 
     def tempNodeGenerator(self):
         print "tempNodeGenerator"
@@ -242,14 +253,14 @@ class GlobalLinuxHaUtility(object):
 
     def connectToLinuxHa(self, obj):
         #logger.info(u"GlobalLinuxHaUtility::connectToLinuxHa(%s)" % obj)
-        if obj.LinuxHaServerActive:
+        if obj.linuxHaServerActive:
             localHaUtilOId = obj.objectID
             connection = {}
             connection['con'] = None
-            connection['ip'] = obj.LinuxHaServerIp
-            connection['port'] = obj.LinuxHaServerPort
-            connection['username'] = obj.LinuxHaUsername
-            connection['password'] = obj.LinuxHaPassword
+            connection['ip'] = obj.linuxHaServerIp
+            connection['port'] = obj.linuxHaServerPort
+            connection['username'] = obj.linuxHaUsername
+            connection['password'] = obj.linuxHaPassword
             print "connection: %s" % (connection)
             if not connection['con']:
                 print "make con"
@@ -301,7 +312,7 @@ class GlobalLinuxHaUtility(object):
                 
     def getNodes(self, obj):
         logger.info(u"GlobalLinuxHaUtility::getNodes(%s)" % obj)
-        if obj.LinuxHaServerActive:
+        if obj.linuxHaServerActive:
             localHaUtilOId = obj.objectID
             myParams = {\
                 'cmd': 'get_nodes',

@@ -37,6 +37,9 @@ class IMenuContext(IViewletManager):
 class IMenuGeneral(IViewletManager):
     """Menu viewlet manager."""
 
+class IMenuInventory(IViewletManager):
+    """Menu viewlet manager."""
+    
 class IMenuEvent(IViewletManager):
     """Menu viewlet manager."""
 

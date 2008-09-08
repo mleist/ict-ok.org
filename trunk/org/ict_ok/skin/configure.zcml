@@ -190,5 +190,4 @@
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--/>-->
 
-    <i18n:registerTranslations directory="../locales" />
 </configure>

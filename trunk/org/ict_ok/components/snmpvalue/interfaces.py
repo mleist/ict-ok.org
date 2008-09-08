@@ -245,33 +245,33 @@ class ISnmpValue(IComponent):
         """converts an input string to the physical unit of
         the quantity 1.0
         """
-    def getPQinpQuantity(self):
+    def getPQinpQuantity():
         """convertQuantity(self.inpQuantity)
         """
-    def getPUdisplUnitAbs(self):
+    def getPUdisplUnitAbs():
         """convertUnit(self.displUnitAbs)
         """
-    def getPUdisplUnitVelocity(self):
+    def getPUdisplUnitVelocity():
         """convertUnit(self.displUnitVelocity)
         """
-    def getPUdisplUnitAcceleration(self):
+    def getPUdisplUnitAcceleration():
         """convertUnit(self.displUnitAcceleration)
         """
-    def getPQmaxQuantityAbs(self):
+    def getPQmaxQuantityAbs():
         """convertQuantity(self.maxQuantityAbs)
         """
-    def getPQmaxQuantityVelocity(self):
+    def getPQmaxQuantityVelocity():
         """convertQuantity(self.maxQuantityVelocity)
         """
-    def getPQmaxQuantityAcceleration(self):
+    def getPQmaxQuantityAcceleration():
         """convertQuantity(self.maxQuantityAcceleration)
         """
-    def getRrdFilename(self):
+    def getRrdFilename():
         """ rrd filename incl. path
         """
-    def getRawSnmpValue(self):
+    def getRawSnmpValue():
         """ get raw snmp-Value without multiplier
         """
-    def getSnmpValue(self):
+    def getSnmpValue():
         """ get SnmpValue as physical value
         """

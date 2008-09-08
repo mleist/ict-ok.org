@@ -26,7 +26,7 @@
         <!--</tr>-->
         <tr class="cb_wht" tal:condition="view/getValue">
             <td i18n:translate="">Value</td>
-            <td tal:content="python: view.getValue()" />
+            <td tal:content="python: context.getSnmpValue()" />
         </tr>
         <!--<tr class="cb_wht" tal:condition="view/getValue">-->
             <!--<td i18n:translate="">Value</td>-->

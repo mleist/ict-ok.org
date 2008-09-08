@@ -39,6 +39,13 @@
         permission="org.ict_ok.components.site.View"
         />
     <viewletManager
+        name="ict_ok.menusub.inventory"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuInventory"
+        class="org.ict_ok.skin.menu.MenuSubInventoryTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    <viewletManager
         name="ict_ok.menusub.event"
         provides="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.skin.menu.MenuSubEventTab"

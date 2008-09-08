@@ -169,6 +169,20 @@ class SnmpValueDetails(ComponentDetails):
                 retVal.ounit(displayUnit.out_unit)
         return retVal
 
+    def getTabClass(self):
+        if hasattr(self.request, 'tabClass'):
+            if self.request.tabClass == 'cb_wht':
+                self.request.tabClass = 'cb_ixl'
+            else:
+                self.request.tabClass = 'cb_wht'
+        else:
+            self.request.tabClass = 'cb_wht'
+        return self.request.tabClass
+
+
+class SnmpValueDisplay(SnmpValueDetails):
+    """
+    """
 
 def getTitel(item, formatter):
     """

@@ -183,7 +183,7 @@ class LinuxHaConnectionThread(threading.Thread):
                     myAdmUtilLinuxHa = queryUtility(IAdmUtilLinuxHa)
                     if myAdmUtilLinuxHa is not None:
                         utilOId = myAdmUtilLinuxHa.getObjectId()
-                        if myAdmUtilLinuxHa.LinuxHaServerActive:
+                        if myAdmUtilLinuxHa.linuxHaServerActive:
                             self.executeMyQueue(myAdmUtilLinuxHa)
                         else:
                             if not self.getQueue(utilOId)['in'].empty():

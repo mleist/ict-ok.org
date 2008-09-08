@@ -36,6 +36,7 @@ from zope.component import getMultiAdapter
 from zope.lifecycleevent import Attributes, ObjectModifiedEvent
 from zope.app.rotterdam.xmlobject import translate, setNoCacheHeaders
 from zope.app.container.interfaces import IOrderedContainer
+from zope.schema import vocabulary
 
 # z3c imports
 from z3c.form import button, field, form, interfaces
@@ -300,6 +301,9 @@ class MSubOverview(GlobalMenuSubItem):
     title = _(u'Overview')
     viewURL = '@@overview.html'
     weight = 10
+    def render(self):
+        if len(self.context) > 0:
+            return GlobalMenuSubItem.render(self)
 
 
 class MSubHistory(GlobalMenuSubItem):
@@ -452,6 +456,20 @@ class SuperclassDetails:
     
     def getModifiedTime(self):
         return IZopeDublinCore(self.context).modified
+    
+    def vocabValue(self, vocabName=None, token=None):
+        if vocabName is None:
+            return None
+        if token is None:
+            return None
+        vocabReg = vocabulary.getVocabularyRegistry()
+        if vocabReg is not None:
+            vocab = vocabReg.get(self.request, vocabName)
+            if vocab is not None:
+                vocabTerm = vocab.getTerm(token)
+                if vocabTerm:
+                    return vocabTerm.title
+        return None
 
 
 class DumpData:

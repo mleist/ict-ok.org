@@ -19,12 +19,25 @@
     <z3c:pagelet
         name="display.html"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
-        class=".snmpvalue.SnmpValueDetails"
+        class=".snmpvalue.SnmpValueDisplay"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.View"
     />
     <z3c:template
         template="display.pt"
+        for=".snmpvalue.SnmpValueDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class=".snmpvalue.SnmpValueDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.View"
+    />
+    <z3c:template
+        template="details.pt"
         for=".snmpvalue.SnmpValueDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
@@ -111,13 +124,13 @@
         permission="org.ict_ok.components.snmpvalue.View"
         />
 
-    <z3c:pagelet
-        name="details.html"
-        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
-        class=".snmpvalue.DetailsSnmpValueForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.snmpvalue.View"
-    />
+    <!--<z3c:pagelet-->
+        <!--name="details.html"-->
+        <!--for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"-->
+        <!--class=".snmpvalue.DetailsSnmpValueForm"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.components.snmpvalue.View"-->
+    <!--/>-->
 
     <z3c:pagelet
         name="edit.html"

@@ -47,13 +47,13 @@ class IAdmUtilLinuxHa(ISupernode):
     """
     major component for registration and event distribution 
     """
-    LinuxHaServerActive = Bool(
+    linuxHaServerActive = Bool(
         title = _("HA-Cluster active"),
         description = _("HA-Cluster connector active"),
         default = False,
         required = False)
 
-    LinuxHaServerIp = HostIpValid(
+    linuxHaServerIp = HostIpValid(
         min_length = 1,
         max_length = 30,
         title = _("HA-Cluster IP"),
@@ -61,7 +61,7 @@ class IAdmUtilLinuxHa(ISupernode):
         default = u"0.0.0.0",
         required = False)
     
-    LinuxHaServerPort = Int(
+    linuxHaServerPort = Int(
         min = 1,
         max = 65535,
         title = _("HA-Cluster Port"),
@@ -69,13 +69,13 @@ class IAdmUtilLinuxHa(ISupernode):
         default = 5560,
         required = False)
     
-    LinuxHaUsername = TextLine(
+    linuxHaUsername = TextLine(
         title = _("HA-Cluster Username"),
         description = _("Name of user with admin rights on ha cluster"),
         default = u"username",
         required = False)
 
-    LinuxHaPassword = Password(
+    linuxHaPassword = Password(
         title = _("HA-Cluster Password"),
         description = _("Password of user with admin rights on ha cluster"),
         default = u"password",

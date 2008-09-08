@@ -156,7 +156,7 @@ class SnmpValue(Component):
         """
         from pysnmp.entity.rfc3413.oneliner import cmdgen
         for oid in self.getOidList():
-            oidStringList = self.oid1.strip(".").split(".")
+            oidStringList = oid.strip(".").split(".")
             try:
                 interfaceObj = self.getParent()
                 if len(interfaceObj.ipv4List) > 0:
