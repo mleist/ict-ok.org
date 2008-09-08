@@ -16,7 +16,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 from zope.interface import Invalid, invariant
-from zope.schema import Bool, Choice
+from zope.schema import Bool, Choice, List
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
@@ -34,23 +34,26 @@ class ISnmpValue(IComponent):
 
     checktype = Choice(
         title=_(u"Check Type"),
-        default=u"oid",
+        default=u"address",
         required = True,
         vocabulary = "SnmpCheckTypes")
 
-    oid1 = SnmpOidValid(
-        max_length=400,
-        title=_("OID1"),
-        description=_("OID1"),
-        default=u"1.3.6.1.2.1.1.1.0",
-        required=False)
+    snmpIndexType = Choice(
+        title = _("SNMP address type"),
+        vocabulary="SnmpIndexTypes",
+        default = u"mac",
+        required = True)
 
-    oid2 = SnmpOidValid(
-        max_length=400,
-        title=_("OID2"),
-        description=_("OID2"),
+    inp_addrs = List (
+        title = _("input addresses"),
+        description = _("list of all input addresses"),
+        value_type = SnmpOidValid(
+            max_length=400,
+            title=_("SNMP address"),
         default=u"1.3.6.1.2.1.1.1.0",
-        required=False)
+            required=True),
+        default = [u"1.3.6.1.2.1.1.1.0"],
+        required = False)
 
     cmd = Choice(
         title=_(u"Check Command"),
@@ -77,12 +80,6 @@ class ISnmpValue(IComponent):
         description=_("enable check 'max' for this entry"),
         default=False,
         required=True)
-
-    snmpIndexType = Choice(
-        title = _("SNMP index type"),
-        vocabulary="SnmpIndexTypes",
-        default = u"mac",
-        required = True)
 
     inpQuantity = PhysicalQuantity(
         max_length=400,

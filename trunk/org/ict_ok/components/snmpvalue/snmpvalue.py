@@ -47,7 +47,7 @@ def SnmpCheckTypes(dummy_context):
     """
     terms = []
     for (gkey, gname) in {
-        u'oid': u'OID',
+        u'address': u'SNMP address',
         u'cmd': u'Command',
         }.items():
         terms.append(SimpleTerm(gkey, str(gkey), gname))
@@ -77,6 +77,7 @@ def SnmpIndexTypes(dummy_context):
     """
     terms = []
     for (gkey, gname) in {
+        u"oid": u"SNMP OID",
         u"index": u"Interface index",
         #u"ip": u"IP address",
         u"mac": u"Ethernet address",
@@ -95,13 +96,12 @@ class SnmpValue(Component):
     # for ..Contained we have to:
     __name__ = __parent__ = None
     checktype = FieldProperty(ISnmpValue['checktype'])
-    oid1 = FieldProperty(ISnmpValue['oid1'])
-    oid2 = FieldProperty(ISnmpValue['oid2'])
+    snmpIndexType = FieldProperty(ISnmpValue['snmpIndexType'])
+    inp_addrs = FieldProperty(ISnmpValue['inp_addrs'])
     cmd = FieldProperty(ISnmpValue['cmd'])
     inptype = FieldProperty(ISnmpValue['inptype'])
     displayMinMax = FieldProperty(ISnmpValue['displayMinMax'])
     checkMax = FieldProperty(ISnmpValue['checkMax'])
-    snmpIndexType = FieldProperty(ISnmpValue['snmpIndexType'])
     inpQuantity = FieldProperty(ISnmpValue['inpQuantity'])
     displUnitAbs = FieldProperty(\
         ISnmpValue['displUnitAbs'])
@@ -126,39 +126,65 @@ class SnmpValue(Component):
                 setattr(self, name, value)
         self.ikRevision = __version__
 
+    def getOidFromIndexType(self):
+        if self.snmpIndexType == u"":
+            pass
+        elif self.snmpIndexType == u"":
+            pass
+        else:
+            pass
+        
+    def getOidList(self):
+        retList = []
+        for addr in self.inp_addrs:
+            if self.snmpIndexType == u"oid":
+                retList.append(addr)
+            elif self.snmpIndexType == u"index":
+                raise Exception, "non implemented yet"
+            elif self.snmpIndexType == u"mac":
+                raise Exception, "non implemented yet"
+            elif self.snmpIndexType == u"desc":
+                raise Exception, "non implemented yet"
+            elif self.snmpIndexType == u"name":
+                raise Exception, "non implemented yet"
+            else:
+                retList.append(addr)
+        return retList
+
     def getRawSnmpValue(self):
         """ get raw snmp-Value without multiplier
         """
         from pysnmp.entity.rfc3413.oneliner import cmdgen
-        oidStringList = self.oid1.strip(".").split(".")
-        try:
-            interfaceObj = self.getParent()
-            if len(interfaceObj.ipv4List) > 0:
-                interfaceIp = interfaceObj.ipv4List[0]
-            else:
+        for oid in self.getOidList():
+            oidStringList = self.oid1.strip(".").split(".")
+            try:
+                interfaceObj = self.getParent()
+                if len(interfaceObj.ipv4List) > 0:
+                    interfaceIp = interfaceObj.ipv4List[0]
+                else:
+                    return None
+                hostObj = interfaceObj.getParent()
+                hostSnmpVers = hostObj.snmpVersion
+                hostSnmpPort = hostObj.snmpPort
+                hostSnmpReadCommunity = hostObj.snmpReadCommunity
+                hostSnmpWriteCommunity = hostObj.snmpWriteCommunity
+                oidIntList = [ int(i) for i in oidStringList]
+                errorIndication, errorStatus, errorIndex, varBinds = \
+                               cmdgen.CommandGenerator().getCmd(
+                                   cmdgen.CommunityData('my-agent', 
+                                                        hostSnmpReadCommunity,
+                                                        int(hostSnmpVers)),
+                                   cmdgen.UdpTransportTarget((interfaceIp, 
+                                                              hostSnmpPort)),
+                                   tuple(oidIntList)
+                               )
+                if len(varBinds) > 0:
+                    return float(varBinds[0][1])
+                else:
+                    return None
+            except Exception, errText:
+                print "getRawSnmpValue-Error: ", errText
                 return None
-            hostObj = interfaceObj.getParent()
-            hostSnmpVers = hostObj.snmpVersion
-            hostSnmpPort = hostObj.snmpPort
-            hostSnmpReadCommunity = hostObj.snmpReadCommunity
-            hostSnmpWriteCommunity = hostObj.snmpWriteCommunity
-            oidIntList = [ int(i) for i in oidStringList]
-            errorIndication, errorStatus, errorIndex, varBinds = \
-                           cmdgen.CommandGenerator().getCmd(
-                               cmdgen.CommunityData('my-agent', 
-                                                    hostSnmpReadCommunity,
-                                                    int(hostSnmpVers)),
-                               cmdgen.UdpTransportTarget((interfaceIp, 
-                                                          hostSnmpPort)),
-                               tuple(oidIntList)
-                           )
-            if len(varBinds) > 0:
-                return float(varBinds[0][1])
-            else:
-                return None
-        except Exception, errText:
-            print "getRawSnmpValue-Error: ", errText
-            return None
 
     def getSnmpValue(self):
         """ get SnmpValue as physical value

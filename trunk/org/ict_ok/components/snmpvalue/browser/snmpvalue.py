@@ -365,10 +365,9 @@ class AddSnmpValueForm(AddForm):
                        templateData.has_key('oid2'):
                         # must do a copy otherwise all future defaults will change
                         self.fields = copy.deepcopy(self.fields)
-                        self.fields['oid1'].field.default = \
-                            u"%s" % templateData['oid1']
-                        self.fields['oid2'].field.default = \
-                            u"%s" % templateData['oid2']
+                        self.fields['inp_addrs'].field.default = \
+                            [u"%s" % templateData['oid1'],
+                             u"%s" % templateData['oid2']]
         AddForm.update(self)
 
 class EditSnmpValueForm(EditForm):
