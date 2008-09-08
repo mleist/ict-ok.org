@@ -109,6 +109,9 @@ class IAdmUtilLinuxHa(ISupernode):
 
     def connect2HaCluster(self):
         ''' '''
+    def getNodes(self):
+        """ list of all cluster nodes objects
+        """
 
 
 class IGlobalLinuxHaUtility(Interface):
@@ -128,3 +131,9 @@ class IGlobalLinuxHaUtility(Interface):
         
     def getUptime(self):
         """uptime of Utility"""
+
+
+class ILinuxHaObjNode(Interface):
+    """
+    """
+    name = Attribute("object name")

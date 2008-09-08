@@ -17,10 +17,15 @@
             <td class="label" i18n:translate="">Server Password</td>
             <td>**********</td>
         </tr>
-        <tr class="cb_wht" tal:condition="context/connStatus|nothing">
-            <td class="label" i18n:translate="">Connection Status</td>
-            <td tal:content="structure context/connStatus" />
+        <tr class="cb_wht" tal:condition="context/connState|nothing">
+            <td class="label" i18n:translate="">Connection State</td>
+            <td tal:content="structure context/connState" />
         </tr>
+        <tr class="cb_wht" tal:condition="context/getNodes|nothing">
+            <td class="label" i18n:translate="">Nodes</td>
+            <td tal:content="structure context/getNodes" />
+        </tr>
+
         <!--<tr class="cb_ilx" tal:condition="context/apiFullName|nothing">-->
             <!--<td class="label" i18n:translate="">ESX Api</td>-->
             <!--<td tal:content="structure context/apiFullName" />-->

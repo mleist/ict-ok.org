@@ -75,12 +75,12 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made IAdmUtilLinuxHa-Utility")
-    #else:
-        #sitem = root_folder.getSiteManager()
-        #utils = [ util for util in sitem.registeredUtilities()
-                  #if util.provided.isOrExtends(IAdmUtilLinuxHa)]
-        #instAdmUtilLinuxHa = utils[0].component
-        #instAdmUtilLinuxHa.connect2VimServer()
+    else:
+        sitem = root_folder.getSiteManager()
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilLinuxHa)]
+        instAdmUtilLinuxHa = utils[0].component
+        instAdmUtilLinuxHa.connect2HaCluster()
 
     #sitem = root_folder.getSiteManager()
     ## search for ICatalog

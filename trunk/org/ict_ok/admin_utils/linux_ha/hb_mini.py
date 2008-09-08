@@ -21,8 +21,9 @@ __version__ = "$Id$"
 import locale
 import sys, socket, string, syslog
 
-sys.path.append("/usr/share/heartbeat-gui")
-sys.path.append("/usr/lib/heartbeat-gui")
+#sys.path.append("/usr/share/heartbeat-gui")
+#sys.path.append("/usr/lib/heartbeat-gui")
+sys.path.append("/opt/ict_ok.org/lib/heartbeat-gui")
 from pymgmt import *
 
 debug_level = 0
@@ -68,7 +69,6 @@ class miniManager(object):
         if string.find(server, ":") != -1 :
             server,port = string.split(server,":")
         ip = socket.gethostbyname(server)
-        print ip
         ret = mgmt_connect(ip, username, password, port)
         if ret != 0 :
             if ret == -1 :

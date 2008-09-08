@@ -64,34 +64,103 @@ class AdmUtilLinuxHa(Supernode):
         print "#-> AdmUtilLinuxHa.connect2VimServer: ", self.getObjectId()
         globalLinuxHaUtility.connectToLinuxHa(self)
 
+    def getNodes(self):
+        """ list of all cluster nodes objects
+        """
+        return globalLinuxHaUtility.getNodes(self)
+    
+    def updateConnState(self):
+        """update the connection state with timestamp
+        """
+        self.connState = str(datetime.utcnow())
+
     #def setConnStatus(self, connString):
         #if self.connStatus != connString:
             #self.connStatus = connString
             #self._p_changed = True
 
-    #def __getitem__(self, key):
-        #'''See interface `IReadContainer`'''
-        #print "AdmUtilLinuxHa.__getitem__(%s)" % (key)
-        #if self.has_key(key):
-            #return self[key]
-        #myDict = globalLinuxHaUtility.get_LinuxHaAllDict(self, self)
-        #if myDict.has_key(key):
-            #return myDict[key]
-        #raise KeyError
+    def __getitem__(self, key):
+        '''See interface `IReadContainer`'''
+        print "AdmUtilLinuxHa.__getitem__(%s)" % (key)
+        if self.has_key(key):
+            return self[key]
+        myDict = self.tempNodeGenerator()
+        if myDict.has_key(key):
+            return myDict[key]
+        raise KeyError
 
-    #def __getattr__(self, key):
-        #print "AdmUtilLinuxHa.__getattr__(%s)" % (key)
-        #if self.has_key(key):
-            #return self[key]
-        #myDict = globalLinuxHaUtility.get_LinuxHaAllDict(self, self)
-        #if myDict.has_key(key):
-            #return myDict[key]
-        #if key == '__annotations__':
-            #return None
-        #if key == '__getnewargs__':
-            #return None
-        #raise KeyError
+    def __getattr__(self, key):
+        print "AdmUtilLinuxHa.__getattr__(%s)" % (key)
+        if self.has_key(key):
+            return self[key]
+        myDict = self.tempNodeGenerator()
+        if myDict.has_key(key):
+            return myDict[key]
+        if key == '__annotations__':
+            return None
+        if key == '__getnewargs__':
+            return None
+        raise KeyError
 
+    def values(self):
+        '''See interface `IReadContainer`'''
+        print "AdmUtilLinuxHa.values"
+        return self.tempNodeGenerator().values()
+        #Supernode.values(self)
+        #return globalLinuxHaUtility.get_LinuxHaDatacenter_values(self)
+        #return globalLinuxHaUtility.get_LinuxHaDatacenter_Dict(self, self).values()
+        #return globalLinuxHaUtility.get_LinuxHaAllDict(self, self).values()
+        #return getTestDict(self).values()
+
+    def tempNodeGenerator(self):
+        print "tempNodeGenerator"
+        retDict = {}
+        parentObj = self
+        for i in range(25):
+            iname = u"Name %d" % i
+            # Node 1
+            newNodeObj = createObject(\
+                "org.ict_ok.admin_utils.linux_ha.linux_ha_node.LinuxHaObjNode")
+            newNodeObj.name = iname
+            contained(newNodeObj, parentObj, iname)
+            newNodeObj.__parent__ = parentObj
+            retDict[iname] = newNodeObj
+        ## Node 2
+        #newNodeObj = createObject(\
+            #"org.ict_ok.admin_utils.linux_ha.linux_ha_node.LinuxHaObjNode")
+        #newNodeObj.name = u'Node xyz2'
+        #contained(newNodeObj, parentObj, u'Node xyz2')
+        #newNodeObj.__parent__ = parentObj
+        #retDict[u"Node xyz2"] = newNodeObj
+        return retDict
+
+    #def keys(self):
+        #print "AdmUtilLinuxHa.keys"
+        #Supernode.keys(self)
+
+    #def __iter__(self):
+        #print "AdmUtilLinuxHa.__iter__"
+        #Supernode.__iter__(self)
+
+    #def get(self, key, default=None):
+        #print "AdmUtilLinuxHa.get(%s,%s)" % (key, default)
+        #Supernode.get(self, key, default)
+
+
+    #def __len__(self):
+        #print "AdmUtilLinuxHa.__len__"
+        #Supernode.__len__(self)
+
+    #def items(self):
+        #print "AdmUtilLinuxHa.items"
+        #Supernode.items(self)
+
+    #def __contains__(self, key):
+        #print "AdmUtilLinuxHa.__contains__(%s)" % (key)
+        #Supernode.__contains__(self, key)
+        
+        
+        
     #def powerOffVm(self, uuid):
         #return globalLinuxHaUtility.powerOffVm(uuid, self)
 
@@ -110,14 +179,6 @@ class AdmUtilLinuxHa(Supernode):
 
     #def getEsxRoomUuid(self, uuid):
         #return globalLinuxHaUtility.getEsxRoomUuid(uuid, self)
-
-    #def values(self):
-        #'''See interface `IReadContainer`'''
-        #print "AdmUtilLinuxHa.values"
-        #return globalLinuxHaUtility.get_LinuxHaDatacenter_values(self)
-        #return globalLinuxHaUtility.get_LinuxHaDatacenter_Dict(self, self).values()
-        #return globalLinuxHaUtility.get_LinuxHaAllDict(self, self).values()
-        #return getTestDict(self).values()
 
     #def receiveLinuxHa(self, request, str_time, mode=None):
         #"""receive linux_ha signal
@@ -180,8 +241,9 @@ class GlobalLinuxHaUtility(object):
             ##del self.connection_dict[obj.getObjectId()]
 
     def connectToLinuxHa(self, obj):
-        logger.info(u"GlobalLinuxHaUtility::connectToLinuxHa(%s)" % obj)
+        #logger.info(u"GlobalLinuxHaUtility::connectToLinuxHa(%s)" % obj)
         if obj.LinuxHaServerActive:
+            localHaUtilOId = obj.objectID
             connection = {}
             connection['con'] = None
             connection['ip'] = obj.LinuxHaServerIp
@@ -191,6 +253,19 @@ class GlobalLinuxHaUtility(object):
             print "connection: %s" % (connection)
             if not connection['con']:
                 print "make con"
+                myParams = {\
+                    'cmd': 'make_con',
+                    'admUtilLinuxHaOid': localHaUtilOId,
+                    'conn_params': connection
+                }
+                self.haThread.getQueue(localHaUtilOId)['in'].join()
+                self.haThread.getQueue(localHaUtilOId)['in'].put(myParams, True, 15)
+                self.haThread.getQueue(localHaUtilOId)['in'].join()
+                if self.haThread.getQueue(localHaUtilOId)['out'].qsize() > 0:
+                    obj.updateConnState()
+                    retValue = self.haThread.getQueue(localHaUtilOId)['out'].get(True, 15)
+                    self.haThread.getQueue(localHaUtilOId)['out'].task_done()
+                    print "done -> retValue: ", retValue
                 #if not self.haThread:
                     #self.haThread = LinuxHaConnectionThread()
                     #self.haThread.globalLinuxHa = self
@@ -208,7 +283,6 @@ class GlobalLinuxHaUtility(object):
                             ##password="ikom.trol")
             else:
                 print "check con if already up"
-        localHaUtilOId = obj.objectID
         print "localHaUtilOId: ", localHaUtilOId
         if self.haThread is None:
             return {}
@@ -225,6 +299,25 @@ class GlobalLinuxHaUtility(object):
             print "done: ", retList
         print "dont total"
                 
+    def getNodes(self, obj):
+        logger.info(u"GlobalLinuxHaUtility::getNodes(%s)" % obj)
+        if obj.LinuxHaServerActive:
+            localHaUtilOId = obj.objectID
+            myParams = {\
+                'cmd': 'get_nodes',
+                'admUtilLinuxHaOid': localHaUtilOId
+                }
+            self.haThread.getQueue(localHaUtilOId)['in'].join()
+            self.haThread.getQueue(localHaUtilOId)['in'].put(myParams, True, 15)
+            self.haThread.getQueue(localHaUtilOId)['in'].join()
+            if self.haThread.getQueue(localHaUtilOId)['out'].qsize() > 0:
+                obj.updateConnState()
+                nodeList = self.haThread.getQueue(localHaUtilOId)['out'].get(True, 15)
+                self.haThread.getQueue(localHaUtilOId)['out'].task_done()
+                print "done -> nodeList: ", nodeList
+                return nodeList
+        return None
+        
     #def get_LinuxHaDatacenter_keys(self, localEsxUtil):
         #print "IkGlobalLinuxHaUtility.get_LinuxHaDatacenter_keys(%s,%s)" % \
               #(self, localEsxUtil)
@@ -509,7 +602,6 @@ class GlobalLinuxHaUtility(object):
         #self.haThread.getQueue(localEsxUtilOId)['out'].task_done()
         #return esxServerUuid
 
-print "#1"*40
 globalLinuxHaUtility = GlobalLinuxHaUtility()
 
 #@adapter(IAdmUtilLinuxHa, IObjectModifiedEvent)

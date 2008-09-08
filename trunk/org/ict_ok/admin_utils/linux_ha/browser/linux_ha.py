@@ -76,6 +76,11 @@ class AdmUtilLinuxHaDetails(SupernodeDetails):
         """
         return self.context.getLinuxHaTime()
 
+    def getNodes(self):
+        """ list view for all cluster nodes
+        """
+        return ["aa", "bb"].extend(self.context.getNodes())
+    
     #def getGlobalLinuxHaUtility(self):
         #return globalLinuxHaUtility
 
@@ -198,16 +203,16 @@ class Overview(BrowserPagelet):
     def objs(self):
         """List of Content objects"""
         retList = []
-        self.context.connect2HaCluster()
+        #self.context.connect2HaCluster()
         ##try:
             ##for obj in self.context.values():
                 ##if ISuperclass.providedBy(obj):
                     ##retList.append(obj)
         ##except:
             ##pass
-        #for obj in self.context.values():
-            ##if ILinuxHaObj.providedBy(obj):
-            #retList.append(obj)
+        for obj in self.context.values():
+            #if ILinuxHaObj.providedBy(obj):
+            retList.append(obj)
         return retList
         #return [obj
                 #for obj in self.context.values()

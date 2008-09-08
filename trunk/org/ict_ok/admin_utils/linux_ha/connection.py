@@ -29,6 +29,8 @@ from zope.component import queryUtility
 # ict_ok.org imports
 from org.ict_ok.libs.ikqueue import IkQueue
 from org.ict_ok.admin_utils.linux_ha.interfaces import IAdmUtilLinuxHa
+from org.ict_ok.admin_utils.linux_ha.hb_mini import miniManager
+from org.ict_ok.admin_utils.linux_ha.classes import Cluster, Node, Ressource
 
 logger = logging.getLogger("AdmUtilLinuxHa")
 _ = MessageFactory('org.ict_ok')
@@ -43,6 +45,8 @@ class LinuxHaConnectionThread(threading.Thread):
         print "LinuxHaConnectionThread started"
         self.globalLinuxHa = None
         self.queues = {}
+        self.clusters = {}
+        self.miniManagers = {}
         threading.Thread.__init__(self)
 
     def createQueue(self, queueId):
@@ -72,55 +76,6 @@ class LinuxHaConnectionThread(threading.Thread):
                 del self.globalLinuxHa.connection_dict[\
                     myAdmUtilLinuxHa.getObjectId()]
                 return True
-        return False
-
-    def hb_login(self, myAdmUtilLinuxHa):
-        try:
-            if self.globalLinuxHa:
-                if self.is_logged_in(myAdmUtilLinuxHa):
-                    pass
-                else:
-                    #print "login"
-                    my_service_url = "https://%s:%s/sdk/webService" % \
-                                   (myAdmUtilLinuxHa.hbVimServerIp,
-                                    myAdmUtilLinuxHa.hbVimServerPort)
-                    #print "service_url: ", my_service_url
-                    retVal = self.perl.call("Vim::login",
-                                            service_url = str(my_service_url),
-                                            user_name = u"%s" % myAdmUtilLinuxHa.hbVimUsername,
-                                            password = u"%s" % myAdmUtilLinuxHa.hbVimPassword
-                                        )
-                    self.globalLinuxHa.connection_dict[\
-                        myAdmUtilLinuxHa.getObjectId()] = \
-                        retVal
-                    myAdmUtilLinuxHa.setConnStatus(u"connect ok")
-                    tmpApiFullName = "%s" % retVal.about().fullName()
-                    if myAdmUtilLinuxHa.apiFullName != tmpApiFullName:
-                        myAdmUtilLinuxHa.apiFullName = tmpApiFullName
-                    return True
-        except self.perl.PerlError, err:
-            errStringList = str(err).split('\n')
-            myErrorText = errStringList[0] + '/' + errStringList[1]
-            myAdmUtilLinuxHa.setConnStatus(u"connect error:" + myErrorText)
-            self.del_logged_in(myAdmUtilLinuxHa)
-            time.sleep(3)
-        return False
-
-    def hb_logout(self, myAdmUtilLinuxHa):
-        print "hb_logout"
-        if self.globalLinuxHa:
-            if self.perl is not None:
-                try:
-                    print "Vim::logout"
-                    retVal = self.perl.call("Vim::logout")
-                    print "logged out, retVal:", retVal
-                    return True
-                except self.perl.PerlError, err:
-                    errStringList = str(err).split('\n')
-                    myErrorText = errStringList[0] + '/' + errStringList[1]
-                    myAdmUtilLinuxHa.setConnStatus(u"connect error:" + myErrorText)
-                    self.del_logged_in(myAdmUtilLinuxHa)
-                    time.sleep(1)
         return False
 
     def getAllLinuxHaDatacenter(self, myAdmUtilLinuxHa):
@@ -179,12 +134,40 @@ class LinuxHaConnectionThread(threading.Thread):
     def executeMyQueue(self, myAdmUtilLinuxHa):
         utilOId = myAdmUtilLinuxHa.getObjectId()
         if not self.getQueue(utilOId)['in'].empty():
-            print "executeMyQueue"
+            #print "executeMyQueue"
             myParams = self.getQueue(utilOId)['in'].get(True, 15)
-            print "cmd: ", myParams['cmd']
-            sourceAdmUtilLinuxHa = myParams['admUtilLinuxHa']
-            sourceOId = sourceAdmUtilLinuxHa.getObjectId()
-            self.getQueue(sourceOId)['out'].put(None, True, 15)
+            #print "cmd: ", myParams['cmd']
+            #sourceAdmUtilEsxVim = myParams['admUtilEsxVim']
+            #sourceOId = sourceAdmUtilEsxVim.getObjectId()
+            
+            # make connection in worker thread
+            if myParams.has_key('cmd'):
+                if myParams['cmd'] == 'make_con':
+                    print "jetzt die Verbindung bauen"
+                    print "ip: ", myParams['conn_params']['ip']
+                    print "port: ", myParams['conn_params']['port']
+                    print "user: ", myParams['conn_params']['username']
+                    print "passwd: ", myParams['conn_params']['password']
+                    print "und los"
+                    # eigentliche conn aufbauen ...
+                    self.miniManagers[utilOId] = miniManager()
+                    self.clusters[utilOId] = Cluster(\
+                        "%s:%d" % (myParams['conn_params']['ip'],
+                                   myParams['conn_params']['port']),
+                        str(myParams['conn_params']['username']),
+                        str(myParams['conn_params']['password']),
+                        str(utilOId),
+                        self.miniManagers[utilOId])
+                    retCon = self.miniManagers[utilOId].login(\
+                        str(self.clusters[utilOId].ip),
+                        str(self.clusters[utilOId].user),
+                        str(self.clusters[utilOId].passwd))
+                    self.getQueue(utilOId)['out'].put(retCon, True, 15)
+                elif myParams['cmd'] == 'get_nodes':
+                    print "jetzt die knoten suchen"
+                    objList = self.clusters[utilOId].getNodes()
+                    retList = [obj.name for obj in objList]
+                    self.getQueue(utilOId)['out'].put(retList, True, 15)
             self.getQueue(utilOId)['in'].task_done()
 
     def run(self, forever=True):
@@ -226,7 +209,9 @@ class LinuxHaConnectionThread(threading.Thread):
             old_site = getSite()
             setSite(root_folder)
             myAdmUtilLinuxHa = queryUtility(IAdmUtilLinuxHa)
-            self.esx_logout(myAdmUtilLinuxHa)
+            #self.esx_logout(myAdmUtilLinuxHa)
+            for minim_obj in self.miniManagers.values():
+                minim_obj.logout()
             #setSite(old_site)
             transaction.commit()
             conn.close()
