@@ -1,12 +1,12 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: ict-ok.org $Id:$\n"
+"Project-Id-Version: ict-ok.org $Id$\n"
 "POT-Creation-Date: Sun Aug 10 20:11:32 2008\n"
-"PO-Revision-Date: 2008-09-08 08:34+0100\n"
+"PO-Revision-Date: 2008-09-08 15:06+0100\n"
 "Last-Translator: Markus Leist <leist@ikom-online.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: etc/site.zcml:203
