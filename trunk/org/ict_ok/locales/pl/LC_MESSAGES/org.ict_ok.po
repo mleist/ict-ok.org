@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ict-ok.org $Id:$\n"
 "POT-Creation-Date: Sun Aug 10 20:11:32 2008\n"
-"PO-Revision-Date: 2008-09-08 08:34+0100\n"
+"PO-Revision-Date: 2008-09-08 08:25+0100\n"
 "Last-Translator: Markus Leist <leist@ikom-online.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -10,81 +10,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: etc/site.zcml:203
-#, fuzzy
 msgid "All users have this role implicitly"
-msgstr "Alle Benutzer haben implizit diese Rolle"
+msgstr ""
 
 #: etc/site.zcml:203
-#, fuzzy
 msgid "Everybody"
-msgstr "Jeder"
+msgstr ""
 
 #: etc/site.zcml:205
-#, fuzzy
 msgid "Site Manager"
-msgstr "Webseitenverwaltung"
+msgstr ""
 
 #: etc/site.zcml:206
-#, fuzzy
 msgid "Site Member"
-msgstr "Webseitennutzer"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:103
 msgid "Delete this host group: '%s'?"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:48
-#, fuzzy
 msgid "Add Host Group"
-msgstr "Gruppen-Informationen hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:75
-#, fuzzy
 msgid "settings of categories"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:83
-#, fuzzy
 msgid "add host group"
-msgstr "Gruppen-Informationen hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:94
 msgid "edit host group settings"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/compliance/browser/compliance.py:64
-#, fuzzy
 msgid "settings of Compliance"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/compliance/browser/compliance.py:72
-#, fuzzy
 msgid "edit Compliance properties"
-msgstr "Felderinhalt bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/cron/browser/cron.py:56
-#, fuzzy
 msgid "settings of cron"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/cron/browser/cron.py:63
-#, fuzzy
 msgid "edit cron"
-msgstr "Bearbeiten Popup"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/cron/interfaces.py:35
-#, fuzzy
 msgid "Time Zone"
-msgstr "Letzter Zugriff"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/cron/interfaces.py:36
 msgid "Time Zone used to display your calendar"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/cron/interfaces.py:56
-#, fuzzy
 msgid "Last Cron Start"
-msgstr "Letzter Zugriff"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/cron/interfaces.py:57
 msgid "Date of last Cron-Start"
@@ -99,101 +86,84 @@ msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:13
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:13
-#, fuzzy
 msgid "Server Username"
-msgstr "Serverkontrolle"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:17
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:17
-#, fuzzy
 msgid "Server Password"
-msgstr "Passwortverwalter"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:21
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:21
-#, fuzzy
 msgid "Connection Status"
-msgstr "Registrierungsstatus"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:25
-#, fuzzy
 msgid "ESX Api"
-msgstr "Deprecation API"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:5
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:5
-#, fuzzy
 msgid "Server IP"
-msgstr "Serverkontrolle"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:9
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:9
-#, fuzzy
 msgid "Server Port"
-msgstr "Serverkontrolle"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx.pt:2
-#, fuzzy
 msgid "Details dddd"
-msgstr "Schnittstellen-Einzelheiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:2
-#, fuzzy
 msgid "Details ESX Host"
-msgstr "Einzelheiten zu ${application_id} Anwendungsverwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:23
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:28
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:61
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:66
-#, fuzzy
 msgid "Uptime"
-msgstr "Laufzeit"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:29
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:67
-#, fuzzy
 msgid "not online"
-msgstr "Online-Hilfe"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:14
 msgid "Powerstate"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:18
-#, fuzzy
 msgid "max CPU usage"
 msgstr ""
-"Aufruf: %s [<Option> ...] <Befehl>\n"
-"\n"
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:2
 msgid "Details ESX Virtual Maschine"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:22
-#, fuzzy
 msgid "max memory usage"
-msgstr "Gesamtverbrauch an Speicher"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:28
 msgid "Heartbeat"
-msgstr "Herzschlag"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:32
-#, fuzzy
 msgid "Guest full name"
-msgstr "Suche nur nach Name"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:36
-#, fuzzy
 msgid "Guest family"
-msgstr "Unbekannte Adressfamilie %u (AF_*)"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:40
-#, fuzzy
 msgid "Guest ip address"
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:44
 msgid "Guest hostname"
@@ -208,9 +178,8 @@ msgid "Guest network connected (net0)"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:56
-#, fuzzy
 msgid "Guest tool Version"
-msgstr "Adapters (light version)"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:71
 msgid "Host Machine"
@@ -222,27 +191,23 @@ msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:129
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:129
-#, fuzzy
 msgid "shutdown"
-msgstr "Server herunterfahren"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:133
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:133
-#, fuzzy
 msgid "shutdow the virtual machine"
-msgstr "  davon gemischte virtuelle Pakete: "
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:141
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:141
-#, fuzzy
 msgid "convert to intern"
-msgstr "FDocTest (How to)"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:145
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:145
-#, fuzzy
 msgid "convert to internal object"
-msgstr "Interner Fehler, konnte %s nicht erzeugen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:187
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:220
@@ -257,9 +222,8 @@ msgstr "Interner Fehler, konnte %s nicht erzeugen"
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:682
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:746
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:771
-#, fuzzy
 msgid "Title"
-msgstr "Titel"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:190
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:190
@@ -267,7 +231,7 @@ msgstr "Titel"
 #: lib/python/org/ict_ok/components/net/browser/net.py:203
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:648
 msgid "Actions"
-msgstr "Tätigkeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:196
 msgid "Overview ESX VIM"
@@ -284,14 +248,12 @@ msgid "Overview ESX VIM %s"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:238
-#, fuzzy
 msgid "settings of esx_vim"
-msgstr "Einstellungen speichern"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:245
-#, fuzzy
 msgid "edit esx_vim"
-msgstr "Felderinhalt bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:102
 msgid "ESX VIM Username"
@@ -302,18 +264,16 @@ msgid "Name of user with admin rights on esx vim-server"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:108
-#, fuzzy
 msgid "ESX VIM Password"
-msgstr "Das Passwort des Nutzungsberechtigten."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:109
 msgid "Password of user with admin rights on esx vim-server"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:179
-#, fuzzy
 msgid "Last EsxVim Contact"
-msgstr "Bitte kontaktieren Sie den Administrator."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:180
 #: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:122
@@ -337,9 +297,8 @@ msgid "Active IP address of esx vim-server"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:96
-#, fuzzy
 msgid "ESX VIM Port"
-msgstr "Port des SMTP-Dienstes"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:97
 msgid "Port of esx vim-server"
@@ -349,43 +308,37 @@ msgstr ""
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timer.py:61
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timingrelay.py:61
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:153
-#, fuzzy
 msgid "settings of Event"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:117
-#, fuzzy
 msgid "add event"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:124
-#, fuzzy
 msgid "edit event properties"
-msgstr "Eine kurze Beschreibung des Ereignisses."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:55
 msgid "Add Event"
-msgstr "Ereignis hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:80
-#, fuzzy
 msgid "send it"
-msgstr "Anfrage _senden"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:84
 msgid "sends an the event to the list of receivers"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timer.py:44
-#, fuzzy
 msgid "Add Pulse Timer"
-msgstr "Felderinhalt hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timer.py:68
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timingrelay.py:72
-#, fuzzy
 msgid "add timing relay"
-msgstr "Felderinhalt hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timer.py:77
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timingrelay.py:81
@@ -398,47 +351,40 @@ msgid "timing relay event interfaces form"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timingrelay.py:44
-#, fuzzy
 msgid "Add Timing Relay"
-msgstr "Felderinhalt hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:104
-#, fuzzy
 msgid "event crossbar"
-msgstr "Eine kurze Beschreibung des Ereignisses."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:140
-#, fuzzy
 msgid "Signal Overview"
-msgstr "Signal Nr. %d"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:161
-#, fuzzy
 msgid "edit crossbar properties"
-msgstr "Felderinhalt bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:55
 msgid "Crossbar"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:62
-#, fuzzy
 msgid "Signal Graph"
-msgstr "Signal Nr. %d"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:205
-#, fuzzy
 msgid "start time"
-msgstr "Anfang der Auswahl"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:206
 msgid "last trigger received at"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:211
-#, fuzzy
 msgid "delay time"
-msgstr "Letzter Zugriff"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:212
 msgid "delayed time for output event"
@@ -446,107 +392,88 @@ msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:216
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:271
-#, fuzzy
 msgid "timer is running"
-msgstr "Debconf, auf %s"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:223
-#, fuzzy
 msgid "trigger event <-"
-msgstr "Auslösemodus"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:231
-#, fuzzy
 msgid "reset event <-"
-msgstr "Zurücksetzen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:239
-#, fuzzy
 msgid "delayed event ->"
-msgstr "Eine kurze Beschreibung des Ereignisses."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:260
-#, fuzzy
 msgid "next pulse"
-msgstr "Nächster Reiter"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:261
-#, fuzzy
 msgid "next pulse at"
-msgstr "Debconf, auf %s"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:266
-#, fuzzy
 msgid "pulse time"
-msgstr "Letzter Zugriff"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:267
 msgid "pulse width for output event"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:283
-#, fuzzy
 msgid "start event <-"
-msgstr "Anfang der Auswahl"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:291
-#, fuzzy
 msgid "stop event <-"
-msgstr "Eine kurze Beschreibung des Ereignisses."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:299
-#, fuzzy
 msgid "pulse event ->"
-msgstr "Eine kurze Beschreibung des Ereignisses."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:321
-#, fuzzy
 msgid "Last EventCrossbar Start"
-msgstr "Letzter Zugriff"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:322
 msgid "Date of last EventCrossbar-Start"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:39
-#, fuzzy
 msgid "event title"
-msgstr "Benutzer: ${user_title}"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:40
-#, fuzzy
 msgid "Title of the event"
-msgstr "Benutzer: ${user_title}"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:41
-#, fuzzy
 msgid "event_01"
-msgstr "Eine kurze Beschreibung des Ereignisses."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:45
-#, fuzzy
 msgid "log events"
-msgstr "Fehlerprotokoll konfigurieren"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:46
-#, fuzzy
 msgid "log all events"
-msgstr "für _alle Benutzer"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:50
-#, fuzzy
 msgid "dry run"
-msgstr "Konnte %s (%.250s) nicht ausführen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:51
-#, fuzzy
 msgid "don't do anything"
-msgstr "Ja, tu was ich sage!"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:55
-#, fuzzy
 msgid "sender objects"
-msgstr "Registrierte Objekte"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:57
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:66
@@ -613,125 +540,104 @@ msgstr "Registrierte Objekte"
 #: lib/python/org/ict_ok/components/host/special/vmware_esx/interfaces.py:52
 #: lib/python/org/ict_ok/components/net/interfaces.py:55
 #: lib/python/org/ict_ok/components/site/interfaces.py:50
-#, fuzzy
 msgid "objects"
-msgstr "Registrierte Objekte"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:64
-#, fuzzy
 msgid "receiver objects"
-msgstr "Registrierte Objekte"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:73
-#, fuzzy
 msgid "host group"
-msgstr "Eine Gruppe Nutzungsberechtigter"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:79
 #: lib/python/org/ict_ok/components/location/configure.zcml:24
-#, fuzzy
 msgid "Location"
-msgstr "Standort:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:80
-#, fuzzy
 msgid "The Location."
-msgstr "Standort:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:86
 #: lib/python/org/ict_ok/components/building/configure.zcml:24
-#, fuzzy
 msgid "Building"
-msgstr "Abhängigkeitsbaum wird aufgebaut"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:87
-#, fuzzy
 msgid "The Building."
-msgstr "Abhängigkeitsbaum wird aufgebaut"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:93
 #: lib/python/org/ict_ok/components/host/interfaces.py:102
 #: lib/python/org/ict_ok/components/room/configure.zcml:24
 msgid "Room"
-msgstr "Raum"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:94
 #: lib/python/org/ict_ok/components/host/interfaces.py:103
-#, fuzzy
 msgid "The Room Description."
-msgstr "Beschreibung zum Menü"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/honeyd/browser/honeyd.py:54
 #: lib/python/org/ict_ok/admin_utils/graphviz/browser/graphviz.py:63
 #: lib/python/org/ict_ok/admin_utils/notifier/browser/notifier.py:73
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:156
-#, fuzzy
 msgid "settings of graphviz adapter"
-msgstr "Adapter-Factory/Factories"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/honeyd/browser/honeyd.py:61
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/nagios.py:110
 #: lib/python/org/ict_ok/admin_utils/graphviz/browser/graphviz.py:70
 #: lib/python/org/ict_ok/admin_utils/notifier/browser/notifier.py:80
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:163
-#, fuzzy
 msgid "edit graphviz adapter"
-msgstr "Relationale Datenbankadapter bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:11
-#, fuzzy
 msgid "View from AdmUtilGeneratorHoneyd."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:11
-#, fuzzy
 msgid "View from AdmUtilGeneratorHoneyd"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:17
-#, fuzzy
 msgid "Edit from AdmUtilGeneratorHoneyd"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:17
-#, fuzzy
 msgid "Edit from AdmUtilGeneratorHoneyd."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:23
-#, fuzzy
 msgid "Add from AdmUtilGeneratorHoneyd"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:23
-#, fuzzy
 msgid "Add from AdmUtilGeneratorHoneyd."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/nagios.py:67
-#, fuzzy
 msgid "generate"
-msgstr "Datenbank erstellen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/nagios.py:71
-#, fuzzy
 msgid "generate nagios cfg"
-msgstr "TM-Datenbank erstellen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/nagios.py:99
-#, fuzzy
 msgid "settings of nagios generator"
-msgstr "Einstellungen speichern"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:34
-#, fuzzy
 msgid "nagios is running"
-msgstr "Debconf, auf %s"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:39
-#, fuzzy
 msgid "init script"
-msgstr "SQL Skript"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:40
 msgid "nagios init script with path"
@@ -742,58 +648,48 @@ msgid "/etc/init.d/nagios"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:46
-#, fuzzy
 msgid "path to configuration"
-msgstr "Pfad zur Konfigurationsdatei"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:51
-#, fuzzy
 msgid "last change"
-msgstr "Eine Datei ändern"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:52
-#, fuzzy
 msgid "last change of configuration file"
-msgstr "Pfad zur Konfigurationsdatei"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:56
-#, fuzzy
 msgid "last reload"
-msgstr "Aktualisieren"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:57
 msgid "last reload of nagios deamon"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:11
-#, fuzzy
 msgid "View from AdmUtilGeneratorNagios"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:11
-#, fuzzy
 msgid "View from AdmUtilGeneratorNagios."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:17
-#, fuzzy
 msgid "Edit from AdmUtilGeneratorNagios"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:17
-#, fuzzy
 msgid "Edit from AdmUtilGeneratorNagios."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:23
-#, fuzzy
 msgid "Add from AdmUtilGeneratorNagios."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:23
-#, fuzzy
 msgid "Add from AdmUtilGeneratorNagios"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/graphviz/browser/configure.zcml:13
 #: lib/python/org/ict_ok/admin_utils/netscan/browser/configure.zcml:13
@@ -802,61 +698,51 @@ msgstr "Umleitung durch %s von: %s\n"
 #: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/configure.zcml:12
 #: lib/python/org/ict_ok/admin_utils/objmq/browser/configure.zcml:13
 #: lib/python/org/ict_ok/admin_utils/wfmc/browser/configure.zcml:29
-#, fuzzy
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/graphviz/interfaces.py:33
 #: lib/python/org/ict_ok/admin_utils/graphviz/interfaces.py:34
 #: lib/python/org/ict_ok/admin_utils/wfmc/interfaces.py:33
 #: lib/python/org/ict_ok/admin_utils/wfmc/interfaces.py:34
-#, fuzzy
 msgid "Output Type"
-msgstr "Präsentationstyp:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/graphviz/security.zcml:11
-#, fuzzy
 msgid "View from AdmUtilGraphviz"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/graphviz/security.zcml:11
-#, fuzzy
 msgid "View from AdmUtilGraphviz."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/graphviz/security.zcml:17
-#, fuzzy
 msgid "Edit from AdmUtilGraphviz."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/graphviz/security.zcml:17
-#, fuzzy
 msgid "Edit from AdmUtilGraphviz"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:2
-#, fuzzy
 msgid "Details 111"
-msgstr "Schnittstellen-Einzelheiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:196
 msgid "Overview Linux HA"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:239
-#, fuzzy
 msgid "settings of linux_ha"
-msgstr "Einstellungen speichern"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:246
-#, fuzzy
 msgid "edit linux_ha"
-msgstr "Felderinhalt bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:121
-#, fuzzy
 msgid "Last LinuxHa Contact"
-msgstr "Bitte kontaktieren Sie den Administrator."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:51
 msgid "HA-Cluster active"
@@ -875,14 +761,12 @@ msgid "Active IP address of the ha cluster"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:67
-#, fuzzy
 msgid "HA-Cluster Port"
-msgstr "Port des SMTP-Dienstes"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:68
-#, fuzzy
 msgid "Port of of the ha cluster"
-msgstr "Port des SMTP-Dienstes"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:73
 msgid "HA-Cluster Username"
@@ -893,9 +777,8 @@ msgid "Name of user with admin rights on ha cluster"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:79
-#, fuzzy
 msgid "HA-Cluster Password"
-msgstr "Das Passwort des Nutzungsberechtigten."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:80
 msgid "Password of user with admin rights on ha cluster"
@@ -906,9 +789,8 @@ msgid "%d scanner"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/adapter/sized.py:50
-#, fuzzy
 msgid "no scanner"
-msgstr "<i>kein Name</i>"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/browser/netscan.py:124
 msgid "settings of all net scanner"
@@ -920,18 +802,16 @@ msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/browser/netscan.py:52
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:376
-#, fuzzy
 msgid "Unavailable"
-msgstr "nicht verfügbar"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:5
 msgid "Systeminfo"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:6
-#, fuzzy
 msgid "Content listing"
-msgstr "Inhaltsauflistung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/interfaces.py:31
 msgid "Network Scanners"
@@ -946,76 +826,63 @@ msgid "Network Scanner"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/nmap/browser/nmap.py:54
-#, fuzzy
 msgid "settings of nmap scanner"
-msgstr "Einstellungen speichern"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/nmap/browser/nmap.py:61
-#, fuzzy
 msgid "edit nmap scanner"
-msgstr "Felderinhalt bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/security.zcml:11
-#, fuzzy
 msgid "View from NetScan"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/security.zcml:11
-#, fuzzy
 msgid "View from NetScan."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/security.zcml:17
-#, fuzzy
 msgid "Edit from NetScan"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/security.zcml:17
-#, fuzzy
 msgid "Edit from NetScan."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/simple1/browser/simple1.py:54
-#, fuzzy
 msgid "settings of simple scanner"
-msgstr "Einstellungen speichern"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/simple1/browser/simple1.py:61
-#, fuzzy
 msgid "edit simple scanner"
-msgstr "Felderinhalt bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/adapter/sized.py:48
 msgid "%d notifier"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/adapter/sized.py:50
-#, fuzzy
 msgid "no notifier"
-msgstr "<i>kein Name</i>"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/email/browser/email.py:53
-#, fuzzy
 msgid "settings of email notifier"
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/email/browser/email.py:60
-#, fuzzy
 msgid "edit email notifier"
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/email/interfaces.py:37
 #: lib/python/org/ict_ok/admin_utils/objmq/interfaces.py:36
 #: lib/python/org/ict_ok/components/host/interfaces.py:37
-#, fuzzy
 msgid "Hostname"
-msgstr "Servername"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/email/interfaces.py:38
 #: lib/python/org/ict_ok/admin_utils/objmq/interfaces.py:37
-#, fuzzy
 msgid "Name of server to be used as SMTP server."
-msgstr "Name des Servers, der als SMTP-Server benutzt werden soll."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/interfaces.py:34
 msgid "Notifiers"
@@ -1046,18 +913,16 @@ msgid "ask the jabber-connector for watchdog"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:73
-#, fuzzy
 msgid "send test message"
-msgstr "FreeType Fehlermeldung: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:77
 msgid "send test message to im-server"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:83
-#, fuzzy
 msgid "start jabber-connector"
-msgstr "muss mit alphanumerischem Zeichen beginnen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:87
 msgid "starts the jabber-connector (as user:%s)"
@@ -1072,14 +937,12 @@ msgid "IP address of the jabber connector."
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:50
-#, fuzzy
 msgid "Connector Port"
-msgstr "Port des SMTP-Dienstes"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:51
-#, fuzzy
 msgid "Port of the jabber connector"
-msgstr "Port des SMTP-Dienstes"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:57
 msgid "Jabber servername"
@@ -1094,34 +957,28 @@ msgid "Jabber serverport"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:66
-#, fuzzy
 msgid "Port of the im server"
-msgstr "Der Server hat die Verbindung geschlossen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:72
-#, fuzzy
 msgid "Username"
-msgstr "Benutzername"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:73
-#, fuzzy
 msgid "Username for im-login"
-msgstr "Benutzername, der für die optionale SMTP-Authentifzierung benutzt wird"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:79
-#, fuzzy
 msgid "Password"
-msgstr "Passwort"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:80
-#, fuzzy
 msgid "Password for im-login"
-msgstr "Passwort, das für die optionale SMTP-Authentifzierung benutzt wird."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:85
-#, fuzzy
 msgid "last seen Connector"
-msgstr "Letzter Zugriff"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:86
 msgid "Time since last contact with the jabber connector"
@@ -1136,24 +993,20 @@ msgid "edit object message queue"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/objmq/security.zcml:11
-#, fuzzy
 msgid "View from AdmUtilObjMQ."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/objmq/security.zcml:11
-#, fuzzy
 msgid "View from AdmUtilObjMQ"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/objmq/security.zcml:17
-#, fuzzy
 msgid "Edit from AdmUtilObjMQ."
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/objmq/security.zcml:17
-#, fuzzy
 msgid "Edit from AdmUtilObjMQ"
-msgstr "Umleitung durch %s von: %s\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/public_viewing/browser/public_viewing.py:43
 msgid "[P+]"
@@ -1164,34 +1017,28 @@ msgid "[P-]"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/public_viewing/browser/public_viewing.py:81
-#, fuzzy
 msgid "Add ShadowObject"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/public_viewing/browser/public_viewing.py:92
-#, fuzzy
 msgid "settings of public viewing"
-msgstr "Einstellungen speichern"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/public_viewing/browser/public_viewing.py:99
-#, fuzzy
 msgid "edit public viewing"
-msgstr "Felderinhalt bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/public_viewing/browser/publicview.pt:2
-#, fuzzy
 msgid "Hallo public"
-msgstr "Berechtigung für Alle"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/snmpd/browser/snmpd.py:61
-#, fuzzy
 msgid "settings of snmpd"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/snmpd/browser/snmpd.py:67
-#, fuzzy
 msgid "edit snmpd settings"
-msgstr "Einstellungen speichern"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/adapter/sized.py:47
 #: lib/python/org/ict_ok/components/net/adapter/sized.py:47
@@ -1206,32 +1053,28 @@ msgstr ""
 #: lib/python/org/ict_ok/admin_utils/supervisor/adapter/state.py:49
 #: lib/python/org/ict_ok/components/host/adapter/state.py:79
 #: lib/python/org/ict_ok/components/net/adapter/state.py:57
-#, fuzzy
 msgid "Warning: "
-msgstr "Warnung: veraltete Option »--%s«\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/adapter/state.py:50
-#, fuzzy
 msgid "in development mode"
-msgstr "ungültiger Aktualisierungs-Modus"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/configure.zcml:58
 msgid "ObjMQ"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:102
-#, fuzzy
 msgid "reindex database"
-msgstr "Name der Datenbank:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:106
 msgid "will reindex the catalogs of all tables in database"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:114
-#, fuzzy
 msgid "pack database"
-msgstr "Name der Datenbank:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:118
 msgid "will pack the database and delete all backups"
@@ -1242,67 +1085,56 @@ msgid "Supervisor events"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:282
-#, fuzzy
 msgid "Start number"
-msgstr "Irgendeine Zahl"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:284
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:302
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:715
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:737
-#, fuzzy
 msgid "Date"
-msgstr "Veraltet"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:287
-#, fuzzy
 msgid "Message"
-msgstr "Nachricht"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:312
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:333
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:6
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:6
 #: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:9
-#, fuzzy
 msgid "Name"
-msgstr "Name"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:314
-#, fuzzy
 msgid "Generation"
-msgstr "Niedrigste Generation"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:316
-#, fuzzy
 msgid "Minimum Generation"
-msgstr "Niedrigste Generation"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:344
-#, fuzzy
 msgid "settings of supervisor"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:351
-#, fuzzy
 msgid "edit supervisor"
-msgstr "Bearbeiten Popup"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:67
-#, fuzzy
 msgid "Events"
-msgstr "Ereignisse"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:73
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:310
-#, fuzzy
 msgid "Generations"
-msgstr "Generationen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:101
-#, fuzzy
 msgid "last seen Slave"
-msgstr "doppelter Slave-Link %s"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:102
 msgid "Time since last contact with the slave"
@@ -1313,51 +1145,44 @@ msgid "Starts"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:36
-#, fuzzy
 msgid "Number of Starts"
-msgstr "Irgendeine Zahl"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:44
-#, fuzzy
 msgid "My active IP"
-msgstr "Meine Anfragen lesen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:45
 msgid "Active IP address of this host."
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:51
-#, fuzzy
 msgid "My object id"
-msgstr "Präfix für Gruppenkennungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:52
-#, fuzzy
 msgid "object id of this supervisor"
-msgstr "Die Kennung dieses Hilfethemas"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:59
 msgid "Master IP"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:60
-#, fuzzy
 msgid "IP address of master."
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:66
-#, fuzzy
 msgid "Master object id"
-msgstr "Präfix für Gruppenkennungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:67
 msgid "object id of our master supervisor"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:72
-#, fuzzy
 msgid "last seen Master"
-msgstr "Letzter Zugriff"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:73
 msgid "Time since last contact with the Master"
@@ -1368,24 +1193,20 @@ msgid "status2Master"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:78
-#, fuzzy
 msgid "Status of connection to master."
-msgstr "Kann keine Verbindung mit %s:%s aufbauen (%s)."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:88
-#, fuzzy
 msgid "Slave IP"
-msgstr "doppelter Slave %s"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:89
-#, fuzzy
 msgid "IP address of slave."
-msgstr "doppelter Slave-Link %s"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:95
-#, fuzzy
 msgid "Slave object id"
-msgstr "Präfix für Gruppenkennungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:96
 msgid "object id of our slave supervisor"
@@ -1394,42 +1215,36 @@ msgstr ""
 #: lib/python/org/ict_ok/admin_utils/supervisor/supervisor.py:161
 #: lib/python/org/ict_ok/admin_utils/supervisor/supervisor.py:202
 #: lib/python/org/ict_ok/admin_utils/supervisor/supervisor.py:216
-#, fuzzy
 msgid "unknown"
-msgstr "<Name unbekannt>"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/supervisor.py:533
 msgid "%d starts"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/ticker/browser/ticker.py:57
-#, fuzzy
 msgid "settings of ticker"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/ticker/browser/ticker.py:63
-#, fuzzy
 msgid "edit ticker settings"
-msgstr "Einstellungen speichern"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/ticker/browser/ticker.py:69
 msgid "AdmUtilTicker Event Interfaces Form"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/ticker/interfaces.py:33
-#, fuzzy
 msgid "1sec. event ->"
-msgstr "Eine kurze Beschreibung des Ereignisses."
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/usermanagement/browser/usermanagement.py:224
-#, fuzzy
 msgid "settings of usermanagement"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/usermanagement/browser/usermanagement.py:231
-#, fuzzy
 msgid "edit user management"
-msgstr "Benutzerinformationen bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/usermanagement/browser/usermanagement.py:59
 msgid "[+]"
@@ -1441,122 +1256,100 @@ msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/usermanagement/interfaces.py:34
 #: lib/python/org/ict_ok/admin_utils/usermanagement/interfaces.py:51
-#, fuzzy
 msgid "Email address"
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:237
 #: lib/python/org/ict_ok/components/net/browser/net.py:200
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:644
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:752
-#, fuzzy
 msgid "Modified On"
-msgstr " hängt ab von "
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:240
-#, fuzzy
 msgid "Size"
-msgstr "Größe"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:264
-#, fuzzy
 msgid "settings of utility manager"
-msgstr "Startordner-Verwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:271
-#, fuzzy
 msgid "edit utility manager"
-msgstr "Bearbeiten Startordner-Verwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/configure.zcml:24
-#, fuzzy
 msgid "Utility Manager"
-msgstr "Webseitenverwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:15
-#, fuzzy
 msgid "Add Utility Manager."
-msgstr "Startordner-Verwaltung hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:15
-#, fuzzy
 msgid "Add Utility Manager"
-msgstr "Startordner-Verwaltung hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:21
-#, fuzzy
 msgid "Edit Utility Manager."
-msgstr "Bearbeiten Startordner-Verwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:21
-#, fuzzy
 msgid "Edit Utility Manager"
-msgstr "Bearbeiten Startordner-Verwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:27
-#, fuzzy
 msgid "Delete Utility Manager."
-msgstr "Startordner-Verwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:27
-#, fuzzy
 msgid "Delete Utility Manager"
-msgstr "Startordner-Verwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:9
 msgid "View the Utility Manager and all its content."
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:9
-#, fuzzy
 msgid "View Utility Manager"
-msgstr "Startordner-Verwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:100
-#, fuzzy
 msgid "Workflow View"
-msgstr "Ansichtenname"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:104
-#, fuzzy
 msgid "settings of workflow manager"
-msgstr "Startordner-Verwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:111
-#, fuzzy
 msgid "edit workflow manager"
-msgstr "Bearbeiten Startordner-Verwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:44
-#, fuzzy
 msgid "Workflows"
-msgstr "Arbeitsabläufe"
+msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:97
-#, fuzzy
 msgid "Workflow List"
-msgstr "Irgendeine Liste"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/building/browser/building.py:46
 #: lib/python/org/ict_ok/components/building/browser/building.py:72
-#, fuzzy
 msgid "Add Building"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/building/browser/building.py:66
-#, fuzzy
 msgid "settings of building"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/building/browser/building.py:79
-#, fuzzy
 msgid "Building Edit Form"
-msgstr "Browser-Formular-Herausforderer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/building/browser/building.py:88
-#, fuzzy
 msgid "Delete this building: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/building/interfaces.py:31
 #: lib/python/org/ict_ok/components/location/interfaces.py:31
@@ -1565,15 +1358,13 @@ msgid "coordinates"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/building/interfaces.py:32
-#, fuzzy
 msgid "Coordinates of the building."
-msgstr "Abhängigkeitsbaum wird aufgebaut"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/building/interfaces.py:38
 #: lib/python/org/ict_ok/components/location/interfaces.py:38
-#, fuzzy
 msgid "GoogleMap URL"
-msgstr "Anfrage-URL"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/building/interfaces.py:39
 #: lib/python/org/ict_ok/components/location/interfaces.py:39
@@ -1585,59 +1376,49 @@ msgstr ""
 #: lib/python/org/ict_ok/components/service/adapter/sized.py:47
 #: lib/python/org/ict_ok/components/site/adapter/sized.py:47
 #: lib/python/org/ict_ok/components/snmpvalue/adapter/sized.py:47
-#, fuzzy
 msgid "1 item"
-msgstr "1 Eintrag"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/adapter/sized.py:48
 #: lib/python/org/ict_ok/components/interface/adapter/sized.py:48
 #: lib/python/org/ict_ok/components/service/adapter/sized.py:48
 #: lib/python/org/ict_ok/components/site/adapter/sized.py:48
 #: lib/python/org/ict_ok/components/snmpvalue/adapter/sized.py:48
-#, fuzzy
 msgid "%d items"
-msgstr "${items} Einträge"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/adapter/state.py:80
-#, fuzzy
 msgid "'host is offline'"
-msgstr "  %.250s (Version %.250s) ist %s.\n"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/adapter/state.py:85
-#, fuzzy
 msgid "Error: "
-msgstr "Fehler"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/adapter/state.py:86
-#, fuzzy
 msgid "'host is in notification1'"
-msgstr "Die Ebene, für welche die Ansicht registriert ist"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/browser/add_hosts.pt:2
-#, fuzzy
 msgid "Add Hosts"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/browser/host.py:105
-#, fuzzy
 msgid "Trigger notification1"
-msgstr "Auslösemodus"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/browser/host.py:202
-#, fuzzy
 msgid "settings of host"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/browser/host.py:216
-#, fuzzy
 msgid "Host Edit Form"
-msgstr "Browser-Formular-Herausforderer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/browser/host.py:225
 #: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:143
-#, fuzzy
 msgid "Delete this host: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/browser/host.py:231
 msgid "host event interfaces form"
@@ -1645,19 +1426,16 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/host/browser/host.py:60
 #: lib/python/org/ict_ok/components/host/browser/host.py:208
-#, fuzzy
 msgid "Add Host"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/browser/host.py:91
-#, fuzzy
 msgid "Trigger online"
-msgstr "Online-Hilfe"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/browser/host.py:98
-#, fuzzy
 msgid "Trigger offline"
-msgstr "Auslösemodus"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/configure.zcml:24
 msgid "Host"
@@ -1673,46 +1451,39 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:112
 msgid "Operatingsystem"
-msgstr "Betriebssystem"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:113
-#, fuzzy
 msgid "The OS Description."
-msgstr "Beschreibung zum Menü"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:121
-#, fuzzy
 msgid "URL"
-msgstr "Anfrage-URL"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:122
-#, fuzzy
 msgid "URL of system."
-msgstr "Systemplattform"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:127
-#, fuzzy
 msgid "URL browser type"
-msgstr "Kennung des Schlüsseltyps"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:128
-#, fuzzy
 msgid "Type of browser window"
-msgstr "&Kommentarfenster anzeigen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:135
-#, fuzzy
 msgid "URL Username"
-msgstr "Anfrage-URL"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:136
 msgid "Username for url-browser login"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:142
-#, fuzzy
 msgid "URL Password"
-msgstr "Passwortverwalter"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:143
 msgid "Password for url-browser login"
@@ -1721,32 +1492,27 @@ msgstr ""
 #: lib/python/org/ict_ok/components/host/interfaces.py:149
 #: lib/python/org/ict_ok/skin/sidebar/ik_sb_console.pt:4
 msgid "Console"
-msgstr "Konsole"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:150
-#, fuzzy
 msgid "Console of system."
-msgstr "Systemplattform"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:155
-#, fuzzy
 msgid "for Nagios"
-msgstr "Für Schnittstelle"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:156
-#, fuzzy
 msgid "enabled in Nagios"
-msgstr "Fehler im Format"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:179
-#, fuzzy
 msgid "shutdown event <-"
-msgstr "Server herunterfahren"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:38
-#, fuzzy
 msgid "Name of the system."
-msgstr "Systemplattform"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:39
 msgid "systemname"
@@ -1757,18 +1523,16 @@ msgid "Manufacturer"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:45
-#, fuzzy
 msgid "Name/Address of the manufacturer."
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:51
 msgid "Vendor"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:52
-#, fuzzy
 msgid "Name/Address of the vendor."
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:57
 msgid "host groups"
@@ -1779,53 +1543,45 @@ msgid "host"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:66
-#, fuzzy
 msgid "Production state"
-msgstr "Einen Status hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:74
 msgid "Workinggroup"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:75
-#, fuzzy
 msgid "Name of the workinggroup."
-msgstr "<i>kein Name</i>"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:81
-#, fuzzy
 msgid "Hardware"
-msgstr "Hardware"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:82
-#, fuzzy
 msgid "Hardware of the system."
-msgstr "Systemplattform"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:88
-#, fuzzy
 msgid "User"
-msgstr "Benutzer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:89
 msgid "User which is working with the system."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:96
-#, fuzzy
 msgid "inventory id"
-msgstr "Prozessnummer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/interfaces.py:97
-#, fuzzy
 msgid "Id of inventory."
-msgstr "Prozessnummer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/linux_server/browser/host.py:42
 #: lib/python/org/ict_ok/components/host/special/linux_server/browser/host.py:51
-#, fuzzy
 msgid "Add Linux Server"
-msgstr "Der Server hat die Verbindung geschlossen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/linux_server/configure.zcml:24
 msgid "HostLinuxServer"
@@ -1833,9 +1589,8 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/linux_workstation/browser/host.py:42
 #: lib/python/org/ict_ok/components/host/special/linux_workstation/browser/host.py:51
-#, fuzzy
 msgid "Add Linux Workstation"
-msgstr "Felderinhalt hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/linux_workstation/configure.zcml:24
 msgid "HostLinuxWorkstation"
@@ -1843,9 +1598,8 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/mge_ups/browser/host.py:44
 #: lib/python/org/ict_ok/components/host/special/mge_ups/browser/host.py:53
-#, fuzzy
 msgid "Add MGE UPS"
-msgstr "Felderinhalt hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/mge_ups/browser/host.py:59
 msgid "HostMgeUps Event Interfaces Form"
@@ -2081,14 +1835,12 @@ msgid "Add VMware ESX Server"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/vmware_esx/browser/host.py:78
-#, fuzzy
 msgid "shutdown host"
-msgstr "Server herunterfahren"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/vmware_esx/browser/host.py:85
-#, fuzzy
 msgid "enter maintenance mode"
-msgstr "ungültiger Aktualisierungs-Modus"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/vmware_esx/configure.zcml:24
 msgid "HostVMwareEsx"
@@ -2107,15 +1859,13 @@ msgstr ""
 #: lib/python/org/ict_ok/components/host/special/vmware_esx/interfaces.py:50
 #: lib/python/org/ict_ok/components/net/interfaces.py:53
 #: lib/python/org/ict_ok/components/site/interfaces.py:48
-#, fuzzy
 msgid "inward relaying shutdown <-"
-msgstr "Abzählen bis zum Neustart oder Abschalten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/vmware_vc2/browser/host.py:42
 #: lib/python/org/ict_ok/components/host/special/vmware_vc2/browser/host.py:51
-#, fuzzy
 msgid "Add VMware VirtualCenter 2"
-msgstr "Felderinhalt hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/vmware_vc2/configure.zcml:24
 msgid "HostVMwareVC2"
@@ -2124,9 +1874,8 @@ msgstr ""
 #: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:121
 #: lib/python/org/ict_ok/components/net/browser/net.py:146
 #: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:211
-#, fuzzy
 msgid "settings of net"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:135
 msgid "VMware Virtual Machine Edit Form"
@@ -2142,9 +1891,8 @@ msgid "Power off"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:84
-#, fuzzy
 msgid "Power on"
-msgstr " hängt ab von "
+msgstr ""
 
 #: lib/python/org/ict_ok/components/host/special/vmware_vm/configure.zcml:24
 msgid "HostVMwareVm"
@@ -2152,176 +1900,149 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/browser/interface.py:42
 #: lib/python/org/ict_ok/components/interface/browser/interface.py:71
-#, fuzzy
 msgid "Add Interface"
-msgstr "Schnittstellen-Einzelheiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/browser/interface.py:65
-#, fuzzy
 msgid "settings of interface"
-msgstr "Schnittstellen-Einzelheiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/browser/interface.py:78
-#, fuzzy
 msgid "Interface Edit Form"
-msgstr "Browser-Formular-Herausforderer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/browser/interface.py:87
-#, fuzzy
 msgid "Delete this interface: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/configure.zcml:24
-#, fuzzy
 msgid "Interface"
-msgstr "Schnittstelle"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/interfaces.py:50
-#, fuzzy
 msgid "interface type"
-msgstr "Schnittstellen-Typ"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/interfaces.py:51
 msgid "Networktype of this interface (OSI Layer1-2)"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/interfaces.py:58
-#, fuzzy
 msgid "MAC address"
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/interfaces.py:59
-#, fuzzy
 msgid "MAC address of the host."
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/interfaces.py:79
-#, fuzzy
 msgid "IP address"
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/interfaces.py:80
-#, fuzzy
 msgid "IP address of the host."
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interfaces.py:34
 msgid "Object is template"
-msgstr "Objekt ist eine Vorlage"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interfaces.py:35
-#, fuzzy
 msgid "object is a template"
-msgstr "Dieses Objekt ist registriert als:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/location/browser/location.py:46
 #: lib/python/org/ict_ok/components/location/browser/location.py:72
-#, fuzzy
 msgid "Add Location"
-msgstr "Standort:&nbsp;"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/location/browser/location.py:66
-#, fuzzy
 msgid "settings of location"
-msgstr "Standort:&nbsp;"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/location/browser/location.py:79
-#, fuzzy
 msgid "Location Edit Form"
-msgstr "Browser-Formular-Herausforderer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/location/browser/location.py:88
-#, fuzzy
 msgid "Delete this location: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/location/interfaces.py:32
-#, fuzzy
 msgid "Coordinates of the location."
-msgstr "Standort:&nbsp;"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/net/adapter/state.py:58
-#, fuzzy
 msgid "'no hosts in net'"
-msgstr "Keine Dateien in:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/net/browser/net.py:101
-#, fuzzy
 msgid "start scanner"
-msgstr "Anfang der Auswahl"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/net/browser/net.py:104
 msgid "starts the network scanner (as user:%s)"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/net/browser/net.py:158
-#, fuzzy
 msgid "Net Edit Form"
-msgstr "Browser-Formular-Herausforderer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/net/browser/net.py:181
 #: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:252
-#, fuzzy
 msgid "Delete this net: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/net/browser/net.py:186
 msgid "Net Event Interfaces Form"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/net/browser/net.py:198
-#, fuzzy
 msgid "Network"
-msgstr "Netzwerk"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/net/browser/net.py:64
 #: lib/python/org/ict_ok/components/net/browser/net.py:151
-#, fuzzy
 msgid "Add Net"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/net/configure.zcml:24
 msgid "Net"
-msgstr "Netz"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/net/interfaces.py:38
 msgid "Network IP"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/net/interfaces.py:39
-#, fuzzy
 msgid "IP address of the Network."
-msgstr "E-Mail-Adresse des Übersetzerteams:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/room/browser/room.py:47
 #: lib/python/org/ict_ok/components/room/browser/room.py:73
-#, fuzzy
 msgid "Add Room"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/room/browser/room.py:67
-#, fuzzy
 msgid "settings of room"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/room/browser/room.py:80
-#, fuzzy
 msgid "Room Edit Form"
-msgstr "Browser-Formular-Herausforderer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/room/browser/room.py:89
-#, fuzzy
 msgid "Delete this room: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/room/interfaces.py:31
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:713
 msgid "Level"
-msgstr "Etage"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/room/interfaces.py:32
 msgid "Level of the room."
-msgstr "Etage des Raums"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/room/interfaces.py:39
 msgid "Coordinates of the room."
@@ -2330,68 +2051,56 @@ msgstr ""
 #: lib/python/org/ict_ok/components/script/browser/script.py:42
 #: lib/python/org/ict_ok/components/script/browser/script.py:68
 #: lib/python/org/ict_ok/components/script/security.zcml:15
-#, fuzzy
 msgid "Add Script"
-msgstr "SQL-Skript hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/browser/script.py:75
-#, fuzzy
 msgid "Script Edit Form"
-msgstr "Ein SQL Skript bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/browser/script.py:84
-#, fuzzy
 msgid "Delete this script: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/interfaces.py:31
-#, fuzzy
 msgid "Python"
-msgstr "Python Version"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/interfaces.py:32
-#, fuzzy
 msgid "Python script."
-msgstr "SQL Skript"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/security.zcml:15
-#, fuzzy
 msgid "Add Script."
-msgstr "SQL-Skript hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/security.zcml:21
-#, fuzzy
 msgid "Edit Script."
-msgstr "Ein SQL Skript bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/security.zcml:21
-#, fuzzy
 msgid "Edit Script"
-msgstr "Ein SQL Skript bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/security.zcml:27
-#, fuzzy
 msgid "Delete Script."
-msgstr "SQL Skript"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/security.zcml:27
-#, fuzzy
 msgid "Delete Script"
-msgstr "SQL Skript"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/script/security.zcml:9
 msgid "View the Script and all its content."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/script/security.zcml:9
-#, fuzzy
 msgid "View Script"
-msgstr "SQL Skript"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/browser/add_services.pt:2
-#, fuzzy
 msgid "Add Services"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/browser/add_services.pt:3
 #: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:8
@@ -2405,75 +2114,65 @@ msgstr "Utility hinzufügen"
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/generations.pt:4
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/events.pt:4
 #: lib/python/org/ict_ok/admin_utils/util_manager/browser/overview.pt:2
-#, fuzzy
 msgid "${DYNAMIC_CONTENT}"
-msgstr "${DYNAMIC_CONTENT}"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/browser/service.py:45
 #: lib/python/org/ict_ok/components/service/browser/service.py:75
 #: lib/python/org/ict_ok/components/service/special/icmp_latency/browser/service.py:53
 #: lib/python/org/ict_ok/components/service/special/ssh/browser/service.py:53
-#, fuzzy
 msgid "Add Service"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/browser/service.py:69
-#, fuzzy
 msgid "settings of service"
-msgstr "ZMI Einstellungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/browser/service.py:82
-#, fuzzy
 msgid "Service Edit Form"
-msgstr "Browser-Formular-Herausforderer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/browser/service.py:91
-#, fuzzy
 msgid "Delete this service: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/configure.zcml:24
-#, fuzzy
 msgid "Service"
-msgstr "Port des SMTP-Dienstes"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/interfaces.py:32
 #: lib/python/org/ict_ok/components/service/special/dns/interfaces.py:38
 #: lib/python/org/ict_ok/components/service/special/http/interfaces.py:38
 #: lib/python/org/ict_ok/components/service/special/ssh/interfaces.py:32
-#, fuzzy
 msgid "Port"
-msgstr "Port"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/interfaces.py:33
 #: lib/python/org/ict_ok/components/service/special/dns/interfaces.py:39
 #: lib/python/org/ict_ok/components/service/special/http/interfaces.py:39
 #: lib/python/org/ict_ok/components/service/special/ssh/interfaces.py:33
-#, fuzzy
 msgid "Number of port."
-msgstr "Irgendeine Zahl"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/interfaces.py:39
 msgid "Product"
-msgstr "Produkt"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/interfaces.py:40
 msgid "Which product will serve?"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/service/interfaces.py:45
-#, fuzzy
 msgid "Protocol"
-msgstr "Protokollkorrumption"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/interfaces.py:46
 msgid "IP-Protocol to use with this service."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/service/special/dns/browser/service.py:44
-#, fuzzy
 msgid "Add Dns check"
-msgstr "Felderinhalt hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/special/dns/browser/service.py:53
 msgid "Add Dns Service Check"
@@ -2484,9 +2183,8 @@ msgid "ServiceDns"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/service/special/http/browser/service.py:44
-#, fuzzy
 msgid "Add Http check"
-msgstr "Generische HTTP-Ansichten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/special/http/browser/service.py:53
 msgid "Add Http Service Check"
@@ -2505,56 +2203,48 @@ msgid "ServiceIcmpLatency"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/service/special/ssh/browser/service.py:44
-#, fuzzy
 msgid "Add SSH check"
-msgstr "Felderinhalt hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/service/special/ssh/configure.zcml:24
 msgid "ServiceSsh"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/site/browser/site.py:46
-#, fuzzy
 msgid "Add Site"
-msgstr "Webseitenverwaltung hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/browser/site.py:67
-#, fuzzy
 msgid "settings of site"
-msgstr "Webseitenverwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/browser/site.py:72
-#, fuzzy
 msgid "add site"
-msgstr "Webseitenverwaltung hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/browser/site.py:78
-#, fuzzy
 msgid "edit site settings"
-msgstr "Einstellungen speichern"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/browser/site.py:87
-#, fuzzy
 msgid "Delete this site: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/browser/site.py:92
 msgid "Site Event Interfaces Form"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/site/configure.zcml:24
-#, fuzzy
 msgid "Site"
-msgstr "Webseitenverwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/interfaces.py:38
 msgid "Sitename"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/site/interfaces.py:39
-#, fuzzy
 msgid "Name of the site."
-msgstr "Webseitenverwaltung"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/interfaces.py:40
 msgid "mysite"
@@ -2565,9 +2255,8 @@ msgid "Confirm"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/site/interfaces.py:66
-#, fuzzy
 msgid "please confirm"
-msgstr "Bitte beachten Sie Folgendes:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/security.zcml:15
 #: lib/python/org/ict_ok/components/net/security.zcml:15
@@ -2578,9 +2267,8 @@ msgstr "Bitte beachten Sie Folgendes:"
 #: lib/python/org/ict_ok/components/location/security.zcml:15
 #: lib/python/org/ict_ok/components/building/security.zcml:15
 #: lib/python/org/ict_ok/components/room/security.zcml:15
-#, fuzzy
 msgid "Add Template Entry"
-msgstr "ungültiger Info-Eintrag"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/security.zcml:15
 #: lib/python/org/ict_ok/components/net/security.zcml:15
@@ -2591,9 +2279,8 @@ msgstr "ungültiger Info-Eintrag"
 #: lib/python/org/ict_ok/components/location/security.zcml:15
 #: lib/python/org/ict_ok/components/building/security.zcml:15
 #: lib/python/org/ict_ok/components/room/security.zcml:15
-#, fuzzy
 msgid "Add Template Entry."
-msgstr "ungültiger Info-Eintrag"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/security.zcml:21
 #: lib/python/org/ict_ok/components/net/security.zcml:21
@@ -2604,9 +2291,8 @@ msgstr "ungültiger Info-Eintrag"
 #: lib/python/org/ict_ok/components/location/security.zcml:21
 #: lib/python/org/ict_ok/components/building/security.zcml:21
 #: lib/python/org/ict_ok/components/room/security.zcml:21
-#, fuzzy
 msgid "Edit Template Entry."
-msgstr "Eintrag bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/security.zcml:21
 #: lib/python/org/ict_ok/components/net/security.zcml:21
@@ -2617,15 +2303,13 @@ msgstr "Eintrag bearbeiten"
 #: lib/python/org/ict_ok/components/location/security.zcml:21
 #: lib/python/org/ict_ok/components/building/security.zcml:21
 #: lib/python/org/ict_ok/components/room/security.zcml:21
-#, fuzzy
 msgid "Edit Template Entry"
-msgstr "Eintrag bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/security.zcml:27
 #: lib/python/org/ict_ok/components/net/security.zcml:27
-#, fuzzy
 msgid "Edit Event Interface"
-msgstr "Keine Schnittstelle notwendig."
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/security.zcml:32
 #: lib/python/org/ict_ok/components/net/security.zcml:32
@@ -2636,9 +2320,8 @@ msgstr "Keine Schnittstelle notwendig."
 #: lib/python/org/ict_ok/components/location/security.zcml:27
 #: lib/python/org/ict_ok/components/building/security.zcml:27
 #: lib/python/org/ict_ok/components/room/security.zcml:27
-#, fuzzy
 msgid "Delete Template Entry"
-msgstr "ungültiger Info-Eintrag"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/security.zcml:32
 #: lib/python/org/ict_ok/components/net/security.zcml:32
@@ -2649,9 +2332,8 @@ msgstr "ungültiger Info-Eintrag"
 #: lib/python/org/ict_ok/components/location/security.zcml:27
 #: lib/python/org/ict_ok/components/building/security.zcml:27
 #: lib/python/org/ict_ok/components/room/security.zcml:27
-#, fuzzy
 msgid "Delete Template Entry."
-msgstr "ungültiger Info-Eintrag"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/site/security.zcml:9
 #: lib/python/org/ict_ok/components/net/security.zcml:9
@@ -2674,34 +2356,28 @@ msgstr ""
 #: lib/python/org/ict_ok/components/location/security.zcml:9
 #: lib/python/org/ict_ok/components/building/security.zcml:9
 #: lib/python/org/ict_ok/components/room/security.zcml:9
-#, fuzzy
 msgid "View Template Entry"
-msgstr "ungültiger Info-Eintrag"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/slave/browser/details.pt:11
-#, fuzzy
 msgid "Date 1"
-msgstr "Veraltet"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/slave/browser/details.pt:19
-#, fuzzy
 msgid "Notes"
-msgstr "Anmerkungen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/slave/browser/details.pt:4
-#, fuzzy
 msgid "DummyContainer Details"
-msgstr "Schnittstellen-Einzelheiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/slave/browser/details.pt:7
-#, fuzzy
 msgid "title"
-msgstr "Titel"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:2
-#, fuzzy
 msgid "Add SNMP Vendor"
-msgstr "Felderinhalt hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:44
 #: lib/python/org/ict_ok/components/superclass/browser/overview.pt:15
@@ -2711,24 +2387,20 @@ msgstr "Felderinhalt hinzufügen"
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/generations.pt:16
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/events.pt:16
 #: lib/python/org/ict_ok/admin_utils/util_manager/browser/overview.pt:13
-#, fuzzy
 msgid "There are no objects."
-msgstr "Keine Einträge vorhanden"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:236
-#, fuzzy
 msgid "Add SnmpValue"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:243
-#, fuzzy
 msgid "SnmpValue Edit Form"
-msgstr "Browser-Formular-Herausforderer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:56
-#, fuzzy
 msgid "Add SNMP Value"
-msgstr "Option -%c benötigt einen Wert"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/configure.zcml:24
 msgid "SnmpValue"
@@ -2740,9 +2412,8 @@ msgid "max level dimension denominator"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:30
-#, fuzzy
 msgid "Check Type"
-msgstr "Präsentationstyp:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:37
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:38
@@ -2756,51 +2427,43 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:50
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:51
-#, fuzzy
 msgid "Check Command"
-msgstr "Kommandozeile"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:57
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:58
-#, fuzzy
 msgid "Input Type"
-msgstr "Präsentationstyp:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:64
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:65
-#, fuzzy
 msgid "input dimension"
-msgstr "Keine Eingabegeräte"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:71
-#, fuzzy
 msgid "display dimension numerator"
-msgstr "Zeile&nnummern anzeigen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:72
-#, fuzzy
 msgid "input dimension numerator"
-msgstr "Keine Eingabegeräte"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:78
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:79
-#, fuzzy
 msgid "display dimension denominator"
-msgstr "Zeile&nnummern anzeigen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:85
-#, fuzzy
 msgid "max-checks"
-msgstr "min_max"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:86
 msgid "enable check 'max' for this entry"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:93
-#, fuzzy
 msgid "max level"
-msgstr "min_max"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:94
 msgid "'max'-level for this entry (bit/s)"
@@ -2814,75 +2477,66 @@ msgstr ""
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:293
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:2
 msgid "Details"
-msgstr "Details"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:300
 msgid "Overview"
-msgstr "Übersicht"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:307
 msgid "History"
-msgstr "Historie"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:314
 #: lib/python/org/ict_ok/components/script/configure.zcml:24
-#, fuzzy
 msgid "Script"
-msgstr "Skript"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:321
 msgid "Dump data"
-msgstr "Daten abrufen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:328
 msgid "Export XML"
-msgstr "Exportiere XML"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:335
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:342
-#, fuzzy
 msgid "Event Interface"
-msgstr "Schnittstellen-Einzelheiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:349
-#, fuzzy
 msgid "Edit Content"
-msgstr "Felderinhalt bearbeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:405
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:429
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:471
-#, fuzzy
 msgid "no pickle adapter"
-msgstr "Adapter-Factory/Factories"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:527
-#, fuzzy
 msgid "View Superclass"
-msgstr "Ansichtenname"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:536
-#, fuzzy
 msgid "Add Superclass"
-msgstr "Utility hinzufügen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:569
-#, fuzzy
 msgid "Edit Superclass"
-msgstr "Bearbeiten Popup"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:604
-#, fuzzy
 msgid "Delete this object?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:608
-#, fuzzy
 msgid "Delete this object: '%s'?"
-msgstr "Resource löschen"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:673
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:678
@@ -2892,7 +2546,7 @@ msgstr ""
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:688
 #: lib/python/org/ict_ok/skin/menu/__init__.py:117
 msgid "Dashboard"
-msgstr "Dashboard"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:690
 msgid "Dashboard of %s"
@@ -2903,9 +2557,8 @@ msgid "R"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:720
-#, fuzzy
 msgid "Text"
-msgstr "Text"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/browser/superclass.py:745
 msgid " "
@@ -2924,47 +2577,40 @@ msgid "No objects were selected."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:37
-#, fuzzy
 msgid "Object id"
-msgstr "Prozessnummer"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:38
-#, fuzzy
 msgid "Oid of this object"
-msgstr "Dieses Objekt ist registriert als:"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:45
 msgid "Instance name"
-msgstr "Name"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:46
-#, fuzzy
 msgid "Name of the instance."
-msgstr "Instanzobjekt"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:51
-#, fuzzy
 msgid "Instance author"
-msgstr "Instanzobjekt"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:52
-#, fuzzy
 msgid "Author of the instance."
-msgstr "Instanzobjekt"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:57
-#, fuzzy
 msgid "Instance notes"
-msgstr "Instanzobjekt"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:58
 msgid "Notes for the instance (in the context of using)."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:61
-#, fuzzy
 msgid "Instance note"
-msgstr "Instanzobjekt"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:62
 msgid "Note for the instance (in the context of using)."
@@ -2973,7 +2619,7 @@ msgstr ""
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:69
 #: lib/python/org/ict_ok/components/slave/browser/details.pt:15
 msgid "Comment"
-msgstr "Bemerkung"
+msgstr "Komentarz"
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:70
 msgid "Comment for the instance (in the context of installing)."
@@ -2985,17 +2631,16 @@ msgstr ""
 
 #: lib/python/org/ict_ok/libs/interfaces.py:32
 msgid "Attribute"
-msgstr "Attribut"
+msgstr ""
 
 #: lib/python/org/ict_ok/libs/interfaces.py:33
-#, fuzzy
 msgid "Attribute of the instance."
-msgstr "Instanzobjekt"
+msgstr ""
 
 #: lib/python/org/ict_ok/libs/lib.py:68
 #: lib/python/org/ict_ok/libs/lib.py:70
 msgid "Oid is not correct."
-msgstr "Oid ist nicht richtig!"
+msgstr ""
 
 #: lib/python/org/ict_ok/schema/interfaces.py:30
 #: lib/python/org/ict_ok/schema/interfaces.py:46
@@ -3015,14 +2660,12 @@ msgid "Network IP-address not ok"
 msgstr ""
 
 #: lib/python/org/ict_ok/schema/interfaces.py:50
-#, fuzzy
 msgid "netaddress is not ok"
-msgstr "Pfad ist nicht richtig!"
+msgstr ""
 
 #: lib/python/org/ict_ok/schema/interfaces.py:54
-#, fuzzy
 msgid "Universe ID not ok"
-msgstr "Die angegebene Kennung ist nicht gültig."
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/error/error.pt:10
 msgid "An error occurred, please print out this page and send to your <a href=\"/yoursupport\">Support</a> or <a href=\"javascript:history.back(1);\">x</a>"
@@ -3030,46 +2673,45 @@ msgstr ""
 
 #. Default: "go back and try another URL."
 #: lib/python/org/ict_ok/skin/error/error.pt:10
-#, fuzzy
 msgid "sys-error-try-again"
-msgstr "Zurück, um eine andere Adresse einzugeben."
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/error/error.pt:15
 msgid "Error object: ${error_object}"
-msgstr "Fehlerobjekt: ${error_object}"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/error/error.pt:4
 msgid "Error type: ${error_type}"
-msgstr "Fehlertyp: ${error_type}"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/hd/ik_hd_menu.pt:4
 msgid "[Version]"
-msgstr "[Version]"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/hd/ik_hd_menu.pt:5
 msgid "[Help]"
-msgstr "[Hilfe]"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/hd/ik_hd_menu.pt:6
 msgid "[Preferences]"
-msgstr "[Einstellungen]"
+msgstr "[Konfiguracja]"
 
 #: lib/python/org/ict_ok/skin/hd/ik_hd_menu.pt:8
 msgid "[Language]"
-msgstr "[Sprache]"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/ik_xmlobject.py:196
 #: lib/python/org/ict_ok/skin/ik_xmlobject.py:199
 msgid "[top]"
-msgstr "[oben]"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/menu/__init__.py:122
 msgid "Help"
-msgstr "Hilfe"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/menu/__init__.py:127
 msgid "Networks"
-msgstr "Netzwerke"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/menu/__init__.py:132
 msgid "Hosts"
@@ -3077,23 +2719,23 @@ msgstr ""
 
 #: lib/python/org/ict_ok/skin/menu/__init__.py:137
 msgid "Services"
-msgstr "Dienste"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/menu/__init__.py:142
 msgid "Utilities"
-msgstr "Utilities"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/mtree/ik_mtree.pt:4
 msgid "Navigation"
-msgstr "Navigation"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/sidebar/ik_sb_actions.pt:4
 msgid "My actions"
-msgstr "Meine Tätigkeiten"
+msgstr ""
 
 #: lib/python/org/ict_ok/skin/sidebar/ik_sb_status.pt:18
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:10
 #: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:10
 msgid "State"
-msgstr "Status"
+msgstr ""
 
