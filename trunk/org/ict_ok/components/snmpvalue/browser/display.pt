@@ -4,7 +4,7 @@
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary"
             tal:define="runtime_info view/getZopeRuntimeInfo">
-        <tr>
+        <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
@@ -24,14 +24,24 @@
             <!--<td i18n:translate="">Value2</td>-->
             <!--<td tal:content="python: context.getDisplayPhysical()" />-->
         <!--</tr>-->
-        <tr class="cb_wht" tal:condition="view/getValue">
-            <td i18n:translate="">Value</td>
-            <td tal:content="python: context.getSnmpValue()" />
-        </tr>
-        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
-            <!--<td i18n:translate="">Value</td>-->
-            <!--<td tal:content="python: context.getMyFactor() * context.getDisplayPhysical() * view.getValue()[1]" />-->
+        <!--<tr class="cb_wht">-->
+            <!--<td i18n:translate="">Timestamp</td>-->
+            <!--<td tal:content="python: view.nowTS()">test</td>-->
         <!--</tr>-->
+        <tr class="cb_wht">
+            <td i18n:translate="">Timestamp</td>
+            <td tal:content="python: dateform.format(view.nowTS())">test</td>
+        </tr>
+        <tr class="cb_wht">
+            <td i18n:translate="">Value</td>
+            <td>
+                <ul>
+                    <div tal:omit-tag="" tal:repeat="val view/getValues">
+                        <li tal:content="val" />
+                    </div>
+                </ul>
+            </td>
+        </tr>
     </table>
     <h3>1h</h3>
     <img tal:attributes="src python: '%s/@@getPNG?hours=1' % (view.getValuePngHref())" />
