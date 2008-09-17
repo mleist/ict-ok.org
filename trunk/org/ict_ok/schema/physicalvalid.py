@@ -21,7 +21,7 @@ from zope.schema import TextLine
 from org.ict_ok.schema.interfaces import PhysicalQuantityValidError, \
      PhysicalUnitValidError
 from org.ict_ok.libs.physicalquantity import physq, convertQuantity, \
-     convertUnit, MagnitudeError
+     convertUnit, magnitude
 
 
 class PhysicalQuantity(TextLine):
@@ -39,7 +39,7 @@ class PhysicalQuantity(TextLine):
                 physical_unit = physq(numerical_value, valList[1])
         except ValueError:
             raise PhysicalQuantityValidError(value, 1)
-        except MagnitudeError:
+        except magnitude.MagnitudeError:
             raise PhysicalQuantityValidError(value, 1)
 
 class PhysicalUnit(TextLine):
@@ -50,5 +50,5 @@ class PhysicalUnit(TextLine):
         TextLine._validate(self, value)
         try:
             physical_quantity = physq(1.0, value)
-        except MagnitudeError:
+        except magnitude.MagnitudeError:
             raise PhysicalUnitValidError(value, 1)
