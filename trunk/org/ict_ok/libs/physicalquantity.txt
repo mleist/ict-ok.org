@@ -95,3 +95,63 @@ comparisons with physical quantities
   >>> zz = hz / ps
   >>> print zz
   1.0
+# new physical quantities
+
+  >>> from org.ict_ok.libs.physicalquantity import convertQuantity
+  >>> u1 = convertQuantity("228.4 V")
+  >>> i1 = convertQuantity("7.8 A")
+  >>> u2 = convertQuantity("236.2 V")
+  >>> i2 = convertQuantity("6.5 A")
+
+  >>> print u1
+  228.4000 V
+  >>> print i1
+  7.8000 A
+  >>> p1 = u1 * i1
+  >>> p2 = u2 * i2
+  
+  >>> print p1
+  1781.5200 m2 kg / s3 
+  
+  >>> p1.ounit("W")
+  <magnitude.Magnitude instance at 0x2b9ede7036c8>
+  >>> p2.ounit("W")
+  <magnitude.Magnitude instance at 0x2b9ede70af80>
+  
+  >>> print p1
+  1781.5200 W
+  >>> print p2
+  1535.3000 W
+  
+  >>> t1 = datetime.datetime(2008, 01, 31, 0, 0, 0)
+  >>> t2 = datetime.datetime(2008, 02, 29, 0, 0, 0)
+  
+  >>> p = p1 + p2 / 2
+  >>> t=t2-t1
+  
+  >>> hours = t.days * 24 
+  
+  >>> print hours
+  696
+  
+  >>> phours = convertQuantity("%f h" % hours)
+  >>> print phours
+  696.0000 h
+  
+  
+  >>> e = phours * p
+  >>> e.ounit("kW h")
+  <magnitude.Magnitude instance at 0x2b9ede945878>
+  
+  >>> print e
+  1774.2223 kW h
+  
+  >>> pr_e = convertQuantity("0.22 Euro/kW h")
+  >>> print pr_e
+  0.2200 Euro/kW h
+  
+  >>> pr = e * pr_e
+  >>> pr.ounit("Euro")
+  <magnitude.Magnitude instance at 0x2b9ede711290>
+  >>> print pr
+  390.3289 Euro

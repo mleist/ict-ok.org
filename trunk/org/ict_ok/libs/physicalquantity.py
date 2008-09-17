@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0232
+# pylint: disable-msg=W0232,W0212
 #
 """Physical quantities for ict-ok.org
 see http://juanreyero.com/magnitude/index.html
@@ -16,23 +16,31 @@ see http://juanreyero.com/magnitude/index.html
 __version__ = "$Id$"
 
 # python imports
-from magnitude import Magnitude, MagnitudeError
+import magnitude
+#from magnitude import Magnitude, MagnitudeError
+
+# zope imports
+from zope.security.checker import BasicTypes, NoProxy
+
+if not magnitude._mags.has_key('Euro'):
+    magnitude.new_mag('Euro', magnitude.Magnitude(1.0, dollar=1))
 
 
-class PhysicalQuantity(Magnitude):
+class PhysicalQuantity(magnitude.Magnitude):
     """
+    our own wrapper class
     """
 
 def physq(value, unit='', ounit=''):
     """Builds a Magnitude from a number and a units string"""
-    pq = PhysicalQuantity(value)
+    phq = PhysicalQuantity(value)
     if unit:
-        u = pq.sunit2mag(unit)
-        pq.mult_by(u)
+        tmp_u = phq.sunit2mag(unit)
+        phq.mult_by(tmp_u)
     if not ounit:
         ounit = unit
-    pq.ounit(ounit)
-    return pq
+    phq.ounit(ounit)
+    return phq
 
 def convertQuantity(inpString):
     """converts an input string to the physical quantity
@@ -48,7 +56,7 @@ def convertQuantity(inpString):
             physical_quantity = physq(numerical_value, "")
     except ValueError:
         return physq(-1.0)
-    except MagnitudeError:
+    except magnitude.MagnitudeError:
         return physq(-1.0)
     return physical_quantity
 
@@ -62,7 +70,11 @@ def convertUnit(inpString):
         physical_quantity = physq(1.0, inpString)
     except ValueError:
         return physq(-1.0)
-    except MagnitudeError:
+    except magnitude.MagnitudeError:
         return physq(-1.0)
     return physical_quantity
 
+# PhysicalQuantity and magnitude.Magnitude shouldn't use security proxy
+BasicTypes.update({PhysicalQuantity: NoProxy,
+                   magnitude.Magnitude: NoProxy,
+                   })
