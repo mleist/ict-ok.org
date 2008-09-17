@@ -16,7 +16,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface
 from zope.component.interfaces import IObjectEvent
-from zope.schema import Choice, Set
+from zope.schema import Choice, Set, List
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -30,7 +30,7 @@ class INotifierUtil(ISupernode):
     implementation of a "Notifier-Utility" 
     """
     
-    notifierSet = Set (
+    notifierSet = List (
         title = _("Notifiers"),
         description = _("Which network notifiers should be triggerd"),
         value_type = Choice(
@@ -39,6 +39,11 @@ class INotifierUtil(ISupernode):
             #values = [ u"nmap", u"kmap", u"omap"]),
         readonly = False,
         required = True)
+    #notifierSet = Choice(
+        #title = _("Notifier"),
+        #vocabulary = "notifierInstances",
+        #readonly = False,
+        #required = True)
     
     def getAllNotifierObjs(self):
         """

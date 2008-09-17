@@ -37,8 +37,8 @@ _ = MessageFactory('org.ict_ok')
 class NotifierDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName', 'notifierSet']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
     def getAllNotifierObjs(self):
         """
@@ -57,11 +57,12 @@ class NotifierDetails(SupernodeDetails):
         get list of Notifier-Tupel (name, obj)
         """
         retList = []
-        for name, notifier in self.context.getNotifierObjs():
-            retDict = {}
-            retDict['name'] = name
-            retDict['href'] = zapi.getPath(notifier) + '/@@status'
-            retList.append(retDict)
+        if self.context.getNotifierObjs() is not None:
+            for name, notifier in self.context.getNotifierObjs():
+                retDict = {}
+                retDict['name'] = name
+                retDict['href'] = zapi.getPath(notifier) + '/@@status'
+                retList.append(retDict)
         return retList
 
 
@@ -69,14 +70,14 @@ class NotifierDetails(SupernodeDetails):
 
 
 class ViewNotifierForm(DisplayForm):
-    """ Display form for the object """
-    label = _(u'settings of graphviz adapter')
+    """ Display form for the notifier """
+    label = _(u'settings of notifier')
     fields = field.Fields(INotifierUtil).omit(\
         *NotifierDetails.omit_viewfields)
 
 
 class EditNotifierForm(EditForm):
-    """ Edit for for net """
-    label = _(u'edit graphviz adapter')
+    """ Edit for for notifier """
+    label = _(u'edit notifier')
     fields = field.Fields(INotifierUtil).omit(\
         *NotifierDetails.omit_editfields)

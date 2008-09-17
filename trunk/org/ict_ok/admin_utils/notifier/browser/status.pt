@@ -1,40 +1,32 @@
-<html metal:use-macro="views/standard_macros/view">
-<body>
-    <div metal:fill-slot="body" i18n:domain="ict-ok.org">
-			<h3 i18n:translate="">Systeminfo</h3>
-            <table id="sortable" class="listing" summary="Content listing"
-                i18n:attributes="summary">
-                <tr>
-                    <th i18n:translate="">Name</th>
-                    <th i18n:translate="">Value</th>
-                </tr>
-                <tr class="cb_wht">
-                    <td i18n:translate="">aktive Notifier</td>
-                    <td>
-						<ul>
-							<span tal:omit-tag="" tal:repeat="notifier view/getNotifierObjs">
-								<li><a href="#" tal:attributes="href python:notifier['href']"
-										tal:content="python: notifier['name']">Notifier1</a></li>
-							</span>
-						</ul>
-					</td>
-                </tr>
-                <tr class="cb_ilx">
-                    <td i18n:translate="">all Notifier</td>
-                    <td>
-						<ul>
-							<span tal:omit-tag="" tal:repeat="notifier view/getAllNotifierObjs">
-								<li><a href="#" tal:attributes="href python:notifier['href']"
-										tal:content="python: notifier['name']">Notifier1</a></li>
-							</span>
-						</ul>
-					</td>
-                </tr>
-                <!--tr class="cb_ixl">
-                    <td i18n:translate="">AAA</td>
-                    <td tal:content="view/getNotifierObjs">test</td>
-                </tr-->
-			</table>
-    </div>
-	</body>
-</html>
+<i18n:block domain="org.ict-ok">
+    <h3 i18n:translate="">Display Notifier</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+        <tr>
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+        <tr class="cb_wht">
+            <td i18n:translate="">Active notifier</td>
+            <td>
+                <ul>
+                    <span tal:omit-tag="" tal:repeat="notifier view/getNotifierObjs">
+                        <li><a href="#" tal:attributes="href python:notifier['href']"
+                            tal:content="python: notifier['name']">Notifier1</a></li>
+                    </span>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td i18n:translate="">All notifier</td>
+            <td>
+                <ul>
+                    <span tal:omit-tag="" tal:repeat="notifier view/getAllNotifierObjs">
+                        <li><a href="#" tal:attributes="href python:notifier['href']"
+                            tal:content="python: notifier['name']">Notifier1</a></li>
+                    </span>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</i18n:block>

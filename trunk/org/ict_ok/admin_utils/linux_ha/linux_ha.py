@@ -613,8 +613,14 @@ class GlobalLinuxHaUtility(object):
         #self.haThread.getQueue(localEsxUtilOId)['out'].task_done()
         #return esxServerUuid
 
-globalLinuxHaUtility = GlobalLinuxHaUtility()
-
+from zope.app.appsetup import appsetup
+try:
+    appsetup.getConfigSource().index("site.zcml")
+    globalLinuxHaUtility = GlobalLinuxHaUtility()
+except ValueError:
+    # dont start thread
+    pass
+    
 #@adapter(IAdmUtilLinuxHa, IObjectModifiedEvent)
 #def notifyAdmUtilLinuxHaModifiedEvent(instance, event):
     #print "notifyAdmUtilLinuxHaModifiedEvent"

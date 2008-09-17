@@ -10,43 +10,85 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
          Markus Leist <leist@ikom-online.de> -->
 
-    <page
-        name="status"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IIkNotifierEmail"
-        class=".email.IkNotifierEmailDetails"
-        template="status.pt"
+    <!--##### email notifier ##### -->
+
+    <defaultView
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        name="details.html"
+        />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        class="org.ict_ok.admin_utils.notifier.email.browser.email.ViewNotifierEmailForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
-        menu="zmi_views" title="Status"/>
+        />
+    <!--<page-->
+        <!--name="status"-->
+        <!--for="org.ict_ok.admin_utils.notifier.email.interfaces.IIkNotifierEmail"-->
+        <!--class=".email.IkNotifierEmailDetails"-->
+        <!--template="status.pt"-->
+        <!--permission="org.ict_ok.admin_utils.notifier.View"-->
+        <!--menu="zmi_views" title="Status"/>-->
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.notifier.View"
+        />
 
     <z3c:pagelet
         name="history.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IIkNotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
         class="org.ict_ok.components.superclass.browser.superclass.History"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
         />
 
-    <!--##### Sub Menu ##### -->
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        class="org.ict_ok.admin_utils.notifier.email.browser.email.EditNotifierEmailForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.notifier.Edit"
+        />
+        
 
+    <!--##### email notifier ##### -->
+    <!--##### Sub Menu ##### -->
     <viewlet
-        name="details.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IIkNotifierEmail"
+        name="details"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
         />
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.notifier.View"
+        />
+
     <viewlet
         name="history"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IIkNotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
         />
+
     <viewlet
         name="edit"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IIkNotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
