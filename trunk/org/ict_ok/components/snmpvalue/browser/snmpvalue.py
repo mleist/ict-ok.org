@@ -18,6 +18,7 @@ __version__ = "$Id$"
 import time
 import rrdtool
 import copy
+from datetime import datetime
 
 # zope imports
 from zope.app import zapi
@@ -105,50 +106,136 @@ class SnmpValueDetails(ComponentDetails):
                         (str(obj.objectID), params['nameext']))
         unitInRrd = convertQuantity(self.context.inpQuantity) \
                   / convertQuantity("1.0 s")
-        if self.context.inptype == u"cnt":
-            displUnitV = convertUnit(self.context.displUnitVelocity)
-            myDisplayString1 = str(self.context.displUnitVelocity)
-            myDisplayString2 = str(self.context.displUnitVelocity)
-        elif self.context.inptype == u"gauge":
-            displUnitV = convertUnit(self.context.displUnitAbs)
-            myDisplayString1 = str(self.context.displUnitAbs)
-            myDisplayString2 = str(self.context.displUnitAbs)
-        else:
-            displUnitV = convertUnit(self.context.displUnitVelocity)
-            myDisplayString1 = str(self.context.displUnitVelocity)
-            myDisplayString2 = str(self.context.displUnitVelocity)
-        multiplier = float(unitInRrd / displUnitV)
+        (displUnit, displayString) = self.context.getDisplayUnit()
+        (minQuantity, minString) = self.context.getMinQuantity()
+        (maxQuantity, maxString) = self.context.getMaxQuantity()
+        #import pdb
+        #pdb.set_trace()
+        #if self.context.inptype == u"cnt":
+            #displUnitV = convertUnit(self.context.displUnitVelocity)
+            #myDisplayString1 = str(self.context.displUnitVelocity)
+            #myDisplayString2 = str(self.context.displUnitVelocity)
+        #elif self.context.inptype == u"gauge":
+            #displUnitV = convertUnit(self.context.displUnitAbs)
+            #myDisplayString1 = str(self.context.displUnitAbs)
+            #myDisplayString2 = str(self.context.displUnitAbs)
+        #else:
+            #displUnitV = convertUnit(self.context.displUnitVelocity)
+            #myDisplayString1 = str(self.context.displUnitVelocity)
+            #myDisplayString2 = str(self.context.displUnitVelocity)
+        multiplier = float(unitInRrd / displUnit)
         if 1: ##fileage > 60:
             rrdFile = self.context.getRrdFilename()
             argList = []
             argList.append(targetPic)
-            argList.append("DEF:avg0=%s:ds0:AVERAGE" % (rrdFile))
+            argList.append("DEF:avg0=%s:ds00:AVERAGE" % (rrdFile))
             if self.context.displayMinMax:
-                argList.append("DEF:max0=%s:ds0:MAX" % (rrdFile))
-                argList.append("DEF:min0=%s:ds0:MIN" % (rrdFile))
+                argList.append("DEF:max0=%s:ds00:MAX" % (rrdFile))
+                argList.append("DEF:min0=%s:ds00:MIN" % (rrdFile))
             argList.append("CDEF:avg=avg0,%f,*" % (multiplier))
             if self.context.displayMinMax:
                 argList.append("CDEF:max=max0,%f,*" % (multiplier))
                 argList.append("CDEF:min=min0,%f,*" % (multiplier))
+
+            #"CDEF:limit=avg,%f,GT,%f,0,IF" % (myMaxValue, myMaxValue),
+            #"CDEF:olimit=avg,%f,GT,avg,%f,-,0,IF" % (myMaxValue, myMaxValue),
+            #"CDEF:ulimit=avg,%f,GT,0,avg,IF" % (myMaxValue),
+            #"HRULE:%f#FFFF00" % (myMaxValue),
+            
+            #if minQuantity is not None:
+                #if maxQuantity is not None: # min and max are valid
+                    #pass
+                #else: # only min is valid
+                    #pass
+            #else:
+                #if maxQuantity is not None: # only max are valid
+                    #myMaxValue = float(maxQuantity / displUnit)
+                    #argList.append("CDEF:limitmax=avg,%f,GT,%f,0,IF" % (myMaxValue, myMaxValue))
+                    #argList.append("CDEF:olimitmax=avg,%f,GT,avg,%f,-,0,IF" % (myMaxValue, myMaxValue))
+                    #argList.append("CDEF:ulimitmax=avg,%f,GT,0,avg,IF" % (myMaxValue))
+                    #argList.append("HRULE:%f#FF0000" % (myMaxValue))
+                #else: # neither min nor max are valid
+                    #pass
+
+            
+            
+            if minQuantity is not None:
+                myMinValue = float(minQuantity / displUnit)
+                print "myMinValue: ", myMinValue
+                #argList.append("CDEF:limit2=avg,%f,LT,%f,0,IF" % (myMinValue, myMinValue))
+                #argList.append("CDEF:olimit2=avg,%f,LT,avg,%f,-,0,IF" % (myMinValue, myMinValue))
+                argList.append("CDEF:ulimitmin=avg,%f,LT,avg,0,IF" % (myMinValue))
+                #argList.append("HRULE:%f#FFFF00" % (myMaxValue))
+                argList.append("HRULE:%f#FFFF00" % (myMinValue))
+            if maxQuantity is not None:
+                myMaxValue = float(maxQuantity / displUnit)
+                print "myMaxValue: ", myMaxValue
+                argList.append("CDEF:limitmax=avg,%f,GT,%f,0,IF" % (myMaxValue, myMaxValue))
+                argList.append("CDEF:olimitmax=avg,%f,GT,avg,%f,-,0,IF" % (myMaxValue, myMaxValue))
+                argList.append("CDEF:ulimitmax=avg,%f,GT,0,avg,IF" % (myMaxValue))
+                #argList.append("HRULE:%f#FFFF00" % (myMaxValue))
+                argList.append("HRULE:%f#FF0000" % (myMaxValue))
             argList.append("--start=%d" % params['starttime'])
             argList.append("--end=%d" % params['endtime'])
             argList.append("--width=540")
             argList.append("--height=120")
             argList.append("--watermark=ict-ok.org")
-            argList.append("--vertical-label=%s" %myDisplayString1)
+            argList.append("--vertical-label=%s" % displayString)
             argList.append(\
-                'GPRINT:avg:AVERAGE:avg\: %%6.2lf %s' %myDisplayString2)
+                'GPRINT:avg:AVERAGE:avg\: %%6.2lf %s' % displayString)
             if self.context.displayMinMax:
                 argList.append(\
-                    'GPRINT:max:MAX:max\: %%6.2lf %s' %myDisplayString2)
+                    'GPRINT:max:MAX:max\: %%6.2lf %s' % displayString)
                 argList.append(\
-                    'GPRINT:min:MIN:min\: %%6.2lf %s' %myDisplayString2)
-            argList.append("AREA:avg#7DD0BC:\"average\"")
+                    'GPRINT:min:MIN:min\: %%6.2lf %s' % displayString)
+
+            ##"AREA:ulimit#009783",
+            ##"AREA:limit#009783",
+            ##"STACK:olimit#FF0000",
+            ##argList.append("AREA:ulimit#009783")
+            ##argList.append("AREA:limit#009783")
+            ##argList.append("STACK:olimit#FF0000")
+            #if minQuantity is not None:
+                ##argList.append("LINE1:ulimit#009783")
+                ##argList.append("LINE2:limit#009783")
+                ##argList.append("STACK:olimit#FF0000")
+                #argList.append("AREA:ulimitmin#CFD138")
+                ##argList.append("AREA:limit#E07771")
+                ##argList.append("STACK:olimit#FF0000")
+            #if maxQuantity is not None:
+                ##argList.append("LINE1:ulimit#009783")
+                ##argList.append("LINE2:limit#009783")
+                ##argList.append("STACK:olimit#FF0000")
+                #argList.append("AREA:ulimitmax#008263")
+                #argList.append("AREA:limitmax#E07771")
+                #argList.append("STACK:olimitmax#FF0000")
+            #else:
+                #argList.append("AREA:avg#7DD0BC:\"average\"")
+
+                
+            if minQuantity is not None:
+                if maxQuantity is not None: # min and max are valid
+                    argList.append("AREA:ulimitmax#008263")
+                    argList.append("AREA:limitmax#E07771")
+                    argList.append("STACK:olimitmax#FF0000")
+                    argList.append("AREA:ulimitmin#CFD138")
+                else: # only min is valid
+                    argList.append("AREA:avg#7DD0BC:\"average\"")
+                    argList.append("AREA:ulimitmin#CFD138")
+            else:
+                if maxQuantity is not None: # only max are valid
+                    argList.append("AREA:ulimitmax#008263")
+                    argList.append("AREA:limitmax#E07771")
+                    argList.append("STACK:olimitmax#FF0000")
+                else: # neither min nor max are valid
+                    argList.append("AREA:avg#7DD0BC:\"average\"")
+
             if self.context.displayMinMax:
                 argList.append("LINE1:max#008263:\"max\"")
             argList.append("--imgformat=PNG")
             argList.append("--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
                            "HEIGHT=\"%lu\" ALT=\"Demo\">")
+            #print "argList:", argList
             rrdtool.graph(*argList)
         pic = open(targetPic, "r")
         picMem = pic.read()
@@ -160,14 +247,18 @@ class SnmpValueDetails(ComponentDetails):
         obj = self.context
         return zapi.getPath(obj)
 
-    def getValue(self):
-        retVal = None
+    def getValues(self):
+        retList = []
+        valueList = self.context.getSnmpValues()
         displayUnit = self.context.getPUdisplUnitAbs()
         if displayUnit:
-            retVal = self.context.getSnmpValue()
-            if retVal:
-                retVal.ounit(displayUnit.out_unit)
-        return retVal
+            for value in valueList:
+                retList.append(str(\
+                    value.ounit(displayUnit.out_unit)))
+        return retList
+    
+    def nowTS(self):
+        return datetime.now()
 
     def getTabClass(self):
         if hasattr(self.request, 'tabClass'):
