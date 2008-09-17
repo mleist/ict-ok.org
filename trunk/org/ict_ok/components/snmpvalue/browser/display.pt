@@ -8,32 +8,12 @@
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
-            <!--<td i18n:translate="">Value</td>-->
-            <!--<td tal:content="python: view.getValue()[1]" />-->
-        <!--</tr>-->
-        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
-            <!--<td i18n:translate="">Value</td>-->
-            <!--<td tal:content="python: context.getMyFactor()" />-->
-        <!--</tr>-->
-        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
-            <!--<td i18n:translate="">Value1</td>-->
-            <!--<td tal:content="python: context.getMyFactor()" />-->
-        <!--</tr>-->
-        <!--<tr class="cb_wht" tal:condition="view/getValue">-->
-            <!--<td i18n:translate="">Value2</td>-->
-            <!--<td tal:content="python: context.getDisplayPhysical()" />-->
-        <!--</tr>-->
-        <!--<tr class="cb_wht">-->
-            <!--<td i18n:translate="">Timestamp</td>-->
-            <!--<td tal:content="python: view.nowTS()">test</td>-->
-        <!--</tr>-->
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">Timestamp</td>
             <td tal:content="python: dateform.format(view.nowTS())">test</td>
         </tr>
-        <tr class="cb_wht">
-            <td i18n:translate="">Value</td>
+        <tr tal:attributes="class view/getTabClass">
+            <td i18n:translate="">current values</td>
             <td>
                 <ul>
                     <div tal:omit-tag="" tal:repeat="val view/getValues">
@@ -41,6 +21,18 @@
                     </div>
                 </ul>
             </td>
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="python:context.getMinQuantity()[0]"
+            tal:define="minString python:context.getMinQuantity()[1]">
+            <td i18n:translate="">min. level</td>
+            <td tal:content="minString" />
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="python:context.getMaxQuantity()[0]"
+            tal:define="maxString python:context.getMaxQuantity()[1]">
+            <td i18n:translate="">max. level</td>
+            <td tal:content="maxString" />
         </tr>
     </table>
     <h3>1h</h3>
@@ -55,5 +47,4 @@
     <img tal:attributes="src python: '%s/@@getPNG?hours=8760' % (view.getValuePngHref())" />
     <h3>10y</h3>
     <img tal:attributes="src python: '%s/@@getPNG?hours=87600' % (view.getValuePngHref())" />
-    <!--http://172./getPNG?hours=24-->
 </i18n:block>

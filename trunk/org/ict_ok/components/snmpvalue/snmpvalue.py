@@ -109,6 +109,12 @@ class SnmpValue(Component):
         ISnmpValue['displUnitVelocity'])
     displUnitAcceleration = FieldProperty(\
         ISnmpValue['displUnitAcceleration'])
+    minQuantityAbs = FieldProperty(\
+        ISnmpValue['minQuantityAbs'])
+    minQuantityVelocity = FieldProperty(\
+        ISnmpValue['minQuantityVelocity'])
+    minQuantityAcceleration = FieldProperty(\
+        ISnmpValue['minQuantityAcceleration'])
     maxQuantityAbs = FieldProperty(\
         ISnmpValue['maxQuantityAbs'])
     maxQuantityVelocity = FieldProperty(\
@@ -140,21 +146,87 @@ class SnmpValue(Component):
             if self.snmpIndexType == u"oid":
                 retList.append(addr)
             elif self.snmpIndexType == u"index":
-                raise Exception, "non implemented yet"
+                raise Exception,\
+                      "index type '%s' non implemented yet for %s" % \
+                      (self.snmpIndexType, self.ikName)
             elif self.snmpIndexType == u"mac":
-                raise Exception, "non implemented yet"
+                raise Exception,\
+                      "index type '%s' non implemented yet for %s" % \
+                      (self.snmpIndexType, self.ikName)
             elif self.snmpIndexType == u"desc":
-                raise Exception, "non implemented yet"
+                raise Exception,\
+                      "index type '%s' non implemented yet for %s" % \
+                      (self.snmpIndexType, self.ikName)
             elif self.snmpIndexType == u"name":
-                raise Exception, "non implemented yet"
+                raise Exception,\
+                      "index type '%s' non implemented yet for %s" % \
+                      (self.snmpIndexType, self.ikName)
             else:
                 retList.append(addr)
         return retList
 
-    def getRawSnmpValue(self):
+    def getDisplayUnit(self):
+        """get unit tuple (displUnit, displayString)
+        """
+        displUnit = None
+        displayString = None
+        if self.inptype == u"cnt":
+            if self.displUnitVelocity is not None:
+                displUnit = convertUnit(self.displUnitVelocity)
+                displayString = str(self.displUnitVelocity)
+        elif self.inptype == u"gauge":
+            if self.displUnitAbs is not None:
+                displUnit = convertUnit(self.displUnitAbs)
+                displayString = str(self.displUnitAbs)
+        else:
+            if self.displUnitVelocity is not None:
+                displUnit = convertUnit(self.displUnitVelocity)
+                displayString = str(self.displUnitVelocity)
+        return (displUnit, displayString)
+
+    def getMinQuantity(self):
+        """get unit tuple (minQuantity, minString)
+        """
+        minQuantity = None
+        minString = None
+        if self.inptype == u"cnt":
+            if self.minQuantityVelocity is not None:
+                minQuantity = convertQuantity(self.minQuantityVelocity)
+                minString = str(self.minQuantityVelocity)
+        elif self.inptype == u"gauge":
+            if self.minQuantityAbs is not None:
+                minQuantity = convertQuantity(self.minQuantityAbs)
+                minString = str(self.minQuantityAbs)
+        else:
+            if self.minQuantityVelocity is not None:
+                minQuantity = convertQuantity(self.minQuantityVelocity)
+                minString = str(self.minQuantityVelocity)
+        return (minQuantity, minString)
+
+    def getMaxQuantity(self):
+        """get unit tuple (maxQuantity, maxString)
+        """
+        maxQuantity = None
+        maxString = None
+        if self.inptype == u"cnt":
+            if self.maxQuantityVelocity is not None:
+                maxQuantity = convertQuantity(self.maxQuantityVelocity)
+                maxString = str(self.maxQuantityVelocity)
+        elif self.inptype == u"gauge":
+            if self.maxQuantityAbs is not None:
+                maxQuantity = convertQuantity(self.maxQuantityAbs)
+                maxString = str(self.maxQuantityAbs)
+        else:
+            if self.maxQuantityVelocity is not None:
+                maxQuantity = convertQuantity(self.maxQuantityVelocity)
+                maxString = str(self.maxQuantityVelocity)
+        return (maxQuantity, maxString)
+
+    def getRawSnmpValues(self):
         """ get raw snmp-Value without multiplier
         """
         from pysnmp.entity.rfc3413.oneliner import cmdgen
+        retList = []
         for oid in self.getOidList():
             oidStringList = oid.strip(".").split(".")
             try:
@@ -179,25 +251,58 @@ class SnmpValue(Component):
                                    tuple(oidIntList)
                                )
                 if len(varBinds) > 0:
-                    return float(varBinds[0][1])
+                    retList.append(float(varBinds[0][1]))
                 else:
                     return None
             except Exception, errText:
-                print "getRawSnmpValue-Error: ", errText
+                print "getRawSnmpValues-Error: ", errText
                 return None
+        return retList
 
-    def getSnmpValue(self):
+    def getSnmpValues(self):
         """ get SnmpValue as physical value
         """
+        retList = []
         try:
-            retVal = self.getPQinpQuantity() * self.getRawSnmpValue()
-            inpUnit = self.getPQinpQuantity().out_unit
-            retVal.ounit(inpUnit)
-            return retVal
+            for rawVal in self.getRawSnmpValues():
+                retVal = self.getPQinpQuantity() * rawVal
+                inpUnit = self.getPQinpQuantity().out_unit
+                retVal.ounit(inpUnit)
+                retList.append(retVal)
         except Exception, errText:
-            print "getSnmpValue-Error: ", errText
+            print "getSnmpValues-Error: ", errText
             return None
-        
+        return retList
+
+    def isOverMax( self, diffString="24h"):
+        retBool = False
+        if not os.path.exists(self.getRrdFilename()):
+            self.rrd_create()
+        #rrdtool.fetch(self.getRrdFilename(),
+                      #)
+        #if self.maxQuantityVelocity is not None:
+            #maxQuantV = convertQuantity(self.maxQuantityVelocity)
+            #myMaxValue = float(maxQuantV / displUnitV)
+                #rrdRet = rrdtool.fetch(
+                    #rrdFile,
+                    #"MAX",
+                    #"--start=%d-%s" % (currtime, diffString),
+                    #"--end=%d" % currtime
+                    #)
+                #rrdTimeTup, rrdVarTup, rrdValList = rrdRet
+                #for (val1, val2) in rrdValList:
+                    #try:
+                        #if val1 and (val1*myFactor > checkMaxLevel):
+                            #retVal = True
+                            ##print "val1: %s (x8: %s)" % (val1, val1*8)
+                            #break
+                    #except:
+                        #pass
+            #return retVal
+        retBool = True
+        return retBool
+
+    
     def tickerEvent(self):
         """ trigger from ticker
         """
@@ -206,7 +311,10 @@ class SnmpValue(Component):
     def triggerMin(self):
         """ got ticker event from ticker thread every minute
         """
-        self.rrd_update()
+        try:
+            self.rrd_update()
+        except:
+            pass
 
     def getPQinpQuantity(self):
         return convertQuantity(self.inpQuantity)
@@ -238,6 +346,7 @@ class SnmpValue(Component):
     def rrd_create(self, interval=1):
         if not os.path.exists(self.getRrdFilename()):
             try:
+                converted_addrs = self.getOidList()
                 rows = int(4000 / interval)
                 minhb = interval * 60 * 2
                 if minhb <600:
@@ -284,10 +393,12 @@ class SnmpValue(Component):
                 create_args.append('-s %d' % (interval * 60))
                 
                 # datasources
-                create_args.append(\
-                    "DS:ds0:%(up_abs)s:%(minhb)s:0:%(absi)s" % rrd_conf)
-                create_args.append(\
-                    "DS:ds1:GAUGE:%(minhb)s:0:U" % rrd_conf)
+                for (ds_nr, ds_oid) in enumerate(converted_addrs):
+                    create_args.append(\
+                        "DS:ds%02d" % ds_nr + \
+                        ":%(up_abs)s:%(minhb)s:0:%(absi)s" % rrd_conf)
+                #create_args.append(\
+                    #"DS:ds1:GAUGE:%(minhb)s:0:U" % rrd_conf)
                 #create_args.append(\
                     #"DS:ds1:%(up_abs)s:%(minhb)s:0:%(abso)s" % rrd_conf)
                 
@@ -326,7 +437,6 @@ class SnmpValue(Component):
                     "RRA:MAX:0.5:%(interval1440)d:800" % rrd_conf)
                 create_args.append(\
                     "RRA:MAX:0.5:%(interval7200)d:800" % rrd_conf)
-                
                 rrdtool.create(*create_args)
             except Exception, errText:
                 print "Exception: %s" % errText
@@ -343,13 +453,15 @@ class SnmpValue(Component):
         # magnitude quantities with "%f"-formatstring will only
         # result in the value
         if self.inptype == "cnt":
-            update_args.append('%f:%d:%d' % (time(),
-                                             int(self.getRawSnmpValue()),
-                                             int(self.getRawSnmpValue()))
-                               )
+            snmpValList = self.getRawSnmpValues()
+            arg_string = "%f" % time()
+            for snmpVal in self.getRawSnmpValues():
+                arg_string += ":%d" % int(snmpVal)
+            update_args.append(arg_string)
         else:
-            update_args.append('%f:%f:%f' % (time(),
-                                             self.getRawSnmpValue(),
-                                             self.getRawSnmpValue())
-                               )
+            snmpValList = self.getRawSnmpValues()
+            arg_string = "%f" % time()
+            for snmpVal in self.getRawSnmpValues():
+                arg_string += ":%f" % snmpVal
+            update_args.append(arg_string)
         return rrdtool.updatev(*update_args)

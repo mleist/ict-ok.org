@@ -102,6 +102,21 @@ class ISnmpValue(IComponent):
         max_length=400,
         title=_("Display unit (acceleration)"),
         required=False)
+    
+    minQuantityAbs = PhysicalQuantity(
+        max_length=400,
+        title=_("Min. quantity"),
+        required=False)
+
+    minQuantityVelocity = PhysicalQuantity(
+        max_length=400,
+        title=_("Min. quantity (velocity)"),
+        required=False)
+
+    minQuantityAcceleration = PhysicalQuantity(
+        max_length=400,
+        title=_("Min. quantity (acceleration)"),
+        required=False)
 
     maxQuantityAbs = PhysicalQuantity(
         max_length=400,
@@ -178,7 +193,59 @@ class ISnmpValue(IComponent):
                                  convPUdisplUnitAcceleration))
 
     @invariant
-    def ensureC6(obj_snmp):
+    def ensureC11(obj_snmp):
+        """The input quantity and the min unit must have the same dimension
+        """
+        if obj_snmp.minQuantityAbs:
+            convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+            convPQminQuantityAbs = convertQuantity(obj_snmp.minQuantityAbs)
+            physFactor = convPQinpQuantity / convPQminQuantityAbs
+            if not physFactor.dimensionless():
+                raise Invalid("The input quantity '%s' and the "\
+                              "min unit '%s'"\
+                              " must have the same dimension" \
+                              % (convPQinpQuantity, convPQminQuantityAbs))
+
+    @invariant
+    def ensureC12(obj_snmp):
+        """The input quantity and the min unit (velocity) '%s' * s
+        must have the same dimension
+        """
+        if obj_snmp.minQuantityVelocity:
+            convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+            convPQminQuantityVelocity = convertQuantity(\
+                obj_snmp.minQuantityVelocity)
+            physFactor = convPQminQuantityVelocity \
+                       / convPQinpQuantity \
+                       * physq(1.0, "s")
+            if not physFactor.dimensionless():
+                raise Invalid("The input quantity '%s' and the "\
+                              "min unit (velocity) '%s' * s"\
+                              " must have the same dimension" \
+                              % (convPQinpQuantity,
+                                 convPQminQuantityVelocity))
+
+    @invariant
+    def ensureC13(obj_snmp):
+        """The input quantity and the min unit (acceleration) * s * s
+        must have the same dimension
+        """
+        if obj_snmp.minQuantityAcceleration:
+            convPQinpQuantity = convertQuantity(obj_snmp.inpQuantity)
+            convPQminQuantityAcceleration = convertQuantity(\
+                obj_snmp.minQuantityAcceleration)
+            physFactor = convPQminQuantityAcceleration \
+                       / convPQinpQuantity \
+                       * physq(1.0, "s2")
+            if not physFactor.dimensionless():
+                raise Invalid("The input quantity '%s' and the "\
+                              "min unit (acceleration) '%s' * s * s"\
+                              " must have the same dimension" \
+                              % (convPQinpQuantity,
+                                 convPQminQuantityAcceleration))
+
+    @invariant
+    def ensureC21(obj_snmp):
         """The input quantity and the max unit must have the same dimension
         """
         if obj_snmp.maxQuantityAbs:
@@ -192,7 +259,7 @@ class ISnmpValue(IComponent):
                               % (convPQinpQuantity, convPQmaxQuantityAbs))
 
     @invariant
-    def ensureC7(obj_snmp):
+    def ensureC22(obj_snmp):
         """The input quantity and the max unit (velocity) '%s' * s
         must have the same dimension
         """
@@ -211,7 +278,7 @@ class ISnmpValue(IComponent):
                                  convPQmaxQuantityVelocity))
 
     @invariant
-    def ensureC8(obj_snmp):
+    def ensureC23(obj_snmp):
         """The input quantity and the max unit (acceleration) * s * s
         must have the same dimension
         """
@@ -269,9 +336,18 @@ class ISnmpValue(IComponent):
     def getRrdFilename():
         """ rrd filename incl. path
         """
-    def getRawSnmpValue():
+    def getDisplayUnit():
+        """get unit tuple (displUnit, displayString)
+        """
+    def getMinQuantity():
+        """get unit tuple (maxQuantity, maxString)
+        """
+    def getMaxQuantity():
+        """get unit tuple (maxQuantity, maxString)
+        """
+    def getRawSnmpValues():
         """ get raw snmp-Value without multiplier
         """
-    def getSnmpValue():
+    def getSnmpValues():
         """ get SnmpValue as physical value
         """

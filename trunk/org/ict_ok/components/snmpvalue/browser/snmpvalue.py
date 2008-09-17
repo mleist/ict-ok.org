@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=F0401,E1101,E0611,W0232,W0201,W0142
+# pylint: disable-msg=F0401,E1101,E0611,W0612,W0232,W0201,W0142
 #
 """implementation of browser class of SnmpValue object
 """
@@ -38,7 +38,7 @@ from z3c.form import field
 from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
-from org.ict_ok.libs.physicalquantity import convertQuantity, convertUnit
+from org.ict_ok.libs.physicalquantity import convertQuantity
 from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
@@ -109,20 +109,6 @@ class SnmpValueDetails(ComponentDetails):
         (displUnit, displayString) = self.context.getDisplayUnit()
         (minQuantity, minString) = self.context.getMinQuantity()
         (maxQuantity, maxString) = self.context.getMaxQuantity()
-        #import pdb
-        #pdb.set_trace()
-        #if self.context.inptype == u"cnt":
-            #displUnitV = convertUnit(self.context.displUnitVelocity)
-            #myDisplayString1 = str(self.context.displUnitVelocity)
-            #myDisplayString2 = str(self.context.displUnitVelocity)
-        #elif self.context.inptype == u"gauge":
-            #displUnitV = convertUnit(self.context.displUnitAbs)
-            #myDisplayString1 = str(self.context.displUnitAbs)
-            #myDisplayString2 = str(self.context.displUnitAbs)
-        #else:
-            #displUnitV = convertUnit(self.context.displUnitVelocity)
-            #myDisplayString1 = str(self.context.displUnitVelocity)
-            #myDisplayString2 = str(self.context.displUnitVelocity)
         multiplier = float(unitInRrd / displUnit)
         if 1: ##fileage > 60:
             rrdFile = self.context.getRrdFilename()
@@ -136,45 +122,22 @@ class SnmpValueDetails(ComponentDetails):
             if self.context.displayMinMax:
                 argList.append("CDEF:max=max0,%f,*" % (multiplier))
                 argList.append("CDEF:min=min0,%f,*" % (multiplier))
-
-            #"CDEF:limit=avg,%f,GT,%f,0,IF" % (myMaxValue, myMaxValue),
-            #"CDEF:olimit=avg,%f,GT,avg,%f,-,0,IF" % (myMaxValue, myMaxValue),
-            #"CDEF:ulimit=avg,%f,GT,0,avg,IF" % (myMaxValue),
-            #"HRULE:%f#FFFF00" % (myMaxValue),
-            
-            #if minQuantity is not None:
-                #if maxQuantity is not None: # min and max are valid
-                    #pass
-                #else: # only min is valid
-                    #pass
-            #else:
-                #if maxQuantity is not None: # only max are valid
-                    #myMaxValue = float(maxQuantity / displUnit)
-                    #argList.append("CDEF:limitmax=avg,%f,GT,%f,0,IF" % (myMaxValue, myMaxValue))
-                    #argList.append("CDEF:olimitmax=avg,%f,GT,avg,%f,-,0,IF" % (myMaxValue, myMaxValue))
-                    #argList.append("CDEF:ulimitmax=avg,%f,GT,0,avg,IF" % (myMaxValue))
-                    #argList.append("HRULE:%f#FF0000" % (myMaxValue))
-                #else: # neither min nor max are valid
-                    #pass
-
-            
-            
             if minQuantity is not None:
                 myMinValue = float(minQuantity / displUnit)
-                print "myMinValue: ", myMinValue
-                #argList.append("CDEF:limit2=avg,%f,LT,%f,0,IF" % (myMinValue, myMinValue))
-                #argList.append("CDEF:olimit2=avg,%f,LT,avg,%f,-,0,IF" % (myMinValue, myMinValue))
-                argList.append("CDEF:ulimitmin=avg,%f,LT,avg,0,IF" % (myMinValue))
-                #argList.append("HRULE:%f#FFFF00" % (myMaxValue))
-                argList.append("HRULE:%f#FFFF00" % (myMinValue))
+                #print "myMinValue: ", myMinValue
+                argList.append("CDEF:ulimitmin=avg,%f,LT,avg,0,IF" % \
+                               (myMinValue))
+                argList.append("HRULE:%f#FFFF0080" % (myMinValue))
             if maxQuantity is not None:
                 myMaxValue = float(maxQuantity / displUnit)
-                print "myMaxValue: ", myMaxValue
-                argList.append("CDEF:limitmax=avg,%f,GT,%f,0,IF" % (myMaxValue, myMaxValue))
-                argList.append("CDEF:olimitmax=avg,%f,GT,avg,%f,-,0,IF" % (myMaxValue, myMaxValue))
-                argList.append("CDEF:ulimitmax=avg,%f,GT,0,avg,IF" % (myMaxValue))
-                #argList.append("HRULE:%f#FFFF00" % (myMaxValue))
-                argList.append("HRULE:%f#FF0000" % (myMaxValue))
+                #print "myMaxValue: ", myMaxValue
+                argList.append("CDEF:limitmax=avg,%f,GT,%f,0,IF" % \
+                               (myMaxValue, myMaxValue))
+                argList.append("CDEF:olimitmax=avg,%f,GT,avg,%f,-,0,IF" % \
+                               (myMaxValue, myMaxValue))
+                argList.append("CDEF:ulimitmax=avg,%f,GT,0,avg,IF" % \
+                               (myMaxValue))
+                argList.append("HRULE:%f#FF000080" % (myMaxValue))
             argList.append("--start=%d" % params['starttime'])
             argList.append("--end=%d" % params['endtime'])
             argList.append("--width=540")
@@ -188,31 +151,6 @@ class SnmpValueDetails(ComponentDetails):
                     'GPRINT:max:MAX:max\: %%6.2lf %s' % displayString)
                 argList.append(\
                     'GPRINT:min:MIN:min\: %%6.2lf %s' % displayString)
-
-            ##"AREA:ulimit#009783",
-            ##"AREA:limit#009783",
-            ##"STACK:olimit#FF0000",
-            ##argList.append("AREA:ulimit#009783")
-            ##argList.append("AREA:limit#009783")
-            ##argList.append("STACK:olimit#FF0000")
-            #if minQuantity is not None:
-                ##argList.append("LINE1:ulimit#009783")
-                ##argList.append("LINE2:limit#009783")
-                ##argList.append("STACK:olimit#FF0000")
-                #argList.append("AREA:ulimitmin#CFD138")
-                ##argList.append("AREA:limit#E07771")
-                ##argList.append("STACK:olimit#FF0000")
-            #if maxQuantity is not None:
-                ##argList.append("LINE1:ulimit#009783")
-                ##argList.append("LINE2:limit#009783")
-                ##argList.append("STACK:olimit#FF0000")
-                #argList.append("AREA:ulimitmax#008263")
-                #argList.append("AREA:limitmax#E07771")
-                #argList.append("STACK:olimitmax#FF0000")
-            #else:
-                #argList.append("AREA:avg#7DD0BC:\"average\"")
-
-                
             if minQuantity is not None:
                 if maxQuantity is not None: # min and max are valid
                     argList.append("AREA:ulimitmax#008263")
@@ -235,7 +173,6 @@ class SnmpValueDetails(ComponentDetails):
             argList.append("--imgformat=PNG")
             argList.append("--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
                            "HEIGHT=\"%lu\" ALT=\"Demo\">")
-            #print "argList:", argList
             rrdtool.graph(*argList)
         pic = open(targetPic, "r")
         picMem = pic.read()

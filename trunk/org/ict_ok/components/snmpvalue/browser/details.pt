@@ -77,6 +77,21 @@
             <td tal:content="context/maxQuantityAcceleration" />
         </tr>
     </table>
+    <h3>Value</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary"
+            tal:define="runtime_info view/getZopeRuntimeInfo">
+        <tr class="cb_wht">
+            <td i18n:translate="">Value</td>
+            <td>
+                <ul>
+                    <div tal:omit-tag="" tal:repeat="val view/getValues">
+                        <li tal:content="val" />
+                    </div>
+                </ul>
+            </td>
+        </tr>
+    </table>
     <h3>24h</h3>
     <img tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
 </i18n:block>
