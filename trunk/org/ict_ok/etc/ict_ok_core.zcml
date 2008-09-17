@@ -22,12 +22,14 @@
     <!--<include package="org.ict_ok.admin_utils.generators/honeyd" />-->
     <include package="org.ict_ok.admin_utils.generators.nagios" />
     <include package="org.ict_ok.admin_utils.graphviz" />
+    <include package="org.ict_ok.admin_utils.linux_ha" />
     <include package="org.ict_ok.admin_utils.netscan" />
     <include package="org.ict_ok.admin_utils.netscan.nmap" />
     <include package="org.ict_ok.admin_utils.netscan.simple1" />
     <include package="org.ict_ok.admin_utils.netscan.demo1" />
+    <include package="org.ict_ok.admin_utils.notifier" />
     <!--<include package="org.ict_ok.admin_utils.notifier.jabber" />-->
-    <!--<include package="org.ict_ok.admin_utils.notifier.email" />-->
+    <include package="org.ict_ok.admin_utils.notifier.email" />
     <include package="org.ict_ok.admin_utils.objmq" />
     <include package="org.ict_ok.admin_utils.public_viewing" />
     <include package="org.ict_ok.admin_utils.snmpd" />

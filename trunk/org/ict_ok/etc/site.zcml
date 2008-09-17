@@ -31,6 +31,7 @@
     <!--registration of ict-ok.org skin-->
     <include package="org.ict_ok.skin" />
     <include package="org.ict_ok.schema" />
+    <include package="org.ict_ok.locales" />
 
     <!-- Provide local overrides of standard configurations -->
     <!-- For example, define a different default skin -->

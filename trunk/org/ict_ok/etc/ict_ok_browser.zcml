@@ -17,12 +17,14 @@
     <!--<include package="org.ict_ok.admin_utils.generators/honeyd.browser" />-->
     <include package="org.ict_ok.admin_utils.generators.nagios.browser" />
     <include package="org.ict_ok.admin_utils.graphviz.browser" />
+    <include package="org.ict_ok.admin_utils.linux_ha.browser" />
     <include package="org.ict_ok.admin_utils.netscan.browser" />
     <include package="org.ict_ok.admin_utils.netscan.nmap.browser" />
     <include package="org.ict_ok.admin_utils.netscan.simple1.browser" />
     <include package="org.ict_ok.admin_utils.netscan.demo1.browser" />
+    <include package="org.ict_ok.admin_utils.notifier.browser" />
     <!--<include package="org.ict_ok.admin_utils.notifier.jabber.browser" />-->
-    <!--<include package="org.ict_ok.admin_utils.notifier.email.browser" />-->
+    <include package="org.ict_ok.admin_utils.notifier.email.browser" />
     <include package="org.ict_ok.admin_utils.objmq.browser" />
     <include package="org.ict_ok.admin_utils.public_viewing.browser" />
     <include package="org.ict_ok.admin_utils.snmpd.browser" />
