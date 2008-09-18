@@ -43,3 +43,19 @@ class Component(Supernode):
         if not hasattr(self, 'isTemplate'):
             self.isTemplate = False
         self.ikRevision = __version__
+
+    def get_health(self):
+        """
+        output of health, 0-1 (float)
+        !!!!!! has to be implemented by subclass !!!!!!
+        """
+        #raise Exception, 'Not implemented yet'
+        return None
+    
+    def get_wcnt(self):
+        """
+        weighted count of accesses
+        !!!!!! has to be implemented by subclass !!!!!!
+        """
+        #raise Exception, 'Not implemented yet'
+        return None

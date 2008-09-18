@@ -37,3 +37,17 @@ class State(object):
         """get State-Value of the Object (0-100)
         """
         return 55
+    
+    def getIconName(self):
+        """get the icon name of the object state
+        """
+        tmp_health = self.context.get_health()
+        if tmp_health is None:
+            return u"SNMP_gray.png"
+        if tmp_health < 0.66666:
+            if tmp_health < 0.33333:
+                return u"SNMP_red.png"
+            else:
+                return u"SNMP_yel.png"
+        else:
+            return u"SNMP_green.png"

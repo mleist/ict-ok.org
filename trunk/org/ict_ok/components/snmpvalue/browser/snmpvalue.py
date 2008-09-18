@@ -173,6 +173,7 @@ class SnmpValueDetails(ComponentDetails):
             argList.append("--imgformat=PNG")
             argList.append("--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
                            "HEIGHT=\"%lu\" ALT=\"Demo\">")
+            #print "argList: ", argList
             rrdtool.graph(*argList)
         pic = open(targetPic, "r")
         picMem = pic.read()

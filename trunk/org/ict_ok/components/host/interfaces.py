@@ -196,6 +196,10 @@ class IHost(IComponent):
         """
         trigger workflow
         """
+        
+    def getIpList():
+        """ get a list of all possible ips
+        """
 
 class IEventIfEventHost(IEventIfSupernode):
     """ event interface of object """

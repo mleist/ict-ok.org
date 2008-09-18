@@ -131,6 +131,24 @@ class SnmpValue(Component):
             if name in ISnmpValue.names():
                 setattr(self, name, value)
         self.ikRevision = __version__
+        
+    def get_health(self):
+        overQuota =  self.overMaxQuota()
+        underQuota = self.underMinQuota()
+        if overQuota is not None and \
+           overQuota > 0.05: # 5 %
+            if underQuota is not None and \
+               underQuota > 0.1: # 10 %
+                return 1.0 - (overQuota * 6 + underQuota * 3) / 9
+            else:
+                return 1.0 - overQuota
+        else:
+            if underQuota is not None and \
+               underQuota > 0.1: # 10 %
+                return 1.0 - underQuota
+            else:
+                return None
+        return None
 
     def getOidFromIndexType(self):
         if self.snmpIndexType == u"":
@@ -274,34 +292,77 @@ class SnmpValue(Component):
             return None
         return retList
 
-    def isOverMax( self, diffString="24h"):
-        retBool = False
+    def overMaxQuota(self, diffString="24h"):
+        """ physical values over max in float 0..1
+        """
         if not os.path.exists(self.getRrdFilename()):
             self.rrd_create()
-        #rrdtool.fetch(self.getRrdFilename(),
-                      #)
-        #if self.maxQuantityVelocity is not None:
-            #maxQuantV = convertQuantity(self.maxQuantityVelocity)
-            #myMaxValue = float(maxQuantV / displUnitV)
-                #rrdRet = rrdtool.fetch(
-                    #rrdFile,
-                    #"MAX",
-                    #"--start=%d-%s" % (currtime, diffString),
-                    #"--end=%d" % currtime
-                    #)
-                #rrdTimeTup, rrdVarTup, rrdValList = rrdRet
-                #for (val1, val2) in rrdValList:
-                    #try:
-                        #if val1 and (val1*myFactor > checkMaxLevel):
-                            #retVal = True
-                            ##print "val1: %s (x8: %s)" % (val1, val1*8)
-                            #break
-                    #except:
-                        #pass
-            #return retVal
-        retBool = True
-        return retBool
+            return None
+        retFloat = 0.0
+        # >>> tt1 = (convertQuantity("325 W") / convertQuantity("3600 s")) *\
+        #           (convertQuantity("3600 s") / convertQuantity("0.5 W h"))
+        # >>> print tt1
+        # 0.1806 1 / s 
+        inpPQ = self.getPQinpQuantity()
+        (maxQuantity, maxString) = self.getMaxQuantity()
+        if maxQuantity is None:
+            return None
+        convMaxPQ = maxQuantity / inpPQ
+        convMaxPQ.ounit("1/s")
+        convMax = float(convMaxPQ)
+        currtime = time()
+        rrdRet = rrdtool.fetch(\
+            self.getRrdFilename(),
+            "MAX",
+            "--start=%d-%s" % (currtime, diffString),
+            "--end=%d" % currtime
+        )
+        rrdTimeTup, rrdVarTup, rrdValList = rrdRet
+        nbrPoints = 0
+        nbrOverMax = 0
+        for vals in rrdValList:
+            for dim in range(len(vals)):
+                if vals[dim] is not None:
+                    nbrPoints += 1
+                    if vals[dim] > convMax:
+                        nbrOverMax += 1
+        if nbrPoints > 0:
+            retFloat = float(nbrOverMax) / float(nbrPoints)
+        return retFloat
 
+    def underMinQuota(self, diffString="24h"):
+        """ physical values over max in float 0..1
+        """
+        if not os.path.exists(self.getRrdFilename()):
+            self.rrd_create()
+            return None
+        retFloat = 0.0
+        inpPQ = self.getPQinpQuantity()
+        (minQuantity, minString) = self.getMinQuantity()
+        if minQuantity is None:
+            return None
+        convMinPQ = minQuantity / inpPQ
+        convMinPQ.ounit("1/s")
+        convMin = float(convMinPQ)
+        currtime = time()
+        rrdRet = rrdtool.fetch(\
+            self.getRrdFilename(),
+            "MIN",
+            "--start=%d-%s" % (currtime, diffString),
+            "--end=%d" % currtime
+        )
+        rrdTimeTup, rrdVarTup, rrdValList = rrdRet
+        nbrPoints = 0
+        nbrUnderMin = 0
+        for vals in rrdValList:
+            for dim in range(len(vals)):
+                if vals[dim] is not None:
+                    nbrPoints += 1
+                    if vals[dim] < convMin:
+                        nbrUnderMin += 1
+        if nbrPoints > 0:
+            retFloat = float(nbrUnderMin) / float(nbrPoints)
+        return retFloat
     
     def tickerEvent(self):
         """ trigger from ticker

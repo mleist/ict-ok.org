@@ -49,18 +49,43 @@
             <td i18n:translate="">Input quantity</td>
             <td tal:content="context/inpQuantity" />
         </tr>
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/displUnitAbs|nothing">
             <td i18n:translate="">Display unit</td>
             <td tal:content="context/displUnitAbs" />
         </tr>
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/displUnitVelocity|nothing">
             <td i18n:translate="">Display unit (velocity)</td>
             <td tal:content="context/displUnitVelocity" />
         </tr>
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/displUnitAcceleration|nothing">
             <td i18n:translate="">Display unit (acceleration)</td>
             <td tal:content="context/displUnitAcceleration" />
         </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/minQuantityAbs">
+            <td i18n:translate="">Min. quantity</td>
+            <td tal:content="context/minQuantityAbs" />
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/minQuantityVelocity">
+            <td i18n:translate="">Min. quantity (velocity)</td>
+            <td tal:content="context/minQuantityVelocity" />
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/minQuantityAcceleration">
+            <td i18n:translate="">Min. quantity (acceleration)</td>
+            <td tal:content="context/minQuantityAcceleration" />
+        </tr>
+        <div tal:omit-tag="" tal:define="underMinQuota context/underMinQuota">
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="underMinQuota|nothing">
+            <td i18n:translate="">Under min quota</td>
+            <td tal:content="python:'%3.1f%%' % (100.0 * underMinQuota)" />
+        </tr>
+        </div>
         <tr tal:attributes="class view/getTabClass"
             tal:condition="context/maxQuantityAbs">
             <td i18n:translate="">Max. quantity</td>
@@ -76,13 +101,20 @@
             <td i18n:translate="">Max. quantity (acceleration)</td>
             <td tal:content="context/maxQuantityAcceleration" />
         </tr>
+        <div tal:omit-tag="" tal:define="overMaxQuota context/overMaxQuota">
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="overMaxQuota|nothing">
+            <td i18n:translate="">Over max quota</td>
+            <td tal:content="python:'%3.1f%%' % (100.0 * overMaxQuota)" />
+        </tr>
+        </div>
     </table>
     <h3>Value</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary"
             tal:define="runtime_info view/getZopeRuntimeInfo">
         <tr class="cb_wht">
-            <td i18n:translate="">Value</td>
+            <td i18n:translate="">current values</td>
             <td>
                 <ul>
                     <div tal:omit-tag="" tal:repeat="val view/getValues">

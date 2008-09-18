@@ -46,5 +46,7 @@ class Pickle(PickleSupernode):
         retVal['listAttr']['revision'] = self.context.ikRevision
         retVal['listAttr']['myFactory'] = self.context.myFactory
         retVal['listAttr']['ipv4'] = self.context.ipv4
+        retVal['listAttr']['health'] = self.context.get_health()
+        retVal['listAttr']['wcnt'] = self.context.get_wcnt()
         del pickler
         return retVal

@@ -54,15 +54,15 @@ from org.ict_ok.components.superclass.interfaces import IPickle, ISuperclass
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.supernode.interfaces import IState
+from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      AdmUtilUserProperties
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEvent
 from org.ict_ok.components.superclass.interfaces import \
      IEventIfSuperclass
-
-# ict_ok imports
 from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.schema.IPy import IP
 
 _ = MessageFactory('org.ict_ok')
 berlinTZ = timezone('Europe/Berlin')
@@ -259,6 +259,14 @@ def getTitel(item, formatter):
     except TypeError:
         return str(item.__class__.__name__)
 
+def getHealth(item, formatter):
+    """State Icon of Object"""
+    if IComponent.providedBy(item):
+        try:
+            return u"%3.0f %%" % (100.0 * item.get_health())
+        except TypeError:
+            return u"-"
+
 def getPosition(item, formatter):
     """
     Titel for Overview
@@ -284,6 +292,27 @@ def applyChanges(form, content, data):
             changes.setdefault(dm.field.interface, {}).setdefault(name, {})['newval'] = data[name]
             changes.setdefault(dm.field.interface, {}).setdefault(name, {})['oldval'] = oldValue
     return changes
+
+class DateGetterColumn(GetterColumn):
+    """Getter columnt that has locale aware sorting."""
+    zope.interface.implements(ISortableColumn)
+    def getSortKey(self, item, formatter):
+        return item.getTime()
+
+class TitleGetterColumn(GetterColumn):
+    """Getter columnt that has locale aware sorting."""
+    zope.interface.implements(ISortableColumn)
+    def getSortKey(self, item, formatter):
+        return getTitel(item, formatter).upper()
+    
+class IPsGetterColumn(GetterColumn):
+    """Getter columnt that has locale aware sorting."""
+    zope.interface.implements(ISortableColumn)
+    def getSortKey(self, item, formatter):
+        hostIpList = item.getIpList()
+        if len(hostIpList) > 0:
+            return IP(hostIpList[0])
+        return None
 
 
 # --------------- menu entries -----------------------------
@@ -660,8 +689,10 @@ class Overview(BrowserPagelet):
         GetterColumn(title="",
                      getter=getStateIcon,
                      cell_formatter=raw_cell_formatter),
-        GetterColumn(title=_('Title'),
-                     getter=getTitel),
+        GetterColumn(title=_('Health'),
+                     getter=getHealth),
+        TitleGetterColumn(title=_('Title'),
+                          getter=getTitel),
         GetterColumn(title=_('Modified On'),
                      getter=getModifiedDate,
                      subsort=True,
@@ -670,7 +701,7 @@ class Overview(BrowserPagelet):
                      getter=getActionBottons,
                      cell_formatter=raw_cell_formatter),
         )
-
+    sort_columns = [1, 2, 3]
     status = None
 
     def objs(self):
@@ -688,8 +719,11 @@ class Overview(BrowserPagelet):
         """ Properties of table are defined here"""
         columnList = list(self.columns)
         containerIsOrderd = IOrderedContainer.providedBy(self.context)
-        directlyProvides(columnList[1], ISortableColumn)
-        directlyProvides(columnList[2], ISortableColumn)
+        for i in self.sort_columns:
+            directlyProvides(columnList[i], ISortableColumn)
+        #directlyProvides(columnList[1], ISortableColumn)
+        #directlyProvides(columnList[2], ISortableColumn)
+        #directlyProvides(columnList[3], ISortableColumn)
         if containerIsOrderd:
             columnList.insert(1, GetterColumn(title=_('Pos'),
                                               getter=getPosition))
@@ -721,12 +755,6 @@ class ViewDashboard(Overview):
             if myObj is not None:
                 retList.append(myObj)
         return retList
-
-class DateGetterColumn(GetterColumn):
-    """Getter columnt that has locale aware sorting."""
-    zope.interface.implements(ISortableColumn)
-    def getSortKey(self, item, formatter):
-        return item.getTime()
 
 class History(BrowserPagelet):
     """History Pagelet"""

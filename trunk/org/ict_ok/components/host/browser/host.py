@@ -33,6 +33,7 @@ from zope.app.catalog.interfaces import ICatalog
 # z3c imports
 from z3c.form import form, field
 from z3c.pagelet.browser import BrowserPagelet
+from zc.table.column import GetterColumn
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
@@ -49,7 +50,9 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
 from org.ict_ok.components.superclass.interfaces import \
      IEventIfSuperclass
 from org.ict_ok.components.superclass.browser.superclass import \
-     Overview
+     Overview, \
+     getStateIcon, getTitel, getModifiedDate, getActionBottons, getHealth, \
+     raw_cell_formatter, IPsGetterColumn, TitleGetterColumn
 
 _ = MessageFactory('org.ict_ok')
 
@@ -61,6 +64,14 @@ class MSubAddHost(GlobalMenuSubItem):
     title = _(u'Add Host')
     viewURL = 'add_hosts.html'
     weight = 50
+
+# --------------- helper funktions -----------------------------
+
+def getHostIp(item, formatter):
+    """
+    Ip for Overview
+    """
+    return ", ".join(item.getIpList())
 
 # --------------- object details ---------------------------
 
@@ -293,6 +304,24 @@ class EditEventHostEventIfForm(EditForm):
 
 class AllHosts(Overview):
     """Overview Pagelet"""
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Health'),
+                     getter=getHealth),
+        TitleGetterColumn(title=_('Title'),
+                          getter=getTitel),
+        IPsGetterColumn(title=_('IP'),
+                     getter=getHostIp),
+        GetterColumn(title=_('Modified On'),
+                     getter=getModifiedDate,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    sort_columns = [1, 2, 3, 4]
     def objs(self):
         """List of Content objects"""
         return getAllHosts()

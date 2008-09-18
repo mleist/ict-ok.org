@@ -50,8 +50,8 @@ from org.ict_ok.admin_utils.netscan.interfaces import \
      IScanner
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, \
-     getStateIcon, getTitel, getModifiedDate, getActionBottons, \
-     raw_cell_formatter
+     getStateIcon, getTitel, getModifiedDate, getActionBottons, getHealth, \
+     raw_cell_formatter, IPsGetterColumn, TitleGetterColumn
 
 _ = MessageFactory('org.ict_ok')
 
@@ -193,10 +193,12 @@ class AllNetworks(Overview):
         GetterColumn(title="",
                      getter=getStateIcon,
                      cell_formatter=raw_cell_formatter),
-        GetterColumn(title=_('Title'),
-                     getter=getTitel),
-        GetterColumn(title=_('Network'),
-                     getter=getNetworkIp),
+        GetterColumn(title=_('Health'),
+                     getter=getHealth),
+        TitleGetterColumn(title=_('Title'),
+                          getter=getTitel),
+        IPsGetterColumn(title=_('Network'),
+                        getter=getNetworkIp),
         GetterColumn(title=_('Modified On'),
                      getter=getModifiedDate,
                      cell_formatter=raw_cell_formatter),
@@ -204,21 +206,23 @@ class AllNetworks(Overview):
                      getter=getActionBottons,
                      cell_formatter=raw_cell_formatter),
         )
+    sort_columns = [1, 2, 3, 4]
     
     def objs(self):
         """List of Content objects"""
         return getAllNetworks()
     
-    def table(self):
-        """ Properties of table are defined here"""
-        directlyProvides(self.columns[1], ISortableColumn)
-        directlyProvides(self.columns[2], ISortableColumn)
-        directlyProvides(self.columns[3], ISortableColumn)
-        formatter = StandaloneFullFormatter(
-            self.context, self.request, self.objs(),
-            columns=self.columns, sort_on=((_('Title'), False),))
-        formatter.cssClasses['table'] = 'listing'
-        return formatter()
+    #def table(self):
+        #""" Properties of table are defined here"""
+        #directlyProvides(self.columns[1], ISortableColumn)
+        #directlyProvides(self.columns[2], ISortableColumn)
+        #directlyProvides(self.columns[3], ISortableColumn)
+        #directlyProvides(self.columns[4], ISortableColumn)
+        #formatter = StandaloneFullFormatter(
+            #self.context, self.request, self.objs(),
+            #columns=self.columns, sort_on=((_('Title'), False),))
+        #formatter.cssClasses['table'] = 'listing'
+        #return formatter()
 
 
 def NetScannerInstances2(dummy_context):

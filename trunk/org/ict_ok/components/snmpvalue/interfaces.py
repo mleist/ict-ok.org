@@ -351,3 +351,9 @@ class ISnmpValue(IComponent):
     def getSnmpValues():
         """ get SnmpValue as physical value
         """
+    def overMaxQuota(diffString="24h"):
+        """ physical values over max in float 0..1
+        """
+    def underMinQuota(diffString="24h"):
+        """ physical values over max in float 0..1
+        """

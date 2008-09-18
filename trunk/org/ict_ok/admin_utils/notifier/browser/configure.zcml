@@ -55,6 +55,18 @@
         permission="org.ict_ok.admin_utils.notifier.Edit"
         />
         
+    <z3c:pagelet
+        name="view_notifications.html"
+        for="*"
+        class="org.ict_ok.admin_utils.notifier.browser.notifier.ViewNotifications"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.notifications.View"
+    />
+    <!--<z3c:template-->
+        <!--template="overview.pt"-->
+        <!--for="org.ict_ok.admin_utils.notifier.browser.notifier.ViewNotifications"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--/>-->
 
     <!--##### Notifier ##### -->
     <!--##### Sub Menu ##### -->

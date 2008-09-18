@@ -28,12 +28,26 @@
             <td i18n:translate="">min. level</td>
             <td tal:content="minString" />
         </tr>
+        <div tal:omit-tag="" tal:define="underMinQuota context/underMinQuota">
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="underMinQuota|nothing">
+            <td i18n:translate="">Under min quota</td>
+            <td tal:content="python:'%3.1f%%' % (100.0 * underMinQuota)" />
+        </tr>
+        </div>
         <tr tal:attributes="class view/getTabClass"
             tal:condition="python:context.getMaxQuantity()[0]"
             tal:define="maxString python:context.getMaxQuantity()[1]">
             <td i18n:translate="">max. level</td>
             <td tal:content="maxString" />
         </tr>
+        <div tal:omit-tag="" tal:define="overMaxQuota context/overMaxQuota">
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="overMaxQuota|nothing">
+            <td i18n:translate="">Over max quota</td>
+            <td tal:content="python:'%3.1f%%' % (100.0 * overMaxQuota)" />
+        </tr>
+        </div>
     </table>
     <h3>1h</h3>
     <img tal:attributes="src python: '%s/@@getPNG?hours=1' % (view.getValuePngHref())" />
