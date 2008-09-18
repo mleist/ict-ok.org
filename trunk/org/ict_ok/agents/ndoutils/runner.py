@@ -26,7 +26,6 @@ from zope.app.appsetup.bootstrap import getInformationFromEvent
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 
-
 def bootStrapSubscriber(event):
     """ log the startup to our supervisor
     """
@@ -37,13 +36,25 @@ def bootStrapSubscriber(event):
               if util.provided.isOrExtends(IAdmUtilSupervisor)]
     instAdmUtilSupervisor = utils[0].component
     instAdmUtilSupervisor.appendEventHistory(\
-        u"'cron runner' started (Vers. %s) (%d bytes) (%d objects)" \
+        u"'ndo runner' started (Vers. %s) (%d bytes) (%d objects)" \
         % (getIkVersion(), dummy_db.getSize(), dummy_db.objectCount()))
     transaction.get().commit()
     connection.close()
 
 
-@gocept.runner.appmain(ticks=1.0, principal='zope.mgr')
+class NdoMain(gocept.runner.appmain):
+    """entry point functions for main loops and ndo thread.
+    """
+    def __init__(self, ticks=1, principal=None):
+        print "ndomain.__init__"
+        #import traceback
+        #traceback.print_stack()
+        # start ndo thread here
+        # ...
+        gocept.runner.appmain.__init__(self, ticks, principal)
+
+
+@NdoMain(ticks=1.0, principal='zope.mgr')
 def runner():
     """ this function will run every second
     """
@@ -53,24 +64,6 @@ def runner():
     import zope.app.appsetup.product
     from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
     site = zope.app.component.hooks.getSite()
-    sm = site.getSiteManager()
-    admSupervisor = sm.getUtility(IAdmUtilSupervisor)
+    sitemgr = site.getSiteManager()
+    admSupervisor = sitemgr.getUtility(IAdmUtilSupervisor)
     print "admSupervisor: ", admSupervisor
-    #uidutil = sm.getUtility(IIntIds)
-    #for (myid, myobj) in uidutil.items():
-        #try:
-            #tickerAdapter = ITicker(myobj.object)
-            #if tickerAdapter:
-                #tickerAdapter.db = db
-                #if signal_min:
-                    #tickerAdapter.triggerMin()
-                #if signal_hour:
-                    #tickerAdapter.triggerHour()
-                #if signal_day:
-                    #tickerAdapter.triggerDay()
-                #if signal_month:
-                    #tickerAdapter.triggerMonth()
-                #if signal_year:
-                    #tickerAdapter.triggerYear()
-        #except TypeError, err:
-            #pass
