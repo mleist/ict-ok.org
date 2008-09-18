@@ -45,13 +45,9 @@ def bootStrapSubscriber(event):
 class NdoMain(gocept.runner.appmain):
     """entry point functions for main loops and ndo thread.
     """
-    def __init__(self, ticks=1, principal=None):
-        print "ndomain.__init__"
-        #import traceback
-        #traceback.print_stack()
-        # start ndo thread here
-        # ...
-        gocept.runner.appmain.__init__(self, ticks, principal)
+    def __call__(self, worker_method):
+        print "NdoMain.__call__"
+        return gocept.runner.appmain.__call__(self, worker_method)
 
 
 @NdoMain(ticks=1.0, principal='zope.mgr')
