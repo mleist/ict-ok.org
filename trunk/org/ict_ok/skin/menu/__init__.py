@@ -118,6 +118,11 @@ class DashboardItem(GlobalMenuMainItem):
     viewURL = 'view_dashboard.html'
     weight = 5
 
+class NotificationsItem(GlobalMenuMainItem):
+    title = _(u'Notifications')
+    viewURL = 'view_notifications.html'
+    weight = 105
+
 class HelpItem(GlobalMenuMainItem):
     title = _(u'Help')
     viewURL = 'help.html'
@@ -163,6 +168,12 @@ class MenuSubTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_tab.pt')
 
 
+#class MenuSubTemplateTab(Tab):
+    #def render(self):
+        #if len(self.viewlets) > 0:
+            #return Tab.render(self)
+        #else:
+            #return u''
 
 class MenuSubGeneralTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_general_tab.pt')
