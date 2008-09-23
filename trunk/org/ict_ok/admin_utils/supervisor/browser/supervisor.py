@@ -55,6 +55,7 @@ from org.ict_ok.components.superclass.browser import \
 from org.ict_ok.libs.lib import convertSystemUptime2String
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.version import getIkVersion
 
 _ = MessageFactory('org.ict_ok')
 berlinTZ = timezone('Europe/Berlin')
@@ -230,6 +231,20 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
             else:
                 pass
         return self.request.response.redirect('./@@objmq')
+
+class AdmUtilSupervisorVersion(SupernodeDetails):
+    def getSystemUptime(self):
+        """
+        get the uptime of the running system
+        no args, returns string
+        """
+        return i18nformat(self.request,
+                          timedelta(seconds=self.context.getSystemUptime()))
+    def getVersion(self):
+        """
+        special format list of the history for web-view
+        """
+        return getIkVersion()
 
 def formatEntryDate(entry, formatter):
     """Entry Date for history in Web-Browser"""

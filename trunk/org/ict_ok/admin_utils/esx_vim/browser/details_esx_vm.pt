@@ -2,57 +2,57 @@
     <h1 i18n:translate="">Details ESX Virtual Maschine</h1>
     <table id="sortable" class="listing"
            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Name</td>
             <td tal:content="python: context.eval_on_obj('obj.name()')" />
         </tr>
-        <tr class="cb_ilx">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">State</td>
             <td tal:content="python: context.eval_on_obj('obj.overallStatus().val()')" />
         </tr>
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Powerstate</td>
             <td tal:content="python: context.eval_on_obj('obj.runtime().powerState().val()')" />
         </tr>
-        <tr class="cb_ilx">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">max CPU usage</td>
             <td tal:content="python: context.eval_on_obj('obj.runtime().maxCpuUsage()')" />
         </tr>
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">max memory usage</td>
             <div tal:omit-tag="" tal:condition="python: context.eval_on_obj('obj.runtime().maxMemoryUsage()')">
                 <td tal:content="python: context.eval_on_obj('obj.runtime().maxMemoryUsage()') + ' MB'" />
             </div>
         </tr>
-        <tr class="cb_ilx">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Heartbeat</td>
             <td tal:content="python: context.eval_on_obj('obj.guestHeartbeatStatus().val()')" />
         </tr>
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Guest full name</td>
             <td tal:content="python: context.eval_on_obj('obj.config().guestFullName()')" />
         </tr>
-        <tr class="cb_ilx">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Guest family</td>
             <td tal:content="python: context.eval_on_obj('obj.guest().guestFamily()')" />
         </tr>
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Guest ip address</td>
             <td tal:content="python: context.eval_on_obj('obj.guest().ipAddress()')" />
         </tr>
-        <tr class="cb_ilx">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Guest hostname</td>
             <td tal:content="python: context.eval_on_obj('obj.guest().hostName()')" />
         </tr>
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Guest mac address (net0)</td>
             <td tal:content="python: context.eval_on_obj('obj.guest().net()[0].macAddress()')" />
         </tr>
-        <tr class="cb_ilx">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Guest network connected (net0)</td>
             <td tal:content="python: context.eval_on_obj('obj.guest().net()[0].network()')" />
         </tr>
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Guest tool Version</td>
             <td tal:content="python: context.eval_on_obj('obj.guest().toolsVersion()')" />
         </tr>
@@ -67,11 +67,11 @@
                 <td i18n:translate="">not online</td>
             </tr>
         </span>
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Host Machine</td>
             <td tal:content="python: context.eval_on_obj('perl.call(\'Vim::get_view\', mo_ref = obj.runtime().host()).name()')" />
         </tr>
-        <tr class="cb_ilx">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">UUID</td>
             <td tal:content="python: context.eval_on_obj('obj.config().uuid()')" />
         </tr>

@@ -133,6 +133,19 @@
         />
 
     <z3c:pagelet
+        name="version.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.AdmUtilSupervisorVersion"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.VersionDisplay"
+        />
+    <z3c:template
+        template="version.pt"
+        for="org.ict_ok.admin_utils.supervisor.browser.supervisor.AdmUtilSupervisorVersion"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
         name="history.html"
         for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
         class="org.ict_ok.components.superclass.browser.superclass.History"

@@ -1,7 +1,7 @@
 <i18n:block domain="org.ict_ok">
   <DIV id="header-help">
     <ul>
-      <li><div i18n:translate="" href="#">[Version]</div></li>
+      <li><a i18n:translate="" href="/@@version">[Version]</a></li>
       <li><div i18n:translate="" href="#">[Help]</div></li>
       <li><a i18n:translate="" href="/@@preferences">[Preferences]</a></li>
       <li id="ikh_login"><a tal:omit-tag="" tal:content="structure context/@@login_logout">Login</a></li>

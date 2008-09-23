@@ -2,7 +2,7 @@
     <h1 i18n:translate="">Details ESX Host</h1>
     <table id="sortable" class="listing"
            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">Name</td>
             <td tal:content="python: context.eval_on_obj('obj.name()')" />
         </tr>
@@ -10,11 +10,11 @@
             <td class="label" i18n:translate="">UUID</td>
             <td tal:content="python: context.eval_on_obj('obj.config().uuid()')" />
         </tr>
-        <tr class="cb_ilx">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">UUID</td>
             <td tal:content="python: context.eval_on_obj('obj.hardware().systemInfo().uuid()')" />
         </tr>
-        <tr class="cb_ilx">
+        <tr tal:attributes="class view/getTabClass">
             <td class="label" i18n:translate="">UUID</td>
             <td tal:content="python: context.eval_on_obj('obj.summary().config().product().fullName()')" />
         </tr-->

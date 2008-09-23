@@ -27,7 +27,8 @@ from zope.app.pagetemplate import ViewPageTemplateFile
 from zope.app.intid.interfaces import IIntIds
 from zope.component import getUtility
 from zope.traversing.browser import absoluteURL
-
+from zope.component import getUtility
+from zope.app import zapi
 from zope.formlib.form import Fields, FormBase, haveInputWidgets
 from zope.formlib.form import action, applyChanges, setUpEditWidgets
 from zope.pagetemplate.interfaces import IPageTemplate
@@ -48,6 +49,7 @@ from org.ict_ok.admin_utils.usermanagement.interfaces import \
      IAdmUtilUserProperties, IAdmUtilUserManagement
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      AdmUtilUserProperties
+from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 
 _ = MessageFactory('org.ict_ok')
 
@@ -84,12 +86,24 @@ class MSubDelDashboard(GlobalMenuSubItem):
 
 # --------------- object details ---------------------------
 
+class AdmUtilUserManagementPreferences:
+    def preferences(self):
+        utilUserMagagement = getUtility(IAdmUtilUserManagement)
+        return self.request.response.redirect(\
+            zapi.getPath(utilUserMagagement)+\
+            '/@@edit.html')
+    def version(self):
+        utilSupervisor = getUtility(IAdmUtilSupervisor)
+        return self.request.response.redirect(\
+            zapi.getPath(utilSupervisor)+\
+            '/@@version.html')
+
 
 class AdmUtilUserManagementDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + ['objectID']
-    omit_editfields = SupernodeDetails.omit_editfields + ['objectID', 'ikName']
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['objectID', 'ikName', 'ikComment']
+    omit_editfields = SupernodeDetails.omit_editfields + ['objectID', 'ikName', 'ikComment']
 
 #class AdmUtilUserPropertiesForm(EditForm):
     #""" Edit form for the object """
@@ -228,6 +242,6 @@ class DetailsAdmUtilUserManagementForm(DisplayForm):
 
 class EditAdmUtilUserManagementForm(EditForm):
     """ Edit for for net """
-    label = _(u'edit user management')
+    label = _(u'edit user settings')
     fields = field.Fields(IAdmUtilUserManagement).omit(\
         *AdmUtilUserManagementDetails.omit_editfields)

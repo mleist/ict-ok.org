@@ -1,20 +1,13 @@
 <i18n:block domain="org.ict-ok">
     <h3 i18n:translate="">details of workflow utility</h3>
-    <!-- span tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-        <div tal:content="dateform" />
-    </span -->
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary"
             tal:define="runtime_info view/getZopeRuntimeInfo">
-        <!--tr>
-            <th i18n:translate="">Name</th>
-            <th i18n:translate="">State</th>
-        </tr-->
-        <tr>
+        <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <tr>
+        <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">graphviz display type</td>
             <td tal:content="context/graphviz_type" />
         </tr>
@@ -28,5 +21,4 @@
             </div>
         </tr -->
     </table>
-
 </i18n:block>

@@ -9,6 +9,11 @@
          Markus Leist <leist@ikom-online.de> -->
 
     <permission
+        id="org.ict_ok.admin_utils.supervisor.VersionDisplay"
+        title="Version display in AdmUtilSupervisor"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.supervisor.View"
         title="View from AdmUtilSupervisor"
         description="View from AdmUtilSupervisor."
@@ -35,6 +40,13 @@
         title="Data Dump"
         description="Dump of system data."
     />
+
+    <grant permission="org.ict_ok.admin_utils.supervisor.VersionDisplay"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.supervisor.VersionDisplay"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.supervisor.VersionDisplay"
+                    role="org.ict_ok.adm" />
 
     <!--<grant permission="org.ict_ok.admin_utils.supervisor.View"-->
                     <!--role="org.ict_ok.usr" />-->

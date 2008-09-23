@@ -15,7 +15,7 @@
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <require
-            permission="org.ict_ok.admin_utils.supervisor.View"
+            permission="org.ict_ok.admin_utils.supervisor.VersionDisplay"
             interface=".interfaces.IAdmUtilSupervisor"
             />
         <require

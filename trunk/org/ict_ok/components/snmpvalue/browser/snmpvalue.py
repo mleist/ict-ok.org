@@ -198,16 +198,6 @@ class SnmpValueDetails(ComponentDetails):
     def nowTS(self):
         return datetime.now()
 
-    def getTabClass(self):
-        if hasattr(self.request, 'tabClass'):
-            if self.request.tabClass == 'cb_wht':
-                self.request.tabClass = 'cb_ixl'
-            else:
-                self.request.tabClass = 'cb_wht'
-        else:
-            self.request.tabClass = 'cb_wht'
-        return self.request.tabClass
-
 
 class SnmpValueDisplay(SnmpValueDetails):
     """

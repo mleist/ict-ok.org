@@ -3,19 +3,19 @@
     <div metal:fill-slot="body" i18n:domain="org.ict_ok">
         <h1 i18n:translate="">DummyContainer Details</h1>
         <table id="sortable" class="listing">
-            <tr class="cb_wht">
+            <tr tal:attributes="class view/getTabClass">
                 <td i18n:translate="">title</td>
                 <td tal:content="context/title" />
             </tr>
-            <tr class="cb_ilx">
+            <tr tal:attributes="class view/getTabClass">
                 <td i18n:translate="">Date 1</td>
                 <td tal:content="context/ikdate1" />
             </tr>
-            <tr class="cb_wht">
+            <tr tal:attributes="class view/getTabClass">
                 <td i18n:translate="">Comment</td>
                 <td tal:content="context/ikComment" />
             </tr>
-            <tr class="cb_ilx">
+            <tr tal:attributes="class view/getTabClass">
                 <td i18n:translate="">Notes</td>
                 <td>
                     <table id="sortable" class="listing">

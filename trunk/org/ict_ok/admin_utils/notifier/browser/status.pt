@@ -2,11 +2,11 @@
     <h3 i18n:translate="">Display Notifier</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
-        <tr>
+        <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">Active notifier</td>
             <td>
                 <ul>
@@ -17,7 +17,7 @@
                 </ul>
             </td>
         </tr>
-        <tr>
+        <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">All notifier</td>
             <td>
                 <ul>

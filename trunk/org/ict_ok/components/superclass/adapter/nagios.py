@@ -100,6 +100,7 @@ class GenNagios(object):
         if comments:
             self.write(u"%s## Pre (%s,%d) - SuperclassGenNagios" % \
                        ("\t" * level, self.context.ikName, level))
+        return False # no real values changed
 
     def traverse4nagiosGeneratorPost(self, level=0, comments=True):
         """graphviz configurations text after object
@@ -107,6 +108,7 @@ class GenNagios(object):
         if comments:
             self.write(u"%s## Post (%s,%d) - SuperclassGenNagios" % \
                        ("\t" * level, self.context.ikName, level))
+        return False # no real values changed
 
     def traverse4nagiosGeneratorBody(self, level=0, comments=True):
         """graphviz configuration data of/in object
@@ -114,6 +116,7 @@ class GenNagios(object):
         if comments:
             self.write(u"%s## Body (%s,%d) - SuperclassGenNagios" % \
                        ("\t" * level, self.context.ikName, level))
+        return False # no real values changed
 
     def traverse4nagiosGenerator(self, level=0, comments=True):
         """Configuration generator
@@ -122,12 +125,17 @@ class GenNagios(object):
         comments: should there comments are in the output?
 
         """
+        valueChanged = False
         if IComponent.providedBy(self.context):
             self.fileOpen()
-            self.traverse4nagiosGeneratorPre(level, comments)
-            self.traverse4nagiosGeneratorBody(level, comments)
-            self.traverse4nagiosGeneratorPost(level, comments)
+            if self.traverse4nagiosGeneratorPre(level, comments):
+                valueChanged = True
+            if self.traverse4nagiosGeneratorBody(level, comments):
+                valueChanged = True
+            if self.traverse4nagiosGeneratorPost(level, comments):
+                valueChanged = True
             self.fileClose()
+        return valueChanged
         
     def nagiosConfigFileOut(self, forceOutput=False, event=None):
         """Nagios-Filegenerator
@@ -139,11 +147,15 @@ class GenNagios(object):
         
         event: None or the zope event from lifecycle
         """
+        valueChanged = False
         if forceOutput:
-            self.traverse4nagiosGenerator(0, False)
+            if self.traverse4nagiosGenerator(0, False):
+                valueChanged = True
         else:
             if self.eventModifiesCfgFile(event):
+                valueChanged = True
                 self.traverse4nagiosGenerator(0, False)
+        return valueChanged
 
     def nagiosConfigFileRemove(self):
         """remove old nagios configuration file for this object

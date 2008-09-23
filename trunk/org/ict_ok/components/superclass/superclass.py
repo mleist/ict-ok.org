@@ -20,6 +20,7 @@ Superclass for non containing objects
 __version__ = "$Id$"
 
 # python imports
+import os
 from logging import INFO, log, NOTSET
 
 # zope imports
@@ -50,7 +51,7 @@ from org.ict_ok.libs.history.entry import Entry
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
-     IGenNagios
+     IAdmUtilGeneratorNagios, IGenNagios
 
 class Superclass(Persistent):
     """
@@ -423,17 +424,25 @@ def notifyAddedEvent(instance, event):
     """
     Node was added
     """
-    #print "Superclass.notifyAddedEvent"
+    valueChanged = False
+    print "Superclass.notifyAddedEvent"
+    print "ikName:", event.object.ikName
+    print "getObjectId():", event.object.getObjectId()
     nagiosAdapter = IGenNagios(event.object)
     if nagiosAdapter is not None:
-        nagiosAdapter.nagiosConfigFileOut(True, event)
+        if nagiosAdapter.nagiosConfigFileOut(True, event):
+            valueChanged = True
+    print "valueChanged: ", valueChanged
 
 @adapter(ISuperclass, IObjectModifiedEvent)
 def notifyModifiedEvent(instance, event):
     """
     Node was modified
     """
-    #print "Superclass.notifyModifiedEvent"
+    valueChanged = False
+    print "Superclass.notifyModifiedEvent"
+    print "ikName:", event.object.ikName
+    print "getObjectId():", event.object.getObjectId()
     allEventObjs = event.object.getAllOutEventObjs()
     utilXbar = queryUtility(IAdmUtilEventCrossbar)
     for eventObj in allEventObjs:
@@ -443,7 +452,14 @@ def notifyModifiedEvent(instance, event):
             pass
     nagiosAdapter = IGenNagios(event.object)
     if nagiosAdapter is not None:
-        nagiosAdapter.nagiosConfigFileOut(False, event)
+        if nagiosAdapter.nagiosConfigFileOut(False, event):
+            valueChanged = True
+        if valueChanged:
+            utilNagios = queryUtility(IAdmUtilGeneratorNagios)
+            reloadString = u"%s reload" % utilNagios.pathInitScript
+            print "reloadString: ", reloadString
+            os.system(reloadString)
+    print "valueChanged: ", valueChanged
 
 @adapter(ISuperclass, IObjectMovedEvent)
 def notifyMovedEvent(instance, event):
@@ -457,15 +473,18 @@ def notifyRemovedEvent(instance, event):
     """
     Node was removed
     """
-    #print "Superclass.notifyRemovedEvent"
+    valueChanged = False
+    print "Superclass.notifyRemovedEvent"
     print "ikName:", event.object.ikName
     print "getObjectId():", event.object.getObjectId()
     nagiosAdapter = IGenNagios(event.object)
     if nagiosAdapter is not None:
         try:
-            nagiosAdapter.nagiosConfigFileRemove()
+            if nagiosAdapter.nagiosConfigFileRemove():
+                valueChanged = True
         except Exception: # no such file at this point and/or at this moment
             pass
     #import pdb
     #pdb.set_trace()
+    print "valueChanged: ", valueChanged
 

@@ -46,7 +46,7 @@ class GenNagios(ParentGenNagios):
     
     # modification of this attributes will trigger an new generation of
     # the config file
-    attrList = ['objectID', 'hostname', 'ikName']
+    attrList = ['objectID', 'hostname', 'ikName', 'genNagios']
     
     def __init__(self, context):
         #print "HostGenNagios.__init__"
@@ -69,10 +69,12 @@ class GenNagios(ParentGenNagios):
     def traverse4nagiosGeneratorPre(self, level=0, comments=True):
         """graphviz configuration preamble
         """
+        valueChanged = False
         if comments:
             self.write(u"%s## Pre (%s,%d) - HostGenNagios" % \
                        ("\t" * level, self.context.ikName, level))
         if self.wantsCheck():
+            valueChanged = True
             self.write(u"define host {\n")
             self.write(u"    use generic-host\n")
             self.write(u"    host_name %s\n" % (self.context.objectID))
@@ -82,14 +84,17 @@ class GenNagios(ParentGenNagios):
             self.write(u"    alias %s\n" % self.context.hostname)
         else:
             self.write(u"# disabled by user\n")
+        return valueChanged
 
     def traverse4nagiosGeneratorPost(self, level=0, comments=True):
         """graphviz configurations text after object
         """
+        valueChanged = False
         if comments:
             self.write(u"%s## Post (%s,%d) - HostGenNagios" % \
                        ("\t" * level, self.context.ikName, level))
         if self.wantsCheck():
+            valueChanged = True
             self.write(u"    check_command check-host-alive\n")
             self.write(u"    max_check_attempts 3\n")
             self.write(u"    contact_groups admins\n")
@@ -97,14 +102,19 @@ class GenNagios(ParentGenNagios):
             self.write(u"    notification_period 24x7\n")
             self.write(u"    notification_options d,u,r\n")
             self.write(u"}\n\n")
+        return valueChanged
 
     def traverse4nagiosGeneratorBody(self, level=0, comments=True):
         """graphviz configuration data of/in object
         """
+        valueChanged = False
         #if self.wantsCheck(from org.ict_ok.version import getIkVersion):
         if self.wantsCheck():
-            ParentGenNagios.traverse4nagiosGeneratorBody(self,
-                                                         level, comments)
+            if ParentGenNagios.traverse4nagiosGeneratorBody(self,
+                                                         level,
+                                                         comments):
+                valueChanged = True
+        return valueChanged
 
     def nagiosConfigFileOut(self, forceOutput=False, event=None):
         """Nagios-Filegenerator
@@ -116,15 +126,18 @@ class GenNagios(ParentGenNagios):
         
         event: None or the zope event from lifecycle
         """
+        valueChanged = False
         ipv4 = None
         for if_name, if_obj in self.context.items():
             if IInterface.providedBy(if_obj) and \
                len (if_obj.ipv4List) > 0:
                 ipv4 = if_obj.ipv4List[0]
         if ipv4 is not None and len(ipv4) > 0:
-            ParentGenNagios.nagiosConfigFileOut(self,
-                                                forceOutput,
-                                                event)
+            if ParentGenNagios.nagiosConfigFileOut(self,
+                                                   forceOutput,
+                                                   event):
+                valueChanged = True
+        return valueChanged
 
     
     #def nagiosConfigFileOut(self, forceOutput=False, event=None):
@@ -168,6 +181,7 @@ class GenNagios(ParentGenNagios):
             os.remove(filename)
         except OSError, errtext:
             raise Exception, "No such configfile: '%s'" % filename
+        return True # real values changed
 
 def _test():
     import doctest

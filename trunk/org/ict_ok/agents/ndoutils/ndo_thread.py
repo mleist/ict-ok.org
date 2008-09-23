@@ -129,6 +129,7 @@ class IkNdoServer(SocketServer.ThreadingMixIn, SocketServer.TCPServer):
     """
     special IKOMtrol XMLRPC-Server, secure https
     """
+    allow_reuse_address = True
     def __init__(self, server_address, RequestHandlerClass,
                  pQueue, threadLogger):
         self.pQueue = pQueue

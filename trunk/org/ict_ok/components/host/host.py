@@ -134,10 +134,10 @@ class Host(Component):
         """
         trigger workflow
         """
-        print "trigger_online"
-        self._counter['r'] += 10
-        print '$$$ self.get_health():', self.get_health()
-        print '$$$ self.get_wcnt():', self.get_wcnt()
+        #print "trigger_online"
+        #self._counter['r'] += 10
+        #print '$$$ self.get_health():', self.get_health()
+        #print '$$$ self.get_wcnt():', self.get_wcnt()
         lastWorkItem = list(self.wf_worklist)[-1]
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "online"
@@ -147,10 +147,10 @@ class Host(Component):
         """
         trigger workflow
         """
-        print "trigger_offline"
-        self._counter['r'] -= 10
-        print '§§§ self.get_health():', self.get_health()
-        print '§§§ self.get_wcnt():', self.get_wcnt()
+        #print "trigger_offline"
+        #self._counter['r'] -= 10
+        #print '§§§ self.get_health():', self.get_health()
+        #print '§§§ self.get_wcnt():', self.get_wcnt()
         lastWorkItem = list(self.wf_worklist)[-1]
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "offline"
@@ -160,7 +160,7 @@ class Host(Component):
         """
         trigger workflow
         """
-        print "trigger_not1"
+        #print "trigger_not1"
         lastWorkItem = list(self.wf_worklist)[-1]
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "notification1"

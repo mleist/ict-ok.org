@@ -5,15 +5,15 @@
                 <table id="sortable" class="listing" summary="Content listing"
                                          i18n:attributes="summary"
                                          tal:define="globalEsxVimUtility view/getGlobalEsxVimUtility">
-                    <tr>
+                    <tr tal:attributes="class view/getTabClass">
                         <th i18n:translate="">Name</th>
                         <th i18n:translate="">State</th>
                     </tr>
-                    <tr>
+                    <tr tal:attributes="class view/getTabClass">
                         <td>last Contact</td>
                         <td tal:content="globalEsxVimUtility/getUtilityVersion" />
                     </tr>
-                    <tr>
+                    <tr tal:attributes="class view/getTabClass">
                         <td>timeStarted</td>
                         <td tal:content="globalEsxVimUtility/timeStarted" />
                     </tr>

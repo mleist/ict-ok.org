@@ -500,6 +500,16 @@ class SuperclassDetails:
                     return vocabTerm.title
         return None
 
+    def getTabClass(self):
+        if hasattr(self.request, 'tabClass'):
+            if self.request.tabClass == 'cb_wht':
+                self.request.tabClass = 'cb_ixl'
+            else:
+                self.request.tabClass = 'cb_wht'
+        else:
+            self.request.tabClass = 'cb_wht'
+        return self.request.tabClass
+
 
 class DumpData:
     """ Class for Web-Browser-Details

@@ -113,7 +113,7 @@
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary"
             tal:define="runtime_info view/getZopeRuntimeInfo">
-        <tr class="cb_wht">
+        <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">current values</td>
             <td>
                 <ul>
