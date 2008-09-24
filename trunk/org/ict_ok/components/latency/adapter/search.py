@@ -25,7 +25,7 @@ from zope.i18nmessageid import MessageFactory
 # ict_ok.org imports
 from org.ict_ok.components.superclass.adapter.search import \
      Searchable as SuperSearchable
-from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.components.latency.interfaces import ILatency
 
 _ = MessageFactory('org.ict_ok')
 
@@ -34,12 +34,12 @@ class Searchable(SuperSearchable):
     """Searchable-Adapter."""
 
     implements(ISearchableText)
-    adapts(ISnmpValue)
+    adapts(ILatency)
 
     def __init__(self, context):
         SuperSearchable.__init__(self, context)
 
-    def getSearchableSnmpvalueOid(self):
+    def getSearchableLatencyOid(self):
         """
         get Object id as string for catalog
         """

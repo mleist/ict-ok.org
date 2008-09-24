@@ -27,8 +27,8 @@ def setUp(test):
 
 def test_suite():
     return unittest.TestSuite((
-        doctest.DocFileSuite("snmpvalue.txt",
-                             package = "org.ict_ok.components.snmpvalue",
+        doctest.DocFileSuite("latency.txt",
+                             package = "org.ict_ok.components.latency",
                              setUp=setUp,
                              ) #,
         ))

@@ -20,32 +20,16 @@ from zope.app.testing.placelesssetup import PlacelessSetup
 from zope.schema import vocabulary
 
 # ict_ok.org imports
-from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
-from org.ict_ok.components.snmpvalue.tests import setUpSnmpCheckTypes
+from org.ict_ok.components.latency.latency import Latency
 
 class GeneralTestCase(PlacelessSetup, unittest.TestCase):
 
     def setUp(self):
-        setUpSnmpCheckTypes(self)
-        self.testobj = SnmpValue()
+        self.testobj = Latency()
         super(GeneralTestCase, self).setUp()
 
     def test_initial_values(self):
         pass
-        #self.assertEqual(self.testobj.checktype, u"oid")
-        #self.assertEqual(self.testobj.oid1, u"1.3.6.1.2.1.1.1.0")
-        #self.assertEqual(self.testobj.oid2, u"1.3.6.1.2.1.1.1.0")
-        #self.assertEqual(self.testobj.cmd, u"none")
-        #self.assertEqual(self.testobj.inptype, u"cnt")
-        #self.assertEqual(self.testobj.checkMax, False)
-        #self.assertEqual(self.testobj.snmpIndexType, u"mac")
-        #self.assertEqual(self.testobj.inpQuantity, u"8.0 bit")
-        #self.assertEqual(self.testobj.displUnitAbs, u"b")
-        #self.assertEqual(self.testobj.displUnitVelocity, None)
-        #self.assertEqual(self.testobj.displUnitAcceleration, None)
-        #self.assertEqual(self.testobj.maxQuantityAbs, None)
-        #self.assertEqual(self.testobj.maxQuantityVelocity, None)
-        #self.assertEqual(self.testobj.maxQuantityAcceleration, None)
 
 
 def test_suite():

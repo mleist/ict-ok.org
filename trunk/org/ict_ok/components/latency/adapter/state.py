@@ -20,14 +20,14 @@ from zope.component import adapts
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
-from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.components.latency.interfaces import ILatency
 
 
 class State(object):
     """Implementation of state adapter for DummyContainer
     """
     implements(IState)
-    adapts(ISnmpValue)
+    adapts(ILatency)
 
 
     def __init__(self, context):

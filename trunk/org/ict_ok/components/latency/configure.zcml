@@ -10,11 +10,11 @@
         Markus Leist <leist@ikom-online.de> -->
 
     <interface
-        interface=".interfaces.ISnmpValue"
+        interface=".interfaces.ILatency"
         type="zope.app.content.interfaces.IContentType"
         />
     
-    <class class=".snmpvalue.SnmpValue">
+    <class class=".latency.Latency">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
@@ -22,16 +22,16 @@
             interface="zope.app.container.interfaces.IContentContainer"
             />
         <factory
-            id="org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue"
-            description="SnmpValue"
+            id="org.ict_ok.components.latency.latency.Latency"
+            description="Latency"
             />
         <require
-            permission="org.ict_ok.components.snmpvalue.View"
-            interface=".interfaces.ISnmpValue"
+            permission="org.ict_ok.components.latency.View"
+            interface=".interfaces.ILatency"
             />
         <require
-            permission="org.ict_ok.components.snmpvalue.Edit"
-            set_schema=".interfaces.ISnmpValue"
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema=".interfaces.ILatency"
             />
     </class>
 
@@ -40,34 +40,8 @@
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".snmpvalue.SnmpVersions"
-        name="SnmpVersions"
-        />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".snmpvalue.SnmpCheckTypes"
-        name="SnmpCheckTypes"
-        />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".snmpvalue.SnmpCheckCmds"
-        name="SnmpCheckCmds"
-        />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".snmpvalue.SnmpInpTypes"
-        name="SnmpInpTypes"
-        />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".snmpvalue.SnmpIndexTypes"
-        name="SnmpIndexTypes"
-        />
-
     <adapter
-        factory=".adapter.sized.SnmpValueSized"
+        factory=".adapter.sized.LatencySized"
         />
 
     <adapter
@@ -75,11 +49,11 @@
         />
         
     <adapter
-        factory="org.ict_ok.components.snmpvalue.adapter.search.Searchable"
+        factory="org.ict_ok.components.latency.adapter.search.Searchable"
     />
 
     <adapter
-        factory="org.ict_ok.components.snmpvalue.adapter.ipickle.Pickle"
+        factory="org.ict_ok.components.latency.adapter.ipickle.Pickle"
     />
 
     <adapter

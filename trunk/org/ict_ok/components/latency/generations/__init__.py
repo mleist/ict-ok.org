@@ -15,9 +15,9 @@ __version__ = "$Id$"
 # zope imports
 from zope.app.generations.generations import SchemaManager
 
-key = 'org.ict_ok.components.snmpvalue.generations'
+key = 'org.ict_ok.components.latency.generations'
 
 AppSchemaManager = SchemaManager(
-    minimum_generation = 5,
-    generation = 5,
+    minimum_generation = 1,
+    generation = 1,
     package_name=key)

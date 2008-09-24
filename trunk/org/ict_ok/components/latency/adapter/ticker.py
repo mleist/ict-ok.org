@@ -22,14 +22,14 @@ from zope.component import adapts
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ITicker
-from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.components.latency.interfaces import ILatency
 
 
 class Ticker(object):
     """Ticker-Adapter."""
 
     implements(ITicker)
-    adapts(ISnmpValue)
+    adapts(ILatency)
 
     def __init__(self, context):
         self.context = context

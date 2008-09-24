@@ -22,16 +22,16 @@ from zope.i18nmessageid import MessageFactory
 from zope.app.container.interfaces import IContainer
 
 # ict_ok.org imports
-from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.components.latency.interfaces import ILatency
 
 _ = MessageFactory('org.ict_ok')
 
 
-class SnmpValueSized(object):
+class LatencySized(object):
     """ISized adapter."""
 
     implements(ISized)
-    adapts(ISnmpValue)
+    adapts(ILatency)
 
     def __init__(self, context):
         self.context = context

@@ -9,11 +9,3 @@
 #
 
 # zope imports
-from zope.schema import vocabulary
-
-def SnmpCheckTypes(obj):
-    return vocabulary.SimpleVocabulary([])
-
-def setUpSnmpCheckTypes(test):
-    vr = vocabulary.getVocabularyRegistry()
-    vr.register('SnmpCheckTypes', SnmpCheckTypes)
