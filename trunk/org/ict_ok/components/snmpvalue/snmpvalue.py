@@ -20,7 +20,8 @@ __version__ = "$Id$"
 # python imports
 import os
 import rrdtool
-from time import time
+import time
+from pysnmp.entity.rfc3413.oneliner import cmdgen
 
 # zope imports
 from zope.interface import implements
@@ -131,6 +132,8 @@ class SnmpValue(Component):
             if name in ISnmpValue.names():
                 setattr(self, name, value)
         self.ikRevision = __version__
+        self.snmpIndexDict = None
+        self.snmpIndexDictTimeStamp = 0.0
         
     def get_health(self):
         overQuota =  self.overMaxQuota()
@@ -158,15 +161,58 @@ class SnmpValue(Component):
         else:
             pass
         
+    def getIndexDict(self):
+        """ get the interface table index in form of:
+        { integer index: internal snmp index position, ... }
+        """
+        if not self.snmpIndexType == u"index":
+            return None
+        nowTS = time.mktime(time.gmtime())
+        if nowTS > self.snmpIndexDictTimeStamp + 1800.0: # Cache update
+            self.snmpIndexDictTimeStamp = nowTS
+            if self.snmpIndexDict is None:
+                self.snmpIndexDict = {}
+            else:
+                self.snmpIndexDict.clear()
+            interfaceObj = self.getParent()
+            if len(interfaceObj.ipv4List) > 0:
+                interfaceIp = interfaceObj.ipv4List[0]
+            else:
+                return None
+            hostObj = interfaceObj.getParent()
+            hostSnmpVers = hostObj.snmpVersion
+            hostSnmpPort = hostObj.snmpPort
+            hostSnmpReadCommunity = hostObj.snmpReadCommunity
+            hostSnmpWriteCommunity = hostObj.snmpWriteCommunity
+            oidIntList = [1,3,6,1,2,1,2,2,1,1] # IfIndex Table
+            errorIndication, errorStatus, errorIndex, varBinds = \
+                           cmdgen.CommandGenerator().nextCmd(
+                               cmdgen.CommunityData('my-agent', 
+                                                    hostSnmpReadCommunity,
+                                                    int(hostSnmpVers)),
+                               cmdgen.UdpTransportTarget((interfaceIp, 
+                                                          hostSnmpPort)),
+                               tuple(oidIntList)
+                           )
+            if len(varBinds) > 0:
+                for pos in varBinds:
+                    (snmpOid, snmpVal) = pos[0]
+                    # get last number of SNMP oid
+                    self.snmpIndexDict[int(snmpVal)] = int(snmpOid.prettyPrint().split(".")[-1])
+        return self.snmpIndexDict
+    
     def getOidList(self):
+        """ return a converted snmp oid list
+        e.g. interface index is translated into snmp oid
+        """
         retList = []
         for addr in self.inp_addrs:
             if self.snmpIndexType == u"oid":
                 retList.append(addr)
             elif self.snmpIndexType == u"index":
-                raise Exception,\
-                      "index type '%s' non implemented yet for %s" % \
-                      (self.snmpIndexType, self.ikName)
+                indexDict = self.getIndexDict()
+                retList.append(u"1.3.6.1.2.1.2.2.1.10.%d" % indexDict[int(addr)])
+                retList.append(u"1.3.6.1.2.1.2.2.1.16.%d" % indexDict[int(addr)])
             elif self.snmpIndexType == u"mac":
                 raise Exception,\
                       "index type '%s' non implemented yet for %s" % \
@@ -243,7 +289,6 @@ class SnmpValue(Component):
     def getRawSnmpValues(self):
         """ get raw snmp-Value without multiplier
         """
-        from pysnmp.entity.rfc3413.oneliner import cmdgen
         retList = []
         for oid in self.getOidList():
             oidStringList = oid.strip(".").split(".")
@@ -310,7 +355,7 @@ class SnmpValue(Component):
         convMaxPQ = maxQuantity / inpPQ
         convMaxPQ.ounit("1/s")
         convMax = float(convMaxPQ)
-        currtime = time()
+        currtime = time.time()
         rrdRet = rrdtool.fetch(\
             self.getRrdFilename(),
             "MAX",
@@ -344,7 +389,7 @@ class SnmpValue(Component):
         convMinPQ = minQuantity / inpPQ
         convMinPQ.ounit("1/s")
         convMin = float(convMinPQ)
-        currtime = time()
+        currtime = time.time()
         rrdRet = rrdtool.fetch(\
             self.getRrdFilename(),
             "MIN",
@@ -408,6 +453,7 @@ class SnmpValue(Component):
         if not os.path.exists(self.getRrdFilename()):
             try:
                 converted_addrs = self.getOidList()
+                print "converted_addrs: ", converted_addrs
                 rows = int(4000 / interval)
                 minhb = interval * 60 * 2
                 if minhb <600:
@@ -515,13 +561,13 @@ class SnmpValue(Component):
         # result in the value
         if self.inptype == "cnt":
             snmpValList = self.getRawSnmpValues()
-            arg_string = "%f" % time()
+            arg_string = "%f" % time.time()
             for snmpVal in self.getRawSnmpValues():
                 arg_string += ":%d" % int(snmpVal)
             update_args.append(arg_string)
         else:
             snmpValList = self.getRawSnmpValues()
-            arg_string = "%f" % time()
+            arg_string = "%f" % time.time()
             for snmpVal in self.getRawSnmpValues():
                 arg_string += ":%f" % snmpVal
             update_args.append(arg_string)

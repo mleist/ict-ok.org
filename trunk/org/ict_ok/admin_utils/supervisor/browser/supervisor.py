@@ -233,6 +233,9 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         return self.request.response.redirect('./@@objmq')
 
 class AdmUtilSupervisorVersion(SupernodeDetails):
+    """ for version display
+    """
+
     def getSystemUptime(self):
         """
         get the uptime of the running system
@@ -240,11 +243,20 @@ class AdmUtilSupervisorVersion(SupernodeDetails):
         """
         return i18nformat(self.request,
                           timedelta(seconds=self.context.getSystemUptime()))
+
     def getVersion(self):
         """
         special format list of the history for web-view
         """
         return getIkVersion()
+
+    def getDbSize(self):
+        """
+        return the size of Database
+        """
+        size = self.request.publication.db.getSize()
+        return size / 1000
+
 
 def formatEntryDate(entry, formatter):
     """Entry Date for history in Web-Browser"""

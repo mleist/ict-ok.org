@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.interface import Invalid, invariant
+from zope.interface import Attribute, Invalid, invariant
 from zope.schema import Bool, Choice, List
 
 # ict_ok.org imports
@@ -132,6 +132,9 @@ class ISnmpValue(IComponent):
         max_length=400,
         title=_("Max. quantity (acceleration)"),
         required=False)
+    
+    snmpIndexDict = Attribute("cache memory for snmp index")
+    snmpIndexDictTimeStamp = Attribute("last update of cache memory")
     
     @invariant
     def ensureC1(obj_snmp):
@@ -335,6 +338,10 @@ class ISnmpValue(IComponent):
         """
     def getRrdFilename():
         """ rrd filename incl. path
+        """
+    def getOidList():
+        """ return a converted snmp oid list
+        e.g. interface index is translated into snmp oid
         """
     def getDisplayUnit():
         """get unit tuple (displUnit, displayString)

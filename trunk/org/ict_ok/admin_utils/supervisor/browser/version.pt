@@ -12,5 +12,10 @@
             <td i18n:translate="">System uptime</td>
             <td tal:content="python: view.getSystemUptime()" />
         </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:define="intform python:request.locale.numbers.getFormatter('decimal')">
+            <td i18n:translate="">Size of Database</td>
+            <td tal:content="python: '%s kB' % intform.format(view.getDbSize())" />
+        </tr>
     </table>
 </i18n:block>

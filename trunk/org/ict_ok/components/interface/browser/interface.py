@@ -146,140 +146,149 @@ class SnmpScanWizardForm(AddForm):
         return absoluteURL(self.context, self.request)
     def create(self, data):
         print "SnmpScanWizardForm.create(%s)" % data
+        #import pdb
+        #pdb.set_trace()
         interfaceCnt = self.getInterfaceCnt(data)
         if interfaceCnt and interfaceCnt > 0:
-            interfacesDict = {}
-            for i in range(0, interfaceCnt):
-                interfacesDict[i] = {}
-            oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 1) # InterfaceIndex
-            snmpList = self.getInterfaceVect(data, oidTuple)
-            if snmpList:
-                for snmpItem in snmpList:
-                    interfacesDict[snmpList.index(snmpItem)]['index'] = \
-                                  int(snmpItem[0][1])
-            oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 2) # InterfaceDesc
-            snmpList = self.getInterfaceVect(data, oidTuple)
-            if snmpList:
-                for snmpItem in snmpList:
-                    interfacesDict[snmpList.index(snmpItem)]['desc'] = \
-                                  snmpItem[0][1].prettyPrint().strip("'")
-            oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 4) # InterfaceMtu
-            snmpList = self.getInterfaceVect(data, oidTuple)
-            if snmpList:
-                for snmpItem in snmpList:
-                    interfacesDict[snmpList.index(snmpItem)]['mtu'] = \
-                                  int(snmpItem[0][1])
-            oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 5) # InterfaceSpeed
-            snmpList = self.getInterfaceVect(data, oidTuple)
-            if snmpList:
-                for snmpItem in snmpList:
-                    interfacesDict[snmpList.index(snmpItem)]['speed'] = \
-                                  int(snmpItem[0][1])
-            oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 6) # InterfacehysAddress
-            snmpList = self.getInterfaceVect(data, oidTuple)
-            if snmpList:
-                for snmpItem in snmpList:
-                    interfacesDict[snmpList.index(snmpItem)]['mac'] = \
-                                  "%02x:%02x:%02x:%02x:%02x:%02x" % \
-                                  tuple([ord(i) for i in snmpItem[0][1]])
-            oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 7) # InterfaceAdminStatus
-            snmpList = self.getInterfaceVect(data, oidTuple)
-            if snmpList:
-                for snmpItem in snmpList:
-                    interfacesDict[snmpList.index(snmpItem)]['adminstat'] = \
-                                  snmpItem[0][1] == 1
-            oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 8) # InterfaceOperStatus
-            snmpList = self.getInterfaceVect(data, oidTuple)
-            if snmpList:
-                for snmpItem in snmpList:
-                    interfacesDict[snmpList.index(snmpItem)]['operstat'] = \
-                                  snmpItem[0][1] == 1
-            oidTuple = (1, 3, 6, 1, 2, 1, 31, 1, 1, 1, 1) # InterfaceName
-            snmpList = self.getInterfaceVect(data, oidTuple)
-            if snmpList:
-                for snmpItem in snmpList:
-                    interfacesDict[snmpList.index(snmpItem)]['name'] = \
-                                  snmpItem[0][1].prettyPrint().strip("'")
-            # -------------------------------------------
-            if data['indexType'] == u'index':
-                atrList = [i['index'] for i in interfacesDict.values()]
-                atrDict = {}.fromkeys(atrList)
-                if len(atrDict.keys()) != interfaceCnt:
-                    self.status = _(u"Error: interface index type 'Interface index' isn't unique")
-                    return None
-            elif data['indexType'] == u'mac':
-                atrList = [i['mac'] for i in interfacesDict.values()]
-                atrDict = {}.fromkeys(atrList)
-                if len(atrDict.keys()) != interfaceCnt:
-                    self.status = _(u"Error: interface index type 'Ethernet address' isn't unique")
-                    return None
-            elif data['indexType'] == u'desc':
-                atrList = [i['desc'] for i in interfacesDict.values()]
-                atrDict = {}.fromkeys(atrList)
-                if len(atrDict.keys()) != interfaceCnt:
-                    self.status = _(u"Error: interface index type 'Description' isn't unique")
-                    return None
-            elif data['indexType'] == u'name':
-                atrList = [i['name'] for i in interfacesDict.values()]
-                atrDict = {}.fromkeys(atrList)
-                if len(atrDict.keys()) != interfaceCnt:
-                    self.status = _(u"Error: interface index type 'Name' isn't unique")
-                    return None
-            # -------------------------------------------
+            #interfacesDict = {}
+            #for i in range(0, interfaceCnt):
+                #interfacesDict[i] = {}
+            #oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 1) # InterfaceIndex
+            #snmpList = self.getInterfaceVect(data, oidTuple)
+            #if snmpList:
+                #for snmpItem in snmpList:
+                    #interfacesDict[snmpList.index(snmpItem)]['index'] = \
+                                  #int(snmpItem[0][1])
+            #oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 2) # InterfaceDesc
+            #snmpList = self.getInterfaceVect(data, oidTuple)
+            #if snmpList:
+                #for snmpItem in snmpList:
+                    #interfacesDict[snmpList.index(snmpItem)]['desc'] = \
+                                  #snmpItem[0][1].prettyPrint().strip("'")
+            #oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 4) # InterfaceMtu
+            #snmpList = self.getInterfaceVect(data, oidTuple)
+            #if snmpList:
+                #for snmpItem in snmpList:
+                    #interfacesDict[snmpList.index(snmpItem)]['mtu'] = \
+                                  #int(snmpItem[0][1])
+            #oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 5) # InterfaceSpeed
+            #snmpList = self.getInterfaceVect(data, oidTuple)
+            #if snmpList:
+                #for snmpItem in snmpList:
+                    #interfacesDict[snmpList.index(snmpItem)]['speed'] = \
+                                  #int(snmpItem[0][1])
+            #oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 6) # InterfacehysAddress
+            #snmpList = self.getInterfaceVect(data, oidTuple)
+            #if snmpList:
+                #for snmpItem in snmpList:
+                    #interfacesDict[snmpList.index(snmpItem)]['mac'] = \
+                                  #"%02x:%02x:%02x:%02x:%02x:%02x" % \
+                                  #tuple([ord(i) for i in snmpItem[0][1]])
+            #oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 7) # InterfaceAdminStatus
+            #snmpList = self.getInterfaceVect(data, oidTuple)
+            #if snmpList:
+                #for snmpItem in snmpList:
+                    #interfacesDict[snmpList.index(snmpItem)]['adminstat'] = \
+                                  #snmpItem[0][1] == 1
+            #oidTuple = (1, 3, 6, 1, 2, 1, 2, 2, 1, 8) # InterfaceOperStatus
+            #snmpList = self.getInterfaceVect(data, oidTuple)
+            #if snmpList:
+                #for snmpItem in snmpList:
+                    #interfacesDict[snmpList.index(snmpItem)]['operstat'] = \
+                                  #snmpItem[0][1] == 1
+            #oidTuple = (1, 3, 6, 1, 2, 1, 31, 1, 1, 1, 1) # InterfaceName
+            #snmpList = self.getInterfaceVect(data, oidTuple)
+            #if snmpList:
+                #for snmpItem in snmpList:
+                    #interfacesDict[snmpList.index(snmpItem)]['name'] = \
+                                  #snmpItem[0][1].prettyPrint().strip("'")
+            ## -------------------------------------------
+            #if data['indexType'] == u'index':
+                #atrList = [i['index'] for i in interfacesDict.values()]
+                #atrDict = {}.fromkeys(atrList)
+                #if len(atrDict.keys()) != interfaceCnt:
+                    #self.status = _(u"Error: interface index type 'Interface index' isn't unique")
+                    #return None
+            #elif data['indexType'] == u'mac':
+                #atrList = [i['mac'] for i in interfacesDict.values()]
+                #atrDict = {}.fromkeys(atrList)
+                #if len(atrDict.keys()) != interfaceCnt:
+                    #self.status = _(u"Error: interface index type 'Ethernet address' isn't unique")
+                    #return None
+            #elif data['indexType'] == u'desc':
+                #atrList = [i['desc'] for i in interfacesDict.values()]
+                #atrDict = {}.fromkeys(atrList)
+                #if len(atrDict.keys()) != interfaceCnt:
+                    #self.status = _(u"Error: interface index type 'Description' isn't unique")
+                    #return None
+            #elif data['indexType'] == u'name':
+                #atrList = [i['name'] for i in interfacesDict.values()]
+                #atrDict = {}.fromkeys(atrList)
+                #if len(atrDict.keys()) != interfaceCnt:
+                    #self.status = _(u"Error: interface index type 'Name' isn't unique")
+                    #return None
+            ## -------------------------------------------
             retList = []
-            for interfaceKey in interfacesDict.keys()[:3]:
-                tmpInterface = interfacesDict[interfaceKey]
-                print "oooo:", tmpInterface
-                dateNow = datetime.utcnow()
-                newInterface = zapi.createObject(\
-                    u'org.ict_ok.components.interface.interface.Interface')
-                #notify(ObjectCreatedEvent(newInterface))
-                newInterfaceDc = IZopeDublinCore(newInterface, None)
-                newInterface.ikName = u"%s" % tmpInterface['desc']
-                newInterfaceDc.title = u"%s" % tmpInterface['desc']
-                newInterfaceDc.created = datetime.utcnow()
-                newInterface.ikComment = u"%s" % tmpInterface['name']
-                newInterface.mac = u"%s" % tmpInterface['mac']
-                newInterface.ipv4List = None
-                # -------------------------------
-                #from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
-                #from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-                #from zope.app.keyreference.interfaces import IKeyReference
-                #from zope.interface import directlyProvides
-                #newSnmpvalue = zapi.createObject(\
-                    #u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue')
-                ##directlyProvides(newSnmpvalue, IKeyReference)
-                ##notify(ObjectCreatedEvent(newSnmpvalue))
-                #newSnmpvalueDc = IZopeDublinCore(newSnmpvalue, None)
-                #newSnmpvalueDc.title = u"%s" % "ddd"
-                #newSnmpvalueDc.created = datetime.utcnow()
-                #newSnmpvalue.__post_init__()
-                ##data = {'ikName': u"ddd314"}
-                ##obj = SnmpValue(**data)
-                ##IBrwsOverview(obj).setTitle(data['ikName'])
-                ##obj.__post_init__()
+            dateNow = datetime.utcnow()
+            newInterface = zapi.createObject(\
+                u'org.ict_ok.components.interface.interface.Interface')
+            newInterfaceDc = IZopeDublinCore(newInterface, None)
+            newInterface.ikName = u"ddd1"
+            newInterfaceDc.title = u"ddd2"
+            newInterfaceDc.created = datetime.utcnow()
+            newInterface.__post_init__()
+            retList.append(newInterface)
+            #for interfaceKey in interfacesDict.keys()[:3]:
+                #tmpInterface = interfacesDict[interfaceKey]
+                #print "oooo:", tmpInterface
+                #dateNow = datetime.utcnow()
+                #newInterface = zapi.createObject(\
+                    #u'org.ict_ok.components.interface.interface.Interface')
+                ##notify(ObjectCreatedEvent(newInterface))
+                #newInterfaceDc = IZopeDublinCore(newInterface, None)
+                #newInterface.ikName = u"%s" % tmpInterface['desc']
+                #newInterfaceDc.title = u"%s" % tmpInterface['desc']
+                #newInterfaceDc.created = datetime.utcnow()
+                #newInterface.ikComment = u"%s" % tmpInterface['name']
+                #newInterface.mac = u"%s" % tmpInterface['mac']
+                #newInterface.ipv4List = None
                 ## -------------------------------
-                #newInterface.__setitem__(u"ddd", newSnmpvalue)
-                #newInterface.__setitem__(u"ddd", obj)
-                newInterface.__post_init__()
-                retList.append(newInterface)
+                ##from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
+                ##from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+                ##from zope.app.keyreference.interfaces import IKeyReference
+                ##from zope.interface import directlyProvides
+                ##newSnmpvalue = zapi.createObject(\
+                    ##u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue')
+                ###directlyProvides(newSnmpvalue, IKeyReference)
+                ###notify(ObjectCreatedEvent(newSnmpvalue))
+                ##newSnmpvalueDc = IZopeDublinCore(newSnmpvalue, None)
+                ##newSnmpvalueDc.title = u"%s" % "ddd"
+                ##newSnmpvalueDc.created = datetime.utcnow()
+                ##newSnmpvalue.__post_init__()
+                ###data = {'ikName': u"ddd314"}
+                ###obj = SnmpValue(**data)
+                ###IBrwsOverview(obj).setTitle(data['ikName'])
+                ###obj.__post_init__()
+                ### -------------------------------
+                ##newInterface.__setitem__(u"ddd", newSnmpvalue)
+                ##newInterface.__setitem__(u"ddd", obj)
+                #newInterface.__post_init__()
+                #retList.append(newInterface)
             return retList
             # -------------------------------------------
 
-        import pprint
-        print "-" * 80
-        pprint.pprint(interfacesDict)
-        print "-" * 80
-        #print "zzz: '%s'" % ddd
-        #import pdb
-        #pdb.set_trace()
+        #import pprint
+        #print "-" * 80
+        #pprint.pprint(interfacesDict)
+        #print "-" * 80
+        ##print "zzz: '%s'" % ddd
+        ##import pdb
+        ##pdb.set_trace()
         self.status = _(u"Error: no unique Id")
         return None #[1,2,3]
     def add(self, objList):
         """ will store the new one in object tree """
         print "SnmpScanWizardForm.add(%s)" % True #objList
-        import pdb
-        pdb.set_trace()
         for obj in objList:
             travp = self.context
             # store obj id for nextURL()
@@ -316,7 +325,7 @@ class SnmpScanWizardForm(AddForm):
                 #u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue')
             ###directlyProvides(newSnmpvalue, IKeyReference)
             #notify(ObjectCreatedEvent(newSnmpvalue))
-            data = {'ikName': u"ddd314",
+            data_old = {'ikName': u"ddd314",
                     'checktype': u"oid",
                     'oid1': u"1.3.6.1.2.1.1.1.0",
                     'oid2': u"1.3.6.1.2.1.1.1.0",
@@ -332,22 +341,41 @@ class SnmpScanWizardForm(AddForm):
                     'checkMaxLevelUnitDenominator': u"1",
                     'snmpIndexType': u"index"
                     }
-            newSnmpvalue = SnmpValue(**data)
-            newSnmpvalueDc = IZopeDublinCore(newSnmpvalue, None)
-            newSnmpvalueDc.title = u"%s" % "ddd"
-            newSnmpvalueDc.created = datetime.utcnow()
-            IBrwsOverview(newSnmpvalue).setTitle(data['ikName'])
-            newSnmpvalue.__post_init__()
-            # -------------------------------
-            #newInterface.__setitem__(u"ddd", newSnmpvalue)
-            obj.__setitem__(u"ddd", newSnmpvalue)
-        #return objList
-        #travp = self.context
-        ## store obj id for nextURL()
-        #self._newObjectID = obj.objectID
-        #while IPagelet.providedBy(travp):
-            #travp = self.context.__parent__
-        #travp[obj.objectID] = obj
+            data = {
+                'checktype': u"address",
+                'snmpIndexType': u"index",
+                'inp_addrs': [u"1"],
+                'cmd': u"none",
+                'inptype': u"cnt",
+                'displayMinMax': True,
+                'checkMax': False,
+                'inpQuantity': u"8.0 bit",
+                'displUnitAbs': u"b",
+                'displUnitVelocity': u"",
+                'displUnitAcceleration': None,
+                'minQuantityAbs': None,
+                'minQuantityVelocity': None,
+                'minQuantityAcceleration': None,
+                'maxQuantityAbs': None,
+                'maxQuantityVelocity': None,
+                'maxQuantityAcceleration': None,
+            }
+            #newSnmpvalue = SnmpValue(**data)
+            #newSnmpvalueDc = IZopeDublinCore(newSnmpvalue, None)
+            #newSnmpvalueDc.title = u"%s" % "ddd"
+            #newSnmpvalueDc.created = datetime.utcnow()
+            #IBrwsOverview(newSnmpvalue).setTitle(data['ikName'])
+            #newSnmpvalue.__post_init__()
+            ## -------------------------------
+            ##newInterface.__setitem__(u"ddd", newSnmpvalue)
+            #obj.__setitem__(u"ddd", newSnmpvalue)
+        ###return objList
+        ###travp = self.context
+        #### store obj id for nextURL()
+        ###self._newObjectID = obj.objectID
+        ###while IPagelet.providedBy(travp):
+            ###travp = self.context.__parent__
+        ###travp[obj.objectID] = obj
         return objList
 
 
