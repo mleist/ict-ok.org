@@ -33,7 +33,7 @@ logger = logging.getLogger("ServiceGenNagios")
 
 
 class GenNagios(ParentGenNagios):
-    """adapter implementation of SSH-Service -> nagios
+    """adapter implementation of HTTP-Service -> nagios
     """
 
     implements(IGenNagios)

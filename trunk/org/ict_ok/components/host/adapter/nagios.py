@@ -130,6 +130,7 @@ class GenNagios(ParentGenNagios):
         ipv4 = None
         for if_name, if_obj in self.context.items():
             if IInterface.providedBy(if_obj) and \
+               if_obj.ipv4List is not None and \
                len (if_obj.ipv4List) > 0:
                 ipv4 = if_obj.ipv4List[0]
         if ipv4 is not None and len(ipv4) > 0:
