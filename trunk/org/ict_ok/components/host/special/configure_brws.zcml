@@ -12,6 +12,8 @@
     <include package=".linux_server.browser" />
     <include package=".linux_workstation.browser" />
     <include package=".mge_ups.browser" />
+    <include package=".router_general.browser" />
+    <include package=".switch_general.browser" />
     <include package=".vmware_vc2.browser" />
     <include package=".vmware_esx.browser" />
     <include package=".vmware_vm.browser" />

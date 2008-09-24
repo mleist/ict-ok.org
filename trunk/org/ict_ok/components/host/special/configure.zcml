@@ -12,6 +12,8 @@
     <include package=".linux_server" />
     <include package=".linux_workstation" />
     <include package=".mge_ups" />
+    <include package=".router_general" />
+    <include package=".switch_general" />
     <include package=".vmware_vc2" />
     <include package=".vmware_esx" />
     <include package=".vmware_vm" />
