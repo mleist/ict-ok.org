@@ -92,11 +92,25 @@ class SnmpValueDetails(ComponentDetails):
     def getValuePngDeltaT(self):
         """get Picture for special time interval"""
         hours = float(self.request.get('hours', default="1"))
+        try:
+            width = int(self.request.get('width', default=None))
+        except ValueError:
+            width = None
+        except TypeError:
+            width = None
+        try:
+            height = int(self.request.get('height', default=None))
+        except ValueError:
+            height = None
+        except TypeError:
+            height = None
         currtime = time.time()
         params = {}
         params['nameext'] = "_%dh" % hours
         params['starttime'] = currtime - 3600*hours
         params['endtime'] = currtime
+        params['width'] = width
+        params['height'] = height
         return self.getValuePng(params)
 
     def rrdConfigureDefs(self, argList, rrdFile):
@@ -313,8 +327,20 @@ class SnmpValueDetails(ComponentDetails):
                 self.rrdConfigureMaximum(argList)
             argList.append("--start=%d" % params['starttime'])
             argList.append("--end=%d" % params['endtime'])
-            argList.append("--width=540")
-            argList.append("--height=120")
+            try:
+                if params['width'] is not None:
+                    argList.append("--width=%d" % int(params['width']))
+                else:
+                    argList.append("--width=540")
+            except ValueError:
+                    argList.append("--width=540")
+            try:
+                if params['height'] is not None:
+                    argList.append("--height=%d" % int(params['height']))
+                else:
+                    argList.append("--height=120")
+            except ValueError:
+                    argList.append("--height=120")
             argList.append("--watermark=ict-ok.org")
             argList.append("--vertical-label=%s" % displayString)
             # Legend

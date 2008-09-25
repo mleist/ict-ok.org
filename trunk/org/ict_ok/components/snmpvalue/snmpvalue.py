@@ -353,6 +353,7 @@ class SnmpValue(Component):
         if maxQuantity is None:
             return None
         convMaxPQ = maxQuantity / inpPQ
+        # TODO error on abs. Counter
         convMaxPQ.ounit("1/s")
         convMax = float(convMaxPQ)
         currtime = time.time()
