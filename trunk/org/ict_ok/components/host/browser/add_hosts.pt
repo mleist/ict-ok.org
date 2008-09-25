@@ -26,6 +26,11 @@
       <li><a href="add_host_mge_ups.html">MGE UPS</a></li>
     </ul>
     
+    <h4 i18n:translate="">Printer</h4>
+    <ul>
+      <li><a href="add_host_printer_general.html">Printer (general)</a></li>
+    </ul>
+    
     <h4 i18n:translate="">Infrastructure</h4>
     <ul>
       <li><a href="add_host_router_general.html">Router (general)</a></li>
