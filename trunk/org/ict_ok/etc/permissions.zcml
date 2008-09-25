@@ -64,6 +64,8 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.interface"
              file="security.zcml" />
+    <include package="org.ict_ok.components.latency"
+             file="security.zcml" />
     <include package="org.ict_ok.components.service"
              file="security.zcml" />
     <include package="org.ict_ok.components.snmpvalue"

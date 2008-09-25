@@ -41,6 +41,7 @@
     <include package="org.ict_ok.components.host.special"
              file="configure_brws.zcml" />
     <include package="org.ict_ok.components.interface.browser" />
+    <include package="org.ict_ok.components.latency.browser" />
     <include package="org.ict_ok.components.script.browser" />
     <include package="org.ict_ok.components.service.browser" />
     <include package="org.ict_ok.components.service.special"

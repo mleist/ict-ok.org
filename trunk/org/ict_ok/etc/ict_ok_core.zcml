@@ -48,6 +48,7 @@
     <include package="org.ict_ok.components.host" />
     <include package="org.ict_ok.components.host.special" />
     <include package="org.ict_ok.components.interface" />
+    <include package="org.ict_ok.components.latency" />
     <include package="org.ict_ok.components.script" />
     <include package="org.ict_ok.components.service" />
     <include package="org.ict_ok.components.service.special" />
