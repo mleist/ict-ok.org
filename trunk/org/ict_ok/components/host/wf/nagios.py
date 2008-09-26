@@ -182,7 +182,7 @@ integration.nagios_checkWorkItem = NagiosCheckWorkItem
 class NagiosTriggerOnlineWorkItem(ApplicationBase):
     """ """
     def start(self):
-        print "NagiosTriggerOnlineWorkItem.start"
+        #print "NagiosTriggerOnlineWorkItem.start"
         setattr(self.participant.activity.process.workflowRelevantData,
                 "state", "online")
         ApplicationBase.start(self)
@@ -190,9 +190,12 @@ class NagiosTriggerOnlineWorkItem(ApplicationBase):
     def change(self):
         wfd = self.participant.activity.process.workflowRelevantData
         if getattr(wfd, 'state') != getattr(wfd, 'new_state'):
+            change_str = u"state changed: '%s' -> '%s'" % (wfd.state, wfd.new_state)
+            hostObj = getattr(wfd, 'object')
+            hostObj.appendHistoryEntry(change_str, level=u"warn")
             self.finish()
     def finish(self):
-        print "NagiosTriggerOnlineWorkItem.finish"
+        #print "NagiosTriggerOnlineWorkItem.finish"
         setattr(self.participant.activity.process.workflowRelevantData,
                 "state", "online")
         wfd = self.participant.activity.process.workflowRelevantData
@@ -205,7 +208,7 @@ integration.nagios_trigger_onlineWorkItem = NagiosTriggerOnlineWorkItem
 class NagiosTriggerOfflineWorkItem(ApplicationBase):
     """ """
     def start(self):
-        print "NagiosTriggerOfflineWorkItem.start"
+        #print "NagiosTriggerOfflineWorkItem.start"
         setattr(self.participant.activity.process.workflowRelevantData,
                 "state", "offline")
         ApplicationBase.start(self)
@@ -213,9 +216,12 @@ class NagiosTriggerOfflineWorkItem(ApplicationBase):
     def change(self):
         wfd = self.participant.activity.process.workflowRelevantData
         if getattr(wfd, 'state') != getattr(wfd, 'new_state'):
+            change_str = u"state changed: '%s' -> '%s'" % (wfd.state, wfd.new_state)
+            hostObj = getattr(wfd, 'object')
+            hostObj.appendHistoryEntry(change_str, level=u"warn")
             self.finish()
     def finish(self):
-        print "NagiosTriggerOfflineWorkItem.finish"
+        #print "NagiosTriggerOfflineWorkItem.finish"
         setattr(self.participant.activity.process.workflowRelevantData,
                 "state", "offline")
         wfd = self.participant.activity.process.workflowRelevantData
@@ -228,7 +234,7 @@ integration.nagios_trigger_offlineWorkItem = NagiosTriggerOfflineWorkItem
 class NagiosTriggerNotif1WorkItem(ApplicationBase):
     """ """
     def start(self):
-        print "NagiosTriggerNotif1WorkItem.start"
+        #print "NagiosTriggerNotif1WorkItem.start"
         setattr(self.participant.activity.process.workflowRelevantData,
                 "state", "notification1")
         ApplicationBase.start(self)
@@ -236,9 +242,12 @@ class NagiosTriggerNotif1WorkItem(ApplicationBase):
     def change(self):
         wfd = self.participant.activity.process.workflowRelevantData
         if getattr(wfd, 'state') != getattr(wfd, 'new_state'):
+            change_str = u"state changed: '%s' -> '%s'" % (wfd.state, wfd.new_state)
+            hostObj = getattr(wfd, 'object')
+            hostObj.appendHistoryEntry(change_str, level=u"warn")
             self.finish()
     def finish(self):
-        print "NagiosTriggerNotif1WorkItem.finish"
+        #print "NagiosTriggerNotif1WorkItem.finish"
         setattr(self.participant.activity.process.workflowRelevantData,
                 "state", "notification1")
         ApplicationBase.finish(self)
