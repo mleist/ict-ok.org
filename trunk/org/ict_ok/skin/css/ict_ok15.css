@@ -31,7 +31,6 @@ div#header-help {
 #header-help a {
   color:#7DD0BC;
 }
-
 div#header-breadcrumbs{
   padding-top:5px;
   color:#808080;
@@ -65,7 +64,6 @@ div#header-breadcrumbs{
 #footer a {
   color:#7DD0BC;
 }
-
 
 /* #navmain {
   clear:both;
@@ -797,6 +795,31 @@ font size is adjusted here (default is 77%) */
 .yuimenubaritem-hassubmenu .yuimenubaritemlabel {
     color:#008263;
 }
+
+.ygtvlabel, .ygtvlabel:link, .ygtvlabel:visited { 
+    background-color: #E5FFF9; 
+}
+
+.ygtvlabel:hover { 
+    background-color: #E5FFF9; 
+    text-decoration:underline;
+}
+
+/*.icon-state0 {*/
+  /*display:block;*/
+  /*height: 10px;*/
+  /*padding-left: 13px;*/
+  /*background: transparent url(/@@/mini/states.gif) 0 0px no-repeat; }*/
+.icon-state1 {
+  display:block;
+  height: 10px;
+  padding-left: 13px;
+  background: transparent url(/@@/mini/states.gif) 0 -10px no-repeat; }
+.icon-state2 {
+  display:block;
+  height: 10px;
+  padding-left: 13px;
+  background: transparent url(/@@/mini/states.gif) 0 -20px no-repeat; }
 
 /*{*/
     /*background-color:#F00;*/

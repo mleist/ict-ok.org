@@ -166,14 +166,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.View"
         />
-    <viewlet
-        name="trend"
-        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubTrendSnmpValue"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.snmpvalue.View"
-        />
+    <!--<viewlet-->
+        <!--name="trend"-->
+        <!--for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"-->
+        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
+        <!--class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubTrendSnmpValue"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.components.snmpvalue.View"-->
+        <!--/>-->
     <viewlet
         name="overview"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"

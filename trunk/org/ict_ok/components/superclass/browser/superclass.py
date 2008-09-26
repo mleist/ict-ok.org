@@ -246,8 +246,14 @@ def link(view='index.html'):
     """Link to the object for Overview in Web-Browser"""
     def anchor(value, item, formatter):
         """ anchor method will return a html formated anchor"""
-        url = absoluteURL(item, formatter.request) + '/' + view
-        return u'<a href="%s">%s</a>' % (url, value)
+        myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                           name=view)
+        if myAdapter is not None and canAccess(myAdapter,'render'):
+            url = absoluteURL(item, formatter.request) + '/' + view
+            return u'<a href="%s">%s</a>' % (url, value)
+        else:
+            return u'%s' % (value)
+            
     return anchor
 
 def getTitel(item, formatter):
@@ -701,8 +707,11 @@ class Overview(BrowserPagelet):
                      cell_formatter=raw_cell_formatter),
         GetterColumn(title=_('Health'),
                      getter=getHealth),
-        TitleGetterColumn(title=_('Title'),
-                          getter=getTitel),
+        #TitleGetterColumn(title=_('Title'),
+                          #getter=getTitel),
+        GetterColumn(title=_('Title'),
+                     getter=getTitel,
+                     cell_formatter=link('overview.html')),
         GetterColumn(title=_('Modified On'),
                      getter=getModifiedDate,
                      subsort=True,

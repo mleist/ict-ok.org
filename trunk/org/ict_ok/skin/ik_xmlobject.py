@@ -42,8 +42,16 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             stateAdapter = getAdapter(item, IState)
             if stateAdapter:
                 icon_name = u"state_%s" % (stateAdapter.getStateOverview())
-                icon = zapi.queryMultiAdapter((item, self.request),
-                                              name=icon_name)
+                #print "icon_name: ", icon_name
+                #import pdb
+                #pdb.set_trace()
+                stateNum = stateAdapter.getStateOverview(-1)
+                return "state%d" % stateNum
+                #iconName = stateAdapter.getIconName()
+                #if iconName:
+                    #return u"/@@/pics/" + iconName
+                #icon = zapi.queryMultiAdapter((item, self.request),
+                                              #name=icon_name)
         except ComponentLookupError, err:
             pass
         except AttributeError, err:
@@ -90,7 +98,6 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
     def children_utility(self, container):
         """Return an XML document that contains the children of an object."""
         result = []
-
         try:
             keys = [obj.objectID for \
                     obj in IContentList(container).getContentList()]
@@ -130,26 +137,26 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             if item_len > 0:
                 if stateOverview:
                     result.append(xmlEscape(
-                        u'<collection title=%s name=%s iklen=%s icon_url=%s ' +
+                        u'<collection title=%s name=%s iklen=%s icon_url=%s rem="1.1.1" ' +
                         u'state_url=%s path=%s expable="" state_val=%s/>',
                         xml_title, name, item_len, iconUrl, stateIconUrl,
                         item_ppath, stateOverview))
                 else:
                     result.append(xmlEscape(
-                        u'<collection title=%s name=%s iklen=%s icon_url=%s ' +
+                        u'<collection title=%s name=%s iklen=%s icon_url=%s rem="1.1.2" ' +
                         u'state_url=%s expable="" path=%s/>',
                         xml_title, name, item_len, iconUrl, stateIconUrl,
                         item_ppath))
             else:
                 if stateOverview:
                     result.append(xmlEscape(
-                        u'<collection title=%s name=%s iklen=%s icon_url=%s ' +
+                        u'<collection title=%s name=%s iklen=%s icon_url=%s rem="1.2.1" ' +
                         u'state_url=%s path=%s state_val=%s/>',
                         xml_title, name, item_len, iconUrl, stateIconUrl,
                         item_ppath, stateOverview))
                 else:
                     result.append(xmlEscape(
-                        u'<collection title=%s name=%s iklen=%s icon_url=%s ' +
+                        u'<collection title=%s name=%s iklen=%s icon_url=%s rem="1.2.2" ' +
                         u'state_url=%s path=%s/>',
                         xml_title, name, item_len, iconUrl, stateIconUrl,
                         item_ppath))
@@ -249,24 +256,24 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                     if subItem == oldItem:
                         if oldItemOid == subItemOid: # focussed
                             subItems.append(xmlEscapeWithCData(
-                                u'<collection isfocus="" title=%s name=%s '
-                                u'iklen=%s '
-                                u'icon_url=%s expable="" state_url=%s '
+                                u'<collection isfocused="" title=%s name=%s '
+                                u'iklen=%s rem="2.1.1.1" '
+                                u'icon_url=%s isopen="" expable="" state_url=%s '
                                 u'path=%s state_val=%s>%s</collection>', 
                                 xml_title, name, subitem_len, iconUrl,
                                 stateIconUrl, item_ppath, stateOverview,
                                 result))
                         else:
                             subItems.append(xmlEscapeWithCData(
-                                u'<collection title=%s name=%s iklen=%s '
-                                u'icon_url=%s state_url=%s path=%s '
+                                u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+                                u'icon_url=%s isopen="" expable="" state_url=%s path=%s '
                                 u'state_val=%s>%s</collection>', 
                                 xml_title, name, subitem_len, iconUrl,
                                 stateIconUrl, item_ppath, stateOverview,
                                 result))
                     else:
                         subItems.append(xmlEscape(
-                            u'<collection title=%s name=%s iklen=%s '
+                            u'<collection title=%s name=%s iklen=%s rem="2.1.2" '
                             u'icon_url=%s expable="" state_url=%s path=%s/>',
                             xml_title, name, subitem_len, iconUrl,
                             stateIconUrl, item_ppath))
@@ -274,8 +281,8 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                     if subItem == oldItem:
                         if oldItemOid == subItemOid: # focussed
                             subItems.append(xmlEscapeWithCData(
-                                u'<collection isfocus="" title=%s '
-                                u'name=%s iklen=%s '
+                                u'<collection isfocused="" title=%s '
+                                u'name=%s iklen=%s rem="2.2.1.1" '
                                 u'icon_url=%s state_url=%s path=%s '
                                 u'state_val=%s>%s</collection>', 
                                 xml_title, name, subitem_len, iconUrl,
@@ -284,14 +291,14 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                         else:
                             subItems.append(xmlEscapeWithCData(
                                 u'<collection title=%s name=%s iklen=%s '
-                                u'icon_url=%s state_url=%s path=%s '
+                                u'icon_url=%s state_url=%s path=%s rem="2.2.1.2" '
                                 u'state_val=%s>%s</collection>', 
                                 xml_title, name, subitem_len, iconUrl,
                                 stateIconUrl, item_ppath, stateOverview,
                                 result))
                     else:
                         subItems.append(xmlEscape(
-                            u'<collection title=%s name=%s iklen=%s '
+                            u'<collection title=%s name=%s iklen=%s rem="2.2.2" '
                             u'icon_url=%s state_url=%s path=%s/>',
                             xml_title, name, subitem_len, iconUrl,
                             stateIconUrl, item_ppath))
@@ -306,13 +313,13 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         
         if len(result) > 0: # collection has content
             result = xmlEscapeWithCData(
-                      u'<collection title=%s name=%s baseURL=%s iklen=%s '
-                      u'icon_url=%s path=%s isroot="">%s</collection>',
+                      u'<collection title=%s name=%s baseURL=%s iklen=%s rem="3.1" '
+                      u'icon_url=%s path=%s isopen="" isroot="">%s</collection>',
                       xml_title, rootName, baseURL, len(oldItem), iconUrl,
                       "/", result)
         else:
             result = xmlEscapeWithCData(
-                      u'<collection title=%s name=%s baseURL=%s iklen=%s '
+                      u'<collection title=%s name=%s baseURL=%s iklen=%s rem="3.2" '
                       u'icon_url=%s path=%s expable="" '
                       u'isroot="">%s</collection>',
                       xml_title, rootName, baseURL, len(oldItem), iconUrl,
