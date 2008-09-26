@@ -1,4 +1,4 @@
-<i18n:block domain="org.ict-ok"
+<i18n:block domain="org.ict_ok"
             tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
     <h3 i18n:translate="">Details of the SNMP Value</h3>
     <table id="sortable" class="listing" summary="Content listing"
@@ -22,7 +22,8 @@
             <td>
                 <ul>
                     <div tal:omit-tag="" tal:repeat="address context/inp_addrs">
-                        <li tal:content="address" />
+                        <li style="list-style-image:url(/@@/mini/arrow_mini_right.gif);"
+                            tal:content="address" />
                     </div>
                 </ul>
             </td>
@@ -125,5 +126,7 @@
         </tr>
     </table>
     <h3>24h</h3>
-    <img tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
+    <a target="_blank" href="#" tal:attributes="href python: '%s/@@getPNG?hours=24&width=1000&height=800' % (view.getValuePngHref())">
+        <img tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
+    </a>
 </i18n:block>

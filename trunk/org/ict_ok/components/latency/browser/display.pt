@@ -1,4 +1,4 @@
-<i18n:block domain="org.ict-ok"
+<i18n:block domain="org.ict_ok"
             tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
     <h3 i18n:translate="">Display SNMP Values</h3>
     <table id="sortable" class="listing" summary="Content listing"

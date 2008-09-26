@@ -15,6 +15,12 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
+    <resourceDirectory
+        name="mini"
+        directory="mini"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <!--<resourceLibrary-->
         <!--name="pics"-->
         <!--directory="."-->

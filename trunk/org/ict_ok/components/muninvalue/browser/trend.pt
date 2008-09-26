@@ -1,4 +1,4 @@
-<i18n:block domain="org.ict-ok"
+<i18n:block domain="org.ict_ok"
   tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
   <h3 i18n:translate="">SNMP Trend1</h3>
   <!--<a href="#" tal:attributes="href context/++resource++pics/open-flash-chart.swf">dddd</a>-->

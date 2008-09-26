@@ -1,4 +1,4 @@
-<i18n:block domain="org.ict-ok">
+<i18n:block domain="org.ict_ok">
     <h3 i18n:translate="">details of the eventcrossbar</h3>
     <!-- span tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
         <div tal:content="dateform" />
