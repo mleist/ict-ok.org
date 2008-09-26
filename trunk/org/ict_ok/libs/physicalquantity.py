@@ -24,6 +24,8 @@ from zope.security.checker import BasicTypes, NoProxy
 
 if not magnitude._mags.has_key('Euro'):
     magnitude.new_mag('Euro', magnitude.Magnitude(1.0, dollar=1))
+if not magnitude._mags.has_key('Unit'):
+    magnitude.new_mag('Unit', magnitude.Magnitude(1.0, bit=1))
 
 
 class PhysicalQuantity(magnitude.Magnitude):
