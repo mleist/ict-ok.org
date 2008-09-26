@@ -33,6 +33,14 @@
             permission="org.ict_ok.components.host.Edit"
             set_schema=".interfaces.IHostLinuxServer"
             />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface="org.ict_ok.components.host.interfaces.IEventIfEventHost"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema="org.ict_ok.components.host.interfaces.IEventIfEventHost"
+            />
     </class>
 
     <include package=".generations" />
