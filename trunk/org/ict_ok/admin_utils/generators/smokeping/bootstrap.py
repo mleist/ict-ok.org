@@ -27,41 +27,41 @@ from zope.dublincore.interfaces import IWriteZopeDublinCore
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
-from org.ict_ok.admin_utils.generators.nagios.interfaces import \
-     IAdmUtilGeneratorNagios
-from org.ict_ok.admin_utils.generators.nagios.nagios import \
-     AdmUtilGeneratorNagios
+from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
+     IAdmUtilGeneratorSmokePing
+from org.ict_ok.admin_utils.generators.smokeping.smokeping import \
+     AdmUtilGeneratorSmokePing
 
-logger = logging.getLogger("AdmUtilGeneratorNagios")
+logger = logging.getLogger("AdmUtilGeneratorSmokePing")
 
 def bootStrapSubscriberDatabase(event):
-    """initialisation of nagios-generator utility on first database startup
+    """initialisation of smokeping-generator utility on first database startup
     """
     if appsetup.getConfigContext().hasFeature('devmode'):
         logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
 
-    madeAdmUtilGeneratorNagios = ensureUtility(root_folder, 
-                                               IAdmUtilGeneratorNagios,
-                                               'AdmUtilGeneratorNagios', 
-                                               AdmUtilGeneratorNagios, '',
+    madeAdmUtilGeneratorSmokePing = ensureUtility(root_folder, 
+                                               IAdmUtilGeneratorSmokePing,
+                                               'AdmUtilGeneratorSmokePing', 
+                                               AdmUtilGeneratorSmokePing, '',
                                                copy_to_zlog=False, 
                                                asObject=True)
 
-    if isinstance(madeAdmUtilGeneratorNagios, AdmUtilGeneratorNagios):
-        logger.info(u"bootstrap: Ensure named AdmUtilGeneratorNagios")
-        dcore = IWriteZopeDublinCore(madeAdmUtilGeneratorNagios)
-        dcore.title = u"Nagios Scanner"
+    if isinstance(madeAdmUtilGeneratorSmokePing, AdmUtilGeneratorSmokePing):
+        logger.info(u"bootstrap: Ensure named AdmUtilGeneratorSmokePing")
+        dcore = IWriteZopeDublinCore(madeAdmUtilGeneratorSmokePing)
+        dcore.title = u"Smokeping Scanner"
         dcore.created = datetime.utcnow()
-        madeAdmUtilGeneratorNagios.ikName = dcore.title
-        madeAdmUtilGeneratorNagios.__post_init__()
+        madeAdmUtilGeneratorSmokePing.ikName = dcore.title
+        madeAdmUtilGeneratorSmokePing.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()
                     if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: made IAdmUtilGeneratorNagios-Utility")
+            u" bootstrap: made IAdmUtilGeneratorSmokePing-Utility")
 
     transaction.get().commit()
     connection.close()

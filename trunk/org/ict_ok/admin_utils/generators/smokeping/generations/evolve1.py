@@ -17,8 +17,8 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.generators.nagios.interfaces import \
-     IAdmUtilGeneratorNagios
+from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
+     IAdmUtilGeneratorSmokePing
 
 generation = 1
 
@@ -30,7 +30,7 @@ def evolve(context):
     
     root = getRootFolder(context) # the Zope-Root-Folders
 
-    for obj in findObjectsProviding(root, IAdmUtilGeneratorNagios):
+    for obj in findObjectsProviding(root, IAdmUtilGeneratorSmokePing):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())

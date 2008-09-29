@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E1101,W0232,W0142,R0901
 #
-"""implementation of browser class of nagios-generator
+"""implementation of browser class of smokeping-generator
 """
 
 __version__ = "$Id$"
@@ -32,16 +32,16 @@ from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.generators.nagios.interfaces import \
-     IAdmUtilGeneratorNagios
+from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
+     IAdmUtilGeneratorSmokePing
 from org.ict_ok.admin_utils.netscan.interfaces import INetScan
 
 _ = MessageFactory('org.ict_ok')
 
 
-class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
+class AdmUtilGeneratorSmokePingDetails(SupernodeDetails):
     """
-    Browser details for nagios-generator
+    Browser details for smokeping-generator
     """
     omit_viewfields = SupernodeDetails.omit_viewfields + []
     omit_editfields = SupernodeDetails.omit_editfields + \
@@ -57,7 +57,7 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
             objId = 1000
         retList = []
         if True:
-        #if checkPermission('org.ict_ok.admin_utils.generators.nagios.View',
+        #if checkPermission('org.ict_ok.admin_utils.generators.smokeping.View',
                            #self.context) and\
            #zapi.queryMultiAdapter((self.context, self.request),
                                   #name='shutdown.html') is not None:
@@ -68,7 +68,7 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
             tmpDict['href'] = u"%s/@@generate.html?nextURL=%s" % \
                    (zapi.getPath( self.context),
                     quoter.quote())
-            tmpDict['tooltip'] = _(u"generate nagios cfg")
+            tmpDict['tooltip'] = _(u"generate smokeping cfg")
             retList.append(tmpDict)
         return retList
     
@@ -76,9 +76,9 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
         """
         starts all configured scanners for this net
         """
-        print "AdmUtilGeneratorNagiosDetails.generate start"
+        print "AdmUtilGeneratorSmokePingDetails.generate start"
         print self.allConfigFilesOut()
-        print "AdmUtilGeneratorNagiosDetails.generate stop"
+        print "AdmUtilGeneratorSmokePingDetails.generate stop"
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:
             return self.request.response.redirect(nextURL)
@@ -94,19 +94,19 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
 # --------------- forms ------------------------------------
 
 
-class DetailsAdmUtilGeneratorNagiosForm(DisplayForm):
+class DetailsAdmUtilGeneratorSmokePingForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of nagios generator')
-    fields = field.Fields(IAdmUtilGeneratorNagios).omit(\
-        *AdmUtilGeneratorNagiosDetails.omit_viewfields) #+ \
-           #field.Fields(IAdmUtilGeneratorNagios).select('objectID')
+    label = _(u'settings of smokeping generator')
+    fields = field.Fields(IAdmUtilGeneratorSmokePing).omit(\
+        *AdmUtilGeneratorSmokePingDetails.omit_viewfields) #+ \
+           #field.Fields(IAdmUtilGeneratorSmokePing).select('objectID')
     #def update(self):
         #import pdb
         #pdb.set_trace()
         #DisplayForm.update(self)
 
-class EditAdmUtilGeneratorNagiosForm(EditForm):
+class EditAdmUtilGeneratorSmokePingForm(EditForm):
     """ Edit for for net """
     label = _(u'edit graphviz adapter')
-    fields = field.Fields(IAdmUtilGeneratorNagios).omit(\
-        *AdmUtilGeneratorNagiosDetails.omit_editfields)
+    fields = field.Fields(IAdmUtilGeneratorSmokePing).omit(\
+        *AdmUtilGeneratorSmokePingDetails.omit_editfields)

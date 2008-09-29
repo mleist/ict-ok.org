@@ -22,15 +22,15 @@ from zope.component import adapts
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ITicker
-from org.ict_ok.admin_utils.generators.nagios.interfaces import \
-     IAdmUtilGeneratorNagios
+from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
+     IAdmUtilGeneratorSmokePing
 
 
 class Ticker(object):
     """Ticker-Adapter."""
 
     implements(ITicker)
-    adapts(IAdmUtilGeneratorNagios)
+    adapts(IAdmUtilGeneratorSmokePing)
 
     def __init__(self, context):
         self.context = context

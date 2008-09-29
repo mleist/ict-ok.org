@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611,W0702,W0704
 #
-"""Configuration adapter for nagios-config files
+"""Configuration adapter for smokeping-config files
 """
 
 __version__ = "$Id$"
@@ -26,7 +26,7 @@ from zope.app.catalog.interfaces import ICatalog
 
 # ict_ok.org imports
 
-logger = logging.getLogger("AdmUtilGeneratorNagios")
+logger = logging.getLogger("AdmUtilGeneratorSmokePing")
 berlinTZ = timezone('Europe/Berlin')
 
 ndo_data_types = {
@@ -151,10 +151,10 @@ ndo_event_types = {
 }
 
 
-class AdmUtilGeneratorNagiosRpcMethods(MethodPublisher):
+class AdmUtilGeneratorSmokePingRpcMethods(MethodPublisher):
     def isUp(self):
         """reachable check on the XMLRPC-Interface"""
-        logger.info(u"AdmUtilGeneratorNagiosRpcMethods::isUp (%s)" \
+        logger.info(u"AdmUtilGeneratorSmokePingRpcMethods::isUp (%s)" \
                     % self.__name__)
         return True
     
@@ -270,7 +270,7 @@ class AdmUtilGeneratorNagiosRpcMethods(MethodPublisher):
             print "dict: %s" % arg_dict
         
         #print "arg_dict: %s" % arg_dict
-        #globalNagiosUtility.lastSeen(arg_dict)
+        #globalSmokePingUtility.lastSeen(arg_dict)
 
         ##ndo_event_types: NEBTYPE_HOSTCHECK_PROCESSED (801)
         ##('4': 2007-04-29 06:26:07.951900+02:00  [NDO_DATA_TIMESTAMP])
@@ -284,7 +284,7 @@ class AdmUtilGeneratorNagiosRpcMethods(MethodPublisher):
         ##('118': 0  [NDO_DATA_STATE])
         ##('121': 1  [NDO_DATA_STATETYPE])
 
-        # with new nagios
+        # with new smokeping
         #'99999': '207',
         #'99997': 45,
         #'117': '1205935461.56343',
@@ -304,7 +304,7 @@ class AdmUtilGeneratorNagiosRpcMethods(MethodPublisher):
         #'95': '', 
         #'13': '', 
         #'12': '0', 
-        #'14': '/opt/nagios/libexec/check_ping -H 172.16.64.210 -w 3000.0,80% -c 5000.0,100% -p 5', 
+        #'14': '/opt/smokeping/libexec/check_ping -H 172.16.64.210 -w 3000.0,80% -c 5000.0,100% -p 5', 
         #'76': '10', 
         #'33': '0.0', 
         #'32': '0', 
@@ -330,11 +330,11 @@ class AdmUtilGeneratorNagiosRpcMethods(MethodPublisher):
         
         
         
-        ##'99999': '200', '99997': 1058, '1': '104', '3': '0', '2': '0', '4': '1177680803.736697', '102': '17170', '107': '3.0a3', '104': '04-10-2007', '105': 'Nagios'}
-        ##'99999': '200', '99997': 1059, '1': '100', '3': '0', '2': '0', '4': '1177680803.743882', '102': '17170', '107': '3.0a3', '104': '04-10-2007', '105': 'Nagios'}
+        ##'99999': '200', '99997': 1058, '1': '104', '3': '0', '2': '0', '4': '1177680803.736697', '102': '17170', '107': '3.0a3', '104': '04-10-2007', '105': 'SmokePing'}
+        ##'99999': '200', '99997': 1059, '1': '100', '3': '0', '2': '0', '4': '1177680803.743882', '102': '17170', '107': '3.0a3', '104': '04-10-2007', '105': 'SmokePing'}
         ##'99999': '408', '127': 'check_hpjd', '4': '1177680803.758473', '99997': 1087, '14': '$USER1$/check_hpjd -H $HOSTADDRESS$ $ARG1$'
         #if arg_dict['99999'] == '408': # NDO_API_COMMANDDEFINITION
-            #globalNagiosUtility.setCommandDefinition(arg_dict)
+            #globalSmokePingUtility.setCommandDefinition(arg_dict)
             ## 127: NDO_DATA_COMMANDNAME
         ##'99999': '213', '113': '0', '37': '', '98': '0.00000', '115': '1', '114': 'ssh Server', '62': '0', '63': '1177681797', '64': '0', '66': '1177681797', '67': '0', '83': '1177682097', '80': '0', '86': '5.000000', '84': '0', '85': '0', '25': '1', '26': '0', '27': '0', '47': '1', '45': '1', '42': '0.20843', '1': '1202', '3': '0', '2': '0', '4': '1177681807.192778', '7': '0', '9': '1', '209': '24x7', '99': '', '76': '3', '38': '1', '99997': 1718, '71': '0.59300', '70': '0', '103': '1', '93': '0', '101': '0', '95': 'SSH OK - OpenSSH_4.2p1 Debian-7ubuntu3.1 (protocol 2.0)', '97': '1', '11': 'check_ssh', '12': '0', '121': '1', '61': '1177681797', '54': '0', '57': '1177681797', '56': '0', '51': '0', '88': '1', '53': '738eda44bafba017120992a2af649fe4e', '109': '1.000000'}
 
@@ -506,4 +506,4 @@ class AdmUtilGeneratorNagiosRpcMethods(MethodPublisher):
         ##'1': '700',NDO_DATA_TYPE -> 
         ##'123': '60',NDO_DATA_TIMEOUT
         ##'71': '0.16000',NDO_DATA_LATENCY
-        ##'14': '/opt/nagios/libexec/check_http -I 127.0.0.1',NDO_DATA_COMMANDLINE
+        ##'14': '/opt/smokeping/libexec/check_http -I 127.0.0.1',NDO_DATA_COMMANDLINE

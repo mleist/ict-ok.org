@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E0213,E0211,W0232,W0622
 #
-"""Interface to nagios generator"""
+"""Interface to smokeping generator"""
 
 __version__ = "$Id$"
 
@@ -26,25 +26,25 @@ from org.ict_ok.admin_utils.generators.interfaces import \
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilGeneratorNagios(IAdmUtilGenerators):
+class IAdmUtilGeneratorSmokePing(IAdmUtilGenerators):
     """
     major component for registration and event distribution 
     """
     isRunning = Bool(
-        title = _("nagios is running"),
+        title = _("smokeping is running"),
         default = False)
 
     pathInitScript = TextLine(
         max_length = 200,
         title = _(u"init script"),
-        description = _(u"nagios init script with path"),
-        default = _(u"/etc/init.d/nagios"),
+        description = _(u"smokeping init script with path"),
+        default = _(u"/etc/init.d/smokeping"),
         required = True)
 
     pathConfigData = TextLine(
         max_length = 200,
         title = _(u"path to configuration"),
-        default = u"/opt/nagios/etc/ict_ok",
+        default = u"/opt/smokeping/etc/ict_ok",
         required = True)
 
     lastConfigFileChange = IctDatetime(
@@ -54,17 +54,17 @@ class IAdmUtilGeneratorNagios(IAdmUtilGenerators):
 
     lastDeamonReload = IctDatetime(
         title=_(u"last reload"),
-        description=_(u"last reload of nagios deamon"),
+        description=_(u"last reload of smokeping deamon"),
         required=False)
 
     def touchLastConfigFile():
         """change timestamp in the utility
         
-        will trigger a reload of the nagios-daemon on cron
+        will trigger a reload of the smokeping-daemon on cron
         """
 
     def reloadDaemon():
-        """ reload the nagios daemon
+        """ reload the smokeping daemon
         """
 
     def allConfigFilesOut():
@@ -72,8 +72,8 @@ class IAdmUtilGeneratorNagios(IAdmUtilGenerators):
         """
 
 
-class IGenNagios(Interface):
-    """Interface of nagios-Adapter
+class IGenSmokePing(Interface):
+    """Interface of smokeping-Adapter
     """
     def fileOpen():
         """will open a filehandle to the specific object
@@ -87,7 +87,7 @@ class IGenNagios(Interface):
         """will write the text_arg into the configuration file
         """
 
-    def traverse4nagiosGeneratorPre(level, comments):
+    def traverse4smokepingGeneratorPre(level, comments):
         """graphviz configuration preamble
         
         level: indent-level
@@ -95,7 +95,7 @@ class IGenNagios(Interface):
 
         """
 
-    def traverse4nagiosGeneratorPost(level, comments):
+    def traverse4smokepingGeneratorPost(level, comments):
         """graphviz configurations text after object
         
         level: indent-level
@@ -103,7 +103,7 @@ class IGenNagios(Interface):
 
         """
 
-    def traverse4nagiosGeneratorBody(level, comments):
+    def traverse4smokepingGeneratorBody(level, comments):
         """graphviz configuration data of/in object
         
         level: indent-level
@@ -111,7 +111,7 @@ class IGenNagios(Interface):
 
         """
 
-    def traverse4nagiosGenerator(level, comments):
+    def traverse4smokepingGenerator(level, comments):
         """Configuration generator
         
         level: indent-level
@@ -119,10 +119,10 @@ class IGenNagios(Interface):
 
         """
 
-    def nagiosConfigFileOut(forceOutput=False, event=None):
-        """Nagios-Filegenerator
+    def smokepingConfigFileOut(forceOutput=False, event=None):
+        """SmokePing-Filegenerator
         
-        will produce the nagios configuration files
+        will produce the smokeping configuration files
         
         forceOutput: False will check for a relevant attribute change
         True will alway generate a new config file
@@ -130,8 +130,8 @@ class IGenNagios(Interface):
         event: None or the zope event from lifecycle
        """
 
-    def nagiosConfigFileRemove():
-        """remove old nagios configuration file for this object
+    def smokepingConfigFileRemove():
+        """remove old smokeping configuration file for this object
         """
 
     def eventModifiesCfgFile(event):

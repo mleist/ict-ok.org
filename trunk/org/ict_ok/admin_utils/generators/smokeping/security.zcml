@@ -9,33 +9,33 @@
          Markus Leist <leist@ikom-online.de> -->
 
     <permission
-        id="org.ict_ok.admin_utils.generators.nagios.View"
-        title="View from AdmUtilGeneratorNagios"
-        description="View from AdmUtilGeneratorNagios."
+        id="org.ict_ok.admin_utils.generators.smokeping.View"
+        title="View from AdmUtilGeneratorSmokePing"
+        description="View from AdmUtilGeneratorSmokePing."
     />
 
     <permission
-        id="org.ict_ok.admin_utils.generators.nagios.Edit"
-        title="Edit from AdmUtilGeneratorNagios"
-        description="Edit from AdmUtilGeneratorNagios."
+        id="org.ict_ok.admin_utils.generators.smokeping.Edit"
+        title="Edit from AdmUtilGeneratorSmokePing"
+        description="Edit from AdmUtilGeneratorSmokePing."
     />
 
     <permission
-        id="org.ict_ok.admin_utils.generators.nagios.Add"
-        title="Add from AdmUtilGeneratorNagios"
-        description="Add from AdmUtilGeneratorNagios."
+        id="org.ict_ok.admin_utils.generators.smokeping.Add"
+        title="Add from AdmUtilGeneratorSmokePing"
+        description="Add from AdmUtilGeneratorSmokePing."
     />
 
-    <!--<grant permission="org.ict_ok.admin_utils.generators.nagios.View"-->
+    <!--<grant permission="org.ict_ok.admin_utils.generators.smokeping.View"-->
                     <!--role="org.ict_ok.usr" />-->
-    <grant permission="org.ict_ok.admin_utils.generators.nagios.View"
+    <grant permission="org.ict_ok.admin_utils.generators.smokeping.View"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.generators.nagios.View"
+    <grant permission="org.ict_ok.admin_utils.generators.smokeping.View"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.admin_utils.generators.nagios.Edit"
+    <grant permission="org.ict_ok.admin_utils.generators.smokeping.Edit"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.generators.nagios.Edit"
+    <grant permission="org.ict_ok.admin_utils.generators.smokeping.Edit"
                     role="org.ict_ok.adm" />
 
 </configure>

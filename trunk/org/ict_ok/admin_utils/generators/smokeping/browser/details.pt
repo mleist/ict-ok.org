@@ -1,6 +1,6 @@
 <i18n:block domain="org.ict_ok"
             tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-    <h3 i18n:translate="">details of nagios generator</h3>
+    <h3 i18n:translate="">details of smokeping generator</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary"
             tal:define="runtime_info view/getZopeRuntimeInfo">

@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611
 #
-"""Configuration adapter for nagios-config files
+"""Configuration adapter for smokeping-config files
 """
 
 __version__ = "$Id$"
@@ -27,52 +27,52 @@ from zope.component import getUtility
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import ISupernode
-from org.ict_ok.admin_utils.generators.nagios.interfaces import \
-     IAdmUtilGeneratorNagios, IGenNagios
+from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
+     IAdmUtilGeneratorSmokePing, IGenSmokePing
 from org.ict_ok.admin_utils.generators.generators import \
      AdmUtilGenerators
 
-logger = logging.getLogger("AdmUtilGeneratorNagios")
+logger = logging.getLogger("AdmUtilGeneratorSmokePing")
 
 
-class AdmUtilGeneratorNagios(AdmUtilGenerators):
-    """Implementation of nagios configuration generator
+class AdmUtilGeneratorSmokePing(AdmUtilGenerators):
+    """Implementation of smokeping configuration generator
     """
-    implements(IAdmUtilGeneratorNagios)
+    implements(IAdmUtilGeneratorSmokePing)
     
     isRunning = FieldProperty(\
-        IAdmUtilGeneratorNagios['isRunning'])
+        IAdmUtilGeneratorSmokePing['isRunning'])
     lastConfigFileChange = FieldProperty(\
-        IAdmUtilGeneratorNagios['lastConfigFileChange'])
+        IAdmUtilGeneratorSmokePing['lastConfigFileChange'])
     pathInitScript = FieldProperty(\
-        IAdmUtilGeneratorNagios['pathInitScript'])
+        IAdmUtilGeneratorSmokePing['pathInitScript'])
     pathConfigData = FieldProperty(\
-        IAdmUtilGeneratorNagios['pathConfigData'])
+        IAdmUtilGeneratorSmokePing['pathConfigData'])
     lastDeamonReload = FieldProperty(\
-        IAdmUtilGeneratorNagios['lastDeamonReload'])
+        IAdmUtilGeneratorSmokePing['lastDeamonReload'])
 
     def __init__(self):
         self.isRunning = False
         self.lastConfigFileChange = None
         self.lastDeamonReload = None
-        self.pathInitScript = u"/etc/init.d/nagios"
-        self.pathConfigData = u"/opt/nagios/etc/ict_ok"
+        self.pathInitScript = u"/etc/init.d/smokeping"
+        self.pathConfigData = u"/opt/smokeping/etc/ict_ok"
         AdmUtilGenerators.__init__(self)
         self.ikRevision = __version__
 
     def touchLastConfigFile(self):
         """change timestamp in the utility
         
-        will trigger a reload of the nagios-daemon on cron
+        will trigger a reload of the smokeping-daemon on cron
         """
         self.lastConfigFileChange = datetime.datetime.utcnow()
         
     def reloadDaemon(self):
-        """ reload the nagios daemon
+        """ reload the smokeping daemon
         """
-        nagiosUtil = getUtility(IAdmUtilGeneratorNagios)
-        if nagiosUtil is not None and \
-           nagiosUtil.isRunning:
+        smokepingUtil = getUtility(IAdmUtilGeneratorSmokePing)
+        if smokepingUtil is not None and \
+           smokepingUtil.isRunning:
             retInt = os.system('echo "" |sudo -S ' + self.pathInitScript + \
                                ' reload > /dev/null 2>&1')
             if retInt == 0:
@@ -88,11 +88,11 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
         for (dummy_name, oobj) in its:
             if ISupernode.providedBy(oobj):
                 try:
-                    adapterGenNagios = IGenNagios(oobj)
-                    if adapterGenNagios:
-                        adapterGenNagios.nagiosConfigFileOut(True, None)
+                    adapterGenSmokePing = IGenSmokePing(oobj)
+                    if adapterGenSmokePing:
+                        adapterGenSmokePing.smokepingConfigFileOut(True, None)
                 except TypeError, errText:
-                    logger.error(u"Problem in adaption of nagios config: %s" %\
+                    logger.error(u"Problem in adaption of smokeping config: %s" %\
                                  (errText))
 
     def tickerEvent(self):
