@@ -1,0 +1,19 @@
+<html metal:use-macro="views/standard_macros/view">
+<body>
+    <div metal:fill-slot="body" i18n:domain="ict-ok.org">
+			<h3 i18n:translate="">Systeminfo</h3>
+				<table id="sortable" class="listing" summary="Content listing"
+										 i18n:attributes="summary"
+										 >
+					<tr tal:attributes="class view/getTabClass">
+						<th i18n:translate="">Name</th>
+						<th i18n:translate="">State</th>
+					</tr>
+					<tr tal:define="config view/getConfig">
+						<td>config</td>
+						<td tal:content="config" />
+					</tr>
+				</table>
+    </div>
+	</body>
+</html>
