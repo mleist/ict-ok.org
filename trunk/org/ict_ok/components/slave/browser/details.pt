@@ -11,9 +11,10 @@
                 <td i18n:translate="">Date 1</td>
                 <td tal:content="context/ikdate1" />
             </tr>
-            <tr tal:attributes="class view/getTabClass">
+            <tr tal:attributes="class view/getTabClass"
+                tal:condition="context/ikComment|nothing">
                 <td i18n:translate="">Comment</td>
-                <td tal:content="context/ikComment" />
+                <td><pre tal:content="context/ikComment" /></td>
             </tr>
             <tr tal:attributes="class view/getTabClass">
                 <td i18n:translate="">Notes</td>

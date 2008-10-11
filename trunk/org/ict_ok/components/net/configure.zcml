@@ -43,12 +43,12 @@
             set_schema=".interfaces.IEventIfEventNet"
             />
     </class>
-   <soap:view
-        for=".interfaces.INet"
-        methods="echoString"
-        class="org.ict_ok.components.net.net.SoapTest"
-        permission="org.ict_ok.components.net.View"
-        />
+   <!--<soap:view-->
+        <!--for=".interfaces.INet"-->
+        <!--methods="echoString"-->
+        <!--class="org.ict_ok.components.net.net.SoapTest"-->
+        <!--permission="org.ict_ok.components.net.View"-->
+        <!--/>-->
   
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
@@ -69,6 +69,10 @@
         />
     <adapter
         factory=".adapter.ipickle.Pickle"
+    />
+    <adapter
+        factory=".adapter.smokeping.GenSmokePing"
+        permission="org.ict_ok.admin_utils.generators.smokeping.View"
     />
     <!--<adapter-->
         <!--factory=".adapter.ticker.Ticker"-->

@@ -38,7 +38,6 @@ logger = logging.getLogger("Compon. Host")
 
 def createLocalSystem(root_folder):
     dateNow = datetime.utcnow()
-    #import pdb;pdb.set_trace()
     newHost = createObject(u'org.ict_ok.components.host.host.Host')
     notify(ObjectCreatedEvent(newHost))
     root_folder.__setitem__(newHost.getObjectId(), 

@@ -13,6 +13,9 @@
             id="org.ict_ok.admin_utils.notifier.notifier.NotifierUtil" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
         <require
             permission="org.ict_ok.admin_utils.notifier.View"
             interface=".interfaces.INotifierUtil"

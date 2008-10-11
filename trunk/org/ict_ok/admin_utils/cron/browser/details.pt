@@ -11,5 +11,11 @@
             <td>last Cron event</td>
             <td tal:content="cronTime" />
         </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td><pre tal:content="context/ikComment" /></td>
+            
+        </tr>
     </table>
 </i18n:block>

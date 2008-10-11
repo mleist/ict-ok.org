@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,E0611,W0232,W0142,R0901
+# pylint: disable-msg=E1101,E0611,W0613,W0232,W0142,R0901
 #
 """implementation of browser class of supervisor
 """
@@ -15,7 +15,6 @@
 __version__ = "$Id$"
 
 # python imports
-from pytz import timezone
 from datetime import timedelta
 
 # zope imports
@@ -52,13 +51,13 @@ from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.components.superclass.browser import \
      superclass
-from org.ict_ok.libs.lib import convertSystemUptime2String
+from org.ict_ok.admin_utils.usermanagement.usermanagement import \
+     getUserTimezone
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.version import getIkVersion
 
 _ = MessageFactory('org.ict_ok')
-berlinTZ = timezone('Europe/Berlin')
 
 # --------------- menu entries -----------------------------
 
@@ -261,13 +260,14 @@ class AdmUtilSupervisorVersion(SupernodeDetails):
 def formatEntryDate(entry, formatter):
     """Entry Date for history in Web-Browser"""
     try:
+        userTZ = getUserTimezone()
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'short')
-        timeString = my_formatter.format(berlinTZ.fromutc(entry['date']))
+        timeString = my_formatter.format(userTZ.fromutc(entry['date']))
         timeStringHTML = timeString.replace(" ", "&nbsp;")
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'long')
-        longTimeString = my_formatter.format(berlinTZ.fromutc(entry['date']))
+        longTimeString = my_formatter.format(userTZ.fromutc(entry['date']))
         ttid = u"id" + str(abs(hash(timeString)))
         tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
                 u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \

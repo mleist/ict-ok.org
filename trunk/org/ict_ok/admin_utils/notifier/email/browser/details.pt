@@ -1,12 +1,19 @@
 <i18n:block domain="org.ict_ok"
             tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-    <h3 i18n:translate="">details of snmpd</h3>
+    <h3 i18n:translate="">details of email notifier</h3>
     <table id="sortable" class="listing" summary="Content listing"
-            i18n:attributes="summary"
-            tal:define="runtime_info view/getZopeRuntimeInfo">
+            i18n:attributes="summary">
         <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">Name</td>
-            <td tal:content="context/ikName" />
+            <td i18n:translate="">Hostname/IP</td>
+            <td tal:content="context/hostname" />
+        </tr>
+        <tr tal:attributes="class view/getTabClass">
+            <td i18n:translate="">SMTP serverport</td>
+            <td tal:content="context/portServer" />
+        </tr>
+        <tr tal:attributes="class view/getTabClass">
+            <td i18n:translate="">'From:' address</td>
+            <td tal:content="context/from_addr" />
         </tr>
         <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">Modification time</td>
@@ -17,14 +24,11 @@
                 <td>---</td>
             </div>
         </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">Last update of mrtg data</td>
-            <td tal:content="python: dateform.format(context.getMrtgDataUpdateDatetime())">test</td>
-        </tr>
         <tr tal:attributes="class view/getTabClass"
             tal:condition="context/ikComment|nothing">
             <td i18n:translate="">Comment</td>
             <td><pre tal:content="context/ikComment" /></td>
+            
         </tr>
     </table>
 </i18n:block>

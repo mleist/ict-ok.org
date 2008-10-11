@@ -179,7 +179,7 @@ class IHost(IComponent):
     genNagios = Bool(
         title = _("for Nagios"),
         description = _("enabled in Nagios"),
-        default = True,
+        default = False,
         required = False)
 
     def trigger_online():

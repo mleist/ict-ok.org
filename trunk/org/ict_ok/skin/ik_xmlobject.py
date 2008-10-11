@@ -43,8 +43,6 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             if stateAdapter:
                 icon_name = u"state_%s" % (stateAdapter.getStateOverview())
                 #print "icon_name: ", icon_name
-                #import pdb
-                #pdb.set_trace()
                 stateNum = stateAdapter.getStateOverview(-1)
                 return "state%d" % stateNum
                 #iconName = stateAdapter.getIconName()
@@ -223,7 +221,10 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             keys.append(u'++etc++site')
             for name in keys:
                 # Only include items we can traverse to
-                subItem = traverse(item, name, None)
+                try:
+                    subItem = traverse(item, name, None)
+                except ValueError:
+                    subItem = None
                 if subItem is None:
                     continue
                 if name == u'++etc++site' and \
@@ -232,8 +233,14 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                        subItem):
                     continue
                 iconUrl = self.getIconUrl(subItem)
-                subitem_len = self.getLengthOf(subItem)
-                dcAdapter = IGeneralDublinCore(subItem)
+                try:
+                    subitem_len = self.getLengthOf(subItem)
+                except TypeError:
+                    subitem_len = 0
+                try:
+                    dcAdapter = IGeneralDublinCore(subItem)
+                except TypeError:
+                    dcAdapter = None
                 xml_title = name
                 if dcAdapter:
                     if dcAdapter.title:

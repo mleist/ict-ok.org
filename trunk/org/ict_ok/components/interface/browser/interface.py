@@ -105,8 +105,6 @@ class SnmpScanWizardForm(AddForm):
         searchIp = data['searchIpV4']
         hostObj = self.context
         snmpOid_IfNumber = (1, 3, 6, 1, 2, 1, 2, 1, 0)
-        #import pdb
-        #pdb.set_trace()
         try:
             hostSnmpVers = hostObj.snmpVersion
             hostSnmpPort = hostObj.snmpPort
@@ -146,8 +144,6 @@ class SnmpScanWizardForm(AddForm):
         return absoluteURL(self.context, self.request)
     def create(self, data):
         print "SnmpScanWizardForm.create(%s)" % data
-        #import pdb
-        #pdb.set_trace()
         interfaceCnt = self.getInterfaceCnt(data)
         if interfaceCnt and interfaceCnt > 0:
             #interfacesDict = {}
@@ -282,8 +278,6 @@ class SnmpScanWizardForm(AddForm):
         #pprint.pprint(interfacesDict)
         #print "-" * 80
         ##print "zzz: '%s'" % ddd
-        ##import pdb
-        ##pdb.set_trace()
         self.status = _(u"Error: no unique Id")
         return None #[1,2,3]
     def add(self, objList):

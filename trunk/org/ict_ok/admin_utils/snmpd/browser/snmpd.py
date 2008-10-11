@@ -49,8 +49,6 @@ class AdmUtilSnmpdDetails(SupernodeDetails):
     def test(self):
         zzz = self.context
         print "ZU:", zzz
-        import pdb
-        pdb.set_trace()
         return "zulu"
 
 

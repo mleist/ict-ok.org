@@ -58,6 +58,10 @@
         factory=".adapter.nagios.GenNagios"
         permission="org.ict_ok.admin_utils.generators.nagios.View"
     />
+    <adapter
+        factory=".adapter.smokeping.GenSmokePing"
+        permission="org.ict_ok.admin_utils.generators.smokeping.View"
+    />
     
     <include package=".generations" />
 

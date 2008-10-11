@@ -86,6 +86,14 @@
         permission="org.ict_ok.components.latency.Edit"
     />
 
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.latency.interfaces.ILatency"
+        class=".latency.DeleteLocationForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Delete"
+    />
+
     <!--##### Sub Menu ##### -->
 
     <!--<viewlet-->
@@ -135,6 +143,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.latency.Edit"
+        />
+    <viewlet
+        name="delete"
+        for="org.ict_ok.components.latency.interfaces.ILatency"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Delete"
         />
     <viewlet
         name="editcontent"

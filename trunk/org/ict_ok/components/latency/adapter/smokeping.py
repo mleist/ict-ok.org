@@ -15,9 +15,6 @@
 
 __version__ = "$Id$"
 
-# python imports
-import logging
-
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
@@ -32,8 +29,6 @@ from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
      IGenSmokePing, IAdmUtilGeneratorSmokePing
 from org.ict_ok.version import getIkVersion
 
-logger = logging.getLogger("HostGenSmokePing")
-
 
 class GenSmokePing(ParentGenSmokePing):
     """adapter implementation of Host -> smokeping
@@ -44,7 +39,7 @@ class GenSmokePing(ParentGenSmokePing):
     
     # modification of this attributes will trigger an new generation of
     # the config file
-    attrList = ['objectID', 'hostname', 'ikName', 'genNagios']
+    attrList = ['objectID', 'hostname', 'ikName']
     
     def __init__(self, context):
         #print "HostGenSmokePing.__init__"
@@ -53,7 +48,6 @@ class GenSmokePing(ParentGenSmokePing):
     def fileOpen(self):
         """will open a filehandle to the specific object
         """
-        #import pdb;pdb.set_trace()
         objId = self.context.getObjectId()
         utilSmokePing = zapi.getUtility(IAdmUtilGeneratorSmokePing, '')
         self.fileName = utilSmokePing.pathConfigData + u'/Hosts/%s.cfg' % objId
@@ -79,7 +73,7 @@ class GenSmokePing(ParentGenSmokePing):
                        ("\t" * level, self.context.ikName, level))
         if self.wantsCheck():
             valueChanged = True
-            self.write(u"+++ %s\n" % (self.context.objectID))
+            self.write(u"++++ %s\n" % (self.context.objectID))
             self.write(u"menu = %s\n" % (self.context.ikName))
             self.write(u"title = %s\n" % (self.context.ikName))
             if ipList is not None and \
@@ -113,7 +107,7 @@ class GenSmokePing(ParentGenSmokePing):
         """
         valueChanged = False
         ipv4 = None
-        for if_name, if_obj in self.context.items():
+        for if_obj in self.context.values():
             if IInterface.providedBy(if_obj) and \
                if_obj.ipv4List is not None and \
                len (if_obj.ipv4List) > 0:

@@ -24,6 +24,7 @@ from zope.app.security.interfaces import IAuthentication
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import ISupernode
+from org.ict_ok.schema.emailvalid import EmailValid
 
 _ = MessageFactory('org.ict_ok')
 
@@ -33,15 +34,15 @@ class IAdmUtilUserProperties(Interface):
     major component for user properties
     """
 
-    email = TextLine(
+    email = EmailValid(
         title = _(u"Email address"),
-        required=True
+        required=False
         )
 
     timezone = Choice(
         title=_("Time Zone"),
         values=pytz.common_timezones,
-        required = True)
+        required = False)
 
     #dashboard_obj_ids = List(
         #title = _("listoh objects for the dashboard"),
@@ -55,9 +56,9 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
     """
     major component for user registration and management
     """
-    email = TextLine(
+    email = EmailValid(
         title = _(u"Email address"),
-        required=True
+        required=False
         )
     timezone = Choice(
         title=_("Time Zone"),
@@ -65,6 +66,17 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
         values=pytz.common_timezones,
         required = False)
 
+class IEditPassword(Interface):
+    """ schema for user password dialog """
+    password1 = TextLine(
+        title = _(u"Password"),
+        required=True
+        )
+    password2 = TextLine(
+        title = _(u"Password (again)"),
+        required=True
+        )
+    
 class IAdmUtilUserDashboard(Interface):
     """ user dashboard """
 

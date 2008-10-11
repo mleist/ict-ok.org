@@ -55,11 +55,15 @@
     <adapter
         factory="org.ict_ok.components.latency.adapter.ipickle.Pickle"
     />
+    <adapter
+        factory=".adapter.smokeping.GenSmokePing"
+        permission="org.ict_ok.admin_utils.generators.smokeping.View"
+    />
 
     <adapter
         factory=".adapter.ticker.Ticker"
     />
-
+    
     <include package=".generations" />
 
 </configure>

@@ -319,8 +319,6 @@ def triggerNdoEvent(arg_dict, sitemgr):
                 #hostObj.trigger_not1()
             #else:
                 #pass
-    #import pdb
-    #pdb.set_trace()
 
     my_catalog = sitemgr.getUtility(ICatalog)
     if (arg_dict.has_key('1')) and \

@@ -29,12 +29,6 @@ class INotifierJabber(INotifier):
     """
     component for notifying with jabber
     """
-    #enableConnector = Bool(
-        #title = _("Connector enabled"),
-        #description = _("jabber connector is enabled"),
-        #default = False,
-        #required = False)
-
     ipv4Connector = HostIpValid(
         min_length = 1,
         max_length = 30,

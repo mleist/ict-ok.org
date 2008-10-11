@@ -36,8 +36,6 @@ def evolve(context):
     }
 
     root = getRootFolder(context) # the Zope-Root-Folders
-    #import pdb
-    #pdb.set_trace()
 
     for host in findObjectsProviding(root, IHost):
         # convert this object

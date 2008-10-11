@@ -122,7 +122,6 @@ class NetDetails(ComponentDetails):
         """
         starts all configured scanners for this net
         """
-        #import pdb; pdb.set_trace()
         objNetScanner = getUtility(INetScan)
         if objNetScanner is not None:
             scannerList = objNetScanner.getScannerObjs()

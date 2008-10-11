@@ -71,7 +71,11 @@ def getHostIp(item, formatter):
     """
     Ip for Overview
     """
-    return ", ".join(item.getIpList())
+    ipList = item.getIpList()
+    if ipList is not None:
+        return ", ".join(ipList)
+    else:
+        return None
 
 # --------------- object details ---------------------------
 
@@ -259,7 +263,6 @@ class EditEventHostEventIfForm(EditForm):
         changes = applyChanges(self, content, data)
         # ``changes`` is a dictionary; if empty, there were no changes
         if changes:
-            #import pdb;pdb.set_trace()
             # Construct change-descriptions for the object-modified event
             descriptions = []
             for interface, attrs in changes.items():

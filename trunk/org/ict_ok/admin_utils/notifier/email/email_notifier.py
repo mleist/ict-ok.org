@@ -21,25 +21,25 @@ import logging
 from zope.interface import implements
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.notifier.email.interfaces import IAdmUtilEmailNotifier
+from org.ict_ok.admin_utils.notifier.email.interfaces import INotifierEmail
 
 logger = logging.getLogger("AdmUtilEmailNotifier")
 
 
-class AdmUtilEmailNotifier(object):
-    """A pseudo-mailer that delivers objects by mail."""
+#class AdmUtilEmailNotifier(object):
+    #"""A pseudo-mailer that delivers objects by mail."""
 
-    implements(IAdmUtilEmailNotifier)
+    #implements(INotifierEmail)
 
-    def __init__(self, hostname='localhost'):
-        self.hostname = hostname
+    #def __init__(self, hostname='localhost'):
+        #self.hostname = hostname
 
-    def send(self, fromaddr, toaddrs, message):
-        """
-        send object data as faked e-mail
-        """
-        logger.info(u"AdmUtilEmailNotifier.msg: %s (%s)->(%s)" % \
-                    (message, fromaddr, toaddrs))
-        #a = 1 / 0
+    #def send(self, fromaddr, toaddrs, message):
+        #"""
+        #send object data as faked e-mail
+        #"""
+        #logger.info(u"AdmUtilEmailNotifier.msg: %s (%s)->(%s)" % \
+                    #(message, fromaddr, toaddrs))
+        ##a = 1 / 0
 
         

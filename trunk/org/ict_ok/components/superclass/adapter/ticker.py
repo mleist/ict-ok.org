@@ -38,7 +38,7 @@ class Ticker(object):
         """
         got ticker event from ticker thread
         """
-#        print "%s triggered!!" % self.context
+        #print "%s triggered!!" % self.context
         self.context.tickerEvent()
         
     def triggerMin(self):

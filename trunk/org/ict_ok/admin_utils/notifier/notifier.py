@@ -73,15 +73,24 @@ class NotifierUtil(Supernode):
             for (name, obj) in notifiersList:
                 obj.sendNotify(notifyEvent, notifyObj)
 
+    def send_test(self, messageText):
+        """
+        will send a test message by the notifier
+        """
+        print "NotifierUtil.send_test(%s)" % messageText
+        notifiersList = self.getNotifierObjs()
+        if notifiersList:
+            for (name, obj) in notifiersList:
+                obj.send_test(messageText)
 
-class Notifier(Superclass, Contained):
+
+class Notifier(Supernode):
     """implementation of a "Notifier-Utility" """
 
     implements(INotifier)
 
     def __init__(self):
-        Superclass.__init__(self)
-        Contained.__init__(self)
+        Supernode.__init__(self)
         self.ikRevision = __version__
 
 

@@ -187,7 +187,6 @@ class EsxVimVirtualMachine(EsxVimObj):
                     dcore = IZopeDublinCore(newHost, None)
                     #dcore.creators = [u'ikportscan']
                     newHost.ikComment += u"esx scanner: %s" % (dateNow)
-                    #import pdb;pdb.set_trace()
                     newHost.__setattr__("ikName", hostname)
                     newHost.__setattr__("hostname", hostname)
                     dcore.title = hostname

@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=F0401,E1101,E0611,W0703,W0612,W0142
+# pylint: disable-msg=F0401,E1101,E1102,E0611,W0703,W0612,W0142
 #
 """implementation of Latency
 
@@ -22,6 +22,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.app import zapi
 
 # ict_ok.org imports
 from org.ict_ok.components.component import Component
@@ -49,6 +50,9 @@ class Latency(Component):
         self.ikRevision = __version__
         
     def get_health(self):
+        """
+        output of health, 0-1 (float)
+        """
         return None
 
     def tickerEvent(self):
@@ -59,4 +63,10 @@ class Latency(Component):
     def triggerMin(self):
         """ got ticker event from ticker thread every minute
         """
-        print "Unsinn"
+        pass
+
+    def getRrdFilename(self):
+        """ rrd filename incl. path
+        """
+        data_path = zapi.getPath(self)
+        return "/opt/smokeping/data/%s.rrd" % data_path

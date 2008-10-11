@@ -42,7 +42,6 @@ class Snmptrapd(object):
         """
         got ticker event from ticker thread
         """
-        #import pdb;pdb.set_trace()
         print "Snmptrapd %s triggered (reqPDU:%s)!!" % (self.context, reqPDU)
         print '-' * 80
         if reqPDU.isSameTypeWith(pMod.TrapPDU()):

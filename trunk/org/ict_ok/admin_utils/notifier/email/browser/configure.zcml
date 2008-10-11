@@ -13,17 +13,40 @@
     <!--##### email notifier ##### -->
 
     <defaultView
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
         name="details.html"
         />
 
+    <page
+        name="actions"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        class=".email.NotifierEmailDetails"
+        attribute="actions"
+        permission="org.ict_ok.admin_utils.notifier.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="send_test"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        class=".email.NotifierEmailDetails"
+        attribute="send_test"
+        permission="org.ict_ok.admin_utils.notifier.Send"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+
     <z3c:pagelet
         name="details.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
-        class="org.ict_ok.admin_utils.notifier.email.browser.email.ViewNotifierEmailForm"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        class="org.ict_ok.admin_utils.notifier.email.browser.email.NotifierEmailDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
         />
+    <z3c:template
+        template="details.pt"
+        for=".email.NotifierEmailDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <!--<page-->
         <!--name="status"-->
         <!--for="org.ict_ok.admin_utils.notifier.email.interfaces.IIkNotifierEmail"-->
@@ -34,7 +57,7 @@
 
     <z3c:pagelet
         name="overview.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
         class="org.ict_ok.components.superclass.browser.superclass.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
@@ -42,7 +65,7 @@
 
     <z3c:pagelet
         name="history.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
         class="org.ict_ok.components.superclass.browser.superclass.History"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
@@ -50,7 +73,7 @@
 
     <z3c:pagelet
         name="edit.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
         class="org.ict_ok.admin_utils.notifier.email.browser.email.EditNotifierEmailForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.Edit"
@@ -61,7 +84,7 @@
     <!--##### Sub Menu ##### -->
     <viewlet
         name="details"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -70,7 +93,7 @@
 
     <viewlet
         name="overview"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -79,7 +102,7 @@
 
     <viewlet
         name="history"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -88,7 +111,7 @@
 
     <viewlet
         name="edit"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.IAdmUtilEmailNotifier"
+        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"

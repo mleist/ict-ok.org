@@ -108,6 +108,11 @@
             <td tal:content="python:'%3.1f%%' % (100.0 * overMaxQuota)" />
         </tr>
         </div>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td><pre tal:content="context/ikComment" /></td>
+        </tr>
     </table>
     <h3>Value</h3>
     <table id="sortable" class="listing" summary="Content listing"

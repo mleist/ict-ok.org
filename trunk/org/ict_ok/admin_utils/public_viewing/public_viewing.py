@@ -49,5 +49,4 @@ def notifyModifiedEvent(instance, event):
     """
     Node was modified
     """
-    #import pdb; pdb.set_trace()
     #print "AdmUtilPublicViewing.notifyModifiedEvent"

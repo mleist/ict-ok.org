@@ -140,6 +140,15 @@
         permission="org.ict_ok.components.snmpvalue.Edit"
     />
 
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class=".snmpvalue.DeleteSnmpValueForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.Delete"
+    />
+
+
     <!--##### Sub Menu ##### -->
 
     <!--<viewlet-->
@@ -197,6 +206,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.Edit"
+        />
+    <viewlet
+        name="delete"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.Delete"
         />
     <viewlet
         name="editcontent"

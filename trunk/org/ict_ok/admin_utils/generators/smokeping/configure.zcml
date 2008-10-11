@@ -30,17 +30,27 @@
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <!-- all XML RPC views -->
-    <xmlrpc:view
-        for=".interfaces.IAdmUtilGeneratorSmokePing"
-        permission="org.ict_ok.admin_utils.generators.smokeping.Edit"
-        methods="isUp triggerNdoEvent"
-        class=".xmlrpcs.AdmUtilGeneratorSmokePingRpcMethods"
-        />
-
     <adapter
         factory=".adapter.ticker.Ticker"
     />
+
+    <subscriber handler=".smokeping.notifyAddedEvent" />
+    <subscriber handler=".smokeping.notifyModifiedEvent" />
+    <subscriber handler=".smokeping.notifyMovedEvent" />
+    <subscriber handler=".smokeping.notifyRemovedEvent" />
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <adapter
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        provides="org.ict_ok.admin_utils.generators.honeyd.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.generators.honeyd.honeyd.SuperclassGenHoneyd"
+        permission="org.ict_ok.admin_utils.generators.honeyd.View"
+    />
+    
 
     <include package=".adapter" />
     <include package=".generations" />

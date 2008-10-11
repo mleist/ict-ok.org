@@ -54,6 +54,14 @@
         <!--for=".latency.LatencyTestData"-->
         <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
         <!--/>-->
+    <page
+        name="getPNG"
+        for="org.ict_ok.components.latency.interfaces.ILatency"
+        class=".latency.LatencyDetails"
+        permission="org.ict_ok.components.latency.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="getValuePngDeltaT"
+    />
     <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.components.latency.interfaces.ILatency"
@@ -85,6 +93,15 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.latency.Edit"
     />
+
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.latency.interfaces.ILatency"
+        class=".latency.DeleteLatencyForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Delete"
+    />
+
 
     <!--##### Sub Menu ##### -->
 
@@ -135,6 +152,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.latency.Edit"
+        />
+    <viewlet
+        name="delete"
+        for="org.ict_ok.components.latency.interfaces.ILatency"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Delete"
         />
     <viewlet
         name="editcontent"

@@ -57,8 +57,8 @@ class GenNagios(object):
     def fileOpen(self):
         """will open a filehandle to the specific object
         """
-        berlinTZ = timezone('Europe/Berlin')
-        self.starttimeCfg = datetime.now(berlinTZ)
+        utcTZ = timezone('UTC')
+        self.starttimeCfg = datetime.now(utcTZ)
         if self.fileName is None:
             self.fileName = u'/opt/nagios/etc/ict_ok/Misc/%s.cfg' % \
                 self.context.getObjectId()
@@ -73,9 +73,9 @@ class GenNagios(object):
         """will close the filehandle to the specific object
         """
         if self.fpCfg is not None:
-            berlinTZ = timezone('Europe/Berlin')
+            utcTZ = timezone('UTC')
             self.write(u"\n\n# ok, generated in %s\n" %
-                       (datetime.now(berlinTZ) - self.starttimeCfg))
+                       (datetime.now(utcTZ) - self.starttimeCfg))
             self.fpCfg.close()
             try:
                 utilNagios = getUtility(IAdmUtilGeneratorNagios)

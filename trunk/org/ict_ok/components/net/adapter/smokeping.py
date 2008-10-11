@@ -19,7 +19,7 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.interface.interfaces import IInterface
+from org.ict_ok.components.net.interfaces import INet
 from org.ict_ok.components.supernode.adapter.smokeping import \
      GenSmokePing as ParentGenSmokePing
 from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
@@ -31,19 +31,19 @@ class GenSmokePing(ParentGenSmokePing):
     """
 
     implements(IGenSmokePing)
-    adapts(IInterface)
+    adapts(INet)
     
     # modification of this attributes will trigger an new generation of
     # the config file
-    attrList = ['objectID', 'ikName', 'ipv4List']
+    attrList = ['objectID', 'ikName']
     
     def traverse4smokepingGeneratorPre(self, level=0, comments=True):
         """graphviz configuration preamble
         """
         if comments:
-            self.write(u"%s## Pre (%s,%d) - InterfaceGenSmokePing" % \
+            self.write(u"%s## Pre (%s,%d) - NetGenSmokePing" % \
                        ("\t" * level, self.context.ikName, level))
-        self.write(u"+++ %s\n" % (self.context.objectID))
+        self.write(u"+ %s\n" % (self.context.objectID))
         self.write(u"menu = %s\n" % (self.context.ikName))
         self.write(u"title = %s\n" % (self.context.ikName))
         return True # valueChanged

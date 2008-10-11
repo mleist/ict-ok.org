@@ -132,7 +132,6 @@ class EditAdmUtilEventForm(EditForm):
         changes = applyChanges(self, content, data)
         # ``changes`` is a dictionary; if empty, there were no changes
         if changes:
-            #import pdb;pdb.set_trace()
             # Construct change-descriptions for the object-modified event
             descriptions = []
             for interface, attrs in changes.items():

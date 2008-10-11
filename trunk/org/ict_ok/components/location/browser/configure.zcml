@@ -91,6 +91,14 @@
         permission="org.ict_ok.components.location.Edit"
         />
     <viewlet
+        name="delete"
+        for="org.ict_ok.components.location.interfaces.ILocation"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Delete"
+        />
+    <viewlet
         name="editcontent"
         for="org.ict_ok.components.location.interfaces.ILocation"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"

@@ -17,6 +17,7 @@ __version__ = "$Id$"
 # python imports
 import os
 import time
+from tempfile import _RandomNameSequence as RandomNameSequence
 import rrdtool
 import copy
 from datetime import datetime
@@ -291,9 +292,10 @@ class SnmpValueDetails(ComponentDetails):
         if not os.path.exists(self.context.getRrdFilename()):
             return None
         self.request.response.setHeader('Content-Type', 'image/png')
+        fileExt = RandomNameSequence().next()
         obj = removeAllProxies(self.context)
-        targetPic = str("/tmp/%s%s.png" % \
-                        (str(obj.objectID), params['nameext']))
+        targetPic = str("/tmp/%s%s_%s.png" % \
+                        (str(obj.objectID), params['nameext'], fileExt))
         unitInRrd = convertQuantity(self.context.inpQuantity) \
                   / convertQuantity("1.0 s")
         (displUnit, displayString) = self.context.getDisplayUnit()
@@ -358,6 +360,7 @@ class SnmpValueDetails(ComponentDetails):
         pic = open(targetPic, "r")
         picMem = pic.read()
         pic.close()
+        os.remove(targetPic)
         return picMem
 
     def getValuePngHref(self):
@@ -545,8 +548,6 @@ class DetailsSnmpValueForm(DisplayForm):
             #if errorIndication != None:
                 #self.status = u"Error: SNMP connect error: '%s'" % \
                     #(errorIndication)
-            ##import pdb
-            ##pdb.set_trace()
             #if errorStatus != 0:
                 #self.status = u"Error: '%s'" % (errorStatus.prettyPrint())
             #print "2", errorStatus
@@ -557,8 +558,6 @@ class DetailsSnmpValueForm(DisplayForm):
         #except ValueError:
             #self.status = u"Error: Value of OID1"
         DisplayForm.update(self)
-        #import pdb
-        #pdb.set_trace()
 
 
 class AddSnmpValueForm(AddForm):
@@ -595,6 +594,6 @@ class DeleteSnmpValueForm(DeleteForm):
     
     def getTitel(self):
         """this title will be displayed in the head of form"""
-        return _(u"Delete this net: '%s'?") % \
+        return _(u"Delete this snmp value: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 

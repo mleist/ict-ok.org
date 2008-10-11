@@ -445,8 +445,6 @@ class AdmUtilSupervisor(Supernode):
         """
         print "reindex_db"
         my_catalog = zapi.getUtility(ICatalog)
-        #import pdb
-        #pdb.set_trace()
         my_catalog.updateIndexes()
         self.appendEventHistory(\
             u"reindex the catalogs of all tables in database")

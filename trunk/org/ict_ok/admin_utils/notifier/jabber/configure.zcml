@@ -13,12 +13,15 @@
             id="org.ict_ok.admin_utils.notifier.jabber.jabber.NotifierJabber" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
         <require
             permission="org.ict_ok.admin_utils.notifier.View"
             interface=".interfaces.INotifierJabber"
             />
         <require
-            permission="org.ict_ok.admin_utils.notifier.View"
+            permission="org.ict_ok.admin_utils.notifier.Edit"
             set_schema=".interfaces.INotifierJabber"
             />
     </class>

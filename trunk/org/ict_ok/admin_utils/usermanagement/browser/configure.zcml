@@ -81,6 +81,13 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.usermanagement.Edit"
     />
+    <z3c:pagelet
+        name="password.html"
+        for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"
+        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.EditPasswordForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.usermanagement.View"
+    />
 
     <!--##### Sub Menu ##### -->
     <viewlet
@@ -106,6 +113,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.usermanagement.Edit"
+        />
+    <viewlet
+        name="password"
+        for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class=".usermanagement.MSubPassword"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.usermanagement.View"
         />
 
 </zope:configure>

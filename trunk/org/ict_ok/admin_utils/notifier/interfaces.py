@@ -36,29 +36,32 @@ class INotifierUtil(ISupernode):
         value_type = Choice(
             title = _("Notifier"),
             vocabulary = "notifierInstances",),
-            #values = [ u"nmap", u"kmap", u"omap"]),
         readonly = False,
         required = True)
-    #notifierSet = Choice(
-        #title = _("Notifier"),
-        #vocabulary = "notifierInstances",
-        #readonly = False,
-        #required = True)
     
-    def getAllNotifierObjs(self):
+    def getAllNotifierObjs():
         """
         get list of all Notifier-Tupel (name, obj)
         """
 
-    def getNotifierObjs(self):
+    def getNotifierObjs():
         """
         get list of enabled Notifier-Tupel (name, obj)
         """
+        
+    def send_test(messageText):
+        """
+        will send a test message by the notifier
+        """
 
-class INotifier(Interface):
+class INotifier(ISupernode):
     """
     component for notifying with
     """
+    def send_test(messageText):
+        """
+        will send a test message by the notifier
+        """
 
 class INotifyUserEvent(IObjectEvent):
     """A notification must be sent"""

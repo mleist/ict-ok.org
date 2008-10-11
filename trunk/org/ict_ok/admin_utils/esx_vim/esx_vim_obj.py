@@ -32,6 +32,7 @@ from org.ict_ok.admin_utils.esx_vim.esx_vim import globalEsxVimUtility
 
 _ = MessageFactory('org.ict_ok')
 utcTZ = timezone('UTC')
+# TODO berlinTZ isn't good in no-browser-class
 berlinTZ = timezone('Europe/Berlin')
 
 

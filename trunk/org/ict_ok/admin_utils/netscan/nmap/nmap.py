@@ -105,8 +105,6 @@ class AdmUtilNMap(Scanner):
                 #'method': u''
                 #'service': u''
             #}
-                #import pdb
-                #pdb.set_trace()
                 for ports in host.findall('ports'):
                     for port in ports.findall('port'):
                         serviceDict = {}

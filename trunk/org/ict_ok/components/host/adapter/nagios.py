@@ -49,13 +49,11 @@ class GenNagios(ParentGenNagios):
     attrList = ['objectID', 'hostname', 'ikName', 'genNagios']
     
     def __init__(self, context):
-        #print "HostGenNagios.__init__"
         ParentGenNagios.__init__(self, context)
 
     def fileOpen(self):
         """will open a filehandle to the specific object
         """
-        #import pdb;pdb.set_trace()
         objId = self.context.getObjectId()
         utilNagios = zapi.getUtility(IAdmUtilGeneratorNagios, '')
         self.fileName = utilNagios.pathConfigData + u'/Hosts/%s.cfg' % objId

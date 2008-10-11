@@ -109,8 +109,6 @@ class Host(HostBase):
                     for vmName, vmObj in myVmDict.items():
                         #print "----->", vmObj.uuid
                         res = my_catalog.searchResults(host_vmuuid_index=str(vmObj.uuid))
-                        #import pdb
-                        #pdb.set_trace()
                         if len(res) > 0:
                             internalVmObj = list(res)[0]
                             #print "ref-->", internalVmObj

@@ -1,7 +1,7 @@
 <i18n:block domain="org.ict_ok">
   <div class="bg-315-top">
     <div class="bg-315-bottom">
-      <h1 i18n:translate="">Console</h1>
+      <h1 id="consoleH1" i18n:translate="">Console</h1>
       <!--ul class="state_error">
         <li>Error...</li>
         <li>Error...</li>

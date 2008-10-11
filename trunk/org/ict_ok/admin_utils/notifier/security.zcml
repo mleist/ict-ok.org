@@ -17,6 +17,12 @@
         title="Edit from IkNotifier"
         description="Edit from IkNotifier."
     />
+
+    <permission
+        id="org.ict_ok.admin_utils.notifier.Send"
+        title="Edit from IkNotifier"
+        description="Edit from IkNotifier."
+    />
     
     <!--<grant permission="org.ict_ok.admin_utils.notifier.View"-->
                     <!--role="org.ict_ok.usr" />-->
@@ -28,6 +34,11 @@
     <grant permission="org.ict_ok.admin_utils.notifier.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.notifier.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.notifier.Send"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.notifier.Send"
                     role="org.ict_ok.adm" />
 
 </configure>

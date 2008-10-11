@@ -42,6 +42,11 @@
         factory=".adapter.ticker.Ticker"
     />
 
+    <subscriber handler=".nagios.notifyAddedEvent" />
+    <subscriber handler=".nagios.notifyModifiedEvent" />
+    <subscriber handler=".nagios.notifyMovedEvent" />
+    <subscriber handler=".nagios.notifyRemovedEvent" />
+
     <include package=".adapter" />
     <include package=".generations" />
     

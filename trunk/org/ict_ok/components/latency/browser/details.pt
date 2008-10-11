@@ -1,129 +1,20 @@
 <i18n:block domain="org.ict_ok"
             tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-    <h3 i18n:translate="">Details of the SNMP Value</h3>
+    <h3 i18n:translate="">Details of the latency Value</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
         <tr tal:attributes="class view/getTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">Check Type</td>
-            <td tal:content="python: view.vocabValue('SnmpCheckTypes',
-                                                     context.checktype)" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">SNMP address type</td>
-            <td tal:content="python: view.vocabValue('SnmpIndexTypes',
-                                context.snmpIndexType)" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">input addresses</td>
-            <td>
-                <ul>
-                    <div tal:omit-tag="" tal:repeat="address context/inp_addrs">
-                        <li tal:content="address" />
-                    </div>
-                </ul>
-            </td>
-        </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">Check Command</td>
-            <td tal:content="python: view.vocabValue('SnmpCheckCmds',
-                                    context.cmd)" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">Input Type</td>
-            <td tal:content="python: view.vocabValue('SnmpInpTypes',
-                                                     context.inptype)" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">enable the display of min and max values</td>
-            <td tal:content="context/displayMinMax" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">enable check 'max' for this entry</td>
-            <td tal:content="context/checkMax" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">Input quantity</td>
-            <td tal:content="context/inpQuantity" />
-        </tr>
         <tr tal:attributes="class view/getTabClass"
-            tal:condition="context/displUnitAbs|nothing">
-            <td i18n:translate="">Display unit</td>
-            <td tal:content="context/displUnitAbs" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="context/displUnitVelocity|nothing">
-            <td i18n:translate="">Display unit (velocity)</td>
-            <td tal:content="context/displUnitVelocity" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="context/displUnitAcceleration|nothing">
-            <td i18n:translate="">Display unit (acceleration)</td>
-            <td tal:content="context/displUnitAcceleration" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="context/minQuantityAbs">
-            <td i18n:translate="">Min. quantity</td>
-            <td tal:content="context/minQuantityAbs" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="context/minQuantityVelocity">
-            <td i18n:translate="">Min. quantity (velocity)</td>
-            <td tal:content="context/minQuantityVelocity" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="context/minQuantityAcceleration">
-            <td i18n:translate="">Min. quantity (acceleration)</td>
-            <td tal:content="context/minQuantityAcceleration" />
-        </tr>
-        <div tal:omit-tag="" tal:define="underMinQuota context/underMinQuota">
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="underMinQuota|nothing">
-            <td i18n:translate="">Under min quota</td>
-            <td tal:content="python:'%3.1f%%' % (100.0 * underMinQuota)" />
-        </tr>
-        </div>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="context/maxQuantityAbs">
-            <td i18n:translate="">Max. quantity</td>
-            <td tal:content="context/maxQuantityAbs" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="context/maxQuantityVelocity">
-            <td i18n:translate="">Max. quantity (velocity)</td>
-            <td tal:content="context/maxQuantityVelocity" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="context/maxQuantityAcceleration">
-            <td i18n:translate="">Max. quantity (acceleration)</td>
-            <td tal:content="context/maxQuantityAcceleration" />
-        </tr>
-        <div tal:omit-tag="" tal:define="overMaxQuota context/overMaxQuota">
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="overMaxQuota|nothing">
-            <td i18n:translate="">Over max quota</td>
-            <td tal:content="python:'%3.1f%%' % (100.0 * overMaxQuota)" />
-        </tr>
-        </div>
-    </table>
-    <h3>Value</h3>
-    <table id="sortable" class="listing" summary="Content listing"
-            i18n:attributes="summary"
-            tal:define="runtime_info view/getZopeRuntimeInfo">
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">current values</td>
-            <td>
-                <ul>
-                    <div tal:omit-tag="" tal:repeat="val view/getValues">
-                        <li tal:content="val" />
-                    </div>
-                </ul>
-            </td>
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td><pre tal:content="context/ikComment" /></td>
         </tr>
     </table>
     <h3>24h</h3>
-    <img tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
+    <a target="_blank" href="#" tal:attributes="href python: '%s/@@display.html' % (view.getValuePngHref())">
+        <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
+    </a>
 </i18n:block>

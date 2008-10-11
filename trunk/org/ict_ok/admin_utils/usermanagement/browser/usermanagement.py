@@ -46,7 +46,7 @@ from org.ict_ok.components.supernode.browser.supernode import \
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
-     IAdmUtilUserProperties, IAdmUtilUserManagement
+     IAdmUtilUserProperties, IAdmUtilUserManagement, IEditPassword
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      AdmUtilUserProperties
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
@@ -54,6 +54,13 @@ from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 _ = MessageFactory('org.ict_ok')
 
 # --------------- menu entries -----------------------------
+
+
+class MSubPassword(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Change password')
+    viewURL = 'password.html'
+    weight = 120
 
 
 class MSubAddDashboard(GlobalMenuSubItem):
@@ -123,7 +130,6 @@ class AdmUtilUserManagementDetails(SupernodeDetails):
         ##'org.ict_ok.ikadmin_utils.usermanagement.form')
     
     #def setUpWidgets(self, ignore_request=False):
-        ##import pdb; pdb.set_trace()
         #self.adapters = {}
         #self.widgets = setUpEditWidgets(
             #self.form_fields, self.prefix, self.request.principal,
@@ -141,7 +147,6 @@ class AdmUtilUserManagementDetails(SupernodeDetails):
         #pass
             
     #def render(self):
-        #import pdb; pdb.set_trace()
         #if self.template is None:
             #template = zope.component.getMultiAdapter(
                 #(self, self.request), IPageTemplate)
@@ -159,7 +164,6 @@ class AdmUtilUserManagementDetails(SupernodeDetails):
     ###fields = field.Fields(AdmUtilUserProperties) #.omit(*SiteDetails.omit_editfields)
     
     ##def updateWidgets(self):
-        ##import pdb; pdb.set_trace()
         ##'''See interfaces.IForm'''
         ###def getMultiAdapter(objects, interface=Interface, name=u'', context=None):
         ###self.widgets = zope.component.getMultiAdapter(
@@ -174,7 +178,6 @@ class AdmUtilUserManagementDetails(SupernodeDetails):
         
     ##def render(self):
         ##'''See interfaces.IForm'''
-        ##import pdb; pdb.set_trace()
         ### render content template
         ##if self.template is None:
             ##template = zope.component.getMultiAdapter((self, self.request),
@@ -245,3 +248,8 @@ class EditAdmUtilUserManagementForm(EditForm):
     label = _(u'edit user settings')
     fields = field.Fields(IAdmUtilUserManagement).omit(\
         *AdmUtilUserManagementDetails.omit_editfields)
+
+class EditPasswordForm(EditForm):
+    """ Edit for for net """
+    label = _(u'edit user password')
+    fields = field.Fields(IEditPassword)

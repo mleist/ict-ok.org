@@ -16,17 +16,24 @@ __version__ = "$Id$"
 
 # python imports
 import time
-import logging
 import transaction
 import gocept.runner
-
 
 # zope imports
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 
 # ict_ok.org imports
 from org.ict_ok.version import getIkVersion
-from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
+from org.ict_ok.admin_utils.supervisor.interfaces import \
+     IAdmUtilSupervisor
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IAdmUtilEventCrossbar
+from org.ict_ok.admin_utils.generators.nagios.interfaces import \
+     IAdmUtilGeneratorNagios
+from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
+     IAdmUtilGeneratorSmokePing
+from org.ict_ok.admin_utils.ticker.interfaces import \
+     IAdmUtilTicker
 
 
 class TimeCheckSpace:
@@ -96,7 +103,6 @@ def runner():
     """
     # import in this context
     from zope.app.intid.interfaces import IIntIds
-    import time
     import zope.app.component.hooks
     import zope.security.management
     import zope.app.appsetup.product
@@ -105,12 +111,12 @@ def runner():
     (signal_min, signal_hour,
      signal_day, signal_month,
      signal_year) = getTimeChangeSignals()
-    interaction = zope.security.management.getInteraction()
-    principal = interaction.participations[0].principal
+    #interaction = zope.security.management.getInteraction()
+    #principal = interaction.participations[0].principal
     site = zope.app.component.hooks.getSite()
     db = site._p_jar.db()
     sm = site.getSiteManager()
-    admSupervisor = sm.getUtility(IAdmUtilSupervisor)
+    #admSupervisor = sm.getUtility(IAdmUtilSupervisor)
     uidutil = sm.getUtility(IIntIds)
     for (myid, myobj) in uidutil.items():
         try:
@@ -129,3 +135,26 @@ def runner():
                     tickerAdapter.triggerYear()
         except TypeError, err:
             pass
+    for utilInterface in (IAdmUtilSupervisor,
+                          IAdmUtilGeneratorSmokePing,
+                          IAdmUtilGeneratorNagios,
+                          ):
+        tmp_util = sm.getUtility(utilInterface)
+        if tmp_util is not None:
+            try:
+                tickerAdapter = ITicker(tmp_util)
+                if tickerAdapter:
+                    tickerAdapter.db = db
+                    tickerAdapter.triggered()
+                    if signal_min:
+                        tickerAdapter.triggerMin()
+                    if signal_hour:
+                        tickerAdapter.triggerHour()
+                    if signal_day:
+                        tickerAdapter.triggerDay()
+                    if signal_month:
+                        tickerAdapter.triggerMonth()
+                    if signal_year:
+                        tickerAdapter.triggerYear()
+            except TypeError, err:
+                print "Error xxx: ", err

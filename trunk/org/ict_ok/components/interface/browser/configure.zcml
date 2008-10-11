@@ -111,6 +111,15 @@
         permission="org.ict_ok.components.snmpvalue.Add"
     />
 
+    <z3c:pagelet
+        name="add_latency.html"
+        for="org.ict_ok.components.interface.interfaces.IInterface"
+        class="org.ict_ok.components.latency.browser.latency.AddLatencyForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
+    />
+
+
     <!--##### Sub Menu ##### -->
 
     <!--<viewlet-->
@@ -154,6 +163,14 @@
         permission="org.ict_ok.components.interface.Edit"
         />
     <viewlet
+        name="delete"
+        for="org.ict_ok.components.interface.interfaces.IInterface"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.interface.Delete"
+        />
+    <viewlet
         name="editcontent"
         for="org.ict_ok.components.interface.interfaces.IInterface"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
@@ -184,6 +201,14 @@
         class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubAddSnmpValueByVendor"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.Add"
+        />
+    <viewlet
+        name="add_latency"
+        for="org.ict_ok.components.interface.interfaces.IInterface"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.latency.browser.latency.MSubAddLatency"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
         />
     <viewlet
         name="add_dashboard"

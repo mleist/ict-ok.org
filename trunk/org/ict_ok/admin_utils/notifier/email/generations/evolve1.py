@@ -18,7 +18,7 @@ from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.notifier.email.interfaces import \
-     IAdmUtilEmailNotifier
+     INotifierEmail
 
 generation = 1
 
@@ -29,7 +29,7 @@ def evolve(context):
     
     root = getRootFolder(context) # the Zope-Root-Folders
 
-    for obj in findObjectsProviding(root, IAdmUtilEmailNotifier):
+    for obj in findObjectsProviding(root, INotifierEmail):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())

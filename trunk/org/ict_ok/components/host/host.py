@@ -217,9 +217,6 @@ class Host(Component):
                 "       ############## <-" % (self.ikName)
                 print "eventMsg: ", eventMsg
         return eventProcessed
-        #import pdb
-        #pdb.set_trace()
-        #print "inEventMask", self.inEventMask(eventMsg)
     
     def get_health(self):
         #return self._health
@@ -239,8 +236,6 @@ class Host(Component):
         """
         weighted count of accesses
         """
-        #import pdb
-        #pdb.set_trace()
         wcnt = 0
         #net = zapi.getParent(self)
         for c_name, c_val in self._counter.items():
@@ -256,7 +251,10 @@ class Host(Component):
         for if_name, if_obj in self.items():
             if if_obj.ipv4List is not None:
                 ipList.extend(if_obj.ipv4List)
-        return ipList
+        if len(ipList) > 0:
+            return ipList
+        else:
+            return None
 
 
 def getAllHosts():

@@ -30,3 +30,7 @@ class ILatency(IComponent):
         title = _(u"Check count"),
         default = 20,
         required = True)
+
+    def getRrdFilename():
+        """ rrd filename incl. path
+        """

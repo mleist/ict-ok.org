@@ -77,7 +77,7 @@ class AdmUtilGeneratorSmokePingDetails(SupernodeDetails):
         starts all configured scanners for this net
         """
         print "AdmUtilGeneratorSmokePingDetails.generate start"
-        print self.allConfigFilesOut()
+        print self.allConfigFilesOut(True)
         print "AdmUtilGeneratorSmokePingDetails.generate stop"
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:
@@ -85,10 +85,10 @@ class AdmUtilGeneratorSmokePingDetails(SupernodeDetails):
         else:
             return self.request.response.redirect('./@@details.html')
 
-    def allConfigFilesOut(self):
+    def allConfigFilesOut(self, forceOutput=False):
         """Trigger configuration by web browser
         """
-        return self.context.allConfigFilesOut()
+        return self.context.allConfigFilesOut(forceOutput)
 
 
 # --------------- forms ------------------------------------
@@ -101,8 +101,6 @@ class DetailsAdmUtilGeneratorSmokePingForm(DisplayForm):
         *AdmUtilGeneratorSmokePingDetails.omit_viewfields) #+ \
            #field.Fields(IAdmUtilGeneratorSmokePing).select('objectID')
     #def update(self):
-        #import pdb
-        #pdb.set_trace()
         #DisplayForm.update(self)
 
 class EditAdmUtilGeneratorSmokePingForm(EditForm):

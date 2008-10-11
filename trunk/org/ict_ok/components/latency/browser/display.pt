@@ -1,64 +1,28 @@
 <i18n:block domain="org.ict_ok"
             tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-    <h3 i18n:translate="">Display SNMP Values</h3>
-    <table id="sortable" class="listing" summary="Content listing"
-            i18n:attributes="summary"
-            tal:define="runtime_info view/getZopeRuntimeInfo">
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">Name</td>
-            <td tal:content="context/ikName" />
-        </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">Timestamp</td>
-            <td tal:content="python: dateform.format(view.nowTS())">test</td>
-        </tr>
-        <tr tal:attributes="class view/getTabClass">
-            <td i18n:translate="">current values</td>
-            <td>
-                <ul>
-                    <div tal:omit-tag="" tal:repeat="val view/getValues">
-                        <li tal:content="val" />
-                    </div>
-                </ul>
-            </td>
-        </tr>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="python:context.getMinQuantity()[0]"
-            tal:define="minString python:context.getMinQuantity()[1]">
-            <td i18n:translate="">min. level</td>
-            <td tal:content="minString" />
-        </tr>
-        <div tal:omit-tag="" tal:define="underMinQuota context/underMinQuota">
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="underMinQuota|nothing">
-            <td i18n:translate="">Under min quota</td>
-            <td tal:content="python:'%3.1f%%' % (100.0 * underMinQuota)" />
-        </tr>
-        </div>
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="python:context.getMaxQuantity()[0]"
-            tal:define="maxString python:context.getMaxQuantity()[1]">
-            <td i18n:translate="">max. level</td>
-            <td tal:content="maxString" />
-        </tr>
-        <div tal:omit-tag="" tal:define="overMaxQuota context/overMaxQuota">
-        <tr tal:attributes="class view/getTabClass"
-            tal:condition="overMaxQuota|nothing">
-            <td i18n:translate="">Over max quota</td>
-            <td tal:content="python:'%3.1f%%' % (100.0 * overMaxQuota)" />
-        </tr>
-        </div>
-    </table>
+    <!--<h3 i18n:translate="">Display SNMP Values</h3>-->
     <h3>1h</h3>
-    <img tal:attributes="src python: '%s/@@getPNG?hours=1' % (view.getValuePngHref())" />
+    <a target="_blank" href="#" tal:attributes="href python: '%s/@@getPNG?hours=1&width=1000&height=800' % (view.getValuePngHref())">
+        <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=1' % (view.getValuePngHref())" />
+    </a>
     <h3>24h</h3>
-    <img tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
+    <a target="_blank" href="#" tal:attributes="href python: '%s/@@getPNG?hours=24&width=1000&height=800' % (view.getValuePngHref())">
+        <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
+    </a>
     <h3>7d</h3>
-    <img tal:attributes="src python: '%s/@@getPNG?hours=168' % (view.getValuePngHref())" />
+    <a target="_blank" href="#" tal:attributes="href python: '%s/@@getPNG?hours=168&width=1000&height=800' % (view.getValuePngHref())">
+        <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=168' % (view.getValuePngHref())" />
+    </a>
     <h3>31d</h3>
-    <img tal:attributes="src python: '%s/@@getPNG?hours=744' % (view.getValuePngHref())" />
+    <a target="_blank" href="#" tal:attributes="href python: '%s/@@getPNG?hours=744&width=1000&height=800' % (view.getValuePngHref())">
+        <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=744' % (view.getValuePngHref())" />
+    </a>
     <h3>365d</h3>
-    <img tal:attributes="src python: '%s/@@getPNG?hours=8760' % (view.getValuePngHref())" />
+    <a target="_blank" href="#" tal:attributes="href python: '%s/@@getPNG?hours=8760&width=1000&height=800' % (view.getValuePngHref())">
+        <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=8760' % (view.getValuePngHref())" />
+    </a>
     <h3>10y</h3>
-    <img tal:attributes="src python: '%s/@@getPNG?hours=87600' % (view.getValuePngHref())" />
+    <a target="_blank" href="#" tal:attributes="href python: '%s/@@getPNG?hours=87600&width=1000&height=800' % (view.getValuePngHref())">
+        <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=87600' % (view.getValuePngHref())" />
+    </a>
 </i18n:block>

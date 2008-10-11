@@ -20,7 +20,6 @@ from datetime import datetime
 # zope imports
 import zope.interface
 from zope.app import zapi
-from pytz import timezone
 from zope.traversing.browser import absoluteURL
 from zope.i18nmessageid import MessageFactory
 from zope.i18n import translate
@@ -32,7 +31,6 @@ from zope.app.applicationcontrol.interfaces import IRuntimeInfo
 from zope.size.interfaces import ISized
 from zope.security.checker import canAccess
 from zope.component import getMultiAdapter
-#import zope.event
 from zope.lifecycleevent import Attributes, ObjectModifiedEvent
 from zope.app.rotterdam.xmlobject import translate, setNoCacheHeaders
 from zope.app.container.interfaces import IOrderedContainer
@@ -56,7 +54,7 @@ from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
-     AdmUtilUserProperties
+     getUserTimezone, convert2UserTimezone, AdmUtilUserProperties
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEvent
 from org.ict_ok.components.superclass.interfaces import \
@@ -65,7 +63,6 @@ from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.schema.IPy import IP
 
 _ = MessageFactory('org.ict_ok')
-berlinTZ = timezone('Europe/Berlin')
 
 
 # --------------- helper functions -------------------------
@@ -81,8 +78,6 @@ class CheckboxColumn(Column):
 
 def getActionBottons(item, formatter):
     """Action Buttons for Overview in Web-Browser"""
-    #import pdb
-    #pdb.set_trace()
     retHtml = u""
     parentIsOrderd = IOrderedContainer.providedBy(item.__parent__)
     resource_path = getAdapter(formatter.request, name='pics')()
@@ -158,19 +153,22 @@ def getSize(item, formatter):
         return translate(ISized(item).sizeForDisplay())
     except AttributeError:
         return "--"
+    except TypeError:
+        return "--"
 
 def getModifiedDate(item, formatter):
     """Modified Date for Overview in Web-Browser"""
     try:
+        userTZ = getUserTimezone()
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'short')
-        timeString = my_formatter.format(berlinTZ.fromutc(
+        timeString = my_formatter.format(userTZ.fromutc(
             IZopeDublinCore(item).modified))
         timeStringHTML = timeString.replace(" ", "&nbsp;")
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'long')
         longTimeString = my_formatter.format(
-            berlinTZ.fromutc(IZopeDublinCore(item).modified))
+            userTZ.fromutc(IZopeDublinCore(item).modified))
         #ttid = u"id" + str(abs(hash(timeString)))
         ttid = u"modt" + item.getObjectId()
         tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
@@ -186,13 +184,14 @@ def getModifiedDate(item, formatter):
 def formatEntryDate(entry, formatter):
     """Entry Date for history in Web-Browser"""
     try:
+        userTZ = getUserTimezone()
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'short')
-        timeString = my_formatter.format(berlinTZ.fromutc(entry.getTime()))
+        timeString = my_formatter.format(userTZ.fromutc(entry.getTime()))
         timeStringHTML = timeString.replace(" ", "&nbsp;")
         my_formatter = formatter.request.locale.dates.getFormatter(
             'dateTime', 'long')
-        longTimeString = my_formatter.format(berlinTZ.fromutc(entry.getTime()))
+        longTimeString = my_formatter.format(userTZ.fromutc(entry.getTime()))
         ttid = u"id" + str(abs(hash(entry)))
         tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
                 u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
@@ -246,12 +245,15 @@ def link(view='index.html'):
     """Link to the object for Overview in Web-Browser"""
     def anchor(value, item, formatter):
         """ anchor method will return a html formated anchor"""
-        myAdapter = zapi.queryMultiAdapter((item, formatter.request),
-                                           name=view)
-        if myAdapter is not None and canAccess(myAdapter,'render'):
-            url = absoluteURL(item, formatter.request) + '/' + view
-            return u'<a href="%s">%s</a>' % (url, value)
-        else:
+        try:
+            myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                               name=view)
+            if myAdapter is not None and canAccess(myAdapter,'render'):
+                url = absoluteURL(item, formatter.request) + '/' + view
+                return u'<a href="%s">%s</a>' % (url, value)
+            else:
+                return u'%s' % (value)
+        except:
             return u'%s' % (value)
             
     return anchor
@@ -337,8 +339,11 @@ class MSubOverview(GlobalMenuSubItem):
     viewURL = '@@overview.html'
     weight = 10
     def render(self):
-        if len(self.context) > 0:
-            return GlobalMenuSubItem.render(self)
+        try:
+            if len(self.context) > 0:
+                return GlobalMenuSubItem.render(self)
+        except:
+            return None
 
 
 class MSubHistory(GlobalMenuSubItem):
@@ -374,6 +379,13 @@ class MSubEdit(GlobalMenuSubItem):
     title = _(u'Edit')
     viewURL = '@@edit.html'
     weight = 20
+
+
+class MSubDelete(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Delete')
+    viewURL = '@@delete.html'
+    weight = 21
 
 
 class MSubEditEventIf(GlobalMenuSubItem):
@@ -482,16 +494,20 @@ class SuperclassDetails:
 
     def convertToLocalTimeString(self, argdatetime):
         """Converts to local time
-        
-        TODO: migrate to better location
         """
-        localTZ = timezone('Europe/Berlin')
-        localTimestmp = argdatetime.astimezone(localTZ)
-        return localTimestmp.strftime('%d.%m.%Y %H:%M:%S %Z')
+        userTimestmp = convert2UserTimezone(argdatetime)
+        return userTimestmp.strftime('%d.%m.%Y %H:%M:%S %Z')
     
     def getModifiedTime(self):
-        return IZopeDublinCore(self.context).modified
+        modTS = IZopeDublinCore(self.context).modified
+        if modTS is not None:
+            return convert2UserTimezone(IZopeDublinCore(self.context).modified)
+        else:
+            return None
     
+    def convert2UserTimezone(self, timest):
+        return convert2UserTimezone(timest)
+
     def vocabValue(self, vocabName=None, token=None):
         if vocabName is None:
             return None
@@ -638,7 +654,6 @@ class EditForm(layout.FormLayoutSupport, form.EditForm):
         changes = applyChanges(self, content, data)
         # ``changes`` is a dictionary; if empty, there were no changes
         if changes:
-            #import pdb;pdb.set_trace()
             # Construct change-descriptions for the object-modified event
             descriptions = []
             for interface, attrs in changes.items():
@@ -675,12 +690,9 @@ class DeleteForm(layout.FormLayoutSupport, form.Form):
     def handleDelete(self, action):
         """delete was pressed"""
         if ISuperclass.providedBy(self.context):
-            parent = self.getContent().__parent__
-            try:
-                del parent[self.context.objectID]
-                self.deleted = True
-            except KeyError:
-                pass
+            parent = self.context.__parent__
+            del parent[self.context.objectID]
+            self.deleted = True
             self.context = parent
             url = absoluteURL(parent, self.request)
             self.request.response.redirect(url)

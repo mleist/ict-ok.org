@@ -123,6 +123,11 @@ class NotificationsItem(GlobalMenuMainItem):
     viewURL = 'view_notifications.html'
     weight = 105
 
+class SearchItem(GlobalMenuMainItem):
+    title = _(u'Search')
+    viewURL = 'search.html'
+    weight = 8500
+
 class HelpItem(GlobalMenuMainItem):
     title = _(u'Help')
     viewURL = 'help.html'

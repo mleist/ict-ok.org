@@ -15,6 +15,17 @@
 
     <!--security settings of ict-ok-->
     <include package="org.ict_ok.etc" file="permissions.zcml" />
+
+    <include package="org.ict_ok.admin_utils.supervisor" />
+    <include package="org.ict_ok.admin_utils.generators.nagios" />
+    <include package="org.ict_ok.admin_utils.generators.smokeping" />
+
+    <include package="org.ict_ok.components.superclass" />
+    <include package="org.ict_ok.components.net" />
+    <include package="org.ict_ok.components.host" />
+    <include package="org.ict_ok.components.host.special" />
+    <include package="org.ict_ok.components.interface" />
+    <include package="org.ict_ok.components.latency" />
     <include package="org.ict_ok.components.snmpvalue" />
 
     <subscriber

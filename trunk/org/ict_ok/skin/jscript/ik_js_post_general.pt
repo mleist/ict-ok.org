@@ -1,6 +1,8 @@
 <script type="text/javascript">
   ik_el_ikh_time = document.getElementById("ikh_time");
   ik_el_status_pic = document.getElementById("statusPic");
+  ik_el_navtree_h1 = document.getElementById("navTreeH1");
+  ik_el_console_h1 = document.getElementById("consoleH1");
   if ( ik_el_status_pic ) {
     ik_el_status_pic.ik_stat = true;
   }
@@ -11,6 +13,16 @@
   }
 </script>
 <script type="text/javascript">
+  document.getElementsByClassName = function(cl) {
+    var retnode = [];
+    var myclass = new RegExp('\\b'+cl+'\\b');
+    var elem = this.getElementsByTagName('*');
+    for (var i = 0; i < elem.length; i++) {
+      var classes = elem[i].className;
+      if (myclass.test(classes)) retnode.push(elem[i]);
+    }
+    return retnode;
+  }; 
   function loadNodeData(node, fnLoadComplete) {
     var callback =
     {
@@ -131,18 +143,38 @@
 </script>
 <script type="text/javascript">
   var timerEvt = new YAHOO.util.CustomEvent("timerEvt");
+  var reloadEvt = new YAHOO.util.CustomEvent("timerEvt");
   clockSubscriber = function(type, args) {
-  var Jetzt = new Date();
-  ik_el_ikh_time.innerHTML = Jetzt.toLocaleString();
+    var Jetzt = new Date();
+    var Sekunden = Jetzt.getSeconds();
+    ik_el_ikh_time.innerHTML = Jetzt.toLocaleString();
+    if (Sekunden % 2) {
+      ik_el_console_h1.style.backgroundImage = "url(/@@/pics/btna2t.gif)";
+    } else {
+      ik_el_console_h1.style.backgroundImage = "url(/@@/pics/btna2.gif)";
+    }
+  }
+  reloadSubscriber = function(type, args) {
+    for (var i = 0; i < document.images_reload.length; i++) {
+      var i_img = document.images_reload[i];
+      i_img.src = i_img.src + '#' + (new Date()).getTime();
+    }
   }
   timerEvt.subscribe(clockSubscriber);
+  reloadEvt.subscribe(reloadSubscriber);
   //timerEvt.subscribe(statusPicSubscriber);
   function timerInter () {
     timerEvt.fire();
     window.setTimeout("timerInter()", 1000);
   }
+  function reloadInter () {
+    reloadEvt.fire();
+    window.setTimeout("reloadInter()", 120000);
+  }
   timerInter();
+  reloadInter();
   ik_init();
+  document.images_reload = document.getElementsByClassName("img_reload");
 </script>
 <span tal:omit-tag="" tal:condition="request/principal/title | nothing">
   <span tal:replace="structure python: '<script type=\'text/javascript\'>'" />

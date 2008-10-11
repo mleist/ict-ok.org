@@ -61,11 +61,15 @@
         factory=".adapter.nagios.GenNagios"
         permission="org.ict_ok.admin_utils.generators.nagios.View"
     />
+    <adapter
+        factory=".adapter.smokeping.GenSmokePing"
+        permission="org.ict_ok.admin_utils.generators.smokeping.View"
+    />
 
-    <subscriber handler=".superclass.notifyAddedEvent" />
-    <subscriber handler=".superclass.notifyModifiedEvent" />
-    <subscriber handler=".superclass.notifyMovedEvent" />
-    <subscriber handler=".superclass.notifyRemovedEvent" />
+    <!--<subscriber handler=".superclass.notifyAddedEvent" />-->
+    <!--<subscriber handler=".superclass.notifyModifiedEvent" />-->
+    <!--<subscriber handler=".superclass.notifyMovedEvent" />-->
+    <!--<subscriber handler=".superclass.notifyRemovedEvent" />-->
     
     
     <subscriber handler=".objmq.notifyCopiedEvent" />

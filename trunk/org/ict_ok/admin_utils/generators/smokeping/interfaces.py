@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface
-from zope.schema import Datetime, TextLine, Bool
+from zope.schema import TextLine, Bool
 from org.ict_ok.schema.datetime import IctDatetime
 from zope.i18nmessageid import MessageFactory
 
@@ -45,6 +45,12 @@ class IAdmUtilGeneratorSmokePing(IAdmUtilGenerators):
         max_length = 200,
         title = _(u"path to configuration"),
         default = u"/opt/smokeping/etc/ict_ok",
+        required = True)
+
+    pathDataFiles = TextLine(
+        max_length = 200,
+        title = _(u"path to data files"),
+        default = u"/opt/smokeping/data",
         required = True)
 
     lastConfigFileChange = IctDatetime(

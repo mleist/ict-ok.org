@@ -17,6 +17,23 @@
         name="details.html"
         />
 
+    <page
+        name="actions"
+        for="org.ict_ok.admin_utils.notifier.interfaces.INotifierUtil"
+        class=".notifier.NotifierDetails"
+        attribute="actions"
+        permission="org.ict_ok.admin_utils.notifier.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="send_test"
+        for="org.ict_ok.admin_utils.notifier.interfaces.INotifierUtil"
+        class=".notifier.NotifierDetails"
+        attribute="send_test"
+        permission="org.ict_ok.admin_utils.notifier.Send"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+
     <!--class="org.ict_ok.admin_utils.notifier.browser.notifier.ViewNotifierForm"-->
     <z3c:pagelet
         name="details.html"

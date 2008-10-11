@@ -28,17 +28,32 @@ from org.ict_ok.components.supernode.browser.supernode import \
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
 from org.ict_ok.admin_utils.notifier.email.interfaces import \
-     IAdmUtilEmailNotifier
+     INotifierEmail
+from org.ict_ok.admin_utils.notifier.browser.notifier import \
+     NotifierDetails
 
 _ = MessageFactory('org.ict_ok')
 
 
-class NotifierEmailDetails(SupernodeDetails):
+class NotifierEmailDetails(NotifierDetails):
     """
     Browser details for email-generator
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + []
-    omit_editfields = SupernodeDetails.omit_editfields + []
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikAuthor', 'ikName']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
+
+    def send_test(self):
+        """
+        will send a test message by the notifier
+        """
+        testMsg = """This is a test message from
+        """
+        self.context.send_test(testMsg)
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
 
     def getConfig(self):
         """Trigger configuration by web browser
@@ -51,12 +66,12 @@ class NotifierEmailDetails(SupernodeDetails):
 class ViewNotifierEmailForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of email notifier')
-    fields = field.Fields(IAdmUtilEmailNotifier).omit(\
+    fields = field.Fields(INotifierEmail).omit(\
         *NotifierEmailDetails.omit_viewfields)
 
 
 class EditNotifierEmailForm(EditForm):
     """ Edit for for net """
     label = _(u'edit email notifier')
-    fields = field.Fields(IAdmUtilEmailNotifier).omit(\
+    fields = field.Fields(INotifierEmail).omit(\
         *NotifierEmailDetails.omit_editfields)

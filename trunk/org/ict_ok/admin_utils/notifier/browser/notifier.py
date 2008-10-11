@@ -21,6 +21,8 @@ from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
 from zope.app.intid.interfaces import IIntIds
 from zope.component import getUtility
+from zope.security import checkPermission
+from zope.app.pagetemplate.urlquote import URLQuote
 
 # z3c imports
 from z3c.form import field
@@ -43,6 +45,42 @@ class NotifierDetails(SupernodeDetails):
     omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName', 'notifierSet']
     omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
+    def actions(self):
+        """
+        gives us the action dict of the object
+        """
+        try:
+            objId = getUtility(IIntIds).getId(self.context)
+        except KeyError:
+            objId = 1000
+        retList = []
+        if checkPermission('org.ict_ok.admin_utils.notifier.Send',
+                           self.context):
+            quoter = URLQuote(self.request.getURL())
+            tmpDict = {}
+            tmpDict['oid'] = u"c%snotifier_send" % objId
+            tmpDict['title'] = _(u"send test")
+            tmpDict['href'] = u"%s/@@send_test?nextURL=%s" % \
+                   (zapi.getPath( self.context),
+                    quoter.quote())
+            tmpDict['tooltip'] = _(u"will send a test message "\
+                                   u"by the selected notifier")
+            retList.append(tmpDict)
+        return retList
+
+    def send_test(self):
+        """
+        will send a test message by the notifier
+        """
+        testMsg = """This is a test message from
+        """
+        self.context.send_test(testMsg)
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
     def getAllNotifierObjs(self):
         """
         get list of Notifier-Tupel (name, obj)
@@ -51,7 +89,7 @@ class NotifierDetails(SupernodeDetails):
         for name, notifier in self.context.getAllNotifierObjs():
             retDict = {}
             retDict['name'] = name
-            retDict['href'] = zapi.getPath(notifier) + '/@@status'
+            retDict['href'] = zapi.getPath(notifier) + '/@@details.html'
             retList.append(retDict)
         return retList
         
@@ -64,7 +102,7 @@ class NotifierDetails(SupernodeDetails):
             for name, notifier in self.context.getNotifierObjs():
                 retDict = {}
                 retDict['name'] = name
-                retDict['href'] = zapi.getPath(notifier) + '/@@status'
+                retDict['href'] = zapi.getPath(notifier) + '/@@details.html'
                 retList.append(retDict)
         return retList
 

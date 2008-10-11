@@ -101,8 +101,6 @@ class DetailsAdmUtilGeneratorNagiosForm(DisplayForm):
         *AdmUtilGeneratorNagiosDetails.omit_viewfields) #+ \
            #field.Fields(IAdmUtilGeneratorNagios).select('objectID')
     #def update(self):
-        #import pdb
-        #pdb.set_trace()
         #DisplayForm.update(self)
 
 class EditAdmUtilGeneratorNagiosForm(EditForm):

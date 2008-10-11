@@ -71,7 +71,6 @@ class Snmptrapd(BaseSnmptrapd):
                 if pMod.apiTrapPDU.getEnterprise(reqPDU).prettyPrint() == \
                    u'1.3.6.1.4.1.705.1.11':
                     #print "MGE UPS <----"
-                    #import pdb; pdb.set_trace()
                     #self.context.trigger_offline()
                     specificTrap = pMod.apiTrapPDU.getSpecificTrap(reqPDU)
                     if specificTrap == 1:

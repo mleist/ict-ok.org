@@ -15,14 +15,15 @@
 __version__ = "$Id$"
 
 # python imports
+from datetime import datetime
+from pytz import timezone
 import logging
 from persistent.dict import PersistentDict
-from zope.app.container.contained import Contained
 
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
-from zope.component import adapts
+from zope.component import adapts, queryUtility
 from zope.security.interfaces import IPrincipal
 from zope.annotation.interfaces import IAnnotations
 from zope.app.authentication.authentication import PluggableAuthentication
@@ -32,6 +33,7 @@ from zope.traversing.api import getPath, getRoot, traverse
 from zope.security.management import getInteraction
 from zope.publisher.interfaces import IRequest
 from zope.schema.fieldproperty import FieldProperty
+from zope.app.container.contained import Contained
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -210,3 +212,20 @@ class AdmUtilUserDashboardItem(object):
                                 self.value,
                                 request=arg_request)
         raise Exception, "wrong type for getObject@AdmUtilUserDashboardItem"
+
+def getUserTimezone():
+    try:
+        userManagement = queryUtility(IAdmUtilUserManagement)
+        if userManagement is not None:
+            return timezone(userManagement.timezone)
+        else:
+            return timezone("GMT")
+    except:
+        return timezone("GMT")
+
+def convert2UserTimezone(timest):
+    userTZ = getUserTimezone()
+    if timest.tzinfo is None:
+        return timest.replace(tzinfo=timezone("UTC")).astimezone(userTZ)
+    else:
+        return timest.astimezone(userTZ)

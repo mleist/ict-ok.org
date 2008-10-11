@@ -39,7 +39,7 @@ class Ticker(object):
         """
         got ticker event from ticker thread
         """
-        pass
+        self.context.tickerEvent()
         
     def triggerMin(self):
         """

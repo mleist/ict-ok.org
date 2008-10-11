@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,E0611,W0232,W0613,W0142,R0901
+# pylint: disable-msg=E1101,E0611,W0232,W0613,W0611,W0142,R0901
 #
 """implementation of browser class of Site object
 """
@@ -17,7 +17,6 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
-from pytz import timezone
 from zope.i18nmessageid import MessageFactory
 
 # z3c imports
@@ -35,7 +34,6 @@ from org.ict_ok.components.site.site import Site
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 
 _ = MessageFactory('org.ict_ok')
-berlinTZ = timezone('Europe/Berlin')
 
 
 # --------------- menu entries -----------------------------

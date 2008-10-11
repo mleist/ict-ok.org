@@ -199,6 +199,14 @@
         permission="org.ict_ok.components.net.Edit"
         />
     <viewlet
+        name="delete"
+        for="org.ict_ok.components.net.interfaces.INet"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.Delete"
+        />
+    <viewlet
         name="edit_event_if"
         for="org.ict_ok.components.net.interfaces.INet"
         manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
