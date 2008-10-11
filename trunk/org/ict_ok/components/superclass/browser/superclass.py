@@ -76,63 +76,119 @@ class CheckboxColumn(Column):
                   u'name="selected:list" value="%s">')
         return widget % (item.objectID)
 
-def getActionBottons(item, formatter):
-    """Action Buttons for Overview in Web-Browser"""
-    retHtml = u""
-    parentIsOrderd = IOrderedContainer.providedBy(item.__parent__)
+def getActionBotton_Detail(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
     resource_path = getAdapter(formatter.request, name='pics')()
-    # details
+    ttid = u"details" + item.getObjectId()
     view_url = absoluteURL(item, formatter.request) + '/@@details.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                        name='details.html')
     if myAdapter is not None and canAccess(myAdapter,'render'):
-        view_html = u'<a href="%s"><img alt="Info" src="%s/Info.png" /></a>' % \
-                  (view_url, resource_path)
+        view_html = u'<a href="%s">' %  (view_url) + \
+                  u'<img id="%s" alt="Info" src="%s/Info.png" /></a>' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'details of this object')
     else:
-        view_html = u'<img alt="Details" src="%s/Info_gr.png" />' % (resource_path)
-    retHtml += view_html
-    # edit
+        view_html = u'<img id="%s" alt="Details" src="%s/Info_gr.png" />' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'viewing details is not permitted')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return view_html + tooltip
+
+def getActionBotton_Edit(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    resource_path = getAdapter(formatter.request, name='pics')()
+    ttid = u"edit" + item.getObjectId()
     edit_url = absoluteURL(item, formatter.request) + '/@@edit.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                        name='edit.html')
     if myAdapter is not None and canAccess(myAdapter,'render'):
-        edit_html = u'<a href="%s"><img alt="Edit" src="%s/Hand.png" /></a>' % \
-                  (edit_url, resource_path)
+        edit_html = u'<a href="%s">' %  (edit_url) + \
+                  u'<img id="%s" alt="Edit" src="%s/Hand.png" /></a>' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'edit this object')
     else:
-        edit_html = u'<img alt="Edit" src="%s/Hand_gr.png" />' % (resource_path)
-    retHtml += edit_html
-    # history
+        edit_html = u'<img id="%s" alt="Edit" src="%s/Hand_gr.png" />' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'editing is not permitted')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return edit_html + tooltip
+
+def getActionBotton_History(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    resource_path = getAdapter(formatter.request, name='pics')()
+    ttid = u"history" + item.getObjectId()
     hist_url = absoluteURL(item, formatter.request) + '/@@history.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                        name='history.html')
     if myAdapter is not None and canAccess(myAdapter,'render'):
-        hist_html = u'<a href="%s"><img alt="History" src="%s/Doc.png" /></a>' % \
-                  (hist_url, resource_path)
+        hist_html = u'<a href="%s">' %  (hist_url) + \
+                  u'<img id="%s" alt="History" src="%s/Doc.png" /></a>' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'history this object')
     else:
-        hist_html = u'<img alt="History" src="%s/Doc_gr.png" />' % (resource_path)
-    retHtml += hist_html
-    # delete
+        hist_html = u'<img id="%s" alt="History" src="%s/Doc_gr.png" />' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'viewing the history is not permitted')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return hist_html + tooltip
+
+def getActionBotton_Delete(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    resource_path = getAdapter(formatter.request, name='pics')()
+    ttid = u"delete" + item.getObjectId()
     trash_url = absoluteURL(item, formatter.request) + '/@@delete.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                        name='delete.html')
     if myAdapter is not None and canAccess(myAdapter,'render') \
        and item.canBeDeleted():
-        trash_html = u'<a href="%s"><img alt="Trash" src="%s/Trash.png" /></a>' % \
-                   (trash_url, resource_path)
+        trash_html = u'<a href="%s">' %  (trash_url) + \
+                  u'<img id="%s" alt="Trash" src="%s/Trash.png" /></a>' % \
+                   (ttid, resource_path)
+        tooltip_text = _(u'delete this object')
     else:
-        trash_html = u'<img alt="Trash" src="%s/Trash_gr.png" />' % (resource_path)
-    retHtml += trash_html
-    # move up / down
+        trash_html = u'<img id="%s" alt="Trash" src="%s/Trash_gr.png" />' % \
+                   (ttid, resource_path)
+        tooltip_text = _(u'deleting this object is not permitted')
+        if not item.canBeDeleted():
+            tooltip_text += _(u',<br/>referenced by other objects')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return trash_html + tooltip
+
+def getActionBotton_UpDown(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    retHtml = u""
+    parentIsOrderd = IOrderedContainer.providedBy(item.__parent__)
+    resource_path = getAdapter(formatter.request, name='pics')()
     if parentIsOrderd:
         up_url = absoluteURL(item, formatter.request) + '/@@moveup.html'
         myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                            name='moveup.html')
         if myAdapter is not None and canAccess(myAdapter,'render') and \
            item.__parent__.keys()[0] != item.objectID: # not the first element
-            up_html = u'<a href="%s"><img alt="Up" src="%s/Up.png" /></a>' % \
-                       (up_url, resource_path)
+            up_html = u'<a href="%s">' %  (up_url) + \
+                    u'<img alt="Up" src="%s/Up.png" /></a>' % \
+                    (resource_path)
         else:
-            up_html = u'<img alt="Up" src="%s/Up_gray.png" />' % (resource_path)
+            up_html = u'<img alt="Up" src="%s/Up_gray.png" />' % \
+                    (resource_path)
         retHtml += up_html
 
         down_url = absoluteURL(item, formatter.request) + '/@@movedown.html'
@@ -140,12 +196,24 @@ def getActionBottons(item, formatter):
                                            name='movedown.html')
         if myAdapter is not None and canAccess(myAdapter,'render') and \
            item.__parent__.keys()[-1] != item.objectID: # not the last element
-            down_html = u'<a href="%s"><img alt="Down" src="%s/Down.png" /></a>' % \
-                       (down_url, resource_path)
+            down_html = u'<a href="%s">' %  (down_url) + \
+                      u'<img alt="Down" src="%s/Down.png" /></a>' % \
+                      (resource_path)
         else:
-            down_html = u'<img alt="Down" src="%s/Down_gray.png" />' % (resource_path)
+            down_html = u'<img alt="Down" src="%s/Down_gray.png" />' %\
+                      (resource_path)
         retHtml += down_html
+    return retHtml
 
+def getActionBottons(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    retHtml = u""
+    retHtml += getActionBotton_Detail(item, formatter)
+    retHtml += getActionBotton_Edit(item, formatter)
+    retHtml += getActionBotton_History(item, formatter)
+    retHtml += getActionBotton_Delete(item, formatter)
+    retHtml += getActionBotton_UpDown(item, formatter)
     return retHtml
 
 def getSize(item, formatter):
@@ -254,7 +322,7 @@ def link(view='index.html'):
                 return u'<a href="%s">%s</a>' % (url, value)
             else:
                 return u'%s' % (value)
-        except:
+        except Exception:
             return u'%s' % (value)
             
     return anchor
@@ -751,19 +819,17 @@ class Overview(BrowserPagelet):
         """ Properties of table are defined here"""
         columnList = list(self.columns)
         containerIsOrderd = IOrderedContainer.providedBy(self.context)
-        for i in self.sort_columns:
-            directlyProvides(columnList[i], ISortableColumn)
-        #directlyProvides(columnList[1], ISortableColumn)
-        #directlyProvides(columnList[2], ISortableColumn)
-        #directlyProvides(columnList[3], ISortableColumn)
         if containerIsOrderd:
-            columnList.insert(1, GetterColumn(title=_('Pos'),
-                                              getter=getPosition))
-            directlyProvides(columnList[3], ISortableColumn)
+            getterC = GetterColumn(title=_('Pos'), getter=getPosition)
+            #directlyProvides(getterC, ISortableColumn)
+            columnList.insert(1, getterC)
+            #directlyProvides(columnList[3], ISortableColumn)
             formatter = StandaloneFullFormatter(
                 self.context, self.request, self.objs(),
                 columns=columnList, sort_on=((_('Pos'), False),))
         else:
+            for i in self.sort_columns:
+                directlyProvides(columnList[i], ISortableColumn)
             formatter = StandaloneFullFormatter(
                 self.context, self.request, self.objs(),
                 columns=columnList, sort_on=((_('Title'), False),))

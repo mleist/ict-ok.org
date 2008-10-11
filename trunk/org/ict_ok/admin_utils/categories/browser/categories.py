@@ -97,7 +97,7 @@ class Overview(SuperclassOverview):
                      getter=getActionBottons,
                      cell_formatter=raw_cell_formatter),
         )
-
+    #sort_columns = [0]
 # --------------- forms ------------------------------------
 
 # ------ Categories

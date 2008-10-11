@@ -727,6 +727,7 @@ pre.traceback {
   color:#333;
   background-color:#E5FFF9;
   border:1px solid #A0A0A0;
+  padding: 2px;
   font-size:85%;
   text-align:left;
   /*z-index:9500;*/
