@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,W0232,W0142
+# pylint: disable-msg=E1101,W0613,W0232,W0201,W0142,W0107
 #
 """implementation of browser class of IkSite object
 """
@@ -32,6 +32,11 @@ from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm, AddForm, DeleteForm
+from org.ict_ok.components.superclass.browser.superclass import \
+     Overview as SuperclassOverview
+from org.ict_ok.components.superclass.browser.superclass import \
+     GetterColumn, getStateIcon, getTitel, raw_cell_formatter, \
+     link, getModifiedDate, getActionBottons
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.admin_utils.categories.interfaces import \
      IAdmUtilCategories, IAdmUtilCatHostGroup
@@ -40,6 +45,14 @@ from org.ict_ok.admin_utils.categories.cat_hostgroup import \
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 
 _ = MessageFactory('org.ict_ok')
+
+
+# --------------- helper functions -------------------------
+
+def getUsedCounter(item, formatter):
+    """display number of objects, which are using this entry"""
+    if IAdmUtilCatHostGroup.providedBy(item):
+        return len(item.isUsedIn())
 
 # --------------- menu entries -----------------------------
 
@@ -65,6 +78,25 @@ class AdmUtilCatHostGroupDetails(SupernodeDetails):
     omit_editfields = SupernodeDetails.omit_editfields
     omit_addfields = SupernodeDetails.omit_addfields
 
+    
+class Overview(SuperclassOverview):
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Title'),
+                     getter=getTitel,
+                     cell_formatter=link('overview.html')),
+        GetterColumn(title=_('used nr.'),
+                     getter=getUsedCounter),
+        GetterColumn(title=_('Modified On'),
+                     getter=getModifiedDate,
+                     subsort=True,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
 
 # --------------- forms ------------------------------------
 
@@ -77,7 +109,8 @@ class DetailsAdmUtilCategoriesForm(DisplayForm):
         *AdmUtilCategoriesDetails.omit_viewfields)
 
 # ------ Host Group
-    
+
+
 class AddAdmUtilCatHostGroupForm(AddForm):
     """Add form."""
     label = _(u'add host group')

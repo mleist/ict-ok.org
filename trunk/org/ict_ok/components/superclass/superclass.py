@@ -115,6 +115,15 @@ class Superclass(Persistent):
         newEntry.setObjVersion(self.ikRevision)
         self.history.append(newEntry)
 
+    def canBeDeleted(self):
+        """
+        a object can be deleted with normal delete permission
+        special objects can overload this for special delete rules
+        (e.g. IAdmUtilCatHostGroup)
+        return True or False
+        """
+        return True
+    
     def enabledDebug(self):
         """
         is debug output enabled?

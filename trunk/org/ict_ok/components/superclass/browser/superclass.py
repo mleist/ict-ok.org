@@ -81,7 +81,7 @@ def getActionBottons(item, formatter):
     retHtml = u""
     parentIsOrderd = IOrderedContainer.providedBy(item.__parent__)
     resource_path = getAdapter(formatter.request, name='pics')()
-
+    # details
     view_url = absoluteURL(item, formatter.request) + '/@@details.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                        name='details.html')
@@ -91,7 +91,7 @@ def getActionBottons(item, formatter):
     else:
         view_html = u'<img alt="Details" src="%s/Info_gr.png" />' % (resource_path)
     retHtml += view_html
-
+    # edit
     edit_url = absoluteURL(item, formatter.request) + '/@@edit.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                        name='edit.html')
@@ -101,7 +101,7 @@ def getActionBottons(item, formatter):
     else:
         edit_html = u'<img alt="Edit" src="%s/Hand_gr.png" />' % (resource_path)
     retHtml += edit_html
-
+    # history
     hist_url = absoluteURL(item, formatter.request) + '/@@history.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                        name='history.html')
@@ -111,17 +111,18 @@ def getActionBottons(item, formatter):
     else:
         hist_html = u'<img alt="History" src="%s/Doc_gr.png" />' % (resource_path)
     retHtml += hist_html
-
+    # delete
     trash_url = absoluteURL(item, formatter.request) + '/@@delete.html'
     myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                        name='delete.html')
-    if myAdapter is not None and canAccess(myAdapter,'render'):
+    if myAdapter is not None and canAccess(myAdapter,'render') \
+       and item.canBeDeleted():
         trash_html = u'<a href="%s"><img alt="Trash" src="%s/Trash.png" /></a>' % \
                    (trash_url, resource_path)
     else:
         trash_html = u'<img alt="Trash" src="%s/Trash_gr.png" />' % (resource_path)
     retHtml += trash_html
-
+    # move up / down
     if parentIsOrderd:
         up_url = absoluteURL(item, formatter.request) + '/@@moveup.html'
         myAdapter = zapi.queryMultiAdapter((item, formatter.request),

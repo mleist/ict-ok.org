@@ -14,10 +14,18 @@
         for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"
         name="overview.html"
         />
+    <!--Details as fake for autimatic display in utility manager-->
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"
+        class=".categories.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.categories.View"
+    />
     <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"
-        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        class=".categories.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.categories.View"
         />

@@ -29,8 +29,16 @@ class IAdmUtilCategories(ISuperclass, IOrderedContainer):
     """A configuration utility."""
 
 class IAdmUtilCatHostGroup(ISupernode):
-    """A host group entry."""
-    def isUsedIn(self):
+    """A host group entry.
+    """
+    def canBeDeleted():
+        """
+        a object can be deleted with normal delete permission
+        special objects can overload this for special delete rules
+        (e.g. IAdmUtilCatHostGroup)
+        return True or False
+        """
+    def isUsedIn():
         """
         this object is used at least in one host (returns object list)
         """

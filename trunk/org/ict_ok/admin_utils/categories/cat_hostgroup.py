@@ -63,6 +63,15 @@ class AdmUtilCatHostGroup(Supernode):
                 setattr(self, name, value)
         self.ikRevision = __version__
 
+    def canBeDeleted(self):
+        """
+        a object can be deleted with normal delete permission
+        special objects can overload this for special delete rules
+        (e.g. IAdmUtilCatHostGroup)
+        return True or False
+        """
+        return len(self.isUsedIn()) == 0
+
     def isUsedIn(self):
         """
         this object is used at least in one host (returns object list)
