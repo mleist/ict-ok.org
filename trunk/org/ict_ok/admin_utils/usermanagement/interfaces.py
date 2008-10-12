@@ -17,8 +17,8 @@ __version__ = "$Id$"
 import pytz
 
 # zope imports
-from zope.interface import Attribute, Interface
-from zope.schema import List, Object, TextLine, Choice
+from zope.interface import Attribute, Interface, invariant, Invalid
+from zope.schema import List, Object, TextLine, Choice, Password
 from zope.i18nmessageid import MessageFactory
 from zope.app.security.interfaces import IAuthentication
 
@@ -68,14 +68,30 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
 
 class IEditPassword(Interface):
     """ schema for user password dialog """
-    password1 = TextLine(
+    password_old = Password(
+        title = _(u"Old password"),
+        required=True
+        )
+    password1 = Password(
         title = _(u"Password"),
+        min_length = 4,
+        max_length = 20,
         required=True
         )
-    password2 = TextLine(
+    password2 = Password(
         title = _(u"Password (again)"),
+        min_length = 4,
+        max_length = 20,
         required=True
         )
+    @invariant
+    def ensureP1eqP2(data_set):
+        """Password 1 and password 2 must be equal
+        """
+        if hasattr(data_set, "password1") and \
+           hasattr(data_set, "password2") and \
+           data_set.password1 != data_set.password2:
+            raise Invalid("new passwords not equal")
     
 class IAdmUtilUserDashboard(Interface):
     """ user dashboard """

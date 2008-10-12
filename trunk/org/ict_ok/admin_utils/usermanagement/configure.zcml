@@ -13,6 +13,8 @@
             id="org.ict_ok.admin_utils.usermanagement.usermanagement.AdmUtilUserManagement" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <implements
+            interface=".interfaces.IEditPassword" />
         <require
             permission="org.ict_ok.admin_utils.usermanagement.View"
             interface=".interfaces.IAdmUtilUserManagement"
