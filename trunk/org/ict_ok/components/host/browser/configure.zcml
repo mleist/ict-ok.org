@@ -107,6 +107,19 @@
     />
 
     <z3c:pagelet
+        name="smartview.html"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        class=".host.SmartviewForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.SmartView"
+    />
+    <z3c:template
+        template="smartview.pt"
+        for=".host.SmartviewForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
         name="edit.html"
         for="org.ict_ok.components.host.interfaces.IHost"
         class=".host.EditHostForm"
@@ -179,6 +192,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.View"
+        />
+    <viewlet
+        name="smartview"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubSmartView"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.SmartView"
         />
     <viewlet
         name="overview"

@@ -230,6 +230,12 @@ class DetailsHostForm(DisplayForm):
     fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
 
 
+class SmartviewForm(DisplayForm):
+    """ Display form for the object """
+    label = _(u'smartview of host')
+    fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
+
+
 class AddHostForm(AddForm):
     """Add form."""
     label = _(u'Add Host')

@@ -402,6 +402,13 @@ class MSubDetails(GlobalMenuSubItem):
     weight = 10
 
 
+class MSubSmartView(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Smart view')
+    viewURL = '@@smartview.html'
+    weight = 12
+
+
 class MSubOverview(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Overview')

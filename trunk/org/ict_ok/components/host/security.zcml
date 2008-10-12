@@ -13,6 +13,11 @@
     />
 
     <permission
+        id="org.ict_ok.components.host.SmartView"
+        title="Smart view host Entry"
+    />
+
+    <permission
         id="org.ict_ok.components.host.Add"
         title="Add Template Entry"
         description="Add Template Entry."
@@ -35,6 +40,9 @@
     <grant permission="org.ict_ok.components.host.View"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.components.host.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.host.SmartView"
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.components.host.Add"
