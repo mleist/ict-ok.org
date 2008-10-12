@@ -30,8 +30,6 @@ from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 from org.ict_ok.admin_utils.reports.reports import AdmUtilReports
-from org.ict_ok.admin_utils.reports.cat_hostgroup import \
-     AdmUtilCatHostGroup
 
 logger = logging.getLogger("AdmUtilReports")
 
