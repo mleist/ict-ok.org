@@ -246,6 +246,7 @@ def getModifiedDate(item, formatter):
                 % (ttid, ttid, ttid, longTimeString)
         resString = u'<span id="%s">%s</span>' % (ttid, timeStringHTML)
     except AttributeError:
+    except TypeError:
         resString = u"---"
         tooltip = u""
     return resString + tooltip
