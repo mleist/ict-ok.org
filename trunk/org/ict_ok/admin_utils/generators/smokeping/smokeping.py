@@ -91,12 +91,14 @@ class AdmUtilGeneratorSmokePing(AdmUtilGenerators):
         smokepingUtil = getUtility(IAdmUtilGeneratorSmokePing)
         if smokepingUtil is not None and \
            smokepingUtil.isRunning:
-            retInt = os.system('echo "" |sudo -S ' + self.pathInitScript + \
-                               ' reload > /dev/null 2>&1')
+            cmdString = 'echo "" |sudo -S ' + self.pathInitScript + \
+                      ' reload > /dev/null 2>&1'
+            retInt = os.system(cmdString)
             if retInt == 0:
                 self.lastDeamonReload = datetime.datetime.utcnow()
             else:
-                logger.warning(u"reloadDaemon Error No: %d", retInt)
+                logger.warning(u"reloadDaemon Error No: %d [cmd:%s]",
+                               retInt, cmdString)
         
     def allConfigFilesOut(self, forceOutput=False,
                           event=None, genOutput=True):
