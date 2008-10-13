@@ -237,6 +237,8 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                     subitem_len = self.getLengthOf(subItem)
                 except TypeError:
                     subitem_len = 0
+                except AttributeError:
+                    subitem_len = 0
                 try:
                     dcAdapter = IGeneralDublinCore(subItem)
                 except TypeError:
