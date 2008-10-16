@@ -40,6 +40,8 @@
              file="security.zcml" />
     <include package="org.ict_ok.admin_utils.public_viewing"
              file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.reports"
+             file="security.zcml" />
     <include package="org.ict_ok.admin_utils.supervisor"
              file="security.zcml" />
     <include package="org.ict_ok.admin_utils.snmpd"

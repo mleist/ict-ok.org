@@ -5,7 +5,7 @@
 				<table id="sortable" class="listing" summary="Content listing"
 										 i18n:attributes="summary"
 										 >
-					<tr tal:attributes="class view/getTabClass">
+					<tr tal:attributes="class view/getNextTabClass">
 						<th i18n:translate="">Name</th>
 						<th i18n:translate="">State</th>
 					</tr>

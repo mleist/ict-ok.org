@@ -15,14 +15,45 @@
         for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
         name="details.html"
         />
+    <page
+        name="actions"
+        for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
+        class=".reports.AdmUtilReportsDetails"
+        attribute="actions"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="generate_test_pdf"
+        for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
+        class=".reports.AdmUtilReportsDetails"
+        attribute="generateTestPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="generate_all_pdf"
+        for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
+        class=".reports.AdmUtilReportsDetails"
+        attribute="generateAllPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
 
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
-        class=".reports.Overview"
+        class=".reports.AdmUtilReportsDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.View"
-    />
+        />
+
+    <z3c:template
+        template="details.pt"
+        for=".reports.AdmUtilReportsDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <z3c:pagelet
         name="history.html"
         for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
@@ -30,6 +61,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.View"
         />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
+        class=".reports.EditAdmUtilReportsForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.reports.Edit"
+    />
 
     <!--##### Sub Menu ##### -->
     <viewlet
@@ -47,5 +86,13 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.reports.Edit"
         />
 </configure>

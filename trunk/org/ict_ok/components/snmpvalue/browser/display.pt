@@ -4,15 +4,15 @@
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary"
             tal:define="runtime_info view/getZopeRuntimeInfo">
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Timestamp</td>
             <td tal:content="python: dateform.format(view.nowTS())">test</td>
         </tr>
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">current values</td>
             <td>
                 <ul>
@@ -22,27 +22,27 @@
                 </ul>
             </td>
         </tr>
-        <tr tal:attributes="class view/getTabClass"
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="python:context.getMinQuantity()[0]"
             tal:define="minString python:context.getMinQuantity()[1]">
             <td i18n:translate="">min. level</td>
             <td tal:content="minString" />
         </tr>
         <div tal:omit-tag="" tal:define="underMinQuota context/underMinQuota">
-        <tr tal:attributes="class view/getTabClass"
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="underMinQuota|nothing">
             <td i18n:translate="">Under min quota</td>
             <td tal:content="python:'%3.1f%%' % (100.0 * underMinQuota)" />
         </tr>
         </div>
-        <tr tal:attributes="class view/getTabClass"
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="python:context.getMaxQuantity()[0]"
             tal:define="maxString python:context.getMaxQuantity()[1]">
             <td i18n:translate="">max. level</td>
             <td tal:content="maxString" />
         </tr>
         <div tal:omit-tag="" tal:define="overMaxQuota context/overMaxQuota">
-        <tr tal:attributes="class view/getTabClass"
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="overMaxQuota|nothing">
             <td i18n:translate="">Over max quota</td>
             <td tal:content="python:'%3.1f%%' % (100.0 * overMaxQuota)" />

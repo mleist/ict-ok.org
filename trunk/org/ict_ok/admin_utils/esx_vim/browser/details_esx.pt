@@ -1,6 +1,6 @@
 <i18n:block domain="org.ict_ok">
     <h1 i18n:translate="">Details dddd</h1>
-        <!--<tr tal:attributes="class view/getTabClass"-->
+        <!--<tr tal:attributes="class view/getNextTabClass"-->
             <!--tal:condition="context/ikComment|nothing">-->
             <!--<td i18n:translate="">Comment</td>-->
             <!--<td><pre tal:content="context/ikComment" /></td>-->

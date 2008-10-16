@@ -17,6 +17,17 @@
         id="org.ict_ok.admin_utils.reports.Edit"
         title="editReportsUtil"
     />
+    <permission
+        id="org.ict_ok.admin_utils.reports.generate.pdf"
+        title="genPdfReport"
+    />
+
+    <grant permission="org.ict_ok.admin_utils.reports.generate.pdf"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.reports.generate.pdf"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.reports.generate.pdf"
+                    role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.reports.View"
                     role="org.ict_ok.mgr" />

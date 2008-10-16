@@ -603,6 +603,11 @@ class SuperclassDetails:
 
     def getTabClass(self):
         if hasattr(self.request, 'tabClass'):
+            return self.request.tabClass
+        return 'cb_wht'
+
+    def getNextTabClass(self):
+        if hasattr(self.request, 'tabClass'):
             if self.request.tabClass == 'cb_wht':
                 self.request.tabClass = 'cb_ixl'
             else:

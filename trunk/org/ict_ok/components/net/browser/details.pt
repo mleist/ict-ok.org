@@ -3,11 +3,11 @@
         <div metal:fill-slot="body" i18n:domain="ict-ok.org">
             <h1 i18n:translate="">Net Details</h1>
             <table id="sortable" class="listing" >
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td class="label" i18n:translate="">ipv4</td>
                     <td tal:content="context/ipv4" />
                 </tr>
-                <tr tal:attributes="class view/getTabClass"
+                <tr tal:attributes="class view/getNextTabClass"
                     tal:condition="context/ikComment|nothing">
                     <td i18n:translate="">Comment</td>
                     <td><pre tal:content="context/ikComment" /></td>

@@ -4,7 +4,7 @@
             <h3 i18n:translate="">Systeminfo</h3>
             <table id="sortable" class="listing" summary="Content listing"
                     i18n:attributes="summary">
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">Process definitions</td>
                     <td>
                         <table id="sortable" class="listing"

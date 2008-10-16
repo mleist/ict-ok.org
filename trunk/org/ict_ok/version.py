@@ -40,7 +40,7 @@ def getVersRevision(versText = __versRevision):
 
 def getIkVersion():
     """ get actual version string """
-    return "%s.%s.%s" % (__versMajor, __versMinor, getVersRevision())
+    return "V%s.%s.%s" % (__versMajor, __versMinor, getVersRevision())
 
 
 if __name__ == '__main__':

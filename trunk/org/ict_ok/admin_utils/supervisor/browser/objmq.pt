@@ -7,15 +7,15 @@
                     <td i18n:translate="">Master Node</td>
                     <td>
                         <table class="listing">
-                            <tr tal:attributes="class view/getTabClass">
+                            <tr tal:attributes="class view/getNextTabClass">
                                 <td i18n:translate="">ipv4Master</td>
                                 <td tal:content="context/ipv4Master" />
                             </tr>
-                            <tr tal:attributes="class view/getTabClass">
+                            <tr tal:attributes="class view/getNextTabClass">
                                 <td i18n:translate="">oidMaster</td>
                                 <td tal:content="context/oidMaster" />
                             </tr>
-                            <tr tal:attributes="class view/getTabClass">
+                            <tr tal:attributes="class view/getNextTabClass">
                                 <td i18n:translate="">status2Master</td>
                                 <td tal:content="context/status2Master" />
                             </tr>

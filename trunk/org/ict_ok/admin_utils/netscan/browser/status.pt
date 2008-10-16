@@ -4,11 +4,11 @@
 			<h3 i18n:translate="">Systeminfo</h3>
             <table id="sortable" class="listing" summary="Content listing"
                 i18n:attributes="summary">
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <th i18n:translate="">Name</th>
                     <th i18n:translate="">Value</th>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">aktive Scanner</td>
                     <td>
 						<ul>
@@ -19,7 +19,7 @@
 						</ul>
 					</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">all Scanner</td>
                     <td>
 						<ul>

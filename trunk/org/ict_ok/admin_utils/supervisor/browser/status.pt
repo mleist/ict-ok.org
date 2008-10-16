@@ -4,7 +4,7 @@
             <h1 i18n:translate="">Systeminfo</h1>
             <table id="sortable" class="listing" summary="Content listing"
                 i18n:attributes="summary">
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <th i18n:translate="">Name</th>
                     <th i18n:translate="">Value</th>
                 </tr>
@@ -12,11 +12,11 @@
         oidMaster = TextLine(
         uidSlaveList = List ( -->
                             
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">Node Name</td>
                     <td tal:content="context/getNodeName">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">Version System</td>
                     <td tal:content="context/getSystemVersion">test</td>
                 </tr>
@@ -24,11 +24,11 @@
                     <td i18n:translate="">getNetworkDevList</td>
                     <td tal:content="context/getNetworkDevList">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">Local IP-Addresses</td>
                     <td tal:content="context/getLocalIpV4AddressList">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">Local MAC-Address</td>
                     <td tal:content="context/getLocalMacAddress">test</td>
                 </tr-->
@@ -36,7 +36,7 @@
                     <td i18n:translate="">getNetworkInfoDict</td>
                     <td tal:content="context/getNetworkInfoDict">test</td>
                 </tr-->
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">Network</td>
                     <td>
                         <table id="sortable" class="listing"
@@ -58,27 +58,27 @@
                         </table>
                     </td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass" tal:condition="context/ipv4Master|nothing">
+                <tr tal:attributes="class view/getNextTabClass" tal:condition="context/ipv4Master|nothing">
                     <td i18n:translate="">ipv4My</td>
                     <td tal:content="context/ipv4My" />
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">objectID</td>
                     <td tal:content="context/objectID" />
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">isMaster</td>
                     <td tal:content="context/isMaster" />
                 </tr>
-                <tr tal:attributes="class view/getTabClass" tal:condition="context/ipv4Master|nothing">
+                <tr tal:attributes="class view/getNextTabClass" tal:condition="context/ipv4Master|nothing">
                     <td i18n:translate="">ipv4Master</td>
                     <td tal:content="context/ipv4Master" />
                 </tr>
-                <tr tal:attributes="class view/getTabClass" tal:condition="context/oidMaster|nothing">
+                <tr tal:attributes="class view/getNextTabClass" tal:condition="context/oidMaster|nothing">
                     <td i18n:translate="">oidMaster</td>
                     <td tal:content="context/oidMaster" />
                 </tr>
-                <tr tal:attributes="class view/getTabClass" tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+                <tr tal:attributes="class view/getNextTabClass" tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
                     <td i18n:translate="">lastSeenMaster</td>
                     <div tal:omit-tag=""  tal:condition="context/lastSeenMaster">
                         <td tal:content="python: dateform.format(context.lastSeenMaster)">test</td>
@@ -87,23 +87,23 @@
                         <td>---</td>
                     </div>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">status2Master</td>
                     <td tal:content="context/status2Master" />
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">isSlave</td>
                     <td tal:content="context/isSlave" />
                 </tr>
-                <tr tal:attributes="class view/getTabClass" tal:condition="context/ipv4Slave|nothing">
+                <tr tal:attributes="class view/getNextTabClass" tal:condition="context/ipv4Slave|nothing">
                     <td i18n:translate="">ipv4Slave</td>
                     <td tal:content="context/ipv4Slave">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass" tal:condition="context/oidSlave|nothing">
+                <tr tal:attributes="class view/getNextTabClass" tal:condition="context/oidSlave|nothing">
                     <td i18n:translate="">oidSlave</td>
                     <td tal:content="context/oidSlave" />
                 </tr>
-                <tr tal:attributes="class view/getTabClass" tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+                <tr tal:attributes="class view/getNextTabClass" tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
                     <td i18n:translate="">lastSeenSlave</td>
                     <div tal:omit-tag=""  tal:condition="context/lastSeenSlave">
                         <td tal:content="python: dateform.format(context.lastSeenSlave)">test</td>
@@ -120,23 +120,23 @@
                         </ul>
                     </td>
                 </tr-->
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">CpuVendorId</td>
                     <td tal:content="context/getCpuVendorId">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">CpuModelName</td>
                     <td tal:content="context/getCpuModelName">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">Kernel Version</td>
                     <td tal:content="context/getKernelVersion">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">System Uptime</td>
                     <td tal:content="view/getSystemUptime">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">System Load</td>
                     <td tal:define="load context/getSystemLoad">
                         <span tal:content="structure python: '1 min: %d %%<br>' % (load[0]*100)"/>
@@ -144,7 +144,7 @@
                         <span tal:content="structure python: '15 min: %d %%' % (load[2]*100)"/>
                     </td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">Start Counter</td>
                     <td tal:content="view/getStartCnt">test</td>
                 </tr>
@@ -152,19 +152,19 @@
                     <td i18n:translate="">principal</td>
                     <td tal:content="request/principal">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">annotations</td>
                     <td tal:content="request/annotations">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">debug</td>
                     <td tal:content="request/debug">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">environment</td>
                     <td tal:content="request/environment/items">test</td>
                 </tr>
-                <tr tal:attributes="class view/getTabClass">
+                <tr tal:attributes="class view/getNextTabClass">
                     <td i18n:translate="">REMOTE_ADDR</td>
                     <td tal:content="request/environment/REMOTE_ADDR">test</td>
                 </tr-->

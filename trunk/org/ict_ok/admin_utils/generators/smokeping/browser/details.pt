@@ -4,11 +4,11 @@
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary"
             tal:define="runtime_info view/getZopeRuntimeInfo">
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Modification time</td>
             <div tal:omit-tag=""  tal:condition="view/getModifiedTime">
                 <td tal:content="python: dateform.format(view.getModifiedTime())">test</td>
@@ -17,16 +17,16 @@
                 <td>---</td>
             </div>
         </tr>
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Debug level</td>
             <td tal:content="context/dbgLevel" />
         </tr>
-        <tr tal:attributes="class view/getTabClass"
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">
             <td i18n:translate="">Comment</td>
             <td><pre tal:content="context/ikComment" /></td>
         </tr>
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">last change</td>
             <div tal:omit-tag=""  tal:condition="context/lastConfigFileChange">
                 <td tal:content="python: dateform.format(view.convert2UserTimezone(context.lastConfigFileChange))">test</td>
@@ -35,7 +35,7 @@
                 <td>---</td>
             </div>
         </tr>
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">last reload</td>
             <div tal:omit-tag=""  tal:condition="context/lastDeamonReload">
                 <td tal:content="python: dateform.format(view.convert2UserTimezone(context.lastDeamonReload))">test</td>

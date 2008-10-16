@@ -6,7 +6,7 @@
                        class="listing"
                        tal:condition="context/enableConnector|nothing">
                        
-                    <tr tal:attributes="class view/getTabClass">
+                    <tr tal:attributes="class view/getNextTabClass">
                         <td class="label" i18n:translate="">Connector OID</td>
                         <td tal:content="python: context.getObjectId()" />
                     </tr>

@@ -3,11 +3,11 @@
     <h3 i18n:translate="">Details of the latency Value</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
-        <tr tal:attributes="class view/getTabClass">
+        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <tr tal:attributes="class view/getTabClass"
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">
             <td i18n:translate="">Comment</td>
             <td><pre tal:content="context/ikComment" /></td>

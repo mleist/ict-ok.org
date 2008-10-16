@@ -34,3 +34,5 @@ class ILatency(IComponent):
     def getRrdFilename():
         """ rrd filename incl. path
         """
+    def generateValuePng(params=None):
+        """generate Picture"""

@@ -19,7 +19,7 @@
                 <td>---</td>
             </div>
         </tr -->
-        <tr tal:attributes="class view/getTabClass"
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">
             <td i18n:translate="">Comment</td>
             <td><pre tal:content="context/ikComment" /></td>

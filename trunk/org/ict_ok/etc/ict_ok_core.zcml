@@ -33,6 +33,7 @@
     <include package="org.ict_ok.admin_utils.notifier.email" />
     <include package="org.ict_ok.admin_utils.objmq" />
     <include package="org.ict_ok.admin_utils.public_viewing" />
+    <include package="org.ict_ok.admin_utils.reports" />
     <include package="org.ict_ok.admin_utils.snmpd" />
     <!--<include package="org.ict_ok.admin_utils.ticker" />-->
     <include package="org.ict_ok.admin_utils.usermanagement" />

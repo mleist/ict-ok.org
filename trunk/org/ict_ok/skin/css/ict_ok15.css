@@ -252,6 +252,14 @@ div.bg-315-bottom h4 {
   font-weight:bold;
 }
 
+div.bg-315-bottom h5 {
+  color:#808080;
+  padding:10px 0px 2px 2px;
+  margin:0px 0 0 0;
+  font-size:100%;
+  font-weight:bold;
+}
+
 .bg-650-top {
   background:url(../pics/bg_box_650_shaddow_top.gif) no-repeat top; 
   padding:6px 0 0 0;
@@ -283,6 +291,14 @@ div.bg-650-bottom h4 {
   font-weight:bold;
 }
 
+div.bg-650-bottom h5 {
+  color:#808080;
+  padding:10px 0px 2px 2px;
+  margin:0px 0 0 0;
+  font-size:100%;
+  font-weight:bold;
+}
+
 .bg-985-top {
   background:url(../pics/bg_box_985_shaddow_top.gif) no-repeat top; 
   padding:6px 0 0 0;
@@ -309,6 +325,14 @@ div.bg-985-bottom h1,h3 {
 div.bg-985-bottom h4 {
   color:#008263;
   padding:0px 0px 4px 14px;
+  margin:0px 0 0 0;
+  font-size:100%;
+  font-weight:bold;
+}
+
+div.bg-985-bottom h5 {
+  color:#808080;
+  padding:10px 0px 2px 2px;
   margin:0px 0 0 0;
   font-size:100%;
   font-weight:bold;
@@ -365,6 +389,29 @@ table.listing tr th {
 
 table.listing tr td {
   padding:2px 8px 2px 0px;
+  vertical-align:top;
+}
+
+table.sublisting {
+  width:100%;
+}
+
+table.sublisting tr.odd {
+  background-color:#C0F0E4;
+}
+
+table.sublisting tr.even {
+  background-color:#FFF;
+}
+
+table.sublisting tr th {
+  padding:2px 8px 2px 0px;
+  vertical-align:top;
+  white-space:nowrap;
+}
+
+table.sublisting tr td {
+  padding:2px 8px 2px 40px;
   vertical-align:top;
 }
 
