@@ -224,12 +224,13 @@ class IAdmUtilReports(ISupernode):
 class IRptPdf(Interface):
     """Interface of PDF-report-Adapter
     """
-    def traverse4RptPre(level, comments):
+    def traverse4RptPre(level, comments, autoAppend=True):
         """pdf report object preamble
         
         level: indent-level (int 0..)
         comments: should there comments are in the output?
-
+        autoAppend: normal usecase: append the pdf elements to the document
+                    not autoAppend: returns a list with pdf elements
         """
 
     def traverse4RptPost(level, comments):

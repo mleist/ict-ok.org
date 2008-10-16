@@ -116,7 +116,8 @@ class Latency(Component):
         return "/opt/smokeping/data/%s.rrd" % data_path
 
     def generateValuePng(self, params=None):
-        """generate Picture"""
+        """generate Picture
+        """
         rrdFile = self.getRrdFilename()
         if not os.path.exists(rrdFile):
             return None
@@ -144,7 +145,7 @@ class Latency(Component):
         argList.append("--color=SHADEB#E5FFF9")
         argList.append("--color=BACK#E5FFF9")
         argList.append("--color=CANVAS#ffffff")
-        argList.append("--watermark=ict-ok.org")
+        argList.append("--watermark=ICT-OK.ORG")
         for i in range(1, 21):
             argList.append("DEF:ping%d=%s:ping%d:AVERAGE" % \
                            (i, str(rrdFile), i))

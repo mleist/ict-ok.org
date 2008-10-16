@@ -198,7 +198,8 @@ class SnmpValue(Component):
                 for pos in varBinds:
                     (snmpOid, snmpVal) = pos[0]
                     # get last number of SNMP oid
-                    self.snmpIndexDict[int(snmpVal)] = int(snmpOid.prettyPrint().split(".")[-1])
+                    self.snmpIndexDict[int(snmpVal)] = \
+                        int(snmpOid.prettyPrint().split(".")[-1])
         return self.snmpIndexDict
     
     def getOidList(self):
@@ -573,3 +574,248 @@ class SnmpValue(Component):
                 arg_string += ":%f" % snmpVal
             update_args.append(arg_string)
         return rrdtool.updatev(*update_args)
+
+    def rrdConfigureDefs(self, argList, rrdFile):
+        converted_addrs = self.getOidList()
+        for (ds_nr, ds_oid) in enumerate(converted_addrs):
+            argList.append("DEF:f_avg%02d=%s:ds%02d:AVERAGE" % \
+                           (ds_nr, rrdFile, ds_nr))
+            if self.displayMinMax:
+                argList.append("DEF:f_max%02d=%s:ds%02d:MAX" % \
+                               (ds_nr, rrdFile, ds_nr))
+                argList.append("DEF:f_min%02d=%s:ds%02d:MIN" % \
+                               (ds_nr, rrdFile, ds_nr))
+
+    def rrdConfigureCDefs(self, argList, arg_multiplier):
+        converted_addrs = self.getOidList()
+        for (ds_nr, ds_oid) in enumerate(converted_addrs):
+            multiplier = arg_multiplier
+            argList.append("CDEF:avg%02d=f_avg%02d,%f,*" % \
+                           (ds_nr, ds_nr, multiplier))
+            if self.displayMinMax:
+                argList.append("CDEF:max%02d=f_max%02d,%f,*" % \
+                               (ds_nr, ds_nr, multiplier))
+                argList.append("CDEF:min%02d=f_min%02d,%f,*" % \
+                               (ds_nr, ds_nr, multiplier))
+
+    def rrdConfigureCDefsIndex(self, argList, arg_multiplier):
+        converted_addrs = self.getOidList()
+        for (ds_nr, ds_oid) in enumerate(converted_addrs):
+            if ds_nr % 2 == 0: # odd / even
+                multiplier = arg_multiplier
+            else:
+                multiplier = -1.0 * arg_multiplier
+            argList.append("CDEF:avg%02d=f_avg%02d,%f,*" % \
+                           (ds_nr, ds_nr, multiplier))
+            if self.displayMinMax:
+                argList.append("CDEF:max%02d=f_max%02d,%f,*" % \
+                               (ds_nr, ds_nr, multiplier))
+                argList.append("CDEF:min%02d=f_min%02d,%f,*" % \
+                               (ds_nr, ds_nr, multiplier))
+
+    def rrdConfigureMinimum(self, argList):
+        (displUnit, displayString) = self.getDisplayUnit()
+        (minQuantity, minString) = self.getMinQuantity()
+        if minQuantity is not None:
+            converted_addrs = self.getOidList()
+            myMinValue = float(minQuantity / displUnit)
+            for (ds_nr, ds_oid) in enumerate(converted_addrs):
+                argList.append("CDEF:ulimitmin%02d=avg%02d,%f,LT,avg%02d,0,IF" % \
+                               (ds_nr, ds_nr, myMinValue, ds_nr))
+            argList.append("HRULE:%f#FFFF0080" % (myMinValue))
+
+    def rrdConfigureMinimumIndex(self, argList):
+        (displUnit, displayString) = self.getDisplayUnit()
+        (minQuantity, minString) = self.getMinQuantity()
+        if minQuantity is not None:
+            converted_addrs = self.getOidList()
+            for (ds_nr, ds_oid) in enumerate(converted_addrs):
+                if ds_nr % 2 == 0: # odd / even
+                    myMinValue = float(minQuantity / displUnit)
+                    argList.append("CDEF:ulimitmin%02d=avg%02d,%f,LT,avg%02d,0,IF" % \
+                                   (ds_nr, ds_nr, myMinValue, ds_nr))
+                else:
+                    myMinValue = -1.0 * float(minQuantity / displUnit)
+                    argList.append("CDEF:ulimitmin%02d=avg%02d,%f,GT,avg%02d,0,IF" % \
+                                   (ds_nr, ds_nr, myMinValue, ds_nr))
+                argList.append("HRULE:%f#FFFF0080" % (myMinValue))
+
+    def rrdConfigureMaximum(self, argList):
+        (displUnit, displayString) = self.getDisplayUnit()
+        (maxQuantity, maxString) = self.getMaxQuantity()
+        if maxQuantity is not None:
+            myMaxValue = float(maxQuantity / displUnit)
+            converted_addrs = self.getOidList()
+            for (ds_nr, ds_oid) in enumerate(converted_addrs):
+                argList.append("CDEF:limitmax%02d=avg%02d,%f,GT,%f,0,IF" % \
+                               (ds_nr, ds_nr, myMaxValue, myMaxValue))
+                argList.append("CDEF:olimitmax%02d=avg%02d,%f,GT,avg%02d,%f,-,0,IF" % \
+                               (ds_nr, ds_nr, myMaxValue, ds_nr, myMaxValue))
+                argList.append("CDEF:ulimitmax%02d=avg%02d,%f,GT,0,avg%02d,IF" % \
+                               (ds_nr, ds_nr, myMaxValue, ds_nr))
+            argList.append("HRULE:%f#FF000080" % (myMaxValue))
+
+    def rrdConfigureMaximumIndex(self, argList):
+        (displUnit, displayString) = self.getDisplayUnit()
+        (maxQuantity, maxString) = self.getMaxQuantity()
+        if maxQuantity is not None:
+            converted_addrs = self.getOidList()
+            for (ds_nr, ds_oid) in enumerate(converted_addrs):
+                if ds_nr % 2 == 0: # odd / even
+                    myMaxValue = float(maxQuantity / displUnit)
+                    argList.append("CDEF:limitmax%02d=avg%02d,%f,GT,%f,0,IF" % \
+                                   (ds_nr, ds_nr, myMaxValue, myMaxValue))
+                    argList.append("CDEF:olimitmax%02d=avg%02d,%f,GT,avg%02d,%f,-,0,IF" % \
+                                   (ds_nr, ds_nr, myMaxValue, ds_nr, myMaxValue))
+                    argList.append("CDEF:ulimitmax%02d=avg%02d,%f,GT,0,avg%02d,IF" % \
+                                   (ds_nr, ds_nr, myMaxValue, ds_nr))
+                else:
+                    myMaxValue = -1.0 * float(maxQuantity / displUnit)
+                    argList.append("CDEF:limitmax%02d=avg%02d,%f,LT,%f,0,IF" % \
+                                   (ds_nr, ds_nr, myMaxValue, myMaxValue))
+                    argList.append("CDEF:olimitmax%02d=avg%02d,%f,LT,avg%02d,%f,-,0,IF" % \
+                                   (ds_nr, ds_nr, myMaxValue, ds_nr, myMaxValue))
+                    argList.append("CDEF:ulimitmax%02d=avg%02d,%f,LT,0,avg%02d,IF" % \
+                                   (ds_nr, ds_nr, myMaxValue, ds_nr))
+                argList.append("HRULE:%f#FF000080" % (myMaxValue))
+
+    def rrdConfigureLegend(self, argList):
+        (displUnit, displayString) = self.getDisplayUnit()
+        converted_addrs = self.getOidList()
+        for (ds_nr, ds_oid) in enumerate(converted_addrs):
+            argList.append(\
+                'GPRINT:avg%02d:AVERAGE:avg%02d\: %%6.2lf %s' % \
+                (ds_nr, ds_nr, displayString))
+        if self.displayMinMax:
+            argList.append(\
+                'GPRINT:max00:MAX:max00\: %%6.2lf %s' % displayString)
+            argList.append(\
+                'GPRINT:min00:MIN:min00\: %%6.2lf %s' % displayString)
+
+    def rrdConfigureGraphs(self, argList):
+        (minQuantity, minString) = self.getMinQuantity()
+        (maxQuantity, maxString) = self.getMaxQuantity()
+        if minQuantity is not None:
+            if maxQuantity is not None: # min and max are valid
+                argList.append("AREA:ulimitmax00#008263")
+                argList.append("AREA:limitmax00#E07771")
+                argList.append("STACK:olimitmax00#FF0000")
+                argList.append("AREA:ulimitmin00#CFD138")
+            else: # only min is valid
+                argList.append("AREA:avg00#7DD0BC:\"average 00\"")
+                argList.append("AREA:ulimitmin00#CFD138")
+        else:
+            if maxQuantity is not None: # only max are valid
+                argList.append("AREA:ulimitmax00#008263")
+                argList.append("AREA:limitmax00#E07771")
+                argList.append("STACK:olimitmax00#FF0000")
+            else: # neither min nor max are valid
+                argList.append("AREA:avg00#7DD0BC:\"average 00\"")
+                #argList.append("STACK:avg01#008263:\"average 01\"")
+        if self.displayMinMax:
+            argList.append("LINE1:max00#008263:\"max00\"")
+
+    def rrdConfigureGraphsIndex(self, argList):
+        (minQuantity, minString) = self.getMinQuantity()
+        (maxQuantity, maxString) = self.getMaxQuantity()
+        if minQuantity is not None:
+            if maxQuantity is not None: # min and max are valid
+                argList.append("AREA:ulimitmax00#008263")
+                argList.append("AREA:limitmax00#E07771")
+                argList.append("STACK:olimitmax00#FF0000")
+                argList.append("AREA:ulimitmin00#CFD138")
+                argList.append("AREA:ulimitmax01#008263")
+                argList.append("AREA:limitmax01#E07771")
+                argList.append("STACK:olimitmax01#FF0000")
+                argList.append("AREA:ulimitmin01#CFD138")
+            else: # only min is valid
+                argList.append("AREA:avg00#7DD0BC:\"average 00\"")
+                argList.append("AREA:ulimitmin00#CFD138")
+                argList.append("AREA:avg01#7DD0BC:\"average 01\"")
+                argList.append("AREA:ulimitmin01#CFD138")
+        else:
+            if maxQuantity is not None: # only max are valid
+                argList.append("AREA:ulimitmax00#008263")
+                argList.append("AREA:limitmax00#E07771")
+                argList.append("STACK:olimitmax00#FF0000")
+                argList.append("AREA:ulimitmax01#008263")
+                argList.append("AREA:limitmax01#E07771")
+                argList.append("STACK:olimitmax01#FF0000")
+            else: # neither min nor max are valid
+                argList.append("LINE1:avg00#7DD0BC:\"average 00\"")
+                argList.append("LINE1:avg01#008263:\"average 01\"")
+        argList.append("HRULE:0.0#00000080")
+        if self.displayMinMax:
+            argList.append("LINE1:max00#008263:\"max00\"")
+
+    def generateValuePng(self, params=None):
+        """generate Picture
+        """
+        rrdFile = self.getRrdFilename()
+        if not os.path.exists(self.getRrdFilename()):
+            return None
+        unitInRrd = convertQuantity(self.inpQuantity) \
+                  / convertQuantity("1.0 s")
+        (displUnit, displayString) = self.getDisplayUnit()
+        (minQuantity, minString) = self.getMinQuantity()
+        (maxQuantity, maxString) = self.getMaxQuantity()
+        if unitInRrd is not None and \
+           displUnit is not None:
+            multiplier = float(unitInRrd / displUnit)
+        else:
+            multiplier = 1.0
+        if 1: ##fileage > 60:
+            rrdFile = self.getRrdFilename()
+            argList = []
+            argList.append(params['targetname'])
+            # Defs
+            self.rrdConfigureDefs(argList, rrdFile)
+            # CDefs
+            if self.snmpIndexType == u"index":
+                self.rrdConfigureCDefsIndex(argList, multiplier)
+            else:
+                self.rrdConfigureCDefs(argList, multiplier)
+            # Minimum settings
+            if self.snmpIndexType == u"index":
+                self.rrdConfigureMinimumIndex(argList)
+            else:
+                self.rrdConfigureMinimum(argList)
+            # Maximum settings
+            if self.snmpIndexType == u"index":
+                self.rrdConfigureMaximumIndex(argList)
+            else:
+                self.rrdConfigureMaximum(argList)
+            argList.append("--start=%d" % params['starttime'])
+            argList.append("--end=%d" % params['endtime'])
+            try:
+                if params['width'] is not None:
+                    argList.append("--width=%d" % int(params['width']))
+                else:
+                    argList.append("--width=540")
+            except ValueError:
+                argList.append("--width=540")
+            try:
+                if params['height'] is not None:
+                    argList.append("--height=%d" % int(params['height']))
+                else:
+                    argList.append("--height=120")
+            except ValueError:
+                argList.append("--height=120")
+            argList.append("--color=SHADEA#E5FFF9")
+            argList.append("--color=SHADEB#E5FFF9")
+            argList.append("--color=BACK#E5FFF9")
+            argList.append("--color=CANVAS#ffffff")
+            argList.append("--watermark=ICT-OK.ORG")
+            argList.append("--vertical-label=%s" % displayString)
+            # Legend
+            self.rrdConfigureLegend(argList)
+            # Graph
+            if self.snmpIndexType == u"index":
+                self.rrdConfigureGraphsIndex(argList)
+            else:
+                self.rrdConfigureGraphs(argList)
+            argList.append("--imgformat=PNG")
+            argList.append("--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
+                           "HEIGHT=\"%lu\" ALT=\"Demo\">")
+            #print "argList: ", argList
+            rrdtool.graph(*argList)

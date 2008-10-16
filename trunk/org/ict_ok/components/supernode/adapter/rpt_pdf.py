@@ -26,11 +26,7 @@ from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.components.superclass.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
-from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
-     IGenSmokePing
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
-from org.ict_ok.admin_utils.reports.rpt_title import RptTitle
-from org.ict_ok.admin_utils.reports.rpt_para import RptPara
 
 logger = logging.getLogger("SupernodeGenSmokePing")
 
@@ -41,6 +37,9 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(ISupernode)
+
+    attributeList = []
+    attributeList.extend(ParentRptPdf.attributeList)
     
     def traverse4RptBody(self, level, comments):
         """pdf report data of/in object

@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,E0611
+# pylint: disable-msg=E1101,E0611,W0704,W0142
 #
 """Configuration adapter for smokeping-config files
 """
@@ -22,9 +22,12 @@ from zope.interface import implements
 from zope.component import adapts
 
 # reportlab imports
-from reportlab.lib.units import mm, cm
-from reportlab.platypus import Image, Spacer
+from reportlab.lib.units import mm
+from reportlab.platypus import Spacer, KeepTogether
 from reportlab.platypus.tables import Table, TableStyle
+
+# z3c imports
+from z3c.form import field
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ISuperclass
@@ -40,6 +43,8 @@ class RptPdf(object):
     
     implements(IRptPdf)
     adapts(ISuperclass)
+    
+    attributeList = ['ikName']
     
     def __init__(self, context):
         self.document = None
@@ -70,55 +75,42 @@ class RptPdf(object):
             except OSError:
                 pass
 
+    def getReportFields(self):
+        """
+        """
+        from org.ict_ok.components.superclass.browser.superclass import \
+             SuperclassDetails
+        return field.Fields(ISuperclass).omit(\
+            *SuperclassDetails.omit_viewfields)
+
     def getAttributeTable(self):
         """
         """
-        print "88888"
-        #ik_tbl_style = TableStyle([\
-            ##('LEFTPADDING', (0,0), (-1,-1), 0),
-            ##('RIGHTPADDING', (0,0), (-1,-1), 0),
-            ##('BOTTOMPADDING', (0,0), (-1,-1), 0),
-            ##('TOPPADDING', (0,0), (-1,-1), 0),
-            #('ALIGN', (0,0), (-1,-1), 'LEFT'),
-        #])        
-        #colWidths = [65 * mm, None]
-        #import pdb
-        #pdb.set_trace()
+        ik_tbl_style = TableStyle([\
+            ('LEFTPADDING', (0,0), (-1,-1), 0),
+            ('RIGHTPADDING', (0,0), (-1,-1), 0),
+            ('BOTTOMPADDING', (0,0), (-1,-1), 0),
+            ('TOPPADDING', (0,0), (-1,-1), 0),
+            ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+        ])        
+        colWidths = [50 * mm, 85 * mm]
         data = []
-        from zope.proxy import removeAllProxies
-        from zope.component import adaptedBy
-        from zope.schema import Field
-        from zope.schema.interfaces import IField
-        from zope.interface import providedBy
-        from zope.schema import getFieldsInOrder
-        print "self.__class__: ", self.__class__
-        i2s=adaptedBy(self.__class__)
-        print "i2s: ", i2s
-        for i1 in i2s:
-            if i1.isOrExtends(ISuperclass):
-                fields = getFieldsInOrder(i1)
-                for f_name, f_obj in fields:
-                    f_val = getattr(self.context, f_name)
-                    if f_val is not None:
-                        print "EEE: (%s) -> (%s)" % (f_obj.title, f_val)
-                        data.append([f_obj.title, f_val])
-                    #import pdb
-                    #pdb.set_trace()
-                #nads = i1.namesAndDescriptions()
-                #for name, obj in nads:
-                    #print "UUUUUUUU: ", (name, obj)
-                    #if providedBy(obj).isOrExtends(IField):
-                        #print "%s /-> %s " % (name, getattr(self.context, name))
-
-        if self.context.ikName is not None:
-            data.append([u'Name', self.context.ikName])
-        t0 = Table(data)
-        #,
-                   #style=ik_tbl_style,
-                   #colWidths=colWidths)
+        fields = self.getReportFields()
+        for f_name, f_obj in fields.items():
+            f_val = getattr(self.context, f_name)
+            if f_val is not None:
+                rptPara = RptPara(unicode(f_val), doc=self.document)
+                data.append([f_obj.field.title, rptPara])
+        if len(data) > 0:
+            t0 = Table(data,
+                       hAlign = 'RIGHT',
+                       style=ik_tbl_style,
+                       colWidths=colWidths)
+        else:
+            t0 = None
         return t0
-        
-    def traverse4RptPre(self, level, comments):
+
+    def traverse4RptPre(self, level, comments, autoAppend=True):
         """pdf report object preamble
         
         level: indent-level (int 0..)
@@ -128,11 +120,21 @@ class RptPdf(object):
             self.writeComment(u"%s## Pre (%s,%d) - SuperclassRptPdfPre" % \
                               ("\t" * level, self.context.ikName, level))
         if self.document is not None:
-            title = RptTitle(self.context.ikName,
+            titleStr = u"%s: %s" % \
+                     (self.context.myFactory.split('.')[-1],
+                      self.context.ikName)
+            title = RptTitle(titleStr,
                              intype="Heading%d" % level,
                              doc=self.document)
-            self.document.append(title.genElements())
-            self.document.append(self.getAttributeTable())
+            elemList = [title.genElements(),
+                        self.getAttributeTable(),
+                        Spacer(0, 4 * mm)]
+            if autoAppend is True:
+                comp = KeepTogether(elemList)
+                self.document.append(comp)
+            else:
+                return elemList
+        return None
 
     def traverse4RptPost(self, level, comments):
         """pdf report object postamble

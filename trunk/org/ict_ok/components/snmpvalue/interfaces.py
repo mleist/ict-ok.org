@@ -364,3 +364,6 @@ class ISnmpValue(IComponent):
     def underMinQuota(diffString="24h"):
         """ physical values over max in float 0..1
         """
+    def generateValuePng(params=None):
+        """generate Picture
+        """

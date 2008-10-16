@@ -85,6 +85,10 @@
     <adapter
         factory=".adapter.ticker.Ticker"
     />
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
 
     <include package=".generations" />
 

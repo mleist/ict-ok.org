@@ -61,7 +61,7 @@ class Superclass(Persistent):
 #    implements(IKeyReference, ISuperclass)
     implements(ISuperclass, IEventIfSuperclass)
     key_type_id = 'org.ict_ok.components.superclass.keyreference'
-    
+
     objectID = FieldProperty(ISuperclass['objectID'])
     ikName = FieldProperty(ISuperclass['ikName'])
     ikComment = FieldProperty(ISuperclass['ikComment'])

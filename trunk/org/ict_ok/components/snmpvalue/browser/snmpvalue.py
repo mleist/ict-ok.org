@@ -18,13 +18,11 @@ __version__ = "$Id$"
 import os
 import time
 from tempfile import _RandomNameSequence as RandomNameSequence
-import rrdtool
 import copy
 from datetime import datetime
 
 # zope imports
 from zope.app import zapi
-from zope.proxy import removeAllProxies
 from zope.interface import directlyProvides
 from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
@@ -40,7 +38,6 @@ from z3c.form import field
 from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
-from org.ict_ok.libs.physicalquantity import convertQuantity
 from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
@@ -114,253 +111,22 @@ class SnmpValueDetails(ComponentDetails):
         params['height'] = height
         return self.getValuePng(params)
 
-    def rrdConfigureDefs(self, argList, rrdFile):
-        converted_addrs = self.context.getOidList()
-        for (ds_nr, ds_oid) in enumerate(converted_addrs):
-            argList.append("DEF:f_avg%02d=%s:ds%02d:AVERAGE" % \
-                           (ds_nr, rrdFile, ds_nr))
-            if self.context.displayMinMax:
-                argList.append("DEF:f_max%02d=%s:ds%02d:MAX" % \
-                               (ds_nr, rrdFile, ds_nr))
-                argList.append("DEF:f_min%02d=%s:ds%02d:MIN" % \
-                               (ds_nr, rrdFile, ds_nr))
-
-    def rrdConfigureCDefs(self, argList, arg_multiplier):
-        converted_addrs = self.context.getOidList()
-        for (ds_nr, ds_oid) in enumerate(converted_addrs):
-            multiplier = arg_multiplier
-            argList.append("CDEF:avg%02d=f_avg%02d,%f,*" % \
-                           (ds_nr, ds_nr, multiplier))
-            if self.context.displayMinMax:
-                argList.append("CDEF:max%02d=f_max%02d,%f,*" % \
-                               (ds_nr, ds_nr, multiplier))
-                argList.append("CDEF:min%02d=f_min%02d,%f,*" % \
-                               (ds_nr, ds_nr, multiplier))
-
-    def rrdConfigureCDefsIndex(self, argList, arg_multiplier):
-        converted_addrs = self.context.getOidList()
-        for (ds_nr, ds_oid) in enumerate(converted_addrs):
-            if ds_nr % 2 == 0: # odd / even
-                multiplier = arg_multiplier
-            else:
-                multiplier = -1.0 * arg_multiplier
-            argList.append("CDEF:avg%02d=f_avg%02d,%f,*" % \
-                           (ds_nr, ds_nr, multiplier))
-            if self.context.displayMinMax:
-                argList.append("CDEF:max%02d=f_max%02d,%f,*" % \
-                               (ds_nr, ds_nr, multiplier))
-                argList.append("CDEF:min%02d=f_min%02d,%f,*" % \
-                               (ds_nr, ds_nr, multiplier))
-
-    def rrdConfigureMinimum(self, argList):
-        (displUnit, displayString) = self.context.getDisplayUnit()
-        (minQuantity, minString) = self.context.getMinQuantity()
-        if minQuantity is not None:
-            converted_addrs = self.context.getOidList()
-            myMinValue = float(minQuantity / displUnit)
-            for (ds_nr, ds_oid) in enumerate(converted_addrs):
-                argList.append("CDEF:ulimitmin%02d=avg%02d,%f,LT,avg%02d,0,IF" % \
-                               (ds_nr, ds_nr, myMinValue, ds_nr))
-            argList.append("HRULE:%f#FFFF0080" % (myMinValue))
-
-    def rrdConfigureMinimumIndex(self, argList):
-        (displUnit, displayString) = self.context.getDisplayUnit()
-        (minQuantity, minString) = self.context.getMinQuantity()
-        if minQuantity is not None:
-            converted_addrs = self.context.getOidList()
-            for (ds_nr, ds_oid) in enumerate(converted_addrs):
-                if ds_nr % 2 == 0: # odd / even
-                    myMinValue = float(minQuantity / displUnit)
-                    argList.append("CDEF:ulimitmin%02d=avg%02d,%f,LT,avg%02d,0,IF" % \
-                                   (ds_nr, ds_nr, myMinValue, ds_nr))
-                else:
-                    myMinValue = -1.0 * float(minQuantity / displUnit)
-                    argList.append("CDEF:ulimitmin%02d=avg%02d,%f,GT,avg%02d,0,IF" % \
-                                   (ds_nr, ds_nr, myMinValue, ds_nr))
-                argList.append("HRULE:%f#FFFF0080" % (myMinValue))
-
-    def rrdConfigureMaximum(self, argList):
-        (displUnit, displayString) = self.context.getDisplayUnit()
-        (maxQuantity, maxString) = self.context.getMaxQuantity()
-        if maxQuantity is not None:
-            myMaxValue = float(maxQuantity / displUnit)
-            converted_addrs = self.context.getOidList()
-            for (ds_nr, ds_oid) in enumerate(converted_addrs):
-                argList.append("CDEF:limitmax%02d=avg%02d,%f,GT,%f,0,IF" % \
-                               (ds_nr, ds_nr, myMaxValue, myMaxValue))
-                argList.append("CDEF:olimitmax%02d=avg%02d,%f,GT,avg%02d,%f,-,0,IF" % \
-                               (ds_nr, ds_nr, myMaxValue, ds_nr, myMaxValue))
-                argList.append("CDEF:ulimitmax%02d=avg%02d,%f,GT,0,avg%02d,IF" % \
-                               (ds_nr, ds_nr, myMaxValue, ds_nr))
-            argList.append("HRULE:%f#FF000080" % (myMaxValue))
-
-    def rrdConfigureMaximumIndex(self, argList):
-        (displUnit, displayString) = self.context.getDisplayUnit()
-        (maxQuantity, maxString) = self.context.getMaxQuantity()
-        if maxQuantity is not None:
-            converted_addrs = self.context.getOidList()
-            for (ds_nr, ds_oid) in enumerate(converted_addrs):
-                if ds_nr % 2 == 0: # odd / even
-                    myMaxValue = float(maxQuantity / displUnit)
-                    argList.append("CDEF:limitmax%02d=avg%02d,%f,GT,%f,0,IF" % \
-                                   (ds_nr, ds_nr, myMaxValue, myMaxValue))
-                    argList.append("CDEF:olimitmax%02d=avg%02d,%f,GT,avg%02d,%f,-,0,IF" % \
-                                   (ds_nr, ds_nr, myMaxValue, ds_nr, myMaxValue))
-                    argList.append("CDEF:ulimitmax%02d=avg%02d,%f,GT,0,avg%02d,IF" % \
-                                   (ds_nr, ds_nr, myMaxValue, ds_nr))
-                else:
-                    myMaxValue = -1.0 * float(maxQuantity / displUnit)
-                    argList.append("CDEF:limitmax%02d=avg%02d,%f,LT,%f,0,IF" % \
-                                   (ds_nr, ds_nr, myMaxValue, myMaxValue))
-                    argList.append("CDEF:olimitmax%02d=avg%02d,%f,LT,avg%02d,%f,-,0,IF" % \
-                                   (ds_nr, ds_nr, myMaxValue, ds_nr, myMaxValue))
-                    argList.append("CDEF:ulimitmax%02d=avg%02d,%f,LT,0,avg%02d,IF" % \
-                                   (ds_nr, ds_nr, myMaxValue, ds_nr))
-                argList.append("HRULE:%f#FF000080" % (myMaxValue))
-
-    def rrdConfigureLegend(self, argList):
-        (displUnit, displayString) = self.context.getDisplayUnit()
-        converted_addrs = self.context.getOidList()
-        for (ds_nr, ds_oid) in enumerate(converted_addrs):
-            argList.append(\
-                'GPRINT:avg%02d:AVERAGE:avg%02d\: %%6.2lf %s' % \
-                (ds_nr, ds_nr, displayString))
-        if self.context.displayMinMax:
-            argList.append(\
-                'GPRINT:max00:MAX:max00\: %%6.2lf %s' % displayString)
-            argList.append(\
-                'GPRINT:min00:MIN:min00\: %%6.2lf %s' % displayString)
-
-    def rrdConfigureGraphs(self, argList):
-        (minQuantity, minString) = self.context.getMinQuantity()
-        (maxQuantity, maxString) = self.context.getMaxQuantity()
-        if minQuantity is not None:
-            if maxQuantity is not None: # min and max are valid
-                argList.append("AREA:ulimitmax00#008263")
-                argList.append("AREA:limitmax00#E07771")
-                argList.append("STACK:olimitmax00#FF0000")
-                argList.append("AREA:ulimitmin00#CFD138")
-            else: # only min is valid
-                argList.append("AREA:avg00#7DD0BC:\"average 00\"")
-                argList.append("AREA:ulimitmin00#CFD138")
-        else:
-            if maxQuantity is not None: # only max are valid
-                argList.append("AREA:ulimitmax00#008263")
-                argList.append("AREA:limitmax00#E07771")
-                argList.append("STACK:olimitmax00#FF0000")
-            else: # neither min nor max are valid
-                argList.append("AREA:avg00#7DD0BC:\"average 00\"")
-                #argList.append("STACK:avg01#008263:\"average 01\"")
-        if self.context.displayMinMax:
-            argList.append("LINE1:max00#008263:\"max00\"")
-
-    def rrdConfigureGraphsIndex(self, argList):
-        (minQuantity, minString) = self.context.getMinQuantity()
-        (maxQuantity, maxString) = self.context.getMaxQuantity()
-        if minQuantity is not None:
-            if maxQuantity is not None: # min and max are valid
-                argList.append("AREA:ulimitmax00#008263")
-                argList.append("AREA:limitmax00#E07771")
-                argList.append("STACK:olimitmax00#FF0000")
-                argList.append("AREA:ulimitmin00#CFD138")
-                argList.append("AREA:ulimitmax01#008263")
-                argList.append("AREA:limitmax01#E07771")
-                argList.append("STACK:olimitmax01#FF0000")
-                argList.append("AREA:ulimitmin01#CFD138")
-            else: # only min is valid
-                argList.append("AREA:avg00#7DD0BC:\"average 00\"")
-                argList.append("AREA:ulimitmin00#CFD138")
-                argList.append("AREA:avg01#7DD0BC:\"average 01\"")
-                argList.append("AREA:ulimitmin01#CFD138")
-        else:
-            if maxQuantity is not None: # only max are valid
-                argList.append("AREA:ulimitmax00#008263")
-                argList.append("AREA:limitmax00#E07771")
-                argList.append("STACK:olimitmax00#FF0000")
-                argList.append("AREA:ulimitmax01#008263")
-                argList.append("AREA:limitmax01#E07771")
-                argList.append("STACK:olimitmax01#FF0000")
-            else: # neither min nor max are valid
-                argList.append("LINE1:avg00#7DD0BC:\"average 00\"")
-                argList.append("LINE1:avg01#008263:\"average 01\"")
-        argList.append("HRULE:0.0#00000080")
-        if self.context.displayMinMax:
-            argList.append("LINE1:max00#008263:\"max00\"")
-
     def getValuePng(self, params=None):
         """get Picture"""
         if not os.path.exists(self.context.getRrdFilename()):
             return None
-        self.request.response.setHeader('Content-Type', 'image/png')
         fileExt = RandomNameSequence().next()
-        obj = removeAllProxies(self.context)
-        targetPic = str("/tmp/%s%s_%s.png" % \
-                        (str(obj.objectID), params['nameext'], fileExt))
-        unitInRrd = convertQuantity(self.context.inpQuantity) \
-                  / convertQuantity("1.0 s")
-        (displUnit, displayString) = self.context.getDisplayUnit()
-        (minQuantity, minString) = self.context.getMinQuantity()
-        (maxQuantity, maxString) = self.context.getMaxQuantity()
-        if unitInRrd is not None and \
-           displUnit is not None:
-            multiplier = float(unitInRrd / displUnit)
-        else:
-            multiplier = 1.0
-        if 1: ##fileage > 60:
-            rrdFile = self.context.getRrdFilename()
-            argList = []
-            argList.append(targetPic)
-            # Defs
-            self.rrdConfigureDefs(argList, rrdFile)
-            # CDefs
-            if self.context.snmpIndexType == u"index":
-                self.rrdConfigureCDefsIndex(argList, multiplier)
-            else:
-                self.rrdConfigureCDefs(argList, multiplier)
-            # Minimum settings
-            if self.context.snmpIndexType == u"index":
-                self.rrdConfigureMinimumIndex(argList)
-            else:
-                self.rrdConfigureMinimum(argList)
-            # Maximum settings
-            if self.context.snmpIndexType == u"index":
-                self.rrdConfigureMaximumIndex(argList)
-            else:
-                self.rrdConfigureMaximum(argList)
-            argList.append("--start=%d" % params['starttime'])
-            argList.append("--end=%d" % params['endtime'])
-            try:
-                if params['width'] is not None:
-                    argList.append("--width=%d" % int(params['width']))
-                else:
-                    argList.append("--width=540")
-            except ValueError:
-                    argList.append("--width=540")
-            try:
-                if params['height'] is not None:
-                    argList.append("--height=%d" % int(params['height']))
-                else:
-                    argList.append("--height=120")
-            except ValueError:
-                    argList.append("--height=120")
-            argList.append("--watermark=ict-ok.org")
-            argList.append("--vertical-label=%s" % displayString)
-            # Legend
-            self.rrdConfigureLegend(argList)
-            # Graph
-            if self.context.snmpIndexType == u"index":
-                self.rrdConfigureGraphsIndex(argList)
-            else:
-                self.rrdConfigureGraphs(argList)
-            argList.append("--imgformat=PNG")
-            argList.append("--imginfo=<IMG SRC=\"/img/%s\" WIDTH=\"%lu\" " \
-                           "HEIGHT=\"%lu\" ALT=\"Demo\">")
-            #print "argList: ", argList
-            rrdtool.graph(*argList)
-        pic = open(targetPic, "r")
+        #obj = removeAllProxies(self.context)
+        params['targetname'] = str("/tmp/%s%s_%s.png" % \
+                                   (str(self.context.objectID),
+                                    params['nameext'],
+                                    fileExt))
+        self.context.generateValuePng(params)
+        self.request.response.setHeader('Content-Type', 'image/png')
+        pic = open(params['targetname'], "r")
         picMem = pic.read()
         pic.close()
-        os.remove(targetPic)
+        os.remove(params['targetname'])
         return picMem
 
     def getValuePngHref(self):
@@ -528,36 +294,6 @@ class DetailsSnmpValueForm(DisplayForm):
     """ Display form for the object """
     label = _(u'Details of Snmp value')
     fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_viewfields)
-    
-    def update(self):
-        #print "--" * 30
-        #print self.context.oid1
-        #from pysnmp.entity.rfc3413.oneliner import cmdgen
-        #oidStringList = self.context.oid1.strip(".").split(".")
-        #try:
-            #oidIntList = [ int(i) for i in oidStringList]
-            ##TODO: evil dirty hack
-            #errorIndication, errorStatus, errorIndex, varBinds = \
-                           #cmdgen.CommandGenerator().getCmd(
-                               #cmdgen.CommunityData('my-agent',
-                                                    #'public01', 0),
-                               #cmdgen.UdpTransportTarget(('localhost', 161)),
-                               #tuple(oidIntList)
-            #)
-            #print "1", errorIndication
-            #if errorIndication != None:
-                #self.status = u"Error: SNMP connect error: '%s'" % \
-                    #(errorIndication)
-            #if errorStatus != 0:
-                #self.status = u"Error: '%s'" % (errorStatus.prettyPrint())
-            #print "2", errorStatus
-            ##if errorStatus == 2:
-                ##self.status = u"Error: ddd"
-            #print "3", varBinds
-            #print "--" * 30
-        #except ValueError:
-            #self.status = u"Error: Value of OID1"
-        DisplayForm.update(self)
 
 
 class AddSnmpValueForm(AddForm):

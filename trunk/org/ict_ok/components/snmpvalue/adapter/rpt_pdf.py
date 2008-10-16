@@ -22,41 +22,28 @@ import time
 # zope imports
 from zope.interface import implements
 from zope.component import adapts
-from zope.i18nmessageid import MessageFactory
 
 # reportlab imports
 from reportlab.lib.units import mm, cm
 from reportlab.platypus import Image, Spacer, KeepTogether
 
+# z3c imports
+from z3c.form import field
 
 # ict_ok.org imports
-from org.ict_ok.components.latency.interfaces import ILatency
+from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
-_ = MessageFactory('org.ict_ok')
-
 
 class RptPdf(ParentRptPdf):
-    """adapter implementation of latency -> PDF Report
+    """adapter implementation of snmp value -> PDF Report
     """
 
     implements(IRptPdf)
-    adapts(ILatency)
+    adapts(ISnmpValue)
 
-    #attributeList = ['checkcount']
-    #attributeList.extend(ParentRptPdf.attributeList)
-    
-    #def traverse4RptBody(self, level, comments):
-        #"""pdf report data of/in object
-        
-        #level: indent-level (int 0..)
-        #comments: should there comments are in the output?
-        #"""
-        #if comments:
-            #self.writeComment(u"%s## Body (%s,%d) - LatencyRptPdfBody" % \
-                              #("\t" * level, self.context.ikName, level))
     def appendImage(self, hours, elemList):
         fileExt = RandomNameSequence().next()
         currtime = time.time()
@@ -78,14 +65,22 @@ class RptPdf(ParentRptPdf):
         elemList.append(Spacer(0, 4 * mm))
         self.appendFile2Delete(params['targetname'])
         
+    def getReportFields(self):
+        """
+        """
+        from org.ict_ok.components.snmpvalue.browser.snmpvalue import \
+             SnmpValueDetails
+        return field.Fields(ISnmpValue).omit(\
+            *SnmpValueDetails.omit_viewfields)
+
     def traverse4RptPre(self, level, comments, autoAppend=True):
         """pdf report object preamble
         
         level: indent-level (int 0..)
         comments: should there comments are in the output?
         """
-        elemList = ParentRptPdf.traverse4RptPre(self, level,
-                                                comments, autoAppend=False)
+        elemList = ParentRptPdf.traverse4RptPre(\
+            self, level, comments, autoAppend=False)
         if comments:
             self.writeComment(u"%s## Pre2 (%s,%d) - LatencyRptPdfPre2" % \
                               ("\t" * level, self.context.ikName, level))
@@ -99,3 +94,4 @@ class RptPdf(ParentRptPdf):
             else:
                 return elemList
         return None
+

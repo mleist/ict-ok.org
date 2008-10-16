@@ -25,7 +25,7 @@ from zope.component import adapts
 from z3c.form import field
 
 # ict_ok.org imports
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -36,11 +36,12 @@ class RptPdf(ParentRptPdf):
     """
 
     implements(IRptPdf)
-    adapts(INet)
+    adapts(IHost)
 
     def getReportFields(self):
         """
         """
-        from org.ict_ok.components.net.browser.net import NetDetails
-        return field.Fields(INet).omit(\
-            *NetDetails.omit_viewfields)
+        from org.ict_ok.components.host.browser.host import HostDetails
+        return field.Fields(IHost).omit(\
+            *HostDetails.omit_viewfields)
+

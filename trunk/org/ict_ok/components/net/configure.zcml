@@ -74,6 +74,10 @@
         factory=".adapter.smokeping.GenSmokePing"
         permission="org.ict_ok.admin_utils.generators.smokeping.View"
     />
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
     <!--<adapter-->
         <!--factory=".adapter.ticker.Ticker"-->
     <!--/>-->
