@@ -186,6 +186,9 @@ class MenuSubGeneralTab(Tab):
 class MenuSubInventoryTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_tab.pt')
 
+class MenuSubReportsTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_reports_tab.pt')
+
 class MenuSubEventTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_event_tab.pt')
 

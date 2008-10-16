@@ -42,6 +42,15 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
+    <page
+        name="reportPdf.html"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        class="org.ict_ok.components.superclass.browser.superclass.SuperclassDetails"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="reportPdf"
+    />
+
     <z3c:pagelet
         name="trend.html"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
@@ -99,7 +108,7 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="getTestData4"
     />
-      <page
+    <page
         name="getPNG"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
         class=".snmpvalue.SnmpValueDetails"
@@ -198,6 +207,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.View"
+        />
+    <viewlet
+        name="reportPdf"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValue"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubReportPdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
         />
     <viewlet
         name="edit"

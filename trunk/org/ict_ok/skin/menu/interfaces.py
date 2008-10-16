@@ -40,6 +40,9 @@ class IMenuGeneral(IViewletManager):
 class IMenuInventory(IViewletManager):
     """Menu viewlet manager."""
     
+class IMenuReports(IViewletManager):
+    """Menu viewlet manager."""
+    
 class IMenuEvent(IViewletManager):
     """Menu viewlet manager."""
 

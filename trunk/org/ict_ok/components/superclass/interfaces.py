@@ -123,6 +123,10 @@ class ISuperclass(Interface):
         object oids for update purpose
         attribute name must start with 'eventInpObjs_'
         """
+    def generatePdf(absFilename, authorStr, versionStr):
+        """
+        will generate a object pdf report
+        """
 
 
 class IPickle(Interface):

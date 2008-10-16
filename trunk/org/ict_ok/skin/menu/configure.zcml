@@ -46,6 +46,13 @@
         permission="org.ict_ok.components.site.View"
         />
     <viewletManager
+        name="ict_ok.menusub.reports"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuReports"
+        class="org.ict_ok.skin.menu.MenuSubReportsTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    <viewletManager
         name="ict_ok.menusub.event"
         provides="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.skin.menu.MenuSubEventTab"

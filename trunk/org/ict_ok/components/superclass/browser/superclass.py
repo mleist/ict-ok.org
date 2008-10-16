@@ -15,7 +15,9 @@
 __version__ = "$Id$"
 
 # python imports
+import os
 from datetime import datetime
+import tempfile
 
 # zope imports
 import zope.interface
@@ -48,6 +50,7 @@ from zc.table.table import StandaloneFullFormatter
 from zc.table.interfaces import ISortableColumn
 
 # ict_ok import
+from org.ict_ok.version import getIkVersion
 from org.ict_ok.components.superclass.interfaces import IPickle, ISuperclass
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
@@ -425,6 +428,13 @@ class MSubOverview(GlobalMenuSubItem):
             return None
 
 
+class MSubReportPdf(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'normal PDF')
+    viewURL = '@@reportPdf.html'
+    weight = 60
+
+
 class MSubHistory(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'History')
@@ -615,6 +625,29 @@ class SuperclassDetails:
         else:
             self.request.tabClass = 'cb_wht'
         return self.request.tabClass
+
+    def reportPdf(self):
+        filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
+        f_handle, f_name = tempfile.mkstemp(filename)
+        authorStr = self.request.principal.title
+        my_formatter = self.request.locale.dates.getFormatter(
+            'dateTime', 'medium')
+        userTZ = getUserTimezone()
+        longTimeString = my_formatter.format(\
+            userTZ.fromutc(datetime.utcnow()))
+        versionStr = "%s [%s]" % (longTimeString, getIkVersion())
+        self.context.generatePdf(f_name, authorStr, versionStr)
+        self.request.response.setHeader('Content-Type', 'application/pdf')
+        self.request.response.setHeader(\
+            'Content-Disposition',
+            'attachment; filename=\"%s\"' % filename)
+        setNoCacheHeaders(self.request.response)
+        datafile = open(f_name, "r")
+        dataMem = datafile.read()
+        datafile.close()
+        os.remove(f_name)
+        return dataMem
+
 
 
 class DumpData:

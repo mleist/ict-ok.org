@@ -52,6 +52,8 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IAdmUtilGeneratorNagios, IGenNagios
+from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
+from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
 
 class Superclass(Persistent):
     """
@@ -381,6 +383,28 @@ class Superclass(Persistent):
                 myObjIdSet.remove(oldOid)
                 self._p_changed = True
             print "myObjIdSet 2 :", myObjIdSet
+
+    def generatePdf(self, absFilename, authorStr, versionStr):
+        """
+        will generate a object pdf report
+        """
+        files2delete = []
+        document = RptDocument(absFilename)
+        #document.setVolumeNo("1")
+        document.setAuthorName(authorStr)
+        document.setVersionStr(versionStr)
+        adapterRptPdf = IRptPdf(self)
+        if adapterRptPdf:
+            adapterRptPdf.document = document
+            adapterRptPdf.traverse4Rpt(1, False)
+            files2delete.extend(adapterRptPdf.files2delete)
+            del adapterRptPdf
+        document.buildPdf()
+        for i_filename in files2delete:
+            try:
+                os.remove(i_filename)
+            except OSError:
+                pass
 
 class MsgEvent:
     """ Interface of an async event message

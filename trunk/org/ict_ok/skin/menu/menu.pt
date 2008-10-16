@@ -17,6 +17,10 @@
                    <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.inventory" />
                 </li>
                 <li class="yuimenubaritem">
+                   <a class="yuimenubaritemlabel" href="#" i18n:translate="">Reports</a>
+                   <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.reports" />
+                </li>
+                <li class="yuimenubaritem">
                    <a class="yuimenubaritemlabel" href="#" i18n:translate="">Scripts</a>
                    <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.script" />
                 </li>

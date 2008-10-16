@@ -147,7 +147,7 @@ class SnmpValueDetails(ComponentDetails):
     
     def nowTS(self):
         return datetime.now()
-
+    
 
 class SnmpValueDisplay(SnmpValueDetails):
     """
