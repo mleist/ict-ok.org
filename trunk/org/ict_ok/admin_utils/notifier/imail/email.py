@@ -18,10 +18,10 @@ __version__ = "$Id$"
 import tempfile
 import logging
 from pytz import timezone
-#from email.MIMEText import MIMEText
+from email.MIMEText import MIMEText
 #from email.MIMEMultipart import MIMEMultipart
-#from email.MIMEBase import MIMEBase
-#from email import Utils, Encoders
+from email.MIMEBase import MIMEBase
+from email import Utils, Encoders
 import mimetypes
 import email
 
@@ -101,6 +101,7 @@ class NotifierEmail(Notifier):
         if pau_utility and pau_utility.has_key('principals'):
             principals = pau_utility['principals']
             toList = []
+            toShortList = []
             for name in principals.keys():
                 print "principal_name: %s" % name
                 principal_id = principals.prefix + name
@@ -112,52 +113,65 @@ class NotifierEmail(Notifier):
                         print "email: %s" % email
                         if email is not None and len(email) > 0:
                             toList.append(email)
+                        if hasattr(principal_annos.data[\
+                            'org.ict_ok.admin_utils.usermanagement'],
+                                   'shortEmail'):
+                            shortEmail = principal_annos.data[\
+                                'org.ict_ok.admin_utils.usermanagement']\
+                                       ['shortEmail']
+                        else:
+                            shortEmail = None
+                        print "shortEmail: %s" % shortEmail
+                        if shortEmail is not None and len(shortEmail) > 0:
+                            toShortList.append(shortEmail)
             print "en_utility: ", en_utility
+            print "toList: ", toList
+            print "toShortList: ", toShortList
             if en_utility is not None:
-                en_utility.send(en_utility.from_addr, toList, messageText)
+                #en_utility.send(en_utility.from_addr, toList, messageText)
                 print "-" * 60
-                print self.create_test_message(toList)
-                print "-" * 60
+                #print self.create_test_message(toList)
+                #print "-" * 60
 
-    def create_test_message(self, toList):
-        ptFileName = tempfile.mktemp('.pt')
-        pdfFileName = tempfile.mktemp('.pdf')
-        open(ptFileName, 'w').write('''\
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <!DOCTYPE document SYSTEM "rml.dtd">
-        <document filename="template.pdf"
-            xmlns:tal="http://xml.zope.org/namespaces/tal">
+    #def create_test_message(self, toList):
+        #ptFileName = tempfile.mktemp('.pt')
+        #pdfFileName = tempfile.mktemp('.pdf')
+        #open(ptFileName, 'w').write('''\
+        #<?xml version="1.0" encoding="UTF-8" ?>
+        #<!DOCTYPE document SYSTEM "rml.dtd">
+        #<document filename="template.pdf"
+            #xmlns:tal="http://xml.zope.org/namespaces/tal">
         
-          <template pageSize="(21cm, 29cm)">
-            <pageTemplate id="main">
-              <frame id="main" x1="2cm" y1="2cm"
-                     width="17cm" height="25cm" />
-            </pageTemplate>
-          </template>
+          #<template pageSize="(21cm, 29cm)">
+            #<pageTemplate id="main">
+              #<frame id="main" x1="2cm" y1="2cm"
+                     #width="17cm" height="25cm" />
+            #</pageTemplate>
+          #</template>
         
-          <story>
-            <para
-                tal:repeat="name context/names"
-                tal:content="name" />
-          </story>
+          #<story>
+            #<para
+                #tal:repeat="name context/names"
+                #tal:content="name" />
+          #</story>
         
-        </document>
-        ''')
+        #</document>
+        #''')
 
-        rmlPageTemplate = pagetemplate.RMLPageTemplateFile(ptFileName)
-        open(pdfFileName, 'w').write(\
-            rmlPageTemplate(names=toList))
-            #rmlPageTemplate(names=(u'Roy', u'Daniel', u'Julian', u'Stephan')))
-        pdfFileName.seek(0)
-        msg = MIMEMultipart()
-        msg['To'] = 'leist@ikom-online.de'
-        msg['Subject'] = '[IKOMtrol] %s %s' % ('Objekt', 'Status')
-        msg['Date'] = Utils.formatdate(localtime = 1)
-        msg['Message-ID'] = Utils.make_msgid()
-        body = MIMEText( "test text", _subtype='plain', _charset='latin-1')
-        msg.attach(body)
-        msg.attach(self.attachment( "data.pdf", pdfFileName))
-        return msg.as_string()
+        #rmlPageTemplate = pagetemplate.RMLPageTemplateFile(ptFileName)
+        #open(pdfFileName, 'w').write(\
+            #rmlPageTemplate(names=toList))
+            ##rmlPageTemplate(names=(u'Roy', u'Daniel', u'Julian', u'Stephan')))
+        #pdfFileName.seek(0)
+        #msg = MIMEMultipart()
+        #msg['To'] = 'leist@ikom-online.de'
+        #msg['Subject'] = '[IKOMtrol] %s %s' % ('Objekt', 'Status')
+        #msg['Date'] = Utils.formatdate(localtime = 1)
+        #msg['Message-ID'] = Utils.make_msgid()
+        #body = MIMEText( "test text", _subtype='plain', _charset='latin-1')
+        #msg.attach(body)
+        #msg.attach(self.attachment( "data.pdf", pdfFileName))
+        #return msg.as_string()
         
     def attachment( self, filename, fd):
         mimetype, mimeencoding = mimetypes.guess_type(filename)
