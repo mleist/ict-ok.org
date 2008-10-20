@@ -17,7 +17,7 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.notifier.email.interfaces import \
+from org.ict_ok.admin_utils.notifier.imail.interfaces import \
      INotifierEmail
 
 generation = 1

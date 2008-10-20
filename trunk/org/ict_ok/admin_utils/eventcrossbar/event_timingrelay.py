@@ -71,16 +71,16 @@ class EventTimingRelay(EventLogic):
             remainingTime = self.timeStart + self.timeDelta - utcNow
             if remainingTime > datetime.timedelta(0,0,0):
                 print "EventTimingRelay.tickerEvent (%s) running (%s)" % \
-                      (self.getDcTitle(), remainingTime)
+                      (self.ikName, remainingTime)
             else:
                 print "EventTimingRelay.tickerEvent (%s) running" % \
-                      (self.getDcTitle())
+                      (self.ikName)
             if self.timeStart + self.timeDelta <= utcNow:
                 self.eventOut_delayed()
                 self.isRunning = False
         else:
             pass
-            #print "EventTimingRelay.tickerEvent (%s)" % (self.getDcTitle())
+            #print "EventTimingRelay.tickerEvent 2 (%s)" % (self.ikName)
         # and up to superclass
         EventLogic.tickerEvent(self)
 

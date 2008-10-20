@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,E0611
+# pylint: disable-msg=E1101,E0611,W0613,W0612
 #
 """implementation of a "eventcrossbar daemon" 
 """
@@ -30,32 +30,28 @@ from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.catalog.interfaces import ICatalog
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.component import getUtility
 
 # zc imports
 from zc.queue import Queue
 
 # ict_ok.org imports
 from org.ict_ok.libs.history.entry import Entry
-from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.site.interfaces import ISite
 from org.ict_ok.components.net.interfaces import INet
 from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.service.interfaces import IService
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
-from org.ict_ok.admin_utils.ticker.interfaces import IAdmUtilTicker
-from org.ict_ok.admin_utils.eventcrossbar.interfaces import IEventTimingRelay
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
-     IAdmUtilEvent, IAdmUtilEventCrossbar, IEventTimingRelay, IEventLogic
+     IAdmUtilEvent, IAdmUtilEventCrossbar, IEventLogic
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IGlobalEventCrossbarUtility
 from org.ict_ok.admin_utils.graphviz.interfaces import \
      IGenGraphvizDot
 from org.ict_ok.components.interfaces import IComponent
-from org.ict_ok.components.location.interfaces import  ILocation
-from org.ict_ok.components.building.interfaces import  IBuilding
-from org.ict_ok.components.room.interfaces import  IRoom
+from org.ict_ok.admin_utils.notifier.imail.interfaces import INotifierEmail
 
 logger = logging.getLogger("AdmUtilEventCrossbar")
 berlinTZ = timezone('Europe/Berlin')
@@ -78,11 +74,13 @@ def AllObjectInstances(dummy_context):
                 SimpleTerm(oobj.object.objectID,
                            str(oobj.object.objectID),
                            oobj.object.getDcTitle()))
-    my_util = zapi.getUtility(IAdmUtilTicker)
-    terms.append(\
-        SimpleTerm(my_util.objectID,
-                   str(my_util.objectID),
-                   my_util.getDcTitle()))
+    for iface in [INotifierEmail]:
+        my_util = getUtility(iface)
+        if my_util is not None:
+            terms.append(\
+                SimpleTerm(my_util.objectID,
+                           str(my_util.objectID),
+                           my_util.getDcTitle()))
     return SimpleVocabulary(terms)
 
 def AllObjectInstancesWithEventInputs(dummy_context):
@@ -105,7 +103,19 @@ def AllObjectInstancesWithEventInputs(dummy_context):
                     terms.append(\
                         SimpleTerm(myId,
                                    str(myId),
-                                   oobj.object.getDcTitle()+ u'->' + inpEventName))
+                                   oobj.object.getDcTitle() + \
+                                   u'->' + inpEventName))
+    for iface in [INotifierEmail]:
+        my_util = getUtility(iface)
+        if my_util is not None:
+            inpEventNames = my_util.getAllInpEventNames().keys()
+            if len(inpEventNames) > 0:
+                for inpEventName in inpEventNames:
+                    myId = my_util.objectID + u'.' + inpEventName
+                    terms.append(\
+                        SimpleTerm(myId,
+                                   str(myId),
+                                   my_util.getDcTitle()+ u'->' + inpEventName))
     return SimpleVocabulary(terms)
 
 def AllEventInstances(dummy_context):
@@ -210,7 +220,8 @@ class AdmUtilEventCrossbar(Supernode):
             #if ILocation.providedBy(oobj.object):
                 #print "Location: ", oobj.object.ikName
                 #print >> dotFile, \
-                      #'\tsubgraph "cluster_location" { color=blue; label="location"};'
+                      #'\tsubgraph "cluster_location" '\
+                      #'{ color=blue; label="location"};'
             ##elif IRoom.providedBy(oobj.object):
                 ##print "Room: ", oobj.object.ikName
             ##elif ILocation.providedBy(oobj.object):
@@ -220,16 +231,22 @@ class AdmUtilEventCrossbar(Supernode):
         print >> dotFile, '\t// events ----------------------------------'
         for event in eventSet:
             eventGraphvizDot = IGenGraphvizDot(event)
-            eventGraphvizDot.traverse4DotGenerator(dotFile, level=1, comments=True)
+            eventGraphvizDot.traverse4DotGenerator(dotFile,
+                                                   level=1,
+                                                   comments=True)
         for obj in objSet:
             allInpNamesDict = obj.getAllInpEventNames()
             allOutNamesDict = obj.getAllOutEventNames()
             for inpName in allInpNamesDict.keys():
                 for iObj in allInpNamesDict[inpName]:
-                    print >> dotFile, '\t "%s"-> "%s":"%s"' % (iObj, obj.objectID, inpName)
+                    print >> dotFile, '\t "%s"-> "%s":"%s"' % (iObj,
+                                                               obj.objectID,
+                                                               inpName)
             for outName in allOutNamesDict.keys():
                 for iObj in allOutNamesDict[outName]:
-                    print >> dotFile, '\t "%s":"%s"-> "%s"' % (obj.objectID, outName, iObj)
+                    print >> dotFile, '\t "%s":"%s"-> "%s"' % (obj.objectID,
+                                                               outName,
+                                                               iObj)
         print >> dotFile, '}'
         dotFile.flush()
 

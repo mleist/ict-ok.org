@@ -21,7 +21,7 @@ import logging
 from zope.interface import implements
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.notifier.email.interfaces import INotifierEmail
+from org.ict_ok.admin_utils.notifier.imail.interfaces import INotifierEmail
 
 logger = logging.getLogger("AdmUtilEmailNotifier")
 

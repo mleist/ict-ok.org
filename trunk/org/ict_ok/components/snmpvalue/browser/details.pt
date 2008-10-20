@@ -132,7 +132,7 @@
         </tr>
     </table>
     <h3>24h</h3>
-    <a target="_blank" href="#" tal:attributes="href python: '%s/@@display.html' % (view.getValuePngHref())">
+    <a href="#" tal:attributes="href python: '%s/@@display.html' % (view.getValuePngHref())">
         <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
     </a>
 </i18n:block>

@@ -33,6 +33,10 @@ class IAdmUtilUserProperties(Interface):
     """
     major component for user properties
     """
+    shortEmail = EmailValid(
+        title = _(u"Short email address"),
+        required=False
+        )
 
     email = EmailValid(
         title = _(u"Email address"),
@@ -56,15 +60,32 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
     """
     major component for user registration and management
     """
-    email = EmailValid(
-        title = _(u"Email address"),
-        required=False
-        )
     timezone = Choice(
         title=_("Time Zone"),
         description=_("Time Zone used to display your calendar"),
         values=pytz.common_timezones,
         required = False)
+    email = EmailValid(
+        title = _(u"Email address"),
+        required=False
+        )
+    notifierLevel = Choice(
+        title=_("Notifier level"),
+        description=_("minimum notification level"),
+        default=u"warning",
+        required = True,
+        vocabulary = "notifierLevels")
+    shortEmail = EmailValid(
+        title = _(u"Short email address"),
+        required=False
+        )
+    shortNotifierLevel = Choice(
+        title=_("Short notifier level"),
+        description=_("minimum notification level for short messages"),
+        default=u"error",
+        required = True,
+        vocabulary = "notifierLevels")
+
 
 class IEditPassword(Interface):
     """ schema for user password dialog """

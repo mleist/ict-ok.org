@@ -15,7 +15,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.app.generations.generations import SchemaManager
 
-key = 'org.ict_ok.admin_utils.notifier.email.generations'
+key = 'org.ict_ok.admin_utils.notifier.imail.generations'
 
 AppSchemaManager = SchemaManager(
     minimum_generation = 1,

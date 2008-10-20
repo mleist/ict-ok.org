@@ -98,8 +98,11 @@ class Host(Component):
     url_authpasswd = FieldProperty(IHost['url_authpasswd'])
     console = FieldProperty(IHost['console'])
     genNagios = FieldProperty(IHost['genNagios'])
+    # Event interface
     eventInpObjs_shutdown = FieldProperty(\
         IEventIfEventHost['eventInpObjs_shutdown'])
+    eventOutObjs_nagiosError = FieldProperty(\
+        IEventIfEventHost['eventOutObjs_nagiosError'])
     
     wf_pd_dict = {}
     wf_pd_dict[WfPdNagios.id] = WfPdNagios

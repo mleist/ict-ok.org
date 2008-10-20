@@ -9,9 +9,9 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
          Markus Leist <leist@ikom-online.de> -->
 
-    <class class=".email.NotifierEmail">
+    <class class=".imail.NotifierEmail">
         <factory
-            id="org.ict_ok.admin_utils.notifier.email.email.NotifierEmail" />
+            id="org.ict_ok.admin_utils.notifier.imail.imail.NotifierEmail" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <implements
@@ -25,33 +25,41 @@
             permission="org.ict_ok.admin_utils.notifier.Edit"
             set_schema=".interfaces.INotifierEmail"
             />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.View"
+            interface=".interfaces.IEventIfNotifierEmail"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.Edit"
+            set_schema=".interfaces.IEventIfNotifierEmail"
+            />
     </class>
 
     <!--adapter
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
-        provides="org.ict_ok.admin_utils.notifier.email.interfaces.IIKGenHoneyd"
-        factory="org.ict_ok.admin_utils.notifier.email.email.SuperclassGenHoneyd"
+        provides="org.ict_ok.admin_utils.notifier.imail.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.imail.imail.SuperclassGenHoneyd"
         permission="org.ict_ok.admin_utils.notifier.View"
     />
 
     <adapter
         for="org.ict_ok.components.supernode.interfaces.ISupernode"
-        provides="org.ict_ok.admin_utils.notifier.email.interfaces.IIKGenHoneyd"
-        factory="org.ict_ok.admin_utils.notifier.email.email.SupernodeGenHoneyd"
+        provides="org.ict_ok.admin_utils.notifier.imail.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.imail.imail.SupernodeGenHoneyd"
         permission="org.ict_ok.admin_utils.notifier.View"
     />
 
     <adapter
         for="org.ict_ok.dummycontainer.interfaces.IDummyContainer"
-        provides="org.ict_ok.admin_utils.notifier.email.interfaces.IIKGenHoneyd"
-        factory="org.ict_ok.admin_utils.notifier.email.email.DummyContainerGenHoneyd"
+        provides="org.ict_ok.admin_utils.notifier.imail.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.imail.imail.DummyContainerGenHoneyd"
         permission="org.ict_ok.admin_utils.notifier.View"
     />
 
     <adapter
         for="org.ict_ok.dummy.interfaces.IDummy"
-        provides="org.ict_ok.admin_utils.notifier.email.interfaces.IIKGenHoneyd"
-        factory="org.ict_ok.admin_utils.notifier.email.email.DummyGenHoneyd"
+        provides="org.ict_ok.admin_utils.notifier.imail.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.notifier.imail.imail.DummyGenHoneyd"
         permission="org.ict_ok.admin_utils.notifier.View"
     /-->
 

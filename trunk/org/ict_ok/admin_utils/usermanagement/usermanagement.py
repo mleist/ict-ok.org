@@ -81,6 +81,18 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         raise RuntimeError('Could not find current request.')
 
     # temp. workaround for "user specific email" in normal form
+    def get_shortEmail(self):
+        """ property getter"""
+        try:
+            return AdmUtilUserProperties(self.getRequest().principal).shortEmail
+        except KeyError, errText:
+            AdmUtilUserProperties(self.getRequest().principal).shortEmail = u""
+    def set_shortEmail(self, my_val):
+        """ property setter"""
+        AdmUtilUserProperties(self.getRequest().principal).shortEmail = my_val
+    shortEmail = property(get_shortEmail, set_shortEmail)
+    
+    # temp. workaround for "user specific email" in normal form
     def get_email(self):
         """ property getter"""
         try:
@@ -139,12 +151,14 @@ class AdmUtilUserProperties(object):
         annotations = IAnnotations(context)
         mapping = annotations.get(KEY)
         if mapping is None:
-            blank = { 'email': u'', 
+            blank = { 'shortEmail': u'',
+                      'email': u'', 
                       'timezone': u'', 
                       'dashboard_objs': AdmUtilUserDashboardSet()}
             mapping = annotations[KEY] = PersistentDict(blank)
         self.mapping = mapping
             
+    shortEmail = MappingProperty('shortEmail')
     email = MappingProperty('email')
     timezone = MappingProperty('timezone')
     dashboard_objs = MappingProperty('dashboard_objs')

@@ -32,6 +32,11 @@
         name="notifierInstances"
         />
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".notifier.notifierLevels"
+        name="notifierLevels"
+        />
 
     <!-- setup local utilities -->
     <subscriber

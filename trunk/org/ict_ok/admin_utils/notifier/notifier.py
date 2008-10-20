@@ -111,3 +111,14 @@ def notifierInstances(dummy_context):
     terms = [SimpleTerm(i.__name__, str(i.__name__), i.__name__) \
              for i in utilList]
     return SimpleVocabulary(terms)
+
+def notifierLevels(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        u"error": u"Error",
+        u"warning": u"Warning",
+        u"info": u"Information",
+        u"all": u"All",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)

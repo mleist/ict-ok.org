@@ -27,8 +27,8 @@ from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.notifier.email.interfaces import \
-     INotifierEmail
+from org.ict_ok.admin_utils.notifier.imail.interfaces import \
+     INotifierEmail, IEventIfNotifierEmail
 from org.ict_ok.admin_utils.notifier.browser.notifier import \
      NotifierDetails
 
@@ -75,3 +75,8 @@ class EditNotifierEmailForm(EditForm):
     label = _(u'edit email notifier')
     fields = field.Fields(INotifierEmail).omit(\
         *NotifierEmailDetails.omit_editfields)
+
+class EditNotifierEmailEventIfForm(EditForm):
+    """ Edit Event Interface of object """
+    label = _(u'email notifier event interfaces form')
+    fields = field.Fields(IEventIfNotifierEmail)

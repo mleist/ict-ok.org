@@ -34,6 +34,8 @@ from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
      IAdmUtilGeneratorSmokePing
 from org.ict_ok.admin_utils.ticker.interfaces import \
      IAdmUtilTicker
+from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
+     IEventTimingRelay
 
 
 class TimeCheckSpace:
@@ -111,8 +113,8 @@ def runner():
     (signal_min, signal_hour,
      signal_day, signal_month,
      signal_year) = getTimeChangeSignals()
-    #interaction = zope.security.management.getInteraction()
-    #principal = interaction.participations[0].principal
+    interaction = zope.security.management.getInteraction()
+    principal = interaction.participations[0].principal
     site = zope.app.component.hooks.getSite()
     db = site._p_jar.db()
     sm = site.getSiteManager()
@@ -123,6 +125,10 @@ def runner():
             tickerAdapter = ITicker(myobj.object)
             if tickerAdapter:
                 tickerAdapter.db = db
+                tickerAdapter.interaction = interaction
+                tickerAdapter.principal = principal
+                if IEventTimingRelay.providedBy(myobj.object):
+                    tickerAdapter.triggered()
                 if signal_min:
                     tickerAdapter.triggerMin()
                 if signal_hour:
@@ -136,6 +142,7 @@ def runner():
         except TypeError, err:
             pass
     for utilInterface in (IAdmUtilSupervisor,
+                          IAdmUtilEventCrossbar,
                           IAdmUtilGeneratorSmokePing,
                           IAdmUtilGeneratorNagios,
                           ):

@@ -175,8 +175,11 @@ class Superclass(Persistent):
         """
         get the Title from Dublin Core
         """
-        dcore = IWriteZopeDublinCore(self)
-        return dcore.title
+        try:
+            dcore = IWriteZopeDublinCore(self)
+            return dcore.title
+        except TypeError:
+            return self.ikName
 
     def setDcTitle(self, title):
         """
@@ -275,7 +278,7 @@ class Superclass(Persistent):
         ## debug if queue not empty
         if len(self.inpEQueue) + len(self.outEQueue) > 0:
             log(INFO, "tickerEvent (n:%s, n(i):%s, n(o):%s)" % \
-                (self.getDcTitle(), len(self.inpEQueue), len(self.outEQueue)))
+                (self.ikName, len(self.inpEQueue), len(self.outEQueue)))
         self.processOutEQueue()
         self.processEvents()
         self.processInpEQueue()

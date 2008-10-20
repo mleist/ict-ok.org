@@ -212,6 +212,15 @@ class IEventIfEventHost(IEventIfSupernode):
         default = set([]),
         readonly = False,
         required = True)
-    
+
+    eventOutObjs_nagiosError = Set(
+        title = _("nagiosError ->"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = False)
+
     def eventInp_shutdown(eventMsg):
         """ start the shutdown of the host """

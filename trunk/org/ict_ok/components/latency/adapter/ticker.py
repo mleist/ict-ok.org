@@ -45,7 +45,7 @@ class Ticker(object):
         """
         got ticker event from ticker thread every minute
         """
-        self.context.triggerMin()
+        self.context.triggerMin(self)
 
     def triggerHour(self):
         """

@@ -39,8 +39,8 @@ from z3c.rml import pagetemplate
 # ict_ok.org imports
 from org.ict_ok.admin_utils.notifier.notifier import \
      Notifier
-from org.ict_ok.admin_utils.notifier.email.interfaces import \
-     INotifierEmail
+from org.ict_ok.admin_utils.notifier.imail.interfaces import \
+     INotifierEmail, IEventIfNotifierEmail
 
 logger = logging.getLogger("NotifierEmail")
 berlinTZ = timezone('Europe/Berlin')
@@ -50,11 +50,15 @@ class NotifierEmail(Notifier):
     """Implementation of email notifier wrapper
     """
 
-    implements(INotifierEmail)
+    implements(INotifierEmail, IEventIfNotifierEmail)
 
     hostname = FieldProperty(INotifierEmail['hostname'])
     portServer = FieldProperty(INotifierEmail['portServer'])
     from_addr = FieldProperty(INotifierEmail['from_addr'])
+    # Event interface
+    eventInpObjs_notify = FieldProperty(\
+        IEventIfNotifierEmail['eventInpObjs_notify'])
+    
 
     def __init__(self):
         Notifier.__init__(self)

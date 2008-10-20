@@ -27,9 +27,9 @@ from zope.dublincore.interfaces import IWriteZopeDublinCore
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
-from org.ict_ok.admin_utils.notifier.email.interfaces import \
+from org.ict_ok.admin_utils.notifier.imail.interfaces import \
      INotifierEmail
-from org.ict_ok.admin_utils.notifier.email.email import NotifierEmail
+from org.ict_ok.admin_utils.notifier.imail.imail import NotifierEmail
 
 logger = logging.getLogger("NotifierEmail")
 

@@ -41,7 +41,7 @@
     <!--some Users are defined in org.ict_ok.admin_utils.usermanagement.bootstrap-->
     <principal
         id="zope.manager"
-        title="Manager"
+        title="ict-ok Manager"
         login="admin"
         password="admin"
         />

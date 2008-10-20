@@ -22,6 +22,56 @@
             <td tal:content="python: view.getSystemUptime()" />
         </tr>
         <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/nbrStarts|nothing">
+            <td i18n:translate="">Starts</td>
+            <td tal:content="context/nbrStarts" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ipv4My|nothing">
+            <td i18n:translate="">My active IP</td>
+            <td tal:content="context/ipv4My" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/objectID|nothing">
+            <td i18n:translate="">My object id</td>
+            <td tal:content="context/objectID" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ipv4Master|nothing">
+            <td i18n:translate="">Master IP</td>
+            <td tal:content="context/ipv4Master" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/oidMaster|nothing">
+            <td i18n:translate="">Master object id</td>
+            <td tal:content="context/oidMaster" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/lastSeenMaster|nothing">
+            <td i18n:translate="">last seen Master</td>
+            <td tal:content="context/lastSeenMaster" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/status2Master|nothing">
+            <td i18n:translate="">status2Master</td>
+            <td tal:content="context/status2Master" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ipv4Slave|nothing">
+            <td i18n:translate="">Slave IP</td>
+            <td tal:content="context/ipv4Slave" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/oidSlave|nothing">
+            <td i18n:translate="">Slave object id</td>
+            <td tal:content="context/oidSlave" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="lastSeenSlave/nbrStarts|nothing">
+            <td i18n:translate="">last seen Slave</td>
+            <td tal:content="context/lastSeenSlave" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">
             <td i18n:translate="">Comment</td>
             <td><pre tal:content="context/ikComment" /></td>

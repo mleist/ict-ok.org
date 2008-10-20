@@ -14,13 +14,15 @@
 __version__ = "$Id$"
 
 # zope imports
-from zope.schema import TextLine, Int
+from zope.schema import TextLine, Int, Set, Choice
 from zope.sendmail.interfaces import IMailer
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.notifier.interfaces import \
      INotifier
+from org.ict_ok.components.supernode.interfaces import \
+     IEventIfSupernode
 
 _ = MessageFactory('org.ict_ok')
 
@@ -54,3 +56,18 @@ class INotifierEmail(INotifier, IMailer):
     #hostname = TextLine(
         #title=_(u"Hostname"),
         #description=_(u"Name of server to be used as SMTP server."))
+
+class IEventIfNotifierEmail(IEventIfSupernode):
+    """ event interface of object """
+    
+    eventInpObjs_notify = Set(
+        title = _("notify event <-"),
+        value_type = Choice(
+            title = _("objects"),
+            vocabulary="AllEventInstances"),
+        default = set([]),
+        readonly = False,
+        required = True)
+
+    def eventInp_notify(eventMsg):
+        """ notify all users """

@@ -21,6 +21,9 @@ __version__ = "$Id$"
 from math import sqrt
 import os
 import rrdtool
+import time
+import tempfile
+from datetime import datetime
 
 # zope imports
 from zope.interface import implements
@@ -28,8 +31,11 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.app import zapi
 
 # ict_ok.org imports
+from org.ict_ok.version import getIkVersion
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.latency.interfaces import ILatency
+from org.ict_ok.admin_utils.usermanagement.usermanagement import \
+     getUserTimezone
 
 # --------------- helper functions -------------------------
 
@@ -104,10 +110,15 @@ class Latency(Component):
         """
         pass
         
-    def triggerMin(self):
+    def triggerMin(self, context):
         """ got ticker event from ticker thread every minute
         """
         pass
+        #filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
+        #f_handle, f_name = tempfile.mkstemp("iop"+filename)
+        #versionStr = "[%s]" % (getIkVersion())
+        #authorStr = context.principal.title
+        #self.generatePdf(f_name, authorStr, versionStr)
 
     def getRrdFilename(self):
         """ rrd filename incl. path

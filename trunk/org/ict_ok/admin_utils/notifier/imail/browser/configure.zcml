@@ -13,22 +13,22 @@
     <!--##### email notifier ##### -->
 
     <defaultView
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
         name="details.html"
         />
 
     <page
         name="actions"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
-        class=".email.NotifierEmailDetails"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
+        class=".imail.NotifierEmailDetails"
         attribute="actions"
         permission="org.ict_ok.admin_utils.notifier.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
     />
     <page
         name="send_test"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
-        class=".email.NotifierEmailDetails"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
+        class=".imail.NotifierEmailDetails"
         attribute="send_test"
         permission="org.ict_ok.admin_utils.notifier.Send"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -36,28 +36,28 @@
 
     <z3c:pagelet
         name="details.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
-        class="org.ict_ok.admin_utils.notifier.email.browser.email.NotifierEmailDetails"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
+        class="org.ict_ok.admin_utils.notifier.imail.browser.imail.NotifierEmailDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
         />
     <z3c:template
         template="details.pt"
-        for=".email.NotifierEmailDetails"
+        for=".imail.NotifierEmailDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
     <!--<page-->
         <!--name="status"-->
-        <!--for="org.ict_ok.admin_utils.notifier.email.interfaces.IIkNotifierEmail"-->
-        <!--class=".email.IkNotifierEmailDetails"-->
+        <!--for="org.ict_ok.admin_utils.notifier.imail.interfaces.IIkNotifierEmail"-->
+        <!--class=".imail.IkNotifierEmailDetails"-->
         <!--template="status.pt"-->
         <!--permission="org.ict_ok.admin_utils.notifier.View"-->
         <!--menu="zmi_views" title="Status"/>-->
 
     <z3c:pagelet
         name="overview.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
         class="org.ict_ok.components.superclass.browser.superclass.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
@@ -65,7 +65,7 @@
 
     <z3c:pagelet
         name="history.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
         class="org.ict_ok.components.superclass.browser.superclass.History"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.View"
@@ -73,18 +73,25 @@
 
     <z3c:pagelet
         name="edit.html"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
-        class="org.ict_ok.admin_utils.notifier.email.browser.email.EditNotifierEmailForm"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
+        class="org.ict_ok.admin_utils.notifier.imail.browser.imail.EditNotifierEmailForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.Edit"
         />
         
+    <z3c:pagelet
+        name="edit_event_if.html"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
+        class="org.ict_ok.admin_utils.notifier.imail.browser.imail.EditNotifierEmailEventIfForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.notifier.EditEventIf"
+    />
 
-    <!--##### email notifier ##### -->
+    <!--##### imail notifier ##### -->
     <!--##### Sub Menu ##### -->
     <viewlet
         name="details"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -93,7 +100,7 @@
 
     <viewlet
         name="overview"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -102,7 +109,7 @@
 
     <viewlet
         name="history"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -111,11 +118,20 @@
 
     <viewlet
         name="edit"
-        for="org.ict_ok.admin_utils.notifier.email.interfaces.INotifierEmail"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.notifier.Edit"
+        />
+
+    <viewlet
+        name="edit_event_if"
+        for="org.ict_ok.admin_utils.notifier.imail.interfaces.INotifierEmail"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.notifier.EditEventIf"
         />
 
 </zope:configure>

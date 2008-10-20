@@ -1,16 +1,20 @@
 > bin/zopectl debug
 
->>> u=debugger.root().getSiteManager() 
+u=debugger.root().getSiteManager() 
 
 
->>> aa=list(u.items())[0][1]
->>> print list(aa.items())
-[(u'AdmUtilCategories', <org.ict_ok.admin_utils.categories.categories.AdmUtilCategories object at 0x3442410>), (u'AdmUtilCompliance', <org.ict_ok.admin_utils.compliance.compliance.AdmUtilCompliance object at 0x3442140>), (u'AdmUtilCron', <org.ict_ok.admin_utils.cron.cron.AdmUtilCron object at 0x3442050>), (u'AdmUtilDemo1', <org.ict_ok.admin_utils.netscan.demo1.demo1.AdmUtilDemo1 object at 0x3442aa0>), (u'AdmUtilEventCrossbar', <org.ict_ok.admin_utils.eventcrossbar.eventcrossbar.AdmUtilEventCrossbar object at 0x3442758>), (u'AdmUtilGeneratorNagios', <org.ict_ok.admin_utils.generators.nagios.nagios.AdmUtilGeneratorNagios object at 0x3442500>), (u'AdmUtilGeneratorSmokePing', <org.ict_ok.admin_utils.generators.smokeping.smokeping.AdmUtilGeneratorSmokePing object at 0x3442488>), (u'AdmUtilGraphviz', <org.ict_ok.admin_utils.graphviz.graphviz.AdmUtilGraphviz object at 0x3442320>), (u'AdmUtilLinuxHa', <org.ict_ok.admin_utils.linux_ha.linux_ha.AdmUtilLinuxHa object at 0x34422a8>), (u'AdmUtilNMap', <org.ict_ok.admin_utils.netscan.nmap.nmap.AdmUtilNMap object at 0x34426e0>), (u'AdmUtilObjMQ', <org.ict_ok.admin_utils.objmq.objmq.AdmUtilObjMQ object at 0x3442578>), (u'AdmUtilPublicViewing', <org.ict_ok.admin_utils.public_viewing.public_viewing.AdmUtilPublicViewing object at 0x3442a28>), (u'AdmUtilSimple1', <org.ict_ok.admin_utils.netscan.simple1.simple1.AdmUtilSimple1 object at 0x34428c0>), (u'AdmUtilSnmpd', <org.ict_ok.admin_utils.snmpd.snmpd.AdmUtilSnmpd object at 0x3442230>), (u'AdmUtilSupervisor', <org.ict_ok.admin_utils.supervisor.supervisor.AdmUtilSupervisor object at 0x34425f0>), (u'AdmUtilTicker', <org.ict_ok.admin_utils.ticker.ticker.AdmUtilTicker object at 0x3442848>), (u'AdmUtilUserManagement', <org.ict_ok.admin_utils.usermanagement.usermanagement.AdmUtilUserManagement object at 0x34427d0>), (u'AdmUtilWFMC', <org.ict_ok.admin_utils.wfmc.wfmc.AdmUtilWFMC object at 0x34429b0>), (u'Catalog', <zope.app.catalog.catalog.Catalog object at 0x343ee60>), (u'CookieClientIdManager', <zope.session.http.CookieClientIdManager object at 0x3442b90>), (u'IntIds', <zope.app.intid.IntIds object at 0x3442398>), (u'NetScan', <org.ict_ok.admin_utils.netscan.netscan.NetScan object at 0x343eed8>), (u'Notifier', <org.ict_ok.admin_utils.notifier.notifier.NotifierUtil object at 0x3442668>), (u'NotifierJabber', <org.ict_ok.admin_utils.notifier.jabber.jabber.NotifierJabber object at 0x34421b8>), (u'PersistentSessionDataContainer', <zope.session.session.PersistentSessionDataContainer object at 0x34420c8>), (u'PrincipalAnnotation', <zope.app.principalannotation.PrincipalAnnotationUtility object at 0x3442b18>), (u'RootErrorReportingUtility', <zope.error.error.RootErrorReportingUtility object at 0x343ef50>), (u'UtilManager', <org.ict_ok.admin_utils.util_manager.util_manager.UtilManager object at 0x3442938>)]
+aa=list(u.items())[0][1]
+import pprint
+pprint.pprint(list(aa.items()))
+
 >>> del aa[u'NotifierJabber']
 
 
 
->>> utilities=list(u.registeredUtilities())
+utilities=list(u.registeredUtilities())
+
+pprint.pprint([x.provided.getName() for x in utilities])
+
 >>> print [x.provided.getName() for x in utilities] 
 ['IAdmUtilDemo1', 'IAdmUtilLinuxHa', 'IAdmUtilCompliance', 'IAdmUtilTicker', 'IAdmUtilGraphviz', 'IIntIds', 'INotifierJabber', 'IAdmUtilGeneratorNagios', 'ICatalog', 'IPrincipalAnnotationUtility', 'INotifierUtil', 'IAdmUtilSimple1', 'IAdmUtilSupervisor', 'INetScan', 'IAdmUtilObjMQ', 'IAdmUtilUserManagement', 'IAdmUtilCron', 'IAdmUtilNMap', 'IClientIdManager', 'IAdmUtilSnmpd', 'ISessionDataContainer', 'IAdmUtilPublicViewing', 'IAdmUtilWFMC', 'IUtilManager', 'INotifierEmail', 'IAdmUtilEventCrossbar', 'IAdmUtilGeneratorSmokePing', 'IAdmUtilCategories', 'IErrorReportingUtility']
 >>> utilities[24] 

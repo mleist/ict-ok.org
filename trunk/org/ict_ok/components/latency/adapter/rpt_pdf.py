@@ -90,6 +90,7 @@ class RptPdf(ParentRptPdf):
             self.writeComment(u"%s## Pre2 (%s,%d) - LatencyRptPdfPre2" % \
                               ("\t" * level, self.context.ikName, level))
         if self.document:
+            self.appendImage(1, elemList)
             self.appendImage(24, elemList)
             self.appendImage(24*7, elemList)
             self.appendImage(24*365, elemList)
