@@ -44,12 +44,17 @@ _ = MessageFactory('org.ict_ok')
 
 # --------------- menu entries -----------------------------
 
+class MSubDisplayRequirements(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Requirements')
+    viewURL = 'display_reqs.html'
+    weight = 80
+
 class MSubAllRequirements(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'All Requirements')
     viewURL = 'allreqs.html'
     weight = 80
-
 
 # --------------- details -----------------------------
 

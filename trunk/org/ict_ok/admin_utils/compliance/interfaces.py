@@ -33,6 +33,10 @@ _ = MessageFactory('org.ict_ok')
 class IAdmUtilCompliance(ISupernode):
     """Compliance Utiltiy
     """
+    def generateAllPdf(absFilename, authorStr, versionStr):
+        """
+        will generate a complete pdf report
+        """
 
 class IRequirement(ISuperclass, ischooltool.IRequirement):
     """ ict-ok.org wrapper

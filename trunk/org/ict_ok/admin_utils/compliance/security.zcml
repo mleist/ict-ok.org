@@ -11,11 +11,16 @@
     />
 
     <permission
+        id="org.ict_ok.admin_utils.compliance.generate.pdf"
+        title="generate pdf reports"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.compliance.Edit"
         title="View from Compliance Utiltiy"
     />
 
-    <!-- Copyright (c) 2007, 
+    <!-- Copyright (c) 2007, 2008, 
                      Markus Leist <leist@ikom-online.de>
     -->
 
@@ -24,8 +29,14 @@
     <grant permission="org.ict_ok.admin_utils.compliance.View"
                     role="org.ict_ok.adm" />
 
+    <grant permission="org.ict_ok.admin_utils.compliance.generate.pdf"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.compliance.generate.pdf"
+                    role="org.ict_ok.adm" />
+
     <grant permission="org.ict_ok.admin_utils.compliance.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.compliance.Edit"
                     role="org.ict_ok.adm" />
+
 </configure>

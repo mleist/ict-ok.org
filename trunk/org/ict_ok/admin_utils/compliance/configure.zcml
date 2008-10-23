@@ -63,6 +63,11 @@
             />
     </class>
 
+    <adapter
+        factory=".adapter.rpt_pdf.RptRequirementPdf"
+        permission="org.ict_ok.admin_utils.compliance.generate.pdf"
+    />
+
     <!--              Evaluations              -->
 
     <adapter

@@ -162,7 +162,7 @@ class RptPdf(object):
         level: indent-level (int 0..)
         comments: should there comments are in the output?
         """
-        if IComponent.providedBy(self.context):
+        if ISuperclass.providedBy(self.context):
             self.traverse4RptPre(level, comments)
             self.traverse4RptBody(level, comments)
             self.traverse4RptPost(level, comments)

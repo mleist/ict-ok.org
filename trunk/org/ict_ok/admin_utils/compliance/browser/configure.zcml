@@ -17,6 +17,22 @@
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
         name="details.html"
         />
+    <page
+        name="actions"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.AdmUtilComplianceDetails"
+        attribute="actions"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="generate_all_pdf"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.AdmUtilComplianceDetails"
+        attribute="generateAllPdf"
+        permission="org.ict_ok.admin_utils.compliance.generate.pdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
 
     <z3c:pagelet
         name="details.html"
@@ -48,6 +64,18 @@
         class="org.ict_ok.admin_utils.compliance.browser.compliance.EditAdmUtilComplianceForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.compliance.Edit"
+        />
+    <z3c:pagelet
+        name="display_reqs.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <z3c:template
+        template="display_reqs.pt"
+        for="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
     <z3c:pagelet
         name="allreqs.html"
@@ -108,4 +136,13 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.compliance.View"
         />
+    <viewlet
+        name="display_reqs"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.admin_utils.compliance.browser.requirement.MSubDisplayRequirements"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+        
 </zope:configure>
