@@ -45,6 +45,10 @@ class MacValidError(ValidationError):
     """Error notification for non valid IPv4-Address"""
     __doc__ = _("""IP-address not ok""")
 
+class ColorValidError(ValidationError):
+    """Error notification for non valid Email-Address"""
+    __doc__ = _("""Color not ok (#rrggbb)""")
+
 class EmailValidError(ValidationError):
     """Error notification for non valid Email-Address"""
     __doc__ = _("""Email-address not ok""")

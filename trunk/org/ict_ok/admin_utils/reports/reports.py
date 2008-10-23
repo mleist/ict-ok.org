@@ -37,6 +37,7 @@ class AdmUtilReports(Supernode):
 
     implements(IAdmUtilReports)
     
+    color1 = FieldProperty(IAdmUtilReports['color1'])
     logoFile1 = FieldProperty(IAdmUtilReports['logoFile1'])
     fontName1 = FieldProperty(IAdmUtilReports['fontName1'])
     fontName2 = FieldProperty(IAdmUtilReports['fontName2'])

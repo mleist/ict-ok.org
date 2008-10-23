@@ -23,6 +23,7 @@ from zope.interface import invariant, Invalid
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
+from org.ict_ok.schema.colorvalid import ColorValid
 from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
@@ -30,9 +31,15 @@ _ = MessageFactory('org.ict_ok')
 
 class IAdmUtilReports(ISupernode):
     """A configuration utility."""
+    
+    color1 = ColorValid(
+        title = _("color1"),
+        description = _("Color as #rrggbb."),
+        readonly = False,
+        required = False)
 
     logoFile1 = TextLine(
-        title = _("logo1 file path"),
+        title = _("logo1 file path (4:1)"),
         description = _("Path to logo file (top/left))."),
         readonly = False,
         required = False)

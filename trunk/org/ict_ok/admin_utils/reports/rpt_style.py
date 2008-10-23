@@ -27,7 +27,7 @@ from reportlab.lib.styles import \
      TA_CENTER, ParagraphStyle, StyleSheet1
 
 # ict-ok.org imports
-from org.ict_ok.admin_utils.reports.rpt_color import colors, CMYK_RPT1
+from org.ict_ok.admin_utils.reports.rpt_color import colors, getColor1
 from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 
 #rptNormalStyle = ParagraphStyle(name='Normal',
@@ -67,7 +67,9 @@ def getRptStyleSheet():
         locFontName5 = 'Courier'
     else:
         locFontName5 = admUtilReports.fontName5
-
+        
+    cmyk_color1 = getColor1()
+    
     stylesheet = StyleSheet1()
     stylesheet.add(ParagraphStyle(name='Normal',
                                   fontName=locFontName1,
@@ -110,7 +112,7 @@ def getRptStyleSheet():
                    alias='h1')
     stylesheet.add(ParagraphStyle(name='Heading1r',
                                   parent=stylesheet['Heading1'],
-                                  textColor = CMYK_RPT1,
+                                  textColor = cmyk_color1,
                                   alignment=2)
                               )
     stylesheet.add(ParagraphStyle(name='Heading2',
@@ -125,7 +127,7 @@ def getRptStyleSheet():
                    alias='h2')
     stylesheet.add(ParagraphStyle(name='Heading2r',
                                   parent=stylesheet['Heading2'],
-                                  textColor = CMYK_RPT1,
+                                  textColor = cmyk_color1,
                                   alignment=2)
                               )
     stylesheet.add(ParagraphStyle(name='Heading3',
@@ -139,7 +141,7 @@ def getRptStyleSheet():
                    alias='h3')
     stylesheet.add(ParagraphStyle(name='Heading3r',
                                   parent=stylesheet['Heading3'],
-                                  textColor = CMYK_RPT1,
+                                  textColor = cmyk_color1,
                                   alignment=2)
                               )
     stylesheet.add(ParagraphStyle(name='Heading4',
@@ -153,7 +155,7 @@ def getRptStyleSheet():
                    alias='h4')
     stylesheet.add(ParagraphStyle(name='Heading4r',
                                   parent=stylesheet['Heading4'],
-                                  textColor = CMYK_RPT1,
+                                  textColor = cmyk_color1,
                                   alignment=2)
                               )
     stylesheet.add(ParagraphStyle(name='Heading5',
@@ -167,7 +169,7 @@ def getRptStyleSheet():
                    alias='h5')
     stylesheet.add(ParagraphStyle(name='Heading5r',
                                   parent=stylesheet['Heading5'],
-                                  textColor = CMYK_RPT1,
+                                  textColor = cmyk_color1,
                                   alignment=2)
                               )
     stylesheet.add(ParagraphStyle(name='Heading6',
@@ -181,7 +183,7 @@ def getRptStyleSheet():
                    alias='h6')
     stylesheet.add(ParagraphStyle(name='Heading6r',
                                   parent=stylesheet['Heading6'],
-                                  textColor = CMYK_RPT1,
+                                  textColor = cmyk_color1,
                                   alignment=2)
                               )
     stylesheet.add(ParagraphStyle(name='Heading7',
@@ -195,7 +197,7 @@ def getRptStyleSheet():
                    alias='h7')
     stylesheet.add(ParagraphStyle(name='Heading7r',
                                   parent=stylesheet['Heading7'],
-                                  textColor = CMYK_RPT1,
+                                  textColor = cmyk_color1,
                                   alignment=2)
                               )
     stylesheet.add(ParagraphStyle(name='Heading8',
@@ -209,7 +211,7 @@ def getRptStyleSheet():
                    alias='h8')
     stylesheet.add(ParagraphStyle(name='Heading8r',
                                   parent=stylesheet['Heading8'],
-                                  textColor = CMYK_RPT1,
+                                  textColor = cmyk_color1,
                                   alignment=2)
                               )
     stylesheet.add(ParagraphStyle(name='Heading9',
@@ -223,7 +225,7 @@ def getRptStyleSheet():
                    alias='h9')
     stylesheet.add(ParagraphStyle(name='Heading9r',
                                   parent=stylesheet['Heading9'],
-                                  textColor = CMYK_RPT1,
+                                  textColor = cmyk_color1,
                                   alignment=2)
                               )
     stylesheet.add(ParagraphStyle(name='Title',

@@ -27,15 +27,16 @@ from reportlab.lib.pagesizes import A4
 from reportlab.platypus import PageTemplate
 
 # ict-ok.org imports
-from org.ict_ok.admin_utils.reports.rpt_color import CMYK_RPT1
+from org.ict_ok.admin_utils.reports.rpt_color import getColor1
 from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 
 class RptPageTemplate(PageTemplate):
     def afterDrawPage(self, canv, doc):
         admUtilReports = getUtility(IAdmUtilReports)
         canv.saveState()
-        canv.setStrokeColor(CMYK_RPT1)
-        canv.setFillColor(CMYK_RPT1)
+        cmyk_color1 = getColor1()
+        canv.setStrokeColor(cmyk_color1)
+        canv.setFillColor(cmyk_color1)
         canv.rect(65 * mm, A4[1] - 18.75 * mm,
                   14 * cm, 1 * cm, fill=1)
         if admUtilReports.logoFile1 is not None:
