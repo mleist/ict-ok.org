@@ -1,45 +1,45 @@
-<!--<i18n:block domain="org.ict_ok">-->
-    <!--<h3 tal:condition="view/label|nothing"-->
-        <!--tal:content="view/label" />-->
-    <!--<div class="message"-->
-        <!--tal:condition="view/status|nothing"-->
-        <!--tal:content="view/status"-->
-        <!--i18n:translate="">-->
-    <!--Something happened.-->
-    <!--</div>-->
-    <!--<form action="" method="post"-->
-        <!--tal:attributes="action request/URL">-->
-    <!--<tal:block-->
-        <!--condition="view/objs|nothing"-->
-        <!--replace="structure view/table" />-->
-    <!--<div-->
-        <!--tal:condition="not: view/objs|nothing"-->
-        <!--i18n:translate="">-->
-        <!--There are no objects.-->
-    <!--</div>-->
-    <!--</form>-->
+<i18n:block domain="org.ict_ok">
+    <h3 tal:condition="view/label|nothing"
+        tal:content="view/label" />
+    <div class="message"
+        tal:condition="view/status|nothing"
+        tal:content="view/status"
+        i18n:translate="">
+    Something happened.
+    </div>
+    <form action="" method="post"
+        tal:attributes="action request/URL">
+    <tal:block
+        condition="view/objs|nothing"
+        replace="structure view/table" />
+    <div
+        tal:condition="not: view/objs|nothing"
+        i18n:translate="">
+        There are no objects.
+    </div>
+    </form>
     <!--<div id="treeDiv8881">-->
-        <ul class="req_view">
-            <li class="req_view">List 0
-                <ul class="req_view">
-                    <li class="req_view">List 0-0
-                        <ul class="req_view">
-                            <li class="req_view">item 0-0-0</li>
-                            <li class="req_view">item 0-0-1</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li class="req_view">item 0-1
-                <ul class="req_view">
-                    <li class="req_view"><a target="_new" href="www.elsewhere.com" title="go elsewhere">elsewhere</a>
-                        <ul class="req_view">
-                            <li class="req_view">item 0-1-0</li>
-                            <li class="req_view">item 0-1-1</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+        <!--<ul class="req_view">-->
+            <!--<li class="req_view">List 0-->
+                <!--<ul class="req_view">-->
+                    <!--<li class="req_view">List 0-0-->
+                        <!--<ul class="req_view">-->
+                            <!--<li class="req_view">item 0-0-0</li>-->
+                            <!--<li class="req_view">item 0-0-1</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
+            <!--<li class="req_view">item 0-1-->
+                <!--<ul class="req_view">-->
+                    <!--<li class="req_view"><a target="_new" href="www.elsewhere.com" title="go elsewhere">elsewhere</a>-->
+                        <!--<ul class="req_view">-->
+                            <!--<li class="req_view">item 0-1-0</li>-->
+                            <!--<li class="req_view">item 0-1-1</li>-->
+                        <!--</ul>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
+        <!--</ul>-->
     <!--</div>-->
-<!--</i18n:block>-->
+</i18n:block>

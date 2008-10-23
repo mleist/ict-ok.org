@@ -25,14 +25,19 @@ from zope.interface import implements
 # zc imports
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.compliance.interfaces import \
-     IAdmUtilCompliance
+     IEvaluations, IEvaluation
+import schooltool.requirement.evaluation
+from schooltool.requirement.evaluation import getEvaluations
 
 logger = logging.getLogger("AdmUtilCompliance")
 
-
-class AdmUtilCompliance(Supernode):
-    """Compliance Utiltiy
+class Evaluation(schooltool.requirement.evaluation.Evaluation):
+    """ ict-ok.org wrapper
     """
-    implements(IAdmUtilCompliance)
+    implements(IEvaluation)
+
+class Evaluations(schooltool.requirement.evaluation.Evaluations):
+    """ ict-ok.org wrapper
+    """
+    implements(IEvaluations)

@@ -40,17 +40,14 @@ from org.ict_ok.components.supernode.browser.supernode import \
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
 from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
 
 _ = MessageFactory('org.ict_ok')
 
 # --------------- menu entries -----------------------------
 
-class MSubAllRequirements(GlobalMenuSubItem):
-    """ Menu Item """
-    title = _(u'All Requirements')
-    viewURL = 'allreqs.html'
-    weight = 80
 
+# --------------- details -----------------------------
 
 class AdmUtilComplianceDetails(SupernodeDetails):
     """Compliance Utiltiy
@@ -69,15 +66,55 @@ class DetailsAdmUtilComplianceForm(DisplayForm):
     label = _(u'settings of Compliance')
     fields = field.Fields(IAdmUtilCompliance).omit(
        *AdmUtilComplianceDetails.omit_viewfields)
-    
+
     def update(self):
         DisplayForm.update(self)
-    
-class AdmUtilComplianceAllRequirements(DisplayForm):
+
+def getTitel(item, formatter):
+    """
+    Titel for Overview
+    """
+    try:
+        return item.ikName
+    except TypeError:
+        return str(item.__class__.__name__)
+
+from org.ict_ok.components.superclass.browser.superclass import \
+     Overview, getModifiedDate, raw_cell_formatter, \
+     link, getActionBottons, getSize
+class AdmUtilRequirementDisplayAll(Overview):
     """for all Requirements
     """
     label = _(u'display all requirements')
-
+    columns = (
+        GetterColumn(title=_('Title'),
+                     getter=getTitel,
+                     cell_formatter=link('overview.html')),
+        GetterColumn(title=_('Modified On'),
+                     getter=getModifiedDate,
+                     subsort=True,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Size'),
+                     getter=getSize,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    sort_columns = [1]
+    status = None
+    
+    def objs(self):
+        """List of Content objects"""
+        #import pdb
+        #pdb.set_trace()
+        return [obj
+                for obj in self.context.values()
+                if IRequirement.providedBy(obj)]
+        #retList = []
+        #for myObj in self.context:
+            
+        #return retList
 
 
 class EditAdmUtilComplianceForm(EditForm):

@@ -52,13 +52,13 @@
     <z3c:pagelet
         name="allreqs.html"
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
-        class="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilComplianceAllRequirements"
+        class="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplayAll"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.compliance.View"
         />
     <z3c:template
         template="allreqs.pt"
-        for="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilComplianceAllRequirements"
+        for="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplayAll"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
@@ -104,7 +104,7 @@
         name="allreqs"
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.admin_utils.compliance.browser.compliance.MSubAllRequirements"
+        class="org.ict_ok.admin_utils.compliance.browser.requirement.MSubAllRequirements"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.compliance.View"
         />
