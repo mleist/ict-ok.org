@@ -509,6 +509,14 @@ td.Selector {
   vertical-align:top;
 }
 
+ul.req_view {
+  padding:0px 0px 0px 5px;
+}
+
+li.req_view {
+  background:url(../pics/mini/arrow_fat_right.gif) no-repeat left top;
+  padding:0px 10px 0px 12px;
+}
 
 ul.sb_actions {
   list-style:none;

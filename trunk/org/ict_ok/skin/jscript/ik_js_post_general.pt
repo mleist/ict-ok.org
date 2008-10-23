@@ -148,11 +148,6 @@
     var Jetzt = new Date();
     var Sekunden = Jetzt.getSeconds();
     ik_el_ikh_time.innerHTML = Jetzt.toLocaleString();
-    //if (Sekunden % 2) {
-    //  ik_el_console_h1.style.backgroundImage = "url(/@@/pics/btna2t.gif)";
-    //} else {
-    //  ik_el_console_h1.style.backgroundImage = "url(/@@/pics/btna2.gif)";
-    //}
   }
   reloadSubscriber = function(type, args) {
     for (var i = 0; i < document.images_reload.length; i++) {
