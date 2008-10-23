@@ -156,6 +156,76 @@ def getRptStyleSheet():
                                   textColor = CMYK_RPT1,
                                   alignment=2)
                               )
+    stylesheet.add(ParagraphStyle(name='Heading5',
+                                  parent=stylesheet['Normal'],
+                                  keepWithNext = 1,
+                                  fontName = locFontName2,
+                                  fontSize=10,
+                                  leading=14,
+                                  spaceBefore=2*mm,
+                                  spaceAfter=12),
+                   alias='h5')
+    stylesheet.add(ParagraphStyle(name='Heading5r',
+                                  parent=stylesheet['Heading5'],
+                                  textColor = CMYK_RPT1,
+                                  alignment=2)
+                              )
+    stylesheet.add(ParagraphStyle(name='Heading6',
+                                  parent=stylesheet['Normal'],
+                                  keepWithNext = 1,
+                                  fontName = locFontName2,
+                                  fontSize=10,
+                                  leading=14,
+                                  spaceBefore=2*mm,
+                                  spaceAfter=12),
+                   alias='h6')
+    stylesheet.add(ParagraphStyle(name='Heading6r',
+                                  parent=stylesheet['Heading6'],
+                                  textColor = CMYK_RPT1,
+                                  alignment=2)
+                              )
+    stylesheet.add(ParagraphStyle(name='Heading7',
+                                  parent=stylesheet['Normal'],
+                                  keepWithNext = 1,
+                                  fontName = locFontName2,
+                                  fontSize=10,
+                                  leading=14,
+                                  spaceBefore=2*mm,
+                                  spaceAfter=12),
+                   alias='h7')
+    stylesheet.add(ParagraphStyle(name='Heading7r',
+                                  parent=stylesheet['Heading7'],
+                                  textColor = CMYK_RPT1,
+                                  alignment=2)
+                              )
+    stylesheet.add(ParagraphStyle(name='Heading8',
+                                  parent=stylesheet['Normal'],
+                                  keepWithNext = 1,
+                                  fontName = locFontName2,
+                                  fontSize=10,
+                                  leading=14,
+                                  spaceBefore=2*mm,
+                                  spaceAfter=12),
+                   alias='h8')
+    stylesheet.add(ParagraphStyle(name='Heading8r',
+                                  parent=stylesheet['Heading8'],
+                                  textColor = CMYK_RPT1,
+                                  alignment=2)
+                              )
+    stylesheet.add(ParagraphStyle(name='Heading9',
+                                  parent=stylesheet['Normal'],
+                                  keepWithNext = 1,
+                                  fontName = locFontName2,
+                                  fontSize=10,
+                                  leading=14,
+                                  spaceBefore=2*mm,
+                                  spaceAfter=12),
+                   alias='h9')
+    stylesheet.add(ParagraphStyle(name='Heading9r',
+                                  parent=stylesheet['Heading9'],
+                                  textColor = CMYK_RPT1,
+                                  alignment=2)
+                              )
     stylesheet.add(ParagraphStyle(name='Title',
                                   parent=stylesheet['Normal'],
                                   fontName = locFontName2,
