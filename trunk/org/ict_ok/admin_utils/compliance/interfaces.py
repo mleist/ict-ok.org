@@ -23,11 +23,53 @@ __version__ = "$Id$"
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
+from schooltool.requirement import interfaces as ischooltool
 
 _ = MessageFactory('org.ict_ok')
 
 
 class IAdmUtilCompliance(ISupernode):
     """Compliance Utiltiy
+    """
+
+class IRequirement(ISuperclass, ischooltool.IRequirement):
+    """ ict-ok.org wrapper
+    """
+
+class IHaveRequirement(ischooltool.IHaveRequirement):
+    """ ict-ok.org wrapper
+    """
+
+class IScoreSystem(ischooltool.IScoreSystem):
+    """ ict-ok.org wrapper
+    """
+
+class IValuesScoreSystem(ischooltool.IValuesScoreSystem):
+    """ ict-ok.org wrapper
+    """
+
+class IDiscreteValuesScoreSystem(ischooltool.IDiscreteValuesScoreSystem):
+    """ ict-ok.org wrapper
+    """
+
+class IRangedValuesScoreSystem(ischooltool.IRangedValuesScoreSystem):
+    """ ict-ok.org wrapper
+    """
+
+class IHaveEvaluations(ischooltool.IHaveEvaluations):
+    """ ict-ok.org wrapper
+    """
+
+class IEvaluation(ischooltool.IEvaluation):
+    """ ict-ok.org wrapper
+    """
+
+class IEvaluations(ischooltool.IEvaluations):
+    """ ict-ok.org wrapper
+    """
+
+class IEvaluationsQuery(ischooltool.IEvaluationsQuery):
+    """ ict-ok.org wrapper
     """

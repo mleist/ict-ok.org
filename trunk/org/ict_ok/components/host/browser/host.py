@@ -229,6 +229,9 @@ class DetailsHostForm(DisplayForm):
     label = _(u'settings of host')
     fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
 
+    def update(self):
+        DisplayForm.update(self)
+
 
 class SmartviewForm(DisplayForm):
     """ Display form for the object """

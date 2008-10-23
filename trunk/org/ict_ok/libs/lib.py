@@ -45,7 +45,7 @@ def generateOid(*args ):
         # if we can't get a network address, just imagine one
         t_hostn = random() * 100000000000000000L
     data = str(t_time) + ' ' + str(t_rand) + ' ' + \
-         str(t_hostn) + ' ' + str(args)
+         str(t_hostn) #+ ' ' + str(args)
     data = md5(data).hexdigest()
     int_list = [int(i, 16) for i in data]
     crc = 0

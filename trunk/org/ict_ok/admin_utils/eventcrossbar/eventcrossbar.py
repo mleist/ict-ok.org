@@ -31,6 +31,7 @@ from zope.app.catalog.interfaces import ICatalog
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
+from zope.component import queryUtility
 
 # zc imports
 from zc.queue import Queue
@@ -75,7 +76,7 @@ def AllObjectInstances(dummy_context):
                            str(oobj.object.objectID),
                            oobj.object.getDcTitle()))
     for iface in [INotifierEmail]:
-        my_util = getUtility(iface)
+        my_util = queryUtility(iface)
         if my_util is not None:
             terms.append(\
                 SimpleTerm(my_util.objectID,
@@ -105,8 +106,10 @@ def AllObjectInstancesWithEventInputs(dummy_context):
                                    str(myId),
                                    oobj.object.getDcTitle() + \
                                    u'->' + inpEventName))
+    import pdb
+    pdb.set_trace()
     for iface in [INotifierEmail]:
-        my_util = getUtility(iface)
+        my_util = queryUtility(iface)
         if my_util is not None:
             inpEventNames = my_util.getAllInpEventNames().keys()
             if len(inpEventNames) > 0:

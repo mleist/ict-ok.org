@@ -45,6 +45,12 @@ _ = MessageFactory('org.ict_ok')
 
 # --------------- menu entries -----------------------------
 
+class MSubAllRequirements(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'All Requirements')
+    viewURL = 'allreqs.html'
+    weight = 80
+
 
 class AdmUtilComplianceDetails(SupernodeDetails):
     """Compliance Utiltiy
@@ -52,7 +58,6 @@ class AdmUtilComplianceDetails(SupernodeDetails):
     
     omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
     omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
-
 
 
 # --------------- forms ------------------------------------
@@ -64,6 +69,15 @@ class DetailsAdmUtilComplianceForm(DisplayForm):
     label = _(u'settings of Compliance')
     fields = field.Fields(IAdmUtilCompliance).omit(
        *AdmUtilComplianceDetails.omit_viewfields)
+    
+    def update(self):
+        DisplayForm.update(self)
+    
+class AdmUtilComplianceAllRequirements(DisplayForm):
+    """for all Requirements
+    """
+    label = _(u'display all requirements')
+
 
 
 class EditAdmUtilComplianceForm(EditForm):

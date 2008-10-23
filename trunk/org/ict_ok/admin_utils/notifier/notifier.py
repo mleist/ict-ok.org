@@ -45,6 +45,7 @@ class NotifierUtil(Supernode):
     def __init__(self):
         Supernode.__init__(self)
         self.ikRevision = __version__
+        self.notifierSet = []
         
     def getAllNotifierObjs(self):
         """

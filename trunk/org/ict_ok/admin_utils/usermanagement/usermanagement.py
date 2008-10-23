@@ -115,6 +115,38 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         """ property setter"""
         AdmUtilUserProperties(self.getRequest().principal).timezone = my_val
     timezone = property(get_timezone, set_timezone)
+    
+    # temp. workaround for "user specific notifierLevel" in normal form
+    def get_notifierLevel(self):
+        """ property getter"""
+        try:
+            return AdmUtilUserProperties(\
+                self.getRequest().principal).notifierLevel
+        except KeyError, errText:
+            AdmUtilUserProperties(\
+                self.getRequest().principal).notifierLevel = u"warning"
+    def set_notifierLevel(self, my_val):
+        """ property setter"""
+        AdmUtilUserProperties(\
+            self.getRequest().principal).notifierLevel = my_val
+    notifierLevel = property(get_notifierLevel, set_notifierLevel)
+    
+    # temp. workaround for "user specific shortNotifierLevel" in normal form
+    def get_shortNotifierLevel(self):
+        """ property getter"""
+        try:
+            return AdmUtilUserProperties(\
+                self.getRequest().principal).shortNotifierLevel
+        except KeyError, errText:
+            AdmUtilUserProperties(\
+                self.getRequest().principal).shortNotifierLevel = u"error"
+    def set_shortNotifierLevel(self, my_val):
+        """ property setter"""
+        AdmUtilUserProperties(\
+            self.getRequest().principal).shortNotifierLevel = my_val
+    shortNotifierLevel = property(\
+        get_shortNotifierLevel, set_shortNotifierLevel)
+    
 
 
 class AdmUtilUserDashboardSet(set):
@@ -153,7 +185,9 @@ class AdmUtilUserProperties(object):
         if mapping is None:
             blank = { 'shortEmail': u'',
                       'email': u'', 
-                      'timezone': u'', 
+                      'timezone': u'',
+                      'notifierLevel': u"warning",
+                      'shortNotifierLevel': u"error",
                       'dashboard_objs': AdmUtilUserDashboardSet()}
             mapping = annotations[KEY] = PersistentDict(blank)
         self.mapping = mapping
@@ -162,6 +196,8 @@ class AdmUtilUserProperties(object):
     email = MappingProperty('email')
     timezone = MappingProperty('timezone')
     dashboard_objs = MappingProperty('dashboard_objs')
+    notifierLevel = MappingProperty('notifierLevel')
+    shortNotifierLevel = MappingProperty('shortNotifierLevel')
 
 
 class AdmUtilUserDashboard(Contained):

@@ -20,7 +20,7 @@
             interface=".interfaces.IAdmUtilCompliance"
             />
         <require
-            permission="org.ict_ok.admin_utils.compliance.View"
+            permission="org.ict_ok.admin_utils.compliance.Edit"
             set_schema=".interfaces.IAdmUtilCompliance"
             />
     </class>
@@ -30,6 +30,60 @@
         handler=".bootstrap.bootStrapSubscriberDatabase"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
+
+    <adapter
+        for=".interfaces.IHaveRequirement"
+        provides=".interfaces.IRequirement"
+        factory=".compliance.getRequirement"
+        trusted="true"
+        />
+  
+    <adapter
+        for=".interfaces.IHaveEvaluations"
+        provides=".interfaces.IEvaluations"
+        factory=".compliance.getEvaluations"
+        trusted="true"
+        />
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component="schooltool.requirement.scoresystem.ScoreSystemsVocabulary"
+        name="schooltool.requirement.scoresystems"
+      />
+
+    <utility
+        provides="schooltool.requirement.interfaces.IScoreSystem"
+        component="schooltool.requirement.scoresystem.PassFail"
+        name="Comp_Pass/Fail"
+        />
+
+    <class class=".compliance.Requirement">
+        <allow interface="zope.app.container.interfaces.ISimpleReadContainer" />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            attributes="keys __iter__ values items __len__ addBase removeBase title"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            set_schema=".interfaces.IRequirement"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <class class="org.ict_ok.components.host.host.Host">
+        <implements interface=".interfaces.IHaveEvaluations" />
+    </class>
+  
+    <!--<class class="schooltool.person.person.Person">-->
+        <!--<implements interface=".interfaces.IHaveEvaluations" />-->
+    <!--</class>-->
 
     <include package=".generations" />
     
