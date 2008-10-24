@@ -728,6 +728,12 @@ pre.traceback {
   padding:10px;
 }
 
+hr {
+  background-color:#7DD0BC;
+  border:0px;
+  height:2px;
+  }
+
 .c_b { color:#0000FF;}
 .c_blk { color:#000000;}
 .c_g { color:#00FF00;}

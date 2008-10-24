@@ -29,6 +29,7 @@ from zope.i18nmessageid import MessageFactory
 from zope.dublincore.interfaces import IZopeDublinCore
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
+from zope.app.catalog.interfaces import ICatalog
 from zope.security import checkPermission
 from zope.app.rotterdam.xmlobject import setNoCacheHeaders
 
@@ -52,6 +53,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
+from org.ict_ok.admin_utils.compliance.requirement import getRequirementList
 
 _ = MessageFactory('org.ict_ok')
 
@@ -85,7 +87,17 @@ class AdmUtilComplianceDetails(SupernodeDetails):
                    (zapi.getPath(self.context))
             tmpDict['tooltip'] = _(u"will generate a all pdf file")
             retList.append(tmpDict)
+        if checkPermission('org.ict_ok.admin_utils.compliance.Import',
+                           self.context):
+            tmpDict = {}
+            tmpDict['oid'] = u"c%simport requirements" % objId
+            tmpDict['title'] = _(u"import requirements")
+            tmpDict['href'] = u"%s/@@import_requirements" % \
+                   (zapi.getPath(self.context))
+            tmpDict['tooltip'] = _(u"will import requirements")
+            retList.append(tmpDict)
         return retList
+    
 
     def generateAllPdf(self):
         """
@@ -112,7 +124,11 @@ class AdmUtilComplianceDetails(SupernodeDetails):
         os.remove(f_name)
         return dataMem
 
-
+    def import_requirements(self):
+        from org.ict_ok.admin_utils.compliance.bootstrap import \
+             fillUtilitiyWithReqs
+        fillUtilitiyWithReqs(self.context)
+        
 # --------------- forms ------------------------------------
 
 
@@ -124,6 +140,16 @@ class DetailsAdmUtilComplianceForm(DisplayForm):
        *AdmUtilComplianceDetails.omit_viewfields)
 
     def update(self):
+        #import pdb
+        #pdb.set_trace()
+        #my_catalog = zapi.getUtility(ICatalog)
+        #vvvv = "eea46d598cb0448fcfad1bbb25d0342dd"
+        #res = my_catalog.searchResults(oid_index=vvvv)
+        #from zope.app.intid.interfaces import IIntIds
+        #uidutil = getUtility(IIntIds)
+        #for (myid, myobj) in uidutil.items():
+            #print (myid, myobj.object)
+
         if False:
             from zope.component import adapts, queryUtility
             from schooltool.requirement.interfaces import IScoreSystem
@@ -152,6 +178,19 @@ class DetailsAdmUtilComplianceForm(DisplayForm):
                 pass
         DisplayForm.update(self)
 
+from org.ict_ok.components.superclass.browser.superclass import \
+     getActionBotton_Detail, getActionBotton_Edit, \
+     getActionBotton_History, getActionBotton_Delete
+def getActionBottons(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    retHtml = u""
+    retHtml += getActionBotton_Detail(item, formatter)
+    retHtml += getActionBotton_Edit(item, formatter)
+    retHtml += getActionBotton_History(item, formatter)
+    retHtml += getActionBotton_Delete(item, formatter)
+    return retHtml
+
 def getTitel(item, formatter):
     """
     Titel for Overview
@@ -163,11 +202,36 @@ def getTitel(item, formatter):
 
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, getModifiedDate, raw_cell_formatter, \
-     link, getActionBottons, getSize
+     link, getSize
+
 class AdmUtilRequirementDisplay(Overview):
     """for 1st level Requirements
     """
     label = _(u'display requirements')
+    columns = (
+        GetterColumn(title=_('Title'),
+                     getter=getTitel,
+                     cell_formatter=link('overview.html')),
+        GetterColumn(title=_('Size'),
+                     getter=getSize,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    sort_columns = [0,1]
+    status = None
+    
+    def objs(self):
+        """List of Content objects"""
+        return [obj
+                for obj in self.context.values()
+                if IRequirement.providedBy(obj)]
+
+class AdmUtilRequirementDisplayAll(AdmUtilRequirementDisplay):
+    """for all Requirements
+    """
+    label = _(u'display all requirements')
     columns = (
         GetterColumn(title=_('Title'),
                      getter=getTitel,
@@ -183,19 +247,16 @@ class AdmUtilRequirementDisplay(Overview):
                      getter=getActionBottons,
                      cell_formatter=raw_cell_formatter),
         )
-    sort_columns = [1]
+    pos_colum_index = 3
+    sort_columns = [0,1,2]
     status = None
-    
     def objs(self):
         """List of Content objects"""
-        return [obj
-                for obj in self.context.values()
-                if IRequirement.providedBy(obj)]
-
-class AdmUtilRequirementDisplayAll(AdmUtilRequirementDisplay):
-    """for all Requirements
-    """
-    label = _(u'display all requirements (not yet)')
+        retList = []
+        for reqObj in self.context.values():
+            if IRequirement.providedBy(reqObj):
+                retList.extend(getRequirementList(reqObj))
+        return retList
 
 class EditAdmUtilComplianceForm(EditForm):
     """ Display form for the object """

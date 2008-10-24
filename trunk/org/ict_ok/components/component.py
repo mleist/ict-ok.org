@@ -18,6 +18,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import implements
+from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
@@ -30,6 +31,8 @@ class Component(Supernode):
     """
 
     implements(IComponent)
+    isTemplate = FieldProperty(IComponent['isTemplate'])
+    requirement = FieldProperty(IComponent['requirement'])
 
     def __init__(self, **data):
         """

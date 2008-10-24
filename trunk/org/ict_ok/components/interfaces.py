@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Attribute
-from zope.schema import Bool
+from zope.schema import Bool, Choice
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -34,6 +34,12 @@ class IComponent(ISupernode):
         title = _("Object is template"),
         description = _("object is a template"),
         default = False,
+        required = False)
+
+    requirement = Choice(
+        title = _("Requirement"),
+        description = _("The Requirement."),
+        vocabulary="AllRequirementVocab",
         required = False)
     
     def get_health():

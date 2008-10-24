@@ -44,6 +44,9 @@
         />
 
     <class class=".requirement.Requirement">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
         <allow interface="zope.app.container.interfaces.ISimpleReadContainer" />
         <require
             permission="org.ict_ok.admin_utils.compliance.View"
@@ -67,6 +70,15 @@
         factory=".adapter.rpt_pdf.RptRequirementPdf"
         permission="org.ict_ok.admin_utils.compliance.generate.pdf"
     />
+    <adapter
+        factory=".adapter.search.Searchable"
+    />
+    
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".requirement.allRequirementVocab"
+        name="AllRequirementVocab"
+        />
 
     <!--              Evaluations              -->
 

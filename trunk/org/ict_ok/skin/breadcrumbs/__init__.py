@@ -75,6 +75,8 @@ class GenericBreadcrumbInfo(object):
         """See interfaces.IBreadcrumbInfo"""
         try:
             name = IBrwsOverview(self.context).getTitle()
+            if len(name) == 0:
+                raise TypeError
         except TypeError:
             name = getattr(self.context, 'title', None)
         if name is None:

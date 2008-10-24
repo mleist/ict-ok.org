@@ -849,9 +849,31 @@ class Overview(BrowserPagelet):
                      getter=getActionBottons,
                      cell_formatter=raw_cell_formatter),
         )
+    pos_column_index = 1
     sort_columns = [1, 2, 3]
     status = None
 
+    def convert2UserTimezone(self, argTS):
+        if argTS is not None:
+            return convert2UserTimezone(argTS)
+        else:
+            return None
+
+    def getTabClass(self):
+        if hasattr(self.request, 'tabClass'):
+            return self.request.tabClass
+        return 'cb_wht'
+
+    def getNextTabClass(self):
+        if hasattr(self.request, 'tabClass'):
+            if self.request.tabClass == 'cb_wht':
+                self.request.tabClass = 'cb_ixl'
+            else:
+                self.request.tabClass = 'cb_wht'
+        else:
+            self.request.tabClass = 'cb_wht'
+        return self.request.tabClass
+    
     def objs(self):
         """List of Content objects"""
         retList = []
@@ -870,7 +892,7 @@ class Overview(BrowserPagelet):
         if containerIsOrderd:
             getterC = GetterColumn(title=_('Pos'), getter=getPosition)
             #directlyProvides(getterC, ISortableColumn)
-            columnList.insert(1, getterC)
+            columnList.insert(self.pos_column_index, getterC)
             #directlyProvides(columnList[3], ISortableColumn)
             formatter = StandaloneFullFormatter(
                 self.context, self.request, self.objs(),

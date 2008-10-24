@@ -29,7 +29,7 @@ from persistent import Persistent
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.security.management import queryInteraction
-from zope.dublincore.interfaces import IWriteZopeDublinCore
+from zope.dublincore.interfaces import IWriteZopeDublinCore, IDCTimes
 from zope.app.keyreference.interfaces import IKeyReference
 from zope.component import adapter, queryUtility
 from zope.app.catalog.interfaces import ICatalog
@@ -177,7 +177,10 @@ class Superclass(Persistent):
         """
         try:
             dcore = IWriteZopeDublinCore(self)
-            return dcore.title
+            if len(dcore.title) > 0:
+                return dcore.title
+            else:
+                return self.ikName
         except TypeError:
             return self.ikName
 
@@ -187,6 +190,12 @@ class Superclass(Persistent):
         """
         dcore = IWriteZopeDublinCore(self)
         dcore.title = unicode(title)
+        
+    def getModifiedTime(self):
+        """
+        get the modified time from Dublin Core
+        """
+        return IDCTimes(self).modified
 
     def appendHistoryEntry(self, entryText, level=u"info"):
         """

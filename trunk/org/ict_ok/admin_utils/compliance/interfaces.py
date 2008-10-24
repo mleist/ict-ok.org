@@ -37,6 +37,9 @@ class IAdmUtilCompliance(ISupernode):
         """
         will generate a complete pdf report
         """
+    def append(subObj):
+        """ append Requirement
+        """
 
 class IRequirement(ISuperclass, ischooltool.IRequirement):
     """ ict-ok.org wrapper

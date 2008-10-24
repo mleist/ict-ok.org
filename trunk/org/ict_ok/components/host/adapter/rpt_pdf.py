@@ -42,6 +42,18 @@ class RptPdf(ParentRptPdf):
         """
         """
         from org.ict_ok.components.host.browser.host import HostDetails
-        return field.Fields(IHost).omit(\
-            *HostDetails.omit_viewfields)
+        omitField = [
+            'snmpVersion',
+            'snmpPort',
+            'snmpReadCommunity',
+            'snmpWriteCommunity',
+            'url',
+            'url_type',
+            'url_authname',
+            'url_authpasswd',
+            'console',
+            'genNagios',
+        ]
+        omitField.extend(HostDetails.omit_viewfields)
+        return field.Fields(IHost).omit(*omitField)
 

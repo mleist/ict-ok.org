@@ -44,6 +44,14 @@ class AdmUtilCompliance(Supernode):
     """Compliance Utiltiy
     """
     implements(IAdmUtilCompliance)
+    
+    def append(self, subObj):
+        """ append Requirement
+        """
+        if hasattr(subObj, 'objectID'):
+            self[subObj.objectID] = subObj
+        else:
+            self[subObj.ikName] = subObj
 
     def generateAllPdf(self, absFilename, authorStr, versionStr):
         """

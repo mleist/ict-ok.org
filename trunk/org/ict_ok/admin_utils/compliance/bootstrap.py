@@ -43,14 +43,9 @@ logger = logging.getLogger("AdmUtilCompliance")
 
 def fillUtilitiyWithReqs(context):
     managementOBJ = context
-    try:
-        del managementOBJ['alle Requirements']
-    except KeyError:
-        pass
-    try:
-        del managementOBJ['IT-Sicherheitskonzept']
-    except KeyError:
-        pass
+    delKeys = [key for key in managementOBJ.keys()]
+    for delKey in delKeys:
+        del managementOBJ[delKey]
     #
     # sorry, only a very first draft in german
     #
@@ -62,7 +57,7 @@ def fillUtilitiyWithReqs(context):
     reqItMediaVentures = Requirement(
         u"IT-Anforderungen Media Ventures GmbH",
         ikComment = u"vollständiger Requirement-Katalog")
-    managementOBJ['alle Requirements'] = reqItMediaVentures
+    managementOBJ.append(reqItMediaVentures)
     
     reqInfrastruktur = Requirement(
         u"Infrastruktur",
@@ -95,12 +90,12 @@ def fillUtilitiyWithReqs(context):
         """)
     
     
-    reqItMediaVentures['Infrastruktur'] = reqInfrastruktur
-    reqItMediaVentures['Organisation'] = reqOrganisation
-    reqItMediaVentures['Personal'] = reqPersonal
-    reqItMediaVentures['HardwareSoftware'] = reqHardwareSoftware
-    reqItMediaVentures['Kommunikation'] = reqKommunikation
-    reqItMediaVentures['Notfallvorsorge'] = reqNotfallvorsorge
+    reqItMediaVentures.append(reqInfrastruktur)
+    reqItMediaVentures.append(reqOrganisation)
+    reqItMediaVentures.append(reqPersonal)
+    reqItMediaVentures.append(reqHardwareSoftware)
+    reqItMediaVentures.append(reqKommunikation)
+    reqItMediaVentures.append(reqNotfallvorsorge)
     
     
     # ###################################################################
@@ -123,7 +118,7 @@ def fillUtilitiyWithReqs(context):
         
         * Organisation
         """)
-    reqOrganisation['Verantwortlichkeiten'] = reqDokuVerantwortlichkeiten
+    reqOrganisation.append(reqDokuVerantwortlichkeiten)
     
     # ###################################################################
     
@@ -140,7 +135,7 @@ def fillUtilitiyWithReqs(context):
         
         * Verträge
         """)
-    reqOrganisation['Doku: externe Ansprechpartner'] = reqDokuExterne
+    reqOrganisation.append(reqDokuExterne)
     
     # ###################################################################
     
@@ -155,7 +150,7 @@ def fillUtilitiyWithReqs(context):
         
         * Handlungsanweisungen
         """)
-    reqOrganisation['Doku: Richtlinien'] = reqDokuRichtlinien
+    reqOrganisation.append(reqDokuRichtlinien)
     
     # ###################################################################
     
@@ -174,7 +169,7 @@ def fillUtilitiyWithReqs(context):
         
         * Dienste (Ebene 7; Anwendungen)
         """)
-    reqOrganisation['Doku: Systeme'] = reqDokuSysteme
+    reqOrganisation.append(reqDokuSysteme)
     
     # ###################################################################
     
@@ -189,7 +184,7 @@ def fillUtilitiyWithReqs(context):
         
         * Dienste-Verfügbarkeiten
         """)
-    reqHardwareSoftware['Monitoring'] = reqMonitoring
+    reqHardwareSoftware.append(reqMonitoring)
     
     # ###################################################################
     
@@ -214,7 +209,7 @@ def fillUtilitiyWithReqs(context):
         standardisierte Methoden und Verfahren zur Durchführung von 
         Veränderungen existieren und effizient genutzt werden.
         """)
-    reqOrganisation['Changemanagement'] = reqChangemanagement
+    reqOrganisation.append(reqChangemanagement)
     
     reqChangemanagement01 = Requirement(
         u"Change-Management-Prozess",
@@ -305,15 +300,15 @@ def fillUtilitiyWithReqs(context):
         Dienstleister durchgeführt.).
         """)
     
-    reqChangemanagement['Prozess'] = reqChangemanagement01
+    reqChangemanagement.append(reqChangemanagement01)
     
-    reqChangemanagement01['RFC'] = reqChangemanagement01_RFC
-    reqChangemanagement01['Registrierung'] = reqChangemanagement01_Registrierung
-    reqChangemanagement01['Planung'] = reqChangemanagement01_Planung
-    reqChangemanagement01['Genehmigung'] = reqChangemanagement01_Genehmigung
-    reqChangemanagement01['Test'] = reqChangemanagement01_Test
-    reqChangemanagement01['Freigabe'] = reqChangemanagement01_Freigabe
-    reqChangemanagement01['Implementierung'] = reqChangemanagement01_Implementierung
+    reqChangemanagement01.append(reqChangemanagement01_RFC)
+    reqChangemanagement01.append(reqChangemanagement01_Registrierung)
+    reqChangemanagement01.append(reqChangemanagement01_Planung)
+    reqChangemanagement01.append(reqChangemanagement01_Genehmigung)
+    reqChangemanagement01.append(reqChangemanagement01_Test)
+    reqChangemanagement01.append(reqChangemanagement01_Freigabe)
+    reqChangemanagement01.append(reqChangemanagement01_Implementierung)
     
     
     # ###################################################################
@@ -337,7 +332,7 @@ def fillUtilitiyWithReqs(context):
         
         * korrekt administriert werden
         """)
-    reqOrganisation['Konzept fuer Sicherheitsgateways'] = reqFirewallKonzept01
+    reqOrganisation.append(reqFirewallKonzept01)
     
     # ###################################################################
     
@@ -352,7 +347,7 @@ def fillUtilitiyWithReqs(context):
         
         * Latenzen
         """)
-    reqKommunikation['Performance Messungen'] = reqPerformance
+    reqKommunikation.append(reqPerformance)
     
     # ###################################################################
     
@@ -367,7 +362,7 @@ def fillUtilitiyWithReqs(context):
         
         * Missbrauch
         """)
-    reqHardwareSoftware['Protokollierungen'] = reqProtokollierungen
+    reqHardwareSoftware.append(reqProtokollierungen)
     
     # ###################################################################
     
@@ -382,7 +377,7 @@ def fillUtilitiyWithReqs(context):
         
         * Diensten
         """)
-    reqHardwareSoftware['Systemkonfiguration'] = reqSystemkonfiguration
+    reqHardwareSoftware.append(reqSystemkonfiguration)
     
     # ###################################################################
     
@@ -397,7 +392,7 @@ def fillUtilitiyWithReqs(context):
         
         * händisch
         """)
-    reqOrganisation['Auditierungen'] = reqAuditierungen
+    reqOrganisation.append(reqAuditierungen)
     
     # ###################################################################
     
@@ -414,7 +409,7 @@ def fillUtilitiyWithReqs(context):
         
         * händisch
         """)
-    reqHardwareSoftware['Aenderungsdokumentation'] = reqDokuAenderungen
+    reqHardwareSoftware.append(reqDokuAenderungen)
     
     # ###################################################################
     
@@ -427,7 +422,7 @@ def fillUtilitiyWithReqs(context):
         
         Einsatz eines Anti-Viren-Programms
         """)
-    reqHardwareSoftware['Antiviren'] = reqAntiviren
+    reqHardwareSoftware.append(reqAntiviren)
     
     # ###################################################################
     
@@ -437,7 +432,7 @@ def fillUtilitiyWithReqs(context):
     reqBackup = Requirement(
         u"Backup",
         ikComment = u"Backup-Konzepte und deren Umsetzungen")
-    reqNotfallvorsorge['Backup'] = reqBackup
+    reqNotfallvorsorge.append(reqBackup)
     
     # ###################################################################
     
@@ -452,7 +447,7 @@ def fillUtilitiyWithReqs(context):
         
         * Verfahren
         """)
-    reqHardwareSoftware['Nutzer-Authentifierung'] = reqAuthentifierung
+    reqHardwareSoftware.append(reqAuthentifierung)
     
     # ###################################################################
     
@@ -471,7 +466,7 @@ def fillUtilitiyWithReqs(context):
         
         * Server-Dateien
         """)
-    reqHardwareSoftware['Verschluesselung'] = reqVerschluesselung
+    reqHardwareSoftware.append(reqVerschluesselung)
     
     # ###################################################################
     
@@ -499,46 +494,46 @@ def fillUtilitiyWithReqs(context):
     reqItSicherheitskonzept = Requirement(
         u"IT-Sicherheitskonzept",
         ikComment = u"speziell die Kurzdarstellung")
-    managementOBJ['IT-Sicherheitskonzept'] = reqItSicherheitskonzept
+    managementOBJ.append(reqItSicherheitskonzept)
     
     reqStoerungenMissbrauch = Requirement(
         u"Störungen und Missbrauch verhindern",
         ikComment = u"innerhalb der Kurzdarstellung")
-    reqItSicherheitskonzept['StoerungenMissbrauch'] = reqStoerungenMissbrauch
+    reqItSicherheitskonzept.append(reqStoerungenMissbrauch)
     
-    reqStoerungenMissbrauch['DokuSysteme'] = reqDokuSysteme
-    reqStoerungenMissbrauch['Changemanagement'] = reqChangemanagement
-    reqStoerungenMissbrauch['Firewall'] = reqFirewallKonzept01
-    reqStoerungenMissbrauch['Protokollierungen'] = reqProtokollierungen
-    reqStoerungenMissbrauch['DokuAenderungen'] = reqDokuAenderungen
-    reqStoerungenMissbrauch['Antiviren'] = reqAntiviren
-    reqStoerungenMissbrauch['Authentifierung'] = reqAuthentifierung
-    reqStoerungenMissbrauch['Verschluesselung'] = reqVerschluesselung
+    reqStoerungenMissbrauch.append(reqDokuSysteme)
+    reqStoerungenMissbrauch.append(reqChangemanagement)
+    reqStoerungenMissbrauch.append(reqFirewallKonzept01)
+    reqStoerungenMissbrauch.append(reqProtokollierungen)
+    reqStoerungenMissbrauch.append(reqDokuAenderungen)
+    reqStoerungenMissbrauch.append(reqAntiviren)
+    reqStoerungenMissbrauch.append(reqAuthentifierung)
+    reqStoerungenMissbrauch.append(reqVerschluesselung)
     
     reqEreignisseErkennen = Requirement(
         u"gefährliche Ereignisse erkennen",
         ikComment = u"innerhalb der Kurzdarstellung")
-    reqItSicherheitskonzept['EreignisseErkennen'] = reqEreignisseErkennen
+    reqItSicherheitskonzept.append(reqEreignisseErkennen)
     
-    reqEreignisseErkennen['DokuVerantwortlichkeiten'] = reqDokuVerantwortlichkeiten
-    reqEreignisseErkennen['DokuSysteme'] = reqDokuSysteme
-    reqEreignisseErkennen['Monitoring'] = reqMonitoring
-    reqEreignisseErkennen['Performance'] = reqPerformance
-    reqEreignisseErkennen['Protokollierungen'] = reqProtokollierungen
-    reqEreignisseErkennen['Auditierungen'] = reqAuditierungen
+    reqEreignisseErkennen.append(reqDokuVerantwortlichkeiten)
+    reqEreignisseErkennen.append(reqDokuSysteme)
+    reqEreignisseErkennen.append(reqMonitoring)
+    reqEreignisseErkennen.append(reqPerformance)
+    reqEreignisseErkennen.append(reqProtokollierungen)
+    reqEreignisseErkennen.append(reqAuditierungen)
     
     reqBusinessContinuity = Requirement(
         u"Fortführung nach Schaden oder Störung",
         ikComment = u"innerhalb der Kurzdarstellung")
-    reqItSicherheitskonzept['BusinessContinuity'] = reqBusinessContinuity
+    reqItSicherheitskonzept.append(reqBusinessContinuity)
     
-    reqBusinessContinuity['DokuVerantwortlichkeiten'] = reqDokuVerantwortlichkeiten
-    reqBusinessContinuity['DokuExterne'] = reqDokuExterne
-    reqBusinessContinuity['DokuRichtlinien'] = reqDokuRichtlinien
-    reqBusinessContinuity['DokuSysteme'] = reqDokuSysteme
-    reqBusinessContinuity['Systemkonfiguration'] = reqSystemkonfiguration
-    reqBusinessContinuity['DokuAenderungen'] = reqDokuAenderungen
-    reqBusinessContinuity['Backup'] = reqBackup
+    reqBusinessContinuity.append(reqDokuVerantwortlichkeiten)
+    reqBusinessContinuity.append(reqDokuExterne)
+    reqBusinessContinuity.append(reqDokuRichtlinien)
+    reqBusinessContinuity.append(reqDokuSysteme)
+    reqBusinessContinuity.append(reqSystemkonfiguration)
+    reqBusinessContinuity.append(reqDokuAenderungen)
+    reqBusinessContinuity.append(reqBackup)
     
     # ###############################
     # ####### vorläufiges Ende
@@ -570,11 +565,29 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made Compliance Utiltiy")
     else:
+        ## search in global component registry
+        #sitem = root_folder.getSiteManager()
+        ## search for ICatalog
+        #utils = [ util for util in sitem.registeredUtilities()
+                  #if util.provided.isOrExtends(ICatalog)]
+        #instUtilityICatalog = utils[0].component
+        #if not "host_oid_index" in instUtilityICatalog.keys():
+            #host_oid_index = FieldIndex(interface=ISearchableText,
+                                        #field_name='getSearchableHostOid',
+                                        #field_callable=True)
+            #instUtilityICatalog['host_oid_index'] = host_oid_index
+            ## search for IAdmUtilSupervisor
+            #utils = [ util for util in sitem.registeredUtilities()
+                      #if util.provided.isOrExtends(IAdmUtilSupervisor)]
+            #instAdmUtilSupervisor = utils[0].component
+            #instAdmUtilSupervisor.appendEventHistory(\
+                #u" bootstrap: ICatalog - create oid index for entry type 'host'")
         if False:
             sitem = root_folder.getSiteManager()
             utils = [ util for util in sitem.registeredUtilities()
                       if util.provided.isOrExtends(IAdmUtilCompliance)]
             instAdmUtilCompliance = utils[0].component
+            logger.info(u"replacing all Requirements")
             fillUtilitiyWithReqs(instAdmUtilCompliance)
     transaction.get().commit()
     connection.close()

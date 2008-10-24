@@ -27,7 +27,7 @@
     <!--<include package="org.ict_ok.admin_utils.notifier.jabber.browser" />-->
     <include package="org.ict_ok.admin_utils.notifier.imail.browser" />
     <include package="org.ict_ok.admin_utils.objmq.browser" />
-    <include package="org.ict_ok.admin_utils.public_viewing.browser" />
+    <!--<include package="org.ict_ok.admin_utils.public_viewing.browser" />-->
     <include package="org.ict_ok.admin_utils.reports.browser" />
     <include package="org.ict_ok.admin_utils.snmpd.browser" />
     <!--<include package="org.ict_ok.admin_utils.ticker.browser" />-->

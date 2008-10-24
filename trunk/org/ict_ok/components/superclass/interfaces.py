@@ -109,6 +109,10 @@ class ISuperclass(Interface):
         """
         set the Title to Dublin Core
         """
+    def getModifiedTime():
+        """
+        get the modified time from Dublin Core
+        """
     def appendHistoryEntry(entryText):
         """
         append an text entry to the history

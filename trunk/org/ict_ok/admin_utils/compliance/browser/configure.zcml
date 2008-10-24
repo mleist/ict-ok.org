@@ -15,7 +15,7 @@
 
     <defaultView
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
-        name="details.html"
+        name="display_reqs.html"
         />
     <page
         name="actions"
@@ -31,6 +31,14 @@
         class=".compliance.AdmUtilComplianceDetails"
         attribute="generateAllPdf"
         permission="org.ict_ok.admin_utils.compliance.generate.pdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="import_requirements"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.AdmUtilComplianceDetails"
+        attribute="import_requirements"
+        permission="org.ict_ok.admin_utils.compliance.Import"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
     />
 
@@ -89,9 +97,42 @@
         for="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplayAll"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
+        
+    <!--##### Requirements ##### -->
+    <defaultView
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        name="details.html"
+        />
 
+    <!--<z3c:pagelet-->
+        <!--name="details.html"-->
+        <!--for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"-->
+        <!--class="org.ict_ok.admin_utils.compliance.browser.requirement.DetailsAdmUtilRequirementForm"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.admin_utils.compliance.View"-->
+        <!--/>-->
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        class=".requirement.DetailsAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <z3c:template
+        template="details.pt"
+        for=".requirement.DetailsAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        class=".requirement.EditAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
+        />
+
+    <!--######################### Sub Menu ################### -->
     <!--##### Compliance ##### -->
-    <!--##### Sub Menu ##### -->
     <viewlet
         name="details"
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
@@ -143,6 +184,23 @@
         class="org.ict_ok.admin_utils.compliance.browser.requirement.MSubDisplayRequirements"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <!--##### Requirements ##### -->
+    <viewlet
+        name="details"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
         />
         
 </zope:configure>
