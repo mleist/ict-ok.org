@@ -93,7 +93,7 @@
         trusted="true"
         />
 
-    <class class="org.ict_ok.components.host.host.Host">
+    <class class="org.ict_ok.components.component.Component">
         <implements interface=".interfaces.IHaveEvaluations" />
     </class>
 

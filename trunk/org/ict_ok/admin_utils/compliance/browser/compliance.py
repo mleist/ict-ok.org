@@ -12,8 +12,8 @@
 
 the compliance utility should store the compliance/requirement-templates
 for the host- or service-instances
-"""
-"""implementation of browser class of eventCrossbar handler
+
+implementation of browser class of eventCrossbar handler
 """
 
 __version__ = "$Id$"
@@ -26,20 +26,16 @@ import tempfile
 # zope imports
 from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
-from zope.dublincore.interfaces import IZopeDublinCore
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
-from zope.app.catalog.interfaces import ICatalog
 from zope.security import checkPermission
 from zope.app.rotterdam.xmlobject import setNoCacheHeaders
 
 # zc imports
 from zc.table.column import GetterColumn
-from zc.table.table import StandaloneFullFormatter
 
 # z3c imports
 from z3c.form import field
-from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
 from org.ict_ok.version import getIkVersion
@@ -51,9 +47,14 @@ from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
-from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
 from org.ict_ok.admin_utils.compliance.requirement import getRequirementList
+from org.ict_ok.components.superclass.browser.superclass import \
+     getActionBotton_Detail, getActionBotton_Edit, \
+     getActionBotton_History, getActionBotton_Delete
+from org.ict_ok.components.superclass.browser.superclass import \
+     Overview, getModifiedDate, raw_cell_formatter, \
+     link, getSize
 
 _ = MessageFactory('org.ict_ok')
 
@@ -145,8 +146,6 @@ class DetailsAdmUtilComplianceForm(DisplayForm):
        *AdmUtilComplianceDetails.omit_viewfields)
 
     def update(self):
-        #import pdb
-        #pdb.set_trace()
         #my_catalog = zapi.getUtility(ICatalog)
         #vvvv = "eea46d598cb0448fcfad1bbb25d0342dd"
         #res = my_catalog.searchResults(oid_index=vvvv)
@@ -155,37 +154,34 @@ class DetailsAdmUtilComplianceForm(DisplayForm):
         #for (myid, myobj) in uidutil.items():
             #print (myid, myobj.object)
 
-        if False:
-            from zope.component import adapts, queryUtility
-            from schooltool.requirement.interfaces import IScoreSystem
-            from zope.app.intid import IntIds
-            from zope.app.intid.interfaces import IIntIds
-            uu2 = queryUtility(IScoreSystem, "Comp_Pass/Fail")
-            uu3 = queryUtility(IIntIds)
-            from org.ict_ok.admin_utils.compliance.requirement import Requirement
-            from zope.proxy import removeAllProxies
-            obj = removeAllProxies(self.context)
-            #a1 = Requirement("a1")
-            #a2 = Requirement("a2")
-            #a3 = Requirement("a3")
-            #aa = Requirement("a")
-            #aa['a1'] = a1
-            #aa['a2'] = a2
-            #aa['a3'] = a3
-            managementOBJ = obj
-            try:
-                del managementOBJ['alle Requirements']
-            except KeyError:
-                pass
-            try:
-                del managementOBJ['IT-Sicherheitskonzept']
-            except KeyError:
-                pass
+        #if False:
+            #from zope.component import adapts, queryUtility
+            #from schooltool.requirement.interfaces import IScoreSystem
+            #from zope.app.intid import IntIds
+            #from zope.app.intid.interfaces import IIntIds
+            #uu2 = queryUtility(IScoreSystem, "Comp_Pass/Fail")
+            #uu3 = queryUtility(IIntIds)
+            #from org.ict_ok.admin_utils.compliance.requirement import Requirement
+            #from zope.proxy import removeAllProxies
+            #obj = removeAllProxies(self.context)
+            ##a1 = Requirement("a1")
+            ##a2 = Requirement("a2")
+            ##a3 = Requirement("a3")
+            ##aa = Requirement("a")
+            ##aa['a1'] = a1
+            ##aa['a2'] = a2
+            ##aa['a3'] = a3
+            #managementOBJ = obj
+            #try:
+                #del managementOBJ['alle Requirements']
+            #except KeyError:
+                #pass
+            #try:
+                #del managementOBJ['IT-Sicherheitskonzept']
+            #except KeyError:
+                #pass
         DisplayForm.update(self)
 
-from org.ict_ok.components.superclass.browser.superclass import \
-     getActionBotton_Detail, getActionBotton_Edit, \
-     getActionBotton_History, getActionBotton_Delete
 def getActionBottons(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
@@ -205,9 +201,6 @@ def getTitle(item, formatter):
     except TypeError:
         return str(item.__class__.__name__)
 
-from org.ict_ok.components.superclass.browser.superclass import \
-     Overview, getModifiedDate, raw_cell_formatter, \
-     link, getSize
 
 class AdmUtilRequirementDisplay(Overview):
     """for 1st level Requirements
@@ -224,7 +217,7 @@ class AdmUtilRequirementDisplay(Overview):
                      getter=getActionBottons,
                      cell_formatter=raw_cell_formatter),
         )
-    sort_columns = [0,1]
+    sort_columns = [0, 1]
     status = None
     
     def objs(self):
@@ -253,7 +246,7 @@ class AdmUtilRequirementDisplayAll(AdmUtilRequirementDisplay):
                      cell_formatter=raw_cell_formatter),
         )
     pos_colum_index = 3
-    sort_columns = [0,1,2]
+    sort_columns = [0, 1, 2]
     status = None
     def objs(self):
         """List of Content objects"""

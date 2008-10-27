@@ -15,26 +15,19 @@
 
 __version__ = "$Id$"
 
-# python imports
-
 # zope imports
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # reportlab imports
 from reportlab.lib.units import mm
 from reportlab.platypus import Spacer, KeepTogether
-from reportlab.platypus.tables import Table, TableStyle
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
-from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
 from org.ict_ok.admin_utils.reports.rpt_title import RptTitle
 from org.ict_ok.admin_utils.reports.rpt_para import RptPara
 
@@ -88,8 +81,6 @@ class RptRequirementPdf(ParentRptPdf):
             if len(newLine):
                 newLines.append(newLine)
             parasString = ' '.join(stringLines)
-            #import pdb
-            #pdb.set_trace()
             elemList = [title.genElements()]
             #elemList = [title.genElements(),
                         #RptPara(self.context.ikComment, doc=self.document),

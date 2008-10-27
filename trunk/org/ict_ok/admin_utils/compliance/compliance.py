@@ -21,19 +21,15 @@ import os
 import logging
 
 # zope imports
-from zope.app import zapi
 from zope.interface import implements
 
 # zc imports
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports, IRptPdf
+from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
-from org.ict_ok.admin_utils.reports.rpt_title import RptTitle
-from org.ict_ok.admin_utils.reports.rpt_para import RptPara
 from org.ict_ok.admin_utils.compliance.interfaces import \
      IAdmUtilCompliance
 
@@ -59,7 +55,6 @@ class AdmUtilCompliance(Supernode):
         """
         files2delete = []
         document = RptDocument(absFilename)
-        #document.setVolumeNo("1")
         document.setAuthorName(authorStr)
         document.setVersionStr(versionStr)
         its = self.items()

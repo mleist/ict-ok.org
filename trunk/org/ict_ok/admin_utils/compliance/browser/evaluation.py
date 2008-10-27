@@ -17,35 +17,20 @@ for the host- or service-instances
 
 __version__ = "$Id$"
 
-# python imports
-
 # zope imports
-from zope.app import zapi
 from zope.traversing.browser import absoluteURL
 from zope.i18nmessageid import MessageFactory
-from zope.dublincore.interfaces import IZopeDublinCore
-from zope.security.checker import canAccess
 from zope.component import getAdapter
 from zope.app.pagetemplate.urlquote import URLQuote
 
-# zc imports
-from zc.table.column import GetterColumn
-from zc.table.table import StandaloneFullFormatter
-
-# z3c imports
-from z3c.form import field
-from z3c.pagelet.browser import BrowserPagelet
-
 # ict_ok.org imports
-from org.ict_ok.admin_utils.compliance.interfaces import \
-     IEvaluation, IEvaluations
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
-     getUserTimezone, convert2UserTimezone, AdmUtilUserProperties
+     getUserTimezone
 
 _ = MessageFactory('org.ict_ok')
 
@@ -66,10 +51,6 @@ def getEvaluationBotton_Cross(item, formatter):
     view_url = absoluteURL(formatter.context,
                            formatter.request) \
              + urlExt
-    #view_url = absoluteURL(evalObj, formatter.request) + '/@@change_eval_no'
-    #myAdapter = zapi.queryMultiAdapter((evalObj, formatter.request),
-                                       #name='change_eval_no')
-    #if myAdapter is not None and canAccess(myAdapter,'render'):
     if not item.value == 'Fail':
         view_html = u'<a href="%s">' %  (view_url) + \
                   u'<img id="%s" alt="Info" src="%s/Cross.png" /></a>' % \
@@ -98,9 +79,6 @@ def getEvaluationBotton_Tick(item, formatter):
     view_url = absoluteURL(formatter.context,
                            formatter.request) \
              + urlExt
-    #myAdapter = zapi.queryMultiAdapter((evalObj, formatter.request),
-                                       #name='change_eval_yes')
-    #if myAdapter is not None and canAccess(myAdapter,'render'):
     if not item.value == 'Pass':
         view_html = u'<a href="%s">' %  (view_url) + \
                   u'<img id="%s" alt="Info" src="%s/Tick.png" /></a>' % \
@@ -116,7 +94,7 @@ def getEvaluationBotton_Tick(item, formatter):
             % (ttid, ttid, ttid, tooltip_text)
     return view_html + tooltip
 
-def getRequirementTitle(item, formatter):
+def getEvaluationRequirementTitle(item, formatter):
     """
     Titel for Overview
     """
@@ -179,6 +157,13 @@ def getEvalModifiedDate(item, formatter):
         tooltip = u""
     return resString + tooltip
 
+def getEvaluationBottons(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    retHtml = u""
+    retHtml += getEvaluationBotton_Tick(item, formatter)
+    retHtml += getEvaluationBotton_Cross(item, formatter)
+    return retHtml
 
 # --------------- menu entries -----------------------------
 

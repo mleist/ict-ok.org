@@ -25,14 +25,11 @@ from zope.annotation.interfaces import IAnnotations
 from zope.location import location
 from zope.proxy import removeAllProxies
 
-# zc imports
-
 # ict_ok.org imports
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.admin_utils.compliance.interfaces import \
      IEvaluations, IEvaluation
 import schooltool.requirement.evaluation
-#from schooltool.requirement.evaluation import getEvaluations
 
 logger = logging.getLogger("AdmUtilCompliance")
 EVALUATIONS_KEY = "org.ict_ok.components.evaluations"

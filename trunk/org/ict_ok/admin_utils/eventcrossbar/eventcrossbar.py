@@ -106,8 +106,6 @@ def AllObjectInstancesWithEventInputs(dummy_context):
                                    str(myId),
                                    oobj.object.getDcTitle() + \
                                    u'->' + inpEventName))
-    import pdb
-    pdb.set_trace()
     for iface in [INotifierEmail]:
         my_util = queryUtility(iface)
         if my_util is not None:

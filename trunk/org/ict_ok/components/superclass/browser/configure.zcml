@@ -46,6 +46,14 @@
     />
 
     <page
+        name="reportPdf.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.SuperclassDetails"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="reportPdf"
+    />
+    <page
         name="exportxmldata.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         class=".superclass.SuperclassDetails"
@@ -121,5 +129,13 @@
         template="edit_content.pt"
         for="org.ict_ok.components.superclass.browser.superclass.EditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <viewlet
+        name="reportPdf"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubReportPdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
         />
 </configure>

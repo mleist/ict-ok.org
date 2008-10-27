@@ -25,7 +25,6 @@ from zope.interface import implements
 from zope import annotation
 import zope.app.container.contained
 from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 from zope.app.catalog.interfaces import ICatalog
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component.interfaces import ComponentLookupError

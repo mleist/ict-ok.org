@@ -30,25 +30,25 @@
         description="Delete Script."
     />
 
-    <grant permission="org.ict_ok.components.script.View"
-                    role="org.ict_ok.usr" />
-    <grant permission="org.ict_ok.components.script.View"
-                    role="org.ict_ok.mgr" />
+    <!--<grant permission="org.ict_ok.components.script.View"-->
+                    <!--role="org.ict_ok.usr" />-->
+    <!--<grant permission="org.ict_ok.components.script.View"-->
+                    <!--role="org.ict_ok.mgr" />-->
     <grant permission="org.ict_ok.components.script.View"
                     role="org.ict_ok.adm" />
 
+    <!--<grant permission="org.ict_ok.components.script.Add"-->
+                    <!--role="org.ict_ok.mgr" />-->
     <grant permission="org.ict_ok.components.script.Add"
-                    role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.script.Add"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.script.Edit"
-                    role="org.ict_ok.mgr" />
+    <!--<grant permission="org.ict_ok.components.script.Edit"-->
+                    <!--role="org.ict_ok.mgr" />-->
     <grant permission="org.ict_ok.components.script.Edit"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.script.Delete"
-                    role="org.ict_ok.mgr" />
+    <!--<grant permission="org.ict_ok.components.script.Delete"-->
+                    <!--role="org.ict_ok.mgr" />-->
     <grant permission="org.ict_ok.components.script.Delete"
                     role="org.ict_ok.adm" />
 

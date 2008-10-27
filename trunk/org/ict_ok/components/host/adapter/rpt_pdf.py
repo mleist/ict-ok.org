@@ -42,7 +42,6 @@ from org.ict_ok.admin_utils.reports.rpt_para import RptPara
 from org.ict_ok.admin_utils.reports.rpt_style import getRptStyleSheet
 from org.ict_ok.admin_utils.compliance.evaluation import getEvaluations
 
-
 class RptPdf(ParentRptPdf):
     """adapter implementation of latency -> PDF Report
     """
@@ -98,74 +97,6 @@ class RptPdf(ParentRptPdf):
                                      Spacer(0, 4 * mm)])
             except TypeError:
                 pass
-                #return elemList
-            if self.context.requirement is not None:
-                my_catalog = zapi.getUtility(ICatalog)
-                res = my_catalog.searchResults(oid_index=self.context.requirement)
-                if len(res) > 0:
-                    requirementObj = iter(res).next()
-                    reqTitle = requirementObj.ikName
-                    reqComment = requirementObj.ikComment
-                    elemList.append(RptPara(reqTitle,
-                                            doc=self.document))
-                    elemList.append(RptPara(reqComment,
-                                            doc=self.document))
-                    elemList.append(Spacer(0, 4 * mm))
-            # Evaluations
-            evaluations = getEvaluations(self.context)
-            if len(evaluations) > 0:
-                styleSheet = getRptStyleSheet()
-                style1 = styleSheet['Small']
-                style2 = styleSheet['Infobox']
-                elemList.append(
-                    RptPara('Evaluations: ', style=style2, doc=self.document))
-                colWidths = [75 * mm, 20 * mm, 40 * mm]
-                data = [[
-                    RptPara('<b>Requirement</b>', style=style1, doc=self.document),
-                    RptPara('<b>Value</b>', style=style1, doc=self.document),
-                    RptPara('<b>Evaluator</b>', style=style1, doc=self.document)
-                ]]
-                ik_tbl_style = TableStyle([\
-                    ('BACKGROUND', (0,0), (-1,0), colors.lightgrey),
-                    ('LEFTPADDING', (0,0), (-1,-1), 2 * mm),
-                    ('RIGHTPADDING', (0,0), (-1,-1), 2 * mm),
-                    ('BOTTOMPADDING', (0,0), (-1,-1), 2 * mm),
-                    ('TOPPADDING', (0,0), (-1,-1), 2 * mm),
-                    ('FONTSIZE', (0,0), (-1,-1), 8),
-                    ('ALIGN', (0,0), (-1,-1), 'LEFT'),
-                    ('INNERGRID', (0,0), (-1,-1), 0.25, colors.black),
-                    ('BOX', (0,0), (-1,-1), 0.25, colors.black),
-                ])
-                pos = 0
-                for evaluation in evaluations.values():
-                    pos = pos + 1
-                    if evaluation.value == 'Pass':
-                        ik_tbl_style.add('BACKGROUND', (1,pos), (1,pos), colors.green)
-                    elif evaluation.value == 'Fail':
-                        ik_tbl_style.add('BACKGROUND', (1,pos), (1,pos), colors.red)
-                    else:
-                        pass
-                    data.append([
-                        RptPara(evaluation.requirement.ikName,
-                                style=style1,
-                                doc=self.document),
-                        RptPara(evaluation.value,
-                                style=style1, 
-                                doc=self.document),
-                        RptPara(evaluation.evaluator.title,
-                                style=style1, 
-                                doc=self.document),
-                    ])
-                t0 = Table(data,
-                           hAlign='RIGHT',
-                           style=ik_tbl_style,
-                           colWidths=colWidths)
-                elemList.append(t0)
-                elemList.append(Spacer(0, 4 * mm))
-            #for evaluation in evaluations.values():
-                #para = RptPara("Eval111",
-                               #doc=self.document)
-                #elemList.append(para)
             if autoAppend is True:
                 #comp = KeepTogether(elemList)
                 #self.document.append(comp)

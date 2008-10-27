@@ -31,10 +31,11 @@ from z3c.form import field
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.component import IComponent
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 from org.ict_ok.admin_utils.reports.rpt_title import RptTitle
 from org.ict_ok.admin_utils.reports.rpt_para import RptPara
+from org.ict_ok.admin_utils.compliance.adapter.rpt_pdf_tools import \
+     appendEvaluationList
 
 
 class RptPdf(object):
@@ -129,6 +130,8 @@ class RptPdf(object):
             elemList = [title.genElements(),
                         self.getAttributeTable(),
                         Spacer(0, 4 * mm)]
+            elemList.extend(\
+                appendEvaluationList(self.context, self.document))
             if autoAppend is True:
                 comp = KeepTogether(elemList)
                 self.document.append(comp)
@@ -137,6 +140,9 @@ class RptPdf(object):
             else:
                 return elemList
         return None
+    
+            #elemList.extend(\
+                #appendEvaluationList(self.context, self.document))
 
     def traverse4RptPost(self, level, comments):
         """pdf report object postamble

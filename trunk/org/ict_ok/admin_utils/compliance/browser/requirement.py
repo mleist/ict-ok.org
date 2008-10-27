@@ -12,8 +12,7 @@
 
 the compliance utility should store the compliance/requirement-templates
 for the host- or service-instances
-"""
-"""implementation of browser class of eventCrossbar handler
+implementation of browser class of eventCrossbar handler
 """
 
 __version__ = "$Id$"
@@ -21,29 +20,29 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
-from zope.app import zapi
 from zope.traversing.browser import absoluteURL
 from zope.i18nmessageid import MessageFactory
-from zope.dublincore.interfaces import IZopeDublinCore
-from zope.security.checker import canAccess
 from zope.component import getAdapter
 from zope.app.pagetemplate.urlquote import URLQuote
 
 # zc imports
 from zc.table.column import GetterColumn
-from zc.table.table import StandaloneFullFormatter
 
 # z3c imports
 from z3c.form import field
-from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm, DisplayForm, EditForm, SuperclassDetails
+     AddForm, DisplayForm, EditForm
 from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.components.superclass.browser.superclass import \
+     Overview, getModifiedDate, raw_cell_formatter, \
+     link, getActionBottons, getSize
+from org.ict_ok.components.superclass.browser.superclass import \
+     getActionBotton_Detail
 
 _ = MessageFactory('org.ict_ok')
 
@@ -61,10 +60,6 @@ def getRequirementBotton_Cross(item, formatter):
     view_url = absoluteURL(formatter.context,
                            formatter.request) \
              + urlExt
-    #myAdapter = zapi.queryMultiAdapter((formatter.context,
-                                        #formatter.request),
-                                       #name='change_eval_no')
-    #if myAdapter is not None and canAccess(myAdapter,'render'):
     if True:
         view_html = u'<a href="%s">' %  (view_url) + \
                   u'<img id="%s" alt="Info" src="%s/Cross.png" /></a>' % \
@@ -91,10 +86,6 @@ def getRequirementBotton_Tick(item, formatter):
     view_url = absoluteURL(formatter.context,
                            formatter.request) \
              + urlExt
-    #myAdapter = zapi.queryMultiAdapter((formatter.context,
-                                        #formatter.request),
-                                       #name='change_eval_yes')
-    #if myAdapter is not None and canAccess(myAdapter,'render'):
     if True:
         view_html = u'<a href="%s">' %  (view_url) + \
                   u'<img id="%s" alt="Info" src="%s/Tick.png" /></a>' % \
@@ -109,6 +100,16 @@ def getRequirementBotton_Tick(item, formatter):
             u"context:'%s', text:'%s' });</script>" \
             % (ttid, ttid, ttid, tooltip_text)
     return view_html + tooltip
+
+
+def getRequirementBottons(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    retHtml = u""
+    retHtml += getActionBotton_Detail(item, formatter)
+    retHtml += getRequirementBotton_Tick(item, formatter)
+    retHtml += getRequirementBotton_Cross(item, formatter)
+    return retHtml
 
 # --------------- menu entries -----------------------------
 
@@ -143,19 +144,10 @@ def getTitle(item, formatter):
     """
     Titel for Overview
     """
-    #ttid = u"comment" + item.getObjectId()
-    #tooltip_text = item.ikComment.replace("'", '"').replace('\n', '<br/>')
     text_html = "%s" % item.ikName
-    #tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
-            #u"widget.Tooltip('tt_%s', { autodismissdelay:'60000', " \
-            #u"context:'%s', text:'%s' });</script>" \
-            #% (ttid, ttid, ttid, tooltip_text)
     return text_html
     
 
-from org.ict_ok.components.superclass.browser.superclass import \
-     Overview, getModifiedDate, raw_cell_formatter, \
-     link, getActionBottons, getSize
 class DetailsAdmUtilRequirementForm(Overview):
     """ Display form for the object """
     
@@ -197,7 +189,6 @@ class AdmUtilRequirementDisplayAll(DisplayForm):
     """for all Requirements
     """
     label = _(u'display all requirements')
-
 
 
 class EditAdmUtilRequirementForm(EditForm):

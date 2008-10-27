@@ -24,7 +24,6 @@ from zope.schema.fieldproperty import FieldProperty
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.supernode import Supernode
 
-
 class Component(Supernode):
     """
     the general component instance
