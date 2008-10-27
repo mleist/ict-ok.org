@@ -153,7 +153,7 @@ class SnmpValueDisplay(SnmpValueDetails):
     """
     """
 
-def getTitel(item, formatter):
+def getTitle(item, formatter):
     """
     Titel for Overview
     """
@@ -234,7 +234,7 @@ class SnmpValueTestData(SnmpValueDetails):
 class AddSnmpByVendorClass(BrowserPagelet):
     columns = (
         GetterColumn(title=_('Title'),
-                     getter=getTitel,
+                     getter=getTitle,
                      cell_formatter=raw_cell_formatter),
         )
     def update(self):
@@ -328,7 +328,7 @@ class EditSnmpValueForm(EditForm):
 class DeleteSnmpValueForm(DeleteForm):
     """ Delete the net """
     
-    def getTitel(self):
+    def getTitle(self):
         """this title will be displayed in the head of form"""
         return _(u"Delete this snmp value: '%s'?") % \
                IBrwsOverview(self.context).getTitle()

@@ -75,6 +75,7 @@ class Host(Component):
     """
 
     implements(IHost, IEventIfEventHost)
+    shortName = "host"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     hostname = FieldProperty(IHost['hostname'])

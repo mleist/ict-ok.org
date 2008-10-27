@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview as SuperclassOverview
 from org.ict_ok.components.superclass.browser.superclass import \
-     GetterColumn, getStateIcon, getTitel, raw_cell_formatter, \
+     GetterColumn, getStateIcon, getTitle, raw_cell_formatter, \
      link, getModifiedDate, getActionBottons
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.admin_utils.categories.interfaces import \
@@ -85,7 +85,7 @@ class Overview(SuperclassOverview):
                      getter=getStateIcon,
                      cell_formatter=raw_cell_formatter),
         GetterColumn(title=_('Title'),
-                     getter=getTitel,
+                     getter=getTitle,
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('used nr.'),
                      getter=getUsedCounter),
@@ -131,7 +131,7 @@ class EditAdmUtilCatHostGroupForm(EditForm):
 class DeleteAdmUtilCatHostGroupForm(DeleteForm):
     """ Delete the host group """
     
-    def getTitel(self):
+    def getTitle(self):
         """this title will be displayed in the head of form"""
         return _(u"Delete this host group: '%s'?") % \
                IBrwsOverview(self.context).getTitle()

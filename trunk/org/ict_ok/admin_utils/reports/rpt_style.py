@@ -80,9 +80,35 @@ def getRptStyleSheet():
                                   fontName=locFontName1,
                                   fontSize=10,
                                   leftIndent = 30*mm,
-                                  leading=12)
+                                  leading=12,
+                                  )
+                   )
+    stylesheet.add(ParagraphStyle(name='Small',
+                                  fontName=locFontName1,
+                                  fontSize=8,
+                                  )
+                   )
+    stylesheet.add(ParagraphStyle(name='ErrorBox',
+                                  parent=stylesheet['Para'],
+                                  borderWidth = 2*mm,
+                                  #borderPadding = 3*mm,
+                                  borderColor = colors.red,
+                                  backColor = colors.red,
+                                  borderRadius = 1*mm,
+                                  )
+                   )
+    stylesheet.add(ParagraphStyle(name='WarnBox',
+                                  parent=stylesheet['Para'],
+                                  borderWidth = 2*mm,
+                                  #borderPadding = 3*mm,
+                                  borderColor = colors.yellow,
+                                  backColor = colors.yellow,
+                                  borderRadius = 1*mm,
+                                  )
                    )
     stylesheet.add(ParagraphStyle(name='Infobox',
+                                  borderWidth = 0,
+                                  borderPadding = 1 * mm,
                                   parent=stylesheet['Para'],
                                   backColor = colors.lightgrey)
                    )

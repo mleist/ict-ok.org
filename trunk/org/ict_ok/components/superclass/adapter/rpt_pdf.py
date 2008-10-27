@@ -132,6 +132,8 @@ class RptPdf(object):
             if autoAppend is True:
                 comp = KeepTogether(elemList)
                 self.document.append(comp)
+                #for elem in elemList:
+                    #self.document.append(elem)
             else:
                 return elemList
         return None

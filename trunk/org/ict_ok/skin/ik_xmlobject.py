@@ -26,6 +26,7 @@ from zope.dublincore.interfaces import IGeneralDublinCore
 from zope.app import zapi
 from zope.security import checkPermission
 from zope.app.catalog.interfaces import ICatalog
+from zope.security.interfaces import ForbiddenAttribute
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
@@ -36,7 +37,10 @@ _ = MessageFactory('org.ict_ok')
 class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
 
     def getStateIconUrl(self, item):
-        result = ''
+        try:
+            result = item.getShortname()
+        except ForbiddenAttribute:
+            result = "Error in IkReadContainerXmlObjectView"
         icon = None
         try:
             stateAdapter = getAdapter(item, IState)
@@ -44,7 +48,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                 icon_name = u"state_%s" % (stateAdapter.getStateOverview())
                 #print "icon_name: ", icon_name
                 stateNum = stateAdapter.getStateOverview(-1)
-                return "state%d" % stateNum
+                return "%s%d" % (item.getShortname(), stateNum)
                 #iconName = stateAdapter.getIconName()
                 #if iconName:
                     #return u"/@@/pics/" + iconName
@@ -129,7 +133,10 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             stateIconUrl = self.getStateIconUrl(item)
             #stateValue = self.getStateValue(item)
             stateOverview = self.getStateOverview(item)
-            item_len = self.getLengthOf(item)
+            try:
+                item_len = len(IContentList(item).getContentList())
+            except TypeError:
+                item_len = self.getLengthOf(item)
             item_ppath = zapi.canonicalPath(zapi.getParent(item)) + u'/'
             item_ppath = item_ppath.replace('//', '/')
             if item_len > 0:
@@ -189,7 +196,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
 
         vh = self.request.getVirtualHostRoot()
         if vh:
-            print "vh: ", vh
+            #print "vh: ", vh
             vhrootView = zapi.getMultiAdapter(
                     (vh, self.request), name='absolute_url')
             baseURL = vhrootView() + '/'
@@ -218,7 +225,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             else:
                 keys = []
             # include the site manager
-            keys.append(u'++etc++site')
+            #keys.append(u'++etc++site')
             for name in keys:
                 # Only include items we can traverse to
                 try:
@@ -227,18 +234,21 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                     subItem = None
                 if subItem is None:
                     continue
-                if name == u'++etc++site' and \
-                   not checkPermission(\
-                       'org.ict_ok.ikadmin_utils.usermanagement.Edit',
-                       subItem):
-                    continue
+                #if name == u'++etc++site' and \
+                   #not checkPermission(\
+                       #'org.ict_ok.admin_utils.supervisor.DataDump',
+                       #subItem):
+                    #continue
                 iconUrl = self.getIconUrl(subItem)
                 try:
-                    subitem_len = self.getLengthOf(subItem)
+                    subitem_len = len(IContentList(self.context).getContentList())
                 except TypeError:
-                    subitem_len = 0
-                except AttributeError:
-                    subitem_len = 0
+                    try:
+                        subitem_len = self.getLengthOf(subItem)
+                    except TypeError:
+                        subitem_len = 0
+                    except AttributeError:
+                        subitem_len = 0
                 try:
                     dcAdapter = IGeneralDublinCore(subItem)
                 except TypeError:

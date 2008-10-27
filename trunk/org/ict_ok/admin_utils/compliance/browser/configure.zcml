@@ -101,7 +101,7 @@
     <!--##### Requirements ##### -->
     <defaultView
         for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
-        name="details.html"
+        name="overview.html"
         />
 
     <!--<z3c:pagelet-->
@@ -121,6 +121,18 @@
     <z3c:template
         template="details.pt"
         for=".requirement.DetailsAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        class=".requirement.OverviewAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <z3c:template
+        template="overview.pt"
+        for=".requirement.OverviewAdmUtilRequirementForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
     <z3c:pagelet
@@ -191,6 +203,14 @@
         for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <viewlet
+        name="overview"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.compliance.View"
         />

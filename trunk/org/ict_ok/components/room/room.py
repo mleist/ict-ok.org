@@ -64,6 +64,7 @@ class Room(Component):
     """
 
     implements(IRoom)
+    shortName = "room"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(IRoom['ikAttr'])

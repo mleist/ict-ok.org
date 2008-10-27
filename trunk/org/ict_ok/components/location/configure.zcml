@@ -48,6 +48,11 @@
         factory="org.ict_ok.components.location.adapter.ipickle.Pickle"
     />
 
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".location.AllLocationsVocab"

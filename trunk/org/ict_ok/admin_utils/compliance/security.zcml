@@ -25,6 +25,16 @@
         title="View from Compliance Utiltiy"
     />
 
+    <permission
+        id="org.ict_ok.admin_utils.compliance.evaluations.View"
+        title="View evaluations from objects"
+    />
+    
+    <permission
+        id="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+        title="Edit evaluations from objects"
+    />
+
     <!-- Copyright (c) 2007, 2008, 
                      Markus Leist <leist@ikom-online.de>
     -->
@@ -45,6 +55,16 @@
                     role="org.ict_ok.adm" />
                     
     <grant permission="org.ict_ok.admin_utils.compliance.Import"
+                    role="org.ict_ok.adm" />
+                    
+    <grant permission="org.ict_ok.admin_utils.compliance.evaluations.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.compliance.evaluations.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
                     role="org.ict_ok.adm" />
 
 </configure>

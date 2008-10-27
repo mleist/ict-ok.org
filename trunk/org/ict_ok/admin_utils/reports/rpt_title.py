@@ -18,7 +18,8 @@ __version__ = "$Id: $"
 
 # reportlab imports
 from reportlab.lib.units import mm
-from reportlab.platypus import Paragraph
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import Paragraph, PageBreak, KeepTogether, CondPageBreak,FrameBreak
 from reportlab.platypus.tables import TableStyle, Table
 
 # ict-ok.org imports
@@ -75,7 +76,14 @@ class RptTitle(RptSuperclass, Paragraph):
                     hAlign='LEFT')
         t_1.keepWithNext = True
         t_1.ik_type = self._type
-        return t_1
+        if self._type.lower() == "heading1":
+            if self.getDocument().firstH1Seen:
+                return KeepTogether([CondPageBreak(A4[1]/2), t_1])
+            else:
+                self.getDocument().firstH1Seen = True
+                return t_1
+        else:
+            return t_1
 
     
 

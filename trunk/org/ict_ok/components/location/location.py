@@ -53,6 +53,7 @@ class Location(Component):
     """
 
     implements(ILocation)
+    shortName = "location"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(ILocation['ikAttr'])

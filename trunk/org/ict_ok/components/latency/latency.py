@@ -85,6 +85,7 @@ class Latency(Component):
     """
 
     implements(ILatency)
+    shortName = "value"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     checkcount = FieldProperty(ILatency['checkcount'])

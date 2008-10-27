@@ -28,6 +28,7 @@ from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports, IRptPdf
 from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
+from org.ict_ok.admin_utils.reports.rpt_para import RptPara
 
 logger = logging.getLogger("AdmUtilReports")
 

@@ -94,6 +94,7 @@ class SnmpValue(Component):
     """
 
     implements(ISnmpValue)
+    shortName = "value"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     checktype = FieldProperty(ISnmpValue['checktype'])

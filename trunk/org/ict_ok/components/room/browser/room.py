@@ -84,7 +84,7 @@ class EditRoomForm(EditForm):
 class DeleteRoomForm(DeleteForm):
     """ Delete the net """
     
-    def getTitel(self):
+    def getTitle(self):
         """this title will be displayed in the head of form"""
         return _(u"Delete this room: '%s'?") % \
                IBrwsOverview(self.context).getTitle()

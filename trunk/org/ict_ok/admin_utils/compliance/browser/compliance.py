@@ -128,6 +128,11 @@ class AdmUtilComplianceDetails(SupernodeDetails):
         from org.ict_ok.admin_utils.compliance.bootstrap import \
              fillUtilitiyWithReqs
         fillUtilitiyWithReqs(self.context)
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
         
 # --------------- forms ------------------------------------
 
@@ -191,7 +196,7 @@ def getActionBottons(item, formatter):
     retHtml += getActionBotton_Delete(item, formatter)
     return retHtml
 
-def getTitel(item, formatter):
+def getTitle(item, formatter):
     """
     Titel for Overview
     """
@@ -210,7 +215,7 @@ class AdmUtilRequirementDisplay(Overview):
     label = _(u'display requirements')
     columns = (
         GetterColumn(title=_('Title'),
-                     getter=getTitel,
+                     getter=getTitle,
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('Size'),
                      getter=getSize,
@@ -234,7 +239,7 @@ class AdmUtilRequirementDisplayAll(AdmUtilRequirementDisplay):
     label = _(u'display all requirements')
     columns = (
         GetterColumn(title=_('Title'),
-                     getter=getTitel,
+                     getter=getTitle,
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('Modified On'),
                      getter=getModifiedDate,

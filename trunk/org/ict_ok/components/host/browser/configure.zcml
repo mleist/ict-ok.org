@@ -56,6 +56,23 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
     />
 
+    <page
+        name="change_eval_yes"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        class=".host.HostDetails"
+        attribute="change_eval_yes"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="change_eval_no"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        class=".host.HostDetails"
+        attribute="change_eval_no"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+
     <defaultView
         for="org.ict_ok.components.host.interfaces.IHost"
         name="overview.html"
@@ -89,6 +106,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.View"
         />
+    <page
+        name="reportPdf.html"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        class="org.ict_ok.components.superclass.browser.superclass.SuperclassDetails"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="reportPdf"
+    />
 
     <!--<z3c:pagelet-->
         <!--name="dumpdata.html"-->
@@ -183,6 +208,50 @@
         permission="org.ict_ok.components.interface.Add"
     />
 
+    <!--####################################################-->
+    <z3c:pagelet
+        name="evaluations_todo.html"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        class=".host.EvaluationsTodoDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+        />
+    <z3c:template
+        template="evaluations_todo.pt"
+        for=".host.EvaluationsTodoDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <viewlet
+        name="evaluations_todo"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.host.browser.host.MSubEvaluationsTodo"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+        />
+    <!--######################-->
+    <z3c:pagelet
+        name="evaluations_done.html"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        class=".host.EvaluationsDoneDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+        />
+    <z3c:template
+        template="evaluations_done.pt"
+        for=".host.EvaluationsDoneDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <viewlet
+        name="evaluations_done"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.host.browser.host.MSubEvaluationsDone"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+        />
+    <!--####################################################-->
+    
     <!--##### Sub Menu ##### -->
 
     <viewlet
@@ -216,6 +285,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.View"
+        />
+    <viewlet
+        name="reportPdf"
+        for="org.ict_ok.components.host.interfaces.IHost"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubReportPdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
         />
     <viewlet
         name="script"

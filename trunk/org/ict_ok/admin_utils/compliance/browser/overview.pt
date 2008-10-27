@@ -38,4 +38,14 @@
             </div>
         </tr>
     </table>
+    <div tal:condition="view/objs|nothing"
+         tal:omit-tag="">
+    <hr />
+    </div>
+    <form action="" method="post"
+        tal:attributes="action request/URL">
+    <tal:block
+        condition="view/objs|nothing"
+        replace="structure view/table" />
+    </form>
 </i18n:block>

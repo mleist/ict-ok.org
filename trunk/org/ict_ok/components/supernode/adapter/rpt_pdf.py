@@ -61,5 +61,5 @@ class RptPdf(ParentRptPdf):
                         self.files2delete.extend(adapterRptPdf.files2delete)
                         del adapterRptPdf
                 except TypeError, errText:
-                    logger.error(u"Problem in adaption of pdf report: %s" %\
-                                 (errText))
+                    logger.error(u"Problem in adaption: %s (%s)" %\
+                                 (errText, oobj.ikName))

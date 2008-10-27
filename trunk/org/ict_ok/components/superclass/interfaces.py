@@ -41,7 +41,7 @@ class ISuperclass(Interface):
 
     ikName = TextLine(
         min_length = 2,
-        max_length = 40,
+        max_length = 50,
         title = _("Instance name"),
         description = _("Name of the instance."),
         required = True)
@@ -95,6 +95,11 @@ class ISuperclass(Interface):
     def getObjectId():
         """
         get 'Universe ID' of object
+        returns str
+        """
+    def getShortname():
+        """
+        get a short class name of object
         returns str
         """
     def getParent():

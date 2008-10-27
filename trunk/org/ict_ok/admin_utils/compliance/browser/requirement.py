@@ -21,8 +21,13 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
+from zope.app import zapi
+from zope.traversing.browser import absoluteURL
 from zope.i18nmessageid import MessageFactory
 from zope.dublincore.interfaces import IZopeDublinCore
+from zope.security.checker import canAccess
+from zope.component import getAdapter
+from zope.app.pagetemplate.urlquote import URLQuote
 
 # zc imports
 from zc.table.column import GetterColumn
@@ -41,6 +46,69 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 
 _ = MessageFactory('org.ict_ok')
+
+# --------------- helper functions -------------------------
+
+
+def getRequirementBotton_Cross(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    fromURLq = URLQuote(formatter.request['PATH_INFO']).quote()
+    urlExt = '/@@change_eval_no?nextURL=%s&req_id=%s' % \
+           (fromURLq, item.getObjectId())
+    resource_path = getAdapter(formatter.request, name='pics')()
+    ttid = u"cross" + formatter.context.getObjectId()
+    view_url = absoluteURL(formatter.context,
+                           formatter.request) \
+             + urlExt
+    #myAdapter = zapi.queryMultiAdapter((formatter.context,
+                                        #formatter.request),
+                                       #name='change_eval_no')
+    #if myAdapter is not None and canAccess(myAdapter,'render'):
+    if True:
+        view_html = u'<a href="%s">' %  (view_url) + \
+                  u'<img id="%s" alt="Info" src="%s/Cross.png" /></a>' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'check requirement to <b>no</b>')
+    else:
+        view_html = u'<img id="%s" alt="Details" src="%s/Cross_gr.png" />' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'checking requirement to <b>no</b> is not permitted')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return view_html + tooltip
+
+def getRequirementBotton_Tick(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    fromURLq = URLQuote(formatter.request['PATH_INFO']).quote()
+    urlExt = '/@@change_eval_yes?nextURL=%s&req_id=%s' % \
+           (fromURLq, item.getObjectId())
+    resource_path = getAdapter(formatter.request, name='pics')()
+    ttid = u"tick" + formatter.context.getObjectId()
+    view_url = absoluteURL(formatter.context,
+                           formatter.request) \
+             + urlExt
+    #myAdapter = zapi.queryMultiAdapter((formatter.context,
+                                        #formatter.request),
+                                       #name='change_eval_yes')
+    #if myAdapter is not None and canAccess(myAdapter,'render'):
+    if True:
+        view_html = u'<a href="%s">' %  (view_url) + \
+                  u'<img id="%s" alt="Info" src="%s/Tick.png" /></a>' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'check requirement to <b>yes</b>')
+    else:
+        view_html = u'<img id="%s" alt="Details" src="%s/Tick_gr.png" />' % \
+                  (ttid, resource_path)
+        tooltip_text = _(u'checking requirement to <b>yes</b> is not permitted')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return view_html + tooltip
 
 # --------------- menu entries -----------------------------
 
@@ -67,18 +135,23 @@ class AdmUtilRequirementDetails(SupernodeDetails):
     omit_editfields = SupernodeDetails.omit_editfields + \
                     ['__name__', '__parent__', 'title']
 
-
+        
 # --------------- forms ------------------------------------
 
 
-def getTitel(item, formatter):
+def getTitle(item, formatter):
     """
     Titel for Overview
     """
-    try:
-        return item.ikName
-    except TypeError:
-        return str(item.__class__.__name__)
+    #ttid = u"comment" + item.getObjectId()
+    #tooltip_text = item.ikComment.replace("'", '"').replace('\n', '<br/>')
+    text_html = "%s" % item.ikName
+    #tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            #u"widget.Tooltip('tt_%s', { autodismissdelay:'60000', " \
+            #u"context:'%s', text:'%s' });</script>" \
+            #% (ttid, ttid, ttid, tooltip_text)
+    return text_html
+    
 
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, getModifiedDate, raw_cell_formatter, \
@@ -89,7 +162,7 @@ class DetailsAdmUtilRequirementForm(Overview):
     label = _(u'settings of Requirement')
     columns = (
         GetterColumn(title=_('Title'),
-                     getter=getTitel,
+                     getter=getTitle,
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('Modified On'),
                      getter=getModifiedDate,
@@ -115,6 +188,10 @@ class DetailsAdmUtilRequirementForm(Overview):
                 for obj in self.context.values()
                 if IRequirement.providedBy(obj)]
 
+class OverviewAdmUtilRequirementForm(DetailsAdmUtilRequirementForm):
+    """for overview
+    """
+    
     
 class AdmUtilRequirementDisplayAll(DisplayForm):
     """for all Requirements

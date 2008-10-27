@@ -875,13 +875,218 @@ font size is adjusted here (default is 77%) */
 .icon-state1 {
   display:block;
   height: 10px;
-  padding-left: 13px;
+  padding-left: 12px;
   background: transparent url(/@@/mini/states.gif) 0 -10px no-repeat; }
 .icon-state2 {
   display:block;
   height: 10px;
-  padding-left: 13px;
+  padding-left: 12px;
   background: transparent url(/@@/mini/states.gif) 0 -20px no-repeat; }
+
+/*-----------------------------------------------*/
+
+.icon-doc {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0    0px no-repeat; }
+.icon-generic {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -10px no-repeat; }
+.icon-tick {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -10px no-repeat; }
+.icon-cross {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -10px no-repeat; }
+.icon-net {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -40px no-repeat; }
+.icon-net0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -50px no-repeat; }
+.icon-net1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -60px no-repeat; }
+.icon-net2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -70px no-repeat; }
+.icon-host {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -80px no-repeat; }
+.icon-host0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -90px no-repeat; }
+.icon-host1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -100px no-repeat; }
+.icon-host2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -110px no-repeat; }
+.icon-interface {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -120px no-repeat; }
+.icon-interface0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -130px no-repeat; }
+.icon-interface1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -140px no-repeat; }
+.icon-interface2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -150px no-repeat; }
+.icon-value {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -160px no-repeat; }
+.icon-value0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -170px no-repeat; }
+.icon-value1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -180px no-repeat; }
+.icon-value2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -190px no-repeat; }
+.icon-service {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -200px no-repeat; }
+.icon-service0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -210px no-repeat; }
+.icon-service1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -220px no-repeat; }
+.icon-service2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -230px no-repeat; }
+.icon-location {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -240px no-repeat; }
+.icon-location0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -250px no-repeat; }
+.icon-location1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -260px no-repeat; }
+.icon-location2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -270px no-repeat; }
+.icon-building {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -280px no-repeat; }
+.icon-building0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -290px no-repeat; }
+.icon-building1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -300px no-repeat; }
+.icon-building2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -310px no-repeat; }
+.icon-room {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -320px no-repeat; }
+.icon-room0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -330px no-repeat; }
+.icon-room1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -340px no-repeat; }
+.icon-room2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -350px no-repeat; }
+.icon-person {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -360px no-repeat; }
+.icon-person0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -370px no-repeat; }
+.icon-person1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -380px no-repeat; }
+.icon-person2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -390px no-repeat; }
+
+/*-----------------------------------------------*/
 
 /*{*/
     /*background-color:#F00;*/

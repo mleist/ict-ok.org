@@ -35,6 +35,7 @@ class Interface(Component):
     """
 
     implements(IInterface)
+    shortName = "interface"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     netType = FieldProperty(IInterface['netType'])

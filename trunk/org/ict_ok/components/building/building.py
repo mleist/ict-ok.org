@@ -57,6 +57,7 @@ class Building(Component):
     """
 
     implements(IBuilding)
+    shortName = "building"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(IBuilding['ikAttr'])

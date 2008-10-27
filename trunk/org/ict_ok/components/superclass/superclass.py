@@ -21,6 +21,8 @@ __version__ = "$Id$"
 
 # python imports
 import os
+from datetime import datetime
+import pytz
 from logging import INFO, log, NOTSET
 
 # zope imports
@@ -29,7 +31,7 @@ from persistent import Persistent
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.security.management import queryInteraction
-from zope.dublincore.interfaces import IWriteZopeDublinCore, IDCTimes
+from zope.dublincore.interfaces import IWriteZopeDublinCore, IDCTimes, IZopeDublinCore
 from zope.app.keyreference.interfaces import IKeyReference
 from zope.component import adapter, queryUtility
 from zope.app.catalog.interfaces import ICatalog
@@ -62,6 +64,7 @@ class Superclass(Persistent):
 
 #    implements(IKeyReference, ISuperclass)
     implements(ISuperclass, IEventIfSuperclass)
+    shortName = "generic"
     key_type_id = 'org.ict_ok.components.superclass.keyreference'
 
     objectID = FieldProperty(ISuperclass['objectID'])
@@ -116,6 +119,11 @@ class Superclass(Persistent):
         newEntry = Entry(u"Object connected to event crossbar", self, level=u"info")
         newEntry.setObjVersion(self.ikRevision)
         self.history.append(newEntry)
+        dc = IZopeDublinCore(self, None)
+        if dc is not None:
+            now = datetime.now(pytz.utc)
+            dc.created = now
+            dc.modified = now
 
     def canBeDeleted(self):
         """
@@ -148,6 +156,13 @@ class Superclass(Persistent):
         returns str
         """
         return self.objectID
+    
+    def getShortname(self):
+        """
+        get a short class name of object
+        returns str
+        """
+        return self.shortName
     
     def getParent(self):
         """

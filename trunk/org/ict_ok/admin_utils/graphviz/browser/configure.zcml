@@ -32,6 +32,13 @@
     <!--======================================================-->
 
     <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.graphviz.interfaces.IAdmUtilGraphviz"
+        class=".graphviz.AdmUtilGraphvizDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.graphviz.View"
+        />
+    <z3c:pagelet
         name="history.html"
         for="org.ict_ok.admin_utils.graphviz.interfaces.IAdmUtilGraphviz"
         class="org.ict_ok.components.superclass.browser.superclass.History"

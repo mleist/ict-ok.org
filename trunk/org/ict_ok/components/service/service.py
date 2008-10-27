@@ -39,6 +39,7 @@ class Service(Component):
     """
 
     implements(IService)
+    shortName = "service"
     port = FieldProperty(IService['port'])
     product = FieldProperty(IService['product'])
     ipprotocol = FieldProperty(IService['ipprotocol'])

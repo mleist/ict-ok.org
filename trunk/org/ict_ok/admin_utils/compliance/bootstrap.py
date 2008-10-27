@@ -41,6 +41,7 @@ from org.ict_ok.admin_utils.compliance.requirement import Requirement
 
 logger = logging.getLogger("AdmUtilCompliance")
 
+#from org.ict_ok.admin_utils.compliance.req_imports import fillUtilitiyWithReqs
 def fillUtilitiyWithReqs(context):
     managementOBJ = context
     delKeys = [key for key in managementOBJ.keys()]

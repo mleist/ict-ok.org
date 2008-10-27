@@ -83,7 +83,7 @@ class EditLocationForm(EditForm):
 class DeleteLocationForm(DeleteForm):
     """ Delete the net """
     
-    def getTitel(self):
+    def getTitle(self):
         """this title will be displayed in the head of form"""
         return _(u"Delete this location: '%s'?") % \
                IBrwsOverview(self.context).getTitle()

@@ -47,7 +47,7 @@ from org.ict_ok.components.supernode.browser.supernode import \
 
 _ = MessageFactory('org.ict_ok')
 
-def getTitel(item, formatter):
+def getTitle(item, formatter):
     """
     Titel for Overview
     """
@@ -185,7 +185,7 @@ class Overview(BrowserPagelet):
                      getter=getStateIcon,
                      cell_formatter=raw_cell_formatter),
         GetterColumn(title=_('Title'),
-                     getter=getTitel,
+                     getter=getTitle,
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('Actions'),
                      getter=getActionBottons,

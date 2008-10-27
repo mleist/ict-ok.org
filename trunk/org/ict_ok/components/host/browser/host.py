@@ -19,7 +19,7 @@ __version__ = "$Id$"
 # zope imports
 import zope.event
 from zope.app import zapi
-from zope.component import getUtility
+from zope.component import getUtility, queryUtility
 from zope.size.interfaces import ISized
 from zope.proxy import removeAllProxies
 from zope.i18nmessageid import MessageFactory
@@ -29,6 +29,11 @@ from zope.app.intid.interfaces import IIntIds
 from zope.app.pagetemplate.urlquote import URLQuote
 from zope.app.appsetup import appsetup
 from zope.app.catalog.interfaces import ICatalog
+from zope.app.security.interfaces import IAuthentication
+from zope.proxy import removeAllProxies
+
+# schooltool
+from schooltool.requirement.interfaces import IScoreSystem
 
 # z3c imports
 from z3c.form import form, field
@@ -51,8 +56,11 @@ from org.ict_ok.components.superclass.interfaces import \
      IEventIfSuperclass
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, \
-     getStateIcon, getTitel, getModifiedDate, getActionBottons, getHealth, \
+     getStateIcon, getTitle, getModifiedDate, getActionBottons, getHealth, \
      raw_cell_formatter, IPsGetterColumn, TitleGetterColumn
+from org.ict_ok.admin_utils.compliance.evaluation import getEvaluations, Evaluation
+from org.ict_ok.admin_utils.compliance.requirement import getRequirementList
+from org.ict_ok.admin_utils.compliance.evaluation import getEvaluations
 
 _ = MessageFactory('org.ict_ok')
 
@@ -64,6 +72,18 @@ class MSubAddHost(GlobalMenuSubItem):
     title = _(u'Add Host')
     viewURL = 'add_hosts.html'
     weight = 50
+
+class MSubEvaluationsTodo(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Evaluations to do')
+    viewURL = 'evaluations_todo.html'
+    weight = 100
+
+class MSubEvaluationsDone(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Evaluations done')
+    viewURL = 'evaluations_done.html'
+    weight = 100
 
 # --------------- helper funktions -----------------------------
 
@@ -177,7 +197,53 @@ class HostDetails(ComponentDetails):
             return self.request.response.redirect(nextURL)
         else:
             return self.request.response.redirect('./@@details.html')
-        
+
+    def change_eval_yes(self):
+        requirementId = self.request.get('req_id', default=None)
+        evaluations = getEvaluations(self.context)
+        if requirementId is not None \
+           and evaluations is not None:
+            my_catalog = zapi.getUtility(ICatalog)
+            res = my_catalog.searchResults(oid_index=requirementId)
+            if len(res) > 0:
+                requirementObj = iter(res).next()
+                principalId = self.request.principal.id.split('.')[1]
+                pau_utility = queryUtility(IAuthentication)
+                internalPrincipal = pau_utility['principals'][principalId]
+                pf = queryUtility(IScoreSystem, name="Comp_Pass/Fail")
+                inpVal = 'Pass'
+                evaluation = Evaluation(requirementObj, pf,
+                                        inpVal, internalPrincipal)
+                evaluations.addEvaluation(evaluation)
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL is not None:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    def change_eval_no(self):
+        requirementId = self.request.get('req_id', default=None)
+        evaluations = getEvaluations(self.context)
+        if requirementId is not None \
+           and evaluations is not None:
+            my_catalog = zapi.getUtility(ICatalog)
+            res = my_catalog.searchResults(oid_index=requirementId)
+            if len(res) > 0:
+                requirementObj = iter(res).next()
+                principalId = self.request.principal.id.split('.')[1]
+                pau_utility = queryUtility(IAuthentication)
+                internalPrincipal = pau_utility['principals'][principalId]
+                pf = queryUtility(IScoreSystem, name="Comp_Pass/Fail")
+                inpVal = 'Fail'
+                evaluation = Evaluation(requirementObj, pf,
+                                        inpVal, internalPrincipal)
+                evaluations.addEvaluation(evaluation)
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL is not None:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
     def getHistory(self):
         """
         return List of history entries for the browser
@@ -230,6 +296,26 @@ class DetailsHostForm(DisplayForm):
     fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
 
     def update(self):
+        #import pdb
+        #pdb.set_trace()
+        #o2 = removeAllProxies(self.context)
+        #el2 = getEvaluations(o2)
+        #el1 = getEvaluations(self.context)
+        #principalId = self.request.principal.id.split('.')[1]
+        #pau_utility = queryUtility(IAuthentication)
+        #try:
+            #internalPrincipal = pau_utility['principals'][principalId]
+            #my_catalog = zapi.getUtility(ICatalog)
+            #vvvv = "39120697c841415ae4a6ba0641fcfac73"
+            #res = my_catalog.searchResults(oid_index=vvvv)
+            #if len(res) > 0:
+                #startReq = iter(res).next()
+                #pf = queryUtility(IScoreSystem, name="Comp_Pass/Fail")
+                #inpVal = 'Pass'
+                #ev1 = Evaluation(startReq, pf, inpVal, internalPrincipal)
+                #el1.addEvaluation(ev1)
+        #except NameError:
+            #pass
         DisplayForm.update(self)
 
 
@@ -256,7 +342,7 @@ class EditHostForm(EditForm):
 class DeleteHostForm(DeleteForm):
     """ Delete the net """
     
-    def getTitel(self):
+    def getTitle(self):
         """this title will be displayed in the head of form"""
         return _(u"Delete this host: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
@@ -313,6 +399,101 @@ class EditEventHostEventIfForm(EditForm):
             zope.event.notify(ObjectModifiedEvent(content, *descriptions))
         return changes
 
+from org.ict_ok.components.superclass.browser.superclass import getActionBotton_Detail, getModifiedDate
+from org.ict_ok.admin_utils.compliance.browser.requirement import getRequirementBotton_Cross, getRequirementBotton_Tick
+
+def getRequirementBottons(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    retHtml = u""
+    retHtml += getActionBotton_Detail(item, formatter)
+    retHtml += getRequirementBotton_Tick(item, formatter)
+    retHtml += getRequirementBotton_Cross(item, formatter)
+    return retHtml
+
+from org.ict_ok.admin_utils.compliance.browser.requirement import getTitle as getReqTitle
+from org.ict_ok.admin_utils.compliance.browser.requirement import link as linkReq
+from org.ict_ok.admin_utils.compliance.browser.requirement import raw_cell_formatter
+from org.ict_ok.admin_utils.compliance.browser.evaluation import getEvaluationBotton_Cross, getEvaluationBotton_Tick
+
+def getEvaluationBottons(item, formatter):
+    """Action Buttons for Overview in Web-Browser
+    """
+    retHtml = u""
+    retHtml += getEvaluationBotton_Tick(item, formatter)
+    retHtml += getEvaluationBotton_Cross(item, formatter)
+    return retHtml
+
+class EvaluationsTodoDisplay(Overview):
+    """for evaluation which are open
+    """
+    label = _(u'evaluations to do')
+    columns = (
+        GetterColumn(title=_('Title'),
+                     getter=getReqTitle,
+                     cell_formatter=linkReq('overview.html')),
+        GetterColumn(title=_('Modified On'),
+                     getter=getModifiedDate,
+                     subsort=True,
+                     cell_formatter=raw_cell_formatter),
+        #GetterColumn(title=_('Size'),
+                     #getter=getSize,
+                     #cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getRequirementBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    sort_columns = []
+    status = None
+    
+    def objs(self):
+        """List of Content objects"""
+        retList = []
+        my_catalog = zapi.getUtility(ICatalog)
+        res = my_catalog.searchResults(oid_index=self.context.requirement)
+        if len(res) > 0:
+            startReq = iter(res).next()
+            allObjReqs = getRequirementList(startReq)
+            allObjEvaluations = getEvaluations(self.context)
+            alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
+            retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
+        return retList
+
+from org.ict_ok.admin_utils.compliance.browser.compliance import \
+     link, GetterColumn
+from org.ict_ok.admin_utils.compliance.browser.evaluation import \
+     getEvaluatorTitle, getRequirementTitle, getEvaluationValue, \
+     getEvalModifiedDate, evaluationValue_formatter
+
+class EvaluationsDoneDisplay(Overview):
+    """for already done evaluations
+    """
+    label = _(u'evaluations done')
+    columns = (
+        GetterColumn(title=_('Requirement'),
+                     getter=getRequirementTitle,
+                     cell_formatter=link('overview.html')),
+        GetterColumn(title=_('Evaluator'),
+                     getter=getEvaluatorTitle,
+                     cell_formatter=link('overview.html')),
+        GetterColumn(title=_('Value'),
+                     getter=getEvaluationValue,
+                     cell_formatter=evaluationValue_formatter),
+        GetterColumn(title=_('Modified On'),
+                     getter=getEvalModifiedDate,
+                     subsort=True,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getEvaluationBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    sort_columns = []
+    status = None
+    
+    def objs(self):
+        """List of Content objects"""
+        retList = getEvaluations(self.context)
+        return [ev[1] for ev in retList.items()]
 
 class AllHosts(Overview):
     """Overview Pagelet"""
@@ -323,7 +504,7 @@ class AllHosts(Overview):
         GetterColumn(title=_('Health'),
                      getter=getHealth),
         TitleGetterColumn(title=_('Title'),
-                          getter=getTitel),
+                          getter=getTitle),
         IPsGetterColumn(title=_('IP'),
                      getter=getHostIp),
         GetterColumn(title=_('Modified On'),

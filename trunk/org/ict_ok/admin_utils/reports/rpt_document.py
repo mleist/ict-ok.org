@@ -67,6 +67,7 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
         self.versionStr = None
         self.firstPageTitle = None
         self.lastPageTitle = None
+        self.firstH1Seen = False
         
     def __str__(self):
         return u""

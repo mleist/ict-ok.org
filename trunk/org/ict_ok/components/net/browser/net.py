@@ -50,7 +50,7 @@ from org.ict_ok.admin_utils.netscan.interfaces import \
      IScanner
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, \
-     getStateIcon, getTitel, getModifiedDate, getActionBottons, getHealth, \
+     getStateIcon, getTitle, getModifiedDate, getActionBottons, getHealth, \
      raw_cell_formatter, IPsGetterColumn, TitleGetterColumn
 
 _ = MessageFactory('org.ict_ok')
@@ -175,7 +175,7 @@ class EditNetForm(EditForm):
 class DeleteNetForm(DeleteForm):
     """ Delete the net """
     
-    def getTitel(self):
+    def getTitle(self):
         """this title will be displayed in the head of form"""
         return _(u"Delete this net: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
@@ -195,7 +195,7 @@ class AllNetworks(Overview):
         GetterColumn(title=_('Health'),
                      getter=getHealth),
         TitleGetterColumn(title=_('Title'),
-                          getter=getTitel),
+                          getter=getTitle),
         IPsGetterColumn(title=_('Network'),
                         getter=getNetworkIp),
         GetterColumn(title=_('Modified On'),

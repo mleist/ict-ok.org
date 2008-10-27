@@ -54,6 +54,10 @@
             />
         <require
             permission="org.ict_ok.admin_utils.compliance.Edit"
+            attributes="updateOrder"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
             set_schema=".interfaces.IRequirement"
             />
         <require
@@ -91,6 +95,25 @@
 
     <class class="org.ict_ok.components.host.host.Host">
         <implements interface=".interfaces.IHaveEvaluations" />
+    </class>
+
+    <!--              Evaluation              -->
+
+    <class class=".evaluation.Evaluation">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.evaluations.View"
+            interface=".interfaces.IEvaluation"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+            set_schema=".interfaces.IEvaluation"
+            />
     </class>
 
     <!--              Score Systems              -->

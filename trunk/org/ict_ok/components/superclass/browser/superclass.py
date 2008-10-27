@@ -333,7 +333,7 @@ def link(view='index.html'):
             
     return anchor
 
-def getTitel(item, formatter):
+def getTitle(item, formatter):
     """
     Titel for Overview
     """
@@ -386,7 +386,7 @@ class TitleGetterColumn(GetterColumn):
     """Getter columnt that has locale aware sorting."""
     zope.interface.implements(ISortableColumn)
     def getSortKey(self, item, formatter):
-        return getTitel(item, formatter).upper()
+        return getTitle(item, formatter).upper()
     
 class IPsGetterColumn(GetterColumn):
     """Getter columnt that has locale aware sorting."""
@@ -798,7 +798,7 @@ class DeleteForm(layout.FormLayoutSupport, form.Form):
     form.extends(form.Form)
     label = _(u"Delete this object?")
     
-    def getTitel(self):
+    def getTitle(self):
         """this title will be displayed in the head of form"""
         return _(u"Delete this object: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
@@ -823,7 +823,7 @@ class DeleteForm(layout.FormLayoutSupport, form.Form):
     def update(self):
         """update all widgets"""
         if ISuperclass.providedBy(self.context):
-            self.label = self.getTitel()
+            self.label = self.getTitle()
         form.Form.update(self)
 
 
@@ -837,9 +837,9 @@ class Overview(BrowserPagelet):
         GetterColumn(title=_('Health'),
                      getter=getHealth),
         #TitleGetterColumn(title=_('Title'),
-                          #getter=getTitel),
+                          #getter=getTitle),
         GetterColumn(title=_('Title'),
-                     getter=getTitel,
+                     getter=getTitle,
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('Modified On'),
                      getter=getModifiedDate,
@@ -900,9 +900,12 @@ class Overview(BrowserPagelet):
         else:
             for i in self.sort_columns:
                 directlyProvides(columnList[i], ISortableColumn)
+            #formatter = StandaloneFullFormatter(
+                #self.context, self.request, self.objs(),
+                #columns=columnList, sort_on=((_('Title'), False),))
             formatter = StandaloneFullFormatter(
                 self.context, self.request, self.objs(),
-                columns=columnList, sort_on=((_('Title'), False),))
+                columns=columnList)
         formatter.cssClasses['table'] = 'listing'
         return formatter()
 
@@ -961,7 +964,7 @@ class EditContent(BrowserPagelet):
     columns = (
         CheckboxColumn(_(' ')),
         GetterColumn(title=_('Title'),
-                     getter=getTitel,
+                     getter=getTitle,
                      cell_formatter=link('edit.html')),
         GetterColumn(title="",
                      getter=getStateIcon,

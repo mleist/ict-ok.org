@@ -40,14 +40,14 @@ class IHost(IComponent):
         required = True)
 
     manufacturer = TextLine(
-        max_length = 80,
+        max_length = 500,
         title = _("Manufacturer"),
         description = _("Name/Address of the manufacturer."),
         default = u"",
         required = False)
 
     vendor = TextLine(
-        max_length = 80,
+        max_length = 500,
         title = _("Vendor"),
         description = _("Name/Address of the vendor."),
         default = u"",
@@ -70,21 +70,21 @@ class IHost(IComponent):
         required = True)
 
     workinggroup = TextLine(
-        max_length = 80,
+        max_length = 500,
         title = _("Workinggroup"),
         description = _("Name of the workinggroup."),
         default = u"",
         required = False)
 
     hardware = TextLine(
-        max_length = 80,
+        max_length = 500,
         title = _("Hardware"),
         description = _("Hardware of the system."),
         default = u"",
         required = False)
 
     user = TextLine(
-        max_length = 80,
+        max_length = 500,
         title = _("User"),
         description = _("User which is working with the system."),
         default = u"",
@@ -92,7 +92,7 @@ class IHost(IComponent):
 
 
     inv_id = TextLine(
-        max_length = 80,
+        max_length = 500,
         title = _("inventory id"),
         description = _("Id of inventory."),
         default = u"",

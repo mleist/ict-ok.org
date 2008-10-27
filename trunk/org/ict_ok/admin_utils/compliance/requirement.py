@@ -38,6 +38,8 @@ from org.ict_ok.admin_utils.compliance.interfaces import \
      IRequirement, IAdmUtilCompliance
 import schooltool.requirement.requirement
 from schooltool.requirement.evaluation import getRequirementList
+from schooltool.requirement.scoresystem import \
+     GlobalDiscreteValuesScoreSystem, Decimal
 
 logger = logging.getLogger("AdmUtilCompliance")
 
@@ -118,7 +120,8 @@ def allRequirementVocab(dummy_context):
     except ComponentLookupError:
         return SimpleVocabulary([])
 
-class Requirement(Superclass, schooltool.requirement.requirement.Requirement):
+class Requirement(Superclass,
+                  schooltool.requirement.requirement.Requirement):
     """ ict-ok.org wrapper
     """
     implements(IRequirement)
@@ -148,3 +151,8 @@ def getRequirement(context):
         return requirement
 # Convention to make adapter introspectable
 getRequirement.factory = Requirement
+
+PassFail = GlobalDiscreteValuesScoreSystem(
+    'PassFail',
+    u'Pass/Fail', u'Pass or Fail score system.',
+    [(u'Pass', Decimal(1)), (u'Fail', Decimal(0))], u'Pass', u'Pass')

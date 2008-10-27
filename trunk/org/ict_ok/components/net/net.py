@@ -41,6 +41,7 @@ class Net(Component):
     """
 
     implements(INet, IEventIfEventNet)
+    shortName = "net"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     ipv4 = FieldProperty(INet['ipv4'])
