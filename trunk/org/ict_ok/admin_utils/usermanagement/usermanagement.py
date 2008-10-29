@@ -34,6 +34,7 @@ from zope.security.management import getInteraction
 from zope.publisher.interfaces import IRequest
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.container.contained import Contained
+from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -80,18 +81,18 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
                 return i_request
         raise RuntimeError('Could not find current request.')
 
-    # temp. workaround for "user specific email" in normal form
-    def get_shortEmail(self):
+    # temp. workaround for "user specific timezone" in normal form
+    def get_timezone(self):
         """ property getter"""
         try:
-            return AdmUtilUserProperties(self.getRequest().principal).shortEmail
+            return AdmUtilUserProperties(self.getRequest().principal).timezone
         except KeyError, errText:
-            AdmUtilUserProperties(self.getRequest().principal).shortEmail = u""
-    def set_shortEmail(self, my_val):
+            AdmUtilUserProperties(self.getRequest().principal).timezone = u""
+    def set_timezone(self, my_val):
         """ property setter"""
-        AdmUtilUserProperties(self.getRequest().principal).shortEmail = my_val
-    shortEmail = property(get_shortEmail, set_shortEmail)
-    
+        AdmUtilUserProperties(self.getRequest().principal).timezone = my_val
+    timezone = property(get_timezone, set_timezone)
+
     # temp. workaround for "user specific email" in normal form
     def get_email(self):
         """ property getter"""
@@ -104,18 +105,22 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         AdmUtilUserProperties(self.getRequest().principal).email = my_val
     email = property(get_email, set_email)
     
-    # temp. workaround for "user specific timezone" in normal form
-    def get_timezone(self):
+    # temp. workaround for "user specific notifierLevel" in normal form
+    def get_notifierChannels(self):
         """ property getter"""
         try:
-            return AdmUtilUserProperties(self.getRequest().principal).timezone
+            return AdmUtilUserProperties(\
+                self.getRequest().principal).notifierChannels
         except KeyError, errText:
-            AdmUtilUserProperties(self.getRequest().principal).timezone = u""
-    def set_timezone(self, my_val):
+            AdmUtilUserProperties(\
+                self.getRequest().principal).notifierChannels = set([])
+    def set_notifierChannels(self, my_val):
         """ property setter"""
-        AdmUtilUserProperties(self.getRequest().principal).timezone = my_val
-    timezone = property(get_timezone, set_timezone)
-    
+        AdmUtilUserProperties(\
+            self.getRequest().principal).notifierChannels = my_val
+    notifierChannels = property(get_notifierChannels,
+                                set_notifierChannels)
+
     # temp. workaround for "user specific notifierLevel" in normal form
     def get_notifierLevel(self):
         """ property getter"""
@@ -124,13 +129,41 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
                 self.getRequest().principal).notifierLevel
         except KeyError, errText:
             AdmUtilUserProperties(\
-                self.getRequest().principal).notifierLevel = u"warning"
+                self.getRequest().principal).notifierLevel = 100
     def set_notifierLevel(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(\
             self.getRequest().principal).notifierLevel = my_val
     notifierLevel = property(get_notifierLevel, set_notifierLevel)
     
+    # temp. workaround for "user specific email" in normal form
+    def get_shortEmail(self):
+        """ property getter"""
+        try:
+            return AdmUtilUserProperties(self.getRequest().principal).shortEmail
+        except KeyError, errText:
+            AdmUtilUserProperties(self.getRequest().principal).shortEmail = u""
+    def set_shortEmail(self, my_val):
+        """ property setter"""
+        AdmUtilUserProperties(self.getRequest().principal).shortEmail = my_val
+    shortEmail = property(get_shortEmail, set_shortEmail)
+    
+    # temp. workaround for "user specific notifierLevel" in normal form
+    def get_shortNotifierChannels(self):
+        """ property getter"""
+        try:
+            return AdmUtilUserProperties(\
+                self.getRequest().principal).shortNotifierChannels
+        except KeyError, errText:
+            AdmUtilUserProperties(\
+                self.getRequest().principal).shortNotifierChannels = set([])
+    def set_shortNotifierChannels(self, my_val):
+        """ property setter"""
+        AdmUtilUserProperties(\
+            self.getRequest().principal).shortNotifierChannels = my_val
+    shortNotifierChannels = property(get_shortNotifierChannels,
+                                     set_shortNotifierChannels)
+
     # temp. workaround for "user specific shortNotifierLevel" in normal form
     def get_shortNotifierLevel(self):
         """ property getter"""
@@ -139,13 +172,14 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
                 self.getRequest().principal).shortNotifierLevel
         except KeyError, errText:
             AdmUtilUserProperties(\
-                self.getRequest().principal).shortNotifierLevel = u"error"
+                self.getRequest().principal).shortNotifierLevel = 1000
     def set_shortNotifierLevel(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(\
             self.getRequest().principal).shortNotifierLevel = my_val
     shortNotifierLevel = property(\
         get_shortNotifierLevel, set_shortNotifierLevel)
+    
     
 
 
@@ -183,21 +217,25 @@ class AdmUtilUserProperties(object):
         annotations = IAnnotations(context)
         mapping = annotations.get(KEY)
         if mapping is None:
-            blank = { 'shortEmail': u'',
+            blank = { 'timezone': u'',
                       'email': u'', 
-                      'timezone': u'',
-                      'notifierLevel': u"warning",
-                      'shortNotifierLevel': u"error",
+                      'notifierChannels': set([]),
+                      'notifierLevel': 100,
+                      'shortEmail': u'',
+                      'shortNotifierChannels': set([]),
+                      'shortNotifierLevel': 1000,
                       'dashboard_objs': AdmUtilUserDashboardSet()}
             mapping = annotations[KEY] = PersistentDict(blank)
         self.mapping = mapping
             
-    shortEmail = MappingProperty('shortEmail')
     email = MappingProperty('email')
+    notifierChannels = MappingProperty('notifierChannels')
+    notifierLevel = MappingProperty('notifierLevel')
+    shortEmail = MappingProperty('shortEmail')
+    shortNotifierChannels = MappingProperty('shortNotifierChannels')
+    shortNotifierLevel = MappingProperty('shortNotifierLevel')
     timezone = MappingProperty('timezone')
     dashboard_objs = MappingProperty('dashboard_objs')
-    notifierLevel = MappingProperty('notifierLevel')
-    shortNotifierLevel = MappingProperty('shortNotifierLevel')
 
 
 class AdmUtilUserDashboard(Contained):
@@ -279,3 +317,24 @@ def convert2UserTimezone(timest):
         return timest.replace(tzinfo=timezone("UTC")).astimezone(userTZ)
     else:
         return timest.astimezone(userTZ)
+
+def getNotifierDict4User(principal_id):
+    """will return notifier props for a special principal id
+    """
+    retDict = {'timezone': None,
+               'email': None,
+               'notifierChannels': None,
+               'notifierLevel': None,
+               'shortEmail': None,
+               'shortNotifierChannels': None,
+               'shortNotifierLevel': None,
+               'shortEmail': None,
+               }
+    pr_anno_util = queryUtility(IPrincipalAnnotationUtility)
+    principal_annos = pr_anno_util.getAnnotationsById(principal_id)
+    if principal_annos:
+        if principal_annos.data.has_key(KEY):
+            for dictKey in retDict.keys():
+                if principal_annos.data[KEY].has_key(dictKey):
+                    retDict[dictKey] = principal_annos.data[KEY][dictKey]
+    return retDict

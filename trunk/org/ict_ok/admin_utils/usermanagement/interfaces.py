@@ -18,7 +18,7 @@ import pytz
 
 # zope imports
 from zope.interface import Attribute, Interface, invariant, Invalid
-from zope.schema import List, Object, TextLine, Choice, Password
+from zope.schema import List, Object, TextLine, Choice, Password, Set
 from zope.i18nmessageid import MessageFactory
 from zope.app.security.interfaces import IAuthentication
 
@@ -69,16 +69,33 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
         title = _(u"Email address"),
         required=False
         )
+    notifierChannels = Set(
+        title = _("Notifier channels"),
+        value_type = Choice(
+            title = _("notifier channel"),
+            vocabulary="notifierChannels"),
+        default = set([]),
+        readonly = False,
+        required = True)
     notifierLevel = Choice(
         title=_("Notifier level"),
         description=_("minimum notification level"),
         default=u"warning",
         required = True,
         vocabulary = "notifierLevels")
+
     shortEmail = EmailValid(
         title = _(u"Short email address"),
         required=False
         )
+    shortNotifierChannels = Set(
+        title = _("Short notifier channels"),
+        value_type = Choice(
+            title = _("notifier channel"),
+            vocabulary="notifierChannels"),
+        default = set([]),
+        readonly = False,
+        required = True)
     shortNotifierLevel = Choice(
         title=_("Short notifier level"),
         description=_("minimum notification level for short messages"),

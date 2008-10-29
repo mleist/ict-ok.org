@@ -38,6 +38,12 @@
         name="notifierLevels"
         />
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".notifier.notifierChannels"
+        name="notifierChannels"
+        />
+
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"

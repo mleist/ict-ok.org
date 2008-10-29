@@ -45,6 +45,7 @@ class Ticker(object):
         """
         got ticker event from ticker thread every minute
         """
+        print "Net: '%s' triggerMin!!" % self.context
         pass
 
     def triggerHour(self):

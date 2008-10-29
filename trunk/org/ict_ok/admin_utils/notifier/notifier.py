@@ -100,10 +100,12 @@ class NotifyUserEvent(ObjectEvent):
 
     implements(INotifyUserEvent)
 
-    def __init__(self, arg_object) :
+    def __init__(self, channels, level, arg_object) :
         """
         """
         super(NotifyUserEvent, self).__init__(arg_object)
+        self.channels = channels
+        self.level = level
 
 def notifierInstances(dummy_context):
     """Which types of notifiers are there
@@ -113,13 +115,28 @@ def notifierInstances(dummy_context):
              for i in utilList]
     return SimpleVocabulary(terms)
 
+errorLevel = 1000
+warningLevel = 100
+infoLevel = 10
+allLevel = 0
+
 def notifierLevels(dummy_context):
     terms = []
     for (gkey, gname) in {
-        u"error": u"Error",
-        u"warning": u"Warning",
-        u"info": u"Information",
-        u"all": u"All",
+        errorLevel: u"Error",
+        warningLevel: u"Warning",
+        infoLevel: u"Information",
+        allLevel: u"All",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
+
+def notifierChannels(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        u"ch_forecast": u"Forecast messages",
+        u"ch_updown": u"Up and down messages",
+        u"ch_misc": u"Miscellaneous messages",
         }.items():
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)

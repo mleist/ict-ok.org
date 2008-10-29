@@ -155,6 +155,26 @@ class Host(Component):
         #self._counter['r'] -= 10
         #print '§§§ self.get_health():', self.get_health()
         #print '§§§ self.get_wcnt():', self.get_wcnt()
+        #import pdb
+        #pdb.set_trace()
+        #(Pdb) from z3c.form import datamanager
+        #(Pdb) from z3c.form import term
+        #(Pdb) dm1=datamanager.AttributeField(self, IHost['hostGroups'])
+        #(Pdb) dm1.canAccess()
+        #True
+        #(Pdb) terms = term.ChoiceTerms(None, None, None, dm1.field.value_type, None)
+        #(Pdb) terms.terms.getTerm(u'dcf0d4edda271cb4a1688501908fd298d').title
+        #u'Miscellaneous-Server'
+        #
+        #(Pdb) from z3c.form import term
+        #(Pdb) terms = term.ChoiceTerms(None, None, None, IHost['room'], None)
+        #(Pdb) self.room
+        #u'36301f822d5a62841d92a60f29f4df972'
+        #(Pdb) terms.terms.getTerm(self.room)
+        #<zope.schema.vocabulary.SimpleTerm object at 0x9f23210>
+        #(Pdb) terms.terms.getTerm(self.room).title
+        #u'Duisburg / RZ / Serverraum'
+        
         lastWorkItem = list(self.wf_worklist)[-1]
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "offline"

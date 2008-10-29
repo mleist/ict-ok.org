@@ -16,14 +16,16 @@ __version__ = "$Id$"
 
 # python imports
 import tempfile
+import os
+from datetime import datetime
 import logging
 from pytz import timezone
 from email.MIMEText import MIMEText
-#from email.MIMEMultipart import MIMEMultipart
+from email.MIMEMultipart import MIMEMultipart
 from email.MIMEBase import MIMEBase
 from email import Utils, Encoders
 import mimetypes
-import email
+#import email
 
 # zope imports
 from zope.interface import implements
@@ -41,6 +43,9 @@ from org.ict_ok.admin_utils.notifier.notifier import \
      Notifier
 from org.ict_ok.admin_utils.notifier.imail.interfaces import \
      INotifierEmail, IEventIfNotifierEmail
+from org.ict_ok.admin_utils.usermanagement.usermanagement import \
+     getNotifierDict4User
+from org.ict_ok.version import getIkVersion
 
 logger = logging.getLogger("NotifierEmail")
 berlinTZ = timezone('Europe/Berlin')
@@ -69,73 +74,160 @@ class NotifierEmail(Notifier):
         sending the real notification to the user
         """
         print "NotifierEmail::sendNotify(%s, %s)" % (notifyEvent, notifyObj)
-        en_utility = getUtility(IMailDelivery, 'ikEmailNotifierQueue')
-        print "en_utility: %s" % en_utility
-        #if en_utility:
-            #en_utility.send("aaa", "bbb", "ccc")
         pau_utility = getUtility(IAuthentication)
-        pr_anno_utility = getUtility(IPrincipalAnnotationUtility)
+        en_utility = getUtility(IMailDelivery, 'ikEmailNotifierQueue')
         if pau_utility and pau_utility.has_key('principals'):
             principals = pau_utility['principals']
+            toList = []
+            toShortList = []
             for (name, obj) in principals.items():
+                #print "v" * 60
                 #print "principal_name: %s" % name
                 principal_id = principals.prefix + name
                 #print "principal_id: %s" % principal_id
-                principal_annos = pr_anno_utility.getAnnotationsById(principal_id)
-                if principal_annos:
-                    if principal_annos.data.has_key('org.ict_ok.admin_utils.usermanagement'):
-                        email = principal_annos.data['org.ict_ok.admin_utils.usermanagement']['email']
-                        print "email: %s" % email
-                        if en_utility:
-                            en_utility.send("aaa", [email], "ccc_msg")
+                notifDict = getNotifierDict4User(principal_id)
+                #returns:
+                #{'timezone': None,
+                 #'email': None,
+                 #'notifierChannels': None,
+                 #'notifierLevel': None,
+                 #'shortEmail': None,
+                 #'shortNotifierChannels': None,
+                 #'shortNotifierLevel': None,
+                 #'shortEmail': None,
+                 #}
+                #print "notifDict: %s" % notifDict
+                #print "notifyEvent.channels", notifyEvent.channels
+                #print "notifyEvent.level", notifyEvent.level
+                # long email
+                #print "email: %s" % notifDict['email']
+                if notifDict['email'] is not None \
+                   and len(notifDict['email']) > 0 \
+                   and notifyEvent is not None \
+                   and notifyEvent.channels is not None \
+                   and notifyEvent.level is not None \
+                   and notifDict['notifierChannels'] is not None \
+                   and (notifyEvent.level >= notifDict['notifierLevel']) \
+                   and (len(set(notifDict['notifierChannels'])\
+                            .intersection(notifyEvent.channels)) > 0):
+                    toList.append(notifDict['email'])
+                # short email
+                #print "shortEmail: %s" % notifDict['shortEmail']
+                if notifDict['shortEmail'] is not None \
+                   and len(notifDict['shortEmail']) > 0:
+                    toShortList.append(notifDict['shortEmail'])
+                if notifDict['shortEmail'] is not None \
+                   and len(notifDict['shortEmail']) > 0 \
+                   and notifyEvent is not None \
+                   and notifyEvent.channels is not None \
+                   and notifyEvent.level is not None \
+                   and notifDict['shortNotifierChannels'] is not None \
+                   and (notifyEvent.level >= notifDict['shortNotifierLevel']) \
+                   and (len(set(notifDict['shortNotifierChannels'])\
+                            .intersection(notifyEvent.channels)) > 0):
+                    toShortList.append(notifDict['shortEmail'])
+                #print "^" * 60
+                #if en_utility:
+                    #en_utility.send("aaa", [email], "ccc_msg")
                 #email = pr_anno_utility.getAnnotationsById(principal_id).data['org.ict_ok.admin_utils.usermanagement']['email']
                 #print "email: %s" % email
                 #dddd2 = AdmUtilUserManagement(obj)
                 #print "dddd2: %s" % dddd2
                 #print "dddd2.email: %s" % dddd2.email
+            print "toList: ", toList
+            print "toShortList: ", toShortList
+            if en_utility:
+                msg = MIMEMultipart()
+                #msg['To'] = ''
+                #msg['Bcc'] = ",".join(toList)
+                msg['From'] = self.from_addr
+                msg['Subject'] = '[ict-ok.org] test'
+                msg['Date'] = Utils.formatdate(localtime = 1)
+                msg['Message-ID'] = Utils.make_msgid()
+                ##body = MIMEText(message, _subtype='plain')
+                outText = u"Hallo und ein Text mit Ä"
+                body = MIMEText( outText, _subtype='plain', _charset='latin-1')
+                msg.attach(body)
+        
+                filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
+                f_handle, f_name = tempfile.mkstemp(filename)
+                #authorStr = self.request.principal.title
+                authorStr = "ict-ok.org"
+                #from zope.i18n.locales import LocaleDates
+                #dates = LocaleDates()
+                #my_formatter = dates.getFormatter('dateTime', 'full')
+                #my_formatter = self.request.locale.dates.getFormatter(
+                    #'dateTime', 'medium')
+                #userTZ = getUserTimezone()
+                #userTZ = getUserTimezone()
+                #longTimeString = my_formatter.format(\
+                    #userTZ.fromutc(datetime.utcnow()))
+                #longTimeString = my_formatter.format(\
+                    #datetime.utcnow())
+                #versionStr = "%s [%s]" % (longTimeString, getIkVersion())
+                versionStr = "[%s]" % (getIkVersion())
+                self.generatePdf(f_name, authorStr, versionStr)
+                datafile = open(f_name, "r")
+                msg.attach(self.attachment(filename, datafile))
+                datafile.close()
+                #ikreportmail = IkReportMail( "toooooo", outMeta)
+                #tmpFile = os.tmpfile()
+                #ikreportmail.gen( tmpFile, outList)
+                #tmpFile.seek(0)
+                #msg.attach( self.attachment( "IKOMtrol.pdf", tmpFile))
+                #return msg.as_string()    
+                en_utility.send(self.from_addr, toList, msg.as_string())
+                #en_utility.send(self.from_addr, toShortList, "ccc_msg_short")
+                os.remove(f_name)
 
     def send_test(self, messageText):
         """
         will send a test message by the notifier
         """
         print "NotifierEmail.send_test(%s)" % messageText
-        pau_utility = getUtility(IAuthentication)
-        pr_anno_utility = getUtility(IPrincipalAnnotationUtility)
-        en_utility = getUtility(IMailDelivery, 'ikEmailNotifierQueue')
-        if pau_utility and pau_utility.has_key('principals'):
-            principals = pau_utility['principals']
-            toList = []
-            toShortList = []
-            for name in principals.keys():
-                print "principal_name: %s" % name
-                principal_id = principals.prefix + name
-                print "principal_id: %s" % principal_id
-                principal_annos = pr_anno_utility.getAnnotationsById(principal_id)
-                if principal_annos:
-                    if principal_annos.data.has_key('org.ict_ok.admin_utils.usermanagement'):
-                        email = principal_annos.data['org.ict_ok.admin_utils.usermanagement']['email']
-                        print "email: %s" % email
-                        if email is not None and len(email) > 0:
-                            toList.append(email)
-                        if hasattr(principal_annos.data[\
-                            'org.ict_ok.admin_utils.usermanagement'],
-                                   'shortEmail'):
-                            shortEmail = principal_annos.data[\
-                                'org.ict_ok.admin_utils.usermanagement']\
-                                       ['shortEmail']
-                        else:
-                            shortEmail = None
-                        print "shortEmail: %s" % shortEmail
-                        if shortEmail is not None and len(shortEmail) > 0:
-                            toShortList.append(shortEmail)
-            print "en_utility: ", en_utility
-            print "toList: ", toList
-            print "toShortList: ", toShortList
-            if en_utility is not None:
-                #en_utility.send(en_utility.from_addr, toList, messageText)
-                print "-" * 60
-                #print self.create_test_message(toList)
-                #print "-" * 60
+        from org.ict_ok.admin_utils.notifier.notifier import NotifyUserEvent, infoLevel
+        channels = ['ch_misc']
+        testEvent = NotifyUserEvent(channels, infoLevel, "test")
+        self.sendNotify(testEvent)
+        #pau_utility = getUtility(IAuthentication)
+        #en_utility = getUtility(IMailDelivery, 'ikEmailNotifierQueue')
+        #if pau_utility and pau_utility.has_key('principals'):
+            #principals = pau_utility['principals']
+            #toList = []
+            #toShortList = []
+            #for name in principals.keys():
+                #print "v" * 60
+                #print "principal_name: %s" % name
+                #principal_id = principals.prefix + name
+                #print "principal_id: %s" % principal_id
+                #notifDict = getNotifierDict4User(principal_id)
+                ##returns:
+                ##{'email': None,
+                 ##'notifierChannels': None,
+                 ##'notifierLevel': None,
+                 ##'shortEmail': None,
+                 ##'shortNotifierChannels': None,
+                 ##'shortNotifierLevel': None,
+                 ##'shortEmail': None,
+                 ##}
+                #print "notifDict: %s" % notifDict
+                #print "email: %s" % notifDict['email']
+                #if notifDict['email'] is not None \
+                   #and len(notifDict['email']) > 0:
+                    #toList.append(notifDict['email'])
+                #print "shortEmail: %s" % notifDict['shortEmail']
+                #if notifDict['shortEmail'] is not None \
+                   #and len(notifDict['shortEmail']) > 0:
+                    #toShortList.append(notifDict['shortEmail'])
+                #print "^" * 60
+            #print "en_utility: ", en_utility
+            #print "toList: ", toList
+            #print "toShortList: ", toShortList
+            #if en_utility is not None:
+                ##en_utility.send(en_utility.from_addr, toList, messageText)
+                #print "#" * 60
+                ##print self.create_test_message(toList)
+                ##print "-" * 60
 
     #def create_test_message(self, toList):
         #ptFileName = tempfile.mktemp('.pt')

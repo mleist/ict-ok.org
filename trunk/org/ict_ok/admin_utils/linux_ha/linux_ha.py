@@ -620,6 +620,8 @@ try:
 except ValueError:
     # dont start thread
     pass
+except AttributeError:
+    pass
     
 #@adapter(IAdmUtilLinuxHa, IObjectModifiedEvent)
 #def notifyAdmUtilLinuxHaModifiedEvent(instance, event):

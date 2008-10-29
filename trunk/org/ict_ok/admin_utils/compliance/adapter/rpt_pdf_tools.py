@@ -35,7 +35,8 @@ from org.ict_ok.admin_utils.compliance.evaluation import getEvaluations
 
 def appendEvaluationList(obj, document):
     elemList = []
-    if obj.requirement is not None:
+    if hasattr(obj, 'requirement') \
+       and obj.requirement is not None:
         my_catalog = zapi.getUtility(ICatalog)
         res = my_catalog.searchResults(oid_index=obj.requirement)
         if len(res) > 0:
