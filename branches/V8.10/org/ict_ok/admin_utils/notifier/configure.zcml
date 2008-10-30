@@ -50,6 +50,11 @@
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
+    <subscriber
+       handler=".notifier.allNotifySubscriber"
+       for=".interfaces.INotifyUserEvent"
+       />
+
     <adapter
         factory=".adapter.sized.NotifierSized"
         />

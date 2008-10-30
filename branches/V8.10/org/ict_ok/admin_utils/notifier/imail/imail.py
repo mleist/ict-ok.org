@@ -39,6 +39,7 @@ from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
 from z3c.rml import pagetemplate
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.admin_utils.notifier.notifier import \
      Notifier
 from org.ict_ok.admin_utils.notifier.imail.interfaces import \
@@ -156,8 +157,12 @@ class NotifierEmail(Notifier):
                     #datetime.utcnow())
                 #versionStr = "%s [%s]" % (longTimeString, getIkVersion())
                 versionStr = "[%s]" % (getIkVersion())
-                self.generatePdf(f_name, authorStr, versionStr)
-                for rcpt in toList:
+                if ISuperclass.providedBy(notifyEvent.object):
+                    notifyEvent.object.generatePdf(\
+                        f_name, authorStr, versionStr)
+                else:
+                    self.generatePdf(f_name, authorStr, versionStr)
+                for rcpt in set(toList):
                     msg = MIMEMultipart()
                     msg['To'] = rcpt
                     msg['From'] = self.from_addr
@@ -169,7 +174,11 @@ class NotifierEmail(Notifier):
                        type(notifyEvent.object) == type(""):
                         outText = notifyEvent.object
                     else:
-                        outText = u"unknown object type in ict-ok.org instance"
+                        if ISuperclass.providedBy(notifyEvent.object):
+                            outText = u"System: '%s': state changed" % \
+                                    (notifyEvent.object.ikName)
+                        else:
+                            outText = u"unknown object type in ict-ok.org instance"
                     body = MIMEText(outText, _subtype='plain', _charset='latin-1')
                     msg.attach(body)
                     datafile = open(f_name, "r")
@@ -180,7 +189,7 @@ class NotifierEmail(Notifier):
                 #print "toList: ", toList
                 #print "msg.as_string(): ", msg.as_string()
                 os.remove(f_name)
-            for rcpt in toShortList:
+            for rcpt in set(toShortList):
                 msg = MIMEMultipart()
                 msg['To'] = rcpt
                 msg['From'] = self.from_addr
@@ -192,7 +201,11 @@ class NotifierEmail(Notifier):
                    type(notifyEvent.object) == type(""):
                     outText = notifyEvent.object
                 else:
-                    outText = u"unknown object type in ict-ok.org instance"
+                    if ISuperclass.providedBy(notifyEvent.object):
+                        outText = u"System: '%s': state changed" % \
+                                (notifyEvent.object.ikName)
+                    else:
+                        outText = u"unknown object type in ict-ok.org instance"
                 body = MIMEText(outText, _subtype='plain', _charset='latin-1')
                 msg.attach(body)
                 en_utility.send(self.from_addr, [rcpt], msg.as_string())

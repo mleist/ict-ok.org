@@ -193,14 +193,20 @@ class NagiosTriggerOnlineWorkItem(ApplicationBase):
             change_str = u"state changed: '%s' -> '%s'" % (wfd.state, wfd.new_state)
             hostObj = getattr(wfd, 'object')
             hostObj.appendHistoryEntry(change_str, level=u"warn")
+            channels = ['ch_updown']
+            from org.ict_ok.admin_utils.notifier.notifier import errorLevel
+            notify(NotifyUserEvent("%s: %s" % (hostObj.ikName, change_str),
+                                   channels,
+                                   errorLevel,
+                                   hostObj))
             self.finish()
     def finish(self):
         #print "NagiosTriggerOnlineWorkItem.finish"
         setattr(self.participant.activity.process.workflowRelevantData,
                 "state", "online")
-        wfd = self.participant.activity.process.workflowRelevantData
-        hostObj = getattr(wfd, 'object')
-        notify(NotifyUserEvent(hostObj))
+        #wfd = self.participant.activity.process.workflowRelevantData
+        #hostObj = getattr(wfd, 'object')
+        #notify(NotifyUserEvent(hostObj))
         ApplicationBase.finish(self)
 integration.nagios_trigger_onlineWorkItem = NagiosTriggerOnlineWorkItem
 
@@ -219,14 +225,20 @@ class NagiosTriggerOfflineWorkItem(ApplicationBase):
             change_str = u"state changed: '%s' -> '%s'" % (wfd.state, wfd.new_state)
             hostObj = getattr(wfd, 'object')
             hostObj.appendHistoryEntry(change_str, level=u"warn")
+            channels = ['ch_updown']
+            from org.ict_ok.admin_utils.notifier.notifier import errorLevel
+            notify(NotifyUserEvent("%s: %s" % (hostObj.ikName, change_str),
+                                   channels,
+                                   errorLevel,
+                                   hostObj))
             self.finish()
     def finish(self):
         #print "NagiosTriggerOfflineWorkItem.finish"
         setattr(self.participant.activity.process.workflowRelevantData,
                 "state", "offline")
-        wfd = self.participant.activity.process.workflowRelevantData
-        hostObj = getattr(wfd, 'object')
-        notify(NotifyUserEvent(hostObj))
+        #wfd = self.participant.activity.process.workflowRelevantData
+        #hostObj = getattr(wfd, 'object')
+        #notify(NotifyUserEvent(hostObj))
         ApplicationBase.finish(self)
 integration.nagios_trigger_offlineWorkItem = NagiosTriggerOfflineWorkItem
 
@@ -245,6 +257,12 @@ class NagiosTriggerNotif1WorkItem(ApplicationBase):
             change_str = u"state changed: '%s' -> '%s'" % (wfd.state, wfd.new_state)
             hostObj = getattr(wfd, 'object')
             hostObj.appendHistoryEntry(change_str, level=u"warn")
+            channels = ['ch_updown']
+            from org.ict_ok.admin_utils.notifier.notifier import errorLevel
+            notify(NotifyUserEvent("%s: %s" % (hostObj.ikName, change_str),
+                                   channels,
+                                   errorLevel,
+                                   hostObj))
             self.finish()
     def finish(self):
         #print "NagiosTriggerNotif1WorkItem.finish"

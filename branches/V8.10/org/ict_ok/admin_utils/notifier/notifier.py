@@ -24,10 +24,12 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.app.container.contained import Contained
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component.interfaces import ObjectEvent
+from zope.component import queryUtility
 
 # ict_ok imports
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.admin_utils.notifier.interfaces import INotifier
 from org.ict_ok.admin_utils.notifier.interfaces import INotifierUtil
 from org.ict_ok.admin_utils.notifier.interfaces import INotifyUserEvent
@@ -85,6 +87,12 @@ class NotifierUtil(Supernode):
         if notifiersList:
             for (name, obj) in notifiersList:
                 obj.send_test(messageText)
+
+def allNotifySubscriber(event):
+    if not ISuperclass.providedBy(event.object):
+        return
+    notifierUtil = queryUtility(INotifierUtil)
+    notifierUtil.sendNotify(event, event.object)
 
 
 class Notifier(Supernode):
