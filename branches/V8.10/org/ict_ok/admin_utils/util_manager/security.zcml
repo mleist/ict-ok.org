@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <permission
+        id="org.ict_ok.admin_utils.util_manager.View"
+        title="View Utility Manager"
+        description="View the Utility Manager and all its content."
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.util_manager.Add"
+        title="Add Utility Manager"
+        description="Add Utility Manager."
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.util_manager.Edit"
+        title="Edit Utility Manager"
+        description="Edit Utility Manager."
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.util_manager.Delete"
+        title="Delete Utility Manager"
+        description="Delete Utility Manager."
+    />
+
+    <grant permission="org.ict_ok.admin_utils.util_manager.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.util_manager.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.util_manager.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.util_manager.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.util_manager.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.util_manager.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.util_manager.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.util_manager.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.util_manager.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>

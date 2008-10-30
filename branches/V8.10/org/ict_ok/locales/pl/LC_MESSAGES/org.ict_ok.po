@@ -1,0 +1,2741 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ict-ok.org $Id$\n"
+"POT-Creation-Date: Sun Aug 10 20:11:32 2008\n"
+"PO-Revision-Date: 2008-09-08 08:25+0100\n"
+"Last-Translator: Markus Leist <leist@ikom-online.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: etc/site.zcml:203
+msgid "All users have this role implicitly"
+msgstr ""
+
+#: etc/site.zcml:203
+msgid "Everybody"
+msgstr ""
+
+#: etc/site.zcml:205
+msgid "Site Manager"
+msgstr ""
+
+#: etc/site.zcml:206
+msgid "Site Member"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:103
+msgid "Delete this host group: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:48
+msgid "Add Host Group"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:75
+msgid "settings of categories"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:83
+msgid "add host group"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/categories/browser/categories.py:94
+msgid "edit host group settings"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/compliance.py:64
+msgid "settings of Compliance"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/compliance.py:72
+msgid "edit Compliance properties"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/cron/browser/cron.py:56
+msgid "settings of cron"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/cron/browser/cron.py:63
+msgid "edit cron"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/cron/interfaces.py:35
+msgid "Time Zone"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/cron/interfaces.py:36
+msgid "Time Zone used to display your calendar"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/cron/interfaces.py:56
+msgid "Last Cron Start"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/cron/interfaces.py:57
+msgid "Date of last Cron-Start"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/cron/interfaces.py:58
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:181
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:323
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:123
+msgid "00.00.0000"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:13
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:13
+msgid "Server Username"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:17
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:17
+msgid "Server Password"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:21
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:21
+msgid "Connection Status"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:25
+msgid "ESX Api"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:5
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:5
+msgid "Server IP"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:9
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:9
+msgid "Server Port"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx.pt:2
+msgid "Details dddd"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:2
+msgid "Details ESX Host"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:23
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:28
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:61
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:66
+msgid "Uptime"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:29
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:67
+msgid "not online"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:14
+msgid "Powerstate"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:18
+msgid "max CPU usage"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:2
+msgid "Details ESX Virtual Maschine"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:22
+msgid "max memory usage"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:28
+msgid "Heartbeat"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:32
+msgid "Guest full name"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:36
+msgid "Guest family"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:40
+msgid "Guest ip address"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:44
+msgid "Guest hostname"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:48
+msgid "Guest mac address (net0)"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:52
+msgid "Guest network connected (net0)"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:56
+msgid "Guest tool Version"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:71
+msgid "Host Machine"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:75
+msgid "UUID"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:129
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:129
+msgid "shutdown"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:133
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:133
+msgid "shutdow the virtual machine"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:141
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:141
+msgid "convert to intern"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:145
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:145
+msgid "convert to internal object"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:187
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:220
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:187
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:221
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:234
+#: lib/python/org/ict_ok/components/net/browser/net.py:196
+#: lib/python/org/ict_ok/components/net/browser/net.py:219
+#: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:172
+#: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:202
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:642
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:682
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:746
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:771
+msgid "Title"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:190
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:190
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:242
+#: lib/python/org/ict_ok/components/net/browser/net.py:203
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:648
+msgid "Actions"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:196
+msgid "Overview ESX VIM"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:227
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:228
+msgid "Overview ESX VIM Datacenters"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:232
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:233
+msgid "Overview ESX VIM %s"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:238
+msgid "settings of esx_vim"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:245
+msgid "edit esx_vim"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:102
+msgid "ESX VIM Username"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:103
+msgid "Name of user with admin rights on esx vim-server"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:108
+msgid "ESX VIM Password"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:109
+msgid "Password of user with admin rights on esx vim-server"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:179
+msgid "Last EsxVim Contact"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:180
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:122
+msgid "Date of last VmWare-Esx Vim contact"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:80
+msgid "ESX VIM active"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:81
+msgid "Esx connector active"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:88
+msgid "ESX VIM IP"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:89
+msgid "Active IP address of esx vim-server"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:96
+msgid "ESX VIM Port"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/esx_vim/interfaces.py:97
+msgid "Port of esx vim-server"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:106
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timer.py:61
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timingrelay.py:61
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:153
+msgid "settings of Event"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:117
+msgid "add event"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:124
+msgid "edit event properties"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:55
+msgid "Add Event"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:80
+msgid "send it"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event.py:84
+msgid "sends an the event to the list of receivers"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timer.py:44
+msgid "Add Pulse Timer"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timer.py:68
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timingrelay.py:72
+msgid "add timing relay"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timer.py:77
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timingrelay.py:81
+msgid "edit timing relay properties"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timer.py:85
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timingrelay.py:91
+msgid "timing relay event interfaces form"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/event_timingrelay.py:44
+msgid "Add Timing Relay"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:104
+msgid "event crossbar"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:140
+msgid "Signal Overview"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:161
+msgid "edit crossbar properties"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:55
+msgid "Crossbar"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/eventcrossbar.py:62
+msgid "Signal Graph"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:205
+msgid "start time"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:206
+msgid "last trigger received at"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:211
+msgid "delay time"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:212
+msgid "delayed time for output event"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:216
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:271
+msgid "timer is running"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:223
+msgid "trigger event <-"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:231
+msgid "reset event <-"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:239
+msgid "delayed event ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:260
+msgid "next pulse"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:261
+msgid "next pulse at"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:266
+msgid "pulse time"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:267
+msgid "pulse width for output event"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:283
+msgid "start event <-"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:291
+msgid "stop event <-"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:299
+msgid "pulse event ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:321
+msgid "Last EventCrossbar Start"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:322
+msgid "Date of last EventCrossbar-Start"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:39
+msgid "event title"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:40
+msgid "Title of the event"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:41
+msgid "event_01"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:45
+msgid "log events"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:46
+msgid "log all events"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:50
+msgid "dry run"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:51
+msgid "don't do anything"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:55
+msgid "sender objects"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:57
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:66
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:225
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:233
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:241
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:285
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:293
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:301
+#: lib/python/org/ict_ok/admin_utils/ticker/interfaces.py:35
+#: lib/python/org/ict_ok/components/host/interfaces.py:181
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:111
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:119
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:127
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:135
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:143
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:151
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:159
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:167
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:175
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:183
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:191
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:199
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:207
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:215
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:223
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:231
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:239
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:247
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:255
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:263
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:271
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:279
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:287
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:295
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:303
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:311
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:319
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:327
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:335
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:343
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:351
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:359
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:367
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:375
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:383
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:391
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:399
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:407
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:415
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:423
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:431
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:439
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:447
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:455
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:463
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:471
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:479
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:487
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:495
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:503
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:511
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:519
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/interfaces.py:52
+#: lib/python/org/ict_ok/components/net/interfaces.py:55
+#: lib/python/org/ict_ok/components/site/interfaces.py:50
+msgid "objects"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:64
+msgid "receiver objects"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:73
+msgid "host group"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:79
+#: lib/python/org/ict_ok/components/location/configure.zcml:24
+msgid "Location"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:80
+msgid "The Location."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:86
+#: lib/python/org/ict_ok/components/building/configure.zcml:24
+msgid "Building"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:87
+msgid "The Building."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:93
+#: lib/python/org/ict_ok/components/host/interfaces.py:102
+#: lib/python/org/ict_ok/components/room/configure.zcml:24
+msgid "Room"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:94
+#: lib/python/org/ict_ok/components/host/interfaces.py:103
+msgid "The Room Description."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/honeyd/browser/honeyd.py:54
+#: lib/python/org/ict_ok/admin_utils/graphviz/browser/graphviz.py:63
+#: lib/python/org/ict_ok/admin_utils/notifier/browser/notifier.py:73
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:156
+msgid "settings of graphviz adapter"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/honeyd/browser/honeyd.py:61
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/nagios.py:110
+#: lib/python/org/ict_ok/admin_utils/graphviz/browser/graphviz.py:70
+#: lib/python/org/ict_ok/admin_utils/notifier/browser/notifier.py:80
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:163
+msgid "edit graphviz adapter"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:11
+msgid "View from AdmUtilGeneratorHoneyd."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:11
+msgid "View from AdmUtilGeneratorHoneyd"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:17
+msgid "Edit from AdmUtilGeneratorHoneyd"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:17
+msgid "Edit from AdmUtilGeneratorHoneyd."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:23
+msgid "Add from AdmUtilGeneratorHoneyd"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/honeyd/security.zcml:23
+msgid "Add from AdmUtilGeneratorHoneyd."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/nagios.py:67
+msgid "generate"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/nagios.py:71
+msgid "generate nagios cfg"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/nagios.py:99
+msgid "settings of nagios generator"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:34
+msgid "nagios is running"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:39
+msgid "init script"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:40
+msgid "nagios init script with path"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:41
+msgid "/etc/init.d/nagios"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:46
+msgid "path to configuration"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:51
+msgid "last change"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:52
+msgid "last change of configuration file"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:56
+msgid "last reload"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/interfaces.py:57
+msgid "last reload of nagios deamon"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:11
+msgid "View from AdmUtilGeneratorNagios"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:11
+msgid "View from AdmUtilGeneratorNagios."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:17
+msgid "Edit from AdmUtilGeneratorNagios"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:17
+msgid "Edit from AdmUtilGeneratorNagios."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:23
+msgid "Add from AdmUtilGeneratorNagios."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/security.zcml:23
+msgid "Add from AdmUtilGeneratorNagios"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/graphviz/browser/configure.zcml:13
+#: lib/python/org/ict_ok/admin_utils/netscan/browser/configure.zcml:13
+#: lib/python/org/ict_ok/admin_utils/netscan/nmap/browser/configure.zcml:13
+#: lib/python/org/ict_ok/admin_utils/netscan/simple1/browser/configure.zcml:13
+#: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/configure.zcml:12
+#: lib/python/org/ict_ok/admin_utils/objmq/browser/configure.zcml:13
+#: lib/python/org/ict_ok/admin_utils/wfmc/browser/configure.zcml:29
+msgid "Status"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/graphviz/interfaces.py:33
+#: lib/python/org/ict_ok/admin_utils/graphviz/interfaces.py:34
+#: lib/python/org/ict_ok/admin_utils/wfmc/interfaces.py:33
+#: lib/python/org/ict_ok/admin_utils/wfmc/interfaces.py:34
+msgid "Output Type"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/graphviz/security.zcml:11
+msgid "View from AdmUtilGraphviz"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/graphviz/security.zcml:11
+msgid "View from AdmUtilGraphviz."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/graphviz/security.zcml:17
+msgid "Edit from AdmUtilGraphviz."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/graphviz/security.zcml:17
+msgid "Edit from AdmUtilGraphviz"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:2
+msgid "Details 111"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:196
+msgid "Overview Linux HA"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:239
+msgid "settings of linux_ha"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:246
+msgid "edit linux_ha"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:121
+msgid "Last LinuxHa Contact"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:51
+msgid "HA-Cluster active"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:52
+msgid "HA-Cluster connector active"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:59
+msgid "HA-Cluster IP"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:60
+msgid "Active IP address of the ha cluster"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:67
+msgid "HA-Cluster Port"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:68
+msgid "Port of of the ha cluster"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:73
+msgid "HA-Cluster Username"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:74
+msgid "Name of user with admin rights on ha cluster"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:79
+msgid "HA-Cluster Password"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/linux_ha/interfaces.py:80
+msgid "Password of user with admin rights on ha cluster"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/adapter/sized.py:48
+msgid "%d scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/adapter/sized.py:50
+msgid "no scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/browser/netscan.py:124
+msgid "settings of all net scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/browser/netscan.py:131
+msgid "edit central net scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/browser/netscan.py:52
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:376
+msgid "Unavailable"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:5
+msgid "Systeminfo"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:6
+msgid "Content listing"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/interfaces.py:31
+msgid "Network Scanners"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/interfaces.py:32
+msgid "Which network scanners should be triggerd"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/interfaces.py:34
+msgid "Network Scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/nmap/browser/nmap.py:54
+msgid "settings of nmap scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/nmap/browser/nmap.py:61
+msgid "edit nmap scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/security.zcml:11
+msgid "View from NetScan"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/security.zcml:11
+msgid "View from NetScan."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/security.zcml:17
+msgid "Edit from NetScan"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/security.zcml:17
+msgid "Edit from NetScan."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/simple1/browser/simple1.py:54
+msgid "settings of simple scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/netscan/simple1/browser/simple1.py:61
+msgid "edit simple scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/adapter/sized.py:48
+msgid "%d notifier"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/adapter/sized.py:50
+msgid "no notifier"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/email/browser/email.py:53
+msgid "settings of email notifier"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/email/browser/email.py:60
+msgid "edit email notifier"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/email/interfaces.py:37
+#: lib/python/org/ict_ok/admin_utils/objmq/interfaces.py:36
+#: lib/python/org/ict_ok/components/host/interfaces.py:37
+msgid "Hostname"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/email/interfaces.py:38
+#: lib/python/org/ict_ok/admin_utils/objmq/interfaces.py:37
+msgid "Name of server to be used as SMTP server."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/interfaces.py:34
+msgid "Notifiers"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/interfaces.py:35
+msgid "Which network notifiers should be triggerd"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/interfaces.py:37
+msgid "Notifier"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:56
+msgid "stop jabber-connector"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:60
+msgid "stops the jabber-connector (as user:%s)"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:65
+msgid "is jabber-connector up"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:69
+msgid "ask the jabber-connector for watchdog"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:73
+msgid "send test message"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:77
+msgid "send test message to im-server"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:83
+msgid "start jabber-connector"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:87
+msgid "starts the jabber-connector (as user:%s)"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:41
+msgid "Connector IP"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:42
+msgid "IP address of the jabber connector."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:50
+msgid "Connector Port"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:51
+msgid "Port of the jabber connector"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:57
+msgid "Jabber servername"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:58
+msgid "Servername or IP of im server"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:65
+msgid "Jabber serverport"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:66
+msgid "Port of the im server"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:72
+msgid "Username"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:73
+msgid "Username for im-login"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:79
+msgid "Password"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:80
+msgid "Password for im-login"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:85
+msgid "last seen Connector"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/notifier/jabber/interfaces.py:86
+msgid "Time since last contact with the jabber connector"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/objmq/browser/objmq.py:48
+msgid "settings of object message queue"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/objmq/browser/objmq.py:55
+msgid "edit object message queue"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/objmq/security.zcml:11
+msgid "View from AdmUtilObjMQ."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/objmq/security.zcml:11
+msgid "View from AdmUtilObjMQ"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/objmq/security.zcml:17
+msgid "Edit from AdmUtilObjMQ."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/objmq/security.zcml:17
+msgid "Edit from AdmUtilObjMQ"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/public_viewing.py:43
+msgid "[P+]"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/public_viewing.py:57
+msgid "[P-]"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/public_viewing.py:81
+msgid "Add ShadowObject"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/public_viewing.py:92
+msgid "settings of public viewing"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/public_viewing.py:99
+msgid "edit public viewing"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/publicview.pt:2
+msgid "Hallo public"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/snmpd/browser/snmpd.py:61
+msgid "settings of snmpd"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/snmpd/browser/snmpd.py:67
+msgid "edit snmpd settings"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/adapter/sized.py:47
+#: lib/python/org/ict_ok/components/net/adapter/sized.py:47
+msgid "1 host"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/adapter/sized.py:48
+#: lib/python/org/ict_ok/components/net/adapter/sized.py:48
+msgid "%d hosts"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/adapter/state.py:49
+#: lib/python/org/ict_ok/components/host/adapter/state.py:79
+#: lib/python/org/ict_ok/components/net/adapter/state.py:57
+msgid "Warning: "
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/adapter/state.py:50
+msgid "in development mode"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/configure.zcml:58
+msgid "ObjMQ"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:102
+msgid "reindex database"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:106
+msgid "will reindex the catalogs of all tables in database"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:114
+msgid "pack database"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:118
+msgid "will pack the database and delete all backups"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:280
+msgid "Supervisor events"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:282
+msgid "Start number"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:284
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:302
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:715
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:737
+msgid "Date"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:287
+msgid "Message"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:312
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:333
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:6
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:6
+#: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:9
+msgid "Name"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:314
+msgid "Generation"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:316
+msgid "Minimum Generation"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:344
+msgid "settings of supervisor"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:351
+msgid "edit supervisor"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:67
+msgid "Events"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:73
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:310
+msgid "Generations"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:101
+msgid "last seen Slave"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:102
+msgid "Time since last contact with the slave"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:35
+msgid "Starts"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:36
+msgid "Number of Starts"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:44
+msgid "My active IP"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:45
+msgid "Active IP address of this host."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:51
+msgid "My object id"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:52
+msgid "object id of this supervisor"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:59
+msgid "Master IP"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:60
+msgid "IP address of master."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:66
+msgid "Master object id"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:67
+msgid "object id of our master supervisor"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:72
+msgid "last seen Master"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:73
+msgid "Time since last contact with the Master"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:77
+msgid "status2Master"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:78
+msgid "Status of connection to master."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:88
+msgid "Slave IP"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:89
+msgid "IP address of slave."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:95
+msgid "Slave object id"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:96
+msgid "object id of our slave supervisor"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/supervisor.py:161
+#: lib/python/org/ict_ok/admin_utils/supervisor/supervisor.py:202
+#: lib/python/org/ict_ok/admin_utils/supervisor/supervisor.py:216
+msgid "unknown"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/supervisor/supervisor.py:533
+msgid "%d starts"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/ticker/browser/ticker.py:57
+msgid "settings of ticker"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/ticker/browser/ticker.py:63
+msgid "edit ticker settings"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/ticker/browser/ticker.py:69
+msgid "AdmUtilTicker Event Interfaces Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/ticker/interfaces.py:33
+msgid "1sec. event ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/usermanagement/browser/usermanagement.py:224
+msgid "settings of usermanagement"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/usermanagement/browser/usermanagement.py:231
+msgid "edit user management"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/usermanagement/browser/usermanagement.py:59
+msgid "[+]"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/usermanagement/browser/usermanagement.py:73
+msgid "[-]"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/usermanagement/interfaces.py:34
+#: lib/python/org/ict_ok/admin_utils/usermanagement/interfaces.py:51
+msgid "Email address"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:237
+#: lib/python/org/ict_ok/components/net/browser/net.py:200
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:644
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:752
+msgid "Modified On"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:240
+msgid "Size"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:264
+msgid "settings of utility manager"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:271
+msgid "edit utility manager"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/configure.zcml:24
+msgid "Utility Manager"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:15
+msgid "Add Utility Manager."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:15
+msgid "Add Utility Manager"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:21
+msgid "Edit Utility Manager."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:21
+msgid "Edit Utility Manager"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:27
+msgid "Delete Utility Manager."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:27
+msgid "Delete Utility Manager"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:9
+msgid "View the Utility Manager and all its content."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/util_manager/security.zcml:9
+msgid "View Utility Manager"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:100
+msgid "Workflow View"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:104
+msgid "settings of workflow manager"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:111
+msgid "edit workflow manager"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:44
+msgid "Workflows"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/wfmc/browser/wfmc.py:97
+msgid "Workflow List"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/building/browser/building.py:46
+#: lib/python/org/ict_ok/components/building/browser/building.py:72
+msgid "Add Building"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/building/browser/building.py:66
+msgid "settings of building"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/building/browser/building.py:79
+msgid "Building Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/building/browser/building.py:88
+msgid "Delete this building: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/building/interfaces.py:31
+#: lib/python/org/ict_ok/components/location/interfaces.py:31
+#: lib/python/org/ict_ok/components/room/interfaces.py:38
+msgid "coordinates"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/building/interfaces.py:32
+msgid "Coordinates of the building."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/building/interfaces.py:38
+#: lib/python/org/ict_ok/components/location/interfaces.py:38
+msgid "GoogleMap URL"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/building/interfaces.py:39
+#: lib/python/org/ict_ok/components/location/interfaces.py:39
+msgid "URL of the location at google maps."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/adapter/sized.py:47
+#: lib/python/org/ict_ok/components/interface/adapter/sized.py:47
+#: lib/python/org/ict_ok/components/service/adapter/sized.py:47
+#: lib/python/org/ict_ok/components/site/adapter/sized.py:47
+#: lib/python/org/ict_ok/components/snmpvalue/adapter/sized.py:47
+msgid "1 item"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/adapter/sized.py:48
+#: lib/python/org/ict_ok/components/interface/adapter/sized.py:48
+#: lib/python/org/ict_ok/components/service/adapter/sized.py:48
+#: lib/python/org/ict_ok/components/site/adapter/sized.py:48
+#: lib/python/org/ict_ok/components/snmpvalue/adapter/sized.py:48
+msgid "%d items"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/adapter/state.py:80
+msgid "'host is offline'"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/adapter/state.py:85
+msgid "Error: "
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/adapter/state.py:86
+msgid "'host is in notification1'"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/browser/add_hosts.pt:2
+msgid "Add Hosts"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/browser/host.py:105
+msgid "Trigger notification1"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/browser/host.py:202
+msgid "settings of host"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/browser/host.py:216
+msgid "Host Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/browser/host.py:225
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:143
+msgid "Delete this host: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/browser/host.py:231
+msgid "host event interfaces form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/browser/host.py:60
+#: lib/python/org/ict_ok/components/host/browser/host.py:208
+msgid "Add Host"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/browser/host.py:91
+msgid "Trigger online"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/browser/host.py:98
+msgid "Trigger offline"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/configure.zcml:24
+msgid "Host"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:108
+msgid "operating systems"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:109
+msgid "list of possible operating systems"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:112
+msgid "Operatingsystem"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:113
+msgid "The OS Description."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:121
+msgid "URL"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:122
+msgid "URL of system."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:127
+msgid "URL browser type"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:128
+msgid "Type of browser window"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:135
+msgid "URL Username"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:136
+msgid "Username for url-browser login"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:142
+msgid "URL Password"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:143
+msgid "Password for url-browser login"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:149
+#: lib/python/org/ict_ok/skin/sidebar/ik_sb_console.pt:4
+msgid "Console"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:150
+msgid "Console of system."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:155
+msgid "for Nagios"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:156
+msgid "enabled in Nagios"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:179
+msgid "shutdown event <-"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:38
+msgid "Name of the system."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:39
+msgid "systemname"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:44
+msgid "Manufacturer"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:45
+msgid "Name/Address of the manufacturer."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:51
+msgid "Vendor"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:52
+msgid "Name/Address of the vendor."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:57
+msgid "host groups"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:59
+msgid "host"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:66
+msgid "Production state"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:74
+msgid "Workinggroup"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:75
+msgid "Name of the workinggroup."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:81
+msgid "Hardware"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:82
+msgid "Hardware of the system."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:88
+msgid "User"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:89
+msgid "User which is working with the system."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:96
+msgid "inventory id"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/interfaces.py:97
+msgid "Id of inventory."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/linux_server/browser/host.py:42
+#: lib/python/org/ict_ok/components/host/special/linux_server/browser/host.py:51
+msgid "Add Linux Server"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/linux_server/configure.zcml:24
+msgid "HostLinuxServer"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/linux_workstation/browser/host.py:42
+#: lib/python/org/ict_ok/components/host/special/linux_workstation/browser/host.py:51
+msgid "Add Linux Workstation"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/linux_workstation/configure.zcml:24
+msgid "HostLinuxWorkstation"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/browser/host.py:44
+#: lib/python/org/ict_ok/components/host/special/mge_ups/browser/host.py:53
+msgid "Add MGE UPS"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/browser/host.py:59
+msgid "HostMgeUps Event Interfaces Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/configure.zcml:24
+msgid "HostMgeUps"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:109
+msgid "upsBatteryFault ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:117
+msgid "upsBatteryOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:125
+msgid "upsBatteryReplacementIndicated ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:133
+msgid "upsBatteryReplacementNotIndicated ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:141
+msgid "upsAtLowBattery ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:149
+msgid "upsFromLowBattery ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:157
+msgid "upsChargerFault ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:165
+msgid "upsChargerOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:173
+msgid "upsAtLowCondition ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:181
+msgid "upsFromLowCondition ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:189
+msgid "upsOnBattery ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:197
+msgid "upsReturnFromBattery ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:205
+msgid "upsOnByPass ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:213
+msgid "upsReturnFromByPass ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:221
+msgid "upsByPassUnavailable ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:229
+msgid "upsByPassAvailable ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:237
+msgid "upsUtilityFailure ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:245
+msgid "upsUtilityRestored ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:253
+msgid "upsOnBoost ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:261
+msgid "upsReturnFromBoost ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:269
+msgid "upsOverLoad ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:277
+msgid "upsLoadOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:285
+msgid "upsOverTemperature ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:293
+msgid "upsTemperatureOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:301
+msgid "upsCommunicationFailure ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:309
+msgid "upsCommunicationRestored ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:317
+msgid "upsInputBad ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:325
+msgid "upsInputOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:333
+msgid "upsBatteryUnavailable ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:341
+msgid "upsBatteryAvailable ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:349
+msgid "upsAtLowRecharge ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:357
+msgid "upsFromLowRecharge ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:365
+msgid "upsDiagnosticTestFail ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:373
+msgid "upsDiagnosticTestOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:381
+msgid "upsBatteryTestOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:389
+msgid "upsBatteryTestFail ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:397
+msgid "upsExternalAlarmActive ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:405
+msgid "upsExternalAlarmInactive ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:413
+msgid "upsOnBuck ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:421
+msgid "upsReturnFromBuck ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:429
+msgid "upsmgEnvironmentComFailure ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:437
+msgid "upsmgEnvironmentComOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:445
+msgid "upsmgEnvironmentTemperatureLow ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:453
+msgid "upsmgEnvironmentTemperatureHigh ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:461
+msgid "upsmgEnvironmentTemperatureOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:469
+msgid "upsmgEnvironmentHumidityLow ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:477
+msgid "upsmgEnvironmentHumidityHigh ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:485
+msgid "upsmgEnvironmentHumidityOK ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:493
+msgid "upsmgEnvironmentInput1Closed ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:501
+msgid "upsmgEnvironmentInput1Open ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:509
+msgid "upsmgEnvironmentInput2Closed ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/mge_ups/interfaces.py:517
+msgid "upsmgEnvironmentInput2Open ->"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/browser/host.py:121
+msgid "settings of VMware ESX Server"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/browser/host.py:135
+msgid "VMware ESX Server Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/browser/host.py:141
+msgid "esx host event interfaces form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/browser/host.py:50
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/browser/host.py:127
+msgid "Add VMware ESX Server"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/browser/host.py:78
+msgid "shutdown host"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/browser/host.py:85
+msgid "enter maintenance mode"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/configure.zcml:24
+msgid "HostVMwareEsx"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/interfaces.py:32
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/interfaces.py:32
+msgid "ESX UUID"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/interfaces.py:33
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/interfaces.py:33
+msgid "UUID of virtual machine in ESX."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_esx/interfaces.py:50
+#: lib/python/org/ict_ok/components/net/interfaces.py:53
+#: lib/python/org/ict_ok/components/site/interfaces.py:48
+msgid "inward relaying shutdown <-"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_vc2/browser/host.py:42
+#: lib/python/org/ict_ok/components/host/special/vmware_vc2/browser/host.py:51
+msgid "Add VMware VirtualCenter 2"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_vc2/configure.zcml:24
+msgid "HostVMwareVC2"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:121
+#: lib/python/org/ict_ok/components/net/browser/net.py:146
+#: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:211
+msgid "settings of net"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:135
+msgid "VMware Virtual Machine Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:49
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:127
+msgid "Add VMware Virtual Machine"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:77
+msgid "Power off"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/browser/host.py:84
+msgid "Power on"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/host/special/vmware_vm/configure.zcml:24
+msgid "HostVMwareVm"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:42
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:71
+msgid "Add Interface"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:65
+msgid "settings of interface"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:78
+msgid "Interface Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:87
+msgid "Delete this interface: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/configure.zcml:24
+msgid "Interface"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/interfaces.py:50
+msgid "interface type"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/interfaces.py:51
+msgid "Networktype of this interface (OSI Layer1-2)"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/interfaces.py:58
+msgid "MAC address"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/interfaces.py:59
+msgid "MAC address of the host."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/interfaces.py:79
+msgid "IP address"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interface/interfaces.py:80
+msgid "IP address of the host."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interfaces.py:34
+msgid "Object is template"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/interfaces.py:35
+msgid "object is a template"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/location/browser/location.py:46
+#: lib/python/org/ict_ok/components/location/browser/location.py:72
+msgid "Add Location"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/location/browser/location.py:66
+msgid "settings of location"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/location/browser/location.py:79
+msgid "Location Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/location/browser/location.py:88
+msgid "Delete this location: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/location/interfaces.py:32
+msgid "Coordinates of the location."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/adapter/state.py:58
+msgid "'no hosts in net'"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/browser/net.py:101
+msgid "start scanner"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/browser/net.py:104
+msgid "starts the network scanner (as user:%s)"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/browser/net.py:158
+msgid "Net Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/browser/net.py:181
+#: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:252
+msgid "Delete this net: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/browser/net.py:186
+msgid "Net Event Interfaces Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/browser/net.py:198
+msgid "Network"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/browser/net.py:64
+#: lib/python/org/ict_ok/components/net/browser/net.py:151
+msgid "Add Net"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/configure.zcml:24
+msgid "Net"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/interfaces.py:38
+msgid "Network IP"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/net/interfaces.py:39
+msgid "IP address of the Network."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/room/browser/room.py:47
+#: lib/python/org/ict_ok/components/room/browser/room.py:73
+msgid "Add Room"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/room/browser/room.py:67
+msgid "settings of room"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/room/browser/room.py:80
+msgid "Room Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/room/browser/room.py:89
+msgid "Delete this room: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/room/interfaces.py:31
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:713
+msgid "Level"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/room/interfaces.py:32
+msgid "Level of the room."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/room/interfaces.py:39
+msgid "Coordinates of the room."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/browser/script.py:42
+#: lib/python/org/ict_ok/components/script/browser/script.py:68
+#: lib/python/org/ict_ok/components/script/security.zcml:15
+msgid "Add Script"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/browser/script.py:75
+msgid "Script Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/browser/script.py:84
+msgid "Delete this script: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/interfaces.py:31
+msgid "Python"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/interfaces.py:32
+msgid "Python script."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/security.zcml:15
+msgid "Add Script."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/security.zcml:21
+msgid "Edit Script."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/security.zcml:21
+msgid "Edit Script"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/security.zcml:27
+msgid "Delete Script."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/security.zcml:27
+msgid "Delete Script"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/security.zcml:9
+msgid "View the Script and all its content."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/script/security.zcml:9
+msgid "View Script"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/browser/add_services.pt:2
+msgid "Add Services"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/browser/add_services.pt:3
+#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:8
+#: lib/python/org/ict_ok/components/host/browser/add_hosts.pt:3
+#: lib/python/org/ict_ok/components/superclass/browser/overview.pt:4
+#: lib/python/org/ict_ok/skin/formui/table-form.pt:30
+#: lib/python/org/ict_ok/skin/formui/table-form.pt:64
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/crossbar.pt:4
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/signalgraph.pt:4
+#: lib/python/org/ict_ok/admin_utils/wfmc/browser/wflist.pt:4
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/generations.pt:4
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/events.pt:4
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/overview.pt:2
+msgid "${DYNAMIC_CONTENT}"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/browser/service.py:45
+#: lib/python/org/ict_ok/components/service/browser/service.py:75
+#: lib/python/org/ict_ok/components/service/special/icmp_latency/browser/service.py:53
+#: lib/python/org/ict_ok/components/service/special/ssh/browser/service.py:53
+msgid "Add Service"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/browser/service.py:69
+msgid "settings of service"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/browser/service.py:82
+msgid "Service Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/browser/service.py:91
+msgid "Delete this service: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/configure.zcml:24
+msgid "Service"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/interfaces.py:32
+#: lib/python/org/ict_ok/components/service/special/dns/interfaces.py:38
+#: lib/python/org/ict_ok/components/service/special/http/interfaces.py:38
+#: lib/python/org/ict_ok/components/service/special/ssh/interfaces.py:32
+msgid "Port"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/interfaces.py:33
+#: lib/python/org/ict_ok/components/service/special/dns/interfaces.py:39
+#: lib/python/org/ict_ok/components/service/special/http/interfaces.py:39
+#: lib/python/org/ict_ok/components/service/special/ssh/interfaces.py:33
+msgid "Number of port."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/interfaces.py:39
+msgid "Product"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/interfaces.py:40
+msgid "Which product will serve?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/interfaces.py:45
+msgid "Protocol"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/interfaces.py:46
+msgid "IP-Protocol to use with this service."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/dns/browser/service.py:44
+msgid "Add Dns check"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/dns/browser/service.py:53
+msgid "Add Dns Service Check"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/dns/configure.zcml:26
+msgid "ServiceDns"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/http/browser/service.py:44
+msgid "Add Http check"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/http/browser/service.py:53
+msgid "Add Http Service Check"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/http/configure.zcml:26
+msgid "ServiceHttp"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/icmp_latency/browser/service.py:44
+msgid "Add ICMP latency check"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/icmp_latency/configure.zcml:24
+msgid "ServiceIcmpLatency"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/ssh/browser/service.py:44
+msgid "Add SSH check"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/service/special/ssh/configure.zcml:24
+msgid "ServiceSsh"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/browser/site.py:46
+msgid "Add Site"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/browser/site.py:67
+msgid "settings of site"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/browser/site.py:72
+msgid "add site"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/browser/site.py:78
+msgid "edit site settings"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/browser/site.py:87
+msgid "Delete this site: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/browser/site.py:92
+msgid "Site Event Interfaces Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/configure.zcml:24
+msgid "Site"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/interfaces.py:38
+msgid "Sitename"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/interfaces.py:39
+msgid "Name of the site."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/interfaces.py:40
+msgid "mysite"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/interfaces.py:65
+msgid "Confirm"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/interfaces.py:66
+msgid "please confirm"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/security.zcml:15
+#: lib/python/org/ict_ok/components/net/security.zcml:15
+#: lib/python/org/ict_ok/components/host/security.zcml:15
+#: lib/python/org/ict_ok/components/interface/security.zcml:15
+#: lib/python/org/ict_ok/components/service/security.zcml:15
+#: lib/python/org/ict_ok/components/snmpvalue/security.zcml:15
+#: lib/python/org/ict_ok/components/location/security.zcml:15
+#: lib/python/org/ict_ok/components/building/security.zcml:15
+#: lib/python/org/ict_ok/components/room/security.zcml:15
+msgid "Add Template Entry"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/security.zcml:15
+#: lib/python/org/ict_ok/components/net/security.zcml:15
+#: lib/python/org/ict_ok/components/host/security.zcml:15
+#: lib/python/org/ict_ok/components/interface/security.zcml:15
+#: lib/python/org/ict_ok/components/service/security.zcml:15
+#: lib/python/org/ict_ok/components/snmpvalue/security.zcml:15
+#: lib/python/org/ict_ok/components/location/security.zcml:15
+#: lib/python/org/ict_ok/components/building/security.zcml:15
+#: lib/python/org/ict_ok/components/room/security.zcml:15
+msgid "Add Template Entry."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/security.zcml:21
+#: lib/python/org/ict_ok/components/net/security.zcml:21
+#: lib/python/org/ict_ok/components/host/security.zcml:21
+#: lib/python/org/ict_ok/components/interface/security.zcml:21
+#: lib/python/org/ict_ok/components/service/security.zcml:21
+#: lib/python/org/ict_ok/components/snmpvalue/security.zcml:21
+#: lib/python/org/ict_ok/components/location/security.zcml:21
+#: lib/python/org/ict_ok/components/building/security.zcml:21
+#: lib/python/org/ict_ok/components/room/security.zcml:21
+msgid "Edit Template Entry."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/security.zcml:21
+#: lib/python/org/ict_ok/components/net/security.zcml:21
+#: lib/python/org/ict_ok/components/host/security.zcml:21
+#: lib/python/org/ict_ok/components/interface/security.zcml:21
+#: lib/python/org/ict_ok/components/service/security.zcml:21
+#: lib/python/org/ict_ok/components/snmpvalue/security.zcml:21
+#: lib/python/org/ict_ok/components/location/security.zcml:21
+#: lib/python/org/ict_ok/components/building/security.zcml:21
+#: lib/python/org/ict_ok/components/room/security.zcml:21
+msgid "Edit Template Entry"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/security.zcml:27
+#: lib/python/org/ict_ok/components/net/security.zcml:27
+msgid "Edit Event Interface"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/security.zcml:32
+#: lib/python/org/ict_ok/components/net/security.zcml:32
+#: lib/python/org/ict_ok/components/host/security.zcml:27
+#: lib/python/org/ict_ok/components/interface/security.zcml:27
+#: lib/python/org/ict_ok/components/service/security.zcml:27
+#: lib/python/org/ict_ok/components/snmpvalue/security.zcml:27
+#: lib/python/org/ict_ok/components/location/security.zcml:27
+#: lib/python/org/ict_ok/components/building/security.zcml:27
+#: lib/python/org/ict_ok/components/room/security.zcml:27
+msgid "Delete Template Entry"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/security.zcml:32
+#: lib/python/org/ict_ok/components/net/security.zcml:32
+#: lib/python/org/ict_ok/components/host/security.zcml:27
+#: lib/python/org/ict_ok/components/interface/security.zcml:27
+#: lib/python/org/ict_ok/components/service/security.zcml:27
+#: lib/python/org/ict_ok/components/snmpvalue/security.zcml:27
+#: lib/python/org/ict_ok/components/location/security.zcml:27
+#: lib/python/org/ict_ok/components/building/security.zcml:27
+#: lib/python/org/ict_ok/components/room/security.zcml:27
+msgid "Delete Template Entry."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/security.zcml:9
+#: lib/python/org/ict_ok/components/net/security.zcml:9
+#: lib/python/org/ict_ok/components/host/security.zcml:9
+#: lib/python/org/ict_ok/components/interface/security.zcml:9
+#: lib/python/org/ict_ok/components/service/security.zcml:9
+#: lib/python/org/ict_ok/components/snmpvalue/security.zcml:9
+#: lib/python/org/ict_ok/components/location/security.zcml:9
+#: lib/python/org/ict_ok/components/building/security.zcml:9
+#: lib/python/org/ict_ok/components/room/security.zcml:9
+msgid "View the Template Entry and all its content."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/site/security.zcml:9
+#: lib/python/org/ict_ok/components/net/security.zcml:9
+#: lib/python/org/ict_ok/components/host/security.zcml:9
+#: lib/python/org/ict_ok/components/interface/security.zcml:9
+#: lib/python/org/ict_ok/components/service/security.zcml:9
+#: lib/python/org/ict_ok/components/snmpvalue/security.zcml:9
+#: lib/python/org/ict_ok/components/location/security.zcml:9
+#: lib/python/org/ict_ok/components/building/security.zcml:9
+#: lib/python/org/ict_ok/components/room/security.zcml:9
+msgid "View Template Entry"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/slave/browser/details.pt:11
+msgid "Date 1"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/slave/browser/details.pt:19
+msgid "Notes"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/slave/browser/details.pt:4
+msgid "DummyContainer Details"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/slave/browser/details.pt:7
+msgid "title"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:2
+msgid "Add SNMP Vendor"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:44
+#: lib/python/org/ict_ok/components/superclass/browser/overview.pt:15
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/crossbar.pt:15
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/overview_esx.pt:8
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/overview_ha.pt:8
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/generations.pt:16
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/events.pt:16
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/overview.pt:13
+msgid "There are no objects."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:236
+msgid "Add SnmpValue"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:243
+msgid "SnmpValue Edit Form"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:56
+msgid "Add SNMP Value"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/configure.zcml:24
+msgid "SnmpValue"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:106
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:107
+msgid "max level dimension denominator"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:30
+msgid "Check Type"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:37
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:38
+msgid "OID1"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:44
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:45
+msgid "OID2"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:50
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:51
+msgid "Check Command"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:57
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:58
+msgid "Input Type"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:64
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:65
+msgid "input dimension"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:71
+msgid "display dimension numerator"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:72
+msgid "input dimension numerator"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:78
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:79
+msgid "display dimension denominator"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:85
+msgid "max-checks"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:86
+msgid "enable check 'max' for this entry"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:93
+msgid "max level"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:94
+msgid "'max'-level for this entry (bit/s)"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:99
+#: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:100
+msgid "max level dimension numerator"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:293
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:2
+msgid "Details"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:300
+msgid "Overview"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:307
+msgid "History"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:314
+#: lib/python/org/ict_ok/components/script/configure.zcml:24
+msgid "Script"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:321
+msgid "Dump data"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:328
+msgid "Export XML"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:335
+msgid "Edit"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:342
+msgid "Event Interface"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:349
+msgid "Edit Content"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:405
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:429
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:471
+msgid "no pickle adapter"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:527
+msgid "View Superclass"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:536
+msgid "Add Superclass"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:569
+msgid "Edit Superclass"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:604
+msgid "Delete this object?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:608
+msgid "Delete this object: '%s'?"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:673
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:678
+msgid "Pos"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:688
+#: lib/python/org/ict_ok/skin/menu/__init__.py:117
+msgid "Dashboard"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:690
+msgid "Dashboard of %s"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:718
+msgid "R"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:720
+msgid "Text"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:745
+msgid " "
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:779
+msgid "You did not confirm the deletion correctly."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:784
+msgid "Objects were successfully deleted."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:786
+msgid "No objects were selected."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:37
+msgid "Object id"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:38
+msgid "Oid of this object"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:45
+msgid "Instance name"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:46
+msgid "Name of the instance."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:51
+msgid "Instance author"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:52
+msgid "Author of the instance."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:57
+msgid "Instance notes"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:58
+msgid "Notes for the instance (in the context of using)."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:61
+msgid "Instance note"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:62
+msgid "Note for the instance (in the context of using)."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:69
+#: lib/python/org/ict_ok/components/slave/browser/details.pt:15
+msgid "Comment"
+msgstr "Komentarz"
+
+#: lib/python/org/ict_ok/components/superclass/interfaces.py:70
+msgid "Comment for the instance (in the context of installing)."
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/security.zcml:9
+msgid "export object data as xml"
+msgstr ""
+
+#: lib/python/org/ict_ok/libs/interfaces.py:32
+msgid "Attribute"
+msgstr ""
+
+#: lib/python/org/ict_ok/libs/interfaces.py:33
+msgid "Attribute of the instance."
+msgstr ""
+
+#: lib/python/org/ict_ok/libs/lib.py:68
+#: lib/python/org/ict_ok/libs/lib.py:70
+msgid "Oid is not correct."
+msgstr ""
+
+#: lib/python/org/ict_ok/schema/interfaces.py:30
+#: lib/python/org/ict_ok/schema/interfaces.py:46
+msgid "IP-address not ok"
+msgstr ""
+
+#: lib/python/org/ict_ok/schema/interfaces.py:34
+msgid "Host IP-address not ok"
+msgstr ""
+
+#: lib/python/org/ict_ok/schema/interfaces.py:38
+msgid "Host IP-address has wrong netmask"
+msgstr ""
+
+#: lib/python/org/ict_ok/schema/interfaces.py:42
+msgid "Network IP-address not ok"
+msgstr ""
+
+#: lib/python/org/ict_ok/schema/interfaces.py:50
+msgid "netaddress is not ok"
+msgstr ""
+
+#: lib/python/org/ict_ok/schema/interfaces.py:54
+msgid "Universe ID not ok"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/error/error.pt:10
+msgid "An error occurred, please print out this page and send to your <a href=\"/yoursupport\">Support</a> or <a href=\"javascript:history.back(1);\">x</a>"
+msgstr ""
+
+#. Default: "go back and try another URL."
+#: lib/python/org/ict_ok/skin/error/error.pt:10
+msgid "sys-error-try-again"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/error/error.pt:15
+msgid "Error object: ${error_object}"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/error/error.pt:4
+msgid "Error type: ${error_type}"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/hd/ik_hd_menu.pt:4
+msgid "[Version]"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/hd/ik_hd_menu.pt:5
+msgid "[Help]"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/hd/ik_hd_menu.pt:6
+msgid "[Preferences]"
+msgstr "[Konfiguracja]"
+
+#: lib/python/org/ict_ok/skin/hd/ik_hd_menu.pt:8
+msgid "[Language]"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/ik_xmlobject.py:196
+#: lib/python/org/ict_ok/skin/ik_xmlobject.py:199
+msgid "[top]"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/menu/__init__.py:122
+msgid "Help"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/menu/__init__.py:127
+msgid "Networks"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/menu/__init__.py:132
+msgid "Hosts"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/menu/__init__.py:137
+msgid "Services"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/menu/__init__.py:142
+msgid "Utilities"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/mtree/ik_mtree.pt:4
+msgid "Navigation"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/sidebar/ik_sb_actions.pt:4
+msgid "My actions"
+msgstr ""
+
+#: lib/python/org/ict_ok/skin/sidebar/ik_sb_status.pt:18
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:10
+#: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:10
+msgid "State"
+msgstr ""
+

@@ -1,0 +1,21 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+    <h3 i18n:translate="">Version</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary"
+            tal:define="runtime_info view/getZopeRuntimeInfo">
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Version</td>
+            <td tal:content="view/getVersion" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">System uptime</td>
+            <td tal:content="python: view.getSystemUptime()" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:define="intform python:request.locale.numbers.getFormatter('decimal')">
+            <td i18n:translate="">Size of Database</td>
+            <td tal:content="python: '%s kB' % intform.format(view.getDbSize())" />
+        </tr>
+    </table>
+</i18n:block>

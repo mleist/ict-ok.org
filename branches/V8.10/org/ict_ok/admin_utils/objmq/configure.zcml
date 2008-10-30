@@ -1,0 +1,48 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:xmlrpc="http://namespaces.zope.org/xmlrpc"
+    xmlns:mail="http://namespaces.zope.org/mail"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <class class=".objmq.AdmUtilObjMQ">
+        <factory
+            id="org.ict_ok.admin_utils.objmq.objmq.AdmUtilObjMQ" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.objmq.View"
+            interface=".interfaces.IAdmUtilObjMQ"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.objmq.View"
+            set_schema=".interfaces.IAdmUtilObjMQ"
+            />
+    </class>
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <mail:admUtilObjTransport
+        name="dddObjTransport"
+        hostname="dddhost"
+        />
+
+    <mail:queuedDelivery
+        name="ikObjTransportQueue"
+        permission="zope.View"
+        queuePath="ddd-queue"
+        mailer="dddObjTransport"
+        />
+
+    <include package=".generations" />
+    
+</configure>

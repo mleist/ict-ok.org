@@ -1,0 +1,47 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <class class=".usermanagement.AdmUtilUserManagement">
+        <factory
+            id="org.ict_ok.admin_utils.usermanagement.usermanagement.AdmUtilUserManagement" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <implements
+            interface=".interfaces.IEditPassword" />
+        <require
+            permission="org.ict_ok.admin_utils.usermanagement.View"
+            interface=".interfaces.IAdmUtilUserManagement"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.usermanagement.Edit"
+            set_schema=".interfaces.IAdmUtilUserManagement"
+            />
+    </class>
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+    <!--<adapter-->
+        <!--factory=".browser.usermanagement.form_template"-->
+        <!--for=".browser.usermanagement.AdmUtilUserPropertiesForm"-->
+        <!--name="org.ict_ok.admin_utils.userproperties.form"-->
+    <!--/>-->
+    <adapter factory=".usermanagement.AdmUtilUserManagement"
+        provides=".interfaces.IAdmUtilUserManagement"
+        />
+    <adapter factory=".usermanagement.AdmUtilUserProperties"
+        provides=".interfaces.IAdmUtilUserProperties"
+        />
+
+    <include package=".generations" />
+    
+</configure>

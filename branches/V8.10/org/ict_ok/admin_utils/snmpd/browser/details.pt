@@ -1,0 +1,30 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+    <h3 i18n:translate="">details of snmpd</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary"
+            tal:define="runtime_info view/getZopeRuntimeInfo">
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Modification time</td>
+            <div tal:omit-tag=""  tal:condition="view/getModifiedTime">
+                <td tal:content="python: dateform.format(view.getModifiedTime())">test</td>
+            </div>
+            <div tal:omit-tag=""  tal:condition="not: view/getModifiedTime">
+                <td>---</td>
+            </div>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Last update of mrtg data</td>
+            <td tal:content="python: dateform.format(context.getMrtgDataUpdateDatetime())">test</td>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td><pre tal:content="context/ikComment" /></td>
+        </tr>
+    </table>
+</i18n:block>

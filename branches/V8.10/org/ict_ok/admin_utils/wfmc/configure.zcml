@@ -1,0 +1,79 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:xmlrpc="http://namespaces.zope.org/xmlrpc"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <class class=".wfmc.AdmUtilWFMC">
+        <factory
+            id="org.ict_ok.admin_utils.wfmc.wfmc.AdmUtilWFMC" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.wfmc.View"
+            interface=".interfaces.IAdmUtilWFMC"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.wfmc.View"
+            set_schema=".interfaces.IAdmUtilWFMC"
+            />
+    </class>
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".wfmc.graphvizOutputTypes"
+        name="WFMCGraphvizOutputTypes"
+        />
+
+    <adapter
+        factory="org.ict_ok.admin_utils.wfmc.adapter.activity_definition.ActivityDefinitionGenDot"
+        permission="org.ict_ok.admin_utils.wfmc.View"
+        />
+
+    <adapter
+        factory="org.ict_ok.admin_utils.wfmc.adapter.transition_definition.TransitionDefinitionGenDot"
+        permission="org.ict_ok.admin_utils.wfmc.View"
+        />
+
+    <!--adapter
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        provides="org.ict_ok.admin_utils.wfmc.interfaces.IIkGenGraphvizDot"
+        factory="org.ict_ok.admin_utils.wfmc.adapter.superclass.SuperclassGenGraphvizDot"
+        permission="org.ict_ok.admin_utils.wfmc.View"
+        />
+
+    <adapter
+        for="org.ict_ok.components.supernode.interfaces.ISupernode"
+        provides="org.ict_ok.admin_utils.wfmc.interfaces.IIkGenGraphvizDot"
+        factory="org.ict_ok.admin_utils.wfmc.adapter.supernode.SupernodeGenGraphvizDot"
+        permission="org.ict_ok.admin_utils.wfmc.View"
+        />
+
+    <adapter
+        for="org.ict_ok.dummycontainer.interfaces.IDummyContainer"
+        provides="org.ict_ok.admin_utils.wfmc.interfaces.IIkGenGraphvizDot"
+        factory="org.ict_ok.admin_utils.wfmc.adapter.ikdummycontainer.DummyContainerGenGraphvizDot"
+        permission="org.ict_ok.admin_utils.wfmc.View"
+        />
+
+    <adapter
+        for="org.ict_ok.dummy.interfaces.IDummy"
+        provides="org.ict_ok.admin_utils.wfmc.interfaces.IIkGenGraphvizDot"
+        factory="org.ict_ok.admin_utils.wfmc.adapter.ikdummy.DummyGenGraphvizDot"
+        permission="org.ict_ok.admin_utils.wfmc.View"
+        /-->
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <include package=".generations" />
+    
+</configure>

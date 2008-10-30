@@ -1,0 +1,29 @@
+
+  -= evil evil evil, not nice, only fast =-
+
+
+bin/zopectl debug
+
+--->
+
+from org.ict_ok.admin_utils.usermanagement.interfaces import IAdmUtilUserManagement
+from zope.app.authentication.principalfolder import InternalPrincipal
+
+sitem = root.getSiteManager()
+utils = [ util for util in sitem.registeredUtilities() if util.provided.isOrExtends(IAdmUtilUserManagement)]
+userUtil = utils[0].component
+authPlugs = list(userUtil.getAuthenticatorPlugins())
+authGroup=authPlugs[0][1]
+principals=authPlugs[1][1]
+
+
+p_newuser = InternalPrincipal(u'User22', u'Password', u'Initial User', passwordManagerName="SHA1")
+principals[u'User22'] = p_newuser
+
+authGroup[u'Manager'].principals = [u'principal.Manager', u'principal.User22']
+
+
+import transaction
+transaction.commit()
+
+<----

@@ -1,0 +1,37 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+	xmlns:z3c="http://namespaces.zope.org/z3c"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+	<z3c:pagelet
+		name="index.html"
+		for="zope.interface.common.interfaces.IException"
+		class="org.ict_ok.skin.error.IkErrorForm"
+		permission="zope.Public"
+		layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+		/>
+
+	<z3c:pagelet
+		name="index.html"
+		for="zope.publisher.interfaces.ITraversalException"
+		class="org.ict_ok.skin.error.IkErrorForm"
+		permission="zope.Public"
+		layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+		/>
+
+	<z3c:template
+		for="org.ict_ok.skin.error.IkErrorForm"
+		template="error.pt"
+		layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+		/>
+		
+	<z3c:layout
+		for="zope.app.exception.interfaces.ISystemErrorView"
+		layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+		template="errorLayout.pt"
+		/>
+
+</configure>

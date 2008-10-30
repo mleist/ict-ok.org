@@ -1,0 +1,33 @@
+   <div tal:omit-tag="" class="3333menumain" tal:content="structure provider:ict_ok.menumain" />
+   <!--<div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.general" />-->
+   <!--<div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub" />-->
+   <div id="productsandservices" class="yuimenubar yuimenubarnav">
+        <div class="bd">
+            <ul class="first-of-type">
+                <li class="yuimenubaritem first-of-type">
+                   <a class="yuimenubaritemlabel" href="#" i18n:translate="">General</a>
+                   <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.general" />
+                </li>
+                <li class="yuimenubaritem">
+                   <a class="yuimenubaritemlabel" href="#" i18n:translate="">Events</a>
+                   <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.event" />
+                </li>
+                <li class="yuimenubaritem">
+                   <a class="yuimenubaritemlabel" href="#" i18n:translate="">Inventory</a>
+                   <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.inventory" />
+                </li>
+                <li class="yuimenubaritem">
+                   <a class="yuimenubaritemlabel" href="#" i18n:translate="">Reports</a>
+                   <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.reports" />
+                </li>
+                <li class="yuimenubaritem">
+                   <a class="yuimenubaritemlabel" href="#" i18n:translate="">Scripts</a>
+                   <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.script" />
+                </li>
+                <li class="yuimenubaritem">
+                   <a class="yuimenubaritemlabel" href="#" i18n:translate="">Administration</a>
+                   <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.admin" />
+                </li>
+            </ul>            
+        </div>
+   </div>

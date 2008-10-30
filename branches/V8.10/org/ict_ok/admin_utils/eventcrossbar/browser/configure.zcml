@@ -1,0 +1,426 @@
+<zope:configure
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <!--##### Event ##### -->
+
+    <defaultView
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
+        name="details.html"
+        />
+
+    <page
+        name="actions"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.AdmUtilEventDetails"
+        attribute="actions"
+        permission="org.ict_ok.admin_utils.event.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="send_event.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.AdmUtilEventDetails"
+        attribute="send_event"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event.Send"
+    />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.AdmUtilEventDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event.View"
+        />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.admin_utils.eventcrossbar.browser.event.AdmUtilEventDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+        
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event.View"
+        />
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.EditAdmUtilEventForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event.Edit"
+    />
+
+    <!--##### Event Timing Relay ##### -->
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.DetailsEventTimingRelayForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.View"
+        />
+        
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.View"
+        />
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.EditEventTimingRelayForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
+    />
+    
+    <z3c:pagelet
+        name="edit_event_if.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.EditEventTimingRelayEventIfForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+    />
+    
+    <defaultView
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        name="details.html"
+        />
+
+    <!--##### Event Timer ##### -->
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timer.DetailsEventTimerForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.View"
+        />
+        
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.View"
+        />
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timer.EditEventTimerForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.Edit"
+    />
+    
+    <z3c:pagelet
+        name="edit_event_if.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timer.EditEventTimerEventIfForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+    />
+    
+    <defaultView
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        name="details.html"
+        />
+
+    <!--##### Event Crossbar ##### -->
+
+    <defaultView
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        name="overview.html"
+        />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.DetailsAdmUtilEventCrossbarForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+        
+    <z3c:pagelet
+        name="add_event.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class=".event.AddAdmUtilEventForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event.Add"
+    />
+
+    <z3c:pagelet
+        name="add_event_timingrelay.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class=".event_timingrelay.AddEventTimingRelayForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.Add"
+    />
+
+    <z3c:pagelet
+        name="add_event_timer.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class=".event_timer.AddEventTimerForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.Add"
+    />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.EditAdmUtilEventCrossbarForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.Edit"
+    />
+    
+    <z3c:pagelet
+        name="edit_content.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.components.superclass.browser.superclass.EditContent"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.Edit"
+    />
+    <z3c:pagelet
+        name="crossbar.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.CrossBar"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+    <z3c:template
+        template="crossbar.pt"
+        for="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.CrossBar"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <page
+        name="getIMG"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.AdmUtilEventCrossbarDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        attribute="getIMGFile"
+    />
+    <z3c:pagelet
+        name="signalgraph.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.SignalGraph"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+    <z3c:template
+        template="signalgraph.pt"
+        for="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.SignalGraph"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <!--##### Event ##### -->
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEvent"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event.Edit"
+        />
+
+
+    <!--##### Event Timing Relay ##### -->
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
+        />
+    <viewlet
+        name="edit_event_if"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimingRelay"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+        />
+
+
+    <!--##### Event Timer ##### -->
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.Edit"
+        />
+    <viewlet
+        name="edit_event_if"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IEventTimer"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.net.EditEventIf"
+        />
+
+
+    <!--##### Event Crossbar ##### -->
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+    <viewlet
+        name="overview"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.Edit"
+        />
+    <viewlet
+        name="editcontent"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.Edit"
+        />
+    <viewlet
+        name="crossbar"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.MSubCrossBar"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+    <viewlet
+        name="signalgraph"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.eventcrossbar.MSubCrossBarSignalGraph"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.eventcrossbar.View"
+        />
+    <viewlet
+        name="add_event"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event.MSubAddEvent"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event.Add"
+        />
+    <viewlet
+        name="add_event_timingrelay"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timingrelay.MSubAddEventTimingRelay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timingrelay.Add"
+        />
+    <viewlet
+        name="add_event_timer"
+        for="org.ict_ok.admin_utils.eventcrossbar.interfaces.IAdmUtilEventCrossbar"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
+        class="org.ict_ok.admin_utils.eventcrossbar.browser.event_timer.MSubAddEventTimer"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.event_timer.Add"
+        />
+</zope:configure>

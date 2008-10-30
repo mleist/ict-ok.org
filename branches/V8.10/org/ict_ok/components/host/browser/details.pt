@@ -1,0 +1,74 @@
+<html metal:use-macro="views/standard_macros/view">
+    <body>
+        <div metal:fill-slot="body" i18n:domain="ict-ok.org">
+            <h1 i18n:translate="">Host Details</h1>
+            <table id="sortable" class="listing" >
+                <tr class="cb_wht" tal:condition="context/hostname|nothing">
+                    <td class="label" i18n:translate="">Hostname</td>
+                    <td tal:content="structure context/hostname" />
+                </tr>
+                <tr class="cb_ilx" tal:condition="context/manufacturer|nothing">
+                    <td class="label" i18n:translate="">Manufacturer</td>
+                    <td tal:content="structure context/manufacturer" />
+                </tr>
+                <tr class="cb_wht" tal:condition="context/vendor|nothing">
+                    <td class="label" i18n:translate="">Vendor</td>
+                    <td tal:content="structure context/vendor" />
+                </tr>
+                <tr class="cb_ilx" tal:condition="context/workinggroup|nothing">
+                    <td class="label" i18n:translate="">Workinggroup</td>
+                    <td tal:content="structure context/workinggroup" />
+                </tr>
+                <tr class="cb_wht" tal:condition="context/hardware|nothing">
+                    <td class="label" i18n:translate="">Hardware</td>
+                    <td tal:content="structure context/hardware" />
+                </tr>
+                <tr class="cb_ilx" tal:condition="context/user|nothing">
+                    <td class="label" i18n:translate="">User</td>
+                    <td tal:content="structure context/user" />
+                </tr>
+                <tr class="cb_wht" tal:condition="context/inv_id|nothing">
+                    <td class="label" i18n:translate="">inventory id</td>
+                    <td tal:content="structure context/inv_id" />
+                </tr>
+                <tr class="cb_ilx" tal:condition="context/building|nothing">
+                    <td class="label" i18n:translate="">Building</td>
+                    <td tal:content="structure context/building" />
+                </tr>
+                <tr class="cb_wht" tal:condition="context/room|nothing">
+                    <td class="label" i18n:translate="">Room</td>
+                    <td tal:content="structure context/room" />
+                </tr>
+                <tr class="cb_ilx" tal:condition="context/osList|nothing">
+                    <td class="label" i18n:translate="">operating systems</td>
+                    <td>
+                        <table id="sortable" class="listing"
+                                tal:define="os_list context/osList">
+                            <tr tal:repeat="os os_list">
+                                <td tal:content="os">linux2.4</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr class="cb_wht" tal:condition="context/url|nothing">
+                    <td class="label" i18n:translate="">URL</td>
+                    <td tal:content="structure context/url" />
+                </tr>
+                <tr class="cb_ilx" tal:condition="context/console|nothing">
+                    <td class="label" i18n:translate="">Console</td>
+                    <td tal:content="structure context/console" />
+                </tr>
+                <!--tr class="cb_wht">
+                    <td class="label" i18n:translate="">getWFMC</td>
+                    <td tal:content="structure view/getWFMC" />
+                </tr-->
+                
+                <tr tal:attributes="class view/getNextTabClass"
+                    tal:condition="context/ikComment|nothing">
+                    <td i18n:translate="">Comment</td>
+                    <td><pre tal:content="context/ikComment" /></td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
