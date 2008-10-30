@@ -355,7 +355,6 @@ class SnmpValue(Component):
         if maxQuantity is None:
             return None
         convMaxPQ = maxQuantity / inpPQ
-        # TODO error on abs. Counter
         if self.inptype == u"cnt":
             convMaxPQ.ounit("1/s")
         elif self.inptype == u"gauge":
