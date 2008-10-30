@@ -77,10 +77,10 @@ class NotifierEmail(Notifier):
         print "NotifierEmail::sendNotify(%s, %s)" % (notifyEvent, notifyObj)
         pau_utility = getUtility(IAuthentication)
         en_utility = getUtility(IMailDelivery, 'ikEmailNotifierQueue')
+        toList = []
+        toShortList = []
         if pau_utility and pau_utility.has_key('principals'):
             principals = pau_utility['principals']
-            toList = []
-            toShortList = []
             for (name, obj) in principals.items():
                 #print "v" * 60
                 #print "principal_name: %s" % name
@@ -135,23 +135,10 @@ class NotifierEmail(Notifier):
                 #dddd2 = AdmUtilUserManagement(obj)
                 #print "dddd2: %s" % dddd2
                 #print "dddd2.email: %s" % dddd2.email
-            print "toList: ", toList
-            print "toShortList: ", toShortList
-            if en_utility:
-                msg = MIMEMultipart()
-                #msg['To'] = ''
-                #msg['Bcc'] = ",".join(toList)
-                msg['From'] = self.from_addr
-                msg['Subject'] = '[%s] %s' % (str(notifyLabel),
-                                              notifyEvent.subject)
-                msg['Date'] = Utils.formatdate(localtime = 1)
-                msg['Message-ID'] = Utils.make_msgid()
-                ##body = MIMEText(message, _subtype='plain')
-                if type(notifyEvent.object) == type("") or \
-                   type(notifyEvent.object) == type(""):
-                    outText = notifyEvent.object
-                body = MIMEText( outText, _subtype='plain', _charset='latin-1')
-                msg.attach(body)
+        print "toList: ", toList
+        print "toShortList: ", toShortList
+        if en_utility:
+            if len(toList) > 0:
                 filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
                 f_handle, f_name = tempfile.mkstemp(filename)
                 #authorStr = self.request.principal.title
@@ -170,21 +157,45 @@ class NotifierEmail(Notifier):
                 #versionStr = "%s [%s]" % (longTimeString, getIkVersion())
                 versionStr = "[%s]" % (getIkVersion())
                 self.generatePdf(f_name, authorStr, versionStr)
-                datafile = open(f_name, "r")
-                msg.attach(self.attachment(filename, datafile))
-                datafile.close()
-                #ikreportmail = IkReportMail( "toooooo", outMeta)
-                #tmpFile = os.tmpfile()
-                #ikreportmail.gen( tmpFile, outList)
-                #tmpFile.seek(0)
-                #msg.attach( self.attachment( "IKOMtrol.pdf", tmpFile))
-                #return msg.as_string()    
-                en_utility.send(self.from_addr, toList, msg.as_string())
+                for rcpt in toList:
+                    msg = MIMEMultipart()
+                    msg['To'] = rcpt
+                    msg['From'] = self.from_addr
+                    msg['Subject'] = '[%s] %s' % (str(notifyLabel),
+                                                  notifyEvent.subject)
+                    msg['Date'] = Utils.formatdate(localtime = 1)
+                    msg['Message-ID'] = Utils.make_msgid()
+                    if type(notifyEvent.object) == type("") or \
+                       type(notifyEvent.object) == type(""):
+                        outText = notifyEvent.object
+                    else:
+                        outText = u"unknown object type in ict-ok.org instance"
+                    body = MIMEText(outText, _subtype='plain', _charset='latin-1')
+                    msg.attach(body)
+                    datafile = open(f_name, "r")
+                    msg.attach(self.attachment(filename, datafile))
+                    datafile.close()
+                    en_utility.send(self.from_addr, [rcpt], msg.as_string())
                 #print "self.from_addr: ", self.from_addr
                 #print "toList: ", toList
                 #print "msg.as_string(): ", msg.as_string()
-                #en_utility.send(self.from_addr, toShortList, "ccc_msg_short")
                 os.remove(f_name)
+            for rcpt in toShortList:
+                msg = MIMEMultipart()
+                msg['To'] = rcpt
+                msg['From'] = self.from_addr
+                msg['Subject'] = '[%s] %s' % (str(notifyLabel),
+                                              notifyEvent.subject)
+                msg['Date'] = Utils.formatdate(localtime = 1)
+                msg['Message-ID'] = Utils.make_msgid()
+                if type(notifyEvent.object) == type("") or \
+                   type(notifyEvent.object) == type(""):
+                    outText = notifyEvent.object
+                else:
+                    outText = u"unknown object type in ict-ok.org instance"
+                body = MIMEText(outText, _subtype='plain', _charset='latin-1')
+                msg.attach(body)
+                en_utility.send(self.from_addr, [rcpt], msg.as_string())
 
     def send_test(self, messageText):
         """
