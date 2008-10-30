@@ -56,7 +56,7 @@ def fillUtilitiyWithReqs(context):
     # ##########  detaillierte Übersicht für Mitarbeiter
     
     reqItMediaVentures = Requirement(
-        u"IT-Anforderungen Media Ventures GmbH",
+        u"IT-Anforderungen XYZ GmbH",
         ikComment = u"vollständiger Requirement-Katalog")
     managementOBJ.append(reqItMediaVentures)
     
