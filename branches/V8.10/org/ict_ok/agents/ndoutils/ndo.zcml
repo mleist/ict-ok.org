@@ -30,6 +30,8 @@
     
 
     <!--all meta definitions-->
+    <include package="zope.sendmail"
+             file="meta.zcml"/>
 
     <!--security settings of ict-ok-->
 
