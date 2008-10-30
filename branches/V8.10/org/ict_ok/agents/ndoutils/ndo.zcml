@@ -34,6 +34,8 @@
     <!--security settings of ict-ok-->
 
     <!--registration of core components-->
+    <include package="org.ict_ok.admin_utils.notifier" />
+    <include package="org.ict_ok.admin_utils.notifier.imail" />
 
     <!--registration of ict-ok.org core components-->
     <include package="org.ict_ok.components.host" />
