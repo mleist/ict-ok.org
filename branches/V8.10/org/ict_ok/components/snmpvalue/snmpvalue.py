@@ -356,7 +356,12 @@ class SnmpValue(Component):
             return None
         convMaxPQ = maxQuantity / inpPQ
         # TODO error on abs. Counter
-        convMaxPQ.ounit("1/s")
+        if self.inptype == u"cnt":
+            convMaxPQ.ounit("1/s")
+        elif self.inptype == u"gauge":
+            convMaxPQ.ounit("1")
+        else:
+            convMaxPQ.ounit("1/s")
         convMax = float(convMaxPQ)
         currtime = time.time()
         rrdRet = rrdtool.fetch(\
@@ -390,7 +395,12 @@ class SnmpValue(Component):
         if minQuantity is None:
             return None
         convMinPQ = minQuantity / inpPQ
-        convMinPQ.ounit("1/s")
+        if self.inptype == u"cnt":
+            convMinPQ.ounit("1/s")
+        elif self.inptype == u"gauge":
+            convMinPQ.ounit("1")
+        else:
+            convMinPQ.ounit("1/s")
         convMin = float(convMinPQ)
         currtime = time.time()
         rrdRet = rrdtool.fetch(\
