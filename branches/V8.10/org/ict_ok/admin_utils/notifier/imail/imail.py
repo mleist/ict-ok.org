@@ -45,6 +45,7 @@ from org.ict_ok.admin_utils.notifier.imail.interfaces import \
      INotifierEmail, IEventIfNotifierEmail
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      getNotifierDict4User
+from org.ict_ok.admin_utils.notifier.notifier import notifyLabel
 from org.ict_ok.version import getIkVersion
 
 logger = logging.getLogger("NotifierEmail")
@@ -141,18 +142,20 @@ class NotifierEmail(Notifier):
                 #msg['To'] = ''
                 #msg['Bcc'] = ",".join(toList)
                 msg['From'] = self.from_addr
-                msg['Subject'] = '[ict-ok.org] test'
+                msg['Subject'] = '[%s] %s' % (str(notifyLabel),
+                                              notifyEvent.subject)
                 msg['Date'] = Utils.formatdate(localtime = 1)
                 msg['Message-ID'] = Utils.make_msgid()
                 ##body = MIMEText(message, _subtype='plain')
-                outText = u"Hallo und ein Text mit Ä"
+                if type(notifyEvent.object) == type("") or \
+                   type(notifyEvent.object) == type(""):
+                    outText = notifyEvent.object
                 body = MIMEText( outText, _subtype='plain', _charset='latin-1')
                 msg.attach(body)
-        
                 filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
                 f_handle, f_name = tempfile.mkstemp(filename)
                 #authorStr = self.request.principal.title
-                authorStr = "ict-ok.org"
+                authorStr = notifyLabel
                 #from zope.i18n.locales import LocaleDates
                 #dates = LocaleDates()
                 #my_formatter = dates.getFormatter('dateTime', 'full')
@@ -177,6 +180,9 @@ class NotifierEmail(Notifier):
                 #msg.attach( self.attachment( "IKOMtrol.pdf", tmpFile))
                 #return msg.as_string()    
                 en_utility.send(self.from_addr, toList, msg.as_string())
+                #print "self.from_addr: ", self.from_addr
+                #print "toList: ", toList
+                #print "msg.as_string(): ", msg.as_string()
                 #en_utility.send(self.from_addr, toShortList, "ccc_msg_short")
                 os.remove(f_name)
 
@@ -187,7 +193,8 @@ class NotifierEmail(Notifier):
         print "NotifierEmail.send_test(%s)" % messageText
         from org.ict_ok.admin_utils.notifier.notifier import NotifyUserEvent, infoLevel
         channels = ['ch_misc']
-        testEvent = NotifyUserEvent(channels, infoLevel, "test")
+        subject = u"test message"
+        testEvent = NotifyUserEvent(subject, channels, infoLevel, "test")
         self.sendNotify(testEvent)
         #pau_utility = getUtility(IAuthentication)
         #en_utility = getUtility(IMailDelivery, 'ikEmailNotifierQueue')

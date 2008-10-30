@@ -32,6 +32,8 @@ from org.ict_ok.admin_utils.notifier.interfaces import INotifier
 from org.ict_ok.admin_utils.notifier.interfaces import INotifierUtil
 from org.ict_ok.admin_utils.notifier.interfaces import INotifyUserEvent
 
+notifyLabel = u"ict-ok.org"
+
 logger = logging.getLogger("Notifier")
 
 
@@ -100,10 +102,11 @@ class NotifyUserEvent(ObjectEvent):
 
     implements(INotifyUserEvent)
 
-    def __init__(self, channels, level, arg_object) :
+    def __init__(self, subject, channels, level, arg_object) :
         """
         """
         super(NotifyUserEvent, self).__init__(arg_object)
+        self.subject = subject
         self.channels = channels
         self.level = level
 
