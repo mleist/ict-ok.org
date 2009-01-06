@@ -1,0 +1,132 @@
+<i18n:block domain="org.ict_ok">
+    <h3 i18n:translate="">details of report utility</h3>
+    <table id="sortable" class="sublisting" summary="Content listing"
+            i18n:attributes="summary">
+        <tr tal:attributes="class view/getNextTabClass">
+            <th colspan="2">
+                <h5 i18n:translate="">logo settings</h5>
+            </th>
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/logoFile1|nothing">
+            <td i18n:translate="">logo1 file path</td>
+            <td tal:content="context/logoFile1" />
+            
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <th colspan="2">
+                <h5 i18n:translate="">font1 (normal font)</h5>
+            </th>
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/fontName1|nothing">
+            <td i18n:translate="">font 1</td>
+            <td tal:content="context/fontName1" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/afmFile1|nothing">
+            <td i18n:translate="">font1 afm path</td>
+            <td tal:content="context/afmFile1" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/pfbFile1|nothing">
+            <td i18n:translate="">font1 pfb path</td>
+            <td tal:content="context/pfbFile1" />
+            
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <th colspan="2">
+                <h5 i18n:translate="">font2 (header font)</h5>
+            </th>
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/fontName2|nothing">
+            <td i18n:translate="">font 2</td>
+            <td tal:content="context/fontName2" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/afmFile2|nothing">
+            <td i18n:translate="">font2 afm path</td>
+            <td tal:content="context/afmFile2" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/pfbFile2|nothing">
+            <td i18n:translate="">font2 pfb path</td>
+            <td tal:content="context/pfbFile2" />
+            
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <th colspan="2">
+                <h5 i18n:translate="">font3 (info font)</h5>
+            </th>
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/fontName3|nothing">
+            <td i18n:translate="">font 3</td>
+            <td tal:content="context/fontName3" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/afmFile3|nothing">
+            <td i18n:translate="">font3 afm path</td>
+            <td tal:content="context/afmFile3" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/pfbFile3|nothing">
+            <td i18n:translate="">font3 pfb path</td>
+            <td tal:content="context/pfbFile3" />
+            
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <th colspan="2">
+                <h5 i18n:translate="">font4 (special info font)</h5>
+            </th>
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/fontName4|nothing">
+            <td i18n:translate="">font 4</td>
+            <td tal:content="context/fontName4" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/afmFile4|nothing">
+            <td i18n:translate="">font4 afm path</td>
+            <td tal:content="context/afmFile4" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/pfbFile4|nothing">
+            <td i18n:translate="">font4 pfb path</td>
+            <td tal:content="context/pfbFile4" />
+            
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <th colspan="2">
+                <h5 i18n:translate="">font5 (code display font)</h5>
+            </th>
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/fontName5|nothing">
+            <td i18n:translate="">font 5</td>
+            <td tal:content="context/fontName5" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/afmFile5|nothing">
+            <td i18n:translate="">font5 afm path</td>
+            <td tal:content="context/afmFile5" />
+            
+        </tr>
+        <tr tal:attributes="class view/getTabClass"
+            tal:condition="context/pfbFile5|nothing">
+            <td i18n:translate="">font5 pfb path</td>
+            <td tal:content="context/pfbFile5" />
+            
+        </tr>
+    </table>
+</i18n:block>

@@ -1,0 +1,122 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:xmlrpc="http://namespaces.zope.org/xmlrpc"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <subscriber handler="org.ict_ok.admin_utils.esx_vim.esx_vim.notifyAdmUtilEsxVimModifiedEvent" />
+
+    <adapter
+        factory="org.ict_ok.admin_utils.esx_vim.adapter.states.State"
+        />
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+    <subscriber handler="org.ict_ok.admin_utils.esx_vim.esx_vim.notifyAdmUtilEsxVimModifiedEvent" />
+
+
+    <class class="org.ict_ok.admin_utils.esx_vim.esx_vim.AdmUtilEsxVim">
+        <factory
+            id="org.ict_ok.admin_utils.esx_vim.esx_vim.AdmUtilEsxVim" />
+        <implements
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.admin_utils.esx_vim.interfaces.IAdmUtilEsxVim"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IAdmUtilEsxVim"
+            />
+    </class>
+
+    <class class="org.ict_ok.admin_utils.esx_vim.esx_vim_datacenter.EsxVimDatacenter">
+        <factory
+            id="org.ict_ok.admin_utils.esx_vim.esx_vim_datacenter.EsxVimDatacenter" />
+        <implements
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimDatacenter"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimDatacenter"
+            />
+    </class>
+
+
+
+    <class class="org.ict_ok.admin_utils.esx_vim.esx_vim_folder.EsxVimFolder">
+        <factory
+            id="org.ict_ok.admin_utils.esx_vim.esx_vim_folder.EsxVimFolder" />
+        <implements
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimFolder"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimFolder"
+            />
+    </class>
+
+
+    <class class="org.ict_ok.admin_utils.esx_vim.esx_vim_hostsystem.EsxVimHostSystem">
+        <factory
+            id="org.ict_ok.admin_utils.esx_vim.esx_vim_hostsystem.EsxVimHostSystem" />
+        <implements
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimHostSystem"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimHostSystem"
+            />
+    </class>
+
+
+    <class class="org.ict_ok.admin_utils.esx_vim.esx_vim_virtual_machine.EsxVimVirtualMachine">
+        <factory
+            id="org.ict_ok.admin_utils.esx_vim.esx_vim_virtual_machine.EsxVimVirtualMachine" />
+        <implements
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
+            />
+    </class>
+
+    <include package=".generations" />
+    
+</configure>

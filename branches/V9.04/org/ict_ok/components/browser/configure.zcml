@@ -1,0 +1,94 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:help="http://namespaces.zope.org/help"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <!-- Evaluations -->
+    <page
+        name="change_eval_yes"
+        for="org.ict_ok.components.interfaces.IComponent"
+        class=".component.ComponentDetails"
+        attribute="change_eval_yes"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="change_eval_no"
+        for="org.ict_ok.components.interfaces.IComponent"
+        class=".component.ComponentDetails"
+        attribute="change_eval_no"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <z3c:pagelet
+        name="evaluations_todo.html"
+        for="org.ict_ok.components.interfaces.IComponent"
+        class="org.ict_ok.components.browser.component.EvaluationsTodoDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+        />
+    <z3c:template
+        template="evaluations_todo.pt"
+        for="org.ict_ok.components.browser.component.EvaluationsTodoDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <z3c:pagelet
+        name="evaluations_done.html"
+        for="org.ict_ok.components.interfaces.IComponent"
+        class="org.ict_ok.components.browser.component.EvaluationsDoneDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+        />
+    <z3c:template
+        template="evaluations_done.pt"
+        for="org.ict_ok.components.browser.component.EvaluationsDoneDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <!--##### Sub Menu ##### -->
+
+    <viewlet
+        name="dumpdata"
+        for="org.ict_ok.components.interfaces.IComponent"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDumpData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.superclass.exportxml"
+        />
+
+    <viewlet
+        name="exportxmldata"
+        for="org.ict_ok.components.interfaces.IComponent"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXmlData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.superclass.exportxml"
+        />
+
+    <viewlet
+        name="evaluations_done"
+        for="org.ict_ok.components.interfaces.IComponent"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.browser.component.MSubEvaluationsDone"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+        />
+
+    <viewlet
+        name="evaluations_todo"
+        for="org.ict_ok.components.interfaces.IComponent"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.browser.component.MSubEvaluationsTodo"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+        />
+
+</configure>

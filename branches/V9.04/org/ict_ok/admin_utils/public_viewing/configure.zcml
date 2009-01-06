@@ -1,0 +1,37 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2007,
+         Thomas Richter <thomas.richter@xwml.de>,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <class class=".public_viewing.AdmUtilPublicViewing">
+        <factory
+            id="org.ict_ok.admin_utils.public_viewing.public_viewing.AdmUtilPublicViewing" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.public_viewing.View"
+            interface=".interfaces.IAdmUtilPublicViewing"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.public_viewing.View"
+            set_schema=".interfaces.IAdmUtilPublicViewing"
+            />
+    </class>
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <subscriber handler=".public_viewing.notifyModifiedEvent" />
+
+    <include package=".generations" />
+    
+</configure>

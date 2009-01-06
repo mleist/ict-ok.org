@@ -1,0 +1,32 @@
+<i18n:block domain="org.ict_ok">
+    <h3 i18n:translate="">Display Notifier</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Active notifier</td>
+            <td>
+                <ul>
+                    <span tal:omit-tag="" tal:repeat="notifier view/getNotifierObjs">
+                        <li><a href="#" tal:attributes="href python:notifier['href']"
+                            tal:content="python: notifier['name']">Notifier1</a></li>
+                    </span>
+                </ul>
+            </td>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">All notifier</td>
+            <td>
+                <ul>
+                    <span tal:omit-tag="" tal:repeat="notifier view/getAllNotifierObjs">
+                        <li><a href="#" tal:attributes="href python:notifier['href']"
+                            tal:content="python: notifier['name']">Notifier1</a></li>
+                    </span>
+                </ul>
+            </td>
+        </tr>
+    </table>
+</i18n:block>

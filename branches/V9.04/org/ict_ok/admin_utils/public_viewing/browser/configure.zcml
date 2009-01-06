@@ -1,0 +1,92 @@
+<zope:configure
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2007,
+         Thomas Richter <thomas.richter at xwml.de>
+         Markus Leist <leist@ikom-online.de> -->
+
+    <!--<z3c:pagelet-->
+        <!--name="details.html"-->
+        <!--for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"-->
+        <!--class=".public_viewing.AdmUtilPublicViewingDetails"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.admin_utils.public_viewing.View"-->
+    <!--/>-->
+    <!--<z3c:template-->
+        <!--template="details.pt"-->
+        <!--for=".public_viewing.AdmUtilPublicViewingDetails"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--/>-->
+
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.public_viewing.View"
+        />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
+        class="org.ict_ok.admin_utils.public_viewing.browser.public_viewing.EditAdmUtilPublicViewingForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.public_viewing.Edit"
+    />
+
+    <z3c:pagelet
+        name="public.html"
+        for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
+        class=".public_viewing.AdmUtilPublicViewingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.public.View"
+    />
+
+    <z3c:template
+        template="publicview.pt"
+        for=".public_viewing.AdmUtilPublicViewingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details.html"
+        for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.public_viewing.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.public_viewing.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.public_viewing.interfaces.IAdmUtilPublicViewing"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.public_viewing.Edit"
+        />
+    <viewlet
+        name="add_shadow"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.admin_utils.public_viewing.browser.public_viewing.MSubAddShadow"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.public_viewing.Edit"
+        />
+
+</zope:configure>

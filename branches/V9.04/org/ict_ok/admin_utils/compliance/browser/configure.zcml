@@ -1,0 +1,226 @@
+<zope:configure
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2007, 2008
+                     Markus Leist <leist@ikom-online.de>
+    -->
+
+    <!--##### Compliance ##### -->
+
+    <defaultView
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        name="display_reqs.html"
+        />
+    <page
+        name="actions"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.AdmUtilComplianceDetails"
+        attribute="actions"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="generate_all_pdf"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.AdmUtilComplianceDetails"
+        attribute="generateAllPdf"
+        permission="org.ict_ok.admin_utils.compliance.generate.pdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="import_requirements"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.AdmUtilComplianceDetails"
+        attribute="import_requirements"
+        permission="org.ict_ok.admin_utils.compliance.Import"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class="org.ict_ok.admin_utils.compliance.browser.compliance.DetailsAdmUtilComplianceForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class="org.ict_ok.admin_utils.compliance.browser.compliance.EditAdmUtilComplianceForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
+        />
+    <z3c:pagelet
+        name="display_reqs.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <z3c:template
+        template="display_reqs.pt"
+        for="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <z3c:pagelet
+        name="allreqs.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplayAll"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <z3c:template
+        template="allreqs.pt"
+        for="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplayAll"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+        
+    <!--##### Requirements ##### -->
+    <defaultView
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        name="overview.html"
+        />
+
+    <!--<z3c:pagelet-->
+        <!--name="details.html"-->
+        <!--for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"-->
+        <!--class="org.ict_ok.admin_utils.compliance.browser.requirement.DetailsAdmUtilRequirementForm"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.admin_utils.compliance.View"-->
+        <!--/>-->
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        class=".requirement.DetailsAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <z3c:template
+        template="details.pt"
+        for=".requirement.DetailsAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        class=".requirement.OverviewAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <z3c:template
+        template="overview.pt"
+        for=".requirement.OverviewAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        class=".requirement.EditAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
+        />
+
+    <!--######################### Sub Menu ################### -->
+    <!--##### Compliance ##### -->
+    <viewlet
+        name="details"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
+        />
+
+    <viewlet
+        name="allreqs"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.admin_utils.compliance.browser.requirement.MSubAllRequirements"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <viewlet
+        name="display_reqs"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.admin_utils.compliance.browser.requirement.MSubDisplayRequirements"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <!--##### Requirements ##### -->
+    <viewlet
+        name="details"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <viewlet
+        name="overview"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IRequirement"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Edit"
+        />
+        
+</zope:configure>

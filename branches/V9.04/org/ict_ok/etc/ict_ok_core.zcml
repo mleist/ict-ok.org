@@ -1,0 +1,62 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+>
+    <!-- $Id$ -->
+        
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+                Markus Leist <leist@ikom-online.de> -->
+
+    <!--registration of ict-ok.org core components-->
+    <include package="org.ict_ok.libs.history.generations" />
+
+    <!--registration of supervisor must be first-->
+    <include package="org.ict_ok.admin_utils.supervisor" />
+
+    <!--registration of utilities (alphabetical)-->
+    <include package="org.ict_ok.admin_utils.categories" />
+    <include package="org.ict_ok.admin_utils.compliance" />
+    <include package="org.ict_ok.admin_utils.cron" />
+    <!-- <include package="org.ict_ok.admin_utils.esx_vim" /> -->
+    <include package="org.ict_ok.admin_utils.eventcrossbar" />
+    <!--<include package="org.ict_ok.admin_utils.generators/honeyd" />-->
+    <include package="org.ict_ok.admin_utils.generators.nagios" />
+    <include package="org.ict_ok.admin_utils.generators.smokeping" />
+    <include package="org.ict_ok.admin_utils.graphviz" />
+    <include package="org.ict_ok.admin_utils.linux_ha" />
+    <include package="org.ict_ok.admin_utils.netscan" />
+    <include package="org.ict_ok.admin_utils.netscan.nmap" />
+    <include package="org.ict_ok.admin_utils.netscan.simple1" />
+    <include package="org.ict_ok.admin_utils.netscan.demo1" />
+    <include package="org.ict_ok.admin_utils.notifier" />
+    <!--<include package="org.ict_ok.admin_utils.notifier.jabber" />-->
+    <include package="org.ict_ok.admin_utils.notifier.imail" />
+    <include package="org.ict_ok.admin_utils.objmq" />
+    <include package="org.ict_ok.admin_utils.public_viewing" />
+    <include package="org.ict_ok.admin_utils.reports" />
+    <include package="org.ict_ok.admin_utils.snmpd" />
+    <!--<include package="org.ict_ok.admin_utils.ticker" />-->
+    <include package="org.ict_ok.admin_utils.usermanagement" />
+    <include package="org.ict_ok.admin_utils.util_manager" />
+    <include package="org.ict_ok.admin_utils.wfmc" />
+
+    <!--registration of components (hierarchical)-->
+    <include package="org.ict_ok.components.browser" />
+    <include package="org.ict_ok.components.superclass" />
+    <include package="org.ict_ok.components.supernode" />
+    <include package="org.ict_ok.components.site" />
+    <!--<include package="org.ict_ok.components.slave" />-->
+    <include package="org.ict_ok.components.net" />
+    <include package="org.ict_ok.components.host" />
+    <include package="org.ict_ok.components.host.special" />
+    <include package="org.ict_ok.components.interface" />
+    <include package="org.ict_ok.components.latency" />
+    <include package="org.ict_ok.components.script" />
+    <include package="org.ict_ok.components.service" />
+    <include package="org.ict_ok.components.service.special" />
+    <include package="org.ict_ok.components.snmpvalue" />
+    <include package="org.ict_ok.components.location" />
+    <include package="org.ict_ok.components.building" />
+    <include package="org.ict_ok.components.room" />
+
+</configure>

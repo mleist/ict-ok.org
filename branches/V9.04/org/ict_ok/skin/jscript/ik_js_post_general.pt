@@ -1,0 +1,178 @@
+<script type="text/javascript">
+  ik_el_ikh_time = document.getElementById("ikh_time");
+  ik_el_status_pic = document.getElementById("statusPic");
+  ik_el_navtree_h1 = document.getElementById("navTreeH1");
+  ik_el_console_h1 = document.getElementById("consoleH1");
+  if ( ik_el_status_pic ) {
+    ik_el_status_pic.ik_stat = true;
+  }
+  // must be at the end of this javascript
+  my_form_widget = document.getElementById("form-widgets-ikName");
+  if ( my_form_widget ) {
+    my_form_widget.focus();
+  }
+</script>
+<script type="text/javascript">
+  document.getElementsByClassName = function(cl) {
+    var retnode = [];
+    var myclass = new RegExp('\\b'+cl+'\\b');
+    var elem = this.getElementsByTagName('*');
+    for (var i = 0; i < elem.length; i++) {
+      var classes = elem[i].className;
+      if (myclass.test(classes)) retnode.push(elem[i]);
+    }
+    return retnode;
+  }; 
+  function loadNodeData(node, fnLoadComplete) {
+    var callback =
+    {
+      success:handleSuccess,
+      failure:handleFailure,
+      argument: { node:node }
+    };
+    var request2 = YAHOO.util.Connect.asyncRequest('POST', node.data.path + node.data.name +"/@@children.xml", callback);
+  }
+  function recNodes(parent, newNodeList) {
+    for (var i = 0, leni = newNodeList.length; i < leni; ++i)
+    {
+      if (newNodeList[i].nodeType==1) {
+        var attributes = newNodeList[i].attributes;
+        var subnodeList = newNodeList[i].childNodes;
+        var newData = Object();
+        newData.label = ''
+        newData.state_url = ''
+        newData.isopen = false;
+        for (var j = 0, lenj = attributes.length; j < lenj; ++j)
+        {
+          if ( attributes[j].nodeName == 'name') {
+            newData.name = attributes[j].nodeValue;
+          }
+          if ( attributes[j].nodeName == 'title') {
+            if (newData.isfocused) {
+              newData.label = newData.label + "\<b\>" + attributes[j].nodeValue + "\<\/b\>";
+            } else {
+              newData.label = newData.label + attributes[j].nodeValue;
+            }
+          }
+          if ( attributes[j].nodeName == 'length') {
+            newData.mylength = attributes[j].nodeValue;
+            //newData.label = newData.label; // + " (" + newData.mylength +")"
+          }
+          if ( attributes[j].nodeName == 'rem') {
+            newData.rem = attributes[j].nodeValue;
+            //newData.label = newData.label + " (R:" + newData.rem +")";
+            //newData.label = newData.label + " (L:" + subnodeList.length +")";
+          }
+          if ( attributes[j].nodeName == 'isfocused') {
+            newData.isfocused = true;
+          }
+          if ( attributes[j].nodeName == 'path') {
+            newData.path = attributes[j].nodeValue;
+          }
+          if ( attributes[j].nodeName == 'iklen') {
+            newData.iklen = attributes[j].nodeValue;
+            //newData.label = newData.label + " (IKL:" + newData.iklen +")";
+          }
+          if ( attributes[j].nodeName == 'isopen') {
+            newData.isopen = true;
+            //newData.label = newData.label  + " (isopen)";
+          }
+          if ( attributes[j].nodeName == 'icon_url') {
+            newData.icon_url = attributes[j].nodeValue;
+            //newData.label = newData.label + " (IU:" + newData.icon_url +")";
+          }
+          if ( attributes[j].nodeName == 'state_url') {
+            newData.state_url = attributes[j].nodeValue;
+            //newData.label = newData.label + " (SU:" + newData.state_url +")";
+          }
+        }
+        newData.href = newData.path + newData.name;
+        var tmpNode = new YAHOO.widget.TextNode(newData, parent, false);
+        if (newData.isopen) {
+            if (newData.isfocused) {
+                tmpNode.setDynamicLoad(loadNodeData,0);
+            } else {
+                tmpNode.expanded = true;
+            }
+        }
+        if ((newData.iklen > 0) && (!newData.isopen)) {
+            tmpNode.setDynamicLoad(loadNodeData,0);
+        }
+        if (subnodeList.length > 0) {
+            recNodes(tmpNode, subnodeList)
+        }
+        if (newData.state_url != '') {
+            tmpNode.labelStyle = "icon-" + newData.state_url; 
+        }
+      }
+    }
+  }
+
+  var handleSuccess = function(o){
+    if(o.responseText !== undefined){
+      var elements = o.responseXML.getElementsByTagName("children");
+      for (var k=0, lenk = elements.length; k < lenk; ++k) {
+        var nodeList = elements[k].childNodes
+        recNodes(o.argument.node, nodeList)
+      }
+      o.argument.node.loadComplete();
+      tree816.draw();
+    }
+  }
+
+  var handleFailure = function(o){
+    if(o.responseText !== undefined){
+      YAHOO.log("Transaction id: " + o.tId);
+      YAHOO.log("HTTP status: " + o.status);
+      YAHOO.log("Status code message: " + o.statusText);
+      o.argument.node.loadComplete();
+    }
+  }
+  function ik_init() {
+    tree816 = new YAHOO.widget.TreeView("treeDiv1");
+    //tree816.setDynamicLoad(loadNodeData,0);
+    var sUrl = "@@children.xml";
+    var callback =
+    {
+      success:handleSuccess,
+      failure:handleFailure,
+      argument: { node:tree816.getRoot() }
+    };
+    var request1 = YAHOO.util.Connect.asyncRequest('POST', "@@singleBranchTree.xml", callback);
+  }
+</script>
+<script type="text/javascript">
+  var timerEvt = new YAHOO.util.CustomEvent("timerEvt");
+  var reloadEvt = new YAHOO.util.CustomEvent("timerEvt");
+  clockSubscriber = function(type, args) {
+    var Jetzt = new Date();
+    var Sekunden = Jetzt.getSeconds();
+    ik_el_ikh_time.innerHTML = Jetzt.toLocaleString();
+  }
+  reloadSubscriber = function(type, args) {
+    for (var i = 0; i < document.images_reload.length; i++) {
+      var i_img = document.images_reload[i];
+      i_img.src = i_img.src + '#' + (new Date()).getTime();
+    }
+  }
+  timerEvt.subscribe(clockSubscriber);
+  reloadEvt.subscribe(reloadSubscriber);
+  //timerEvt.subscribe(statusPicSubscriber);
+  function timerInter () {
+    timerEvt.fire();
+    window.setTimeout("timerInter()", 1000);
+  }
+  function reloadInter () {
+    reloadEvt.fire();
+    window.setTimeout("reloadInter()", 120000);
+  }
+  timerInter();
+  reloadInter();
+  ik_init();
+  document.images_reload = document.getElementsByClassName("img_reload");
+</script>
+<span tal:omit-tag="" tal:condition="request/principal/title | nothing">
+  <span tal:replace="structure python: '<script type=\'text/javascript\'>'" />
+  <span tal:replace="structure python: 'tt_login = new YAHOO.widget.Tooltip(\'tt_login\', { autodismissdelay:\'15000\', context:\'ikh_login\', text:\'%s\' });' % (request.principal.title)" />
+  <span tal:replace="structure python: '</script>'" />
+</span>

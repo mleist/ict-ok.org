@@ -1,0 +1,62 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:xmlrpc="http://namespaces.zope.org/xmlrpc"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <!-- adapter
+        factory="org.ict_ok.admin_utils.linux_ha.adapter.states.State"
+        / -->
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <!-- subscriber handler="org.ict_ok.admin_utils.linux_ha.linux_ha.notifyAdmUtilLinuxHaModifiedEvent" / -->
+
+    <class class="org.ict_ok.admin_utils.linux_ha.linux_ha.AdmUtilLinuxHa">
+        <factory
+            id="org.ict_ok.admin_utils.linux_ha.linux_ha.AdmUtilLinuxHa" />
+        <implements
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.View"
+            interface="org.ict_ok.admin_utils.linux_ha.interfaces.IAdmUtilLinuxHa"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.View"
+            set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.IAdmUtilLinuxHa"
+            />
+    </class>
+
+    <class class="org.ict_ok.admin_utils.linux_ha.linux_ha_node.LinuxHaObjNode">
+        <factory
+            id="org.ict_ok.admin_utils.linux_ha.linux_ha_node.LinuxHaObjNode" />
+        <implements
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.View"
+            interface="org.ict_ok.admin_utils.linux_ha.interfaces.ILinuxHaObjNode"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.View"
+            set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.ILinuxHaObjNode"
+            />
+    </class>
+
+    <!--<include package=".generations" />-->
+    
+</configure>

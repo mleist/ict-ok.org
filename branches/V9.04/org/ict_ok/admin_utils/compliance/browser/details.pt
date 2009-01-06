@@ -1,0 +1,41 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+    <h3 tal:condition="view/label|nothing"
+        tal:content="view/label" />
+    <div class="message"
+        tal:condition="view/status|nothing"
+        tal:content="view/status"
+        i18n:translate="">
+    Something happened.
+    </div>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+        <!--<tr tal:attributes="class view/getNextTabClass">-->
+            <!--<td i18n:translate="">e-mail</td>-->
+            <!--<td tal:content="python: u'%s' % context.email" />-->
+        <!--</tr>-->
+        <!--<tr tal:attributes="class view/getNextTabClass">-->
+            <!--<td i18n:translate="">Timezone</td>-->
+            <!--<td tal:content="context/timezone" />-->
+        <!--</tr>-->
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ikName|nothing">
+            <td i18n:translate="">Instance name</td>
+            <td><b tal:content="context/ikName" /></td>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td><pre tal:content="context/ikComment" /></td>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Modification time</td>
+            <div tal:omit-tag=""  tal:condition="context/getModifiedTime">
+                <td tal:content="python: dateform.format(view.convert2UserTimezone(context.getModifiedTime()))">test</td>
+            </div>
+            <div tal:omit-tag=""  tal:condition="not: context/getModifiedTime">
+                <td>---</td>
+            </div>
+        </tr>
+    </table>
+</i18n:block>

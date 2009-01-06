@@ -1,0 +1,45 @@
+<i18n:block domain="org.ict_ok">
+  <h3 i18n:translate="">Add Hosts</h3>
+  <div class="message"
+    tal:condition="view/status|nothing"
+    tal:content="view/status"
+    i18n:translate="">
+  Something happened.
+  </div>
+  <br />
+  <div id="addmenu">
+    <h4 i18n:translate="">Linux</h4>
+    <ul>
+      <li><a href="add_host_linux_server.html">Linux Server</a></li>
+      <li><a href="add_host_linux_workstation.html">Linux Workstation</a></li>
+    </ul>
+    
+    <h4 i18n:translate="">VmWare Hosts</h4>
+    <ul>
+      <li><a href="add_host_vmware_esx.html">VMware ESX Server</a></li>
+      <li><a href="add_host_vmware_vm.html">VMware Virtual Machine</a></li>
+      <li><a href="add_host_vmware_vc2.html">VMware VirtualCenter 2</a></li>
+    </ul>
+    
+    <h4 i18n:translate="">UPS</h4>
+    <ul>
+      <li><a href="add_host_mge_ups.html">MGE UPS</a></li>
+    </ul>
+    
+    <h4 i18n:translate="">Printer</h4>
+    <ul>
+      <li><a href="add_host_printer_general.html">Printer (general)</a></li>
+    </ul>
+    
+    <h4 i18n:translate="">Infrastructure</h4>
+    <ul>
+      <li><a href="add_host_router_general.html">Router (general)</a></li>
+      <li><a href="add_host_switch_general.html">Switch (general)</a></li>
+    </ul>
+  
+    <h4 i18n:translate="">misc.</h4>
+    <ul>
+      <li><a href="add_host.html">normal Host</a></li>
+    </ul>
+  </div>
+</i18n:block>

@@ -1,0 +1,68 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+>
+    <!-- $Id$ -->
+        
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+                Markus Leist <leist@ikom-online.de> -->
+                                
+
+    <!--registration of ict-ok.org principals-->
+    <role id="zope.Anonymous" title="Everybody"
+        description="All users have this role implicitly" />
+    <role id="zope.Manager" title="Site Manager" />
+    <role id="zope.Member" title="Site Member" />
+
+    <grantAll role="zope.Manager" />
+    <grantAll role="org.ict_ok.dvl" />
+    <grant permission="org.ict_ok.public.View"
+                    role="zope.Anonymous" />
+
+    <unauthenticatedPrincipal
+        id="zope.anybody"
+        title="Unauthenticated User" />
+
+    <unauthenticatedGroup
+        id="zope.Anybody"
+        title="Unauthenticated Users" 
+        />
+
+    <authenticatedGroup
+        id="zope.Authenticated"
+        title="Authenticated Users" 
+        />
+
+    <everybodyGroup
+        id="zope.Everybody"
+        title="All Users" 
+        />
+
+    <!--some Users are defined in org.ict_ok.admin_utils.usermanagement.bootstrap-->
+    <principal
+        id="zope.manager"
+        title="ict-ok Manager"
+        login="admin"
+        password="admin"
+        />
+
+    <principal
+      id="ict.cron"
+      title="Cron User"
+      login="cron"
+      password="ab16178ffe2d489acc434722cf4caeaa9552e270"
+      password_manager="MD5"
+      />
+
+    <!--TODO create an own cron role-->
+    <grant
+        role="zope.Manager"
+        principal="ict.cron"
+        />
+
+    <grant
+        role="zope.Manager"
+        principal="zope.manager"
+        />
+
+</configure>
