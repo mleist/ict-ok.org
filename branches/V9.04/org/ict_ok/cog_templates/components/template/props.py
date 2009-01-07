@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Copyright (c) 2007,
@@ -17,9 +18,10 @@ filename = r'test'
 longpath = r'org.ict_ok.components'
 longpath_interface = longpath + r'.%s.interfaces' % (filename)
 longpath_file = longpath + r'.%s.%s' % (filename, filename)
+longpath_browser_file = longpath + r'.%s.browser.%s' % (filename, filename)
 
-moduletitle = r'Test Instance'
-componentname = r'Test'
+moduletitle = r'Test Component Instance'
+componentname = r'TestComponent'
 #servicename = r'Test'
 #serviceport = 65533
 #utilityname = r'AdmUtil' + modulename
@@ -32,3 +34,6 @@ A test component will server some tests ...
 """
 
 copyrights = [2006, 2007, 2008, 2009]
+
+if __name__=="__main__":
+  print filename + ".py"

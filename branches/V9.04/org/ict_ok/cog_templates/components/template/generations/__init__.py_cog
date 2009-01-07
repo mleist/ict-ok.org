@@ -17,36 +17,24 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id$
+# $Id: __init__.py_cog 394 2009-01-06 15:12:30Z markusleist $
 #
-# pylint: disable-msg=E1101,W0142
-#
-# [[[cog cog.outl('"""implementation of %(componentname)s"""' % props.__dict__)]]]
+# [[[cog cog.outl('"""define the range of generations of %(componentname)s"""' % props.__dict__)]]]
 # [[[end]]]
 
-__version__ = "$Id$"
-
-# python imports
+__version__ = "$Id: __init__.py 394 2009-01-06 15:12:30Z markusleist $"
 
 # zope imports
-from zope.interface import implements
+from zope.app.generations.generations import SchemaManager
 
-# ict_ok.org imports
 #[[[cog
 #   cog.out("""\
+#   key = '%(longpath)s.%(filename)s.generations'
 #   """ % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
-from org.ict_ok.components.service.service import Service as ServiceBase
 
-
-class Service(ServiceBase):
-    """
-    the template instance
-    """
-
-    #[[[cog
-    #   cog.out("""\
-    #   """ % props.__dict__, dedent=True)
-    #]]]
-    #[[[end]]]
+AppSchemaManager = SchemaManager(
+    minimum_generation = 1,
+    generation = 1,
+    package_name=key)

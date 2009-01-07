@@ -17,35 +17,5 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id$
+# $Id: __init__.py_cog 394 2009-01-06 15:12:30Z markusleist $
 #
-# pylint: disable-msg=E0213,W0232
-#
-# [[[cog cog.outl('"""Interface of %(componentname)s"""' % props.__dict__)]]]
-"""Interface of TestMod"""
-# [[[end]]]
-
-
-__version__ = "$Id$"
-
-# zope imports
-from zope.i18nmessageid import MessageFactory
-from zope.schema import Int
-
-# ict_ok.org imports
-from org.ict_ok.components.service.interfaces import IService
-
-_ = MessageFactory('org.ict_ok')
-
-
-#[[[cog
-#   cog.out("""\
-#   """ % props.__dict__, dedent=True)
-#]]]
-#[[[end]]]
-
-    #[[[cog
-    #cog.out("""\
-    #""" % props.__dict__, dedent=True)
-    #]]]
-    #[[[end]]]

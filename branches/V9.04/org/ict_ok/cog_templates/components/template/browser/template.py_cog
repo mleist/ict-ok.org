@@ -21,7 +21,7 @@
 #
 # pylint: disable-msg=W0232,W0142
 #
-# [[[cog cog.outl('"""implementation of browser class of %(servicetitle)s"""' % props.__dict__)]]]
+# [[[cog cog.outl('"""implementation of browser class of %(componentname)s"""' % props.__dict__)]]]
 # [[[end]]]
 
 __version__ = "$Id$"
@@ -37,18 +37,13 @@ from z3c.form import field
 # ict_ok.org imports
 #[[[cog
 #   cog.out("""\
-#   from %(longpath_interface)s import \\
-#        IService%(servicename)s
-#   from %(longpath_file)s import \\
-#        Service
+#   from %(longpath_interface)s import I%(componentname)s
 #   """ % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm
-from org.ict_ok.components.service.browser.service import \
-     ServiceDetails
 
 _ = MessageFactory('org.ict_ok')
 
@@ -60,8 +55,8 @@ class MSubAddService(GlobalMenuSubItem):
     """ Menu Item """
     #[[[cog
     #   cog.out("""\
-    #   title = _(u'Add %(servicename)s check')
-    #   viewURL = 'add_%(filename)s_service.html'
+    #   title = _(u'Add %(moduletitle)s')
+    #   viewURL = 'add_%(filename)s.html'
     #   """ % props.__dict__, dedent=True)
     #]]]
     #[[[end]]]
@@ -74,8 +69,8 @@ class AddServiceForm(AddForm):
     """Add form."""
     #[[[cog
     #   cog.out("""\
-    #   label = _(u'Add %(servicename)s Service Check')
-    #   fields = field.Fields(IService%(servicename)s).omit(*ServiceDetails.omit_addfields)
+    #   label = _(u'Add %(moduletitle)s')
+    #   fields = field.Fields(I%(componentname)s)
     #   """ % props.__dict__, dedent=True)
     #]]]
     #[[[end]]]

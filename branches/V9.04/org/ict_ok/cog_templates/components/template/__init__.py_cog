@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # [[[cog
+#    import sys; sys.path.extend(['.'])
 #    import props
 #    import cog
 #    cog.out("# Copyright (c) ")
