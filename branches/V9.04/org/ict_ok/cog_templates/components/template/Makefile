@@ -59,18 +59,8 @@ clean:
 	@rm -vf adapter/rpt_pdf.py
 	@rm -vf adapter/search.py
 	@rm -vf adapter/state.py
-
-gen2:	configure.zcml \
-	ftests/__init__.py \
-	generations/configure.zcml \
-	generations/evolve1.py \
-	bootstrap.py \
-	adapter/__init__.py \
-	adapter/rpt_pdf.py \
-	adapter/search.py \
-	adapter/state.py \
-	${FILENAME} \
-	browser/${FILENAME}
+	@rm -vf $(FILENAME_SH)_cog
+	@rm -vf browser/$(FILENAME_SH)_cog
 
 allclean:
 	@find . -type f -name \*_cog -exec rm -v {} \;
