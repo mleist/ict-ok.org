@@ -7,25 +7,6 @@
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">interface type</td>
-            <td tal:content="context/netType" />
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">MAC address</td>
-            <td tal:content="context/mac" />
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">IPv4 addresses</td>
-            <td>
-                <ul>
-                    <div tal:omit-tag="" tal:repeat="address context/ipv4List">
-                        <li style="list-style-image:url(/@@/mini/arrow_mini_right.gif);"
-                            tal:content="address" />
-                    </div>
-                </ul>
-            </td>
-        </tr>
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">
             <td i18n:translate="">Comment</td>

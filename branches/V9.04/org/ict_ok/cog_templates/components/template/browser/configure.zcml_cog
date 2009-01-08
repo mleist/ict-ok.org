@@ -53,6 +53,19 @@
                     />
 
                     <z3c:pagelet
+                        name="display.html"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        class="%(longpath_browser_file)s.%(componentname)sDetails"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.View"
+                    />
+                    <z3c:template
+                        template="details.pt"
+                        for="%(longpath_browser_file)s.%(componentname)sDetails"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        />
+
+                    <z3c:pagelet
                         name="edit.html"
                         for="%(longpath_interface)s.I%(componentname)s"
                         class="%(longpath_browser_file)s.Edit%(componentname)sForm"
@@ -70,12 +83,27 @@
 
                     <z3c:pagelet
                         name="add_%(filename)s.html"
-                        for="%(longpath_interface)s.I%(componentname)s"
+                        for="%(longpath_interface)s.I%(componentname)sFolder"
                         class="%(longpath_browser_file)s.Add%(componentname)sForm"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.Add"
                     />
                     <!--    for="%(longpath_interface)s.I%(componentname)s"  -->
+
+                    <!-- Folder  -->
+
+                    <defaultView
+                        for="%(longpath_interface)s.I%(componentname)sFolder"
+                        name="overview.html"
+                    />
+
+                    <z3c:pagelet
+                        name="overview.html"
+                        for="%(longpath_interface)s.I%(componentname)sFolder"
+                        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.View"
+                        />
 
                     <!-- Sub Menu  -->
                     
@@ -84,6 +112,14 @@
                         for="%(longpath_interface)s.I%(componentname)s"
                         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
                         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.View"
+                        />
+                    <viewlet
+                        name="details"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.View"
                         />
@@ -113,7 +149,7 @@
                         />
                     <viewlet
                         name="add_%(filename)s"
-                        for="%(longpath_interface)s.I%(componentname)s"
+                        for="%(longpath_interface)s.I%(componentname)sFolder"
                         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
                         class="%(longpath_browser_file)s.MSubAdd%(componentname)s"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -134,6 +170,17 @@
                         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.admin_utils.dashboard.Edit"
+                        />
+
+                    <!-- Folder  -->
+
+                    <viewlet
+                        name="overview"
+                        for="%(longpath_interface)s.I%(componentname)sFolder"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.View"
                         />
             ''' % props.__dict__, dedent=True)
          ]]] -->

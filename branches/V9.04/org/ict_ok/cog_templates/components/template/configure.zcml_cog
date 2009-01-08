@@ -55,6 +55,27 @@
                             />
                     </class>
 
+                    <class class=".%(filename)s.%(componentname)sFolder">
+                        <implements
+                            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+                            />
+                        <implements
+                            interface="zope.app.container.interfaces.IContentContainer"
+                            />
+                        <factory
+                            id="org.ict_ok.components.%(filename)s.%(filename)s.%(componentname)sFolder"
+                            description="%(componentname)s"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.View"
+                            interface=".interfaces.I%(componentname)sFolder"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.Edit"
+                            set_schema=".interfaces.I%(componentname)sFolder"
+                            />
+                    </class>
+
                     <subscriber
                         handler=".bootstrap.bootStrapSubscriber"
                         for="zope.app.appsetup.IDatabaseOpenedEvent"
