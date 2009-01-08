@@ -62,7 +62,7 @@ clean:
 	@rm -vf $(FILENAME_SH)_cog
 	@rm -vf browser/$(FILENAME_SH)_cog
 
-allclean:
+cogclean:
 	@find . -type f -name \*_cog -exec rm -v {} \;
 
 rename:
