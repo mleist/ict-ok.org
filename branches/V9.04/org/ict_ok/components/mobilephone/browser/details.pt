@@ -1,0 +1,84 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+    <h3 i18n:translate="">Mobile Phone Details</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/phoneNumber|nothing">
+            <td i18n:translate="">phone number</td>
+            <td tal:content="context/phoneNumber" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/user|nothing">
+            <td i18n:translate="">User</td>
+            <td tal:content="python: view.vocabValue('AllLdapUser',
+                                                     context.user)" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/contractModel|nothing">
+            <td i18n:translate="">contract model</td>
+            <td tal:content="context/contractModel" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/contractEnd|nothing">
+            <td i18n:translate="">contract end date</td>
+            <td tal:content="context/contractEnd" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/deliveryDate|nothing">
+            <td i18n:translate="">delivery date</td>
+            <td tal:content="context/deliveryDate" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/modelType|nothing">
+            <td i18n:translate="">model type</td>
+            <td tal:content="context/modelType" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/serialNumber|nothing">
+            <td i18n:translate="">Serial number</td>
+            <td tal:content="context/serialNumber" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/imei|nothing">
+            <td i18n:translate="">IMEI</td>
+            <td tal:content="context/imei" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/pin|nothing">
+            <td i18n:translate="">PIN</td>
+            <td tal:content="context/pin" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/puk|nothing">
+            <td i18n:translate="">PUK</td>
+            <td tal:content="context/puk" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/simNumber|nothing">
+            <td i18n:translate="">Serial number</td>
+            <td tal:content="context/simNumber" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td tal:content="context/ikComment" />
+        </tr>
+    </table>
+</i18n:block>
