@@ -86,9 +86,9 @@ def getHostIp(item, formatter):
 class HostDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = ComponentDetails.omit_viewfields + ['osList']
-    omit_addfields = ComponentDetails.omit_addfields + ['osList']
-    omit_editfields = ComponentDetails.omit_editfields + ['osList']
+    omit_viewfields = ComponentDetails.omit_viewfields + ['osList', 'interfaces21']
+    omit_addfields = ComponentDetails.omit_addfields + ['osList', 'interfaces21']
+    omit_editfields = ComponentDetails.omit_editfields + ['osList', 'interfaces21']
     #omit_viewfields = ComponentDetails.omit_viewfields + []
     #omit_addfields = ComponentDetails.omit_addfields + []
     #omit_editfields = ComponentDetails.omit_editfields + []

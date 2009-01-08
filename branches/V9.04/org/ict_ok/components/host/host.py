@@ -27,9 +27,15 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
+
 # ict_ok.org imports
 from org.ict_ok.libs.lib import nodeIsUnder
 from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
+from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.host.wf.nagios import pd as WfPdNagios
@@ -68,6 +74,23 @@ def AllHostProductionStates(dummy_context):
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)
 
+def AllHosts(dummy_context):
+    """In which production state a host may be
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IHost.providedBy(oobj.object):
+            myString = u"%s" % (oobj.object.getDcTitle())
+            terms.append(\
+                SimpleTerm(oobj.object,
+                           token=oid,
+                           title=myString))
+    return SimpleVocabulary(terms)
+
+Host_Interfaces_RelManager = FieldRelationManager(IHost['interfaces2'],
+                                                 IInterface['host2'],
+                                                 relType='host:interfaces')
 
 class Host(Component):
     """
@@ -104,6 +127,8 @@ class Host(Component):
         IEventIfEventHost['eventInpObjs_shutdown'])
     eventOutObjs_nagiosError = FieldProperty(\
         IEventIfEventHost['eventOutObjs_nagiosError'])
+    
+    interfaces2 = RelationPropertyOut(Host_Interfaces_RelManager)
     
     wf_pd_dict = {}
     wf_pd_dict[WfPdNagios.id] = WfPdNagios

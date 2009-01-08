@@ -23,10 +23,41 @@ __version__ = "$Id$"
 from zope.app import zapi
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.component import getUtility
+from zope.app.intid.interfaces import IIntIds
+
+from lovely.relation.property import RelationPropertyIn
 
 # ict_ok.org imports
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.interface.interfaces import IInterface
+from org.ict_ok.components.host.host import Host_Interfaces_RelManager
+   
+
+def AllInterfaces(dummy_context):
+    """In which production state a host may be
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IInterface.providedBy(oobj.object):
+            myString = u"%s" % (oobj.object.getDcTitle())
+            terms.append(\
+                SimpleTerm(oobj.object,
+                           token=oid,
+                           title=myString))
+    return SimpleVocabulary(terms)
+        
+#def documentsInParentVocabulary(context):
+
+    #"""a vocabulary that returns the child documents __name__for any
+    #subobjects of parent"""
+
+    #return SimpleVocabulary.fromItems(
+        #[(k, v) for k, v in context.__parent__.items() \
+         #if IDocument.providedBy(v)])
+
 
 
 class Interface(Component):
@@ -41,6 +72,8 @@ class Interface(Component):
     netType = FieldProperty(IInterface['netType'])
     mac = FieldProperty(IInterface['mac'])
     ipv4List = FieldProperty(IInterface['ipv4List'])
+    
+    host2 = RelationPropertyIn(Host_Interfaces_RelManager)
     
     def __init__(self, **data):
         """

@@ -62,9 +62,9 @@ class InterfaceDetails(ComponentDetails):
     #omit_viewfields = ComponentDetails.omit_viewfields + ['ipv4List']
     #omit_addfields = ComponentDetails.omit_addfields + ['ipv4List']
     #omit_editfields = ComponentDetails.omit_editfields + ['ipv4List']
-    omit_viewfields = ComponentDetails.omit_viewfields + []
-    omit_addfields = ComponentDetails.omit_addfields + []
-    omit_editfields = ComponentDetails.omit_editfields + []
+    omit_viewfields = ComponentDetails.omit_viewfields + ['host21']
+    omit_addfields = ComponentDetails.omit_addfields + ['host21']
+    omit_editfields = ComponentDetails.omit_editfields + ['host21']
 
 # --------------- forms ------------------------------------
 
@@ -72,7 +72,7 @@ class InterfaceDetails(ComponentDetails):
 class DetailsInterfaceForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of interface')
-    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_viewfields)
+    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_viewfields)    
 
 
 class AddInterfaceForm(AddForm):
@@ -86,6 +86,11 @@ class EditInterfaceForm(EditForm):
     """ Edit for for net """
     label = _(u'Interface Edit Form')
     fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_editfields)
+    #def update(self):
+        #import pdb
+        #pdb.set_trace()
+        #print "LLLLLLLLL Jepp"
+        #EditForm.update(self)
 
 
 class DeleteInterfaceForm(DeleteForm):

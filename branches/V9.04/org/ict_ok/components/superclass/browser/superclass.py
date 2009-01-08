@@ -743,6 +743,7 @@ class AddForm(layout.FormLayoutSupport, form.AddForm):
     def create(self, data):
         """ will create the object """
         obj = self.factory(**data)
+        self.newdata = data
         IBrwsOverview(obj).setTitle(data['ikName'])
         obj.__post_init__()
         return obj
@@ -755,6 +756,8 @@ class AddForm(layout.FormLayoutSupport, form.AddForm):
         while IPagelet.providedBy(travp):
             travp = self.context.__parent__
         travp[obj.objectID] = obj
+        if hasattr(obj, "store_refs"):
+            obj.store_refs(**self.newdata)
         return obj
 
 

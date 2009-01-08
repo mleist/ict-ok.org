@@ -23,7 +23,7 @@
     <include package="org.ict_ok.admin_utils.generators.nagios" />
     <include package="org.ict_ok.admin_utils.generators.smokeping" />
     <include package="org.ict_ok.admin_utils.graphviz" />
-    <include package="org.ict_ok.admin_utils.linux_ha" />
+    <!-- <include package="org.ict_ok.admin_utils.linux_ha" /> -->
     <include package="org.ict_ok.admin_utils.netscan" />
     <include package="org.ict_ok.admin_utils.netscan.nmap" />
     <include package="org.ict_ok.admin_utils.netscan.simple1" />
@@ -58,5 +58,8 @@
     <include package="org.ict_ok.components.location" />
     <include package="org.ict_ok.components.building" />
     <include package="org.ict_ok.components.room" />
+
+
+    <include package="org.ict_ok.components.mobilephone" />
 
 </configure>

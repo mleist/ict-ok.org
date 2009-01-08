@@ -30,6 +30,10 @@ from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
 
+from lovely.relation.app import O2OStringTypeRelationships
+from lovely.relation.interfaces import IO2OStringTypeRelationships
+from lovely.relation.event import o2oIntIdRemoved
+
 # ict_ok.org imports
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
@@ -102,6 +106,26 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made IIntIds-Utility")
+        
+    madeUtilityO2ORels = ensureUtility(root_folder, 
+                                       IO2OStringTypeRelationships, 
+                                       '', 
+                                       O2OStringTypeRelationships, 
+                                       '', 
+                                       copy_to_zlog=False, 
+                                       asObject=True)
+
+    if isinstance(madeUtilityO2ORels, O2OStringTypeRelationships):
+        logger.info(u"bootstrap: made O2ORels-Utility")
+        #dcore = IWriteZopeDublinCore(madeUtilityO2ORels)
+        #dcore.title = u"ICT_Ok Object Relation Manager"
+        #dcore.created = datetime.utcnow()
+        sitem = root_folder.getSiteManager()
+        utils = [ util for util in sitem.registeredUtilities()
+                    if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: made O2ORels-Utility")
 
     madeUtilityICatalog = ensureUtility(root_folder, 
                                         ICatalog, 

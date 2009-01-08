@@ -29,6 +29,8 @@ from zope.app.authentication.principalfolder import PrincipalFolder
 from zope.app.authentication.groupfolder import GroupInformation, \
      GroupFolder
 from zope.securitypolicy.interfaces import IPrincipalRoleManager
+from ldapadapter.interfaces import IManageableLDAPAdapter
+from ldapadapter.utility import ManageableLDAPAdapter
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
@@ -119,5 +121,23 @@ def bootStrapSubscriberDatabase(event):
         prm.assignRoleToPrincipal(u'org.ict_ok.mgr', u'group.Manager')
         prm.assignRoleToPrincipal(u'org.ict_ok.adm', u'group.Administrator')
         prm.assignRoleToPrincipal(u'org.ict_ok.dvl', u'group.Developer')
+    
+    madeLdapAdapter = ensureUtility(\
+        root_folder,
+        IManageableLDAPAdapter,
+        'ManageableLDAPAdapter',
+        ManageableLDAPAdapter,
+        copy_to_zlog=False,
+        asObject=True)
+
+    if isinstance(madeLdapAdapter, ManageableLDAPAdapter):
+        madeLdapAdapter.serverURL = "ldap://172.16.1.10:389"
+        #conn = madeLdapAdapter.connect()
+        #ddd = conn.search("ou=people, dc=drako, dc=de",
+                          #scope='sub',
+                          #filter='(objectClass=*)',
+                          #attrs=['uid', 'cn'])
+        #print "ddd:", ddd
+    
     transaction.get().commit()
     connection.close()

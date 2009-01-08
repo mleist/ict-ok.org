@@ -15,7 +15,8 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Attribute
-from zope.schema import Bool, Choice, List, Password, Set, TextLine, Int
+from zope.schema import Bool, Choice, List, Password, Set, TextLine, Int, Object
+from zope.schema.interfaces import IObject
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
@@ -31,6 +32,17 @@ class IHost(IComponent):
     """A host object."""
 
     contains('org.ict_ok.components.interface.interfaces.IInterface')
+    
+    interfaces2 = List(title=u"Interfaces 0..n",
+                      #value_type=Object(IObject),
+                      value_type=Choice(vocabulary='AllInterfaces'),
+                      required=False,
+                      default=[])
+    #related = schema.List(
+            #title=u"Related",
+            #value_type=schema.Choice(vocabulary='demo.documentsInParent'),
+            #required=False,
+            #default=[])
 
     hostname = TextLine(
         max_length = 80,

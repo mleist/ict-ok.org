@@ -42,6 +42,12 @@
         provides=".interfaces.IAdmUtilUserProperties"
         />
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".usermanagement.allLdapUser"
+        name="AllLdapUser"
+    />
+
     <include package=".generations" />
     
 </configure>

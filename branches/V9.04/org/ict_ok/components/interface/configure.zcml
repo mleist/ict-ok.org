@@ -66,6 +66,12 @@
         factory=".adapter.rpt_pdf.RptPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".interface.AllInterfaces"
+        name="AllInterfaces"
+    />
     
     <include package=".generations" />
 

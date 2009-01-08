@@ -35,6 +35,8 @@ from zope.publisher.interfaces import IRequest
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.container.contained import Contained
 from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
+from ldapadapter.interfaces import IManageableLDAPAdapter
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -338,3 +340,23 @@ def getNotifierDict4User(principal_id):
                 if principal_annos.data[KEY].has_key(dictKey):
                     retDict[dictKey] = principal_annos.data[KEY][dictKey]
     return retDict
+
+def allLdapUser(dummy_context):
+    """Ask the ldap for our user ĺist
+    """
+    terms = []
+    ldapUtil = queryUtility(IManageableLDAPAdapter)
+    conn = ldapUtil.connect()
+    ldapResultList = conn.search("ou=people, dc=drako, dc=de",
+                      scope='sub',
+                      filter='(objectClass=*)',
+                      attrs=['uid', 'cn'])
+    ldapResultList.sort()
+    for ldapKey, ldapDict in ldapResultList:
+        if ldapDict.has_key('cn'):
+            terms.append(\
+                SimpleTerm(ldapKey,
+                           token=str(ldapKey),
+                           title=ldapDict['cn'][0]))
+    conn.conn.unbind()
+    return SimpleVocabulary(terms)

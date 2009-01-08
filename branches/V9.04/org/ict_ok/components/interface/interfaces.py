@@ -15,7 +15,8 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.app import zapi
-from zope.schema import Choice, List
+from zope.schema import Choice, List, Object
+from zope.schema.interfaces import IObject
 from zope.interface import Attribute, Interface, Invalid, invariant
 from zope.i18nmessageid import MessageFactory
 from zope.app.catalog.interfaces import ICatalog
@@ -45,6 +46,15 @@ class IInterface(IComponent):
 
     contains('org.ict_ok.components.service.interfaces.IService',
              'org.ict_ok.components.snmpvalue.interfaces.ISnmpValue')
+    
+    #host2 = Object(IObject,
+                   #title=u'Host 0..1',
+                   #required=False)
+    host2 = Choice(
+        title=u'Host 0..1',
+        vocabulary='AllHosts',
+        required=False
+        )
 
     netType = Choice(
         title = _("interface type"),

@@ -34,6 +34,8 @@
         factory=".adapter.ticker.Ticker"
     />
 
+    <subscriber handler="lovely.relation.event.o2oIntIdRemoved" />
+
     <!-- setup local utilities -->
     <subscriber
         handler=".bootstrap.bootStrapSubscriberDatabase"

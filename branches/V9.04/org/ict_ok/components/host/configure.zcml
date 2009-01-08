@@ -96,6 +96,12 @@
         component=".host.AllHostProductionStates"
         name="AllHostProductionStates"
         />
+        
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".host.AllHosts"
+        name="AllHosts"
+    />
 
     <!--subscriber handler=".objmq.notifyAddedEvent" /-->
     <!--subscriber handler=".objmq.notifyModifiedEvent" /-->

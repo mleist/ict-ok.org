@@ -27,6 +27,10 @@ from zope.exceptions.interfaces import UserError
 from zope.i18nmessageid import MessageFactory
 from zope.app.catalog.interfaces import ICatalog
 
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+
 # ict_ok.org imports
 
 _ = MessageFactory('org.ict_ok')
@@ -165,3 +169,16 @@ def oid2dcTitle(arg_oid):
     if len(res) > 0:
         return iter(res).next().getDcTitle()
     return "Oid not found"
+
+def getRefAttributeNames(arg_class):
+    """return a string list of attribute names with
+    RelationPropertyIn- or RelationPropertyOut-type
+    """
+    retList = []
+    for attrName, attrValue in arg_class.__dict__.items():
+        if type(attrValue)==RelationPropertyIn or \
+           type(attrValue)==RelationPropertyOut:
+            retList.append(attrName)
+    return retList
+    
+    
