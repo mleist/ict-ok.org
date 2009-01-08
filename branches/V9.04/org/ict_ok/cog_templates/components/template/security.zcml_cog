@@ -27,7 +27,7 @@
     <!-- [[[end]]] -->
 
     <!-- [[[cog
-            cog.out("""\
+            cog.out('''\
                     <permission
                         id="org.ict_ok.components.%(filename)s.View"
                         title="View %(moduletitle)s"
@@ -70,7 +70,7 @@
                     <grant permission="org.ict_ok.components.%(filename)s.Delete"
                                     role="org.ict_ok.adm" />
 
-            """ % props.__dict__, dedent=True)
+            ''' % props.__dict__, dedent=True)
          ]]] -->
     <!-- [[[end]]] -->
 </configure>

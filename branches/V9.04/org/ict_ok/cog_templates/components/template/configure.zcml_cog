@@ -28,7 +28,7 @@
     <!-- [[[end]]] -->
 
     <!-- [[[cog
-            cog.out("""\
+            cog.out('''\
                     <interface
                         interface=".interfaces.I%(componentname)s"
                         type="zope.app.content.interfaces.IContentType"
@@ -61,26 +61,11 @@
                         />
 
                     <adapter
-                        factory=".adapter.sized.%(componentname)sSized"
-                        />
-
-                    <adapter
                         factory=".adapter.state.State"
                         />
 
                     <adapter
                         factory="org.ict_ok.components.%(filename)s.adapter.search.Searchable"
-                    />
-                    <adapter
-                        factory="org.ict_ok.components.%(filename)s.adapter.ipickle.Pickle"
-                    />
-                    <adapter
-                        factory=".adapter.nagios.GenNagios"
-                        permission="org.ict_ok.admin_utils.generators.nagios.View"
-                    />
-                    <adapter
-                        factory=".adapter.smokeping.GenSmokePing"
-                        permission="org.ict_ok.admin_utils.generators.smokeping.View"
                     />
                     <adapter
                         factory=".adapter.rpt_pdf.RptPdf"
@@ -94,7 +79,7 @@
                     />
                     
                     <include package=".generations" />
-            """ % props.__dict__, dedent=True)
+            ''' % props.__dict__, dedent=True)
          ]]] -->
     <!-- [[[end]]] -->
 

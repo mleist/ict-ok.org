@@ -28,9 +28,9 @@ __version__ = "$Id: __init__.py 394 2009-01-06 15:12:30Z markusleist $"
 from zope.app.generations.generations import SchemaManager
 
 #[[[cog
-#   cog.out("""\
+#   cog.out('''\
 #   key = '%(longpath)s.%(filename)s.generations'
-#   """ % props.__dict__, dedent=True)
+#   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
 

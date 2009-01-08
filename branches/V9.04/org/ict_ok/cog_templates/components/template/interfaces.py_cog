@@ -30,22 +30,41 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Int
+from zope.schema import Choice, Int, List, TextLine
 
 # ict_ok.org imports
-from org.ict_ok.components.service.interfaces import IService
+from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
 #[[[cog
-#   cog.out("""\
-#   """ % props.__dict__, dedent=True)
+#   cog.out('''\
+#   class I%(componentname)s(IComponent):
+#       """A host object."""
+#
+#       conns = List(title=u"Conns 0..n",
+#                    #value_type=Object(IObject),
+#                    value_type=Choice(vocabulary='AllInterfaces'),
+#                    required=False,
+#                    default=[])
+#       #related = schema.List(
+#               #title=u"Related",
+#               #value_type=schema.Choice(vocabulary='demo.documentsInParent'),
+#               #required=False,
+#               #default=[])
+#
+#       attrFoo = TextLine(
+#           max_length = 80,
+#           title = _("Foo"),
+#           description = _("Foo of the system."),
+#           default = _("default foo"),
+#           required = True)
+#
+#       def trigger_online():
+#           """
+#           trigger workflow
+#           """
+#   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
-
-    #[[[cog
-    #cog.out("""\
-    #""" % props.__dict__, dedent=True)
-    #]]]
-    #[[[end]]]

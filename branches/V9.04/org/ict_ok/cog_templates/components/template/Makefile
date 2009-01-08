@@ -23,6 +23,7 @@ all:
 	@echo "\t\twill clean all cog-templates"
 
 gen:	configure.zcml \
+	security.zcml \
 	__init__.py \
 	interfaces.py \
 	${FILENAME} \
@@ -39,22 +40,25 @@ gen:	configure.zcml \
 	adapter/search.py \
 	adapter/state.py
 
-clean:	rm -v configure.zcml
-	rm -v __init__.py
-#	interfaces.py \
-#	${FILENAME} \
-#	bootstrap.py \
-#	browser/${FILENAME} \
-#	browser/configure.zcml \
-#	browser/__init__.py \
-#	generations/evolve1.py \
-#	generations/configure.zcml \
-#	generations/__init__.py \
-#	ftests/__init__.py \
-#	adapter/__init__.py \
-#	adapter/rpt_pdf.py \
-#	adapter/search.py \
-#	adapter/state.py
+clean:
+	@echo removing files:
+	@rm -vf configure.zcml
+	@rm -vf security.zcml
+	@rm -vf __init__.py
+	@rm -vf interfaces.py
+	@rm -vf ${FILENAME}
+	@rm -vf bootstrap.py
+	@rm -vf browser/${FILENAME}
+	@rm -vf browser/configure.zcml
+	@rm -vf browser/__init__.py
+	@rm -vf generations/evolve1.py
+	@rm -vf generations/configure.zcml
+	@rm -vf generations/__init__.py
+	@rm -vf ftests/__init__.py
+	@rm -vf adapter/__init__.py
+	@rm -vf adapter/rpt_pdf.py
+	@rm -vf adapter/search.py
+	@rm -vf adapter/state.py
 
 gen2:	configure.zcml \
 	ftests/__init__.py \

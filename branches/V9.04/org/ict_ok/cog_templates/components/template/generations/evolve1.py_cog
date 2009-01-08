@@ -30,9 +30,9 @@ from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
 #[[[cog
-#   cog.out("""\
+#   cog.out('''\
 #   from %(longpath_interface)s import I%(componentname)s
-#   """ % props.__dict__, dedent=True)
+#   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
 

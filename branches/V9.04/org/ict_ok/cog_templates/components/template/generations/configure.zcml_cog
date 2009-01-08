@@ -27,13 +27,13 @@
     <!-- [[[end]]] -->
 
     <!-- [[[cog
-            cog.out("""\
+            cog.out('''\
                     <utility
                         name="org.ict_ok.%(filename)s" 
                         provides="zope.app.generations.interfaces.ISchemaManager"
                         component=".AppSchemaManager"
                         />
-            """ % props.__dict__, dedent=True)
+            ''' % props.__dict__, dedent=True)
          ]]] -->
     <!-- [[[end]]] -->
 

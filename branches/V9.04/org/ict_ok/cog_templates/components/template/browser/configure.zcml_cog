@@ -30,22 +30,112 @@
     <!-- [[[end]]] -->
 
     <!-- [[[cog
-            cog.out("""\
+            cog.out('''\
                     <defaultView
-                        for="%(longpath_interface)s.IService%(servicename)s"
+                        for="%(longpath_interface)s.I%(componentname)s"
                         name="details.html"
                     />
 
                     <z3c:pagelet
-                        name="add_%(filename)s_service.html"
-                        for="org.ict_ok.components.interface.interfaces.IInterface"
-                        class="%(longpath)s.%(filename)s.browser.service.AddServiceForm"
+                        name="history.html"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        class="org.ict_ok.components.superclass.browser.superclass.History"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-                        permission="org.ict_ok.components.service.Add"
+                        permission="org.ict_ok.components.%(filename)s.View"
+                        />
+
+                    <z3c:pagelet
+                        name="details.html"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        class="%(longpath_browser_file)s.Details%(componentname)sForm"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.View"
                     />
 
-                    <!--##### Sub Menu ##### -->
-            """ % props.__dict__, dedent=True)
+                    <z3c:pagelet
+                        name="edit.html"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        class="%(longpath_browser_file)s.Edit%(componentname)sForm"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Edit"
+                    />
+
+                    <z3c:pagelet
+                        name="delete.html"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        class="%(longpath_browser_file)s.Delete%(componentname)sForm"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Delete"
+                    />
+
+                    <z3c:pagelet
+                        name="add_%(filename)s.html"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        class="%(longpath_browser_file)s.Add%(componentname)sForm"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Add"
+                    />
+                    <!--    for="%(longpath_interface)s.I%(componentname)s"  -->
+
+                    <!-- Sub Menu  -->
+                    
+                    <viewlet
+                        name="history"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.View"
+                        />
+                    <viewlet
+                        name="edit"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Edit"
+                        />
+                    <viewlet
+                        name="delete"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Delete"
+                        />
+                    <viewlet
+                        name="editcontent"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Edit"
+                        />
+                    <viewlet
+                        name="add_%(filename)s"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+                        class="%(longpath_browser_file)s.MSubAdd%(componentname)s"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Add"
+                        />
+                    <viewlet
+                        name="add_dashboard"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+                        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubAddDashboard"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.admin_utils.dashboard.Edit"
+                        />
+                    <viewlet
+                        name="del_dashboard"
+                        for="%(longpath_interface)s.I%(componentname)s"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+                        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.admin_utils.dashboard.Edit"
+                        />
+            ''' % props.__dict__, dedent=True)
          ]]] -->
     <!-- [[[end]]] -->
 

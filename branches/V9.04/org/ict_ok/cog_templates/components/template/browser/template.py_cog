@@ -36,14 +36,17 @@ from z3c.form import field
 
 # ict_ok.org imports
 #[[[cog
-#   cog.out("""\
+#   cog.out('''\
 #   from %(longpath_interface)s import I%(componentname)s
-#   """ % props.__dict__, dedent=True)
+#   from %(longpath_file)s import %(componentname)s
+#   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
+from org.ict_ok.components.browser.component import ComponentDetails
+from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm
+     AddForm, DeleteForm, DisplayForm, EditForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -51,27 +54,66 @@ _ = MessageFactory('org.ict_ok')
 # --------------- menu entries -----------------------------
 
 
-class MSubAddService(GlobalMenuSubItem):
-    """ Menu Item """
-    #[[[cog
-    #   cog.out("""\
-    #   title = _(u'Add %(moduletitle)s')
-    #   viewURL = 'add_%(filename)s.html'
-    #   """ % props.__dict__, dedent=True)
-    #]]]
-    #[[[end]]]
-    weight = 50
+#[[[cog
+#   cog.out('''\
+#   class MSubAdd%(componentname)s(GlobalMenuSubItem):
+#       """ Menu Item """
+#       title = _(u'Add %(moduletitle)s')
+#       viewURL = 'add_%(filename)s.html'
+#
+#       weight = 50
+#   ''' % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]
+
+# --------------- object details ---------------------------
+
+
+#[[[cog
+#   cog.out('''\
+#   class %(componentname)sDetails(ComponentDetails):
+#       """ Class for %(componentname)s details
+#       """
+#       omit_viewfields = ComponentDetails.omit_viewfields + []
+#       omit_addfields = ComponentDetails.omit_addfields + []
+#       omit_editfields = ComponentDetails.omit_editfields + []
+#   ''' % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]
 
 # --------------- forms ------------------------------------
 
 
-class AddServiceForm(AddForm):
-    """Add form."""
-    #[[[cog
-    #   cog.out("""\
-    #   label = _(u'Add %(moduletitle)s')
-    #   fields = field.Fields(I%(componentname)s)
-    #   """ % props.__dict__, dedent=True)
-    #]]]
-    #[[[end]]]
-    factory = Service
+#[[[cog
+#   cog.out('''\
+#   class Details%(componentname)sForm(DisplayForm):
+#       """ Display form for the object """
+#       label = _(u'settings of %(moduletitle)s')
+#       fields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_viewfields)
+#
+#
+#   class Add%(componentname)sForm(AddForm):
+#       """Add %(moduletitle)s form"""
+#       label = _(u'Add %(moduletitle)s')
+#       fields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_addfields)
+#    
+#       factory = %(componentname)s
+#
+#
+#   class Edit%(componentname)sForm(EditForm):
+#       """ Edit for %(moduletitle)s """
+#       label = _(u'%(moduletitle)s Edit Form')
+#       fields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_editfields)
+#
+#
+#   class Delete%(componentname)sForm(DeleteForm):
+#       """ Delete the %(moduletitle)s """
+#       
+#       def getTitle(self):
+#           """this title will be displayed in the head of form"""
+#           return _(u"Delete this %(componentname)s: '%%s'?") %% \\
+#                  IBrwsOverview(self.context).getTitle()
+#
+#   ''' % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]

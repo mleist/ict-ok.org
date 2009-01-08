@@ -41,9 +41,9 @@ from zope.index.text.interfaces import ISearchableText
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 
 #[[[cog
-#   cog.out("""\
+#   cog.out('''\
 #   logger = logging.getLogger("Compon. %(componentname)s")
-#   """ % props.__dict__, dedent=True)
+#   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
 
