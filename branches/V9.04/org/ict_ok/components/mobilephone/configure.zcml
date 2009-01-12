@@ -55,6 +55,23 @@
             permission="org.ict_ok.components.mobilephone.Edit"
             set_schema=".interfaces.IMobilePhoneFolder"
             />
+        <require
+            permission="org.ict_ok.components.mobilephone.View"
+            interface=".interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.mobilephone.Edit"
+            set_schema=".interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.mobilephone.View"
+            interface=".interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.mobilephone.Edit"
+            set_schema=".interfaces.IImportXlsData"
+            />
+            
     </class>
 
     <subscriber

@@ -347,7 +347,12 @@ def allLdapUser(dummy_context):
     terms = []
     ldapUtil = queryUtility(IManageableLDAPAdapter)
     conn = ldapUtil.connect()
-    ldapResultList = conn.search("ou=people, dc=drako, dc=de",
+    
+#    ldapResultList = conn.search("ou=people, dc=drako, dc=de",
+#                      scope='sub',
+#                      filter='(objectClass=*)',
+#                      attrs=['uid', 'cn'])
+    ldapResultList = conn.search("ou=staff,o=ikom-online,c=de,o=ifdd",
                       scope='sub',
                       filter='(objectClass=*)',
                       attrs=['uid', 'cn'])

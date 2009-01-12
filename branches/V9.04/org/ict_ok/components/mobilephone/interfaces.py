@@ -15,8 +15,9 @@
 __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 
 # zope imports
+from zope.interface import Attribute, Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Int, List, TextLine
+from zope.schema import Choice, Int, List, TextLine, Bytes, Date
 from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
@@ -24,6 +25,20 @@ from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
+
+
+class IImportXlsData(Interface):
+    """Interface for all Objects"""
+    xlsdata = Bytes(
+        title = _("XLS data"),
+        required = True)
+
+
+class IImportCsvData(Interface):
+    """Interface for all Objects"""
+    csvdata = Bytes(
+        title = _("CSV data"),
+        required = True)
 
 
 class IMobilePhone(IComponent):
@@ -74,15 +89,13 @@ class IMobilePhone(IComponent):
         required = False)
     
     ##Vertragsende
-    contractEnd = TextLine(
-        max_length = 40,
+    contractEnd = Date(
         title = _("contract end date"),
         description = _("contract end date"),
         required = False)
     
     ##Lieferdatum
-    deliveryDate = TextLine(
-        max_length = 40,
+    deliveryDate = Date(
         title = _("delivery date"),
         description = _("delivery date"),
         required = False)

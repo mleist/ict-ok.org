@@ -33,7 +33,8 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.mobilephone.interfaces import IMobilePhone
-from org.ict_ok.components.mobilephone.interfaces import IMobilePhoneFolder
+from org.ict_ok.components.mobilephone.interfaces import IMobilePhoneFolder, \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component
 
 def AllMobilePhones(dummy_context):
@@ -44,9 +45,9 @@ def AllMobilePhones(dummy_context):
     for (oid, oobj) in uidutil.items():
         if IMobilePhone.providedBy(oobj.object):
             myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(                SimpleTerm(oobj.object,
-                          token=oid,
-                          title=myString))
+            terms.append(SimpleTerm(oobj.object,
+                                    token=oid,
+                                    title=myString))
     return SimpleVocabulary(terms)
 
 #MobilePhone_Conns_RelManager = FieldRelationManager(IMobilePhone['conns'],
@@ -102,7 +103,9 @@ class MobilePhone(Component):
 
 
 class MobilePhoneFolder(Superclass, Folder):
-    implements(IMobilePhoneFolder)
+    implements(IMobilePhoneFolder, 
+               IImportCsvData,
+               IImportXlsData)
     def __init__(self, **data):
         """
         constructor of the object

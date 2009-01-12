@@ -43,6 +43,7 @@ from z3c.form import button, field, form, interfaces
 from z3c.formui import layout
 from z3c.pagelet.interfaces import IPagelet
 from z3c.pagelet.browser import BrowserPagelet
+from z3c.form.converter import CalendarDataConverter
 
 # zc imports
 from zc.table.column import Column, GetterColumn
@@ -67,6 +68,7 @@ from org.ict_ok.schema.IPy import IP
 
 _ = MessageFactory('org.ict_ok')
 
+CalendarDataConverter.length = 'medium'
 
 # --------------- helper functions -------------------------
 
@@ -453,13 +455,41 @@ class MSubDumpData(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Dump data')
     viewURL = '@@dumpdata.html'
-    weight = 60
+    weight = 69
 
 
 class MSubExportXmlData(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Export XML')
     viewURL = '@@exportxmldata.html'
+    weight = 62
+
+
+class MSubExportCsvData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Export CSV')
+    viewURL = '@@exportcsvdata.html'
+    weight = 62
+
+
+class MSubExportXlsData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Export XLS')
+    viewURL = '@@exportxlsdata.html'
+    weight = 62
+
+
+class MSubImportCsvData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Import CSV')
+    viewURL = '@@importcsvdata.html'
+    weight = 60
+
+
+class MSubImportXlsData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Import XLS')
+    viewURL = '@@importxlsdata.html'
     weight = 60
 
 
