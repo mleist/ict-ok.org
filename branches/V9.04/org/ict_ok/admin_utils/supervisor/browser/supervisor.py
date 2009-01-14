@@ -9,6 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611,W0613,W0232,W0142,R0901
 #
+from twisted.web.sux import ParseError
 """implementation of browser class of supervisor
 """
 
@@ -30,9 +31,13 @@ from zope.app.zapi import getPath
 from zope.interface import directlyProvides
 from zope.app.pagetemplate.urlquote import URLQuote
 from zope.app.generations.generations import findManagers
+from zope.traversing.browser import absoluteURL
+from zope.app.catalog.interfaces import ICatalog
+from zope.index.text.parsetree import ParseError
 
 # z3c imports
-from z3c.form import field
+from z3c.form import button, field, form, interfaces
+from z3c.formui import layout
 from z3c.pagelet.browser import BrowserPagelet
 
 # zc imports
@@ -46,9 +51,9 @@ from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
-     DisplayForm, EditForm
+     DisplayForm, EditForm, Overview
 from org.ict_ok.admin_utils.supervisor.interfaces import \
-     IAdmUtilSupervisor
+     IAdmUtilSupervisor, IFSearchText
 from org.ict_ok.components.superclass.browser import \
      superclass
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
@@ -179,7 +184,6 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         """
         commnds for objmq
         """
-        #obj = removeAllProxies(self.context)
         obj = self.context
         print "cmd/objmq"
         print "path: %s" % (zapi.getPath(obj))
@@ -378,3 +382,29 @@ class EditAdmUtilSupervisorForm(EditForm):
     label = _(u'edit supervisor')
     fields = field.Fields(IAdmUtilSupervisor).omit(\
         *AdmUtilSupervisorDetails.omit_editfields)
+
+
+class FSearchForm(Overview):
+    """ Search Form """
+#    form.extends(form.Form)
+    label = _(u"Search for what?")
+    fsearchText = None
+    
+    def objs(self):
+        """List of Content objects"""
+        retList = []
+        if self.fsearchText is not None:
+            my_catalog = zapi.getUtility(ICatalog)
+            try:
+                res = my_catalog.searchResults(all_fulltext_index=self.fsearchText)
+                for obj in res:
+                    retList.append(obj)
+            except ParseError, errText:
+                self.status = u"Error: '%s'" % errText
+        return retList
+    
+    def update(self):
+        myForm = self.request.form
+        if myForm.has_key('form.widgets.fsearchText'):
+            self.fsearchText = myForm['form.widgets.fsearchText']
+

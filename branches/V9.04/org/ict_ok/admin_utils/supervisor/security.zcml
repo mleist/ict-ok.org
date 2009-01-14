@@ -12,6 +12,11 @@
         id="org.ict_ok.admin_utils.supervisor.VersionDisplay"
         title="Version display in AdmUtilSupervisor"
     />
+    
+    <permission
+        id="org.ict_ok.admin_utils.supervisor.Search"
+        title="search from AdmUtilSupervisor"
+    />
 
     <permission
         id="org.ict_ok.admin_utils.supervisor.View"
@@ -46,6 +51,13 @@
     <grant permission="org.ict_ok.admin_utils.supervisor.VersionDisplay"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.supervisor.VersionDisplay"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.supervisor.Search"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.supervisor.Search"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.supervisor.Search"
                     role="org.ict_ok.adm" />
 
     <!--<grant permission="org.ict_ok.admin_utils.supervisor.View"-->

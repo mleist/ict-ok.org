@@ -24,6 +24,7 @@ from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.components.superclass.superclass import Superclass
 
 _ = MessageFactory('org.ict_ok')
 
@@ -59,3 +60,17 @@ class Searchable(object):
             return ""
         return ' '.join([str(note) for note in self.context.ikNotes])
 
+    def getFullTextSearchFields(self):
+        """
+        """
+        return Superclass.fullTextSearchFields
+    
+    def getSearchableFullText(self):
+        """
+        get Object id as string for catalog
+        """
+        stringList = []
+        for field in self.getFullTextSearchFields():
+            #print u"%s : '%s'" % (field, getattr(self.context, field))
+            stringList.append(u"%s" % getattr(self.context, field))
+        return u" ".join(stringList)

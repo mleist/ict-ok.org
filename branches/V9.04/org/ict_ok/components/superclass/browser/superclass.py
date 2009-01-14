@@ -48,6 +48,7 @@ from z3c.form.converter import CalendarDataConverter
 # zc imports
 from zc.table.column import Column, GetterColumn
 from zc.table.table import StandaloneFullFormatter
+from zc.table.batching import Formatter as BatchedFormatter
 from zc.table.interfaces import ISortableColumn
 
 # ict_ok import
@@ -329,10 +330,16 @@ def link(view='index.html'):
                 url = absoluteURL(item, formatter.request) + '/' + view
                 return u'<a href="%s">%s</a>' % (url, value)
             else:
-                return u'%s' % (value)
+#                view = "details.html"
+                myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                                   name="details.html")
+                if myAdapter is not None and canAccess(myAdapter,'render'):
+                    url = absoluteURL(item, formatter.request) + '/' + "details.html"
+                    return u'<a href="%s">%s</a>' % (url, value)
+                else:
+                    return u'%s' % (value)
         except Exception:
             return u'%s' % (value)
-            
     return anchor
 
 def getTitle(item, formatter):
@@ -874,7 +881,7 @@ class Overview(BrowserPagelet):
         GetterColumn(title=_('Title'),
                      getter=getTitle,
                      cell_formatter=link('overview.html')),
-        GetterColumn(title=_('Modified On'),
+        GetterColumn(title=_('Modified'),
                      getter=getModifiedDate,
                      subsort=True,
                      cell_formatter=raw_cell_formatter),
@@ -927,19 +934,29 @@ class Overview(BrowserPagelet):
             #directlyProvides(getterC, ISortableColumn)
             columnList.insert(self.pos_column_index, getterC)
             #directlyProvides(columnList[3], ISortableColumn)
-            formatter = StandaloneFullFormatter(
+            #StandaloneFullFormatter
+            #BatchedFormatter
+            formatter = BatchedFormatter(
                 self.context, self.request, self.objs(),
-                columns=columnList, sort_on=((_('Pos'), False),))
+                columns=columnList,
+                sort_on=((_('Pos'), False),),
+                batch_size=50)
         else:
             for i in self.sort_columns:
                 directlyProvides(columnList[i], ISortableColumn)
             #formatter = StandaloneFullFormatter(
                 #self.context, self.request, self.objs(),
                 #columns=columnList, sort_on=((_('Title'), False),))
-            formatter = StandaloneFullFormatter(
+            #StandaloneFullFormatter
+            #BatchedFormatter
+            formatter = BatchedFormatter(
                 self.context, self.request, self.objs(),
-                columns=columnList)
+                columns=columnList,
+                sort_on=((_('Title'), False),),
+                batch_size=50)
         formatter.cssClasses['table'] = 'listing'
+        #import pdb
+        #pdb.set_trace()
         return formatter()
 
 
@@ -1002,7 +1019,7 @@ class EditContent(BrowserPagelet):
         GetterColumn(title="",
                      getter=getStateIcon,
                      cell_formatter=raw_cell_formatter),
-        GetterColumn(title=_('Modified On'),
+        GetterColumn(title=_('Modified'),
                      getter=getModifiedDate,
                      cell_formatter=raw_cell_formatter),
         )

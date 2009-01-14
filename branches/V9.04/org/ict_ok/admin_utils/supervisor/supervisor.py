@@ -39,7 +39,8 @@ from zope.copypastemove.interfaces import IObjectMover
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
-from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
+from org.ict_ok.admin_utils.supervisor.interfaces import \
+    IAdmUtilSupervisor, IFSearchText
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.components.slave.interfaces import ISlave
@@ -53,7 +54,7 @@ class AdmUtilSupervisor(Supernode):
     """Supervisor instance
     """
 
-    implements(IAdmUtilSupervisor)
+    implements(IAdmUtilSupervisor, IFSearchText)
 
     nbrStarts = FieldProperty(IAdmUtilSupervisor['nbrStarts'])
     ipv4My = FieldProperty(IAdmUtilSupervisor['ipv4My'])

@@ -89,7 +89,7 @@ class Overview(SuperclassOverview):
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('used nr.'),
                      getter=getUsedCounter),
-        GetterColumn(title=_('Modified On'),
+        GetterColumn(title=_('Modified'),
                      getter=getModifiedDate,
                      subsort=True,
                      cell_formatter=raw_cell_formatter),

@@ -33,6 +33,9 @@ class Component(Supernode):
     isTemplate = FieldProperty(IComponent['isTemplate'])
     requirement = FieldProperty(IComponent['requirement'])
 
+    fullTextSearchFields = []
+    fullTextSearchFields.extend(Supernode.fullTextSearchFields)
+
     def __init__(self, **data):
         """
         constructor of the object

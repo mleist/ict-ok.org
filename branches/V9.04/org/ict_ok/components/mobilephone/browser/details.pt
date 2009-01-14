@@ -1,5 +1,5 @@
 <i18n:block domain="org.ict_ok"
-            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+            tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
     <h3 i18n:translate="">Mobile Phone Details</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
@@ -30,13 +30,13 @@
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/contractEnd|nothing">
             <td i18n:translate="">contract end date</td>
-            <td tal:content="context/contractEnd" />
+            <td tal:content="python: dateform.format(context.contractEnd)">test</td>
         </tr>
     
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/deliveryDate|nothing">
             <td i18n:translate="">delivery date</td>
-            <td tal:content="context/deliveryDate" />
+            <td tal:content="python: dateform.format(context.deliveryDate)">test</td>
         </tr>
     
         <tr tal:attributes="class view/getNextTabClass"

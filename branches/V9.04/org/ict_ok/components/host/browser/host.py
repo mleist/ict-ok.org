@@ -347,7 +347,7 @@ class AllHosts(Overview):
                           getter=getTitle),
         IPsGetterColumn(title=_('IP'),
                      getter=getHostIp),
-        GetterColumn(title=_('Modified On'),
+        GetterColumn(title=_('Modified'),
                      getter=getModifiedDate,
                      cell_formatter=raw_cell_formatter),
         GetterColumn(title=_('Actions'),

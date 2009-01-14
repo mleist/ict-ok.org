@@ -63,7 +63,7 @@ class Overview(SuperclassOverview):
         GetterColumn(title=_('Title'),
                      getter=superclass.getTitle,
                      cell_formatter=superclass.link('')),
-        GetterColumn(title=_('Modified On'),
+        GetterColumn(title=_('Modified'),
                      getter=superclass.getModifiedDate,
                      cell_formatter=superclass.raw_cell_formatter),
         GetterColumn(title=_('Size'),

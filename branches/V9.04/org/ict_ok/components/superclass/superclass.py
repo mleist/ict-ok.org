@@ -75,6 +75,8 @@ class Superclass(Persistent):
     ikEventTarget = FieldProperty(ISuperclass['ikEventTarget'])
     ref = FieldProperty(ISuperclass['ref'])
     
+    fullTextSearchFields = ['ikName', 'ikComment', 'ikAuthor']
+    
     # IEventIfSuperclass
     #eventInpObjs_Ping = FieldProperty(IEventIfSuperclass['eventInpObjs_Ping'])
     #eventOutObjs_Pong = FieldProperty(IEventIfSuperclass['eventOutObjs_Pong'])

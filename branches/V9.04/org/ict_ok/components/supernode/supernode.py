@@ -35,6 +35,9 @@ class Supernode(BTreeContainer, Superclass):
 
     implements(ISupernode)
 
+    fullTextSearchFields = []
+    fullTextSearchFields.extend(Superclass.fullTextSearchFields)
+
     def __init__(self, **data):
         """
         constructor of Supernode

@@ -9,6 +9,7 @@
 #
 # pylint: disable-msg=E0213,W0232
 #
+from pyExcelerator.BIFFRecords import CodepageBiff8Record
 """Interface of MobilePhone"""
 
 
@@ -31,6 +32,13 @@ class IImportXlsData(Interface):
     """Interface for all Objects"""
     xlsdata = Bytes(
         title = _("XLS data"),
+        required = True)
+    
+    codepage = Choice(
+        title = _("Codepage"),
+        description = _("Codepage of XLS"),
+        vocabulary="AllXlsCodepages",
+        default = 'cp850',
         required = True)
 
 

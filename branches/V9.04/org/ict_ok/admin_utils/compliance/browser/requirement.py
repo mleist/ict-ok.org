@@ -156,7 +156,7 @@ class DetailsAdmUtilRequirementForm(Overview):
         GetterColumn(title=_('Title'),
                      getter=getTitle,
                      cell_formatter=link('overview.html')),
-        GetterColumn(title=_('Modified On'),
+        GetterColumn(title=_('Modified'),
                      getter=getModifiedDate,
                      subsort=True,
                      cell_formatter=raw_cell_formatter),

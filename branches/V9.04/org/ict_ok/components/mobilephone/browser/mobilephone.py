@@ -245,6 +245,7 @@ class MobilePhoneFolderDetails(ComponentDetails):
 # --------------- forms ------------------------------------
 
 
+# TODO: delete this form
 class DetailsMobilePhoneForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of Mobile phone')
@@ -336,6 +337,9 @@ class ImportXlsDataForm(layout.FormLayoutSupport, form.Form):
             from zope.schema.interfaces import IChoice, ICollection, IDate
             from zope.component import createObject
             fields = field.Fields(IMobilePhone)
+#            import pdb
+#            pdb.set_trace()
+            codepage=self.widgets['codepage'].value[0]
             fileWidget=self.widgets['xlsdata']
             fileUpload = fileWidget.extract()
             filename = datetime.now().strftime('in_%Y%m%d%H%M%S.xls')
@@ -343,16 +347,17 @@ class ImportXlsDataForm(layout.FormLayoutSupport, form.Form):
             outf = open(f_name, 'wb')
             outf.write(fileUpload.read())
             outf.close()
-            parseRet = pyExcelerator.parse_xls(f_name)
+            parseRet = pyExcelerator.parse_xls(f_name, codepage)
             os.remove(f_name)
             for sheet_name, values in parseRet:
-                print 'Sheet = "%s"' % sheet_name.encode('cp866', 'backslashreplace')
+                print 'Sheet = "%s"' % sheet_name.encode(codepage,
+                                                         'backslashreplace')
                 print '----------------'
                 matrix = [[]]
                 for row_idx, col_idx in sorted(values.keys()):
                     v = values[(row_idx, col_idx)]
                     if isinstance(v, unicode):
-                        v = v.encode('cp866', 'backslashreplace')
+                        v = u"%s" % v # v.encode(codepage, 'backslashreplace')
                     else:
                         v = `v`
                     v = u'%s' % v.strip()
@@ -402,7 +407,6 @@ class ImportXlsDataForm(layout.FormLayoutSupport, form.Form):
                         newObj = createObject(\
                             u'org.ict_ok.components.mobilephone.mobilephone.MobilePhone')
                         newObj.__post_init__()
-                        self.context.__setitem__(attrDict['ikName'], newObj)
                         for attrName, newValString in attrDict.items():
                             attrField = IMobilePhone[attrName]
                             if IChoice.providedBy(attrField):
@@ -422,6 +426,7 @@ class ImportXlsDataForm(layout.FormLayoutSupport, form.Form):
                                                 interfaces.IDataConverter)
                                 newVal = v_dataconverter.toFieldValue(newValString)
                             setattr(newObj, attrName, newVal)
+                        self.context.__setitem__(newObj.objectID, newObj)
                         notify(ObjectCreatedEvent(newObj))
                     # ---------------------------------------
                     

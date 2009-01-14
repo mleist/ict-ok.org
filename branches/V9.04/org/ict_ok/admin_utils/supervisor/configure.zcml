@@ -22,6 +22,14 @@
             permission="org.ict_ok.admin_utils.supervisor.View"
             set_schema=".interfaces.IAdmUtilSupervisor"
             />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.Search"
+            interface=".interfaces.IFSearchText"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.Search"
+            set_schema=".interfaces.IFSearchText"
+            />
     </class>
 
     <adapter

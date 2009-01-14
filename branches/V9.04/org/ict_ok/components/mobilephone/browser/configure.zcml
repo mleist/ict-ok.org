@@ -26,7 +26,7 @@
         />
 
     <z3c:pagelet
-        name="details.html"
+        name="details2.html"
         for="org.ict_ok.components.mobilephone.interfaces.IMobilePhone"
         class="org.ict_ok.components.mobilephone.browser.mobilephone.DetailsMobilePhoneForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -34,7 +34,7 @@
     />
 
     <z3c:pagelet
-        name="display.html"
+        name="details.html"
         for="org.ict_ok.components.mobilephone.interfaces.IMobilePhone"
         class="org.ict_ok.components.mobilephone.browser.mobilephone.MobilePhoneDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"

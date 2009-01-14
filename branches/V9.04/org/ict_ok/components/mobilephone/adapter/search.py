@@ -23,6 +23,7 @@ from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.components.mobilephone.interfaces import IMobilePhone
+from org.ict_ok.components.mobilephone.mobilephone import MobilePhone
 from org.ict_ok.components.superclass.adapter.search import \
      Searchable as SuperSearchable
 
@@ -43,3 +44,8 @@ class Searchable(SuperSearchable):
         get Object id as string for catalog
         """
         return self.context.getObjectId()
+
+    def getFullTextSearchFields(self):
+        """
+        """
+        return MobilePhone.fullTextSearchFields

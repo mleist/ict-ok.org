@@ -1,4 +1,17 @@
 <script type="text/javascript">
+function eee3() {
+	a = 1
+	}
+	
+var kl2 = new YAHOO.util.KeyListener(document, { ctrl:true, keys:89 }, 
+											   { fn:eee3, 
+												 scope:document,
+												 correctScope:true } );
+
+kl2.enable();
+</script>
+
+<script type="text/javascript">
   ik_el_ikh_time = document.getElementById("ikh_time");
   ik_el_status_pic = document.getElementById("statusPic");
   ik_el_navtree_h1 = document.getElementById("navTreeH1");
@@ -128,6 +141,9 @@
       o.argument.node.loadComplete();
     }
   }
+  function ik_fsearch() {
+		window.location.href = '/@@fsearch';
+		}
   function ik_init() {
     tree816 = new YAHOO.widget.TreeView("treeDiv1");
     //tree816.setDynamicLoad(loadNodeData,0);
@@ -139,6 +155,13 @@
       argument: { node:tree816.getRoot() }
     };
     var request1 = YAHOO.util.Connect.asyncRequest('POST', "@@singleBranchTree.xml", callback);
+		
+	var searchkl = new YAHOO.util.KeyListener(document, { ctrl:true, keys:70 }, 
+												   { fn:ik_fsearch, 
+													 scope:document,
+													 correctScope:true } );
+	
+	searchkl.enable();
   }
 </script>
 <script type="text/javascript">

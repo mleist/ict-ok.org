@@ -179,6 +179,17 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for all notes")
+    if not "all_fulltext_index" in instUtilityICatalog.keys():
+        all_fulltext_index = TextIndex(interface=ISearchableText,
+                                        field_name='getSearchableFullText',
+                                        field_callable=True)
+        instUtilityICatalog['all_fulltext_index'] = all_fulltext_index
+        # search for IAdmUtilSupervisor
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: ICatalog - create index for all fulltext")
 
         
     transaction.get().commit()

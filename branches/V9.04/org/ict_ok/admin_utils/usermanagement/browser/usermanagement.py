@@ -134,6 +134,11 @@ class AdmUtilUserManagementPreferences:
         return self.request.response.redirect(\
             zapi.getPath(utilSupervisor)+\
             '/@@version.html')
+    def fsearch(self):
+        utilSupervisor = getUtility(IAdmUtilSupervisor)
+        return self.request.response.redirect(\
+            zapi.getPath(utilSupervisor)+\
+            '/@@fsearch.html')
 
 
 class AdmUtilUserManagementDetails(SupernodeDetails):

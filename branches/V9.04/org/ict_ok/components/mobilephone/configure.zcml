@@ -96,6 +96,11 @@
         component=".mobilephone.AllMobilePhones"
         name="AllMobilePhones"
     />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".mobilephone.AllXlsCodepages"
+        name="AllXlsCodepages"
+    />
 
     <include package=".generations" />
 
