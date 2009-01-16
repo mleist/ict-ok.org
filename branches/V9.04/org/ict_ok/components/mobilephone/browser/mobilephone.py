@@ -9,7 +9,9 @@
 #
 # pylint: disable-msg=E1101,W0232,W0142
 #
-from pprint import pprint
+from zope.component._api import getUtility
+from zope.app.intid.interfaces import IIntIds
+from docutils.nodes import field_name
 """implementation of browser class of MobilePhone"""
 
 __version__ = "$Id: template.py_cog 396 2009-01-08 00:21:51Z markusleist $"
@@ -19,6 +21,8 @@ import os
 import csv
 from datetime import datetime
 import tempfile
+from pyExcelerator import Workbook, XFStyle, Font, Alignment, Formula
+import pyExcelerator as xl
 
 # zope imports
 from zope.app import zapi
@@ -26,17 +30,25 @@ from zope.traversing.browser import absoluteURL
 from zope.i18nmessageid import MessageFactory
 from zope.app.rotterdam.xmlobject import setNoCacheHeaders
 import zope.component
+from zope.component import getUtility
 from zope.lifecycleevent import ObjectCreatedEvent
 from zope.event import notify
+from zope.session.interfaces import ISession
+from zope.schema.interfaces import IChoice, ICollection, IDate
 
 # z3c imports
-from z3c.form import button, field, form, interfaces
+from z3c.form import button, field, form, interfaces, util
 from z3c.formui import layout
 from z3c.pagelet.interfaces import IPagelet
 from z3c.pagelet.browser import BrowserPagelet
+from z3c.form import datamanager
+from z3c.form import converter
+from z3c.form import widget
 
 # ict_ok.org imports
-from org.ict_ok.components.mobilephone.interfaces import IMobilePhone, \
+from org.ict_ok.components.mobilephone.interfaces import \
+    IMobilePhone, IAddMobilePhones
+from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.mobilephone.mobilephone import MobilePhone
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -46,6 +58,8 @@ from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 
 _ = MessageFactory('org.ict_ok')
+SESSION_KEY = 'org.ict_ok.components.mobilephone'
+
 
 # --------------- menu entries -----------------------------
 
@@ -102,14 +116,6 @@ class MobilePhoneFolderDetails(ComponentDetails):
     
     def exportXlsData(self):
         """get CSV file for all folder objects"""
-        from z3c.form import datamanager
-        from z3c.form import converter
-        from z3c.form import widget
-        from z3c.form import button, field, interfaces, util
-        from zope.schema.interfaces import IChoice, ICollection, IDate
-
-        from pyExcelerator import Workbook, XFStyle, Font, Alignment, Formula
-        import pyExcelerator as xl
         filename = datetime.now().strftime('ict_%Y%m%d%H%M%S.xls')
         f_handle, f_name = tempfile.mkstemp(filename)
         wbook = Workbook()
@@ -276,6 +282,164 @@ class DeleteMobilePhoneForm(DeleteForm):
 
 
 
+#class AddMobilePhones(layout.FormLayoutSupport, form.Form):
+#class AddMobilePhones(layout.FormLayoutSupport, form.AddForm):
+class AddMobilePhones(AddForm):
+    """ Delete the net """
+    
+    #form.extends(form.AddForm)
+    label = _(u"Add Mobile Phones")
+    #fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_addfields)
+    fields = field.Fields(IAddMobilePhones)
+    factory = MobilePhone
+    _templChoice = False
+    _dataExtracted = False
+    
+#    def __call__(self):
+#        print "###### __call__() (%s) (%s)" % (self.templChoice, self.dataExtracted)
+#        if self.templChoice or \
+#            self.dataExtracted:
+#            self.fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_addfields)
+#        import pdb
+#        pdb.set_trace()
+#        return AddForm.__call__(self)
+
+    def update(self):
+        """update all widgets"""
+        session = ISession(self.request)[SESSION_KEY]
+        print "###### update() (%s) (%s)" % (self._templChoice, self._dataExtracted)
+        print "> :", session
+#        import pdb
+#        pdb.set_trace()
+        try:
+            if session['state'] == "templateOk":
+                print "------------ 1"
+                self.fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_addfields)
+            elif session['state'] == "dataExtracted":
+                print "------------ 2"
+                #self.fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_addfields)
+            elif session['state'] == "done":
+                print "------------ 3"
+                #self.fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_addfields)
+                del session['state']
+            else:
+                print "------------ 4"
+                #self.fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_addfields)
+        except KeyError:
+            print "++++++++++++ 5"
+            self.fields = field.Fields(IAddMobilePhones)
+        return AddForm.update(self)
+#        
+##        if self.templChoice or \
+##            self.dataExtracted:
+#        if not self._templChoice:
+#            self.fields = field.Fields(IAddMobilePhones)
+#        else:
+#            self.fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_addfields)
+#        return AddForm.update(self)
+    
+    @button.buttonAndHandler(u'Cancel')
+    def handleCancel(self, action):
+        """cancel was pressed"""
+        session = ISession(self.request)[SESSION_KEY]
+        try:
+            del session['state']
+        except KeyError:
+            pass
+        url = absoluteURL(self.context, self.request)
+        self.request.response.redirect(url)
+        
+#    @button.buttonAndHandler(u'Add from template')
+#    def handleAdd(self, action):
+    @button.buttonAndHandler(_('Add'), name='add')
+    def handleAdd(self, action):
+        """submit was pressed"""
+#        import pdb
+#        pdb.set_trace()
+        session = ISession(self.request)[SESSION_KEY]
+        if 'template' in self.widgets and \
+            self.widgets['template'] is not None and \
+            len(self.widgets['template'].value) > 0:
+            print "............... 5"
+            #action.value = u"Add1"
+#            import pdb
+#            pdb.set_trace()
+            print "iii: ", self.widgets['template']
+            addObjIntId = int(self.widgets['template'].value[0])
+            intIdUtil = getUtility(IIntIds)
+            addObj = intIdUtil.queryObject(addObjIntId)
+            if addObj is not None:
+#                import pdb
+#                pdb.set_trace()
+#                print addObj.ikName
+                self.context = addObj
+                session['state'] = "templateOk" 
+                #self._templChoice = True
+                self.fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_addfields)
+#                self.factory = MobilePhone
+#                form.extends(form.AddForm)
+                self.updateWidgets()
+#                self.update()
+#                for field_n, field_o in self.fields.items():
+                for field_n in self.fields:
+                    if field_n == "user":
+                        import pdb
+                        pdb.set_trace()
+                    w21=self.widgets[field_n]
+                    f21=self.fields[field_n]
+                    dc21=zope.component.queryMultiAdapter((w21.field,w21),interfaces.IDataConverter)
+                    val21 = getattr(addObj, field_n)
+                    wval21 = dc21.toWidgetValue(val21)
+                    if val21 is not None and \
+                        field_n != "isTemplate":
+                        self.widgets[field_n].value = wval21
+                    
+##                    attrField = IMobilePhone[attr]
+##                    attrDm = datamanager.AttributeField(item_v, attrField)
+#                    attrDm = datamanager.AttributeField(addObj, field_o)
+#                    dateValue = attrDm.get()
+#                    v_widget = zope.component.getMultiAdapter(\
+#                                    (field_o.field,self.request),
+#                                    interfaces.IFieldWidget)
+#                    #(self, self.request, self.getContent())
+#                    v_dataconverter = zope.component.queryMultiAdapter(\
+#                                    (attrDm.field, v_widget),
+#                                    interfaces.IDataConverter)
+#                    if v_dataconverter is not None:
+#                        import pdb
+#                        pdb.set_trace()
+#                        i_val = v_dataconverter.toWidgetValue(dateValue)
+#                    else:
+#                        i_val = getattr(addObj, field_n)
+#                    if i_val is not None and \
+#                        field_n != "isTemplate":
+#                        self.widgets[field_n].value = i_val
+#                        print "uuu: ", i_val
+##                import pdb
+##                pdb.set_trace()
+##                self.update()
+#                self._templChoice = True
+#                #return self.render()
+        else:
+            print "............... 4"
+            #action.value = u"Add2"
+            self.fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_addfields)
+            data, errors = self.extractData()
+            session['state'] = "dataExtracted" 
+            self._dataExtracted = True
+#            import pdb
+#            pdb.set_trace()
+            if errors:
+                self.status = self.formErrorsMessage
+                return
+            obj = self.createAndAdd(data)
+            if obj is not None:
+                # mark only as finished if we get the new object
+                self._finishedAdd = True
+                session['state'] = "done" 
+            url = absoluteURL(self, self.request)
+            self.request.response.redirect(url)
+
 
 class ImportCsvDataForm(layout.FormLayoutSupport, form.Form):
     """ Delete the net """
@@ -350,9 +514,6 @@ class ImportXlsDataForm(layout.FormLayoutSupport, form.Form):
             parseRet = pyExcelerator.parse_xls(f_name, codepage)
             os.remove(f_name)
             for sheet_name, values in parseRet:
-                print 'Sheet = "%s"' % sheet_name.encode(codepage,
-                                                         'backslashreplace')
-                print '----------------'
                 matrix = [[]]
                 for row_idx, col_idx in sorted(values.keys()):
                     v = values[(row_idx, col_idx)]

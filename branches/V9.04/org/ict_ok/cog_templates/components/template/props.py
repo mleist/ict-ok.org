@@ -33,7 +33,13 @@ purpose = r"""test component
 A test component will server some tests ...
 """
 
+attrDict = {
+    'attr1': 'TextLine',
+    'attr2': 'Choice',
+    'attr3': 'Date',
+    }
+
 copyrights = [2006, 2007, 2008, 2009]
 
 if __name__=="__main__":
-  print filename + ".py"
+    print filename + ".py"

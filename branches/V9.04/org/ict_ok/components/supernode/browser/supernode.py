@@ -37,6 +37,6 @@ from org.ict_ok.components.superclass.browser.superclass import \
 class SupernodeDetails(SuperclassDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SuperclassDetails.omit_viewfields + ['isTemplate']
-    omit_addfields = SuperclassDetails.omit_addfields + ['isTemplate']
-    omit_editfields = SuperclassDetails.omit_editfields + ['isTemplate']
+    omit_viewfields = SuperclassDetails.omit_viewfields + []
+    omit_addfields = SuperclassDetails.omit_addfields + []
+    omit_editfields = SuperclassDetails.omit_editfields + []

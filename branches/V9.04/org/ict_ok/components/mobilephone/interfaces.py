@@ -9,7 +9,6 @@
 #
 # pylint: disable-msg=E0213,W0232
 #
-from pyExcelerator.BIFFRecords import CodepageBiff8Record
 """Interface of MobilePhone"""
 
 
@@ -26,27 +25,6 @@ from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
-
-
-class IImportXlsData(Interface):
-    """Interface for all Objects"""
-    xlsdata = Bytes(
-        title = _("XLS data"),
-        required = True)
-    
-    codepage = Choice(
-        title = _("Codepage"),
-        description = _("Codepage of XLS"),
-        vocabulary="AllXlsCodepages",
-        default = 'cp850',
-        required = True)
-
-
-class IImportCsvData(Interface):
-    """Interface for all Objects"""
-    csvdata = Bytes(
-        title = _("CSV data"),
-        required = True)
 
 
 class IMobilePhone(IComponent):
@@ -151,9 +129,6 @@ class IMobilePhone(IComponent):
         description = _("Subscriber Identity Module Number"),
         required = False)
     
-
-    
-    
     def trigger_online():
         """
         trigger workflow
@@ -163,3 +138,10 @@ class IMobilePhone(IComponent):
 class IMobilePhoneFolder(ISuperclass, IFolder):
     """Container for MobilePhone objects
     """
+
+class IAddMobilePhones(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllMobilePhoneTemplates",
+        required = False)

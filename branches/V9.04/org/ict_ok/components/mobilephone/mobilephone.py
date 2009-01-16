@@ -7,7 +7,7 @@
 #
 # $Id: template.py_cog 399 2009-01-08 14:00:17Z markusleist $
 #
-# pylint: disable-msg=E1101,W0142
+# pylint: disable-msg=E1101,E0611,W0142
 #
 """implementation of MobilePhone"""
 
@@ -21,7 +21,6 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 from zope.app.folder import Folder
 
 # lovely imports
@@ -33,18 +32,33 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.mobilephone.interfaces import IMobilePhone
-from org.ict_ok.components.mobilephone.interfaces import IMobilePhoneFolder, \
+from org.ict_ok.components.mobilephone.interfaces import IMobilePhoneFolder, IAddMobilePhones
+from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component
 
 def AllMobilePhones(dummy_context):
-    """Which MobilePhone are there
+    """Which MobilePhone exists
     """
     terms = []
     uidutil = getUtility(IIntIds)
     for (oid, oobj) in uidutil.items():
         if IMobilePhone.providedBy(oobj.object):
             myString = u"%s" % (oobj.object.getDcTitle())
+            terms.append(SimpleTerm(oobj.object,
+                                    token=oid,
+                                    title=myString))
+    return SimpleVocabulary(terms)
+
+def AllMobilePhoneTemplates(dummy_context):
+    """Which MobilePhone templates exists
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IMobilePhone.providedBy(oobj.object) and \
+        oobj.object.isTemplate:
+            myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
                                     token=oid,
                                     title=myString))
@@ -156,7 +170,8 @@ class MobilePhone(Component):
 class MobilePhoneFolder(Superclass, Folder):
     implements(IMobilePhoneFolder, 
                IImportCsvData,
-               IImportXlsData)
+               IImportXlsData,
+               IAddMobilePhones)
     def __init__(self, **data):
         """
         constructor of the object

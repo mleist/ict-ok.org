@@ -14,8 +14,8 @@
 __version__ = "$Id$"
 
 # zope imports
-from zope.interface import Attribute
-from zope.schema import Bool, Choice
+from zope.interface import Attribute, Interface
+from zope.schema import Bool, Choice, Bytes
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -53,3 +53,26 @@ class IComponent(ISupernode):
         weighted count of accesses
         !!!!!! has to be implemented by subclass !!!!!!
         """
+
+        
+class IImportXlsData(Interface):
+    """Interface for all Objects"""
+    xlsdata = Bytes(
+        title = _("XLS data"),
+        required = True)
+    
+    codepage = Choice(
+        title = _("Codepage"),
+        description = _("Codepage of XLS"),
+        vocabulary="AllXlsCodepages",
+        default = 'cp850',
+        required = True)
+
+
+class IImportCsvData(Interface):
+    """Interface for all Objects"""
+    csvdata = Bytes(
+        title = _("CSV data"),
+        required = True)
+
+
