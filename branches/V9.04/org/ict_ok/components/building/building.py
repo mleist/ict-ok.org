@@ -26,11 +26,24 @@ from zope.component import getUtility
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.app.folder import Folder
+
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
+from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.location.interfaces import ILocation
-from org.ict_ok.components.building.interfaces import IBuilding
+from org.ict_ok.components.building.interfaces import \
+    IBuilding, IAddBuilding, IBuildingFolder
+from org.ict_ok.components.room.interfaces import IRoom
+from org.ict_ok.components.location.location import Location_Buildings_RelManager
 
 
 def AllBuildingsVocab(dummy_context):
@@ -50,6 +63,62 @@ def AllBuildingsVocab(dummy_context):
                                myString))
     return SimpleVocabulary(terms)
 
+def AllBuildingTemplates(dummy_context):
+    """Which MobilePhone templates exists
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IBuilding.providedBy(oobj.object) and \
+        oobj.object.isTemplate:
+            myString = u"%s [T]" % (oobj.object.getDcTitle())
+            terms.append(SimpleTerm(oobj.object,
+                                    token=oid,
+                                    title=myString))
+    return SimpleVocabulary(terms)
+
+def AllBuildings(dummy_context):
+    """In which production state a host may be
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IBuilding.providedBy(oobj.object):
+            myString = u"%s" % (oobj.object.getDcTitle())
+            terms.append(\
+                SimpleTerm(oobj.object,
+                           token=oid,
+                           title=myString))
+    return SimpleVocabulary(terms)
+    
+def AllUnusedOrSelfBuildings(dummy_context):
+    """In which production state a host may be
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IBuilding.providedBy(oobj.object):
+            if not oobj.object.isTemplate:
+                if oobj.object.location is None:
+                    myString = u"%s" % (oobj.object.getDcTitle())
+                    terms.append(\
+                        SimpleTerm(oobj.object,
+                                   token=oid,
+                                   title=myString))
+                else:
+                    if oobj.object.location == dummy_context:
+                        myString = u"%s" % (oobj.object.getDcTitle())
+                        terms.append(\
+                            SimpleTerm(oobj.object,
+                                       token=oid,
+                                       title=myString))
+    return SimpleVocabulary(terms)
+
+
+Building_Rooms_RelManager = FieldRelationManager(IBuilding['rooms'],
+                                                 IRoom['building'],
+                                                 relType='building:rooms')
+
 
 class Building(Component):
     """
@@ -64,12 +133,36 @@ class Building(Component):
     coordinates = FieldProperty(IBuilding['coordinates'])
     gmapsurl = FieldProperty(IBuilding['gmapsurl'])
 
+    location = RelationPropertyIn(Location_Buildings_RelManager)
+    rooms = RelationPropertyOut(Building_Rooms_RelManager)
+
     def __init__(self, **data):
         """
         constructor of the object
         """
         Component.__init__(self, **data)
+        refAttributeNames = getRefAttributeNames(Building)
         for (name, value) in data.items():
             if name in IBuilding.names():
-                setattr(self, name, value)
+                if name not in refAttributeNames:
+                    setattr(self, name, value)
         self.ikRevision = __version__
+
+    def store_refs(self, **data):
+        refAttributeNames = getRefAttributeNames(Building)
+        for (name, value) in data.items():
+            if name in refAttributeNames:
+                setattr(self, name, value)
+
+
+class BuildingFolder(Superclass, Folder):
+    implements(IBuildingFolder, 
+               IImportCsvData,
+               IImportXlsData,
+               IAddBuilding)
+    def __init__(self, **data):
+        """
+        constructor of the object
+        """
+        Superclass.__init__(self, **data)
+        Folder.__init__(self)

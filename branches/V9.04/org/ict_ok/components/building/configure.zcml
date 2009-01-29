@@ -34,6 +34,43 @@
             set_schema=".interfaces.IBuilding"
             />
     </class>
+    <class class=".building.BuildingFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.building.building.BuildingFolder"
+            description="Building"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface=".interfaces.IBuildingFolder"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema=".interfaces.IBuildingFolder"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+            
+    </class>
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
@@ -53,6 +90,21 @@
         component=".building.AllBuildingsVocab"
         name="AllBuildingsVocab"
         />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".building.AllBuildingTemplates"
+        name="AllBuildingTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".building.AllUnusedOrSelfBuildings"
+        name="AllUnusedOrSelfBuildings"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".building.AllBuildings"
+        name="AllBuildings"
+    />
 
     <!-- include package=".generations" / -->
 

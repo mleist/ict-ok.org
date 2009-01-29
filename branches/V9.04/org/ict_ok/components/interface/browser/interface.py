@@ -29,16 +29,21 @@ from zope.component import createObject
 
 # z3c imports
 from z3c.form import field
+from z3c.form.browser import checkbox
 from z3c.pagelet.interfaces import IPagelet
 
 # ict_ok.org imports
-from org.ict_ok.components.interface.interfaces import IInterface, IInterfaceSnmpScanWizard
+from org.ict_ok.components.interface.interfaces import \
+    IInterface, IInterfaceSnmpScanWizard, IAddInterface
 from org.ict_ok.components.interface.interface import Interface
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm, EditContent
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -66,6 +71,16 @@ class InterfaceDetails(ComponentDetails):
     omit_addfields = ComponentDetails.omit_addfields + ['host21']
     omit_editfields = ComponentDetails.omit_editfields + ['host21']
 
+
+class InterfaceFolderDetails(ComponentDetails):
+    """ Class for MobilePhone details
+    """
+    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
+    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
+    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_viewfields)
+    attrInterface = IInterface
+
 # --------------- forms ------------------------------------
 
 
@@ -75,17 +90,30 @@ class DetailsInterfaceForm(DisplayForm):
     fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_viewfields)    
 
 
-class AddInterfaceForm(AddForm):
-    """Add form."""
+#class AddInterfaceForm(AddForm):
+#    """Add form."""
+#    label = _(u'Add Interface')
+#    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_addfields)
+#    factory = Interface
+    
+    
+class AddInterfaceForm(AddComponentForm):
     label = _(u'Add Interface')
-    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_addfields)
+    addFields = field.Fields(IAddInterface)
+    allFields = field.Fields(IInterface).omit(*InterfaceDetails.omit_addfields)
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
     factory = Interface
+    attrInterface = IInterface
+    _session_key = 'org.ict_ok.components.interface'
 
 
 class EditInterfaceForm(EditForm):
     """ Edit for for net """
     label = _(u'Interface Edit Form')
     fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_editfields)
+    fields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
     #def update(self):
         #import pdb
         #pdb.set_trace()
@@ -409,3 +437,13 @@ class SnmpScanWizardForm(AddForm):
             #travp = self.context.__parent__
         #travp[obj.objectID] = obj
         #return obj
+
+
+class ImportCsvDataForm(ImportCsvDataComponentForm):
+    pass
+
+
+class ImportXlsDataForm(ImportXlsDataComponentForm):
+    allFields = field.Fields(IInterface)
+    attrInterface = IInterface
+    factoryId = u'org.ict_ok.components.interface.interface.Interface'

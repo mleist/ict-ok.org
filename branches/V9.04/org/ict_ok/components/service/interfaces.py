@@ -14,10 +14,13 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Int, TextLine, Choice
+from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
@@ -45,4 +48,15 @@ class IService(IComponent):
         title = _("Protocol"),
         description = _("IP-Protocol to use with this service."),
         values = [u"tcp", u"udp", u"tcp/udp"],
+        required = False)
+
+class IServiceFolder(ISuperclass, IFolder):
+    """Container for Service objects
+    """
+
+class IAddService(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllServiceTemplates",
         required = False)

@@ -15,10 +15,13 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.interface import Interface
 from zope.interface import Attribute, Invalid, invariant
 from zope.schema import Bool, Choice, List
+from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.schema.snmpoidvalid import SnmpOidValid
 from org.ict_ok.schema.physicalvalid import PhysicalQuantity, \
@@ -367,3 +370,14 @@ class ISnmpValue(IComponent):
     def generateValuePng(params=None):
         """generate Picture
         """
+
+class ISnmpValueFolder(ISuperclass, IFolder):
+    """Container for SnmpValue objects
+    """
+
+class IAddSnmpValue(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllSnmpValueTemplates",
+        required = False)

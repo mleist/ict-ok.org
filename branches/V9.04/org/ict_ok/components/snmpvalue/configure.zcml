@@ -34,6 +34,43 @@
             set_schema=".interfaces.ISnmpValue"
             />
     </class>
+    
+    <class class=".snmpvalue.SnmpValueFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.snmpvalue.snmpvalue.SnmpValueFolder"
+            description="SnmpValueFolder"
+            />
+        <require
+            permission="org.ict_ok.components.snmpvalue.View"
+            interface=".interfaces.ISnmpValueFolder"
+            />
+        <require
+            permission="org.ict_ok.components.snmpvalue.Edit"
+            set_schema=".interfaces.ISnmpValueFolder"
+            />
+        <require
+            permission="org.ict_ok.components.snmpvalue.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.snmpvalue.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.snmpvalue.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.snmpvalue.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />        
+    </class>
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
@@ -90,6 +127,12 @@
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".snmpvalue.AllSnmpValueTemplates"
+        name="AllSnmpValueTemplates"
+    />
+    
     <include package=".generations" />
 
 </configure>

@@ -34,6 +34,43 @@
             set_schema=".interfaces.IService"
             />
     </class>
+    
+    <class class=".service.ServiceFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.service.service.ServiceFolder"
+            description="ServiceFolder"
+            />
+        <require
+            permission="org.ict_ok.components.service.View"
+            interface=".interfaces.IServiceFolder"
+            />
+        <require
+            permission="org.ict_ok.components.service.Edit"
+            set_schema=".interfaces.IServiceFolder"
+            />
+        <require
+            permission="org.ict_ok.components.service.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.service.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.service.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.service.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+    </class>
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
@@ -64,6 +101,12 @@
     <adapter
         factory=".adapter.nagios.GenNagios"
         permission="org.ict_ok.admin_utils.generators.nagios.View"
+    />
+    
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".service.AllServiceTemplates"
+        name="AllServiceTemplates"
     />
 
     <include package=".generations" />

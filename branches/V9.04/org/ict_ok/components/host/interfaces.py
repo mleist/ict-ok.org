@@ -14,13 +14,16 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.interface import Attribute
 from zope.schema import Bool, Choice, List, Password, Set, TextLine, Int, Object
 from zope.schema.interfaces import IObject
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
+from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.interfaces import \
      IEventIfSupernode
@@ -35,7 +38,7 @@ class IHost(IComponent):
     
     interfaces2 = List(title=u"Interfaces 0..n",
                       #value_type=Object(IObject),
-                      value_type=Choice(vocabulary='AllInterfaces'),
+                      value_type=Choice(vocabulary='AllUnusedOrSelfInterfaces'),
                       required=False,
                       default=[])
     #related = schema.List(
@@ -236,3 +239,15 @@ class IEventIfEventHost(IEventIfSupernode):
 
     def eventInp_shutdown(eventMsg):
         """ start the shutdown of the host """
+
+
+class IHostFolder(ISuperclass, IFolder):
+    """Container for host objects
+    """
+
+class IAddHost(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllHostTemplates",
+        required = False)

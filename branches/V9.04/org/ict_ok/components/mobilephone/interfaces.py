@@ -139,7 +139,7 @@ class IMobilePhoneFolder(ISuperclass, IFolder):
     """Container for MobilePhone objects
     """
 
-class IAddMobilePhones(Interface):
+class IAddMobilePhone(Interface):
     """Interface for all Objects"""
     template = Choice(
         title = _("Template"),

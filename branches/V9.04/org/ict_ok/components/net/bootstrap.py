@@ -75,5 +75,16 @@ def bootStrapSubscriber(event):
 
     createLocalSystem(root_folder)
 
+    folderName = u"Nets"
+    if folderName not in root_folder.keys():
+        #newFolder = TestComponentFolder()
+        newFolder = createObject(u'org.ict_ok.components.net.net.NetFolder')
+        root_folder[folderName] = newFolder
+        dcore = IZopeDublinCore(newFolder, None)
+        #dcore.creators = [u'ikportscan']
+        #newFolder.ikComment += u"scanner: %s" % (dateNow)
+        newFolder.__setattr__("ikName", folderName)
+        dcore.title = folderName
+
     transaction.get().commit()
     connection.close()

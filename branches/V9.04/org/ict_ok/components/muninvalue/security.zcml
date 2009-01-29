@@ -7,49 +7,49 @@
         Markus Leist <leist@ikom-online.de> -->
 
     <permission
-        id="org.ict_ok.components.latency.View"
+        id="org.ict_ok.components.muninvalue.View"
         title="View Template Entry"
         description="View the Template Entry and all its content."
     />
 
     <permission
-        id="org.ict_ok.components.latency.Add"
+        id="org.ict_ok.components.muninvalue.Add"
         title="Add Template Entry"
         description="Add Template Entry."
     />
 
     <permission
-        id="org.ict_ok.components.latency.Edit"
+        id="org.ict_ok.components.muninvalue.Edit"
         title="Edit Template Entry"
         description="Edit Template Entry."
     />
 
     <permission
-        id="org.ict_ok.components.latency.Delete"
+        id="org.ict_ok.components.muninvalue.Delete"
         title="Delete Template Entry"
         description="Delete Template Entry."
     />
 
-    <grant permission="org.ict_ok.components.latency.View"
+    <grant permission="org.ict_ok.components.muninvalue.View"
                     role="org.ict_ok.usr" />
-    <grant permission="org.ict_ok.components.latency.View"
+    <grant permission="org.ict_ok.components.muninvalue.View"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.latency.View"
+    <grant permission="org.ict_ok.components.muninvalue.View"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.latency.Add"
+    <grant permission="org.ict_ok.components.muninvalue.Add"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.latency.Add"
+    <grant permission="org.ict_ok.components.muninvalue.Add"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.latency.Edit"
+    <grant permission="org.ict_ok.components.muninvalue.Edit"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.latency.Edit"
+    <grant permission="org.ict_ok.components.muninvalue.Edit"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.latency.Delete"
+    <grant permission="org.ict_ok.components.muninvalue.Delete"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.latency.Delete"
+    <grant permission="org.ict_ok.components.muninvalue.Delete"
                     role="org.ict_ok.adm" />
 
 </configure>

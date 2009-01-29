@@ -34,6 +34,43 @@
             set_schema=".interfaces.IInterface"
             />
     </class>
+    
+    <class class=".interface.InterfaceFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.interface.interface.InterfaceFolder"
+            description="InterfaceFolder"
+            />
+        <require
+            permission="org.ict_ok.components.interface.View"
+            interface=".interfaces.IInterfaceFolder"
+            />
+        <require
+            permission="org.ict_ok.components.interface.Edit"
+            set_schema=".interfaces.IInterfaceFolder"
+            />
+        <require
+            permission="org.ict_ok.components.interface.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.interface.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.interface.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.interface.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+    </class>
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
@@ -71,6 +108,16 @@
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".interface.AllInterfaces"
         name="AllInterfaces"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".interface.AllInterfaceTemplates"
+        name="AllInterfaceTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".interface.AllUnusedOrSelfInterfaces"
+        name="AllUnusedOrSelfInterfaces"
     />
     
     <include package=".generations" />

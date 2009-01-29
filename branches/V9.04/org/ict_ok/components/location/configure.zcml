@@ -34,6 +34,44 @@
             set_schema=".interfaces.ILocation"
             />
     </class>
+    
+    <class class=".location.LocationFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.location.location.LocationFolder"
+            description="LocationFolder"
+            />
+        <require
+            permission="org.ict_ok.components.location.View"
+            interface=".interfaces.ILocationFolder"
+            />
+        <require
+            permission="org.ict_ok.components.location.Edit"
+            set_schema=".interfaces.ILocationFolder"
+            />
+        <require
+            permission="org.ict_ok.components.location.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.location.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.location.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.location.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+            
+    </class>
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
@@ -58,7 +96,17 @@
         component=".location.AllLocationsVocab"
         name="AllLocationsVocab"
         />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".location.AllLocationTemplates"
+        name="AllLocationTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".location.AllLocations"
+        name="AllLocations"
+    />
 
-    <!-- include package=".generations" / -->
+    <include package=".generations" />
 
 </configure>

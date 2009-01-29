@@ -29,6 +29,7 @@ from zope.interface import directlyProvides
 
 # z3c imports
 from z3c.form import button, field
+from z3c.form.browser import checkbox
 
 # zc imports
 from zc.table.column import Column, GetterColumn
@@ -44,7 +45,8 @@ from org.ict_ok.admin_utils.netscan.interfaces import INetScan
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
-from org.ict_ok.components.net.interfaces import INet, IEventIfEventNet
+from org.ict_ok.components.net.interfaces import \
+    INet, IEventIfEventNet, IAddNet
 from org.ict_ok.components.net.net import getAllNetworks, Net
 from org.ict_ok.admin_utils.netscan.interfaces import \
      IScanner
@@ -52,6 +54,9 @@ from org.ict_ok.components.superclass.browser.superclass import \
      Overview, \
      getStateIcon, getTitle, getModifiedDate, getActionBottons, getHealth, \
      raw_cell_formatter, IPsGetterColumn, TitleGetterColumn
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -136,6 +141,16 @@ class NetDetails(ComponentDetails):
         slaveSupervisor = zapi.queryUtility(IAdmUtilSupervisor,
                                             context=self.context)
         return slaveSupervisor.objectID
+    
+
+class NetFolderDetails(ComponentDetails):
+    """ Class for MobilePhone details
+    """
+    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
+    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
+    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    fields = field.Fields(INet).omit(*NetDetails.omit_viewfields)
+    attrInterface = INet
 
 # --------------- forms ------------------------------------
 
@@ -145,18 +160,31 @@ class DetailsNetForm(DisplayForm):
     label = _(u'settings of net')
     fields = field.Fields(INet).omit(*NetDetails.omit_viewfields)
 
-class AddNetForm(AddForm):
-    """Add form."""
+#class AddNetForm(AddForm):
+#    """Add form."""
+#    label = _(u'Add Net')
+#    fields = field.Fields(INet).omit(*NetDetails.omit_addfields)
+#    factory = Net
+    
+    
+class AddNetForm(AddComponentForm):
     label = _(u'Add Net')
-    fields = field.Fields(INet).omit(*NetDetails.omit_addfields)
+    addFields = field.Fields(IAddNet)
+    allFields = field.Fields(INet).omit(*NetDetails.omit_addfields)
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
     factory = Net
+    attrInterface = INet
+    _session_key = 'org.ict_ok.components.net'
 
 
 class EditNetForm(EditForm):
     """ Edit for for net """
     label = _(u'Net Edit Form')
     fields = field.Fields(INet).omit(*NetDetails.omit_editfields)
-    
+    fields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
+
     ##TODO: Test-Button
     #@button.buttonAndHandler(u'test', name='test')
     #def handleApplyView(self, action):
@@ -248,3 +276,13 @@ def NamePrefixes(dummy_context=None):
         except ValueError:
             pass
     return SimpleVocabulary(terms)
+
+
+class ImportCsvDataForm(ImportCsvDataComponentForm):
+    pass
+
+
+class ImportXlsDataForm(ImportXlsDataComponentForm):
+    allFields = field.Fields(INet)
+    attrInterface = INet
+    factoryId = u'org.ict_ok.components.net.net.Net'

@@ -21,8 +21,10 @@ from zope.interface import Attribute, Interface, Invalid, invariant
 from zope.i18nmessageid import MessageFactory
 from zope.app.catalog.interfaces import ICatalog
 from zope.app.container.constraints import contains
+from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.schema.ipvalid import HostIpValid
@@ -134,6 +136,20 @@ class IInterface(IComponent):
             if len(alreadyFound) > 0:
                 raise Invalid("The IP address already used in interface %s" % \
                               " ".join(alreadyFound))
+
+
+class IInterfaceFolder(ISuperclass, IFolder):
+    """Container for interface objects
+    """
+
+
+class IAddInterface(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllInterfaceTemplates",
+        required = False)
+
 
 class IInterfaceSnmpScanWizard(Interface):
     """A interface object."""

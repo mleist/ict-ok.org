@@ -34,6 +34,44 @@
             set_schema=".interfaces.ILatency"
             />
     </class>
+    
+    <class class=".latency.LatencyFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.latency.latency.LatencyFolder"
+            description="LatencyFolder"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface=".interfaces.ILatencyFolder"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema=".interfaces.ILatencyFolder"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+            
+    </class>
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
@@ -66,6 +104,11 @@
 
     <adapter
         factory=".adapter.ticker.Ticker"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".latency.AllLatencyTemplates"
+        name="AllLatencyTemplates"
     />
     
     <include package=".generations" />

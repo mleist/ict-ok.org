@@ -17,8 +17,10 @@ __version__ = "$Id$"
 from zope.interface import Attribute, Interface
 from zope.schema import Bool, Choice, Bytes
 from zope.i18nmessageid import MessageFactory
+from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
@@ -53,6 +55,11 @@ class IComponent(ISupernode):
         weighted count of accesses
         !!!!!! has to be implemented by subclass !!!!!!
         """
+
+
+class IComponentFolder(ISuperclass, IFolder):
+    """Container for MobilePhone objects
+    """
 
         
 class IImportXlsData(Interface):

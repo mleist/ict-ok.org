@@ -14,11 +14,14 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.schema import Choice, Set
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
+from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.interfaces import \
      IEventIfSupernode
@@ -62,3 +65,14 @@ class IEventIfEventNet(IEventIfSupernode):
         """
         forward the event to all objects in this container through the signal filter
         """
+
+class INetFolder(ISuperclass, IFolder):
+    """Container for net objects
+    """
+
+class IAddNet(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllNetTemplates",
+        required = False)

@@ -14,10 +14,13 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import TextLine
+from zope.schema import TextLine, Choice
+from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
@@ -26,6 +29,12 @@ _ = MessageFactory('org.ict_ok')
 class IRoom(IComponent):
     """A service object."""
 
+    building = Choice(
+        title=_(u'Building'),
+        vocabulary='AllBuildings',
+        required=False
+        )
+    
     level = TextLine(
         max_length = 80,
         title = _("Level"),
@@ -38,4 +47,15 @@ class IRoom(IComponent):
         title = _("coordinates"),
         description = _("Coordinates of the room."),
         default = u"",
+        required = False)
+
+class IRoomFolder(ISuperclass, IFolder):
+    """Container for room objects
+    """
+
+class IAddRoom(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllRoomTemplates",
         required = False)

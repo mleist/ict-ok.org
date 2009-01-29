@@ -32,12 +32,14 @@ from zope.app.catalog.interfaces import ICatalog
 
 # z3c imports
 from z3c.form import form, field
+from z3c.form.browser import checkbox
 from z3c.pagelet.browser import BrowserPagelet
 from zc.table.column import GetterColumn
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
-from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
+from org.ict_ok.components.host.interfaces import \
+    IHost, IEventIfEventHost, IAddHost
 from org.ict_ok.components.host.host import getAllHosts, Host
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
@@ -56,6 +58,9 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.admin_utils.compliance.browser.requirement import raw_cell_formatter
 from org.ict_ok.admin_utils.compliance.browser.compliance import \
      GetterColumn
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -65,7 +70,7 @@ _ = MessageFactory('org.ict_ok')
 class MSubAddHost(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Host')
-    viewURL = 'add_hosts.html'
+    viewURL = 'add_host.html'
     weight = 50
 
 # --------------- helper funktions -----------------------------
@@ -220,6 +225,16 @@ class HostDetails(ComponentDetails):
         return owfs
 
 
+class HostFolderDetails(ComponentDetails):
+    """ Class for MobilePhone details
+    """
+    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
+    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
+    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
+    attrInterface = IHost
+
+
 class AddHostClass(BrowserPagelet):
     def update(self):
         pass
@@ -261,11 +276,22 @@ class SmartviewForm(DisplayForm):
     fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
 
 
-class AddHostForm(AddForm):
-    """Add form."""
+#class AddHostForm(AddForm):
+#    """Add form."""
+#    label = _(u'Add Host')
+#    fields = field.Fields(IHost).omit(*HostDetails.omit_addfields)
+#    factory = Host
+
+
+class AddHostForm(AddComponentForm):
     label = _(u'Add Host')
-    fields = field.Fields(IHost).omit(*HostDetails.omit_addfields)
+    addFields = field.Fields(IAddHost)
+    allFields = field.Fields(IHost).omit(*HostDetails.omit_addfields)
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
     factory = Host
+    attrInterface = IHost
+    _session_key = 'org.ict_ok.components.host'
 
 
 class EditHostForm(EditForm):
@@ -273,6 +299,8 @@ class EditHostForm(EditForm):
     form.extends(form.EditForm)
     label = _(u'Host Edit Form')
     fields = field.Fields(IHost).omit(*HostDetails.omit_editfields)
+    fields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class DeleteHostForm(DeleteForm):
@@ -359,3 +387,12 @@ class AllHosts(Overview):
         """List of Content objects"""
         return getAllHosts()
 
+
+class ImportCsvDataForm(ImportCsvDataComponentForm):
+    pass
+
+
+class ImportXlsDataForm(ImportXlsDataComponentForm):
+    allFields = field.Fields(IHost)
+    attrInterface = IHost
+    factoryId = u'org.ict_ok.components.host.host.Host'

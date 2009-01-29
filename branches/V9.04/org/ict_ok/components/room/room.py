@@ -26,13 +26,24 @@ from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component.interfaces import ComponentLookupError
+from zope.app.folder import Folder
+
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.location.interfaces import ILocation
 from org.ict_ok.components.building.interfaces import IBuilding
-from org.ict_ok.components.room.interfaces import IRoom
-
+from org.ict_ok.components.room.interfaces import \
+    IRoom, IAddRoom, IRoomFolder
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
+from org.ict_ok.components.building.building import Building_Rooms_RelManager
 
 def AllRoomsVocab(dummy_context):
     """Which locations are there
@@ -57,6 +68,46 @@ def AllRoomsVocab(dummy_context):
     except ComponentLookupError:
         return SimpleVocabulary([])
 
+def AllRoomTemplates(dummy_context):
+    """Which room templates exists
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IRoom.providedBy(oobj.object) and \
+        oobj.object.isTemplate:
+            myString = u"%s [T]" % (oobj.object.getDcTitle())
+            terms.append(SimpleTerm(oobj.object,
+                                    token=oid,
+                                    title=myString))
+    return SimpleVocabulary(terms)
+
+def AllUnusedOrSelfRooms(dummy_context):
+    """In which production state a host may be
+    """
+#    import pdb
+#    pdb.set_trace()
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IRoom.providedBy(oobj.object):
+            if not oobj.object.isTemplate:
+                if oobj.object.building is None:
+                    myString = u"%s" % (oobj.object.getDcTitle())
+                    terms.append(\
+                        SimpleTerm(oobj.object,
+                                   token=oid,
+                                   title=myString))
+                else:
+#                    if oobj.object.building == dummy_context:
+                    myString = u"%s" % (oobj.object.getDcTitle())
+                    terms.append(\
+                        SimpleTerm(oobj.object,
+                                   token=oid,
+                                   title=myString))
+    return SimpleVocabulary(terms)
+
+
 
 class Room(Component):
     """
@@ -69,12 +120,35 @@ class Room(Component):
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(IRoom['ikAttr'])
 
+    building = RelationPropertyIn(Building_Rooms_RelManager)
+
     def __init__(self, **data):
         """
         constructor of the object
         """
         Component.__init__(self, **data)
+        refAttributeNames = getRefAttributeNames(Room)
         for (name, value) in data.items():
             if name in IRoom.names():
-                setattr(self, name, value)
+                if name not in refAttributeNames:
+                    setattr(self, name, value)
         self.ikRevision = __version__
+
+    def store_refs(self, **data):
+        refAttributeNames = getRefAttributeNames(Room)
+        for (name, value) in data.items():
+            if name in refAttributeNames:
+                setattr(self, name, value)
+
+
+class RoomFolder(Superclass, Folder):
+    implements(IRoomFolder, 
+               IImportCsvData,
+               IImportXlsData,
+               IAddRoom)
+    def __init__(self, **data):
+        """
+        constructor of the object
+        """
+        Superclass.__init__(self, **data)
+        Folder.__init__(self)

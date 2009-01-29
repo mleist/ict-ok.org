@@ -62,23 +62,6 @@
         permission="org.ict_ok.components.mobilephone.Delete"
     />
     
-    <z3c:pagelet
-        name="add_mobilephones.html"
-        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
-        class="org.ict_ok.components.mobilephone.browser.mobilephone.AddMobilePhones"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.mobilephone.Add"
-    />
-
-    <z3c:pagelet
-        name="add_mobilephone.html"
-        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
-        class="org.ict_ok.components.mobilephone.browser.mobilephone.AddMobilePhoneForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.mobilephone.Add"
-    />
-    <!--    for="org.ict_ok.components.mobilephone.interfaces.IMobilePhone"  -->
-
     <!-- Folder  -->
 
     <defaultView
@@ -93,6 +76,23 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.mobilephone.View"
         />
+
+    <z3c:pagelet
+        name="add_mobilephone.html"
+        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
+        class="org.ict_ok.components.mobilephone.browser.mobilephone.AddMobilePhoneForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.mobilephone.Add"
+    />
+
+    <!-- z3c:pagelet
+        name="add_mobilephone.html"
+        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
+        class="org.ict_ok.components.mobilephone.browser.mobilephone.AddMobilePhoneForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.mobilephone.Add"
+    / -->
+    <!--    for="org.ict_ok.components.mobilephone.interfaces.IMobilePhone"  -->
 
     <!-- Sub Menu  -->
 
@@ -137,14 +137,6 @@
         permission="org.ict_ok.components.mobilephone.Edit"
         />
     <viewlet
-        name="add_mobilephone"
-        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.components.mobilephone.browser.mobilephone.MSubAddMobilePhone"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.mobilephone.Add"
-        />
-    <viewlet
         name="add_dashboard"
         for="org.ict_ok.components.mobilephone.interfaces.IMobilePhone"
         manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
@@ -170,6 +162,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.mobilephone.View"
+        />
+    <viewlet
+        name="add_mobilephone"
+        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.mobilephone.browser.mobilephone.MSubAddMobilePhone"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.mobilephone.Add"
         />
     <page
         name="exportcsvdata.html"
@@ -201,14 +201,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.mobilephone.Add"
     />
-    <!--<page-->
-        <!--name="importcsvdata.html"-->
-        <!--for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"-->
-        <!--class=".mobilephone.MobilePhoneFolderDetails"-->
-        <!--permission="org.ict_ok.components.mobilephone.Add"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--attribute="setCSVraw"-->
-    <!--/>-->
     <viewlet
         name="exportcsvdata"
         for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"

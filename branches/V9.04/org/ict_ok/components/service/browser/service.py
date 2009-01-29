@@ -21,10 +21,11 @@ from zope.i18nmessageid import MessageFactory
 
 # z3c imports
 from z3c.form import field
+from z3c.form.browser import checkbox
 from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
-from org.ict_ok.components.service.interfaces import IService
+from org.ict_ok.components.service.interfaces import IService, IAddService
 from org.ict_ok.components.service.service import Service, getAllServices
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
@@ -33,6 +34,9 @@ from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -43,7 +47,7 @@ _ = MessageFactory('org.ict_ok')
 class MSubAddService(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Service')
-    viewURL = 'add_services.html'
+    viewURL = 'add_service.html'
     weight = 50
 
 
@@ -56,6 +60,17 @@ class ServiceDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
+
+
+class ServiceFolderDetails(ComponentDetails):
+    """ Class for MobilePhone details
+    """
+    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
+    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
+    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    fields = field.Fields(IService).omit(*ServiceDetails.omit_viewfields)
+    attrInterface = IService
+
 
 class AddServiceClass(BrowserPagelet):
     def update(self):
@@ -70,17 +85,30 @@ class DetailsServiceForm(DisplayForm):
     fields = field.Fields(IService).omit(*ServiceDetails.omit_viewfields)
 
 
-class AddServiceForm(AddForm):
-    """Add form."""
+#class AddServiceForm(AddForm):
+#    """Add form."""
+#    label = _(u'Add Service')
+#    fields = field.Fields(IService).omit(*ServiceDetails.omit_addfields)
+#    factory = Service
+    
+
+class AddServiceForm(AddComponentForm):
     label = _(u'Add Service')
-    fields = field.Fields(IService).omit(*ServiceDetails.omit_addfields)
+    addFields = field.Fields(IAddService)
+    allFields = field.Fields(IService).omit(*ServiceDetails.omit_addfields)
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
     factory = Service
+    attrInterface = IService
+    _session_key = 'org.ict_ok.components.service'
 
 
 class EditServiceForm(EditForm):
     """ Edit for for net """
     label = _(u'Service Edit Form')
     fields = field.Fields(IService).omit(*ServiceDetails.omit_editfields)
+    fields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class DeleteServiceForm(DeleteForm):
@@ -98,4 +126,13 @@ class AllServices(Overview):
         """List of Content objects"""
         return getAllServices()
 
+
+class ImportCsvDataForm(ImportCsvDataComponentForm):
+    pass
+
+
+class ImportXlsDataForm(ImportXlsDataComponentForm):
+    allFields = field.Fields(IService)
+    attrInterface = IService
+    factoryId = u'org.ict_ok.components.service.service.Service'
 

@@ -34,6 +34,43 @@
             set_schema=".interfaces.IRoom"
             />
     </class>
+    
+    <class class=".room.RoomFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.room.room.RoomFolder"
+            description="RoomFolder"
+            />
+        <require
+            permission="org.ict_ok.components.room.View"
+            interface=".interfaces.IRoomFolder"
+            />
+        <require
+            permission="org.ict_ok.components.room.Edit"
+            set_schema=".interfaces.IRoomFolder"
+            />
+        <require
+            permission="org.ict_ok.components.room.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.room.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.room.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.room.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />        
+    </class>
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
@@ -57,6 +94,16 @@
         component=".room.AllRoomsVocab"
         name="AllRoomsVocab"
         />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".room.AllRoomTemplates"
+        name="AllRoomTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".room.AllUnusedOrSelfRooms"
+        name="AllUnusedOrSelfRooms"
+    />
 
     <!-- include package=".generations" / -->
 

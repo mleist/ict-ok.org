@@ -42,6 +42,44 @@
             set_schema=".interfaces.IEventIfEventHost"
             />
     </class>
+    
+    <class class=".host.HostFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.host.host.HostFolder"
+            description="HostFolder"
+            />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface=".interfaces.IHostFolder"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema=".interfaces.IHostFolder"
+            />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+            
+    </class>
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
@@ -101,6 +139,11 @@
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".host.AllHosts"
         name="AllHosts"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".host.AllHostTemplates"
+        name="AllHostTemplates"
     />
 
     <!--subscriber handler=".objmq.notifyAddedEvent" /-->

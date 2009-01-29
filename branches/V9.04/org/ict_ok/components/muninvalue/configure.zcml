@@ -14,7 +14,7 @@
         type="zope.app.content.interfaces.IContentType"
         />
     
-    <class class=".latency.Latency">
+    <class class=".muninvalue.Latency">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
@@ -22,17 +22,55 @@
             interface="zope.app.container.interfaces.IContentContainer"
             />
         <factory
-            id="org.ict_ok.components.latency.latency.Latency"
+            id="org.ict_ok.components.latency.muninvalue.Latency"
             description="Latency"
             />
         <require
-            permission="org.ict_ok.components.latency.View"
+            permission="org.ict_ok.components.muninvalue.View"
             interface=".interfaces.ILatency"
             />
         <require
-            permission="org.ict_ok.components.latency.Edit"
+            permission="org.ict_ok.components.muninvalue.Edit"
             set_schema=".interfaces.ILatency"
             />
+    </class>
+    
+    <class class=".latency.LatencyFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.muninvalue.muninvalue.LatencyFolder"
+            description="LatencyFolder"
+            />
+        <require
+            permission="org.ict_ok.components.muninvalue.View"
+            interface=".interfaces.ILatencyFolder"
+            />
+        <require
+            permission="org.ict_ok.components.muninvalue.Edit"
+            set_schema=".interfaces.ILatencyFolder"
+            />
+        <require
+            permission="org.ict_ok.components.muninvalue.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.muninvalue.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.muninvalue.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+            
     </class>
 
     <subscriber
@@ -60,6 +98,12 @@
         factory=".adapter.ticker.Ticker"
     />
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".latency.AllMuninValueTemplates"
+        name="AllMuninValueTemplates"
+    />
+    
     <include package=".generations" />
 
 </configure>

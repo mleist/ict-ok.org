@@ -43,6 +43,43 @@
             set_schema=".interfaces.IEventIfEventNet"
             />
     </class>
+    
+    <class class=".net.NetFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.net.net.NetFolder"
+            description="NetFolder"
+            />
+        <require
+            permission="org.ict_ok.components.net.View"
+            interface=".interfaces.INetFolder"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            set_schema=".interfaces.INetFolder"
+            />
+        <require
+            permission="org.ict_ok.components.net.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.net.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />        
+    </class>
    <!--<soap:view-->
         <!--for=".interfaces.INet"-->
         <!--methods="echoString"-->
@@ -86,6 +123,11 @@
         factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"
         provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
         for=".interfaces.INet"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".net.AllNetTemplates"
+        name="AllNetTemplates"
     />
 
     <include package=".generations" />
