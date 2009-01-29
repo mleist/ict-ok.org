@@ -630,6 +630,7 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                         #self.context.__setitem__(newObj.objectID, newObj)
 #                        import pdb
 #                        pdb.set_trace()
+                        #print "dataVect: ", dataVect
                         newObj = self.factory(**dataVect)
                         newObj.__post_init__()
                         IBrwsOverview(newObj).setTitle(dataVect['ikName'])

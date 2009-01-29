@@ -27,6 +27,7 @@ from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component.interfaces import ComponentLookupError
 from zope.app.folder import Folder
+from zope.schema.fieldproperty import FieldProperty
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -118,7 +119,8 @@ class Room(Component):
     shortName = "room"
     # for ..Contained we have to:
     __name__ = __parent__ = None
-    #ikAttr = FieldProperty(IRoom['ikAttr'])
+    level = FieldProperty(IRoom['level'])
+    coordinates = FieldProperty(IRoom['coordinates'])
 
     building = RelationPropertyIn(Building_Rooms_RelManager)
 
