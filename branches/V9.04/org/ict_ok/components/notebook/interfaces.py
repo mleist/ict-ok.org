@@ -30,16 +30,16 @@ _ = MessageFactory('org.ict_ok')
 class INotebook(IComponent):
     """A Notebook object."""
 
-    conns = List(title=u"Conns 0..n",
-                 #value_type=Object(IObject),
-                 value_type=Choice(vocabulary='AllNotebooks'),
-                 required=False,
-                 default=[])
-    conn = Choice(
-        title=u'Conn 0..1',
-        vocabulary='AllNotebooks',
-        required=False
-        )
+#    conns = List(title=u"Conns 0..n",
+#                 #value_type=Object(IObject),
+#                 value_type=Choice(vocabulary='AllNotebooks'),
+#                 required=False,
+#                 default=[])
+#    conn = Choice(
+#        title=u'Conn 0..1',
+#        vocabulary='AllNotebooks',
+#        required=False
+#        )
     #related = schema.List(
             #title=u"Related",
             #value_type=schema.Choice(vocabulary='demo.documentsInParent'),
@@ -93,6 +93,11 @@ class INotebook(IComponent):
         title = _("delivery date"),
         description = _("delivery date"),
         required = False)
+
+    appSoftware = List(title=_(u"Applicaton software"),
+        value_type=Choice(vocabulary='AllUnusedOrSelfApplicationSoftwares'),
+        required=False,
+        default=[])
 
     def trigger_online():
         """

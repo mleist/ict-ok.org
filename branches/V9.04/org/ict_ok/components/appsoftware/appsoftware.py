@@ -49,6 +49,47 @@ def AllApplicationSoftwares(dummy_context):
                           title=myString))
     return SimpleVocabulary(terms)
 
+
+def AllApplicationSoftwareTemplates(dummy_context):
+    """Which room templates exists
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IApplicationSoftware.providedBy(oobj.object) and \
+        oobj.object.isTemplate:
+            myString = u"%s [T]" % (oobj.object.getDcTitle())
+            terms.append(SimpleTerm(oobj.object,
+                                    token=oid,
+                                    title=myString))
+    return SimpleVocabulary(terms)
+
+def AllUnusedOrSelfApplicationSoftwares(dummy_context):
+    """In which production state a host may be
+    """
+#    import pdb
+#    pdb.set_trace()
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IApplicationSoftware.providedBy(oobj.object):
+            if not oobj.object.isTemplate:
+#                if oobj.object.building is None:
+                myString = u"%s" % (oobj.object.getDcTitle())
+                terms.append(\
+                    SimpleTerm(oobj.object,
+                               token=oid,
+                               title=myString))
+#                else:
+##                    if oobj.object.building == dummy_context:
+#                    myString = u"%s" % (oobj.object.getDcTitle())
+#                    terms.append(\
+#                        SimpleTerm(oobj.object,
+#                                   token=oid,
+#                                   title=myString))
+    return SimpleVocabulary(terms)
+
+
 ApplicationSoftware_Conns_RelManager = FieldRelationManager(IApplicationSoftware['conns'],
                                                  IApplicationSoftware['conn'],
                                                  relType='appsoftware:conns')

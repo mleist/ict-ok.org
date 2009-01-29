@@ -49,9 +49,9 @@ def AllNotebooks(dummy_context):
                           title=myString))
     return SimpleVocabulary(terms)
 
-Notebook_Conns_RelManager = FieldRelationManager(INotebook['conns'],
-                                                 INotebook['conn'],
-                                                 relType='notebook:conns')
+#Notebook_Conns_RelManager = FieldRelationManager(INotebook['conns'],
+#                                                 INotebook['conn'],
+#                                                 relType='notebook:conns')
 
 class Notebook(Component):
     """
@@ -71,8 +71,8 @@ class Notebook(Component):
     modelType = FieldProperty(INotebook['modelType'])
     deliveryDate = FieldProperty(INotebook['deliveryDate'])
 
-    conns = RelationPropertyOut(Notebook_Conns_RelManager)
-    conn = RelationPropertyIn(Notebook_Conns_RelManager)
+#    conns = RelationPropertyOut(Notebook_Conns_RelManager)
+#    conn = RelationPropertyIn(Notebook_Conns_RelManager)
 
     def __init__(self, **data):
         """

@@ -79,6 +79,17 @@
         component=".appsoftware.AllApplicationSoftwares"
         name="AllApplicationSoftwares"
     />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".appsoftware.AllApplicationSoftwareTemplates"
+        name="AllApplicationSoftwareTemplates"
+    />
+    
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".appsoftware.AllUnusedOrSelfApplicationSoftwares"
+        name="AllUnusedOrSelfApplicationSoftwares"
+    />
 
     <include package=".generations" />
 
