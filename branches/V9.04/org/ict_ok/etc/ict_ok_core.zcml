@@ -41,7 +41,9 @@
     <include package="org.ict_ok.admin_utils.wfmc" />
 
     <!--registration of components (hierarchical)-->
+    <include package="org.ict_ok.components" />
     <include package="org.ict_ok.components.browser" />
+
     <include package="org.ict_ok.components.superclass" />
     <include package="org.ict_ok.components.supernode" />
     <include package="org.ict_ok.components.site" />
@@ -61,5 +63,6 @@
 
 
     <include package="org.ict_ok.components.mobilephone" />
+    <include package="org.ict_ok.components.outlet" />
 
 </configure>

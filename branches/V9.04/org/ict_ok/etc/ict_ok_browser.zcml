@@ -54,5 +54,6 @@
     <include package="org.ict_ok.components.room.browser" />
 
     <include package="org.ict_ok.components.mobilephone.browser" />
+    <include package="org.ict_ok.components.outlet.browser" />
 
 </configure>

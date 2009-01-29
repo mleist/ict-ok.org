@@ -86,4 +86,6 @@
 
     <include package="org.ict_ok.components.mobilephone"
              file="security.zcml" />
+    <include package="org.ict_ok.components.outlet"
+             file="security.zcml" />
 </configure>
