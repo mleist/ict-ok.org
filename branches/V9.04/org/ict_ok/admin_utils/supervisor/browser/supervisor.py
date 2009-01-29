@@ -362,7 +362,7 @@ class ViewAdmUtilSupervisorGenerationsForm(BrowserPagelet):
         formatter = StandaloneFullFormatter(
             self.context, self.request, self.objs(),
             columns=self.columns, sort_on=((_('Name'), False),))
-        formatter.batch_size = 30
+        formatter.batch_size = 150
         formatter.cssClasses['table'] = 'listing'
         return formatter()
 

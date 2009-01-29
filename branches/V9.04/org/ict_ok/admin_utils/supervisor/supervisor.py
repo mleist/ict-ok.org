@@ -358,7 +358,7 @@ class AdmUtilSupervisor(Supernode):
         will pack the database
         """
         #pass
-        print "ddd: <%s>" % dir(db)
+        #print "ddd: <%s>" % dir(db)
         if not db:
             size_pre = db.getSize()
             db.pack(days=0)
