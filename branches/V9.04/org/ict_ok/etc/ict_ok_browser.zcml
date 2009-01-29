@@ -55,5 +55,8 @@
 
     <include package="org.ict_ok.components.mobilephone.browser" />
     <include package="org.ict_ok.components.outlet.browser" />
+    <include package="org.ict_ok.components.notebook.browser" />
+    <include package="org.ict_ok.components.appsoftware.browser" />
+    <include package="org.ict_ok.components.osoftware.browser" />
 
 </configure>

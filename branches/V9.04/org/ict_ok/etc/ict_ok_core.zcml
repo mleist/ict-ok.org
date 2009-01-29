@@ -64,5 +64,8 @@
 
     <include package="org.ict_ok.components.mobilephone" />
     <include package="org.ict_ok.components.outlet" />
+    <include package="org.ict_ok.components.notebook" />
+    <include package="org.ict_ok.components.appsoftware" />
+    <include package="org.ict_ok.components.osoftware" />
 
 </configure>

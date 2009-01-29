@@ -77,6 +77,15 @@ _ = MessageFactory('org.ict_ok')
 #   class I%(componentname)sFolder(ISuperclass, IFolder):
 #       """Container for %(componentname)s objects
 #       """
+#
+#
+#   class IAdd%(componentname)s(Interface):
+#       """Interface for all Objects"""
+#       template = Choice(
+#           title = _("Template"),
+#           vocabulary="All%(componentname)sTemplates",
+#           required = False)
 #   ''' % props.__dict__, dedent=True)
+
 #]]]
 #[[[end]]]

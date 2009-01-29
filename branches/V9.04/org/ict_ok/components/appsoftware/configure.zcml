@@ -1,0 +1,85 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id: configure.zcml_cog 399 2009-01-08 14:00:17Z markusleist $ -->
+
+    <!-- Copyright (c) 2008, 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <interface
+        interface=".interfaces.IApplicationSoftware"
+        type="zope.app.content.interfaces.IContentType"
+        />
+
+    <class class=".appsoftware.ApplicationSoftware">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.appsoftware.appsoftware.ApplicationSoftware"
+            description="ApplicationSoftware"
+            />
+        <require
+            permission="org.ict_ok.components.appsoftware.View"
+            interface=".interfaces.IApplicationSoftware"
+            />
+        <require
+            permission="org.ict_ok.components.appsoftware.Edit"
+            set_schema=".interfaces.IApplicationSoftware"
+            />
+    </class>
+
+    <class class=".appsoftware.ApplicationSoftwareFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.appsoftware.appsoftware.ApplicationSoftwareFolder"
+            description="ApplicationSoftware"
+            />
+        <require
+            permission="org.ict_ok.components.appsoftware.View"
+            interface=".interfaces.IApplicationSoftwareFolder"
+            />
+        <require
+            permission="org.ict_ok.components.appsoftware.Edit"
+            set_schema=".interfaces.IApplicationSoftwareFolder"
+            />
+    </class>
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <adapter
+        factory=".adapter.state.State"
+        />
+
+    <adapter
+        factory="org.ict_ok.components.appsoftware.adapter.search.Searchable"
+    />
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".appsoftware.AllApplicationSoftwares"
+        name="AllApplicationSoftwares"
+    />
+
+    <include package=".generations" />
+
+</configure>

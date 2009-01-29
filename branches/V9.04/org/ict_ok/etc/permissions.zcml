@@ -88,4 +88,10 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.outlet"
              file="security.zcml" />
+    <include package="org.ict_ok.components.notebook"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.appsoftware"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.osoftware"
+             file="security.zcml" />
 </configure>

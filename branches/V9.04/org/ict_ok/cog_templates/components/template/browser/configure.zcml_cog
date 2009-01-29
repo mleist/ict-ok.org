@@ -182,69 +182,69 @@
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.Add"
                         />
-				    <page
-				        name="exportcsvdata.html"
+                    <page
+                        name="exportcsvdata.html"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
-				        class=".%(filename)s.%(componentname)sFolderDetails"
-				        permission="org.ict_ok.components.%(filename)s.View"
-				        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-				        attribute="exportCsvData"
-				    />
-				    <page
-				        name="exportxlsdata.html"
+                        class=".%(filename)s.%(componentname)sFolderDetails"
+                        permission="org.ict_ok.components.%(filename)s.View"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        attribute="exportCsvData"
+                    />
+                    <page
+                        name="exportxlsdata.html"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
-				        class=".%(filename)s.%(componentname)sFolderDetails"
-				        permission="org.ict_ok.components.%(filename)s.View"
-				        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-				        attribute="exportXlsData"
-				    />
-				    <z3c:pagelet
-				        name="importcsvdata.html"
+                        class=".%(filename)s.%(componentname)sFolderDetails"
+                        permission="org.ict_ok.components.%(filename)s.View"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        attribute="exportXlsData"
+                    />
+                    <z3c:pagelet
+                        name="importcsvdata.html"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
-				        class=".%(filename)s.ImportCsvDataForm"
-				        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-				        permission="org.ict_ok.components.%(filename)s.Add"
-				    />
-				    <z3c:pagelet
-				        name="importxlsdata.html"
+                        class=".%(filename)s.ImportCsvDataForm"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Add"
+                    />
+                    <z3c:pagelet
+                        name="importxlsdata.html"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
-				        class=".%(filename)s.ImportXlsDataForm"
-				        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-				        permission="org.ict_ok.components.%(filename)s.Add"
-				    />
-				    <viewlet
-				        name="exportcsvdata"
+                        class=".%(filename)s.ImportXlsDataForm"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Add"
+                    />
+                    <viewlet
+                        name="exportcsvdata"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
-				        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-				        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
-				        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-				        permission="org.ict_ok.components.%(filename)s.View"
-				        />
-				    <viewlet
-				        name="exportxlsdata"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.View"
+                        />
+                    <viewlet
+                        name="exportxlsdata"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
-				        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-				        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
-				        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-				        permission="org.ict_ok.components.%(filename)s.View"
-				        />
-				    <viewlet
-				        name="importcsvdata"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.View"
+                        />
+                    <viewlet
+                        name="importcsvdata"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
-				        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-				        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
-				        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-				        permission="org.ict_ok.components.%(filename)s.Add"
-				        />
-				    <viewlet
-				        name="importxlsdata"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Add"
+                        />
+                    <viewlet
+                        name="importxlsdata"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
-				        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-				        class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
-				        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-				        permission="org.ict_ok.components.%(filename)s.Add"
-				        />
-				                        
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+                        class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Add"
+                        />
+                                        
             ''' % props.__dict__, dedent=True)
          ]]] -->
     <!-- [[[end]]] -->

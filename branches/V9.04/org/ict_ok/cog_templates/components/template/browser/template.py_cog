@@ -33,11 +33,12 @@ from zope.i18nmessageid import MessageFactory
 
 # z3c imports
 from z3c.form import field
+from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 #[[[cog
 #   cog.out('''\
-#   from %(longpath_interface)s import I%(componentname)s
+#   from %(longpath_interface)s import I%(componentname)s, IAdd%(componentname)s
 #   from %(longpath_file)s import %(componentname)s
 #   ''' % props.__dict__, dedent=True)
 #]]]
@@ -47,6 +48,9 @@ from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -77,6 +81,16 @@ _ = MessageFactory('org.ict_ok')
 #       omit_viewfields = ComponentDetails.omit_viewfields + []
 #       omit_addfields = ComponentDetails.omit_addfields + []
 #       omit_editfields = ComponentDetails.omit_editfields + []
+#   
+#   
+#   class %(componentname)sFolderDetails(ComponentDetails):
+#       """ Class for %(componentname)s details
+#       """
+#       omit_viewfields = ComponentDetails.omit_viewfields + []
+#       omit_addfields = ComponentDetails.omit_addfields + []
+#       omit_editfields = ComponentDetails.omit_editfields + []
+#       fields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_viewfields)
+#       attrInterface = I%(componentname)s
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
@@ -92,12 +106,16 @@ _ = MessageFactory('org.ict_ok')
 #       fields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_viewfields)
 #
 #
-#   class Add%(componentname)sForm(AddForm):
+#   class Add%(componentname)sForm(AddComponentForm):
 #       """Add %(moduletitle)s form"""
 #       label = _(u'Add %(moduletitle)s')
-#       fields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_addfields)
-#    
+#       addFields = field.Fields(IAdd%(componentname)s)
+#       allFields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_addfields)
+#       allFields['isTemplate'].widgetFactory = \
+#           checkbox.SingleCheckBoxFieldWidget
 #       factory = %(componentname)s
+#       attrInterface = I%(componentname)s
+#       _session_key = 'org.ict_ok.components.%(filename)s'
 #
 #
 #   class Edit%(componentname)sForm(EditForm):
@@ -114,6 +132,16 @@ _ = MessageFactory('org.ict_ok')
 #           return _(u"Delete this %(componentname)s: '%%s'?") %% \\
 #                  IBrwsOverview(self.context).getTitle()
 #
+#   
+#   class ImportCsvDataForm(ImportCsvDataComponentForm):
+#       pass
+#   
+#   
+#   class ImportXlsDataForm(ImportXlsDataComponentForm):
+#       allFields = field.Fields(I%(componentname)s)
+#       attrInterface = I%(componentname)s
+#       factory = %(componentname)s
+#       factoryId = u'org.ict_ok.components.%(filename)s.%(filename)s.%(componentname)s'
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
