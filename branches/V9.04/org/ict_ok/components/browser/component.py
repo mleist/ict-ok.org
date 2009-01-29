@@ -70,6 +70,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
      AddForm
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
+from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 
 _ = MessageFactory('org.ict_ok')
 
@@ -180,6 +181,7 @@ class ComponentDetails(SupernodeDetails):
     
     def exportXlsData(self):
         """get CSV file for all folder objects"""
+        
         filename = datetime.now().strftime('ict_%Y%m%d%H%M%S.xls')
         f_handle, f_name = tempfile.mkstemp(filename)
         wbook = Workbook()
@@ -208,6 +210,10 @@ class ComponentDetails(SupernodeDetails):
             style0.pattern = heading_pattern 
             wb_hosts.write(pos_y, pos_x, wb_data, style0)
             pos_x += 1
+        # IntID
+        wb_data = Formula(u'"IntID"')
+        wb_hosts.write(pos_y, pos_x, wb_data, style0)
+        pos_x += 1
         # objectID
         wb_data = Formula(u'"objectID"')
         wb_hosts.write(pos_y, pos_x, wb_data, style0)
@@ -267,6 +273,11 @@ class ComponentDetails(SupernodeDetails):
                     print "wb_hosts.write(%s, %s, %s, %s)" % (pos_y, pos_x, value, v_style)
                     wb_hosts.write(pos_y, pos_x, value, v_style)
                 pos_x += 1
+            # IntID
+            uidutil = queryUtility(IIntIds)
+            wb_data = Formula(u'"%s"' % uidutil.getId(item_v))
+            wb_hosts.write(pos_y, pos_x, wb_data, style0)
+            pos_x += 1
             # objectID
             wb_data = Formula(u'"%s"' % item_v.objectID)
             wb_hosts.write(pos_y, pos_x, wb_data, style0)
@@ -531,15 +542,20 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                     for attrIndex, attrVal in enumerate(attrValVector):
                         attrDict[attrNameList[attrIndex]] = attrVal
                     # ---------------------------------------
+                    if attrDict.has_key('IntID'):
+                        attrDict.pop('IntID')
                     if attrDict.has_key('objectID'):
                         attrObjectID = attrDict.pop('objectID')
                         oldObj = self.context[attrObjectID]
 #                        import pdb
 #                        pdb.set_trace()
                         for attrName, newValString in attrDict.items():
-                            print "ddd4-> %s" % (attrName)
+#                            print "ddd4-> %s" % (attrName)
                             attrField = self.attrInterface[attrName]
-                            print "type(%s): %s" % (attrField, type(attrField))
+#                            print "type(%s): %s" % (attrField, type(attrField))
+#                            if attrName == "rooms":
+#                                import pdb
+#                                pdb.set_trace()
                             if IChoice.providedBy(attrField):
                                 v_widget = getMultiAdapter(\
                                                 (attrField,self.request),
@@ -562,12 +578,22 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                                 v_dataconverter = queryMultiAdapter(\
                                                 (attrField, v_widget),
                                                 interfaces.IDataConverter)
-                                newVal = v_dataconverter.toFieldValue(newValString)
+                                if ICollection.providedBy(attrField):
+                                    if len(newValString) > 0:
+                                        newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+                                    else:
+                                        newVal = v_dataconverter.toFieldValue([])
+                                else:
+                                    newVal = v_dataconverter.toFieldValue(newValString)
                             if getattr(oldObj, attrName) != newVal:
                                 setattr(oldObj, attrName, newVal)
+                                if attrName == "ikName":
+                                    IBrwsOverview(oldObj).setTitle(newVal)
                     else:
-                        newObj = createObject(self.factoryId)
-                        newObj.__post_init__()
+                        # new Object
+#                        newObj = createObject(self.factoryId)
+#                        newObj.__post_init__()
+                        dataVect = {}
                         for attrName, newValString in attrDict.items():
                             attrField = self.attrInterface[attrName]
                             if IChoice.providedBy(attrField):
@@ -577,17 +603,39 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                                 v_dataconverter = queryMultiAdapter(\
                                                 (attrField, v_widget),
                                                 interfaces.IDataConverter)
-                                newVal = v_dataconverter.toFieldValue([newValString])
+                                if len(newValString) > 0:
+                                    newVal = v_dataconverter.toFieldValue([newValString])
+                                else:
+                                    newVal = v_dataconverter.toFieldValue([])
                             else:
-                                v_widget = getMultiAdapter(\
-                                                (attrField,self.request),
-                                                interfaces.IFieldWidget)
+                                if attrName == "isTemplate":
+                                    v_widget = checkbox.SingleCheckBoxFieldWidget(\
+                                                attrField,self.request)
+                                else:
+                                    v_widget = getMultiAdapter(\
+                                                    (attrField,self.request),
+                                                    interfaces.IFieldWidget)
                                 v_dataconverter = queryMultiAdapter(\
                                                 (attrField, v_widget),
                                                 interfaces.IDataConverter)
-                                newVal = v_dataconverter.toFieldValue(newValString)
-                            setattr(newObj, attrName, newVal)
-                        self.context.__setitem__(newObj.objectID, newObj)
+                                if ICollection.providedBy(attrField):
+                                    if len(newValString) > 0:
+                                        newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+                                    else:
+                                        newVal = v_dataconverter.toFieldValue([])
+                                else:
+                                    newVal = v_dataconverter.toFieldValue(newValString)
+                            dataVect[str(attrName)] = newVal
+                            #setattr(newObj, attrName, newVal)
+                        #self.context.__setitem__(newObj.objectID, newObj)
+#                        import pdb
+#                        pdb.set_trace()
+                        newObj = self.factory(**dataVect)
+                        newObj.__post_init__()
+                        IBrwsOverview(newObj).setTitle(dataVect['ikName'])
+                        self.context[newObj.objectID] = newObj
+                        if hasattr(newObj, "store_refs"):
+                            newObj.store_refs(**dataVect)
                         notify(ObjectCreatedEvent(newObj))
         url = absoluteURL(self.context, self.request)
         self.request.response.redirect(url)

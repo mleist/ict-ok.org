@@ -134,4 +134,5 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     allFields = field.Fields(IRoom)
     attrInterface = IRoom
+    factory = Room
     factoryId = u'org.ict_ok.components.room.room.Room'

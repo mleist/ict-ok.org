@@ -123,5 +123,6 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     allFields = field.Fields(ILocation)
     attrInterface = ILocation
+    factory = Location
     factoryId = u'org.ict_ok.components.location.location.Location'
 

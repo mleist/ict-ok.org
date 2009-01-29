@@ -116,4 +116,5 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
 #    allFields['isTemplate'].widgetFactory = \
 #        checkbox.SingleCheckBoxFieldWidget
     attrInterface = IMobilePhone
+    factory = MobilePhone
     factoryId = u'org.ict_ok.components.mobilephone.mobilephone.MobilePhone'

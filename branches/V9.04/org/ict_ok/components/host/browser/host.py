@@ -395,4 +395,5 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     allFields = field.Fields(IHost)
     attrInterface = IHost
+    factory = Host
     factoryId = u'org.ict_ok.components.host.host.Host'

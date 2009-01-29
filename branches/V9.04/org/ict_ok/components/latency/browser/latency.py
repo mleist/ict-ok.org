@@ -190,4 +190,5 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     allFields = field.Fields(ILatency)
     attrInterface = ILatency
+    factory = Latency
     factoryId = u'org.ict_ok.components.latency.latency.Latency'

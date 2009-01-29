@@ -370,4 +370,5 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     allFields = field.Fields(ISnmpValue)
     attrInterface = ISnmpValue
+    factory = SnmpValue
     factoryId = u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue'

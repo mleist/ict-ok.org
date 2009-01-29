@@ -118,4 +118,5 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     allFields = field.Fields(IOutlet)
     attrInterface = IOutlet
+    factory = Outlet
     factoryId = u'org.ict_ok.components.outlet.outlet.Outlet'

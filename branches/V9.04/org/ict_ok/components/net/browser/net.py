@@ -285,4 +285,5 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     allFields = field.Fields(INet)
     attrInterface = INet
+    factory = Net
     factoryId = u'org.ict_ok.components.net.net.Net'

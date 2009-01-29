@@ -446,4 +446,5 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     allFields = field.Fields(IInterface)
     attrInterface = IInterface
+    factory = Interface
     factoryId = u'org.ict_ok.components.interface.interface.Interface'

@@ -134,5 +134,6 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     allFields = field.Fields(IService)
     attrInterface = IService
+    factory = Service
     factoryId = u'org.ict_ok.components.service.service.Service'
 
