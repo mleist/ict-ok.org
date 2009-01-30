@@ -76,8 +76,18 @@
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".notebook.AllNotebookTemplates"
+        name="AllNotebookTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
         component=".notebook.AllNotebooks"
         name="AllNotebooks"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".notebook.AllUnusedOrSelfComponents"
+        name="AllUnusedOrSelfComponents"
     />
 
     <include package=".generations" />

@@ -38,19 +38,32 @@ from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
 from org.ict_ok.components.device.device import Device, DeviceFolder
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+
+#def AllNotebooks(dummy_context):
+#    """Which Notebook are there
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if INotebook.providedBy(oobj.object):
+#            myString = u"%s" % (oobj.object.getDcTitle())
+#            terms.append(                SimpleTerm(oobj.object,
+#                          token=oid,
+#                          title=myString))
+#    return SimpleVocabulary(terms)
+
+def AllNotebookTemplates(dummy_context):
+    return AllComponentTemplates(dummy_context, INotebook)
 
 def AllNotebooks(dummy_context):
-    """Which Notebook are there
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if INotebook.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(                SimpleTerm(oobj.object,
-                          token=oid,
-                          title=myString))
-    return SimpleVocabulary(terms)
+    return AllComponents(dummy_context, INotebook)
+
+def AllUnusedOrSelfNotebooks(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, INotebook, 'device')
+
+
 
 Notebook_AppSoftware_RelManager = FieldRelationManager(INotebook['appsoftwares'],
                                                        IApplicationSoftware['device'],
