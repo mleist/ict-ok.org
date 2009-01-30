@@ -30,22 +30,12 @@ _ = MessageFactory('org.ict_ok')
 class IOperatingSoftware(IComponent):
     """A OperatingSoftware object."""
 
-    conns = List(title=u"Conns 0..n",
-                 #value_type=Object(IObject),
-                 value_type=Choice(vocabulary='AllOperatingSoftwares'),
-                 required=False,
-                 default=[])
-    conn = Choice(
-        title=u'Conn 0..1',
-        vocabulary='AllOperatingSoftwares',
+    device = Choice(
+        title=_(u'Device'),
+        vocabulary='AllDevices',
         required=False
         )
-    #related = schema.List(
-            #title=u"Related",
-            #value_type=schema.Choice(vocabulary='demo.documentsInParent'),
-            #required=False,
-            #default=[])
-    
+        
     manufacturer = TextLine(
         max_length = 200,
         title = _("Manufacturer"),

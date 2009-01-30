@@ -74,10 +74,26 @@
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
 
+    <!-- utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".osoftware.AllOperatingSoftwares"
+        name="AllOperatingSoftwares"
+    / -->
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".osoftware.AllOperatingSoftwares"
         name="AllOperatingSoftwares"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".osoftware.AllOperatingSoftwareTemplates"
+        name="AllOperatingSoftwareTemplates"
+    />
+    
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".osoftware.AllUnusedOrSelfOperatingSoftwares"
+        name="AllUnusedOrSelfOperatingSoftwares"
     />
 
     <include package=".generations" />

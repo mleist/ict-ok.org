@@ -10,74 +10,20 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
-    <interface
-        interface=".interfaces.INotebook"
-        type="zope.app.content.interfaces.IContentType"
-        />
-
-    <class class=".notebook.Notebook">
-        <implements
-            interface="zope.annotation.interfaces.IAttributeAnnotatable"
-            />
-        <implements
-            interface="zope.app.container.interfaces.IContentContainer"
-            />
-        <factory
-            id="org.ict_ok.components.notebook.notebook.Notebook"
-            description="Notebook"
-            />
-        <require
-            permission="org.ict_ok.components.notebook.View"
-            interface=".interfaces.INotebook"
-            />
-        <require
-            permission="org.ict_ok.components.notebook.Edit"
-            set_schema=".interfaces.INotebook"
-            />
-    </class>
-
-    <class class=".notebook.NotebookFolder">
-        <implements
-            interface="zope.annotation.interfaces.IAttributeAnnotatable"
-            />
-        <implements
-            interface="zope.app.container.interfaces.IContentContainer"
-            />
-        <factory
-            id="org.ict_ok.components.notebook.notebook.NotebookFolder"
-            description="Notebook"
-            />
-        <require
-            permission="org.ict_ok.components.notebook.View"
-            interface=".interfaces.INotebookFolder"
-            />
-        <require
-            permission="org.ict_ok.components.notebook.Edit"
-            set_schema=".interfaces.INotebookFolder"
-            />
-    </class>
-
-    <subscriber
-        handler=".bootstrap.bootStrapSubscriber"
-        for="zope.app.appsetup.IDatabaseOpenedEvent"
-        />
-
-    <adapter
-        factory=".adapter.state.State"
-        />
-
-    <adapter
-        factory="org.ict_ok.components.notebook.adapter.search.Searchable"
-    />
-    <adapter
-        factory=".adapter.rpt_pdf.RptPdf"
-        permission="org.ict_ok.admin_utils.reports.generate.pdf"
-    />
-
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".notebook.AllNotebooks"
-        name="AllNotebooks"
+        component=".device.AllDeviceTemplates"
+        name="AllDeviceTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".device.AllDevices"
+        name="AllDevices"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".device.AllUnusedOrSelfDevices"
+        name="AllUnusedOrSelfDevices"
     />
 
     <include package=".generations" />

@@ -35,23 +35,33 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftwareFolder
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.notebook.notebook import Notebook_OSoftware_RelManager
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+
+#def AllOperatingSoftwares(dummy_context):
+#    """Which OperatingSoftware are there
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if IOperatingSoftware.providedBy(oobj.object):
+#            myString = u"%s" % (oobj.object.getDcTitle())
+#            terms.append(                SimpleTerm(oobj.object,
+#                          token=oid,
+#                          title=myString))
+#    return SimpleVocabulary(terms)
+
+
+def AllOperatingSoftwareTemplates(dummy_context):
+    return AllComponentTemplates(dummy_context, IOperatingSoftware)
 
 def AllOperatingSoftwares(dummy_context):
-    """Which OperatingSoftware are there
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IOperatingSoftware.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(                SimpleTerm(oobj.object,
-                          token=oid,
-                          title=myString))
-    return SimpleVocabulary(terms)
+    return AllComponents(dummy_context, IOperatingSoftware)
 
-OperatingSoftware_Conns_RelManager = FieldRelationManager(IOperatingSoftware['conns'],
-                                                 IOperatingSoftware['conn'],
-                                                 relType='osoftware:conns')
+def AllUnusedOrSelfOperatingSoftwares(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IOperatingSoftware, 'device')
+
 
 class OperatingSoftware(Component):
     """
@@ -73,8 +83,8 @@ class OperatingSoftware(Component):
     revisionNumber = FieldProperty(IOperatingSoftware['revisionNumber'])
     buildNumber = FieldProperty(IOperatingSoftware['buildNumber'])
 
-    conns = RelationPropertyOut(OperatingSoftware_Conns_RelManager)
-    conn = RelationPropertyIn(OperatingSoftware_Conns_RelManager)
+    device = RelationPropertyIn(Notebook_OSoftware_RelManager)
+    
 
     def __init__(self, **data):
         """

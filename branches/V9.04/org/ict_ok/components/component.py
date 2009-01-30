@@ -64,7 +64,7 @@ def AllUnusedOrSelfComponents(dummy_context, interface, obj_attr_name):
     for (oid, oobj) in uidutil.items():
         if interface.providedBy(oobj.object):
             if not oobj.object.isTemplate:
-                if oobj.object.location is None:
+                if getattr(oobj.object, obj_attr_name) is None:
                     myString = u"%s" % (oobj.object.getDcTitle())
                     terms.append(\
                         SimpleTerm(oobj.object,

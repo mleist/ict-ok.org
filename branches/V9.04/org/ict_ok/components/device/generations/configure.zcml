@@ -10,7 +10,7 @@
     -->
 
     <utility
-        name="org.ict_ok.notebook" 
+        name="org.ict_ok.device" 
         provides="zope.app.generations.interfaces.ISchemaManager"
         component=".AppSchemaManager"
         />

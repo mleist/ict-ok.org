@@ -34,6 +34,9 @@ from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.notebook.interfaces import INotebook
 from org.ict_ok.components.notebook.interfaces import INotebookFolder
+from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
+from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
+from org.ict_ok.components.device.device import Device, DeviceFolder
 from org.ict_ok.components.component import Component
 
 def AllNotebooks(dummy_context):
@@ -49,21 +52,20 @@ def AllNotebooks(dummy_context):
                           title=myString))
     return SimpleVocabulary(terms)
 
-#Notebook_Conns_RelManager = FieldRelationManager(INotebook['conns'],
-#                                                 INotebook['conn'],
-#                                                 relType='notebook:conns')
+Notebook_AppSoftware_RelManager = FieldRelationManager(INotebook['appsoftwares'],
+                                                       IApplicationSoftware['device'],
+                                                       relType='notebook:appsoftwares')
+Notebook_OSoftware_RelManager = FieldRelationManager(INotebook['osoftwares'],
+                                                       IOperatingSoftware['device'],
+                                                       relType='notebook:osoftwares')
 
-class Notebook(Component):
+class Notebook(Device):
     """
     the template instance
     """
     implements(INotebook)
     shortName = "notebook"
-    # for ..Contained we have to:
-    __name__ = __parent__ = None
     user = FieldProperty(INotebook['user'])
-    manufacturer = FieldProperty(INotebook['manufacturer'])
-    vendor = FieldProperty(INotebook['vendor'])
     productionState = FieldProperty(INotebook['productionState'])
     hardware = FieldProperty(INotebook['hardware'])
     serialNumber = FieldProperty(INotebook['serialNumber'])
@@ -71,14 +73,14 @@ class Notebook(Component):
     modelType = FieldProperty(INotebook['modelType'])
     deliveryDate = FieldProperty(INotebook['deliveryDate'])
 
-#    conns = RelationPropertyOut(Notebook_Conns_RelManager)
-#    conn = RelationPropertyIn(Notebook_Conns_RelManager)
+    appsoftwares = RelationPropertyOut(Notebook_AppSoftware_RelManager)
+    osoftwares = RelationPropertyOut(Notebook_OSoftware_RelManager)
 
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        Device.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(Notebook)
         for (name, value) in data.items():
             if name in INotebook.names() and \
@@ -87,17 +89,17 @@ class Notebook(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        Device.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(Notebook)
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
 
 
-class NotebookFolder(Superclass, Folder):
+class NotebookFolder(DeviceFolder):
     implements(INotebookFolder)
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        DeviceFolder.__init__(self, **data)

@@ -35,64 +35,72 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftwareFolder
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.notebook.notebook import Notebook_AppSoftware_RelManager
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
-def AllApplicationSoftwares(dummy_context):
-    """Which ApplicationSoftware are there
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IApplicationSoftware.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(                SimpleTerm(oobj.object,
-                          token=oid,
-                          title=myString))
-    return SimpleVocabulary(terms)
-
+#def AllApplicationSoftwares(dummy_context):
+#    """Which ApplicationSoftware are there
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if IApplicationSoftware.providedBy(oobj.object):
+#            myString = u"%s" % (oobj.object.getDcTitle())
+#            terms.append(                SimpleTerm(oobj.object,
+#                          token=oid,
+#                          title=myString))
+#    return SimpleVocabulary(terms)
+#
+#
+#def AllApplicationSoftwareTemplates(dummy_context):
+#    """Which room templates exists
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if IApplicationSoftware.providedBy(oobj.object) and \
+#        oobj.object.isTemplate:
+#            myString = u"%s [T]" % (oobj.object.getDcTitle())
+#            terms.append(SimpleTerm(oobj.object,
+#                                    token=oid,
+#                                    title=myString))
+#    return SimpleVocabulary(terms)
+#
+#def AllUnusedOrSelfApplicationSoftwares(dummy_context):
+#    """In which production state a host may be
+#    """
+##    import pdb
+##    pdb.set_trace()
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if IApplicationSoftware.providedBy(oobj.object):
+#            if not oobj.object.isTemplate:
+##                if oobj.object.building is None:
+#                myString = u"%s" % (oobj.object.getDcTitle())
+#                terms.append(\
+#                    SimpleTerm(oobj.object,
+#                               token=oid,
+#                               title=myString))
+##                else:
+###                    if oobj.object.building == dummy_context:
+##                    myString = u"%s" % (oobj.object.getDcTitle())
+##                    terms.append(\
+##                        SimpleTerm(oobj.object,
+##                                   token=oid,
+##                                   title=myString))
+#    return SimpleVocabulary(terms)
 
 def AllApplicationSoftwareTemplates(dummy_context):
-    """Which room templates exists
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IApplicationSoftware.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
-                                    title=myString))
-    return SimpleVocabulary(terms)
+    return AllComponentTemplates(dummy_context, IApplicationSoftware)
+
+def AllApplicationSoftwares(dummy_context):
+    return AllComponents(dummy_context, IApplicationSoftware)
 
 def AllUnusedOrSelfApplicationSoftwares(dummy_context):
-    """In which production state a host may be
-    """
-#    import pdb
-#    pdb.set_trace()
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IApplicationSoftware.providedBy(oobj.object):
-            if not oobj.object.isTemplate:
-#                if oobj.object.building is None:
-                myString = u"%s" % (oobj.object.getDcTitle())
-                terms.append(\
-                    SimpleTerm(oobj.object,
-                               token=oid,
-                               title=myString))
-#                else:
-##                    if oobj.object.building == dummy_context:
-#                    myString = u"%s" % (oobj.object.getDcTitle())
-#                    terms.append(\
-#                        SimpleTerm(oobj.object,
-#                                   token=oid,
-#                                   title=myString))
-    return SimpleVocabulary(terms)
+    return AllUnusedOrSelfComponents(dummy_context, IApplicationSoftware, 'device')
 
-
-ApplicationSoftware_Conns_RelManager = FieldRelationManager(IApplicationSoftware['conns'],
-                                                 IApplicationSoftware['conn'],
-                                                 relType='appsoftware:conns')
 
 class ApplicationSoftware(Component):
     """
@@ -113,8 +121,7 @@ class ApplicationSoftware(Component):
     revisionNumber = FieldProperty(IApplicationSoftware['revisionNumber'])
     buildNumber = FieldProperty(IApplicationSoftware['buildNumber'])
 
-    conns = RelationPropertyOut(ApplicationSoftware_Conns_RelManager)
-    conn = RelationPropertyIn(ApplicationSoftware_Conns_RelManager)
+    device = RelationPropertyIn(Notebook_AppSoftware_RelManager)
 
     def __init__(self, **data):
         """

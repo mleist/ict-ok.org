@@ -18,83 +18,56 @@ __version__ = "$Id: template.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 from zope.app.folder import Folder
-
-# lovely imports
-from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.components.device.interfaces import IDevice, IDeviceFolder
 from org.ict_ok.components.superclass.superclass import Superclass
-from org.ict_ok.components.notebook.interfaces import INotebook
-from org.ict_ok.components.notebook.interfaces import INotebookFolder
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
-def AllNotebooks(dummy_context):
-    """Which Notebook are there
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if INotebook.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(                SimpleTerm(oobj.object,
-                          token=oid,
-                          title=myString))
-    return SimpleVocabulary(terms)
+def AllDeviceTemplates(dummy_context):
+    return AllComponentTemplates(dummy_context, IDevice)
 
-#Notebook_Conns_RelManager = FieldRelationManager(INotebook['conns'],
-#                                                 INotebook['conn'],
-#                                                 relType='notebook:conns')
+def AllDevices(dummy_context):
+    return AllComponents(dummy_context, IDevice)
 
-class Notebook(Component):
+def AllUnusedOrSelfDevices(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IDevice, 'location')
+
+
+class Device(Component):
     """
     the template instance
     """
-    implements(INotebook)
-    shortName = "notebook"
-    # for ..Contained we have to:
+    implements(IDevice)
     __name__ = __parent__ = None
-    user = FieldProperty(INotebook['user'])
-    manufacturer = FieldProperty(INotebook['manufacturer'])
-    vendor = FieldProperty(INotebook['vendor'])
-    productionState = FieldProperty(INotebook['productionState'])
-    hardware = FieldProperty(INotebook['hardware'])
-    serialNumber = FieldProperty(INotebook['serialNumber'])
-    inv_id = FieldProperty(INotebook['inv_id'])
-    modelType = FieldProperty(INotebook['modelType'])
-    deliveryDate = FieldProperty(INotebook['deliveryDate'])
-
-#    conns = RelationPropertyOut(Notebook_Conns_RelManager)
-#    conn = RelationPropertyIn(Notebook_Conns_RelManager)
+    manufacturer = FieldProperty(IDevice['manufacturer'])
+    vendor = FieldProperty(IDevice['vendor'])
 
     def __init__(self, **data):
         """
         constructor of the object
         """
         Component.__init__(self, **data)
-        refAttributeNames = getRefAttributeNames(Notebook)
+        refAttributeNames = getRefAttributeNames(Device)
         for (name, value) in data.items():
-            if name in INotebook.names() and \
+            if name in IDevice.names() and \
                name not in refAttributeNames:
                 setattr(self, name, value)
         self.ikRevision = __version__
 
     def store_refs(self, **data):
-        refAttributeNames = getRefAttributeNames(Notebook)
+        refAttributeNames = getRefAttributeNames(Device)
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
 
 
-class NotebookFolder(Superclass, Folder):
-    implements(INotebookFolder)
+class DeviceFolder(Superclass, Folder):
+    implements(IDeviceFolder)
     def __init__(self, **data):
         """
         constructor of the object
