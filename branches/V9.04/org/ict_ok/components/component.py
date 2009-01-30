@@ -18,12 +18,67 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import implements
+from zope.component import getUtility
+from zope.app.intid.interfaces import IIntIds
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # ict_ok.org imports
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.supernode import Supernode
+
+
+def AllComponentTemplates(dummy_context, interface):
+    """Which MobilePhone templates exists
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if interface.providedBy(oobj.object) and \
+        oobj.object.isTemplate:
+            myString = u"%s [T]" % (oobj.object.getDcTitle())
+            terms.append(SimpleTerm(oobj.object,
+                                    token=oid,
+                                    title=myString))
+    return SimpleVocabulary(terms)
+
+def AllComponents(dummy_context, interface):
+    """In which production state a host may be
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if interface.providedBy(oobj.object):
+            myString = u"%s" % (oobj.object.getDcTitle())
+            terms.append(\
+                SimpleTerm(oobj.object,
+                           token=oid,
+                           title=myString))
+    return SimpleVocabulary(terms)
+    
+def AllUnusedOrSelfComponents(dummy_context, interface, obj_attr_name):
+    """In which production state a host may be
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if interface.providedBy(oobj.object):
+            if not oobj.object.isTemplate:
+                if oobj.object.location is None:
+                    myString = u"%s" % (oobj.object.getDcTitle())
+                    terms.append(\
+                        SimpleTerm(oobj.object,
+                                   token=oid,
+                                   title=myString))
+                else:
+                    if getattr(oobj.object, obj_attr_name) == dummy_context:
+                        myString = u"%s" % (oobj.object.getDcTitle())
+                        terms.append(\
+                            SimpleTerm(oobj.object,
+                                       token=oid,
+                                       title=myString))
+    return SimpleVocabulary(terms)
+
 
 class Component(Supernode):
     """

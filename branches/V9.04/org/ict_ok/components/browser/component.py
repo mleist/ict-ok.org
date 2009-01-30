@@ -233,9 +233,23 @@ class ComponentDetails(SupernodeDetails):
                 if IChoice.providedBy(attrField):
                     v_style.num_format_str = '@'
                     dateValue = attrDm.get()
+#                    import pdb
+#                    pdb.set_trace()
                     v_widget = getMultiAdapter(\
                                     (attrField,self.request),
                                     interfaces.IFieldWidget)
+                    v_widget.context = item_v
+#                    dm = zope.component.getMultiAdapter(
+#                        (self.content, field.field), interfaces.IDataManager)
+#                    zope.component.getMultiAdapter(
+#                        (self.context,
+#                         self.request,
+#                         self.form,
+#                         getattr(widget, 'field', None),
+#                         widget),
+#                        interfaces.IValidator).validate(fvalue)
+#                    dm = zope.component.getMultiAdapter(
+#                        (self.__context__, field), interfaces.IDataManager)
                     v_dataconverter = queryMultiAdapter(\
                                     (attrDm.field, v_widget),
                                     interfaces.IDataConverter)
@@ -255,16 +269,18 @@ class ComponentDetails(SupernodeDetails):
 #                    if IBool.providedBy(attrField):
 #                        import pdb
 #                        pdb.set_trace()
-#                    import pdb
-#                    pdb.set_trace()
                     v_style.num_format_str = '@'
                     dateValue = attrDm.get()
+                    #import pdb
+                    #pdb.set_trace()
                     v_widget = getMultiAdapter(\
                                     (attrField,self.request),
                                     interfaces.IFieldWidget)
+                    v_widget.context = item_v
                     v_dataconverter = queryMultiAdapter(\
                                     (attrDm.field, v_widget),
                                     interfaces.IDataConverter)
+                    #d2 = queryMultiAdapter((attrDm.field, v_widget),interfaces.IDataConverter)
                     value = v_dataconverter.toWidgetValue(dateValue)
                     if type(value) is list:
                         value = u";".join(value)
@@ -550,16 +566,17 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
 #                        import pdb
 #                        pdb.set_trace()
                         for attrName, newValString in attrDict.items():
-#                            print "ddd4-> %s" % (attrName)
+                            print "ddd4-> %s" % (attrName)
                             attrField = self.attrInterface[attrName]
-#                            print "type(%s): %s" % (attrField, type(attrField))
-#                            if attrName == "rooms":
-#                                import pdb
-#                                pdb.set_trace()
+                            print "type(%s): %s" % (attrField, type(attrField))
+                            if attrName == "rooms":
+                                import pdb
+                                pdb.set_trace()
                             if IChoice.providedBy(attrField):
                                 v_widget = getMultiAdapter(\
                                                 (attrField,self.request),
                                                 interfaces.IFieldWidget)
+                                v_widget.context = oldObj
                                 v_dataconverter = queryMultiAdapter(\
                                                 (attrField, v_widget),
                                                 interfaces.IDataConverter)
@@ -575,6 +592,7 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                                     v_widget = getMultiAdapter(\
                                                     (attrField,self.request),
                                                     interfaces.IFieldWidget)
+                                v_widget.context = oldObj
                                 v_dataconverter = queryMultiAdapter(\
                                                 (attrField, v_widget),
                                                 interfaces.IDataConverter)
@@ -630,7 +648,7 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                         #self.context.__setitem__(newObj.objectID, newObj)
 #                        import pdb
 #                        pdb.set_trace()
-                        #print "dataVect: ", dataVect
+                        print "dataVect: ", dataVect
                         newObj = self.factory(**dataVect)
                         newObj.__post_init__()
                         IBrwsOverview(newObj).setTitle(dataVect['ikName'])

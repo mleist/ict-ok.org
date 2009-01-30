@@ -85,11 +85,11 @@
         factory="org.ict_ok.components.building.adapter.ipickle.Pickle"
     />
 
-    <utility
+    <!--utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".building.AllBuildingsVocab"
         name="AllBuildingsVocab"
-        />
+        /-->
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".building.AllBuildingTemplates"

@@ -44,75 +44,89 @@ from org.ict_ok.components.building.interfaces import \
     IBuilding, IAddBuilding, IBuildingFolder
 from org.ict_ok.components.room.interfaces import IRoom
 from org.ict_ok.components.location.location import Location_Buildings_RelManager
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
 
-def AllBuildingsVocab(dummy_context):
-    """Which locations are there
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IBuilding.providedBy(oobj.object):
-            locationObj = oobj.object.__parent__
-            if ILocation.providedBy(locationObj):
-                myString = u"%s / %s" % (locationObj.getDcTitle(),
-                                      oobj.object.getDcTitle())
-                terms.append(\
-                    SimpleTerm(oobj.object.objectID,
-                               str(oobj.object.objectID),
-                               myString))
-    return SimpleVocabulary(terms)
+
+#def AllBuildingsVocab(dummy_context):
+#    """Which locations are there
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if IBuilding.providedBy(oobj.object):
+#            locationObj = oobj.object.__parent__
+#            if ILocation.providedBy(locationObj):
+#                myString = u"%s / %s" % (locationObj.getDcTitle(),
+#                                      oobj.object.getDcTitle())
+#                terms.append(\
+#                    SimpleTerm(oobj.object.objectID,
+#                               str(oobj.object.objectID),
+#                               myString))
+#    return SimpleVocabulary(terms)
 
 def AllBuildingTemplates(dummy_context):
-    """Which MobilePhone templates exists
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IBuilding.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
-                                    title=myString))
-    return SimpleVocabulary(terms)
+    return AllComponentTemplates(dummy_context, IBuilding)
+
+#def AllBuildingTemplates(dummy_context):
+#    """Which MobilePhone templates exists
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if IBuilding.providedBy(oobj.object) and \
+#        oobj.object.isTemplate:
+#            myString = u"%s [T]" % (oobj.object.getDcTitle())
+#            terms.append(SimpleTerm(oobj.object,
+#                                    token=oid,
+#                                    title=myString))
+#    return SimpleVocabulary(terms)
+#
 
 def AllBuildings(dummy_context):
-    """In which production state a host may be
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IBuilding.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(\
-                SimpleTerm(oobj.object,
-                           token=oid,
-                           title=myString))
-    return SimpleVocabulary(terms)
-    
+    return AllComponents(dummy_context, IBuilding)
+
+#def AllBuildings(dummy_context):
+#    """In which production state a host may be
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if IBuilding.providedBy(oobj.object):
+#            myString = u"%s" % (oobj.object.getDcTitle())
+#            terms.append(\
+#                SimpleTerm(oobj.object,
+#                           token=oid,
+#                           title=myString))
+#    return SimpleVocabulary(terms)
+#    
+
 def AllUnusedOrSelfBuildings(dummy_context):
-    """In which production state a host may be
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IBuilding.providedBy(oobj.object):
-            if not oobj.object.isTemplate:
-                if oobj.object.location is None:
-                    myString = u"%s" % (oobj.object.getDcTitle())
-                    terms.append(\
-                        SimpleTerm(oobj.object,
-                                   token=oid,
-                                   title=myString))
-                else:
-                    if oobj.object.location == dummy_context:
-                        myString = u"%s" % (oobj.object.getDcTitle())
-                        terms.append(\
-                            SimpleTerm(oobj.object,
-                                       token=oid,
-                                       title=myString))
-    return SimpleVocabulary(terms)
+    return AllUnusedOrSelfComponents(dummy_context, IBuilding, 'location')
+
+#def AllUnusedOrSelfBuildings(dummy_context):
+#    """In which production state a host may be
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if IBuilding.providedBy(oobj.object):
+#            if not oobj.object.isTemplate:
+#                if oobj.object.location is None:
+#                    myString = u"%s" % (oobj.object.getDcTitle())
+#                    terms.append(\
+#                        SimpleTerm(oobj.object,
+#                                   token=oid,
+#                                   title=myString))
+#                else:
+#                    if oobj.object.location == dummy_context:
+#                        myString = u"%s" % (oobj.object.getDcTitle())
+#                        terms.append(\
+#                            SimpleTerm(oobj.object,
+#                                       token=oid,
+#                                       title=myString))
+#    return SimpleVocabulary(terms)
 
 
 Building_Rooms_RelManager = FieldRelationManager(IBuilding['rooms'],

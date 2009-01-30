@@ -86,8 +86,6 @@ def AllRoomTemplates(dummy_context):
 def AllUnusedOrSelfRooms(dummy_context):
     """In which production state a host may be
     """
-#    import pdb
-#    pdb.set_trace()
     terms = []
     uidutil = getUtility(IIntIds)
     for (oid, oobj) in uidutil.items():
@@ -100,12 +98,12 @@ def AllUnusedOrSelfRooms(dummy_context):
                                    token=oid,
                                    title=myString))
                 else:
-#                    if oobj.object.building == dummy_context:
-                    myString = u"%s" % (oobj.object.getDcTitle())
-                    terms.append(\
-                        SimpleTerm(oobj.object,
-                                   token=oid,
-                                   title=myString))
+                    if oobj.object.building == dummy_context:
+                        myString = u"%s" % (oobj.object.getDcTitle())
+                        terms.append(\
+                            SimpleTerm(oobj.object,
+                                       token=oid,
+                                       title=myString))
     return SimpleVocabulary(terms)
 
 
