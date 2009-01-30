@@ -18,16 +18,10 @@ __version__ = "$Id: template.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
@@ -35,62 +29,10 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftwareFolder
 from org.ict_ok.components.component import Component
-from org.ict_ok.components.notebook.notebook import Notebook_AppSoftware_RelManager
+from org.ict_ok.components.device.device import Device_AppSoftware_RelManager
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
-#def AllApplicationSoftwares(dummy_context):
-#    """Which ApplicationSoftware are there
-#    """
-#    terms = []
-#    uidutil = getUtility(IIntIds)
-#    for (oid, oobj) in uidutil.items():
-#        if IApplicationSoftware.providedBy(oobj.object):
-#            myString = u"%s" % (oobj.object.getDcTitle())
-#            terms.append(                SimpleTerm(oobj.object,
-#                          token=oid,
-#                          title=myString))
-#    return SimpleVocabulary(terms)
-#
-#
-#def AllApplicationSoftwareTemplates(dummy_context):
-#    """Which room templates exists
-#    """
-#    terms = []
-#    uidutil = getUtility(IIntIds)
-#    for (oid, oobj) in uidutil.items():
-#        if IApplicationSoftware.providedBy(oobj.object) and \
-#        oobj.object.isTemplate:
-#            myString = u"%s [T]" % (oobj.object.getDcTitle())
-#            terms.append(SimpleTerm(oobj.object,
-#                                    token=oid,
-#                                    title=myString))
-#    return SimpleVocabulary(terms)
-#
-#def AllUnusedOrSelfApplicationSoftwares(dummy_context):
-#    """In which production state a host may be
-#    """
-##    import pdb
-##    pdb.set_trace()
-#    terms = []
-#    uidutil = getUtility(IIntIds)
-#    for (oid, oobj) in uidutil.items():
-#        if IApplicationSoftware.providedBy(oobj.object):
-#            if not oobj.object.isTemplate:
-##                if oobj.object.building is None:
-#                myString = u"%s" % (oobj.object.getDcTitle())
-#                terms.append(\
-#                    SimpleTerm(oobj.object,
-#                               token=oid,
-#                               title=myString))
-##                else:
-###                    if oobj.object.building == dummy_context:
-##                    myString = u"%s" % (oobj.object.getDcTitle())
-##                    terms.append(\
-##                        SimpleTerm(oobj.object,
-##                                   token=oid,
-##                                   title=myString))
-#    return SimpleVocabulary(terms)
 
 def AllApplicationSoftwareTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IApplicationSoftware)
@@ -121,7 +63,12 @@ class ApplicationSoftware(Component):
     revisionNumber = FieldProperty(IApplicationSoftware['revisionNumber'])
     buildNumber = FieldProperty(IApplicationSoftware['buildNumber'])
 
-    device = RelationPropertyIn(Notebook_AppSoftware_RelManager)
+    device = RelationPropertyIn(Device_AppSoftware_RelManager)
+
+    fullTextSearchFields = ['manufacturer', 'otherType',
+                            'targetOperatingSystems', 'versionText',
+                            'licenseKey', 'language']
+    fullTextSearchFields.extend(Component.fullTextSearchFields)
 
     def __init__(self, **data):
         """

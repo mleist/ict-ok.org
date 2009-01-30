@@ -18,41 +18,15 @@ __version__ = "$Id: template.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
-
-# lovely imports
-from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.notebook.interfaces import INotebook
 from org.ict_ok.components.notebook.interfaces import INotebookFolder
-from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
-from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
 from org.ict_ok.components.device.device import Device, DeviceFolder
-from org.ict_ok.components.component import Component
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
-#def AllNotebooks(dummy_context):
-#    """Which Notebook are there
-#    """
-#    terms = []
-#    uidutil = getUtility(IIntIds)
-#    for (oid, oobj) in uidutil.items():
-#        if INotebook.providedBy(oobj.object):
-#            myString = u"%s" % (oobj.object.getDcTitle())
-#            terms.append(                SimpleTerm(oobj.object,
-#                          token=oid,
-#                          title=myString))
-#    return SimpleVocabulary(terms)
 
 def AllNotebookTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, INotebook)
@@ -63,14 +37,6 @@ def AllNotebooks(dummy_context):
 def AllUnusedOrSelfNotebooks(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, INotebook, 'device')
 
-
-
-Notebook_AppSoftware_RelManager = FieldRelationManager(INotebook['appsoftwares'],
-                                                       IApplicationSoftware['device'],
-                                                       relType='notebook:appsoftwares')
-Notebook_OSoftware_RelManager = FieldRelationManager(INotebook['osoftwares'],
-                                                       IOperatingSoftware['device'],
-                                                       relType='notebook:osoftwares')
 
 class Notebook(Device):
     """
@@ -85,9 +51,11 @@ class Notebook(Device):
     inv_id = FieldProperty(INotebook['inv_id'])
     modelType = FieldProperty(INotebook['modelType'])
     deliveryDate = FieldProperty(INotebook['deliveryDate'])
-
-    appsoftwares = RelationPropertyOut(Notebook_AppSoftware_RelManager)
-    osoftwares = RelationPropertyOut(Notebook_OSoftware_RelManager)
+    
+    fullTextSearchFields = ['user', 'productionState',
+                            'hardware', 'serialNumber',
+                            'inv_id', 'modelType']
+    fullTextSearchFields.extend(Device.fullTextSearchFields)
 
     def __init__(self, **data):
         """

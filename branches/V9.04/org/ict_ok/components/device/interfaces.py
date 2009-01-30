@@ -16,7 +16,7 @@ __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.schema import TextLine
+from zope.schema import Choice, List, TextLine
 from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
@@ -33,13 +33,23 @@ class IDevice(IComponent):
         max_length = 200,
         title = _("Manufacturer"),
         description = _("Name/Address of the manufacturer."),
-        required = True)
+        required = False)
     vendor = TextLine(
         max_length = 500,
         title = _("Vendor"),
         description = _("Name/Address of the vendor."),
         default = u"",
         required = False)
+    
+    osoftwares = List(title=_(u"Operating software"),
+                      value_type=Choice(vocabulary='AllUnusedOrSelfOperatingSoftwares'),
+                      required=False,
+                      default=[])
+    
+    appsoftwares = List(title=_(u"Application software"),
+                      value_type=Choice(vocabulary='AllUnusedOrSelfApplicationSoftwares'),
+                      required=False,
+                      default=[])
 
 
 class IDeviceFolder(ISuperclass, IFolder):

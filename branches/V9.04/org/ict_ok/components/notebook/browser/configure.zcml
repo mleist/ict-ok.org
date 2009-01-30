@@ -26,7 +26,7 @@
         />
 
     <z3c:pagelet
-        name="details.html"
+        name="details2.html"
         for="org.ict_ok.components.notebook.interfaces.INotebook"
         class="org.ict_ok.components.notebook.browser.notebook.DetailsNotebookForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -34,7 +34,7 @@
     />
 
     <z3c:pagelet
-        name="display.html"
+        name="details.html"
         for="org.ict_ok.components.notebook.interfaces.INotebook"
         class="org.ict_ok.components.notebook.browser.notebook.NotebookDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"

@@ -20,11 +20,18 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.folder import Folder
 
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
+
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.device.interfaces import IDevice, IDeviceFolder
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
+from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
@@ -37,6 +44,13 @@ def AllDevices(dummy_context):
 def AllUnusedOrSelfDevices(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IDevice, 'location')
 
+Device_AppSoftware_RelManager = FieldRelationManager(IDevice['appsoftwares'],
+                                                       IApplicationSoftware['device'],
+                                                       relType='device:appsoftwares')
+Device_OSoftware_RelManager = FieldRelationManager(IDevice['osoftwares'],
+                                                       IOperatingSoftware['device'],
+                                                       relType='device:osoftwares')
+
 
 class Device(Component):
     """
@@ -46,6 +60,12 @@ class Device(Component):
     __name__ = __parent__ = None
     manufacturer = FieldProperty(IDevice['manufacturer'])
     vendor = FieldProperty(IDevice['vendor'])
+    
+    appsoftwares = RelationPropertyOut(Device_AppSoftware_RelManager)
+    osoftwares = RelationPropertyOut(Device_OSoftware_RelManager)
+
+    fullTextSearchFields = ['manufacturer', 'vendor']
+    fullTextSearchFields.extend(Component.fullTextSearchFields)
 
     def __init__(self, **data):
         """

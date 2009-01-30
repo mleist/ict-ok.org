@@ -1,12 +1,106 @@
 <i18n:block domain="org.ict_ok"
-            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-    <h3 i18n:translate="">Interface Details</h3>
+            tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
+    <h3 tal:condition="context/isTemplate" i18n:translate="">Notebook Details [Template]</h3>
+    <h3 tal:condition="not:context/isTemplate" i18n:translate="">Notebook Details</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/user|nothing">
+            <td i18n:translate="">User</td>
+            <td tal:content="python: view.vocabValue('AllLdapUser',
+                                                     context.user)" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/productionState|nothing">
+            <td i18n:translate="">Production state</td>
+            <td tal:content="python: view.vocabValue('AllHostProductionStates',
+                                                     context.productionState)" />
+        </tr>
+
+        <!--tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/osoftwares|nothing">
+            <td i18n:translate="">Operating software</td>
+            <td tal:content="python: view.vocabValue('AllUnusedOrSelfOperatingSoftwares',
+                                                     context.osoftwares)" />
+        </tr -->
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/osoftwares|nothing">
+            <td i18n:translate="">Operating software</td>
+            <td>
+                <ul>
+                    <li tal:repeat="softw context/osoftwares"
+                        tal:content="structure python: view.getHrefTitle(softw)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/appsoftwares|nothing">
+            <td i18n:translate="">Application software</td>
+            <td>
+                <ul>
+                    <li tal:repeat="softw context/appsoftwares"
+                        tal:content="structure python: view.getHrefTitle(softw)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/manufacturer|nothing">
+            <td i18n:translate="">Manufacturer</td>
+            <td tal:content="context/manufacturer" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/vendor|nothing">
+            <td i18n:translate="">Vendor</td>
+            <td tal:content="context/vendor" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/hardware|nothing">
+            <td i18n:translate="">Hardware</td>
+            <td tal:content="context/hardware" />
+        </tr>
+        
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/serialNumber|nothing">
+            <td i18n:translate="">Serial number</td>
+            <td tal:content="context/serialNumber" />
+        </tr>
+        
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/inv_id|nothing">
+            <td i18n:translate="">inventory id</td>
+            <td tal:content="context/inv_id" />
+        </tr>
+        
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/modelType|nothing">
+            <td i18n:translate="">model type</td>
+            <td tal:content="context/modelType" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/deliveryDate|nothing">
+            <td i18n:translate="">delivery date</td>
+            <td tal:content="python: dateform.format(context.deliveryDate)">test</td>
+        </tr>
+        
+
+
+                
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">
             <td i18n:translate="">Comment</td>

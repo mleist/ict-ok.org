@@ -40,7 +40,7 @@ class IOperatingSoftware(IComponent):
         max_length = 200,
         title = _("Manufacturer"),
         description = _("Name/Address of the manufacturer."),
-        required = True)
+        required = False)
     osType = TextLine(
         max_length = 200,
         title = _("OS type"),

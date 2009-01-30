@@ -18,16 +18,10 @@ __version__ = "$Id: template.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
@@ -35,22 +29,9 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftwareFolder
 from org.ict_ok.components.component import Component
-from org.ict_ok.components.notebook.notebook import Notebook_OSoftware_RelManager
+from org.ict_ok.components.device.device import Device_OSoftware_RelManager
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-
-#def AllOperatingSoftwares(dummy_context):
-#    """Which OperatingSoftware are there
-#    """
-#    terms = []
-#    uidutil = getUtility(IIntIds)
-#    for (oid, oobj) in uidutil.items():
-#        if IOperatingSoftware.providedBy(oobj.object):
-#            myString = u"%s" % (oobj.object.getDcTitle())
-#            terms.append(                SimpleTerm(oobj.object,
-#                          token=oid,
-#                          title=myString))
-#    return SimpleVocabulary(terms)
 
 
 def AllOperatingSoftwareTemplates(dummy_context):
@@ -83,8 +64,12 @@ class OperatingSoftware(Component):
     revisionNumber = FieldProperty(IOperatingSoftware['revisionNumber'])
     buildNumber = FieldProperty(IOperatingSoftware['buildNumber'])
 
-    device = RelationPropertyIn(Notebook_OSoftware_RelManager)
+    device = RelationPropertyIn(Device_OSoftware_RelManager)
     
+    fullTextSearchFields = ['manufacturer', 'osType',
+                            'otherType', 'versionText',
+                            'licenseKey', 'language']
+    fullTextSearchFields.extend(Component.fullTextSearchFields)    
 
     def __init__(self, **data):
         """

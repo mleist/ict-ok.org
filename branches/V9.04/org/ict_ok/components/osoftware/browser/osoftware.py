@@ -42,7 +42,7 @@ _ = MessageFactory('org.ict_ok')
 
 class MSubAddOperatingSoftware(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'Add Operating Software Instance')
+    title = _(u'Add Operating Software')
     viewURL = 'add_osoftware.html'
 
     weight = 50

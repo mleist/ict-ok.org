@@ -28,7 +28,6 @@ _ = MessageFactory('org.ict_ok')
 class INotebook(IDevice):
     """A Notebook object."""
 
-
     user = Choice(
         title = _("User"),
         description = _("User of the mobile phone"),
@@ -65,17 +64,6 @@ class INotebook(IDevice):
         title = _("delivery date"),
         description = _("delivery date"),
         required = False)
-
-    osoftwares = List(title=_(u"Operating software"),
-                      value_type=Choice(vocabulary='AllUnusedOrSelfOperatingSoftwares'),
-                      required=False,
-                      default=[])
-    
-    appsoftwares = List(title=_(u"Application software"),
-                      value_type=Choice(vocabulary='AllUnusedOrSelfApplicationSoftwares'),
-                      required=False,
-                      default=[])
-
 
     def trigger_online():
         """

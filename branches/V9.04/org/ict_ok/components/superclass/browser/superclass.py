@@ -647,6 +647,11 @@ class SuperclassDetails:
                 if vocabTerm:
                     return vocabTerm.title
         return None
+    
+    def getHrefTitle(self, obj):
+        href = zapi.getPath(obj)
+        title = obj.ikName
+        return u'<a href="%s">%s</a>' % (href, title)
 
     def getTabClass(self):
         if hasattr(self.request, 'tabClass'):
