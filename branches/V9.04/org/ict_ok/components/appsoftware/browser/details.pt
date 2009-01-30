@@ -80,5 +80,11 @@
             <td i18n:translate="">Device</td>
             <td tal:content="structure python: view.getHrefTitle(context.device)" />
         </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.device is not None and context.device.user is not None">
+            <td i18n:translate="">User</td>
+            <td tal:content="python: view.vocabValue('AllLdapUser',
+                                                     context.device.user)" />
+        </tr>
     </table>
 </i18n:block>

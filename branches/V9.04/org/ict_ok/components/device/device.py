@@ -32,6 +32,8 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
@@ -87,7 +89,9 @@ class Device(Component):
 
 
 class DeviceFolder(Superclass, Folder):
-    implements(IDeviceFolder)
+    implements(IDeviceFolder,
+               IImportCsvData,
+               IImportXlsData)
     def __init__(self, **data):
         """
         constructor of the object

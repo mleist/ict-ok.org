@@ -21,8 +21,8 @@ from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
-from org.ict_ok.components.notebook.interfaces import INotebook
-from org.ict_ok.components.notebook.interfaces import INotebookFolder
+from org.ict_ok.components.notebook.interfaces import \
+    INotebook, INotebookFolder, IAddNotebook
 from org.ict_ok.components.device.device import Device, DeviceFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
@@ -78,7 +78,8 @@ class Notebook(Device):
 
 
 class NotebookFolder(DeviceFolder):
-    implements(INotebookFolder)
+    implements(INotebookFolder,
+               IAddNotebook)
     def __init__(self, **data):
         """
         constructor of the object

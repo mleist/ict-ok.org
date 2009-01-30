@@ -163,14 +163,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.notebook.Add"
         />
-    <page
+    <!-- page
         name="exportcsvdata.html"
         for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
         class=".notebook.NotebookFolderDetails"
         permission="org.ict_ok.components.notebook.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportCsvData"
-    />
+    / -->
     <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
@@ -179,13 +179,13 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
-    <z3c:pagelet
+    <!-- z3c:pagelet
         name="importcsvdata.html"
         for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
         class=".notebook.ImportCsvDataForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.notebook.Add"
-    />
+    / -->
     <z3c:pagelet
         name="importxlsdata.html"
         for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
@@ -193,14 +193,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.notebook.Add"
     />
-    <viewlet
+    <!-- viewlet
         name="exportcsvdata"
         for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.notebook.View"
-        />
+        / -->
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
@@ -209,14 +209,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.notebook.View"
         />
-    <viewlet
+    <!-- viewlet
         name="importcsvdata"
         for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.notebook.Add"
-        />
+        / -->
     <viewlet
         name="importxlsdata"
         for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
