@@ -1,0 +1,82 @@
+# -*- coding: utf-8 -*-
+#
+# [[[cog
+#    import sys; sys.path.extend(['.'])
+#    import props
+#    import cog
+#    cog.out("# Copyright (c) ")
+#    for year in props.copyrights:
+#        cog.out("%4d, " % year)
+#    cog.outl()
+#    for author in props.authors:
+#       cog.outl("#               %s <%s>" % (author['name'], author['email']))
+#    cog.out("%s" % props.filename ) ]]]
+# Copyright (c) 2006, 2007, 
+#               Markus Leist <leist@ikom-online.de>
+# [[[end]]]
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $
+#
+# pylint: disable-msg=E0213,W0232
+#
+# [[[cog cog.outl('"""Interface of %(componentname)s"""' % props.__dict__)]]]
+"""Interface of TestMod"""
+# [[[end]]]
+
+
+__version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
+
+# zope imports
+from zope.i18nmessageid import MessageFactory
+from zope.schema import Choice, Int, List, TextLine
+from zope.app.folder.interfaces import IFolder
+
+# ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.components.interfaces import IComponent
+
+_ = MessageFactory('org.ict_ok')
+
+
+#[[[cog
+#   cog.out('''\
+#   class I%(componentname)s(IComponent):
+#       """A %(componentname)s object."""
+#
+#       conns = List(title=u"Conns 0..n",
+#                    #value_type=Object(IObject),
+#                    value_type=Choice(vocabulary='All%(componentname)ss'),
+#                    required=False,
+#                    default=[])
+#       conn = Choice(
+#           title=u'Conn 0..1',
+#           vocabulary='All%(componentname)ss',
+#           required=False
+#           )
+#       #related = schema.List(
+#               #title=u"Related",
+#               #value_type=schema.Choice(vocabulary='demo.documentsInParent'),
+#               #required=False,
+#               #default=[])
+#
+#       attrFoo = TextLine(
+#           max_length = 80,
+#           title = _("Foo"),
+#           description = _("Foo of the system."),
+#           default = _("default foo"),
+#           required = True)
+#
+#       def trigger_online():
+#           """
+#           trigger workflow
+#           """
+#
+#
+#   class I%(componentname)sFolder(ISuperclass, IFolder):
+#       """Container for %(componentname)s objects
+#       """
+#   ''' % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]
