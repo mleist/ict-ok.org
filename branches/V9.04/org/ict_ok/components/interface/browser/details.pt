@@ -1,35 +1,74 @@
 <i18n:block domain="org.ict_ok"
-            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-    <h3 i18n:translate="">Interface Details</h3>
+            tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
+    <h3 tal:condition="context/isTemplate" i18n:translate="">Interface Details [Template]</h3>
+    <h3 tal:condition="not:context/isTemplate" i18n:translate="">Interface Details</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
-        <tr tal:attributes="class view/getNextTabClass">
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.device is not None">
+            <td i18n:translate="">Device</td>
+            <td tal:content="structure python: view.getHrefTitle(context.device)" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.device is not None and context.device.user is not None">
+            <td i18n:translate="">User</td>
+            <td tal:content="python: view.vocabValue('AllLdapUser',
+                                                     context.device.user)" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.device is not None and context.device.room is not None">
+            <td i18n:translate="">Room</td>
+            <td>
+            <span tal:content="structure python: view.getHrefTitle(context.device.room)" />
+            <div tal:omit-tag=""
+                 tal:condition="python: context.device.room.building is not None">
+                <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.device.room.building)" />
+                <div tal:omit-tag=""
+                     tal:condition="python: context.device.room.building.location is not None">
+                    <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.device.room.building.location)" />
+                </div>
+            </div>
+            </td>
+        </tr>
+
+
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/host2|nothing">
+            <td i18n:translate="">Host 0..1</td>
+            <td tal:content="python: view.vocabValue('AllHosts',
+                                                     context.host2)" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/netType|nothing">
             <td i18n:translate="">interface type</td>
-            <td tal:content="context/netType" />
+            <td tal:content="structure python: view.fsearchLink(context.netType)" />
         </tr>
-        <tr tal:attributes="class view/getNextTabClass">
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/mac|nothing">
             <td i18n:translate="">MAC address</td>
-            <td tal:content="context/mac" />
+            <td tal:content="structure python: view.fsearchLink(context.mac)" />
         </tr>
-        <tr tal:attributes="class view/getNextTabClass">
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ipv4List|nothing">
             <td i18n:translate="">IPv4 addresses</td>
             <td>
                 <ul>
-                    <div tal:omit-tag="" tal:repeat="address context/ipv4List">
-                        <li style="list-style-image:url(/@@/mini/arrow_mini_right.gif);"
-                            tal:content="address" />
-                    </div>
-                </ul>
+                    <li tal:repeat="obj context/ipv4List"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
             </td>
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/ikComment|nothing">
-            <td i18n:translate="">Comment</td>
-            <td tal:content="context/ikComment" />
         </tr>
     </table>
 </i18n:block>

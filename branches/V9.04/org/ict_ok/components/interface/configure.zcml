@@ -106,20 +106,20 @@
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".interface.AllInterfaces"
-        name="AllInterfaces"
-    />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
         component=".interface.AllInterfaceTemplates"
         name="AllInterfaceTemplates"
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".interface.AllUnusedOrSelfInterfaces"
-        name="AllUnusedOrSelfInterfaces"
+        component=".interface.AllInterfaces"
+        name="AllInterfaces"
     />
-    
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".interface.AllUnusedOrUsedDeviceInterfaces"
+        name="AllUnusedOrUsedDeviceInterfaces"
+    />
+        
     <include package=".generations" />
 
 </configure>

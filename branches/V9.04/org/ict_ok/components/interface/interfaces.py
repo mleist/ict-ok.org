@@ -49,9 +49,12 @@ class IInterface(IComponent):
     contains('org.ict_ok.components.service.interfaces.IService',
              'org.ict_ok.components.snmpvalue.interfaces.ISnmpValue')
     
-    #host2 = Object(IObject,
-                   #title=u'Host 0..1',
-                   #required=False)
+    device = Choice(
+        title=_(u'Device'),
+        vocabulary='AllDevices',
+        required=False
+        )
+    
     host2 = Choice(
         title=u'Host 0..1',
         vocabulary='AllHosts',

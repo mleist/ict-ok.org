@@ -20,12 +20,8 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
-from zope.app import zapi
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 from zope.app.folder import Folder
 
 from lovely.relation.property import RelationPropertyIn
@@ -36,75 +32,23 @@ from org.ict_ok.components.component import Component
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.interface.interfaces import \
     IInterface, IAddInterface, IInterfaceFolder
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.host.host import Host_Interfaces_RelManager
-   
+from org.ict_ok.components.device.device import Device_Interface_RelManager
 
-def AllInterfaces(dummy_context):
-    """In which production state a host may be
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IInterface.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(\
-                SimpleTerm(oobj.object,
-                           token=oid,
-                           title=myString))
-    return SimpleVocabulary(terms)
-
-
-def AllUnusedOrSelfInterfaces(dummy_context):
-    """In which production state a host may be
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IInterface.providedBy(oobj.object):
-            if not oobj.object.isTemplate:
-                if oobj.object.host2 is None:
-                    myString = u"%s" % (oobj.object.getDcTitle())
-                    terms.append(\
-                        SimpleTerm(oobj.object,
-                                   token=oid,
-                                   title=myString))
-                else:
-                    if oobj.object.host2 == dummy_context:
-                        myString = u"%s" % (oobj.object.getDcTitle())
-                        terms.append(\
-                            SimpleTerm(oobj.object,
-                                       token=oid,
-                                       title=myString))
-    return SimpleVocabulary(terms)
 
 
 def AllInterfaceTemplates(dummy_context):
-    """Which MobilePhone templates exists
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IInterface.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
-                                    title=myString))
-    return SimpleVocabulary(terms)
+    return AllComponentTemplates(dummy_context, IInterface)
 
+def AllInterfaces(dummy_context):
+    return AllComponents(dummy_context, IInterface)
 
-        
-#def documentsInParentVocabulary(context):
-
-    #"""a vocabulary that returns the child documents __name__for any
-    #subobjects of parent"""
-
-    #return SimpleVocabulary.fromItems(
-        #[(k, v) for k, v in context.__parent__.items() \
-         #if IDocument.providedBy(v)])
-
+def AllUnusedOrUsedDeviceInterfaces(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IInterface, 'device')
 
 
 class Interface(Component):
@@ -120,7 +64,12 @@ class Interface(Component):
     mac = FieldProperty(IInterface['mac'])
     ipv4List = FieldProperty(IInterface['ipv4List'])
     
+    device = RelationPropertyIn(Device_Interface_RelManager)
     host2 = RelationPropertyIn(Host_Interfaces_RelManager)
+
+    fullTextSearchFields = ['netType', 'mac',
+                            'ipv4List']
+    fullTextSearchFields.extend(Component.fullTextSearchFields)
     
     def __init__(self, **data):
         """
@@ -139,6 +88,7 @@ class Interface(Component):
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
+
 
 
 class InterfaceFolder(Superclass, Folder):

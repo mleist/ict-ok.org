@@ -30,6 +30,7 @@ from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.device.interfaces import IDevice, IDeviceFolder
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
 from org.ict_ok.components.interfaces import \
@@ -47,6 +48,9 @@ def AllDevices(dummy_context):
 def AllUnusedOrUsedRoomDevices(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IDevice, 'room')
 
+Device_Interface_RelManager = FieldRelationManager(IDevice['interfaces'],
+                                                   IInterface['device'],
+                                                   relType='device:interfaces')
 Device_AppSoftware_RelManager = FieldRelationManager(IDevice['appsoftwares'],
                                                        IApplicationSoftware['device'],
                                                        relType='device:appsoftwares')
@@ -65,6 +69,7 @@ class Device(Component):
     vendor = FieldProperty(IDevice['vendor'])
 
     room = RelationPropertyIn(Room_Devices_RelManager)
+    interfaces = RelationPropertyOut(Device_Interface_RelManager)
     appsoftwares = RelationPropertyOut(Device_AppSoftware_RelManager)
     osoftwares = RelationPropertyOut(Device_OSoftware_RelManager)
 

@@ -27,6 +27,7 @@ from org.ict_ok.components.superclass.adapter.search import \
      Searchable as SuperSearchable
 from org.ict_ok.components.interface.interfaces import \
      IInterface, convertIpV4
+from org.ict_ok.components.interface.interface import Interface
 
 _ = MessageFactory('org.ict_ok')
 
@@ -51,3 +52,8 @@ class Searchable(SuperSearchable):
 
     def getSearchableInterfaceMac(self):
         return self.context.mac
+
+    def getFullTextSearchFields(self):
+        """
+        """
+        return Interface.fullTextSearchFields

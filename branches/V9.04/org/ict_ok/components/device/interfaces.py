@@ -47,6 +47,11 @@ class IDevice(IComponent):
         required=False
         )
     
+    interfaces = List(title=_(u"Interface"),
+                      value_type=Choice(vocabulary='AllUnusedOrUsedDeviceInterfaces'),
+                      required=False,
+                      default=[])
+    
     osoftwares = List(title=_(u"Operating software"),
                       value_type=Choice(vocabulary='AllUnusedOrUsedDeviceOperatingSoftwares'),
                       required=False,

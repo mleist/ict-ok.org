@@ -13,7 +13,7 @@
 
     <defaultView
         for="org.ict_ok.components.interface.interfaces.IInterface"
-        name="overview.html"
+        name="details.html"
         />
 
     <z3c:pagelet
