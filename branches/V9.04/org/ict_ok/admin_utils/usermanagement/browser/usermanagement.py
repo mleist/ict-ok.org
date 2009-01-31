@@ -136,9 +136,13 @@ class AdmUtilUserManagementPreferences:
             '/@@version.html')
     def fsearch(self):
         utilSupervisor = getUtility(IAdmUtilSupervisor)
+        if self.request.has_key('QUERY_STRING'):
+            queryString = '?%s' % self.request['QUERY_STRING']
+        else:
+            queryString =''
         return self.request.response.redirect(\
             zapi.getPath(utilSupervisor)+\
-            '/@@fsearch.html')
+            '/@@fsearch.html%s' % queryString)
 
 
 class AdmUtilUserManagementDetails(SupernodeDetails):

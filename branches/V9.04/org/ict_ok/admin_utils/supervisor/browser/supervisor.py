@@ -404,7 +404,10 @@ class FSearchForm(Overview):
         return retList
     
     def update(self):
-        myForm = self.request.form
-        if myForm.has_key('form.widgets.fsearchText'):
-            self.fsearchText = myForm['form.widgets.fsearchText']
+        if self.request.has_key('key'):
+            self.fsearchText = self.request['key']
+        else:
+            myForm = self.request.form
+            if myForm.has_key('form.widgets.fsearchText'):
+                self.fsearchText = myForm['form.widgets.fsearchText']
 

@@ -62,6 +62,7 @@
     <include package="org.ict_ok.components.room" />
 
     <include package="org.ict_ok.components.device" />
+    <include package="org.ict_ok.components.physical_connector" />
 
     <include package="org.ict_ok.components.mobilephone" />
     <include package="org.ict_ok.components.outlet" />
