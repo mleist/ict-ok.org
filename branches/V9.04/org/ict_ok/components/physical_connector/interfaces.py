@@ -35,6 +35,12 @@ class IPhysicalConnector(IComponent):
         title = _("Connector pinout"),
         required = False)
 
+    room = Choice(
+        title=_(u'Room'),
+        vocabulary='AllRooms',
+        required=False
+        )
+
 
 class IPhysicalConnectorFolder(ISuperclass, IFolder):
     """Container for PhysicalConnector objects

@@ -40,6 +40,11 @@ class IRoom(IComponent):
         required=False,
         default=[])
     
+    physicalConnectors = List(title=_(u"Physical connectors"),
+        value_type=Choice(vocabulary='AllUnusedOrUsedRoomPhysicalConnectors'),
+        required=False,
+        default=[])
+    
     level = TextLine(
         max_length = 80,
         title = _("Level"),

@@ -43,6 +43,7 @@ from org.ict_ok.components.building.interfaces import IBuilding
 from org.ict_ok.components.device.interfaces import IDevice
 from org.ict_ok.components.room.interfaces import \
     IRoom, IAddRoom, IRoomFolder
+from org.ict_ok.components.physical_connector.interfaces import IPhysicalConnector
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -63,6 +64,9 @@ def AllUnusedOrUsedBuildingRooms(dummy_context):
 Room_Devices_RelManager = FieldRelationManager(IRoom['devices'],
                                                IDevice['room'],
                                                relType='room:devices')
+Room_PhysicalConnectors_RelManager = FieldRelationManager(IRoom['physicalConnectors'],
+                                                          IPhysicalConnector['room'],
+                                                          relType='room:physicalConnectors')
 
 
 class Room(Component):
@@ -79,6 +83,7 @@ class Room(Component):
 
     building = RelationPropertyIn(Building_Rooms_RelManager)
     devices = RelationPropertyOut(Room_Devices_RelManager)
+    physicalConnectors = RelationPropertyOut(Room_PhysicalConnectors_RelManager)
 
     def __init__(self, **data):
         """

@@ -20,6 +20,11 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.folder import Folder
 
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
+
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
@@ -29,14 +34,18 @@ from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.component import \
-    AllComponents, AllComponentTemplates
-
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+from org.ict_ok.components.room.room import Room_PhysicalConnectors_RelManager
 
 def AllPhysicalConnectorTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IPhysicalConnector)
 
 def AllPhysicalConnectors(dummy_context):
     return AllComponents(dummy_context, IPhysicalConnector)
+
+def AllUnusedOrUsedRoomPhysicalConnectors(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'room')
+
 
 
 class PhysicalConnector(Component):
@@ -49,6 +58,11 @@ class PhysicalConnector(Component):
     __name__ = __parent__ = None
     
     connectorPinout = FieldProperty(IPhysicalConnector['connectorPinout'])
+    
+    room = RelationPropertyIn(Room_PhysicalConnectors_RelManager)
+
+    fullTextSearchFields = ['connectorPinout']
+    fullTextSearchFields.extend(Component.fullTextSearchFields)
 
     def __init__(self, **data):
         """

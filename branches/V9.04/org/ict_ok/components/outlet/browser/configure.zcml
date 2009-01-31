@@ -26,7 +26,7 @@
         />
 
     <z3c:pagelet
-        name="details.html"
+        name="details2.html"
         for="org.ict_ok.components.outlet.interfaces.IOutlet"
         class="org.ict_ok.components.outlet.browser.outlet.DetailsOutletForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -34,7 +34,7 @@
     />
 
     <z3c:pagelet
-        name="display.html"
+        name="details.html"
         for="org.ict_ok.components.outlet.interfaces.IOutlet"
         class="org.ict_ok.components.outlet.browser.outlet.OutletDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"

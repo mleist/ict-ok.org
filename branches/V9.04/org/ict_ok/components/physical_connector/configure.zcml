@@ -20,6 +20,11 @@
         component=".physical_connector.AllPhysicalConnectorTemplates"
         name="AllPhysicalConnectorTemplates"
     />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".physical_connector.AllUnusedOrUsedRoomPhysicalConnectors"
+        name="AllUnusedOrUsedRoomPhysicalConnectors"
+    />
 
     <include package=".generations" />
 
