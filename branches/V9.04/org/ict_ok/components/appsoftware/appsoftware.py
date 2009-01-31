@@ -40,7 +40,7 @@ def AllApplicationSoftwareTemplates(dummy_context):
 def AllApplicationSoftwares(dummy_context):
     return AllComponents(dummy_context, IApplicationSoftware)
 
-def AllUnusedOrSelfApplicationSoftwares(dummy_context):
+def AllUnusedOrUsedDeviceApplicationSoftwares(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IApplicationSoftware, 'device')
 
 

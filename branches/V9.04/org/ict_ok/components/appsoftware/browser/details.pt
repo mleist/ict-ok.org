@@ -12,37 +12,37 @@
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/manufacturer|nothing">
             <td i18n:translate="">Manufacturer</td>
-            <td tal:content="context/manufacturer" />
+            <td tal:content="structure python: view.fsearchLink(context.manufacturer)" />
         </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/otherType|nothing">
             <td i18n:translate="">Other type</td>
-            <td tal:content="context/otherType" />
+            <td tal:content="structure python: view.fsearchLink(context.otherType)" />
         </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/targetOperatingSystems|nothing">
             <td i18n:translate="">Target OS</td>
-            <td tal:content="context/targetOperatingSystems" />
+            <td tal:content="structure python: view.fsearchLink(context.targetOperatingSystems)" />
         </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/versionText|nothing">
             <td i18n:translate="">Version text</td>
-            <td tal:content="context/versionText" />
+            <td tal:content="structure python: view.fsearchLink(context.versionText)" />
         </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/licenseKey|nothing">
             <td i18n:translate="">License key</td>
-            <td tal:content="context/licenseKey" />
+            <td tal:content="structure python: view.fsearchLink(context.licenseKey)" />
         </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/language|nothing">
             <td i18n:translate="">Language</td>
-            <td tal:content="context/language" />
+            <td tal:content="structure python: view.fsearchLink(context.language)" />
         </tr>
         
         <tr tal:attributes="class view/getNextTabClass"
@@ -80,6 +80,7 @@
             <td i18n:translate="">Device</td>
             <td tal:content="structure python: view.getHrefTitle(context.device)" />
         </tr>
+        
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.device is not None and context.device.user is not None">
             <td i18n:translate="">User</td>

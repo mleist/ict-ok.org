@@ -16,7 +16,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import TextLine, Choice
+from zope.schema import Choice, List, TextLine 
 from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
@@ -34,6 +34,11 @@ class IRoom(IComponent):
         vocabulary='AllBuildings',
         required=False
         )
+
+    devices = List(title=_(u"Devices"),
+        value_type=Choice(vocabulary='AllUnusedOrUsedRoomDevices'),
+        required=False,
+        default=[])
     
     level = TextLine(
         max_length = 80,

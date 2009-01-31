@@ -13,7 +13,7 @@
 
     <defaultView
         for="org.ict_ok.components.building.interfaces.IBuilding"
-        name="overview.html"
+        name="details.html"
         />
 
     <z3c:pagelet
@@ -33,12 +33,25 @@
         />
 
     <z3c:pagelet
-        name="details.html"
+        name="details2.html"
         for="org.ict_ok.components.building.interfaces.IBuilding"
         class=".building.DetailsBuildingForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.building.View"
     />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        class="org.ict_ok.components.building.browser.building.BuildingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+    />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.components.building.browser.building.BuildingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="edit.html"
@@ -104,6 +117,14 @@
         for="org.ict_ok.components.building.interfaces.IBuilding"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+    <viewlet
+        name="details"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.building.View"
         />

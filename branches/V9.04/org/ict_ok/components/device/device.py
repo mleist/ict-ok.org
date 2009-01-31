@@ -36,6 +36,7 @@ from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+from org.ict_ok.components.room.room import Room_Devices_RelManager
 
 def AllDeviceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IDevice)
@@ -43,8 +44,8 @@ def AllDeviceTemplates(dummy_context):
 def AllDevices(dummy_context):
     return AllComponents(dummy_context, IDevice)
 
-def AllUnusedOrSelfDevices(dummy_context):
-    return AllUnusedOrSelfComponents(dummy_context, IDevice, 'location')
+def AllUnusedOrUsedRoomDevices(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IDevice, 'room')
 
 Device_AppSoftware_RelManager = FieldRelationManager(IDevice['appsoftwares'],
                                                        IApplicationSoftware['device'],
@@ -62,7 +63,8 @@ class Device(Component):
     __name__ = __parent__ = None
     manufacturer = FieldProperty(IDevice['manufacturer'])
     vendor = FieldProperty(IDevice['vendor'])
-    
+
+    room = RelationPropertyIn(Room_Devices_RelManager)
     appsoftwares = RelationPropertyOut(Device_AppSoftware_RelManager)
     osoftwares = RelationPropertyOut(Device_OSoftware_RelManager)
 

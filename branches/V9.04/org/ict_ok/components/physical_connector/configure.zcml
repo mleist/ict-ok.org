@@ -12,20 +12,14 @@
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".device.AllDeviceTemplates"
-        name="AllDeviceTemplates"
+        component=".physical_connector.AllPhysicalConnectors"
+        name="AllPhysicalConnectors"
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".device.AllDevices"
-        name="AllDevices"
+        component=".physical_connector.AllPhysicalConnectorTemplates"
+        name="AllPhysicalConnectorTemplates"
     />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".device.AllUnusedOrUsedRoomDevices"
-        name="AllUnusedOrUsedRoomDevices"
-    />
-    
 
     <include package=".generations" />
 

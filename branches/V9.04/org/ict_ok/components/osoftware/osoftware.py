@@ -40,7 +40,7 @@ def AllOperatingSoftwareTemplates(dummy_context):
 def AllOperatingSoftwares(dummy_context):
     return AllComponents(dummy_context, IOperatingSoftware)
 
-def AllUnusedOrSelfOperatingSoftwares(dummy_context):
+def AllUnusedOrUsedDeviceOperatingSoftwares(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IOperatingSoftware, 'device')
 
 

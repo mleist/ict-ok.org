@@ -91,18 +91,18 @@
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".room.AllRoomsVocab"
-        name="AllRoomsVocab"
+        component=".room.AllRoomTemplates"
+        name="AllRoomTemplates"
         />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".room.AllRoomTemplates"
-        name="AllRoomTemplates"
+        component=".room.AllRooms"
+        name="AllRooms"
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".room.AllUnusedOrSelfRooms"
-        name="AllUnusedOrSelfRooms"
+        component=".room.AllUnusedOrUsedBuildingRooms"
+        name="AllUnusedOrUsedBuildingRooms"
     />
 
     <!-- include package=".generations" / -->

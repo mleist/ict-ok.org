@@ -92,8 +92,8 @@
     
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".osoftware.AllUnusedOrSelfOperatingSoftwares"
-        name="AllUnusedOrSelfOperatingSoftwares"
+        component=".osoftware.AllUnusedOrUsedDeviceOperatingSoftwares"
+        name="AllUnusedOrUsedDeviceOperatingSoftwares"
     />
 
     <include package=".generations" />

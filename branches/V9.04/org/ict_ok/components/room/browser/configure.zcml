@@ -13,11 +13,11 @@
 
     <defaultView
         for="org.ict_ok.components.room.interfaces.IRoom"
-        name="overview.html"
+        name="details.html"
         />
 
     <z3c:pagelet
-        name="overview.html"
+        name="details3.html"
         for="org.ict_ok.components.room.interfaces.IRoom"
         class="org.ict_ok.components.room.browser.room.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -33,12 +33,25 @@
         />
 
     <z3c:pagelet
-        name="details.html"
+        name="details2.html"
         for="org.ict_ok.components.room.interfaces.IRoom"
         class=".room.DetailsRoomForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.room.View"
     />
+    
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.room.interfaces.IRoom"
+        class="org.ict_ok.components.room.browser.room.RoomDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.View"
+    />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.components.room.browser.room.RoomDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="edit.html"
@@ -94,6 +107,14 @@
         for="org.ict_ok.components.room.interfaces.IRoom"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.View"
+        />
+    <viewlet
+        name="details"
+        for="org.ict_ok.components.room.interfaces.IRoom"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.room.View"
         />

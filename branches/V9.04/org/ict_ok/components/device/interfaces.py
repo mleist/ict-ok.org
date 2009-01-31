@@ -41,13 +41,19 @@ class IDevice(IComponent):
         default = u"",
         required = False)
     
+    room = Choice(
+        title=_(u'Room'),
+        vocabulary='AllRooms',
+        required=False
+        )
+    
     osoftwares = List(title=_(u"Operating software"),
-                      value_type=Choice(vocabulary='AllUnusedOrSelfOperatingSoftwares'),
+                      value_type=Choice(vocabulary='AllUnusedOrUsedDeviceOperatingSoftwares'),
                       required=False,
                       default=[])
     
     appsoftwares = List(title=_(u"Application software"),
-                      value_type=Choice(vocabulary='AllUnusedOrSelfApplicationSoftwares'),
+                      value_type=Choice(vocabulary='AllUnusedOrUsedDeviceApplicationSoftwares'),
                       required=False,
                       default=[])
 

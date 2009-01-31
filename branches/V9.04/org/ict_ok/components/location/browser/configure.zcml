@@ -13,7 +13,7 @@
 
     <defaultView
         for="org.ict_ok.components.location.interfaces.ILocation"
-        name="overview.html"
+        name="details.html"
         />
 
     <z3c:pagelet
@@ -33,12 +33,25 @@
         />
 
     <z3c:pagelet
-        name="details.html"
+        name="details2.html"
         for="org.ict_ok.components.location.interfaces.ILocation"
         class=".location.DetailsLocationForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.location.View"
     />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.location.interfaces.ILocation"
+        class="org.ict_ok.components.location.browser.location.LocationDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.View"
+    />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.components.location.browser.location.LocationDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="edit.html"
@@ -102,6 +115,14 @@
         for="org.ict_ok.components.location.interfaces.ILocation"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.View"
+        />
+    <viewlet
+        name="details"
+        for="org.ict_ok.components.location.interfaces.ILocation"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.location.View"
         />

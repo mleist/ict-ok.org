@@ -37,6 +37,7 @@ from zope.lifecycleevent import Attributes, ObjectModifiedEvent
 from zope.app.rotterdam.xmlobject import translate, setNoCacheHeaders
 from zope.app.container.interfaces import IOrderedContainer
 from zope.schema import vocabulary
+from zope.app.pagetemplate.urlquote import URLQuote
 
 # z3c imports
 from z3c.form import button, field, form, interfaces
@@ -652,6 +653,12 @@ class SuperclassDetails:
         href = zapi.getPath(obj)
         title = obj.ikName
         return u'<a href="%s">%s</a>' % (href, title)
+    
+    def fsearchLink(self, text):
+        key = u'%s' % (text)
+        quoter = URLQuote(key)
+        return u'<a href="/@@fsearch?key=%s">%s</a>' % (quoter.quote(), text)
+        
 
     def getTabClass(self):
         if hasattr(self.request, 'tabClass'):

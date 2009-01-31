@@ -1,0 +1,43 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
+    <h3 tal:condition="context/isTemplate" i18n:translate="">Room Details [Template]</h3>
+    <h3 tal:condition="not:context/isTemplate" i18n:translate="">Room Details</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.location is not None">
+            <td i18n:translate="">Location</td>
+            <td tal:content="structure python: view.getHrefTitle(context.location)" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/rooms|nothing">
+            <td i18n:translate="">Rooms</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/rooms"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/coordinates|nothing">
+            <td i18n:translate="">coordinates</td>
+            <td tal:content="context/coordinates" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/coordinates|nothing">
+            <td i18n:translate="">coordinates</td>
+            <td tal:content="context/coordinates" />
+        </tr>
+    
+    </table>
+</i18n:block>

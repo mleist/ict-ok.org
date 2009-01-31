@@ -36,7 +36,7 @@ class IBuilding(IComponent):
         )
     
     rooms = List(title=_(u"Rooms"),
-                      value_type=Choice(vocabulary='AllUnusedOrSelfRooms'),
+                      value_type=Choice(vocabulary='AllUnusedOrUsedBuildingRooms'),
                       required=False,
                       default=[])
 

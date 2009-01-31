@@ -18,11 +18,6 @@ __version__ = "$Id: template.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -31,47 +26,22 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.outlet.interfaces import \
     IOutlet, IOutletFolder, IAddOutlet
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.physical_connector.physical_connector import \
+    PhysicalConnector, PhysicalConnectorFolder
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates
 
-def AllOutlets(dummy_context):
-    """Which Outlet are there
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IOutlet.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(                SimpleTerm(oobj.object,
-                          token=oid,
-                          title=myString))
-    return SimpleVocabulary(terms)
 
 def AllOutletTemplates(dummy_context):
-    """Which Outlet templates exists
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IOutlet.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
-                                    title=myString))
-    return SimpleVocabulary(terms)
+    return AllComponentTemplates(dummy_context, IOutlet)
+
+def AllOutlets(dummy_context):
+    return AllComponents(dummy_context, IOutlet)
 
 
-
-Outlet_Conns_RelManager = FieldRelationManager(IOutlet['conns'],
-                                                 IOutlet['conn'],
-                                                 relType='outlet:conns')
-
-class Outlet(Component):
+class Outlet(PhysicalConnector):
     """
     the template instance
     """
@@ -79,16 +49,12 @@ class Outlet(Component):
     shortName = "outlet"
     # for ..Contained we have to:
     __name__ = __parent__ = None
-    attrFoo = FieldProperty(IOutlet['attrFoo'])
-
-    conns = RelationPropertyOut(Outlet_Conns_RelManager)
-    conn = RelationPropertyIn(Outlet_Conns_RelManager)
-
+    
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        PhysicalConnector.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(Outlet)
         for (name, value) in data.items():
             if name in IOutlet.names():
@@ -97,20 +63,18 @@ class Outlet(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        PhysicalConnector.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(Outlet)
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
 
 
-class OutletFolder(Superclass, Folder):
+class OutletFolder(PhysicalConnectorFolder):
     implements(IOutletFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddOutlet)
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        PhysicalConnectorFolder.__init__(self, **data)

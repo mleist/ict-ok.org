@@ -87,8 +87,8 @@
     
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".appsoftware.AllUnusedOrSelfApplicationSoftwares"
-        name="AllUnusedOrSelfApplicationSoftwares"
+        component=".appsoftware.AllUnusedOrUsedDeviceApplicationSoftwares"
+        name="AllUnusedOrUsedDeviceApplicationSoftwares"
     />
 
     <include package=".generations" />

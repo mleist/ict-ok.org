@@ -40,72 +40,29 @@ from org.ict_ok.components.component import Component
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.location.interfaces import ILocation
 from org.ict_ok.components.building.interfaces import IBuilding
+from org.ict_ok.components.device.interfaces import IDevice
 from org.ict_ok.components.room.interfaces import \
     IRoom, IAddRoom, IRoomFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.building.building import Building_Rooms_RelManager
 
-def AllRoomsVocab(dummy_context):
-    """Which locations are there
-    """
-    terms = []
-    try:
-        uidutil = getUtility(IIntIds)
-        for (oid, oobj) in uidutil.items():
-            if IRoom.providedBy(oobj.object):
-                buildingObj = oobj.object.__parent__
-                if IBuilding.providedBy(buildingObj):
-                    locationObj = buildingObj.__parent__
-                    if ILocation.providedBy(locationObj):
-                        myString = u"%s / %s / %s" % (locationObj.getDcTitle(),
-                                              buildingObj.getDcTitle(),
-                                              oobj.object.getDcTitle())
-                        terms.append(\
-                            SimpleTerm(oobj.object.objectID,
-                                       str(oobj.object.objectID),
-                                       myString))
-        return SimpleVocabulary(terms)
-    except ComponentLookupError:
-        return SimpleVocabulary([])
 
 def AllRoomTemplates(dummy_context):
-    """Which room templates exists
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IRoom.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
-                                    title=myString))
-    return SimpleVocabulary(terms)
+    return AllComponentTemplates(dummy_context, IRoom)
 
-def AllUnusedOrSelfRooms(dummy_context):
-    """In which production state a host may be
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IRoom.providedBy(oobj.object):
-            if not oobj.object.isTemplate:
-                if oobj.object.building is None:
-                    myString = u"%s" % (oobj.object.getDcTitle())
-                    terms.append(\
-                        SimpleTerm(oobj.object,
-                                   token=oid,
-                                   title=myString))
-                else:
-                    if oobj.object.building == dummy_context:
-                        myString = u"%s" % (oobj.object.getDcTitle())
-                        terms.append(\
-                            SimpleTerm(oobj.object,
-                                       token=oid,
-                                       title=myString))
-    return SimpleVocabulary(terms)
+def AllRooms(dummy_context):
+    return AllComponents(dummy_context, IRoom)
 
+def AllUnusedOrUsedBuildingRooms(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IRoom, 'building')
+
+
+Room_Devices_RelManager = FieldRelationManager(IRoom['devices'],
+                                               IDevice['room'],
+                                               relType='room:devices')
 
 
 class Room(Component):
@@ -121,6 +78,7 @@ class Room(Component):
     coordinates = FieldProperty(IRoom['coordinates'])
 
     building = RelationPropertyIn(Building_Rooms_RelManager)
+    devices = RelationPropertyOut(Room_Devices_RelManager)
 
     def __init__(self, **data):
         """

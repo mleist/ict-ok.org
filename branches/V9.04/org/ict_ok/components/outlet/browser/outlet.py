@@ -42,7 +42,7 @@ _ = MessageFactory('org.ict_ok')
 
 class MSubAddOutlet(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'Add An network outlet instance')
+    title = _(u'Add An network outlet')
     viewURL = 'add_outlet.html'
 
     weight = 50
