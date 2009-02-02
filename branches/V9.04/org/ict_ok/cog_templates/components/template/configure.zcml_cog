@@ -74,6 +74,14 @@
                             permission="org.ict_ok.components.%(filename)s.Edit"
                             set_schema=".interfaces.I%(componentname)sFolder"
                             />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.View"
+                            interface="org.ict_ok.components.interfaces.IImportXlsData"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.Edit"
+                            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+                            />
                     </class>
 
                     <subscriber
@@ -98,7 +106,34 @@
                         component=".%(filename)s.All%(componentname)ss"
                         name="All%(componentname)ss"
                     />
+                    <utility
+                        provides="zope.schema.interfaces.IVocabularyFactory"
+                        component=".%(filename)s.All%(componentname)sTemplates"
+                        name="All%(componentname)sTemplates"
+                    />
+            ''' % props.__dict__, dedent=True)
+         ]]] -->
+    <!-- [[[end]]] -->
+
+    <!-- [[[cog
+            for (varName, displayName, otherClassName) in props.connInTuples:
+                my_dict = {'i_varName':varName,
+                           'i_displayName':displayName ,
+                           'i_otherClassName':otherClassName}
+                my_dict.update(props.__dict__)
+            cog.out('''\
+            <utility
+                provides="zope.schema.interfaces.IVocabularyFactory"
+                component=".%(filename)s.AllUnusedOrUsed%(i_otherClassName)s%(componentname)ss"
+                name="AllUnusedOrUsed%(i_otherClassName)s%(componentname)ss"
+            />
+            ''' % my_dict, dedent=True)
+         ]]] -->
+    <!-- [[[end]]] -->
+
                     
+    <!-- [[[cog
+            cog.out('''\
                     <include package=".generations" />
             ''' % props.__dict__, dedent=True)
          ]]] -->

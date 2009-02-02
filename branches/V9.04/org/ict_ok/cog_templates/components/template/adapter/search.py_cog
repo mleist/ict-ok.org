@@ -38,6 +38,7 @@ from zope.i18nmessageid import MessageFactory
 #[[[cog
 #   cog.out('''\
 #   from %(longpath_interface)s import I%(componentname)s
+#   from %(longpath_file)s import %(componentname)s
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
@@ -63,6 +64,11 @@ _ = MessageFactory('org.ict_ok')
 #           get Object id as string for catalog
 #           """
 #           return self.context.getObjectId()
+#
+#       def getFullTextSearchFields(self):
+#           """
+#           """
+#           return %(componentname)s.fullTextSearchFields
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]

@@ -45,7 +45,7 @@
                         />
 
                     <z3c:pagelet
-                        name="details.html"
+                        name="details2.html"
                         for="%(longpath_interface)s.I%(componentname)s"
                         class="%(longpath_browser_file)s.Details%(componentname)sForm"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -53,7 +53,7 @@
                     />
 
                     <z3c:pagelet
-                        name="display.html"
+                        name="details.html"
                         for="%(longpath_interface)s.I%(componentname)s"
                         class="%(longpath_browser_file)s.%(componentname)sDetails"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -182,14 +182,14 @@
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.Add"
                         />
-                    <page
+                    <!-- page
                         name="exportcsvdata.html"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
                         class=".%(filename)s.%(componentname)sFolderDetails"
                         permission="org.ict_ok.components.%(filename)s.View"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         attribute="exportCsvData"
-                    />
+                    / -->
                     <page
                         name="exportxlsdata.html"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
@@ -198,13 +198,13 @@
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         attribute="exportXlsData"
                     />
-                    <z3c:pagelet
+                    <!-- z3c:pagelet
                         name="importcsvdata.html"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
                         class=".%(filename)s.ImportCsvDataForm"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.Add"
-                    />
+                    / -->
                     <z3c:pagelet
                         name="importxlsdata.html"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
@@ -212,14 +212,14 @@
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.Add"
                     />
-                    <viewlet
+                    <!-- viewlet
                         name="exportcsvdata"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
                         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
                         class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.View"
-                        />
+                        / -->
                     <viewlet
                         name="exportxlsdata"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
@@ -228,14 +228,14 @@
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.View"
                         />
-                    <viewlet
+                    <!-- viewlet
                         name="importcsvdata"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
                         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
                         class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.Add"
-                        />
+                        / -->
                     <viewlet
                         name="importxlsdata"
                         for="%(longpath_interface)s.I%(componentname)sFolder"

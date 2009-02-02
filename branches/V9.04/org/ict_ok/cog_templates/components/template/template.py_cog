@@ -53,34 +53,58 @@ from org.ict_ok.components.superclass.superclass import Superclass
 #]]]
 #[[[end]]]
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+#[[[cog
+#   for importText in props.__dict__['additionalClassImports']:
+#       cog.outl(importText)
+#]]]
+#[[[end]]]
 
 #[[[cog
 #   cog.out('''\
+#   def All%(componentname)sTemplates(dummy_context):
+#       return AllComponentTemplates(dummy_context, I%(componentname)s)
+#
 #   def All%(componentname)ss(dummy_context):
-#       """Which %(componentname)s are there
-#       """
-#       terms = []
-#       uidutil = getUtility(IIntIds)
-#       for (oid, oobj) in uidutil.items():
-#           if I%(componentname)s.providedBy(oobj.object):
-#               myString = u"%%s" %% (oobj.object.getDcTitle())
-#               terms.append(\
-#                   SimpleTerm(oobj.object,
-#                             token=oid,
-#                             title=myString))
-#       return SimpleVocabulary(terms)
+#       return AllComponents(dummy_context, I%(componentname)s)
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
 
 #[[[cog
-#   cog.out('''\
-#   %(componentname)s_Conns_RelManager = FieldRelationManager(I%(componentname)s['conns'],
-#                                                    I%(componentname)s['conn'],
-#                                                    relType='%(filename)s:conns')
-#   ''' % props.__dict__, dedent=True)
+#   for (varName, displayName, otherClassName) in props.connInTuples:
+#       my_dict = {'i_varName':varName,
+#                  'i_displayName':displayName ,
+#                  'i_otherClassName':otherClassName}
+#       my_dict.update(props.__dict__)
+#       cog.out('''\
+#       def AllUnusedOrUsed%(i_otherClassName)s%(componentname)ss(dummy_context):
+#           return AllUnusedOrSelfComponents(dummy_context, I%(componentname)s, '%(i_varName)s')
+#       ''' % my_dict, dedent=True)
+#
 #]]]
 #[[[end]]]
+
+
+#[[[cog
+#   for (varName, displayName, otherClassName) in props.connOutTuples:
+#       my_dict = {'i_varName':varName,
+#                  'i_displayName':displayName ,
+#                  'i_otherClassName':otherClassName}
+#       my_dict.update(props.__dict__)
+#       cog.out('''\
+#       %(componentname)s_%(i_otherClassName)ss_RelManager = \\
+#              FieldRelationManager(I%(componentname)s['%(i_varName)s'],
+#                                   I%(i_otherClassName)s['%(filename)s'],
+#                                   relType='%(filename)s:%(i_varName)s')
+#       ''' % my_dict, dedent=True)
+#
+#]]]
+#[[[end]]]
+
+
+
 
 #[[[cog
 #   cog.out('''\
@@ -92,10 +116,60 @@ from org.ict_ok.components.component import Component
 #       shortName = "%(filename)s"
 #       # for ..Contained we have to:
 #       __name__ = __parent__ = None
-#       attrFoo = FieldProperty(I%(componentname)s['attrFoo'])
-#
-#       conns = RelationPropertyOut(%(componentname)s_Conns_RelManager)
-#       conn = RelationPropertyIn(%(componentname)s_Conns_RelManager)
+#   ''' % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]
+
+    #[[[cog
+    #   for (varName, schema, displayName, displayDescription) in props.attrTuples:
+    #       my_dict = {'i_varName':varName, 'i_schema':schema,
+    #                  'i_displayName':displayName ,
+    #                  'i_displayDescription':displayDescription}
+    #       my_dict.update(props.__dict__)
+    #       cog.out('''\
+    #       %(i_varName)s = FieldProperty(I%(componentname)s['%(i_varName)s'])
+    #       ''' % my_dict, dedent=True)
+    #
+    #]]]
+    #[[[end]]]
+    #[[[cog
+    #   for (varName, displayName, otherClassName) in props.connInTuples:
+    #       my_dict = {'i_varName':varName,
+    #                  'i_displayName':displayName ,
+    #                  'i_otherClassName':otherClassName}
+    #       my_dict.update(props.__dict__)
+    #       managerName = ""
+    #       cog.out('''\
+    #       %(i_varName)s = RelationPropertyIn(%(i_otherClassName)s_%(componentname)ss_RelManager)
+    #       ''' % my_dict, dedent=True)
+    #
+    #]]]
+    #[[[end]]]
+    #[[[cog
+    #   for (varName, displayName, otherClassName) in props.connOutTuples:
+    #       my_dict = {'i_varName':varName,
+    #                  'i_displayName':displayName ,
+    #                  'i_otherClassName':otherClassName}
+    #       my_dict.update(props.__dict__)
+    #       managerName = ""
+    #       cog.out('''\
+    #       %(i_varName)s = RelationPropertyOut(%(componentname)s_%(i_otherClassName)ss_RelManager)
+    #       ''' % my_dict, dedent=True)
+    #
+    #]]]
+    #[[[end]]]
+
+    #[[[cog
+    #   textList = [n for n,s,dn,dd in props.attrTuples if s == 'TextLine' or s == 'Text']
+    #   cog.out('''\
+    #   fullTextSearchFields = %s
+    #   fullTextSearchFields.extend(Component.fullTextSearchFields)
+    #       ''' % (str(textList)), dedent=True)
+    #]]]
+    #[[[end]]]
+
+#[[[cog
+#   cog.out('''\
 #
 #       def __init__(self, **data):
 #           """

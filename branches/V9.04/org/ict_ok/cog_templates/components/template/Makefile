@@ -29,6 +29,7 @@ gen:	configure.zcml \
 	${FILENAME} \
 	bootstrap.py \
 	browser/${FILENAME} \
+	browser/details.pt \
 	browser/configure.zcml \
 	browser/__init__.py \
 	generations/evolve1.py \
@@ -49,6 +50,7 @@ clean:
 	@rm -vf ${FILENAME}
 	@rm -vf bootstrap.py
 	@rm -vf browser/${FILENAME}
+	@rm -vf browser/details.pt
 	@rm -vf browser/configure.zcml
 	@rm -vf browser/__init__.py
 	@rm -vf generations/evolve1.py
@@ -73,6 +75,9 @@ rename:
 	$(COG) -d -o $@ $<
 
 %.zcml : %.zcml_cog
+	$(COG) -d -o $@ $<
+
+%.pt : %.pt_cog
 	$(COG) -d -o $@ $<
 
 %.txt : %.txt_cog
