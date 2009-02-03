@@ -33,6 +33,7 @@ from org.ict_ok.components.physical_connector.interfaces import \
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.room.room import Room_PhysicalConnectors_RelManager
@@ -46,6 +47,13 @@ def AllPhysicalConnectors(dummy_context):
 def AllUnusedOrUsedRoomPhysicalConnectors(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'room')
 
+def AllUnusedOrUsedInterfacePhysicalConnectors(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'interface')
+
+PhysicalConnector_Interface_RelManager = \
+    FieldRelationManager(IPhysicalConnector['interface'],
+                         IInterface['physicalConnector'],
+                         relType='physicalConnector:interface')
 
 
 class PhysicalConnector(Component):
@@ -60,6 +68,8 @@ class PhysicalConnector(Component):
     connectorPinout = FieldProperty(IPhysicalConnector['connectorPinout'])
     
     room = RelationPropertyIn(Room_PhysicalConnectors_RelManager)
+
+    interface = RelationPropertyIn(PhysicalConnector_Interface_RelManager)
 
     fullTextSearchFields = ['connectorPinout']
     fullTextSearchFields.extend(Component.fullTextSearchFields)

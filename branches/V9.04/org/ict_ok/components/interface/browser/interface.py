@@ -33,6 +33,7 @@ from z3c.form.browser import checkbox
 from z3c.pagelet.interfaces import IPagelet
 
 # ict_ok.org imports
+from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.interface.interfaces import \
     IInterface, IInterfaceSnmpScanWizard, IAddInterface
 from org.ict_ok.components.interface.interface import Interface
@@ -70,6 +71,12 @@ class InterfaceDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + ['host21']
     omit_addfields = ComponentDetails.omit_addfields + ['host21']
     omit_editfields = ComponentDetails.omit_editfields + ['host21']
+    
+    def state(self):
+        """
+        gives us the state dict of the object
+        """
+        return IState(self.context).getStateDict()
 
 
 class InterfaceFolderDetails(ComponentDetails):

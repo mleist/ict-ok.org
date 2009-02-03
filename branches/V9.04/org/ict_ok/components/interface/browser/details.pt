@@ -16,6 +16,12 @@
         </tr>
         
         <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.physicalConnector is not None">
+            <td i18n:translate="">Connected with</td>
+            <td tal:content="structure python: view.getHrefTitle(context.physicalConnector)" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.device is not None and context.device.user is not None">
             <td i18n:translate="">User</td>
             <td tal:content="python: view.vocabValue('AllLdapUser',
@@ -70,5 +76,6 @@
                 <ul>
             </td>
         </tr>
+        
     </table>
 </i18n:block>

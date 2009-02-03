@@ -45,6 +45,11 @@ class IRoom(IComponent):
         required=False,
         default=[])
     
+    racks = List(title=_(u"Racks"),
+        value_type=Choice(vocabulary='AllUnusedOrUsedRoomRacks'),
+        required=False,
+        default=[])
+    
     level = TextLine(
         max_length = 80,
         title = _("Level"),

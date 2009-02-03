@@ -1,0 +1,91 @@
+
+<!-- $Id: details.pt_cog -1M 2009-02-02 23:50:02Z (lokal) $ -->
+
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
+    <h3 tal:condition="context/isTemplate" i18n:translate="">Patch port details [Template]</h3>
+    <h3 tal:condition="not:context/isTemplate" i18n:translate="">Patch port details</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+        <!-- #### vvv    some examples, please remove     vvv ####
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.room is not None">
+            <td i18n:translate="">Room</td>
+            <td>
+            <span tal:content="structure python: view.getHrefTitle(context.room)" />
+            <div tal:omit-tag=""
+                 tal:condition="python: context.room.building is not None">
+                <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building)" />
+                <div tal:omit-tag=""
+                     tal:condition="python: context.room.building.location is not None">
+                    <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building.location)" />
+                </div>
+            </div>
+            </td>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/productionState|nothing">
+            <td i18n:translate="">Production state</td>
+            <td tal:content="python: view.vocabValue('AllHostProductionStates',
+                                                     context.productionState)" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/interfaces|nothing">
+            <td i18n:translate="">Interfaces</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/interfaces"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+        #### ^^^    some examples, please remove     ^^^ #### -->
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.interface is not None">
+            <td i18n:translate="">Connected interface</td>
+            <td>
+            <span tal:content="structure python: view.getHrefTitle(context.interface)" />
+            <div tal:omit-tag=""
+                 tal:condition="python: context.interface.device is not None">
+                <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.interface.device)" />
+            </div>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.room is not None">
+            <td i18n:translate="">Room</td>
+            <td>
+            <span tal:content="structure python: view.getHrefTitle(context.room)" />
+            <div tal:omit-tag=""
+                 tal:condition="python: context.room.building is not None">
+                <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building)" />
+                <div tal:omit-tag=""
+                     tal:condition="python: context.room.building.location is not None">
+                    <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building.location)" />
+                </div>
+            </div>
+            </td>
+        </tr>
+
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.patchpanel is not None">
+           <td i18n:translate="">Patch panel</td>
+           <td tal:content="structure python: view.getHrefTitle(context.patchpanel)" />
+       </tr>
+
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td tal:content="context/ikComment" />
+        </tr>
+    </table>
+</i18n:block>

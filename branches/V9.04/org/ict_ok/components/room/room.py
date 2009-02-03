@@ -41,6 +41,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.location.interfaces import ILocation
 from org.ict_ok.components.building.interfaces import IBuilding
 from org.ict_ok.components.device.interfaces import IDevice
+from org.ict_ok.components.rack.interfaces import IRack
 from org.ict_ok.components.room.interfaces import \
     IRoom, IAddRoom, IRoomFolder
 from org.ict_ok.components.physical_connector.interfaces import IPhysicalConnector
@@ -67,6 +68,9 @@ Room_Devices_RelManager = FieldRelationManager(IRoom['devices'],
 Room_PhysicalConnectors_RelManager = FieldRelationManager(IRoom['physicalConnectors'],
                                                           IPhysicalConnector['room'],
                                                           relType='room:physicalConnectors')
+Room_Racks_RelManager = FieldRelationManager(IRoom['racks'],
+                                             IRack['room'],
+                                             relType='room:racks')
 
 
 class Room(Component):
@@ -84,6 +88,7 @@ class Room(Component):
     building = RelationPropertyIn(Building_Rooms_RelManager)
     devices = RelationPropertyOut(Room_Devices_RelManager)
     physicalConnectors = RelationPropertyOut(Room_PhysicalConnectors_RelManager)
+    racks = RelationPropertyOut(Room_Racks_RelManager)
 
     def __init__(self, **data):
         """

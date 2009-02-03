@@ -94,4 +94,10 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.osoftware"
              file="security.zcml" />
+    <include package="org.ict_ok.components.patchpanel"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.patchport"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.rack"
+             file="security.zcml" />
 </configure>

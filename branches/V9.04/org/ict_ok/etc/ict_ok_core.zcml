@@ -69,5 +69,8 @@
     <include package="org.ict_ok.components.notebook" />
     <include package="org.ict_ok.components.appsoftware" />
     <include package="org.ict_ok.components.osoftware" />
+    <include package="org.ict_ok.components.patchpanel" />
+    <include package="org.ict_ok.components.patchport" />
+    <include package="org.ict_ok.components.rack" />
 
 </configure>

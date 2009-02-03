@@ -68,6 +68,12 @@ class IInterface(IComponent):
         values = ['ethernet', 'fddi', 'wlan', 'token bus', 'token ring'],
         required = True)
 
+    physicalConnector = Choice(
+        title=u'Connected with',
+        vocabulary='AllUnusedOrUsedInterfacePhysicalConnectors',
+        required=False
+        )
+
     mac = MacValid(
         max_length=40,
         title=_("MAC address"),

@@ -25,6 +25,7 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.app.folder import Folder
 
 from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
@@ -38,7 +39,8 @@ from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.host.host import Host_Interfaces_RelManager
 from org.ict_ok.components.device.device import Device_Interface_RelManager
-
+from org.ict_ok.components.physical_connector.physical_connector import \
+    PhysicalConnector_Interface_RelManager
 
 
 def AllInterfaceTemplates(dummy_context):
@@ -49,6 +51,9 @@ def AllInterfaces(dummy_context):
 
 def AllUnusedOrUsedDeviceInterfaces(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IInterface, 'device')
+
+def AllUnusedOrUsedPhysicalConnectorInterfaces(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IInterface, 'physicalConnector')
 
 
 class Interface(Component):
@@ -66,6 +71,8 @@ class Interface(Component):
     
     device = RelationPropertyIn(Device_Interface_RelManager)
     host2 = RelationPropertyIn(Host_Interfaces_RelManager)
+
+    physicalConnector = RelationPropertyOut(PhysicalConnector_Interface_RelManager)
 
     fullTextSearchFields = ['netType', 'mac',
                             'ipv4List']

@@ -14,6 +14,17 @@
             <td i18n:translate="">Connector pinout</td>
             <td tal:content="structure python: view.fsearchLink(context.connectorPinout)" />
         </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.interface is not None">
+            <td i18n:translate="">Connected interface</td>
+            <td>
+            <span tal:content="structure python: view.getHrefTitle(context.interface)" />
+            <div tal:omit-tag=""
+                 tal:condition="python: context.interface.device is not None">
+                <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.interface.device)" />
+            </div>
+            </td>
+        </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.room is not None">

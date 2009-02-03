@@ -40,6 +40,13 @@ class IPhysicalConnector(IComponent):
         vocabulary='AllRooms',
         required=False
         )
+    
+    interface = Choice(
+        title=_(u'Connected interface'),
+        vocabulary='AllUnusedOrUsedPhysicalConnectorInterfaces',
+        required=False
+        )
+
 
 
 class IPhysicalConnectorFolder(ISuperclass, IFolder):

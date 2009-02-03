@@ -58,5 +58,8 @@
     <include package="org.ict_ok.components.notebook.browser" />
     <include package="org.ict_ok.components.appsoftware.browser" />
     <include package="org.ict_ok.components.osoftware.browser" />
+    <include package="org.ict_ok.components.patchpanel.browser" />
+    <include package="org.ict_ok.components.patchport.browser" />
+    <include package="org.ict_ok.components.rack.browser" />
 
 </configure>

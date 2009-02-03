@@ -119,6 +119,11 @@
         component=".interface.AllUnusedOrUsedDeviceInterfaces"
         name="AllUnusedOrUsedDeviceInterfaces"
     />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".interface.AllUnusedOrUsedPhysicalConnectorInterfaces"
+        name="AllUnusedOrUsedPhysicalConnectorInterfaces"
+    />
         
     <include package=".generations" />
 
