@@ -253,10 +253,10 @@ class ComponentDetails(SupernodeDetails):
                     v_dataconverter = queryMultiAdapter(\
                                     (attrDm.field, v_widget),
                                     interfaces.IDataConverter)
-                    print "ddd55: %s: %s" % (attr, dateValue)
+                    #print u"ddd55: %s: %s" % (attr, dateValue)
                     if dateValue is not None:
                         value = v_dataconverter.toWidgetValue(dateValue)[0]
-                        print "value3->   %s: %s " % (attr, value)
+                        #print "value3->   %s: %s " % (attr, value)
 #                elif ICollection.providedBy(attrField):
 #                    v_style.num_format_str = '@'
 #                    value = getattr(item_v, attr)
@@ -284,9 +284,9 @@ class ComponentDetails(SupernodeDetails):
                     value = v_dataconverter.toWidgetValue(dateValue)
                     if type(value) is list:
                         value = u";".join(value)
-                    print "value1->   %s: %s " % (attr, value)
+                    #print u"value1->   %s: %s " % (attr, value)
                 if value is not None:
-                    print "wb_hosts.write(%s, %s, %s, %s)" % (pos_y, pos_x, value, v_style)
+                    #print u"wb_hosts.write(%s, %s, %s, %s)" % (pos_y, pos_x, value, v_style)
                     wb_hosts.write(pos_y, pos_x, value, v_style)
                 pos_x += 1
             # IntID
@@ -488,8 +488,8 @@ class ImportCsvDataComponentForm(layout.FormLayoutSupport, form.Form):
             reader = csv.reader(fileUpload.readlines(), 
                                 delimiter=';', 
                                 quoting=csv.QUOTE_NONNUMERIC)
-            for row in reader:
-                print '> ', row
+#            for row in reader:
+#                print '> ', row
         url = absoluteURL(self.context, self.request)
         self.request.response.redirect(url)
 
@@ -566,12 +566,12 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
 #                        import pdb
 #                        pdb.set_trace()
                         for attrName, newValString in attrDict.items():
-                            print "ddd4-> %s" % (attrName)
+                            #print u"ddd4-> %s" % (attrName)
                             attrField = self.attrInterface[attrName]
-                            print "type(%s): %s" % (attrField, type(attrField))
-                            if attrName == "rooms":
-                                import pdb
-                                pdb.set_trace()
+                            #print u"type(%s): %s" % (attrField, type(attrField))
+#                            if attrName == "rooms":
+#                                import pdb
+#                                pdb.set_trace()
                             if IChoice.providedBy(attrField):
                                 v_widget = getMultiAdapter(\
                                                 (attrField,self.request),
@@ -648,7 +648,7 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                         #self.context.__setitem__(newObj.objectID, newObj)
 #                        import pdb
 #                        pdb.set_trace()
-                        print "dataVect: ", dataVect
+                        #print "dataVect: ", dataVect
                         newObj = self.factory(**dataVect)
                         newObj.__post_init__()
                         IBrwsOverview(newObj).setTitle(dataVect['ikName'])
