@@ -1,0 +1,103 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id: configure.zcml_cog 427M 2009-02-05 11:16:54Z (lokal) $ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <interface
+        interface=".interfaces.IIndustrialComputer"
+        type="zope.app.content.interfaces.IContentType"
+        />
+
+    <class class=".ipc.IndustrialComputer">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.ipc.ipc.IndustrialComputer"
+            description="IndustrialComputer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface=".interfaces.IIndustrialComputer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema=".interfaces.IIndustrialComputer"
+            />
+    </class>
+
+    <class class=".ipc.IndustrialComputerFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <implements
+            interface="org.ict_ok.components.superclass.interfaces.IFocus"
+            />
+        <factory
+            id="org.ict_ok.components.ipc.ipc.IndustrialComputerFolder"
+            description="IndustrialComputer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface=".interfaces.IIndustrialComputerFolder"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema=".interfaces.IIndustrialComputerFolder"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+    </class>
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <adapter
+        factory=".adapter.state.State"
+        />
+
+    <adapter
+        factory="org.ict_ok.components.ipc.adapter.search.Searchable"
+    />
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".ipc.AllIndustrialComputers"
+        name="AllIndustrialComputers"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".ipc.AllIndustrialComputerTemplates"
+        name="AllIndustrialComputerTemplates"
+    />
+
+
+                    
+    <include package=".generations" />
+
+</configure>

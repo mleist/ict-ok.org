@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+
+    <!-- $Id: configure.zcml_cog 283 2008-09-04 14:22:30Z markusleist $ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <permission
+        id="org.ict_ok.components.ipc.View"
+        title="View Industrial Computer"
+    />
+
+    <permission
+        id="org.ict_ok.components.ipc.Add"
+        title="Add Industrial Computer"
+    />
+
+    <permission
+        id="org.ict_ok.components.ipc.Edit"
+        title="Edit Industrial Computer"
+    />
+
+    <permission
+        id="org.ict_ok.components.ipc.Delete"
+        title="Delete Industrial Computer"
+    />
+
+    <grant permission="org.ict_ok.components.ipc.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.components.ipc.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.ipc.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.ipc.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.ipc.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.ipc.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.ipc.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.ipc.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.ipc.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>
