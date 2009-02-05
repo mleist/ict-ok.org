@@ -28,6 +28,8 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.outlet.interfaces import \
     IOutlet, IOutletFolder, IAddOutlet
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.physical_connector.physical_connector import \
     PhysicalConnector, PhysicalConnectorFolder
 from org.ict_ok.components.component import \
@@ -72,6 +74,8 @@ class Outlet(PhysicalConnector):
 
 class OutletFolder(PhysicalConnectorFolder):
     implements(IOutletFolder, 
+               IImportCsvData,
+               IImportXlsData,
                IAddOutlet)
     def __init__(self, **data):
         """

@@ -24,6 +24,8 @@ from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.notebook.interfaces import \
     INotebook, INotebookFolder, IAddNotebook
 from org.ict_ok.components.device.device import Device, DeviceFolder
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
@@ -79,6 +81,8 @@ class Notebook(Device):
 
 class NotebookFolder(DeviceFolder):
     implements(INotebookFolder,
+               IImportCsvData,
+               IImportXlsData,
                IAddNotebook)
     def __init__(self, **data):
         """

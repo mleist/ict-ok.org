@@ -17,30 +17,22 @@ __version__ = "$Id: template.py_cog 399M 2009-02-02 22:29:31Z (lokal) $"
 
 # zope imports
 from zope.interface import implements
-from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.patchport.interfaces import \
     IPatchPort, IPatchPortFolder, IAddPatchPort
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.physical_connector.physical_connector import \
     PhysicalConnector, PhysicalConnectorFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.patchpanel.patchpanel import PatchPanel_PatchPorts_RelManager
-from org.ict_ok.components.patchpanel.interfaces import IPatchPanel
 
 def AllPatchPortTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IPatchPort)
@@ -88,6 +80,8 @@ class PatchPort(PhysicalConnector):
 
 class PatchPortFolder(PhysicalConnectorFolder):
     implements(IPatchPortFolder,
+               IImportCsvData,
+               IImportXlsData,
                IAddPatchPort)
     def __init__(self, **data):
         """

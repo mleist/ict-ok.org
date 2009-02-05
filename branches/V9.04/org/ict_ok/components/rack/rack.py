@@ -18,10 +18,6 @@ __version__ = "$Id: template.py_cog 399M 2009-02-02 22:29:31Z (lokal) $"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 from zope.app.folder import Folder
 
 # lovely imports
@@ -32,13 +28,14 @@ from lovely.relation.property import FieldRelationManager
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
-from org.ict_ok.components.rack.interfaces import IRack
-from org.ict_ok.components.rack.interfaces import IRackFolder
+from org.ict_ok.components.rack.interfaces import \
+    IAddRack, IRack, IRackFolder
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.room.room import Room_Racks_RelManager
-from org.ict_ok.components.room.interfaces import IRoom
 from org.ict_ok.components.patchpanel.interfaces import IPatchPanel
 
 def AllRackTemplates(dummy_context):
@@ -97,7 +94,10 @@ class Rack(Component):
 
 
 class RackFolder(Superclass, Folder):
-    implements(IRackFolder)
+    implements(IRackFolder,
+               IImportCsvData,
+               IImportXlsData,
+               IAddRack)
     def __init__(self, **data):
         """
         constructor of the object
