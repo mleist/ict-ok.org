@@ -59,7 +59,7 @@ def bootStrapSubscriber(event):
     ensureComponentFolderOnBootstrap(\
          IPatchPanelFolder,
          u"PatchPanels",
-         u'org.ict_ok.components..patchpanel.patchpanel.PatchPanelFolder',
+         u'org.ict_ok.components.patchpanel.patchpanel.PatchPanelFolder',
          root_folder,
          sitem)
 

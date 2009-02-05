@@ -49,10 +49,13 @@ from org.ict_ok.components.superclass.superclass import Superclass
 #   cog.out('''\
 #   from %(longpath_interface)s import I%(componentname)s
 #   from %(longpath_interface)s import I%(componentname)sFolder
+#   from %(longpath_interface)s import IAdd%(componentname)s
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 #[[[cog
@@ -191,7 +194,10 @@ from org.ict_ok.components.component import \
 #
 #
 #   class %(componentname)sFolder(Superclass, Folder):
-#       implements(I%(componentname)sFolder)
+#       implements(I%(componentname)sFolder,
+#                  IImportCsvData,
+#                  IImportXlsData,
+#                  IAdd%(componentname)s)
 #       def __init__(self, **data):
 #           """
 #           constructor of the object

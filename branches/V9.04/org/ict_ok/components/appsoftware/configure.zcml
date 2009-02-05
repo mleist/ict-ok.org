@@ -58,6 +58,14 @@
             permission="org.ict_ok.components.appsoftware.Edit"
             set_schema=".interfaces.IApplicationSoftwareFolder"
             />
+        <require
+            permission="org.ict_ok.components.appsoftware.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.appsoftware.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
     </class>
 
     <subscriber

@@ -36,6 +36,7 @@ from zope.component import createObject
 from zope.lifecycleevent import ObjectCreatedEvent
 from zope.event import notify
 from zope.app.rotterdam.xmlobject import setNoCacheHeaders
+from zope.dublincore.interfaces import IWriteZopeDublinCore
 
 # z3c imports
 from z3c.form import button, field, form, interfaces
@@ -545,11 +546,9 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                     while last_row <= row_idx:
                         matrix.extend([[]])
                         last_row = len(matrix)
-    
                     while last_col < col_idx:
                         matrix[-1].extend([''])
                         last_col = len(matrix[-1])
-    
                     matrix[-1].extend([v])
                 attrNameList = matrix[0]
                 attrValMatrix = matrix[1:]
@@ -605,6 +604,8 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                                     newVal = v_dataconverter.toFieldValue(newValString)
                             if getattr(oldObj, attrName) != newVal:
                                 setattr(oldObj, attrName, newVal)
+                                dcore = IWriteZopeDublinCore(oldObj)
+                                dcore.modified = datetime.utcnow()
                                 if attrName == "ikName":
                                     IBrwsOverview(oldObj).setTitle(newVal)
                     else:
@@ -651,6 +652,8 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                         #print "dataVect: ", dataVect
                         newObj = self.factory(**dataVect)
                         newObj.__post_init__()
+                        dcore = IWriteZopeDublinCore(oldObj)
+                        dcore.modified = datetime.utcnow()
                         IBrwsOverview(newObj).setTitle(dataVect['ikName'])
                         self.context[newObj.objectID] = newObj
                         if hasattr(newObj, "store_refs"):

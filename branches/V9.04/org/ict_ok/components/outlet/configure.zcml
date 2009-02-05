@@ -58,6 +58,14 @@
             permission="org.ict_ok.components.outlet.Edit"
             set_schema=".interfaces.IOutletFolder"
             />
+        <require
+            permission="org.ict_ok.components.outlet.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.outlet.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
     </class>
 
     <subscriber

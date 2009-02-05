@@ -27,10 +27,12 @@ from lovely.relation.property import RelationPropertyIn
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.superclass.interfaces import IFocus
-from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
-from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftwareFolder
+from org.ict_ok.components.appsoftware.interfaces import \
+    IAddApplicationSoftware, IApplicationSoftware, IApplicationSoftwareFolder
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.device.device import Device_AppSoftware_RelManager
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
@@ -92,8 +94,10 @@ class ApplicationSoftware(Component):
 
 
 class ApplicationSoftwareFolder(Superclass, Folder):
-    implements(IApplicationSoftwareFolder)
-
+    implements(IApplicationSoftwareFolder,
+               IImportCsvData,
+               IImportXlsData,
+               IAddApplicationSoftware)
     def __init__(self, **data):
         """
         constructor of the object

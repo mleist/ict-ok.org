@@ -58,6 +58,14 @@
             permission="org.ict_ok.components.osoftware.Edit"
             set_schema=".interfaces.IOperatingSoftwareFolder"
             />
+        <require
+            permission="org.ict_ok.components.osoftware.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.osoftware.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
     </class>
 
     <subscriber
