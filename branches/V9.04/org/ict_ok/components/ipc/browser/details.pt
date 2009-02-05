@@ -60,6 +60,67 @@
            <td tal:content="structure python: view.fsearchLink(context.productionState)" />
        </tr>
           
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/interfaces|nothing">
+            <td i18n:translate="">Interfaces</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/interfaces"
+                        tal:content="structure python: view.getHrefTitle(obj) +
+                                     u'&nbsp;(%s)' % u'&nbsp/&nbsp;'.join(obj.ipv4List)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/osoftwares|nothing">
+            <td i18n:translate="">Operating software</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/osoftwares"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/appsoftwares|nothing">
+            <td i18n:translate="">Application software</td>
+            <td>
+                <ul>
+                    <li tal:repeat="softw context/appsoftwares"
+                        tal:content="structure python: view.getHrefTitle(softw)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/manufacturer|nothing">
+            <td i18n:translate="">Manufacturer</td>
+            <td tal:content="structure python: view.fsearchLink(context.manufacturer)" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/vendor|nothing">
+            <td i18n:translate="">Vendor</td>
+            <td tal:content="structure python: view.fsearchLink(context.vendor)" />
+        </tr>
+
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/memsize|nothing">
+           <td i18n:translate="">Memory size</td>
+           <td tal:content="structure python: u'%d&nbsp;MB' % context.memsize" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/cpuType|nothing">
+           <td i18n:translate="">CPU type</td>
+           <td tal:content="structure python: view.fsearchLink(context.cpuType)" />
+       </tr>
+          
        <tr tal:attributes="class view/getNextTabClass"
            tal:condition="context/hardware|nothing">
            <td i18n:translate="">Hardware</td>
