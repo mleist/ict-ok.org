@@ -72,5 +72,7 @@
     <include package="org.ict_ok.components.patchpanel" />
     <include package="org.ict_ok.components.patchport" />
     <include package="org.ict_ok.components.rack" />
+    <include package="org.ict_ok.components.pc" />
+    <include package="org.ict_ok.components.ipc" />
 
 </configure>

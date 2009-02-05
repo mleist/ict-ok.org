@@ -100,4 +100,8 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.rack"
              file="security.zcml" />
+    <include package="org.ict_ok.components.pc"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.ipc"
+             file="security.zcml" />
 </configure>

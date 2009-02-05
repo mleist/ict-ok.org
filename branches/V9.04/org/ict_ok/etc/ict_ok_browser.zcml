@@ -61,5 +61,7 @@
     <include package="org.ict_ok.components.patchpanel.browser" />
     <include package="org.ict_ok.components.patchport.browser" />
     <include package="org.ict_ok.components.rack.browser" />
+    <include package="org.ict_ok.components.pc.browser" />
+    <include package="org.ict_ok.components.ipc.browser" />
 
 </configure>

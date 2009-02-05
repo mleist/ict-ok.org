@@ -17,7 +17,7 @@ Version information
 """
 
 ##
-## _____________
+## ______________
 ##
 
 import re

@@ -124,13 +124,13 @@
                            'i_displayName':displayName ,
                            'i_otherClassName':otherClassName}
                 my_dict.update(props.__dict__)
-            cog.out('''\
-            <utility
-                provides="zope.schema.interfaces.IVocabularyFactory"
-                component=".%(filename)s.AllUnusedOrUsed%(i_otherClassName)s%(componentname)ss"
-                name="AllUnusedOrUsed%(i_otherClassName)s%(componentname)ss"
-            />
-            ''' % my_dict, dedent=True)
+                cog.out('''\
+                <utility
+                    provides="zope.schema.interfaces.IVocabularyFactory"
+                    component=".%(filename)s.AllUnusedOrUsed%(i_otherClassName)s%(componentname)ss"
+                    name="AllUnusedOrUsed%(i_otherClassName)s%(componentname)ss"
+                />
+                ''' % my_dict, dedent=True)
          ]]] -->
     <!-- [[[end]]] -->
 

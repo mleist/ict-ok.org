@@ -86,6 +86,15 @@ class AddPatchPanelForm(AddComponentForm):
     attrInterface = IPatchPanel
     _session_key = 'org.ict_ok.components.patchpanel'
 
+    def create(self, data):
+        """ will create the object with all new patch ports"""
+        obj = self.factory(**data)
+        self.newdata = data
+        IBrwsOverview(obj).setTitle(data['ikName'])
+        obj.__post_init__()
+        print "portCount: ", obj.portCount
+        return obj
+
 
 class EditPatchPanelForm(EditForm):
     """ Edit for Patch panel """
