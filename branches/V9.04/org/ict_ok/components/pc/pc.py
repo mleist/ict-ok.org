@@ -60,6 +60,8 @@ class PersonalComputer(Device):
     __name__ = __parent__ = None
 
     productionState = FieldProperty(IPersonalComputer['productionState'])
+    memsize = FieldProperty(IPersonalComputer['memsize'])
+    cpuType = FieldProperty(IPersonalComputer['cpuType'])
     hardware = FieldProperty(IPersonalComputer['hardware'])
     serialNumber = FieldProperty(IPersonalComputer['serialNumber'])
     inv_id = FieldProperty(IPersonalComputer['inv_id'])
@@ -68,7 +70,7 @@ class PersonalComputer(Device):
     documentNumber = FieldProperty(IPersonalComputer['documentNumber'])
     user = FieldProperty(IPersonalComputer['user'])
 
-    fullTextSearchFields = ['hardware', 'serialNumber', 'inv_id', 'modelType', 'documentNumber']
+    fullTextSearchFields = ['cpuType', 'hardware', 'serialNumber', 'inv_id', 'modelType', 'documentNumber']
     fullTextSearchFields.extend(Device.fullTextSearchFields)
         
 

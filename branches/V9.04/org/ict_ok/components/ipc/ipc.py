@@ -47,9 +47,6 @@ def AllIndustrialComputers(dummy_context):
 
 
 
-
-
-
 class IndustrialComputer(Device):
     """
     the template instance
@@ -60,6 +57,8 @@ class IndustrialComputer(Device):
     __name__ = __parent__ = None
 
     productionState = FieldProperty(IIndustrialComputer['productionState'])
+    memsize = FieldProperty(IIndustrialComputer['memsize'])
+    cpuType = FieldProperty(IIndustrialComputer['cpuType'])
     hardware = FieldProperty(IIndustrialComputer['hardware'])
     serialNumber = FieldProperty(IIndustrialComputer['serialNumber'])
     inv_id = FieldProperty(IIndustrialComputer['inv_id'])

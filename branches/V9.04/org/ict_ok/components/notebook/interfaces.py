@@ -17,7 +17,7 @@ __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Date, List, TextLine
+from zope.schema import Choice, Date, Int, List, TextLine
 
 # ict_ok.org imports
 from org.ict_ok.components.device.interfaces import IDevice, IDeviceFolder
@@ -39,6 +39,14 @@ class INotebook(IDevice):
         default = 'production',
         readonly = False,
         required = True)
+    memsize = Int(
+        title = _(u'Memory size (MB)'),
+        description = _(u'Memory size in MB'),
+        required = False)
+    cpuType = TextLine(
+        title = _(u'CPU type'),
+        description = _(u'Text of CPU type'),
+        required = False)
     hardware = TextLine(
         max_length = 500,
         title = _("Hardware"),

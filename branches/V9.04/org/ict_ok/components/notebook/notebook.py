@@ -48,6 +48,8 @@ class Notebook(Device):
     shortName = "notebook"
     user = FieldProperty(INotebook['user'])
     productionState = FieldProperty(INotebook['productionState'])
+    memsize = FieldProperty(INotebook['memsize'])
+    cpuType = FieldProperty(INotebook['cpuType'])
     hardware = FieldProperty(INotebook['hardware'])
     serialNumber = FieldProperty(INotebook['serialNumber'])
     inv_id = FieldProperty(INotebook['inv_id'])

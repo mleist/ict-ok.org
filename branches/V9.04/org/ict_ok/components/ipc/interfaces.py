@@ -17,7 +17,7 @@ __version__ = "$Id: interfaces.py_cog 424 2009-02-02 23:58:56Z markusleist $"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Date, TextLine
+from zope.schema import Choice, Date, Int, TextLine
 
 # ict_ok.org imports
 from org.ict_ok.components.device.interfaces import IDevice, IDeviceFolder
@@ -40,6 +40,16 @@ class IIndustrialComputer(IDevice):
         default = 'production',
         readonly = False,
         required = True)
+        
+    memsize = Int(
+        title = _(u'Memory size (MB)'),
+        description = _(u'Memory size in MB'),
+        required = False)
+
+    cpuType = TextLine(
+        title = _(u'CPU type'),
+        description = _(u'Text of CPU type'),
+        required = False)
         
     hardware = TextLine(
         title = _(u'Hardware'),
