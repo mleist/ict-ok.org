@@ -62,7 +62,7 @@
         permission="org.ict_ok.components.appsoftware.Delete"
     />
     <!--    for="org.ict_ok.components.appsoftware.interfaces.IApplicationSoftware"  -->
-
+    
     <!-- Folder  -->
 
     <defaultView
@@ -84,6 +84,15 @@
         class="org.ict_ok.components.appsoftware.browser.appsoftware.AddApplicationSoftwareForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.appsoftware.Add"
+    />
+
+    <page
+        name="focus.html"
+        for="org.ict_ok.components.appsoftware.interfaces.IApplicationSoftwareFolder"
+        class="org.ict_ok.components.appsoftware.browser.appsoftware.ApplicationSoftwareFolderDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="getFocusContent"
+        permission="org.ict_ok.components.superclass.focus"
     />
 
     <!-- Sub Menu  -->

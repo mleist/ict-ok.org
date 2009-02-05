@@ -94,7 +94,7 @@ class MobilePhone(Component):
     puk = FieldProperty(IMobilePhone['puk'])
     simNumber = FieldProperty(IMobilePhone['simNumber'])
 
-    fullTextSearchFields = ['phoneNumber', 'contractModel',
+    fullTextSearchFields = ['phoneNumber', 'user', 'contractModel',
                             'modelType', 'serialNumber',
                             'imei', 'pin', 'puk', 'simNumber']
     fullTextSearchFields.extend(Component.fullTextSearchFields)

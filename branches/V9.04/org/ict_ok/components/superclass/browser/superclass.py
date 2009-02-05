@@ -18,6 +18,7 @@ __version__ = "$Id$"
 import os
 from datetime import datetime
 import tempfile
+import operator
 
 # zope imports
 import zope.interface
@@ -32,12 +33,15 @@ from zope.proxy import removeAllProxies
 from zope.app.applicationcontrol.interfaces import IRuntimeInfo
 from zope.size.interfaces import ISized
 from zope.security.checker import canAccess
+from zope.component import queryUtility
+from zope.app.intid.interfaces import IIntIds
 from zope.component import getMultiAdapter
 from zope.lifecycleevent import Attributes, ObjectModifiedEvent
 from zope.app.rotterdam.xmlobject import translate, setNoCacheHeaders
 from zope.app.container.interfaces import IOrderedContainer
 from zope.schema import vocabulary
 from zope.app.pagetemplate.urlquote import URLQuote
+from zope.component.interfaces import ComponentLookupError
 
 # z3c imports
 from z3c.form import button, field, form, interfaces
@@ -54,7 +58,8 @@ from zc.table.interfaces import ISortableColumn
 
 # ict_ok import
 from org.ict_ok.version import getIkVersion
-from org.ict_ok.components.superclass.interfaces import IPickle, ISuperclass
+from org.ict_ok.components.superclass.interfaces import \
+    IPickle, ISuperclass, IFocus
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.supernode.interfaces import IState
@@ -654,8 +659,11 @@ class SuperclassDetails:
         title = obj.ikName
         return u'<a href="%s">%s</a>' % (href, title)
     
-    def fsearchLink(self, text):
-        key = u'%s' % (text)
+    def fsearchLink(self, text, arg_key=None):
+        if arg_key:
+            key = arg_key
+        else:
+            key = u'%s' % (text)
         quoter = URLQuote(key)
         return u'<a href="/@@fsearch?key=%s">%s</a>' % (quoter.quote(), text)
         
@@ -696,7 +704,30 @@ class SuperclassDetails:
         datafile.close()
         os.remove(f_name)
         return dataMem
+    
+    def getFocusContent(self):
+        return (1000,
+                self.__class__.__name__,
+                self,
+                self.context,
+                u"<div>%s</div>" % self.context.ikName)
 
+
+class FocusDetails(SuperclassDetails):
+    """
+    """
+    def getHtmlList(self):
+        retList = []
+        uidutil = queryUtility(IIntIds)
+        for (oid, oobj) in uidutil.items():
+            if IFocus.providedBy(oobj.object):
+                try:
+                    obj_view = getMultiAdapter((oobj.object, self.request), name='focus.html')
+                    retList.append(obj_view.getFocusContent())
+                except ComponentLookupError, err:
+                    pass
+        retList.sort(key=operator.itemgetter(0))
+        return retList
 
 
 class DumpData:

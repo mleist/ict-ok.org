@@ -42,6 +42,9 @@
         <implements
             interface="zope.app.container.interfaces.IContentContainer"
             />
+        <implements
+            interface="org.ict_ok.components.superclass.interfaces.IFocus"
+            />
         <factory
             id="org.ict_ok.components.service.service.ServiceFolder"
             description="ServiceFolder"

@@ -11,7 +11,15 @@
         title="export object data as xml"
     />
 
+    <permission
+        id="org.ict_ok.components.superclass.focus"
+        title="display object on focus page"
+    />
+
     <grant permission="org.ict_ok.components.superclass.exportxml"
+        role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.superclass.focus"
         role="org.ict_ok.adm" />
 
 </configure>

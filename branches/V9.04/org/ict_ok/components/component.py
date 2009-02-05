@@ -42,7 +42,7 @@ def AllComponentTemplates(dummy_context, interface):
                                     title=myString))
     return SimpleVocabulary(terms)
 
-def AllComponents(dummy_context, interface):
+def AllComponents(dummy_context, interface, additionalAttrNames=None):
     """In which production state a host may be
     """
     terms = []
@@ -50,13 +50,24 @@ def AllComponents(dummy_context, interface):
     for (oid, oobj) in uidutil.items():
         if interface.providedBy(oobj.object):
             myString = u"%s" % (oobj.object.getDcTitle())
+            if additionalAttrNames is not None:
+                for additionalAttrName in additionalAttrNames:
+                    additionalAttribute = getattr(oobj.object, additionalAttrName)
+                    if additionalAttribute is not None:
+                        if hasattr(additionalAttribute, 'ikName'):
+                            myString = myString + u" (%s)" % \
+                                additionalAttribute.ikName
+                        else:
+                            myString = myString + u" (%s)" % \
+                                additionalAttribute
             terms.append(\
                 SimpleTerm(oobj.object,
                            token=oid,
                            title=myString))
     return SimpleVocabulary(terms)
     
-def AllUnusedOrSelfComponents(dummy_context, interface, obj_attr_name):
+def AllUnusedOrSelfComponents(dummy_context, interface,
+                              obj_attr_name, additionalAttrNames=None):
     """In which production state a host may be
     """
     terms = []
@@ -66,6 +77,16 @@ def AllUnusedOrSelfComponents(dummy_context, interface, obj_attr_name):
             if not oobj.object.isTemplate:
                 if getattr(oobj.object, obj_attr_name) is None:
                     myString = u"%s" % (oobj.object.getDcTitle())
+                    if additionalAttrNames is not None:
+                        for additionalAttrName in additionalAttrNames:
+                            additionalAttribute = getattr(oobj.object, additionalAttrName)
+                            if additionalAttribute is not None:
+                                if hasattr(additionalAttribute, 'ikName'):
+                                    myString = myString + u" (%s)" % \
+                                        additionalAttribute.ikName
+                                else:
+                                    myString = myString + u" (%s)" % \
+                                        additionalAttribute
                     terms.append(\
                         SimpleTerm(oobj.object,
                                    token=oid,
@@ -73,6 +94,16 @@ def AllUnusedOrSelfComponents(dummy_context, interface, obj_attr_name):
                 else:
                     if getattr(oobj.object, obj_attr_name) == dummy_context:
                         myString = u"%s" % (oobj.object.getDcTitle())
+                        if additionalAttrNames is not None:
+                            for additionalAttrName in additionalAttrNames:
+                                additionalAttribute = getattr(oobj.object, additionalAttrName)
+                                if additionalAttribute is not None:
+                                    if hasattr(additionalAttribute, 'ikName'):
+                                        myString = myString + u" (%s)" % \
+                                            additionalAttribute.ikName
+                                    else:
+                                        myString = myString + u" (%s)" % \
+                                            additionalAttribute
                         terms.append(\
                             SimpleTerm(oobj.object,
                                        token=oid,

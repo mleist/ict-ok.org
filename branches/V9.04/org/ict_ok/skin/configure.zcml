@@ -38,7 +38,7 @@
 
     <defaultView
         for="zope.app.folder.interfaces.IRootFolder"
-        name="overview.html"
+        name="switch.html"
         />
 
     <!-- viewlet manager -->
@@ -63,12 +63,32 @@
 
     <!-- pagelets -->
     
+    <page
+        name="switch.html"
+        for="zope.app.folder.interfaces.IRootFolder"
+        class=".SkinDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="switch"
+        permission="zope.View"
+    />
     <z3c:pagelet
         name="overview.html"
         for="zope.app.folder.interfaces.IRootFolder"
         class="org.ict_ok.components.superclass.browser.superclass.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="zope.View"
+        />
+    <z3c:pagelet
+        name="focus.html"
+        for="zope.app.folder.interfaces.IRootFolder"
+        class="org.ict_ok.components.superclass.browser.superclass.FocusDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.superclass.focus"
+    />
+    <z3c:template
+        template="focus.pt"
+        for="org.ict_ok.components.superclass.browser.superclass.FocusDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
     <z3c:pagelet
         name="add_site.html"

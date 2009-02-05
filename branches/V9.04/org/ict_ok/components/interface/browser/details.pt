@@ -71,7 +71,7 @@
             <td>
                 <ul>
                     <li tal:repeat="obj context/ipv4List"
-                        tal:content="structure python: view.getHrefTitle(obj)" />
+                        tal:content="structure python: obj" />
                     
                 <ul>
             </td>

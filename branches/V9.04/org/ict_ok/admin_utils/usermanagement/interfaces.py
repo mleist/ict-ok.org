@@ -69,6 +69,12 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
         title = _(u"Email address"),
         required=False
         )
+    startView = Choice(
+        title=_("Start View"),
+        default=u"view_dashboard.html",
+        required = True,
+        vocabulary = "UserCfgStartView")
+    
     notifierChannels = Set(
         title = _("Notifier channels"),
         value_type = Choice(

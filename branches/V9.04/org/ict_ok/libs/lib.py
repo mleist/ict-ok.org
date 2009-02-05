@@ -26,6 +26,9 @@ from zope.app import zapi
 from zope.exceptions.interfaces import UserError
 from zope.i18nmessageid import MessageFactory
 from zope.app.catalog.interfaces import ICatalog
+from zope.app.intid.interfaces import IIntIds
+from zope.dublincore.interfaces import IZopeDublinCore
+from zope.component import createObject
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -181,4 +184,22 @@ def getRefAttributeNames(arg_class):
             retList.append(attrName)
     return retList
     
-    
+def ensureComponentFolderOnBootstrap(interface, folderName, factoryId,
+                                     root_folder, siteManager):
+    allSubFolders = [folder for folder in root_folder.values()
+                     if interface.providedBy(folder)]
+    utils = [ util for util in siteManager.registeredUtilities()
+              if util.provided.isOrExtends(IIntIds)]
+    instUtilityIIntIds = utils[0].component
+    if len(allSubFolders) < 1: # there is no subfolder
+        newFolder = createObject(factoryId)
+        root_folder[folderName] = newFolder
+        dcore = IZopeDublinCore(newFolder, None)
+        #dcore.creators = [u'ikportscan']
+        #newFolder.ikComment += u"scanner: %s" % (dateNow)
+        newFolder.__setattr__("ikName", folderName)
+        dcore.title = folderName
+        instUtilityIIntIds.register(newFolder)
+    else:
+        for obj in allSubFolders:
+            instUtilityIIntIds.register(obj)

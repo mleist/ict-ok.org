@@ -16,7 +16,6 @@ __version__ = "$Id$"
 # python imports
 import logging
 import transaction
-from datetime import datetime
 
 # zope imports
 from zope.app.appsetup import appsetup
@@ -24,13 +23,11 @@ from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
-from zope.dublincore.interfaces import IZopeDublinCore
-from zope.lifecycleevent import ObjectCreatedEvent
-from zope.event import notify
-from zope.component import createObject
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import ensureComponentFolderOnBootstrap
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
+from org.ict_ok.components.net.interfaces import INetFolder 
 
 logger = logging.getLogger("Compon. Net")
 
@@ -75,16 +72,12 @@ def bootStrapSubscriber(event):
 
     createLocalSystem(root_folder)
 
-    folderName = u"Nets"
-    if folderName not in root_folder.keys():
-        #newFolder = TestComponentFolder()
-        newFolder = createObject(u'org.ict_ok.components.net.net.NetFolder')
-        root_folder[folderName] = newFolder
-        dcore = IZopeDublinCore(newFolder, None)
-        #dcore.creators = [u'ikportscan']
-        #newFolder.ikComment += u"scanner: %s" % (dateNow)
-        newFolder.__setattr__("ikName", folderName)
-        dcore.title = folderName
+    ensureComponentFolderOnBootstrap(\
+         INetFolder,
+         u"Nets",
+         u'org.ict_ok.components.net.net.NetFolder',
+         root_folder,
+         sitem)
 
     transaction.get().commit()
     connection.close()

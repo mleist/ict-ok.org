@@ -107,6 +107,18 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         AdmUtilUserProperties(self.getRequest().principal).email = my_val
     email = property(get_email, set_email)
     
+    # temp. workaround for "user specific email" in normal form
+    def get_startView(self):
+        """ property getter"""
+        try:
+            return AdmUtilUserProperties(self.getRequest().principal).startView
+        except KeyError, errText:
+            AdmUtilUserProperties(self.getRequest().principal).startView = "view_dashboard.html"
+    def set_startView(self, my_val):
+        """ property setter"""
+        AdmUtilUserProperties(self.getRequest().principal).startView = my_val
+    startView = property(get_startView, set_startView)
+    
     # temp. workaround for "user specific notifierLevel" in normal form
     def get_notifierChannels(self):
         """ property getter"""
@@ -220,7 +232,8 @@ class AdmUtilUserProperties(object):
         mapping = annotations.get(KEY)
         if mapping is None:
             blank = { 'timezone': u'',
-                      'email': u'', 
+                      'email': u'',
+                      'startView': u'view_dashboard.html',
                       'notifierChannels': set([]),
                       'notifierLevel': 100,
                       'shortEmail': u'',
@@ -231,6 +244,7 @@ class AdmUtilUserProperties(object):
         self.mapping = mapping
             
     email = MappingProperty('email')
+    startView = MappingProperty('startView')
     notifierChannels = MappingProperty('notifierChannels')
     notifierLevel = MappingProperty('notifierLevel')
     shortEmail = MappingProperty('shortEmail')
@@ -324,6 +338,7 @@ def getNotifierDict4User(principal_id):
     """will return notifier props for a special principal id
     """
     retDict = {'timezone': None,
+               'startView': None,
                'email': None,
                'notifierChannels': None,
                'notifierLevel': None,
@@ -364,4 +379,14 @@ def allLdapUser(dummy_context):
                            token=str(ldapKey),
                            title=ldapDict['cn'][0]))
     conn.conn.unbind()
+    return SimpleVocabulary(terms)
+
+def UserCfgStartView(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        "overview.html": u"Overview",
+        "view_dashboard.html": u"Dashboard",
+        "focus.html": u"Focus",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)

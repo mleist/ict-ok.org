@@ -31,8 +31,9 @@ from zope.event import notify
 from zope.component import createObject
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import ensureComponentFolderOnBootstrap
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
-from org.ict_ok.components.host.interfaces import IHost
+from org.ict_ok.components.host.interfaces import IHost, IHostFolder
 
 logger = logging.getLogger("Compon. Host")
 
@@ -103,17 +104,12 @@ def bootStrapSubscriber(event):
 
     # creates and stores the local system in ZODB
     # createLocalSystem(root_folder)
-    
-    folderName = u"Hosts"
-    if folderName not in root_folder.keys():
-        #newFolder = TestComponentFolder()
-        newFolder = createObject(u'org.ict_ok.components.host.host.HostFolder')
-        root_folder[folderName] = newFolder
-        dcore = IZopeDublinCore(newFolder, None)
-        #dcore.creators = [u'ikportscan']
-        #newFolder.ikComment += u"scanner: %s" % (dateNow)
-        newFolder.__setattr__("ikName", folderName)
-        dcore.title = folderName
+
+    ensureComponentFolderOnBootstrap(IHostFolder,
+                 u"Hosts",
+                 u'org.ict_ok.components.host.host.HostFolder',
+                 root_folder,
+                 sitem)
 
     transaction.get().commit()
     connection.close()

@@ -23,11 +23,11 @@ from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
-from zope.dublincore.interfaces import IZopeDublinCore
-from zope.component import createObject
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import ensureComponentFolderOnBootstrap
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
+from org.ict_ok.components.patchport.interfaces import IPatchPortFolder
 
 logger = logging.getLogger("Compon. PatchPort")
 
@@ -55,14 +55,13 @@ def bootStrapSubscriber(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for entry type 'patchport'")
-        
-    folderName = u"PatchPorts"
-    if folderName not in root_folder.keys():
-        newFolder = createObject(u'org.ict_ok.components.patchport.patchport.PatchPortFolder')
-        root_folder[folderName] = newFolder
-        dcore = IZopeDublinCore(newFolder, None)
-        newFolder.__setattr__("ikName", folderName)
-        dcore.title = folderName
+
+    ensureComponentFolderOnBootstrap(\
+         IPatchPortFolder,
+         u"PatchPorts",
+         u'org.ict_ok.components.patchport.patchport.PatchPortFolder',
+         root_folder,
+         sitem)
 
     transaction.get().commit()
     connection.close()

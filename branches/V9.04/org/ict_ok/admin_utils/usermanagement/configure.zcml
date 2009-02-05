@@ -47,6 +47,11 @@
         component=".usermanagement.allLdapUser"
         name="AllLdapUser"
     />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".usermanagement.UserCfgStartView"
+        name="UserCfgStartView"
+    />
 
     <include package=".generations" />
     

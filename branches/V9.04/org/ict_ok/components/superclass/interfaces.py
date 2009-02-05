@@ -191,6 +191,12 @@ class IBrwsOverview(Interface):
         """
 
 
+class IFocus(Interface):
+    """Interface for objects to display on focus-page
+    """
+
+
+
 class IMsgEvent(Interface):
     """ Interface of an async event event
     """

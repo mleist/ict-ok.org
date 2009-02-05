@@ -26,6 +26,7 @@ from lovely.relation.property import RelationPropertyIn
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.superclass.interfaces import IFocus
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftwareFolder
 from org.ict_ok.components.component import Component
@@ -38,10 +39,11 @@ def AllApplicationSoftwareTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IApplicationSoftware)
 
 def AllApplicationSoftwares(dummy_context):
-    return AllComponents(dummy_context, IApplicationSoftware)
+    return AllComponents(dummy_context, IApplicationSoftware, ['licenseKey'])
 
 def AllUnusedOrUsedDeviceApplicationSoftwares(dummy_context):
-    return AllUnusedOrSelfComponents(dummy_context, IApplicationSoftware, 'device')
+    return AllUnusedOrSelfComponents(dummy_context, IApplicationSoftware,
+                                     'device', ['licenseKey'])
 
 
 class ApplicationSoftware(Component):
@@ -91,6 +93,7 @@ class ApplicationSoftware(Component):
 
 class ApplicationSoftwareFolder(Superclass, Folder):
     implements(IApplicationSoftwareFolder)
+
     def __init__(self, **data):
         """
         constructor of the object

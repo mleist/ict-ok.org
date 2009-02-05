@@ -104,47 +104,47 @@ class IInterface(IComponent):
 
     #connectedInterfaces
 
-    @invariant
-    def ensureMyIpInNetIpRange(intfc):
-        if intfc.netType == 'ethernet' and \
-           intfc.__context__ is not None and \
-           intfc.ipv4List is not None:
-            if IHost.providedBy(intfc.__context__):
-                host = intfc.__context__
-            else:
-                host = intfc.__context__.__parent__
-            net = host.__parent__
-            for ipv4 in intfc.ipv4List:
-                if not net.containsIp(ipv4):
-                    raise Invalid("The IP address %s is not in ip-range %s of the "\
-                                  "network '%s'" % (ipv4, net.ipv4, net.ikName))
+#    @invariant
+#    def ensureMyIpInNetIpRange(intfc):
+#        if intfc.netType == 'ethernet' and \
+#           intfc.__context__ is not None and \
+#           intfc.ipv4List is not None:
+#            if IHost.providedBy(intfc.__context__):
+#                host = intfc.__context__
+#            else:
+#                host = intfc.__context__.__parent__
+#            net = host.__parent__
+#            for ipv4 in intfc.ipv4List:
+#                if not net.containsIp(ipv4):
+#                    raise Invalid("The IP address %s is not in ip-range %s of the "\
+#                                  "network '%s'" % (ipv4, net.ipv4, net.ikName))
 
-    @invariant
-    def ensureMyIpNotAlreadyUsed(intfc):
-        if intfc.netType == 'ethernet' and \
-             intfc.__context__ is not None and \
-           intfc.ipv4List is not None:
-            my_catalog = zapi.getUtility(ICatalog)
-            alreadyFound = []
-            # new Object
-            if IHost.providedBy(intfc.__context__):
-                for obj in my_catalog.searchResults(\
-                    interface_ip_index=convertIpV4(intfc.ipv4List)):
-                    ifHost = obj.__parent__
-                    ifString = u"%s/%s" % (ifHost.ikName, obj.ikName)
-                    alreadyFound.append(ifString)
-            # edit Object
-            if IInterface.providedBy(intfc.__context__):
-                for obj in my_catalog.searchResults(\
-                    interface_ip_index=convertIpV4(intfc.ipv4List)):
-                    # don't check object itself
-                    if obj.objectID != intfc.__context__.objectID:
-                        ifHost = obj.__parent__
-                        ifString = u"%s/%s" % (ifHost.ikName, obj.ikName)
-                        alreadyFound.append(ifString)
-            if len(alreadyFound) > 0:
-                raise Invalid("The IP address already used in interface %s" % \
-                              " ".join(alreadyFound))
+#    @invariant
+#    def ensureMyIpNotAlreadyUsed(intfc):
+#        if intfc.netType == 'ethernet' and \
+#             intfc.__context__ is not None and \
+#           intfc.ipv4List is not None:
+#            my_catalog = zapi.getUtility(ICatalog)
+#            alreadyFound = []
+#            # new Object
+#            if IHost.providedBy(intfc.__context__):
+#                for obj in my_catalog.searchResults(\
+#                    interface_ip_index=convertIpV4(intfc.ipv4List)):
+#                    ifHost = obj.__parent__
+#                    ifString = u"%s/%s" % (ifHost.ikName, obj.ikName)
+#                    alreadyFound.append(ifString)
+#            # edit Object
+#            if IInterface.providedBy(intfc.__context__):
+#                for obj in my_catalog.searchResults(\
+#                    interface_ip_index=convertIpV4(intfc.ipv4List)):
+#                    # don't check object itself
+#                    if obj.objectID != intfc.__context__.objectID:
+#                        ifHost = obj.__parent__
+#                        ifString = u"%s/%s" % (ifHost.ikName, obj.ikName)
+#                        alreadyFound.append(ifString)
+#            if len(alreadyFound) > 0:
+#                raise Invalid("The IP address already used in interface %s" % \
+#                              " ".join(alreadyFound))
 
 
 class IInterfaceFolder(ISuperclass, IFolder):
