@@ -27,7 +27,8 @@ from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
 from zope.app.catalog.interfaces import ICatalog
 from zope.app.security.interfaces import IAuthentication
-from zope.component import queryUtility, queryMultiAdapter, getMultiAdapter
+from zope.component import queryUtility, queryMultiAdapter, \
+    getMultiAdapter, getUtilitiesFor
 from zope.app.intid.interfaces import IIntIds
 from zope.traversing.browser import absoluteURL
 from zope.session.interfaces import ISession
@@ -71,6 +72,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
      AddForm
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
+from org.ict_ok.admin_utils.idchooser.interfaces import IIdChooser
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 
 _ = MessageFactory('org.ict_ok')
@@ -456,6 +458,14 @@ class AddComponentForm(AddForm):
         else:
             self.fields = self.allFields
             data, errors = self.extractData()
+            if not data['isTemplate']:
+                idChoosers = list(getUtilitiesFor(IIdChooser))
+                for (i_key, i_val) in data.items():
+                    if type(i_val) is type(u''):
+                        for (ch_name, idChooser) in idChoosers:
+                            if i_val.count(u'[$%s$]' % ch_name) > 0:
+                                data[i_key] = i_val.replace(u'[$%s$]' % ch_name,
+                                                      idChooser.incrementId())
             session['state'] = "dataExtracted" 
             if errors:
                 self.status = self.formErrorsMessage

@@ -18,6 +18,7 @@
     <include package="org.ict_ok.admin_utils.generators.nagios.browser" />
     <include package="org.ict_ok.admin_utils.generators.smokeping.browser" />
     <include package="org.ict_ok.admin_utils.graphviz.browser" />
+    <include package="org.ict_ok.admin_utils.idchooser.browser" />
     <include package="org.ict_ok.admin_utils.linux_ha.browser" />
     <include package="org.ict_ok.admin_utils.netscan.browser" />
     <include package="org.ict_ok.admin_utils.netscan.nmap.browser" />

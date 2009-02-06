@@ -20,13 +20,19 @@
             <td i18n:translate="">Devices</td>
             <td>
                 <ul>
-                    <li tal:repeat="obj context/devices"
-                        tal:content="structure python: view.getHrefTitle(obj)" />
-                    
+                    <li tal:repeat="obj context/devices">
+                        <span tal:omit-tag=""
+                              tal:content="structure python: view.getHrefTitle(obj)" />
+                        <span tal:omit-tag=""
+                              tal:condition="python: obj.user is not None"
+                              tal:content="structure python: u'&nbsp;&nbsp;%s' % view.fsearchLink(
+                                            u'(%s)' % view.vocabValue('AllLdapUser',obj.user),
+                                            obj.user)" />
+                    </li>
                 <ul>
             </td>
         </tr>
-        
+
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/physicalConnectors|nothing">
             <td i18n:translate="">Physical connectors</td>

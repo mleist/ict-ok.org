@@ -23,6 +23,7 @@
     <include package="org.ict_ok.admin_utils.generators.nagios" />
     <include package="org.ict_ok.admin_utils.generators.smokeping" />
     <include package="org.ict_ok.admin_utils.graphviz" />
+    <include package="org.ict_ok.admin_utils.idchooser" />
     <!-- <include package="org.ict_ok.admin_utils.linux_ha" /> -->
     <include package="org.ict_ok.admin_utils.netscan" />
     <include package="org.ict_ok.admin_utils.netscan.nmap" />

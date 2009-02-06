@@ -9,54 +9,61 @@
          Markus Leist <leist@ikom-online.de> -->
 
     <permission
-        id="org.ict_ok.admin_utils.categories.Read"
-        title="readCategoriesUtil"
-        description="can get vocabulary"
+        id="org.ict_ok.admin_utils.idchooser_util.View"
+        title="viewIdChooserUtil"
     />
     <permission
-        id="org.ict_ok.admin_utils.categories.View"
-        title="viewCategoriesUtil"
-        description="can view entry"
+        id="org.ict_ok.admin_utils.idchooser_util.Edit"
+        title="editIdChooserUtil"
     />
-    <permission
-        id="org.ict_ok.admin_utils.categories.Edit"
-        title="editCategoriesUtil"
-    />
+    
     <!--subentries-->
     <permission
-        id="org.ict_ok.admin_utils.cat_hostgroup.Add"
-        title="addCatHostGroupUtil"
+        id="org.ict_ok.admin_utils.idchooser.View"
+        title="viewIdChooser"
     />
     <permission
-        id="org.ict_ok.admin_utils.cat_hostgroup.Edit"
-        title="editCatHostGroupUtil"
+        id="org.ict_ok.admin_utils.idchooser.Count"
+        title="countIdChooser"
+    />
+    <permission
+        id="org.ict_ok.admin_utils.idchooser.Add"
+        title="addIdChooser"
+    />
+    <permission
+        id="org.ict_ok.admin_utils.idchooser.Edit"
+        title="editIdChooser"
     />
 
-    <grant permission="org.ict_ok.admin_utils.categories.Read"
-                    role="org.ict_ok.usr" />
-    <grant permission="org.ict_ok.admin_utils.categories.Read"
+
+    <grant permission="org.ict_ok.admin_utils.idchooser_util.View"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.categories.Read"
+    <grant permission="org.ict_ok.admin_utils.idchooser_util.View"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.admin_utils.categories.View"
+    <grant permission="org.ict_ok.admin_utils.idchooser_util.Edit"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.categories.View"
+    <grant permission="org.ict_ok.admin_utils.idchooser_util.Edit"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.admin_utils.categories.Edit"
+    <grant permission="org.ict_ok.admin_utils.idchooser.View"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.categories.Edit"
+    <grant permission="org.ict_ok.admin_utils.idchooser.View"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.admin_utils.cat_hostgroup.Add"
+    <grant permission="org.ict_ok.admin_utils.idchooser.Count"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.cat_hostgroup.Add"
+    <grant permission="org.ict_ok.admin_utils.idchooser.Count"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.admin_utils.cat_hostgroup.Edit"
+    <grant permission="org.ict_ok.admin_utils.idchooser.Add"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.cat_hostgroup.Edit"
+    <grant permission="org.ict_ok.admin_utils.idchooser.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.idchooser.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.idchooser.Edit"
                     role="org.ict_ok.adm" />
 
 </configure>

@@ -6,36 +6,36 @@
 
     <!-- $Id$ -->
 
-    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+    <!-- Copyright (c) 2009,
          Markus Leist <leist@ikom-online.de> -->
 
-    <class class=".categories.AdmUtilCategories">
+    <class class=".idchooser_util.AdmUtilIdChooser">
         <factory
-            id="org.ict_ok.admin_utils.categories.categories.AdmUtilCategories" />
+            id="org.ict_ok.admin_utils.categories.categories.AdmUtilIdChooser" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <require
-            permission="org.ict_ok.admin_utils.categories.View"
-            interface=".interfaces.IAdmUtilCategories"
+            permission="org.ict_ok.admin_utils.idchooser_util.View"
+            interface=".interfaces.IAdmUtilIdChooser"
             />
         <require
-            permission="org.ict_ok.admin_utils.categories.Edit"
-            set_schema=".interfaces.IAdmUtilCategories"
+            permission="org.ict_ok.admin_utils.idchooser_util.Edit"
+            set_schema=".interfaces.IAdmUtilIdChooser"
             />
     </class>
 
-    <class class=".cat_hostgroup.AdmUtilCatHostGroup">
+    <class class=".idchooser.IdChooser">
         <factory
-            id="org.ict_ok.admin_utils.categories.cat_hostgroup.AdmUtilCatHostGroup" />
+            id="org.ict_ok.admin_utils.categories.cat_hostgroup.IdChooser" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <require
-            permission="org.ict_ok.admin_utils.categories.Read"
-            interface=".interfaces.IAdmUtilCatHostGroup"
+            permission="org.ict_ok.admin_utils.idchooser.View"
+            interface=".interfaces.IIdChooser"
             />
         <require
-            permission="org.ict_ok.admin_utils.categories.Edit"
-            set_schema=".interfaces.IAdmUtilCatHostGroup"
+            permission="org.ict_ok.admin_utils.idchooser.Edit"
+            set_schema=".interfaces.IIdChooser"
             />
     </class>
 
@@ -47,8 +47,8 @@
         
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".cat_hostgroup.AllHostGroups"
-        name="AllHostGroups"
+        component=".idchooser.AllIdChoosers"
+        name="AllIdChoosers"
         />
 
     <include package=".generations" />

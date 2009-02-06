@@ -30,6 +30,8 @@
              file="security.zcml" />
     <include package="org.ict_ok.admin_utils.graphviz"
              file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.idchooser"
+             file="security.zcml" />
     <include package="org.ict_ok.admin_utils.linux_ha"
              file="security.zcml" />
     <include package="org.ict_ok.admin_utils.netscan"

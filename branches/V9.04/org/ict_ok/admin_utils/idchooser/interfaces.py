@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# no_pylint: disable-msg=W0232
+# no_pylint: disable-msg=E0211,W0232
 #
 """Interface of Object-Message-Queue-Utility"""
 
@@ -15,22 +15,50 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.schema import TextLine, Set
-from zope.app.container.interfaces import IOrderedContainer
+from zope.schema import Bool, Int, TextLine
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilCategories(ISuperclass, IOrderedContainer):
-    """A configuration utility."""
+class IAdmUtilIdChooser(ISupernode):
+    """A id getter utility."""
+    def getIdChoosers():
+        """ get all id chooser
+        """
 
-class IAdmUtilCatHostGroup(ISupernode):
-    """A host group entry.
+class IIdChooser(ISupernode):
+    """An id getter
     """
+    wasUsed = Bool(
+        title=_("Was used"),
+        description=_("Id chooser was used and cannot be deleted"),
+        default = False,
+        readonly = False,
+        required = True)
+
+    counter = Int(
+        min = 0,
+        title = _("Counter"),
+        default = 0,
+        required = True)
+    
+    step = Int(
+        min = 1,
+        title = _("Step"),
+        default = 1,
+        required = True)
+    
+    format = TextLine(
+        min_length = 2,
+        max_length = 30,
+        title = _("Format"),
+        description = _("Format with %%d for no."),
+        default = u"ID %05d",
+        required = True)
+
     def canBeDeleted():
         """
         a object can be deleted with normal delete permission
@@ -38,7 +66,6 @@ class IAdmUtilCatHostGroup(ISupernode):
         (e.g. IAdmUtilCatHostGroup)
         return True or False
         """
-    def isUsedIn():
-        """
-        this object is used at least in one host (returns object list)
+    def incrementId():
+        """return a unique valid id string.
         """
