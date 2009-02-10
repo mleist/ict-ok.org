@@ -127,11 +127,11 @@
            <td tal:content="structure python: view.fsearchLink(context.modelType)" />
        </tr>
           
-       <tr tal:attributes="class view/getNextTabClass"
-           tal:condition="context/deliveryDate|nothing">
-           <td i18n:translate="">Delivery date</td>
-           <td tal:content="structure python: view.fsearchLink(context.deliveryDate)" />
-       </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/deliveryDate|nothing">
+            <td i18n:translate="">delivery date</td>
+            <td tal:content="python: dateform.format(context.deliveryDate)">test</td>
+        </tr>
           
        <tr tal:attributes="class view/getNextTabClass"
            tal:condition="context/documentNumber|nothing">
