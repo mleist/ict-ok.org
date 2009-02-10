@@ -72,6 +72,10 @@ class INotebook(IDevice):
         title = _("delivery date"),
         description = _("delivery date"),
         required = False)
+    documentNumber = TextLine(
+        title = _(u'Document number'),
+        description = _(u'Document number'),
+        required = False)
 
     def trigger_online():
         """

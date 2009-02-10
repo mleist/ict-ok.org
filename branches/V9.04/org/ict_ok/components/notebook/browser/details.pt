@@ -47,15 +47,22 @@
         </tr -->
 
         <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/interfaces|nothing">
+            tal:condition="python: context.interfaces is not None and
+                           len(context.interfaces) > 0">
             <td i18n:translate="">Interfaces</td>
             <td>
                 <ul>
-                    <li tal:repeat="obj context/interfaces"
+                    <span tal:omit-tag="" tal:repeat="obj context/interfaces">
+                    <li tal:condition="python: obj.ipv4List is None"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    <li tal:condition="python: obj.ipv4List and len(obj.ipv4List) > 0"
                         tal:content="structure python: view.getHrefTitle(obj) +
                                      u'&nbsp;(%s)' % u'&nbsp/&nbsp;'.join(obj.ipv4List)" />
-                    
-                <ul>
+                    <!-- li tal:repeat="obj context/interfaces"
+                        tal:content="structure python: view.getHrefTitle(obj) +
+                                     u'&nbsp;(%s)' % u'&nbsp/&nbsp;'.join(obj.ipv4List)" / -->
+                    </span>                    
+                </ul>
             </td>
         </tr>
 
@@ -139,6 +146,12 @@
             <td i18n:translate="">delivery date</td>
             <td tal:content="python: dateform.format(context.deliveryDate)">test</td>
         </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/documentNumber|nothing">
+           <td i18n:translate="">Document number</td>
+           <td tal:content="structure python: view.fsearchLink(context.documentNumber)" />
+       </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">

@@ -55,6 +55,7 @@ class Notebook(Device):
     inv_id = FieldProperty(INotebook['inv_id'])
     modelType = FieldProperty(INotebook['modelType'])
     deliveryDate = FieldProperty(INotebook['deliveryDate'])
+    documentNumber = FieldProperty(INotebook['documentNumber'])
     
     fullTextSearchFields = ['user', 'productionState',
                             'hardware', 'serialNumber',

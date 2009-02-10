@@ -33,5 +33,11 @@
             <td tal:content="context/gmapsurl" />
         </tr>
     
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td tal:content="context/ikComment" />
+        </tr>
+    
     </table>
 </i18n:block>

@@ -25,7 +25,6 @@ from org.ict_ok.components.browser.component import ComponentDetails
 
 _ = MessageFactory('org.ict_ok')
 
-
 # --------------- object details ---------------------------
 
 

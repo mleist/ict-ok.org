@@ -40,7 +40,7 @@ def AllComponentTemplates(dummy_context, interface):
             terms.append(SimpleTerm(oobj.object,
                                     token=oid,
                                     title=myString))
-    terms.sort(cmp=lambda x,y: x.title < y.title)
+    terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
 
 def AllComponents(dummy_context, interface, additionalAttrNames=None):
@@ -73,7 +73,7 @@ def AllComponents(dummy_context, interface, additionalAttrNames=None):
                 SimpleTerm(oobj.object,
                            token=oid,
                            title=myString))
-    terms.sort(cmp=lambda x,y: x.title < y.title)
+    terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
     
 def AllUnusedOrSelfComponents(dummy_context, interface,
@@ -134,7 +134,7 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
                             SimpleTerm(oobj.object,
                                        token=oid,
                                        title=myString))
-    terms.sort(cmp=lambda x,y: x.title < y.title)
+    terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
 
 

@@ -329,6 +329,11 @@ def link(view='index.html'):
     """Link to the object for Overview in Web-Browser"""
     def anchor(value, item, formatter):
         """ anchor method will return a html formated anchor"""
+        if value is None:
+            return u''
+        if ISuperclass.providedBy(value):
+            item = value
+            value = item.ikName
         try:
             myAdapter = zapi.queryMultiAdapter((item, formatter.request),
                                                name=view)
@@ -395,7 +400,10 @@ class DateGetterColumn(GetterColumn):
     """Getter columnt that has locale aware sorting."""
     zope.interface.implements(ISortableColumn)
     def getSortKey(self, item, formatter):
-        return item.getTime()
+        if hasattr(item, 'getTime'):
+            return item.getTime()
+        else:
+            return IZopeDublinCore(item).modified
 
 class TitleGetterColumn(GetterColumn):
     """Getter columnt that has locale aware sorting."""
@@ -713,6 +721,24 @@ class SuperclassDetails:
                 u"<div>%s</div>" % self.context.ikName)
 
 
+class IctGetterColumn(GetterColumn):
+    def getSortKey(self, item, formatter):
+        if ISuperclass.providedBy(self.getter(item, formatter)):
+            key = self.getter(item, formatter).ikName
+            if key is not None:
+                key = key.lower()
+            else:
+                key = u'\xffff' * 80
+            return key
+        else:
+            key = self.getter(item, formatter)
+            if key is not None:
+                key = key.lower()
+            else:
+                key = u'\xffff' * 80
+            return key
+
+
 class FocusDetails(SuperclassDetails):
     """
     """
@@ -921,7 +947,7 @@ class Overview(BrowserPagelet):
                      getter=getHealth),
         #TitleGetterColumn(title=_('Title'),
                           #getter=getTitle),
-        GetterColumn(title=_('Title'),
+        IctGetterColumn(title=_('Title'),
                      getter=getTitle,
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('Modified'),
@@ -1001,6 +1027,7 @@ class Overview(BrowserPagelet):
         #import pdb
         #pdb.set_trace()
         return formatter()
+
 
 
 class ViewDashboard(Overview):
