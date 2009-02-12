@@ -1,0 +1,3247 @@
+format 63
+"pkg_inv01" // pkg_inv01
+  revision 11
+  modified_by 2 "markus"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  python_dir "/home/markus/Repositories/svn.ict-ok.org/documentation/uml/ict.genpy/"
+  deploymentview 128002 "deployment01"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    deploymentdiagram 129282 "deployment01_diag"
+      package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+      draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+      size A3
+    end
+
+    deploymentnode 129154 "Node01"
+    end
+
+    artifact 130818 "Building"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 132098 // Building
+      end
+    end
+
+    artifact 130690 "Host"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 132994 // Host
+      end
+    end
+
+    artifact 130946 "HostLinuxServer"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 134402 // HostLinuxServer
+      end
+    end
+
+    artifact 131074 "HostRouterGeneral"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 134146 // HostRouterGeneral
+      end
+    end
+
+    artifact 131202 "HostSwitchGeneral"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 129538 // HostSwitchGeneral
+      end
+    end
+
+    artifact 131330 "Interface"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 133122 // Interface
+      end
+    end
+
+    artifact 131458 "Location"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 132226 // Location
+      end
+    end
+
+    artifact 131586 "Net"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 132866 // Net
+      end
+    end
+
+    artifact 129538 "Outlet"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 129282 // Outlet
+      end
+    end
+
+    artifact 129282 "PatchPanel"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 128770 // PatchPanel
+      end
+      comment "PatchPanel Comment01
+"
+    end
+
+    artifact 129410 "PatchPort"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 129026 // PatchPort
+      end
+    end
+
+    artifact 131714 "Rack"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 132610 // Rack
+      end
+    end
+
+    artifact 129154 "Room"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 130818 // Room
+      end
+    end
+
+    artifact 131842 "Service"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 133250 // Service
+      end
+    end
+
+    artifact 131970 "SnmpValue"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 133378 // SnmpValue
+      end
+    end
+
+    artifact 132098 "IBuilding"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 132354 // IBuilding
+      end
+    end
+
+    artifact 132226 "IHost"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 133506 // IHost
+      end
+    end
+
+    artifact 132354 "IHostLinuxServer"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 134530 // IHostLinuxServer
+      end
+    end
+
+    artifact 132482 "IHostRouterGeneral"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 134274 // IHostRouterGeneral
+      end
+    end
+
+    artifact 132610 "IHostSwitchGeneral"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 129666 // IHostSwitchGeneral
+      end
+    end
+
+    artifact 132738 "IInterface"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 134018 // IInterface
+      end
+    end
+
+    artifact 132866 "ILocation"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 132482 // ILocation
+      end
+    end
+
+    artifact 132994 "INet"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 133762 // INet
+      end
+    end
+
+    artifact 133122 "IOutlet"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 129410 // IOutlet
+      end
+    end
+
+    artifact 133250 "IPatchPanel"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 128898 // IPatchPanel
+      end
+    end
+
+    artifact 133378 "IPatchPort"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 129154 // IPatchPort
+      end
+    end
+
+    artifact 133506 "IRack"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 132738 // IRack
+      end
+    end
+
+    artifact 133634 "IRoom"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 130946 // IRoom
+      end
+    end
+
+    artifact 133762 "IService"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 133634 // IService
+      end
+    end
+
+    artifact 133890 "ISnmpValue"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 133890 // ISnmpValue
+      end
+    end
+
+    artifact 135042 "ILatency"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 136066 // ILatency
+      end
+    end
+
+    artifact 135170 "Latency"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 136194 // Latency
+      end
+    end
+
+    artifact 136322 "IPhysicalConnector"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 137346 // IPhysicalConnector
+      end
+    end
+
+    artifact 136450 "PhysicalConnector"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 137474 // PhysicalConnector
+      end
+    end
+  end
+
+  classview 128002 "cl_inventory01"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    associated_deployment_view deploymentview_ref 128002 // deployment01
+    classdiagram 128002 "cl_inventory01_diag"
+      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 131714 "cl_inventory02_diag"
+      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 131970 "cl_inventory03_diag"
+      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    classdiagram 134402 "cl_inventory04_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 134530 "cl_inventory05_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    objectdiagram 131586 "obj01_diag"
+       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations no shadow default show_stereotype_properties default
+      size A4-Landscape
+    end
+
+    objectdiagram 131842 "obj02_diag"
+       write_horizontally yes package_name_in_tab yes show_context default auto_label_position yes draw_all_relations yes shadow yes show_stereotype_properties yes
+      size A4
+    end
+
+    objectdiagram 133122 "obj03_diag"
+       write_horizontally yes package_name_in_tab yes show_context default auto_label_position yes draw_all_relations yes shadow yes show_stereotype_properties yes
+      size A4-Landscape
+    end
+
+    objectdiagram 133250 "obj04_diag"
+       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+      size A4-Landscape
+    end
+
+    objectdiagram 134658 "obj05_diag"
+       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    class 135938 "Choice"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 128386 "Superclass"
+      abstract visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128002 // <realization>
+	relation 128002 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 128002 // <realization>
+	  b parent class_ref 128002 // ISuperclass
+      end
+    end
+
+    class 128130 "Supernode"
+      abstract visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128130 // <realization>
+	relation 128130 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 128130 // <realization>
+	  b parent class_ref 128514 // ISupernode
+      end
+
+      classrelation 128514 // <generalisation>
+	relation 128514 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 128514 // <generalisation>
+	  b parent class_ref 128386 // Superclass
+      end
+    end
+
+    class 128258 "Component"
+      abstract visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128258 // <realization>
+	relation 128258 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 128258 // <realization>
+	  b parent class_ref 128642 // IComponent
+      end
+
+      classrelation 128386 // <generalisation>
+	relation 128386 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 128386 // <generalisation>
+	  b parent class_ref 128130 // Supernode
+      end
+    end
+
+    class 128002 "ISuperclass"
+      abstract visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 130690 "ikName"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "object name 2-50 chars"
+      end
+    end
+
+    class 128514 "ISupernode"
+      abstract visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129154 // <generalisation>
+	relation 129154 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 129154 // <generalisation>
+	  b parent class_ref 128002 // ISuperclass
+      end
+    end
+
+    class 128642 "IComponent"
+      abstract visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 129026 // <generalisation>
+	relation 129026 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 129026 // <generalisation>
+	  b parent class_ref 128514 // ISupernode
+      end
+
+      attribute 130946 "requirement"
+	public type class_ref 135682 // Requirement
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 135938 "isTemplate"
+	public explicit_type "bool"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 136066 "myFactory"
+	public explicit_type "any"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Factory String of this object"
+      end
+
+      attribute 136194 "ikRevision"
+	public explicit_type "any"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Class-Revision of this object"
+      end
+    end
+
+    class 138114 "ApplicationSoftware"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 146562 // <generalisation>
+	relation 143746 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 146562 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 146818 // <realization>
+	relation 144002 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 146818 // <realization>
+	  b parent class_ref 137602 // IApplicationSoftware
+      end
+    end
+
+    class 132098 "Building"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 133890 // <realization>
+	relation 133378 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 133890 // <realization>
+	  b parent class_ref 132354 // IBuilding
+      end
+
+      classrelation 134146 // <generalisation>
+	relation 133634 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 134146 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 134786 // Building in Location
+	relation_ref 134146 // Building in Location
+      end
+
+      classrelation 134914 // room (contains)
+	relation 134274 o--- name "contains"
+	  a role_name "room" multiplicity "0..1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 134914 // room (contains)
+	  b role_name "building" multiplicity "*" public
+	    python "${comment}${self}${name} = ${stereotype}()
+"
+	    classrelation_ref 135042 // building (contains)
+      end
+    end
+
+    class 137858 "Device"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 146306 // <generalisation>
+	relation 143490 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 146306 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+    end
+
+    class 132994 "Host"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 137218 // <generalisation>
+	relation 135682 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 137218 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 141314 // contains
+	relation_ref 139394 // contains
+      end
+
+      classrelation 141442 // (contains)
+	relation 139522 o--- name "contains"
+	  a role_name "" multiplicity "*" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 141442 // (contains)
+	  b role_name "" public
+	    python "${comment}${self}${name} = ${stereotype}()
+"
+	    classrelation_ref 141570 // (contains)
+      end
+
+      classrelation 143618 // contains
+	relation_ref 141058 // contains
+      end
+    end
+
+    class 134402 "HostLinuxServer"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 140546 // <generalisation>
+	relation 138882 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 140546 // <generalisation>
+	  b parent class_ref 132994 // Host
+      end
+
+      classrelation 140674 // <realization>
+	relation 139010 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 140674 // <realization>
+	  b parent class_ref 134530 // IHostLinuxServer
+      end
+    end
+
+    class 134146 "HostRouterGeneral"
+      visibility protected 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 140034 // <generalisation>
+	relation 138370 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 140034 // <generalisation>
+	  b parent class_ref 132994 // Host
+      end
+
+      classrelation 140418 // <realization>
+	relation 138754 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 140418 // <realization>
+	  b parent class_ref 134274 // IHostRouterGeneral
+      end
+    end
+
+    class 129538 "HostSwitchGeneral"
+      visibility protected 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 131074 // <realization>
+	relation 130562 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 131074 // <realization>
+	  b parent class_ref 129666 // IHostSwitchGeneral
+      end
+
+      classrelation 136962 // Switch in Rack
+	relation_ref 135426 // Switch in Rack
+      end
+
+      classrelation 137346 // <generalisation>
+	relation 135810 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 137346 // <generalisation>
+	  b parent class_ref 132994 // Host
+      end
+
+      classrelation 140930 // (Interface in Switch)
+	relation 139266 ---- name "Interface in Switch"
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 140930 // (Interface in Switch)
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 141058 // (Interface in Switch)
+      end
+    end
+
+    class 133122 "Interface"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 138882 // <realization>
+	relation 137346 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 138882 // <realization>
+	  b parent class_ref 134018 // IInterface
+      end
+
+      classrelation 141058 // (Interface in Switch)
+	relation_ref 139266 // Interface in Switch
+      end
+
+      classrelation 141570 // (contains)
+	relation_ref 139522 // contains
+      end
+
+      classrelation 141698 // (patched)
+	relation 139650 ---- name "patched"
+	  a role_name "" multiplicity "1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 141698 // (patched)
+	  b role_name "" multiplicity "1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 141826 // (patched)
+      end
+
+      classrelation 142082 // patched
+	relation_ref 139778 // patched
+      end
+
+      classrelation 144002 // <association>
+	relation 141314 ----
+	  a role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 144002 // <association>
+	  b role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 144130 // <association>
+      end
+
+      classrelation 146050 // <generalisation>
+	relation 143234 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 146050 // <generalisation>
+	  b parent class_ref 137474 // PhysicalConnector
+      end
+    end
+
+    class 136194 "Latency"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 132226 "Location"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 134018 // <realization>
+	relation 133506 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 134018 // <realization>
+	  b parent class_ref 132482 // ILocation
+      end
+
+      classrelation 134274 // <generalisation>
+	relation 133762 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 134274 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 134658 // (Building in Location)
+	relation 134146 ---- name "Building in Location"
+	  a role_name "" multiplicity "0..1" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 134658 // (Building in Location)
+	  b role_name "" multiplicity "1..*" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 134786 // Building in Location
+      end
+    end
+
+    class 132866 "Net"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 137986 // <generalisation>
+	relation 136450 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 137986 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 138498 // <realization>
+	relation 136962 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 138498 // <realization>
+	  b parent class_ref 133762 // INet
+      end
+
+      classrelation 143490 // (contains)
+	relation 141058 o--- name "contains"
+	  a role_name "" multiplicity "*" public
+	    python "${comment}${self}${name} = ${stereotype}()
+"
+	    classrelation_ref 143490 // (contains)
+	  b role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 143618 // contains
+      end
+    end
+
+    class 137986 "OperatingSoftware"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 129282 "Outlet"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 130434 // <realization>
+	relation 130050 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 130434 // <realization>
+	  b parent class_ref 129410 // IOutlet
+      end
+
+      classrelation 136194 // Outlet in Room
+	relation_ref 135042 // Outlet in Room
+      end
+
+      classrelation 136578 // port (connected)
+	relation 135298 ---- name "connected"
+	  a role_name "port" multiplicity "1" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 136578 // port (connected)
+	  b role_name "outlet" multiplicity "1" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 136706 // outlet (connected)
+      end
+
+      classrelation 141826 // (patched)
+	relation_ref 139650 // patched
+      end
+
+      classrelation 145538 // <generalisation>
+	relation 142722 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 145538 // <generalisation>
+	  b parent class_ref 137474 // PhysicalConnector
+      end
+    end
+
+    class 128770 "PatchPanel"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128642 // <realization>
+	relation 128642 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 128642 // <realization>
+	  b parent class_ref 128898 // IPatchPanel
+      end
+
+      classrelation 128770 // <generalisation>
+	relation 128770 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 128770 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      attribute 128002 "size"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 128130 "name"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 128258 "room"
+	public type class_ref 130818 // Room
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Das Objekt befindet sich in diesem Raum"
+      end
+
+      classrelation 135938 // Panel in Rack
+	relation_ref 134914 // Panel in Rack
+      end
+
+      classrelation 136322 // (PatchPort in Panel)
+	relation 135170 ---- name "PatchPort in Panel"
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 136322 // (PatchPort in Panel)
+	  b role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 136450 // (PatchPort in Panel)
+      end
+
+      classrelation 142210 // port (contains)
+	relation 139906 o--- name "contains"
+	  a role_name "port" multiplicity "1..*" public
+	    comment "List of all ports"
+	    python "${comment}${self}${name} = ${stereotype}()
+"
+	    classrelation_ref 142210 // port (contains)
+	  b role_name "panel" public
+	    comment "the panel"
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 142338 // panel (contains)
+      end
+
+      classrelation 144130 // <association>
+	relation_ref 141314 // <association>
+      end
+    end
+
+    class 129026 "PatchPort"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 136450 // (PatchPort in Panel)
+	relation_ref 135170 // PatchPort in Panel
+      end
+
+      classrelation 136706 // outlet (connected)
+	relation_ref 135298 // connected
+      end
+
+      classrelation 137090 // <realization>
+	relation 135554 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 137090 // <realization>
+	  b parent class_ref 129154 // IPatchPort
+      end
+
+      classrelation 141954 // interface (patched)
+	relation 139778 ---- name "patched"
+	  a role_name "interface" multiplicity "1" class_relation public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 141954 // interface (patched)
+	  b role_name "port" multiplicity "1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 142082 // patched
+      end
+
+      classrelation 142338 // panel (contains)
+	relation_ref 139906 // contains
+      end
+
+      classrelation 145282 // <generalisation>
+	relation 142466 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 145282 // <generalisation>
+	  b parent class_ref 137474 // PhysicalConnector
+      end
+    end
+
+    class 137474 "PhysicalConnector"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 145410 // <generalisation>
+	relation 142594 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 145410 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+    end
+
+    class 132610 "Rack"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 129538 "height"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      classrelation 135170 // <realization>
+	relation 134402 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 135170 // <realization>
+	  b parent class_ref 132738 // IRack
+      end
+
+      classrelation 135298 // <generalisation>
+	relation 134530 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 135298 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 135682 // Rack in Room
+	relation_ref 134786 // Rack in Room
+      end
+
+      classrelation 135810 // (Panel in Rack)
+	relation 134914 ---- name "Panel in Rack"
+	  a role_name "" multiplicity "0..1" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 135810 // (Panel in Rack)
+	  b role_name "" multiplicity "1..*" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 135938 // Panel in Rack
+      end
+
+      classrelation 136834 // (Switch in Rack)
+	relation 135426 ---- name "Switch in Rack"
+	  a role_name "" multiplicity "*" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 136834 // (Switch in Rack)
+	  b role_name "" multiplicity "0..1" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 136962 // Switch in Rack
+      end
+    end
+
+    class 135682 "Requirement"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 130818 "Room"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 132482 // <realization>
+	relation 131970 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 132482 // <realization>
+	  b parent class_ref 130946 // IRoom
+      end
+
+      classrelation 132610 // <generalisation>
+	relation 132098 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 132610 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 135042 // building (contains)
+	relation_ref 134274 // contains
+      end
+
+      classrelation 135554 // (Rack in Room)
+	relation 134786 ---- name "Rack in Room"
+	  a role_name "" multiplicity "0..1" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 135554 // (Rack in Room)
+	  b role_name "" multiplicity "1..*" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 135682 // Rack in Room
+      end
+
+      classrelation 136066 // (Outlet in Room)
+	relation 135042 ---- name "Outlet in Room"
+	  a role_name "" multiplicity "0..1" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 136066 // (Outlet in Room)
+	  b role_name "" multiplicity "1..*" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 136194 // Outlet in Room
+      end
+
+      classrelation 141186 // host (contains)
+	relation 139394 o--- name "contains"
+	  a role_name "host" multiplicity "*" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 141186 // host (contains)
+	  b role_name "room" multiplicity "0..1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 141314 // contains
+      end
+    end
+
+    class 133250 "Service"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 138242 // <generalisation>
+	relation 136706 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 138242 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 138626 // <realization>
+	relation 137090 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 138626 // <realization>
+	  b parent class_ref 133634 // IService
+      end
+    end
+
+    class 133378 "SnmpValue"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 138370 // <generalisation>
+	relation 136834 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 138370 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 138754 // <realization>
+	relation 137218 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 138754 // <realization>
+	  b parent class_ref 133890 // ISnmpValue
+      end
+    end
+
+    class 137602 "IApplicationSoftware"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 146690 // <generalisation>
+	relation 143874 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 146690 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+
+      attribute 137090 "device"
+	public type class_ref 137858 // Device
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 137218 "manufacturer"
+	public explicit_type "char"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Name/Address of the manufacturer."
+      end
+
+      attribute 137346 "otherType"
+	public explicit_type "char"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "other type description."
+      end
+
+      attribute 137474 "targetOperatingSystems"
+	public explicit_type "char"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "target operating systems."
+      end
+
+      attribute 137602 "versionText"
+	public explicit_type "char"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 137730 "licenseKey"
+	public explicit_type "char"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 137858 "language"
+	public explicit_type "char"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 137986 "majorVersion"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 138114 "minorVersion"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 138242 "revisionNumber"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 138370 "buildNumber"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+    end
+
+    class 132354 "IBuilding"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 134402 // <generalisation>
+	relation 133890 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 134402 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+
+      attribute 131074 "coordinates"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 131202 "gmapsurl"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+    end
+
+    class 137730 "IDevice"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 136322 "manufacturer"
+	public explicit_type "char"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Name/Address of the manufacturer"
+      end
+
+      attribute 136450 "vendor"
+	public explicit_type "char"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Name/Address of the vendor."
+      end
+
+      attribute 136578 "room"
+	public type class_ref 130818 // Room
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 136706 "interfaces"
+	public type class_ref 133122 // Interface
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 136834 "osoftwares"
+	public explicit_type ""
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 136962 "appsoftwares"
+	public explicit_type ""
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      classrelation 146434 // <generalisation>
+	relation 143618 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 146434 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    class 133506 "IHost"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 137602 // <generalisation>
+	relation 136066 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 137602 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+
+      attribute 131330 "hostname"
+	public explicit_type "string"
+	init_value "\"systemname\""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Name of the system"
+      end
+
+      attribute 131458 "manufacturer"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Name/Address of the manufacturer"
+      end
+
+      attribute 131586 "vendor"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Name/Address of the vendor"
+      end
+
+      attribute 131714 "hostGroups"
+	public type class_ref 135938 // Choice
+	stereotype "set"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 131842 "productionState"
+	public type class_ref 135938 // Choice
+	init_value "'Production'"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 131970 "workinggroup"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 132098 "hardware"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 132226 "user"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 132354 "inv_id"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 132482 "room"
+	public type class_ref 130818 // Room
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 132610 "osList"
+	public explicit_type "string"
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 132738 "snmpVersion"
+	public type class_ref 135938 // Choice
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 132866 "snmpPort"
+	public explicit_type "int"
+	init_value "161"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 132994 "snmpReadCommunity"
+	public explicit_type "string"
+	init_value "u\"public\""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 133122 "snmpWriteCommunity"
+	public explicit_type "string"
+	init_value "u\"private\""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 133250 "url"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 133378 "url_type"
+	public type class_ref 135938 // Choice
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 133506 "url_authname"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 133634 "url_authpasswd"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 133762 "console"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 133890 "genNagios"
+	public explicit_type "bool"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      operation 128002 "trigger_online"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128130 "trigger_offline"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128258 "trigger_not1"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 128386 "getIpList"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${)}:
+${docstring}${body}
+"
+	
+      end
+    end
+
+    class 134530 "IHostLinuxServer"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 140802 // <generalisation>
+	relation 139138 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 140802 // <generalisation>
+	  b parent class_ref 133506 // IHost
+      end
+    end
+
+    class 134274 "IHostRouterGeneral"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 140290 // <generalisation>
+	relation 138626 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 140290 // <generalisation>
+	  b parent class_ref 133506 // IHost
+      end
+    end
+
+    class 129666 "IHostSwitchGeneral"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 137474 // <generalisation>
+	relation 135938 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 137474 // <generalisation>
+	  b parent class_ref 133506 // IHost
+      end
+    end
+
+    class 134018 "IInterface"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 134018 "netType"
+	public explicit_type "string"
+	init_value "\"ethernet\""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Networktype of this interface (OSI Layer1-2)
+['ethernet', 'fddi', 'wlan', 'token bus', 'token ring']"
+      end
+
+      attribute 134146 "mac"
+	public explicit_type "string"
+	init_value "u\"00:00:00:00:00:00\""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "MAC address of the host"
+      end
+
+      attribute 134274 "ipv4List"
+	public explicit_type "string"
+	init_value "[]"
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      classrelation 146178 // <generalisation>
+	relation 143362 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 146178 // <generalisation>
+	  b parent class_ref 137346 // IPhysicalConnector
+      end
+    end
+
+    class 136066 "ILatency"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 134402 "checkcount"
+	public explicit_type "int"
+	init_value "20"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+    end
+
+    class 132482 "ILocation"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 134530 // <generalisation>
+	relation 134018 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 134530 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    class 133762 "INet"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 139010 // <generalisation>
+	relation 137474 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 139010 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+
+      attribute 130818 "ipv4"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "IP address"
+      end
+    end
+
+    class 129410 "IOutlet"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 145794 // <generalisation>
+	relation 142978 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 145794 // <generalisation>
+	  b parent class_ref 137346 // IPhysicalConnector
+      end
+    end
+
+    class 128898 "IPatchPanel"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128898 // <generalisation>
+	relation 128898 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 128898 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    class 129154 "IPatchPort"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 145666 // <generalisation>
+	relation 142850 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 145666 // <generalisation>
+	  b parent class_ref 137346 // IPhysicalConnector
+      end
+    end
+
+    class 137346 "IPhysicalConnector"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 145922 // <generalisation>
+	relation 143106 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 145922 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+
+      attribute 135554 "connectorPinout"
+	public explicit_type "char"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 135682 "room"
+	public type class_ref 130818 // Room
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 135810 "interface"
+	public type class_ref 133122 // Interface
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+    end
+
+    class 132738 "IRack"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 129410 "height"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "height in inch"
+      end
+
+      classrelation 135426 // <generalisation>
+	relation 134658 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 135426 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    class 135810 "IRequirement"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 130946 "IRoom"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 132738 // <generalisation>
+	relation 132226 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 132738 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    class 133634 "IService"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 139266 // <generalisation>
+	relation 137730 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 139266 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    class 133890 "ISnmpValue"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 139394 // <generalisation>
+	relation 137858 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 139394 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    classinstance 129154 "Rumeln"
+      type class_ref 132226 // Location
+      attributes
+        end
+      relations
+        relation_ref 134146 // Building in Location
+          classinstance_ref 129282 // Duesseldorfer Str.
+        end
+    end
+
+    classinstance 129282 "Duesseldorfer Str."
+      type class_ref 132098 // Building
+      attributes
+        end
+      relations
+        relation_ref 134274 // contains
+          classinstance_ref 129666 // Office
+        relation_ref 134274 // contains
+          classinstance_ref 129538 // Serverroom
+        end
+    end
+
+    classinstance 129538 "Serverroom"
+      type class_ref 130818 // Room
+      attributes
+        end
+      relations
+        relation_ref 134786 // Rack in Room
+          classinstance_ref 129794 // Infra1
+        end
+    end
+
+    classinstance 129666 "Office"
+      type class_ref 130818 // Room
+      attributes
+        end
+      relations
+        relation_ref 135042 // Outlet in Room
+          classinstance_ref 130050 // P1/1
+        relation_ref 139394 // contains
+          classinstance_ref 130562 // Workstation1
+        end
+    end
+
+    classinstance 129794 "Infra1"
+      type class_ref 132610 // Rack
+      attributes
+        end
+      relations
+        relation_ref 134914 // Panel in Rack
+          classinstance_ref 129922 // Panel1
+        relation_ref 135426 // Switch in Rack
+          classinstance_ref 130306 // 3Com-01
+        end
+    end
+
+    classinstance 129922 "Panel1"
+      type class_ref 128770 // PatchPanel
+      attributes
+        end
+      relations
+        relation_ref 139906 // contains
+          classinstance_ref 130178 // P1
+        relation_ref 139906 // contains
+          classinstance_ref 133506 // P2
+        end
+    end
+
+    classinstance 130178 "P1"
+      type class_ref 129026 // PatchPort
+      attributes
+        end
+      relations
+        relation_ref 139778 // patched
+          classinstance_ref 130434 // P1
+        end
+      comment "Panel1/P1"
+    end
+
+    classinstance 133506 "P2"
+      type class_ref 129026 // PatchPort
+      attributes
+        end
+      relations
+        end
+      comment "Panel1/P2"
+    end
+
+    classinstance 130050 "P1/1"
+      type class_ref 129282 // Outlet
+      attributes
+        end
+      relations
+        relation_ref 135298 // connected
+          classinstance_ref 130178 // P1
+        end
+    end
+
+    classinstance 130306 "3Com-01"
+      type class_ref 129538 // HostSwitchGeneral
+      attributes
+        end
+      relations
+        relation_ref 139266 // Interface in Switch
+          classinstance_ref 130434 // P1
+        relation_ref 139266 // Interface in Switch
+          classinstance_ref 133378 // P3
+        relation_ref 139266 // Interface in Switch
+          classinstance_ref 133250 // P2
+        end
+    end
+
+    classinstance 130434 "P1"
+      type class_ref 133122 // Interface
+      attributes
+        end
+      relations
+        end
+      comment "3Com-01/P1"
+    end
+
+    classinstance 133250 "P2"
+      type class_ref 133122 // Interface
+      attributes
+        end
+      relations
+        end
+      comment "3Com-01/P2"
+    end
+
+    classinstance 133378 "P3"
+      type class_ref 133122 // Interface
+      attributes
+        end
+      relations
+        end
+      comment "3Com-01/P3"
+    end
+
+    classinstance 130562 "Workstation1"
+      type class_ref 132994 // Host
+      attributes
+        attribute_ref 130690 // ikName
+          "Sun1"
+        end
+      relations
+        relation_ref 139522 // contains
+          classinstance_ref 130690 // eth0
+        relation_ref 139522 // contains
+          classinstance_ref 132610 // eth1
+        end
+    end
+
+    classinstance 130690 "eth0"
+      type class_ref 133122 // Interface
+      attributes
+        attribute_ref 134274 // ipv4List
+          "[u\"172.16.64.35\"]"
+        end
+      relations
+        relation_ref 139650 // patched
+          classinstance_ref 130050 // P1/1
+        end
+      comment "Workstation1/eth0"
+    end
+
+    classinstance 132610 "eth1"
+      type class_ref 133122 // Interface
+      attributes
+        end
+      relations
+        end
+      comment "Workstation1/eth1"
+    end
+
+    classinstance 130818 ""
+      type class_ref 129026 // PatchPort
+      attributes
+        end
+      relations
+        end
+    end
+
+    classinstance 131970 "Net1"
+      type class_ref 132866 // Net
+      attributes
+        attribute_ref 130818 // ipv4
+          "192.168.1.0/24"
+        end
+      relations
+        relation_ref 141058 // contains
+          classinstance_ref 130562 // Workstation1
+        relation_ref 141058 // contains
+          classinstance_ref 132226 // Workstation2
+        end
+    end
+
+    classinstance 132226 "Workstation2"
+      type class_ref 132994 // Host
+      attributes
+        end
+      relations
+        relation_ref 139522 // contains
+          classinstance_ref 132354 // eth1
+        relation_ref 139522 // contains
+          classinstance_ref 132482 // eth0
+        end
+    end
+
+    classinstance 132482 "eth0"
+      type class_ref 133122 // Interface
+      attributes
+        attribute_ref 134274 // ipv4List
+          "[u\"172.16.64.17\"]"
+        end
+      relations
+        end
+      comment "Workstation2/eth0"
+    end
+
+    classinstance 132354 "eth1"
+      type class_ref 133122 // Interface
+      attributes
+        end
+      relations
+        end
+      comment "Workstation2/eth1"
+    end
+
+    classinstance 132738 "neon.server.ifdd.de"
+      type class_ref 134402 // HostLinuxServer
+      attributes
+        end
+      relations
+        relation_ref 139522 // contains
+          classinstance_ref 133122 // eth0
+        end
+    end
+
+    classinstance 133122 "eth0"
+      type class_ref 133122 // Interface
+      attributes
+        end
+      relations
+        end
+      comment "neon.server.ifdd.de/eth0"
+    end
+
+    classinstance 132866 "helium.server.ifdd.de"
+      type class_ref 134402 // HostLinuxServer
+      attributes
+        end
+      relations
+        relation_ref 139522 // contains
+          classinstance_ref 132994 // eth0
+        end
+    end
+
+    classinstance 132994 "eth0"
+      type class_ref 133122 // Interface
+      attributes
+        end
+      relations
+        end
+      comment "helium.server.ifdd.de/eth0"
+    end
+  end
+
+  componentview 128002 "Compon01"
+    //component diagram settings
+    package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    componentdiagram 130434 "Compon01_diag"
+      package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+      draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+      size A3-Landscape
+    end
+  end
+end

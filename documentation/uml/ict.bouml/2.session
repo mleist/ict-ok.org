@@ -1,0 +1,7 @@
+window_sizes 1916 1156 339 1571 1033 67
+show_stereotypes
+selected classview_ref 128002 // cl_inventory01
+open
+  class_ref 137602 // IApplicationSoftware
+end
+end

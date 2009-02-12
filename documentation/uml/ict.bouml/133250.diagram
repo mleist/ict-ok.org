@@ -1,0 +1,82 @@
+format 63
+
+classinstancecanvas 128002 classinstance_ref 132738 // neon.server.ifdd.de
+  xyz 871 113 2000
+end
+classinstancecanvas 128130 classinstance_ref 130306 // 3Com-01
+  xyz 343 278 2000
+end
+classinstancecanvas 128258 classinstance_ref 130434 // P1
+  xyz 352 391 2000
+end
+classinstancecanvas 128386 classinstance_ref 129794 // Infra1
+  xyz 286 165 2000
+end
+classinstancecanvas 128514 classinstance_ref 130178 // P1
+  xyz 37 389 2000
+end
+classinstancecanvas 128642 classinstance_ref 129922 // Panel1
+  xyz 93 282 2000
+end
+classinstancecanvas 128770 classinstance_ref 129538 // Serverroom
+  xyz 265 63 2000
+end
+classinstancecanvas 129666 classinstance_ref 132866 // helium.server.ifdd.de
+  xyz 883 483 2000
+end
+classinstancecanvas 129794 classinstance_ref 133122 // eth0
+  xyz 879 201 2000
+end
+classinstancecanvas 129922 classinstance_ref 132994 // eth0
+  xyz 885 393 2000
+end
+classinstancecanvas 130306 classinstance_ref 133250 // P2
+  xyz 616 202 2000
+end
+classinstancecanvas 130434 classinstance_ref 133378 // P3
+  xyz 619 394 2000
+end
+note 131458 "Server Neon"
+  xyzwh 934 60 2000 110 34
+note 131586 "Server Helium"
+  xyzwh 945 528 2000 112 34
+objectlinkcanvas 128898 rel relation_ref 139266 // Interface in Switch
+  from ref 128130 z 1999 label "Interface in Switch" italic xyz 358 329 1999 to ref 128258
+  no_role_a no_role_b
+objectlinkcanvas 129026 rel relation_ref 134914 // Panel in Rack
+  from ref 128386 z 1999 label "Panel in Rack" italic xyz 195 218 1999 to ref 128642
+  no_role_a no_role_b
+objectlinkcanvas 129154 rel relation_ref 139778 // patched
+  from ref 128514 z 1999 label "patched" italic xyz 215 386 1999 to ref 128258
+  role_a_pos 299 383 3000 role_b_pos 125 382 3000
+objectlinkcanvas 129282 rel relation_ref 134786 // Rack in Room
+  from ref 128770 z 1999 label "Rack in Room" italic xyz 284 109 1999 to ref 128386
+  no_role_a no_role_b
+objectlinkcanvas 129410 norel
+  from ref 128642 z 1999 to ref 128514
+  no_role_a no_role_b
+objectlinkcanvas 129538 rel relation_ref 135426 // Switch in Rack
+  from ref 128386 z 1999 label "Switch in Rack" italic xyz 337 216 1999 to ref 128130
+  no_role_a no_role_b
+objectlinkcanvas 130050 rel relation_ref 139522 // contains
+  from ref 128002 z 1999 label "contains" italic xyz 925 153 1999 to ref 129794
+  no_role_a no_role_b
+objectlinkcanvas 130178 rel relation_ref 139522 // contains
+  from ref 129666 z 1999 label "contains" italic xyz 936 434 1999 to ref 129922
+  no_role_a no_role_b
+objectlinkcanvas 130562 rel relation_ref 139266 // Interface in Switch
+  from ref 128130 z 1999 label "Interface in Switch" italic xyz 485 235 1999 to ref 130306
+  no_role_a no_role_b
+objectlinkcanvas 130690 rel relation_ref 139266 // Interface in Switch
+  from ref 128130 z 1999 label "Interface in Switch" italic xyz 494 331 1999 to ref 130434
+  no_role_a no_role_b
+objectlinkcanvas 130946 norel
+  from ref 130306 z 1999 to ref 129794
+  no_role_a no_role_b
+objectlinkcanvas 131074 norel
+  from ref 130434 z 1999 to ref 129922
+  no_role_a no_role_b
+objectlinkcanvas 131714 rel relation_ref 139906 // contains
+  from ref 128642 z 1999 label "contains" italic xyz 90 332 3000 to ref 128514
+  role_a_pos 105 368 3000 role_b_pos 152 313 3000
+end

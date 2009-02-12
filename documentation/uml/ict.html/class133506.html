@@ -1,0 +1,73 @@
+<!-- Documentation produced by the Html generator of Bouml (http://bouml.free.fr) -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class IHost</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class IHost</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="refclass133506"></a>
+<p>Declaration :</p><ul><li>Python : class IHost(<a href="class128642.html#refclass128642"><b>IComponent</b></a>)</li></ul><p>Directly inherited by : <a href="class134530.html#refclass134530"><b>IHostLinuxServer</b></a> <a href="class134274.html#refclass134274"><b>IHostRouterGeneral</b></a> <a href="class129666.html#refclass129666"><b>IHostSwitchGeneral</b></a> </p>
+<p>Artifact : <a href="index.html#refartifact132226"><b>IHost</b></a></p><p>Stereotype: interface</p>
+<div class="sub">
+<a name="refattribute131330"></a>
+<table><tr><td><div class="element">Attribute <b>hostname</b></div></td></tr></table>
+<p>Name of the system<br /></p><p>Declaration :</p><ul><li>Uml : + hostname : string</li><li>Python : self.hostname = ...<br /></li></ul><a name="refattribute131458"></a>
+<table><tr><td><div class="element">Attribute <b>manufacturer</b></div></td></tr></table>
+<p>Name/Address of the manufacturer<br /></p><p>Declaration :</p><ul><li>Uml : + manufacturer : string</li><li>Python : self.manufacturer = None<br /></li></ul><a name="refattribute131586"></a>
+<table><tr><td><div class="element">Attribute <b>vendor</b></div></td></tr></table>
+<p>Name/Address of the vendor<br /></p><p>Declaration :</p><ul><li>Uml : + vendor : string</li><li>Python : self.vendor = None<br /></li></ul><a name="refattribute131714"></a>
+<table><tr><td><div class="element">Attribute <b>hostGroups</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + hostGroups : <a href="class135938.html#refclass135938"><b>Choice</b></a></li><li>Python : self.hostGroups = None<br /></li></ul><p>Stereotype: set</p>
+<a name="refattribute131842"></a>
+<table><tr><td><div class="element">Attribute <b>productionState</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + productionState : <a href="class135938.html#refclass135938"><b>Choice</b></a></li><li>Python : self.productionState = ...<br /></li></ul><a name="refattribute131970"></a>
+<table><tr><td><div class="element">Attribute <b>workinggroup</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + workinggroup : string</li><li>Python : self.workinggroup = None<br /></li></ul><a name="refattribute132098"></a>
+<table><tr><td><div class="element">Attribute <b>hardware</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + hardware : string</li><li>Python : self.hardware = None<br /></li></ul><a name="refattribute132226"></a>
+<table><tr><td><div class="element">Attribute <b>user</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + user : string</li><li>Python : self.user = None<br /></li></ul><a name="refattribute132354"></a>
+<table><tr><td><div class="element">Attribute <b>inv_id</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + inv_id : string</li><li>Python : self.inv_id = None<br /></li></ul><a name="refattribute132482"></a>
+<table><tr><td><div class="element">Attribute <b>room</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + room : <a href="class130818.html#refclass130818"><b>Room</b></a>, multiplicity : 0..1</li><li>Python : self.room = None<br /></li></ul><a name="refattribute132610"></a>
+<table><tr><td><div class="element">Attribute <b>osList</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + osList : string</li><li>Python : self.osList = None<br /></li></ul><p>Stereotype: list</p>
+<a name="refattribute132738"></a>
+<table><tr><td><div class="element">Attribute <b>snmpVersion</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + snmpVersion : <a href="class135938.html#refclass135938"><b>Choice</b></a></li><li>Python : self.snmpVersion = None<br /></li></ul><a name="refattribute132866"></a>
+<table><tr><td><div class="element">Attribute <b>snmpPort</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + snmpPort : int</li><li>Python : self.snmpPort = ...<br /></li></ul><a name="refattribute132994"></a>
+<table><tr><td><div class="element">Attribute <b>snmpReadCommunity</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + snmpReadCommunity : string</li><li>Python : self.snmpReadCommunity = ...<br /></li></ul><a name="refattribute133122"></a>
+<table><tr><td><div class="element">Attribute <b>snmpWriteCommunity</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + snmpWriteCommunity : string</li><li>Python : self.snmpWriteCommunity = ...<br /></li></ul><a name="refattribute133250"></a>
+<table><tr><td><div class="element">Attribute <b>url</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + url : string</li><li>Python : self.url = None<br /></li></ul><a name="refattribute133378"></a>
+<table><tr><td><div class="element">Attribute <b>url_type</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + url_type : <a href="class135938.html#refclass135938"><b>Choice</b></a></li><li>Python : self.url_type = None<br /></li></ul><a name="refattribute133506"></a>
+<table><tr><td><div class="element">Attribute <b>url_authname</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + url_authname : string</li><li>Python : self.url_authname = None<br /></li></ul><a name="refattribute133634"></a>
+<table><tr><td><div class="element">Attribute <b>url_authpasswd</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + url_authpasswd : string</li><li>Python : self.url_authpasswd = None<br /></li></ul><a name="refattribute133762"></a>
+<table><tr><td><div class="element">Attribute <b>console</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + console : string</li><li>Python : self.console = None<br /></li></ul><a name="refattribute133890"></a>
+<table><tr><td><div class="element">Attribute <b>genNagios</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + genNagios : bool</li><li>Python : self.genNagios = None<br /></li></ul><a name="refoperation128002"></a>
+<table><tr><td><div class="element">Operation <b>trigger_online</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + trigger_online() : </li><li>Python : def trigger_online()</li></ul><a name="refoperation128130"></a>
+<table><tr><td><div class="element">Operation <b>trigger_offline</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + trigger_offline() : </li><li>Python : def trigger_offline()</li></ul><a name="refoperation128258"></a>
+<table><tr><td><div class="element">Operation <b>trigger_not1</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + trigger_not1() : </li><li>Python : def trigger_not1()</li></ul><a name="refoperation128386"></a>
+<table><tr><td><div class="element">Operation <b>getIpList</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + getIpList() : </li><li>Python : def getIpList()</li></ul></div>
+<p>All public operations : <a href="class133506.html#refoperation128386"><b>getIpList</b></a> , <a href="class133506.html#refoperation128258"><b>trigger_not1</b></a> , <a href="class133506.html#refoperation128130"><b>trigger_offline</b></a> , <a href="class133506.html#refoperation128002"><b>trigger_online</b></a> </p>
+</body>
+</html>

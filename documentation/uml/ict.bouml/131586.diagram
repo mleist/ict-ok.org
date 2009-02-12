@@ -1,0 +1,81 @@
+format 63
+
+classinstancecanvas 128002 classinstance_ref 129154 // Rumeln
+  xyz 514 143 2000
+end
+classinstancecanvas 128130 classinstance_ref 129282 // Duesseldorfer Str.
+  xyz 486 288 2000
+end
+classinstancecanvas 129282 classinstance_ref 129538 // Serverroom
+  xyz 761 376 2000
+end
+classinstancecanvas 129410 classinstance_ref 129666 // Office
+  xyz 322 408 2000
+end
+classinstancecanvas 129794 classinstance_ref 129794 // Infra1
+  xyz 921 458 2000
+end
+classinstancecanvas 130050 classinstance_ref 129922 // Panel1
+  xyz 724 575 2000
+end
+classinstancecanvas 130306 classinstance_ref 130050 // P1/1
+  xyz 415 683 2000
+end
+classinstancecanvas 130562 classinstance_ref 130178 // P1
+  xyz 669 683 2000
+end
+classinstancecanvas 130946 classinstance_ref 130306 // 3Com-01
+  xyz 918 573 2000
+end
+classinstancecanvas 131202 classinstance_ref 130434 // P1
+  xyz 985 683 2000
+end
+classinstancecanvas 131458 classinstance_ref 130562 // Workstation1
+  xyz 77 538 2000
+end
+classinstancecanvas 131714 classinstance_ref 130690 // eth0
+  xyz 29 673 2005
+end
+objectlinkcanvas 128898 rel relation_ref 134146 // Building in Location
+  from ref 128002 z 1999 label "Building in Location" italic xyz 511 210 1999 to ref 128130
+  no_role_a no_role_b
+objectlinkcanvas 129538 rel relation_ref 134274 // contains
+  from ref 128130 z 1999 label "contains" italic xyz 442 342 1999 to ref 129410
+  role_a_pos 383 387 3000 role_b_pos 461 311 3000
+objectlinkcanvas 129666 rel relation_ref 134274 // contains
+  from ref 128130 z 1999 label "contains" italic xyz 680 327 1999 to ref 129282
+  role_a_pos 754 360 3000 role_b_pos 628 306 3000
+objectlinkcanvas 129922 rel relation_ref 134786 // Rack in Room
+  from ref 129282 z 1999 label "Rack in Room" italic xyz 850 412 1999 to ref 129794
+  no_role_a no_role_b
+objectlinkcanvas 130178 rel relation_ref 134914 // Panel in Rack
+  from ref 129794 z 1999 label "Panel in Rack" italic xyz 827 510 1999 to ref 130050
+  no_role_a no_role_b
+objectlinkcanvas 130434 rel relation_ref 135042 // Outlet in Room
+  from ref 129410 z 1999 label "Outlet in Room" italic xyz 361 540 1999 to ref 130306
+  no_role_a no_role_b
+objectlinkcanvas 131074 rel relation_ref 135426 // Switch in Rack
+  from ref 129794 z 1999 label "Switch in Rack" italic xyz 943 510 1999 to ref 130946
+  no_role_a no_role_b
+objectlinkcanvas 131330 rel relation_ref 139266 // Interface in Switch
+  from ref 130946 z 1999 label "Interface in Switch" italic xyz 967 622 1999 to ref 131202
+  no_role_a no_role_b
+objectlinkcanvas 131586 rel relation_ref 139394 // contains
+  from ref 129410 z 1999 label "contains" italic xyz 230 467 1999 to ref 131458
+  role_a_pos 167 518 3000 role_b_pos 298 426 3000
+objectlinkcanvas 131970 rel relation_ref 139650 // patched
+  from ref 131714 z 1999 label "patched" italic xyz 289 680 1999 to ref 130306
+  no_role_a no_role_b
+objectlinkcanvas 132098 rel relation_ref 139778 // patched
+  from ref 130562 z 1999 label "patched" italic xyz 848 679 1999 to ref 131202
+  role_a_pos 932 676 3000 role_b_pos 755 676 3000
+objectlinkcanvas 132482 rel relation_ref 139906 // contains
+  from ref 130050 z 1999 label "contains" italic xyz 725 624 1999 to ref 130562
+  role_a_pos 724 665 3000 role_b_pos 772 600 3000
+objectlinkcanvas 132738 rel relation_ref 135298 // connected
+  from ref 130306 z 1999 label "connected" italic xyz 548 679 1999 to ref 130562
+  role_a_pos 640 676 3000 role_b_pos 492 676 3000
+objectlinkcanvas 132866 rel relation_ref 139522 // contains
+  from ref 131458 z 1999 label "contains" italic xyz 105 612 1999 to ref 131714
+  no_role_a no_role_b
+end

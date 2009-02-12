@@ -1,0 +1,18 @@
+format 63
+
+classinstancecanvas 128130 classinstance_ref 129922 // Panel1
+  xyz 47 162 2000
+end
+classinstancecanvas 128258 classinstance_ref 130178 // P1
+  xyz 165 52 2004
+end
+classinstancecanvas 129410 classinstance_ref 133506 // P2
+  xyz 138 275 2000
+end
+objectlinkcanvas 129282 rel relation_ref 139906 // contains
+  from ref 128130 z 1999 label "contains" italic xyz 133 102 1999 to ref 128258
+  role_a_pos 196 78 3000 role_b_pos 125 144 3000
+objectlinkcanvas 129538 rel relation_ref 139906 // contains
+  from ref 128130 z 1999 label "contains" italic xyz 122 214 1999 to ref 129410
+  role_a_pos 175 257 3000 role_b_pos 121 188 3000
+end

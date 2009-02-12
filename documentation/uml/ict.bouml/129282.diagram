@@ -1,0 +1,21 @@
+format 62
+
+deploymentnodecanvas 128002 deploymentnode_ref 129154 // Node01
+  xyzwh 503 473 2000 71 33
+end
+artifactcanvas 128386 artifact_ref 129154 // Room
+  xyz 346 331 2000
+end
+artifactcanvas 128514 artifact_ref 129282 // PatchPanel
+  xyz 267 544 2000
+end
+artifactcanvas 128642 artifact_ref 129410 // PatchPort
+  xyz 573 214 2000
+end
+artifactcanvas 128770 artifact_ref 129538 // Outlet
+  xyz 674 500 2000
+end
+artifactcanvas 129154 artifact_ref 129282 // PatchPanel
+  xyz 207 207 2000
+end
+end
