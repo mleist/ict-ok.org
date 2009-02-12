@@ -1,7 +1,34 @@
 window_sizes 1916 1156 339 1571 1033 67
+diagrams
+  classdiagram_ref 128002 // cl_inventory01_diag
+    1256 827 100 14 0 0
+  classdiagram_ref 134530 // cl_inventory05_diag
+    1256 826 100 14 0 0
+  classdiagram_ref 135810 // cl_inventory06_diag
+    1256 826 100 14 221 0
+  active  classdiagram_ref 134402 // cl_inventory04_diag
+    1567 1013 100 14 0 0
+  objectdiagram_ref 136962 // obj06_MobilePhoneFolder_diag
+    1256 826 100 4 0 0
+end
 show_stereotypes
-selected classview_ref 128002 // cl_inventory01
+selected classrelation_ref 128258 // <realization>
 open
-  class_ref 137602 // IApplicationSoftware
+  class_ref 142082 // AllHostProductionStates
+  class_ref 141442 // RootFolder
+  class_ref 128258 // Component
+  class_ref 143234 // LogicalComponent
+  class_ref 142978 // IndustrialComputer
+  class_ref 129282 // Outlet
+  class_ref 142722 // PersonalComputer
+  class_ref 135682 // Requirement
+  class_ref 142338 // DeviceFolder
+  class_ref 142850 // IIndustrialComputer
+  attribute_ref 143618 // simNumber
+  class_ref 133762 // INet
+  class_ref 142594 // IPersonalComputer
+  class_ref 142466 // IPersonalComputerFolder
+  classinstance_ref 132866 // helium.server.ifdd.de
+  classinstance_ref 132994 // eth0
 end
 end

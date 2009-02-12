@@ -1,6 +1,6 @@
-format 63
+format 64
 "pkg_inv01" // pkg_inv01
-  revision 11
+  revision 13
   modified_by 2 "markus"
   // class settings
   //class diagram settings
@@ -27,6 +27,110 @@ format 63
   show_infonote default drawing_language default show_stereotype_properties default
   
   python_dir "/home/markus/Repositories/svn.ict-ok.org/documentation/uml/ict.genpy/"
+  classview 129154 "zope"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 142082 "AllHostProductionStates"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 139394 "IFolder"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      comment "zope.app.folder.interfaces"
+    end
+
+    class 140674 "User"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "LDAP User getter"
+    end
+
+    class 140802 "Date"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 141314 "Folder"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 150402 // <realization>
+	relation 147586 -_-|>
+	  a public
+	    classrelation_ref 150402 // <realization>
+	  b parent class_ref 139394 // IFolder
+      end
+    end
+
+    class 141442 "RootFolder"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 150786 // (contains)
+	relation 147842 o--- name "contains"
+	  a role_name "" multiplicity "0..1" public
+	    classrelation_ref 150786 // (contains)
+	  b role_name "" multiplicity "*" public
+	    classrelation_ref 150914 // (contains)
+      end
+    end
+  end
+
   deploymentview 128002 "deployment01"
     //deployment diagram settings
     package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
@@ -861,6 +965,13 @@ ${definition}
 	class_ref 137474 // PhysicalConnector
       end
     end
+
+    artifact 137602 "IComponentFolder"
+      stereotype "source"
+      associated_classes
+	class_ref 139266 // IComponentFolder
+      end
+    end
   end
 
   classview 128002 "cl_inventory01"
@@ -905,6 +1016,11 @@ ${definition}
       size A3-Landscape
     end
 
+    classdiagram 135810 "cl_inventory06_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
     objectdiagram 131586 "obj01_diag"
        write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations no shadow default show_stereotype_properties default
       size A4-Landscape
@@ -926,6 +1042,11 @@ ${definition}
     end
 
     objectdiagram 134658 "obj05_diag"
+       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    objectdiagram 136962 "obj06_MobilePhoneFolder_diag"
        write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
       size A4
     end
@@ -960,6 +1081,10 @@ ${docstring}${members}
 	    python "${type}"
 	    classrelation_ref 128002 // <realization>
 	  b parent class_ref 128002 // ISuperclass
+      end
+
+      classrelation 150914 // (contains)
+	relation_ref 147842 // contains
       end
     end
 
@@ -1019,6 +1144,28 @@ ${docstring}${members}
       end
     end
 
+    class 143234 "LogicalComponent"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 143106 "PhysicalComponent"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
     class 128002 "ISuperclass"
       abstract visibility package stereotype "interface"
       cpp_decl ""
@@ -1036,6 +1183,16 @@ ${members}};
 "
       explicit_switch_type ""
       
+      attribute 139522 "objectID"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Oid of this object"
+      end
+
       attribute 130690 "ikName"
 	public explicit_type "string"
 	cpp_decl ""
@@ -1045,6 +1202,127 @@ ${members}};
 "
 	idl_decl ""
 	comment "object name 2-50 chars"
+      end
+
+      attribute 139778 "ikAuthor"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Author of the instance."
+      end
+
+      attribute 139906 "ikNotes"
+	public explicit_type "string"
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Notes for the instance in the context of using"
+      end
+
+      attribute 140034 "ikComment"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Comment for the instance in the context of installing"
+      end
+
+      attribute 140162 "ref"
+	public explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Reference"
+      end
+
+      attribute 140290 "history"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "history list"
+      end
+
+      attribute 140418 "dbgLevel"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Object Debug Level"
+      end
+
+      attribute 140546 "ikEventTarget"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "target list for events"
+      end
+
+      attribute 140674 "inpEQueue"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "input event queue"
+      end
+
+      attribute 140802 "outEQueue"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "output event queue"
+      end
+
+      attribute 140930 "outEReceiver"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "receiver object for output events"
+      end
+
+      attribute 141058 "workflows"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "dict of object workflows"
+      end
+
+      attribute 141186 "wf_worklist"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "list of ongoing workflow apps"
       end
     end
 
@@ -1093,27 +1371,6 @@ ${members}};
 	  b parent class_ref 128514 // ISupernode
       end
 
-      attribute 130946 "requirement"
-	public type class_ref 135682 // Requirement
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
-      attribute 135938 "isTemplate"
-	public explicit_type "bool"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
       attribute 136066 "myFactory"
 	public explicit_type "any"
 	cpp_decl ""
@@ -1126,7 +1383,7 @@ ${members}};
       end
 
       attribute 136194 "ikRevision"
-	public explicit_type "any"
+	private explicit_type "any"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -1134,6 +1391,51 @@ ${members}};
 "
 	idl_decl ""
 	comment "Class-Revision of this object"
+      end
+
+      attribute 135938 "isTemplate"
+	public explicit_type "bool"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 130946 "requirement"
+	public type class_ref 135682 // Requirement
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+    end
+
+    class 139266 "IComponentFolder"
+      abstract visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 147970 // <generalisation>
+	relation 145154 ---|>
+	  a public
+	    classrelation_ref 147970 // <generalisation>
+	  b parent class_ref 128002 // ISuperclass
+      end
+
+      classrelation 148098 // <generalisation>
+	relation 145282 ---|>
+	  a public
+	    classrelation_ref 148098 // <generalisation>
+	  b parent class_ref 139394 // IFolder
       end
     end
 
@@ -1369,6 +1671,30 @@ ${docstring}${members}
       end
     end
 
+    class 142978 "IndustrialComputer"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 153218 // <generalisation>
+	relation 150146 ---|>
+	  a public
+	    classrelation_ref 153218 // <generalisation>
+	  b parent class_ref 137858 // Device
+      end
+
+      classrelation 153474 // <realization>
+	relation 150402 -_-|>
+	  a public
+	    classrelation_ref 153474 // <realization>
+	  b parent class_ref 142850 // IIndustrialComputer
+      end
+    end
+
     class 133122 "Interface"
       visibility package 
       cpp_decl ""
@@ -1486,6 +1812,34 @@ ${docstring}${members}
       end
     end
 
+    class 140930 "MobilePhone"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 149378 // <generalisation>
+	relation 146562 ---|>
+	  a public
+	    classrelation_ref 149378 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 149506 // <realization>
+	relation 146690 -_-|>
+	  a public
+	    classrelation_ref 149506 // <realization>
+	  b parent class_ref 139522 // IMobilePhone
+      end
+
+      classrelation 150658 // (contains)
+	relation_ref 147714 // contains
+      end
+    end
+
     class 132866 "Net"
       visibility package 
       cpp_decl ""
@@ -1523,6 +1877,30 @@ ${docstring}${members}
 	    python "${comment}${self}${name} = ${value}
 "
 	    classrelation_ref 143618 // contains
+      end
+    end
+
+    class 141826 "Notebook"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 151042 // <realization>
+	relation 147970 -_-|>
+	  a public
+	    classrelation_ref 151042 // <realization>
+	  b parent class_ref 141570 // INotebook
+      end
+
+      classrelation 151170 // <generalisation>
+	relation 148098 ---|>
+	  a public
+	    classrelation_ref 151170 // <generalisation>
+	  b parent class_ref 137858 // Device
       end
     end
 
@@ -1729,6 +2107,30 @@ ${docstring}${members}
 	    python "${type}"
 	    classrelation_ref 145282 // <generalisation>
 	  b parent class_ref 137474 // PhysicalConnector
+      end
+    end
+
+    class 142722 "PersonalComputer"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 152834 // <generalisation>
+	relation 149762 ---|>
+	  a public
+	    classrelation_ref 152834 // <generalisation>
+	  b parent class_ref 137858 // Device
+      end
+
+      classrelation 152962 // <realization>
+	relation 149890 -_-|>
+	  a public
+	    classrelation_ref 152962 // <realization>
+	  b parent class_ref 142594 // IPersonalComputer
       end
     end
 
@@ -1955,6 +2357,100 @@ ${docstring}${members}
       end
     end
 
+    class 142338 "DeviceFolder"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 151426 // <realization>
+	relation 148354 -_-|>
+	  a public
+	    classrelation_ref 151426 // <realization>
+	  b parent class_ref 142210 // IDeviceFolder
+      end
+
+      classrelation 151554 // <generalisation>
+	relation 148482 ---|>
+	  a public
+	    classrelation_ref 151554 // <generalisation>
+	  b parent class_ref 128386 // Superclass
+      end
+
+      classrelation 151682 // <generalisation>
+	relation 148610 ---|>
+	  a public
+	    classrelation_ref 151682 // <generalisation>
+	  b parent class_ref 141314 // Folder
+      end
+    end
+
+    class 141186 "MobilePhoneFolder"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 150018 // <realization>
+	relation 147202 -_-|>
+	  a public
+	    classrelation_ref 150018 // <realization>
+	  b parent class_ref 141058 // IMobilePhoneFolder
+      end
+
+      classrelation 150146 // <generalisation>
+	relation 147330 ---|>
+	  a public
+	    classrelation_ref 150146 // <generalisation>
+	  b parent class_ref 141314 // Folder
+      end
+
+      classrelation 150274 // <generalisation>
+	relation 147458 ---|>
+	  a public
+	    classrelation_ref 150274 // <generalisation>
+	  b parent class_ref 128386 // Superclass
+      end
+
+      classrelation 150530 // (contains)
+	relation 147714 o--- name "contains"
+	  a role_name "" multiplicity "0..1" public
+	    classrelation_ref 150530 // (contains)
+	  b role_name "" multiplicity "*" public
+	    classrelation_ref 150658 // (contains)
+      end
+    end
+
+    class 141954 "NotebookFolder"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 152066 // <generalisation>
+	relation 148994 ---|>
+	  a public
+	    classrelation_ref 152066 // <generalisation>
+	  b parent class_ref 142338 // DeviceFolder
+      end
+
+      classrelation 152322 // <realization>
+	relation 149250 -_-|>
+	  a public
+	    classrelation_ref 152322 // <realization>
+	  b parent class_ref 141698 // INotebookFolder
+      end
+    end
+
     class 137602 "IApplicationSoftware"
       visibility package stereotype "interface"
       cpp_decl ""
@@ -1992,7 +2488,7 @@ ${members}};
       end
 
       attribute 137218 "manufacturer"
-	public explicit_type "char"
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -2003,7 +2499,7 @@ ${members}};
       end
 
       attribute 137346 "otherType"
-	public explicit_type "char"
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -2014,7 +2510,7 @@ ${members}};
       end
 
       attribute 137474 "targetOperatingSystems"
-	public explicit_type "char"
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -2025,7 +2521,7 @@ ${members}};
       end
 
       attribute 137602 "versionText"
-	public explicit_type "char"
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -2035,7 +2531,7 @@ ${members}};
       end
 
       attribute 137730 "licenseKey"
-	public explicit_type "char"
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -2045,7 +2541,7 @@ ${members}};
       end
 
       attribute 137858 "language"
-	public explicit_type "char"
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -2153,7 +2649,8 @@ ${members}};
       explicit_switch_type ""
       
       attribute 136322 "manufacturer"
-	public explicit_type "char"
+	public explicit_type "string"
+	multiplicity "0..1"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -2164,7 +2661,8 @@ ${members}};
       end
 
       attribute 136450 "vendor"
-	public explicit_type "char"
+	public explicit_type "string"
+	multiplicity "0..1"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -2187,6 +2685,7 @@ ${members}};
 
       attribute 136706 "interfaces"
 	public type class_ref 133122 // Interface
+	multiplicity "*"
 	stereotype "list"
 	cpp_decl ""
 	java_decl ""
@@ -2198,6 +2697,7 @@ ${members}};
 
       attribute 136834 "osoftwares"
 	public explicit_type ""
+	multiplicity "*"
 	stereotype "list"
 	cpp_decl ""
 	java_decl ""
@@ -2209,6 +2709,7 @@ ${members}};
 
       attribute 136962 "appsoftwares"
 	public explicit_type ""
+	multiplicity "*"
 	stereotype "list"
 	cpp_decl ""
 	java_decl ""
@@ -2594,6 +3095,138 @@ ${members}};
       end
     end
 
+    class 142850 "IIndustrialComputer"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 153090 // <generalisation>
+	relation 150018 ---|>
+	  a public
+	    classrelation_ref 153090 // <generalisation>
+	  b parent class_ref 137730 // IDevice
+      end
+
+      attribute 146306 "user"
+	public type class_ref 140674 // User
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "User of the mobile phone"
+      end
+
+      attribute 146434 "productionState"
+	public type class_ref 142082 // AllHostProductionStates
+	multiplicity "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Production state"
+      end
+
+      attribute 146562 "memsize"
+	public explicit_type "int"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Memory size in MB"
+      end
+
+      attribute 146690 "cpuType"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Text of CPU type"
+      end
+
+      attribute 146818 "hardware"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Hardware of the system."
+      end
+
+      attribute 146946 "serialNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Serial number"
+      end
+
+      attribute 147074 "inv_id"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Id of inventory."
+      end
+
+      attribute 147202 "modelType"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 147330 "deliveryDate"
+	public type class_ref 140802 // Date
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "delivery date"
+      end
+
+      attribute 147458 "documentNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Document number"
+      end
+    end
+
     class 134018 "IInterface"
       visibility public stereotype "interface"
       cpp_decl ""
@@ -2700,6 +3333,141 @@ ${docstring}${members}
       end
     end
 
+    class 139522 "IMobilePhone"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 148226 // <generalisation>
+	relation 145410 ---|>
+	  a public
+	    classrelation_ref 148226 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+
+      attribute 141314 "phoneNumber"
+	public explicit_type "string"
+	multiplicity "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "phone number"
+      end
+
+      attribute 141442 "user"
+	public type class_ref 140674 // User
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "User of the mobile phone"
+      end
+
+      attribute 142594 "contractModel"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "contract model"
+      end
+
+      attribute 142722 "contractEnd"
+	public type class_ref 140802 // Date
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 142850 "deliveryDate"
+	public type class_ref 140802 // Date
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "delivery date"
+      end
+
+      attribute 142978 "modelType"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143106 "serialNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 143234 "imei"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "International Mobile Equipment Identity"
+      end
+
+      attribute 143362 "pin"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Personal Identification Number"
+      end
+
+      attribute 143490 "puk"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Personal Unblocking Key"
+      end
+
+      attribute 143618 "simNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Subscriber Identity Module Number"
+      end
+    end
+
     class 133762 "INet"
       visibility public stereotype "interface"
       cpp_decl ""
@@ -2728,6 +3496,138 @@ ${docstring}${members}
 "
 	idl_decl ""
 	comment "IP address"
+      end
+    end
+
+    class 141570 "INotebook"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 151298 // <generalisation>
+	relation 148226 ---|>
+	  a public
+	    classrelation_ref 151298 // <generalisation>
+	  b parent class_ref 137730 // IDevice
+      end
+
+      attribute 143746 "user"
+	public type class_ref 140674 // User
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "User of the mobile phone"
+      end
+
+      attribute 143874 "productionState"
+	public type class_ref 142082 // AllHostProductionStates
+	multiplicity "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Production state"
+      end
+
+      attribute 144002 "memsize"
+	public explicit_type "int"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Memory size in MB"
+      end
+
+      attribute 144130 "cpuType"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Text of CPU type"
+      end
+
+      attribute 144258 "hardware"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Hardware of the system."
+      end
+
+      attribute 144386 "serialNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Serial number"
+      end
+
+      attribute 144514 "inv_id"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Id of inventory."
+      end
+
+      attribute 144642 "modelType"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 144770 "deliveryDate"
+	public type class_ref 140802 // Date
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "delivery date"
+      end
+
+      attribute 144898 "documentNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Document number"
       end
     end
 
@@ -2800,6 +3700,138 @@ ${members}};
 	    python "${type}"
 	    classrelation_ref 145666 // <generalisation>
 	  b parent class_ref 137346 // IPhysicalConnector
+      end
+    end
+
+    class 142594 "IPersonalComputer"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 152578 // <generalisation>
+	relation 149506 ---|>
+	  a public
+	    classrelation_ref 152578 // <generalisation>
+	  b parent class_ref 137730 // IDevice
+      end
+
+      attribute 145026 "user"
+	public type class_ref 140674 // User
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "User of the mobile phone"
+      end
+
+      attribute 145154 "productionState"
+	public type class_ref 142082 // AllHostProductionStates
+	multiplicity "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Production state"
+      end
+
+      attribute 145282 "memsize"
+	public explicit_type "int"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Memory size in MB"
+      end
+
+      attribute 145410 "cpuType"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Text of CPU type"
+      end
+
+      attribute 145538 "hardware"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Hardware of the system."
+      end
+
+      attribute 145666 "serialNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Serial number"
+      end
+
+      attribute 145794 "inv_id"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Id of inventory."
+      end
+
+      attribute 145922 "modelType"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 146050 "deliveryDate"
+	public type class_ref 140802 // Date
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "delivery date"
+      end
+
+      attribute 146178 "documentNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Document number"
       end
     end
 
@@ -2963,6 +3995,107 @@ ${docstring}${members}
 	    python "${type}"
 	    classrelation_ref 139394 // <generalisation>
 	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    class 142210 "IDeviceFolder"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 151810 // <generalisation>
+	relation 148738 ---|>
+	  a public
+	    classrelation_ref 151810 // <generalisation>
+	  b parent class_ref 128002 // ISuperclass
+      end
+
+      classrelation 151938 // <generalisation>
+	relation 148866 ---|>
+	  a public
+	    classrelation_ref 151938 // <generalisation>
+	  b parent class_ref 139394 // IFolder
+      end
+    end
+
+    class 141058 "IMobilePhoneFolder"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 149634 // <generalisation>
+	relation 146818 ---|>
+	  a public
+	    classrelation_ref 149634 // <generalisation>
+	  b parent class_ref 128002 // ISuperclass
+      end
+
+      classrelation 149762 // <generalisation>
+	relation 146946 ---|>
+	  a public
+	    classrelation_ref 149762 // <generalisation>
+	  b parent class_ref 139394 // IFolder
+      end
+
+    end
+
+    class 141698 "INotebookFolder"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 152194 // <generalisation>
+	relation 149122 ---|>
+	  a public
+	    classrelation_ref 152194 // <generalisation>
+	  b parent class_ref 142210 // IDeviceFolder
+      end
+    end
+
+    class 142466 "IPersonalComputerFolder"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 152450 // <generalisation>
+	relation 149378 ---|>
+	  a public
+	    classrelation_ref 152450 // <generalisation>
+	  b parent class_ref 142210 // IDeviceFolder
       end
     end
 
@@ -3232,6 +4365,101 @@ ${docstring}${members}
         end
       comment "helium.server.ifdd.de/eth0"
     end
+
+    classinstance 134658 "Mobile01"
+      type class_ref 140930 // MobilePhone
+      attributes
+        attribute_ref 142722 // contractEnd
+          "31.12.2099"
+        attribute_ref 142594 // contractModel
+          "Flat1000"
+        attribute_ref 142850 // deliveryDate
+          "12.03.2003"
+        attribute_ref 130690 // ikName
+          "Mobile 01"
+        attribute_ref 143234 // imei
+          "1234567imei"
+        attribute_ref 142978 // modelType
+          "Pony eiFon"
+        attribute_ref 139522 // objectID
+          "12348aedea12"
+        attribute_ref 141314 // phoneNumber
+          "+49 123 456789"
+        attribute_ref 143362 // pin
+          "1234"
+        attribute_ref 143490 // puk
+          "654321"
+        attribute_ref 143106 // serialNumber
+          "sn44444444/88"
+        attribute_ref 143618 // simNumber
+          "sim-34567898765"
+        attribute_ref 141442 // user
+          "Mr. X"
+        end
+      relations
+        end
+    end
+
+    classinstance 134786 "Mobile02"
+      type class_ref 140930 // MobilePhone
+      attributes
+        attribute_ref 142722 // contractEnd
+          "31.12.2099"
+        attribute_ref 142594 // contractModel
+          "Flat1002"
+        attribute_ref 142850 // deliveryDate
+          "12.03.2003"
+        attribute_ref 130690 // ikName
+          "Mobile02"
+        attribute_ref 143234 // imei
+          "1234567imei"
+        attribute_ref 142978 // modelType
+          "Pony eiFon"
+        attribute_ref 139522 // objectID
+          "74593026242628e"
+        attribute_ref 141314 // phoneNumber
+          "+49 123 456789"
+        attribute_ref 143362 // pin
+          "1234"
+        attribute_ref 143490 // puk
+          "654321"
+        attribute_ref 143106 // serialNumber
+          "sn44444444/88"
+        attribute_ref 143618 // simNumber
+          "sim-34567898765"
+        attribute_ref 141442 // user
+          "Mr. Y"
+        end
+      relations
+        end
+    end
+
+    classinstance 134914 "Mobiles"
+      type class_ref 141186 // MobilePhoneFolder
+      attributes
+        attribute_ref 130690 // ikName
+          "Mobile Phones"
+        attribute_ref 139522 // objectID
+          "0234eaf2741"
+        end
+      relations
+        relation_ref 147714 // contains
+          classinstance_ref 134658 // Mobile01
+        relation_ref 147714 // contains
+          classinstance_ref 134786 // Mobile02
+        end
+    end
+
+    classinstance 135042 "ict_ok.org"
+      type class_ref 141442 // RootFolder
+      attributes
+        end
+      relations
+        relation_ref 147842 // contains
+          classinstance_ref 134914 // Mobiles
+        end
+    end
+
   end
 
   componentview 128002 "Compon01"

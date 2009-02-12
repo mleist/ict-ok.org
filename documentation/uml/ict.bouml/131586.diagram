@@ -1,4 +1,4 @@
-format 63
+format 64
 
 classinstancecanvas 128002 classinstance_ref 129154 // Rumeln
   xyz 514 143 2000
@@ -41,10 +41,10 @@ objectlinkcanvas 128898 rel relation_ref 134146 // Building in Location
   no_role_a no_role_b
 objectlinkcanvas 129538 rel relation_ref 134274 // contains
   from ref 128130 z 1999 label "contains" italic xyz 442 342 1999 to ref 129410
-  role_a_pos 383 387 3000 role_b_pos 461 311 3000
+  role_a_pos 385 385 3000 role_b_pos 492 286 3000
 objectlinkcanvas 129666 rel relation_ref 134274 // contains
   from ref 128130 z 1999 label "contains" italic xyz 680 327 1999 to ref 129282
-  role_a_pos 754 360 3000 role_b_pos 628 306 3000
+  role_a_pos 749 361 3000 role_b_pos 601 294 3000
 objectlinkcanvas 129922 rel relation_ref 134786 // Rack in Room
   from ref 129282 z 1999 label "Rack in Room" italic xyz 850 412 1999 to ref 129794
   no_role_a no_role_b
