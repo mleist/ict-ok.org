@@ -1,6 +1,6 @@
 format 64
 "pkg_inv01" // pkg_inv01
-  revision 13
+  revision 14
   modified_by 2 "markus"
   // class settings
   //class diagram settings
@@ -1153,6 +1153,12 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
+      classrelation 154626 // <generalisation>
+	relation 151554 ---|>
+	  a public
+	    classrelation_ref 154626 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
     end
 
     class 143106 "PhysicalComponent"
@@ -1164,6 +1170,12 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
+      classrelation 154754 // <generalisation>
+	relation 151682 ---|>
+	  a public
+	    classrelation_ref 154754 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
     end
 
     class 128002 "ISuperclass"
@@ -1415,6 +1427,97 @@ ${members}};
       end
     end
 
+    class 144386 "ILogicalComponent"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 155138 // <generalisation>
+	relation 152066 ---|>
+	  a public
+	    classrelation_ref 155138 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    class 144514 "IPhysicalComponent"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 136322 "manufacturer"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Name/Address of the manufacturer"
+      end
+
+      attribute 136450 "vendor"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Name/Address of the vendor."
+      end
+
+      attribute 136578 "room"
+	public type class_ref 130818 // Room
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 143106 "serialNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 155010 // <generalisation>
+	relation 151938 ---|>
+	  a public
+	    classrelation_ref 155010 // <generalisation>
+	  b parent class_ref 128642 // IComponent
+      end
+    end
+
     class 139266 "IComponentFolder"
       abstract visibility package stereotype "interface"
       cpp_decl ""
@@ -1522,12 +1625,11 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 146306 // <generalisation>
-	relation 143490 ---|>
+      classrelation 155266 // <generalisation>
+	relation 152194 ---|>
 	  a public
-	    python "${type}"
-	    classrelation_ref 146306 // <generalisation>
-	  b parent class_ref 128258 // Component
+	    classrelation_ref 155266 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
       end
     end
 
@@ -1821,13 +1923,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 149378 // <generalisation>
-	relation 146562 ---|>
-	  a public
-	    classrelation_ref 149378 // <generalisation>
-	  b parent class_ref 128258 // Component
-      end
-
       classrelation 149506 // <realization>
 	relation 146690 -_-|>
 	  a public
@@ -1835,7 +1930,7 @@ ${docstring}${members}
 	  b parent class_ref 139522 // IMobilePhone
       end
 
-      classrelation 150658 // (contains)
+      classrelation 150658 // contains
 	relation_ref 147714 // contains
       end
     end
@@ -2423,7 +2518,7 @@ ${docstring}${members}
 	  a role_name "" multiplicity "0..1" public
 	    classrelation_ref 150530 // (contains)
 	  b role_name "" multiplicity "*" public
-	    classrelation_ref 150658 // (contains)
+	    classrelation_ref 150658 // contains
       end
     end
 
@@ -2648,39 +2743,26 @@ ${members}};
 "
       explicit_switch_type ""
       
-      attribute 136322 "manufacturer"
+      attribute 146690 "cpuType"
 	public explicit_type "string"
 	multiplicity "0..1"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
+	python_decl ""
 	idl_decl ""
-	comment "Name/Address of the manufacturer"
+	comment "Text of CPU type"
       end
 
-      attribute 136450 "vendor"
-	public explicit_type "string"
+      attribute 145282 "memsize"
+	public explicit_type "int"
 	multiplicity "0..1"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
+	python_decl ""
 	idl_decl ""
-	comment "Name/Address of the vendor."
-      end
-
-      attribute 136578 "room"
-	public type class_ref 130818 // Room
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
+	comment "Memory size in MB"
       end
 
       attribute 136706 "interfaces"
@@ -2719,12 +2801,11 @@ ${members}};
 	idl_decl ""
       end
 
-      classrelation 146434 // <generalisation>
-	relation 143618 ---|>
+      classrelation 154882 // <generalisation>
+	relation 151810 ---|>
 	  a public
-	    python "${type}"
-	    classrelation_ref 146434 // <generalisation>
-	  b parent class_ref 128642 // IComponent
+	    classrelation_ref 154882 // <generalisation>
+	  b parent class_ref 144514 // IPhysicalComponent
       end
     end
 
@@ -3139,28 +3220,6 @@ ${members}};
 	comment "Production state"
       end
 
-      attribute 146562 "memsize"
-	public explicit_type "int"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Memory size in MB"
-      end
-
-      attribute 146690 "cpuType"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Text of CPU type"
-      end
-
       attribute 146818 "hardware"
 	public explicit_type "string"
 	multiplicity "0..1"
@@ -3170,17 +3229,6 @@ ${members}};
 	python_decl ""
 	idl_decl ""
 	comment "Hardware of the system."
-      end
-
-      attribute 146946 "serialNumber"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Serial number"
       end
 
       attribute 147074 "inv_id"
@@ -3413,16 +3461,6 @@ ${docstring}${members}
 	idl_decl ""
       end
 
-      attribute 143106 "serialNumber"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       attribute 143234 "imei"
 	public explicit_type "string"
 	multiplicity "0..1"
@@ -3543,28 +3581,6 @@ ${members}};
 	comment "Production state"
       end
 
-      attribute 144002 "memsize"
-	public explicit_type "int"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Memory size in MB"
-      end
-
-      attribute 144130 "cpuType"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Text of CPU type"
-      end
-
       attribute 144258 "hardware"
 	public explicit_type "string"
 	multiplicity "0..1"
@@ -3574,17 +3590,6 @@ ${members}};
 	python_decl ""
 	idl_decl ""
 	comment "Hardware of the system."
-      end
-
-      attribute 144386 "serialNumber"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Serial number"
       end
 
       attribute 144514 "inv_id"
@@ -3747,28 +3752,6 @@ ${members}};
 	comment "Production state"
       end
 
-      attribute 145282 "memsize"
-	public explicit_type "int"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Memory size in MB"
-      end
-
-      attribute 145410 "cpuType"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Text of CPU type"
-      end
-
       attribute 145538 "hardware"
 	public explicit_type "string"
 	multiplicity "0..1"
@@ -3778,17 +3761,6 @@ ${members}};
 	python_decl ""
 	idl_decl ""
 	comment "Hardware of the system."
-      end
-
-      attribute 145666 "serialNumber"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Serial number"
       end
 
       attribute 145794 "inv_id"
@@ -4050,7 +4022,6 @@ ${members}};
 	    classrelation_ref 149762 // <generalisation>
 	  b parent class_ref 139394 // IFolder
       end
-
     end
 
     class 141698 "INotebookFolder"
@@ -4389,8 +4360,6 @@ ${members}};
           "1234"
         attribute_ref 143490 // puk
           "654321"
-        attribute_ref 143106 // serialNumber
-          "sn44444444/88"
         attribute_ref 143618 // simNumber
           "sim-34567898765"
         attribute_ref 141442 // user
@@ -4423,8 +4392,6 @@ ${members}};
           "1234"
         attribute_ref 143490 // puk
           "654321"
-        attribute_ref 143106 // serialNumber
-          "sn44444444/88"
         attribute_ref 143618 // simNumber
           "sim-34567898765"
         attribute_ref 141442 // user
@@ -4459,7 +4426,6 @@ ${members}};
           classinstance_ref 134914 // Mobiles
         end
     end
-
   end
 
   componentview 128002 "Compon01"
