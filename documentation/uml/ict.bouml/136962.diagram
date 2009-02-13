@@ -13,10 +13,10 @@ classinstancecanvas 128642 classinstance_ref 135042 // ict_ok.org
   xyz 370 88 2000
 end
 objectlinkcanvas 128386 rel relation_ref 147714 // contains
-  from ref 128258 z 1999 label "contains" italic xyz 279 444 1999 to ref 128002
+  from ref 128258 z 1999 label "contains" italic xyz 291 444 1999 to ref 128002
   no_role_a no_role_b
 objectlinkcanvas 128514 rel relation_ref 147714 // contains
-  from ref 128258 z 1999 label "contains" italic xyz 492 424 1999 to ref 128130
+  from ref 128258 z 1999 label "contains" italic xyz 484 424 1999 to ref 128130
   no_role_a no_role_b
 objectlinkcanvas 129026 rel relation_ref 147842 // contains
   from ref 128642 z 1999 label "contains" italic xyz 438 187 1999 to ref 128258

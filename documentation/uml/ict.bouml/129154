@@ -1145,7 +1145,7 @@ ${docstring}${members}
     end
 
     class 143234 "LogicalComponent"
-      visibility package 
+      abstract visibility package 
       cpp_decl ""
       java_decl ""
       php_decl ""
@@ -1162,7 +1162,7 @@ ${docstring}${members}
     end
 
     class 143106 "PhysicalComponent"
-      visibility package 
+      abstract visibility package 
       cpp_decl ""
       java_decl ""
       php_decl ""
@@ -1175,6 +1175,23 @@ ${docstring}${members}
 	  a public
 	    classrelation_ref 154754 // <generalisation>
 	  b parent class_ref 128258 // Component
+      end
+    end
+
+    class 144770 "Software"
+      abstract visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 155522 // <generalisation>
+	relation 152450 ---|>
+	  a public
+	    classrelation_ref 155522 // <generalisation>
+	  b parent class_ref 143234 // LogicalComponent
       end
     end
 
@@ -1288,7 +1305,8 @@ ${members}};
       end
 
       attribute 140674 "inpEQueue"
-	private explicit_type ""
+	private explicit_type "void"
+	stereotype "list"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -1298,7 +1316,8 @@ ${members}};
       end
 
       attribute 140802 "outEQueue"
-	private explicit_type ""
+	private explicit_type "void"
+	stereotype "list"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -1428,7 +1447,7 @@ ${members}};
     end
 
     class 144386 "ILogicalComponent"
-      visibility package stereotype "interface"
+      abstract visibility package stereotype "interface"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}interface ${name}${extends} {
 ${members}}
@@ -1451,7 +1470,7 @@ ${members}};
     end
 
     class 144514 "IPhysicalComponent"
-      visibility package stereotype "interface"
+      abstract visibility package stereotype "interface"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}interface ${name}${extends} {
 ${members}}
@@ -1465,6 +1484,17 @@ ${members}};
 "
       explicit_switch_type ""
       
+      attribute 143746 "user"
+	public type class_ref 140674 // User
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "User of the mobile phone"
+      end
+
       attribute 136322 "manufacturer"
 	public explicit_type "string"
 	multiplicity "0..1"
@@ -1477,6 +1507,16 @@ ${members}};
 	comment "Name/Address of the manufacturer"
       end
 
+      attribute 144642 "modelType"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
       attribute 136450 "vendor"
 	public explicit_type "string"
 	multiplicity "0..1"
@@ -1487,6 +1527,17 @@ ${members}};
 "
 	idl_decl ""
 	comment "Name/Address of the vendor."
+      end
+
+      attribute 144770 "deliveryDate"
+	public type class_ref 140802 // Date
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "delivery date"
       end
 
       attribute 136578 "room"
@@ -1510,11 +1561,164 @@ ${members}};
 	idl_decl ""
       end
 
+      attribute 145794 "inv_id"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Id of inventory."
+      end
+
+      attribute 144898 "documentNumber"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Document number"
+      end
+
+      attribute 146434 "productionState"
+	public type class_ref 142082 // AllHostProductionStates
+	multiplicity "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Production state"
+      end
+
       classrelation 155010 // <generalisation>
 	relation 151938 ---|>
 	  a public
 	    classrelation_ref 155010 // <generalisation>
 	  b parent class_ref 128642 // IComponent
+      end
+    end
+
+    class 144642 "ISoftware"
+      abstract visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 137090 "device"
+	public type class_ref 137858 // Device
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 137218 "manufacturer"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "Name/Address of the manufacturer."
+      end
+
+      attribute 137346 "otherType"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	comment "other type description."
+      end
+
+      attribute 137602 "versionText"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 137730 "licenseKey"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 137858 "language"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 137986 "majorVersion"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 138114 "minorVersion"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 138242 "revisionNumber"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 138370 "buildNumber"
+	public explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      classrelation 156034 // <generalisation>
+	relation 152962 ---|>
+	  a public
+	    classrelation_ref 156034 // <generalisation>
+	  b parent class_ref 144386 // ILogicalComponent
       end
     end
 
@@ -1553,20 +1757,19 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 146562 // <generalisation>
-	relation 143746 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 146562 // <generalisation>
-	  b parent class_ref 128258 // Component
-      end
-
       classrelation 146818 // <realization>
 	relation 144002 -_-|>
 	  a public
 	    python "${type}"
 	    classrelation_ref 146818 // <realization>
 	  b parent class_ref 137602 // IApplicationSoftware
+      end
+
+      classrelation 155650 // <generalisation>
+	relation 152578 ---|>
+	  a public
+	    classrelation_ref 155650 // <generalisation>
+	  b parent class_ref 144770 // Software
       end
     end
 
@@ -2010,6 +2213,19 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
+      classrelation 155778 // <generalisation>
+	relation 152706 ---|>
+	  a public
+	    classrelation_ref 155778 // <generalisation>
+	  b parent class_ref 144770 // Software
+      end
+
+      classrelation 155906 // <realization>
+	relation 152834 -_-|>
+	  a public
+	    classrelation_ref 155906 // <realization>
+	  b parent class_ref 144898 // IOperatingSoftware
+      end
     end
 
     class 129282 "Outlet"
@@ -2563,49 +2779,9 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 146690 // <generalisation>
-	relation 143874 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 146690 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
-
-      attribute 137090 "device"
-	public type class_ref 137858 // Device
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
-      attribute 137218 "manufacturer"
-	public explicit_type "string"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-	comment "Name/Address of the manufacturer."
-      end
-
-      attribute 137346 "otherType"
-	public explicit_type "string"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-	comment "other type description."
-      end
-
       attribute 137474 "targetOperatingSystems"
 	public explicit_type "string"
+	multiplicity "0..1"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
@@ -2615,74 +2791,11 @@ ${members}};
 	comment "target operating systems."
       end
 
-      attribute 137602 "versionText"
-	public explicit_type "string"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
-      attribute 137730 "licenseKey"
-	public explicit_type "string"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
-      attribute 137858 "language"
-	public explicit_type "string"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
-      attribute 137986 "majorVersion"
-	public explicit_type "int"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
-      attribute 138114 "minorVersion"
-	public explicit_type "int"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
-      attribute 138242 "revisionNumber"
-	public explicit_type "int"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
-      attribute 138370 "buildNumber"
-	public explicit_type "int"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
+      classrelation 156162 // <generalisation>
+	relation 153090 ---|>
+	  a public
+	    classrelation_ref 156162 // <generalisation>
+	  b parent class_ref 144642 // ISoftware
       end
     end
 
@@ -3198,81 +3311,6 @@ ${members}};
 	  b parent class_ref 137730 // IDevice
       end
 
-      attribute 146306 "user"
-	public type class_ref 140674 // User
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "User of the mobile phone"
-      end
-
-      attribute 146434 "productionState"
-	public type class_ref 142082 // AllHostProductionStates
-	multiplicity "1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Production state"
-      end
-
-      attribute 146818 "hardware"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Hardware of the system."
-      end
-
-      attribute 147074 "inv_id"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Id of inventory."
-      end
-
-      attribute 147202 "modelType"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 147330 "deliveryDate"
-	public type class_ref 140802 // Date
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "delivery date"
-      end
-
-      attribute 147458 "documentNumber"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Document number"
-      end
     end
 
     class 134018 "IInterface"
@@ -3390,13 +3428,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 148226 // <generalisation>
-	relation 145410 ---|>
-	  a public
-	    classrelation_ref 148226 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
-
       attribute 141314 "phoneNumber"
 	public explicit_type "string"
 	multiplicity "1"
@@ -3406,17 +3437,6 @@ ${docstring}${members}
 	python_decl ""
 	idl_decl ""
 	comment "phone number"
-      end
-
-      attribute 141442 "user"
-	public type class_ref 140674 // User
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "User of the mobile phone"
       end
 
       attribute 142594 "contractModel"
@@ -3432,27 +3452,6 @@ ${docstring}${members}
 
       attribute 142722 "contractEnd"
 	public type class_ref 140802 // Date
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 142850 "deliveryDate"
-	public type class_ref 140802 // Date
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "delivery date"
-      end
-
-      attribute 142978 "modelType"
-	public explicit_type "string"
 	multiplicity "0..1"
 	cpp_decl ""
 	java_decl ""
@@ -3503,6 +3502,13 @@ ${docstring}${members}
 	python_decl ""
 	idl_decl ""
 	comment "Subscriber Identity Module Number"
+      end
+
+      classrelation 155394 // <generalisation>
+	relation 152322 ---|>
+	  a public
+	    classrelation_ref 155394 // <generalisation>
+	  b parent class_ref 144514 // IPhysicalComponent
       end
     end
 
@@ -3559,29 +3565,31 @@ ${members}};
 	  b parent class_ref 137730 // IDevice
       end
 
-      attribute 143746 "user"
-	public type class_ref 140674 // User
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "User of the mobile phone"
+    end
+
+    class 144898 "IOperatingSoftware"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 156290 // <generalisation>
+	relation 153218 ---|>
+	  a public
+	    classrelation_ref 156290 // <generalisation>
+	  b parent class_ref 144642 // ISoftware
       end
 
-      attribute 143874 "productionState"
-	public type class_ref 142082 // AllHostProductionStates
-	multiplicity "1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Production state"
-      end
-
-      attribute 144258 "hardware"
+      attribute 148610 "osType"
 	public explicit_type "string"
 	multiplicity "0..1"
 	cpp_decl ""
@@ -3589,50 +3597,7 @@ ${members}};
 	php_decl ""
 	python_decl ""
 	idl_decl ""
-	comment "Hardware of the system."
-      end
-
-      attribute 144514 "inv_id"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Id of inventory."
-      end
-
-      attribute 144642 "modelType"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 144770 "deliveryDate"
-	public type class_ref 140802 // Date
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "delivery date"
-      end
-
-      attribute 144898 "documentNumber"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Document number"
+	comment "type of operating system."
       end
     end
 
@@ -3730,81 +3695,6 @@ ${members}};
 	  b parent class_ref 137730 // IDevice
       end
 
-      attribute 145026 "user"
-	public type class_ref 140674 // User
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "User of the mobile phone"
-      end
-
-      attribute 145154 "productionState"
-	public type class_ref 142082 // AllHostProductionStates
-	multiplicity "1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Production state"
-      end
-
-      attribute 145538 "hardware"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Hardware of the system."
-      end
-
-      attribute 145794 "inv_id"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Id of inventory."
-      end
-
-      attribute 145922 "modelType"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 146050 "deliveryDate"
-	public type class_ref 140802 // Date
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "delivery date"
-      end
-
-      attribute 146178 "documentNumber"
-	public explicit_type "string"
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	comment "Document number"
-      end
     end
 
     class 137346 "IPhysicalConnector"
@@ -4344,26 +4234,36 @@ ${members}};
           "31.12.2099"
         attribute_ref 142594 // contractModel
           "Flat1000"
-        attribute_ref 142850 // deliveryDate
-          "12.03.2003"
+        attribute_ref 144898 // documentNumber
+          "345198735"
         attribute_ref 130690 // ikName
-          "Mobile 01"
+          "Mobil 01"
         attribute_ref 143234 // imei
           "1234567imei"
-        attribute_ref 142978 // modelType
-          "Pony eiFon"
+        attribute_ref 145794 // inv_id
+          "inv13131313"
+        attribute_ref 136322 // manufacturer
+          "Pony"
+        attribute_ref 144642 // modelType
+          "Pony eiVon"
         attribute_ref 139522 // objectID
-          "12348aedea12"
+          "2353ab6ced43563"
         attribute_ref 141314 // phoneNumber
           "+49 123 456789"
         attribute_ref 143362 // pin
           "1234"
+        attribute_ref 146434 // productionState
+          "productive"
         attribute_ref 143490 // puk
           "654321"
+        attribute_ref 143106 // serialNumber
+          "1234567890123"
         attribute_ref 143618 // simNumber
           "sim-34567898765"
-        attribute_ref 141442 // user
+        attribute_ref 143746 // user
           "Mr. X"
+        attribute_ref 136450 // vendor
+          "Fast Vendor"
         end
       relations
         end
@@ -4376,26 +4276,36 @@ ${members}};
           "31.12.2099"
         attribute_ref 142594 // contractModel
           "Flat1002"
-        attribute_ref 142850 // deliveryDate
-          "12.03.2003"
+        attribute_ref 144898 // documentNumber
+          "3467812532"
         attribute_ref 130690 // ikName
-          "Mobile02"
+          "Mobil 02"
         attribute_ref 143234 // imei
           "1234567imei"
-        attribute_ref 142978 // modelType
-          "Pony eiFon"
+        attribute_ref 145794 // inv_id
+          "inv5656565656"
+        attribute_ref 136322 // manufacturer
+          "Pony"
+        attribute_ref 144642 // modelType
+          "Pony eiVon"
         attribute_ref 139522 // objectID
-          "74593026242628e"
+          "6547383838aeae4364"
         attribute_ref 141314 // phoneNumber
           "+49 123 456789"
         attribute_ref 143362 // pin
           "1234"
+        attribute_ref 146434 // productionState
+          "productive"
         attribute_ref 143490 // puk
           "654321"
+        attribute_ref 143106 // serialNumber
+          "sn44444678912"
         attribute_ref 143618 // simNumber
           "sim-34567898765"
-        attribute_ref 141442 // user
+        attribute_ref 143746 // user
           "Mr. Y"
+        attribute_ref 136450 // vendor
+          "Dottersack"
         end
       relations
         end

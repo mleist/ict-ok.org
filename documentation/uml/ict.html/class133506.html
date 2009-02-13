@@ -21,7 +21,7 @@
 <div class="sub">
 <a name="refattribute131330"></a>
 <table><tr><td><div class="element">Attribute <b>hostname</b></div></td></tr></table>
-<p>Name of the system<br /></p><p>Declaration :</p><ul><li>Uml : + hostname : string</li><li>Python : self.hostname = ...<br /></li></ul><a name="refattribute131458"></a>
+<p>Name of the system<br /></p><p>Declaration :</p><ul><li>Uml : + hostname : string = "systemname"</li><li>Python : self.hostname = "systemname"<br /></li></ul><a name="refattribute131458"></a>
 <table><tr><td><div class="element">Attribute <b>manufacturer</b></div></td></tr></table>
 <p>Name/Address of the manufacturer<br /></p><p>Declaration :</p><ul><li>Uml : + manufacturer : string</li><li>Python : self.manufacturer = None<br /></li></ul><a name="refattribute131586"></a>
 <table><tr><td><div class="element">Attribute <b>vendor</b></div></td></tr></table>
@@ -30,7 +30,7 @@
 <p>Declaration :</p><ul><li>Uml : + hostGroups : <a href="class135938.html#refclass135938"><b>Choice</b></a></li><li>Python : self.hostGroups = None<br /></li></ul><p>Stereotype: set</p>
 <a name="refattribute131842"></a>
 <table><tr><td><div class="element">Attribute <b>productionState</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + productionState : <a href="class135938.html#refclass135938"><b>Choice</b></a></li><li>Python : self.productionState = ...<br /></li></ul><a name="refattribute131970"></a>
+<p>Declaration :</p><ul><li>Uml : + productionState : <a href="class135938.html#refclass135938"><b>Choice</b></a> = 'Production'</li><li>Python : self.productionState = 'Production'<br /></li></ul><a name="refattribute131970"></a>
 <table><tr><td><div class="element">Attribute <b>workinggroup</b></div></td></tr></table>
 <p>Declaration :</p><ul><li>Uml : + workinggroup : string</li><li>Python : self.workinggroup = None<br /></li></ul><a name="refattribute132098"></a>
 <table><tr><td><div class="element">Attribute <b>hardware</b></div></td></tr></table>
@@ -47,11 +47,11 @@
 <table><tr><td><div class="element">Attribute <b>snmpVersion</b></div></td></tr></table>
 <p>Declaration :</p><ul><li>Uml : + snmpVersion : <a href="class135938.html#refclass135938"><b>Choice</b></a></li><li>Python : self.snmpVersion = None<br /></li></ul><a name="refattribute132866"></a>
 <table><tr><td><div class="element">Attribute <b>snmpPort</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + snmpPort : int</li><li>Python : self.snmpPort = ...<br /></li></ul><a name="refattribute132994"></a>
+<p>Declaration :</p><ul><li>Uml : + snmpPort : int = 161</li><li>Python : self.snmpPort = 161<br /></li></ul><a name="refattribute132994"></a>
 <table><tr><td><div class="element">Attribute <b>snmpReadCommunity</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + snmpReadCommunity : string</li><li>Python : self.snmpReadCommunity = ...<br /></li></ul><a name="refattribute133122"></a>
+<p>Declaration :</p><ul><li>Uml : + snmpReadCommunity : string = u"public"</li><li>Python : self.snmpReadCommunity = u"public"<br /></li></ul><a name="refattribute133122"></a>
 <table><tr><td><div class="element">Attribute <b>snmpWriteCommunity</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + snmpWriteCommunity : string</li><li>Python : self.snmpWriteCommunity = ...<br /></li></ul><a name="refattribute133250"></a>
+<p>Declaration :</p><ul><li>Uml : + snmpWriteCommunity : string = u"private"</li><li>Python : self.snmpWriteCommunity = u"private"<br /></li></ul><a name="refattribute133250"></a>
 <table><tr><td><div class="element">Attribute <b>url</b></div></td></tr></table>
 <p>Declaration :</p><ul><li>Uml : + url : string</li><li>Python : self.url = None<br /></li></ul><a name="refattribute133378"></a>
 <table><tr><td><div class="element">Attribute <b>url_type</b></div></td></tr></table>
