@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E0213,W0232
 #
-"""Interface of PhysicalConnector"""
+"""Interface of LogicalComponent"""
 
 
 __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
@@ -27,36 +27,6 @@ from org.ict_ok.components.interfaces import IComponent
 _ = MessageFactory('org.ict_ok')
 
 
-class IPhysicalConnector(IComponent):
-    """A PhysicalConnector object."""
+class ILogicalComponent(Interface):
+    """A LogicalComponent object."""
 
-    connectorPinout = TextLine(
-        max_length = 80,
-        title = _("Connector pinout"),
-        required = False)
-
-    room = Choice(
-        title=_(u'Room'),
-        vocabulary='AllRooms',
-        required=False
-        )
-    
-    interface = Choice(
-        title=_(u'Connected interface'),
-        vocabulary='AllUnusedOrUsedPhysicalConnectorInterfaces',
-        required=False
-        )
-
-
-
-class IPhysicalConnectorFolder(ISuperclass, IFolder):
-    """Container for PhysicalConnector objects
-    """
-
-
-class IAddPhysicalConnector(Interface):
-    """Interface for all Objects"""
-    template = Choice(
-        title = _("Template"),
-        vocabulary="AllPhysicalConnectorTemplates",
-        required = False)

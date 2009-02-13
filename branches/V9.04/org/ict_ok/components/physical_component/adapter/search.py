@@ -23,7 +23,7 @@ from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.components.outlet.interfaces import IOutlet
-from org.ict_ok.components.physical_connector.physical_connector import PhysicalConnector
+from org.ict_ok.components.physical_component.physical_component import PhysicalComponent
 from org.ict_ok.components.superclass.adapter.search import \
      Searchable as SuperSearchable
 
@@ -48,4 +48,4 @@ class Searchable(SuperSearchable):
     def getFullTextSearchFields(self):
         """
         """
-        return PhysicalConnector.fullTextSearchFields
+        return PhysicalComponent.fullTextSearchFields

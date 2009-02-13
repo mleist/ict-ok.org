@@ -10,27 +10,25 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
-    <utility
+    <!-- utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".physical_connector.AllPhysicalConnectors"
-        name="AllPhysicalConnectors"
+        component=".physical_component.AllPhysicalComponents"
+        name="AllPhysicalComponents"
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".physical_connector.AllPhysicalConnectorTemplates"
-        name="AllPhysicalConnectorTemplates"
+        component=".physical_component.AllPhysicalComponentTemplates"
+        name="AllPhysicalComponentTemplates"
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".physical_connector.AllUnusedOrUsedRoomPhysicalConnectors"
-        name="AllUnusedOrUsedRoomPhysicalConnectors"
+        component=".physical_component.AllUnusedOrUsedRoomPhysicalComponents"
+        name="AllUnusedOrUsedRoomPhysicalComponents"
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".physical_connector.AllUnusedOrUsedInterfacePhysicalConnectors"
-        name="AllUnusedOrUsedInterfacePhysicalConnectors"
-    />
-
-    <include package=".generations" />
+        component=".physical_component.AllUnusedOrUsedInterfacePhysicalComponents"
+        name="AllUnusedOrUsedInterfacePhysicalComponents"
+    / -->
 
 </configure>

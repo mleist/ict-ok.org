@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=W0232,W0142
 #
-"""implementation of browser class of PhysicalConnector"""
+"""implementation of browser class of PhysicalComponent"""
 
 __version__ = "$Id: template.py_cog 396 2009-01-08 00:21:51Z markusleist $"
 
@@ -23,8 +23,8 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
-from org.ict_ok.components.physical_connector.interfaces import IPhysicalConnector, IAddPhysicalConnector
-from org.ict_ok.components.physical_connector.physical_connector import PhysicalConnector
+from org.ict_ok.components.physical_component.interfaces import IPhysicalComponent, IAddPhysicalComponent
+from org.ict_ok.components.physical_component.physical_component import PhysicalComponent
 from org.ict_ok.components.browser.component import ComponentDetails
 
 _ = MessageFactory('org.ict_ok')
@@ -33,15 +33,15 @@ _ = MessageFactory('org.ict_ok')
 # --------------- object details ---------------------------
 
 
-class PhysicalConnectorDetails(ComponentDetails):
-    """ Class for PhysicalConnector details
+class PhysicalComponentDetails(ComponentDetails):
+    """ Class for PhysicalComponent details
     """
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
 
 
-class PhysicalConnectorFolderDetails(ComponentDetails):
+class PhysicalComponentFolderDetails(ComponentDetails):
     """ Class for MobilePhone details
     """
     omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']

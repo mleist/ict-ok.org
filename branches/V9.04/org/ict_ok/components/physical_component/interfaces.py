@@ -9,54 +9,22 @@
 #
 # pylint: disable-msg=E0213,W0232
 #
-"""Interface of PhysicalConnector"""
+"""Interface of PhysicalComponent"""
 
 
 __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 
 # zope imports
-from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, Int, List, TextLine
-from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IPhysicalConnector(IComponent):
-    """A PhysicalConnector object."""
-
-    connectorPinout = TextLine(
-        max_length = 80,
-        title = _("Connector pinout"),
-        required = False)
-
-    room = Choice(
-        title=_(u'Room'),
-        vocabulary='AllRooms',
-        required=False
-        )
-    
-    interface = Choice(
-        title=_(u'Connected interface'),
-        vocabulary='AllUnusedOrUsedPhysicalConnectorInterfaces',
-        required=False
-        )
+class IPhysicalComponent(Interface):
+    """A PhysicalComponent object."""
 
 
-
-class IPhysicalConnectorFolder(ISuperclass, IFolder):
-    """Container for PhysicalConnector objects
-    """
-
-
-class IAddPhysicalConnector(Interface):
-    """Interface for all Objects"""
-    template = Choice(
-        title = _("Template"),
-        vocabulary="AllPhysicalConnectorTemplates",
-        required = False)
