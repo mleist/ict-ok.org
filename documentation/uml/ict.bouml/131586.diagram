@@ -47,7 +47,7 @@ classinstancecanvas 134146 classinstance_ref 136578 // link03
 end
 note 135042 "obj01_diag
 $Id$"
-  xyzwh 16 16 2000 179 105
+  xyzwh 36 27 2000 382 45
 objectlinkcanvas 128898 rel relation_ref 134146 // Building in Location
   from ref 128002 z 1999 label "Building in Location" italic xyz 534 88 1999 to ref 128130
   no_role_a no_role_b
@@ -79,24 +79,24 @@ objectlinkcanvas 132482 rel relation_ref 139906 // contains
   from ref 130050 z 1999 label "contains" italic xyz 748 502 1999 to ref 130562
   role_a_pos 750 543 3000 role_b_pos 799 479 3000
 objectlinkcanvas 133378 rel relation_ref 156290 // linkHasConnector
-  from ref 132994 z 1999 label "linkHasConnector" italic xyz 778 655 3000 to ref 130562
+  from ref 132994 z 1999 label "linkHasConnector" italic xyz 778 655 1999 to ref 130562
   role_a_pos 764 589 3000 role_b_pos 848 698 3000
 objectlinkcanvas 133506 rel relation_ref 156418 // linkHasConnector
-  from ref 132994 z 1999 label "linkHasConnector" italic xyz 932 646 3000 to ref 131202
+  from ref 132994 z 1999 label "linkHasConnector" italic xyz 932 646 1999 to ref 131202
   role_a_pos 1035 590 3000 role_b_pos 944 697 3000
 objectlinkcanvas 133890 rel relation_ref 139522 // contains
-  from ref 131458 z 1999 label "contains" italic xyz 121 490 3000 to ref 131714
+  from ref 131458 z 1999 label "contains" italic xyz 121 490 1999 to ref 131714
   role_a_pos 144 533 3000 role_b_pos 158 462 3000
 objectlinkcanvas 134274 rel relation_ref 156418 // linkHasConnector
-  from ref 134146 z 1999 label "linkHasConnector" italic xyz 187 669 3000 to ref 131714
+  from ref 134146 z 1999 label "linkHasConnector" italic xyz 187 669 1999 to ref 131714
   role_a_pos 178 599 3000 role_b_pos 263 720 3000
 objectlinkcanvas 134658 rel relation_ref 156674 // linkHasConnector
-  from ref 134146 z 1999 label "linkHasConnector" italic xyz 351 663 3000 to ref 130306
+  from ref 134146 z 1999 label "linkHasConnector" italic xyz 351 663 1999 to ref 130306
   role_a_pos 417 586 3000 role_b_pos 355 722 3000
 objectlinkcanvas 134786 rel relation_ref 156290 // linkHasConnector
-  from ref 134018 z 1999 label "linkHasConnector" italic xyz 635 664 3000 to ref 130562
+  from ref 134018 z 1999 label "linkHasConnector" italic xyz 635 664 1999 to ref 130562
   role_a_pos 685 593 3000 role_b_pos 656 721 3000
 objectlinkcanvas 134914 rel relation_ref 156674 // linkHasConnector
-  from ref 134018 z 1999 label "linkHasConnector" italic xyz 507 664 3000 to ref 130306
+  from ref 134018 z 1999 label "linkHasConnector" italic xyz 507 664 1999 to ref 130306
   role_a_pos 507 588 3000 role_b_pos 577 723 3000
 end

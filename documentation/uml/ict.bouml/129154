@@ -1,6 +1,6 @@
 format 64
 "pkg_inv01" // pkg_inv01
-  revision 16
+  revision 17
   modified_by 2 "markus"
   // class settings
   //class diagram settings
@@ -1600,7 +1600,6 @@ ${members}};
 	idl_decl ""
 	comment "Production state"
       end
-
     end
 
     class 144642 "ISoftwareComponent"
@@ -1871,7 +1870,6 @@ ${docstring}${members}
 "
 	    classrelation_ref 141570 // host (contains)
       end
-
     end
 
     class 134402 "HostLinuxServer"
@@ -2055,7 +2053,7 @@ ${docstring}${members}
 	  b parent class_ref 137346 // IPhysicalConnector
       end
 
-      classrelation 160258 // link (linkHasConnector)
+      classrelation 160258 // linkHasConnector
 	relation_ref 156418 // linkHasConnector
       end
     end
@@ -2160,7 +2158,6 @@ ${docstring}${members}
 	    classrelation_ref 138498 // <realization>
 	  b parent class_ref 133762 // INet
       end
-
     end
 
     class 141826 "Notebook"
@@ -2250,7 +2247,7 @@ ${docstring}${members}
 	  b parent class_ref 137346 // IPhysicalConnector
       end
 
-      classrelation 160770 // link (linkHasConnector)
+      classrelation 160770 // linkHasConnector
 	relation_ref 156674 // linkHasConnector
       end
     end
@@ -2400,7 +2397,7 @@ ${docstring}${members}
 	  b parent class_ref 137346 // IPhysicalConnector
       end
 
-      classrelation 160002 // link (linkHasConnector)
+      classrelation 160002 // linkHasConnector
 	relation_ref 156290 // linkHasConnector
       end
     end
@@ -2457,7 +2454,7 @@ ${docstring}${members}
 	  a role_name "port" multiplicity "0..1" public
 	    classrelation_ref 159874 // port (linkHasConnector)
 	  b role_name "link" multiplicity "1" public
-	    classrelation_ref 160002 // link (linkHasConnector)
+	    classrelation_ref 160002 // linkHasConnector
       end
 
       classrelation 160130 // If (linkHasConnector)
@@ -2465,7 +2462,7 @@ ${docstring}${members}
 	  a role_name "If" multiplicity "0..1" public
 	    classrelation_ref 160130 // If (linkHasConnector)
 	  b role_name "link" multiplicity "*" public
-	    classrelation_ref 160258 // link (linkHasConnector)
+	    classrelation_ref 160258 // linkHasConnector
       end
 
       classrelation 160642 // outlet (linkHasConnector)
@@ -2473,7 +2470,17 @@ ${docstring}${members}
 	  a role_name "outlet" public
 	    classrelation_ref 160642 // outlet (linkHasConnector)
 	  b role_name "link" public
-	    classrelation_ref 160770 // link (linkHasConnector)
+	    classrelation_ref 160770 // linkHasConnector
+      end
+
+      attribute 151298 "connector"
+	public type class_ref 137346 // IPhysicalConnector
+	multiplicity "*"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
 
@@ -3363,7 +3370,6 @@ ${docstring}${members}
 "
 	idl_decl ""
       end
-
     end
 
     class 136066 "ILatency"
@@ -3702,8 +3708,8 @@ ${members}};
 	idl_decl ""
       end
 
-      attribute 135810 "interface"
-	public type class_ref 133122 // Interface
+      attribute 135810 "link"
+	public type class_ref 146050 // IPhysicalLink
 	multiplicity "0..1"
 	cpp_decl ""
 	java_decl ""
@@ -3790,7 +3796,6 @@ ${docstring}${members}
 	idl_decl ""
 	comment "height in inch"
       end
-
     end
 
     class 135810 "IRequirement"

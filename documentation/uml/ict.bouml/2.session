@@ -12,7 +12,7 @@ diagrams
     1256 826 100 4 0 0
   classdiagram_ref 131970 // cl_inventory03_diag
     1164 741 100 4 0 0
-  active  objectdiagram_ref 131586 // obj01_diag
+  objectdiagram_ref 131586 // obj01_diag
     1567 1013 100 15 0 0
   classdiagram_ref 131714 // cl_inventory02_diag
     1256 826 100 14 0 0
@@ -24,9 +24,11 @@ diagrams
     1256 826 100 15 0 0
   objectdiagram_ref 134658 // obj05_diag
     1256 826 100 4 0 0
+  active  classdiagram_ref 138114 // cl_inventory07_diag
+    1567 1013 100 3 0 0
 end
 show_stereotypes
-selected objectdiagram_ref 131586 // obj01_diag
+selected classdiagram_ref 138114 // cl_inventory07_diag
 open
   class_ref 142082 // AllHostProductionStates
   class_ref 141442 // RootFolder
@@ -36,7 +38,7 @@ open
   class_ref 146178 // PhysicalLink
   class_ref 135682 // Requirement
   class_ref 129666 // IHostSwitchGeneral
+  class_ref 137346 // IPhysicalConnector
   class_ref 146050 // IPhysicalLink
-  classinstance_ref 135042 // ict_ok.org
 end
 end

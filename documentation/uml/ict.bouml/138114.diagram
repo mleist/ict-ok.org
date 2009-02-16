@@ -2,7 +2,7 @@ format 64
 
 classcanvas 128002 class_ref 146178 // PhysicalLink
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 577 1189 2000
+  xyz 544 1185 2000
 end
 classcanvas 128130 class_ref 146050 // IPhysicalLink
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
@@ -52,8 +52,9 @@ classcanvas 131842 class_ref 134018 // IInterface
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
   xyz 140 1161 2004
 end
-note 132098 "cl_inventory07"
-  xyzwh 18 14 2000 134 46
+note 132098 "cl_inventory07
+$Id$"
+  xyzwh 36 26 2000 567 51
 relationcanvas 128258 relation_ref 154370 // <realization>
   from ref 128002 z 1999 to ref 128130
   no_role_a no_role_b
@@ -110,9 +111,9 @@ relationcanvas 131586 relation_ref 156034 // <realization>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 131714 relation_ref 156418 // linkHasConnector
-  from ref 128002 z 1999 label "linkHasConnector" italic xyz 416 1190 3000 to ref 131330
-  role_a_pos 375 1188 3000 role_b_pos 544 1188 3000
-  multiplicity_a_pos 376 1213 3000 multiplicity_b_pos 552 1213 3000
+  from ref 128002 z 1999 label "linkHasConnector" italic xyz 399 1190 1999 to ref 131330
+  role_a_pos 370 1190 3000 role_b_pos 518 1190 3000
+  multiplicity_a_pos 370 1213 3000 multiplicity_b_pos 527 1213 3000
 end
 relationcanvas 131970 relation_ref 137346 // <realization>
   from ref 131330 z 1999 to ref 131842
