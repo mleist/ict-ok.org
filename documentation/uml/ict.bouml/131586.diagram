@@ -1,81 +1,102 @@
 format 64
 
 classinstancecanvas 128002 classinstance_ref 129154 // Rumeln
-  xyz 514 143 2000
+  xyz 537 21 2000
 end
 classinstancecanvas 128130 classinstance_ref 129282 // Duesseldorfer Str.
-  xyz 486 288 2000
+  xyz 509 166 2000
 end
 classinstancecanvas 129282 classinstance_ref 129538 // Serverroom
-  xyz 761 376 2000
+  xyz 784 254 2000
 end
 classinstancecanvas 129410 classinstance_ref 129666 // Office
-  xyz 322 408 2000
+  xyz 345 286 2000
 end
 classinstancecanvas 129794 classinstance_ref 129794 // Infra1
-  xyz 921 458 2000
+  xyz 944 336 2000
 end
 classinstancecanvas 130050 classinstance_ref 129922 // Panel1
-  xyz 724 575 2000
+  xyz 747 453 2000
 end
 classinstancecanvas 130306 classinstance_ref 130050 // P1/1
-  xyz 415 683 2000
+  xyz 438 561 2000
 end
 classinstancecanvas 130562 classinstance_ref 130178 // P1
-  xyz 669 683 2000
+  xyz 692 561 2000
 end
 classinstancecanvas 130946 classinstance_ref 130306 // 3Com-01
-  xyz 918 573 2000
+  xyz 941 451 2000
 end
 classinstancecanvas 131202 classinstance_ref 130434 // P1
-  xyz 985 683 2000
+  xyz 1008 561 2000
 end
 classinstancecanvas 131458 classinstance_ref 130562 // Workstation1
-  xyz 77 538 2000
+  xyz 100 416 2000
 end
 classinstancecanvas 131714 classinstance_ref 130690 // eth0
-  xyz 29 673 2005
+  xyz 52 551 2005
 end
+classinstancecanvas 132994 classinstance_ref 136194 // link01
+  xyz 853 717 2000
+end
+classinstancecanvas 134018 classinstance_ref 136450 // link02
+  xyz 580 746 2000
+end
+classinstancecanvas 134146 classinstance_ref 136578 // link03
+  xyz 272 744 2000
+end
+note 135042 "obj01_diag
+$Id$"
+  xyzwh 16 16 2000 179 105
 objectlinkcanvas 128898 rel relation_ref 134146 // Building in Location
-  from ref 128002 z 1999 label "Building in Location" italic xyz 511 210 1999 to ref 128130
+  from ref 128002 z 1999 label "Building in Location" italic xyz 534 88 1999 to ref 128130
   no_role_a no_role_b
 objectlinkcanvas 129538 rel relation_ref 134274 // contains
-  from ref 128130 z 1999 label "contains" italic xyz 442 342 1999 to ref 129410
-  role_a_pos 385 385 3000 role_b_pos 492 286 3000
+  from ref 128130 z 1999 label "contains" italic xyz 465 220 1999 to ref 129410
+  role_a_pos 384 262 3000 role_b_pos 500 187 3000
 objectlinkcanvas 129666 rel relation_ref 134274 // contains
-  from ref 128130 z 1999 label "contains" italic xyz 680 327 1999 to ref 129282
-  role_a_pos 749 361 3000 role_b_pos 601 294 3000
+  from ref 128130 z 1999 label "contains" italic xyz 703 205 1999 to ref 129282
+  role_a_pos 803 237 3000 role_b_pos 654 188 3000
 objectlinkcanvas 129922 rel relation_ref 134786 // Rack in Room
-  from ref 129282 z 1999 label "Rack in Room" italic xyz 850 412 1999 to ref 129794
+  from ref 129282 z 1999 label "Rack in Room" italic xyz 873 290 1999 to ref 129794
   no_role_a no_role_b
 objectlinkcanvas 130178 rel relation_ref 134914 // Panel in Rack
-  from ref 129794 z 1999 label "Panel in Rack" italic xyz 827 510 1999 to ref 130050
+  from ref 129794 z 1999 label "Panel in Rack" italic xyz 850 388 1999 to ref 130050
   no_role_a no_role_b
 objectlinkcanvas 130434 rel relation_ref 135042 // Outlet in Room
-  from ref 129410 z 1999 label "Outlet in Room" italic xyz 361 540 1999 to ref 130306
+  from ref 129410 z 1999 label "Outlet in Room" italic xyz 384 418 1999 to ref 130306
   no_role_a no_role_b
 objectlinkcanvas 131074 rel relation_ref 135426 // Switch in Rack
-  from ref 129794 z 1999 label "Switch in Rack" italic xyz 943 510 1999 to ref 130946
+  from ref 129794 z 1999 label "Switch in Rack" italic xyz 966 388 1999 to ref 130946
   no_role_a no_role_b
 objectlinkcanvas 131330 rel relation_ref 139266 // Interface in Switch
-  from ref 130946 z 1999 label "Interface in Switch" italic xyz 967 622 1999 to ref 131202
+  from ref 130946 z 1999 label "Interface in Switch" italic xyz 990 500 1999 to ref 131202
   no_role_a no_role_b
 objectlinkcanvas 131586 rel relation_ref 139394 // contains
-  from ref 129410 z 1999 label "contains" italic xyz 230 467 1999 to ref 131458
-  role_a_pos 167 518 3000 role_b_pos 298 426 3000
-objectlinkcanvas 131970 rel relation_ref 139650 // patched
-  from ref 131714 z 1999 label "patched" italic xyz 289 680 1999 to ref 130306
-  no_role_a no_role_b
-objectlinkcanvas 132098 rel relation_ref 139778 // patched
-  from ref 130562 z 1999 label "patched" italic xyz 848 679 1999 to ref 131202
-  role_a_pos 932 676 3000 role_b_pos 755 676 3000
+  from ref 129410 z 1999 label "contains" italic xyz 253 345 1999 to ref 131458
+  role_a_pos 194 392 3000 role_b_pos 315 301 3000
 objectlinkcanvas 132482 rel relation_ref 139906 // contains
-  from ref 130050 z 1999 label "contains" italic xyz 725 624 1999 to ref 130562
-  role_a_pos 724 665 3000 role_b_pos 772 600 3000
-objectlinkcanvas 132738 rel relation_ref 135298 // connected
-  from ref 130306 z 1999 label "connected" italic xyz 548 679 1999 to ref 130562
-  role_a_pos 640 676 3000 role_b_pos 492 676 3000
-objectlinkcanvas 132866 rel relation_ref 139522 // contains
-  from ref 131458 z 1999 label "contains" italic xyz 105 612 1999 to ref 131714
-  no_role_a no_role_b
+  from ref 130050 z 1999 label "contains" italic xyz 748 502 1999 to ref 130562
+  role_a_pos 750 543 3000 role_b_pos 799 479 3000
+objectlinkcanvas 133378 rel relation_ref 156290 // linkHasConnector
+  from ref 132994 z 1999 label "linkHasConnector" italic xyz 778 655 3000 to ref 130562
+  role_a_pos 764 589 3000 role_b_pos 848 698 3000
+objectlinkcanvas 133506 rel relation_ref 156418 // linkHasConnector
+  from ref 132994 z 1999 label "linkHasConnector" italic xyz 932 646 3000 to ref 131202
+  role_a_pos 1035 590 3000 role_b_pos 944 697 3000
+objectlinkcanvas 133890 rel relation_ref 139522 // contains
+  from ref 131458 z 1999 label "contains" italic xyz 121 490 3000 to ref 131714
+  role_a_pos 144 533 3000 role_b_pos 158 462 3000
+objectlinkcanvas 134274 rel relation_ref 156418 // linkHasConnector
+  from ref 134146 z 1999 label "linkHasConnector" italic xyz 187 669 3000 to ref 131714
+  role_a_pos 178 599 3000 role_b_pos 263 720 3000
+objectlinkcanvas 134658 rel relation_ref 156674 // linkHasConnector
+  from ref 134146 z 1999 label "linkHasConnector" italic xyz 351 663 3000 to ref 130306
+  role_a_pos 417 586 3000 role_b_pos 355 722 3000
+objectlinkcanvas 134786 rel relation_ref 156290 // linkHasConnector
+  from ref 134018 z 1999 label "linkHasConnector" italic xyz 635 664 3000 to ref 130562
+  role_a_pos 685 593 3000 role_b_pos 656 721 3000
+objectlinkcanvas 134914 rel relation_ref 156674 // linkHasConnector
+  from ref 134018 z 1999 label "linkHasConnector" italic xyz 507 664 3000 to ref 130306
+  role_a_pos 507 588 3000 role_b_pos 577 723 3000
 end

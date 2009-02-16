@@ -1,4 +1,4 @@
-format 62
+format 64
 
 classinstancecanvas 128002 classinstance_ref 131970 // Net1
   xyz 52 322 2000
@@ -21,22 +21,28 @@ end
 classinstancecanvas 130434 classinstance_ref 132610 // eth1
   xyz 548 273 2000
 end
-objectlinkcanvas 128258 rel relation_ref 141058 // Host in Net
-  from ref 128002 z 1999 label "Host in Net" italic xyz 182 267 3000 to ref 128130
+objectlinkcanvas 128258 norel
+  from ref 128002 z 1999 to ref 128130
   no_role_a no_role_b
-objectlinkcanvas 128514 rel relation_ref 139522 // Interface in Host
-  from ref 128130 z 1999 label "Interface in Host" italic xyz 407 172 3000 to ref 128386
+objectlinkcanvas 128514 norel
+  from ref 128130 z 1999 to ref 128386
   no_role_a no_role_b
-objectlinkcanvas 129282 rel relation_ref 141058 // Host in Net
-  from ref 128002 z 1999 label "Host in Net" italic xyz 197 396 3000 to ref 129154
+objectlinkcanvas 129282 norel
+  from ref 128002 z 1999 to ref 129154
   no_role_a no_role_b
-objectlinkcanvas 129922 rel relation_ref 139522 // Interface in Host
-  from ref 129154 z 1999 label "Interface in Host" italic xyz 406 512 3000 to ref 129666
+objectlinkcanvas 129922 norel
+  from ref 129154 z 1999 to ref 129666
   no_role_a no_role_b
-objectlinkcanvas 130306 rel relation_ref 139522 // Interface in Host
-  from ref 129154 z 1999 label "Interface in Host" italic xyz 414 446 3000 to ref 130178
+objectlinkcanvas 130306 norel
+  from ref 129154 z 1999 to ref 130178
   no_role_a no_role_b
-objectlinkcanvas 130562 rel relation_ref 139522 // Interface in Host
-  from ref 128130 z 1999 label "Interface in Host" italic xyz 410 238 3000 to ref 130434
+objectlinkcanvas 130562 norel
+  from ref 128130 z 1999 to ref 130434
   no_role_a no_role_b
+objectlinkcanvas 130690 norel
+  from ref 128130 z 1999 to ref 128386
+  no_role_a no_role_b
+objectlinkcanvas 131074 rel relation_ref 139522 // contains
+  from ref 128130 z 1999 label "contains" italic xyz 430 171 3000 to ref 128386
+  role_a_pos 489 144 3000 role_b_pos 370 186 3000
 end

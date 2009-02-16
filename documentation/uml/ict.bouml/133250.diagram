@@ -1,4 +1,4 @@
-format 63
+format 64
 
 classinstancecanvas 128002 classinstance_ref 132738 // neon.server.ifdd.de
   xyz 871 113 2000
@@ -46,9 +46,9 @@ objectlinkcanvas 128898 rel relation_ref 139266 // Interface in Switch
 objectlinkcanvas 129026 rel relation_ref 134914 // Panel in Rack
   from ref 128386 z 1999 label "Panel in Rack" italic xyz 195 218 1999 to ref 128642
   no_role_a no_role_b
-objectlinkcanvas 129154 rel relation_ref 139778 // patched
-  from ref 128514 z 1999 label "patched" italic xyz 215 386 1999 to ref 128258
-  role_a_pos 299 383 3000 role_b_pos 125 382 3000
+objectlinkcanvas 129154 norel
+  from ref 128514 z 1999 to ref 128258
+  no_role_a no_role_b
 objectlinkcanvas 129282 rel relation_ref 134786 // Rack in Room
   from ref 128770 z 1999 label "Rack in Room" italic xyz 284 109 1999 to ref 128386
   no_role_a no_role_b
@@ -58,11 +58,11 @@ objectlinkcanvas 129410 norel
 objectlinkcanvas 129538 rel relation_ref 135426 // Switch in Rack
   from ref 128386 z 1999 label "Switch in Rack" italic xyz 337 216 1999 to ref 128130
   no_role_a no_role_b
-objectlinkcanvas 130050 rel relation_ref 139522 // contains
-  from ref 128002 z 1999 label "contains" italic xyz 925 153 1999 to ref 129794
+objectlinkcanvas 130050 norel
+  from ref 128002 z 1999 to ref 129794
   no_role_a no_role_b
-objectlinkcanvas 130178 rel relation_ref 139522 // contains
-  from ref 129666 z 1999 label "contains" italic xyz 936 434 1999 to ref 129922
+objectlinkcanvas 130178 norel
+  from ref 129666 z 1999 to ref 129922
   no_role_a no_role_b
 objectlinkcanvas 130562 rel relation_ref 139266 // Interface in Switch
   from ref 128130 z 1999 label "Interface in Switch" italic xyz 485 235 1999 to ref 130306
@@ -77,6 +77,6 @@ objectlinkcanvas 131074 norel
   from ref 130434 z 1999 to ref 129922
   no_role_a no_role_b
 objectlinkcanvas 131714 rel relation_ref 139906 // contains
-  from ref 128642 z 1999 label "contains" italic xyz 90 332 3000 to ref 128514
-  role_a_pos 105 368 3000 role_b_pos 152 313 3000
+  from ref 128642 z 1999 label "contains" italic xyz 90 332 1999 to ref 128514
+  role_a_pos 95 371 3000 role_b_pos 145 308 3000
 end

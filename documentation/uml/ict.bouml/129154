@@ -1,6 +1,6 @@
 format 64
 "pkg_inv01" // pkg_inv01
-  revision 14
+  revision 16
   modified_by 2 "markus"
   // class settings
   //class diagram settings
@@ -125,9 +125,20 @@ ${members}};
 	relation 147842 o--- name "contains"
 	  a role_name "" multiplicity "0..1" public
 	    classrelation_ref 150786 // (contains)
-	  b role_name "" multiplicity "*" public
-	    classrelation_ref 150914 // (contains)
+	  b role_name "root" multiplicity "*" public
+	    classrelation_ref 150914 // root (contains)
       end
+    end
+
+    class 146306 "PhysicalQuantity"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
     end
   end
 
@@ -962,7 +973,6 @@ ${import}
 ${definition}
 "
       associated_classes
-	class_ref 137474 // PhysicalConnector
       end
     end
 
@@ -1021,8 +1031,13 @@ ${definition}
       size A3-Landscape
     end
 
+    classdiagram 138114 "cl_inventory07_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3
+    end
+
     objectdiagram 131586 "obj01_diag"
-       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations no shadow default show_stereotype_properties default
+       write_horizontally default package_name_in_tab default show_context default auto_label_position no draw_all_relations yes shadow default show_stereotype_properties default
       size A4-Landscape
     end
 
@@ -1083,7 +1098,7 @@ ${docstring}${members}
 	  b parent class_ref 128002 // ISuperclass
       end
 
-      classrelation 150914 // (contains)
+      classrelation 150914 // root (contains)
 	relation_ref 147842 // contains
       end
     end
@@ -1176,9 +1191,16 @@ ${docstring}${members}
 	    classrelation_ref 154754 // <generalisation>
 	  b parent class_ref 128258 // Component
       end
+
+      classrelation 157698 // <realization>
+	relation 154626 -_-|>
+	  a public
+	    classrelation_ref 157698 // <realization>
+	  b parent class_ref 144514 // IPhysicalComponent
+      end
     end
 
-    class 144770 "Software"
+    class 144770 "SoftwareComponent"
       abstract visibility package 
       cpp_decl ""
       java_decl ""
@@ -1368,13 +1390,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 129154 // <generalisation>
-	relation 129154 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 129154 // <generalisation>
-	  b parent class_ref 128002 // ISuperclass
-      end
     end
 
     class 128642 "IComponent"
@@ -1394,14 +1409,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 129026 // <generalisation>
-	relation 129026 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 129026 // <generalisation>
-	  b parent class_ref 128514 // ISupernode
-      end
-
       attribute 136066 "myFactory"
 	public explicit_type "any"
 	cpp_decl ""
@@ -1594,15 +1601,9 @@ ${members}};
 	comment "Production state"
       end
 
-      classrelation 155010 // <generalisation>
-	relation 151938 ---|>
-	  a public
-	    classrelation_ref 155010 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
     end
 
-    class 144642 "ISoftware"
+    class 144642 "ISoftwareComponent"
       abstract visibility package stereotype "interface"
       cpp_decl ""
       java_decl ""
@@ -1769,7 +1770,7 @@ ${docstring}${members}
 	relation 152578 ---|>
 	  a public
 	    classrelation_ref 155650 // <generalisation>
-	  b parent class_ref 144770 // Software
+	  b parent class_ref 144770 // SoftwareComponent
       end
     end
 
@@ -1859,21 +1860,18 @@ ${docstring}${members}
 	relation_ref 139394 // contains
       end
 
-      classrelation 141442 // (contains)
+      classrelation 141442 // interface (contains)
 	relation 139522 o--- name "contains"
-	  a role_name "" multiplicity "*" public
+	  a role_name "interface" multiplicity "*" public
 	    python "${comment}${self}${name} = ${value}
 "
-	    classrelation_ref 141442 // (contains)
-	  b role_name "" public
+	    classrelation_ref 141442 // interface (contains)
+	  b role_name "host" public
 	    python "${comment}${self}${name} = ${stereotype}()
 "
-	    classrelation_ref 141570 // (contains)
+	    classrelation_ref 141570 // host (contains)
       end
 
-      classrelation 143618 // contains
-	relation_ref 141058 // contains
-      end
     end
 
     class 134402 "HostLinuxServer"
@@ -2023,20 +2021,8 @@ ${docstring}${members}
 	relation_ref 139266 // Interface in Switch
       end
 
-      classrelation 141570 // (contains)
+      classrelation 141570 // host (contains)
 	relation_ref 139522 // contains
-      end
-
-      classrelation 141698 // (patched)
-	relation 139650 ---- name "patched"
-	  a role_name "" multiplicity "1" public
-	    python "${comment}${self}${name} = ${value}
-"
-	    classrelation_ref 141698 // (patched)
-	  b role_name "" multiplicity "1" public
-	    python "${comment}${self}${name} = ${value}
-"
-	    classrelation_ref 141826 // (patched)
       end
 
       classrelation 142082 // patched
@@ -2055,12 +2041,22 @@ ${docstring}${members}
 	    classrelation_ref 144130 // <association>
       end
 
-      classrelation 146050 // <generalisation>
-	relation 143234 ---|>
+      classrelation 159106 // <generalisation>
+	relation 155650 ---|>
 	  a public
-	    python "${type}"
-	    classrelation_ref 146050 // <generalisation>
-	  b parent class_ref 137474 // PhysicalConnector
+	    classrelation_ref 159106 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
+      end
+
+      classrelation 159490 // <realization>
+	relation 156034 -_-|>
+	  a public
+	    classrelation_ref 159490 // <realization>
+	  b parent class_ref 137346 // IPhysicalConnector
+      end
+
+      classrelation 160258 // link (linkHasConnector)
+	relation_ref 156418 // linkHasConnector
       end
     end
 
@@ -2165,17 +2161,6 @@ ${docstring}${members}
 	  b parent class_ref 133762 // INet
       end
 
-      classrelation 143490 // (contains)
-	relation 141058 o--- name "contains"
-	  a role_name "" multiplicity "*" public
-	    python "${comment}${self}${name} = ${stereotype}()
-"
-	    classrelation_ref 143490 // (contains)
-	  b role_name "" public
-	    python "${comment}${self}${name} = ${value}
-"
-	    classrelation_ref 143618 // contains
-      end
     end
 
     class 141826 "Notebook"
@@ -2217,7 +2202,7 @@ ${docstring}${members}
 	relation 152706 ---|>
 	  a public
 	    classrelation_ref 155778 // <generalisation>
-	  b parent class_ref 144770 // Software
+	  b parent class_ref 144770 // SoftwareComponent
       end
 
       classrelation 155906 // <realization>
@@ -2251,28 +2236,22 @@ ${docstring}${members}
 	relation_ref 135042 // Outlet in Room
       end
 
-      classrelation 136578 // port (connected)
-	relation 135298 ---- name "connected"
-	  a role_name "port" multiplicity "1" private
-	    python "${comment}${self}${name} = ${value}
-"
-	    classrelation_ref 136578 // port (connected)
-	  b role_name "outlet" multiplicity "1" private
-	    python "${comment}${self}${name} = ${value}
-"
-	    classrelation_ref 136706 // outlet (connected)
-      end
-
-      classrelation 141826 // (patched)
-	relation_ref 139650 // patched
-      end
-
-      classrelation 145538 // <generalisation>
-	relation 142722 ---|>
+      classrelation 158978 // <generalisation>
+	relation 155522 ---|>
 	  a public
-	    python "${type}"
-	    classrelation_ref 145538 // <generalisation>
-	  b parent class_ref 137474 // PhysicalConnector
+	    classrelation_ref 158978 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
+      end
+
+      classrelation 159362 // <realization>
+	relation 155906 -_-|>
+	  a public
+	    classrelation_ref 159362 // <realization>
+	  b parent class_ref 137346 // IPhysicalConnector
+      end
+
+      classrelation 160770 // link (linkHasConnector)
+	relation_ref 156674 // linkHasConnector
       end
     end
 
@@ -2293,14 +2272,6 @@ ${docstring}${members}
 	    python "${type}"
 	    classrelation_ref 128642 // <realization>
 	  b parent class_ref 128898 // IPatchPanel
-      end
-
-      classrelation 128770 // <generalisation>
-	relation 128770 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 128770 // <generalisation>
-	  b parent class_ref 128258 // Component
       end
 
       attribute 128002 "size"
@@ -2367,6 +2338,13 @@ ${docstring}${members}
       classrelation 144130 // <association>
 	relation_ref 141314 // <association>
       end
+
+      classrelation 158722 // <generalisation>
+	relation 155266 ---|>
+	  a public
+	    classrelation_ref 158722 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
+      end
     end
 
     class 129026 "PatchPort"
@@ -2382,10 +2360,6 @@ ${docstring}${members}
       
       classrelation 136450 // (PatchPort in Panel)
 	relation_ref 135170 // PatchPort in Panel
-      end
-
-      classrelation 136706 // outlet (connected)
-	relation_ref 135298 // connected
       end
 
       classrelation 137090 // <realization>
@@ -2412,12 +2386,22 @@ ${docstring}${members}
 	relation_ref 139906 // contains
       end
 
-      classrelation 145282 // <generalisation>
-	relation 142466 ---|>
+      classrelation 158850 // <generalisation>
+	relation 155394 ---|>
 	  a public
-	    python "${type}"
-	    classrelation_ref 145282 // <generalisation>
-	  b parent class_ref 137474 // PhysicalConnector
+	    classrelation_ref 158850 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
+      end
+
+      classrelation 159234 // <realization>
+	relation 155778 -_-|>
+	  a public
+	    classrelation_ref 159234 // <realization>
+	  b parent class_ref 137346 // IPhysicalConnector
+      end
+
+      classrelation 160002 // link (linkHasConnector)
+	relation_ref 156290 // linkHasConnector
       end
     end
 
@@ -2445,23 +2429,51 @@ ${docstring}${members}
       end
     end
 
-    class 137474 "PhysicalConnector"
+    class 146178 "PhysicalLink"
       visibility package 
       cpp_decl ""
       java_decl ""
       php_decl ""
-      python_2_2 python_decl "class ${name}${inherit}:
-${docstring}${members}
-"
+      python_2_2 python_decl ""
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 145410 // <generalisation>
-	relation 142594 ---|>
+      classrelation 157442 // <realization>
+	relation 154370 -_-|>
 	  a public
-	    python "${type}"
-	    classrelation_ref 145410 // <generalisation>
-	  b parent class_ref 128258 // Component
+	    classrelation_ref 157442 // <realization>
+	  b parent class_ref 146050 // IPhysicalLink
+      end
+
+      classrelation 157570 // <generalisation>
+	relation 154498 ---|>
+	  a public
+	    classrelation_ref 157570 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
+      end
+
+      classrelation 159874 // port (linkHasConnector)
+	relation 156290 o--- name "linkHasConnector"
+	  a role_name "port" multiplicity "0..1" public
+	    classrelation_ref 159874 // port (linkHasConnector)
+	  b role_name "link" multiplicity "1" public
+	    classrelation_ref 160002 // link (linkHasConnector)
+      end
+
+      classrelation 160130 // If (linkHasConnector)
+	relation 156418 o--- name "linkHasConnector"
+	  a role_name "If" multiplicity "0..1" public
+	    classrelation_ref 160130 // If (linkHasConnector)
+	  b role_name "link" multiplicity "*" public
+	    classrelation_ref 160258 // link (linkHasConnector)
+      end
+
+      classrelation 160642 // outlet (linkHasConnector)
+	relation 156674 o--- name "linkHasConnector"
+	  a role_name "outlet" public
+	    classrelation_ref 160642 // outlet (linkHasConnector)
+	  b role_name "link" public
+	    classrelation_ref 160770 // link (linkHasConnector)
       end
     end
 
@@ -2795,7 +2807,7 @@ ${members}};
 	relation 153090 ---|>
 	  a public
 	    classrelation_ref 156162 // <generalisation>
-	  b parent class_ref 144642 // ISoftware
+	  b parent class_ref 144642 // ISoftwareComponent
       end
     end
 
@@ -2810,14 +2822,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 134402 // <generalisation>
-	relation 133890 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 134402 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
-
       attribute 131074 "coordinates"
 	public explicit_type "string"
 	cpp_decl ""
@@ -3310,7 +3314,6 @@ ${members}};
 	    classrelation_ref 153090 // <generalisation>
 	  b parent class_ref 137730 // IDevice
       end
-
     end
 
     class 134018 "IInterface"
@@ -3361,13 +3364,6 @@ ${docstring}${members}
 	idl_decl ""
       end
 
-      classrelation 146178 // <generalisation>
-	relation 143362 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 146178 // <generalisation>
-	  b parent class_ref 137346 // IPhysicalConnector
-      end
     end
 
     class 136066 "ILatency"
@@ -3410,13 +3406,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 134530 // <generalisation>
-	relation 134018 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 134530 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
     end
 
     class 139522 "IMobilePhone"
@@ -3564,7 +3553,6 @@ ${members}};
 	    classrelation_ref 151298 // <generalisation>
 	  b parent class_ref 137730 // IDevice
       end
-
     end
 
     class 144898 "IOperatingSoftware"
@@ -3586,7 +3574,7 @@ ${members}};
 	relation 153218 ---|>
 	  a public
 	    classrelation_ref 156290 // <generalisation>
-	  b parent class_ref 144642 // ISoftware
+	  b parent class_ref 144642 // ISoftwareComponent
       end
 
       attribute 148610 "osType"
@@ -3618,13 +3606,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 145794 // <generalisation>
-	relation 142978 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 145794 // <generalisation>
-	  b parent class_ref 137346 // IPhysicalConnector
-      end
     end
 
     class 128898 "IPatchPanel"
@@ -3638,13 +3619,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 128898 // <generalisation>
-	relation 128898 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 128898 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
     end
 
     class 129154 "IPatchPort"
@@ -3664,13 +3638,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 145666 // <generalisation>
-	relation 142850 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 145666 // <generalisation>
-	  b parent class_ref 137346 // IPhysicalConnector
-      end
     end
 
     class 142594 "IPersonalComputer"
@@ -3694,7 +3661,6 @@ ${members}};
 	    classrelation_ref 152578 // <generalisation>
 	  b parent class_ref 137730 // IDevice
       end
-
     end
 
     class 137346 "IPhysicalConnector"
@@ -3714,14 +3680,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 145922 // <generalisation>
-	relation 143106 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 145922 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
-
       attribute 135554 "connectorPinout"
 	public explicit_type "char"
 	multiplicity "0..1"
@@ -3756,6 +3714,61 @@ ${members}};
       end
     end
 
+    class 146050 "IPhysicalLink"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 149762 "length"
+	public type class_ref 146306 // PhysicalQuantity
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "The current length of the PhysicalLink. For some connections, especially wireless technologies, this property may not be applicable and should be left uninitialized."
+      end
+
+      attribute 149890 "maxLength"
+	public type class_ref 146306 // PhysicalQuantity
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "The maximum length of the PhysicalLink"
+      end
+
+      attribute 150018 "mediaType"
+	public explicit_type "int"
+	multiplicity "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "The MediaType property defines the particular type of Media through which transmission signals pass."
+      end
+
+      attribute 150146 "wired"
+	public explicit_type "bool"
+	multiplicity "1"
+	init_value "True"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "Boolean indicating whether the PhysicalLink is an actual cable (TRUE) or a wireless connection (FALSE)."
+      end
+    end
+
     class 132738 "IRack"
       visibility public stereotype "interface"
       cpp_decl ""
@@ -3778,13 +3791,6 @@ ${docstring}${members}
 	comment "height in inch"
       end
 
-      classrelation 135426 // <generalisation>
-	relation 134658 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 135426 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
     end
 
     class 135810 "IRequirement"
@@ -3811,13 +3817,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 132738 // <generalisation>
-	relation 132226 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 132738 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
     end
 
     class 133634 "IService"
@@ -4033,8 +4032,6 @@ ${members}};
       attributes
         end
       relations
-        relation_ref 139778 // patched
-          classinstance_ref 130434 // P1
         end
       comment "Panel1/P1"
     end
@@ -4053,8 +4050,6 @@ ${members}};
       attributes
         end
       relations
-        relation_ref 135298 // connected
-          classinstance_ref 130178 // P1
         end
     end
 
@@ -4108,8 +4103,6 @@ ${members}};
       relations
         relation_ref 139522 // contains
           classinstance_ref 130690 // eth0
-        relation_ref 139522 // contains
-          classinstance_ref 132610 // eth1
         end
     end
 
@@ -4120,8 +4113,6 @@ ${members}};
           "[u\"172.16.64.35\"]"
         end
       relations
-        relation_ref 139650 // patched
-          classinstance_ref 130050 // P1/1
         end
       comment "Workstation1/eth0"
     end
@@ -4150,10 +4141,6 @@ ${members}};
           "192.168.1.0/24"
         end
       relations
-        relation_ref 141058 // contains
-          classinstance_ref 130562 // Workstation1
-        relation_ref 141058 // contains
-          classinstance_ref 132226 // Workstation2
         end
     end
 
@@ -4162,10 +4149,6 @@ ${members}};
       attributes
         end
       relations
-        relation_ref 139522 // contains
-          classinstance_ref 132354 // eth1
-        relation_ref 139522 // contains
-          classinstance_ref 132482 // eth0
         end
     end
 
@@ -4194,8 +4177,6 @@ ${members}};
       attributes
         end
       relations
-        relation_ref 139522 // contains
-          classinstance_ref 133122 // eth0
         end
     end
 
@@ -4213,8 +4194,6 @@ ${members}};
       attributes
         end
       relations
-        relation_ref 139522 // contains
-          classinstance_ref 132994 // eth0
         end
     end
 
@@ -4236,8 +4215,6 @@ ${members}};
           "Flat1000"
         attribute_ref 144898 // documentNumber
           "345198735"
-        attribute_ref 130690 // ikName
-          "Mobil 01"
         attribute_ref 143234 // imei
           "1234567imei"
         attribute_ref 145794 // inv_id
@@ -4246,8 +4223,6 @@ ${members}};
           "Pony"
         attribute_ref 144642 // modelType
           "Pony eiVon"
-        attribute_ref 139522 // objectID
-          "2353ab6ced43563"
         attribute_ref 141314 // phoneNumber
           "+49 123 456789"
         attribute_ref 143362 // pin
@@ -4278,8 +4253,6 @@ ${members}};
           "Flat1002"
         attribute_ref 144898 // documentNumber
           "3467812532"
-        attribute_ref 130690 // ikName
-          "Mobil 02"
         attribute_ref 143234 // imei
           "1234567imei"
         attribute_ref 145794 // inv_id
@@ -4288,8 +4261,6 @@ ${members}};
           "Pony"
         attribute_ref 144642 // modelType
           "Pony eiVon"
-        attribute_ref 139522 // objectID
-          "6547383838aeae4364"
         attribute_ref 141314 // phoneNumber
           "+49 123 456789"
         attribute_ref 143362 // pin
@@ -4334,6 +4305,54 @@ ${members}};
       relations
         relation_ref 147842 // contains
           classinstance_ref 134914 // Mobiles
+        end
+    end
+
+    classinstance 136194 "link01"
+      type class_ref 146178 // PhysicalLink
+      attributes
+        attribute_ref 149762 // length
+          "2 m"
+        attribute_ref 150018 // mediaType
+          "6 (Cat5)"
+        end
+      relations
+        relation_ref 156290 // linkHasConnector
+          classinstance_ref 130178 // P1
+        relation_ref 156418 // linkHasConnector
+          classinstance_ref 130434 // P1
+        end
+    end
+
+    classinstance 136450 "link02"
+      type class_ref 146178 // PhysicalLink
+      attributes
+        attribute_ref 149762 // length
+          "27 m"
+        attribute_ref 150018 // mediaType
+          "6 (Cat5)"
+        end
+      relations
+        relation_ref 156290 // linkHasConnector
+          classinstance_ref 130178 // P1
+        relation_ref 156674 // linkHasConnector
+          classinstance_ref 130050 // P1/1
+        end
+    end
+
+    classinstance 136578 "link03"
+      type class_ref 146178 // PhysicalLink
+      attributes
+        attribute_ref 149762 // length
+          "3 m"
+        attribute_ref 150018 // mediaType
+          "6 (Cat5)"
+        end
+      relations
+        relation_ref 156418 // linkHasConnector
+          classinstance_ref 130690 // eth0
+        relation_ref 156674 // linkHasConnector
+          classinstance_ref 130050 // P1/1
         end
     end
   end
