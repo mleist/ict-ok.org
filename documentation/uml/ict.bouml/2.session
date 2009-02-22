@@ -25,7 +25,7 @@ diagrams
   objectdiagram_ref 134658 // obj05_diag
     1256 826 100 4 0 0
   active  classdiagram_ref 138114 // cl_inventory07_diag
-    1567 1013 100 3 0 0
+    1567 1013 110 3 0 0
 end
 show_stereotypes
 selected classdiagram_ref 138114 // cl_inventory07_diag
