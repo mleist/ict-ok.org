@@ -57,6 +57,7 @@ from zc.table.batching import Formatter as BatchedFormatter
 from zc.table.interfaces import ISortableColumn
 
 # ict_ok import
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.components.superclass.interfaces import \
     IPickle, ISuperclass, IFocus
@@ -548,11 +549,11 @@ class MSubEditContent(GlobalMenuSubItem):
 class SuperclassDetails:
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = ['objectID', 'ikNotes', 'ref', 'history',
+    omit_viewfields = ['objectID', '__name__', 'ref', 'history',
                       'dbgLevel', 'ikEventTarget']
-    omit_addfields = ['objectID', 'ikAuthor', 'ikNotes', 'ref', 'history',
+    omit_addfields = ['objectID', 'ikAuthor', '__name__', 'ref', 'history',
                       'dbgLevel', 'ikEventTarget']
-    omit_editfields = ['objectID', 'ikAuthor', 'ikNotes', 'ref', 'history',
+    omit_editfields = ['objectID', 'ikAuthor', '__name__', 'ref', 'history',
                        'dbgLevel', 'ikEventTarget']
     _zopeRuntimeInfoFields = (
         "ZopeVersion",
@@ -662,11 +663,29 @@ class SuperclassDetails:
                     return vocabTerm.title
         return None
     
-    def getHrefTitle(self, obj):
+    def getHrefTitle(self, obj, displayShort=False):
         href = zapi.getPath(obj)
         title = obj.ikName
-        return u'<a href="%s">%s</a>' % (href, title)
-    
+        if displayShort and hasattr(obj, 'shortName'):
+            return u'<a href="%s">%s [%s]</a>' % (href, title, obj.shortName)
+        else:
+            return u'<a href="%s">%s</a>' % (href, title)
+
+    def getStateIconClass(self, obj):
+        try:
+            stateAdapter = getAdapter(obj, IState)
+            if stateAdapter:
+                stateNum = stateAdapter.getStateOverview(-1)
+                if stateNum >= 0:
+                    return u"icon-%s%d" % (obj.getShortname(), stateNum)
+                else:
+                    return u"icon-%s" % (obj.getShortname())
+        except ComponentLookupError, err:
+            return u"icon-%s" % (obj.getShortname())
+        except AttributeError, err:
+            return u"icon-%s" % (obj.getShortname())
+        return u"icon-%s" % (obj.getShortname())
+
     def fsearchLink(self, text, arg_key=None):
         if arg_key:
             key = arg_key
@@ -780,6 +799,8 @@ class MoveUp(BrowserPagelet):
             keyList = [i for i in parentObj.keys()]
             keyList.remove(self.context.objectID)
             keyList.insert(itemIndex - 1, self.context.objectID)
+            dd1=parentObj
+            d2=IOrderedContainer(dd1)
             parentObj.updateOrder(keyList)
     def render(self):
         parentObj = self.context.__parent__
@@ -827,8 +848,9 @@ class DisplayForm(layout.FormLayoutSupport, form.DisplayForm):
     """Widgets in Display-Mode"""
     form.extends(form.DisplayForm)
     label = _(u'View Superclass')
-    fields = field.Fields(ISuperclass).omit(\
-        *SuperclassDetails.omit_viewfields)
+    factory = Superclass
+    omitFields = SuperclassDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class AddForm(layout.FormLayoutSupport, form.AddForm):
@@ -836,10 +858,9 @@ class AddForm(layout.FormLayoutSupport, form.AddForm):
 
     form.extends(form.AddForm)
     label = _(u'Add Superclass')
-    fields = field.Fields(ISuperclass).omit(\
-        *SuperclassDetails.omit_addfields)
-    # factory stores the class, which will instanciated in AddForm.create()
     factory = Superclass
+    omitFields = SuperclassDetails.omit_addfields
+    fields = fieldsForFactory(factory, omitFields)
 
     def nextURL(self):
         """ forward the browser """
@@ -872,8 +893,9 @@ class EditForm(layout.FormLayoutSupport, form.EditForm):
 
     form.extends(form.EditForm)
     label = _(u'Edit Superclass')
-    fields = field.Fields(ISuperclass).omit(\
-        *SuperclassDetails.omit_editfields)
+    factory = Superclass
+    omitFields = SuperclassDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
     
     def applyChanges(self, data):
         content = self.getContent()
@@ -986,12 +1008,12 @@ class Overview(BrowserPagelet):
     def objs(self):
         """List of Content objects"""
         retList = []
-        try:
-            for obj in self.context.values():
-                if ISuperclass.providedBy(obj):
-                    retList.append(obj)
-        except:
-            pass
+#        try:
+        for obj in self.context.values():
+            #if ISuperclass.providedBy(obj):
+            retList.append(obj)
+#        except:
+#            pass
         return retList
 
     def table(self):

@@ -15,12 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface
-from zope.app.container.interfaces import IContainer
 from zope.i18nmessageid import MessageFactory
-
-# ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import \
-     IEventIfSuperclass, ISuperclass
 
 # ict_ok.org imports
 #from org.ict_ok.components.superclass.interfaces import ISuperclass
@@ -28,10 +23,10 @@ from org.ict_ok.components.superclass.interfaces import \
 _ = MessageFactory('org.ict_ok')
 
 
-class ISupernode(ISuperclass, IContainer):
+class ISupernode(Interface):
     """A generator object."""
 
-class IEventIfSupernode(IEventIfSuperclass):
+class IEventIfSupernode(Interface):
     """ event interface of object """
 
 class IState(Interface):

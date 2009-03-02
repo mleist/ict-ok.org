@@ -56,7 +56,7 @@ def notifyCopiedEvent(instance, event):
 
 @adapter(ISuperclass, IObjectCreatedEvent)
 def notifyCreatedEvent(instance, event):
-    logger.info(u"superclass.objmq.notifyCreatedEvent: event: %s" % event)
+    #logger.info(u"superclass.objmq.notifyCreatedEvent: event: %s" % event)
     if hasattr(event.object, "getObjectId"):
         objectOid = event.object.getObjectId()
     else:
@@ -67,7 +67,7 @@ def notifyCreatedEvent(instance, event):
 
 @adapter(ISuperclass, IObjectRemovedEvent)
 def notifyRemovedEvent(instance, event):
-    logger.info(u"superclass.objmq.notifyRemovedEvent: event: %s" % event)
+    #logger.info(u"superclass.objmq.notifyRemovedEvent: event: %s" % event)
     if hasattr(event.object, "getObjectId"):
         objectOid = event.object.getObjectId()
     else:

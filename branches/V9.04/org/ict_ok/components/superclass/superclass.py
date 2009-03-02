@@ -46,6 +46,7 @@ from zc.queue.interfaces import IQueue
 from zc.queue import Queue
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.interfaces import \
      IEventIfSuperclass, IMsgEvent, ISuperclass
 from org.ict_ok.libs.lib import generateOid, oidIsValid, RingBuffer
@@ -63,7 +64,8 @@ class Superclass(Persistent):
     """
 
 #    implements(IKeyReference, ISuperclass)
-    implements(ISuperclass, IEventIfSuperclass)
+#    implements(ISuperclass, IEventIfSuperclass)
+    implements(ISuperclass)
     shortName = "generic"
     key_type_id = 'org.ict_ok.components.superclass.keyreference'
 

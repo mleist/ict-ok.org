@@ -15,19 +15,17 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.schema import TextLine
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
-from zope.component.interfaces import IObjectEvent
-from zope.app.component.interfaces import IPossibleSite
 
 # ict_ok imports
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class ISlave(IPossibleSite, IComponent):
+class ISlave(Interface):
     """A objectcontainer for new slave data."""
 
     contains('org.ict_ok.components.net.interfaces.INet')
@@ -40,7 +38,7 @@ class ISlave(IPossibleSite, IComponent):
         default = u"Title",
         required = True)
 
-class INewSlaveEvent(IObjectEvent):
+class INewSlaveEvent(Interface):
     """
     Indicates that a new ICT_Ok slave node has been created
     """

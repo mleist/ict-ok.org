@@ -84,6 +84,7 @@ class ISuperclass(Interface):
     outEReceiver = Attribute("receiver object for output events")
     workflows = Attribute("dict of object workflows")
     wf_worklist = Attribute("list of ongoing workflow apps")
+    shortName = Attribute("class shortname")
 
     def canBeDeleted():
         """

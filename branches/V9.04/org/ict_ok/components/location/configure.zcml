@@ -33,6 +33,30 @@
             permission="org.ict_ok.components.location.Edit"
             set_schema=".interfaces.ILocation"
             />
+        <require
+            permission="org.ict_ok.components.location.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.location.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.location.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.location.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.location.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.location.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
     
     <class class=".location.LocationFolder">
@@ -56,6 +80,22 @@
         <require
             permission="org.ict_ok.components.location.Edit"
             set_schema=".interfaces.ILocationFolder"
+            />
+        <require
+            permission="org.ict_ok.components.location.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.location.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.location.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.location.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
         <require
             permission="org.ict_ok.components.location.View"

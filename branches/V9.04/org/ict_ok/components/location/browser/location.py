@@ -28,6 +28,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.location.interfaces import ILocation, IAddLocation
 from org.ict_ok.components.location.location import Location
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -78,7 +79,9 @@ class LocationFolderDetails(ComponentDetails):
 class DetailsLocationForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of location')
-    fields = field.Fields(ILocation).omit(*LocationDetails.omit_viewfields)
+    factory = Location
+    omitFields = LocationDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 #class AddLocationForm(AddForm):
@@ -90,19 +93,23 @@ class DetailsLocationForm(DisplayForm):
     
 class AddLocationForm(AddComponentForm):
     label = _(u'Add Location')
-    addFields = field.Fields(IAddLocation)
-    allFields = field.Fields(ILocation).omit(*LocationDetails.omit_addfields)
+    factory = Location
+    omitFields = LocationDetails.omit_addfields
+    attrInterface = ILocation
+    addInterface = IAddLocation
+    _session_key = 'org.ict_ok.components.location'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
-    factory = Location
-    attrInterface = ILocation
-    _session_key = 'org.ict_ok.components.location'
 
 
 class EditLocationForm(EditForm):
     """ Edit for for net """
     label = _(u'Location Edit Form')
-    fields = field.Fields(ILocation).omit(*LocationDetails.omit_editfields)
+    factory = Location
+    omitFields = LocationDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
@@ -121,8 +128,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(ILocation)
     attrInterface = ILocation
     factory = Location
     factoryId = u'org.ict_ok.components.location.location.Location'
-
+    allFields = fieldsForInterface(attrInterface, [])
