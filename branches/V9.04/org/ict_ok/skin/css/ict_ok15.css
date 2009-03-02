@@ -429,13 +429,13 @@ table.form-fields tr td.label {
 }
 
 table.form-fields tr td.field {
-  padding:1px 0px 4px 0px;
+  padding:1px 0px 4px 10px;
   vertical-align:top;
 }
 
 table.form-fields tr td.field div.widget {
   display: inline;
-  padding:2px 2px 2px 10px;
+  padding:2px 2px 2px 0px;
 }
 
 table.form-fields tr td.field div.error {
@@ -518,6 +518,11 @@ li.req_view {
   padding:0px 10px 0px 12px;
 }
 
+li.connects {
+  margin:2px 0px 8px 0px;
+  padding:0px 20px 0px 16px;
+}
+
 ul.sb_actions {
   list-style:none;
   padding:0 0 0 14px;
@@ -591,7 +596,7 @@ input.required {
 }
 
 input.file-widget {
-  width: 400px;
+  width: 500px;
 }
 
 input.checkBox-widget {
@@ -599,7 +604,7 @@ input.checkBox-widget {
 }
 
 input.password-widget {
-  width: 400px;
+  width: 500px;
 }
 
 input.radio-widget {
@@ -613,23 +618,49 @@ input.button-field {
 
 
 select.select-widget {
-  width: 400px;
+  width: 500px;
   border: 1px solid #BBB;
 }
 
+
+#form-widgets-requirements-from {
+  min_width: 220px;
+  max-width: 220px;
+  background-color:#E0C7C5;
+  font-size:92%;
+  text-align:left;
+}
+
+#form-widgets-requirements-to {
+  min-width: 220px;
+  max-width: 220px;
+  background-color:#C0F8C7;
+  font-size:92%;
+  text-align:left;
+}
+
+
+table.ordered-selection-field tr td select.list-field {
+  min-width: 220px;
+  max-width: 220px;
+  font-size:92%;
+  text-align:left;
+}
+
+
 input.text-widget {
-  width: 400px;
+  width: 500px;
 }
 
 /*input.multi-widget {*/
-  /*width: 400px;*/
+  /*width: 500px;*/
 /*}*/
 
 /*---[ multi widget ]--------------------------------------------------------*/
 div.multi-widget {
     float: left;
     vertical-align:top;
-    width: 400px;
+    width: 500px;
     padding: 5px 5px 5px 10px;
 }
 
@@ -650,6 +681,7 @@ div.multi-widget div.label {
     margin: 0px;
     padding: 0px;
     padding: 6px 0px 00px 0px;
+    clear:both;
 }
 
 div.multi-widget input.password-widget {
@@ -661,23 +693,23 @@ div.multi-widget input.text-widget {
 }
 
 div.multi-widget textarea.textarea-widget {
-    width: 375px;
-    height: 100px;
+    width: 475px;
 }
 
 div.multi-widget div.buttons {
-    padding: 10px 0px 5px 0px;
+    padding: 4px 0px 5px 20px;
+    clear:both;
 }
 
 
 /*span.text-widget {*/
-  /*width: 400px;*/
+  /*width: 500px;*/
   /*font-weight:bold;*/
 /*}*/
 
 
 textarea.textarea-widget {
-  width: 400px;
+  width: 500px;
   height: 100px;
 }
 
@@ -770,6 +802,10 @@ hr {
 .cb_ig { background-color:#5FF871;}
 .cb_ib { background-color:#5F77F2;}
 .cb_iy { background-color:#CFD138;}
+
+.cb_irl { background-color:#E0C7C5 }
+.cb_igl { background-color:#C0F8C7 }
+
 
 .a_l { text-align:left;}
 .a_c { text-align:center;}
@@ -876,11 +912,13 @@ font size is adjusted here (default is 77%) */
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/states.gif) 0 -10px no-repeat; }
 .icon-state2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/states.gif) 0 -20px no-repeat; }
 
 /*-----------------------------------------------*/
@@ -889,202 +927,367 @@ font size is adjusted here (default is 77%) */
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0    0px no-repeat; }
 .icon-generic {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0  -10px no-repeat; }
 .icon-tick {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0  -10px no-repeat; }
 .icon-cross {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0  -10px no-repeat; }
 .icon-net {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0  -40px no-repeat; }
 .icon-net0 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0  -50px no-repeat; }
 .icon-net1 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0  -60px no-repeat; }
 .icon-net2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0  -70px no-repeat; }
 .icon-host {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0  -80px no-repeat; }
 .icon-host0 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0  -90px no-repeat; }
 .icon-host1 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -100px no-repeat; }
 .icon-host2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -110px no-repeat; }
 .icon-interface {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -120px no-repeat; }
 .icon-interface0 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -130px no-repeat; }
 .icon-interface1 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -140px no-repeat; }
 .icon-interface2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -150px no-repeat; }
 .icon-value {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -160px no-repeat; }
 .icon-value0 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -170px no-repeat; }
 .icon-value1 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -180px no-repeat; }
 .icon-value2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -190px no-repeat; }
 .icon-service {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -200px no-repeat; }
 .icon-service0 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -210px no-repeat; }
 .icon-service1 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -220px no-repeat; }
 .icon-service2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -230px no-repeat; }
 .icon-location {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -240px no-repeat; }
 .icon-location0 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -250px no-repeat; }
 .icon-location1 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -260px no-repeat; }
 .icon-location2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -270px no-repeat; }
 .icon-building {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -280px no-repeat; }
 .icon-building0 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -290px no-repeat; }
 .icon-building1 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -300px no-repeat; }
 .icon-building2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -310px no-repeat; }
 .icon-room {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -320px no-repeat; }
 .icon-room0 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -330px no-repeat; }
 .icon-room1 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -340px no-repeat; }
 .icon-room2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -350px no-repeat; }
 .icon-person {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -360px no-repeat; }
 .icon-person0 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -370px no-repeat; }
 .icon-person1 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -380px no-repeat; }
 .icon-person2 {
   display:block;
   height: 10px;
   padding-left: 12px;
+  margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -390px no-repeat; }
+
+.icon-physicallink {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -400px no-repeat; }
+.icon-physicallink0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -410px no-repeat; }
+.icon-physicallink1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -420px no-repeat; }
+.icon-physicallink2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -430px no-repeat; }
+
+.icon-patchport {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -440px no-repeat; }
+.icon-patchport0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -450px no-repeat; }
+.icon-patchport1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -460px no-repeat; }
+.icon-patchport2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -470px no-repeat; }
+
+.icon-pc {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -480px no-repeat; }
+.icon-pc0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -490px no-repeat; }
+.icon-pc1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -500px no-repeat; }
+.icon-pc2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -510px no-repeat; }
+
+.icon-ipc {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -520px no-repeat; }
+.icon-ipc0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -530px no-repeat; }
+.icon-ipc1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -540px no-repeat; }
+.icon-ipc2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -550px no-repeat; }
+
+.icon-outlet {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -560px no-repeat; }
+.icon-outlet0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -570px no-repeat; }
+.icon-outlet1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -580px no-repeat; }
+.icon-outlet2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -590px no-repeat; }
 
 /*-----------------------------------------------*/
 
