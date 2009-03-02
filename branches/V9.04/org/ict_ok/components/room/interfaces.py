@@ -17,16 +17,13 @@ __version__ = "$Id$"
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, List, TextLine 
-from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IRoom(IComponent):
+class IRoom(Interface):
     """A service object."""
 
     building = Choice(
@@ -40,10 +37,10 @@ class IRoom(IComponent):
         required=False,
         default=[])
     
-    physicalConnectors = List(title=_(u"Physical connectors"),
-        value_type=Choice(vocabulary='AllUnusedOrUsedRoomPhysicalConnectors'),
-        required=False,
-        default=[])
+#    physicalConnectors = List(title=_(u"Physical connectors"),
+#        value_type=Choice(vocabulary='AllUnusedOrUsedRoomPhysicalConnectors'),
+#        required=False,
+#        default=[])
     
     racks = List(title=_(u"Racks"),
         value_type=Choice(vocabulary='AllUnusedOrUsedRoomRacks'),
@@ -64,7 +61,7 @@ class IRoom(IComponent):
         default = u"",
         required = False)
 
-class IRoomFolder(ISuperclass, IFolder):
+class IRoomFolder(Interface):
     """Container for room objects
     """
 

@@ -17,65 +17,15 @@ __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Date, Int, List, TextLine
+from zope.schema import Choice, Date, Int, TextLine
 
 # ict_ok.org imports
-from org.ict_ok.components.device.interfaces import IDevice, IDeviceFolder
 
 _ = MessageFactory('org.ict_ok')
 
 
-class INotebook(IDevice):
+class INotebook(Interface):
     """A Notebook object."""
-
-    user = Choice(
-        title = _("User"),
-        description = _("User of the mobile phone"),
-        vocabulary="AllLdapUser",
-        required = False)
-    productionState = Choice(
-        title = _("Production state"),
-        vocabulary="AllHostProductionStates",
-        default = 'production',
-        readonly = False,
-        required = True)
-    memsize = Int(
-        title = _(u'Memory size (MB)'),
-        description = _(u'Memory size in MB'),
-        required = False)
-    cpuType = TextLine(
-        title = _(u'CPU type'),
-        description = _(u'Text of CPU type'),
-        required = False)
-    hardware = TextLine(
-        max_length = 500,
-        title = _("Hardware"),
-        description = _("Hardware of the system."),
-        default = u"",
-        required = False)
-    serialNumber = TextLine(
-        max_length = 80,
-        title = _("Serial number"),
-        description = _("Serial number"),
-        required = False)
-    inv_id = TextLine(
-        max_length = 500,
-        title = _("inventory id"),
-        description = _("Id of inventory."),
-        default = u"",
-        required = False)
-    modelType = TextLine(
-        max_length = 200,
-        title = _("model type"),
-        required = False)
-    deliveryDate = Date(
-        title = _("delivery date"),
-        description = _("delivery date"),
-        required = False)
-    documentNumber = TextLine(
-        title = _(u'Document number'),
-        description = _(u'Document number'),
-        required = False)
 
     def trigger_online():
         """
@@ -83,7 +33,7 @@ class INotebook(IDevice):
         """
 
 
-class INotebookFolder(IDeviceFolder):
+class INotebookFolder(Interface):
     """Container for Notebook objects
     """
 

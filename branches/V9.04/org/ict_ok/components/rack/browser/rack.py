@@ -23,6 +23,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.rack.interfaces import IRack, IAddRack
 from org.ict_ok.components.rack.rack import Rack
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -73,24 +74,30 @@ class RackFolderDetails(ComponentDetails):
 class DetailsRackForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of Device rack')
-    fields = field.Fields(IRack).omit(*RackDetails.omit_viewfields)
+    factory = Rack
+    omitFields = RackDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class AddRackForm(AddComponentForm):
     """Add Device rack form"""
     label = _(u'Add Device rack')
-    addFields = field.Fields(IAddRack)
-    allFields = field.Fields(IRack).omit(*RackDetails.omit_addfields)
-    allFields['isTemplate'].widgetFactory =         checkbox.SingleCheckBoxFieldWidget
     factory = Rack
+    omitFields = RackDetails.omit_addfields
     attrInterface = IRack
+    addInterface = IAddRack
     _session_key = 'org.ict_ok.components.rack'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = checkbox.SingleCheckBoxFieldWidget
 
 
 class EditRackForm(EditForm):
     """ Edit for Device rack """
     label = _(u'Device rack Edit Form')
-    fields = field.Fields(IRack).omit(*RackDetails.omit_editfields)
+    factory = Rack
+    omitFields = RackDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class DeleteRackForm(DeleteForm):
@@ -107,7 +114,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IRack)
     attrInterface = IRack
     factory = Rack
     factoryId = u'org.ict_ok.components.rack.rack.Rack'
+    allFields = fieldsForInterface(attrInterface, [])

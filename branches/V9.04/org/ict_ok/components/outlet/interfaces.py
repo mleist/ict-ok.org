@@ -17,20 +17,18 @@ __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Int, List, TextLine
+from zope.schema import Choice
 
 # ict_ok.org imports
-from org.ict_ok.components.physical_connector.interfaces import \
-    IPhysicalConnector, IPhysicalConnectorFolder
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IOutlet(IPhysicalConnector):
+class IOutlet(Interface):
     """A Outlet object."""
 
 
-class IOutletFolder(IPhysicalConnectorFolder):
+class IOutletFolder(Interface):
     """Container for Outlet objects
     """
 

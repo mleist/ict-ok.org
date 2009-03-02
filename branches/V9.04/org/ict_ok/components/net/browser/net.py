@@ -37,6 +37,7 @@ from zc.table.table import StandaloneFullFormatter
 from zc.table.interfaces import ISortableColumn
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import \
@@ -158,30 +159,32 @@ class NetFolderDetails(ComponentDetails):
 class DetailsNetForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of net')
-    fields = field.Fields(INet).omit(*NetDetails.omit_viewfields)
+    factory = Net
+    omitFields = NetDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
-#class AddNetForm(AddForm):
-#    """Add form."""
-#    label = _(u'Add Net')
-#    fields = field.Fields(INet).omit(*NetDetails.omit_addfields)
-#    factory = Net
     
     
 class AddNetForm(AddComponentForm):
     label = _(u'Add Net')
-    addFields = field.Fields(IAddNet)
-    allFields = field.Fields(INet).omit(*NetDetails.omit_addfields)
+    factory = Net
+    omitFields = NetDetails.omit_addfields
+    attrInterface = INet
+    addInterface = IAddNet
+    _session_key = 'org.ict_ok.components.net'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
-    factory = Net
-    attrInterface = INet
-    _session_key = 'org.ict_ok.components.net'
 
 
 class EditNetForm(EditForm):
     """ Edit for for net """
     label = _(u'Net Edit Form')
+    factory = Net
+    omitFields = NetDetails.omit_editfields
     fields = field.Fields(INet).omit(*NetDetails.omit_editfields)
+    fields = fieldsForFactory(factory, omitFields)
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
@@ -283,7 +286,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(INet)
     attrInterface = INet
     factory = Net
     factoryId = u'org.ict_ok.components.net.net.Net'
+    allFields = fieldsForInterface(attrInterface, [])

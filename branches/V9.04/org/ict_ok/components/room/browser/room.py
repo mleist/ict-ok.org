@@ -26,6 +26,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.room.interfaces import IRoom, IAddRoom
 from org.ict_ok.components.room.room import Room
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -79,7 +80,9 @@ class RoomFolderDetails(ComponentDetails):
 class DetailsRoomForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of room')
-    fields = field.Fields(IRoom).omit(*RoomDetails.omit_viewfields)
+    factory = Room
+    omitFields = RoomDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 #class AddRoomForm(AddForm):
@@ -91,19 +94,23 @@ class DetailsRoomForm(DisplayForm):
 
 class AddRoomForm(AddComponentForm):
     label = _(u'Add Room')
-    addFields = field.Fields(IAddRoom)
-    allFields = field.Fields(IRoom).omit(*RoomDetails.omit_addfields)
+    factory = Room
+    omitFields = RoomDetails.omit_addfields
+    attrInterface = IRoom
+    addInterface = IAddRoom
+    _session_key = 'org.ict_ok.components.room'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
-    factory = Room
-    attrInterface = IRoom
-    _session_key = 'org.ict_ok.components.room'
 
 
 class EditRoomForm(EditForm):
     """ Edit for for net """
     label = _(u'Room Edit Form')
-    fields = field.Fields(IRoom).omit(*RoomDetails.omit_editfields)
+    factory = Room
+    omitFields = RoomDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
@@ -132,7 +139,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IRoom)
     attrInterface = IRoom
     factory = Room
     factoryId = u'org.ict_ok.components.room.room.Room'
+    allFields = fieldsForInterface(attrInterface, [])

@@ -23,6 +23,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.pc.interfaces import IPersonalComputer, IAddPersonalComputer
 from org.ict_ok.components.pc.pc import PersonalComputer
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -30,9 +31,14 @@ from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    Overview as SuperOverview
 from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
+    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
 
 _ = MessageFactory('org.ict_ok')
 
@@ -73,24 +79,30 @@ class PersonalComputerFolderDetails(ComponentDetails):
 class DetailsPersonalComputerForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of Personal Computer')
-    fields = field.Fields(IPersonalComputer).omit(*PersonalComputerDetails.omit_viewfields)
+    factory = PersonalComputer
+    omitFields = PersonalComputerDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class AddPersonalComputerForm(AddComponentForm):
     """Add Personal Computer form"""
     label = _(u'Add Personal Computer')
-    addFields = field.Fields(IAddPersonalComputer)
-    allFields = field.Fields(IPersonalComputer).omit(*PersonalComputerDetails.omit_addfields)
-    allFields['isTemplate'].widgetFactory =         checkbox.SingleCheckBoxFieldWidget
     factory = PersonalComputer
     attrInterface = IPersonalComputer
+    addInterface = IAddPersonalComputer
+    omitFields = PersonalComputerDetails.omit_addfields
     _session_key = 'org.ict_ok.components.pc'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = checkbox.SingleCheckBoxFieldWidget
 
 
 class EditPersonalComputerForm(EditForm):
     """ Edit for Personal Computer """
     label = _(u'Personal Computer Edit Form')
-    fields = field.Fields(IPersonalComputer).omit(*PersonalComputerDetails.omit_editfields)
+    factory = PersonalComputer
+    omitFields = PersonalComputerDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class DeletePersonalComputerForm(DeleteForm):
@@ -107,7 +119,39 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IPersonalComputer)
     attrInterface = IPersonalComputer
     factory = PersonalComputer
     factoryId = u'org.ict_ok.components.pc.pc.PersonalComputer'
+    allFields = fieldsForInterface(attrInterface, [])
+
+#def getRoom(item, formatter):
+#    if item.device is not None:
+#        return item.device.room
+#    return None
+
+class Overview(SuperOverview):
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Health'),
+                     getter=getHealth),
+        IctGetterColumn(title=_('Title'),
+                        getter=getTitle,
+                        cell_formatter=link('overview.html')),
+#        IctGetterColumn(title=_('Device'),
+#                        getter=lambda i,f: i.device,
+#                        cell_formatter=link('details.html')),
+#        IctGetterColumn(title=_('Room'),
+#                        getter=getRoom,
+#                        cell_formatter=link('details.html')),
+        DateGetterColumn(title=_('Modified'),
+                        getter=getModifiedDate,
+                        subsort=True,
+                        cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    pos_column_index = 1
+    sort_columns = [1, 2, 3, 4, 5]

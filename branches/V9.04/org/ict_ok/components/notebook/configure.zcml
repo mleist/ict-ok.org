@@ -34,6 +34,46 @@
             permission="org.ict_ok.components.notebook.Edit"
             set_schema=".interfaces.INotebook"
             />
+        <require
+            permission="org.ict_ok.components.notebook.View"
+            interface="org.ict_ok.components.device.interfaces.IDevice"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.Edit"
+            set_schema="org.ict_ok.components.device.interfaces.IDevice"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.View"
+            interface="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.Edit"
+            set_schema="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <class class=".notebook.NotebookFolder">
@@ -57,6 +97,22 @@
         <require
             permission="org.ict_ok.components.notebook.Edit"
             set_schema=".interfaces.INotebookFolder"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.notebook.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
         <require
             permission="org.ict_ok.components.notebook.View"

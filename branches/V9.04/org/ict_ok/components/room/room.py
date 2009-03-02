@@ -50,7 +50,7 @@ from org.ict_ok.components.interfaces import \
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.building.building import Building_Rooms_RelManager
-
+from org.ict_ok.components.physical_component.interfaces import IPhysicalComponent
 
 def AllRoomTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IRoom)
@@ -64,13 +64,13 @@ def AllUnusedOrUsedBuildingRooms(dummy_context):
 
 
 Room_Devices_RelManager = FieldRelationManager(IRoom['devices'],
-                                               IDevice['room'],
+                                               IPhysicalComponent['room'],
                                                relType='room:devices')
-Room_PhysicalConnectors_RelManager = FieldRelationManager(IRoom['physicalConnectors'],
-                                                          IPhysicalConnector['room'],
-                                                          relType='room:physicalConnectors')
+#Room_PhysicalConnectors_RelManager = FieldRelationManager(IRoom['physicalConnectors'],
+#                                                          IPhysicalConnector['room'],
+#                                                          relType='room:physicalConnectors')
 Room_Racks_RelManager = FieldRelationManager(IRoom['racks'],
-                                             IRack['room'],
+                                             IPhysicalComponent['room'],
                                              relType='room:racks')
 
 
@@ -88,7 +88,7 @@ class Room(Component):
 
     building = RelationPropertyIn(Building_Rooms_RelManager)
     devices = RelationPropertyOut(Room_Devices_RelManager)
-    physicalConnectors = RelationPropertyOut(Room_PhysicalConnectors_RelManager)
+#    physicalConnectors = RelationPropertyOut(Room_PhysicalConnectors_RelManager)
     racks = RelationPropertyOut(Room_Racks_RelManager)
 
     def __init__(self, **data):

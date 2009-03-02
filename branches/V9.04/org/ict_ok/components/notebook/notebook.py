@@ -46,20 +46,8 @@ class Notebook(Device):
     """
     implements(INotebook)
     shortName = "notebook"
-    user = FieldProperty(INotebook['user'])
-    productionState = FieldProperty(INotebook['productionState'])
-    memsize = FieldProperty(INotebook['memsize'])
-    cpuType = FieldProperty(INotebook['cpuType'])
-    hardware = FieldProperty(INotebook['hardware'])
-    serialNumber = FieldProperty(INotebook['serialNumber'])
-    inv_id = FieldProperty(INotebook['inv_id'])
-    modelType = FieldProperty(INotebook['modelType'])
-    deliveryDate = FieldProperty(INotebook['deliveryDate'])
-    documentNumber = FieldProperty(INotebook['documentNumber'])
     
-    fullTextSearchFields = ['user', 'productionState',
-                            'hardware', 'serialNumber',
-                            'inv_id', 'modelType']
+    fullTextSearchFields = []
     fullTextSearchFields.extend(Device.fullTextSearchFields)
 
     def __init__(self, **data):

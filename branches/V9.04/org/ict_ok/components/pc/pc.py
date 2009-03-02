@@ -59,21 +59,8 @@ class PersonalComputer(Device):
     # for ..Contained we have to:
     __name__ = __parent__ = None
 
-    productionState = FieldProperty(IPersonalComputer['productionState'])
-    memsize = FieldProperty(IPersonalComputer['memsize'])
-    cpuType = FieldProperty(IPersonalComputer['cpuType'])
-    hardware = FieldProperty(IPersonalComputer['hardware'])
-    serialNumber = FieldProperty(IPersonalComputer['serialNumber'])
-    inv_id = FieldProperty(IPersonalComputer['inv_id'])
-    modelType = FieldProperty(IPersonalComputer['modelType'])
-    deliveryDate = FieldProperty(IPersonalComputer['deliveryDate'])
-    documentNumber = FieldProperty(IPersonalComputer['documentNumber'])
-    user = FieldProperty(IPersonalComputer['user'])
-
-    fullTextSearchFields = ['cpuType', 'hardware', 'serialNumber', 'inv_id', 'modelType', 'documentNumber']
+    fullTextSearchFields = []
     fullTextSearchFields.extend(Device.fullTextSearchFields)
-        
-
 
     def __init__(self, **data):
         """

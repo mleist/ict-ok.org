@@ -18,6 +18,7 @@ __version__ = "$Id: template.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -26,14 +27,22 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.outlet.interfaces import \
     IOutlet, IOutletFolder, IAddOutlet
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
-from org.ict_ok.components.physical_connector.physical_connector import \
-    PhysicalConnector, PhysicalConnectorFolder
+from org.ict_ok.components.component import Component
+#from org.ict_ok.components.physical_connector.physical_connector import \
+#    PhysicalConnector, PhysicalConnectorFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates
+from org.ict_ok.components.physical_connector.interfaces import \
+    IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
+from org.ict_ok.components.physical_link.physical_link import \
+    PhysicalLinks_PhysicalConnectors_RelManager
+from org.ict_ok.components.physical_component.physical_component import \
+    PhysicalComponent
 
 
 def AllOutletTemplates(dummy_context):
@@ -43,7 +52,7 @@ def AllOutlets(dummy_context):
     return AllComponents(dummy_context, IOutlet)
 
 
-class Outlet(PhysicalConnector):
+class Outlet(PhysicalComponent):
     """
     the template instance
     """
@@ -52,11 +61,17 @@ class Outlet(PhysicalConnector):
     # for ..Contained we have to:
     __name__ = __parent__ = None
     
+    connectorPinout = FieldProperty(IPhysicalConnector['connectorPinout'])
+    links = RelationPropertyIn(PhysicalLinks_PhysicalConnectors_RelManager)
+    
+    fullTextSearchFields = []
+    fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
+    
     def __init__(self, **data):
         """
         constructor of the object
         """
-        PhysicalConnector.__init__(self, **data)
+        PhysicalComponent.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(Outlet)
         for (name, value) in data.items():
             if name in IOutlet.names():
@@ -65,14 +80,14 @@ class Outlet(PhysicalConnector):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
-        PhysicalConnector.store_refs(self, **data)
+        PhysicalComponent.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(Outlet)
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
 
 
-class OutletFolder(PhysicalConnectorFolder):
+class OutletFolder(Superclass, Folder):
     implements(IOutletFolder, 
                IImportCsvData,
                IImportXlsData,
@@ -81,4 +96,5 @@ class OutletFolder(PhysicalConnectorFolder):
         """
         constructor of the object
         """
-        PhysicalConnectorFolder.__init__(self, **data)
+        Superclass.__init__(self, **data)
+        Folder.__init__(self)

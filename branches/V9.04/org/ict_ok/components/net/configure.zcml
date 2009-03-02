@@ -42,6 +42,30 @@
             permission="org.ict_ok.components.net.Edit"
             set_schema=".interfaces.IEventIfEventNet"
             />
+        <require
+            permission="org.ict_ok.components.net.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.net.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <!--require
+            permission="org.ict_ok.components.net.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            /-->
     </class>
     
     <class class=".net.NetFolder">
@@ -65,6 +89,22 @@
         <require
             permission="org.ict_ok.components.net.Edit"
             set_schema=".interfaces.INetFolder"
+            />
+        <require
+            permission="org.ict_ok.components.net.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.net.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
         <require
             permission="org.ict_ok.components.net.View"

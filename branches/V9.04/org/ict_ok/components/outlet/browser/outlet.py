@@ -23,6 +23,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.outlet.interfaces import IOutlet, IAddOutlet
 from org.ict_ok.components.outlet.outlet import Outlet
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -33,6 +34,8 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.physical_connector.interfaces import \
+    IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
 
 _ = MessageFactory('org.ict_ok')
 
@@ -73,7 +76,9 @@ class OutletFolderDetails(ComponentDetails):
 class DetailsOutletForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of An network outlet instance')
-    fields = field.Fields(IOutlet).omit(*OutletDetails.omit_viewfields)
+    factory = Outlet
+    omitFields = OutletDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
 
 
 #class AddOutletForm(AddForm):
@@ -85,19 +90,23 @@ class DetailsOutletForm(DisplayForm):
     
 class AddOutletForm(AddComponentForm):
     label = _(u'Add An network outlet instance')
-    addFields = field.Fields(IAddOutlet)
-    allFields = field.Fields(IOutlet).omit(*OutletDetails.omit_addfields)
+    factory = Outlet
+    omitFields = OutletDetails.omit_addfields
+    attrInterface = IOutlet
+    addInterface = IAddOutlet
+    _session_key = 'org.ict_ok.components.outlet'
+    allFields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
+    addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
-    factory = Outlet
-    attrInterface = IOutlet
-    _session_key = 'org.ict_ok.components.outlet'
 
 
 class EditOutletForm(EditForm):
     """ Edit for An network outlet instance """
     label = _(u'An network outlet instance Edit Form')
-    fields = field.Fields(IOutlet).omit(*OutletDetails.omit_editfields)
+    factory = Outlet
+    omitFields = OutletDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
@@ -116,7 +125,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IOutlet)
     attrInterface = IOutlet
     factory = Outlet
     factoryId = u'org.ict_ok.components.outlet.outlet.Outlet'
+    allFields = fieldsForInterface(attrInterface, [])

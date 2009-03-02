@@ -70,14 +70,31 @@
         name="overview.html"
     />
 
-    <z3c:pagelet
-        name="overview.html"
-        for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
-        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+    <viewlet
+        name="all_notebooks"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuInventory"
+        class="org.ict_ok.components.notebook.browser.notebook.MSubInvNotebook"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.notebook.View"
         />
 
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
+        class=".notebook.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.notebook.View"
+        />
+
+    <z3c:pagelet
+        name="all_notebooks.html"
+        for="*"
+        class=".notebook.AllNotebooks"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.notebook.View"
+        />
+        
     <z3c:pagelet
         name="add_notebook.html"
         for="org.ict_ok.components.notebook.interfaces.INotebookFolder"
@@ -85,6 +102,7 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.notebook.Add"
     />
+
 
     <!-- Sub Menu  -->
 

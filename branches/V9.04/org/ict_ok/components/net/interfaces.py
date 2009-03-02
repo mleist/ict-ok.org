@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=W0232
+# pylint: disable-msg=E0213,W0232
 #
 """Interface of Net"""
 
@@ -18,19 +18,14 @@ from zope.interface import Interface
 from zope.schema import Choice, Set
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
-from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
-from org.ict_ok.components.supernode.interfaces import \
-     IEventIfSupernode
 from org.ict_ok.schema.ipvalid import NetIpValid
 
 _ = MessageFactory('org.ict_ok')
 
 
-class INet(IComponent):
+class INet(Interface):
     """A network object."""
 
     contains('org.ict_ok.components.host.interfaces.IHost')
@@ -49,7 +44,7 @@ class INet(IComponent):
         """
 
 
-class IEventIfEventNet(IEventIfSupernode):
+class IEventIfEventNet(Interface):
     """ event interface of object """
     
     eventInpObjs_inward_relaying_shutdown = Set(
@@ -66,7 +61,7 @@ class IEventIfEventNet(IEventIfSupernode):
         forward the event to all objects in this container through the signal filter
         """
 
-class INetFolder(ISuperclass, IFolder):
+class INetFolder(Interface):
     """Container for net objects
     """
 
