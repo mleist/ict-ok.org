@@ -17,17 +17,14 @@ __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Int, List, TextLine
-from zope.app.folder.interfaces import IFolder
+from zope.schema import Choice, List, TextLine
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IPhysicalConnector(IComponent):
+class IPhysicalConnector(Interface):
     """A PhysicalConnector object."""
 
     connectorPinout = TextLine(
@@ -35,28 +32,40 @@ class IPhysicalConnector(IComponent):
         title = _("Connector pinout"),
         required = False)
 
-    room = Choice(
-        title=_(u'Room'),
-        vocabulary='AllRooms',
-        required=False
-        )
+#    room = Choice(
+#        title=_(u'Room'),
+#        vocabulary='AllRooms',
+#        required=False
+#        )
     
-    interface = Choice(
-        title=_(u'Connected interface'),
-        vocabulary='AllUnusedOrUsedPhysicalConnectorInterfaces',
-        required=False
-        )
+#    local = Choice(
+#        title=_(u'Connected from'),
+#        vocabulary='AllPhysicalConnectors',
+#        required=False
+#        )
 
+#    link = Choice(
+#        title=_(u'Connected to'),
+#        vocabulary='AllPhysicalLinks',
+#        required=False
+#        )
 
-
-class IPhysicalConnectorFolder(ISuperclass, IFolder):
-    """Container for PhysicalConnector objects
-    """
-
-
-class IAddPhysicalConnector(Interface):
-    """Interface for all Objects"""
-    template = Choice(
-        title = _("Template"),
-        vocabulary="AllPhysicalConnectorTemplates",
+    links = List(
+        title=_(u'Connected to'),
+        value_type=Choice(vocabulary='AllPhysicalLinks'),
+        default=[],
         required = False)
+
+
+
+#class IPhysicalConnectorFolder(ISuperclass, IFolder):
+#    """Container for PhysicalConnector objects
+#    """
+#
+#
+#class IAddPhysicalConnector(Interface):
+#    """Interface for all Objects"""
+#    template = Choice(
+#        title = _("Template"),
+#        vocabulary="AllPhysicalConnectorTemplates",
+#        required = False)

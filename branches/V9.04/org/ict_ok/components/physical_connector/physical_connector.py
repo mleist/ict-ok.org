@@ -29,78 +29,90 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.physical_connector.interfaces import \
-    IPhysicalConnector, IPhysicalConnectorFolder, IAddPhysicalConnector
+    IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.components.room.room import Room_PhysicalConnectors_RelManager
+#from org.ict_ok.components.room.room import Room_PhysicalConnectors_RelManager
 
-def AllPhysicalConnectorTemplates(dummy_context):
-    return AllComponentTemplates(dummy_context, IPhysicalConnector)
+#def AllPhysicalConnectorTemplates(dummy_context):
+#    return AllComponentTemplates(dummy_context, IPhysicalConnector)
 
 def AllPhysicalConnectors(dummy_context):
     return AllComponents(dummy_context, IPhysicalConnector)
 
-def AllUnusedOrUsedRoomPhysicalConnectors(dummy_context):
-    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'room')
+#def AllUnusedOrUsedRoomPhysicalConnectors(dummy_context):
+#    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'room')
+#
+#def AllUnusedOrUsedInterfacePhysicalConnectors(dummy_context):
+#    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'interface')
 
-def AllUnusedOrUsedInterfacePhysicalConnectors(dummy_context):
-    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'interface')
-
-PhysicalConnector_Interface_RelManager = \
-    FieldRelationManager(IPhysicalConnector['interface'],
-                         IInterface['physicalConnector'],
-                         relType='physicalConnector:interface')
+#def AllUnusedOrUsedPhysicalConnectorPhysicalConnectors(dummy_context):
+#    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'physicalConnector')
 
 
-class PhysicalConnector(Component):
-    """
-    the template instance
-    """
-    implements(IPhysicalConnector)
-    shortName = "physical_connector"
-    # for ..Contained we have to:
-    __name__ = __parent__ = None
-    
-    connectorPinout = FieldProperty(IPhysicalConnector['connectorPinout'])
-    
-    room = RelationPropertyIn(Room_PhysicalConnectors_RelManager)
-
-    interface = RelationPropertyIn(PhysicalConnector_Interface_RelManager)
-
-    fullTextSearchFields = ['connectorPinout']
-    fullTextSearchFields.extend(Component.fullTextSearchFields)
-
-    def __init__(self, **data):
-        """
-        constructor of the object
-        """
-        Component.__init__(self, **data)
-        refAttributeNames = getRefAttributeNames(PhysicalConnector)
-        for (name, value) in data.items():
-            if name in IPhysicalConnector.names():
-                if name not in refAttributeNames:
-                    setattr(self, name, value)
-        self.ikRevision = __version__
-
-    def store_refs(self, **data):
-        refAttributeNames = getRefAttributeNames(PhysicalConnector)
-        for (name, value) in data.items():
-            if name in refAttributeNames:
-                setattr(self, name, value)
+def AllUnusedOrUsedPhysikalLinkPhysicalConnectors(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'links')
 
 
-class PhysicalConnectorFolder(Superclass, Folder):
-    implements(IPhysicalConnectorFolder, 
-               IImportCsvData,
-               IImportXlsData,
-               IAddPhysicalConnector)
-    def __init__(self, **data):
-        """
-        constructor of the object
-        """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+#PhysicalConnector_PhysicalConnector_RelManager = \
+#    FieldRelationManager(IPhysicalConnector['remote'],
+#                         IPhysicalConnector['remote'],
+#                         relType='physicalConnector:physicalConnector')
+#PhysicalConnector_PhysicalConnector_RelManager = \
+#    FieldRelationManager(IPhysicalConnector['local'],
+#                         IPhysicalConnector['remote'],
+#                         relType='physicalConnector:local:remote')
+
+
+#class PhysicalConnector(Component):
+#    """
+#    the template instance
+#    """
+#    implements(IPhysicalConnector)
+#    shortName = "physical_connector"
+#    # for ..Contained we have to:
+#    __name__ = __parent__ = None
+#    
+#    connectorPinout = FieldProperty(IPhysicalConnector['connectorPinout'])
+#    
+#    room = RelationPropertyIn(Room_PhysicalConnectors_RelManager)
+#
+#    interface = RelationPropertyIn(PhysicalConnector_Interface_RelManager)
+#
+#    fullTextSearchFields = ['connectorPinout']
+#    fullTextSearchFields.extend(Component.fullTextSearchFields)
+#
+#    def __init__(self, **data):
+#        """
+#        constructor of the object
+#        """
+#        Component.__init__(self, **data)
+#        refAttributeNames = getRefAttributeNames(PhysicalConnector)
+#        for (name, value) in data.items():
+#            if name in IPhysicalConnector.names():
+#                if name not in refAttributeNames:
+#                    setattr(self, name, value)
+#        self.ikRevision = __version__
+#
+#    def store_refs(self, **data):
+#        refAttributeNames = getRefAttributeNames(PhysicalConnector)
+#        for (name, value) in data.items():
+#            if name in refAttributeNames:
+#                setattr(self, name, value)
+#
+#
+#class PhysicalConnectorFolder(Superclass, Folder):
+#    implements(IPhysicalConnectorFolder, 
+#               IImportCsvData,
+#               IImportXlsData,
+#               IAddPhysicalConnector)
+#    def __init__(self, **data):
+#        """
+#        constructor of the object
+#        """
+#        Superclass.__init__(self, **data)
+#        Folder.__init__(self)

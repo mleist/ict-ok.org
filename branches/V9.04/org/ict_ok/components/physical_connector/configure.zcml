@@ -15,7 +15,7 @@
         component=".physical_connector.AllPhysicalConnectors"
         name="AllPhysicalConnectors"
     />
-    <utility
+    <!--utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".physical_connector.AllPhysicalConnectorTemplates"
         name="AllPhysicalConnectorTemplates"
@@ -29,6 +29,12 @@
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".physical_connector.AllUnusedOrUsedInterfacePhysicalConnectors"
         name="AllUnusedOrUsedInterfacePhysicalConnectors"
+    /-->
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".physical_connector.AllUnusedOrUsedPhysikalLinkPhysicalConnectors"
+        name="AllUnusedOrUsedPhysikalLinkPhysicalConnectors"
     />
 
     <include package=".generations" />
