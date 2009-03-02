@@ -21,6 +21,22 @@
             permission="org.ict_ok.admin_utils.generators.honeyd.View"
             set_schema=".interfaces.IAdmUtilGeneratorHoneyd"
             />
+        <require
+            permission="org.ict_ok.admin_utils.generators.honeyd.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.generators.honeyd.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.generators.honeyd.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.generators.honeyd.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <adapter

@@ -24,17 +24,14 @@ from zope.security import checkPermission
 from zope.app.intid.interfaces import IIntIds
 from zope.app.pagetemplate.urlquote import URLQuote
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
-     IAdmUtilGeneratorSmokePing
-from org.ict_ok.admin_utils.netscan.interfaces import INetScan
+from org.ict_ok.admin_utils.generators.smokeping.smokeping import \
+     AdmUtilGeneratorSmokePing
 
 _ = MessageFactory('org.ict_ok')
 
@@ -97,14 +94,14 @@ class AdmUtilGeneratorSmokePingDetails(SupernodeDetails):
 class DetailsAdmUtilGeneratorSmokePingForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of smokeping generator')
-    fields = field.Fields(IAdmUtilGeneratorSmokePing).omit(\
-        *AdmUtilGeneratorSmokePingDetails.omit_viewfields) #+ \
-           #field.Fields(IAdmUtilGeneratorSmokePing).select('objectID')
-    #def update(self):
-        #DisplayForm.update(self)
+    factory = AdmUtilGeneratorSmokePing
+    omitFields = AdmUtilGeneratorSmokePingDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
+
 
 class EditAdmUtilGeneratorSmokePingForm(EditForm):
     """ Edit for for net """
     label = _(u'edit graphviz adapter')
-    fields = field.Fields(IAdmUtilGeneratorSmokePing).omit(\
-        *AdmUtilGeneratorSmokePingDetails.omit_editfields)
+    factory = AdmUtilGeneratorSmokePing
+    omitFields = AdmUtilGeneratorSmokePingDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

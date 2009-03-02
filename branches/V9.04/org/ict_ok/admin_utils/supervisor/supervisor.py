@@ -58,7 +58,7 @@ class AdmUtilSupervisor(Supernode):
 
     nbrStarts = FieldProperty(IAdmUtilSupervisor['nbrStarts'])
     ipv4My = FieldProperty(IAdmUtilSupervisor['ipv4My'])
-    objectID = FieldProperty(IAdmUtilSupervisor['objectID'])
+#    objectID = FieldProperty(IAdmUtilSupervisor['objectID'])
     ipv4Master = FieldProperty(IAdmUtilSupervisor['ipv4Master'])
     oidMaster = FieldProperty(IAdmUtilSupervisor['oidMaster'])
     lastSeenMaster = FieldProperty(IAdmUtilSupervisor['lastSeenMaster'])

@@ -22,6 +22,22 @@
             permission="org.ict_ok.admin_utils.idchooser_util.Edit"
             set_schema=".interfaces.IAdmUtilIdChooser"
             />
+        <require
+            permission="org.ict_ok.admin_utils.idchooser_util.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.idchooser_util.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.idchooser_util.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.idchooser_util.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <class class=".idchooser.IdChooser">
@@ -37,6 +53,25 @@
             permission="org.ict_ok.admin_utils.idchooser.Edit"
             set_schema=".interfaces.IIdChooser"
             />
+            
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+            
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+            
     </class>
 
     <!-- setup local utilities -->

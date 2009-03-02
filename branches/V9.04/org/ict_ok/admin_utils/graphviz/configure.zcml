@@ -22,6 +22,22 @@
             permission="org.ict_ok.admin_utils.graphviz.View"
             set_schema=".interfaces.IAdmUtilGraphviz"
             />
+        <require
+            permission="org.ict_ok.admin_utils.graphviz.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.graphviz.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.graphviz.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.graphviz.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <utility

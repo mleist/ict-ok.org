@@ -158,6 +158,20 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
+
+    <!--z3c:pagelet
+        name="tsearch.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.TypeSearchForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.Search"
+    />
+    <z3c:template
+        template="tsearch.pt"
+        for="org.ict_ok.admin_utils.supervisor.browser.supervisor.TypeSearchForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        /-->
+
     <z3c:pagelet
         name="history.html"
         for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"

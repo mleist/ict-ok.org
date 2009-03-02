@@ -23,10 +23,10 @@ from zope.traversing.browser import absoluteURL
 # zc imports
 
 # z3c imports
-from z3c.form import button, field
-#from z3c.form import button, field, form, interfaces
+from z3c.form import button
 
 # ict-ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
@@ -39,7 +39,8 @@ from org.ict_ok.components.superclass.browser.superclass import \
      link, getModifiedDate, getActionBottons
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.admin_utils.categories.interfaces import \
-     IAdmUtilCategories, IAdmUtilCatHostGroup
+     IAdmUtilCatHostGroup
+from org.ict_ok.admin_utils.categories.categories import AdmUtilCategories
 from org.ict_ok.admin_utils.categories.cat_hostgroup import \
      AdmUtilCatHostGroup
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -105,8 +106,9 @@ class Overview(SuperclassOverview):
 class DetailsAdmUtilCategoriesForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of categories')
-    fields = field.Fields(IAdmUtilCategories).omit(\
-        *AdmUtilCategoriesDetails.omit_viewfields)
+    factory = AdmUtilCategories
+    omitFields = AdmUtilCategoriesDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 # ------ Host Group
 
@@ -114,9 +116,9 @@ class DetailsAdmUtilCategoriesForm(DisplayForm):
 class AddAdmUtilCatHostGroupForm(AddForm):
     """Add form."""
     label = _(u'add host group')
-    fields = field.Fields(IAdmUtilCatHostGroup).omit(\
-        *AdmUtilCatHostGroupDetails.omit_addfields)
     factory = AdmUtilCatHostGroup
+    omitFields = AdmUtilCatHostGroupDetails.omit_addfields
+    fields = fieldsForFactory(factory, omitFields)
     
     def nextURL(self):
         """ don't forward the browser """
@@ -125,8 +127,9 @@ class AddAdmUtilCatHostGroupForm(AddForm):
 class EditAdmUtilCatHostGroupForm(EditForm):
     """ Edit of host group """
     label = _(u'edit host group settings')
-    fields = field.Fields(IAdmUtilCatHostGroup).omit(\
-        *AdmUtilCatHostGroupDetails.omit_editfields)
+    factory = AdmUtilCatHostGroup
+    omitFields = AdmUtilCatHostGroupDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
 
 class DeleteAdmUtilCatHostGroupForm(DeleteForm):
     """ Delete the host group """

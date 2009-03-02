@@ -28,6 +28,7 @@ from z3c.form import button, field
 #from z3c.form import button, field, form, interfaces
 
 # ict-ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
@@ -65,17 +66,18 @@ class IdChooserDetails(SupernodeDetails):
 class DetailsIdChooserForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of id chooser')
-    fields = field.Fields(IIdChooser).omit(\
-        *IdChooserDetails.omit_viewfields)
+    factory = IdChooser
+    omitFields = IdChooserDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 
 class AddIdChooserForm(AddForm):
     """Add form."""
     label = _(u'add id chooser')
-    fields = field.Fields(IIdChooser).omit(\
-        *IdChooserDetails.omit_addfields)
     factory = IdChooser
+    omitFields = IdChooserDetails.omit_addfields
+    fields = fieldsForFactory(factory, omitFields)
     
     def nextURL(self):
         """ don't forward the browser """
@@ -92,8 +94,9 @@ class AddIdChooserForm(AddForm):
 class EditIdChooserForm(EditForm):
     """ Edit of id chooser"""
     label = _(u'edit host group settings')
-    fields = field.Fields(IIdChooser).omit(\
-        *IdChooserDetails.omit_editfields)
+    factory = IdChooser
+    omitFields = IdChooserDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
     
     def update(self):
         """update all widgets"""

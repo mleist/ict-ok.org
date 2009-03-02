@@ -19,16 +19,12 @@ from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
 from zope.proxy import removeAllProxies
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.wfmc.interfaces import \
-     IAdmUtilWFMC
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 #from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -102,12 +98,14 @@ class AdmUtilWFMCWfView(AdmUtilWFMCDetails):
 class ViewAdmUtilWFMCForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of workflow manager')
-    fields = field.Fields(IAdmUtilWFMC).omit(\
-        *AdmUtilWFMCDetails.omit_viewfields)
+    factory = AdmUtilWFMC
+    omitFields = AdmUtilWFMCDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilWFMCForm(EditForm):
     """ Edit for for net """
     label = _(u'edit workflow manager')
-    fields = field.Fields(IAdmUtilWFMC).omit(\
-        *AdmUtilWFMCDetails.omit_editfields)
+    factory = AdmUtilWFMC
+    omitFields = AdmUtilWFMCDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

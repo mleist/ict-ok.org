@@ -19,14 +19,13 @@ from zope.schema import TextLine, Choice
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
 import pytz
 
 
-class IAdmUtilCron(ISupernode):
+class IAdmUtilCron(Interface):
     """
     major component for registration and event distribution 
     """

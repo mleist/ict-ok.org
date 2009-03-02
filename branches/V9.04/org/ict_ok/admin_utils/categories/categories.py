@@ -19,6 +19,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.app.container.ordered import OrderedContainer
+from zope.app.container.interfaces import IOrderedContainer
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.categories.interfaces import \

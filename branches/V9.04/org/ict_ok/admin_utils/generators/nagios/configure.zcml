@@ -22,6 +22,22 @@
             permission="org.ict_ok.admin_utils.generators.nagios.Edit"
             set_schema=".interfaces.IAdmUtilGeneratorNagios"
             />
+        <require
+            permission="org.ict_ok.admin_utils.generators.nagios.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.generators.nagios.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.generators.nagios.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.generators.nagios.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <!-- setup local utilities -->

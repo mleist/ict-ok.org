@@ -17,6 +17,10 @@
         title="Edit from AdmUtilUserManagement"
         description="Edit from AdmUtilUserManagement."
     />
+    <permission
+        id="org.ict_ok.admin_utils.usermanagement.Preferences"
+        title="Preferences for the user"
+    />
 
     <permission
         id="org.ict_ok.admin_utils.dashboard.View"
@@ -44,10 +48,15 @@
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"
-                    role="org.ict_ok.usr" />
-    <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.usermanagement.Preferences"
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.dashboard.View"

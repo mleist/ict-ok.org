@@ -38,11 +38,14 @@ from zc.table.column import GetterColumn
 from z3c.form import field
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      getUserTimezone
 from org.ict_ok.admin_utils.compliance.interfaces import \
      IAdmUtilCompliance
+from org.ict_ok.admin_utils.compliance.compliance import \
+     AdmUtilCompliance
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -260,5 +263,6 @@ class EditAdmUtilComplianceForm(EditForm):
     """ Display form for the object """
     
     label = _(u'edit Compliance properties')
-    fields = field.Fields(IAdmUtilCompliance).omit(
-       *AdmUtilComplianceDetails.omit_editfields)
+    factory = AdmUtilCompliance
+    omitFields = AdmUtilComplianceDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

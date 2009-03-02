@@ -22,6 +22,22 @@
             permission="org.ict_ok.admin_utils.ticker.Edit"
             set_schema=".interfaces.IAdmUtilTicker"
             />
+        <require
+            permission="org.ict_ok.admin_utils.ticker.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.ticker.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.ticker.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.ticker.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
 

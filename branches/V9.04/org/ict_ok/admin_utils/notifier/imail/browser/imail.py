@@ -19,16 +19,13 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.notifier.imail.interfaces import \
-     INotifierEmail, IEventIfNotifierEmail
+from org.ict_ok.admin_utils.notifier.imail.imail import NotifierEmail
 from org.ict_ok.admin_utils.notifier.browser.notifier import \
      NotifierDetails
 
@@ -66,17 +63,22 @@ class NotifierEmailDetails(NotifierDetails):
 class ViewNotifierEmailForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of email notifier')
-    fields = field.Fields(INotifierEmail).omit(\
-        *NotifierEmailDetails.omit_viewfields)
+    factory = NotifierEmail
+    omitFields = NotifierEmailDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditNotifierEmailForm(EditForm):
     """ Edit for for net """
     label = _(u'edit email notifier')
-    fields = field.Fields(INotifierEmail).omit(\
-        *NotifierEmailDetails.omit_editfields)
+    factory = NotifierEmail
+    omitFields = NotifierEmailDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
+
 
 class EditNotifierEmailEventIfForm(EditForm):
     """ Edit Event Interface of object """
     label = _(u'email notifier event interfaces form')
-    fields = field.Fields(IEventIfNotifierEmail)
+#    factory = NotifierEmail
+#    omitFields = NotifierEmailDetails.omit_editfields
+#    fields = fieldsForFactory(factory, omitFields)

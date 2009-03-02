@@ -20,12 +20,11 @@ from zope.schema import Choice, Set, List
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class INotifierUtil(ISupernode):
+class INotifierUtil(Interface):
     """
     implementation of a "Notifier-Utility" 
     """
@@ -54,7 +53,7 @@ class INotifierUtil(ISupernode):
         will send a test message by the notifier
         """
 
-class INotifier(ISupernode):
+class INotifier(Interface):
     """
     component for notifying with
     """

@@ -130,15 +130,5 @@ def bootStrapSubscriberDatabase(event):
         copy_to_zlog=False,
         asObject=True)
 
-    if isinstance(madeLdapAdapter, ManageableLDAPAdapter):
-        #madeLdapAdapter.serverURL = "ldap://172.16.1.10:389"
-        madeLdapAdapter.serverURL = "ldap://172.16.10.47:389"
-        #conn = madeLdapAdapter.connect()
-        #ddd = conn.search("ou=people, dc=drako, dc=de",
-                          #scope='sub',
-                          #filter='(objectClass=*)',
-                          #attrs=['uid', 'cn'])
-        #print "ddd:", ddd
-    
     transaction.get().commit()
     connection.close()

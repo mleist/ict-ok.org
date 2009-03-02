@@ -23,6 +23,22 @@
             permission="org.ict_ok.admin_utils.objmq.View"
             set_schema=".interfaces.IAdmUtilObjMQ"
             />
+        <require
+            permission="org.ict_ok.admin_utils.objmq.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.objmq.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.objmq.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.objmq.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <!-- setup local utilities -->

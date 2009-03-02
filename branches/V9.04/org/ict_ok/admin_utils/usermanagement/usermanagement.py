@@ -42,7 +42,8 @@ from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
      IAdmUtilUserDashboard, IAdmUtilUserDashboardItem,\
-     IAdmUtilUserProperties, IAdmUtilUserManagement
+     IAdmUtilUserProperties, IAdmUtilUserManagement, \
+     IAdmUtilUserPreferences
 
 logger = logging.getLogger("AdmUtilUserManagement")
 
@@ -63,9 +64,12 @@ class MappingProperty(object):
 class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     """Implementation of local UserManagement Utility"""
 
-    implements(IAdmUtilUserManagement)
+    implements(IAdmUtilUserManagement, IAdmUtilUserPreferences)
     adapts(IPrincipal)
 
+    serverURL = FieldProperty(IAdmUtilUserManagement['serverURL'])
+    baseDN = FieldProperty(IAdmUtilUserManagement['baseDN'])
+    useLdap = FieldProperty(IAdmUtilUserManagement['useLdap'])
     #email = FieldProperty(IAdmUtilUserManagement['email'])
 
     def __init__(self):
@@ -360,25 +364,25 @@ def allLdapUser(dummy_context):
     """Ask the ldap for our user ĺist
     """
     terms = []
-    ldapUtil = queryUtility(IManageableLDAPAdapter)
-    conn = ldapUtil.connect()
-    
-#    ldapResultList = conn.search("ou=people, dc=drako, dc=de",
-#                      scope='sub',
-#                      filter='(objectClass=*)',
-#                      attrs=['uid', 'cn'])
-    ldapResultList = conn.search("ou=staff,o=ikom-online,c=de,o=ifdd",
-                      scope='sub',
-                      filter='(objectClass=*)',
-                      attrs=['uid', 'cn'])
-    ldapResultList.sort()
-    for ldapKey, ldapDict in ldapResultList:
-        if ldapDict.has_key('cn'):
-            terms.append(\
-                SimpleTerm(ldapKey,
-                           token=str(ldapKey),
-                           title=ldapDict['cn'][0]))
-    conn.conn.unbind()
+    userManagement = queryUtility(IAdmUtilUserManagement)
+    if userManagement.useLdap:
+        ldapUtil = queryUtility(IManageableLDAPAdapter)
+        if ldapUtil.serverURL != userManagement.serverURL:
+            ldapUtil.serverURL = userManagement.serverURL
+        conn = ldapUtil.connect()
+        # "ou=staff,o=ikom-online,c=de,o=ifdd"
+        ldapResultList = conn.search(userManagement.baseDN,
+                          scope='sub',
+                          filter='(objectClass=*)',
+                          attrs=['uid', 'cn'])
+        ldapResultList.sort()
+        for ldapKey, ldapDict in ldapResultList:
+            if ldapDict.has_key('cn'):
+                terms.append(\
+                    SimpleTerm(ldapKey,
+                               token=str(ldapKey),
+                               title=ldapDict['cn'][0]))
+        conn.conn.unbind()
     return SimpleVocabulary(terms)
 
 def UserCfgStartView(dummy_context):

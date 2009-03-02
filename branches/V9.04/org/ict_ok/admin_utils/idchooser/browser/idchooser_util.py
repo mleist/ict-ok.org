@@ -18,17 +18,11 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.traversing.browser import absoluteURL
 
 # zc imports
 
-# z3c imports
-from z3c.form import button, field
-#from z3c.form import button, field, form, interfaces
-
 # ict-ok.org imports
-from org.ict_ok.admin_utils.idchooser.interfaces import IAdmUtilIdChooser
-from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -39,10 +33,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
      GetterColumn, getStateIcon, getTitle, raw_cell_formatter, \
      link, getModifiedDate, getActionBottons
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.admin_utils.idchooser.interfaces import \
-    IAdmUtilIdChooser, IIdChooser
-from org.ict_ok.admin_utils.idchooser.idchooser import IdChooser
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.admin_utils.idchooser.idchooser_util import AdmUtilIdChooser
 
 _ = MessageFactory('org.ict_ok')
 
@@ -97,6 +88,7 @@ class Overview(SuperclassOverview):
 class DetailsAdmUtilIdChooserForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of categories')
-    fields = field.Fields(IAdmUtilIdChooser).omit(\
-        *AdmUtilIdChooserDetails.omit_viewfields)
+    factory = AdmUtilIdChooser
+    omitFields = AdmUtilIdChooserDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 

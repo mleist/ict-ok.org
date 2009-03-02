@@ -29,17 +29,15 @@ from zope.app.rotterdam.xmlobject import setNoCacheHeaders
 
 # zc imports
 
-# z3c imports
-from z3c.form import field
-
 # ict-ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      getUserTimezone
 from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
+from org.ict_ok.admin_utils.reports.reports import AdmUtilReports
 
 
 _ = MessageFactory('org.ict_ok')
@@ -136,12 +134,14 @@ class AdmUtilReportsDetails(SupernodeDetails):
 class DetailsAdmUtilReportsForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of reports')
-    fields = field.Fields(IAdmUtilReports).omit(\
-        *AdmUtilReportsDetails.omit_viewfields)
+    factory = AdmUtilReports
+    omitFields = AdmUtilReportsDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
+
     
 class EditAdmUtilReportsForm(EditForm):
     """ Edit for for net """
     label = _(u'edit report settings')
-    fields = field.Fields(IAdmUtilReports).omit(\
-        *AdmUtilReportsDetails.omit_editfields)
-
+    factory = AdmUtilReports
+    omitFields = AdmUtilReportsDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

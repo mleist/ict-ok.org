@@ -14,6 +14,7 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import TextLine, Set
 from zope.app.container.interfaces import IOrderedContainer
@@ -25,19 +26,19 @@ from org.ict_ok.components.supernode.interfaces import ISupernode
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilCategories(ISuperclass, IOrderedContainer):
+class IAdmUtilCategories(Interface):
     """A configuration utility."""
 
-class IAdmUtilCatHostGroup(ISupernode):
+class IAdmUtilCatHostGroup(Interface):
     """A host group entry.
     """
-    def canBeDeleted():
-        """
-        a object can be deleted with normal delete permission
-        special objects can overload this for special delete rules
-        (e.g. IAdmUtilCatHostGroup)
-        return True or False
-        """
+#    def canBeDeleted():
+#        """
+#        a object can be deleted with normal delete permission
+#        special objects can overload this for special delete rules
+#        (e.g. IAdmUtilCatHostGroup)
+#        return True or False
+#        """
     def isUsedIn():
         """
         this object is used at least in one host (returns object list)

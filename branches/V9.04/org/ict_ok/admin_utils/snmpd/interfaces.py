@@ -17,10 +17,9 @@ __version__ = "$Id$"
 from zope.interface import Attribute, Interface
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 
-class IAdmUtilSnmpd(ISupernode):
+class IAdmUtilSnmpd(Interface):
     """A pseudo-mailer that delivers objects by xmlrpc."""
     mrtg_data = Attribute("mrtg data dict")
     mrtg_data_timestamp = Attribute("timestamp of last mrtd data update")

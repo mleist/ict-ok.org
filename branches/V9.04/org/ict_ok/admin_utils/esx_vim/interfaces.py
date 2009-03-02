@@ -39,7 +39,6 @@ from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.schema.ipvalid import HostIpValid
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
@@ -72,7 +71,7 @@ class IAaa(Interface):
         '''See interface `IReadContainer`'''
 
 
-class IAdmUtilEsxVim(ISupernode):
+class IAdmUtilEsxVim(Interface):
     """
     major component for registration and event distribution 
     """
@@ -198,7 +197,7 @@ class IEsxVimObj(Interface):
         """ convert time string from esx to python datetime """
 
     
-class IEsxVimDatacenter(IEsxVimObj):
+class IEsxVimDatacenter(Interface):
     """
     The interface to the common container object for hosts and virtual
     machines. Every host and virtual machine must be under a distinct
@@ -207,7 +206,7 @@ class IEsxVimDatacenter(IEsxVimObj):
     """
 
 
-class IEsxVimDatastore(IEsxVimObj):
+class IEsxVimDatastore(Interface):
     """
     Represents a storage location for virtual machine files. A storage
     location can be a VMFS volume, a directory on Network Attached Storage,
@@ -219,20 +218,20 @@ class IEsxVimDatastore(IEsxVimObj):
     the datastore is uniquely named within the datacenter.
     """
 
-class IEsxVimNetwork(IEsxVimObj):
+class IEsxVimNetwork(Interface):
     """
     Represents a network accessible by either hosts or virtual machines.
     This can be a physical network or a logical network, such as a VLAN.
     """
 
-class IEsxVimFolder(IEsxVimObj):
+class IEsxVimFolder(Interface):
     """
     These are generic folders for storing inventory objects.
     """
     def values(self):
         '''See interface `IReadContainer`'''
 
-class IEsxVimVirtualMachine(IEsxVimObj):
+class IEsxVimVirtualMachine(Interface):
     """
     VirtualMachine is the managed object type for manipulating virtual
     machines, including templates that can be deployed (repeatedly) as new
@@ -249,7 +248,7 @@ class IEsxVimVirtualMachine(IEsxVimObj):
         converts this esx object to an internal object
         """
 
-class IEsxVimHostSystem(IEsxVimObj):
+class IEsxVimHostSystem(Interface):
     """
     Represents a set of physical compute resources for a set of virtual
     machines.

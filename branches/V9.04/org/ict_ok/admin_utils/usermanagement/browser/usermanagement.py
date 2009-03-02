@@ -17,38 +17,26 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
-import zope.component
 from zope.i18nmessageid import MessageFactory
-from zope.formlib.form import Fields, FormBase, haveInputWidgets
-from zope.formlib.form import action, applyChanges, setUpEditWidgets
-from zope.formlib.namedtemplate import NamedTemplate
-from zope.formlib.namedtemplate import NamedTemplateImplementation
-from zope.app.pagetemplate import ViewPageTemplateFile
-from zope.app.intid.interfaces import IIntIds
-from zope.component import getUtility
-from zope.traversing.browser import absoluteURL
 from zope.component import getUtility
 from zope.app import zapi
-from zope.formlib.form import Fields, FormBase, haveInputWidgets
-from zope.formlib.form import action, applyChanges, setUpEditWidgets
-from zope.pagetemplate.interfaces import IPageTemplate
 
 # z3c imports
-from z3c.form import button, field, form
+from z3c.form import field
 from z3c.form import interfaces
-from z3c.formui import layout
-from z3c.template import template as z3ctemplate
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
-     IAdmUtilUserProperties, IAdmUtilUserManagement, IEditPassword
+     IAdmUtilUserProperties, IAdmUtilUserManagement, IEditPassword, \
+     IAdmUtilUserPreferences
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
-     AdmUtilUserProperties
+     AdmUtilUserManagement, AdmUtilUserProperties
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 
 _ = MessageFactory('org.ict_ok')
@@ -93,6 +81,13 @@ class MSubPassword(GlobalMenuSubItem):
     weight = 120
 
 
+class MSubPreferences(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Preferences')
+    viewURL = 'preferences.html'
+    weight = 100
+
+
 class MSubAddDashboard(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'[+]')
@@ -128,7 +123,7 @@ class AdmUtilUserManagementPreferences:
         utilUserMagagement = getUtility(IAdmUtilUserManagement)
         return self.request.response.redirect(\
             zapi.getPath(utilUserMagagement)+\
-            '/@@edit.html')
+            '/@@preferences.html')
     def version(self):
         utilSupervisor = getUtility(IAdmUtilSupervisor)
         return self.request.response.redirect(\
@@ -148,8 +143,10 @@ class AdmUtilUserManagementPreferences:
 class AdmUtilUserManagementDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + ['objectID', 'ikName', 'ikComment']
-    omit_editfields = SupernodeDetails.omit_editfields + ['objectID', 'ikName', 'ikComment']
+    omit_viewfields = SupernodeDetails.omit_viewfields + \
+        ['objectID', 'ikName', 'ikNotes', 'ikComment']
+    omit_editfields = SupernodeDetails.omit_editfields + \
+        ['objectID', 'ikName', 'ikNotes', 'ikComment']
 
 # --------------- forms ------------------------------------
 
@@ -157,8 +154,11 @@ class AdmUtilUserManagementDetails(SupernodeDetails):
 class DetailsAdmUtilUserManagementForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of usermanagement')
-    fields = field.Fields(IAdmUtilUserManagement).omit(\
-        *AdmUtilUserManagementDetails.omit_viewfields)
+    factory = AdmUtilUserManagement
+    omitFields = AdmUtilUserManagementDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
+
+
 
 
 class EditAdmUtilUserManagementForm(EditForm):
@@ -166,6 +166,25 @@ class EditAdmUtilUserManagementForm(EditForm):
     label = _(u'edit user settings')
     fields = field.Fields(IAdmUtilUserManagement).omit(\
         *AdmUtilUserManagementDetails.omit_editfields)
+
+
+class EditAdmUtilUserManagementForm(EditForm):
+    """ Edit for for net """
+    label = _(u'edit user settings')
+    factory = AdmUtilUserManagement
+    omitFields = AdmUtilUserManagementDetails.omit_editfields
+    fields = field.Fields(IAdmUtilUserManagement).omit(\
+        *omitFields)
+#    fields = fieldsForFactory(factory, omitFields)
+
+
+class PreferencesAdmUtilUserManagementForm(EditForm):
+    """ Edit for for net """
+    label = _(u'edit user settings')
+    factory = AdmUtilUserManagement
+    omitFields = AdmUtilUserManagementDetails.omit_editfields
+    fields = fieldsForInterface(IAdmUtilUserPreferences, omitFields)
+
 
 
 class EditPasswordForm(EditForm):

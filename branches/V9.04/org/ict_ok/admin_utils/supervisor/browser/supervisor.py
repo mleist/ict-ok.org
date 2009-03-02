@@ -31,13 +31,9 @@ from zope.app.zapi import getPath
 from zope.interface import directlyProvides
 from zope.app.pagetemplate.urlquote import URLQuote
 from zope.app.generations.generations import findManagers
-from zope.traversing.browser import absoluteURL
 from zope.app.catalog.interfaces import ICatalog
-from zope.index.text.parsetree import ParseError
 
 # z3c imports
-from z3c.form import button, field, form, interfaces
-from z3c.formui import layout
 from z3c.pagelet.browser import BrowserPagelet
 
 # zc imports
@@ -47,13 +43,14 @@ from zc.table.interfaces import ISortableColumn
 from zc.i18n.duration import format as i18nformat
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm, Overview
-from org.ict_ok.admin_utils.supervisor.interfaces import \
-     IAdmUtilSupervisor, IFSearchText
+from org.ict_ok.admin_utils.supervisor.supervisor import \
+     AdmUtilSupervisor
 from org.ict_ok.components.superclass.browser import \
      superclass
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
@@ -86,8 +83,8 @@ class MSubGenerations(GlobalMenuSubItem):
 class AdmUtilSupervisorDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
-    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName', 'fsearchText']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName', 'fsearchText']
 
     def actions(self):
         """
@@ -373,15 +370,17 @@ class ViewAdmUtilSupervisorGenerationsForm(BrowserPagelet):
 class ViewAdmUtilSupervisorForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of supervisor')
-    fields = field.Fields(IAdmUtilSupervisor).omit(\
-        *AdmUtilSupervisorDetails.omit_viewfields)
+    factory = AdmUtilSupervisor
+    omitFields = AdmUtilSupervisorDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilSupervisorForm(EditForm):
     """ Edit for for net """
     label = _(u'edit supervisor')
-    fields = field.Fields(IAdmUtilSupervisor).omit(\
-        *AdmUtilSupervisorDetails.omit_editfields)
+    factory = AdmUtilSupervisor
+    omitFields = AdmUtilSupervisorDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class FSearchForm(Overview):
@@ -410,4 +409,28 @@ class FSearchForm(Overview):
             myForm = self.request.form
             if myForm.has_key('form.widgets.fsearchText'):
                 self.fsearchText = myForm['form.widgets.fsearchText']
+
+
+class TypeSearchForm(Overview):
+    """ Search Form """
+#    form.extends(form.Form)
+    fsearchText = None
+    
+    def objs(self):
+        """List of Content objects"""
+        retList = []
+        uidutil = getUtility(IIntIds)
+        for (oid, oobj) in uidutil.items():
+            retList.append(oobj.object)
+#            import pprint
+#            pprint.pprint(retList)
+        return retList
+    
+#    def update(self):
+#        if self.request.has_key('key'):
+#            self.fsearchText = self.request['key']
+#        else:
+#            myForm = self.request.form
+#            if myForm.has_key('form.widgets.fsearchText'):
+#                self.fsearchText = myForm['form.widgets.fsearchText']
 

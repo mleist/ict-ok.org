@@ -22,6 +22,22 @@
             permission="org.ict_ok.admin_utils.wfmc.View"
             set_schema=".interfaces.IAdmUtilWFMC"
             />
+        <require
+            permission="org.ict_ok.admin_utils.wfmc.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.wfmc.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.wfmc.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.wfmc.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <utility

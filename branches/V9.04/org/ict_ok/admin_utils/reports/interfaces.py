@@ -24,12 +24,11 @@ from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.schema.colorvalid import ColorValid
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilReports(ISupernode):
+class IAdmUtilReports(Interface):
     """A configuration utility."""
     
     color1 = ColorValid(

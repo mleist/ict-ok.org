@@ -14,22 +14,22 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Bool, Int, TextLine
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilIdChooser(ISupernode):
+class IAdmUtilIdChooser(Interface):
     """A id getter utility."""
     def getIdChoosers():
         """ get all id chooser
         """
 
-class IIdChooser(ISupernode):
+class IIdChooser(Interface):
     """An id getter
     """
     wasUsed = Bool(
@@ -59,13 +59,13 @@ class IIdChooser(ISupernode):
         default = u"ID %05d",
         required = True)
 
-    def canBeDeleted():
-        """
-        a object can be deleted with normal delete permission
-        special objects can overload this for special delete rules
-        (e.g. IAdmUtilCatHostGroup)
-        return True or False
-        """
+#    def canBeDeleted():
+#        """
+#        a object can be deleted with normal delete permission
+#        special objects can overload this for special delete rules
+#        (e.g. IAdmUtilCatHostGroup)
+#        return True or False
+#        """
     def incrementId():
         """return a unique valid id string.
         """

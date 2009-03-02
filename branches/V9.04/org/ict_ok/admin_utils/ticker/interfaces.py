@@ -14,17 +14,18 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, Set
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import \
-     IEventIfSupernode, ISupernode
+     IEventIfSupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilTicker(ISupernode):
+class IAdmUtilTicker(Interface):
     """A pseudo-mailer that delivers objects by xmlrpc."""
 
 class IEventIfAdmUtilTicker(IEventIfSupernode):

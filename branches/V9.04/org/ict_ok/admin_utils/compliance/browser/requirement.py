@@ -28,15 +28,14 @@ from zope.app.pagetemplate.urlquote import URLQuote
 # zc imports
 from zc.table.column import GetterColumn
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
+from org.ict_ok.admin_utils.compliance.requirement import Requirement
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm, DisplayForm, EditForm
+     DisplayForm, EditForm
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, getModifiedDate, raw_cell_formatter, \
@@ -152,6 +151,9 @@ class DetailsAdmUtilRequirementForm(Overview):
     """ Display form for the object """
     
     label = _(u'settings of Requirement')
+    factory = Requirement
+    omitFields = AdmUtilRequirementDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
     columns = (
         GetterColumn(title=_('Title'),
                      getter=getTitle,
@@ -170,9 +172,6 @@ class DetailsAdmUtilRequirementForm(Overview):
     pos_colum_index = 3
     sort_columns = [1]
     status = None
-
-    fields = field.Fields(IRequirement).omit(
-       *AdmUtilRequirementDetails.omit_viewfields)
     
     def objs(self):
         """List of Content objects"""
@@ -195,5 +194,6 @@ class EditAdmUtilRequirementForm(EditForm):
     """ Display form for the object """
     
     label = _(u'edit Requirement properties')
-    fields = field.Fields(IRequirement).omit(
-       *AdmUtilRequirementDetails.omit_editfields)
+    factory = Requirement
+    omitFields = AdmUtilRequirementDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

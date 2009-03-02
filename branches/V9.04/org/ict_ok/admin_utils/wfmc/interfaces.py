@@ -19,12 +19,11 @@ from zope.schema import Choice
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilWFMC(ISupernode):
+class IAdmUtilWFMC(Interface):
     """
     major component for registration and event distribution 
     """

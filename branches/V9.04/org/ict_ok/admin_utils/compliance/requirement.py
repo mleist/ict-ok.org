@@ -32,6 +32,7 @@ from zope.component.interfaces import ComponentLookupError
 # zc imports
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.admin_utils.compliance.interfaces import \
      IRequirement, IAdmUtilCompliance
