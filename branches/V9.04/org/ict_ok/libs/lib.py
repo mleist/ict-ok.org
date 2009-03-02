@@ -203,3 +203,25 @@ def ensureComponentFolderOnBootstrap(interface, folderName, factoryId,
     else:
         for obj in allSubFolders:
             instUtilityIIntIds.register(obj)
+
+from zope.interface import implementedBy
+from z3c.form.field import Fields
+
+def fieldsForFactory(factory, omitFields, additionalInterfaces=[]):
+    """return z3c.form fields for the given ict-factory
+    """
+    interfaceList = [i for i in implementedBy(factory)
+                     if i.__identifier__[:10] == 'org.ict_ok']
+    interfaceList.reverse()
+    interfaceList.extend(additionalInterfaces)
+    return Fields(*interfaceList).omit(*omitFields)
+
+def fieldsForInterface(interface_s, omitFields):
+    """return z3c.form fields for the given ict-interface
+    """
+    if type(interface_s) == type(list):
+        interfaceList = [i for i in interface_s
+                         if i.__identifier__[:10] == 'org.ict_ok']
+    else:
+        interfaceList = [interface_s]
+    return Fields(*interfaceList).omit(*omitFields)
