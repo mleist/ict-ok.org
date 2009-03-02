@@ -45,8 +45,6 @@ def AllIndustrialComputers(dummy_context):
     return AllComponents(dummy_context, IIndustrialComputer)
 
 
-
-
 class IndustrialComputer(Device):
     """
     the template instance
@@ -56,21 +54,8 @@ class IndustrialComputer(Device):
     # for ..Contained we have to:
     __name__ = __parent__ = None
 
-    productionState = FieldProperty(IIndustrialComputer['productionState'])
-    memsize = FieldProperty(IIndustrialComputer['memsize'])
-    cpuType = FieldProperty(IIndustrialComputer['cpuType'])
-    hardware = FieldProperty(IIndustrialComputer['hardware'])
-    serialNumber = FieldProperty(IIndustrialComputer['serialNumber'])
-    inv_id = FieldProperty(IIndustrialComputer['inv_id'])
-    modelType = FieldProperty(IIndustrialComputer['modelType'])
-    deliveryDate = FieldProperty(IIndustrialComputer['deliveryDate'])
-    documentNumber = FieldProperty(IIndustrialComputer['documentNumber'])
-    user = FieldProperty(IIndustrialComputer['user'])
-
-    fullTextSearchFields = ['hardware', 'serialNumber', 'inv_id', 'modelType', 'documentNumber']
+    fullTextSearchFields = []
     fullTextSearchFields.extend(Device.fullTextSearchFields)
-        
-
 
     def __init__(self, **data):
         """

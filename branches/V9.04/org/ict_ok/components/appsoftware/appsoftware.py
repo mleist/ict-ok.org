@@ -26,6 +26,8 @@ from lovely.relation.property import RelationPropertyIn
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.software_component.software_component import \
+    SoftwareComponent
 from org.ict_ok.components.superclass.interfaces import IFocus
 from org.ict_ok.components.appsoftware.interfaces import \
     IAddApplicationSoftware, IApplicationSoftware, IApplicationSoftwareFolder
@@ -35,6 +37,7 @@ from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+from org.ict_ok.components.supernode.supernode import Supernode
 
 
 def AllApplicationSoftwareTemplates(dummy_context):
@@ -48,7 +51,7 @@ def AllUnusedOrUsedDeviceApplicationSoftwares(dummy_context):
                                      'device', ['licenseKey'])
 
 
-class ApplicationSoftware(Component):
+class ApplicationSoftware(SoftwareComponent):
     """
     the template instance
     """
@@ -72,13 +75,13 @@ class ApplicationSoftware(Component):
     fullTextSearchFields = ['manufacturer', 'otherType',
                             'targetOperatingSystems', 'versionText',
                             'licenseKey', 'language']
-    fullTextSearchFields.extend(Component.fullTextSearchFields)
+    fullTextSearchFields.extend(SoftwareComponent.fullTextSearchFields)
 
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        SoftwareComponent.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(ApplicationSoftware)
         for (name, value) in data.items():
             if name in IApplicationSoftware.names() and \
@@ -87,6 +90,7 @@ class ApplicationSoftware(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        SoftwareComponent.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(ApplicationSoftware)
         for (name, value) in data.items():
             if name in refAttributeNames:

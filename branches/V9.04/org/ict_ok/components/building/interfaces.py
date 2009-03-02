@@ -17,16 +17,13 @@ __version__ = "$Id$"
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, List, TextLine
-from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IBuilding(IComponent):
+class IBuilding(Interface):
     """A service object."""
     
     location = Choice(
@@ -54,7 +51,7 @@ class IBuilding(IComponent):
         default = u"",
         required = False)
     
-class IBuildingFolder(ISuperclass, IFolder):
+class IBuildingFolder(Interface):
     """Container for Building objects
     """
 

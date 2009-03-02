@@ -75,11 +75,11 @@
             <td tal:content="context/ikComment" />
         </tr>
 
-        <tr tal:attributes="class view/getNextTabClass"
+        <!--tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.device is not None">
             <td i18n:translate="">Device</td>
             <td tal:content="structure python: view.getHrefTitle(context.device)" />
-        </tr>
+        </tr-->
         
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.device is not None and context.device.user is not None">

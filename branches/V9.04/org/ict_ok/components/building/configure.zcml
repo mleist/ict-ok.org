@@ -33,6 +33,30 @@
             permission="org.ict_ok.components.building.Edit"
             set_schema=".interfaces.IBuilding"
             />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
     <class class=".building.BuildingFolder">
         <implements
@@ -55,6 +79,22 @@
         <require
             permission="org.ict_ok.components.building.Edit"
             set_schema=".interfaces.IBuildingFolder"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
         <require
             permission="org.ict_ok.components.building.View"

@@ -28,6 +28,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.building.interfaces import IBuilding, IAddBuilding
 from org.ict_ok.components.building.building import Building
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -78,7 +79,9 @@ class BuildingFolderDetails(ComponentDetails):
 class DetailsBuildingForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of building')
-    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_viewfields)
+    factory = Building
+    omitFields = BuildingDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 #class AddBuildingForm(AddForm):
@@ -90,19 +93,23 @@ class DetailsBuildingForm(DisplayForm):
     
 class AddBuildingForm(AddComponentForm):
     label = _(u'Add Building')
-    addFields = field.Fields(IAddBuilding)
-    allFields = field.Fields(IBuilding).omit(*BuildingDetails.omit_addfields)
-    allFields['isTemplate'].widgetFactory = \
-        checkbox.SingleCheckBoxFieldWidget
     factory = Building
     attrInterface = IBuilding
+    addInterface = IAddBuilding
+    omitFields = BuildingDetails.omit_addfields
     _session_key = 'org.ict_ok.components.building'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class EditBuildingForm(EditForm):
     """ Edit for for net """
     label = _(u'Building Edit Form')
-    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_editfields)
+    factory = Building
+    omitFields = BuildingDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
@@ -121,8 +128,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IBuilding)
     attrInterface = IBuilding
     factory = Building
     factoryId = u'org.ict_ok.components.building.building.Building'
-
+    allFields = fieldsForInterface(attrInterface, [])

@@ -15,37 +15,28 @@
 __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, List, TextLine
-from zope.app.folder.interfaces import IFolder
+from zope.schema import Choice, Int, List, TextLine
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IDevice(IComponent):
+class IDevice(Interface):
     """A device object."""
 
-    manufacturer = TextLine(
-        max_length = 200,
-        title = _("Manufacturer"),
-        description = _("Name/Address of the manufacturer."),
+    cpuType = TextLine(
+        title = _(u'CPU type'),
+        description = _(u'Text of CPU type'),
         required = False)
-    vendor = TextLine(
-        max_length = 500,
-        title = _("Vendor"),
-        description = _("Name/Address of the vendor."),
-        default = u"",
+        
+    memsize = Int(
+        title = _(u'Memory size (MB)'),
+        description = _(u'Memory size in MB'),
         required = False)
-    
-    room = Choice(
-        title=_(u'Room'),
-        vocabulary='AllRooms',
-        required=False
-        )
+
     
     interfaces = List(title=_(u"Interface"),
                       value_type=Choice(vocabulary='AllUnusedOrUsedDeviceInterfaces'),
@@ -63,6 +54,6 @@ class IDevice(IComponent):
                       default=[])
 
 
-class IDeviceFolder(ISuperclass, IFolder):
+class IDeviceFolder(Interface):
     """Container for Notebook objects
     """

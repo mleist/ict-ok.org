@@ -29,7 +29,6 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.device.interfaces import IDevice, IDeviceFolder
 from org.ict_ok.components.superclass.superclass import Superclass
-from org.ict_ok.components.component import Component
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
@@ -38,6 +37,8 @@ from org.ict_ok.components.interfaces import \
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.room.room import Room_Devices_RelManager
+from org.ict_ok.components.physical_component.physical_component import \
+    PhysicalComponent
 
 def AllDeviceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IDevice)
@@ -59,28 +60,28 @@ Device_OSoftware_RelManager = FieldRelationManager(IDevice['osoftwares'],
                                                        relType='device:osoftwares')
 
 
-class Device(Component):
+class Device(PhysicalComponent):
     """
     the template instance
     """
     implements(IDevice)
     __name__ = __parent__ = None
-    manufacturer = FieldProperty(IDevice['manufacturer'])
-    vendor = FieldProperty(IDevice['vendor'])
+    cpuType = FieldProperty(IDevice['cpuType'])
+    memsize = FieldProperty(IDevice['memsize'])
 
     room = RelationPropertyIn(Room_Devices_RelManager)
     interfaces = RelationPropertyOut(Device_Interface_RelManager)
     appsoftwares = RelationPropertyOut(Device_AppSoftware_RelManager)
     osoftwares = RelationPropertyOut(Device_OSoftware_RelManager)
 
-    fullTextSearchFields = ['manufacturer', 'vendor']
-    fullTextSearchFields.extend(Component.fullTextSearchFields)
+    fullTextSearchFields = ['cpuType']
+    fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
 
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        PhysicalComponent.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(Device)
         for (name, value) in data.items():
             if name in IDevice.names() and \
@@ -89,6 +90,7 @@ class Device(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        PhysicalComponent.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(Device)
         for (name, value) in data.items():
             if name in refAttributeNames:

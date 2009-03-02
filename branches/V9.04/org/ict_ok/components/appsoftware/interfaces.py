@@ -15,19 +15,16 @@
 __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 
 # zope imports
-from zope.interface import Attribute, Interface
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Int, List, TextLine
-from zope.app.folder.interfaces import IFolder
+from zope.schema import Choice, Int, TextLine
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IApplicationSoftware(IComponent):
+class IApplicationSoftware(Interface):
     """A ApplicationSoftware object."""
 
     device = Choice(
@@ -83,7 +80,7 @@ class IApplicationSoftware(IComponent):
         """
 
 
-class IApplicationSoftwareFolder(ISuperclass, IFolder):
+class IApplicationSoftwareFolder(Interface):
     """Container for ApplicationSoftware objects
     """
 
