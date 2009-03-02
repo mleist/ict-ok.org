@@ -21,8 +21,13 @@ from zope.i18nmessageid import MessageFactory
 # z3c imports
 from z3c.form import field
 from z3c.form.browser import checkbox
+from zope.lifecycleevent import ObjectCreatedEvent
+from zope.event import notify
+from zope.component import queryUtility
+from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.patchpanel.interfaces import IPatchPanel, IAddPatchPanel
 from org.ict_ok.components.patchpanel.patchpanel import PatchPanel
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -33,6 +38,8 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.patchport.patchport import PatchPort
+from org.ict_ok.components.patchport.interfaces import IPatchPortFolder
 
 _ = MessageFactory('org.ict_ok')
 
@@ -73,33 +80,55 @@ class PatchPanelFolderDetails(ComponentDetails):
 class DetailsPatchPanelForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of Patch panel')
-    fields = field.Fields(IPatchPanel).omit(*PatchPanelDetails.omit_viewfields)
+    factory = PatchPanel
+    omitFields = PatchPanelDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class AddPatchPanelForm(AddComponentForm):
     """Add Patch panel form"""
     label = _(u'Add Patch panel')
-    addFields = field.Fields(IAddPatchPanel)
-    allFields = field.Fields(IPatchPanel).omit(*PatchPanelDetails.omit_addfields)
-    allFields['isTemplate'].widgetFactory =         checkbox.SingleCheckBoxFieldWidget
     factory = PatchPanel
+    omitFields = PatchPanelDetails.omit_addfields
     attrInterface = IPatchPanel
+    addInterface = IAddPatchPanel
     _session_key = 'org.ict_ok.components.patchpanel'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = checkbox.SingleCheckBoxFieldWidget
 
-    def create(self, data):
-        """ will create the object with all new patch ports"""
-        obj = self.factory(**data)
-        self.newdata = data
-        IBrwsOverview(obj).setTitle(data['ikName'])
-        obj.__post_init__()
-        print "portCount: ", obj.portCount
+    def createAndAdd(self, data):
+        obj = self.create(data)
+        notify(ObjectCreatedEvent(obj))
+        self.add(obj)
+        uidutil = queryUtility(IIntIds)
+        oneParent = None
+        for (oid, oobj) in uidutil.items():
+            if IPatchPortFolder.providedBy(oobj.object):
+                oneParent = oobj.object
+                break
+        if oneParent is not None:
+            for i in range(1, obj.portCount+1):
+                dataVect = {}
+                dataVect['ikName'] = u'%s-%02d' % (obj.ikName, i)
+                dataVect['patchpanel'] = obj
+                newObj = PatchPort(**dataVect)
+                newObj.__post_init__()
+                IBrwsOverview(newObj).setTitle(dataVect['ikName'])
+                oneParent[newObj.objectID] = newObj
+                if hasattr(newObj, "store_refs"):
+                    newObj.store_refs(**dataVect)
+                notify(ObjectCreatedEvent(newObj))
         return obj
+
 
 
 class EditPatchPanelForm(EditForm):
     """ Edit for Patch panel """
     label = _(u'Patch panel Edit Form')
-    fields = field.Fields(IPatchPanel).omit(*PatchPanelDetails.omit_editfields)
+    factory = PatchPanel
+    omitFields = PatchPanelDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class DeletePatchPanelForm(DeleteForm):
@@ -116,7 +145,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IPatchPanel)
     attrInterface = IPatchPanel
     factory = PatchPanel
     factoryId = u'org.ict_ok.components.patchpanel.patchpanel.PatchPanel'
+    allFields = fieldsForInterface(attrInterface, [])

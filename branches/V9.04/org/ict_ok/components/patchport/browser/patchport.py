@@ -16,6 +16,7 @@ __version__ = "$Id: template.py_cog 411 2009-01-29 16:16:51Z markusleist $"
 # python imports
 
 # zope imports
+from zope.interface import implementedBy
 from zope.i18nmessageid import MessageFactory
 
 # z3c imports
@@ -23,6 +24,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.patchport.interfaces import IPatchPort, IAddPatchPort
 from org.ict_ok.components.patchport.patchport import PatchPort
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -33,6 +35,8 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.physical_connector.interfaces import \
+    IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
 
 _ = MessageFactory('org.ict_ok')
 
@@ -65,7 +69,11 @@ class PatchPortFolderDetails(ComponentDetails):
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
     fields = field.Fields(IPatchPort).omit(*PatchPortDetails.omit_viewfields)
+    
     attrInterface = IPatchPort
+    factory = PatchPort
+    omitFields = PatchPortDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 # --------------- forms ------------------------------------
 
@@ -73,24 +81,29 @@ class PatchPortFolderDetails(ComponentDetails):
 class DetailsPatchPortForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of Patch port')
-    fields = field.Fields(IPatchPort).omit(*PatchPortDetails.omit_viewfields)
+    factory = PatchPort
+    omitFields = PatchPortDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class AddPatchPortForm(AddComponentForm):
     """Add Patch port form"""
     label = _(u'Add Patch port')
-    addFields = field.Fields(IAddPatchPort)
-    allFields = field.Fields(IPatchPort).omit(*PatchPortDetails.omit_addfields)
-    allFields['isTemplate'].widgetFactory =         checkbox.SingleCheckBoxFieldWidget
     factory = PatchPort
     attrInterface = IPatchPort
+    addInterface = IAddPatchPort
+    omitFields = PatchPortDetails.omit_addfields
+    allFields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
+    addFields = fieldsForInterface(addInterface, [])
     _session_key = 'org.ict_ok.components.patchport'
 
 
 class EditPatchPortForm(EditForm):
     """ Edit for Patch port """
     label = _(u'Patch port Edit Form')
-    fields = field.Fields(IPatchPort).omit(*PatchPortDetails.omit_editfields)
+    factory = PatchPort
+    omitFields = PatchPortDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
 
 
 class DeletePatchPortForm(DeleteForm):
@@ -107,7 +120,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IPatchPort)
     attrInterface = IPatchPort
     factory = PatchPort
     factoryId = u'org.ict_ok.components.patchport.patchport.PatchPort'
+    allFields = fieldsForInterface(attrInterface, [])

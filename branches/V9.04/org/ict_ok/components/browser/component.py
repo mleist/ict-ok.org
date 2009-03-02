@@ -23,6 +23,8 @@ from pyExcelerator import Workbook, XFStyle, Font, Formula
 import pyExcelerator as xl
 
 # zope imports
+from zope.interface import implementedBy
+from zope.schema.interfaces import IField
 from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
 from zope.app.catalog.interfaces import ICatalog
@@ -74,6 +76,8 @@ from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.admin_utils.idchooser.interfaces import IIdChooser
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+from org.ict_ok.osi.interfaces import IOSIModel
+from org.ict_ok.osi.interfaces import IPhysicalLayer
 
 _ = MessageFactory('org.ict_ok')
 
@@ -183,8 +187,7 @@ class ComponentDetails(SupernodeDetails):
         return tmpText
     
     def exportXlsData(self):
-        """get CSV file for all folder objects"""
-        
+        """get XLS file for all folder objects"""
         filename = datetime.now().strftime('ict_%Y%m%d%H%M%S.xls')
         f_handle, f_name = tempfile.mkstemp(filename)
         wbook = Workbook()
@@ -223,10 +226,29 @@ class ComponentDetails(SupernodeDetails):
         wb_hosts.col(pos_x).width *= 3
         pos_x += 1
         pos_y = 1
+        #
+        allAttributes = {}
+        for interface in implementedBy(self.factory):
+            for i_attrName in interface:
+                i_attr = interface[i_attrName]
+                if IField.providedBy(i_attr):
+                    allAttributes[i_attrName] = i_attr
+        #
         for item_n, item_v in itemList:
             pos_x = 0
             for attr in attrList:
-                attrField = self.attrInterface[attr]
+#                from zope.interface import implementedBy
+#                ff=self.factory
+#                tt=[i for i in implementedBy(ff)]
+#                it=tt[-1]
+                #attrField = self.attrInterface[attr]
+                attrField = allAttributes[attr]
+#                tmpFieldProperty = getattr(self.factory, attr)
+#                if hasattr(tmpFieldProperty, '_FieldProperty__field'):
+#                    attrField = getattr(self.factory, attr)._FieldProperty__field
+#                else:
+#                    import pdb
+#                    pdb.set_trace()
                 attrDm = datamanager.AttributeField(item_v, attrField)
                 v_style = XFStyle()
                 v_font = Font()
@@ -284,7 +306,8 @@ class ComponentDetails(SupernodeDetails):
                                     (attrDm.field, v_widget),
                                     interfaces.IDataConverter)
                     #d2 = queryMultiAdapter((attrDm.field, v_widget),interfaces.IDataConverter)
-                    value = v_dataconverter.toWidgetValue(dateValue)
+                    if dateValue is not None:
+                        value = v_dataconverter.toWidgetValue(dateValue)
                     if type(value) is list:
                         value = u";".join(value)
                     #print u"value1->   %s: %s " % (attr, value)
@@ -314,6 +337,14 @@ class ComponentDetails(SupernodeDetails):
         os.remove(f_name)
         return dataMem
 
+    def connectedComponentsOnPhysicalLayer(self):
+        Components = []
+        osiModelAdapter = IOSIModel(self.context)
+        if osiModelAdapter:
+            osiModelAdapter.connectedComponentsOnLayer(\
+                (IPhysicalLayer,), Components, 10)
+        return Components
+
 
 class EvaluationsTodoDisplay(Overview):
     """for evaluation which are open
@@ -340,16 +371,20 @@ class EvaluationsTodoDisplay(Overview):
     def objs(self):
         """List of Content objects"""
         retList = []
+        retSet = set([])
         my_catalog = zapi.getUtility(ICatalog)
-        if self.context.requirement is not None:
-            res = my_catalog.searchResults(oid_index=self.context.requirement)
-            if len(res) > 0:
-                startReq = iter(res).next()
-                allObjReqs = getRequirementList(startReq)
-                allObjEvaluations = getEvaluations(self.context)
-                alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
-                retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
-        return retList
+        if self.context.requirements is not None:
+            for requirement in self.context.requirements:
+                res = my_catalog.searchResults(oid_index=requirement)
+                if len(res) > 0:
+                    startReq = iter(res).next()
+                    allObjReqs = getRequirementList(startReq)
+                    allObjEvaluations = getEvaluations(self.context)
+                    alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
+                    #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
+                    retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
+#        return retList
+        return list(retSet)
 
 
 class EvaluationsDoneDisplay(Overview):
@@ -543,6 +578,14 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
             outf.close()
             parseRet = xl.parse_xls(f_name, codepage)
             os.remove(f_name)
+            #
+            allAttributes = {}
+            for interface in implementedBy(self.factory):
+                for i_attrName in interface:
+                    i_attr = interface[i_attrName]
+                    if IField.providedBy(i_attr):
+                        allAttributes[i_attrName] = i_attr
+            #
             for sheet_name, values in parseRet:
                 matrix = [[]]
                 for row_idx, col_idx in sorted(values.keys()):
@@ -576,7 +619,7 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
 #                        pdb.set_trace()
                         for attrName, newValString in attrDict.items():
                             #print u"ddd4-> %s" % (attrName)
-                            attrField = self.attrInterface[attrName]
+                            attrField = allAttributes[attrName]
                             #print u"type(%s): %s" % (attrField, type(attrField))
 #                            if attrName == "rooms":
 #                                import pdb
@@ -619,12 +662,13 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                                 if attrName == "ikName":
                                     IBrwsOverview(oldObj).setTitle(newVal)
                     else:
+                        oldObj = None
                         # new Object
 #                        newObj = createObject(self.factoryId)
 #                        newObj.__post_init__()
                         dataVect = {}
                         for attrName, newValString in attrDict.items():
-                            attrField = self.attrInterface[attrName]
+                            attrField = allAttributes[attrName]
                             if IChoice.providedBy(attrField):
                                 v_widget = getMultiAdapter(\
                                                 (attrField,self.request),
@@ -662,8 +706,9 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                         #print "dataVect: ", dataVect
                         newObj = self.factory(**dataVect)
                         newObj.__post_init__()
-                        dcore = IWriteZopeDublinCore(oldObj)
-                        dcore.modified = datetime.utcnow()
+                        if oldObj is not None:
+                            dcore = IWriteZopeDublinCore(oldObj)
+                            dcore.modified = datetime.utcnow()
                         IBrwsOverview(newObj).setTitle(dataVect['ikName'])
                         self.context[newObj.objectID] = newObj
                         if hasattr(newObj, "store_refs"):

@@ -18,12 +18,8 @@ __version__ = "$Id: template.py_cog 396 2009-01-08 00:21:51Z markusleist $"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-from z3c.form.browser import checkbox
-
 # ict_ok.org imports
-from org.ict_ok.components.logical_component.interfaces import ILogicalComponent, IAddLogicalComponent
+from org.ict_ok.components.logical_component.interfaces import ILogicalComponent
 from org.ict_ok.components.logical_component.logical_component import LogicalComponent
 from org.ict_ok.components.browser.component import ComponentDetails
 

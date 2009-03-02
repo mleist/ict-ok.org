@@ -19,19 +19,16 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 
-# zc imports
-
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
-from org.ict_ok.components.latency.interfaces import ILatency
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
+from org.ict_ok.components.latency.interfaces import ILatency, IAddLatency
 from org.ict_ok.components.latency.latency import Latency
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.browser.component import AddComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -72,23 +69,32 @@ class LatencyDisplay(LatencyDetails):
 class DetailsLatencyForm(DisplayForm):
     """ Display form for the object """
     label = _(u'Details of Snmp value')
-    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_viewfields)
+    factory = Latency
+    omitFields = LatencyDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
     
     def update(self):
         DisplayForm.update(self)
 
 
-class AddLatencyForm(AddForm):
+class AddLatencyForm(AddComponentForm):
     """Add form."""
     label = _(u'Add Latency')
-    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_addfields)
     factory = Latency
+    attrInterface = ILatency
+    addInterface = IAddLatency
+    omitFields = LatencyDetails.omit_addfields
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
+    _session_key = 'org.ict_ok.components.muninvalue'
 
 
 class EditLatencyForm(EditForm):
     """ Edit for for net """
     label = _(u'Latency Edit Form')
-    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_editfields)
+    factory = Latency
+    omitFields = LatencyDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class DeleteLatencyForm(DeleteForm):
@@ -98,4 +104,3 @@ class DeleteLatencyForm(DeleteForm):
         """this title will be displayed in the head of form"""
         return _(u"Delete this net: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
-

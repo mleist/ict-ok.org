@@ -29,31 +29,14 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.logical_component.interfaces import \
-    ILogicalComponent, ILogicalComponentFolder, IAddLogicalComponent
+    ILogicalComponent
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.components.room.room import Room_LogicalComponents_RelManager
 
-def AllLogicalComponentTemplates(dummy_context):
-    return AllComponentTemplates(dummy_context, ILogicalComponent)
-
-def AllLogicalComponents(dummy_context):
-    return AllComponents(dummy_context, ILogicalComponent)
-
-def AllUnusedOrUsedRoomLogicalComponents(dummy_context):
-    return AllUnusedOrSelfComponents(dummy_context, ILogicalComponent, 'room')
-
-def AllUnusedOrUsedInterfaceLogicalComponents(dummy_context):
-    return AllUnusedOrSelfComponents(dummy_context, ILogicalComponent, 'interface')
-
-LogicalComponent_Interface_RelManager = \
-    FieldRelationManager(ILogicalComponent['interface'],
-                         IInterface['physicalConnector'],
-                         relType='physicalConnector:interface')
 
 
 class LogicalComponent(Component):

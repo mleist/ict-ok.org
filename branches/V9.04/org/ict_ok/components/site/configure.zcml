@@ -41,6 +41,30 @@
             permission="org.ict_ok.components.site.Edit"
             set_schema=".interfaces.IEventIfEventSite"
             />
+        <require
+            permission="org.ict_ok.components.site.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.site.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.site.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.site.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <!--require
+            permission="org.ict_ok.components.site.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.site.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            /-->
     </class>
     <!--<class class=".site.Site">-->
         <!--<allow-->

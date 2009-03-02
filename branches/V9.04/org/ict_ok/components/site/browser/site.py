@@ -19,17 +19,12 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-
-# zc imports
-
 # ict_ok imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.components.site.interfaces import ISite, IEventIfEventSite
 from org.ict_ok.components.site.site import Site
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 
@@ -63,18 +58,26 @@ class SiteDetails(ComponentDetails):
 class DetailsSiteForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of site')
-    fields = field.Fields(ISite).omit(*SiteDetails.omit_viewfields)
+    factory = Site
+    omitFields = SiteDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
+
 
 class AddSiteForm(AddForm):
     """Add form."""
     label = _(u'add site')
-    fields = field.Fields(ISite).omit(*SiteDetails.omit_addfields)
     factory = Site
+    omitFields = SiteDetails.omit_addfields
+    _session_key = 'org.ict_ok.components.site'
+    fields = fieldsForFactory(factory, omitFields)
+
 
 class EditSiteForm(EditForm):
     """ Edit for for site """
     label = _(u'edit site settings')
-    fields = field.Fields(ISite).omit(*SiteDetails.omit_editfields)
+    factory = Site
+    omitFields = SiteDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class DeleteSiteForm(DeleteForm):
@@ -88,4 +91,4 @@ class DeleteSiteForm(DeleteForm):
 class EditSiteEventIfForm(EditForm):
     """ Event edit for site """
     label = _(u'Site Event Interfaces Form')
-    fields = field.Fields(IEventIfEventSite)
+    #fields = field.Fields(IEventIfEventSite)

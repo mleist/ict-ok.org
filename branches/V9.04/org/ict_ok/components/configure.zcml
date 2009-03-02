@@ -10,6 +10,18 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
+
+    <!-- class class=".component.Component">
+        <require
+            permission="org.ict_ok.components.appsoftware.View"
+            interface=".interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.appsoftware.Edit"
+            set_schema=".interfaces.IComponent"
+            />            
+    </class -->
+
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".component.AllXlsCodepages"

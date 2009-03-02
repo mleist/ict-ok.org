@@ -17,17 +17,14 @@ __version__ = "$Id: interfaces.py_cog 411M 2009-02-02 23:31:12Z (lokal) $"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Int, List, TextLine
-from zope.app.folder.interfaces import IFolder
+from zope.schema import Choice, Int, List
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IPatchPanel(IComponent):
+class IPatchPanel(Interface):
     """A PatchPanel object."""
 
     portCount = Int(
@@ -54,7 +51,7 @@ class IPatchPanel(IComponent):
         """
 
 
-class IPatchPanelFolder(ISuperclass, IFolder):
+class IPatchPanelFolder(Interface):
     """Container for PatchPanel objects
     """
 

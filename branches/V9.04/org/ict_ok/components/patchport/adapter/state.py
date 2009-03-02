@@ -36,3 +36,13 @@ class State(object):
         """get State-Value of the Object (0-100)
         """
         return 55
+
+    def getStateOverview(self, parentOverviewNum=0):
+        """get State-Overview of the Object (0: ok, 1: warn, 2: error)
+        """
+        linkCounter = len(self.context.links)
+        overviewNum = parentOverviewNum # 0: ok, 1: warn, 2: error
+        if linkCounter > 0:
+            if overviewNum < 0:
+                overviewNum = 0
+        return overviewNum

@@ -30,6 +30,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.latency.interfaces import ILatency, IAddLatency
 from org.ict_ok.components.latency.latency import Latency
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -143,33 +144,33 @@ class LatencyDisplay(LatencyDetails):
 class DetailsLatencyForm(DisplayForm):
     """ Display form for the object """
     label = _(u'Details of Snmp value')
-    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_viewfields)
+    factory = Latency
+    omitFields = LatencyDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
     
     def update(self):
         DisplayForm.update(self)
 
 
-#class AddLatencyForm(AddForm):
-#    """Add form."""
-#    label = _(u'Add Latency')
-#    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_addfields)
-#    factory = Latency
-    
 class AddLatencyForm(AddComponentForm):
     label = _(u'Add Latency')
-    addFields = field.Fields(IAddLatency)
-    allFields = field.Fields(ILatency).omit(*LatencyDetails.omit_addfields)
+    factory = Latency
+    omitFields = LatencyDetails.omit_addfields
+    attrInterface = ILatency
+    addInterface = IAddLatency
+    _session_key = 'org.ict_ok.components.latency'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
-    factory = Latency
-    attrInterface = ILatency
-    _session_key = 'org.ict_ok.components.latency'
 
 
 class EditLatencyForm(EditForm):
     """ Edit for for net """
     label = _(u'Latency Edit Form')
-    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_editfields)
+    factory = Latency
+    omitFields = LatencyDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
@@ -188,7 +189,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(ILatency)
     attrInterface = ILatency
     factory = Latency
     factoryId = u'org.ict_ok.components.latency.latency.Latency'
+    allFields = fieldsForInterface(attrInterface, [])

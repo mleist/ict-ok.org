@@ -73,7 +73,7 @@
     <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.components.osoftware.interfaces.IOperatingSoftwareFolder"
-        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        class=".osoftware.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.osoftware.View"
         />

@@ -11,6 +11,18 @@
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/patchports|nothing">
+           <td i18n:translate="">Patch ports</td>
+           <td>
+               <ul>
+                   <li tal:repeat="obj context/patchports"
+                       tal:attributes="class python: view.getStateIconClass(obj)"
+                       tal:content="structure python: view.getHrefTitle(obj)" />
+                   
+               <ul>
+           </td>
+       </tr>
         <!-- #### vvv    some examples, please remove     vvv ####
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.room is not None">
@@ -50,7 +62,7 @@
        <tr tal:attributes="class view/getNextTabClass"
            tal:condition="context/portCount|nothing">
            <td i18n:translate="">Port quantity</td>
-           <td tal:content="structure python: view.fsearchLink(context.portCount)" />
+           <td tal:content="context/portCount" />
        </tr>
 
           
@@ -60,18 +72,6 @@
            <td tal:content="structure python: view.getHrefTitle(context.rack)" />
        </tr>
 
-          
-       <tr tal:attributes="class view/getNextTabClass"
-           tal:condition="context/patchports|nothing">
-           <td i18n:translate="">Patch ports</td>
-           <td>
-               <ul>
-                   <li tal:repeat="obj context/patchports"
-                       tal:content="structure python: view.getHrefTitle(obj)" />
-                   
-               <ul>
-           </td>
-       </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">

@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Attribute, Interface
-from zope.schema import Bool, Choice, Bytes
+from zope.schema import Bool, Bytes, Choice, List
 from zope.i18nmessageid import MessageFactory
 from zope.app.folder.interfaces import IFolder
 
@@ -26,7 +26,7 @@ from org.ict_ok.components.supernode.interfaces import ISupernode
 _ = MessageFactory('org.ict_ok')
 
 
-class IComponent(ISupernode):
+class IComponent(Interface):
     """A general component object."""
 
     myFactory = Attribute("Factory String of this object")
@@ -38,10 +38,20 @@ class IComponent(ISupernode):
         default = False,
         required = False)
 
-    requirement = Choice(
-        title = _("Requirement"),
-        description = _("The Requirement."),
-        vocabulary="AllRequirementVocab",
+#    requirement = Choice(
+#        title = _("Requirement"),
+#        description = _("The Requirement."),
+#        vocabulary="AllRequirementVocab",
+#        required = False)
+
+    requirements = List (
+        title = _("Requirements"),
+        value_type = Choice(
+            title = _("Requirement"),
+            description = _("Requirement."),
+            vocabulary="AllRequirementVocab",
+            required = False),
+        readonly = False,
         required = False)
     
     def get_health():

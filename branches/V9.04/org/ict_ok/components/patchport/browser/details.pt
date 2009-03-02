@@ -46,7 +46,41 @@
         </tr>
         #### ^^^    some examples, please remove     ^^^ #### -->
 
-        <tr tal:attributes="class view/getNextTabClass"
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/links|nothing">
+           <td i18n:translate="">Links</td>
+           <td>
+               <ul>
+                   <li tal:repeat="obj context/links"
+                       tal:content="structure python: view.getHrefTitle(obj)" />
+                   
+               <ul>
+           </td>
+       </tr>
+
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/links|nothing">
+           <td i18n:translate="">Connected components<br>(physical layer)</td>
+           <td>
+               <ul>
+                   <li class="icon-generic connects"
+                       tal:repeat="obj view/connectedComponentsOnPhysicalLayer"
+                       tal:attributes="class python: view.getStateIconClass(obj)"
+                       tal:content="structure python: view.getHrefTitle(obj, displayShort=False)" />
+                   
+               <ul>
+           </td>
+       </tr>
+
+        <!--tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.links is not None">
+            <td i18n:translate="">Connected by</td>
+            <td>
+            <span tal:content="structure python: view.getHrefTitle(context.links)" />
+            </td>
+        </tr-->
+
+        <!--tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.interface is not None">
             <td i18n:translate="">Connected interface</td>
             <td>
@@ -56,9 +90,9 @@
                 <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.interface.device)" />
             </div>
             </td>
-        </tr>
+        </tr-->
 
-        <tr tal:attributes="class view/getNextTabClass"
+        <!--tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.room is not None">
             <td i18n:translate="">Room</td>
             <td>
@@ -72,7 +106,7 @@
                 </div>
             </div>
             </td>
-        </tr>
+        </tr-->
 
           
        <tr tal:attributes="class view/getNextTabClass"
@@ -87,5 +121,19 @@
             <td i18n:translate="">Comment</td>
             <td tal:content="context/ikComment" />
         </tr>
+        
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/ddd|nothing">
+           <td i18n:translate="">ddd</td>
+           <td>
+               <ul>
+                   <li tal:repeat="obj context/ddd"
+                       tal:content="structure python: len(obj)" />
+                   
+               <ul>
+           </td>
+       </tr>
+
+
     </table>
 </i18n:block>

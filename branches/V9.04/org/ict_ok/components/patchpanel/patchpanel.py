@@ -37,6 +37,8 @@ from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.rack.rack import Rack_PatchPanels_RelManager
 from org.ict_ok.components.patchport.interfaces import IPatchPort
+from org.ict_ok.components.physical_component.physical_component import \
+    PhysicalComponent
 
 def AllPatchPanelTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IPatchPanel)
@@ -56,7 +58,7 @@ PatchPanel_PatchPorts_RelManager = \
 
 
 
-class PatchPanel(Component):
+class PatchPanel(PhysicalComponent):
     """
     the template instance
     """
@@ -70,7 +72,7 @@ class PatchPanel(Component):
     patchports = RelationPropertyOut(PatchPanel_PatchPorts_RelManager)
 
     fullTextSearchFields = []
-    fullTextSearchFields.extend(Component.fullTextSearchFields)
+    fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
         
 
 
@@ -78,7 +80,7 @@ class PatchPanel(Component):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        PhysicalComponent.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(PatchPanel)
         for (name, value) in data.items():
             if name in IPatchPanel.names() and \
@@ -87,6 +89,7 @@ class PatchPanel(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        PhysicalComponent.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(PatchPanel)
         for (name, value) in data.items():
             if name in refAttributeNames:

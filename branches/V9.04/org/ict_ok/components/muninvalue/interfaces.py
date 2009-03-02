@@ -17,16 +17,13 @@ __version__ = "$Id$"
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Int
-from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class ILatency(IComponent):
+class ILatency(Interface):
     """A service object."""
 
     checkcount = Int(
@@ -34,7 +31,7 @@ class ILatency(IComponent):
         default = 20,
         required = True)
 
-class IMuninValueFolder(ISuperclass, IFolder):
+class IMuninValueFolder(Interface):
     """Container for MuninValue objects
     """
 

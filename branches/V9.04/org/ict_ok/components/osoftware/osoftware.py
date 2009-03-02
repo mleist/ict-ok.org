@@ -26,6 +26,8 @@ from lovely.relation.property import RelationPropertyIn
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.software_component.software_component import \
+    SoftwareComponent
 from org.ict_ok.components.osoftware.interfaces import \
     IAddOperatingSoftware, IOperatingSoftware, IOperatingSoftwareFolder
 from org.ict_ok.components.component import Component
@@ -47,7 +49,7 @@ def AllUnusedOrUsedDeviceOperatingSoftwares(dummy_context):
                                      'device', ['licenseKey'])
 
 
-class OperatingSoftware(Component):
+class OperatingSoftware(SoftwareComponent):
     """
     the template instance
     """
@@ -72,13 +74,13 @@ class OperatingSoftware(Component):
     fullTextSearchFields = ['manufacturer', 'osType',
                             'otherType', 'versionText',
                             'licenseKey', 'language']
-    fullTextSearchFields.extend(Component.fullTextSearchFields)    
+    fullTextSearchFields.extend(SoftwareComponent.fullTextSearchFields)    
 
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        SoftwareComponent.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(OperatingSoftware)
         for (name, value) in data.items():
             if name in IOperatingSoftware.names() and \
@@ -87,6 +89,7 @@ class OperatingSoftware(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        SoftwareComponent.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(OperatingSoftware)
         for (name, value) in data.items():
             if name in refAttributeNames:
