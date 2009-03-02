@@ -49,16 +49,16 @@ class State(object):
         errorList = []
         retDict = {}
         interf = self.context
-        if interf.device is not None and \
-           interf.physicalConnector is not None and \
-           interf.device.room is not None and \
-           interf.physicalConnector.room is not None and \
-           interf.device.room != interf.physicalConnector.room:
-            if overviewNum < 1:
-                overviewNum = 1
-            mesg = _(u'Warning: ')
-            mesg += _(u"'device room and connected room not equal'")
-            warnList.append(mesg)
+#        if interf.device is not None and \
+#           interf.physicalConnector is not None and \
+#           interf.device.room is not None and \
+#           interf.physicalConnector.room is not None and \
+#           interf.device.room != interf.physicalConnector.room:
+#            if overviewNum < 1:
+#                overviewNum = 1
+#            mesg = _(u'Warning: ')
+#            mesg += _(u"'device room and connected room not equal'")
+#            warnList.append(mesg)
         retDict['overview'] = ('ok', 'warn', 'error')[overviewNum]
         retDict['warnings'] = warnList
         retDict['errors'] = errorList

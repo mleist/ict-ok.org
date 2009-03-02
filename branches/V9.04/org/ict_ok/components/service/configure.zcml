@@ -33,6 +33,30 @@
             permission="org.ict_ok.components.service.Edit"
             set_schema=".interfaces.IService"
             />
+        <require
+            permission="org.ict_ok.components.service.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.service.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.service.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.service.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.service.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.service.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
     
     <class class=".service.ServiceFolder">
@@ -56,6 +80,22 @@
         <require
             permission="org.ict_ok.components.service.Edit"
             set_schema=".interfaces.IServiceFolder"
+            />
+        <require
+            permission="org.ict_ok.components.service.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.service.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.service.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.service.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
         <require
             permission="org.ict_ok.components.service.View"

@@ -33,6 +33,7 @@ from z3c.form.browser import checkbox
 from z3c.pagelet.interfaces import IPagelet
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.interface.interfaces import \
     IInterface, IInterfaceSnmpScanWizard, IAddInterface
@@ -47,6 +48,13 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
+    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
+from org.ict_ok.components.physical_connector.interfaces import \
+    IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
+from org.ict_ok.osi.interfaces import IOSIModel
+from org.ict_ok.osi.interfaces import IPhysicalLayer
 
 _ = MessageFactory('org.ict_ok')
 
@@ -79,8 +87,31 @@ class InterfaceDetails(ComponentDetails):
         gives us the state dict of the object
         """
         return IState(self.context).getStateDict()
-
-
+    
+#    def ddd(self):
+##        import pdb
+##        pdb.set_trace()
+#        deviceSet = set([])
+#        osiModelAdapter = IOSIModel(self.context)
+#        if osiModelAdapter:
+#            #osiModelAdapter.connectedComponentsOnLayer1(deviceSet, 10)
+#            osiModelAdapter.connectedComponentsOnLayer(\
+#                (IPhysicalLayer,), deviceSet, 10)
+#        #self.context.getAllPhysicalConnectors(deviceSet, 10)
+#        return u"dd(%s)dd" % deviceSet
+#
+#    def connectedComponentsOnPhysicalLayer(self):
+#        Components = []
+#        osiModelAdapter = IOSIModel(self.context)
+#        if osiModelAdapter:
+#            osiModelAdapter.connectedComponentsOnLayer(\
+#                (IPhysicalLayer,), Components, 10)
+#        return Components
+#
+    def otherConnectedInterfaces(self):
+        return [i for i in self.connectedComponentsOnPhysicalLayer()
+                if IInterface.providedBy(i) and i is not self.context]
+        
 class InterfaceFolderDetails(ComponentDetails):
     """ Class for MobilePhone details
     """
@@ -96,7 +127,9 @@ class InterfaceFolderDetails(ComponentDetails):
 class DetailsInterfaceForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of interface')
-    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_viewfields)    
+    factory = Interface
+    omitFields = InterfaceDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
 
 
 #class AddInterfaceForm(AddForm):
@@ -108,26 +141,25 @@ class DetailsInterfaceForm(DisplayForm):
     
 class AddInterfaceForm(AddComponentForm):
     label = _(u'Add Interface')
-    addFields = field.Fields(IAddInterface)
-    allFields = field.Fields(IInterface).omit(*InterfaceDetails.omit_addfields)
-    allFields['isTemplate'].widgetFactory = \
-        checkbox.SingleCheckBoxFieldWidget
     factory = Interface
     attrInterface = IInterface
+    addInterface = IAddInterface
+    omitFields = InterfaceDetails.omit_addfields
     _session_key = 'org.ict_ok.components.interface'
+    allFields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class EditInterfaceForm(EditForm):
     """ Edit for for net """
     label = _(u'Interface Edit Form')
-    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_editfields)
+    factory = Interface
+    omitFields = InterfaceDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
-    #def update(self):
-        #import pdb
-        #pdb.set_trace()
-        #print "LLLLLLLLL Jepp"
-        #EditForm.update(self)
 
 
 class DeleteInterfaceForm(DeleteForm):
@@ -453,15 +485,12 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IInterface)
     attrInterface = IInterface
     factory = Interface
     factoryId = u'org.ict_ok.components.interface.interface.Interface'
+    allFields = fieldsForInterface(attrInterface, [])
 
 
-from org.ict_ok.components.superclass.browser.superclass import \
-    GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
-    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
 
 def getRoom(item, formatter):
     if item.device is not None:
@@ -494,4 +523,3 @@ class Overview(SuperOverview):
         )
     pos_column_index = 1
     sort_columns = [1, 2, 3, 4, 5]
-

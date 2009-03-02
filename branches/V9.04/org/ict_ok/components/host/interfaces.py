@@ -15,32 +15,25 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface
-from zope.interface import Attribute
-from zope.schema import Bool, Choice, List, Password, Set, TextLine, Int, Object
-from zope.schema.interfaces import IObject
+from zope.schema import Bool, Choice, List, Password, Set, TextLine, Int
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
-from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
-from org.ict_ok.components.supernode.interfaces import \
-     IEventIfSupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IHost(IComponent):
+class IHost(Interface):
     """A host object."""
 
     contains('org.ict_ok.components.interface.interfaces.IInterface')
     
-    interfaces2 = List(title=u"Interfaces 0..n",
-                      #value_type=Object(IObject),
-                      value_type=Choice(vocabulary='AllUnusedOrSelfInterfaces'),
-                      required=False,
-                      default=[])
+#    interfaces2 = List(title=u"Interfaces 0..n",
+#                      #value_type=Object(IObject),
+#                      value_type=Choice(vocabulary='AllUnusedOrSelfInterfaces'),
+#                      required=False,
+#                      default=[])
     #related = schema.List(
             #title=u"Related",
             #value_type=schema.Choice(vocabulary='demo.documentsInParent'),
@@ -216,7 +209,7 @@ class IHost(IComponent):
         """ get a list of all possible ips
         """
 
-class IEventIfEventHost(IEventIfSupernode):
+class IEventIfEventHost(Interface):
     """ event interface of object """
     
     eventInpObjs_shutdown = Set(
@@ -241,7 +234,7 @@ class IEventIfEventHost(IEventIfSupernode):
         """ start the shutdown of the host """
 
 
-class IHostFolder(ISuperclass, IFolder):
+class IHostFolder(Interface):
     """Container for host objects
     """
 

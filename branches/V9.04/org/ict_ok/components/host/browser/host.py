@@ -37,6 +37,7 @@ from z3c.pagelet.browser import BrowserPagelet
 from zc.table.column import GetterColumn
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.host.interfaces import \
     IHost, IEventIfEventHost, IAddHost
@@ -246,7 +247,9 @@ class AddHostClass(BrowserPagelet):
 class DetailsHostForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of host')
-    fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
+    factory = Host
+    omitFields = HostDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
     def update(self):
         #o2 = removeAllProxies(self.context)
@@ -273,7 +276,9 @@ class DetailsHostForm(DisplayForm):
 class SmartviewForm(DisplayForm):
     """ Display form for the object """
     label = _(u'smartview of host')
-    fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
+    factory = Host
+    omitFields = HostDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 #class AddHostForm(AddForm):
@@ -285,20 +290,22 @@ class SmartviewForm(DisplayForm):
 
 class AddHostForm(AddComponentForm):
     label = _(u'Add Host')
-    addFields = field.Fields(IAddHost)
-    allFields = field.Fields(IHost).omit(*HostDetails.omit_addfields)
-    allFields['isTemplate'].widgetFactory = \
-        checkbox.SingleCheckBoxFieldWidget
     factory = Host
     attrInterface = IHost
+    addInterface = IAddHost
+    omitFields = HostDetails.omit_addfields
     _session_key = 'org.ict_ok.components.host'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
 
 
 class EditHostForm(EditForm):
     """ Edit form for host """
     form.extends(form.EditForm)
     label = _(u'Host Edit Form')
-    fields = field.Fields(IHost).omit(*HostDetails.omit_editfields)
+    factory = Host
+    omitFields = HostDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
@@ -393,7 +400,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IHost)
     attrInterface = IHost
     factory = Host
     factoryId = u'org.ict_ok.components.host.host.Host'
+    allFields = fieldsForInterface(attrInterface, [])

@@ -37,11 +37,18 @@ from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
-from org.ict_ok.components.host.host import Host_Interfaces_RelManager
+#from org.ict_ok.components.host.host import Host_Interfaces_RelManager
 from org.ict_ok.components.device.device import Device_Interface_RelManager
-from org.ict_ok.components.physical_connector.physical_connector import \
-    PhysicalConnector_Interface_RelManager
-
+#from org.ict_ok.components.physical_connector.physical_connector import \
+#    PhysicalConnector_Interface_RelManager
+from org.ict_ok.components.physical_connector.interfaces import \
+    IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
+from org.ict_ok.components.physical_link.interfaces import IPhysicalLink
+from org.ict_ok.components.physical_link.physical_link import \
+    PhysicalLinks_PhysicalConnectors_RelManager
+from org.ict_ok.osi import osi
+from org.ict_ok.components.physical_component.physical_component import \
+    PhysicalComponent
 
 def AllInterfaceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IInterface)
@@ -56,7 +63,7 @@ def AllUnusedOrUsedPhysicalConnectorInterfaces(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IInterface, 'physicalConnector')
 
 
-class Interface(Component):
+class Interface(PhysicalComponent):
     """
     the template instance
     """
@@ -70,19 +77,21 @@ class Interface(Component):
     ipv4List = FieldProperty(IInterface['ipv4List'])
     
     device = RelationPropertyIn(Device_Interface_RelManager)
-    host2 = RelationPropertyIn(Host_Interfaces_RelManager)
+    #host2 = RelationPropertyIn(Host_Interfaces_RelManager)
+    connectorPinout = FieldProperty(IPhysicalConnector['connectorPinout'])
+    links = RelationPropertyIn(PhysicalLinks_PhysicalConnectors_RelManager)
 
-    physicalConnector = RelationPropertyOut(PhysicalConnector_Interface_RelManager)
+#    physicalConnector = RelationPropertyOut(PhysicalConnector_Interface_RelManager)
 
     fullTextSearchFields = ['netType', 'mac',
                             'ipv4List']
-    fullTextSearchFields.extend(Component.fullTextSearchFields)
+    fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
     
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        PhysicalComponent.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(Interface)
         for (name, value) in data.items():
             if name in IInterface.names():
@@ -91,11 +100,18 @@ class Interface(Component):
         self.ikRevision = __version__
         
     def store_refs(self, **data):
+        PhysicalComponent.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(Interface)
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
 
+    def getAllPhysicalConnectors(self, connectorSet, maxDepth=10):
+        if maxDepth < 0:
+            raise Exception
+        for link in self.links:
+            if IPhysicalLink.providedBy(link):
+                link.getAllPhysicalConnectors(connectorSet, maxDepth-1)
 
 
 class InterfaceFolder(Superclass, Folder):

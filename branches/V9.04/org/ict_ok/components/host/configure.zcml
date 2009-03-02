@@ -41,6 +41,30 @@
             permission="org.ict_ok.components.host.Edit"
             set_schema=".interfaces.IEventIfEventHost"
             />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <!--require
+            permission="org.ict_ok.components.host.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            /-->
     </class>
     
     <class class=".host.HostFolder">
@@ -64,6 +88,22 @@
         <require
             permission="org.ict_ok.components.host.Edit"
             set_schema=".interfaces.IHostFolder"
+            />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.host.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.host.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
         <require
             permission="org.ict_ok.components.host.View"

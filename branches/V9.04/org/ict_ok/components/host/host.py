@@ -120,9 +120,9 @@ def AllHostTemplates(dummy_context):
 
 
 
-Host_Interfaces_RelManager = FieldRelationManager(IHost['interfaces2'],
-                                                 IInterface['host2'],
-                                                 relType='host:interfaces')
+#Host_Interfaces_RelManager = FieldRelationManager(IHost['interfaces2'],
+#                                                 IInterface['host2'],
+#                                                 relType='host:interfaces')
 
 class Host(Component):
     """
@@ -160,7 +160,7 @@ class Host(Component):
     eventOutObjs_nagiosError = FieldProperty(\
         IEventIfEventHost['eventOutObjs_nagiosError'])
     
-    interfaces2 = RelationPropertyOut(Host_Interfaces_RelManager)
+#    interfaces2 = RelationPropertyOut(Host_Interfaces_RelManager)
     
     wf_pd_dict = {}
     wf_pd_dict[WfPdNagios.id] = WfPdNagios

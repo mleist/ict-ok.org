@@ -17,16 +17,13 @@ __version__ = "$Id$"
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Int, TextLine, Choice
-from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IService(IComponent):
+class IService(Interface):
     """A service object."""
 
     port = Int(
@@ -50,7 +47,7 @@ class IService(IComponent):
         values = [u"tcp", u"udp", u"tcp/udp"],
         required = False)
 
-class IServiceFolder(ISuperclass, IFolder):
+class IServiceFolder(Interface):
     """Container for Service objects
     """
 

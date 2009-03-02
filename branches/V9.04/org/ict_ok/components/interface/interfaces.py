@@ -14,19 +14,12 @@
 __version__ = "$Id$"
 
 # zope imports
-from zope.app import zapi
-from zope.schema import Choice, List, Object
-from zope.schema.interfaces import IObject
-from zope.interface import Attribute, Interface, Invalid, invariant
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.app.catalog.interfaces import ICatalog
+from zope.schema import Choice, List
 from zope.app.container.constraints import contains
-from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
-from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.schema.ipvalid import HostIpValid
 from org.ict_ok.schema.macvalid import MacValid
 
@@ -43,7 +36,7 @@ def convertIpV4(inp):
         return str(inp).replace(".", "_").replace("/", "__")
 
 
-class IInterface(IComponent):
+class IInterface(Interface):
     """A interface object."""
 
     contains('org.ict_ok.components.service.interfaces.IService',
@@ -55,11 +48,11 @@ class IInterface(IComponent):
         required=False
         )
     
-    host2 = Choice(
-        title=u'Host 0..1',
-        vocabulary='AllHosts',
-        required=False
-        )
+#    host2 = Choice(
+#        title=u'Host 0..1',
+#        vocabulary='AllHosts',
+#        required=False
+#        )
 
     netType = Choice(
         title = _("interface type"),
@@ -68,11 +61,11 @@ class IInterface(IComponent):
         values = ['ethernet', 'fddi', 'wlan', 'token bus', 'token ring'],
         required = True)
 
-    physicalConnector = Choice(
-        title=u'Connected with',
-        vocabulary='AllUnusedOrUsedInterfacePhysicalConnectors',
-        required=False
-        )
+#    physicalConnector = Choice(
+#        title=u'Connected with',
+#        vocabulary='AllUnusedOrUsedInterfacePhysicalConnectors',
+#        required=False
+#        )
 
     mac = MacValid(
         max_length=40,
@@ -146,8 +139,13 @@ class IInterface(IComponent):
 #                raise Invalid("The IP address already used in interface %s" % \
 #                              " ".join(alreadyFound))
 
+    def getAllPhysicalConnectors(connectorSet, maxDepth=10):
+        """
+        """
 
-class IInterfaceFolder(ISuperclass, IFolder):
+
+
+class IInterfaceFolder(Interface):
     """Container for interface objects
     """
 

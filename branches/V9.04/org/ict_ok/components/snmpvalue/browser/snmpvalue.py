@@ -39,6 +39,7 @@ from z3c.form.browser import checkbox
 from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 from org.ict_ok.components.snmpvalue.interfaces import \
     ISnmpValue, IAddSnmpValue
@@ -304,11 +305,12 @@ class AddSnmpByVendorClass(BrowserPagelet):
 
 # --------------- forms ------------------------------------
 
-
 class DetailsSnmpValueForm(DisplayForm):
     """ Display form for the object """
     label = _(u'Details of Snmp value')
-    fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_viewfields)
+    factory = SnmpValue
+    omitFields = SnmpValueDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 #class AddSnmpValueForm(AddForm):
@@ -337,19 +339,24 @@ class DetailsSnmpValueForm(DisplayForm):
         
 class AddSnmpValueForm(AddComponentForm):
     label = _(u'Add SnmpValue')
-    addFields = field.Fields(IAddSnmpValue)
-    allFields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_addfields)
+    factory = SnmpValue
+    omitFields = SnmpValueDetails.omit_addfields
+    attrInterface = ISnmpValue
+    addInterface = IAddSnmpValue
+    _session_key = 'org.ict_ok.components.snmpvalue'
+    allFields = fieldsForFactory(factory, omitFields, [])
+    addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
-    factory = SnmpValue
-    attrInterface = ISnmpValue
-    _session_key = 'org.ict_ok.components.snmpvalue'
 
 
 class EditSnmpValueForm(EditForm):
     """ Edit for for net """
     label = _(u'SnmpValue Edit Form')
+    factory = SnmpValue
+    omitFields = SnmpValueDetails.omit_editfields
     fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_editfields)
+    fields = fieldsForFactory(factory, omitFields)
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
@@ -368,7 +375,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(ISnmpValue)
     attrInterface = ISnmpValue
     factory = SnmpValue
     factoryId = u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue'
+    allFields = fieldsForInterface(attrInterface, [])

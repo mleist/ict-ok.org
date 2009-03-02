@@ -18,11 +18,8 @@ from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface
 from zope.interface import Attribute, Invalid, invariant
 from zope.schema import Bool, Choice, List
-from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.schema.snmpoidvalid import SnmpOidValid
 from org.ict_ok.schema.physicalvalid import PhysicalQuantity, \
      PhysicalUnit
@@ -32,7 +29,7 @@ from org.ict_ok.libs.physicalquantity import physq, convertQuantity, \
 _ = MessageFactory('org.ict_ok')
 
 
-class ISnmpValue(IComponent):
+class ISnmpValue(Interface):
     """A service object."""
 
     checktype = Choice(
@@ -371,7 +368,7 @@ class ISnmpValue(IComponent):
         """generate Picture
         """
 
-class ISnmpValueFolder(ISuperclass, IFolder):
+class ISnmpValueFolder(Interface):
     """Container for SnmpValue objects
     """
 

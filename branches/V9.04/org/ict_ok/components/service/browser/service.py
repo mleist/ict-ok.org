@@ -25,6 +25,7 @@ from z3c.form.browser import checkbox
 from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.service.interfaces import IService, IAddService
 from org.ict_ok.components.service.service import Service, getAllServices
 from org.ict_ok.components.browser.component import ComponentDetails
@@ -82,7 +83,10 @@ class AddServiceClass(BrowserPagelet):
 class DetailsServiceForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of service')
-    fields = field.Fields(IService).omit(*ServiceDetails.omit_viewfields)
+    factory = Service
+    attrInterface = IService
+    omitFields = ServiceDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 #class AddServiceForm(AddForm):
@@ -94,19 +98,23 @@ class DetailsServiceForm(DisplayForm):
 
 class AddServiceForm(AddComponentForm):
     label = _(u'Add Service')
-    addFields = field.Fields(IAddService)
-    allFields = field.Fields(IService).omit(*ServiceDetails.omit_addfields)
+    factory = Service
+    omitFields = ServiceDetails.omit_addfields
+    attrInterface = IService
+    addInterface = IAddService
+    _session_key = 'org.ict_ok.components.service'
+    allFields = fieldsForFactory(factory, omitFields, [])
+    addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
-    factory = Service
-    attrInterface = IService
-    _session_key = 'org.ict_ok.components.service'
 
 
 class EditServiceForm(EditForm):
     """ Edit for for net """
     label = _(u'Service Edit Form')
-    fields = field.Fields(IService).omit(*ServiceDetails.omit_editfields)
+    factory = Service
+    omitFields = ServiceDetails.omit_addfields
+    fields = fieldsForFactory(factory, omitFields)
     fields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
@@ -132,8 +140,7 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    allFields = field.Fields(IService)
     attrInterface = IService
     factory = Service
     factoryId = u'org.ict_ok.components.service.service.Service'
-
+    allFields = fieldsForInterface(attrInterface, [])
