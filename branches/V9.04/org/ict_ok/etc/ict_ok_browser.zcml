@@ -19,7 +19,7 @@
     <include package="org.ict_ok.admin_utils.generators.smokeping.browser" />
     <include package="org.ict_ok.admin_utils.graphviz.browser" />
     <include package="org.ict_ok.admin_utils.idchooser.browser" />
-    <include package="org.ict_ok.admin_utils.linux_ha.browser" />
+    <!--<include package="org.ict_ok.admin_utils.linux_ha.browser" /> -->
     <include package="org.ict_ok.admin_utils.netscan.browser" />
     <include package="org.ict_ok.admin_utils.netscan.nmap.browser" />
     <include package="org.ict_ok.admin_utils.netscan.simple1.browser" />
@@ -63,6 +63,7 @@
     <include package="org.ict_ok.components.patchport.browser" />
     <include package="org.ict_ok.components.rack.browser" />
     <include package="org.ict_ok.components.pc.browser" />
+    <include package="org.ict_ok.components.physical_link.browser" />
     <include package="org.ict_ok.components.ipc.browser" />
 
 </configure>

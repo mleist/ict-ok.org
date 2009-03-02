@@ -104,6 +104,8 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.pc"
              file="security.zcml" />
+    <include package="org.ict_ok.components.physical_link"
+             file="security.zcml" />
     <include package="org.ict_ok.components.ipc"
              file="security.zcml" />
 </configure>
