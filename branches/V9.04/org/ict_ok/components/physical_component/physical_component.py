@@ -29,14 +29,13 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.physical_component.interfaces import \
-    IPhysicalComponent, IPhysicalComponentFolder, IAddPhysicalComponent
+    IPhysicalComponent
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.components.room.room import Room_PhysicalComponents_RelManager
 
 
 class PhysicalComponent(Component):
@@ -45,6 +44,22 @@ class PhysicalComponent(Component):
     """
     implements(IPhysicalComponent)
     shortName = "physical_component"
+
+    user = FieldProperty(IPhysicalComponent['user'])
+    manufacturer = FieldProperty(IPhysicalComponent['manufacturer'])
+    modelType = FieldProperty(IPhysicalComponent['modelType'])
+    vendor = FieldProperty(IPhysicalComponent['vendor'])
+    deliveryDate = FieldProperty(IPhysicalComponent['deliveryDate'])
+    room = FieldProperty(IPhysicalComponent['room'])
+    serialNumber = FieldProperty(IPhysicalComponent['serialNumber'])
+    inv_id = FieldProperty(IPhysicalComponent['inv_id'])
+    documentNumber = FieldProperty(IPhysicalComponent['documentNumber'])
+    productionState = FieldProperty(IPhysicalComponent['productionState'])
+
+    fullTextSearchFields = ['user', 'manufacturer', 'modelType',
+                            'vendor', 'serialNumber', 'inv_id',
+                            'documentNumber']
+    fullTextSearchFields.extend(Component.fullTextSearchFields)
 
     def __init__(self, **data):
         """
