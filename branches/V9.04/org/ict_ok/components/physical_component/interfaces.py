@@ -15,7 +15,7 @@
 __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 
 # zope imports
-from zope.interface import Interface
+from zope.interface import Interface, Invalid, invariant
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, Date, Int, TextLine
 
@@ -88,3 +88,8 @@ class IPhysicalComponent(Interface):
         default = 'production',
         readonly = False,
         required = True)
+
+    @invariant
+    def ensureRoomInvariants(event):
+        if hasattr(event.__context__, 'ensureInvariants'):
+            event.__context__.ensureInvariants(event)

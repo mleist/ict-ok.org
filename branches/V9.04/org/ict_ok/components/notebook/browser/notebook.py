@@ -77,8 +77,9 @@ class NotebookFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
     omit_addfields = ComponentDetails.omit_addfields + ['requirement']
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
-    fields = field.Fields(INotebook).omit(*NotebookDetails.omit_viewfields)
     attrInterface = INotebook
+    factory = Notebook
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 

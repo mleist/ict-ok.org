@@ -72,6 +72,8 @@ class IndustrialComputerFolderDetails(ComponentDetails):
     omit_editfields = ComponentDetails.omit_editfields + []
     fields = field.Fields(IIndustrialComputer).omit(*IndustrialComputerDetails.omit_viewfields)
     attrInterface = IIndustrialComputer
+    factory = IndustrialComputer
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 

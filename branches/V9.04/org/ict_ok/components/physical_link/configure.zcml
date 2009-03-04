@@ -131,6 +131,11 @@
         factory=".physical_link.OSIModel"
         permission="org.ict_ok.components.interface.View"
     />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".physical_link.PhysicalLinkMediaTypes"
+        name="PhysicalLinkMediaTypes"
+        />
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"

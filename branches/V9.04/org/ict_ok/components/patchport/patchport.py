@@ -17,6 +17,7 @@ __version__ = "$Id: template.py_cog 399M 2009-02-02 22:29:31Z (lokal) $"
 
 # zope imports
 from zope.interface import implements
+from zope.interface import Invalid
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.folder import Folder
 
@@ -111,6 +112,16 @@ class PatchPort(PhysicalComponent):
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
+
+    def ensureInvariants(self, formObj):
+        if hasattr(formObj, 'room'):
+            if self.patchpanel is not None and \
+               self.patchpanel.room  is not None and \
+               self.patchpanel.room != formObj.room:
+                raise Invalid(
+                    "Port (%s) and Panel (%s) in different rooms." % \
+                    (formObj.room.ikName, self.patchpanel.room.ikName))
+               
 
 
 class PatchPortFolder(Superclass, Folder):

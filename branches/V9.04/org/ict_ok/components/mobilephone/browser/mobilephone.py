@@ -71,6 +71,8 @@ class MobilePhoneFolderDetails(ComponentDetails):
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
     fields = field.Fields(IMobilePhone).omit(*MobilePhoneDetails.omit_viewfields)
     attrInterface = IMobilePhone
+    factory = MobilePhone
+    fields = fieldsForFactory(factory, omit_editfields)
 
 
 # --------------- forms ------------------------------------

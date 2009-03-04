@@ -53,6 +53,8 @@ from org.ict_ok.components.superclass.browser.superclass import \
     getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
 from org.ict_ok.components.physical_connector.interfaces import \
     IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
+from org.ict_ok.components.physical_component.browser.physical_component import \
+    PhysicalComponentDetails
 from org.ict_ok.osi.interfaces import IOSIModel
 from org.ict_ok.osi.interfaces import IPhysicalLayer
 
@@ -72,15 +74,15 @@ class MSubAddInterface(GlobalMenuSubItem):
 # --------------- object details ---------------------------
 
 
-class InterfaceDetails(ComponentDetails):
+class InterfaceDetails(PhysicalComponentDetails):
     """ Class for Web-Browser-Details
     """
     #omit_viewfields = ComponentDetails.omit_viewfields + ['ipv4List']
     #omit_addfields = ComponentDetails.omit_addfields + ['ipv4List']
     #omit_editfields = ComponentDetails.omit_editfields + ['ipv4List']
-    omit_viewfields = ComponentDetails.omit_viewfields + ['host21']
-    omit_addfields = ComponentDetails.omit_addfields + ['host21']
-    omit_editfields = ComponentDetails.omit_editfields + ['host21']
+    omit_viewfields = PhysicalComponentDetails.omit_viewfields + ['host21']
+    omit_addfields = PhysicalComponentDetails.omit_addfields + ['host21']
+    omit_editfields = PhysicalComponentDetails.omit_editfields + ['host21']
     
     def state(self):
         """
@@ -120,6 +122,8 @@ class InterfaceFolderDetails(ComponentDetails):
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
     fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_viewfields)
     attrInterface = IInterface
+    factory = Interface
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 

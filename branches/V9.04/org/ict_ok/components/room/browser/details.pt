@@ -16,11 +16,11 @@
         </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/devices|nothing">
-            <td i18n:translate="">Devices</td>
+            tal:condition="context/physicalComponents|nothing">
+            <td i18n:translate="">Physical components</td>
             <td>
                 <ul>
-                    <li tal:repeat="obj context/devices">
+                    <li tal:repeat="obj context/physicalComponents">
                         <span tal:omit-tag=""
                               tal:content="structure python: view.getHrefTitle(obj)" />
                         <span tal:omit-tag=""

@@ -7,6 +7,33 @@
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
         </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.length is not None">
+            <td i18n:translate="">Length</td>
+            <td tal:content="context/length" />
+        </tr>
+        
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.maxLength is not None">
+            <td i18n:translate="">Maximum length</td>
+            <td tal:content="context/maxLength" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.mediaType is not None">
+            <td i18n:translate="">Media type</td>
+            <td tal:content="python: view.vocabValue('PhysicalLinkMediaTypes',
+                                                     context.mediaType)" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.wired is not None">
+            <td i18n:translate="">wired</td>
+            <td tal:content="context/wired" />
+        </tr>
+        
         <!--tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.interface is not None">
             <td i18n:translate="">Connected interface</td>

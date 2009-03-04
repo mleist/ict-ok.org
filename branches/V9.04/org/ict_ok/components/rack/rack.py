@@ -35,8 +35,10 @@ from org.ict_ok.components.interfaces import \
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.components.room.room import Room_Racks_RelManager
 from org.ict_ok.components.patchpanel.interfaces import IPatchPanel
+from org.ict_ok.components.switch.interfaces import ISwitch
+from org.ict_ok.components.physical_component.physical_component import \
+    PhysicalComponent
 
 def AllRackTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IRack)
@@ -53,10 +55,14 @@ Rack_PatchPanels_RelManager = \
                             IPatchPanel['rack'],
                             relType='rack:patchpanels')
 
+Rack_Switches_RelManager = \
+       FieldRelationManager(IRack['patchpanels'],
+                            ISwitch['rack'],
+                            relType='rack:switches')
 
 
 
-class Rack(Component):
+class Rack(PhysicalComponent):
     """
     the template instance
     """
@@ -66,11 +72,11 @@ class Rack(Component):
     __name__ = __parent__ = None
 
     height = FieldProperty(IRack['height'])
-    room = RelationPropertyIn(Room_Racks_RelManager)
     patchpanels = RelationPropertyOut(Rack_PatchPanels_RelManager)
+    switches = RelationPropertyOut(Rack_Switches_RelManager)
 
     fullTextSearchFields = []
-    fullTextSearchFields.extend(Component.fullTextSearchFields)
+    fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
         
 
 
@@ -78,7 +84,7 @@ class Rack(Component):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        PhysicalComponent.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(Rack)
         for (name, value) in data.items():
             if name in IRack.names() and \
@@ -87,6 +93,7 @@ class Rack(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        PhysicalComponent.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(Rack)
         for (name, value) in data.items():
             if name in refAttributeNames:

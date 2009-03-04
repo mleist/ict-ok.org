@@ -42,7 +42,7 @@ from org.ict_ok.components.component import \
 #    return AllComponentTemplates(dummy_context, IPhysicalConnector)
 
 def AllPhysicalConnectors(dummy_context):
-    return AllComponents(dummy_context, IPhysicalConnector)
+    return AllComponents(dummy_context, IPhysicalConnector, additionalAttrNames=['device', 'room'])
 
 #def AllUnusedOrUsedRoomPhysicalConnectors(dummy_context):
 #    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'room')
@@ -55,7 +55,7 @@ def AllPhysicalConnectors(dummy_context):
 
 
 def AllUnusedOrUsedPhysikalLinkPhysicalConnectors(dummy_context):
-    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'links')
+    return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'links', additionalAttrNames=['device', 'room'])
 
 
 #PhysicalConnector_PhysicalConnector_RelManager = \

@@ -15,11 +15,13 @@
 __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 
 # zope imports
-from zope.interface import Interface
+from zope.interface import Attribute, Interface, Invalid, invariant
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, List, TextLine
+from zope.schema import Bool, Choice, List, TextLine
 
 # ict_ok.org imports
+from org.ict_ok.schema.physicalvalid import PhysicalQuantity
+from org.ict_ok.libs.physicalquantity import convertQuantity
 
 _ = MessageFactory('org.ict_ok')
 
@@ -27,9 +29,38 @@ _ = MessageFactory('org.ict_ok')
 class IPhysicalLink(Interface):
     """A PhysicalConnector object."""
 
+    length = PhysicalQuantity(
+        max_length = 10,
+        title = _(u"Length"),
+        description = _(u"The length of the physical link."),
+        required = False)
+
+    maxLength = PhysicalQuantity(
+        max_length = 10,
+        title = _(u"Maximum length"),
+        description = _(u"The maximum length of the physical link."),
+        required = False)
+
+    mediaType = Choice(
+        title=_(u"Media type"),
+        description=_(u"The MediaType property defines the particular type "
+                      u"of Media through which transmission signals pass."),
+        default=6,
+        required = False,
+        vocabulary = "PhysicalLinkMediaTypes")
+    
+    wired = Bool(
+        title = _(u"Physical link is cable"),
+        description = _(u"﻿Boolean indicating whether the PhysicalLink is an "
+                        u"actual cable (TRUE) or a "
+                        u"wireless connection (FALSE)."),
+        default = True,
+        required = False)
+
+
     connectorPinout = TextLine(
         max_length = 80,
-        title = _("Connector pinout"),
+        title = _(u"Connector pinout"),
         required = False)
 
 #    room = Choice(
@@ -49,6 +80,15 @@ class IPhysicalLink(Interface):
         value_type=Choice(vocabulary='AllUnusedOrUsedPhysikalLinkPhysicalConnectors'),
         default=[],
         required = False)
+
+    @invariant
+    def ensureLengthUnit(link):
+        if link.length is not None:
+            physicalInput = convertQuantity(link.length)
+            if not physicalInput.isLength():
+                raise Invalid(
+                    "No length specification: '%s'." % \
+                    (link.length))
     
 
 

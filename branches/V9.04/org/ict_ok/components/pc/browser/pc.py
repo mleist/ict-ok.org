@@ -70,8 +70,9 @@ class PersonalComputerFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
-    fields = field.Fields(IPersonalComputer).omit(*PersonalComputerDetails.omit_viewfields)
     attrInterface = IPersonalComputer
+    factory = PersonalComputer
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 

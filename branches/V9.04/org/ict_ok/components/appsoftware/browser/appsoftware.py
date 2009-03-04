@@ -83,7 +83,7 @@ class ApplicationSoftwareFolderDetails(SoftwareComponentFolderDetails):
     
 #    fields = field.Fields(IApplicationSoftware).omit(*ApplicationSoftwareDetails.omit_viewfields)
     factory = ApplicationSoftware
-    omitFields = ApplicationSoftwareDetails.omit_viewfields
+    omitFields = ApplicationSoftwareDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
     attrInterface = IApplicationSoftware
 

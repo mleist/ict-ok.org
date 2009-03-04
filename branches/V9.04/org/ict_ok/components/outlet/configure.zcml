@@ -23,6 +23,9 @@
             interface="zope.app.container.interfaces.IContentContainer"
             />
         <implements
+            interface="org.ict_ok.osi.interfaces.IPhysicalLayer"
+            />
+        <implements
             interface="org.ict_ok.components.physical_connector.interfaces.IPhysicalConnector"
             />
         <factory

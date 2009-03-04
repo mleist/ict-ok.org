@@ -71,8 +71,9 @@ class PatchPanelFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
-    fields = field.Fields(IPatchPanel).omit(*PatchPanelDetails.omit_viewfields)
     attrInterface = IPatchPanel
+    factory = PatchPanel
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 
@@ -112,6 +113,8 @@ class AddPatchPanelForm(AddComponentForm):
                 dataVect = {}
                 dataVect['ikName'] = u'%s-%02d' % (obj.ikName, i)
                 dataVect['patchpanel'] = obj
+                if obj.room is not None:
+                    dataVect['room'] = obj.room
                 newObj = PatchPort(**dataVect)
                 newObj.__post_init__()
                 IBrwsOverview(newObj).setTitle(dataVect['ikName'])

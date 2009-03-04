@@ -108,4 +108,6 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.ipc"
              file="security.zcml" />
+    <include package="org.ict_ok.components.switch"
+             file="security.zcml" />
 </configure>

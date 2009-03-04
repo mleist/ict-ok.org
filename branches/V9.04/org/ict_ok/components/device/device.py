@@ -36,7 +36,6 @@ from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.components.room.room import Room_Devices_RelManager
 from org.ict_ok.components.physical_component.physical_component import \
     PhysicalComponent
 
@@ -69,7 +68,7 @@ class Device(PhysicalComponent):
     cpuType = FieldProperty(IDevice['cpuType'])
     memsize = FieldProperty(IDevice['memsize'])
 
-    room = RelationPropertyIn(Room_Devices_RelManager)
+#    room = RelationPropertyIn(Room_Devices_RelManager)
     interfaces = RelationPropertyOut(Device_Interface_RelManager)
     appsoftwares = RelationPropertyOut(Device_AppSoftware_RelManager)
     osoftwares = RelationPropertyOut(Device_OSoftware_RelManager)

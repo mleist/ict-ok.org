@@ -69,8 +69,9 @@ class ServiceFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
     omit_addfields = ComponentDetails.omit_addfields + ['requirement']
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
-    fields = field.Fields(IService).omit(*ServiceDetails.omit_viewfields)
     attrInterface = IService
+    factory = Service
+    fields = fieldsForFactory(factory, omit_editfields)
 
 
 class AddServiceClass(BrowserPagelet):

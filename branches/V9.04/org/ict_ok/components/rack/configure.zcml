@@ -36,6 +36,14 @@
             />
         <require
             permission="org.ict_ok.components.rack.View"
+            interface="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.rack.Edit"
+            set_schema="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.rack.View"
             interface="org.ict_ok.components.interfaces.IComponent"
             />
         <require

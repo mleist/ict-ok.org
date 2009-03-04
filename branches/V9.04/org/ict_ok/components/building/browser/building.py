@@ -72,6 +72,8 @@ class BuildingFolderDetails(ComponentDetails):
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
     fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_viewfields)
     attrInterface = IBuilding
+    factory = Building
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 

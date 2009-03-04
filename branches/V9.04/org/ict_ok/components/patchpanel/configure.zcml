@@ -35,20 +35,20 @@
             set_schema=".interfaces.IPatchPanel"
             />
         <require
-            permission="org.ict_ok.components.patchpanel.View"
-            interface="org.ict_ok.components.interfaces.IComponent"
-            />
-        <require
-            permission="org.ict_ok.components.patchpanel.Edit"
-            set_schema="org.ict_ok.components.interfaces.IComponent"
-            />
-        <require
             permission="org.ict_ok.components.interface.View"
             interface="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
             />
         <require
             permission="org.ict_ok.components.interface.Edit"
             set_schema="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.patchpanel.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.patchpanel.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
             />
         <require
             permission="org.ict_ok.components.patchpanel.View"
@@ -149,6 +149,8 @@
         component=".patchpanel.AllUnusedOrUsedRackPatchPanels"
         name="AllUnusedOrUsedRackPatchPanels"
     />
+
+    <subscriber handler=".adapter.events.update" />
 
                     
     <include package=".generations" />

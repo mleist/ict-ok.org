@@ -32,13 +32,6 @@ class IRack(Interface):
         description = _(u'Height of the rack'),
         required = False)
         
-
-    room = Choice(
-        title = _(u'Room'),
-        vocabulary = 'AllRooms',
-        required = False)
-        
-
     patchpanels = List(
         title = _(u'Patchpanel'),
         value_type=Choice(vocabulary='AllUnusedOrUsedRackPatchPanels'),

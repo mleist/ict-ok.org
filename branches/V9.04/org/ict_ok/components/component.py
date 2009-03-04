@@ -53,7 +53,10 @@ def AllComponents(dummy_context, interface, additionalAttrNames=None):
             myString = u"%s" % (oobj.object.getDcTitle())
             if additionalAttrNames is not None:
                 for additionalAttrName in additionalAttrNames:
-                    additionalAttribute = getattr(oobj.object, additionalAttrName)
+                    try:
+                        additionalAttribute = getattr(oobj.object, additionalAttrName)
+                    except AttributeError:
+                        additionalAttribute = None
                     if additionalAttribute is not None:
                         if hasattr(additionalAttribute, 'ikName'):
                             if len(additionalAttribute.ikName) > 70:
@@ -93,7 +96,10 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
                     myString = u"%s" % (oobj.object.getDcTitle())
                     if additionalAttrNames is not None:
                         for additionalAttrName in additionalAttrNames:
-                            additionalAttribute = getattr(oobj.object, additionalAttrName)
+                            try:
+                                additionalAttribute = getattr(oobj.object, additionalAttrName)
+                            except AttributeError:
+                                additionalAttribute = None
                             if additionalAttribute is not None:
                                 if hasattr(additionalAttribute, 'ikName'):
                                     if len(additionalAttribute.ikName) > 70:
@@ -114,11 +120,15 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
                                    token=oid,
                                    title=myString))
                 else:
-                    if getattr(oobj.object, obj_attr_name) == dummy_context:
+                    if getattr(oobj.object, obj_attr_name) == dummy_context or \
+                       dummy_context in getattr(oobj.object, obj_attr_name):
                         myString = u"%s" % (oobj.object.getDcTitle())
                         if additionalAttrNames is not None:
                             for additionalAttrName in additionalAttrNames:
-                                additionalAttribute = getattr(oobj.object, additionalAttrName)
+                                try:
+                                    additionalAttribute = getattr(oobj.object, additionalAttrName)
+                                except AttributeError:
+                                    additionalAttribute = None
                                 if additionalAttribute is not None:
                                     if hasattr(additionalAttribute, 'ikName'):
                                         if len(additionalAttribute.ikName) > 70:

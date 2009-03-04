@@ -79,6 +79,9 @@ class PhysicalLinkFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
     omit_addfields = ComponentDetails.omit_addfields + ['requirement']
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    attrInterface = IPhysicalLink
+    factory = PhysicalLink
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 

@@ -67,8 +67,9 @@ class OutletFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
     omit_addfields = ComponentDetails.omit_addfields + ['requirement']
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
-    fields = field.Fields(IOutlet).omit(*OutletDetails.omit_viewfields)
     attrInterface = IOutlet
+    factory = Outlet
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 

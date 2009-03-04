@@ -65,8 +65,9 @@ class RackFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
-    fields = field.Fields(IRack).omit(*RackDetails.omit_viewfields)
     attrInterface = IRack
+    factory = Rack
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 

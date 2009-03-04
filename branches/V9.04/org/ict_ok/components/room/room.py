@@ -63,15 +63,24 @@ def AllUnusedOrUsedBuildingRooms(dummy_context):
                                      'building', ['building'])
 
 
-Room_Devices_RelManager = FieldRelationManager(IRoom['devices'],
+#Room_Devices_RelManager = FieldRelationManager(IRoom['devices'],
+#                                               IPhysicalComponent['room'],
+#                                               relType='room:devices')
+Room_Devices_RelManager = FieldRelationManager(IRoom['physicalComponents'],
                                                IPhysicalComponent['room'],
                                                relType='room:devices')
 #Room_PhysicalConnectors_RelManager = FieldRelationManager(IRoom['physicalConnectors'],
 #                                                          IPhysicalConnector['room'],
 #                                                          relType='room:physicalConnectors')
-Room_Racks_RelManager = FieldRelationManager(IRoom['racks'],
-                                             IPhysicalComponent['room'],
-                                             relType='room:racks')
+#Room_Racks_RelManager = FieldRelationManager(IRoom['racks'],
+#                                             IPhysicalComponent['room'],
+#                                             relType='room:racks')
+
+
+Room_PhysicalComponents_RelManager = FieldRelationManager(IRoom['physicalComponents'],
+                                                          IPhysicalComponent['room'],
+                                                          relType='room:physicalcomponents')
+
 
 
 class Room(Component):
@@ -87,9 +96,10 @@ class Room(Component):
     coordinates = FieldProperty(IRoom['coordinates'])
 
     building = RelationPropertyIn(Building_Rooms_RelManager)
-    devices = RelationPropertyOut(Room_Devices_RelManager)
+ #   devices = RelationPropertyOut(Room_Devices_RelManager)
 #    physicalConnectors = RelationPropertyOut(Room_PhysicalConnectors_RelManager)
-    racks = RelationPropertyOut(Room_Racks_RelManager)
+#    racks = RelationPropertyOut(Room_Racks_RelManager)
+    physicalComponents = RelationPropertyOut(Room_PhysicalComponents_RelManager)
 
     def __init__(self, **data):
         """

@@ -31,4 +31,21 @@
         name="AllUnusedOrUsedInterfacePhysicalComponents"
     / -->
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".physical_component.AllPhysicalComponents"
+        name="AllPhysicalComponents"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".physical_component.AllPhysicalComponentTemplates"
+        name="AllPhysicalComponentTemplates"
+    />
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".physical_component.AllUnusedOrUsedRoomPhysicalComponents"
+        name="AllUnusedOrUsedRoomPhysicalComponents"
+    />
+
 </configure>

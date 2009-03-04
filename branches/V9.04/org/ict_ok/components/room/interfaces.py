@@ -32,18 +32,23 @@ class IRoom(Interface):
         required=False
         )
 
-    devices = List(title=_(u"Devices"),
-        value_type=Choice(vocabulary='AllUnusedOrUsedRoomDevices'),
-        required=False,
-        default=[])
-    
+#    devices = List(title=_(u"Devices"),
+#        value_type=Choice(vocabulary='AllUnusedOrUsedRoomDevices'),
+#        required=False,
+#        default=[])
+#    
 #    physicalConnectors = List(title=_(u"Physical connectors"),
 #        value_type=Choice(vocabulary='AllUnusedOrUsedRoomPhysicalConnectors'),
 #        required=False,
 #        default=[])
     
-    racks = List(title=_(u"Racks"),
-        value_type=Choice(vocabulary='AllUnusedOrUsedRoomRacks'),
+#    racks = List(title=_(u"Racks"),
+#        value_type=Choice(vocabulary='AllUnusedOrUsedRoomRacks'),
+#        required=False,
+#        default=[])
+#    
+    physicalComponents = List(title=_(u"Physical components"),
+        value_type=Choice(vocabulary='AllUnusedOrUsedRoomPhysicalComponents'),
         required=False,
         default=[])
     

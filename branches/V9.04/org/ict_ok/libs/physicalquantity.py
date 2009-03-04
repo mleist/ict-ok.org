@@ -32,6 +32,9 @@ class PhysicalQuantity(magnitude.Magnitude):
     """
     our own wrapper class
     """
+    def isLength(self):
+        # ['m', 's', 'K', 'kg', 'A', 'mol', 'cd', '$', 'bit']
+        return self.unit == [1,0,0,0,0,0,0,0,0]
 
 def physq(value, unit='', ounit=''):
     """Builds a Magnitude from a number and a units string"""

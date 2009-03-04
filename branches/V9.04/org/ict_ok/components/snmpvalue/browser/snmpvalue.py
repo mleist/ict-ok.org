@@ -161,8 +161,9 @@ class SnmpValueFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
     omit_addfields = ComponentDetails.omit_addfields + ['requirement']
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
-    fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_viewfields)
     attrInterface = ISnmpValue
+    factory = SnmpValue
+    fields = fieldsForFactory(factory, omit_editfields)
 
 
 class SnmpValueDisplay(SnmpValueDetails):

@@ -65,5 +65,6 @@
     <include package="org.ict_ok.components.pc.browser" />
     <include package="org.ict_ok.components.physical_link.browser" />
     <include package="org.ict_ok.components.ipc.browser" />
+    <include package="org.ict_ok.components.switch.browser" />
 
 </configure>

@@ -36,6 +36,17 @@ from org.ict_ok.components.component import Component
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+from org.ict_ok.components.room.room import Room_PhysicalComponents_RelManager
+
+
+def AllPhysicalComponentTemplates(dummy_context):
+    return AllComponentTemplates(dummy_context, IPhysicalComponent)
+
+def AllPhysicalComponents(dummy_context):
+    return AllComponents(dummy_context, IPhysicalComponent)
+
+def AllUnusedOrUsedRoomPhysicalComponents(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IPhysicalComponent, 'room')
 
 
 class PhysicalComponent(Component):
@@ -50,12 +61,14 @@ class PhysicalComponent(Component):
     modelType = FieldProperty(IPhysicalComponent['modelType'])
     vendor = FieldProperty(IPhysicalComponent['vendor'])
     deliveryDate = FieldProperty(IPhysicalComponent['deliveryDate'])
-    room = FieldProperty(IPhysicalComponent['room'])
+    #room = FieldProperty(IPhysicalComponent['room'])
     serialNumber = FieldProperty(IPhysicalComponent['serialNumber'])
     inv_id = FieldProperty(IPhysicalComponent['inv_id'])
     documentNumber = FieldProperty(IPhysicalComponent['documentNumber'])
     productionState = FieldProperty(IPhysicalComponent['productionState'])
 
+    room = RelationPropertyIn(Room_PhysicalComponents_RelManager)
+    
     fullTextSearchFields = ['user', 'manufacturer', 'modelType',
                             'vendor', 'serialNumber', 'inv_id',
                             'documentNumber']

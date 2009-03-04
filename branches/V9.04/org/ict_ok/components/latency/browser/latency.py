@@ -129,8 +129,9 @@ class LatencyFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
     omit_addfields = ComponentDetails.omit_addfields + ['requirement']
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
-    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_viewfields)
     attrInterface = ILatency
+    factory = Latency
+    fields = fieldsForFactory(factory, omit_editfields)
 
 
 class LatencyDisplay(LatencyDetails):

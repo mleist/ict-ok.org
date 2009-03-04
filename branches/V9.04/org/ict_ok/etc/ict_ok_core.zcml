@@ -64,6 +64,7 @@
 
     <include package="org.ict_ok.components.device" />
     <include package="org.ict_ok.components.physical_connector" />
+    <include package="org.ict_ok.components.physical_component" />
 
     <include package="org.ict_ok.components.mobilephone" />
     <include package="org.ict_ok.components.outlet" />
@@ -76,5 +77,6 @@
     <include package="org.ict_ok.components.pc" />
     <include package="org.ict_ok.components.physical_link" />
     <include package="org.ict_ok.components.ipc" />
+    <include package="org.ict_ok.components.switch" />
 
 </configure>

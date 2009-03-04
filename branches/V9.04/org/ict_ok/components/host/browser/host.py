@@ -234,6 +234,8 @@ class HostFolderDetails(ComponentDetails):
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
     fields = field.Fields(IHost).omit(*HostDetails.omit_viewfields)
     attrInterface = IHost
+    factory = Host
+    fields = fieldsForFactory(factory, omit_editfields)
 
 
 class AddHostClass(BrowserPagelet):

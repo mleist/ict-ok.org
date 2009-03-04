@@ -15,7 +15,7 @@
 __version__ = "$Id: interfaces.py_cog 411M 2009-02-02 23:31:12Z (lokal) $"
 
 # zope imports
-from zope.interface import Interface
+from zope.interface import Interface, Invalid, invariant
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, Bytes, List
 
@@ -51,9 +51,26 @@ class IPatchPort(Interface):
 #        readonly = False,
 #        required = False)
 
+#    @invariant
+#    def ensurePortAndPanelInSameRoom(event):
+#        import pdb
+#        pdb.set_trace()
+#        if event.room is not None and \
+#           event.patchpanel is not None and \
+#           event.patchpanel.room is not None and \
+#           event.patchpanel.room != event.room:
+#            raise Invalid(
+#                "Port (%s) and Panel (%s) in different rooms." % \
+#                event.room.ikName, event.patchpanel.room.ikName)
+
     def trigger_online():
         """
         trigger workflow
+        """
+        
+    def ensureInvariants(formObj):
+        """
+        invariants for the patchport
         """
 
 

@@ -23,7 +23,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
-from org.ict_ok.components.physical_component.interfaces import IPhysicalComponent, IAddPhysicalComponent
+from org.ict_ok.components.physical_component.interfaces import IPhysicalComponent
 from org.ict_ok.components.physical_component.physical_component import PhysicalComponent
 from org.ict_ok.components.browser.component import ComponentDetails
 

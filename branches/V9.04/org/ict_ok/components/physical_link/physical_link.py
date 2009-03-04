@@ -19,6 +19,7 @@ __version__ = "$Id: template.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.folder import Folder
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -43,6 +44,30 @@ from org.ict_ok.components.component import \
 #def AllPhysicalConnectorTemplates(dummy_context):
 #    return AllComponentTemplates(dummy_context, IPhysicalConnector)
 
+def PhysicalLinkMediaTypes(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        0: u"Unknown",
+        1: u"Other",
+        2: u"Cat1",
+        3: u"Cat2",
+        4: u"Cat3",
+        5: u"Cat4",
+        6: u"Cat5",
+        7: u"50-ohm Coaxial",
+        8: u"75-ohm Coaxial",
+        9: u"100-ohm Coaxial",
+        10: u"Fiber-optic",
+        11: u"UTP",
+        12: u"STP",
+        13: u"Ribbon Cable",
+        14: u"Twinaxial",
+        15: u"Optical 9um",
+        16: u"Optical 50um",
+        17: u"Optical 62.5um",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)
 
 
 def AllPhysicalLinkTemplates(dummy_context):
@@ -97,7 +122,12 @@ class PhysicalLink(Component):
     # for ..Contained we have to:
     __name__ = __parent__ = None
 
+    length = FieldProperty(IPhysicalLink['length'])
+    maxLength = FieldProperty(IPhysicalLink['maxLength'])
+    mediaType = FieldProperty(IPhysicalLink['mediaType'])
+    wired = FieldProperty(IPhysicalLink['wired'])
     connectorPinout = FieldProperty(IPhysicalLink['connectorPinout'])
+
     connectors = RelationPropertyOut(PhysicalLinks_PhysicalConnectors_RelManager)
 
     fullTextSearchFields = ['connectorPinout']

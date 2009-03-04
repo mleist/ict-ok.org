@@ -70,8 +70,9 @@ class OperatingSoftwareFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
     omit_addfields = ComponentDetails.omit_addfields + ['requirement']
     omit_editfields = ComponentDetails.omit_editfields + ['requirement']
-    fields = field.Fields(IOperatingSoftware).omit(*OperatingSoftwareDetails.omit_viewfields)
     attrInterface = IOperatingSoftware
+    factory = OperatingSoftware
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 
