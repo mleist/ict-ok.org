@@ -161,6 +161,7 @@ class CreatePhysicalLinksForm(EditForm):
                 dataVect = {}
                 dataVect['ikName'] = u'%s -/- %s' % (con1.ikName, con2.ikName)
                 dataVect['connectors'] = [con1, con2]
+                dataVect['requirements'] = []
                 newObj = PhysicalLink(**dataVect)
                 newObj.__post_init__()
                 IBrwsOverview(newObj).setTitle(dataVect['ikName'])
