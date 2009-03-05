@@ -53,6 +53,30 @@
                             permission="org.ict_ok.components.%(filename)s.Edit"
                             set_schema=".interfaces.I%(componentname)s"
                             />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.View"
+                            interface="org.ict_ok.components.interfaces.IComponent"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.Edit"
+                            set_schema="org.ict_ok.components.interfaces.IComponent"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.View"
+                            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.Edit"
+                            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.View"
+                            interface="zope.app.container.interfaces.IReadContainer"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.Edit"
+                            interface="zope.app.container.interfaces.IWriteContainer"
+                            />
                     </class>
 
                     <class class=".%(filename)s.%(componentname)sFolder">
@@ -79,6 +103,22 @@
                             />
                         <require
                             permission="org.ict_ok.components.%(filename)s.View"
+                            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.Edit"
+                            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.View"
+                            interface="zope.app.container.interfaces.IReadContainer"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.Edit"
+                            interface="zope.app.container.interfaces.IWriteContainer"
+                            />
+                        <require
+                            permission="org.ict_ok.components.%(filename)s.View"
                             interface="org.ict_ok.components.interfaces.IImportXlsData"
                             />
                         <require
@@ -102,6 +142,10 @@
                     <adapter
                         factory=".adapter.rpt_pdf.RptPdf"
                         permission="org.ict_ok.admin_utils.reports.generate.pdf"
+                    />
+                    <adapter
+                        factory=".adapter.osi.OSIModel"
+                        permission="org.ict_ok.components.%(filename)s.View"
                     />
 
                     <utility

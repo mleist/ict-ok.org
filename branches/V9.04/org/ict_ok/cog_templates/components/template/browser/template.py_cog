@@ -36,6 +36,7 @@ from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 #[[[cog
 #   cog.out('''\
 #   from %(longpath_interface)s import I%(componentname)s, IAdd%(componentname)s
@@ -89,8 +90,10 @@ _ = MessageFactory('org.ict_ok')
 #       omit_viewfields = ComponentDetails.omit_viewfields + []
 #       omit_addfields = ComponentDetails.omit_addfields + []
 #       omit_editfields = ComponentDetails.omit_editfields + []
-#       fields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_viewfields)
 #       attrInterface = I%(componentname)s
+#       factory = %(componentname)s
+#       omitFields = %(componentname)sDetails.omit_viewfields
+#       fields = fieldsForFactory(factory, omitFields)
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
@@ -103,25 +106,31 @@ _ = MessageFactory('org.ict_ok')
 #   class Details%(componentname)sForm(DisplayForm):
 #       """ Display form for the object """
 #       label = _(u'settings of %(moduletitle)s')
-#       fields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_viewfields)
+#       factory = %(componentname)s
+#       omitFields = %(componentname)sDetails.omit_viewfields
+#       fields = fieldsForFactory(factory, omitFields)
 #
 #
 #   class Add%(componentname)sForm(AddComponentForm):
 #       """Add %(moduletitle)s form"""
 #       label = _(u'Add %(moduletitle)s')
-#       addFields = field.Fields(IAdd%(componentname)s)
-#       allFields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_addfields)
-#       allFields['isTemplate'].widgetFactory = \
-#           checkbox.SingleCheckBoxFieldWidget
 #       factory = %(componentname)s
 #       attrInterface = I%(componentname)s
+#       addInterface = IAdd%(componentname)s
+#       omitFields = %(componentname)sDetails.omit_addfields
+#       allFields = fieldsForFactory(factory, omitFields)
+#       addFields = fieldsForInterface(addInterface, [])
 #       _session_key = 'org.ict_ok.components.%(filename)s'
+#       allFields['isTemplate'].widgetFactory = \\
+#           checkbox.SingleCheckBoxFieldWidget
 #
 #
 #   class Edit%(componentname)sForm(EditForm):
 #       """ Edit for %(moduletitle)s """
 #       label = _(u'%(moduletitle)s Edit Form')
-#       fields = field.Fields(I%(componentname)s).omit(*%(componentname)sDetails.omit_editfields)
+#       factory = %(componentname)s
+#       omitFields = %(componentname)sDetails.omit_editfields
+#       fields = fieldsForFactory(factory, omitFields)
 #
 #
 #   class Delete%(componentname)sForm(DeleteForm):
@@ -138,10 +147,11 @@ _ = MessageFactory('org.ict_ok')
 #   
 #   
 #   class ImportXlsDataForm(ImportXlsDataComponentForm):
-#       allFields = field.Fields(I%(componentname)s)
-#       attrInterface = I%(componentname)s
 #       factory = %(componentname)s
+#       attrInterface = I%(componentname)s
+#       omitFields = %(componentname)sDetails.omit_viewfields
 #       factoryId = u'org.ict_ok.components.%(filename)s.%(filename)s.%(componentname)s'
+#       allFields = fieldsForInterface(attrInterface, [])
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]

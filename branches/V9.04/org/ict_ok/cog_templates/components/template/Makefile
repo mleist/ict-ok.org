@@ -39,6 +39,7 @@ gen:	configure.zcml \
 	adapter/__init__.py \
 	adapter/rpt_pdf.py \
 	adapter/search.py \
+    adapter/osi.py \
 	adapter/state.py
 
 clean:
@@ -60,6 +61,7 @@ clean:
 	@rm -vf adapter/__init__.py
 	@rm -vf adapter/rpt_pdf.py
 	@rm -vf adapter/search.py
+	@rm -vf adapter/osi.py
 	@rm -vf adapter/state.py
 	@rm -vf $(FILENAME_SH)_cog
 	@rm -vf browser/$(FILENAME_SH)_cog

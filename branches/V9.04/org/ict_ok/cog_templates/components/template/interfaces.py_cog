@@ -34,16 +34,12 @@ from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, Int, List, TextLine
 from zope.app.folder.interfaces import IFolder
 
-# ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.interfaces import IComponent
-
 _ = MessageFactory('org.ict_ok')
 
 
 #[[[cog
 #   cog.out('''\
-#   class I%(componentname)s(IComponent):
+#   class I%(componentname)s(Interface):
 #       """A %(componentname)s object."""
 #   ''' % props.__dict__, dedent=True)
 #]]]
@@ -54,7 +50,7 @@ _ = MessageFactory('org.ict_ok')
     #           
     #           %s = %s(
     #               title = _(u'%s'),
-    #               description = _(u'%s'),
+    #               description = _(u"%s"),
     #               required = False)
     #       ''' % (varName, schema, displayName, displayDescription), dedent=True)
     #]]]
@@ -90,7 +86,7 @@ _ = MessageFactory('org.ict_ok')
 #           """
 #
 #
-#   class I%(componentname)sFolder(ISuperclass, IFolder):
+#   class I%(componentname)sFolder(Interface):
 #       """Container for %(componentname)s objects
 #       """
 #

@@ -80,7 +80,7 @@ from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 #                   instAdmUtilSupervisor = utils[0].component
 #                   instAdmUtilSupervisor.appendEventHistory(\\
 #                       u" bootstrap: ICatalog - create index for entry type '%(filename)s'")
-#                   instAdmUtilSupervisor.appendEventHistory(\
+#                   instAdmUtilSupervisor.appendEventHistory(\\
 #                       u" bootstrap: ICatalog - create index for entry type 'appsoftware'")
 #           
 #               ensureComponentFolderOnBootstrap(I%(componentname)sFolder,
