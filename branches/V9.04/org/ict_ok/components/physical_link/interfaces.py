@@ -46,7 +46,7 @@ class IPhysicalLink(Interface):
         description=_(u"The MediaType property defines the particular type "
                       u"of Media through which transmission signals pass."),
         default=6,
-        required = False,
+        required = True,
         vocabulary = "PhysicalLinkMediaTypes")
     
     wired = Bool(
@@ -55,7 +55,7 @@ class IPhysicalLink(Interface):
                         u"actual cable (TRUE) or a "
                         u"wireless connection (FALSE)."),
         default = True,
-        required = False)
+        required = True)
 
 
     connectorPinout = TextLine(
