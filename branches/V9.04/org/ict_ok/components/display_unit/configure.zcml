@@ -1,0 +1,158 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id: configure.zcml_cog 465M 2009-03-05 02:49:50Z (lokal) $ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <interface
+        interface=".interfaces.IDisplayUnit"
+        type="zope.app.content.interfaces.IContentType"
+        />
+
+    <class class=".display_unit.DisplayUnit">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <implements
+            interface="org.ict_ok.osi.interfaces.IPhysicalLayer"
+            />
+        <factory
+            id="org.ict_ok.components.display_unit.display_unit.DisplayUnit"
+            description="DisplayUnit"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.View"
+            interface=".interfaces.IDisplayUnit"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.Edit"
+            set_schema=".interfaces.IDisplayUnit"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.View"
+            interface="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.Edit"
+            set_schema="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <class class=".display_unit.DisplayUnitFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <implements
+            interface="org.ict_ok.components.superclass.interfaces.IFocus"
+            />
+        <factory
+            id="org.ict_ok.components.display_unit.display_unit.DisplayUnitFolder"
+            description="DisplayUnit"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.View"
+            interface=".interfaces.IDisplayUnitFolder"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.Edit"
+            set_schema=".interfaces.IDisplayUnitFolder"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.display_unit.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+    </class>
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <adapter
+        factory=".adapter.state.State"
+        />
+
+    <adapter
+        factory="org.ict_ok.components.display_unit.adapter.search.Searchable"
+    />
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+    <adapter
+        factory=".adapter.osi.OSIModel"
+        permission="org.ict_ok.components.display_unit.View"
+    />
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".display_unit.AllDisplayUnits"
+        name="AllDisplayUnits"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".display_unit.AllDisplayUnitTemplates"
+        name="AllDisplayUnitTemplates"
+    />
+
+
+                    
+    <include package=".generations" />
+
+</configure>

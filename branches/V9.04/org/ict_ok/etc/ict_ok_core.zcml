@@ -78,5 +78,8 @@
     <include package="org.ict_ok.components.physical_link" />
     <include package="org.ict_ok.components.ipc" />
     <include package="org.ict_ok.components.switch" />
+    <include package="org.ict_ok.components.display_unit" />
+    <include package="org.ict_ok.components.printer" />
+    <include package="org.ict_ok.components.misc_physical" />
 
 </configure>

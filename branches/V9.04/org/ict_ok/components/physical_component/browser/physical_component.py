@@ -17,6 +17,8 @@ __version__ = "$Id: template.py_cog 396 2009-01-08 00:21:51Z markusleist $"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.schema import vocabulary
+from zope.app.pagetemplate.urlquote import URLQuote
 
 # z3c imports
 from z3c.form import field
@@ -28,6 +30,41 @@ from org.ict_ok.components.physical_component.physical_component import Physical
 from org.ict_ok.components.browser.component import ComponentDetails
 
 _ = MessageFactory('org.ict_ok')
+
+
+# --------------- helper functions -------------------------
+
+def vocabValue(vocabName=None, token=None, request=None):
+    if vocabName is None:
+        return None
+    if token is None:
+        return None
+    vocabReg = vocabulary.getVocabularyRegistry()
+    if vocabReg is not None:
+        vocab = vocabReg.get(request, vocabName)
+        if vocab is not None:
+            vocabTerm = vocab.getTerm(token)
+            if vocabTerm:
+                return vocabTerm.title
+    return None
+
+def getUserName(item, formatter):
+    """
+    Titel for Overview
+    """
+    username = vocabValue('AllLdapUser', item.user, formatter.request)
+    if username:
+        return username
+    else:
+        return u''
+
+def fsearch_user_formatter(value, item, formatter):
+    username = vocabValue('AllLdapUser', item.user, formatter.request)
+    if username:
+        quoter = URLQuote(item.user)
+        return u'<a href="/@@fsearch?key=%s">%s</a>' % (quoter.quote(), username)
+    else:
+        return u''
 
 
 # --------------- object details ---------------------------

@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2008, 2009, 
+# Copyright (c) 2009, 
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: template.py_cog 396 2009-01-08 00:21:51Z markusleist $
+# $Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $
 #
 # pylint: disable-msg=W0232,W0142
 #
-"""implementation of browser class of Notebook"""
+"""implementation of browser class of DisplayUnit"""
 
-__version__ = "$Id: template.py_cog 396 2009-01-08 00:21:51Z markusleist $"
+__version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
 # python imports
 
@@ -26,8 +26,8 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.notebook.interfaces import INotebook, IAddNotebook
-from org.ict_ok.components.notebook.notebook import Notebook
+from org.ict_ok.components.display_unit.interfaces import IDisplayUnit, IAddDisplayUnit
+from org.ict_ok.components.display_unit.display_unit import DisplayUnit
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -43,6 +43,10 @@ from org.ict_ok.components.superclass.browser.superclass import \
     getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
 from org.ict_ok.components.physical_component.browser.physical_component import \
     getUserName, fsearch_user_formatter
+from org.ict_ok.components.physical_component.browser.physical_component import \
+    PhysicalComponentDetails
+from org.ict_ok.osi.interfaces import IOSIModel
+from org.ict_ok.osi.interfaces import IPhysicalLayer
 
 _ = MessageFactory('org.ict_ok')
 
@@ -50,78 +54,81 @@ _ = MessageFactory('org.ict_ok')
 # --------------- menu entries -----------------------------
 
 
-class MSubAddNotebook(GlobalMenuSubItem):
+class MSubAddDisplayUnit(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'Add Notebook')
-    viewURL = 'add_notebook.html'
+    title = _(u'Add Display unit instance')
+    viewURL = 'add_display_unit.html'
+
     weight = 50
 
-class MSubInvNotebook(GlobalMenuSubItem):
+
+class MSubInvDisplayUnit(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'All notebooks')
-    viewURL = '/@@all_notebooks.html'
+    title = _(u'All Display unit instances')
+    viewURL = '/@@all_display_units.html'
     weight = 100
 
 # --------------- object details ---------------------------
 
 
-class NotebookDetails(ComponentDetails):
-    """ Class for Notebook details
+class DisplayUnitDetails(PhysicalComponentDetails):
+    """ Class for DisplayUnit details
+    """
+    omit_viewfields = PhysicalComponentDetails.omit_viewfields + []
+    omit_addfields = PhysicalComponentDetails.omit_addfields + []
+    omit_editfields = PhysicalComponentDetails.omit_editfields + []
+
+
+class DisplayUnitFolderDetails(ComponentDetails):
+    """ Class for DisplayUnit details
     """
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
-
-
-class NotebookFolderDetails(ComponentDetails):
-    """ Class for MobilePhone details
-    """
-    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
-    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
-    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
-    attrInterface = INotebook
-    factory = Notebook
-    fields = fieldsForFactory(factory, omit_editfields)
+    attrInterface = IDisplayUnit
+    factory = DisplayUnit
+    omitFields = DisplayUnitDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 # --------------- forms ------------------------------------
 
 
-class DetailsNotebookForm(DisplayForm):
+class DetailsDisplayUnitForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of Notebook')
-    factory = Notebook
-    omitFields = NotebookDetails.omit_viewfields
+    label = _(u'settings of Display unit instance')
+    factory = DisplayUnit
+    omitFields = DisplayUnitDetails.omit_viewfields
     fields = fieldsForFactory(factory, omitFields)
 
 
-class AddNotebookForm(AddComponentForm):
-    """Add Notebook form"""
-    label = _(u'Add Notebook')
-    factory = Notebook
-    omitFields = NotebookDetails.omit_addfields
-    attrInterface = INotebook
-    addInterface = IAddNotebook
-    _session_key = 'org.ict_ok.components.notebook'
+class AddDisplayUnitForm(AddComponentForm):
+    """Add Display unit instance form"""
+    label = _(u'Add Display unit instance')
+    factory = DisplayUnit
+    attrInterface = IDisplayUnit
+    addInterface = IAddDisplayUnit
+    omitFields = DisplayUnitDetails.omit_addfields
     allFields = fieldsForFactory(factory, omitFields)
     addFields = fieldsForInterface(addInterface, [])
+    _session_key = 'org.ict_ok.components.display_unit'
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
 
-class EditNotebookForm(EditForm):
-    """ Edit for Notebook """
-    label = _(u'Notebook Edit Form')
-    factory = Notebook
-    omitFields = NotebookDetails.omit_editfields
+class EditDisplayUnitForm(EditForm):
+    """ Edit for Display unit instance """
+    label = _(u'Display unit instance Edit Form')
+    factory = DisplayUnit
+    omitFields = DisplayUnitDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
 
 
-class DeleteNotebookForm(DeleteForm):
-    """ Delete the Notebook """
+class DeleteDisplayUnitForm(DeleteForm):
+    """ Delete the Display unit instance """
     
     def getTitle(self):
         """this title will be displayed in the head of form"""
-        return _(u"Delete this Notebook: '%s'?") % \
+        return _(u"Delete this DisplayUnit: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
 
@@ -130,15 +137,11 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    attrInterface = INotebook
-    factory = Notebook
-    factoryId = u'org.ict_ok.components.notebook.notebook.Notebook'
+    factory = DisplayUnit
+    attrInterface = IDisplayUnit
+    omitFields = DisplayUnitDetails.omit_viewfields
+    factoryId = u'org.ict_ok.components.display_unit.display_unit.DisplayUnit'
     allFields = fieldsForInterface(attrInterface, [])
-
-#def getRoom(item, formatter):
-#    if item.device is not None:
-#        return item.device.room
-#    return None
 
 
 class Overview(SuperOverview):
@@ -168,12 +171,16 @@ class Overview(SuperOverview):
     pos_column_index = 1
     sort_columns = [1, 2, 3, 4, 5]
 
-class AllNotebooks(Overview):
+
+
+class AllDisplayUnits(Overview):
     def objs(self):
         """List of all objects with selected interface"""
         retList = []
         uidutil = queryUtility(IIntIds)
         for (oid, oobj) in uidutil.items():
-            if INotebook.providedBy(oobj.object):
+            if IDisplayUnit.providedBy(oobj.object):
                 retList.append(oobj.object)
         return retList
+
+

@@ -110,4 +110,11 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.switch"
              file="security.zcml" />
+    <include package="org.ict_ok.components.display_unit"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.printer"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.misc_physical"
+             file="security.zcml" />
+             
 </configure>

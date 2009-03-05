@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2008, 2009, 
+# Copyright (c) 2009, 
 #               Markus Leist <leist@ikom-online.de>
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: template.py_cog 396 2009-01-08 00:21:51Z markusleist $
+# $Id: template.py_cog 467 2009-03-05 04:28:59Z markusleist $
 #
 # pylint: disable-msg=W0232,W0142
 #
-"""implementation of browser class of Notebook"""
+"""implementation of browser class of MiscPhysical"""
 
-__version__ = "$Id: template.py_cog 396 2009-01-08 00:21:51Z markusleist $"
+__version__ = "$Id: template.py_cog 467 2009-03-05 04:28:59Z markusleist $"
 
 # python imports
 
@@ -26,8 +26,8 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.notebook.interfaces import INotebook, IAddNotebook
-from org.ict_ok.components.notebook.notebook import Notebook
+from org.ict_ok.components.misc_physical.interfaces import IMiscPhysical, IAddMiscPhysical
+from org.ict_ok.components.misc_physical.misc_physical import MiscPhysical
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -43,6 +43,10 @@ from org.ict_ok.components.superclass.browser.superclass import \
     getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
 from org.ict_ok.components.physical_component.browser.physical_component import \
     getUserName, fsearch_user_formatter
+from org.ict_ok.components.physical_component.browser.physical_component import \
+    PhysicalComponentDetails
+from org.ict_ok.osi.interfaces import IOSIModel
+from org.ict_ok.osi.interfaces import IPhysicalLayer
 
 _ = MessageFactory('org.ict_ok')
 
@@ -50,78 +54,81 @@ _ = MessageFactory('org.ict_ok')
 # --------------- menu entries -----------------------------
 
 
-class MSubAddNotebook(GlobalMenuSubItem):
+class MSubAddMiscPhysical(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'Add Notebook')
-    viewURL = 'add_notebook.html'
+    title = _(u'Add miscellaneous physical component')
+    viewURL = 'add_misc_physical.html'
+
     weight = 50
 
-class MSubInvNotebook(GlobalMenuSubItem):
+
+class MSubInvMiscPhysical(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'All notebooks')
-    viewURL = '/@@all_notebooks.html'
+    title = _(u'All miscellaneous physical components')
+    viewURL = '/@@all_misc_physicals.html'
     weight = 100
 
 # --------------- object details ---------------------------
 
 
-class NotebookDetails(ComponentDetails):
-    """ Class for Notebook details
+class MiscPhysicalDetails(PhysicalComponentDetails):
+    """ Class for MiscPhysical details
+    """
+    omit_viewfields = PhysicalComponentDetails.omit_viewfields + []
+    omit_addfields = PhysicalComponentDetails.omit_addfields + []
+    omit_editfields = PhysicalComponentDetails.omit_editfields + []
+
+
+class MiscPhysicalFolderDetails(ComponentDetails):
+    """ Class for MiscPhysical details
     """
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
-
-
-class NotebookFolderDetails(ComponentDetails):
-    """ Class for MobilePhone details
-    """
-    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
-    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
-    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
-    attrInterface = INotebook
-    factory = Notebook
-    fields = fieldsForFactory(factory, omit_editfields)
+    attrInterface = IMiscPhysical
+    factory = MiscPhysical
+    omitFields = MiscPhysicalDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 # --------------- forms ------------------------------------
 
 
-class DetailsNotebookForm(DisplayForm):
+class DetailsMiscPhysicalForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of Notebook')
-    factory = Notebook
-    omitFields = NotebookDetails.omit_viewfields
+    label = _(u'settings of miscellaneous physical component')
+    factory = MiscPhysical
+    omitFields = MiscPhysicalDetails.omit_viewfields
     fields = fieldsForFactory(factory, omitFields)
 
 
-class AddNotebookForm(AddComponentForm):
-    """Add Notebook form"""
-    label = _(u'Add Notebook')
-    factory = Notebook
-    omitFields = NotebookDetails.omit_addfields
-    attrInterface = INotebook
-    addInterface = IAddNotebook
-    _session_key = 'org.ict_ok.components.notebook'
+class AddMiscPhysicalForm(AddComponentForm):
+    """Add miscellaneous physical component form"""
+    label = _(u'Add miscellaneous physical component')
+    factory = MiscPhysical
+    attrInterface = IMiscPhysical
+    addInterface = IAddMiscPhysical
+    omitFields = MiscPhysicalDetails.omit_addfields
     allFields = fieldsForFactory(factory, omitFields)
     addFields = fieldsForInterface(addInterface, [])
+    _session_key = 'org.ict_ok.components.misc_physical'
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
 
-class EditNotebookForm(EditForm):
-    """ Edit for Notebook """
-    label = _(u'Notebook Edit Form')
-    factory = Notebook
-    omitFields = NotebookDetails.omit_editfields
+class EditMiscPhysicalForm(EditForm):
+    """ Edit for miscellaneous physical component """
+    label = _(u'miscellaneous physical component Edit Form')
+    factory = MiscPhysical
+    omitFields = MiscPhysicalDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
 
 
-class DeleteNotebookForm(DeleteForm):
-    """ Delete the Notebook """
+class DeleteMiscPhysicalForm(DeleteForm):
+    """ Delete the miscellaneous physical component """
     
     def getTitle(self):
         """this title will be displayed in the head of form"""
-        return _(u"Delete this Notebook: '%s'?") % \
+        return _(u"Delete this MiscPhysical: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
 
@@ -130,15 +137,11 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    attrInterface = INotebook
-    factory = Notebook
-    factoryId = u'org.ict_ok.components.notebook.notebook.Notebook'
+    factory = MiscPhysical
+    attrInterface = IMiscPhysical
+    omitFields = MiscPhysicalDetails.omit_viewfields
+    factoryId = u'org.ict_ok.components.misc_physical.misc_physical.MiscPhysical'
     allFields = fieldsForInterface(attrInterface, [])
-
-#def getRoom(item, formatter):
-#    if item.device is not None:
-#        return item.device.room
-#    return None
 
 
 class Overview(SuperOverview):
@@ -168,12 +171,16 @@ class Overview(SuperOverview):
     pos_column_index = 1
     sort_columns = [1, 2, 3, 4, 5]
 
-class AllNotebooks(Overview):
+
+
+class AllMiscPhysicals(Overview):
     def objs(self):
         """List of all objects with selected interface"""
         retList = []
         uidutil = queryUtility(IIntIds)
         for (oid, oobj) in uidutil.items():
-            if INotebook.providedBy(oobj.object):
+            if IMiscPhysical.providedBy(oobj.object):
                 retList.append(oobj.object)
         return retList
+
+
