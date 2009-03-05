@@ -1,44 +1,55 @@
 window_sizes 1916 1156 339 1571 1033 67
 diagrams
-  classdiagram_ref 128002 // cl_inventory01_diag
-    1256 827 89 14 0 0
-  classdiagram_ref 134530 // cl_inventory05_diag
-    1451 907 100 14 0 0
-  classdiagram_ref 135810 // cl_inventory06_diag
-    1256 826 100 14 0 0
-  classdiagram_ref 134402 // cl_inventory04_diag
-    1567 1013 71 14 0 0
-  objectdiagram_ref 136962 // obj06_MobilePhoneFolder_diag
-    1256 826 100 4 0 0
-  classdiagram_ref 131970 // cl_inventory03_diag
-    1164 741 100 4 0 0
   objectdiagram_ref 131586 // obj01_diag
-    1567 1013 100 15 0 0
-  classdiagram_ref 131714 // cl_inventory02_diag
-    1256 826 100 14 0 0
+    1256 826 100 15 0 0
+  classdiagram_ref 128002 // cl_inventory01_diag
+    1256 826 96 14 0 0
+  classdiagram_ref 131970 // cl_inventory03_diag
+    1567 1013 100 4 0 0
   objectdiagram_ref 131842 // obj02_diag
-    1256 826 100 4 0 0
+    1567 1013 100 4 0 0
   objectdiagram_ref 133122 // obj03_diag
     1256 826 100 15 0 0
   objectdiagram_ref 133250 // obj04_diag
     1256 826 100 15 0 0
   objectdiagram_ref 134658 // obj05_diag
     1256 826 100 4 0 0
-  active  classdiagram_ref 138114 // cl_inventory07_diag
-    1567 1013 110 3 0 0
+  objectdiagram_ref 136962 // obj06_MobilePhoneFolder_diag
+    1256 826 100 4 0 0
+  active  classdiagram_ref 134402 // cl_inventory04_diag
+    1567 1013 100 14 0 0
+  classdiagram_ref 131714 // cl_inventory02_diag
+    1256 826 114 14 0 0
+  classdiagram_ref 134530 // cl_inventory05_diag
+    1256 826 120 14 0 0
+  classdiagram_ref 135810 // cl_inventory06_diag
+    1256 826 130 14 0 0
+  classdiagram_ref 138114 // cl_inventory07_diag
+    1256 826 100 3 0 0
+  classdiagram_ref 139266 // cl_inventory08_diag
+    1256 826 88 14 0 0
 end
 show_stereotypes
-selected classdiagram_ref 138114 // cl_inventory07_diag
+marked
+  attribute_ref 141314 // phoneNumber
+end
+selected class_ref 137346 // IPhysicalConnector
 open
-  class_ref 142082 // AllHostProductionStates
-  class_ref 141442 // RootFolder
-  class_ref 128386 // Superclass
-  class_ref 132994 // Host
-  class_ref 133122 // Interface
-  class_ref 146178 // PhysicalLink
+  class_ref 148354 // ISDNPhone
+  class_ref 147970 // MiscPhysical
+  class_ref 129026 // PatchPort
+  class_ref 147714 // Printer
   class_ref 135682 // Requirement
-  class_ref 129666 // IHostSwitchGeneral
-  class_ref 137346 // IPhysicalConnector
-  class_ref 146050 // IPhysicalLink
+  class_ref 141954 // NotebookFolder
+  class_ref 147586 // IDisplayUnit
+  class_ref 142850 // IIndustrialComputer
+  class_ref 148226 // IISDNPhone
+  class_ref 136066 // ILatency
+  class_ref 132482 // ILocation
+  class_ref 148098 // IMiscPhysical
+  class_ref 139522 // IMobilePhone
+  class_ref 129154 // IPatchPort
+  class_ref 147842 // IPrinter
+  classinstance_ref 136578 // link03
 end
 end

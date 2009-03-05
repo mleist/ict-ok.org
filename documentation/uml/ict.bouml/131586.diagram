@@ -34,7 +34,7 @@ classinstancecanvas 131458 classinstance_ref 130562 // Workstation1
   xyz 100 416 2000
 end
 classinstancecanvas 131714 classinstance_ref 130690 // eth0
-  xyz 52 551 2005
+  xyz 53 551 2005
 end
 classinstancecanvas 132994 classinstance_ref 136194 // link01
   xyz 853 717 2000

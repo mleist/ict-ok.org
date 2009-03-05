@@ -1,6 +1,6 @@
 format 64
 "pkg_inv01" // pkg_inv01
-  revision 18
+  revision 21
   modified_by 2 "markus"
   // class settings
   //class diagram settings
@@ -1036,6 +1036,11 @@ ${definition}
       size A3
     end
 
+    classdiagram 139266 "cl_inventory08_diag"
+      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
     objectdiagram 131586 "obj01_diag"
        write_horizontally default package_name_in_tab default show_context default auto_label_position no draw_all_relations yes shadow default show_stereotype_properties default
       size A4-Landscape
@@ -1174,6 +1179,13 @@ ${docstring}${members}
 	    classrelation_ref 154626 // <generalisation>
 	  b parent class_ref 128258 // Component
       end
+
+      classrelation 162050 // <realization>
+	relation 157954 -_-|>
+	  a public
+	    classrelation_ref 162050 // <realization>
+	  b parent class_ref 144386 // ILogicalComponent
+      end
     end
 
     class 143106 "PhysicalComponent"
@@ -1214,6 +1226,13 @@ ${docstring}${members}
 	  a public
 	    classrelation_ref 155522 // <generalisation>
 	  b parent class_ref 143234 // LogicalComponent
+      end
+
+      classrelation 163714 // <realization>
+	relation 159618 -_-|>
+	  a public
+	    classrelation_ref 163714 // <realization>
+	  b parent class_ref 144642 // ISoftwareComponent
       end
     end
 
@@ -1468,12 +1487,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 155138 // <generalisation>
-	relation 152066 ---|>
-	  a public
-	    classrelation_ref 155138 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
     end
 
     class 144514 "IPhysicalComponent"
@@ -1714,12 +1727,6 @@ ${members}};
 	idl_decl ""
       end
 
-      classrelation 156034 // <generalisation>
-	relation 152962 ---|>
-	  a public
-	    classrelation_ref 156034 // <generalisation>
-	  b parent class_ref 144386 // ILogicalComponent
-      end
     end
 
     class 139266 "IComponentFolder"
@@ -1731,19 +1738,6 @@ ${members}};
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 147970 // <generalisation>
-	relation 145154 ---|>
-	  a public
-	    classrelation_ref 147970 // <generalisation>
-	  b parent class_ref 128002 // ISuperclass
-      end
-
-      classrelation 148098 // <generalisation>
-	relation 145282 ---|>
-	  a public
-	    classrelation_ref 148098 // <generalisation>
-	  b parent class_ref 139394 // IFolder
-      end
     end
 
     class 138114 "ApplicationSoftware"
@@ -1834,6 +1828,37 @@ ${docstring}${members}
 	    classrelation_ref 155266 // <generalisation>
 	  b parent class_ref 143106 // PhysicalComponent
       end
+
+      classrelation 162178 // <realization>
+	relation 158082 -_-|>
+	  a public
+	    classrelation_ref 162178 // <realization>
+	  b parent class_ref 137730 // IDevice
+      end
+    end
+
+    class 147458 "DisplayUnit"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 163842 // <realization>
+	relation 159746 -_-|>
+	  a public
+	    classrelation_ref 163842 // <realization>
+	  b parent class_ref 147586 // IDisplayUnit
+      end
+
+      classrelation 163970 // <generalisation>
+	relation 159874 ---|>
+	  a public
+	    classrelation_ref 163970 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
+      end
     end
 
     class 132994 "Host"
@@ -1869,6 +1894,13 @@ ${docstring}${members}
 	    python "${comment}${self}${name} = ${stereotype}()
 "
 	    classrelation_ref 141570 // host (contains)
+      end
+
+      classrelation 163458 // <realization>
+	relation 159362 -_-|>
+	  a public
+	    classrelation_ref 163458 // <realization>
+	  b parent class_ref 133506 // IHost
       end
     end
 
@@ -2056,6 +2088,31 @@ ${docstring}${members}
       classrelation 160258 // linkHasConnector
 	relation_ref 156418 // linkHasConnector
       end
+
+    end
+
+    class 148354 "ISDNPhone"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 164610 // <realization>
+	relation 160514 -_-|>
+	  a public
+	    classrelation_ref 164610 // <realization>
+	  b parent class_ref 148226 // IISDNPhone
+      end
+
+      classrelation 164738 // <generalisation>
+	relation 160642 ---|>
+	  a public
+	    classrelation_ref 164738 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
+      end
     end
 
     class 136194 "Latency"
@@ -2111,6 +2168,30 @@ ${docstring}${members}
       end
     end
 
+    class 147970 "MiscPhysical"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 164354 // <realization>
+	relation 160258 -_-|>
+	  a public
+	    classrelation_ref 164354 // <realization>
+	  b parent class_ref 148098 // IMiscPhysical
+      end
+
+      classrelation 164482 // <generalisation>
+	relation 160386 ---|>
+	  a public
+	    classrelation_ref 164482 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
+      end
+    end
+
     class 140930 "MobilePhone"
       visibility package 
       cpp_decl ""
@@ -2129,6 +2210,13 @@ ${docstring}${members}
 
       classrelation 150658 // contains
 	relation_ref 147714 // contains
+      end
+
+      classrelation 162306 // <generalisation>
+	relation 158210 ---|>
+	  a public
+	    classrelation_ref 162306 // <generalisation>
+	  b parent class_ref 128258 // Component
       end
     end
 
@@ -2291,17 +2379,6 @@ ${docstring}${members}
 	idl_decl ""
       end
 
-      attribute 128258 "room"
-	public type class_ref 130818 // Room
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-	comment "Das Objekt befindet sich in diesem Raum"
-      end
-
       classrelation 135938 // Panel in Rack
 	relation_ref 134914 // Panel in Rack
       end
@@ -2453,7 +2530,7 @@ ${docstring}${members}
 	relation 156290 o--- name "linkHasConnector"
 	  a role_name "port" multiplicity "0..1" public
 	    classrelation_ref 159874 // port (linkHasConnector)
-	  b role_name "link" multiplicity "1" public
+	  b role_name "link" multiplicity "*" public
 	    classrelation_ref 160002 // linkHasConnector
       end
 
@@ -2467,13 +2544,13 @@ ${docstring}${members}
 
       classrelation 160642 // outlet (linkHasConnector)
 	relation 156674 o--- name "linkHasConnector"
-	  a role_name "outlet" public
+	  a role_name "outlet" multiplicity "0..1" public
 	    classrelation_ref 160642 // outlet (linkHasConnector)
-	  b role_name "link" public
+	  b role_name "link" multiplicity "*" public
 	    classrelation_ref 160770 // linkHasConnector
       end
 
-      attribute 151298 "connector"
+      attribute 151298 "connectors"
 	public type class_ref 137346 // IPhysicalConnector
 	multiplicity "*"
 	cpp_decl ""
@@ -2481,6 +2558,30 @@ ${docstring}${members}
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+    end
+
+    class 147714 "Printer"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 164098 // <realization>
+	relation 160002 -_-|>
+	  a public
+	    classrelation_ref 164098 // <realization>
+	  b parent class_ref 147842 // IPrinter
+      end
+
+      classrelation 164226 // <generalisation>
+	relation 160130 ---|>
+	  a public
+	    classrelation_ref 164226 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
       end
     end
 
@@ -2513,14 +2614,6 @@ ${docstring}${members}
 	  b parent class_ref 132738 // IRack
       end
 
-      classrelation 135298 // <generalisation>
-	relation 134530 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 135298 // <generalisation>
-	  b parent class_ref 128258 // Component
-      end
-
       classrelation 135682 // Rack in Room
 	relation_ref 134786 // Rack in Room
       end
@@ -2547,6 +2640,13 @@ ${docstring}${members}
 	    python "${comment}${self}${name} = ${value}
 "
 	    classrelation_ref 136962 // Switch in Rack
+      end
+
+      classrelation 161922 // <generalisation>
+	relation 157826 ---|>
+	  a public
+	    classrelation_ref 161922 // <generalisation>
+	  b parent class_ref 143106 // PhysicalComponent
       end
     end
 
@@ -2810,12 +2910,6 @@ ${members}};
 	comment "target operating systems."
       end
 
-      classrelation 156162 // <generalisation>
-	relation 153090 ---|>
-	  a public
-	    classrelation_ref 156162 // <generalisation>
-	  b parent class_ref 144642 // ISoftwareComponent
-      end
     end
 
     class 132354 "IBuilding"
@@ -2924,12 +3018,43 @@ ${members}};
 "
 	idl_decl ""
       end
+    end
 
-      classrelation 154882 // <generalisation>
-	relation 151810 ---|>
-	  a public
-	    classrelation_ref 154882 // <generalisation>
-	  b parent class_ref 144514 // IPhysicalComponent
+    class 147586 "IDisplayUnit"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 155778 "horizontalResolution"
+	public explicit_type "int"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "FlatPanel's horizontal resolution in Pixels."
+      end
+
+      attribute 155906 "verticalResolution"
+	public explicit_type "int"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "FlatPanel's vertical resolution in Pixels."
       end
     end
 
@@ -2944,14 +3069,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 137602 // <generalisation>
-	relation 136066 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 137602 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
-
       attribute 131330 "hostname"
 	public explicit_type "string"
 	init_value "\"systemname\""
@@ -3239,13 +3356,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 140802 // <generalisation>
-	relation 139138 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 140802 // <generalisation>
-	  b parent class_ref 133506 // IHost
-      end
     end
 
     class 134274 "IHostRouterGeneral"
@@ -3265,13 +3375,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 140290 // <generalisation>
-	relation 138626 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 140290 // <generalisation>
-	  b parent class_ref 133506 // IHost
-      end
     end
 
     class 129666 "IHostSwitchGeneral"
@@ -3291,13 +3394,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 137474 // <generalisation>
-	relation 135938 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 137474 // <generalisation>
-	  b parent class_ref 133506 // IHost
-      end
     end
 
     class 142850 "IIndustrialComputer"
@@ -3315,12 +3411,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 153090 // <generalisation>
-	relation 150018 ---|>
-	  a public
-	    classrelation_ref 153090 // <generalisation>
-	  b parent class_ref 137730 // IDevice
-      end
     end
 
     class 134018 "IInterface"
@@ -3372,6 +3462,40 @@ ${docstring}${members}
       end
     end
 
+    class 148226 "IISDNPhone"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 156162 "phoneNumber"
+	public explicit_type "string"
+	multiplicity "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "phone number"
+      end
+
+      classrelation 164866 // <realization>
+	relation 160770 -_-|>
+	  a public
+	    classrelation_ref 164866 // <realization>
+	  b parent class_ref 137346 // IPhysicalConnector
+      end
+    end
+
     class 136066 "ILatency"
       visibility public stereotype "interface"
       cpp_decl ""
@@ -3410,6 +3534,23 @@ ${members}};
 ${docstring}${members}
 "
       idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 148098 "IMiscPhysical"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
       explicit_switch_type ""
       
     end
@@ -3498,13 +3639,6 @@ ${docstring}${members}
 	idl_decl ""
 	comment "Subscriber Identity Module Number"
       end
-
-      classrelation 155394 // <generalisation>
-	relation 152322 ---|>
-	  a public
-	    classrelation_ref 155394 // <generalisation>
-	  b parent class_ref 144514 // IPhysicalComponent
-      end
     end
 
     class 133762 "INet"
@@ -3518,14 +3652,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 139010 // <generalisation>
-	relation 137474 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 139010 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
-
       attribute 130818 "ipv4"
 	public explicit_type "string"
 	cpp_decl ""
@@ -3553,12 +3679,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 151298 // <generalisation>
-	relation 148226 ---|>
-	  a public
-	    classrelation_ref 151298 // <generalisation>
-	  b parent class_ref 137730 // IDevice
-      end
     end
 
     class 144898 "IOperatingSoftware"
@@ -3576,13 +3696,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 156290 // <generalisation>
-	relation 153218 ---|>
-	  a public
-	    classrelation_ref 156290 // <generalisation>
-	  b parent class_ref 144642 // ISoftwareComponent
-      end
-
       attribute 148610 "osType"
 	public explicit_type "string"
 	multiplicity "0..1"
@@ -3644,6 +3757,15 @@ ${members}};
 "
       explicit_switch_type ""
       
+      attribute 155650 "patchpanel"
+	public type class_ref 128770 // PatchPanel
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
     end
 
     class 142594 "IPersonalComputer"
@@ -3661,12 +3783,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 152578 // <generalisation>
-	relation 149506 ---|>
-	  a public
-	    classrelation_ref 152578 // <generalisation>
-	  b parent class_ref 137730 // IDevice
-      end
     end
 
     class 137346 "IPhysicalConnector"
@@ -3697,26 +3813,16 @@ ${members}};
 	idl_decl ""
       end
 
-      attribute 135682 "room"
-	public type class_ref 130818 // Room
-	multiplicity "0..1"
-	cpp_decl ""
-	java_decl ""
-	php_decl ""
-	python_decl "${comment}${self}${name} = ${value}
-"
-	idl_decl ""
-      end
-
-      attribute 135810 "link"
+      attribute 135810 "links"
 	public type class_ref 146050 // IPhysicalLink
-	multiplicity "0..1"
+	multiplicity "*"
 	cpp_decl ""
 	java_decl ""
 	php_decl ""
 	python_decl "${comment}${self}${name} = ${value}
 "
 	idl_decl ""
+	comment "Connected to"
       end
     end
 
@@ -3775,6 +3881,32 @@ ${members}};
       end
     end
 
+    class 147842 "IPrinter"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 156034 "paperTypesAvailable"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+    end
+
     class 132738 "IRack"
       visibility public stereotype "interface"
       cpp_decl ""
@@ -3786,6 +3918,17 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
+      attribute 154498 "devices"
+	public type class_ref 137858 // Device
+	multiplicity "*"
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
       attribute 129410 "height"
 	public explicit_type "int"
 	cpp_decl ""
@@ -3822,6 +3965,57 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
+      attribute 153858 "building"
+	public type class_ref 132098 // Building
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 153986 "devices"
+	public type class_ref 137858 // Device
+	multiplicity "*"
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 154114 "physicalComponents"
+	public type class_ref 143106 // PhysicalComponent
+	multiplicity "*"
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 154242 "level"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 154370 "coordinates"
+	public explicit_type "string"
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
     end
 
     class 133634 "IService"
@@ -3835,13 +4029,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 139266 // <generalisation>
-	relation 137730 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 139266 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
     end
 
     class 133890 "ISnmpValue"
@@ -3855,13 +4042,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 139394 // <generalisation>
-	relation 137858 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 139394 // <generalisation>
-	  b parent class_ref 128642 // IComponent
-      end
     end
 
     class 142210 "IDeviceFolder"
@@ -3879,19 +4059,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 151810 // <generalisation>
-	relation 148738 ---|>
-	  a public
-	    classrelation_ref 151810 // <generalisation>
-	  b parent class_ref 128002 // ISuperclass
-      end
-
-      classrelation 151938 // <generalisation>
-	relation 148866 ---|>
-	  a public
-	    classrelation_ref 151938 // <generalisation>
-	  b parent class_ref 139394 // IFolder
-      end
     end
 
     class 141058 "IMobilePhoneFolder"
@@ -3903,19 +4070,6 @@ ${members}};
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 149634 // <generalisation>
-	relation 146818 ---|>
-	  a public
-	    classrelation_ref 149634 // <generalisation>
-	  b parent class_ref 128002 // ISuperclass
-      end
-
-      classrelation 149762 // <generalisation>
-	relation 146946 ---|>
-	  a public
-	    classrelation_ref 149762 // <generalisation>
-	  b parent class_ref 139394 // IFolder
-      end
     end
 
     class 141698 "INotebookFolder"
@@ -3933,12 +4087,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 152194 // <generalisation>
-	relation 149122 ---|>
-	  a public
-	    classrelation_ref 152194 // <generalisation>
-	  b parent class_ref 142210 // IDeviceFolder
-      end
     end
 
     class 142466 "IPersonalComputerFolder"
@@ -3956,12 +4104,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 152450 // <generalisation>
-	relation 149378 ---|>
-	  a public
-	    classrelation_ref 152450 // <generalisation>
-	  b parent class_ref 142210 // IDeviceFolder
-      end
     end
 
     classinstance 129154 "Rumeln"
@@ -4103,7 +4245,7 @@ ${members}};
       type class_ref 132994 // Host
       attributes
         attribute_ref 130690 // ikName
-          "Sun1"
+          "Workstation1"
         end
       relations
         relation_ref 139522 // contains
@@ -4218,32 +4360,16 @@ ${members}};
           "31.12.2099"
         attribute_ref 142594 // contractModel
           "Flat1000"
-        attribute_ref 144898 // documentNumber
-          "345198735"
         attribute_ref 143234 // imei
           "1234567imei"
-        attribute_ref 145794 // inv_id
-          "inv13131313"
-        attribute_ref 136322 // manufacturer
-          "Pony"
-        attribute_ref 144642 // modelType
-          "Pony eiVon"
         attribute_ref 141314 // phoneNumber
           "+49 123 456789"
         attribute_ref 143362 // pin
           "1234"
-        attribute_ref 146434 // productionState
-          "productive"
         attribute_ref 143490 // puk
           "654321"
-        attribute_ref 143106 // serialNumber
-          "1234567890123"
         attribute_ref 143618 // simNumber
           "sim-34567898765"
-        attribute_ref 143746 // user
-          "Mr. X"
-        attribute_ref 136450 // vendor
-          "Fast Vendor"
         end
       relations
         end
@@ -4256,32 +4382,16 @@ ${members}};
           "31.12.2099"
         attribute_ref 142594 // contractModel
           "Flat1002"
-        attribute_ref 144898 // documentNumber
-          "3467812532"
         attribute_ref 143234 // imei
           "1234567imei"
-        attribute_ref 145794 // inv_id
-          "inv5656565656"
-        attribute_ref 136322 // manufacturer
-          "Pony"
-        attribute_ref 144642 // modelType
-          "Pony eiVon"
         attribute_ref 141314 // phoneNumber
           "+49 123 456789"
         attribute_ref 143362 // pin
           "1234"
-        attribute_ref 146434 // productionState
-          "productive"
         attribute_ref 143490 // puk
           "654321"
-        attribute_ref 143106 // serialNumber
-          "sn44444678912"
         attribute_ref 143618 // simNumber
           "sim-34567898765"
-        attribute_ref 143746 // user
-          "Mr. Y"
-        attribute_ref 136450 // vendor
-          "Dottersack"
         end
       relations
         end
