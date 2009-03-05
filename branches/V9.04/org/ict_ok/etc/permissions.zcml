@@ -116,5 +116,7 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.misc_physical"
              file="security.zcml" />
+    <include package="org.ict_ok.components.isdnphone"
+             file="security.zcml" />
              
 </configure>

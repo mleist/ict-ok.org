@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+
+    <!-- $Id: configure.zcml_cog 283 2008-09-04 14:22:30Z markusleist $ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <permission
+        id="org.ict_ok.components.isdnphone.View"
+        title="View ISDN Phone"
+    />
+
+    <permission
+        id="org.ict_ok.components.isdnphone.Add"
+        title="Add ISDN Phone"
+    />
+
+    <permission
+        id="org.ict_ok.components.isdnphone.Edit"
+        title="Edit ISDN Phone"
+    />
+
+    <permission
+        id="org.ict_ok.components.isdnphone.Delete"
+        title="Delete ISDN Phone"
+    />
+
+    <grant permission="org.ict_ok.components.isdnphone.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.components.isdnphone.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.isdnphone.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.isdnphone.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.isdnphone.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.isdnphone.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.isdnphone.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.isdnphone.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.isdnphone.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>

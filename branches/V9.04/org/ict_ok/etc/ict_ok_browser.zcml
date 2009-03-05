@@ -69,5 +69,6 @@
     <include package="org.ict_ok.components.display_unit.browser" />
     <include package="org.ict_ok.components.printer.browser" />
     <include package="org.ict_ok.components.misc_physical.browser" />
+    <include package="org.ict_ok.components.isdnphone.browser" />
 
 </configure>
