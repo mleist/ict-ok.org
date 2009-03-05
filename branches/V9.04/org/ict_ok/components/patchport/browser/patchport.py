@@ -68,8 +68,6 @@ class PatchPortFolderDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
-    fields = field.Fields(IPatchPort).omit(*PatchPortDetails.omit_viewfields)
-    
     attrInterface = IPatchPort
     factory = PatchPort
     omitFields = PatchPortDetails.omit_viewfields
