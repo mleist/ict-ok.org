@@ -1,6 +1,6 @@
 format 64
 "pkg_inv01" // pkg_inv01
-  revision 21
+  revision 22
   modified_by 2 "markus"
   // class settings
   //class diagram settings
@@ -1726,7 +1726,6 @@ ${members}};
 "
 	idl_decl ""
       end
-
     end
 
     class 139266 "IComponentFolder"
@@ -2088,7 +2087,6 @@ ${docstring}${members}
       classrelation 160258 // linkHasConnector
 	relation_ref 156418 // linkHasConnector
       end
-
     end
 
     class 148354 "ISDNPhone"
@@ -2909,7 +2907,6 @@ ${members}};
 	idl_decl ""
 	comment "target operating systems."
       end
-
     end
 
     class 132354 "IBuilding"

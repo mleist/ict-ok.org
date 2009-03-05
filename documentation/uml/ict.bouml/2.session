@@ -19,7 +19,7 @@ diagrams
   active  classdiagram_ref 134402 // cl_inventory04_diag
     1567 1013 100 14 0 0
   classdiagram_ref 131714 // cl_inventory02_diag
-    1256 826 114 14 0 0
+    1256 826 113 14 0 0
   classdiagram_ref 134530 // cl_inventory05_diag
     1256 826 120 14 0 0
   classdiagram_ref 135810 // cl_inventory06_diag
@@ -30,26 +30,9 @@ diagrams
     1256 826 88 14 0 0
 end
 show_stereotypes
-marked
-  attribute_ref 141314 // phoneNumber
-end
-selected class_ref 137346 // IPhysicalConnector
+selected classview_ref 128002 // cl_inventory01
 open
-  class_ref 148354 // ISDNPhone
-  class_ref 147970 // MiscPhysical
-  class_ref 129026 // PatchPort
-  class_ref 147714 // Printer
-  class_ref 135682 // Requirement
-  class_ref 141954 // NotebookFolder
-  class_ref 147586 // IDisplayUnit
-  class_ref 142850 // IIndustrialComputer
-  class_ref 148226 // IISDNPhone
-  class_ref 136066 // ILatency
-  class_ref 132482 // ILocation
-  class_ref 148098 // IMiscPhysical
-  class_ref 139522 // IMobilePhone
-  class_ref 129154 // IPatchPort
-  class_ref 147842 // IPrinter
-  classinstance_ref 136578 // link03
+  
+  package_ref 129154 // pkg_inv01
 end
 end
