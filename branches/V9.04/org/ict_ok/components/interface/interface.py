@@ -92,6 +92,7 @@ class Interface(PhysicalComponent):
         constructor of the object
         """
         PhysicalComponent.__init__(self, **data)
+        ipv4List = []
         refAttributeNames = getRefAttributeNames(Interface)
         for (name, value) in data.items():
             if name in IInterface.names():
