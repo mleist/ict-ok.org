@@ -170,6 +170,7 @@ class Component(Supernode):
         constructor of the object
         """
         Supernode.__init__(self, **data)
+        self.requirements = []
         #self.myFactory = str(self.__class__).split("'")[1]
         for (name, value) in data.items():
             if name in IComponent.names():
