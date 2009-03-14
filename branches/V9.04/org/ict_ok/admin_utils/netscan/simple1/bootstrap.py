@@ -34,14 +34,7 @@ from org.ict_ok.admin_utils.netscan.simple1.simple1 import \
 
 logger = logging.getLogger("AdmUtilSimple1")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of simple1-generator utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeSimple = ensureUtility(root_folder, 
                                IAdmUtilSimple1,
                                'AdmUtilSimple1', 
@@ -65,4 +58,15 @@ def bootStrapSubscriberDatabase(event):
             u" bootstrap: made IAdmUtilSimple1-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of simple1-generator utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

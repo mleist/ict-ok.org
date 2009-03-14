@@ -33,14 +33,7 @@ from org.ict_ok.admin_utils.netscan.nmap.nmap import AdmUtilNMap
 
 logger = logging.getLogger("AdmUtilNMap")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of nmap-generator utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeNmap = ensureUtility(root_folder, 
                              IAdmUtilNMap,
                              'AdmUtilNMap', 
@@ -64,4 +57,15 @@ def bootStrapSubscriberDatabase(event):
             u" bootstrap: made IAdmUtilNMap-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of nmap-generator utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

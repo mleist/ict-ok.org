@@ -24,6 +24,8 @@ from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
+from zope.app.component.hooks import setSite
+from zope.app import zapi
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
@@ -35,19 +37,11 @@ from org.ict_ok.admin_utils.categories.cat_hostgroup import \
 
 logger = logging.getLogger("AdmUtilCategories")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of ict_ok supervisor on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilCategories = ensureUtility(root_folder, IAdmUtilCategories,
                                        'AdmUtilCategories',
                                        AdmUtilCategories, '',
                                        copy_to_zlog=False, asObject=True)
-
     if isinstance(madeAdmUtilCategories, AdmUtilCategories):
         logger.info(u"bootstrap: Ensure named AdmUtilCategories")
         dcore = IWriteZopeDublinCore(madeAdmUtilCategories)
@@ -78,4 +72,14 @@ def bootStrapSubscriberDatabase(event):
             u" bootstrap: made IAdmUtilCategories-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of ict_ok supervisor on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)

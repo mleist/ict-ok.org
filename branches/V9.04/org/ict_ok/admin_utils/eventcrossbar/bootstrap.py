@@ -52,14 +52,7 @@ def recursiveEventCrossbarSubscriber(obj):
         for (dummy_name, subObject) in obj.items():
             recursiveEventCrossbarSubscriber(subObject)
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of eventcrossbar utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilEventCrossbar = ensureUtility(root_folder, IAdmUtilEventCrossbar,
                                         'AdmUtilEventCrossbar', AdmUtilEventCrossbar, '',
                                         copy_to_zlog=False, asObject=True)
@@ -81,4 +74,15 @@ def bootStrapSubscriberDatabase(event):
     recursiveEventCrossbarSubscriber(root_folder)
     
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of eventcrossbar utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

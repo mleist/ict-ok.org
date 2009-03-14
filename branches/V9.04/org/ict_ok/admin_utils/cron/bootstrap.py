@@ -25,6 +25,7 @@ from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.component.interfaces import ISite
 from zope.app.container.interfaces import IContainer
+from zope.component import getSiteManager
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
@@ -41,6 +42,7 @@ def recursiveCronSubscriber(obj):
 
     if ISite.providedBy(obj):
         sitem = obj.getSiteManager()
+        #sitem = getSiteManager(obj)
         smList = list(sitem.getAllUtilitiesRegisteredFor(IAdmUtilCron))
         for utilObj in smList:
             if IAdmUtilCron.providedBy(utilObj) :
@@ -49,14 +51,7 @@ def recursiveCronSubscriber(obj):
         for (dummy_name, subObject) in obj.items():
             recursiveCronSubscriber(subObject)
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of cron utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilCron = ensureUtility(root_folder, IAdmUtilCron,
                                     'AdmUtilCron', AdmUtilCron, '',
                                     copy_to_zlog=False, asObject=True)
@@ -78,4 +73,15 @@ def bootStrapSubscriberDatabase(event):
     recursiveCronSubscriber(root_folder)
     
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of cron utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

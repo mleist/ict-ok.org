@@ -55,13 +55,7 @@ def createLocalSystem(root_folder):
     newHost.__setattr__("genNagios", True)
     dcore.created = dateNow
 
-def bootStrapSubscriber(event):
-    """initialisation of IntId utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
+def createUtils(root_folder, connection=None, dummy_db=None):
     # search in global component registry
     sitem = root_folder.getSiteManager()
     # search for ICatalog
@@ -112,4 +106,14 @@ def bootStrapSubscriber(event):
                  sitem)
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriber(event):
+    """initialisation of IntId utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)

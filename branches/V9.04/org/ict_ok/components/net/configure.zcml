@@ -58,11 +58,11 @@
             permission="org.ict_ok.components.net.Edit"
             set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
-        <!--require
+        <require
             permission="org.ict_ok.components.net.View"
             interface="zope.app.container.interfaces.IReadContainer"
             />
-        <require
+        <!--require
             permission="org.ict_ok.components.net.Edit"
             interface="zope.app.container.interfaces.IWriteContainer"
             /-->

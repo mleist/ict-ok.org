@@ -41,13 +41,7 @@ from org.ict_ok.admin_utils.supervisor.supervisor import AdmUtilSupervisor
 
 logger = logging.getLogger("AdmUtilSupervisor")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of ict_ok supervisor on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilSupervisor = ensureUtility(root_folder, 
                                           IAdmUtilSupervisor,
                                           'AdmUtilSupervisor', 
@@ -80,9 +74,10 @@ def bootStrapSubscriberDatabase(event):
         IAdmUtilSupervisor['nbrStarts'].readonly = False
         instAdmUtilSupervisor.nbrStarts += 1
         IAdmUtilSupervisor['nbrStarts'].readonly = True
-        instAdmUtilSupervisor.appendEventHistory(\
-            u"'web service' started (Vers. %s) (%d bytes) (%d objects)" \
-            % (getIkVersion(), dummy_db.getSize(), dummy_db.objectCount()))
+        if dummy_db is not None:
+            instAdmUtilSupervisor.appendEventHistory(\
+                u"'web service' started (Vers. %s) (%d bytes) (%d objects)" \
+                % (getIkVersion(), dummy_db.getSize(), dummy_db.objectCount()))
         dcore = IWriteZopeDublinCore(instAdmUtilSupervisor)
         dcore.title = u"ICT_Ok Supervisor"
         dcore.modified = datetime.utcnow()
@@ -190,7 +185,15 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for all fulltext")
-
-        
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of ict_ok supervisor on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)

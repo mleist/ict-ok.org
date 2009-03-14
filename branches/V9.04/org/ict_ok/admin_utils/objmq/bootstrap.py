@@ -32,14 +32,7 @@ from org.ict_ok.admin_utils.objmq.objmq import AdmUtilObjMQ
 
 logger = logging.getLogger("AdmUtilObjMQ")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of Message-Queue-Utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilObjMQ = ensureUtility(root_folder, IAdmUtilObjMQ,
                                         'AdmUtilObjMQ', AdmUtilObjMQ, '',
                                         copy_to_zlog=False, asObject=True)
@@ -59,4 +52,15 @@ def bootStrapSubscriberDatabase(event):
             u" bootstrap: made IAdmUtilObjMQ-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of Message-Queue-Utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

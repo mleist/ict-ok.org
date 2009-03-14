@@ -33,14 +33,7 @@ from org.ict_ok.admin_utils.netscan.demo1.demo1 import AdmUtilDemo1
 
 logger = logging.getLogger("AdmUtilDemo1")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of demo1-generator utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeNmap = ensureUtility(root_folder, 
                              IAdmUtilDemo1,
                              'AdmUtilDemo1', 
@@ -64,4 +57,15 @@ def bootStrapSubscriberDatabase(event):
             u" bootstrap: made IAdmUtilDemo1-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of demo1-generator utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

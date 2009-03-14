@@ -34,14 +34,7 @@ from org.ict_ok.admin_utils.graphviz.graphviz import \
 
 logger = logging.getLogger("AdmUtilGraphviz")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of graphviz utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilGraphviz = ensureUtility(root_folder, 
                                           IAdmUtilGraphviz,
                                           'AdmUtilGraphviz', 
@@ -63,4 +56,15 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made IAdmUtilGraphviz-Utility")
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of graphviz utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

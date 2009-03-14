@@ -34,15 +34,7 @@ from org.ict_ok.admin_utils.notifier.jabber.jabber import \
 
 logger = logging.getLogger("NotifierJabber")
 
-def bootStrapSubscriberDatabase_step1(event):
-    """initialisation of jabber-generator utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    print "bootStrapSubscriberDatabase_step1"
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeSimple = ensureUtility(root_folder, 
                                INotifierJabber,
                                'NotifierJabber', 
@@ -66,7 +58,8 @@ def bootStrapSubscriberDatabase_step1(event):
             u" bootstrap: made INotifierJabber-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
 
 def bootStrapSubscriberDatabase_step2(event):
     """initialisation of jabber-generator utility on first database startup
@@ -85,3 +78,13 @@ def bootStrapSubscriberDatabase_step2(event):
     print "ipv4Connector: %s" % instIkNotifierJabber.ipv4Connector
     print "portConnector: %s" % instIkNotifierJabber.portConnector
     print "lastSeenConnector: %s" % instIkNotifierJabber.lastSeenConnector
+
+def bootStrapSubscriberDatabase_step1(event):
+    """initialisation of jabber-generator utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    print "bootStrapSubscriberDatabase_step1"
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)

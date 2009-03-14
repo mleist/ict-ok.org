@@ -63,3 +63,7 @@ class IIkDeleteConfirm(Interface):
         description = _(u"please confirm"),
         default = False)
 
+from zope.component.interfaces import IObjectEvent
+
+class INewSiteEvent(IObjectEvent):
+    """Indicates that a new WorldCookery site has been created"""

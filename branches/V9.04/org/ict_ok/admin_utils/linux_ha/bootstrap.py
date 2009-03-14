@@ -23,41 +23,17 @@ from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
-from zope.app.catalog.field import FieldIndex
-from zope.app.catalog.interfaces import ICatalog
-from zope.index.text.interfaces import ISearchableText
-from zope.app.component.interfaces import ISite
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.admin_utils.linux_ha.interfaces import IAdmUtilLinuxHa
 from org.ict_ok.admin_utils.linux_ha.linux_ha import AdmUtilLinuxHa
-from org.ict_ok.admin_utils.linux_ha.linux_ha import globalLinuxHaUtility
 from org.ict_ok.admin_utils.linux_ha.linux_ha import LinuxHaConnectionThread
 
 logger = logging.getLogger("AdmUtilLinuxHa")
 
-#def recursiveLinuxHaSubscriber(obj):
-    #"""distibution of linux_ha event
-    #"""
-
-    #if ISite.providedBy(obj):
-        #sitem = obj.getSiteManager()
-        #smList = list(sitem.getAllUtilitiesRegisteredFor(IAdmUtilLinuxHa))
-        #for utilObj in smList:
-            #if IAdmUtilLinuxHa.providedBy(utilObj) :
-                #globalLinuxHaUtility.subscribeToLinuxHa(utilObj)
-
-def bootStrapSubscriberDatabase(event):
-    """initialisation of linux_ha utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    LinuxHaConnectionThread.database = event.database
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilLinuxHa = ensureUtility(root_folder, IAdmUtilLinuxHa,
                                        'AdmUtilLinuxHa', AdmUtilLinuxHa, '',
                                        copy_to_zlog=False, asObject=True)
@@ -81,26 +57,17 @@ def bootStrapSubscriberDatabase(event):
                   if util.provided.isOrExtends(IAdmUtilLinuxHa)]
         instAdmUtilLinuxHa = utils[0].component
         instAdmUtilLinuxHa.connect2HaCluster()
-
-    #sitem = root_folder.getSiteManager()
-    ## search for ICatalog
-    #utils = [ util for util in sitem.registeredUtilities()
-              #if util.provided.isOrExtends(ICatalog)]
-    #instUtilityICatalog = utils[0].component
-    #if not "host_esx_uuid_index" in instUtilityICatalog.keys():
-        #host_esx_uuid_index = FieldIndex(interface=ISearchableText,
-                                         #field_name='getSearchableEsxUuid',
-                                         #field_callable=True)
-        #instUtilityICatalog['host_esx_uuid_index'] = host_esx_uuid_index
-        ## search for IAdmUtilSupervisor
-        #utils = [ util for util in sitem.registeredUtilities()
-                  #if util.provided.isOrExtends(IAdmUtilSupervisor)]
-        #instAdmUtilSupervisor = utils[0].component
-        #instAdmUtilSupervisor.appendEventHistory(\
-            #u" bootstrap: ICatalog - create esx uuid index for entry type 'host'")
-
-
-    #recursiveLinuxHaSubscriber(root_folder)
-    
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of linux_ha utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    LinuxHaConnectionThread.database = event.database
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

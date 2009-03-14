@@ -36,15 +36,7 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
 
 logger = logging.getLogger("AdmUtilTicker")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of ict_ok supervisor on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    TickerThread.database = event.database
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilTicker = ensureUtility(root_folder, IAdmUtilTicker,
                                        'AdmUtilTicker', AdmUtilTicker, '',
                                        copy_to_zlog=False, asObject=True)
@@ -69,4 +61,16 @@ def bootStrapSubscriberDatabase(event):
             u" bootstrap: made IAdmUtilTicker-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of ict_ok supervisor on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    TickerThread.database = event.database
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

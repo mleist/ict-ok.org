@@ -34,14 +34,7 @@ from org.ict_ok.admin_utils.generators.nagios.nagios import \
 
 logger = logging.getLogger("AdmUtilGeneratorNagios")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of nagios-generator utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilGeneratorNagios = ensureUtility(root_folder, 
                                                IAdmUtilGeneratorNagios,
                                                'AdmUtilGeneratorNagios', 
@@ -64,4 +57,15 @@ def bootStrapSubscriberDatabase(event):
             u" bootstrap: made IAdmUtilGeneratorNagios-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of nagios-generator utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+
