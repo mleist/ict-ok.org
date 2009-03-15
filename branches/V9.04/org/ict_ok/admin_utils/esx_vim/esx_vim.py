@@ -124,7 +124,7 @@ class AdmUtilEsxVim(Supernode):
         """receive esx_vim signal
         """
         #logger.info(u"AdmUtilEsxVim::receiveEsxVim(%s, %s) in '%s'" \
-                    #% (str_time, mode,zapi.getPath(self)))
+                    #% (str_time, mode,zapi.absoluteURL(self, request)))
         self.lastEsxVim = str_time
         dcore = IWriteZopeDublinCore(self)
         dcore.modified = datetime.utcnow()

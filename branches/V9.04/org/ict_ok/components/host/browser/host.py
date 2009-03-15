@@ -115,21 +115,21 @@ class HostDetails(ComponentDetails):
             tmpDict['oid'] = u"c%strigger_online" % objId
             tmpDict['title'] = _(u"Trigger online")
             tmpDict['href'] = u"%s/@@trigger_online?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             retList.append(tmpDict)
             tmpDict = {}
             tmpDict['oid'] = u"c%strigger_offline" % objId
             tmpDict['title'] = _(u"Trigger offline")
             tmpDict['href'] = u"%s/@@trigger_offline?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             retList.append(tmpDict)
             tmpDict = {}
             tmpDict['oid'] = u"c%strigger_not1" % objId
             tmpDict['title'] = _(u"Trigger notification1")
             tmpDict['href'] = u"%s/@@trigger_not1?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             retList.append(tmpDict)
         adapSize = ISized(self.context)
@@ -139,7 +139,7 @@ class HostDetails(ComponentDetails):
             tmpDict['oid'] = u"c%sstart_snmp_if_scanner" % objId
             tmpDict['title'] = _(u"start snmp interface scanner")
             tmpDict['href'] = u"%s/@@start_snmp_if_scanner.html" % \
-                   zapi.getPath(self.context)
+                   zapi.absoluteURL(self.context, self.request)
             tmpDict['tooltip'] = _(u"starts the interface scanner with snmp scan (as user:%s)"\
                                    % self.request.principal.title)
             retList.append(tmpDict)

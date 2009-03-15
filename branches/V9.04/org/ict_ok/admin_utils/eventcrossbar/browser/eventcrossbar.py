@@ -134,7 +134,7 @@ class SignalGraph(BrowserPagelet):
     def getValuePngHref(self):
         """get path of object as string
         """
-        return zapi.getPath(self.context)
+        return zapi.absoluteURL(self.context, self.request)
 
 
 # --------------- forms ------------------------------------

@@ -88,7 +88,7 @@ class AdmUtilComplianceDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%sgenerate_all_pdf" % objId
             tmpDict['title'] = _(u"generate all pdf")
             tmpDict['href'] = u"%s/@@generate_all_pdf" % \
-                   (zapi.getPath(self.context))
+                   (zapi.absoluteURL(self.context, self.request))
             tmpDict['tooltip'] = _(u"will generate a all pdf file")
             retList.append(tmpDict)
         if checkPermission('org.ict_ok.admin_utils.compliance.Import',
@@ -97,7 +97,7 @@ class AdmUtilComplianceDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%simport requirements" % objId
             tmpDict['title'] = _(u"import requirements")
             tmpDict['href'] = u"%s/@@import_requirements" % \
-                   (zapi.getPath(self.context))
+                   (zapi.absoluteURL(self.context, self.request))
             tmpDict['tooltip'] = _(u"will import requirements")
             retList.append(tmpDict)
         return retList

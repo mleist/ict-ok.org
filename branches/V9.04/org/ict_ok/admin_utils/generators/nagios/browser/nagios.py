@@ -63,7 +63,7 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%sgenerate" % objId
             tmpDict['title'] = _(u"generate")
             tmpDict['href'] = u"%s/@@generate.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"generate nagios cfg")
             retList.append(tmpDict)

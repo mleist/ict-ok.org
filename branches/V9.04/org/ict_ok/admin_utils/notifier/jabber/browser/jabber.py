@@ -52,7 +52,7 @@ class NotifierJabberDetails(SupernodeDetails):
                 tmpDict['oid'] = u"c000stop_connector"
                 tmpDict['title'] = _(u"stop jabber-connector")
                 tmpDict['href'] = u"%s/@@stop_connector?nextURL=%s" % \
-                       (zapi.getPath(self.context),
+                       (zapi.absoluteURL(self.context, self.request),
                         quoter.quote())
                 tmpDict['tooltip'] = _(u"stops the jabber-connector (as user:%s)"\
                                        % self.request.principal.title)
@@ -61,7 +61,7 @@ class NotifierJabberDetails(SupernodeDetails):
                 tmpDict['oid'] = u"c000get_isup"
                 tmpDict['title'] = _(u"is jabber-connector up")
                 tmpDict['href'] = u"%s/@@get_isup?nextURL=%s" % \
-                       (zapi.getPath(self.context),
+                       (zapi.absoluteURL(self.context, self.request),
                         quoter.quote())
                 tmpDict['tooltip'] = _(u"ask the jabber-connector for watchdog")
                 retList.append(tmpDict)
@@ -69,7 +69,7 @@ class NotifierJabberDetails(SupernodeDetails):
                 tmpDict['oid'] = u"c000send_test"
                 tmpDict['title'] = _(u"send test message")
                 tmpDict['href'] = u"%s/@@send_test?nextURL=%s" % \
-                       (zapi.getPath(self.context),
+                       (zapi.absoluteURL(self.context, self.request),
                         quoter.quote())
                 tmpDict['tooltip'] = _(u"send test message to im-server")
                 retList.append(tmpDict)
@@ -79,7 +79,7 @@ class NotifierJabberDetails(SupernodeDetails):
                 tmpDict['oid'] = u"c000start_connector"
                 tmpDict['title'] = _(u"start jabber-connector")
                 tmpDict['href'] = u"%s/@@start_connector?nextURL=%s" % \
-                       (zapi.getPath(self.context),
+                       (zapi.absoluteURL(self.context, self.request),
                         quoter.quote())
                 tmpDict['tooltip'] = _(u"starts the jabber-connector (as user:%s)"\
                                        % self.request.principal.title)

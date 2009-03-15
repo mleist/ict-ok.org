@@ -664,7 +664,7 @@ class SuperclassDetails:
         return None
     
     def getHrefTitle(self, obj, displayShort=False):
-        href = zapi.getPath(obj)
+        href = zapi.absoluteURL(obj, self.request)
         title = obj.ikName
         if displayShort and hasattr(obj, 'shortName'):
             return u'<a href="%s">%s [%s]</a>' % (href, title, obj.shortName)

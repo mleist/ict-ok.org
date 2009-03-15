@@ -106,7 +106,7 @@ class NetDetails(ComponentDetails):
             tmpDict['oid'] = u"c%sstart_scanner" % objId
             tmpDict['title'] = _(u"start scanner")
             tmpDict['href'] = u"%s/@@start_scanner.html" % \
-                   zapi.getPath(self.context)
+                   zapi.absoluteURL(self.context, self.request)
             tmpDict['tooltip'] = _(u"starts the network scanner (as user:%s)"\
                                    % self.request.principal.title)
             retList.append(tmpDict)

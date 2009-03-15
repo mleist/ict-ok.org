@@ -122,12 +122,12 @@ class AdmUtilUserManagementPreferences:
     def preferences(self):
         utilUserMagagement = getUtility(IAdmUtilUserManagement)
         return self.request.response.redirect(\
-            zapi.getPath(utilUserMagagement)+\
+            zapi.absoluteURL(utilUserMagagement, self.request)+\
             '/@@preferences.html')
     def version(self):
         utilSupervisor = getUtility(IAdmUtilSupervisor)
         return self.request.response.redirect(\
-            zapi.getPath(utilSupervisor)+\
+            zapi.absoluteURL(utilSupervisor, self.request)+\
             '/@@version.html')
     def fsearch(self):
         utilSupervisor = getUtility(IAdmUtilSupervisor)
@@ -136,7 +136,7 @@ class AdmUtilUserManagementPreferences:
         else:
             queryString =''
         return self.request.response.redirect(\
-            zapi.getPath(utilSupervisor)+\
+            zapi.absoluteURL(utilSupervisor, self.request)+\
             '/@@fsearch.html%s' % queryString)
 
 

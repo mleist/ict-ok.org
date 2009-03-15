@@ -58,7 +58,7 @@ class NetScanDetails(SupernodeDetails):
         for name, scanner in self.context.getAllScannerObjs():
             retDict = {}
             retDict['name'] = name
-            retDict['href'] = zapi.getPath(scanner) + '/@@status'
+            retDict['href'] = zapi.absoluteURL(scanner, self.request) + '/@@status'
             retList.append(retDict)
         return retList
         
@@ -70,7 +70,7 @@ class NetScanDetails(SupernodeDetails):
         for name, scanner in self.context.getScannerObjs():
             retDict = {}
             retDict['name'] = name
-            retDict['href'] = zapi.getPath(scanner) + '/@@status'
+            retDict['href'] = zapi.absoluteURL(scanner, self.request) + '/@@status'
             retList.append(retDict)
         return retList
         

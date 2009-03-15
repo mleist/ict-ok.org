@@ -76,7 +76,7 @@ class AdmUtilWFMCDetails(SupernodeDetails):
         """get path of object as string
         """
         obj = removeAllProxies(self.context)
-        return zapi.getPath(obj)
+        return zapi.absoluteURL(obj, self.request)
 
     def getAllWfmcPDs(self):
         """get all registered Processdefinitions 

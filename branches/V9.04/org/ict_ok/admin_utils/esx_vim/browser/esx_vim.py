@@ -125,7 +125,7 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
             tmpDict['oid'] = u"c%sshutdown" % objId
             tmpDict['title'] = _(u"shutdown")
             tmpDict['href'] = u"%s/@@shutdown.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"shutdow the virtual machine")
             retList.append(tmpDict)
@@ -137,7 +137,7 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
             tmpDict['oid'] = u"c%sconvertobj" % objId
             tmpDict['title'] = _(u"convert to intern")
             tmpDict['href'] = u"%s/@@convertobj.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"convert to internal object")
             retList.append(tmpDict)
@@ -161,7 +161,7 @@ class EsxVimVirtualMachineDetails(EsxVimObjDetails):
         """
         print("EsxVimVirtualMachineDetails.convertobj")
         r_obj = self.context.convertobj()
-        return self.request.response.redirect(zapi.getPath(r_obj)+\
+        return self.request.response.redirect(zapi.absoluteURL(r_obj, self.request)+\
                                               '/@@details.html')
         #nextURL = self.request.get('nextURL', default=None)
         #if nextURL:

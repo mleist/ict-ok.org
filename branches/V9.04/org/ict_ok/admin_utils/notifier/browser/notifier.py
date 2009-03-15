@@ -58,7 +58,7 @@ class NotifierDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%snotifier_send" % objId
             tmpDict['title'] = _(u"send test")
             tmpDict['href'] = u"%s/@@send_test?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"will send a test message "\
                                    u"by the selected notifier")
@@ -86,7 +86,7 @@ class NotifierDetails(SupernodeDetails):
         for name, notifier in self.context.getAllNotifierObjs():
             retDict = {}
             retDict['name'] = name
-            retDict['href'] = zapi.getPath(notifier) + '/@@details.html'
+            retDict['href'] = zapi.absoluteURL(notifier, self.request) + '/@@details.html'
             retList.append(retDict)
         return retList
         
@@ -99,7 +99,7 @@ class NotifierDetails(SupernodeDetails):
             for name, notifier in self.context.getNotifierObjs():
                 retDict = {}
                 retDict['name'] = name
-                retDict['href'] = zapi.getPath(notifier) + '/@@details.html'
+                retDict['href'] = zapi.absoluteURL(notifier, self.request) + '/@@details.html'
                 retList.append(retDict)
         return retList
 

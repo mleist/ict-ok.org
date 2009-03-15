@@ -75,7 +75,7 @@ class AdmUtilEventDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%ssend_event" % objId
             tmpDict['title'] = _(u"send it")
             tmpDict['href'] = u"%s/@@send_event.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"sends an the event to the list of receivers")
             retList.append(tmpDict)

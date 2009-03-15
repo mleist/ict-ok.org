@@ -138,7 +138,7 @@ class SnmpValueDetails(ComponentDetails):
     def getValuePngHref(self):
         """Url to picture"""
         obj = self.context
-        return zapi.getPath(obj)
+        return zapi.absoluteURL(obj, self.request)
 
     def getValues(self):
         retList = []

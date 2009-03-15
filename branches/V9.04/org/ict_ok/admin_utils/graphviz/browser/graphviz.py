@@ -51,7 +51,7 @@ class AdmUtilGraphvizDetails(SupernodeDetails):
         """get path of object as string
         """
         obj = removeAllProxies(self.context)
-        return zapi.getPath(obj)
+        return zapi.absoluteURL(obj, self.request)
 
 # --------------- forms ------------------------------------
 

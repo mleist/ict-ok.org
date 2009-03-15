@@ -103,7 +103,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%sreindex_db" % objId
             tmpDict['title'] = _(u"reindex database")
             tmpDict['href'] = u"%s/@@reindex_db?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"will reindex the catalogs of all "\
                                    u"tables in database")
@@ -115,7 +115,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%spack_db" % objId
             tmpDict['title'] = _(u"pack database")
             tmpDict['href'] = u"%s/@@pack_db?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"will pack the database and delete "\
                                    u"all backups")
@@ -183,7 +183,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         """
         obj = self.context
         print "cmd/objmq"
-        print "path: %s" % (zapi.getPath(obj))
+        print "path: %s" % (zapi.absoluteURL(obj, self.request))
         action = self.request.get('cmd', default=None)
         if action:
             if action == 'start':
@@ -211,7 +211,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
                 #mq_utility.sendPerMq(toxml(python_pickle))
                 #mq_utility = zapi.getUtility(IMailDelivery, 'ikObjTransportQueue')
                 #from_adr = u"http://%s@%s:8080%s" % \
-                         #(obj.objectID, obj.ipv4My, zapi.getPath(obj))
+                         #(obj.objectID, obj.ipv4My, zapi.absoluteURL(obj, self.request))
                 #to_adr = u"http://%s@%s:8080/++etc++site/default/AdmUtilSupervisor" % \
                          #(str(obj.oidMaster), str(obj.ipv4Master))
                 #mq_utility.send(from_adr, [to_adr], "msg_start")
@@ -221,7 +221,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
                 mq_utility = zapi.getUtility(IMailDelivery,
                                               'ikObjTransportQueue')
                 from_adr = u"http://%s@%s:8080%s" % \
-                         (obj.objectID, obj.ipv4My, zapi.getPath(obj))
+                         (obj.objectID, obj.ipv4My, zapi.absoluteURL(obj, self.request))
                 to_adr = u"http://%s@%s:8080/++etc++site/"+\
                        "default/AdmUtilSupervisor" % \
                          (str(obj.oidMaster), str(obj.ipv4Master))

@@ -77,14 +77,14 @@ class HostDetails(SuperHostDetails):
             tmpDict['oid'] = u"c%sshutdownHost" % objId
             tmpDict['title'] = _(u"shutdown host")
             tmpDict['href'] = u"%s/@@shutdownHost.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             retList.append(tmpDict)
             tmpDict = {}
             tmpDict['oid'] = u"c%senterMaintenanceMode" % objId
             tmpDict['title'] = _(u"enter maintenance mode")
             tmpDict['href'] = u"%s/@@enterMaintenanceMode.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             retList.append(tmpDict)
         return SuperHostDetails.actions(self) + retList

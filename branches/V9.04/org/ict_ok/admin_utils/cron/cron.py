@@ -48,7 +48,7 @@ class AdmUtilCron(Supernode):
         """receive cron signal
         """
         #logger.info(u"AdmUtilCron::receiveCron(%s, %s) in '%s'" \
-                    #% (str_time, mode,zapi.getPath(self)))
+                    #% (str_time, mode,zapi.absoluteURL(self, request)))
         self.lastCron = str_time
         dcore = IWriteZopeDublinCore(self)
         dcore.modified = datetime.utcnow()
