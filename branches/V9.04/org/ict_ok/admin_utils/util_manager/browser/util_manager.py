@@ -76,7 +76,7 @@ class Overview(SuperclassOverview):
         """List of Content objects"""
         objWithPermisson = []
 #        allObj = getAllUtilitiesRegisteredFor(ISuperclass)
-        allObj = getAllUtilitiesRegisteredFor(Interface)
+        allObj = getAllUtilitiesRegisteredFor(Interface, context=self.context)
         for obj in allObj:
             if ISuperclass.providedBy(obj):
                 myAdapter = zapi.queryMultiAdapter((obj, self.request),
