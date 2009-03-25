@@ -36,6 +36,9 @@
     <include package="org.ict_ok.admin_utils.util_manager.browser" />
     <include package="org.ict_ok.admin_utils.wfmc.browser" />
     <include package="org.ict_ok.components.browser" />
+    
+    <include package="org.ict_ok.libs.browser" />
+    
     <include package="org.ict_ok.components.superclass.browser" />
     <include package="org.ict_ok.components.site.browser" />
     <!--<include package="org.ict_ok.components.slave.browser" />-->

@@ -37,6 +37,8 @@
     <include package="zc.i18n" />
 
     <include package="z3c.form" />
+    <include package="z3c.form"
+             file="file.zcml" />
     <!-- include package="z3checkins" /-->
     <include package="z3c.layer.pagelet" />
     <include package="z3c.macro" />

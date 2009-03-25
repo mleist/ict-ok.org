@@ -45,6 +45,8 @@
     <include package="org.ict_ok.components" />
     <include package="org.ict_ok.components.browser" />
 
+    <include package="org.ict_ok.libs" />
+
     <include package="org.ict_ok.components.superclass" />
     <include package="org.ict_ok.components.supernode" />
     <include package="org.ict_ok.components.site" />

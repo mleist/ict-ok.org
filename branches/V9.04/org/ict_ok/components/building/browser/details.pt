@@ -44,6 +44,12 @@
             <td i18n:translate="">Comment</td>
             <td tal:content="context/ikComment" />
         </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/file2|nothing">
+            <td i18n:translate="">file2</td>
+            <td tal:content="python: len(context.file2)" />
+        </tr>
     
     </table>
 </i18n:block>

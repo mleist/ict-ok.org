@@ -57,6 +57,9 @@
     <include package="org.ict_ok.admin_utils.wfmc"
              file="security.zcml" />
 
+    <include package="org.ict_ok.libs"
+             file="security.zcml" />
+
     <!--security settings of components (hierarchical)-->
     <include package="org.ict_ok.components.superclass"
              file="security.zcml" />

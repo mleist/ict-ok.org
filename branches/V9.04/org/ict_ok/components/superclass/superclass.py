@@ -58,6 +58,7 @@ from org.ict_ok.admin_utils.generators.nagios.interfaces import \
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
 
+
 class Superclass(Persistent):
     """
     the superclass

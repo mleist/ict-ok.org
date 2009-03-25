@@ -16,7 +16,8 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Attribute, Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, List, Text, TextLine, Set
+from zope.schema import Choice, List, Text, TextLine, Set, Object, Int
+#from zope.mimetype.interfaces import IContentTypeAware
 
 # z3c imports
 from z3c.reference.schema import ViewReferenceField

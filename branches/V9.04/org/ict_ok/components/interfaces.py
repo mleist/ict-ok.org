@@ -15,16 +15,24 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Attribute, Interface
-from zope.schema import Bool, Bytes, Choice, List
+from zope.schema import Bool, Bytes, Choice, List, Object
 from zope.i18nmessageid import MessageFactory
 from zope.app.folder.interfaces import IFolder
+
+from zope.app.file.interfaces import IFile
+from z3c.form.interfaces import IFileWidget
+from z3c.blobfile.interfaces import IBlobFile
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
+from zope.schema.interfaces import IBytes
 
 _ = MessageFactory('org.ict_ok')
 
+
+class IDocument(IBlobFile):
+    pass
 
 class IComponent(Interface):
     """A general component object."""
@@ -53,6 +61,8 @@ class IComponent(Interface):
             required = False),
         readonly = False,
         required = False)
+
+
     
     def get_health():
         """
