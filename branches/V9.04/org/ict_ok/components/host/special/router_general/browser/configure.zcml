@@ -18,7 +18,7 @@
 
     <z3c:pagelet
         name="add_host_router_general.html"
-        for="org.ict_ok.components.net.interfaces.INet"
+        for="org.ict_ok.components.host.interfaces.IHostFolder"
         class="org.ict_ok.components.host.special.router_general.browser.host.AddHostForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"

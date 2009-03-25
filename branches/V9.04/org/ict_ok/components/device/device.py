@@ -32,6 +32,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
+from org.ict_ok.components.logical_device.interfaces import ILogicalDevice
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -48,15 +49,22 @@ def AllDevices(dummy_context):
 def AllUnusedOrUsedRoomDevices(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IDevice, 'room')
 
-Device_Interface_RelManager = FieldRelationManager(IDevice['interfaces'],
-                                                   IInterface['device'],
-                                                   relType='device:interfaces')
-Device_AppSoftware_RelManager = FieldRelationManager(IDevice['appsoftwares'],
-                                                       IApplicationSoftware['device'],
-                                                       relType='device:appsoftwares')
-Device_OSoftware_RelManager = FieldRelationManager(IDevice['osoftwares'],
-                                                       IOperatingSoftware['device'],
-                                                       relType='device:osoftwares')
+Device_Interface_RelManager = \
+    FieldRelationManager(IDevice['interfaces'],
+                         IInterface['device'],
+                         relType='device:interfaces')
+Device_AppSoftware_RelManager = \
+    FieldRelationManager(IDevice['appsoftwares'],
+                         IApplicationSoftware['device'],
+                         relType='device:appsoftwares')
+Device_OSoftware_RelManager = \
+    FieldRelationManager(IDevice['osoftwares'],
+                         IOperatingSoftware['device'],
+                         relType='device:osoftwares')
+Device_LogicalDevices_RelManager = \
+    FieldRelationManager(IDevice['logicalDevices'],
+                         ILogicalDevice['device'],
+                         relType='device:logicalDevices')
 
 
 class Device(PhysicalComponent):
@@ -72,6 +80,7 @@ class Device(PhysicalComponent):
     interfaces = RelationPropertyOut(Device_Interface_RelManager)
     appsoftwares = RelationPropertyOut(Device_AppSoftware_RelManager)
     osoftwares = RelationPropertyOut(Device_OSoftware_RelManager)
+    logicalDevices = RelationPropertyOut(Device_LogicalDevices_RelManager)
 
     fullTextSearchFields = ['cpuType']
     fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)

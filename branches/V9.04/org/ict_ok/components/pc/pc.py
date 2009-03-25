@@ -75,6 +75,7 @@ class PersonalComputer(Device):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        Device.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(PersonalComputer)
         for (name, value) in data.items():
             if name in refAttributeNames:

@@ -42,6 +42,22 @@
             set_schema=".interfaces.IEventIfEventHost"
             />
         <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="org.ict_ok.components.logical_device.interfaces.ILogicalDevice"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema="org.ict_ok.components.logical_device.interfaces.ILogicalDevice"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="org.ict_ok.components.logical_component.interfaces.ILogicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema="org.ict_ok.components.logical_component.interfaces.ILogicalComponent"
+            />
+        <require
             permission="org.ict_ok.components.host.View"
             interface="org.ict_ok.components.interfaces.IComponent"
             />
@@ -57,14 +73,14 @@
             permission="org.ict_ok.components.host.Edit"
             set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
-        <!--require
+        <require
             permission="org.ict_ok.components.host.View"
             interface="zope.app.container.interfaces.IReadContainer"
             />
-        <require
+        <!-- require
             permission="org.ict_ok.components.host.Edit"
             interface="zope.app.container.interfaces.IWriteContainer"
-            /-->
+            / -->
     </class>
     
     <class class=".host.HostFolder">

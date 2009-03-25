@@ -68,6 +68,9 @@
     <include package="org.ict_ok.components.physical_connector" />
     <include package="org.ict_ok.components.physical_component" />
 
+    <include package="org.ict_ok.components.logical_device" />
+    <include package="org.ict_ok.components.logical_component" />
+
     <include package="org.ict_ok.components.mobilephone" />
     <include package="org.ict_ok.components.outlet" />
     <include package="org.ict_ok.components.notebook" />

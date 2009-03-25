@@ -50,9 +50,3 @@ class Searchable(SuperSearchable):
         get hostname as string for catalog
         """
         return self.context.hostname
-
-    def getSearchableHostRoomOid(self):
-        """
-        get Object id as string for catalog
-        """
-        return self.context.room

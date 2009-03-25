@@ -48,7 +48,7 @@ from org.ict_ok.components.host.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
-
+from org.ict_ok.components.logical_device.logical_device import LogicalDevice
 
 #def AllHostGroups(dummy_context):
     #"""Which host group are there
@@ -124,7 +124,7 @@ def AllHostTemplates(dummy_context):
 #                                                 IInterface['host2'],
 #                                                 relType='host:interfaces')
 
-class Host(Component):
+class Host(LogicalDevice):
     """
     the template instance
     """
@@ -134,26 +134,26 @@ class Host(Component):
     # for ..Contained we have to:
     __name__ = __parent__ = None
     hostname = FieldProperty(IHost['hostname'])
-    manufacturer = FieldProperty(IHost['manufacturer'])
-    vendor = FieldProperty(IHost['vendor'])
-    hostGroups = FieldProperty(IHost['hostGroups'])
-    productionState = FieldProperty(IHost['productionState'])
-    workinggroup = FieldProperty(IHost['workinggroup'])
-    hardware = FieldProperty(IHost['hardware'])
-    user = FieldProperty(IHost['user'])
-    inv_id = FieldProperty(IHost['inv_id'])
-    room = FieldProperty(IHost['room'])
-    osList = FieldProperty(IHost['osList'])
-    snmpVersion = FieldProperty(IHost['snmpVersion'])
-    snmpPort = FieldProperty(IHost['snmpPort'])
-    snmpReadCommunity = FieldProperty(IHost['snmpReadCommunity'])
-    snmpWriteCommunity = FieldProperty(IHost['snmpWriteCommunity'])
-    url = FieldProperty(IHost['url'])
-    url_type = FieldProperty(IHost['url_type'])
-    url_authname = FieldProperty(IHost['url_authname'])
-    url_authpasswd = FieldProperty(IHost['url_authpasswd'])
-    console = FieldProperty(IHost['console'])
-    genNagios = FieldProperty(IHost['genNagios'])
+#    manufacturer = FieldProperty(IHost['manufacturer'])
+#    vendor = FieldProperty(IHost['vendor'])
+#    hostGroups = FieldProperty(IHost['hostGroups'])
+#    productionState = FieldProperty(IHost['productionState'])
+#    workinggroup = FieldProperty(IHost['workinggroup'])
+#    hardware = FieldProperty(IHost['hardware'])
+#    user = FieldProperty(IHost['user'])
+#    inv_id = FieldProperty(IHost['inv_id'])
+#    room = FieldProperty(IHost['room'])
+#    osList = FieldProperty(IHost['osList'])
+#    snmpVersion = FieldProperty(IHost['snmpVersion'])
+#    snmpPort = FieldProperty(IHost['snmpPort'])
+#    snmpReadCommunity = FieldProperty(IHost['snmpReadCommunity'])
+#    snmpWriteCommunity = FieldProperty(IHost['snmpWriteCommunity'])
+#    url = FieldProperty(IHost['url'])
+#    url_type = FieldProperty(IHost['url_type'])
+#    url_authname = FieldProperty(IHost['url_authname'])
+#    url_authpasswd = FieldProperty(IHost['url_authpasswd'])
+#    console = FieldProperty(IHost['console'])
+#    genNagios = FieldProperty(IHost['genNagios'])
     # Event interface
     eventInpObjs_shutdown = FieldProperty(\
         IEventIfEventHost['eventInpObjs_shutdown'])
@@ -170,7 +170,7 @@ class Host(Component):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        LogicalDevice.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(Host)
         # initialize OS List
         self.osList = []
@@ -194,10 +194,12 @@ class Host(Component):
         self._weight_user = 0.5
         
     def store_refs(self, **data):
+        LogicalDevice.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(Host)
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
+
 
     def trigger_online(self):
         """

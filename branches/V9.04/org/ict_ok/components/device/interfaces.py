@@ -53,6 +53,11 @@ class IDevice(Interface):
                       required=False,
                       default=[])
 
+    logicalDevices = List(title=_(u"Logical Devices"),
+                      value_type=Choice(vocabulary='AllUnusedOrUsedDeviceLogicalDevices'),
+                      required=False,
+                      default=[])
+
 
 class IDeviceFolder(Interface):
     """Container for Notebook objects

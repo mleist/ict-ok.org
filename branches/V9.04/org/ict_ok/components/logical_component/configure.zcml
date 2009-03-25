@@ -10,7 +10,7 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
-    <!-utility
+    <!-- utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".logical_component.AllLogicalComponents"
         name="AllLogicalComponents"
@@ -31,6 +31,6 @@
         name="AllUnusedOrUsedInterfaceLogicalComponents"
     / -->
 
-    <include package=".generations" />
+    <!-- include package=".generations" / -->
 
 </configure>

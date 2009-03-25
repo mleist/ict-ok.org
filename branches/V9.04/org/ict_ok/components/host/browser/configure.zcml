@@ -58,7 +58,7 @@
 
     <defaultView
         for="org.ict_ok.components.host.interfaces.IHost"
-        name="overview.html"
+        name="details.html"
         />
         
     <z3c:pagelet
@@ -101,10 +101,15 @@
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.components.host.interfaces.IHost"
-        class=".host.DetailsHostForm"
+        class=".host.HostDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.View"
     />
+    <z3c:template
+        template="details.pt"
+        for=".host.HostDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="smartview.html"
@@ -205,6 +210,18 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
     />
+    <z3c:pagelet
+        name="add_hosts.html"
+        for="org.ict_ok.components.host.interfaces.IHostFolder"
+        class="org.ict_ok.components.host.browser.host.AddHostClass"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.host.Add"
+    />
+    <z3c:template
+        template="../../host/browser/add_hosts.pt"
+        for="org.ict_ok.components.host.browser.host.AddHostClass"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
 
     <!--##### Sub Menu ##### -->
