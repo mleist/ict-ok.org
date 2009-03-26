@@ -54,7 +54,7 @@ class IDevice(Interface):
                       default=[])
 
     logicalDevices = List(title=_(u"Logical Devices"),
-                      value_type=Choice(vocabulary='AllUnusedOrUsedDeviceLogicalDevices'),
+                      value_type=Choice(vocabulary='AllLogicalDevices'),
                       required=False,
                       default=[])
 

@@ -35,7 +35,7 @@ from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.logical_component.logical_component import \
     LogicalComponent
-from org.ict_ok.components.device.device import Device_LogicalDevices_RelManager
+from org.ict_ok.components.device.device import Devices_LogicalDevices_RelManager
 
 def AllLogicalDeviceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, ILogicalDevice)
@@ -44,7 +44,7 @@ def AllLogicalDevices(dummy_context):
     return AllComponents(dummy_context, ILogicalDevice)
 
 def AllUnusedOrUsedDeviceLogicalDevices(dummy_context):
-    return AllUnusedOrSelfComponents(dummy_context, ILogicalDevice, 'device')
+    return AllUnusedOrSelfComponents(dummy_context, ILogicalDevice, 'devices')
 
 class LogicalDevice(LogicalComponent):
     """
@@ -54,7 +54,7 @@ class LogicalDevice(LogicalComponent):
     __name__ = __parent__ = None
     powerManagementSupported = FieldProperty(ILogicalDevice['powerManagementSupported'])
 
-    device = RelationPropertyIn(Device_LogicalDevices_RelManager)
+    devices = RelationPropertyIn(Devices_LogicalDevices_RelManager)
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(LogicalComponent.fullTextSearchFields)

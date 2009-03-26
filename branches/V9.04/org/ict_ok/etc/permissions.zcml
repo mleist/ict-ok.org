@@ -122,4 +122,7 @@
     <include package="org.ict_ok.components.isdnphone"
              file="security.zcml" />
              
+    <include package="org.ict_ok.components.x509certificate"
+             file="security.zcml" />
+
 </configure>

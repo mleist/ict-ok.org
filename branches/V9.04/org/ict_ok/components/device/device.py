@@ -61,10 +61,14 @@ Device_OSoftware_RelManager = \
     FieldRelationManager(IDevice['osoftwares'],
                          IOperatingSoftware['device'],
                          relType='device:osoftwares')
-Device_LogicalDevices_RelManager = \
+#Device_LogicalDevices_RelManager = \
+#    FieldRelationManager(IDevice['logicalDevices'],
+#                         ILogicalDevice['device'],
+#                         relType='device:logicalDevices')
+Devices_LogicalDevices_RelManager = \
     FieldRelationManager(IDevice['logicalDevices'],
-                         ILogicalDevice['device'],
-                         relType='device:logicalDevices')
+                         ILogicalDevice['devices'],
+                         relType='devices:logicalDevices')
 
 
 class Device(PhysicalComponent):
@@ -80,7 +84,8 @@ class Device(PhysicalComponent):
     interfaces = RelationPropertyOut(Device_Interface_RelManager)
     appsoftwares = RelationPropertyOut(Device_AppSoftware_RelManager)
     osoftwares = RelationPropertyOut(Device_OSoftware_RelManager)
-    logicalDevices = RelationPropertyOut(Device_LogicalDevices_RelManager)
+#    logicalDevices = RelationPropertyOut(Device_LogicalDevices_RelManager)
+    logicalDevices = RelationPropertyOut(Devices_LogicalDevices_RelManager)
 
     fullTextSearchFields = ['cpuType']
     fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)

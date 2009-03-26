@@ -17,7 +17,7 @@ __version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Bool, Choice
+from zope.schema import Bool, Choice, List
 
 # ict_ok.org imports
 
@@ -32,11 +32,16 @@ class ILogicalDevice(Interface):
         description = _(u'the Device can be power managed'),
         required = True)
 
-    device = Choice(
-        title=_(u'Device'),
-        vocabulary='AllDevices',
-        required=False
-        )
+#    device = Choice(
+#        title=_(u'Device'),
+#        vocabulary='AllDevices',
+#        required=False
+#        )
+
+    devices = List(title=_(u"Devices"),
+                   value_type=Choice(vocabulary='AllDevices'),
+                   required=False,
+                   default=[])
 
 
 class ILogicalDeviceFolder(Interface):

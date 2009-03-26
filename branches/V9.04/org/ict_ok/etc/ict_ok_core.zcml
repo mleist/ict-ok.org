@@ -71,6 +71,8 @@
     <include package="org.ict_ok.components.logical_device" />
     <include package="org.ict_ok.components.logical_component" />
 
+    <include package="org.ict_ok.components.credential" />
+
     <include package="org.ict_ok.components.mobilephone" />
     <include package="org.ict_ok.components.outlet" />
     <include package="org.ict_ok.components.notebook" />
@@ -87,5 +89,7 @@
     <include package="org.ict_ok.components.printer" />
     <include package="org.ict_ok.components.misc_physical" />
     <include package="org.ict_ok.components.isdnphone" />
+
+    <include package="org.ict_ok.components.x509certificate" />
 
 </configure>
