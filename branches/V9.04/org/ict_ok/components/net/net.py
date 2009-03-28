@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,E0611,W0142
+# pylint: disable-msg=E1101,E0611,W0612,W0142
 #
 """implementation of Net
 
@@ -27,6 +27,11 @@ from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 from zope.app.folder import Folder
 
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
+
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
@@ -41,32 +46,72 @@ from org.ict_ok.components.host.special.vmware_vm.interfaces import \
      IHostVMwareVm
 from org.ict_ok.components.host.special.vmware_esx.interfaces import \
      IHostVMwareEsx
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents, \
+    ComponentsFromObjList
 
 
-def getAllNetworks():
-    """ get a list of all Nets
-    """
-    retList = []
-    uidutil = getUtility(IIntIds)
-    for (myid, myobj) in uidutil.items():
-        if INet.providedBy(myobj.object):
-            retList.append(myobj.object)
-    return retList
+#def getAllNetworks():
+#    """ get a list of all Nets
+#    """
+#    retList = []
+#    uidutil = getUtility(IIntIds)
+#    for (myid, myobj) in uidutil.items():
+#        if INet.providedBy(myobj.object):
+#            retList.append(myobj.object)
+#    return retList
+#
+#def AllNetTemplates(dummy_context):
+#    """Which Net templates exists
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if INet.providedBy(oobj.object) and \
+#        oobj.object.isTemplate:
+#            myString = u"%s [T]" % (oobj.object.getDcTitle())
+#            terms.append(SimpleTerm(oobj.object,
+#                                    token=oid,
+#                                    title=myString))
+#    return SimpleVocabulary(terms)
 
 def AllNetTemplates(dummy_context):
-    """Which Net templates exists
-    """
-    terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if INet.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
-                                    title=myString))
-    return SimpleVocabulary(terms)
+    return AllComponentTemplates(dummy_context, INet,
+                                 additionalAttrNames=['ipv4'])
 
+def AllNets(dummy_context):
+    return AllComponents(dummy_context, INet,
+                         additionalAttrNames=['ipv4'])
+
+def AllUnusedOrSelfNets(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, INet,
+                                     'parentnet',
+                                     additionalAttrNames=['ipv4'])
+
+def AllValidSubNets(dummy_context):
+    uidutil = getUtility(IIntIds)
+    validObjects = []
+    if INet.providedBy(dummy_context):
+        myNetIp = IP(dummy_context.ipv4)
+        for (oid, oobj) in uidutil.items():
+            if INet.providedBy(oobj.object):
+                i_NetIp = IP(oobj.object.ipv4)
+                if i_NetIp in myNetIp and \
+                    oobj.object != dummy_context:
+                    validObjects.append(oobj.object)
+    else:
+        for (oid, oobj) in uidutil.items():
+            if INet.providedBy(oobj.object):
+                validObjects.append(oobj.object)
+    return ComponentsFromObjList(dummy_context, validObjects,
+                                 additionalAttrNames=['ipv4'])
+
+
+
+Net_Nets_RelManager = \
+       FieldRelationManager(INet['subnets'],
+                            INet['parentnet'],
+                            relType='parentnet:subnets')
 
 class Net(Component):
     """
@@ -79,6 +124,9 @@ class Net(Component):
     __name__ = __parent__ = None
     ipv4 = FieldProperty(INet['ipv4'])
 
+    subnets = RelationPropertyOut(Net_Nets_RelManager)
+    parentnet = RelationPropertyIn(Net_Nets_RelManager)
+    
     eventInpObjs_inward_relaying_shutdown = FieldProperty(\
         IEventIfEventNet['eventInpObjs_inward_relaying_shutdown'])
 

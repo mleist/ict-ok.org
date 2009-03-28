@@ -48,7 +48,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 from org.ict_ok.components.net.interfaces import \
     INet, IEventIfEventNet, IAddNet
-from org.ict_ok.components.net.net import getAllNetworks, Net
+from org.ict_ok.components.net.net import AllNets, Net
 from org.ict_ok.admin_utils.netscan.interfaces import \
      IScanner
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -241,7 +241,7 @@ class AllNetworks(Overview):
     
     def objs(self):
         """List of Content objects"""
-        return getAllNetworks()
+        return AllNets()
     
     #def table(self):
         #""" Properties of table are defined here"""

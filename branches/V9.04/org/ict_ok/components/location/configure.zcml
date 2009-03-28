@@ -21,6 +21,9 @@
         <implements
             interface="zope.app.container.interfaces.IContentContainer"
             />
+        <!--implements
+            interface="org.ict_ok.libs.interfaces.IDocumentAddable"
+            /-->            
         <factory
             id="org.ict_ok.components.location.location.Location"
             description="Location"

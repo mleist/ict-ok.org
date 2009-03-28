@@ -26,3 +26,8 @@ _ = MessageFactory('org.ict_ok')
 
 class IDocument(Interface):
     """A file object."""
+
+
+class IDocumentAddable(Interface):
+    """Document can be Add"""
+

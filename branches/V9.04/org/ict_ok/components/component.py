@@ -24,6 +24,7 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # ict_ok.org imports
+from org.ict_ok.libs.interfaces import IDocumentAddable
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.supernode import Supernode
 
@@ -151,13 +152,48 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
 
+def ComponentsFromObjList(dummy_context, obj_list, additionalAttrNames=None):
+    """In which production state a host may be
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for i_obj in obj_list:
+        myString = u"%s" % (i_obj.getDcTitle())
+        if additionalAttrNames is not None:
+            for additionalAttrName in additionalAttrNames:
+                try:
+                    additionalAttribute = getattr(i_obj, additionalAttrName)
+                except AttributeError:
+                    additionalAttribute = None
+                if additionalAttribute is not None:
+                    if hasattr(additionalAttribute, 'ikName'):
+                        if len(additionalAttribute.ikName) > 70:
+                            dotted = u'...)'
+                        else:
+                            dotted = u')'
+                        myString = myString + u" (%s" % \
+                            additionalAttribute.ikName[:70] + dotted
+                    else:
+                        if len(additionalAttribute) > 70:
+                            dotted = u'...)'
+                        else:
+                            dotted = u')'
+                        myString = myString + u" (%s" % \
+                            additionalAttribute[:70] + dotted
+        terms.append(\
+            SimpleTerm(i_obj,
+                       token=uidutil.getId(i_obj),
+                       title=myString))
+    terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
+    return SimpleVocabulary(terms)    
+
 
 class Component(Supernode):
     """
     the general component instance
     """
 
-    implements(IComponent)
+    implements(IComponent, IDocumentAddable)
     isTemplate = FieldProperty(IComponent['isTemplate'])
 #    requirement = FieldProperty(IComponent['requirement'])
     requirements = FieldProperty(IComponent['requirements'])

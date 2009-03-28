@@ -169,8 +169,23 @@
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".net.AllNets"
+        name="AllNets"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
         component=".net.AllNetTemplates"
         name="AllNetTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".net.AllUnusedOrSelfNets"
+        name="AllUnusedOrSelfNets"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".net.AllValidSubNets"
+        name="AllValidSubNets"
     />
 
     <include package=".generations" />

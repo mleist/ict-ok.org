@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E0213,W0232
+# pylint: disable-msg=E1101,E0213,W0232
 #
 """Interface of Net"""
 
@@ -15,12 +15,14 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface
-from zope.schema import Choice, Set
+from zope.interface import Attribute, Invalid, invariant
+from zope.schema import Choice, List, Set
 from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
 # ict_ok.org imports
 from org.ict_ok.schema.ipvalid import NetIpValid
+from org.ict_ok.schema.IPy import IP
 
 _ = MessageFactory('org.ict_ok')
 
@@ -39,6 +41,33 @@ class INet(Interface):
         readonly = False,
         required = True)
     
+    parentnet = Choice(
+        title = _(u'Parent net'),
+        vocabulary = 'AllNets',
+        required = False)
+
+    subnets = List(
+        title = _(u'Sub nets'),
+        value_type=Choice(vocabulary='AllValidSubNets'),
+        default=[],
+        required = False)
+
+    @invariant
+    def ensureSubnetInNet(obj):
+        """publicKey must be valid PEM string
+        """
+        if obj.parentnet is not None:
+            parentnet = IP(obj.parentnet)
+            mynet = IP(obj.ipv4)
+            if not mynet in parentnet:
+                raise Invalid(u"'%s' not in '%s'" % (obj.ipv4, obj.parentnet.ipv4))
+        if obj.subnets is not None:
+            mynet = IP(obj.ipv4)
+            for subnet_obj in obj.subnets:
+                subnet = IP(subnet_obj.ipv4)
+                if not subnet in mynet:
+                    raise Invalid(u"'%s' not in '%s'" % (subnet_obj.ipv4, obj.ipv4))
+        
     def containsIp(ipString):
         """ is ip(String) part of this network?
         """
