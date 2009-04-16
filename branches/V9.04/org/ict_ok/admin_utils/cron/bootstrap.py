@@ -53,7 +53,8 @@ def recursiveCronSubscriber(obj):
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilCron = ensureUtility(root_folder, IAdmUtilCron,
-                                    'AdmUtilCron', AdmUtilCron, '',
+                                    'AdmUtilCron', AdmUtilCron,
+                                    name='AdmUtilCron',
                                     copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilCron, AdmUtilCron):

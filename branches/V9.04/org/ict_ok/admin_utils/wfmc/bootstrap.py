@@ -38,7 +38,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilWFMC = ensureUtility(root_folder, 
                                     IAdmUtilWFMC,
                                     'AdmUtilWFMC', 
-                                    AdmUtilWFMC, '',
+                                    AdmUtilWFMC,
+                                    name='AdmUtilWFMC',
                                     copy_to_zlog=False, 
                                     asObject=True)
     

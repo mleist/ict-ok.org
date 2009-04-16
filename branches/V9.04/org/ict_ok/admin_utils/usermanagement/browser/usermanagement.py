@@ -130,7 +130,8 @@ class AdmUtilUserManagementPreferences:
             zapi.absoluteURL(utilSupervisor, self.request)+\
             '/@@version.html')
     def fsearch(self):
-        utilSupervisor = getUtility(IAdmUtilSupervisor)
+        utilSupervisor = getUtility(IAdmUtilSupervisor,
+                                    name='AdmUtilSupervisor')
         if self.request.has_key('QUERY_STRING'):
             queryString = '?%s' % self.request['QUERY_STRING']
         else:

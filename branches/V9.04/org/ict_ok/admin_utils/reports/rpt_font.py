@@ -36,7 +36,7 @@ def __registerFont__(fontname, afmFilename, pfbFilename):
     pdfmetrics.registerFont(justFont)
 
 def registerRptFonts():
-    admUtilReports = getUtility(IAdmUtilReports)
+    admUtilReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
     if admUtilReports.fontName1 is not None and \
        admUtilReports.afmFile1 is not None and \
        admUtilReports.pfbFile1 is not None:

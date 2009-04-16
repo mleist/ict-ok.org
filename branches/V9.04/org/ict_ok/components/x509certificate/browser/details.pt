@@ -11,39 +11,31 @@
 
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">getSubject</td>
-            <td tal:content="context/getSubject" />
+            <td tal:content="view/getSubject" />
         </tr>
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">getIssuerName</td>
-            <td tal:content="context/getIssuerName" />
+            <td tal:content="view/getIssuerName" />
         </tr>
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">getSerialNumber</td>
             <td tal:content="context/getSerialNumber" />
         </tr>
         <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">getSignatureAlgorithm</td>
-            <td tal:content="context/getSignatureAlgorithm" />
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">getPublicKeyAlgorithm</td>
-            <td tal:content="context/getPublicKeyAlgorithm" />
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Public key size</td>
             <td tal:content="python: u'%s bit' % context.getPublicKeySize()" />
         </tr>
-        <tr tal:attributes="class view/getNextTabClass">
+        <!--tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">getVersion</td>
             <td tal:content="context/getVersion" />
-        </tr>
+        </tr-->
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">getValidNotBefore</td>
-            <td tal:content="context/getValidNotBefore" />
+            <td tal:content="python: dateform.format(context.validNotBefore)">test</td>
         </tr>
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">getValidNotAfter</td>
-            <td tal:content="context/getValidNotAfter" />
+            <td tal:content="python: dateform.format(context.validNotAfter)">test</td>
         </tr>
 
         <tr tal:attributes="class view/getNextTabClass"

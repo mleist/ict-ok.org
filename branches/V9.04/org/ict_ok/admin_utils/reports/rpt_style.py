@@ -45,7 +45,7 @@ from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 def getRptStyleSheet():
     """Returns a stylesheet object"""
     
-    admUtilReports = getUtility(IAdmUtilReports)
+    admUtilReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
 
     if admUtilReports.fontName1 is None:
         locFontName1 = 'Helvetica'

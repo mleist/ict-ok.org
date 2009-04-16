@@ -366,7 +366,8 @@ def allLdapUser(dummy_context):
     terms = []
     userManagement = queryUtility(IAdmUtilUserManagement)
     if userManagement.useLdap:
-        ldapUtil = queryUtility(IManageableLDAPAdapter)
+        ldapUtil = queryUtility(IManageableLDAPAdapter,
+                                name='ManageableLDAPAdapter')
         if ldapUtil.serverURL != userManagement.serverURL:
             ldapUtil.serverURL = userManagement.serverURL
         conn = ldapUtil.connect()

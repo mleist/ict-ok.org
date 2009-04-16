@@ -51,8 +51,9 @@ def recursiveEsxVimSubscriber(obj):
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilEsxVim = ensureUtility(root_folder, IAdmUtilEsxVim,
-                                        'AdmUtilEsxVim', AdmUtilEsxVim, '',
-                                        copy_to_zlog=False, asObject=True)
+                                      'AdmUtilEsxVim', AdmUtilEsxVim,
+                                      name='AdmUtilEsxVim',
+                                      copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilEsxVim, AdmUtilEsxVim):
         logger.info(u"bootstrap: Ensure named AdmUtilEsxVim")

@@ -262,3 +262,40 @@ class IRptPdf(Interface):
         comments: should there comments are in the output?
 
         """
+
+
+class IRptXML(Interface):
+    """Interface of XML-report-Adapter
+    """
+    def traverse4RptPre(level, comments, autoAppend=True):
+        """pdf report object preamble
+        
+        level: indent-level (int 0..)
+        comments: should there comments are in the output?
+        autoAppend: normal usecase: append the pdf elements to the document
+                    not autoAppend: returns a list with pdf elements
+        """
+
+    def traverse4RptPost(level, comments):
+        """pdf report object postamble
+        
+        level: indent-level (int 0..)
+        comments: should there comments are in the output?
+
+        """
+
+    def traverse4RptBody(level, comments):
+        """pdf report data of/in object
+        
+        level: indent-level (int 0..)
+        comments: should there comments are in the output?
+
+        """
+
+    def traverse4Rpt(level, comments):
+        """object pdf report
+        
+        level: indent-level (int 0..)
+        comments: should there comments are in the output?
+
+        """

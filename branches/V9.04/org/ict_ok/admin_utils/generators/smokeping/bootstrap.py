@@ -38,7 +38,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilGeneratorSmokePing = ensureUtility(root_folder, 
                                                IAdmUtilGeneratorSmokePing,
                                                'AdmUtilGeneratorSmokePing', 
-                                               AdmUtilGeneratorSmokePing, '',
+                                               AdmUtilGeneratorSmokePing,
+                                               name='AdmUtilGeneratorSmokePing',
                                                copy_to_zlog=False, 
                                                asObject=True)
 

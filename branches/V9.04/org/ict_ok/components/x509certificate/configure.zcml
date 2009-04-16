@@ -142,4 +142,9 @@
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
+    <adapter
+        factory="org.ict_ok.components.x509certificate.adapter.search.Searchable"
+    />
+
+
 </configure>

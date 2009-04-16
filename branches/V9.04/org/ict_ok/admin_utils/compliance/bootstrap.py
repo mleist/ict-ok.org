@@ -542,8 +542,9 @@ def fillUtilitiyWithReqs(context):
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilCompliance = ensureUtility(root_folder, IAdmUtilCompliance,
-                                       'AdmUtilCompliance', AdmUtilCompliance, '',
-                                       copy_to_zlog=False, asObject=True)
+                                          'AdmUtilCompliance', AdmUtilCompliance,
+                                          name='AdmUtilCompliance',
+                                          copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilCompliance, AdmUtilCompliance):
         logger.info(u"bootstrap: Ensure named AdmUtilCompliance")

@@ -74,6 +74,6 @@
       </DIV>
       <DIV tal:omit-tag="" tal:content="structure provider:ict_ok.footer"></DIV>
     </DIV>
-</body>
+  </body>
 </html>
 

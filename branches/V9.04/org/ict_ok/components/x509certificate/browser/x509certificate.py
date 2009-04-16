@@ -17,6 +17,7 @@ __version__ = "$Id: template.py_cog 396 2009-01-08 00:21:51Z markusleist $"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.security.proxy import removeSecurityProxy
 
 # z3c imports
 from z3c.form.browser import checkbox
@@ -64,6 +65,43 @@ class X509CertificateDetails(CredentialDetails):
     omit_viewfields = CredentialDetails.omit_viewfields + []
     omit_addfields = CredentialDetails.omit_addfields + []
     omit_editfields = CredentialDetails.omit_editfields + []
+    
+    def getIssuerName(self):
+        issuer = removeSecurityProxy(self.context.getIssuerName())
+        issue_str = u', '.join([u"%s=%s" % (i_k, i_v)
+                                for i_k, i_v in issuer.get_components()])
+        return issue_str
+
+    def getSubject(self):
+#        import pdb
+#        pdb.set_trace()
+#        from ldappas.interfaces import ILDAPAuthentication
+#        from zope.component import getUtility
+#        from ldapadapter.interfaces import IManageableLDAPAdapter
+#        from org.ict_ok.admin_utils.usermanagement.interfaces import IAdmUtilUserManagement
+#        ldap = getUtility(ILDAPAuthentication,
+#                          name='LDAPAuthentication')
+#        pau=getUtility(IAdmUtilUserManagement)
+#        pau.getPrincipal(u'principal.User')
+#        pau.getPrincipal(u'LDAPAuthentication.demo')
+#        ddd = ldap.authenticateCredentials({'login': 'demo', 'password': 'ddd'})
+        subject = removeSecurityProxy(self.context.getSubject())
+        subject_str = u', '.join([u"%s=%s" % (i_k, i_v)
+                                for i_k, i_v in subject.get_components()])
+        return subject_str
+
+    def getValidNotBefore(self):
+        timeString = removeSecurityProxy(self.getCertificate().get_notBefore())
+        return datetime.strptime(\
+                timeString, '%Y%m%d%H%M%SZ').replace(tzinfo=pytz.utc)
+
+    def getValidNotAfter(self):
+        #return self.getCertificate().get_notAfter()
+        timeString = removeSecurityProxy(self.getCertificate().get_notAfter())
+        return datetime.strptime(\
+                timeString, '%Y%m%d%H%M%SZ').replace(tzinfo=pytz.utc)
+
+
 
 
 class X509CertificateFolderDetails(CredentialFolderDetails):

@@ -54,8 +54,9 @@ def recursiveEventCrossbarSubscriber(obj):
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilEventCrossbar = ensureUtility(root_folder, IAdmUtilEventCrossbar,
-                                        'AdmUtilEventCrossbar', AdmUtilEventCrossbar, '',
-                                        copy_to_zlog=False, asObject=True)
+                                             'AdmUtilEventCrossbar', AdmUtilEventCrossbar,
+                                             name='AdmUtilEventCrossbar',
+                                             copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilEventCrossbar, AdmUtilEventCrossbar):
         logger.info(u"bootstrap: Ensure named AdmUtilEventCrossbar")

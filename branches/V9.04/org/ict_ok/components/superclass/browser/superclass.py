@@ -459,6 +459,13 @@ class MSubReportPdf(GlobalMenuSubItem):
     weight = 60
 
 
+class MSubReportXML(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'report XML')
+    viewURL = '@@reportXML.html'
+    weight = 70
+
+
 class MSubHistory(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'History')
@@ -722,6 +729,28 @@ class SuperclassDetails:
         versionStr = "%s [%s]" % (longTimeString, getIkVersion())
         self.context.generatePdf(f_name, authorStr, versionStr)
         self.request.response.setHeader('Content-Type', 'application/pdf')
+        self.request.response.setHeader(\
+            'Content-Disposition',
+            'attachment; filename=\"%s\"' % filename)
+        setNoCacheHeaders(self.request.response)
+        datafile = open(f_name, "r")
+        dataMem = datafile.read()
+        datafile.close()
+        os.remove(f_name)
+        return dataMem
+    
+    def reportXML(self):
+        filename = datetime.now().strftime('ict_%Y%m%d%H%M%S.xml')
+        f_handle, f_name = tempfile.mkstemp(filename)
+        authorStr = self.request.principal.title
+        my_formatter = self.request.locale.dates.getFormatter(
+            'dateTime', 'medium')
+        userTZ = getUserTimezone()
+        longTimeString = my_formatter.format(\
+            userTZ.fromutc(datetime.utcnow()))
+        versionStr = "%s [%s]" % (longTimeString, getIkVersion())
+        self.context.generateXML(f_name, authorStr, versionStr)
+        self.request.response.setHeader('Content-Type', 'application/xml')
         self.request.response.setHeader(\
             'Content-Disposition',
             'attachment; filename=\"%s\"' % filename)

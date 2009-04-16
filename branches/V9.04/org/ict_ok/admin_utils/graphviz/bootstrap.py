@@ -38,7 +38,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilGraphviz = ensureUtility(root_folder, 
                                           IAdmUtilGraphviz,
                                           'AdmUtilGraphviz', 
-                                          AdmUtilGraphviz, '',
+                                          AdmUtilGraphviz,
+                                          name='AdmUtilGraphviz',
                                           copy_to_zlog=False, 
                                           asObject=True)
 

@@ -38,7 +38,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilGeneratorNagios = ensureUtility(root_folder, 
                                                IAdmUtilGeneratorNagios,
                                                'AdmUtilGeneratorNagios', 
-                                               AdmUtilGeneratorNagios, '',
+                                               AdmUtilGeneratorNagios,
+                                               name='AdmUtilGeneratorNagios',
                                                copy_to_zlog=False, 
                                                asObject=True)
 

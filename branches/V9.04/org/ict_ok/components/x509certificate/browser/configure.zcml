@@ -54,7 +54,7 @@
         permission="org.ict_ok.components.x509certificate.Delete"
     />
     <!--    for="org.ict_ok.components.x509certificate.interfaces.IX509Certificate"  -->
-
+    
     <!-- Folder  -->
 
     <defaultView
@@ -155,14 +155,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.x509certificate.Add"
         />
-    <!-- page
-        name="exportcsvdata.html"
-        for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
-        class=".x509certificate.X509CertificateFolderDetails"
-        permission="org.ict_ok.components.x509certificate.View"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        attribute="exportCsvData"
-    / -->
     <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
@@ -171,13 +163,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
-    <!-- z3c:pagelet
-        name="importcsvdata.html"
-        for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
-        class=".x509certificate.ImportCsvDataForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.x509certificate.Add"
-    / -->
     <z3c:pagelet
         name="importxlsdata.html"
         for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
@@ -185,14 +170,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.x509certificate.Add"
     />
-    <!-- viewlet
-        name="exportcsvdata"
-        for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.x509certificate.View"
-        / -->
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
@@ -201,14 +178,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.x509certificate.View"
         />
-    <!-- viewlet
-        name="importcsvdata"
-        for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.x509certificate.Add"
-        / -->
     <viewlet
         name="importxlsdata"
         for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"

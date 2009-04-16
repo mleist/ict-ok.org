@@ -38,7 +38,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilGeneratorHoneyd = ensureUtility(root_folder, 
                                                  IAdmUtilGeneratorHoneyd,
                                                  'AdmUtilGeneratorHoneyd', 
-                                                 AdmUtilGeneratorHoneyd, '',
+                                                 AdmUtilGeneratorHoneyd,
+                                                 name='AdmUtilGeneratorHoneyd',
                                                  copy_to_zlog=False, 
                                                  asObject=True)
 

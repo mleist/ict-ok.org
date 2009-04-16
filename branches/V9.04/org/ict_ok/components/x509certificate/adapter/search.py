@@ -22,7 +22,7 @@ from zope.index.text.interfaces import ISearchableText
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.outlet.interfaces import IOutlet
+from org.ict_ok.components.x509certificate.interfaces import IX509Certificate
 from org.ict_ok.components.x509certificate.x509certificate import X509Certificate
 from org.ict_ok.components.superclass.adapter.search import \
      Searchable as SuperSearchable
@@ -34,7 +34,7 @@ class Searchable(SuperSearchable):
     """Searchable-Adapter."""
 
     implements(ISearchableText)
-    adapts(IOutlet)
+    adapts(IX509Certificate)
 
     def __init__(self, context):
         SuperSearchable.__init__(self, context)
@@ -49,3 +49,22 @@ class Searchable(SuperSearchable):
         """
         """
         return X509Certificate.fullTextSearchFields
+
+    def getSearchableFullText(self):
+        """
+        get Object id as string for catalog
+        """
+        stringList = []
+        for field in self.getFullTextSearchFields():
+            stringList.append(u"%s" % getattr(self.context, field))
+        issuerName = self.context.getIssuerName()
+        subject = self.context.getSubject()
+        if issuerName:
+            issuerName_str = u', '.join([u"%s=%s" % (i_k, i_v)
+                                    for i_k, i_v in issuerName.get_components()])
+            stringList.append(issuerName_str)
+        if subject:
+            subject_str = u', '.join([u"%s=%s" % (i_k, i_v)
+                                    for i_k, i_v in subject.get_components()])
+            stringList.append(subject_str)
+        return u" ".join(stringList)

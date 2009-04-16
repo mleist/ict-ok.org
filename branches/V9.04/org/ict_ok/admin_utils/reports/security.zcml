@@ -21,12 +21,19 @@
         id="org.ict_ok.admin_utils.reports.generate.pdf"
         title="genPdfReport"
     />
+    <permission
+        id="org.ict_ok.admin_utils.reports.generate.xml"
+        title="genXMLReport"
+    />
 
     <grant permission="org.ict_ok.admin_utils.reports.generate.pdf"
                     role="org.ict_ok.usr" />
     <grant permission="org.ict_ok.admin_utils.reports.generate.pdf"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.reports.generate.pdf"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.reports.generate.xml"
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.reports.View"

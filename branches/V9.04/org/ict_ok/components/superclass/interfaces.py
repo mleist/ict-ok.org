@@ -138,6 +138,10 @@ class ISuperclass(Interface):
         """
         will generate a object pdf report
         """
+    def generateXML(absFilename, authorStr, versionStr):
+        """
+        will generate a object XML report
+        """
 
 
 class IPickle(Interface):

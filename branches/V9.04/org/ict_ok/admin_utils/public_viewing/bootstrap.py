@@ -41,6 +41,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         IAdmUtilPublicViewing,
         'AdmUtilPublicViewing',
         AdmUtilPublicViewing,
+        name='AdmUtilPublicViewing',
         copy_to_zlog=False,
         asObject=True)
 

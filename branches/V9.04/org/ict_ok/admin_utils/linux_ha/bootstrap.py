@@ -35,7 +35,8 @@ logger = logging.getLogger("AdmUtilLinuxHa")
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilLinuxHa = ensureUtility(root_folder, IAdmUtilLinuxHa,
-                                       'AdmUtilLinuxHa', AdmUtilLinuxHa, '',
+                                       'AdmUtilLinuxHa', AdmUtilLinuxHa,
+                                       name='AdmUtilLinuxHa',
                                        copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilLinuxHa, AdmUtilLinuxHa):

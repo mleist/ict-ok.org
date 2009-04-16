@@ -88,7 +88,7 @@ def setSiteManagerWhenAdded(site, event):
                           IIntIds,
                           '',
                           IntIds,
-                          '', 
+                          name='IntIds',
                           copy_to_zlog=False, 
                           asObject=True)
             madeUtilityICatalog = ensureUtility(\
@@ -96,7 +96,7 @@ def setSiteManagerWhenAdded(site, event):
                 ICatalog, 
                 '', 
                 Catalog,
-                '', 
+                name='Catalog',
                 copy_to_zlog=False, 
                 asObject=True)
             oid_index = TextIndex(interface=ISearchableText,
@@ -108,7 +108,7 @@ def setSiteManagerWhenAdded(site, event):
                 IAdmUtilSupervisor,
                 'AdmUtilSupervisor', 
                 AdmUtilSupervisor,
-                '',
+                name='AdmUtilSupervisor',
                 copy_to_zlog=False, 
                 asObject=True)
             madeAdmUtilSupervisor.status2Master = u"will be a slave"

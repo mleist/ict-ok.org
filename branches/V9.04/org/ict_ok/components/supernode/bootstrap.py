@@ -50,7 +50,7 @@ def bootStrapSubscriber(event):
                                        IIntIds, 
                                        '', 
                                        IntIds, 
-                                       '', 
+                                       name='IntIds',
                                        copy_to_zlog=False, 
                                        asObject=True)
 
@@ -70,7 +70,7 @@ def bootStrapSubscriber(event):
                                         ICatalog, 
                                         '', 
                                         Catalog, 
-                                        '', 
+                                        name='Catalog',
                                         copy_to_zlog=False, 
                                         asObject=True)
 

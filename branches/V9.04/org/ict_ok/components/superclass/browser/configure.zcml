@@ -54,6 +54,15 @@
         attribute="reportPdf"
     />
     <page
+        name="reportXML.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.SuperclassDetails"
+        permission="org.ict_ok.admin_utils.reports.generate.xml"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="reportXML"
+    />
+
+    <page
         name="exportxmldata.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         class=".superclass.SuperclassDetails"
@@ -137,5 +146,13 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubReportPdf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
+        />
+    <viewlet
+        name="reportXML"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubReportXML"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.reports.generate.xml"
         />
 </configure>

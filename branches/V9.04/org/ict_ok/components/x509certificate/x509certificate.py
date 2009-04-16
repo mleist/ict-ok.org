@@ -15,11 +15,14 @@ __version__ = "$Id: template.py_cog 399 2009-01-08 14:00:17Z markusleist $"
 
 # python imports
 from OpenSSL import crypto
+from datetime import datetime
+import pytz
 
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.folder import Folder
+
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
@@ -66,8 +69,9 @@ class X509Certificate(Credential):
             if name in refAttributeNames:
                 setattr(self, name, value)
 
-    def __getCertificate__(self):
-        return crypto.load_certificate(crypto.FILETYPE_PEM, self.publicKey)
+    def getCertificate(self):
+        return crypto.load_certificate(crypto.FILETYPE_PEM,
+                                            self.publicKey)
 
     #>>> dir(co)
     #['add_extensions', 'digest', 'get_issuer', 'get_notAfter', 'get_notBefore',
@@ -77,32 +81,48 @@ class X509Certificate(Credential):
     # 'set_serial_number', 'set_subject', 'set_version', 'sign', 'subject_name_hash']
 
     def getIssuerName(self):
-        return unicode(self.__getCertificate__().get_issuer())
+        return self.getCertificate().get_issuer()
 
     def getSubject(self):
-        return unicode(self.__getCertificate__().get_subject())
+        return self.getCertificate().get_subject()
 
     def getSerialNumber(self):
-        return self.__getCertificate__().get_serial_number()
-
-    def getSignatureAlgorithm(self):
-        return self.__getCertificate__().get_pubkey().bits()
-
-    def getPublicKeyAlgorithm(self):
-        return self.__getCertificate__().get_pubkey().bits()
+        return self.getCertificate().get_serial_number()
 
     def getPublicKeySize(self):
-        return self.__getCertificate__().get_pubkey().bits()
+        return self.getCertificate().get_pubkey().bits()
 
     def getVersion(self):
-        return self.__getCertificate__().get_version()
+        return self.getCertificate().get_version()
 
-    def getValidNotBefore(self):
-        return self.__getCertificate__().get_notBefore()
+    def getRawValidNotBefore(self):
+        return self.getCertificate().get_notBefore()
+        
+#    def getValidNotBefore(self):
+#        timeString = self.getRawValidNotBefore()
+#        return datetime.strptime(\
+#                timeString, '%Y%m%d%H%M%SZ').replace(tzinfo=pytz.utc)
 
-    def getValidNotAfter(self):
-        return self.__getCertificate__().get_notAfter()
+    def getRawValidNotAfter(self):
+        return self.getCertificate().get_notAfter()
+        
+#    def getValidNotAfter(self):
+#        #return self.getCertificate().get_notAfter()
+#        timeString = self.getRawValidNotAfter()
+#        return datetime.strptime(\
+#                timeString, '%Y%m%d%H%M%SZ').replace(tzinfo=pytz.utc)
 
+    @property
+    def validNotBefore(self):
+        timeString = self.getRawValidNotBefore()
+        return datetime.strptime(\
+                timeString, '%Y%m%d%H%M%SZ').replace(tzinfo=pytz.utc)
+    
+    @property
+    def validNotAfter(self):
+        timeString = self.getRawValidNotAfter()
+        return datetime.strptime(\
+                timeString, '%Y%m%d%H%M%SZ').replace(tzinfo=pytz.utc)
 
 
 

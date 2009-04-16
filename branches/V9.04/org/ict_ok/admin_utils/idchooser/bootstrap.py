@@ -38,7 +38,8 @@ logger = logging.getLogger("AdmUtilIdChooser")
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilIdChooser = ensureUtility(root_folder, IAdmUtilIdChooser,
                                        'AdmUtilIdChooser',
-                                       AdmUtilIdChooser, '',
+                                       AdmUtilIdChooser,
+                                       name='AdmUtilIdChooser',
                                        copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilIdChooser, AdmUtilIdChooser):

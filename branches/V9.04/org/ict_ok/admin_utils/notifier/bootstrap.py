@@ -34,7 +34,8 @@ logger = logging.getLogger("Notifier")
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeNotifier = ensureUtility(root_folder, INotifierUtil,
-                                  'Notifier', NotifierUtil, '',
+                                  'Notifier', NotifierUtil,
+                                  name='Notifier',
                                   copy_to_zlog=False, asObject=True)
 
     if isinstance(madeNotifier, NotifierUtil):

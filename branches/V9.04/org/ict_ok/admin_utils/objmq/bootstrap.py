@@ -34,7 +34,8 @@ logger = logging.getLogger("AdmUtilObjMQ")
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilObjMQ = ensureUtility(root_folder, IAdmUtilObjMQ,
-                                        'AdmUtilObjMQ', AdmUtilObjMQ, '',
+                                        'AdmUtilObjMQ', AdmUtilObjMQ,
+                                        name='AdmUtilObjMQ',
                                         copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilObjMQ, AdmUtilObjMQ):

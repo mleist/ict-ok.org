@@ -24,6 +24,8 @@ import os
 from datetime import datetime
 import pytz
 from logging import INFO, log, NOTSET
+import xml.dom.minidom
+import xml.dom.ext
 
 # zope imports
 from zope.app import zapi
@@ -55,7 +57,7 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
      IAdmUtilGeneratorNagios, IGenNagios
-from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
+from org.ict_ok.admin_utils.reports.interfaces import IRptPdf, IRptXML
 from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
 
 
@@ -437,6 +439,31 @@ class Superclass(Persistent):
                 os.remove(i_filename)
             except OSError:
                 pass
+            
+    def generateXML(self, absFilename, authorStr, versionStr):
+        """
+        will generate a object pdf report
+        """
+        #files2delete = []
+        document = xml.dom.minidom.Document()
+        #document.setVolumeNo("1")
+        #document.setAuthorName(authorStr)
+        #document.setVersionStr(versionStr)
+        adapterRptXML = IRptXML(self)
+        if adapterRptXML:
+            adapterRptXML.document = document
+            adapterRptXML.traverse4Rpt(1, True)
+            #files2delete.extend(adapterRptXML.files2delete)
+            del adapterRptXML
+        #document.buildPdf()
+        file_object = open(absFilename, "w")
+        xml.dom.ext.PrettyPrint(document, file_object)
+        file_object.close()
+        #for i_filename in files2delete:
+            #try:
+                #os.remove(i_filename)
+            #except OSError:
+                #pass
 
 class MsgEvent:
     """ Interface of an async event message

@@ -45,6 +45,10 @@ class IX509Certificate(Interface):
         except crypto.Error, errText:
             raise Invalid(u'Invalid public key: %s' % errText)
 
+    def getCertificate():
+        """get certificate data
+        """
+        
     def getIssuerName():
         """get some certificate data
         """
@@ -57,14 +61,6 @@ class IX509Certificate(Interface):
         """get some certificate data
         """
 
-    def getSignatureAlgorithm():
-        """get some certificate data
-        """
-
-    def getPublicKeyAlgorithm():
-        """get some certificate data
-        """
-
     def getPublicKeySize():
         """get some certificate data
         """
@@ -73,13 +69,22 @@ class IX509Certificate(Interface):
         """get some certificate data
         """
 
-    def getValidNotBefore():
+    def getRawValidNotBefore():
         """get some certificate data
         """
 
-    def getValidNotAfter():
+    def getRawValidNotAfter():
         """get some certificate data
         """
+
+    def validNotBefore():
+        """get some certificate data
+        """
+
+    def validNotAfter():
+        """get some certificate data
+        """
+
 
 class IX509CertificateFolder(Interface):
     """Container for PersonalComputer objects

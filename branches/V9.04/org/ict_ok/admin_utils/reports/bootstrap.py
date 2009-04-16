@@ -36,7 +36,8 @@ logger = logging.getLogger("AdmUtilReports")
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilReports = ensureUtility(root_folder, IAdmUtilReports,
                                        'AdmUtilReports',
-                                       AdmUtilReports, '',
+                                       AdmUtilReports,
+                                       name='AdmUtilReports',
                                        copy_to_zlog=False, asObject=True)
     if isinstance(madeAdmUtilReports, AdmUtilReports):
         logger.info(u"bootstrap: Ensure named AdmUtilReports")

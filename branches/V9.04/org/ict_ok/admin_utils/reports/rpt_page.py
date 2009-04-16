@@ -32,7 +32,7 @@ from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 
 class RptPageTemplate(PageTemplate):
     def afterDrawPage(self, canv, doc):
-        admUtilReports = getUtility(IAdmUtilReports)
+        admUtilReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
         canv.saveState()
         cmyk_color1 = getColor1()
         canv.setStrokeColor(cmyk_color1)

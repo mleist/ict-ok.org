@@ -45,7 +45,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilSupervisor = ensureUtility(root_folder, 
                                           IAdmUtilSupervisor,
                                           'AdmUtilSupervisor', 
-                                          AdmUtilSupervisor, '',
+                                          AdmUtilSupervisor,
+                                          name='AdmUtilSupervisor',
                                           copy_to_zlog=False, 
                                           asObject=True)
 
@@ -86,7 +87,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                        IIntIds, 
                                        '', 
                                        IntIds, 
-                                       '', 
+                                       name='', 
                                        copy_to_zlog=False, 
                                        asObject=True)
 
@@ -106,7 +107,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                        IO2OStringTypeRelationships, 
                                        '', 
                                        O2OStringTypeRelationships, 
-                                       '', 
+                                       name='',
                                        copy_to_zlog=False, 
                                        asObject=True)
 
@@ -126,7 +127,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                         ICatalog, 
                                         '', 
                                         Catalog, 
-                                        '', 
+                                        name='',
                                         copy_to_zlog=False, 
                                         asObject=True)
 

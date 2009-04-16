@@ -36,7 +36,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeUtilManager = ensureUtility(root_folder, 
                                     IUtilManager,
                                     'UtilManager', 
-                                    UtilManager, '',
+                                    UtilManager,
+                                    name='',
                                     copy_to_zlog=False, 
                                     asObject=True)
     

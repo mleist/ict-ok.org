@@ -46,5 +46,6 @@
     <include package="z3c.blobfile" />
 
     <include package="ldapadapter" />
+    <include package="ldappas" />
 
 </configure>

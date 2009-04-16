@@ -28,7 +28,7 @@ from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 #CMYK_RPT1=colors.CMYKColor(1.0, 0.49, 0.612, 0.0)
 
 def getColor1():
-    admUtilReports = getUtility(IAdmUtilReports)
+    admUtilReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
     if admUtilReports.color1 is not None:
         rString = admUtilReports.color1[1:3]
         gString = admUtilReports.color1[3:5]
