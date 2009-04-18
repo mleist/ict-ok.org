@@ -1,0 +1,65 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
+    <h3 tal:condition="context/isTemplate" i18n:translate="">IpNet Details [Template]</h3>
+    <h3 tal:condition="not:context/isTemplate" i18n:translate="">IpNet Details</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ipv4|nothing">
+            <td i18n:translate="">IpNetwork IP</td>
+            <td tal:content="context/ipv4" />
+        </tr>
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/ipAddresses|nothing">
+           <td i18n:translate="">IP Addresses</td>
+           <td>
+               <ul>
+                   <li tal:repeat="obj context/ipAddresses"
+                       tal:attributes="class python: view.getStateIconClass(obj)">
+                        <div tal:omit-tag=""
+                             tal:content="structure python: view.getHrefTitle(obj)">
+                        </div>
+                        <div tal:omit-tag=""
+                             tal:content="structure python: u'(%s)' % obj.ipv4">
+                        </div>
+                        <div tal:omit-tag=""
+                             tal:condition="obj/interface|nothing"
+                             tal:content="structure python: u'/(%s)' % obj.interface">
+                        </div>
+                   </li>
+               <ul>
+           </td>
+       </tr>
+
+
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.parentnet is not None">
+           <td i18n:translate="">Parent net</td>
+           <td tal:content="structure python: view.getHrefTitle(context.parentnet)" />
+       </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/subnets|nothing">
+            <td i18n:translate="">Sub nets</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/subnets"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td tal:content="context/ikComment" />
+        </tr>
+
+    </table>
+</i18n:block>
