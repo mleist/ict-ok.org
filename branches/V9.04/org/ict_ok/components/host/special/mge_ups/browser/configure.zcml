@@ -18,7 +18,7 @@
 
     <z3c:pagelet
         name="add_host_mge_ups.html"
-        for="org.ict_ok.components.net.interfaces.INet"
+        for="org.ict_ok.components.ipnet.interfaces.IIpNet"
         class="org.ict_ok.components.host.special.mge_ups.browser.host.AddHostForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
@@ -28,13 +28,13 @@
         for="org.ict_ok.components.host.special.mge_ups.interfaces.IHostMgeUps"
         class=".host.EditHostEventIfForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.EditEventIf"
+        permission="org.ict_ok.components.ipnet.EditEventIf"
     />
 
     <!--##### Sub Menu ##### -->
     <!--viewlet
         name="add_host_mge_ups"
-        for="org.ict_ok.components.net.interfaces.INet"
+        for="org.ict_ok.components.ipnet.interfaces.IIpNet"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.host.special.mge_ups.browser.host.MSubAddHost"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -46,7 +46,7 @@
         manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.EditEventIf"
+        permission="org.ict_ok.components.ipnet.EditEventIf"
         />
 
 </configure>

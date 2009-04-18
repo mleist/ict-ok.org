@@ -21,6 +21,7 @@ import transaction
 from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.catalog.text import TextIndex
+from zope.app.intid.interfaces import IIntIds
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
 
@@ -77,6 +78,52 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     if connection is not None:
         connection.close()
 
+def deleteUtils(root_folder, connection=None, dummy_db=None):
+    # search in global component registry
+    sitem = root_folder.getSiteManager()
+    # search for ICatalog
+    utils = [ util for util in sitem.registeredUtilities()
+              if util.provided.isOrExtends(ICatalog)]
+    instUtilityICatalog = utils[0].component
+    utils = [ util for util in sitem.registeredUtilities()
+              if util.provided.isOrExtends(IIntIds)]
+    instUtilityIIntIds = utils[0].component
+    if "net_oid_index" in instUtilityICatalog.keys():
+        indx = instUtilityICatalog['net_oid_index']
+        indx.clear()
+        del instUtilityICatalog['net_oid_index']
+        # search for IAdmUtilSupervisor
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: ICatalog - delete index for entry type 'net'")
+        
+    if "net_ip_index" in instUtilityICatalog.keys():
+        indx = instUtilityICatalog['net_ip_index']
+        indx.clear()
+        del instUtilityICatalog['net_ip_index']
+        # search for IAdmUtilSupervisor
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: ICatalog - delete ip index for 'net'")
+
+    allSubFolders = [folder for folder in root_folder.values()
+                     if INetFolder.providedBy(folder)]
+    for i_subFolder in allSubFolders:
+        instUtilityIIntIds.unregister(i_subFolder)
+        i_subFolder.disconnectFromEventXbar()
+        del i_subFolder
+    if 'Nets' in root_folder.keys():
+        root_folder['Nets'].disconnectFromEventXbar()
+        del root_folder['Nets']
+
+    transaction.get().commit()
+    if connection is not None:
+        connection.close()
+
 def bootStrapSubscriber(event):
     """initialisation of IntId utility on first database startup
     """
@@ -84,4 +131,4 @@ def bootStrapSubscriber(event):
         logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
-    createUtils(root_folder, connection, dummy_db)
+    deleteUtils(root_folder, connection, dummy_db)

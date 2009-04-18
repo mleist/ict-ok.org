@@ -45,7 +45,7 @@
 
     <z3c:pagelet
         name="add_host_vmware_esx.html"
-        for="org.ict_ok.components.net.interfaces.INet"
+        for="org.ict_ok.components.ipnet.interfaces.IIpNet"
         class="org.ict_ok.components.host.special.vmware_esx.browser.host.AddHostForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
@@ -71,7 +71,7 @@
         for="org.ict_ok.components.host.special.vmware_esx.interfaces.IHostVMwareEsx"
         class="org.ict_ok.components.host.special.vmware_esx.browser.host.EditEventHostEventIfForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.EditEventIf"
+        permission="org.ict_ok.components.ipnet.EditEventIf"
     />
 
 
@@ -79,7 +79,7 @@
 
     <!--viewlet
         name="add_host_vmware_esx"
-        for="org.ict_ok.components.net.interfaces.INet"
+        for="org.ict_ok.components.ipnet.interfaces.IIpNet"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.host.special.vmware_esx.browser.host.MSubAddHost"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"

@@ -246,9 +246,6 @@ class ComponentDetails(SupernodeDetails):
 #                tmpFieldProperty = getattr(self.factory, attr)
 #                if hasattr(tmpFieldProperty, '_FieldProperty__field'):
 #                    attrField = getattr(self.factory, attr)._FieldProperty__field
-#                else:
-#                    import pdb
-#                    pdb.set_trace()
                 attrDm = datamanager.AttributeField(item_v, attrField)
                 v_style = XFStyle()
                 v_font = Font()
@@ -258,8 +255,6 @@ class ComponentDetails(SupernodeDetails):
                 if IChoice.providedBy(attrField):
                     v_style.num_format_str = '@'
                     dateValue = attrDm.get()
-#                    import pdb
-#                    pdb.set_trace()
                     v_widget = getMultiAdapter(\
                                     (attrField,self.request),
                                     interfaces.IFieldWidget)
@@ -291,13 +286,8 @@ class ComponentDetails(SupernodeDetails):
 #                    value = getattr(item_v, attr)
 #                    print "value2->   %s: %s " % (attr, value)
                 else:
-#                    if IBool.providedBy(attrField):
-#                        import pdb
-#                        pdb.set_trace()
                     v_style.num_format_str = '@'
                     dateValue = attrDm.get()
-                    #import pdb
-                    #pdb.set_trace()
                     v_widget = getMultiAdapter(\
                                     (attrField,self.request),
                                     interfaces.IFieldWidget)
@@ -615,15 +605,11 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                     if attrDict.has_key('objectID'):
                         attrObjectID = attrDict.pop('objectID')
                         oldObj = self.context[attrObjectID]
-#                        import pdb
-#                        pdb.set_trace()
                         for attrName, newValString in attrDict.items():
                             #print u"ddd4-> %s" % (attrName)
                             attrField = allAttributes[attrName]
                             #print u"type(%s): %s" % (attrField, type(attrField))
 #                            if attrName == "rooms":
-#                                import pdb
-#                                pdb.set_trace()
                             if IChoice.providedBy(attrField):
                                 v_widget = getMultiAdapter(\
                                                 (attrField,self.request),
@@ -701,8 +687,6 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                             dataVect[str(attrName)] = newVal
                             #setattr(newObj, attrName, newVal)
                         #self.context.__setitem__(newObj.objectID, newObj)
-#                        import pdb
-#                        pdb.set_trace()
                         #print "dataVect: ", dataVect
                         newObj = self.factory(**dataVect)
                         newObj.__post_init__()

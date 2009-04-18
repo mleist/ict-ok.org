@@ -25,7 +25,7 @@ from zope.i18nmessageid import MessageFactory
 # ict_ok.org imports
 from org.ict_ok.components.superclass.adapter.search \
      import Searchable as SuperSearchable
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.ipnet.interfaces import IIpNet
 
 _ = MessageFactory('org.ict_ok')
 
@@ -34,7 +34,7 @@ class Searchable(SuperSearchable):
     """Searchable-Adapter."""
 
     implements(ISearchableText)
-    adapts(INet)
+    adapts(IIpNet)
 
     def __init__(self, context):
         SuperSearchable.__init__(self, context)

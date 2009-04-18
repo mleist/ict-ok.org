@@ -95,6 +95,12 @@ class IInterface(Interface):
             #default=u"192.168.1.100",
             #required=False)
 
+    ipAddresses = List(
+        title = _(u'IP Addresses'),
+        value_type=Choice(vocabulary='AllUnusedOrUsedInterfaceIpAddresses'),
+        default=[],
+        required = False)
+
     #connectedInterfaces
 
 #    @invariant

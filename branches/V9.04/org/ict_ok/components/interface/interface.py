@@ -24,8 +24,10 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.folder import Folder
 
+# lovely imports
 from lovely.relation.property import RelationPropertyIn
 from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import getRefAttributeNames
@@ -49,6 +51,7 @@ from org.ict_ok.components.physical_link.physical_link import \
 from org.ict_ok.osi import osi
 from org.ict_ok.components.physical_component.physical_component import \
     PhysicalComponent
+from org.ict_ok.components.ip_address.interfaces import IIpAddress
 
 def AllInterfaceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IInterface)
@@ -61,6 +64,12 @@ def AllUnusedOrUsedDeviceInterfaces(dummy_context):
 
 def AllUnusedOrUsedPhysicalConnectorInterfaces(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IInterface, 'physicalConnector')
+
+
+Interface_IpAddresses_RelManager = \
+       FieldRelationManager(IInterface['ipAddresses'],
+                            IIpAddress['interface'],
+                            relType='interface:ipAddresses')
 
 
 class Interface(PhysicalComponent):
@@ -82,6 +91,7 @@ class Interface(PhysicalComponent):
     links = RelationPropertyIn(PhysicalLinks_PhysicalConnectors_RelManager)
 
 #    physicalConnector = RelationPropertyOut(PhysicalConnector_Interface_RelManager)
+    ipAddresses = RelationPropertyOut(Interface_IpAddresses_RelManager)
 
     fullTextSearchFields = ['netType', 'mac',
                             'ipv4List']

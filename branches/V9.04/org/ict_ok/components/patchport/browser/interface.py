@@ -86,11 +86,6 @@ class EditInterfaceForm(EditForm):
     """ Edit for for net """
     label = _(u'Interface Edit Form')
     fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_editfields)
-    #def update(self):
-        #import pdb
-        #pdb.set_trace()
-        #print "LLLLLLLLL Jepp"
-        #EditForm.update(self)
 
 
 class DeleteInterfaceForm(DeleteForm):

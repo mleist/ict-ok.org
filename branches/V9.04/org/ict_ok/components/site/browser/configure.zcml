@@ -140,9 +140,9 @@
         name="add_net"
         for="org.ict_ok.components.site.interfaces.ISite"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.components.net.browser.net.MSubAddNet"
+        class="org.ict_ok.components.ipnet.browser.ipnet.MSubAddIpNet"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.Add"
+        permission="org.ict_ok.components.ipnet.Add"
         />
     <viewlet
         name="add_site"

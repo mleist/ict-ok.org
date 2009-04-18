@@ -125,7 +125,8 @@ class AdmUtilUserManagementPreferences:
             zapi.absoluteURL(utilUserMagagement, self.request)+\
             '/@@preferences.html')
     def version(self):
-        utilSupervisor = getUtility(IAdmUtilSupervisor)
+        utilSupervisor = getUtility(IAdmUtilSupervisor,
+                                    name='AdmUtilSupervisor')
         return self.request.response.redirect(\
             zapi.absoluteURL(utilSupervisor, self.request)+\
             '/@@version.html')

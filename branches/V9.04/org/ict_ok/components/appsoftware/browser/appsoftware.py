@@ -69,8 +69,6 @@ class ApplicationSoftwareDetails(SoftwareComponentDetails):
 
     def aaa(self):
         aaa = IApplicationSoftware(self.context)
-#        import pdb
-#        pdb.set_trace()
         return aaa
 
 

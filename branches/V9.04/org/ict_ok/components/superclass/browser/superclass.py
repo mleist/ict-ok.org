@@ -1075,8 +1075,6 @@ class Overview(BrowserPagelet):
                 sort_on=((_('Title'), False),),
                 batch_size=50)
         formatter.cssClasses['table'] = 'listing'
-        #import pdb
-        #pdb.set_trace()
         return formatter()
 
 

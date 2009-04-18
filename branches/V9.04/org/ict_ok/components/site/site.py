@@ -27,7 +27,7 @@ from zope.event import notify
 from org.ict_ok.components.superclass.superclass import MsgEvent
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.site.interfaces import ISite, IEventIfEventSite
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.ipnet.interfaces import IIpNet
 from org.ict_ok.components.site.interfaces import INewSiteEvent
 
 class NewSiteEvent(object):
@@ -73,7 +73,7 @@ class Site(Component, SiteManagerContainer):
         for name, obj in self.items():
             if ISite.providedBy(obj):
                 targetFunctionName = "inward_relaying_shutdown"
-            elif INet.providedBy(obj):
+            elif IIpNet.providedBy(obj):
                 targetFunctionName = "inward_relaying_shutdown"
             else:
                 targetFunctionName = None
@@ -111,8 +111,8 @@ def createLocalUtils(event):
         createUtils as createCategoriesUtils
     from org.ict_ok.admin_utils.reports.bootstrap import \
         createUtils as createReportUtils
-    from org.ict_ok.admin_utils.snmpd.bootstrap import \
-        createUtils as createSnmpdUtils
+#    from org.ict_ok.admin_utils.snmpd.bootstrap import \
+#        createUtils as createSnmpdUtils
 #    from org.ict_ok.admin_utils.ticker.bootstrap import \
 #        createUtils as createTickerUtils
     from org.ict_ok.admin_utils.public_viewing.bootstrap import \
@@ -174,7 +174,7 @@ def createLocalUtils(event):
         createUtils as createOperatingSoftwareUtils
     from org.ict_ok.components.notebook.bootstrap import \
         createUtils as createNotebookUtils
-    from org.ict_ok.components.net.bootstrap import \
+    from org.ict_ok.components.ipnet.bootstrap import \
         createUtils as createNetUtils
     from org.ict_ok.components.muninvalue.bootstrap import \
         createUtils as createMuninValueUtils
@@ -216,7 +216,7 @@ def createLocalUtils(event):
     createUtilityManagerUtils(event.object)
     createCategoriesUtils(event.object)
     createReportUtils(event.object)
-    createSnmpdUtils(event.object)
+#    createSnmpdUtils(event.object)
 #    createTickerUtils(event.object)
     createPublicViewingUtils(event.object)
     createNotifierUtils(event.object)

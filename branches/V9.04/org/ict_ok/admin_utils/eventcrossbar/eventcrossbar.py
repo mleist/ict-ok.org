@@ -39,7 +39,7 @@ from zc.queue import Queue
 # ict_ok.org imports
 from org.ict_ok.libs.history.entry import Entry
 from org.ict_ok.components.site.interfaces import ISite
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.ipnet.interfaces import IIpNet
 from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.service.interfaces import IService
@@ -65,7 +65,7 @@ def AllObjectInstances(dummy_context):
     terms = []
     for (oid, oobj) in iid.items():
         if ISite.providedBy(oobj.object) or \
-           INet.providedBy(oobj.object) or \
+           IIpNet.providedBy(oobj.object) or \
            IHost.providedBy(oobj.object) or \
            IInterface.providedBy(oobj.object) or \
            IService.providedBy(oobj.object) or \
@@ -91,7 +91,7 @@ def AllObjectInstancesWithEventInputs(dummy_context):
     terms = []
     for (oid, oobj) in iid.items():
         if ISite.providedBy(oobj.object) or \
-           INet.providedBy(oobj.object) or \
+           IIpNet.providedBy(oobj.object) or \
            IHost.providedBy(oobj.object) or \
            IInterface.providedBy(oobj.object) or \
            IService.providedBy(oobj.object) or \

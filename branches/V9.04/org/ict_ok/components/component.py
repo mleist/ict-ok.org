@@ -89,8 +89,6 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
     for (oid, oobj) in uidutil.items():
         if interface.providedBy(oobj.object):
             if not oobj.object.isTemplate:
-#                import pdb
-#                pdb.set_trace()
                 if obj_attr_name is not None and \
                     ( getattr(oobj.object, obj_attr_name) is None or \
                       len(getattr(oobj.object, obj_attr_name)) == 0):

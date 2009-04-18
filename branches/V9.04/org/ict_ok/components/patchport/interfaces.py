@@ -53,8 +53,6 @@ class IPatchPort(Interface):
 
 #    @invariant
 #    def ensurePortAndPanelInSameRoom(event):
-#        import pdb
-#        pdb.set_trace()
 #        if event.room is not None and \
 #           event.patchpanel is not None and \
 #           event.patchpanel.room is not None and \

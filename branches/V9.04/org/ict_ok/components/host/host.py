@@ -222,8 +222,6 @@ class Host(LogicalDevice):
         #self._counter['r'] -= 10
         #print '§§§ self.get_health():', self.get_health()
         #print '§§§ self.get_wcnt():', self.get_wcnt()
-        #import pdb
-        #pdb.set_trace()
         #(Pdb) from z3c.form import datamanager
         #(Pdb) from z3c.form import term
         #(Pdb) dm1=datamanager.AttributeField(self, IHost['hostGroups'])

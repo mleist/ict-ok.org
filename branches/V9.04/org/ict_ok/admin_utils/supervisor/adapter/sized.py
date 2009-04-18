@@ -22,7 +22,7 @@ from zope.i18nmessageid import MessageFactory
 from zope.app.container.interfaces import IContainer
 
 # ict_ok.org imports
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.ipnet.interfaces import IIpNet
 
 _ = MessageFactory('org.ict_ok')
 
@@ -31,7 +31,7 @@ class NetSized(object):
     """ISized adapter."""
 
     implements(ISized)
-    adapts(INet)
+    adapts(IIpNet)
 
     def __init__(self, context):
         self.context = context

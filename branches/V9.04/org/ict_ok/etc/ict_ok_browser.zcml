@@ -42,7 +42,9 @@
     <include package="org.ict_ok.components.superclass.browser" />
     <include package="org.ict_ok.components.site.browser" />
     <!--<include package="org.ict_ok.components.slave.browser" />-->
-    <include package="org.ict_ok.components.net.browser" />
+    <!--include package="org.ict_ok.components.net.browser" /-->
+    <include package="org.ict_ok.components.ipnet.browser" />
+    <include package="org.ict_ok.components.ip_address.browser" />
     <include package="org.ict_ok.components.host.browser" />
     <include package="org.ict_ok.components.host.special"
              file="configure_brws.zcml" />

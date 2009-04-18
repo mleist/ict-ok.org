@@ -51,7 +51,9 @@
     <include package="org.ict_ok.components.supernode" />
     <include package="org.ict_ok.components.site" />
     <!--<include package="org.ict_ok.components.slave" />-->
-    <include package="org.ict_ok.components.net" />
+    <!--include package="org.ict_ok.components.net" /-->
+    <include package="org.ict_ok.components.ipnet" />
+    <include package="org.ict_ok.components.ip_address" />
     <include package="org.ict_ok.components.host" />
     <include package="org.ict_ok.components.host.special" />
     <include package="org.ict_ok.components.interface" />

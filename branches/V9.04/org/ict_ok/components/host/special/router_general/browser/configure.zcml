@@ -28,7 +28,7 @@
 
     <!--viewlet
         name="add_host_router_general"
-        for="org.ict_ok.components.net.interfaces.INet"
+        for="org.ict_ok.components.ipnet.interfaces.IIpNet"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.host.special.router_general.browser.host.MSubAddHost"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"

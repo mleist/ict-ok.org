@@ -40,7 +40,7 @@ from org.ict_ok.admin_utils.generators.generators import \
      AdmUtilGenerators
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.ipnet.interfaces import IIpNet
 from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.service.interfaces import IService
@@ -118,7 +118,7 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
             
 def objEventSupported(instance):
     for tmpInterface in [
-        INet,
+        IIpNet,
         IHost,
         IInterface,
         IService

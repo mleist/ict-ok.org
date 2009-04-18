@@ -91,8 +91,6 @@ class InterfaceDetails(PhysicalComponentDetails):
         return IState(self.context).getStateDict()
     
 #    def ddd(self):
-##        import pdb
-##        pdb.set_trace()
 #        deviceSet = set([])
 #        osiModelAdapter = IOSIModel(self.context)
 #        if osiModelAdapter:

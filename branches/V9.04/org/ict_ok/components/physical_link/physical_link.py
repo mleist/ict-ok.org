@@ -245,8 +245,6 @@ class PhysicalLinkFolder(Superclass, Folder):
 #        searchDepth: searchDepth will be decreased on every recursive step
 #        """
 #        print "%s -> connectedComponentsOnLayer1(%s, %s) " % (self.context.ikName, targetSet, searchDepth)
-##        import pdb
-##        pdb.set_trace()
 #        if searchDepth < 0:
 #            raise Exception
 #        if self.context not in targetSet:

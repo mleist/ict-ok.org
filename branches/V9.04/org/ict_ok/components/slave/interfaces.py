@@ -28,7 +28,7 @@ _ = MessageFactory('org.ict_ok')
 class ISlave(Interface):
     """A objectcontainer for new slave data."""
 
-    contains('org.ict_ok.components.net.interfaces.INet')
+    contains('org.ict_ok.components.ipnet.interfaces.IIpNet')
 
     title = TextLine(
         min_length = 2,

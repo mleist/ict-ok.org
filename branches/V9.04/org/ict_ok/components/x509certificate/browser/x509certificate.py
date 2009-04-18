@@ -73,8 +73,6 @@ class X509CertificateDetails(CredentialDetails):
         return issue_str
 
     def getSubject(self):
-#        import pdb
-#        pdb.set_trace()
 #        from ldappas.interfaces import ILDAPAuthentication
 #        from zope.component import getUtility
 #        from ldapadapter.interfaces import IManageableLDAPAdapter

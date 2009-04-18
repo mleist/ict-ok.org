@@ -153,7 +153,7 @@
         for="org.ict_ok.components.host.interfaces.IHost"
         class=".host.EditEventHostEventIfForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.EditEventIf"
+        permission="org.ict_ok.components.ipnet.EditEventIf"
     />
 
     <z3c:pagelet
@@ -320,7 +320,7 @@
         manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.EditEventIf"
+        permission="org.ict_ok.components.ipnet.EditEventIf"
         />
     <viewlet
         name="add_interface"

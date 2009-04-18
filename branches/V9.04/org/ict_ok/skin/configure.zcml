@@ -100,9 +100,9 @@
     <z3c:pagelet
         name="add_net.html"
         for="zope.app.folder.interfaces.IRootFolder"
-        class="org.ict_ok.components.net.browser.net.AddNetForm"
+        class="org.ict_ok.components.ipnet.browser.ipnet.AddIpNetForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.Add"
+        permission="org.ict_ok.components.ipnet.Add"
     />
     <z3c:pagelet
         name="add_location.html"
@@ -116,7 +116,7 @@
         for="zope.app.folder.interfaces.IRootFolder"
         class="org.ict_ok.components.superclass.browser.superclass.EditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.Edit"
+        permission="org.ict_ok.components.ipnet.Edit"
     />
     <viewlet
         name="editcontent"
