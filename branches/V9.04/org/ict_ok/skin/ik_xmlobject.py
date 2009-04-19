@@ -200,7 +200,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
 
         vh = self.request.getVirtualHostRoot()
         if vh:
-            print "vh: ", vh
+            #print "vh: ", vh
             vhrootView = zapi.getMultiAdapter(
                     (vh, self.request), name='absolute_url')
             baseURL = vhrootView() + '/'
