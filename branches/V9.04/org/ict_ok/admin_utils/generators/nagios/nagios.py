@@ -150,7 +150,8 @@ def notifyModifiedEvent(instance, event):
         valueChanged = False
         #print "generators.nagios.notifyModifiedEvent"
         allEventObjs = event.object.getAllOutEventObjs()
-        utilXbar = getUtility(IAdmUtilEventCrossbar)
+        utilXbar = getUtility(IAdmUtilEventCrossbar,
+                              name='AdmUtilEventCrossbar')
         for eventObj in allEventObjs:
             try:
                 utilXbar[eventObj].addOidToInpObjects(event.object.objectID)
