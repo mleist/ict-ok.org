@@ -28,8 +28,12 @@
                              tal:content="structure python: u'(%s)' % obj.ipv4">
                         </div>
                         <div tal:omit-tag=""
-                             tal:condition="obj/interface|nothing"
-                             tal:content="structure python: u'/(%s)' % obj.interface">
+                             tal:condition="python: obj.interface is not None"
+                             tal:content="structure python: u' / %s' % (view.getHrefTitle(obj.interface))">
+                        </div>
+                        <div tal:omit-tag=""
+                             tal:condition="python: obj.interface is not None and obj.interface.device is not None"
+                             tal:content="structure python: u' / %s' % (view.getHrefTitle(obj.interface.device))">
                         </div>
                    </li>
                <ul>

@@ -57,7 +57,17 @@
        <tr tal:attributes="class view/getNextTabClass"
            tal:condition="python: context.interface is not None">
            <td i18n:translate="">Interface</td>
-           <td tal:content="structure python: view.getHrefTitle(context.interface)" />
+           <td>
+                <div tal:omit-tag=""
+                     tal:content="structure python: view.getHrefTitle(context.interface)">
+                </div>
+                <div tal:omit-tag=""
+                     tal:condition="python: context.interface is not None and context.interface.device is not None"
+                     tal:content="structure python: u' / %s' % (view.getHrefTitle(context.interface.device))">
+                </div>
+           </td>
+
+
        </tr>
           
        <tr tal:attributes="class view/getNextTabClass"

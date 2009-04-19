@@ -152,7 +152,11 @@
                                  tal:content="structure python: u'(%s)' % obj.ipv4">
                             </div>
                             <div tal:omit-tag=""
-                                 tal:condition="obj/interface|nothing"
+                                 tal:condition="python: obj.ipNet is not None"
+                                 tal:content="structure python: u' / %s (%s)' % (view.getHrefTitle(obj.ipNet), obj.ipNet.ipv4)">
+                            </div>
+                            <div tal:omit-tag=""
+                                 tal:condition="python: obj.interface is not None"
                                  tal:content="structure python: u'/(%s)' % obj.interface">
                             </div>
                        </li>
