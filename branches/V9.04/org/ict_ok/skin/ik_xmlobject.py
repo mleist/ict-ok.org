@@ -13,6 +13,7 @@
 __version__ = "$Id$"
 
 # python imports
+from urlparse import urlparse
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
@@ -137,7 +138,10 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                 item_len = len(IContentList(item).getContentList())
             except TypeError:
                 item_len = self.getLengthOf(item)
-            item_ppath = zapi.canonicalPath(zapi.getParent(item)) + u'/'
+#            item_ppath = zapi.canonicalPath(zapi.getParent(item)) + u'/'
+            url = urlparse(zapi.absoluteURL(zapi.getParent(item),
+                                            self.request))
+            item_ppath = url.path + u'/'
             item_ppath = item_ppath.replace('//', '/')
             if item_len > 0:
                 if stateOverview:
@@ -196,7 +200,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
 
         vh = self.request.getVirtualHostRoot()
         if vh:
-            #print "vh: ", vh
+            print "vh: ", vh
             vhrootView = zapi.getMultiAdapter(
                     (vh, self.request), name='absolute_url')
             baseURL = vhrootView() + '/'
@@ -259,8 +263,11 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                         xml_title = dcAdapter.title
                 stateIconUrl = self.getStateIconUrl(subItem)
                 if zapi.getParent(subItem):
-                    item_ppath = zapi.canonicalPath(zapi.getParent(subItem)) \
-                               + u'/'
+#                    item_ppath = zapi.canonicalPath(zapi.getParent(subItem)) \
+#                               + u'/'
+                    url = urlparse(zapi.absoluteURL(zapi.getParent(item),
+                                                    self.request))
+                    item_ppath = url.path + u'/'
                     item_ppath = item_ppath.replace('//', '/')
                 else:
                     item_ppath = "/"
