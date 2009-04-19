@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+
+    <!-- $Id: configure.zcml_cog 283 2008-09-04 14:22:30Z markusleist $ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <permission
+        id="org.ict_ok.components.pc.View"
+        title="View Personal Computer"
+    />
+
+    <permission
+        id="org.ict_ok.components.pc.Add"
+        title="Add Personal Computer"
+    />
+
+    <permission
+        id="org.ict_ok.components.pc.Edit"
+        title="Edit Personal Computer"
+    />
+
+    <permission
+        id="org.ict_ok.components.pc.Delete"
+        title="Delete Personal Computer"
+    />
+
+    <grant permission="org.ict_ok.components.pc.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.components.pc.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.pc.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.pc.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.pc.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.pc.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.pc.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.pc.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.pc.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>
