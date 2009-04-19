@@ -16,12 +16,14 @@ __version__ = "$Id: interfaces.py_cog 467 2009-03-05 04:28:59Z markusleist $"
 
 # zope imports
 from zope.interface import Interface
+from zope.interface import Attribute, Invalid, invariant
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, Int, List, TextLine
 from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
 from org.ict_ok.schema.ipvalid import NetIpValid
+from org.ict_ok.schema.IPy import IP
 
 _ = MessageFactory('org.ict_ok')
 
@@ -44,6 +46,16 @@ class IIpAddress(Interface):
         title = _(u'IP Net'),
         vocabulary = 'AllIpNets',
         required = False)
+
+    @invariant
+    def ensureIpAddressInIpNet(obj):
+        """address must be in network
+        """
+        if obj.ipNet is not None:
+            ipNet = IP(obj.ipNet.ipv4)
+            mynet = IP(obj.ipv4)
+            if not mynet in ipNet:
+                raise Invalid(u"'%s' not in '%s'" % (obj.ipv4, obj.ipNet.ipv4))
         
     def trigger_online():
         """
