@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E0611
 #
-"""Adapter implementation of state-methods for PersonalComputer"""
+"""Adapter implementation of state-methods for HardwareAppliance"""
 
 __version__ = "$Id: state.py 394 2009-01-06 15:12:30Z markusleist $"
 
@@ -18,15 +18,15 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.pc.interfaces import IPersonalComputer
+from org.ict_ok.components.happliance.interfaces import IHardwareAppliance
 from org.ict_ok.components.supernode.interfaces import IState
 
 
 class State(object):
-    """Implementation of state adapter for Personal Computer
+    """Implementation of state adapter for Hardware Appliance
     """
     implements(IState)
-    adapts(IPersonalComputer)
+    adapts(IHardwareAppliance)
 
 
     def __init__(self, context):

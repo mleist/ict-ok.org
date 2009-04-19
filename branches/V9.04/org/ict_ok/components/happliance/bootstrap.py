@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E1101
 #
-"""startup of PersonalComputer"""
+"""startup of HardwareAppliance"""
 
 __version__ = "$Id: bootstrap.py 273 2008-08-26 13:23:57Z markusleist $"
 
@@ -27,9 +27,9 @@ from zope.index.text.interfaces import ISearchableText
 # ict_ok.org imports
 from org.ict_ok.libs.lib import ensureComponentFolderOnBootstrap
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
-from org.ict_ok.components.pc.interfaces import IPersonalComputerFolder
+from org.ict_ok.components.happliance.interfaces import IHardwareApplianceFolder
 
-logger = logging.getLogger("Compon. PersonalComputer")
+logger = logging.getLogger("Compon. HardwareAppliance")
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     # search in global component registry
@@ -38,22 +38,22 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     utils = [ util for util in sitem.registeredUtilities()
               if util.provided.isOrExtends(ICatalog)]
     instUtilityICatalog = utils[0].component
-    if not "pc_oid_index" in instUtilityICatalog.keys():
-        pc_oid_index = TextIndex(interface=ISearchableText,
-                                        field_name='getSearchablePersonalComputerOid',
+    if not "happliance_oid_index" in instUtilityICatalog.keys():
+        happliance_oid_index = TextIndex(interface=ISearchableText,
+                                        field_name='getSearchableHardwareApplianceOid',
                                         field_callable=True)
-        instUtilityICatalog['pc_oid_index'] = pc_oid_index
+        instUtilityICatalog['happliance_oid_index'] = happliance_oid_index
         # search for IAdmUtilSupervisor
         utils = [ util for util in sitem.registeredUtilities()
                   if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create index for entry type 'pc'")
+            u" bootstrap: ICatalog - create index for entry type 'happliance'")
         instAdmUtilSupervisor.appendEventHistory(                    u" bootstrap: ICatalog - create index for entry type 'appsoftware'")
 
-    ensureComponentFolderOnBootstrap(IPersonalComputerFolder,
-                 u"PersonalComputers",
-                 u'org.ict_ok.components.pc.pc.PersonalComputerFolder',
+    ensureComponentFolderOnBootstrap(IHardwareApplianceFolder,
+                 u"HardwareAppliances",
+                 u'org.ict_ok.components.happliance.happliance.HardwareApplianceFolder',
                  root_folder,
                  sitem)
 

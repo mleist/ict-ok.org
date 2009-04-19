@@ -11,11 +11,11 @@
     -->
 
     <interface
-        interface=".interfaces.IPersonalComputer"
+        interface=".interfaces.IHardwareAppliance"
         type="zope.app.content.interfaces.IContentType"
         />
 
-    <class class=".pc.PersonalComputer">
+    <class class=".happliance.HardwareAppliance">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
@@ -23,60 +23,60 @@
             interface="zope.app.container.interfaces.IContentContainer"
             />
         <factory
-            id="org.ict_ok.components.pc.pc.PersonalComputer"
-            description="PersonalComputer"
+            id="org.ict_ok.components.happliance.happliance.HardwareAppliance"
+            description="HardwareAppliance"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
-            interface=".interfaces.IPersonalComputer"
+            permission="org.ict_ok.components.happliance.View"
+            interface=".interfaces.IHardwareAppliance"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
-            set_schema=".interfaces.IPersonalComputer"
+            permission="org.ict_ok.components.happliance.Edit"
+            set_schema=".interfaces.IHardwareAppliance"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
+            permission="org.ict_ok.components.happliance.View"
             interface="org.ict_ok.components.device.interfaces.IDevice"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
+            permission="org.ict_ok.components.happliance.Edit"
             set_schema="org.ict_ok.components.device.interfaces.IDevice"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
+            permission="org.ict_ok.components.happliance.View"
             interface="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
+            permission="org.ict_ok.components.happliance.Edit"
             set_schema="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
+            permission="org.ict_ok.components.happliance.View"
             interface="org.ict_ok.components.interfaces.IComponent"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
+            permission="org.ict_ok.components.happliance.Edit"
             set_schema="org.ict_ok.components.interfaces.IComponent"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
+            permission="org.ict_ok.components.happliance.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
+            permission="org.ict_ok.components.happliance.Edit"
             set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
+            permission="org.ict_ok.components.happliance.View"
             interface="zope.app.container.interfaces.IReadContainer"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
+            permission="org.ict_ok.components.happliance.Edit"
             interface="zope.app.container.interfaces.IWriteContainer"
             />
     </class>
 
-    <class class=".pc.PersonalComputerFolder">
+    <class class=".happliance.HardwareApplianceFolder">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
@@ -87,39 +87,39 @@
             interface="org.ict_ok.components.superclass.interfaces.IFocus"
             />
         <factory
-            id="org.ict_ok.components.pc.pc.PersonalComputerFolder"
-            description="PersonalComputer"
+            id="org.ict_ok.components.happliance.happliance.HardwareApplianceFolder"
+            description="HardwareAppliance"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
-            interface=".interfaces.IPersonalComputerFolder"
+            permission="org.ict_ok.components.happliance.View"
+            interface=".interfaces.IHardwareApplianceFolder"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
-            set_schema=".interfaces.IPersonalComputerFolder"
+            permission="org.ict_ok.components.happliance.Edit"
+            set_schema=".interfaces.IHardwareApplianceFolder"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
+            permission="org.ict_ok.components.happliance.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
+            permission="org.ict_ok.components.happliance.Edit"
             set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
+            permission="org.ict_ok.components.happliance.View"
             interface="zope.app.container.interfaces.IReadContainer"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
+            permission="org.ict_ok.components.happliance.Edit"
             interface="zope.app.container.interfaces.IWriteContainer"
             />
         <require
-            permission="org.ict_ok.components.pc.View"
+            permission="org.ict_ok.components.happliance.View"
             interface="org.ict_ok.components.interfaces.IImportXlsData"
             />
         <require
-            permission="org.ict_ok.components.pc.Edit"
+            permission="org.ict_ok.components.happliance.Edit"
             set_schema="org.ict_ok.components.interfaces.IImportXlsData"
             />
     </class>
@@ -134,7 +134,7 @@
         />
 
     <adapter
-        factory="org.ict_ok.components.pc.adapter.search.Searchable"
+        factory="org.ict_ok.components.happliance.adapter.search.Searchable"
     />
     <adapter
         factory=".adapter.rpt_pdf.RptPdf"
@@ -143,13 +143,13 @@
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".pc.AllPersonalComputers"
-        name="AllPersonalComputers"
+        component=".happliance.AllHardwareAppliances"
+        name="AllHardwareAppliances"
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".pc.AllPersonalComputerTemplates"
-        name="AllPersonalComputerTemplates"
+        component=".happliance.AllHardwareApplianceTemplates"
+        name="AllHardwareApplianceTemplates"
     />
 
 

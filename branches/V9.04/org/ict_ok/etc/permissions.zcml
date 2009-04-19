@@ -113,6 +113,8 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.physical_link"
              file="security.zcml" />
+    <include package="org.ict_ok.components.happliance"
+             file="security.zcml" />
     <include package="org.ict_ok.components.ipc"
              file="security.zcml" />
     <include package="org.ict_ok.components.switch"

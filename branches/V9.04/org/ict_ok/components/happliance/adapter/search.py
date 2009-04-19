@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E0611,W0212
 #
-"""Adapter implementation of search-methods for PersonalComputer"""
+"""Adapter implementation of search-methods for HardwareAppliance"""
 
 __version__ = "$Id: search.py 394 2009-01-06 15:12:30Z markusleist $"
 
@@ -22,8 +22,8 @@ from zope.index.text.interfaces import ISearchableText
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.pc.interfaces import IPersonalComputer
-from org.ict_ok.components.pc.pc import PersonalComputer
+from org.ict_ok.components.happliance.interfaces import IHardwareAppliance
+from org.ict_ok.components.happliance.happliance import HardwareAppliance
 from org.ict_ok.components.superclass.adapter.search import \
      Searchable as SuperSearchable
 
@@ -34,12 +34,12 @@ class Searchable(SuperSearchable):
     """Searchable-Adapter."""
 
     implements(ISearchableText)
-    adapts(IPersonalComputer)
+    adapts(IHardwareAppliance)
 
     def __init__(self, context):
         SuperSearchable.__init__(self, context)
 
-    def getSearchablePersonalComputerOid(self):
+    def getSearchableHardwareApplianceOid(self):
         """
         get Object id as string for catalog
         """
@@ -48,4 +48,4 @@ class Searchable(SuperSearchable):
     def getFullTextSearchFields(self):
         """
         """
-        return PersonalComputer.fullTextSearchFields
+        return HardwareAppliance.fullTextSearchFields

@@ -13,124 +13,124 @@
     -->
 
     <defaultView
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
         name="details.html"
     />
 
     <z3c:pagelet
         name="history.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
         class="org.ict_ok.components.superclass.browser.superclass.History"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.View"
+        permission="org.ict_ok.components.happliance.View"
         />
 
     <z3c:pagelet
         name="details2.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
-        class="org.ict_ok.components.pc.browser.pc.DetailsPersonalComputerForm"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
+        class="org.ict_ok.components.happliance.browser.happliance.DetailsHardwareApplianceForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.View"
+        permission="org.ict_ok.components.happliance.View"
     />
 
     <z3c:pagelet
         name="details.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
-        class="org.ict_ok.components.pc.browser.pc.PersonalComputerDetails"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
+        class="org.ict_ok.components.happliance.browser.happliance.HardwareApplianceDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.View"
+        permission="org.ict_ok.components.happliance.View"
     />
     <z3c:template
         template="details.pt"
-        for="org.ict_ok.components.pc.browser.pc.PersonalComputerDetails"
+        for="org.ict_ok.components.happliance.browser.happliance.HardwareApplianceDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
     <z3c:pagelet
         name="edit.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
-        class="org.ict_ok.components.pc.browser.pc.EditPersonalComputerForm"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
+        class="org.ict_ok.components.happliance.browser.happliance.EditHardwareApplianceForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Edit"
+        permission="org.ict_ok.components.happliance.Edit"
     />
 
     <z3c:pagelet
         name="delete.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
-        class="org.ict_ok.components.pc.browser.pc.DeletePersonalComputerForm"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
+        class="org.ict_ok.components.happliance.browser.happliance.DeleteHardwareApplianceForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Delete"
+        permission="org.ict_ok.components.happliance.Delete"
     />
-    <!--    for="org.ict_ok.components.pc.interfaces.IPersonalComputer"  -->
+    <!--    for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"  -->
 
     <!-- Folder  -->
 
     <defaultView
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
         name="overview.html"
     />
 
     <z3c:pagelet
         name="overview.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
         class="org.ict_ok.components.superclass.browser.superclass.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.View"
+        permission="org.ict_ok.components.happliance.View"
         />
 
     <z3c:pagelet
-        name="add_pc.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
-        class="org.ict_ok.components.pc.browser.pc.AddPersonalComputerForm"
+        name="add_happliance.html"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
+        class="org.ict_ok.components.happliance.browser.happliance.AddHardwareApplianceForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Add"
+        permission="org.ict_ok.components.happliance.Add"
     />
 
     <!-- Sub Menu  -->
 
     <viewlet
         name="history"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.View"
+        permission="org.ict_ok.components.happliance.View"
         />
     <viewlet
         name="details"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.View"
+        permission="org.ict_ok.components.happliance.View"
         />
     <viewlet
         name="edit"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Edit"
+        permission="org.ict_ok.components.happliance.Edit"
         />
     <viewlet
         name="delete"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Delete"
+        permission="org.ict_ok.components.happliance.Delete"
         />
     <viewlet
         name="editcontent"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Edit"
+        permission="org.ict_ok.components.happliance.Edit"
         />
     <viewlet
         name="add_dashboard"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
         manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubAddDashboard"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -138,7 +138,7 @@
         />
     <viewlet
         name="del_dashboard"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputer"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareAppliance"
         manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -149,81 +149,81 @@
 
     <viewlet
         name="overview"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.View"
+        permission="org.ict_ok.components.happliance.View"
         />
     <viewlet
-        name="add_pc"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
+        name="add_happliance"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.components.pc.browser.pc.MSubAddPersonalComputer"
+        class="org.ict_ok.components.happliance.browser.happliance.MSubAddHardwareAppliance"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Add"
+        permission="org.ict_ok.components.happliance.Add"
         />
     <!-- page
         name="exportcsvdata.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
-        class=".pc.PersonalComputerFolderDetails"
-        permission="org.ict_ok.components.pc.View"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
+        class=".happliance.HardwareApplianceFolderDetails"
+        permission="org.ict_ok.components.happliance.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportCsvData"
     / -->
     <page
         name="exportxlsdata.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
-        class=".pc.PersonalComputerFolderDetails"
-        permission="org.ict_ok.components.pc.View"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
+        class=".happliance.HardwareApplianceFolderDetails"
+        permission="org.ict_ok.components.happliance.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
     <!-- z3c:pagelet
         name="importcsvdata.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
-        class=".pc.ImportCsvDataForm"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
+        class=".happliance.ImportCsvDataForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Add"
+        permission="org.ict_ok.components.happliance.Add"
     / -->
     <z3c:pagelet
         name="importxlsdata.html"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
-        class=".pc.ImportXlsDataForm"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
+        class=".happliance.ImportXlsDataForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Add"
+        permission="org.ict_ok.components.happliance.Add"
     />
     <!-- viewlet
         name="exportcsvdata"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.View"
+        permission="org.ict_ok.components.happliance.View"
         / -->
     <viewlet
         name="exportxlsdata"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.View"
+        permission="org.ict_ok.components.happliance.View"
         />
     <!-- viewlet
         name="importcsvdata"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Add"
+        permission="org.ict_ok.components.happliance.Add"
         / -->
     <viewlet
         name="importxlsdata"
-        for="org.ict_ok.components.pc.interfaces.IPersonalComputerFolder"
+        for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.pc.Add"
+        permission="org.ict_ok.components.happliance.Add"
         />
                         
 

@@ -85,6 +85,7 @@
     <include package="org.ict_ok.components.rack" />
     <include package="org.ict_ok.components.pc" />
     <include package="org.ict_ok.components.physical_link" />
+    <include package="org.ict_ok.components.happliance" />
     <include package="org.ict_ok.components.ipc" />
     <include package="org.ict_ok.components.switch" />
     <include package="org.ict_ok.components.display_unit" />

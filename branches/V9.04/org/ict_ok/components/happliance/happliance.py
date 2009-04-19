@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E1101,W0142
 #
-"""implementation of PersonalComputer"""
+"""implementation of HardwareAppliance"""
 
 __version__ = "$Id: template.py_cog 424 2009-02-02 23:58:56Z markusleist $"
 
@@ -33,29 +33,24 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.device.device import Device, DeviceFolder
-from org.ict_ok.components.pc.interfaces import \
-    IPersonalComputer, IPersonalComputerFolder, IAddPersonalComputer
+from org.ict_ok.components.happliance.interfaces import \
+    IHardwareAppliance, IHardwareApplianceFolder, IAddHardwareAppliance
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
-def AllPersonalComputerTemplates(dummy_context):
-    return AllComponentTemplates(dummy_context, IPersonalComputer)
+def AllHardwareApplianceTemplates(dummy_context):
+    return AllComponentTemplates(dummy_context, IHardwareAppliance)
 
-def AllPersonalComputers(dummy_context):
-    return AllComponents(dummy_context, IPersonalComputer)
-
-
+def AllHardwareAppliances(dummy_context):
+    return AllComponents(dummy_context, IHardwareAppliance)
 
 
-
-
-
-class PersonalComputer(Device):
+class HardwareAppliance(Device):
     """
     the template instance
     """
-    implements(IPersonalComputer)
-    shortName = "pc"
+    implements(IHardwareAppliance)
+    shortName = "happliance"
     # for ..Contained we have to:
     __name__ = __parent__ = None
 
@@ -67,24 +62,24 @@ class PersonalComputer(Device):
         constructor of the object
         """
         Device.__init__(self, **data)
-        refAttributeNames = getRefAttributeNames(PersonalComputer)
+        refAttributeNames = getRefAttributeNames(HardwareAppliance)
         for (name, value) in data.items():
-            if name in IPersonalComputer.names() and \
+            if name in IHardwareAppliance.names() and \
                name not in refAttributeNames:
                 setattr(self, name, value)
         self.ikRevision = __version__
 
     def store_refs(self, **data):
         Device.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(PersonalComputer)
+        refAttributeNames = getRefAttributeNames(HardwareAppliance)
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
 
 
-class PersonalComputerFolder(DeviceFolder):
-    implements(IPersonalComputerFolder,
-               IAddPersonalComputer)
+class HardwareApplianceFolder(DeviceFolder):
+    implements(IHardwareApplianceFolder,
+               IAddHardwareAppliance)
     def __init__(self, **data):
         """
         constructor of the object

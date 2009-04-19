@@ -11,45 +11,45 @@
     -->
 
     <permission
-        id="org.ict_ok.components.pc.View"
-        title="View Personal Computer"
+        id="org.ict_ok.components.happliance.View"
+        title="View Hardware Appliance"
     />
 
     <permission
-        id="org.ict_ok.components.pc.Add"
-        title="Add Personal Computer"
+        id="org.ict_ok.components.happliance.Add"
+        title="Add Hardware Appliance"
     />
 
     <permission
-        id="org.ict_ok.components.pc.Edit"
-        title="Edit Personal Computer"
+        id="org.ict_ok.components.happliance.Edit"
+        title="Edit Hardware Appliance"
     />
 
     <permission
-        id="org.ict_ok.components.pc.Delete"
-        title="Delete Personal Computer"
+        id="org.ict_ok.components.happliance.Delete"
+        title="Delete Hardware Appliance"
     />
 
-    <grant permission="org.ict_ok.components.pc.View"
+    <grant permission="org.ict_ok.components.happliance.View"
                     role="org.ict_ok.usr" />
-    <grant permission="org.ict_ok.components.pc.View"
+    <grant permission="org.ict_ok.components.happliance.View"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.pc.View"
+    <grant permission="org.ict_ok.components.happliance.View"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.pc.Add"
+    <grant permission="org.ict_ok.components.happliance.Add"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.pc.Add"
+    <grant permission="org.ict_ok.components.happliance.Add"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.pc.Edit"
+    <grant permission="org.ict_ok.components.happliance.Edit"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.pc.Edit"
+    <grant permission="org.ict_ok.components.happliance.Edit"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.pc.Delete"
+    <grant permission="org.ict_ok.components.happliance.Delete"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.pc.Delete"
+    <grant permission="org.ict_ok.components.happliance.Delete"
                     role="org.ict_ok.adm" />
 
 </configure>

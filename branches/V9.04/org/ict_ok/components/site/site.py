@@ -180,6 +180,8 @@ def createLocalUtils(event):
         createUtils as createMuninValueUtils
     from org.ict_ok.components.mobilephone.bootstrap import \
         createUtils as createMobilePhoneUtils
+    from org.ict_ok.components.happliance.bootstrap import \
+        createUtils as createHardwareApplianceUtils
     from org.ict_ok.components.isdnphone.bootstrap import \
         createUtils as createISDNPhoneUtils
     from org.ict_ok.components.ipc.bootstrap import \
@@ -255,6 +257,7 @@ def createLocalUtils(event):
     createNetUtils(event.object)
     createMuninValueUtils(event.object)
     createMobilePhoneUtils(event.object)
+    createHardwareApplianceUtils(event.object)
     createISDNPhoneUtils(event.object)
     createIndustrialComputerUtils(event.object)
     createInterfaceUtils(event.object)

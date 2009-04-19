@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=W0232,W0142
 #
-"""implementation of browser class of PersonalComputer"""
+"""implementation of browser class of HardwareAppliance"""
 
 __version__ = "$Id: template.py_cog 411 2009-01-29 16:16:51Z markusleist $"
 
@@ -24,8 +24,8 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.pc.interfaces import IPersonalComputer, IAddPersonalComputer
-from org.ict_ok.components.pc.pc import PersonalComputer
+from org.ict_ok.components.happliance.interfaces import IHardwareAppliance, IAddHardwareAppliance
+from org.ict_ok.components.happliance.happliance import HardwareAppliance
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem
@@ -46,72 +46,72 @@ _ = MessageFactory('org.ict_ok')
 # --------------- menu entries -----------------------------
 
 
-class MSubAddPersonalComputer(GlobalMenuSubItem):
+class MSubAddHardwareAppliance(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'Add Personal Computer')
-    viewURL = 'add_pc.html'
+    title = _(u'Add Hardware Appliance')
+    viewURL = 'add_happliance.html'
 
     weight = 50
 
 # --------------- object details ---------------------------
 
 
-class PersonalComputerDetails(ComponentDetails):
-    """ Class for PersonalComputer details
+class HardwareApplianceDetails(ComponentDetails):
+    """ Class for HardwareAppliance details
     """
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
 
 
-class PersonalComputerFolderDetails(ComponentDetails):
-    """ Class for PersonalComputer details
+class HardwareApplianceFolderDetails(ComponentDetails):
+    """ Class for HardwareAppliance details
     """
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
-    attrInterface = IPersonalComputer
-    factory = PersonalComputer
+    attrInterface = IHardwareAppliance
+    factory = HardwareAppliance
     fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 
 
-class DetailsPersonalComputerForm(DisplayForm):
+class DetailsHardwareApplianceForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of Personal Computer')
-    factory = PersonalComputer
-    omitFields = PersonalComputerDetails.omit_viewfields
+    label = _(u'settings of Hardware Appliance')
+    factory = HardwareAppliance
+    omitFields = HardwareApplianceDetails.omit_viewfields
     fields = fieldsForFactory(factory, omitFields)
 
 
-class AddPersonalComputerForm(AddComponentForm):
-    """Add Personal Computer form"""
-    label = _(u'Add Personal Computer')
-    factory = PersonalComputer
-    attrInterface = IPersonalComputer
-    addInterface = IAddPersonalComputer
-    omitFields = PersonalComputerDetails.omit_addfields
-    _session_key = 'org.ict_ok.components.pc'
+class AddHardwareApplianceForm(AddComponentForm):
+    """Add Hardware Appliance form"""
+    label = _(u'Add Hardware Appliance')
+    factory = HardwareAppliance
+    attrInterface = IHardwareAppliance
+    addInterface = IAddHardwareAppliance
+    omitFields = HardwareApplianceDetails.omit_addfields
+    _session_key = 'org.ict_ok.components.happliance'
     allFields = fieldsForFactory(factory, omitFields)
     addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = checkbox.SingleCheckBoxFieldWidget
 
 
-class EditPersonalComputerForm(EditForm):
-    """ Edit for Personal Computer """
-    label = _(u'Personal Computer Edit Form')
-    factory = PersonalComputer
-    omitFields = PersonalComputerDetails.omit_editfields
+class EditHardwareApplianceForm(EditForm):
+    """ Edit for Hardware Appliance """
+    label = _(u'Hardware Appliance Edit Form')
+    factory = HardwareAppliance
+    omitFields = HardwareApplianceDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
 
 
-class DeletePersonalComputerForm(DeleteForm):
-    """ Delete the Personal Computer """
+class DeleteHardwareApplianceForm(DeleteForm):
+    """ Delete the Hardware Appliance """
     
     def getTitle(self):
         """this title will be displayed in the head of form"""
-        return _(u"Delete this PersonalComputer: '%s'?") % \
+        return _(u"Delete this HardwareAppliance: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
 
@@ -120,9 +120,9 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    attrInterface = IPersonalComputer
-    factory = PersonalComputer
-    factoryId = u'org.ict_ok.components.pc.pc.PersonalComputer'
+    attrInterface = IHardwareAppliance
+    factory = HardwareAppliance
+    factoryId = u'org.ict_ok.components.happliance.happliance.HardwareAppliance'
     allFields = fieldsForInterface(attrInterface, [])
 
 #def getRoom(item, formatter):

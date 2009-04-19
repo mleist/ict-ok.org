@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611,W0142
 #
-"""Adapter implementation for generating pdf reports of PersonalComputer"""
+"""Adapter implementation for generating pdf reports of HardwareAppliance"""
 
 
 __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
@@ -24,7 +24,7 @@ from zope.component import adapts
 from z3c.form import field
 
 # ict_ok.org imports
-from org.ict_ok.components.pc.interfaces import IPersonalComputer
+from org.ict_ok.components.happliance.interfaces import IHardwareAppliance
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -32,17 +32,17 @@ from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
 # ict_ok.org imports
 class RptPdf(ParentRptPdf):
-    """adapter implementation of Personal Computer -> PDF Report
+    """adapter implementation of Hardware Appliance -> PDF Report
     """
 
     implements(IRptPdf)
-    adapts(IPersonalComputer)
+    adapts(IHardwareAppliance)
     
     def getReportFields(self):
         """
         """
-        from org.ict_ok.components.pc.browser.pc import \
-             PersonalComputerDetails
-        return field.Fields(IPersonalComputer).omit(\
-            *PersonalComputerDetails.omit_viewfields)
+        from org.ict_ok.components.happliance.browser.happliance import \
+             HardwareApplianceDetails
+        return field.Fields(IHardwareAppliance).omit(\
+            *HardwareApplianceDetails.omit_viewfields)
 

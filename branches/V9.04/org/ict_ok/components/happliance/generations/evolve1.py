@@ -7,7 +7,7 @@
 #
 # $Id: evolve1.py 394 2009-01-06 15:12:30Z markusleist $
 #
-"""What to do when upgrade PersonalComputer from gen 0 to gen 1"""
+"""What to do when upgrade HardwareAppliance from gen 0 to gen 1"""
 
 __version__ = "$Id: evolve1.py 394 2009-01-06 15:12:30Z markusleist $"
 
@@ -16,7 +16,7 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.components.pc.interfaces import IPersonalComputer
+from org.ict_ok.components.happliance.interfaces import IHardwareAppliance
 
 generation = 1
 
@@ -27,9 +27,9 @@ def evolve(context):
     
     root = getRootFolder(context) # the Zope-Root-Folders
 
-    for ikobj in findObjectsProviding(root, IPersonalComputer):
+    for ikobj in findObjectsProviding(root, IHardwareAppliance):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
-        print "PersonalComputer(%s): " % ikobj.ikName + evolve_msg
+        print "HardwareAppliance(%s): " % ikobj.ikName + evolve_msg
         ikobj.appendHistoryEntry(evolve_msg)

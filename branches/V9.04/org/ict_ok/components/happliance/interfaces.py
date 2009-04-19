@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E0213,W0232
 #
-"""Interface of PersonalComputer"""
+"""Interface of HardwareAppliance"""
 
 
 __version__ = "$Id: interfaces.py_cog 424 2009-02-02 23:58:56Z markusleist $"
@@ -24,8 +24,8 @@ from zope.schema import Choice, Date, Int, TextLine
 _ = MessageFactory('org.ict_ok')
 
 
-class IPersonalComputer(Interface):
-    """A PersonalComputer object."""
+class IHardwareAppliance(Interface):
+    """A HardwareAppliance object."""
 
     def trigger_online():
         """
@@ -33,14 +33,14 @@ class IPersonalComputer(Interface):
         """
 
 
-class IPersonalComputerFolder(Interface):
-    """Container for PersonalComputer objects
+class IHardwareApplianceFolder(Interface):
+    """Container for HardwareAppliance objects
     """
 
 
-class IAddPersonalComputer(Interface):
+class IAddHardwareAppliance(Interface):
     """Interface for all Objects"""
     template = Choice(
         title = _("Template"),
-        vocabulary="AllPersonalComputerTemplates",
+        vocabulary="AllHardwareApplianceTemplates",
         required = False)
