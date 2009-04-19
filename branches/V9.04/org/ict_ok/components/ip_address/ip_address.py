@@ -53,10 +53,11 @@ def AllIpAddressTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IIpAddress)
 
 def AllIpAddresses(dummy_context):
-    return AllComponents(dummy_context, IIpAddress)
-
+    return AllComponents(dummy_context, IIpAddress,
+                         additionalAttrNames=['ipv4'])
 def AllUnusedOrUsedInterfaceIpAddresses(dummy_context):
-    return AllUnusedOrSelfComponents(dummy_context, IIpAddress, 'interface')
+    return AllUnusedOrSelfComponents(dummy_context, IIpAddress, 'interface',
+                                     additionalAttrNames=['ipv4'])
 def AllUnusedOrUsedIpNetIpAddresses(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IIpAddress, 'ipNet',
                                      additionalAttrNames=['ipv4'])
