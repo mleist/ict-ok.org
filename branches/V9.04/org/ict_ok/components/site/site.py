@@ -208,6 +208,10 @@ def createLocalUtils(event):
         createUtils as createLocationUtils
     from org.ict_ok.components.latency.bootstrap import \
         createUtils as createLatencyUtils
+    from org.ict_ok.components.x509certificate.bootstrap import \
+        createUtils as createX509certificateUtils
+    from org.ict_ok.components.ip_address.bootstrap import \
+        createUtils as createIpAddressUtils
 
     setSite(event.object)
 #    default = zapi.traverse(event.object, '++etc++site/default')
@@ -265,3 +269,5 @@ def createLocalUtils(event):
     createMiscPhysicalUtils(event.object)
     createLocationUtils(event.object)
     createLatencyUtils(event.object)
+    createX509certificateUtils(event.object)
+    createIpAddressUtils(event.object)

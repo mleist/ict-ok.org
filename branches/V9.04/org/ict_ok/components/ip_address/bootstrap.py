@@ -31,13 +31,8 @@ from org.ict_ok.components.ip_address.interfaces import IIpAddressFolder
 
 logger = logging.getLogger("Compon. IpAddress")
 
-def bootStrapSubscriber(event):
-    """initialisation of IntId utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
+
+def createUtils(root_folder, connection=None, dummy_db=None):
     # search in global component registry
     sitem = root_folder.getSiteManager()
     # search for ICatalog
@@ -46,8 +41,8 @@ def bootStrapSubscriber(event):
     instUtilityICatalog = utils[0].component
     if not "ip_address_oid_index" in instUtilityICatalog.keys():
         ip_address_oid_index = TextIndex(interface=ISearchableText,
-                                        field_name='getSearchableIpAddressOid',
-                                        field_callable=True)
+                                         field_name='getSearchableIpAddressOid',
+                                         field_callable=True)
         instUtilityICatalog['ip_address_oid_index'] = ip_address_oid_index
         # search for IAdmUtilSupervisor
         utils = [ util for util in sitem.registeredUtilities()
@@ -55,14 +50,21 @@ def bootStrapSubscriber(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for entry type 'ip_address'")
-        instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create index for entry type 'appsoftware'")
-
     ensureComponentFolderOnBootstrap(IIpAddressFolder,
                  u"IpAddresses",
                  u'org.ict_ok.components.ip_address.ip_address.IpAddressFolder',
                  root_folder,
                  sitem)
-
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+
+def bootStrapSubscriber(event):
+    """initialisation of IntId utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
