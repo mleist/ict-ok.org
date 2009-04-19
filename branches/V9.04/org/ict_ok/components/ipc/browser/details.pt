@@ -84,11 +84,18 @@
             <td>
                 <ul>
                     <span tal:omit-tag="" tal:repeat="obj context/interfaces">
-                    <li tal:condition="python: obj.ipv4List is None"
-                        tal:content="structure python: view.getHrefTitle(obj)" />
-                    <li tal:condition="python: obj.ipv4List and len(obj.ipv4List) > 0"
+                    <li>
+                        <div tal:omit-tag=""
+                             tal:content="structure python: view.getHrefTitle(obj)" />
+                        <div tal:omit-tag=""
+                             tal:condition="obj/ipAddresses|nothing"
+                             tal:content="structure python: u'(%s)' % u'&nbsp/&nbsp;'.join([ip.ipv4 for ip in obj.ipAddresses])" />
+                    </li>
+                    <!--li tal:condition="python: obj.ipAddresses is None"
+                        tal:content="structure python: view.getHrefTitle(obj)" /-->
+                    <!--li tal:condition="python: obj.ipAddresses and len(obj.ipAddresses) > 0"
                         tal:content="structure python: view.getHrefTitle(obj) +
-                                     u'&nbsp;(%s)' % u'&nbsp/&nbsp;'.join(obj.ipv4List)" />
+                                     u'&nbsp;(%s)' % u'&nbsp/&nbsp;'.join(obj.ipAddresses)" /-->
                     <!-- li tal:repeat="obj context/interfaces"
                         tal:content="structure python: view.getHrefTitle(obj) +
                                      u'&nbsp;(%s)' % u'&nbsp/&nbsp;'.join(obj.ipv4List)" / -->
@@ -96,7 +103,7 @@
                 </ul>
             </td>
         </tr>
-
+        
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/osoftwares|nothing">
             <td i18n:translate="">Operating software</td>
