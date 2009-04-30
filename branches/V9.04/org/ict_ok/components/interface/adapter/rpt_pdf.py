@@ -21,11 +21,10 @@ __version__ = "$Id$"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.interface.interfaces import IInterface
+from org.ict_ok.components.interface.interface import Interface
+from org.ict_ok.components.interface.browser.interface import InterfaceDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -37,12 +36,5 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(IInterface)
-    
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.interface.browser.interface import \
-             InterfaceDetails
-        return field.Fields(IInterface).omit(\
-            *InterfaceDetails.omit_viewfields)
-
+    factory = Interface
+    omitFields = InterfaceDetails.omit_viewfields
