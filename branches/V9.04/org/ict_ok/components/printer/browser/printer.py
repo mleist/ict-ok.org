@@ -5,13 +5,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: template.py_cog 467 2009-03-05 04:28:59Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=W0232,W0142
 #
 """implementation of browser class of Printer"""
 
-__version__ = "$Id: template.py_cog 467 2009-03-05 04:28:59Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 

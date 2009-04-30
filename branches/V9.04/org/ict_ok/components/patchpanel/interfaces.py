@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py_cog 411M 2009-02-02 23:31:12Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E0213,W0232
 #
 """Interface of PatchPanel"""
 
 
-__version__ = "$Id: interfaces.py_cog 411M 2009-02-02 23:31:12Z (lokal) $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface

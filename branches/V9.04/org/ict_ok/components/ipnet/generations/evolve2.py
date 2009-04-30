@@ -5,12 +5,12 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: evolve2.py 145M 2009-04-16 11:09:07Z (lokal) $
+# $Id$
 #
 """What to do when upgrade IpNet from gen 0 to gen 1
 """
 
-__version__ = "$Id: evolve2.py 145M 2009-04-16 11:09:07Z (lokal) $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.app.zopeappgenerations import getRootFolder

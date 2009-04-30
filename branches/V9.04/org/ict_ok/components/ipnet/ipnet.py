@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: ipnet.py -1M 2009-04-17 10:50:20Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E1101,E0611,W0612,W0142
 #
@@ -15,7 +15,7 @@ IpNet does ....
 
 """
 
-__version__ = "$Id: ipnet.py -1M 2009-04-17 10:50:20Z (lokal) $"
+__version__ = "$Id$"
 
 # python imports
 

@@ -5,13 +5,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: template.py_cog 467M 2009-04-17 09:23:28Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E1101,W0142
 #
 """implementation of IpAddress"""
 
-__version__ = "$Id: template.py_cog 467M 2009-04-17 09:23:28Z (lokal) $"
+__version__ = "$Id$"
 
 # python imports
 

@@ -10,7 +10,7 @@
          ]]] -->
     <!-- [[[end]]] -->
 
-    <!-- $Id: configure.zcml_cog 283 2008-09-04 14:22:30Z markusleist $ -->
+    <!-- $Id$ -->
 
     <!-- [[[cog
             cog.out("<!-- Copyright (c) ")

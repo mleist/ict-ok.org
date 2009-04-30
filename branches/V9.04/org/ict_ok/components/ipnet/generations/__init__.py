@@ -5,12 +5,12 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: __init__.py 147M 2009-04-16 11:09:07Z (lokal) $
+# $Id$
 #
 """define the range of generations
 """
 
-__version__ = "$Id: __init__.py 147M 2009-04-16 11:09:07Z (lokal) $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.app.generations.generations import SchemaManager

@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: rpt_pdf.py 364M 2009-04-17 05:42:26Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E1101,E0611,W0142
 #
 """Adapter implementation for generating graphviz-dot configuration
 """
 
-__version__ = "$Id: rpt_pdf.py 364M 2009-04-17 05:42:26Z (lokal) $"
+__version__ = "$Id$"
 
 # python imports
 

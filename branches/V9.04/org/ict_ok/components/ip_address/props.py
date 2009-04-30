@@ -6,7 +6,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: props.py 467 2009-03-05 04:28:59Z markusleist $
+# $Id$
 #
 
 authors = [

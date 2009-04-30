@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E0213,W0232
 #
 """Interface of MobilePhone"""
 
 
-__version__ = "$Id: interfaces.py_cog 399 2009-01-08 14:00:17Z markusleist $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface

@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: smokeping.py 346M 2009-04-16 11:09:07Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E1101,E0611
 #
 """Adapter implementation for generating graphviz-dot configuration
 """
 
-__version__ = "$Id: smokeping.py 346M 2009-04-16 11:09:07Z (lokal) $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.interface import implements

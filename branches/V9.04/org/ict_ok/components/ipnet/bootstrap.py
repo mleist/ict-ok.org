@@ -5,13 +5,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: bootstrap.py 478M 2009-04-17 06:33:14Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E1101,E0611
 #
 """startup of subsystem"""
 
-__version__ = "$Id: bootstrap.py 478M 2009-04-17 06:33:14Z (lokal) $"
+__version__ = "$Id$"
 
 # python imports
 import logging

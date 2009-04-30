@@ -5,5 +5,5 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: __init__.py 145 2008-02-15 20:41:04Z markusleist $
+# $Id$
 #

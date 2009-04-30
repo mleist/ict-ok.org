@@ -1,5 +1,5 @@
 
-<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+<!-- $Id$ -->
 
 <i18n:block domain="org.ict_ok"
             tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">

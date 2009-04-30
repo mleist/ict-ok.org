@@ -5,13 +5,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: template.py_cog 424 2009-02-02 23:58:56Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E1101,W0142
 #
 """implementation of HardwareAppliance"""
 
-__version__ = "$Id: template.py_cog 424 2009-02-02 23:58:56Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 

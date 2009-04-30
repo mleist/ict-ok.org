@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: sized.py 145M 2009-04-16 11:09:08Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E0611,W0212
 #
 """Adapter implementation of size-methods
 """
 
-__version__ = "$Id: sized.py 145M 2009-04-16 11:09:08Z (lokal) $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.interface import implements

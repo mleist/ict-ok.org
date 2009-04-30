@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: namechooser.py 273M 2009-04-16 11:09:07Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E0611
 #
 """Adapter implementation of name chooser
 """
 
-__version__ = "$Id: namechooser.py 273M 2009-04-16 11:09:07Z (lokal) $"
+__version__ = "$Id$"
 
 # python imports
 

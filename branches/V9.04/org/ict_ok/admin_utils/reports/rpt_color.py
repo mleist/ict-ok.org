@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 350 2008-10-12 09:18:43Z markusleist $
+# $Id$
 #
 # no_pylint: disable-msg=W0232
 #
@@ -14,7 +14,7 @@
 color-class for ict-ok.org reporting 
 """
 
-__version__ = "$Id: $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.component import getUtility

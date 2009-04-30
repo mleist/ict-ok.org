@@ -5,13 +5,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: template.py_cog 467 2009-03-05 04:28:59Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E1101,W0142
 #
 """implementation of ISDNPhone"""
 
-__version__ = "$Id: template.py_cog 467 2009-03-05 04:28:59Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 

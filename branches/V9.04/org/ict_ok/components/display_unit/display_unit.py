@@ -5,13 +5,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: template.py_cog 465M 2009-03-05 02:48:01Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E1101,W0142
 #
 """implementation of DisplayUnit"""
 
-__version__ = "$Id: template.py_cog 465M 2009-03-05 02:48:01Z (lokal) $"
+__version__ = "$Id$"
 
 # python imports
 

@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interface.py 394 2009-01-06 15:12:30Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=F0401,E1101,E0611,W0232,W0142
 #
 """implementation of browser class of Interface object
 """
 
-__version__ = "$Id: interface.py 394 2009-01-06 15:12:30Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 from pysnmp.entity.rfc3413.oneliner import cmdgen

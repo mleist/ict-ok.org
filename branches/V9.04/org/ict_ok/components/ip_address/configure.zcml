@@ -4,7 +4,7 @@
     i18n_domain="org.ict_ok"
     >
 
-    <!-- $Id: configure.zcml_cog 467M 2009-04-17 09:23:04Z (lokal) $ -->
+    <!-- $Id$ -->
 
     <!-- Copyright (c) 2009, 
                        Markus Leist <leist@ikom-online.de>

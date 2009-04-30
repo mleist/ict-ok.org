@@ -4,7 +4,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: Makefile 398M 2009-02-02 08:40:11Z (lokal) $
+# $Id$
 #
 
 PYTHON=/usr/bin/python2.4

@@ -5,13 +5,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 487M 2009-04-17 10:40:53Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E1101,E0213,W0232
 #
 """Interface of IpNet"""
 
-__version__ = "$Id: interfaces.py 487M 2009-04-17 10:40:53Z (lokal) $"
+__version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface

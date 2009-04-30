@@ -5,13 +5,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E1101,E0611,W0142
 #
 """Adapter implementation for generating pdf reports of HardwareAppliance"""
 
-__version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 
@@ -40,6 +40,8 @@ class RptPdf(ParentRptPdf):
     omitFields = RoomDetails.omit_viewfields
 
     def getRefTitle(self):
+        import pdb
+        pdb.set_trace()
         retString = u"<a href='%s' color='blue'>%s</a>" % \
                     (self.context.objectID, self.context.ikName)
         if self.context.building is not None:

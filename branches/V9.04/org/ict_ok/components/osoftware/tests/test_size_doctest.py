@@ -5,14 +5,14 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: test_size_doctest.py 394 2009-01-06 15:12:30Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=W0221
 #
 """doctest of Dummycontainer
 """
 
-__version__ = "$Id: test_size_doctest.py 394 2009-01-06 15:12:30Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 import unittest

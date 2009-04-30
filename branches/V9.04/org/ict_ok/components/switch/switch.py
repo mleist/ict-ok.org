@@ -5,13 +5,13 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: template.py_cog 399M 2009-02-02 22:29:31Z (lokal) $
+# $Id$
 #
 # pylint: disable-msg=E1101,W0142
 #
 """implementation of Switch"""
 
-__version__ = "$Id: template.py_cog 399M 2009-02-02 22:29:31Z (lokal) $"
+__version__ = "$Id$"
 
 # python imports
 
