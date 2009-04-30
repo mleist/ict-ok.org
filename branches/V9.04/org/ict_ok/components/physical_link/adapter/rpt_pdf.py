@@ -11,7 +11,6 @@
 #
 """Adapter implementation for generating pdf reports of Outlet"""
 
-
 __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 
 # python imports
@@ -20,29 +19,21 @@ __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
-from org.ict_ok.components.outlet.interfaces import IOutlet
+from org.ict_ok.components.physical_link.interfaces import IPhysicalLink
+from org.ict_ok.components.physical_link.physical_link import PhysicalLink
+from org.ict_ok.components.physical_link.browser.physical_link import \
+    PhysicalLinkDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
-     RptPdf as ParentRptPdf
+    RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
 
-# ict_ok.org imports
 class RptPdf(ParentRptPdf):
     """adapter implementation of An network outlet instance -> PDF Report
     """
 
     implements(IRptPdf)
     adapts(IOutlet)
-    
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.outlet.browser.outlet import \
-             OutletDetails
-        return field.Fields(IOutlet).omit(\
-            *OutletDetails.omit_viewfields)
-
+    factory = PhysicalLink
+    omitFields = PhysicalLinkDetails.omit_viewfields

@@ -12,7 +12,6 @@
 """Adapter implementation for generating graphviz-dot configuration
 """
 
-
 __version__ = "$Id$"
 
 # python imports
@@ -28,9 +27,10 @@ from zope.i18nmessageid import MessageFactory
 from reportlab.lib.units import mm, cm
 from reportlab.platypus import Image, Spacer, KeepTogether
 
-
 # ict_ok.org imports
 from org.ict_ok.components.latency.interfaces import ILatency
+from org.ict_ok.components.latency.latency import Latency
+from org.ict_ok.components.latency.browser.latency import LatencyDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -44,6 +44,8 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(ILatency)
+    factory = Latency
+    omitFields = LatencyDetails.omit_viewfields
 
     #attributeList = ['checkcount']
     #attributeList.extend(ParentRptPdf.attributeList)
@@ -56,7 +58,7 @@ class RptPdf(ParentRptPdf):
         #"""
         #if comments:
             #self.writeComment(u"%s## Body (%s,%d) - LatencyRptPdfBody" % \
-                              #("\t" * level, self.context.ikName, level))
+          #("\t" * level, self.context.ikName, level))
     def appendImage(self, hours, elemList):
         fileExt = RandomNameSequence().next()
         currtime = time.time()

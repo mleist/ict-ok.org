@@ -12,7 +12,6 @@
 """Adapter implementation for generating graphviz-dot configuration
 """
 
-
 __version__ = "$Id$"
 
 # python imports
@@ -27,11 +26,10 @@ from zope.component import adapts
 from reportlab.lib.units import mm, cm
 from reportlab.platypus import Image, Spacer, KeepTogether
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
+from org.ict_ok.components.snmpvalue.browser.snmpvalue import SnmpValueDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -43,6 +41,8 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(ISnmpValue)
+    factory = SnmpValue
+    omitFields = SnmpValueDetails.omit_viewfields
 
     def appendImage(self, hours, elemList):
         fileExt = RandomNameSequence().next()
@@ -65,14 +65,6 @@ class RptPdf(ParentRptPdf):
         elemList.append(Spacer(0, 4 * mm))
         self.appendFile2Delete(params['targetname'])
         
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.snmpvalue.browser.snmpvalue import \
-             SnmpValueDetails
-        return field.Fields(ISnmpValue).omit(\
-            *SnmpValueDetails.omit_viewfields)
-
     def traverse4RptPre(self, level, comments, autoAppend=True):
         """pdf report object preamble
         
@@ -95,4 +87,3 @@ class RptPdf(ParentRptPdf):
             else:
                 return elemList
         return None
-

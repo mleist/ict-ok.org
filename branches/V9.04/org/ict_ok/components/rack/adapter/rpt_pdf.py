@@ -11,7 +11,6 @@
 #
 """Adapter implementation for generating pdf reports of Rack"""
 
-
 __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 
 # python imports
@@ -20,11 +19,10 @@ __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.rack.interfaces import IRack
+from org.ict_ok.components.rack.rack import Rack
+from org.ict_ok.components.rack.browser.rack import RackDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -37,12 +35,5 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(IRack)
-    
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.rack.browser.rack import \
-             RackDetails
-        return field.Fields(IRack).omit(\
-            *RackDetails.omit_viewfields)
-
+    factory = Rack
+    omitFields = RackDetails.omit_viewfields

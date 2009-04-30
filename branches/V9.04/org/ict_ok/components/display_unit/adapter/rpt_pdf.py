@@ -11,7 +11,6 @@
 #
 """Adapter implementation for generating pdf reports of DisplayUnit"""
 
-
 __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 
 # python imports
@@ -20,29 +19,21 @@ __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.display_unit.interfaces import IDisplayUnit
+from org.ict_ok.components.display_unit.display_unit import DisplayUnit
+from org.ict_ok.components.display_unit.browser.display_unit import \
+    DisplayUnitDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
-     RptPdf as ParentRptPdf
+    RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
 
-# ict_ok.org imports
 class RptPdf(ParentRptPdf):
     """adapter implementation of Display unit instance -> PDF Report
     """
 
     implements(IRptPdf)
     adapts(IDisplayUnit)
-    
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.display_unit.browser.display_unit import \
-             DisplayUnitDetails
-        return field.Fields(IDisplayUnit).omit(\
-            *DisplayUnitDetails.omit_viewfields)
-
+    factory = DisplayUnit
+    omitFields = DisplayUnitDetails.omit_viewfields

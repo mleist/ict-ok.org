@@ -24,7 +24,6 @@
 # [[[cog cog.outl('"""Adapter implementation for generating pdf reports of %(componentname)s"""' % props.__dict__)]]]
 # [[[end]]]
 
-
 __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 
 # python imports
@@ -40,6 +39,9 @@ from z3c.form import field
 #[[[cog
 #   cog.out('''\
 #   from %(longpath_interface)s import I%(componentname)s
+#   from %(longpath_file)s import %(componentname)s
+#   from %(longpath_browser_file)s import \\
+#       %(componentname)sDetails
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
@@ -48,7 +50,6 @@ from org.ict_ok.components.supernode.adapter.rpt_pdf import \
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
 
-# ict_ok.org imports
 #[[[cog
 #   cog.out('''\
 #   class RptPdf(ParentRptPdf):
@@ -57,14 +58,8 @@ from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 #
 #       implements(IRptPdf)
 #       adapts(I%(componentname)s)
-#       
-#       def getReportFields(self):
-#           """
-#           """
-#           from %(longpath_browser_file)s import \\
-#                %(componentname)sDetails
-#           return field.Fields(I%(componentname)s).omit(\\
-#               *%(componentname)sDetails.omit_viewfields)
+#       factory = %(componentname)s
+#       omitFields = %(componentname)sDetails.omit_viewfields
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]

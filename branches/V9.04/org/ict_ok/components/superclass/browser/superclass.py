@@ -727,7 +727,7 @@ class SuperclassDetails:
         longTimeString = my_formatter.format(\
             userTZ.fromutc(datetime.utcnow()))
         versionStr = "%s [%s]" % (longTimeString, getIkVersion())
-        self.context.generatePdf(f_name, authorStr, versionStr)
+        self.context.generatePdf(f_name, authorStr, versionStr,request=self.request)
         self.request.response.setHeader('Content-Type', 'application/pdf')
         self.request.response.setHeader(\
             'Content-Disposition',
@@ -914,6 +914,9 @@ class AddForm(layout.FormLayoutSupport, form.AddForm):
         travp[obj.objectID] = obj
         if hasattr(obj, "store_refs"):
             obj.store_refs(**self.newdata)
+        # workaround for gocept.objectquery
+        import transaction
+        transaction.savepoint()
         return obj
 
 
@@ -948,6 +951,9 @@ class EditForm(layout.FormLayoutSupport, form.EditForm):
                 descriptions.append(Attributes(interface, *names))
             # Send out a detailed object-modified event
             zope.event.notify(ObjectModifiedEvent(content, *descriptions))
+        # workaround for gocept.objectquery
+        import transaction
+        transaction.savepoint()
         return changes
 
 
@@ -973,6 +979,9 @@ class DeleteForm(layout.FormLayoutSupport, form.Form):
             self.context = parent
             url = absoluteURL(parent, self.request)
             self.request.response.redirect(url)
+            # workaround for gocept.objectquery
+            import transaction
+            transaction.savepoint()
 
     @button.buttonAndHandler(u'Cancel')
     def handleCancel(self, action):

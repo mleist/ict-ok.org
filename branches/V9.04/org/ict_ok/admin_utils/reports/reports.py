@@ -24,11 +24,13 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports, IRptPdf
+from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports, \
+    IRptPdf, IBaseReporter
 from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
 from org.ict_ok.admin_utils.reports.rpt_para import RptPara
+from org.ict_ok.admin_utils.reports.rpt_title import RptTitle
 
 logger = logging.getLogger("AdmUtilReports")
 
@@ -89,3 +91,87 @@ class AdmUtilReports(Supernode):
             except OSError:
                 pass
 
+class BaseReporter(object):
+    """
+    """
+    implements(IBaseReporter)
+
+#    firstLevelContent = FieldProperty(IBaseReporter['firstLevelContent'])
+    allContentObjects = FieldProperty(IBaseReporter['allContentObjects'])
+    alreadyReported = FieldProperty(IBaseReporter['alreadyReported'])
+    
+    def __init__(self):
+#        self.firstLevelContent = []
+        self.allContentObjects = set([])
+        self.alreadyReported = {}
+    
+class SimpleReporter(BaseReporter):
+    """
+    """
+
+class PDFReporter(SimpleReporter):
+    """
+    """
+    def __init__(self, absFilename, request=None):
+        self.files2delete = []
+        self.document = RptDocument(absFilename)
+        self.document.setReporter(self)
+        self.request = request
+        SimpleReporter.__init__(self)
+
+        
+    def setVolumeNo(self, volumeStr):
+        self.document.setVolumeNo(volumeStr)
+
+    def setAuthorName(self, authorStr):
+        self.document.setAuthorName(authorStr)
+        
+    def setVersionStr(self, versionStr):
+        self.document.setVersionStr(versionStr)
+    
+    def cleanup(self):
+        for i_filename in self.files2delete:
+            try:
+                os.remove(i_filename)
+            except OSError:
+                pass
+            
+    def extendAllContentObjects(self, objList):
+        for obj in objList:
+            self.allContentObjects.add(obj)
+
+#    def fill(self):
+#        self.append(self.firstLevelContent)
+
+    def appendTitle1(self, title):
+        title = RptTitle(title, doc=self.document, intype='Heading1')
+        self.document.append(title.genElements())
+        
+    def appendTitle2(self, title):
+        title = RptTitle(title, doc=self.document, intype='Heading2')
+        self.document.append(title.genElements())
+        
+    def append(self, obj):
+        try:
+            it = iter(obj)
+            for i in it:
+                #self.firstLevelContent.append(i)
+                adapterRptPdf = IRptPdf(i)
+                if adapterRptPdf:
+                    adapterRptPdf.request=self.request
+                    adapterRptPdf.document = self.document
+                    adapterRptPdf.traverse4Rpt(2, False)
+                    self.files2delete.extend(adapterRptPdf.files2delete)
+                    del adapterRptPdf
+        except TypeError:
+            #self.firstLevelContent.append(obj)
+            adapterRptPdf = IRptPdf(obj)
+            if adapterRptPdf:
+                adapterRptPdf.request=self.request
+                adapterRptPdf.document = self.document
+                adapterRptPdf.traverse4Rpt(2, False)
+                self.files2delete.extend(adapterRptPdf.files2delete)
+                del adapterRptPdf
+
+    def buildPdf(self):
+        self.document.buildPdf()

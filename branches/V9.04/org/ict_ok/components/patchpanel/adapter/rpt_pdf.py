@@ -11,7 +11,6 @@
 #
 """Adapter implementation for generating pdf reports of PatchPanel"""
 
-
 __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 
 # python imports
@@ -20,29 +19,21 @@ __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.patchpanel.interfaces import IPatchPanel
+from org.ict_ok.components.patchpanel.patchpanel import PatchPanel
+from org.ict_ok.components.patchpanel.browser.patchpanel import \
+    PatchPanelDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
-     RptPdf as ParentRptPdf
+    RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
 
-# ict_ok.org imports
 class RptPdf(ParentRptPdf):
     """adapter implementation of Patch panel -> PDF Report
     """
 
     implements(IRptPdf)
     adapts(IPatchPanel)
-    
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.patchpanel.browser.patchpanel import \
-             PatchPanelDetails
-        return field.Fields(IPatchPanel).omit(\
-            *PatchPanelDetails.omit_viewfields)
-
+    factory = PatchPanel
+    omitFields = PatchPanelDetails.omit_viewfields

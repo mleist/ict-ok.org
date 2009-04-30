@@ -11,7 +11,6 @@
 #
 """Adapter implementation for generating pdf reports of Printer"""
 
-
 __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 
 # python imports
@@ -20,11 +19,10 @@ __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.printer.interfaces import IPrinter
+from org.ict_ok.components.printer.printer import Printer
+from org.ict_ok.components.printer.browser.printer import PrinterDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -37,12 +35,5 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(IPrinter)
-    
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.printer.browser.printer import \
-             PrinterDetails
-        return field.Fields(IPrinter).omit(\
-            *PrinterDetails.omit_viewfields)
-
+    factory = Printer
+    omitFields = PrinterDetails.omit_viewfields

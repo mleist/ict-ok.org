@@ -83,6 +83,12 @@
     <subscriber handler=".objmq.notifyCopiedEvent" />
     <subscriber handler=".objmq.notifyCreatedEvent" />
     <subscriber handler=".objmq.notifyModifiedEvent" />
+
+    <!-- <subscriber handler=".objcollect.notifyCopiedEvent" />
+    <subscriber handler=".objcollect.notifyRemovedEvent" />
+    <subscriber handler=".objcollect.notifyModifiedEvent" />
+    <subscriber handler=".objcollect.notifyAddedEvent" /> -->
+
     <subscriber handler=".dublincore.updateSuperclassDCTitle" />
     <subscriber handler=".dublincore.createSuperclassDCTitle" />
 

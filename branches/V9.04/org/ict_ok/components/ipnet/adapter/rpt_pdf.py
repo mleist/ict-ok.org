@@ -12,7 +12,6 @@
 """Adapter implementation for generating graphviz-dot configuration
 """
 
-
 __version__ = "$Id: rpt_pdf.py 364M 2009-04-17 05:42:26Z (lokal) $"
 
 # python imports
@@ -21,11 +20,10 @@ __version__ = "$Id: rpt_pdf.py 364M 2009-04-17 05:42:26Z (lokal) $"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.ipnet.interfaces import IIpNet
+from org.ict_ok.components.ipnet.ipnet import IpNet
+from org.ict_ok.components.ipnet.browser.ipnet import IpNetDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -37,10 +35,5 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(IIpNet)
-
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.ipnet.browser.ipnet import IpNetDetails
-        return field.Fields(IIpNet).omit(\
-            *IpNetDetails.omit_viewfields)
+    factory = IpNet
+    omitFields = IpNetDetails.omit_viewfields

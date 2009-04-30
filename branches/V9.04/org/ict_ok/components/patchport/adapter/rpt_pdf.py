@@ -11,7 +11,6 @@
 #
 """Adapter implementation for generating pdf reports of PatchPort"""
 
-
 __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 
 # python imports
@@ -20,29 +19,20 @@ __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.patchport.interfaces import IPatchPort
+from org.ict_ok.components.patchport.patchport import PatchPort
+from org.ict_ok.components.patchport.browser.patchport import PatchPortDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
 
-# ict_ok.org imports
 class RptPdf(ParentRptPdf):
     """adapter implementation of Patch port -> PDF Report
     """
 
     implements(IRptPdf)
     adapts(IPatchPort)
-    
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.patchport.browser.patchport import \
-             PatchPortDetails
-        return field.Fields(IPatchPort).omit(\
-            *PatchPortDetails.omit_viewfields)
-
+    factory = PatchPort
+    omitFields = PatchPortDetails.omit_viewfields

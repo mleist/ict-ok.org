@@ -60,6 +60,11 @@ from org.ict_ok.admin_utils.generators.nagios.interfaces import \
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf, IRptXML
 from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
 
+import transaction
+from gocept.objectquery import indexsupport
+index_synch = indexsupport.IndexSynchronizer()
+transaction.manager.registerSynch(index_synch)
+
 
 class Superclass(Persistent):
     """
@@ -80,7 +85,8 @@ class Superclass(Persistent):
     ikEventTarget = FieldProperty(ISuperclass['ikEventTarget'])
     ref = FieldProperty(ISuperclass['ref'])
     
-    fullTextSearchFields = ['ikName', 'ikComment', 'ikAuthor']
+    fullTextSearchFields = ['objectID', 'ikName',
+                            'ikComment', 'ikAuthor']
     
     # IEventIfSuperclass
     #eventInpObjs_Ping = FieldProperty(IEventIfSuperclass['eventInpObjs_Ping'])
@@ -418,10 +424,170 @@ class Superclass(Persistent):
                 self._p_changed = True
             print "myObjIdSet 2 :", myObjIdSet
 
-    def generatePdf(self, absFilename, authorStr, versionStr):
+    def generatePdf(self, absFilename, authorStr, versionStr, request=None):
         """
         will generate a object pdf report
+        steps to do:
+        - toReportSet = set([])
+        - 1. select of objects (e.g. locations), append  toReportSet
+        - 2. select of objects (e.g. buildings), append  toReportSet
+        - 3. select of objects (e.g. rooms), append  toReportSet
+        - generate Report (1st run, content)
+        - generate Report (2nd run, references)
         """
+        ##
+        ##
+        ## TODO:
+        ##
+        ## evil, very alpha, evaluation code for some kind of "Query Language"
+        ## ... to be removed ...
+        ##
+        ##
+        
+        #-> connection = IConnection(self)
+        #(Pdb) 
+        #> /Users/markus/Projekte/ict_ok.org/inst/lib/python/org/ict_ok/components/superclass/superclass.py(447)generatePdf()
+        #-> from gocept.objectquery.collection import ObjectCollection
+        #(Pdb) connection
+        #<Connection at 01f19910>
+        #(Pdb) dir(connection)
+        #['_Connection__onCloseCallbacks', '__class__', '__delattr__', '__dict__', '__doc__', '__getattribute__', '__getitem__', '__hash__', '__implemented__', '__init__', '__module__', '__new__', '__providedBy__', '__provides__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__str__', '__weakref__', '_abort', '_abort_savepoint', '_added', '_added_during_commit', '_cache', '_cache_items', '_code_timestamp', '_commit', '_commit_savepoint', '_conflicts', '_creating', '_db', '_debug_info', '_flush_invalidations', '_handle_independent', '_handle_one_serial', '_handle_serial', '_implicitlyAdding', '_import', '_importDuringCommit', '_inv_lock', '_invalidate_creating', '_invalidated', '_invalidatedCache', '_load_before_or_conflict', '_load_count', '_log', '_modified', '_needs_to_join', '_normal_storage', '_opened', '_pre_cache', '_reader', '_register', '_registered_objects', '_resetCache', '_reset_counter', '_rollback', '_savepoint_storage', '_setstate', '_setstate_noncurrent', '_storage', '_storage_sync', '_store_count', '_store_objects', '_tpc_cleanup', '_txn_time', '_version', 'abort', 'add', 'afterCompletion', 'beforeCompletion', 'cacheGC', 'cacheMinimize', 'close', 'commit', 'connections', 'db', 'exchange', 'exportFile', 'get', 'getDebugInfo', 'getTransferCounts', 'getVersion', 'get_connection', 'importFile', 'invalidate', 'invalidateCache', 'isReadOnly', 'modifiedInVersion', 'newTransaction', 'new_oid', 'oldstate', 'onCloseCallback', 'open', 'register', 'root', 'savepoint', 'setDebugInfo', 'setstate', 'sortKey', 'sync', 'tpc_abort', 'tpc_begin', 'tpc_finish', 'tpc_vote', 'transaction_manager']
+        #(Pdb) connection.transaction_manager
+        #<transaction._manager.ThreadTransactionManager object at 0x1239bf0>
+        #(Pdb) pp dir(connection.transaction_manager)
+        #['__class__',
+        # '__delattr__',
+        # '__dict__',
+        # '__doc__',
+        # '__getattribute__',
+        # '__hash__',
+        # '__init__',
+        # '__module__',
+        # '__new__',
+        # '__reduce__',
+        # '__reduce_ex__',
+        # '__repr__',
+        # '__setattr__',
+        # '__str__',
+        # '__weakref__',
+        # '_synchs',
+        # '_txns',
+        # 'abort',
+        # 'begin',
+        # 'commit',
+        # 'doom',
+        # 'free',
+        # 'get',
+        # 'isDoomed',
+        # 'registerSynch',
+        # 'savepoint',
+        # 'unregisterSynch']
+        #(Pdb) connection.transaction_manager.registerSynch(index_synch)
+        #(Pdb) connection.root()['_oq_collection'] = oc
+        #*** NameError: name 'oc' is not defined
+        #(Pdb) l
+        #442                  publ = request.publication
+        #443                  import pdb
+        #444                  pdb.set_trace()
+        #445                  from ZODB.interfaces import IConnection
+        #446                  connection = IConnection(self)
+        #447  ->                from gocept.objectquery.collection import ObjectCollection
+        #448                  from gocept.objectquery.pathexpressions import RPEQueryParser
+        #449                  from gocept.objectquery.processor import QueryProcessor
+        #450                  from zope.app import zapi
+        #451                  parser = RPEQueryParser()
+        #452                  oc = ObjectCollection(connection)
+        #(Pdb) n
+        #> /Users/markus/Projekte/ict_ok.org/inst/lib/python/org/ict_ok/components/superclass/superclass.py(448)generatePdf()
+        #-> from gocept.objectquery.pathexpressions import RPEQueryParser
+        #(Pdb) 
+        #> /Users/markus/Projekte/ict_ok.org/inst/lib/python/org/ict_ok/components/superclass/superclass.py(449)generatePdf()
+        #-> from gocept.objectquery.processor import QueryProcessor
+        #(Pdb) 
+        #> /Users/markus/Projekte/ict_ok.org/inst/lib/python/org/ict_ok/components/superclass/superclass.py(450)generatePdf()
+        #-> from zope.app import zapi
+        #(Pdb) 
+        #> /Users/markus/Projekte/ict_ok.org/inst/lib/python/org/ict_ok/components/superclass/superclass.py(451)generatePdf()
+        #-> parser = RPEQueryParser()
+        #(Pdb) 
+        #> /Users/markus/Projekte/ict_ok.org/inst/lib/python/org/ict_ok/components/superclass/superclass.py(452)generatePdf()
+        #-> oc = ObjectCollection(connection)
+        #(Pdb) 
+        #> /Users/markus/Projekte/ict_ok.org/inst/lib/python/org/ict_ok/components/superclass/superclass.py(453)generatePdf()
+        #-> d1 = zapi.getParent(self)
+        #(Pdb) connection.root()['_oq_collection'] = oc
+        #(Pdb) connection.transaction_manager.commit()
+        #(Pdb) 
+        
+        
+        from org.ict_ok.components.happliance.interfaces import IHardwareAppliance
+        if IHardwareAppliance.providedBy(self):
+            publ = request.publication
+            import pdb
+            pdb.set_trace()
+            from ZODB.interfaces import IConnection
+            connection = IConnection(self)
+            from gocept.objectquery.collection import ObjectCollection
+            from gocept.objectquery.pathexpressions import RPEQueryParser
+            from gocept.objectquery.processor import QueryProcessor
+            from zope.app import zapi
+            parser = RPEQueryParser()
+            oc = ObjectCollection(connection)
+            d1 = zapi.getParent(self)
+            d2 = zapi.getParent(d1)
+            d3 = zapi.getParent(d2)
+            from pprint import pprint
+            print "-" * 80
+            print "class_index:"
+            pprint(list(oc.class_index._index))
+    #        print "attribute_index:"
+    #        pprint(list(oc.attribute_index._index))
+    #        print "structure_index:"
+    #        pprint(list(oc.structure_index.paths))
+            oc.index(connection.root())
+            print "-" * 80
+            print "class_index:"
+            pprint(list(oc.class_index._index))
+            print "attribute_index:"
+            pprint(list(oc.attribute_index._index))
+            print "structure_index:"
+            pprint(list(oc.structure_index.paths))
+            oc.index(d2)
+            print "-" * 80
+            print "class_index:"
+            pprint(list(oc.class_index._index))
+            print "attribute_index:"
+            pprint(list(oc.attribute_index._index))
+            print "structure_index:"
+            pprint(list(oc.structure_index.paths))
+            oc.index(d1)
+            print "-" * 80
+            print "class_index:"
+            pprint(list(oc.class_index._index))
+            print "attribute_index:"
+            pprint(list(oc.attribute_index._index))
+            print "structure_index:"
+            pprint(list(oc.structure_index.paths))
+            oc.index(self)
+            print "-" * 80
+            print "class_index:"
+            pprint(list(oc.class_index._index))
+            print "attribute_index:"
+            pprint(list(oc.attribute_index._index))
+            print "structure_index:"
+            pprint(list(oc.structure_index.paths))
+            print "-" * 80
+            if0 = self.interfaces[0]
+            oc.index(if0)
+            oc3 = connection.root()['_oq_collection']
+            query = QueryProcessor(parser, oc3)
+            tt2 = oc3.is_child(self._p_oid,d1._p_oid)
+            tt1 = oc3.is_child(d1._p_oid,d2._p_oid)
+            tt3 = oc3.is_child(self._p_oid,if0._p_oid)
+            tt4 = oc3.is_child(if0._p_oid,self._p_oid)
+            ee=query('/Folder')
+            ff=query('/Folder/HardwareApplianceFolder/HardwareAppliance')
+            print "ff: ", ff
         files2delete = []
         document = RptDocument(absFilename)
         #document.setVolumeNo("1")
@@ -430,10 +596,11 @@ class Superclass(Persistent):
         adapterRptPdf = IRptPdf(self)
         if adapterRptPdf:
             adapterRptPdf.document = document
-            adapterRptPdf.traverse4Rpt(1, False)
+            adapterRptPdf.traverse4Rpt(1, True)
             files2delete.extend(adapterRptPdf.files2delete)
             del adapterRptPdf
         document.buildPdf()
+        document.outConsoleTree(0)
         for i_filename in files2delete:
             try:
                 os.remove(i_filename)

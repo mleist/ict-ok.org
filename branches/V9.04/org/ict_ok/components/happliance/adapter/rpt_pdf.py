@@ -11,7 +11,6 @@
 #
 """Adapter implementation for generating pdf reports of HardwareAppliance"""
 
-
 __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 
 # python imports
@@ -20,29 +19,21 @@ __version__ = "$Id: rpt_pdf.py 394 2009-01-06 15:12:30Z markusleist $"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.happliance.interfaces import IHardwareAppliance
+from org.ict_ok.components.happliance.happliance import HardwareAppliance
+from org.ict_ok.components.happliance.browser.happliance import \
+         HardwareApplianceDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
 
-# ict_ok.org imports
 class RptPdf(ParentRptPdf):
     """adapter implementation of Hardware Appliance -> PDF Report
     """
 
     implements(IRptPdf)
     adapts(IHardwareAppliance)
-    
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.happliance.browser.happliance import \
-             HardwareApplianceDetails
-        return field.Fields(IHardwareAppliance).omit(\
-            *HardwareApplianceDetails.omit_viewfields)
-
+    factory = HardwareAppliance
+    omitFields = HardwareApplianceDetails.omit_viewfields

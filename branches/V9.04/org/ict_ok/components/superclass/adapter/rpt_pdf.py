@@ -20,6 +20,7 @@ import os
 # zope imports
 from zope.interface import implements
 from zope.component import adapts
+from zope.i18n import translate
 
 # reportlab imports
 from reportlab.lib.units import mm
@@ -30,7 +31,9 @@ from reportlab.platypus.tables import Table, TableStyle
 from z3c.form import field
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 from org.ict_ok.admin_utils.reports.rpt_title import RptTitle
 from org.ict_ok.admin_utils.reports.rpt_para import RptPara
@@ -44,12 +47,15 @@ class RptPdf(object):
     
     implements(IRptPdf)
     adapts(ISuperclass)
+    factory = Superclass
+    omitFields = []
     
     attributeList = ['ikName']
     
     def __init__(self, context):
         self.document = None
         self.context = context
+        self.request = None
         self.files2delete = []
         self.attributeData = []
         self.ikRevision = __version__
@@ -57,6 +63,7 @@ class RptPdf(object):
     def writeComment(self, text_arg):
         """will write the text_arg into the configuration file
         """
+        print "writeComment('%s')" % text_arg
         if self.document is not None:
             rptPara = RptPara(text_arg, doc=self.document)
             self.document.append(rptPara)
@@ -76,13 +83,49 @@ class RptPdf(object):
             except OSError:
                 pass
 
+    def getRefTitle(self):
+        if self.document and \
+            self.document._reporter and \
+            self.context in \
+                self.document._reporter.allContentObjects:
+            return u"<a href='%s' color='blue'>%s</a>" % \
+                (self.context.objectID, self.context.ikName)
+        else:
+            return u"%s" % \
+                (self.context.ikName)
+
     def getReportFields(self):
         """
         """
-        from org.ict_ok.components.superclass.browser.superclass import \
-             SuperclassDetails
-        return field.Fields(ISuperclass).omit(\
-            *SuperclassDetails.omit_viewfields)
+        return fieldsForFactory(self.factory, self.omitFields)
+#    def getReportFields(self):
+#        """
+#        """
+#        from org.ict_ok.components.superclass.browser.superclass import \
+#             SuperclassDetails
+#        return field.Fields(ISuperclass).omit(\
+#            *SuperclassDetails.omit_viewfields)
+
+    def _convertNamePara(self, f_obj):
+        reportFieldsTransl = translate(f_obj.field.title,
+                                       context=self.request)
+        rptPara = RptPara(reportFieldsTransl,
+                           style=self.document.styles['Normal'],
+                           doc=self.document)
+        return rptPara
+
+    def _convertValPara(self, f_val):
+        if ISuperclass.providedBy(f_val):
+            rptAdapter = IRptPdf(f_val)
+            rptAdapter.request=self.request
+            rptAdapter.document = self.document
+            iText = rptAdapter.getRefTitle()
+        else:
+            iText = unicode(f_val)
+        rptPara = RptPara(iText,
+                           style=self.document.styles['Normal'],
+                           doc=self.document)
+        return rptPara
 
     def getAttributeTable(self):
         """
@@ -93,15 +136,29 @@ class RptPdf(object):
             ('BOTTOMPADDING', (0,0), (-1,-1), 0),
             ('TOPPADDING', (0,0), (-1,-1), 0),
             ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+            ('VALIGN',(0,0),(-1,-1),'TOP'),
         ])        
         colWidths = [50 * mm, 85 * mm]
         data = []
         fields = self.getReportFields()
         for f_name, f_obj in fields.items():
             f_val = getattr(self.context, f_name)
+            namePara = self._convertNamePara(f_obj)
             if f_val is not None:
-                rptPara = RptPara(unicode(f_val), doc=self.document)
-                data.append([f_obj.field.title, rptPara])
+                if type(f_val) is str or \
+                   type(f_val) is unicode:
+                    valPara = self._convertValPara(f_val)
+                    data.append([namePara, valPara])
+                else:
+                    try:
+                        it = iter(f_val)
+                        valParas = []
+                        for i in it:
+                            valParas.append(self._convertValPara(i))
+                        data.append([namePara, valParas])
+                    except TypeError:
+                        valPara = self._convertValPara(f_val)
+                        data.append([namePara, valPara])
         if len(data) > 0:
             t0 = Table(data,
                        hAlign = 'RIGHT',
@@ -110,6 +167,28 @@ class RptPdf(object):
         else:
             t0 = None
         return t0
+
+#-----------------------------------
+#        try:
+#            it = iter(obj)
+#            for i in it:
+#                adapterRptPdf = IRptPdf(i)
+#                if adapterRptPdf:
+#                    adapterRptPdf.request=self.request
+#                    adapterRptPdf.document = self.document
+#                    adapterRptPdf.traverse4Rpt(1, False)
+#                    self.files2delete.extend(adapterRptPdf.files2delete)
+#                    del adapterRptPdf
+#        except TypeError:
+#            adapterRptPdf = IRptPdf(obj)
+#            if adapterRptPdf:
+#                adapterRptPdf.request=self.request
+#                adapterRptPdf.document = self.document
+#                adapterRptPdf.traverse4Rpt(1, False)
+#                self.files2delete.extend(adapterRptPdf.files2delete)
+#                del adapterRptPdf
+#----------------------------------
+
 
     def traverse4RptPre(self, level, comments, autoAppend=True):
         """pdf report object preamble
@@ -126,12 +205,19 @@ class RptPdf(object):
                       self.context.ikName)
             title = RptTitle(titleStr,
                              intype="Heading%d" % level,
-                             doc=self.document)
-            elemList = [title.genElements(),
-                        self.getAttributeTable(),
-                        Spacer(0, 4 * mm)]
-            elemList.extend(\
-                appendEvaluationList(self.context, self.document))
+                             doc=self.document,
+                             context=self.context)
+#            elemList = [title.genElements()]
+            attrTable = self.getAttributeTable()
+            if attrTable:
+                elemList = [title.genElements(),
+                            self.getAttributeTable(),
+                            Spacer(0, 4 * mm)]
+            else:
+                elemList = [title.genElements(),
+                            Spacer(0, 4 * mm)]
+#            elemList.extend(\
+#                appendEvaluationList(self.context, self.document))
             if autoAppend is True:
                 comp = KeepTogether(elemList)
                 self.document.append(comp)
@@ -174,3 +260,6 @@ class RptPdf(object):
             self.traverse4RptPre(level, comments)
             self.traverse4RptBody(level, comments)
             self.traverse4RptPost(level, comments)
+            if self.document is not None and \
+                self.document._reporter is not None:
+                self.document._reporter.alreadyReported[self.context.objectID] = self

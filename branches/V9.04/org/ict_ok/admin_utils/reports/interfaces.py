@@ -18,7 +18,7 @@ import os
 
 # zope imports
 from zope.interface import Interface
-from zope.schema import TextLine
+from zope.schema import TextLine, List, Dict, Set
 from zope.interface import invariant, Invalid
 from zope.i18nmessageid import MessageFactory
 
@@ -227,6 +227,26 @@ class IAdmUtilReports(Interface):
         will generate a complete pdf report
         """
 
+
+class IBaseReporter(Interface):
+    """A configuration utility."""
+    
+#    firstLevelContent = List(
+#        #title = _("color1"),
+#        default = [],
+#        required = True)
+
+    allContentObjects = Set(
+        #title = _("color1"),
+        default = set([]),
+        required = True)
+
+    alreadyReported = Dict(
+        #title = _("logo1 file path (4:1)"),
+        default = {},
+        required = False)
+
+
 class IRptPdf(Interface):
     """Interface of PDF-report-Adapter
     """
@@ -262,7 +282,10 @@ class IRptPdf(Interface):
         comments: should there comments are in the output?
 
         """
-
+    def getRefTitle():
+        """
+        get title and reference for reportlab pdf stuff
+        """
 
 class IRptXML(Interface):
     """Interface of XML-report-Adapter

@@ -22,7 +22,6 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.components.superclass.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
@@ -37,6 +36,8 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(ISupernode)
+    factory = None
+    omitFields = []
 
     attributeList = []
     attributeList.extend(ParentRptPdf.attributeList)
@@ -50,16 +51,16 @@ class RptPdf(ParentRptPdf):
         if comments:
             self.writeComment(u"%s## Body (%s,%d) - SupernodeRptPdfBody" % \
                               ("\t" * level, self.context.ikName, level))
-        its = self.context.items()
-        for (dummy_name, oobj) in its:
-            if ISuperclass.providedBy(oobj):
-                try:
-                    adapterRptPdf = IRptPdf(oobj)
-                    if adapterRptPdf:
-                        adapterRptPdf.document = self.document
-                        adapterRptPdf.traverse4Rpt(level + 1, comments)
-                        self.files2delete.extend(adapterRptPdf.files2delete)
-                        del adapterRptPdf
-                except TypeError, errText:
-                    logger.error(u"Problem in adaption: %s (%s)" %\
-                                 (errText, oobj.ikName))
+#        its = self.context.items()
+#        for (dummy_name, oobj) in its:
+#            if ISuperclass.providedBy(oobj):
+#                try:
+#                    adapterRptPdf = IRptPdf(oobj)
+#                    if adapterRptPdf:
+#                        adapterRptPdf.document = self.document
+#                        adapterRptPdf.traverse4Rpt(level + 1, comments)
+#                        self.files2delete.extend(adapterRptPdf.files2delete)
+#                        del adapterRptPdf
+#                except TypeError, errText:
+#                    logger.error(u"Problem in adaption: %s (%s)" %\
+#                                 (errText, oobj.ikName))

@@ -128,6 +128,11 @@
         factory="org.ict_ok.components.building.adapter.ipickle.Pickle"
     />
 
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
     <!--utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".building.AllBuildingsVocab"

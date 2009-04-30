@@ -15,6 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Attribute, Interface
+import zope.component.interfaces
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, List, Text, TextLine, Set, Object, Int
 #from zope.mimetype.interfaces import IContentTypeAware
@@ -238,3 +239,8 @@ class IEventIfSuperclass(Interface):
         #""" trigger ping request in object """
     #def eventOut_Pong(self):
         #""" sends a ping response """
+
+class IObjectAddedEvent(zope.component.interfaces.IObjectEvent):
+    """An object has been created.
+
+    The location will usually be ``None`` for this event."""

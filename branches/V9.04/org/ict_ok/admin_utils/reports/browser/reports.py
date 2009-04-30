@@ -38,6 +38,8 @@ from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
 from org.ict_ok.admin_utils.reports.reports import AdmUtilReports
+from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.admin_utils.reports.reports import PDFReporter
 
 
 _ = MessageFactory('org.ict_ok')
@@ -46,6 +48,12 @@ _ = MessageFactory('org.ict_ok')
 # --------------- helper functions -------------------------
 
 # --------------- menu entries -----------------------------
+
+class MSubReportNetworkPdf(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Network (PDF)')
+    viewURL = '@@reportNetworkPdf.html'
+    weight = 70
 
 # --------------- object details ---------------------------
 
@@ -118,6 +126,107 @@ class AdmUtilReportsDetails(SupernodeDetails):
             userTZ.fromutc(datetime.utcnow()))
         versionStr = "%s [%s]" % (longTimeString, getIkVersion())
         self.context.generateAllPdf(f_name, authorStr, versionStr)
+        self.request.response.setHeader('Content-Type', 'application/pdf')
+        self.request.response.setHeader(\
+            'Content-Disposition',
+            'attachment; filename=\"%s\"' % filename)
+        setNoCacheHeaders(self.request.response)
+        datafile = open(f_name, "r")
+        dataMem = datafile.read()
+        datafile.close()
+        os.remove(f_name)
+        return dataMem
+
+    def reportNetworkPdf(self):
+        filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
+        f_handle, f_name = tempfile.mkstemp(filename)
+        authorStr = self.request.principal.title
+        my_formatter = self.request.locale.dates.getFormatter(
+            'dateTime', 'medium')
+        userTZ = getUserTimezone()
+        longTimeString = my_formatter.format(\
+            userTZ.fromutc(datetime.utcnow()))
+        versionStr = "%s [%s]" % (longTimeString, getIkVersion())
+        from ZODB.interfaces import IConnection
+        from zope.security.proxy import removeSecurityProxy
+        #import pdb
+        #pdb.set_trace()
+        connection = IConnection(removeSecurityProxy(self.context))
+        from gocept.objectquery.pathexpressions import RPEQueryParser
+        from gocept.objectquery.processor import QueryProcessor
+        parser = RPEQueryParser()
+        oc = connection.root()['_oq_collection']
+#        # ---------------------------------------------------------
+#        from zope.app import zapi
+#        from org.ict_ok.components.superclass.interfaces import ISuperclass
+#        iid = zapi.getUtility(IIntIds, '')
+#        for (oid, oobj) in iid.items():
+#            if ISuperclass.providedBy(oobj.object):
+#                try:
+#                    oc.index(oobj.object)
+#                except AttributeError:
+#                    pass
+#                except TypeError:
+#                    pass
+#        # ---------------------------------------------------------
+        thisReporter = PDFReporter(f_name, self.request)
+        thisReporter.setAuthorName(authorStr)
+        thisReporter.setVersionStr(versionStr)
+        queryList = [
+                     ('HardwareAppliances', \
+                        '/Folder/HardwareApplianceFolder/HardwareAppliance'),
+                     ('Rooms', '/Folder/RoomFolder/Room'),
+                     ('Buildings', '/Folder/BuildingFolder/Building'),
+                     ('Locations', '/Folder/LocationFolder/Location'),
+                     ('Interfaces', '/Folder/InterfaceFolder/Interface'),
+                     ('OperatingSoftware', '/Folder/OperatingSoftwareFolder/OperatingSoftware'),
+                     ]
+        queryproc = QueryProcessor(parser, oc)
+        queryResultsList = [(queryn, queryproc(queryv))
+                            for (queryn, queryv) in queryList]
+        # first run
+        for (queryName, queryResults) in queryResultsList:
+            thisReporter.extendAllContentObjects(queryResults)
+        # second run
+        for (queryName, queryResults) in queryResultsList:
+            thisReporter.extendAllContentObjects(queryResults)
+            thisReporter.appendTitle1(queryName)
+            thisReporter.append(queryResults)
+
+        
+#        ff=query('/Folder/HardwareApplianceFolder/HardwareAppliance')
+#        gg=query('/Folder/RoomFolder/Room')
+#        hh=query('/Folder/BuildingFolder/Building')
+#        ii=query('/Folder/LocationFolder/Location')
+##        ff2=query('/_*')
+##        print "ff2: ", ff2
+##        print "len(ff2): ", len(ff2)
+#        thisReporter.extendAllContentObjects(ff)
+#        thisReporter.extendAllContentObjects(gg)
+#        thisReporter.extendAllContentObjects(hh)
+#        thisReporter.extendAllContentObjects(ii)
+##        thisReporter.extend(ff)
+##        thisReporter.extend(gg)
+##        thisReporter.extend(\
+##            query('/Folder/BuildingFolder/Building'))
+##        thisReporter.extend(\
+##            query('/Folder/LocationFolder/Location'))
+#        thisReporter.appendTitle1(u"/HardwareApplianceFolder/HardwareAppliance")
+#        thisReporter.append(ff)
+#        thisReporter.appendTitle1(u"/RoomFolder/Room")
+#        thisReporter.append(gg)
+#        thisReporter.appendTitle1(u"/BuildingFolder/Building")
+#        thisReporter.append(hh)
+#        thisReporter.appendTitle1(u"/LocationFolder/Location")
+#        thisReporter.append(ii)
+
+
+        #thisReporter.allContentObjects.extend(ff2)
+        #thisReporter.fill()
+        thisReporter.buildPdf()
+        thisReporter.cleanup()
+        #self.context.generatePdf(f_name, authorStr, versionStr,request=self.request)
+
         self.request.response.setHeader('Content-Type', 'application/pdf')
         self.request.response.setHeader(\
             'Content-Disposition',

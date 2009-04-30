@@ -98,6 +98,8 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
                 key = str(hash(flowable))
                 c = self.canv
                 c.bookmarkPage(key)
+                if hasattr(flowable, 'ikoid'):
+                    c.bookmarkPage(str(flowable.ikoid))
                 c.addOutlineEntry(text, key, level=level-1, closed=0)
                 nbr = flowable._cellvalues[0][0].getPlainText()
                 self.lastPageTitle = "%s %s" % (nbr, text)
@@ -113,6 +115,8 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
                 key = str(hash(flowable))
                 c = self.canv
                 c.bookmarkPage(key)
+                if hasattr(flowable, 'ikoid'):
+                    c.bookmarkPage(str(flowable.ikoid))
                 c.addOutlineEntry(text, key, level=level-1, closed=0)
                 nbr = flowable._cellvalues[0][0].getPlainText()
                 self.lastPageTitle = "%s %s" % (nbr, text)
