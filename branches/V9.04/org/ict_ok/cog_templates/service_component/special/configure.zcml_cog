@@ -29,10 +29,15 @@
 
     <!-- [[[cog
             cog.out("""\
+            
+                    <!--  Interfaces ---------------------------------------------------- -->
+                    
                     <interface
                         interface=".interfaces.IService%(servicename)s"
                         type="zope.app.content.interfaces.IContentType"
                         />
+                    
+                    <!--  Classes ------------------------------------------------------- -->
                     
                     <class class=".service.Service">
                         <implements
@@ -55,6 +60,20 @@
                             />
                     </class>
 
+                    <!--  Event subscribers --------------------------------------------- -->
+                
+                    <!--  Search adapters ----------------------------------------------- -->
+
+                    <!--  Report adapters ----------------------------------------------- -->
+                
+                    <!--  OSI adapters -------------------------------------------------- -->
+                
+                    <!--  other adapters ------------------------------------------------ -->
+                
+                    <!--  Vocabulary stuff ---------------------------------------------- -->
+                
+                    <!--  Includes ------------------------------------------------------ -->
+                    
                     <include package=".browser" />
                     <!--include package=".generations" /-->
             """ % props.__dict__, dedent=True)
