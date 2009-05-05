@@ -9,7 +9,6 @@
 #
 # pylint: disable-msg=E1101,E0611,W0704,W0142
 #
-from Carbon.QuickDraw import whiteColor
 """Configuration adapter for smokeping-config files
 """
 
