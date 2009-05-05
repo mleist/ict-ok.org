@@ -10,10 +10,14 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
+    <!--  Interfaces ==================================================== -->
+
     <interface
         interface=".interfaces.IMobilePhone"
         type="zope.app.content.interfaces.IContentType"
         />
+    
+    <!--  Classes ======================================================= -->
 
     <class class=".mobilephone.MobilePhone">
         <implements
@@ -114,25 +118,37 @@
             permission="org.ict_ok.components.mobilephone.Edit"
             set_schema="org.ict_ok.components.interfaces.IImportXlsData"
             />
-            
     </class>
+
+    <!--  Event subscribers ============================================= -->
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <adapter
-        factory=".adapter.state.State"
-        />
+    <!--  Search adapters =============================================== -->
 
     <adapter
         factory="org.ict_ok.components.mobilephone.adapter.search.Searchable"
     />
+
+    <!--  Report adapters =============================================== -->
+
     <adapter
         factory=".adapter.rpt_pdf.RptPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory=".adapter.state.State"
+        />
+
+    <!--  Vocabulary stuff ============================================== -->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -144,7 +160,9 @@
         component=".mobilephone.AllMobilePhoneTemplates"
         name="AllMobilePhoneTemplates"
     />
-    
+
+    <!--  Includes ====================================================== -->
+
     <include package=".generations" />
 
 </configure>

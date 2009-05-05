@@ -22,9 +22,7 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.ip_address.interfaces import IIpAddress
 from org.ict_ok.components.ip_address.ip_address import IpAddress
-from org.ict_ok.components.ip_address.browser.ip_address import \
-    IpAddressDetails
-from org.ict_ok.components.supernode.adapter.rpt_pdf import \
+from org.ict_ok.components.logical_component.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
@@ -36,4 +34,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IIpAddress)
     factory = IpAddress
-    omitFields = IpAddressDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

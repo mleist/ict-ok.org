@@ -10,11 +10,15 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.INet"
         type="zope.app.content.interfaces.IContentType"
         />    
     
+    <!--  Classes ======================================================= -->
+
     <class class=".net.Net">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
@@ -123,17 +127,30 @@
             set_schema="org.ict_ok.components.interfaces.IImportXlsData"
             />        
     </class>
-   <!--<soap:view-->
-        <!--for=".interfaces.INet"-->
-        <!--methods="echoString"-->
-        <!--class="org.ict_ok.components.net.net.SoapTest"-->
-        <!--permission="org.ict_ok.components.net.View"-->
-        <!--/>-->
-  
+
+    <!--  Event subscribers ============================================= -->
+
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
+
+    <!--  Search adapters =============================================== -->
+
+    <adapter
+        factory="org.ict_ok.components.net.adapter.search.Searchable"
+    />
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
 
     <adapter
         factory=".adapter.sized.NetSized"
@@ -141,9 +158,6 @@
     <adapter
         factory=".adapter.state.State"
         />
-    <adapter
-        factory="org.ict_ok.components.net.adapter.search.Searchable"
-    />
     <adapter
         factory=".adapter.namechooser.NetNameChooser"
         />
@@ -154,19 +168,17 @@
         factory=".adapter.smokeping.GenSmokePing"
         permission="org.ict_ok.admin_utils.generators.smokeping.View"
     />
-    <adapter
-        factory=".adapter.rpt_pdf.RptPdf"
-        permission="org.ict_ok.admin_utils.reports.generate.pdf"
-    />
     <!--<adapter-->
         <!--factory=".adapter.ticker.Ticker"-->
     <!--/>-->
-
     <adapter
         factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"
         provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
         for=".interfaces.INet"
     />
+
+    <!--  Vocabulary stuff ============================================== -->
+
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".net.AllNets"
@@ -188,6 +200,15 @@
         name="AllValidSubNets"
     />
 
+    <!--  Includes ====================================================== -->
+
     <include package=".generations" />
+
+   <!--<soap:view-->
+        <!--for=".interfaces.INet"-->
+        <!--methods="echoString"-->
+        <!--class="org.ict_ok.components.net.net.SoapTest"-->
+        <!--permission="org.ict_ok.components.net.View"-->
+        <!--/>-->
 
 </configure>

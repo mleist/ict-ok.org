@@ -23,7 +23,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.location.interfaces import ILocation
 from org.ict_ok.components.location.location import Location
-from org.ict_ok.components.location.browser.location import LocationDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -36,4 +35,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(ILocation)
     factory = Location
-    omitFields = LocationDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

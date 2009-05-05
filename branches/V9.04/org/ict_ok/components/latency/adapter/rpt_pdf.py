@@ -30,7 +30,6 @@ from reportlab.platypus import Image, Spacer, KeepTogether
 # ict_ok.org imports
 from org.ict_ok.components.latency.interfaces import ILatency
 from org.ict_ok.components.latency.latency import Latency
-from org.ict_ok.components.latency.browser.latency import LatencyDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -45,7 +44,7 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(ILatency)
     factory = Latency
-    omitFields = LatencyDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []
 
     #attributeList = ['checkcount']
     #attributeList.extend(ParentRptPdf.attributeList)

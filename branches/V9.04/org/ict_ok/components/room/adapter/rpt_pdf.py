@@ -22,11 +22,10 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.room.interfaces import IRoom
 from org.ict_ok.components.room.room import Room
-from org.ict_ok.components.room.browser.room import \
-         RoomDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
+from org.ict_ok.admin_utils.reports.rpt_color import getLinkColor
 
 
 # ict_ok.org imports
@@ -37,20 +36,21 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IRoom)
     factory = Room
-    omitFields = RoomDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []
 
     def getRefTitle(self):
-        import pdb
-        pdb.set_trace()
-        retString = u"<a href='%s' color='blue'>%s</a>" % \
-                    (self.context.objectID, self.context.ikName)
+        retString = u"<a href='%s' color='%s'>%s</a>" % \
+                    (self.context.objectID,
+                     getLinkColor().hexval(),
+                     self.context.ikName)
         if self.context.building is not None:
             if self.document and \
                 self.document._reporter and \
                 self.context.building in \
                     self.document._reporter.allContentObjects:
-                retString += u" / <a href='%s' color='blue'>%s</a>" % \
+                retString += u" / <a href='%s' color='%s'>%s</a>" % \
                         (self.context.building.objectID,
+                         getLinkColor().hexval(),
                          self.context.building.ikName)
             else:
                 retString += u" / %s" % \
@@ -60,8 +60,9 @@ class RptPdf(ParentRptPdf):
                     self.document._reporter and \
                     self.context.building.location in \
                         self.document._reporter.allContentObjects:
-                    retString += u" / <a href='%s' color='blue'>%s</a>" % \
+                    retString += u" / <a href='%s' color='%s'>%s</a>" % \
                             (self.context.building.location.objectID,
+                             getLinkColor().hexval(),
                              self.context.building.location.ikName)
                 else:
                     retString += u" / %s" % \

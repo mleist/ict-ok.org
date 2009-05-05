@@ -9,6 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611,W0704,W0142
 #
+from Carbon.QuickDraw import whiteColor
 """Configuration adapter for smokeping-config files
 """
 
@@ -21,11 +22,13 @@ import os
 from zope.interface import implements
 from zope.component import adapts
 from zope.i18n import translate
+from zope.schema import vocabulary
 
 # reportlab imports
 from reportlab.lib.units import mm
 from reportlab.platypus import Spacer, KeepTogether
 from reportlab.platypus.tables import Table, TableStyle
+from reportlab.lib.colors import white, CMYKColor
 
 # z3c imports
 from z3c.form import field
@@ -34,12 +37,18 @@ from z3c.form import field
 from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.superclass.browser.superclass import \
+    SuperclassDetails
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 from org.ict_ok.admin_utils.reports.rpt_title import RptTitle
 from org.ict_ok.admin_utils.reports.rpt_para import RptPara
 from org.ict_ok.admin_utils.compliance.adapter.rpt_pdf_tools import \
      appendEvaluationList
-
+from org.ict_ok.admin_utils.reports.rpt_color import \
+    getColor1, getLinkColor, \
+    getTabBackgroundColor, getTabBackgroundColorLight
+from org.ict_ok.components.superclass.superclass import isOidInCatalog
+from org.ict_ok.libs.lib import oid2dcTitle
 
 class RptPdf(object):
     """adapter implementation of Superclass -> PDF Report
@@ -48,7 +57,8 @@ class RptPdf(object):
     implements(IRptPdf)
     adapts(ISuperclass)
     factory = Superclass
-    omitFields = []
+    omitFields = ['objectID', '__name__', 'ref', 'history',
+                  'dbgLevel', 'ikEventTarget']
     
     attributeList = ['ikName']
     
@@ -88,8 +98,10 @@ class RptPdf(object):
             self.document._reporter and \
             self.context in \
                 self.document._reporter.allContentObjects:
-            return u"<a href='%s' color='blue'>%s</a>" % \
-                (self.context.objectID, self.context.ikName)
+            return u"<a href='%s' color='%s'>%s</a>" % \
+                (self.context.objectID,
+                 getLinkColor().hexval(),
+                 self.context.ikName)
         else:
             return u"%s" % \
                 (self.context.ikName)
@@ -107,8 +119,15 @@ class RptPdf(object):
 #            *SuperclassDetails.omit_viewfields)
 
     def _convertNamePara(self, f_obj):
-        reportFieldsTransl = translate(f_obj.field.title,
-                                       context=self.request)
+        if type(f_obj) is unicode or \
+           type(f_obj) is str:
+            reportFieldsTransl = translate(f_obj,
+                                           domain='org.ict_ok',
+                                           context=self.request)
+        else: # f_obj is zope.schema-field
+            reportFieldsTransl = translate(f_obj.field.title,
+                                           domain='org.ict_ok',
+                                           context=self.request)
         rptPara = RptPara(reportFieldsTransl,
                            style=self.document.styles['Normal'],
                            doc=self.document)
@@ -121,44 +140,84 @@ class RptPdf(object):
             rptAdapter.document = self.document
             iText = rptAdapter.getRefTitle()
         else:
-            iText = unicode(f_val)
+#            if isOidInCatalog(f_val):
+#                iText = translate(oid2dcTitle(f_val),
+#                                  domain='org.ict_ok',
+#                                  context=self.request)
+#            else:
+            iText = translate(unicode(f_val),
+                              domain='org.ict_ok',
+                              context=self.request)
         rptPara = RptPara(iText,
                            style=self.document.styles['Normal'],
                            doc=self.document)
         return rptPara
 
-    def getAttributeTable(self):
-        """
-        """
-        ik_tbl_style = TableStyle([\
-            ('LEFTPADDING', (0,0), (-1,-1), 0),
-            ('RIGHTPADDING', (0,0), (-1,-1), 0),
-            ('BOTTOMPADDING', (0,0), (-1,-1), 0),
-            ('TOPPADDING', (0,0), (-1,-1), 0),
-            ('ALIGN', (0,0), (-1,-1), 'LEFT'),
-            ('VALIGN',(0,0),(-1,-1),'TOP'),
-        ])        
-        colWidths = [50 * mm, 85 * mm]
+    def _getVocabValue(self, vocabName=None, token=None):
+        vocabReg = vocabulary.getVocabularyRegistry()
+        if vocabReg is not None:
+            vocab = vocabReg.get(self.request, vocabName)
+            if vocab is not None:
+                vocabTerm = vocab.getTerm(token)
+                if vocabTerm:
+                    return vocabTerm.title
+
+    def prependAttributeTable(self):
+        return []
+
+    def makeAttributeTable(self):
         data = []
         fields = self.getReportFields()
         for f_name, f_obj in fields.items():
             f_val = getattr(self.context, f_name)
             namePara = self._convertNamePara(f_obj)
             if f_val is not None:
-                if type(f_val) is str or \
+                if f_name in ['user', 'productionState']:
+                    token = self._getVocabValue(f_obj.field.vocabularyName,
+                                                f_val)
+                    valPara = self._convertValPara(token)
+                    data.append([namePara, valPara])                    
+                elif type(f_val) is str or \
                    type(f_val) is unicode:
                     valPara = self._convertValPara(f_val)
                     data.append([namePara, valPara])
+                elif ISuperclass.providedBy(f_val):
+                    valPara = self._convertValPara(f_val)
+                    data.append([namePara, valPara])
                 else:
-                    try:
-                        it = iter(f_val)
+                    if type(f_val) is list:
                         valParas = []
-                        for i in it:
+                        for i in f_val:
                             valParas.append(self._convertValPara(i))
-                        data.append([namePara, valParas])
-                    except TypeError:
+                        if len(valParas) >= 1:
+                            data.append([namePara, valParas])
+                    else:
                         valPara = self._convertValPara(f_val)
                         data.append([namePara, valPara])
+        return data
+
+    def appendAttributeTable(self):
+        return []
+
+    def getAttributeTable(self):
+        """
+        """
+        rowColor = getTabBackgroundColor()
+        rowColorLight = getTabBackgroundColorLight()
+        ik_tbl_style = TableStyle([\
+            ('LEFTPADDING', (0,0), (-1,-1), 0),
+            ('RIGHTPADDING', (0,0), (-1,-1), 0),
+            ('BOTTOMPADDING', (0,0), (-1,-1), 0),
+            ('TOPPADDING', (0,0), (-1,-1), 3),
+            ('ALIGN', (0,0), (-1,-1), 'LEFT'),
+            ('VALIGN',(0,0),(-1,-1),'TOP'),
+            ('ROWBACKGROUNDS',(0,0),(-1,-1),[rowColorLight, rowColor]),
+        ])        
+        colWidths = [50 * mm, 85 * mm]
+        data = []
+        data.extend(self.prependAttributeTable())
+        data.extend(self.makeAttributeTable())
+        data.extend(self.appendAttributeTable())
         if len(data) > 0:
             t0 = Table(data,
                        hAlign = 'RIGHT',
@@ -216,8 +275,8 @@ class RptPdf(object):
             else:
                 elemList = [title.genElements(),
                             Spacer(0, 4 * mm)]
-#            elemList.extend(\
-#                appendEvaluationList(self.context, self.document))
+            elemList.extend(\
+                appendEvaluationList(self.context, self.document))
             if autoAppend is True:
                 comp = KeepTogether(elemList)
                 self.document.append(comp)

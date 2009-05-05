@@ -10,10 +10,14 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.IIpAddress"
         type="zope.app.content.interfaces.IContentType"
         />
+
+    <!--  Classes ======================================================= -->
 
     <class class=".ip_address.IpAddress">
         <implements
@@ -119,26 +123,40 @@
             />
     </class>
 
+    <!--  Event subscribers ============================================= -->
+
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <adapter
-        factory=".adapter.state.State"
-        />
+    <!--  Search adapters =============================================== -->
 
     <adapter
         factory="org.ict_ok.components.ip_address.adapter.search.Searchable"
     />
+
+    <!--  Report adapters =============================================== -->
+
     <adapter
         factory=".adapter.rpt_pdf.RptPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
+
+    <!--  OSI adapters ================================================== -->
+
     <adapter
         factory=".adapter.osi.OSIModel"
         permission="org.ict_ok.components.ip_address.View"
     />
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory=".adapter.state.State"
+        />
+
+    <!--  Vocabulary stuff ============================================== -->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -150,7 +168,6 @@
         component=".ip_address.AllIpAddressTemplates"
         name="AllIpAddressTemplates"
     />
-
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".ip_address.AllUnusedOrUsedInterfaceIpAddresses"
@@ -162,7 +179,8 @@
         name="AllUnusedOrUsedIpNetIpAddresses"
     />
 
-                    
+    <!--  Includes ====================================================== -->
+
     <include package=".generations" />
 
 </configure>

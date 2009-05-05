@@ -10,6 +10,27 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
+    <!--  Interfaces ==================================================== -->
+    
+    <!--  Classes ======================================================= -->
+
+    <!--  Event subscribers ============================================= -->
+
+    <!--  Search adapters =============================================== -->
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <!--  Vocabulary stuff ============================================== -->
+
     <!-- utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".software_component.AllSoftwareComponents"
@@ -30,5 +51,7 @@
         component=".software_component.AllUnusedOrUsedInterfaceSoftwareComponents"
         name="AllUnusedOrUsedInterfaceSoftwareComponents"
     / -->
+
+    <!--  Includes ====================================================== -->
 
 </configure>

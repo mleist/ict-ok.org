@@ -23,7 +23,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.net.interfaces import INet
 from org.ict_ok.components.net.net import Net
-from org.ict_ok.components.net.browser.net import NetDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -36,4 +35,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(INet)
     factory = Net
-    omitFields = NetDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

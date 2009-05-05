@@ -18,12 +18,11 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.component import adapts
+from zope.i18n import translate
 
 # ict_ok.org imports
-from org.ict_ok.components.credential.interfaces import ICredential
-from org.ict_ok.components.credential.credential import Credential
-from org.ict_ok.components.credential.browser.credential import \
-    CredentialDetails
+from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.components.component import Component
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -34,6 +33,18 @@ class RptPdf(ParentRptPdf):
     """
 
     implements(IRptPdf)
-    adapts(ICredential)
-    factory = Credential
-    omitFields = CredentialDetails.omit_viewfields
+    adapts(IComponent)
+    factory = Component
+    omitFields = ParentRptPdf.omitFields + ['isTemplate', 'requirements']
+
+    def prependAttributeTable(self):
+        data = ParentRptPdf.prependAttributeTable(self)
+        if self.context.isTemplate:
+            namePara = self._convertNamePara(u'')
+            textTransl = translate(u'Object is template',
+                                   domain='org.ict_ok',
+                                   context=self.request)
+            valPara = self._convertValPara(u'<b>%s</b><br />' % textTransl)
+            data.append([namePara, valPara])
+            data.append([u'', u''])
+        return data

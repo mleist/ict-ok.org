@@ -9,11 +9,15 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.IInterface"
         type="zope.app.content.interfaces.IContentType"
         />
     
+    <!--  Classes ======================================================= -->
+
     <class class=".interface.Interface">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
@@ -137,22 +141,41 @@
             />
     </class>
 
+    <!--  Event subscribers ============================================= -->
+
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <adapter
-        factory=".adapter.sized.InterfaceSized"
-        />
-
-    <adapter
-        factory=".adapter.state.State"
-        />
+    <!--  Search adapters =============================================== -->
 
     <adapter
         factory="org.ict_ok.components.interface.adapter.search.Searchable"
     />
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <adapter
+        factory=".adapter.osi.OSIModel"
+        permission="org.ict_ok.components.interface.View"
+    />
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory=".adapter.sized.InterfaceSized"
+        />
+    <adapter
+        factory=".adapter.state.State"
+        />
     <adapter
         factory="org.ict_ok.components.interface.adapter.ipickle.Pickle"
     />
@@ -164,16 +187,8 @@
         factory=".adapter.smokeping.GenSmokePing"
         permission="org.ict_ok.admin_utils.generators.smokeping.View"
     />
-    <adapter
-        factory=".adapter.rpt_pdf.RptPdf"
-        permission="org.ict_ok.admin_utils.reports.generate.pdf"
-    />
 
-    <adapter
-        factory=".adapter.osi.OSIModel"
-        permission="org.ict_ok.components.interface.View"
-    />
-
+    <!--  Vocabulary stuff ============================================== -->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -195,6 +210,8 @@
         component=".interface.AllUnusedOrUsedPhysicalConnectorInterfaces"
         name="AllUnusedOrUsedPhysicalConnectorInterfaces"
     />
+
+    <!--  Includes ====================================================== -->
         
     <include package=".generations" />
 

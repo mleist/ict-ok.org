@@ -20,19 +20,18 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.outlet.interfaces import IOutlet
-from org.ict_ok.components.outlet.outlet import Outlet
-from org.ict_ok.components.outlet.browser.outlet import OutletDetails
-from org.ict_ok.components.supernode.adapter.rpt_pdf import \
+from org.ict_ok.components.credential.interfaces import ICredential
+from org.ict_ok.components.credential.credential import Credential
+from org.ict_ok.components.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
 
 class RptPdf(ParentRptPdf):
-    """adapter implementation of An network outlet instance -> PDF Report
+    """adapter implementation of credential instance -> PDF Report
     """
 
     implements(IRptPdf)
-    adapts(IOutlet)
-    factory = Outlet
-    omitFields = OutletDetails.omit_viewfields
+    adapts(ICredential)
+    factory = Credential
+    omitFields = ParentRptPdf.omitFields + []

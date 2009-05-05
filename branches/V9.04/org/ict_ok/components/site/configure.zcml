@@ -9,11 +9,15 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007 Ingenieurbuero IKOM,
         Markus Leist <leist at ikom-online.de> -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.ISite"
         type="zope.app.content.interfaces.IContentType"
         />
         
+    <!--  Classes ======================================================= -->
+
     <class class=".site.Site">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
@@ -75,24 +79,25 @@
             />
             
     </class>
-    <!--<class class=".site.Site">-->
-        <!--<allow-->
-            <!--interface=".interfaces.ISite"-->
-        <!--/>-->
-        <!--<require-->
-            <!--permission="zope.View"-->
-            <!--interface=".interfaces.ISite"-->
-            <!--/>-->
-        <!--<require-->
-            <!--permission="zope.View"-->
-            <!--set_schema=".interfaces.ISite"-->
-        <!--/>-->
-    <!--</class>-->
 
+    <!--  Event subscribers ============================================= -->
 
-    <!--<adapter-->
-        <!--factory=".adapter.sized.SiteSized"-->
-        <!--/>-->
+    <subscriber handler=".site.setSiteManagerWhenAdded" />
+    <subscriber handler=".site.createLocalUtils" />
+
+    <!--  Search adapters =============================================== -->
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
     <adapter
         factory=".adapter.ikstate.State"
         />
@@ -105,8 +110,9 @@
         for=".interfaces.ISite"
     />
 
-    <subscriber handler=".site.setSiteManagerWhenAdded" />
-    <subscriber handler=".site.createLocalUtils" />
+    <!--  Vocabulary stuff ============================================== -->
+
+    <!--  Includes ====================================================== -->
 
     <include package=".generations" />
 

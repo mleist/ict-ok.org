@@ -9,11 +9,15 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
+    <!--  Interfaces ==================================================== -->
+
     <interface
         interface=".interfaces.ISnmpValue"
         type="zope.app.content.interfaces.IContentType"
         />
     
+    <!--  Classes ======================================================= -->
+
     <class class=".snmpvalue.SnmpValue">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
@@ -115,10 +119,44 @@
             />        
     </class>
 
+    <!--  Event subscribers ============================================= -->
+
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
+
+    <!--  Search adapters =============================================== -->
+
+    <adapter
+        factory="org.ict_ok.components.snmpvalue.adapter.search.Searchable"
+    />
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory=".adapter.sized.SnmpValueSized"
+        />
+    <adapter
+        factory=".adapter.state.State"
+        />
+    <adapter
+        factory="org.ict_ok.components.snmpvalue.adapter.ipickle.Pickle"
+    />
+    <adapter
+        factory=".adapter.ticker.Ticker"
+    />
+
+    <!--  Vocabulary stuff ============================================== -->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -145,37 +183,14 @@
         component=".snmpvalue.SnmpIndexTypes"
         name="SnmpIndexTypes"
         />
-
-    <adapter
-        factory=".adapter.sized.SnmpValueSized"
-        />
-
-    <adapter
-        factory=".adapter.state.State"
-        />
-        
-    <adapter
-        factory="org.ict_ok.components.snmpvalue.adapter.search.Searchable"
-    />
-
-    <adapter
-        factory="org.ict_ok.components.snmpvalue.adapter.ipickle.Pickle"
-    />
-
-    <adapter
-        factory=".adapter.ticker.Ticker"
-    />
-    <adapter
-        factory=".adapter.rpt_pdf.RptPdf"
-        permission="org.ict_ok.admin_utils.reports.generate.pdf"
-    />
-
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".snmpvalue.AllSnmpValueTemplates"
         name="AllSnmpValueTemplates"
     />
-    
+
+    <!--  Includes ====================================================== -->
+
     <include package=".generations" />
 
 </configure>

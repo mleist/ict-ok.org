@@ -22,7 +22,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.pc.interfaces import IPersonalComputer
 from org.ict_ok.components.pc.pc import PersonalComputer
-from org.ict_ok.components.pc.browser.pc import PersonalComputerDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -35,4 +34,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IPersonalComputer)
     factory = PersonalComputer
-    omitFields = PersonalComputerDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

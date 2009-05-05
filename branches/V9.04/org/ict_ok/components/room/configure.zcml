@@ -9,11 +9,15 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
+    <!--  Interfaces ==================================================== -->
+
     <interface
         interface=".interfaces.IRoom"
         type="zope.app.content.interfaces.IContentType"
         />
     
+    <!--  Classes ======================================================= -->
+
     <class class=".room.Room">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
@@ -115,27 +119,38 @@
             />        
     </class>
 
+    <!--  Event subscribers ============================================= -->
+
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
+    <!--  Search adapters =============================================== -->
+
     <adapter
         factory="org.ict_ok.components.room.adapter.search.Searchable"
     />
 
-    <adapter
-        factory="org.ict_ok.components.room.adapter.ipickle.Pickle"
-    />
+    <!--  Report adapters =============================================== -->
 
     <adapter
         factory=".adapter.rpt_pdf.RptPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
 
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
     <adapter
         factory=".adapter.contentlist.ContentList"
     />
+    <adapter
+        factory="org.ict_ok.components.room.adapter.ipickle.Pickle"
+    />
+
+    <!--  Vocabulary stuff ============================================== -->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -152,6 +167,8 @@
         component=".room.AllUnusedOrUsedBuildingRooms"
         name="AllUnusedOrUsedBuildingRooms"
     />
+
+    <!--  Includes ====================================================== -->
 
     <!-- include package=".generations" / -->
 

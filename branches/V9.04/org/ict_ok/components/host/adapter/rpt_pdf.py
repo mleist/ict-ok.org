@@ -43,28 +43,28 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IHost)
     factory = None
-    omitFields = None
+    omitFields = ParentRptPdf.omitFields + []
 
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.host.browser.host import HostDetails
-        omitField = [
-            'snmpVersion',
-            'snmpPort',
-            'snmpReadCommunity',
-            'snmpWriteCommunity',
-            'url',
-            'url_type',
-            'url_authname',
-            'url_authpasswd',
-            'console',
-            'genNagios',
-            'requirement',
-            'hostGroups',
-        ]
-        omitField.extend(HostDetails.omit_viewfields)
-        return field.Fields(IHost).omit(*omitField)
+#    def getReportFields(self):
+#        """
+#        """
+#        from org.ict_ok.components.host.browser.host import HostDetails
+#        omitField = [
+#            'snmpVersion',
+#            'snmpPort',
+#            'snmpReadCommunity',
+#            'snmpWriteCommunity',
+#            'url',
+#            'url_type',
+#            'url_authname',
+#            'url_authpasswd',
+#            'console',
+#            'genNagios',
+#            'requirement',
+#            'hostGroups',
+#        ]
+#        omitField.extend(HostDetails.omit_viewfields)
+#        return field.Fields(IHost).omit(*omitField)
 
     def traverse4RptPre(self, level, comments, autoAppend=True):
         """pdf report object preamble

@@ -10,11 +10,14 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
+    <!--  Interfaces ==================================================== -->
 
     <interface
         interface=".interfaces.IPhysicalLink"
         type="zope.app.content.interfaces.IContentType"
         />
+    
+    <!--  Classes ======================================================= -->
 
     <class class=".physical_link.PhysicalLink">
         <implements
@@ -119,18 +122,37 @@
             />
     </class>
 
+    <!--  Event subscribers ============================================= -->
 
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
 
-
+    <!--  Search adapters =============================================== -->
 
     <adapter
         factory="org.ict_ok.components.physical_link.adapter.search.Searchable"
     />
 
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
     <adapter
         factory=".physical_link.OSIModel"
         permission="org.ict_ok.components.interface.View"
     />
+
+    <!--  other adapters ================================================ -->
+
+    <!--  Vocabulary stuff ============================================== -->
+
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".physical_link.PhysicalLinkMediaTypes"
@@ -153,11 +175,7 @@
         name="AllUnusedOrUsedPhysicalConnectorsPhysicalLinks"
     />
 
-    <subscriber
-        handler=".bootstrap.bootStrapSubscriber"
-        for="zope.app.appsetup.IDatabaseOpenedEvent"
-        />
-
+    <!--  Includes ====================================================== -->
 
     <include package=".generations" />
 

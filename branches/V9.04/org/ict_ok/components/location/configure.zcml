@@ -9,11 +9,15 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.ILocation"
         type="zope.app.content.interfaces.IContentType"
         />
     
+    <!--  Classes ======================================================= -->
+
     <class class=".location.Location">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
@@ -116,27 +120,38 @@
             permission="org.ict_ok.components.location.Edit"
             set_schema="org.ict_ok.components.interfaces.IImportXlsData"
             />
-            
     </class>
+
+    <!--  Event subscribers ============================================= -->
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
+    <!--  Search adapters =============================================== -->
+
     <adapter
         factory="org.ict_ok.components.location.adapter.search.Searchable"
     />
 
-    <adapter
-        factory="org.ict_ok.components.location.adapter.ipickle.Pickle"
-    />
+    <!--  Report adapters =============================================== -->
 
     <adapter
         factory=".adapter.rpt_pdf.RptPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
 
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory="org.ict_ok.components.location.adapter.ipickle.Pickle"
+    />
+
+    <!--  Vocabulary stuff ============================================== -->
+    
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".location.AllLocationsVocab"
@@ -152,6 +167,8 @@
         component=".location.AllLocations"
         name="AllLocations"
     />
+
+    <!--  Includes ====================================================== -->
 
     <include package=".generations" />
 

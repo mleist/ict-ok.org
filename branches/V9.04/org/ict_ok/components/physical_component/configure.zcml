@@ -10,26 +10,26 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
-    <!-- utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".physical_component.AllPhysicalComponents"
-        name="AllPhysicalComponents"
+    <!--  Interfaces ==================================================== -->
+    
+    <!--  Classes ======================================================= -->
+
+    <!--  Event subscribers ============================================= -->
+
+    <!--  Search adapters =============================================== -->
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".physical_component.AllPhysicalComponentTemplates"
-        name="AllPhysicalComponentTemplates"
-    />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".physical_component.AllUnusedOrUsedRoomPhysicalComponents"
-        name="AllUnusedOrUsedRoomPhysicalComponents"
-    />
-    <utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".physical_component.AllUnusedOrUsedInterfacePhysicalComponents"
-        name="AllUnusedOrUsedInterfacePhysicalComponents"
-    / -->
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <!--  Vocabulary stuff ============================================== -->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -47,5 +47,7 @@
         component=".physical_component.AllUnusedOrUsedRoomPhysicalComponents"
         name="AllUnusedOrUsedRoomPhysicalComponents"
     />
+
+    <!--  Includes ====================================================== -->
 
 </configure>

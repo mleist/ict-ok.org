@@ -68,6 +68,12 @@ class MSubInvPrinter(GlobalMenuSubItem):
     viewURL = '/@@all_printers.html'
     weight = 100
 
+class MSubSubInvPrinter(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'## All Printers')
+    viewURL = '/@@all_printers.html'
+    weight = 100
+
 # --------------- object details ---------------------------
 
 

@@ -22,7 +22,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.isdnphone.interfaces import IISDNPhone
 from org.ict_ok.components.isdnphone.isdnphone import ISDNPhone
-from org.ict_ok.components.isdnphone.browser.isdnphone import ISDNPhoneDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -35,4 +34,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IISDNPhone)
     factory = ISDNPhone
-    omitFields = ISDNPhoneDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

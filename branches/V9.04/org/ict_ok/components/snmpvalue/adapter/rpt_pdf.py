@@ -29,7 +29,6 @@ from reportlab.platypus import Image, Spacer, KeepTogether
 # ict_ok.org imports
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
-from org.ict_ok.components.snmpvalue.browser.snmpvalue import SnmpValueDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -42,7 +41,7 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(ISnmpValue)
     factory = SnmpValue
-    omitFields = SnmpValueDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []
 
     def appendImage(self, hours, elemList):
         fileExt = RandomNameSequence().next()

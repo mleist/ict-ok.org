@@ -255,8 +255,8 @@ class DetailsHostForm(DisplayForm):
 
     def update(self):
         #o2 = removeAllProxies(self.context)
-        #el2 = getEvaluations(o2)
-        #el1 = getEvaluations(self.context)
+        #el2 = getEvaluationsDone(o2)
+        #el1 = getEvaluationsDone(self.context)
         #principalId = self.request.principal.id.split('.')[1]
         #pau_utility = queryUtility(IAuthentication)
         #try:

@@ -10,10 +10,14 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.IISDNPhone"
         type="zope.app.content.interfaces.IContentType"
         />
+
+    <!--  Classes ======================================================= -->
 
     <class class=".isdnphone.ISDNPhone">
         <implements
@@ -130,26 +134,40 @@
             />
     </class>
 
+    <!--  Event subscribers ============================================= -->
+
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <adapter
-        factory=".adapter.state.State"
-        />
+    <!--  Search adapters =============================================== -->
 
     <adapter
         factory="org.ict_ok.components.isdnphone.adapter.search.Searchable"
     />
+
+    <!--  Report adapters =============================================== -->
+
     <adapter
         factory=".adapter.rpt_pdf.RptPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
+
+    <!--  OSI adapters ================================================== -->
+
     <adapter
         factory=".adapter.osi.OSIModel"
         permission="org.ict_ok.components.isdnphone.View"
     />
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory=".adapter.state.State"
+        />
+
+    <!--  Vocabulary stuff ============================================== -->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -162,8 +180,8 @@
         name="AllISDNPhoneTemplates"
     />
 
+    <!--  Includes ====================================================== -->
 
-                    
     <include package=".generations" />
 
 </configure>

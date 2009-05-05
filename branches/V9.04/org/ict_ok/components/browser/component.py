@@ -57,7 +57,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.admin_utils.compliance.evaluation import \
-     getEvaluations, Evaluation
+     getEvaluationsDone, Evaluation
 from org.ict_ok.admin_utils.compliance.browser.requirement import \
      getTitle as getReqTitle
 from org.ict_ok.admin_utils.compliance.browser.requirement import \
@@ -116,7 +116,7 @@ class ComponentDetails(SupernodeDetails):
         """ trigger an evaluation process
         """
         requirementId = self.request.get('req_id', default=None)
-        evaluations = getEvaluations(self.context)
+        evaluations = getEvaluationsDone(self.context)
         if requirementId is not None \
            and evaluations is not None:
             my_catalog = zapi.getUtility(ICatalog)
@@ -141,7 +141,7 @@ class ComponentDetails(SupernodeDetails):
         """ trigger an evaluation process
         """
         requirementId = self.request.get('req_id', default=None)
-        evaluations = getEvaluations(self.context)
+        evaluations = getEvaluationsDone(self.context)
         if requirementId is not None \
            and evaluations is not None:
             my_catalog = zapi.getUtility(ICatalog)
@@ -369,7 +369,7 @@ class EvaluationsTodoDisplay(Overview):
                 if len(res) > 0:
                     startReq = iter(res).next()
                     allObjReqs = getRequirementList(startReq)
-                    allObjEvaluations = getEvaluations(self.context)
+                    allObjEvaluations = getEvaluationsDone(self.context)
                     alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
                     #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
                     retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
@@ -382,7 +382,7 @@ class EvaluationsDoneDisplay(Overview):
     """
     label = _(u'evaluations done')
     columns = (
-        GetterColumn(title=_('Requirement'),
+        GetterColumn(title=_('Title'),
                      getter=getEvaluationRequirementTitle,
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('Evaluator'),
@@ -404,7 +404,7 @@ class EvaluationsDoneDisplay(Overview):
     
     def objs(self):
         """List of Content objects"""
-        retList = getEvaluations(self.context)
+        retList = getEvaluationsDone(self.context)
         return [ev[1] for ev in retList.items()]
     
     

@@ -22,8 +22,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.patchpanel.interfaces import IPatchPanel
 from org.ict_ok.components.patchpanel.patchpanel import PatchPanel
-from org.ict_ok.components.patchpanel.browser.patchpanel import \
-    PatchPanelDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
     RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -36,4 +34,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IPatchPanel)
     factory = PatchPanel
-    omitFields = PatchPanelDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

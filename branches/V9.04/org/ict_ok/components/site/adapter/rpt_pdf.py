@@ -23,7 +23,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.site.interfaces import ISite
 from org.ict_ok.components.site.site import Site
-from org.ict_ok.components.site.browser.site import SiteDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -36,4 +35,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(ISite)
     factory = Site
-    omitFields = SiteDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

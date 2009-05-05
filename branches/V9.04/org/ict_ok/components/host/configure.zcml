@@ -9,11 +9,15 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.IHost"
         type="zope.app.content.interfaces.IContentType"
         />
     
+    <!--  Classes ======================================================= -->
+
     <class class=".host.Host">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
@@ -137,13 +141,35 @@
             permission="org.ict_ok.components.host.Edit"
             set_schema="org.ict_ok.components.interfaces.IImportXlsData"
             />
-            
     </class>
+
+    <!--  Event subscribers ============================================= -->
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
+    <!--subscriber handler=".objmq.notifyAddedEvent" /-->
+    <!--subscriber handler=".objmq.notifyModifiedEvent" /-->
+    <!--subscriber handler=".objmq.notifyMovedEvent" /-->
+    <!--subscriber handler=".objmq.notifyRemovedEvent" /-->
+
+    <!--  Search adapters =============================================== -->
+
+    <adapter
+        factory="org.ict_ok.components.host.adapter.search.Searchable"
+    />
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
 
     <adapter
         factory=".adapter.sized.HostSized"
@@ -158,9 +184,6 @@
         factory=".adapter.ipickle.Pickle"
     />
     <adapter
-        factory="org.ict_ok.components.host.adapter.search.Searchable"
-    />
-    <adapter
         factory="org.ict_ok.components.host.adapter.snmp.Snmptrapd"
     />
     <adapter
@@ -172,28 +195,18 @@
         permission="org.ict_ok.admin_utils.generators.smokeping.View"
     />
     <adapter
-        factory=".adapter.rpt_pdf.RptPdf"
-        permission="org.ict_ok.admin_utils.reports.generate.pdf"
-    />
-    
-    <adapter
         factory="org.ict_ok.components.superclass.adapter.obj_data.BrwsOverview"
         provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
         for=".interfaces.IHost"
     />
 
-    <!--<utility-->
-        <!--provides="zope.schema.interfaces.IVocabularyFactory"-->
-        <!--component=".host.AllHostGroups"-->
-        <!--name="AllHostGroups"-->
-        <!--/>-->
+    <!--  Vocabulary stuff ============================================== -->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".host.AllHostProductionStates"
         name="AllHostProductionStates"
         />
-        
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".host.AllHosts"
@@ -204,11 +217,13 @@
         component=".host.AllHostTemplates"
         name="AllHostTemplates"
     />
+    <!--<utility-->
+        <!--provides="zope.schema.interfaces.IVocabularyFactory"-->
+        <!--component=".host.AllHostGroups"-->
+        <!--name="AllHostGroups"-->
+        <!--/>-->
 
-    <!--subscriber handler=".objmq.notifyAddedEvent" /-->
-    <!--subscriber handler=".objmq.notifyModifiedEvent" /-->
-    <!--subscriber handler=".objmq.notifyMovedEvent" /-->
-    <!--subscriber handler=".objmq.notifyRemovedEvent" /-->
+    <!--  Includes ====================================================== -->
 
     <include package=".generations" />
 

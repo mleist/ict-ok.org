@@ -37,6 +37,12 @@ from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 
+def AllX509CertificateTemplates(dummy_context):
+    return AllComponentTemplates(dummy_context, IX509Certificate)
+
+def AllX509Certificates(dummy_context):
+    return AllComponents(dummy_context, IX509Certificate)
+
 
 class X509Certificate(Credential):
     """

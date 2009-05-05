@@ -22,7 +22,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.switch.interfaces import ISwitch
 from org.ict_ok.components.switch.switch import Switch
-from org.ict_ok.components.switch.browser.switch import SwitchDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -35,4 +34,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(ISwitch)
     factory = Switch
-    omitFields = SwitchDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

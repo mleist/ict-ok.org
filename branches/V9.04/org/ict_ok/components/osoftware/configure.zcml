@@ -10,10 +10,14 @@
                        Markus Leist <leist@ikom-online.de>
     -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.IOperatingSoftware"
         type="zope.app.content.interfaces.IContentType"
         />
+
+    <!--  Classes ======================================================= -->
 
     <class class=".osoftware.OperatingSoftware">
         <implements
@@ -108,28 +112,36 @@
             />
     </class>
 
+    <!--  Event subscribers ============================================= -->
+
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <adapter
-        factory=".adapter.state.State"
-        />
+    <!--  Search adapters =============================================== -->
 
     <adapter
         factory="org.ict_ok.components.osoftware.adapter.search.Searchable"
     />
+
+    <!--  Report adapters =============================================== -->
+
     <adapter
         factory=".adapter.rpt_pdf.RptPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
 
-    <!-- utility
-        provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".osoftware.AllOperatingSoftwares"
-        name="AllOperatingSoftwares"
-    / -->
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory=".adapter.state.State"
+        />
+
+    <!--  Vocabulary stuff ============================================== -->
+
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".osoftware.AllOperatingSoftwares"
@@ -140,12 +152,13 @@
         component=".osoftware.AllOperatingSoftwareTemplates"
         name="AllOperatingSoftwareTemplates"
     />
-    
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".osoftware.AllUnusedOrUsedDeviceOperatingSoftwares"
         name="AllUnusedOrUsedDeviceOperatingSoftwares"
     />
+
+    <!--  Includes ====================================================== -->
 
     <include package=".generations" />
 

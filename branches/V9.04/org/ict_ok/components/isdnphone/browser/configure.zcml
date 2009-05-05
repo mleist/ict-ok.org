@@ -73,7 +73,7 @@
     <viewlet
         name="all_isdnphones"
         for="*"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuInventory"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuInventoryByType"
         class="org.ict_ok.components.isdnphone.browser.isdnphone.MSubInvISDNPhone"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.isdnphone.View"

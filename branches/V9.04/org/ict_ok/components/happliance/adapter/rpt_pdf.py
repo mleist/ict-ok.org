@@ -22,8 +22,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.happliance.interfaces import IHardwareAppliance
 from org.ict_ok.components.happliance.happliance import HardwareAppliance
-from org.ict_ok.components.happliance.browser.happliance import \
-         HardwareApplianceDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -36,4 +34,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IHardwareAppliance)
     factory = HardwareAppliance
-    omitFields = HardwareApplianceDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

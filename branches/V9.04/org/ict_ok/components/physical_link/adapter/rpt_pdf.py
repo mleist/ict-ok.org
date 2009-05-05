@@ -22,8 +22,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.physical_link.interfaces import IPhysicalLink
 from org.ict_ok.components.physical_link.physical_link import PhysicalLink
-from org.ict_ok.components.physical_link.browser.physical_link import \
-    PhysicalLinkDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
     RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -34,6 +32,6 @@ class RptPdf(ParentRptPdf):
     """
 
     implements(IRptPdf)
-    adapts(IOutlet)
+    adapts(IPhysicalLink)
     factory = PhysicalLink
-    omitFields = PhysicalLinkDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []

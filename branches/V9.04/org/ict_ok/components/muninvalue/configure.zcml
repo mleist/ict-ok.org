@@ -9,11 +9,15 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
         Markus Leist <leist@ikom-online.de> -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.ILatency"
         type="zope.app.content.interfaces.IContentType"
         />
     
+    <!--  Classes ======================================================= -->
+
     <class class=".muninvalue.Latency">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
@@ -113,40 +117,55 @@
             permission="org.ict_ok.components.latency.Edit"
             set_schema="org.ict_ok.components.interfaces.IImportXlsData"
             />
-            
     </class>
+
+    <!--  Event subscribers ============================================= -->
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"
         for="zope.app.appsetup.IDatabaseOpenedEvent"
         />
 
-    <adapter
-        factory=".adapter.sized.LatencySized"
-        />
+    <!--  Search adapters =============================================== -->
 
-    <adapter
-        factory=".adapter.state.State"
-        />
-        
     <adapter
         factory="org.ict_ok.components.latency.adapter.search.Searchable"
     />
 
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory=".adapter.sized.LatencySized"
+        />
+    <adapter
+        factory=".adapter.state.State"
+        />
     <adapter
         factory="org.ict_ok.components.latency.adapter.ipickle.Pickle"
     />
-
     <adapter
         factory=".adapter.ticker.Ticker"
     />
+
+    <!--  Vocabulary stuff ============================================== -->
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
         component=".latency.AllMuninValueTemplates"
         name="AllMuninValueTemplates"
     />
-    
+
+    <!--  Includes ====================================================== -->
+
     <include package=".generations" />
 
 </configure>

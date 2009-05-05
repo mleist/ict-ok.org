@@ -22,8 +22,6 @@ from zope.component import adapts
 # ict_ok.org imports
 from org.ict_ok.components.misc_physical.interfaces import IMiscPhysical
 from org.ict_ok.components.misc_physical.misc_physical import MiscPhysical
-from org.ict_ok.components.misc_physical.browser.misc_physical import \
-    MiscPhysicalDetails
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
     RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -36,4 +34,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IMiscPhysical)
     factory = MiscPhysical
-    omitFields = MiscPhysicalDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []
