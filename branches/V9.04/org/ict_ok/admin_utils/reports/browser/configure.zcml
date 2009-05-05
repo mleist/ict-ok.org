@@ -23,22 +23,22 @@
         permission="org.ict_ok.admin_utils.supervisor.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
     />
-    <page
+    <!--page
         name="generate_test_pdf"
         for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
         class=".reports.AdmUtilReportsDetails"
         attribute="generateTestPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-    />
-    <page
+    /-->
+    <!--page
         name="generate_all_pdf"
         for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
         class=".reports.AdmUtilReportsDetails"
         attribute="generateAllPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-    />
+    /-->
 
     <z3c:pagelet
         name="details.html"
@@ -127,30 +127,30 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.Edit"
         />
-    <viewlet
+    <!--viewlet
         name="reportNetworkPdf"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
         class="org.ict_ok.admin_utils.reports.browser.reports.MSubReportNetworkPdf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
-        />
-    <viewlet
+        /-->
+    <!--viewlet
         name="reportHardwarePdf"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
         class="org.ict_ok.admin_utils.reports.browser.reports.MSubReportHardwarePdf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
-        />
-    <viewlet
+        /-->
+    <!--viewlet
         name="reportSoftwarePdf"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
         class="org.ict_ok.admin_utils.reports.browser.reports.MSubReportSoftwarePdf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
-        />        
+        /-->        
     <viewlet
         name="reportAllPdf"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"

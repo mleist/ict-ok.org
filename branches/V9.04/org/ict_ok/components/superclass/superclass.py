@@ -444,6 +444,7 @@ class Superclass(Persistent):
         ##
         ##
         
+        #-> from ZODB.interfaces import IConnection
         #-> connection = IConnection(self)
         #(Pdb) 
         #> /Users/markus/Projekte/ict_ok.org/inst/lib/python/org/ict_ok/components/superclass/superclass.py(447)generatePdf()

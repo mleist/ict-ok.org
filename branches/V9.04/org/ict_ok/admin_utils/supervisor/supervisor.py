@@ -453,18 +453,18 @@ class AdmUtilSupervisor(Supernode):
         my_catalog.updateIndexes()
         self.appendEventHistory(\
             u"reindex the catalogs of all tables in database")
-        connection = IConnection(self)
-        oc = connection.root()['_oq_collection']
-        for (oid, oobj) in iid.items():
-            if ISuperclass.providedBy(oobj.object):
-                try:
-                    oc.index(oobj.object)
-                except AttributeError:
-                    pass
-                except TypeError:
-                    pass
-        self.appendEventHistory(\
-            u"reindex the object query catalogs in database")
+#        connection = IConnection(self)
+#        oc = connection.root()['_oq_collection']
+#        for (oid, oobj) in iid.items():
+#            if ISuperclass.providedBy(oobj.object):
+#                try:
+#                    oc.index(oobj.object)
+#                except AttributeError:
+#                    pass
+#                except TypeError:
+#                    pass
+#        self.appendEventHistory(\
+#            u"reindex the object query catalogs in database")
 
     def removeObject(self, msgHeader, msgOldparent,
                      msgNewparent, msgObjectOid):
