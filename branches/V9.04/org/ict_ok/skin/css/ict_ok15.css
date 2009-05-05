@@ -204,7 +204,7 @@ div#header-breadcrumbs{
 }
 #navsub a.navsub:hover {
   color:#008263;
-  text-decoration:underline;
+  text-decor2ation:underline;
 }
 #navsub a.selected {
   color:#008263;
@@ -872,14 +872,11 @@ font size is adjusted here (default is 77%) */
     background-color: #E5FFF9;
     border: solid 1px #C0F0E4;
     padding: 1px;
-    
 }
 
 .yuimenubaritem-selected,
 .yuimenuitem-selected {
-
     background-color: #7DD0BC;
-
 }
 
 .yuimenubaritem .yuimenubaritemlabel {
@@ -1350,6 +1347,14 @@ font size is adjusted here (default is 77%) */
     background-color2:#E5FFF9;
     background-color:#fff;
 }
+
+.ict_ok-skin .yuimenu .bd2 {
+
+    border: solid 1px #FF0000;
+    background-color2:#00FF00;
+    background-color:#00f;
+}
+
 
 .ict_ok-skin .yuimenubaritemlabel2-selected,
 .ict_ok-skin .yuimenuitemlabel2-selected {

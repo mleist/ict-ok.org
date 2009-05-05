@@ -1,0 +1,8 @@
+<div id="menu_inventory_all" class="yuimenu">
+    <div class="bd">
+        <ul>
+            <tal:block repeat="viewlet view/viewlets"
+                    content="structure viewlet/render" />
+        </ul>
+    </div>
+</div>

@@ -113,6 +113,23 @@ class GlobalMenuSubItem(ContextMenuItem):
                 return u"navsub"
 
     
+class GlobalMenuSubSubItem(ContextMenuItem):
+    """Menu item viewlet generating global/site related links."""
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_item.pt')
+    @property
+    def menu_class(self):
+        if self.posInManager > 0:
+            if self.selected:
+                return u"navsub selected"
+            else:
+                return u"navsub"
+        else:
+            if self.selected:
+                return u"navsub first selected"
+            else:
+                return u"navsub"
+
+    
 class DashboardItem(GlobalMenuMainItem):
     title = _(u'Dashboard')
     viewURL = 'view_dashboard.html'
@@ -183,11 +200,23 @@ class MenuSubTab(Tab):
 class MenuSubGeneralTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_general_tab.pt')
 
+class MenuSubGeneralAddsTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_general_adds_tab.pt')
+
 class MenuSubInventoryTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_tab.pt')
 
+class MenuSubInventoryByTypeTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_by_type_tab.pt')
+
+class MenuSubInventoryWarningsTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_warnings_tab.pt')
+
 class MenuSubReportsTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_reports_tab.pt')
+
+class MenuSubReportsOvervPdfTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_reports_overv_pdf_tab.pt')
 
 class MenuSubEventTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_event_tab.pt')

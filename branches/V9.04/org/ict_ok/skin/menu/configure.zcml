@@ -39,6 +39,13 @@
         permission="org.ict_ok.components.site.View"
         />
     <viewletManager
+        name="ict_ok.menusub.general.adds"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.skin.menu.MenuSubGeneralAddsTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    <viewletManager
         name="ict_ok.menusub.inventory"
         provides="org.ict_ok.skin.menu.interfaces.IMenuInventory"
         class="org.ict_ok.skin.menu.MenuSubInventoryTab"
@@ -46,9 +53,30 @@
         permission="org.ict_ok.components.site.View"
         />
     <viewletManager
+        name="ict_ok.menusub.inventory.by_type"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuInventoryByType"
+        class="org.ict_ok.skin.menu.MenuSubInventoryByTypeTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    <viewletManager
+        name="ict_ok.menusub.inventory.warnings"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuInventoryWarnings"
+        class="org.ict_ok.skin.menu.MenuSubInventoryWarningsTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    <viewletManager
         name="ict_ok.menusub.reports"
         provides="org.ict_ok.skin.menu.interfaces.IMenuReports"
         class="org.ict_ok.skin.menu.MenuSubReportsTab"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.site.View"
+        />
+    <viewletManager
+        name="ict_ok.menusub.reports.overv_pdf"
+        provides="org.ict_ok.skin.menu.interfaces.IMenuReportsOvervPdf"
+        class="org.ict_ok.skin.menu.MenuSubReportsOvervPdfTab"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.site.View"
         />

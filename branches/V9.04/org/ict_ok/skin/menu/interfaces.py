@@ -37,10 +37,22 @@ class IMenuContext(IViewletManager):
 class IMenuGeneral(IViewletManager):
     """Menu viewlet manager."""
 
+class IMenuGeneralAdds(IViewletManager):
+    """Menu viewlet manager."""
+
 class IMenuInventory(IViewletManager):
+    """Menu viewlet manager."""
+
+class IMenuInventoryByType(IViewletManager):
+    """Menu viewlet manager."""
+    
+class IMenuInventoryWarnings(IViewletManager):
     """Menu viewlet manager."""
     
 class IMenuReports(IViewletManager):
+    """Menu viewlet manager."""
+    
+class IMenuReportsOvervPdf(IViewletManager):
     """Menu viewlet manager."""
     
 class IMenuEvent(IViewletManager):
@@ -51,3 +63,4 @@ class IMenuScript(IViewletManager):
 
 class IMenuAdmin(IViewletManager):
     """Menu viewlet manager."""
+
