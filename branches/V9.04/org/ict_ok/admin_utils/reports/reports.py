@@ -152,9 +152,8 @@ class PDFReporter(SimpleReporter):
         self.document.append(title.genElements())
         
     def append(self, obj):
-        try:
-            it = iter(obj)
-            for i in it:
+        if type(obj) is list:
+            for i in obj:
                 #self.firstLevelContent.append(i)
                 adapterRptPdf = IRptPdf(i)
                 if adapterRptPdf:
@@ -163,8 +162,7 @@ class PDFReporter(SimpleReporter):
                     adapterRptPdf.traverse4Rpt(2, False)
                     self.files2delete.extend(adapterRptPdf.files2delete)
                     del adapterRptPdf
-        except TypeError:
-            #self.firstLevelContent.append(obj)
+        else:
             adapterRptPdf = IRptPdf(obj)
             if adapterRptPdf:
                 adapterRptPdf.request=self.request

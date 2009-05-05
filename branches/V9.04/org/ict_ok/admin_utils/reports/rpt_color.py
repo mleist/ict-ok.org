@@ -16,6 +16,9 @@ color-class for ict-ok.org reporting
 
 __version__ = "$Id$"
 
+# python
+from math import sqrt
+
 # zope imports
 from zope.component import getUtility
 
@@ -24,8 +27,6 @@ from reportlab.lib import colors
 
 # ict-ok.org imports
 from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
-
-#CMYK_RPT1=colors.CMYKColor(1.0, 0.49, 0.612, 0.0)
 
 def getColor1():
     admUtilReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
@@ -40,3 +41,16 @@ def getColor1():
         return colors.CMYKColor(*cmyk_tuple)
     else:
         return colors.CMYKColor(1.0, 0.49, 0.612, 0.0)
+
+def getLinkColor():
+    color1 = getColor1()
+    distance = colors.colorDistance(color1, colors.white) / sqrt(3)
+    return colors.Blacker(color1, distance)
+
+def getTabBackgroundColor():
+    color1 = getColor1()
+    return colors.Whiter(color1, 0.1)
+
+def getTabBackgroundColorLight():
+    color1 = getColor1()
+    return colors.Whiter(color1, 0.03)

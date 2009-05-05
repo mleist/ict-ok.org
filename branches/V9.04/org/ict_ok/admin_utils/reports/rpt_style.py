@@ -27,7 +27,8 @@ from reportlab.lib.styles import \
      TA_CENTER, ParagraphStyle, StyleSheet1
 
 # ict-ok.org imports
-from org.ict_ok.admin_utils.reports.rpt_color import colors, getColor1
+from org.ict_ok.admin_utils.reports.rpt_color import \
+    colors, getColor1, getTabBackgroundColor
 from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 
 #rptNormalStyle = ParagraphStyle(name='Normal',
@@ -69,6 +70,7 @@ def getRptStyleSheet():
         locFontName5 = admUtilReports.fontName5
         
     cmyk_color1 = getColor1()
+    cmyk_color2 = getTabBackgroundColor()
     
     stylesheet = StyleSheet1()
     stylesheet.add(ParagraphStyle(name='Normal',
@@ -110,7 +112,7 @@ def getRptStyleSheet():
                                   borderWidth = 0,
                                   borderPadding = 1 * mm,
                                   parent=stylesheet['Para'],
-                                  backColor = colors.lightgrey)
+                                  backColor = cmyk_color2)
                    )
     stylesheet.add(ParagraphStyle(name='Normal_R',
                                   fontName=locFontName1,

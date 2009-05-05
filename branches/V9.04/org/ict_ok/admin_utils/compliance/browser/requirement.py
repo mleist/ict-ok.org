@@ -35,13 +35,14 @@ from org.ict_ok.admin_utils.compliance.requirement import Requirement
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
-     DisplayForm, EditForm
+     DisplayForm, EditForm, AddForm, DeleteForm
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, getModifiedDate, raw_cell_formatter, \
      link, getActionBottons, getSize
 from org.ict_ok.components.superclass.browser.superclass import \
      getActionBotton_Detail
+from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 
 _ = MessageFactory('org.ict_ok')
 
@@ -124,6 +125,13 @@ class MSubAllRequirements(GlobalMenuSubItem):
     viewURL = 'allreqs.html'
     weight = 80
 
+class MSubAddRequirement(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Add Requirement')
+    viewURL = 'add_requirement.html'
+    weight = 50
+
+
 # --------------- details -----------------------------
 
 class AdmUtilRequirementDetails(SupernodeDetails):
@@ -131,6 +139,8 @@ class AdmUtilRequirementDetails(SupernodeDetails):
     """
     
     omit_viewfields = SupernodeDetails.omit_viewfields + \
+                    ['__name__', '__parent__', 'title']
+    omit_addfields = SupernodeDetails.omit_addfields + \
                     ['__name__', '__parent__', 'title']
     omit_editfields = SupernodeDetails.omit_editfields + \
                     ['__name__', '__parent__', 'title']
@@ -190,6 +200,29 @@ class AdmUtilRequirementDisplayAll(DisplayForm):
     label = _(u'display all requirements')
 
 
+class AddAdmUtilRequirementForm(AddForm):
+    """Add form."""
+    label = _(u'add Requirement')
+    factory = Requirement
+    omitFields = AdmUtilRequirementDetails.omit_addfields
+    fields = fieldsForFactory(factory, omitFields)
+    
+    def create(self, data):
+        """ will create the object """
+        # arg1 must be title for schooltool requirement
+        # this will be reused later by ikName=arg1
+        titleArg = data.pop('ikName')
+        obj = self.factory(titleArg, **data)
+        self.newdata = data
+        IBrwsOverview(obj).setTitle(titleArg)
+        obj.__post_init__()
+        return obj
+    
+    def nextURL(self):
+        """ don't forward the browser """
+        return absoluteURL(self.context, self.request)
+
+    
 class EditAdmUtilRequirementForm(EditForm):
     """ Display form for the object """
     
@@ -197,3 +230,12 @@ class EditAdmUtilRequirementForm(EditForm):
     factory = Requirement
     omitFields = AdmUtilRequirementDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
+
+
+class DeleteAdmUtilRequirementForm(DeleteForm):
+    """ Delete the Requirement """
+    
+    def getTitle(self):
+        """this title will be displayed in the head of form"""
+        return _(u"Delete this Requirement: '%s'?") % \
+               self.context.ikName

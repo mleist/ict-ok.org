@@ -127,7 +127,7 @@
     <adapter
         for=".interfaces.IHaveEvaluations"
         provides=".interfaces.IEvaluations"
-        factory=".evaluation.getEvaluations"
+        factory=".evaluation.getEvaluationsDone"
         trusted="true"
         />
 

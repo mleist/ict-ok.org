@@ -20,6 +20,8 @@ from datetime import datetime
 import tempfile
 
 # zope imports
+from ZODB.interfaces import IConnection
+from zope.security.proxy import removeSecurityProxy
 from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
 from zope.component import getUtility
@@ -28,6 +30,10 @@ from zope.security import checkPermission
 from zope.app.rotterdam.xmlobject import setNoCacheHeaders
 
 # zc imports
+
+# gocept imports
+from gocept.objectquery.pathexpressions import RPEQueryParser
+from gocept.objectquery.processor import QueryProcessor
 
 # ict-ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory
@@ -54,6 +60,24 @@ class MSubReportNetworkPdf(GlobalMenuSubItem):
     title = _(u'Network (PDF)')
     viewURL = '@@reportNetworkPdf.html'
     weight = 70
+
+class MSubReportHardwarePdf(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Hardware (PDF)')
+    viewURL = '@@reportHardwarePdf.html'
+    weight = 71
+
+class MSubReportSoftwarePdf(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Software (PDF)')
+    viewURL = '@@reportSoftwarePdf.html'
+    weight = 72
+
+class MSubReportAllPdf(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'All (PDF)')
+    viewURL = '@@reportAllPdf.html'
+    weight = 73
 
 # --------------- object details ---------------------------
 
@@ -137,7 +161,108 @@ class AdmUtilReportsDetails(SupernodeDetails):
         os.remove(f_name)
         return dataMem
 
-    def reportNetworkPdf(self):
+#    def reportNetworkPdf2(self):
+#        filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
+#        f_handle, f_name = tempfile.mkstemp(filename)
+#        authorStr = self.request.principal.title
+#        my_formatter = self.request.locale.dates.getFormatter(
+#            'dateTime', 'medium')
+#        userTZ = getUserTimezone()
+#        longTimeString = my_formatter.format(\
+#            userTZ.fromutc(datetime.utcnow()))
+#        versionStr = "%s [%s]" % (longTimeString, getIkVersion())
+#        from ZODB.interfaces import IConnection
+#        from zope.security.proxy import removeSecurityProxy
+#        #import pdb
+#        #pdb.set_trace()
+#        connection = IConnection(removeSecurityProxy(self.context))
+#        from gocept.objectquery.pathexpressions import RPEQueryParser
+#        from gocept.objectquery.processor import QueryProcessor
+#        parser = RPEQueryParser()
+#        oc = connection.root()['_oq_collection']
+##        # ---------------------------------------------------------
+##        from zope.app import zapi
+##        from org.ict_ok.components.superclass.interfaces import ISuperclass
+##        iid = zapi.getUtility(IIntIds, '')
+##        for (oid, oobj) in iid.items():
+##            if ISuperclass.providedBy(oobj.object):
+##                try:
+##                    oc.index(oobj.object)
+##                except AttributeError:
+##                    pass
+##                except TypeError:
+##                    pass
+##        # ---------------------------------------------------------
+#        thisReporter = PDFReporter(f_name, self.request)
+#        thisReporter.setAuthorName(authorStr)
+#        thisReporter.setVersionStr(versionStr)
+#        queryList = [
+#                     ('HardwareAppliances', \
+#                        '/Folder/HardwareApplianceFolder/HardwareAppliance'),
+#                     ('Rooms', '/Folder/RoomFolder/Room'),
+#                     ('Buildings', '/Folder/BuildingFolder/Building'),
+#                     ('Locations', '/Folder/LocationFolder/Location'),
+#                     ('Interfaces', '/Folder/InterfaceFolder/Interface'),
+#                     ('OperatingSoftware', '/Folder/OperatingSoftwareFolder/OperatingSoftware'),
+#                     ]
+#        queryproc = QueryProcessor(parser, oc)
+#        queryResultsList = [(queryn, queryproc(queryv))
+#                            for (queryn, queryv) in queryList]
+#        # first run
+#        for (queryName, queryResults) in queryResultsList:
+#            thisReporter.extendAllContentObjects(queryResults)
+#        # second run
+#        for (queryName, queryResults) in queryResultsList:
+#            thisReporter.extendAllContentObjects(queryResults)
+#            thisReporter.appendTitle1(queryName)
+#            thisReporter.append(queryResults)
+#
+#        
+##        ff=query('/Folder/HardwareApplianceFolder/HardwareAppliance')
+##        gg=query('/Folder/RoomFolder/Room')
+##        hh=query('/Folder/BuildingFolder/Building')
+##        ii=query('/Folder/LocationFolder/Location')
+###        ff2=query('/_*')
+###        print "ff2: ", ff2
+###        print "len(ff2): ", len(ff2)
+##        thisReporter.extendAllContentObjects(ff)
+##        thisReporter.extendAllContentObjects(gg)
+##        thisReporter.extendAllContentObjects(hh)
+##        thisReporter.extendAllContentObjects(ii)
+###        thisReporter.extend(ff)
+###        thisReporter.extend(gg)
+###        thisReporter.extend(\
+###            query('/Folder/BuildingFolder/Building'))
+###        thisReporter.extend(\
+###            query('/Folder/LocationFolder/Location'))
+##        thisReporter.appendTitle1(u"/HardwareApplianceFolder/HardwareAppliance")
+##        thisReporter.append(ff)
+##        thisReporter.appendTitle1(u"/RoomFolder/Room")
+##        thisReporter.append(gg)
+##        thisReporter.appendTitle1(u"/BuildingFolder/Building")
+##        thisReporter.append(hh)
+##        thisReporter.appendTitle1(u"/LocationFolder/Location")
+##        thisReporter.append(ii)
+#
+#
+#        #thisReporter.allContentObjects.extend(ff2)
+#        #thisReporter.fill()
+#        thisReporter.buildPdf()
+#        thisReporter.cleanup()
+#        #self.context.generatePdf(f_name, authorStr, versionStr,request=self.request)
+#
+#        self.request.response.setHeader('Content-Type', 'application/pdf')
+#        self.request.response.setHeader(\
+#            'Content-Disposition',
+#            'attachment; filename=\"%s\"' % filename)
+#        setNoCacheHeaders(self.request.response)
+#        datafile = open(f_name, "r")
+#        dataMem = datafile.read()
+#        datafile.close()
+#        os.remove(f_name)
+#        return dataMem
+
+    def reportPdfByQueryList(self, queryList):
         filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
         f_handle, f_name = tempfile.mkstemp(filename)
         authorStr = self.request.principal.title
@@ -147,40 +272,12 @@ class AdmUtilReportsDetails(SupernodeDetails):
         longTimeString = my_formatter.format(\
             userTZ.fromutc(datetime.utcnow()))
         versionStr = "%s [%s]" % (longTimeString, getIkVersion())
-        from ZODB.interfaces import IConnection
-        from zope.security.proxy import removeSecurityProxy
-        #import pdb
-        #pdb.set_trace()
         connection = IConnection(removeSecurityProxy(self.context))
-        from gocept.objectquery.pathexpressions import RPEQueryParser
-        from gocept.objectquery.processor import QueryProcessor
         parser = RPEQueryParser()
         oc = connection.root()['_oq_collection']
-#        # ---------------------------------------------------------
-#        from zope.app import zapi
-#        from org.ict_ok.components.superclass.interfaces import ISuperclass
-#        iid = zapi.getUtility(IIntIds, '')
-#        for (oid, oobj) in iid.items():
-#            if ISuperclass.providedBy(oobj.object):
-#                try:
-#                    oc.index(oobj.object)
-#                except AttributeError:
-#                    pass
-#                except TypeError:
-#                    pass
-#        # ---------------------------------------------------------
         thisReporter = PDFReporter(f_name, self.request)
         thisReporter.setAuthorName(authorStr)
         thisReporter.setVersionStr(versionStr)
-        queryList = [
-                     ('HardwareAppliances', \
-                        '/Folder/HardwareApplianceFolder/HardwareAppliance'),
-                     ('Rooms', '/Folder/RoomFolder/Room'),
-                     ('Buildings', '/Folder/BuildingFolder/Building'),
-                     ('Locations', '/Folder/LocationFolder/Location'),
-                     ('Interfaces', '/Folder/InterfaceFolder/Interface'),
-                     ('OperatingSoftware', '/Folder/OperatingSoftwareFolder/OperatingSoftware'),
-                     ]
         queryproc = QueryProcessor(parser, oc)
         queryResultsList = [(queryn, queryproc(queryv))
                             for (queryn, queryv) in queryList]
@@ -189,44 +286,13 @@ class AdmUtilReportsDetails(SupernodeDetails):
             thisReporter.extendAllContentObjects(queryResults)
         # second run
         for (queryName, queryResults) in queryResultsList:
-            thisReporter.extendAllContentObjects(queryResults)
             thisReporter.appendTitle1(queryName)
             thisReporter.append(queryResults)
-
-        
-#        ff=query('/Folder/HardwareApplianceFolder/HardwareAppliance')
-#        gg=query('/Folder/RoomFolder/Room')
-#        hh=query('/Folder/BuildingFolder/Building')
-#        ii=query('/Folder/LocationFolder/Location')
-##        ff2=query('/_*')
-##        print "ff2: ", ff2
-##        print "len(ff2): ", len(ff2)
-#        thisReporter.extendAllContentObjects(ff)
-#        thisReporter.extendAllContentObjects(gg)
-#        thisReporter.extendAllContentObjects(hh)
-#        thisReporter.extendAllContentObjects(ii)
-##        thisReporter.extend(ff)
-##        thisReporter.extend(gg)
-##        thisReporter.extend(\
-##            query('/Folder/BuildingFolder/Building'))
-##        thisReporter.extend(\
-##            query('/Folder/LocationFolder/Location'))
-#        thisReporter.appendTitle1(u"/HardwareApplianceFolder/HardwareAppliance")
-#        thisReporter.append(ff)
-#        thisReporter.appendTitle1(u"/RoomFolder/Room")
-#        thisReporter.append(gg)
-#        thisReporter.appendTitle1(u"/BuildingFolder/Building")
-#        thisReporter.append(hh)
-#        thisReporter.appendTitle1(u"/LocationFolder/Location")
-#        thisReporter.append(ii)
-
-
-        #thisReporter.allContentObjects.extend(ff2)
-        #thisReporter.fill()
+        # debug output
+        #for i_obj in thisReporter.allContentObjects:
+        #    print "%s (%s)" % (i_obj.ikName, i_obj.objectID)
         thisReporter.buildPdf()
         thisReporter.cleanup()
-        #self.context.generatePdf(f_name, authorStr, versionStr,request=self.request)
-
         self.request.response.setHeader('Content-Type', 'application/pdf')
         self.request.response.setHeader(\
             'Content-Disposition',
@@ -237,6 +303,73 @@ class AdmUtilReportsDetails(SupernodeDetails):
         datafile.close()
         os.remove(f_name)
         return dataMem
+
+    def reportNetworkPdf(self):
+        queryList = [
+                     ('HardwareAppliances', \
+                        '/Folder/HardwareApplianceFolder/HardwareAppliance'),
+                     ('Rooms', '/Folder/RoomFolder/Room'),
+                     ('Buildings', '/Folder/BuildingFolder/Building'),
+                     ('Locations', '/Folder/LocationFolder/Location'),
+                     ('Interfaces', '/Folder/InterfaceFolder/Interface'),
+                     ('OperatingSoftware', '/Folder/OperatingSoftwareFolder/OperatingSoftware'),
+                     ]
+        return self.reportPdfByQueryList(queryList)
+
+    def reportHardwarePdf(self):
+        queryList = [
+                     ('HardwareAppliances', \
+                        '/Folder/HardwareApplianceFolder/HardwareAppliance'),
+                     ('Rooms', '/Folder/RoomFolder/Room'),
+                     ('Buildings', '/Folder/BuildingFolder/Building'),
+                     ('Locations', '/Folder/LocationFolder/Location'),
+                     ]
+        return self.reportPdfByQueryList(queryList)
+    
+    def reportSoftwarePdf(self):
+        queryList = [
+                     ('HardwareAppliances', \
+                        '/Folder/HardwareApplianceFolder/HardwareAppliance'),
+                     ('Rooms', '/Folder/RoomFolder/Room'),
+                     ('Buildings', '/Folder/BuildingFolder/Building'),
+                     ('Locations', '/Folder/LocationFolder/Location'),
+                     ]
+        return self.reportPdfByQueryList(queryList)
+    
+    def reportAllPdf(self):
+        queryList = [
+                     ('Application Software', '/Folder/ApplicationSoftwareFolder/ApplicationSoftware'),
+                     ('Buildings', '/Folder/BuildingFolder/Building'),
+                     ('Display Units', '/Folder/DisplayUnitFolder/DisplayUnit'),
+                     ('Hardware Appliances', '/Folder/HardwareApplianceFolder/HardwareAppliance'),
+                     ('Hosts', '/Folder/HostFolder/Host'),
+                     ('Interfaces', '/Folder/InterfaceFolder/Interface'),
+                     ('Ip Addresses', '/Folder/IpAddressFolder/IpAddress'),
+                     ('Industrial Computers', '/Folder/IndustrialComputerFolder/IndustrialComputer'),
+                     ('Ip Networks', '/Folder/IpNetFolder/IpNet'),
+                     ('ISDN Phones', '/Folder/ISDNPhoneFolder/ISDNPhone'),
+                     ('Latencies', '/Folder/LatencyFolder/Latency'),
+                     ('Locations', '/Folder/LocationFolder/Location'),
+                     ('Misc Physicals', '/Folder/MiscPhysicalFolder/MiscPhysical'),
+                     ('Mobile Phones', '/Folder/MobilePhoneFolder/MobilePhone'),
+                     ('Nets', '/Folder/NetFolder/Net'),
+                     ('Notebooks', '/Folder/NotebookFolder/Notebook'),
+                     ('Operating Software', '/Folder/OperatingSoftwareFolder/OperatingSoftware'),
+                     ('Outlets', '/Folder/OutletFolder/Outlets'),
+                     ('Patch Panels', '/Folder/PatchPanelFolder/PatchPanel'),
+                     ('Patch Ports', '/Folder/PatchPortFolder/PatchPort'),
+                     ('Personal Computers', '/Folder/PersonalComputerFolder/PersonalComputer'),
+                     ('Physical Links', '/Folder/PhysicalLinkFolder/PhysicalLink'),
+                     ('Printers', '/Folder/PrinterFolder/Printer'),
+                     ('Racks', '/Folder/RackFolder/Rack'),
+                     ('Rooms', '/Folder/RoomFolder/Room'),
+                     ('Services', '/Folder/ServiceFolder/Service'),
+                     ('Snmp Value', '/Folder/SnmpValueFolder/SnmpValue'),
+                     ('Switches', '/Folder/SwitchFolder/Switch'),
+                     ('X509 Certificates', '/Folder/X509CertificateFolder/X509Certificate'),
+                     ]
+        return self.reportPdfByQueryList(queryList)
+
 
 # --------------- forms ------------------------------------
 

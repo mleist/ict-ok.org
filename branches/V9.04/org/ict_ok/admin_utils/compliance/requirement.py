@@ -58,9 +58,11 @@ def buildRequirementVocab(inRequirement, inTitlePath=u"",
 def allRequirementHierVocab(dummy_context):
     """Which locations are there
     """
+    print "allRequirementHierVocab"
     terms = []
     try:
-        complianceUtil = getUtility(IAdmUtilCompliance)
+        complianceUtil = getUtility(IAdmUtilCompliance,
+                                    name='AdmUtilCompliance')
         for (oid, oobj) in complianceUtil.items():
             buildRequirementVocab(oobj, terms=terms)
             #reqList = getRequirementList(oobj)
@@ -91,11 +93,13 @@ def allRequirementHierVocab(dummy_context):
 def allRequirementVocab(dummy_context):
     """Which locations are there
     """
+    print "allRequirementVocab"
     terms = []
     my_catalog = zapi.getUtility(ICatalog)
     try:
         reqOidList = []
-        complianceUtil = getUtility(IAdmUtilCompliance)
+        complianceUtil = getUtility(IAdmUtilCompliance,
+                                    name='AdmUtilCompliance')
         for (oid, oobj) in complianceUtil.items():
             for req in getRequirementList(oobj):
                 reqOidList.append(req.objectID)
@@ -120,6 +124,7 @@ def allRequirementVocab(dummy_context):
     except ComponentLookupError:
         return SimpleVocabulary([])
 
+
 class Requirement(Superclass,
                   schooltool.requirement.requirement.Requirement):
     """ ict-ok.org wrapper
@@ -136,6 +141,23 @@ class Requirement(Superclass,
         else:
             self[subObj.ikName] = subObj
 
+    def getIndex(self):
+        indexList = []
+        current = self
+        parent = current.getParent()
+        while IRequirement.providedBy(parent):
+            # prepend to list
+            indexList.insert(0, parent.values().index(current)+1)
+            current = parent
+            parent = current.getParent()
+        return indexList
+    
+    def getIndexString(self):
+        try:
+            index = self.getIndex()
+            return '.'.join(['%d' % i for i in index])
+        except TypeError:
+            return "-deleted-"
 
 def getRequirement(context):
     """Adapt an ``IHaveRequirement`` object to ``IRequirement``."""

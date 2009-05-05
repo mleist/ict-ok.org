@@ -16,7 +16,17 @@
     />
 
     <permission
+        id="org.ict_ok.admin_utils.compliance.Add"
+        title="View from Compliance Utiltiy"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.compliance.Edit"
+        title="View from Compliance Utiltiy"
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.compliance.Delete"
         title="View from Compliance Utiltiy"
     />
 
@@ -49,9 +59,19 @@
     <grant permission="org.ict_ok.admin_utils.compliance.generate.pdf"
                     role="org.ict_ok.adm" />
 
+    <grant permission="org.ict_ok.admin_utils.compliance.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.compliance.Add"
+                    role="org.ict_ok.adm" />
+                    
     <grant permission="org.ict_ok.admin_utils.compliance.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.compliance.Edit"
+                    role="org.ict_ok.adm" />
+                    
+    <grant permission="org.ict_ok.admin_utils.compliance.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.compliance.Delete"
                     role="org.ict_ok.adm" />
                     
     <grant permission="org.ict_ok.admin_utils.compliance.Import"
