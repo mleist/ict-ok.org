@@ -90,20 +90,21 @@ def appendEvaluationList(obj, document):
                 ik_tbl_style.add('BACKGROUND', (2, pos), (2, pos), colors.red)
             else:
                 pass
-            data.append([
-                RptPara(evaluation.requirement.getIndexString(),
-                        style=style1,
-                        doc=document),
-                RptPara(evaluation.requirement.ikName,
-                        style=style1,
-                        doc=document),
-                RptPara(evaluation.value,
-                        style=style1, 
-                        doc=document),
-                RptPara(evaluation.evaluator.title,
-                        style=style1, 
-                        doc=document),
-            ])
+            if len(evaluation.requirement) == 0:
+                data.append([
+                    RptPara(evaluation.requirement.getIndexString(),
+                            style=style1,
+                            doc=document),
+                    RptPara(evaluation.requirement.ikName,
+                            style=style1,
+                            doc=document),
+                    RptPara(evaluation.value,
+                            style=style1, 
+                            doc=document),
+                    RptPara(evaluation.evaluator.title,
+                            style=style1, 
+                            doc=document),
+                ])
         t0 = Table(data,
                    hAlign='RIGHT',
                    style=ik_tbl_style,
@@ -151,13 +152,14 @@ def appendEvaluationList(obj, document):
 #                ik_tbl_style.add('BACKGROUND', (1, pos), (1, pos), colors.red)
 #            else:
 #                pass
-            data.append([
-                RptPara(evaluation.getIndexString(),
-                        style=style1,
-                        doc=document),
-                RptPara(evaluation.ikName,
-                        style=style1,
-                        doc=document),
+            if len(evaluation.keys()) == 0:
+                data.append([
+                    RptPara(evaluation.getIndexString(),
+                            style=style1,
+                            doc=document),
+                    RptPara(evaluation.ikName,
+                            style=style1,
+                            doc=document),
 #                RptPara(evaluation.value,
 #                        style=style1, 
 #                        doc=document),
