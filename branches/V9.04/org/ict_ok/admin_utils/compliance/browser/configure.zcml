@@ -66,6 +66,13 @@
         permission="org.ict_ok.admin_utils.compliance.View"
         />
     <z3c:pagelet
+        name="add_requirement.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".requirement.AddAdmUtilRequirementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Add"
+    />
+    <z3c:pagelet
         name="edit.html"
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
         class="org.ict_ok.admin_utils.compliance.browser.compliance.EditAdmUtilComplianceForm"
@@ -185,6 +192,14 @@
         permission="org.ict_ok.admin_utils.compliance.View"
         />
 
+    <viewlet
+        name="add_requirement"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.admin_utils.compliance.browser.requirement.MSubAddRequirement"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Add"
+        />
     <viewlet
         name="edit"
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
