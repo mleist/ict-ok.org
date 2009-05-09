@@ -1,38 +1,70 @@
-window_sizes 1916 1156 339 1571 1033 67
+window_sizes 1916 1156 358 1552 1033 67
 diagrams
-  objectdiagram_ref 131586 // obj01_diag
-    1256 826 100 15 0 0
   classdiagram_ref 128002 // cl_inventory01_diag
-    1256 826 96 14 0 0
-  classdiagram_ref 131970 // cl_inventory03_diag
-    1567 1013 100 4 0 0
-  objectdiagram_ref 131842 // obj02_diag
-    1567 1013 100 4 0 0
-  objectdiagram_ref 133122 // obj03_diag
-    1256 826 100 15 0 0
-  objectdiagram_ref 133250 // obj04_diag
-    1256 826 100 15 0 0
-  objectdiagram_ref 134658 // obj05_diag
-    1256 826 100 4 0 0
-  objectdiagram_ref 136962 // obj06_MobilePhoneFolder_diag
-    1256 826 100 4 0 0
-  active  classdiagram_ref 134402 // cl_inventory04_diag
-    1567 1013 100 14 0 0
+    1256 826 100 17 0 0
   classdiagram_ref 131714 // cl_inventory02_diag
-    1256 826 113 14 0 0
+    1256 826 100 17 0 0
+  classdiagram_ref 131970 // cl_inventory03_diag
+    1256 826 100 4 0 0
+  classdiagram_ref 134402 // cl_inventory04_diag
+    1256 826 100 17 0 0
   classdiagram_ref 134530 // cl_inventory05_diag
-    1256 826 120 14 0 0
+    1256 826 100 17 0 0
   classdiagram_ref 135810 // cl_inventory06_diag
-    1256 826 130 14 0 0
+    1256 826 100 17 0 0
   classdiagram_ref 138114 // cl_inventory07_diag
     1256 826 100 3 0 0
   classdiagram_ref 139266 // cl_inventory08_diag
-    1256 826 88 14 0 0
+    1256 826 100 17 0 0
+  classdiagram_ref 140418 // cl_inventory09_diag
+    1256 826 100 17 0 0
+  classdiagram_ref 141570 // cl_inventory10_diag
+    1256 826 100 17 0 0
+  classdiagram_ref 142722 // cl_inventory11_diag
+    1256 826 100 17 0 0
+  objectdiagram_ref 142850 // obj07_product
+    1548 1013 100 17 0 0
+  objectdiagram_ref 131586 // obj01_diag
+    1241 826 100 18 0 0
+  objectdiagram_ref 131842 // obj02_diag
+    1241 826 100 4 0 0
+  objectdiagram_ref 133122 // obj03_diag
+    1241 826 100 18 0 0
+  objectdiagram_ref 133250 // obj04_diag
+    1241 826 100 18 0 0
+  active  classdiagram_ref 144002 // cl_inventory12_diag
+    1548 1013 100 17 0 0
+  classdiagram_ref 144258 // cl_inventory14_diag
+    1241 826 100 17 0 0
+  classdiagram_ref 144130 // cl_inventory13_diag
+    1241 826 100 17 0 0
+  classdiagram_ref 144386 // cl_inventory16_diag
+    1241 826 100 17 0 0
+  classdiagram_ref 144514 // cl_inventory15_diag
+    1241 826 100 17 0 0
+  classdiagram_ref 144642 // cl_inventory17_diag
+    1241 826 100 17 0 0
+  classdiagram_ref 144770 // cl_inventory18_diag
+    1241 826 100 17 0 0
+  classdiagram_ref 144898 // cl_inventory19_diag
+    1241 826 100 17 0 0
 end
 show_stereotypes
-selected classview_ref 128002 // cl_inventory01
+selected classview_ref 130690 // ict classes
 open
-  
-  package_ref 129154 // pkg_inv01
+  class_ref 156034 // Address
+  class_ref 156290 // Organization
+  class_ref 155778 // Person
+  class_ref 133250 // Service
+  class_ref 155010 // WorkOrder
+  class_ref 156162 // IAddress
+  class_ref 156418 // IOrganization
+  class_ref 129410 // IOutlet
+  class_ref 128898 // IPatchPanel
+  class_ref 155906 // IPerson
+  class_ref 137346 // IPhysicalConnector
+  class_ref 147842 // IPrinter
+  class_ref 153858 // IProduct
+  classinstance_ref 140162 // Ubuntu
 end
 end

@@ -1,4 +1,4 @@
-format 64
+format 66
 
 classinstancecanvas 128002 classinstance_ref 132738 // neon.server.ifdd.de
   xyz 871 113 2000
@@ -79,4 +79,13 @@ objectlinkcanvas 131074 norel
 objectlinkcanvas 131714 rel relation_ref 139906 // contains
   from ref 128642 z 1999 label "contains" italic xyz 90 332 1999 to ref 128514
   role_a_pos 95 371 3000 role_b_pos 145 308 3000
+objectlinkcanvas 131842 norel
+  from ref 128002 z 1999 to ref 129794
+  no_role_a no_role_b
+objectlinkcanvas 131970 norel
+  from ref 128002 z 1999 to ref 129794
+  no_role_a no_role_b
+objectlinkcanvas 132098 rel relation_ref 139522 // contains
+  from ref 128002 z 1999 label "contains" italic xyz 928 152 1999 to ref 129794
+  role_a_pos 945 179 3000 role_b_pos 977 145 3000
 end

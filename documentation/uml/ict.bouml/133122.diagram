@@ -1,34 +1,40 @@
-format 64
+format 66
 
-classinstancecanvas 128002 classinstance_ref 131970 // Net1
-  xyz 52 322 2000
-end
 classinstancecanvas 128130 classinstance_ref 130562 // Workstation1
-  xyz 252 200 2000
+  xyz 182 207 2000
 end
 classinstancecanvas 128386 classinstance_ref 130690 // eth0
-  xyz 542 127 2004
+  xyz 413 113 2004
 end
 classinstancecanvas 129154 classinstance_ref 132226 // Workstation2
-  xyz 260 458 2000
+  xyz 190 465 2000
 end
 classinstancecanvas 129666 classinstance_ref 132354 // eth1
-  xyz 543 577 2000
+  xyz 414 563 2000
 end
 classinstancecanvas 130178 classinstance_ref 132482 // eth0
-  xyz 548 433 2000
+  xyz 419 419 2000
 end
 classinstancecanvas 130434 classinstance_ref 132610 // eth1
-  xyz 548 273 2000
+  xyz 419 259 2000
 end
-objectlinkcanvas 128258 norel
-  from ref 128002 z 1999 to ref 128130
-  no_role_a no_role_b
+classinstancecanvas 131202 classinstance_ref 137730 // 172.16.64.35
+  xyz 601 174 2000
+end
+classinstancecanvas 131330 classinstance_ref 137858 // 172.16.64.17
+  xyz 601 426 2000
+end
+classinstancecanvas 131458 classinstance_ref 137986 // 192.168.1.35
+  xyz 593 40 2000
+end
+classinstancecanvas 131970 classinstance_ref 131970 // Net1
+  xyz 879 41 2000
+end
+classinstancecanvas 132098 classinstance_ref 138114 // Net2
+  xyz 879 287 2000
+end
 objectlinkcanvas 128514 norel
   from ref 128130 z 1999 to ref 128386
-  no_role_a no_role_b
-objectlinkcanvas 129282 norel
-  from ref 128002 z 1999 to ref 129154
   no_role_a no_role_b
 objectlinkcanvas 129922 norel
   from ref 129154 z 1999 to ref 129666
@@ -43,6 +49,24 @@ objectlinkcanvas 130690 norel
   from ref 128130 z 1999 to ref 128386
   no_role_a no_role_b
 objectlinkcanvas 131074 rel relation_ref 139522 // contains
-  from ref 128130 z 1999 label "contains" italic xyz 430 171 3000 to ref 128386
-  role_a_pos 489 144 3000 role_b_pos 370 186 3000
+  from ref 128130 z 1999 label "contains" italic xyz 322 160 1999 to ref 128386
+  role_a_pos 366 112 3000 role_b_pos 277 181 3000
+objectlinkcanvas 131586 rel relation_ref 164354 // <aggregation>
+  from ref 128386 z 1999 to ref 131202
+  no_role_a no_role_b
+objectlinkcanvas 131714 rel relation_ref 164354 // <aggregation>
+  from ref 128386 z 1999 to ref 131458
+  no_role_a no_role_b
+objectlinkcanvas 131842 rel relation_ref 164354 // <aggregation>
+  from ref 130178 z 1999 to ref 131330
+  no_role_a no_role_b
+objectlinkcanvas 132482 rel relation_ref 164482 // <aggregation>
+  from ref 131970 z 1999 to ref 131458
+  no_role_a no_role_b
+objectlinkcanvas 132738 rel relation_ref 164482 // <aggregation>
+  from ref 132098 z 1999 to ref 131202
+  no_role_a no_role_b
+objectlinkcanvas 132866 rel relation_ref 164482 // <aggregation>
+  from ref 132098 z 1999 to ref 131330
+  no_role_a no_role_b
 end

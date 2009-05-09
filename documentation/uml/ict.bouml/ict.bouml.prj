@@ -1,7 +1,8 @@
-format 64
+format 66
 "ict.bouml"
-  revision 15
+  revision 18
   modified_by 2 "markus"
+  python_root_dir "/Users/markus/Repositories/svn.ict-ok.org/documentation/uml/ict.py/"
 
 
   
@@ -36,7 +37,7 @@ format 64
 
   mark_for_import
   
-  ncouples 12
+  ncouples 13
   key "html dir" value "/Users/markus/Repositories/svn.ict-ok.org/documentation/uml/ict.html/"
   key "gxmi path" value "/home/markus/Repositories/svn.ict-ok.org/documentation/uml/ict.xmi"
   key "gxmi gen views" value "no"
@@ -49,6 +50,7 @@ format 64
   key "gxmi gen eclipse" value "no"
   key "gxmi comment exporter" value "no"
   key "gxmi linefeed" value "no"
+  key "check-out-cmd" value "specify the command containing %file and %dir or %dironly"
   comment "ict-ok.org UML"
   package_ref 129154 // pkg_inv01
 end

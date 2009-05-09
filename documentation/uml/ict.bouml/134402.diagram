@@ -1,4 +1,4 @@
-format 64
+format 66
 
 classcanvas 128002 class_ref 128514 // ISupernode
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
@@ -22,11 +22,11 @@ classcanvas 128514 class_ref 128386 // Superclass
 end
 classcanvas 129282 class_ref 137858 // Device
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 601 590 2000
+  xyz 606 589 2000
 end
 classcanvas 129538 class_ref 137730 // IDevice
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 254 549 2000
+  xyz 258 528 2000
 end
 classcanvas 129666 class_ref 128642 // IComponent
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
@@ -42,27 +42,27 @@ classcanvas 130946 class_ref 140930 // MobilePhone
 end
 classcanvas 131458 class_ref 141570 // INotebook
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 159 894 2000
+  xyz 343 980 2000
 end
 classcanvas 131586 class_ref 141826 // Notebook
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 162 773 2000
+  xyz 346 859 2000
 end
 classcanvas 132098 class_ref 142594 // IPersonalComputer
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 398 901 2004
+  xyz 582 987 2004
 end
 classcanvas 132354 class_ref 142722 // PersonalComputer
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 405 773 2004
+  xyz 589 859 2004
 end
 classcanvas 132866 class_ref 142850 // IIndustrialComputer
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 633 904 2004
+  xyz 817 990 2004
 end
 classcanvas 133122 class_ref 142978 // IndustrialComputer
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 638 772 2004
+  xyz 822 858 2004
 end
 classcanvas 133634 class_ref 143106 // PhysicalComponent
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default

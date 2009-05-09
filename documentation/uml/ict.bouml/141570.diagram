@@ -1,0 +1,55 @@
+format 66
+
+classcanvas 128002 class_ref 152450 // IpAddress
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  xyz 476 576 2000
+end
+classcanvas 128130 class_ref 152578 // IIpAddress
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  xyz 783 543 2004
+end
+classcanvas 128386 class_ref 134018 // IInterface
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  xyz 771 245 2000
+end
+classcanvas 128514 class_ref 133122 // Interface
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  xyz 481 279 2004
+end
+classcanvas 128898 class_ref 132866 // IpNet
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  xyz 491 798 2000
+end
+classcanvas 129026 class_ref 133762 // IIpNet
+  draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+  xyz 783 773 2004
+end
+note 129410 "cl_inventory10_diag
+$Id: 131714.diagram 472 2009-03-05 12:51:18Z markusleist $"
+  xyzwh 36 29 2000 483 52
+relationcanvas 128258 relation_ref 164226 // <realization>
+  from ref 128002 z 1999 to ref 128130
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128642 relation_ref 137346 // <realization>
+  from ref 128514 z 1999 to ref 128386
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128770 relation_ref 164354 // <aggregation>
+  from ref 128514 z 1999 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129154 relation_ref 136962 // <realization>
+  from ref 128898 z 1999 to ref 129026
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129282 relation_ref 164482 // <aggregation>
+  from ref 128898 z 1999 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

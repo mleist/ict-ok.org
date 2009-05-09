@@ -1,0 +1,68 @@
+format 66
+
+classinstancecanvas 128002 classinstance_ref 139266 // EMail Support
+  xyz 685 453 2000
+end
+classinstancecanvas 128130 classinstance_ref 139394 // DNS
+  xyz 248 110 2000
+end
+classinstancecanvas 128258 classinstance_ref 139522 // IMAP
+  xyz 114 454 2000
+end
+classinstancecanvas 128386 classinstance_ref 139650 // SMTP
+  xyz 119 779 2000
+end
+classinstancecanvas 129794 classinstance_ref 130690 // eth0
+  xyz 1030 325 2000
+end
+classinstancecanvas 129922 classinstance_ref 130562 // Workstation1
+  xyz 1329 257 3005
+end
+classinstancecanvas 130306 classinstance_ref 139778 // bind9
+  xyz 92 189 2000
+end
+classinstancecanvas 130434 classinstance_ref 139906 // postfix
+  xyz 124 873 2000
+end
+classinstancecanvas 130562 classinstance_ref 140034 // dovecot
+  xyz 43 568 2000
+end
+classinstancecanvas 131714 classinstance_ref 140162 // Ubuntu
+  xyz 1287 492 2000
+end
+objectlinkcanvas 128514 rel relation_ref 166146 // ProductServices
+  from ref 128002 z 1999 label "ProductServices" italic xyz 713 270 1999 to point 757 119
+  line 130690 z 1999 to ref 128130
+  no_role_a no_role_b
+objectlinkcanvas 128642 rel relation_ref 166146 // ProductServices
+  from ref 128002 z 1999 label "ProductServices" italic xyz 396 467 1999 to ref 128258
+  no_role_a no_role_b
+objectlinkcanvas 128770 rel relation_ref 166146 // ProductServices
+  from ref 128002 z 1999 label "ProductServices" italic xyz 615 655 1999 to point 591 788
+  line 130818 z 1999 to ref 128386
+  no_role_a no_role_b
+objectlinkcanvas 130050 rel relation_ref 139522 // contains
+  from ref 129922 z 1999 label "contains" italic xyz 1201 286 1999 to ref 129794
+  role_a_pos 1132 302 3000 role_b_pos 1294 257 3000
+objectlinkcanvas 130178 rel relation_ref 165762 // ProductPhysicalComponents
+  from ref 128002 z 1999 label "ProductPhysicalComponents" italic xyz 861 389 1999 to ref 129794
+  no_role_a no_role_b
+objectlinkcanvas 130946 rel relation_ref 166274 // ProductSoftware
+  from ref 128002 z 1999 label "ProductSoftware" italic xyz 565 309 1999 to point 504 198
+  line 131074 z 1999 to ref 130306
+  no_role_a no_role_b
+objectlinkcanvas 131202 rel relation_ref 166274 // ProductSoftware
+  from ref 128002 z 1999 label "ProductSoftware" italic xyz 531 534 1999 to point 469 578
+  line 131330 z 1999 to ref 130562
+  no_role_a no_role_b
+objectlinkcanvas 131458 rel relation_ref 166274 // ProductSoftware
+  from ref 128002 z 1999 label "ProductSoftware" italic xyz 724 702 1999 to point 778 882
+  line 131586 z 1999 to ref 130434
+  no_role_a no_role_b
+objectlinkcanvas 131842 rel relation_ref 166274 // ProductSoftware
+  from ref 128002 z 1999 label "ProductSoftware" italic xyz 1014 500 1999 to ref 131714
+  no_role_a no_role_b
+objectlinkcanvas 131970 norel
+  from ref 129922 z 1999 to ref 131714
+  no_role_a no_role_b
+end

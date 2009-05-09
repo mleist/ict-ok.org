@@ -1,6 +1,6 @@
-format 64
+format 66
 "pkg_inv01" // pkg_inv01
-  revision 22
+  revision 29
   modified_by 2 "markus"
   // class settings
   //class diagram settings
@@ -26,7 +26,7 @@ format 64
   package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
   show_infonote default drawing_language default show_stereotype_properties default
   
-  python_dir "/home/markus/Repositories/svn.ict-ok.org/documentation/uml/ict.genpy/"
+  python_dir "/Users/markus/Repositories/svn.ict-ok.org/documentation/uml/ict.genpy/"
   classview 129154 "zope"
     //class diagram settings
     draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
@@ -95,6 +95,17 @@ ${members}};
       
     end
 
+    class 151298 "DateTime"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
     class 141314 "Folder"
       visibility package 
       cpp_decl ""
@@ -140,6 +151,171 @@ ${members}};
       explicit_switch_type ""
       
     end
+  end
+
+  classview 130306 "ict dias"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    classdiagram 128002 "cl_inventory01_diag"
+      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 131714 "cl_inventory02_diag"
+      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 131970 "cl_inventory03_diag"
+      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    classdiagram 134402 "cl_inventory04_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 134530 "cl_inventory05_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 135810 "cl_inventory06_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 138114 "cl_inventory07_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3
+    end
+
+    classdiagram 139266 "cl_inventory08_diag"
+      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 140418 "cl_inventory09_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 141570 "cl_inventory10_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 142722 "cl_inventory11_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 144002 "cl_inventory12_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 144130 "cl_inventory13_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 144258 "cl_inventory14_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 144514 "cl_inventory15_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 144386 "cl_inventory16_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 144642 "cl_inventory17_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 144770 "cl_inventory18_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    classdiagram 144898 "cl_inventory19_diag"
+      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+
+    objectdiagram 131586 "obj01_diag"
+       write_horizontally default package_name_in_tab default show_context default auto_label_position no draw_all_relations yes shadow default show_stereotype_properties default
+      size A4-Landscape
+    end
+
+    objectdiagram 131842 "obj02_diag"
+       write_horizontally yes package_name_in_tab yes show_context default auto_label_position yes draw_all_relations yes shadow yes show_stereotype_properties yes
+      size A4
+    end
+
+    objectdiagram 133122 "obj03_diag"
+       write_horizontally yes package_name_in_tab yes show_context default auto_label_position yes draw_all_relations yes shadow yes show_stereotype_properties yes
+      size A4-Landscape
+    end
+
+    objectdiagram 133250 "obj04_diag"
+       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+      size A4-Landscape
+    end
+
+    objectdiagram 134658 "obj05_diag"
+       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    objectdiagram 136962 "obj06_MobilePhoneFolder_diag"
+       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    objectdiagram 142850 "obj07_product"
+       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+      size A3-Landscape
+    end
+  end
+
+  classview 130434 "ict objs"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
   end
 
   deploymentview 128002 "deployment01"
@@ -316,7 +492,7 @@ ${definition}
       end
     end
 
-    artifact 131586 "Net"
+    artifact 131586 "IpNet"
       stereotype "source"
       python_src "# -*- coding: utf-8 -*-
 #
@@ -335,7 +511,7 @@ ${import}
 ${definition}
 "
       associated_classes
-	class_ref 132866 // Net
+	class_ref 132866 // IpNet
       end
     end
 
@@ -663,7 +839,7 @@ ${definition}
       end
     end
 
-    artifact 132994 "INet"
+    artifact 132994 "IIpNet"
       stereotype "source"
       python_src "# -*- coding: utf-8 -*-
 #
@@ -682,7 +858,7 @@ ${import}
 ${definition}
 "
       associated_classes
-	class_ref 133762 // INet
+	class_ref 133762 // IIpNet
       end
     end
 
@@ -982,6 +1158,860 @@ ${definition}
 	class_ref 139266 // IComponentFolder
       end
     end
+
+    artifact 138754 "IX509Certificate"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 150146 // IX509Certificate
+      end
+    end
+
+    artifact 139906 "ILogicalDevice"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 149506 // ILogicalDevice
+      end
+    end
+
+    artifact 140034 "ISuperclass"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 128002 // ISuperclass
+      end
+    end
+
+    artifact 140162 "ISupernode"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 128514 // ISupernode
+      end
+    end
+
+    artifact 140290 "IComponent"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 128642 // IComponent
+      end
+    end
+
+    artifact 140418 "ILogicalComponent"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 144386 // ILogicalComponent
+      end
+    end
+
+    artifact 140546 "IPhysicalComponent"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 144514 // IPhysicalComponent
+      end
+    end
+
+    artifact 140674 "ISoftwareComponent"
+      stereotype "source"
+      associated_classes
+	class_ref 144642 // ISoftwareComponent
+      end
+    end
+
+    artifact 140802 "ICredential"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 149890 // ICredential
+      end
+    end
+
+    artifact 140930 "ApplicationSoftware"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 138114 // ApplicationSoftware
+      end
+    end
+
+    artifact 141058 "Device"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 137858 // Device
+      end
+    end
+
+    artifact 141186 "DisplayUnit"
+      stereotype "source"
+      associated_classes
+	class_ref 147458 // DisplayUnit
+      end
+    end
+
+    artifact 141314 "IndustrialComputer"
+      stereotype "source"
+      associated_classes
+	class_ref 142978 // IndustrialComputer
+      end
+    end
+
+    artifact 141442 "ISDNPhone"
+      stereotype "source"
+      associated_classes
+	class_ref 148354 // ISDNPhone
+      end
+    end
+
+    artifact 141570 "MiscPhysical"
+      stereotype "source"
+      associated_classes
+	class_ref 147970 // MiscPhysical
+      end
+    end
+
+    artifact 141698 "MobilePhone"
+      stereotype "source"
+      associated_classes
+	class_ref 140930 // MobilePhone
+      end
+    end
+
+    artifact 141826 "Notebook"
+      stereotype "source"
+      associated_classes
+	class_ref 141826 // Notebook
+      end
+    end
+
+    artifact 141954 "OperatingSoftware"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 137986 // OperatingSoftware
+      end
+    end
+
+    artifact 142082 "PersonalComputer"
+      stereotype "source"
+      associated_classes
+	class_ref 142722 // PersonalComputer
+      end
+    end
+
+    artifact 142210 "PhysicalLink"
+      stereotype "source"
+      associated_classes
+	class_ref 146178 // PhysicalLink
+      end
+    end
+
+    artifact 142338 "Printer"
+      stereotype "source"
+      associated_classes
+	class_ref 147714 // Printer
+      end
+    end
+
+    artifact 142466 "Requirement"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 135682 // Requirement
+      end
+    end
+
+    artifact 142594 "X509Certificate"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 150018 // X509Certificate
+      end
+    end
+
+    artifact 142722 "DeviceFolder"
+      stereotype "source"
+      associated_classes
+	class_ref 142338 // DeviceFolder
+      end
+    end
+
+    artifact 142850 "MobilePhoneFolder"
+      stereotype "source"
+      associated_classes
+	class_ref 141186 // MobilePhoneFolder
+      end
+    end
+
+    artifact 142978 "NotebookFolder"
+      stereotype "source"
+      associated_classes
+	class_ref 141954 // NotebookFolder
+      end
+    end
+
+    artifact 143106 "IApplicationSoftware"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 137602 // IApplicationSoftware
+      end
+    end
+
+    artifact 143234 "IDevice"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 137730 // IDevice
+      end
+    end
+
+    artifact 143362 "IDisplayUnit"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 147586 // IDisplayUnit
+      end
+    end
+
+    artifact 143490 "IIndustrialComputer"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 142850 // IIndustrialComputer
+      end
+    end
+
+    artifact 143618 "IISDNPhone"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 148226 // IISDNPhone
+      end
+    end
+
+    artifact 143746 "IMiscPhysical"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 148098 // IMiscPhysical
+      end
+    end
+
+    artifact 143874 "IMobilePhone"
+      stereotype "source"
+      associated_classes
+	class_ref 139522 // IMobilePhone
+      end
+    end
+
+    artifact 144002 "INotebook"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 141570 // INotebook
+      end
+    end
+
+    artifact 144130 "IOperatingSoftware"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 144898 // IOperatingSoftware
+      end
+    end
+
+    artifact 144258 "IPersonalComputer"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 142594 // IPersonalComputer
+      end
+    end
+
+    artifact 144386 "IPhysicalLink"
+      stereotype "source"
+      associated_classes
+	class_ref 146050 // IPhysicalLink
+      end
+    end
+
+    artifact 144514 "IPrinter"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 147842 // IPrinter
+      end
+    end
+
+    artifact 144642 "IRequirement"
+      stereotype "source"
+      python_src "# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 135810 // IRequirement
+      end
+    end
+
+    artifact 144770 "IDeviceFolder"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 142210 // IDeviceFolder
+      end
+    end
+
+    artifact 144898 "IMobilePhoneFolder"
+      stereotype "source"
+      associated_classes
+	class_ref 141058 // IMobilePhoneFolder
+      end
+    end
+
+    artifact 145026 "INotebookFolder"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 141698 // INotebookFolder
+      end
+    end
+
+    artifact 145154 "IPersonalComputerFolder"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 142466 // IPersonalComputerFolder
+      end
+    end
   end
 
   classview 128002 "cl_inventory01"
@@ -1001,76 +2031,6 @@ ${definition}
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
     associated_deployment_view deploymentview_ref 128002 // deployment01
-    classdiagram 128002 "cl_inventory01_diag"
-      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-      size A3-Landscape
-    end
-
-    classdiagram 131714 "cl_inventory02_diag"
-      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-      size A3-Landscape
-    end
-
-    classdiagram 131970 "cl_inventory03_diag"
-      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-      size A4
-    end
-
-    classdiagram 134402 "cl_inventory04_diag"
-      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-      size A3-Landscape
-    end
-
-    classdiagram 134530 "cl_inventory05_diag"
-      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-      size A3-Landscape
-    end
-
-    classdiagram 135810 "cl_inventory06_diag"
-      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-      size A3-Landscape
-    end
-
-    classdiagram 138114 "cl_inventory07_diag"
-      draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-      size A3
-    end
-
-    classdiagram 139266 "cl_inventory08_diag"
-      draw_all_relations no hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-      size A3-Landscape
-    end
-
-    objectdiagram 131586 "obj01_diag"
-       write_horizontally default package_name_in_tab default show_context default auto_label_position no draw_all_relations yes shadow default show_stereotype_properties default
-      size A4-Landscape
-    end
-
-    objectdiagram 131842 "obj02_diag"
-       write_horizontally yes package_name_in_tab yes show_context default auto_label_position yes draw_all_relations yes shadow yes show_stereotype_properties yes
-      size A4
-    end
-
-    objectdiagram 133122 "obj03_diag"
-       write_horizontally yes package_name_in_tab yes show_context default auto_label_position yes draw_all_relations yes shadow yes show_stereotype_properties yes
-      size A4-Landscape
-    end
-
-    objectdiagram 133250 "obj04_diag"
-       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
-      size A4-Landscape
-    end
-
-    objectdiagram 134658 "obj05_diag"
-       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
-      size A4
-    end
-
-    objectdiagram 136962 "obj06_MobilePhoneFolder_diag"
-       write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
-      size A4
-    end
-
     class 135938 "Choice"
       visibility package 
       cpp_decl ""
@@ -1188,6 +2148,39 @@ ${docstring}${members}
       end
     end
 
+    class 149634 "LogicalDevice"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "			"
+      classrelation 166018 // <generalisation>
+	relation 161922 ---|>
+	  a public
+	    classrelation_ref 166018 // <generalisation>
+	  b parent class_ref 143234 // LogicalComponent
+      end
+
+      classrelation 166146 // <realization>
+	relation 162050 -_-|>
+	  a public
+	    classrelation_ref 166146 // <realization>
+	  b parent class_ref 149506 // ILogicalDevice
+      end
+
+      classrelation 166658 // (Realizes)
+	relation 162434 ---- name "Realizes"
+	  a role_name "" multiplicity "*" public
+	    classrelation_ref 166658 // (Realizes)
+	  b role_name "" multiplicity "*" public
+	    classrelation_ref 166786 // (Realizes)
+      end
+    end
+
     class 143106 "PhysicalComponent"
       abstract visibility package 
       cpp_decl ""
@@ -1209,6 +2202,10 @@ ${docstring}${members}
 	  a public
 	    classrelation_ref 157698 // <realization>
 	  b parent class_ref 144514 // IPhysicalComponent
+      end
+
+      classrelation 170498 // ProductPhysicalComponents
+	relation_ref 165762 // ProductPhysicalComponents
       end
     end
 
@@ -1233,6 +2230,34 @@ ${docstring}${members}
 	  a public
 	    classrelation_ref 163714 // <realization>
 	  b parent class_ref 144642 // ISoftwareComponent
+      end
+
+      classrelation 171522 // ProductSoftware
+	relation_ref 166274 // ProductSoftware
+      end
+    end
+
+    class 149762 "Credential"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 167042 // <generalisation>
+	relation 162690 ---|>
+	  a public
+	    classrelation_ref 167042 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 167170 // <realization>
+	relation 162818 -_-|>
+	  a public
+	    classrelation_ref 167170 // <realization>
+	  b parent class_ref 149890 // ICredential
       end
     end
 
@@ -1489,6 +2514,33 @@ ${members}};
       
     end
 
+    class 149506 "ILogicalDevice"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 157442 "device"
+	public type class_ref 137730 // IDevice
+	multiplicity "*"
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+    end
+
     class 144514 "IPhysicalComponent"
       abstract visibility package stereotype "interface"
       cpp_decl ""
@@ -1728,6 +2780,23 @@ ${members}};
       end
     end
 
+    class 149890 "ICredential"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+    end
+
     class 139266 "IComponentFolder"
       abstract visibility package stereotype "interface"
       cpp_decl ""
@@ -1737,6 +2806,30 @@ ${members}};
       idl_decl ""
       explicit_switch_type ""
       
+    end
+
+    class 156034 "Address"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 173570 // <realization>
+	relation 168194 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 173570 // <realization>
+	  b parent class_ref 156162 // IAddress
+      end
+
+      classrelation 174722 // <aggregation>
+	relation_ref 168834 // <aggregation>
+      end
     end
 
     class 138114 "ApplicationSoftware"
@@ -1810,6 +2903,82 @@ ${docstring}${members}
       end
     end
 
+    class 155266 "Contact"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 173314 // <realization>
+	relation 167938 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 173314 // <realization>
+	  b parent class_ref 155394 // IContact
+      end
+
+      classrelation 174338 // <aggregation>
+	relation 168706 o---
+	  a role_name "" multiplicity "*" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 174338 // <aggregation>
+	  b role_name "" multiplicity "0..1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 174466 // <aggregation>
+      end
+
+      classrelation 175746 // <aggregation>
+	relation_ref 169474 // <aggregation>
+      end
+    end
+
+    class 155650 "ContactItem"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 173442 // <realization>
+	relation 168066 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 173442 // <realization>
+	  b parent class_ref 155522 // IContactItem
+      end
+
+      classrelation 174466 // <aggregation>
+	relation_ref 168706 // <aggregation>
+      end
+
+      classrelation 174594 // <aggregation>
+	relation 168834 o---
+	  a role_name "" multiplicity "*" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 174594 // <aggregation>
+	  b role_name "" multiplicity "1..*" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 174722 // <aggregation>
+      end
+
+      classrelation 175490 // <aggregation>
+	relation_ref 169346 // <aggregation>
+      end
+    end
+
     class 137858 "Device"
       visibility package 
       cpp_decl ""
@@ -1833,6 +3002,10 @@ ${docstring}${members}
 	  a public
 	    classrelation_ref 162178 // <realization>
 	  b parent class_ref 137730 // IDevice
+      end
+
+      classrelation 166786 // (Realizes)
+	relation_ref 162434 // Realizes
       end
     end
 
@@ -1871,14 +3044,6 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 137218 // <generalisation>
-	relation 135682 ---|>
-	  a public
-	    python "${type}"
-	    classrelation_ref 137218 // <generalisation>
-	  b parent class_ref 128258 // Component
-      end
-
       classrelation 141314 // contains
 	relation_ref 139394 // contains
       end
@@ -1900,6 +3065,13 @@ ${docstring}${members}
 	  a public
 	    classrelation_ref 163458 // <realization>
 	  b parent class_ref 133506 // IHost
+      end
+
+      classrelation 166274 // <generalisation>
+	relation 162178 ---|>
+	  a public
+	    classrelation_ref 166274 // <generalisation>
+	  b parent class_ref 149634 // LogicalDevice
       end
     end
 
@@ -2087,6 +3259,18 @@ ${docstring}${members}
       classrelation 160258 // linkHasConnector
 	relation_ref 156418 // linkHasConnector
       end
+
+      classrelation 168706 // <aggregation>
+	relation 164354 o---
+	  a role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 168706 // <aggregation>
+	  b role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 168834 // <aggregation>
+      end
     end
 
     class 148354 "ISDNPhone"
@@ -2218,7 +3402,43 @@ ${docstring}${members}
       end
     end
 
-    class 132866 "Net"
+    class 152450 "IpAddress"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 168450 // <generalisation>
+	relation 164098 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 168450 // <generalisation>
+	  b parent class_ref 143234 // LogicalComponent
+      end
+
+      classrelation 168578 // <realization>
+	relation 164226 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 168578 // <realization>
+	  b parent class_ref 152578 // IIpAddress
+      end
+
+      classrelation 168834 // <aggregation>
+	relation_ref 164354 // <aggregation>
+      end
+
+      classrelation 169090 // <aggregation>
+	relation_ref 164482 // <aggregation>
+      end
+    end
+
+    class 132866 "IpNet"
       visibility package 
       cpp_decl ""
       java_decl ""
@@ -2242,7 +3462,19 @@ ${docstring}${members}
 	  a public
 	    python "${type}"
 	    classrelation_ref 138498 // <realization>
-	  b parent class_ref 133762 // INet
+	  b parent class_ref 133762 // IIpNet
+      end
+
+      classrelation 168962 // <aggregation>
+	relation 164482 o---
+	  a role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 168962 // <aggregation>
+	  b role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 169090 // <aggregation>
       end
     end
 
@@ -2293,6 +3525,34 @@ ${docstring}${members}
 	  a public
 	    classrelation_ref 155906 // <realization>
 	  b parent class_ref 144898 // IOperatingSoftware
+      end
+    end
+
+    class 156290 "Organization"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 173698 // <realization>
+	relation 168322 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 173698 // <realization>
+	  b parent class_ref 156418 // IOrganization
+      end
+
+      classrelation 174978 // <generalisation>
+	relation 169090 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 174978 // <generalisation>
+	  b parent class_ref 155650 // ContactItem
       end
     end
 
@@ -2477,6 +3737,34 @@ ${docstring}${members}
       end
     end
 
+    class 155778 "Person"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 173186 // <realization>
+	relation 167810 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 173186 // <realization>
+	  b parent class_ref 155906 // IPerson
+      end
+
+      classrelation 174850 // <generalisation>
+	relation 168962 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 174850 // <generalisation>
+	  b parent class_ref 155650 // ContactItem
+      end
+    end
+
     class 142722 "PersonalComputer"
       visibility package 
       cpp_decl ""
@@ -2580,6 +3868,90 @@ ${docstring}${members}
 	  a public
 	    classrelation_ref 164226 // <generalisation>
 	  b parent class_ref 143106 // PhysicalComponent
+      end
+    end
+
+    class 153730 "Product"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 170242 // <realization>
+	relation 165634 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 170242 // <realization>
+	  b parent class_ref 153858 // IProduct
+      end
+
+      classrelation 170370 // (ProductPhysicalComponents)
+	relation 165762 o--- name "ProductPhysicalComponents"
+	  a role_name "" multiplicity "*" public
+	    python "${comment}${self}${name} = ${stereotype}()
+"
+	    classrelation_ref 170370 // (ProductPhysicalComponents)
+	  b role_name "" multiplicity "0..1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 170498 // ProductPhysicalComponents
+      end
+
+      classrelation 171138 // (ProductServices)
+	relation 166146 o--- name "ProductServices"
+	  a role_name "" multiplicity "*" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 171138 // (ProductServices)
+	  b role_name "" multiplicity "0..1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 171266 // (ProductServices)
+      end
+
+      classrelation 171394 // (ProductSoftware)
+	relation 166274 o--- name "ProductSoftware"
+	  a role_name "" multiplicity "*" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 171394 // (ProductSoftware)
+	  b role_name "" multiplicity "0..1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 171522 // ProductSoftware
+      end
+
+      classrelation 171650 // (ProductParentChild)
+	relation 166402 o--- name "ProductParentChild"
+	  a role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 171650 // (ProductParentChild)
+	  b role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 171778 // (ProductParentChild)
+      end
+
+      classrelation 171778 // (ProductParentChild)
+	relation_ref 166402 // ProductParentChild
+      end
+
+      classrelation 171906 // <generalisation>
+	relation 166530 ---|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 171906 // <generalisation>
+	  b parent class_ref 128258 // Component
+      end
+
+      classrelation 175234 // <aggregation>
+	relation_ref 169218 // <aggregation>
       end
     end
 
@@ -2755,6 +4127,10 @@ ${docstring}${members}
 	    classrelation_ref 138626 // <realization>
 	  b parent class_ref 133634 // IService
       end
+
+      classrelation 171266 // (ProductServices)
+	relation_ref 166146 // ProductServices
+      end
     end
 
     class 133378 "SnmpValue"
@@ -2782,6 +4158,104 @@ ${docstring}${members}
 	    python "${type}"
 	    classrelation_ref 138754 // <realization>
 	  b parent class_ref 133890 // ISnmpValue
+      end
+    end
+
+    class 155010 "WorkOrder"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 173058 // <realization>
+	relation 167682 -_-|>
+	  a public
+	    python "${type}"
+	    classrelation_ref 173058 // <realization>
+	  b parent class_ref 155138 // IWorkOrder
+      end
+
+      classrelation 175106 // <aggregation>
+	relation 169218 o---
+	  a role_name "" multiplicity "*" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 175106 // <aggregation>
+	  b role_name "" multiplicity "1" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 175234 // <aggregation>
+      end
+
+      classrelation 175362 // <aggregation>
+	relation 169346 o---
+	  a role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 175362 // <aggregation>
+	  b role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 175490 // <aggregation>
+      end
+
+      classrelation 175618 // <aggregation>
+	relation 169474 o---
+	  a role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 175618 // <aggregation>
+	  b role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 175746 // <aggregation>
+      end
+
+      classrelation 175874 // <aggregation>
+	relation 169602 o---
+	  a role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 175874 // <aggregation>
+	  b role_name "" public
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 176002 // <aggregation>
+      end
+
+      classrelation 176002 // <aggregation>
+	relation_ref 169602 // <aggregation>
+      end
+    end
+
+    class 150018 "X509Certificate"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 166914 // <generalisation>
+	relation 162562 ---|>
+	  a public
+	    classrelation_ref 166914 // <generalisation>
+	  b parent class_ref 149762 // Credential
+      end
+
+      classrelation 167298 // <realization>
+	relation 162946 -_-|>
+	  a public
+	    classrelation_ref 167298 // <realization>
+	  b parent class_ref 150146 // IX509Certificate
       end
     end
 
@@ -2879,6 +4353,84 @@ ${docstring}${members}
       end
     end
 
+    class 156162 "IAddress"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 162946 "address1"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 163074 "address2"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 163202 "address3"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 163330 "city"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 163458 "postalCode"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 163586 "country"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+    end
+
     class 137602 "IApplicationSoftware"
       visibility package stereotype "interface"
       cpp_decl ""
@@ -2941,6 +4493,38 @@ ${docstring}${members}
       end
     end
 
+    class 155394 "IContact"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+    end
+
+    class 155522 "IContactItem"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
     class 137730 "IDevice"
       visibility package stereotype "interface"
       cpp_decl ""
@@ -2993,7 +4577,7 @@ ${members}};
       end
 
       attribute 136834 "osoftwares"
-	public explicit_type ""
+	public type class_ref 144898 // IOperatingSoftware
 	multiplicity "*"
 	stereotype "list"
 	cpp_decl ""
@@ -3005,7 +4589,7 @@ ${members}};
       end
 
       attribute 136962 "appsoftwares"
-	public explicit_type ""
+	public type class_ref 137602 // IApplicationSoftware
 	multiplicity "*"
 	stereotype "list"
 	cpp_decl ""
@@ -3013,6 +4597,17 @@ ${members}};
 	php_decl ""
 	python_decl "${comment}${self}${name} = ${value}
 "
+	idl_decl ""
+      end
+
+      attribute 157314 "logicalDevices"
+	public type class_ref 149506 // ILogicalDevice
+	multiplicity "*"
+	stereotype "list"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
 	idl_decl ""
       end
     end
@@ -3446,8 +5041,9 @@ ${docstring}${members}
 	comment "MAC address of the host"
       end
 
-      attribute 134274 "ipv4List"
-	public explicit_type "string"
+      attribute 134274 "ipAddresses"
+	public type class_ref 152450 // IpAddress
+	multiplicity "*"
 	init_value "[]"
 	stereotype "list"
 	cpp_decl ""
@@ -3638,7 +5234,57 @@ ${members}};
       end
     end
 
-    class 133762 "INet"
+    class 152578 "IIpAddress"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 160898 "ipv4"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 161026 "interface"
+	public type class_ref 133122 // Interface
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 161154 "ipNet"
+	public type class_ref 132866 // IpNet
+	multiplicity "0..1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+    end
+
+    class 133762 "IIpNet"
       visibility public stereotype "interface"
       cpp_decl ""
       java_decl ""
@@ -3659,6 +5305,17 @@ ${docstring}${members}
 	idl_decl ""
 	comment "IP address"
       end
+
+      attribute 161282 "ipAddresses"
+	public type class_ref 152450 // IpAddress
+	multiplicity "*"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
     end
 
     class 141570 "INotebook"
@@ -3676,6 +5333,34 @@ ${members}};
 "
       explicit_switch_type ""
       
+    end
+
+    class 156418 "IOrganization"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 162434 "name"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
     end
 
     class 144898 "IOperatingSoftware"
@@ -3761,6 +5446,54 @@ ${members}};
 	java_decl ""
 	php_decl ""
 	python_decl ""
+	idl_decl ""
+      end
+    end
+
+    class 155906 "IPerson"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 162562 "firstName"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 162690 "lastName"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+      end
+
+      attribute 162818 "title"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
 	idl_decl ""
       end
     end
@@ -3904,6 +5637,19 @@ ${members}};
       end
     end
 
+    class 153858 "IProduct"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
     class 132738 "IRack"
       visibility public stereotype "interface"
       cpp_decl ""
@@ -4039,6 +5785,138 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
+    end
+
+    class 155138 "IWorkOrder"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 150146 "IX509Certificate"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}${visibility}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      attribute 159746 "publicKey"
+	public explicit_type "string"
+	multiplicity "1"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	comment "The PEM-encoded raw public key."
+      end
+
+      operation 130690 "getIssuerName"
+	public explicit_return_type "string"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 130818 "getSubject"
+	public explicit_return_type "string"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 130946 "getSerialNumber"
+	public explicit_return_type "string"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131074 "getSignatureAlgorithm"
+	public explicit_return_type "string"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131202 "getPublicKeyAlgorithm"
+	public explicit_return_type "string"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131330 "getPublicKeySize"
+	public explicit_return_type "string"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131458 "getVersion"
+	public explicit_return_type "string"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131586 "getValidNotBefore"
+	public return_type class_ref 151298 // DateTime
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 131714 "getValidNotAfter"
+	public return_type class_ref 151298 // DateTime
+	nparams 0
+	
+	
+	
+	
+	
+      end
     end
 
     class 142210 "IDeviceFolder"
@@ -4241,8 +6119,6 @@ ${members}};
     classinstance 130562 "Workstation1"
       type class_ref 132994 // Host
       attributes
-        attribute_ref 130690 // ikName
-          "Workstation1"
         end
       relations
         relation_ref 139522 // contains
@@ -4253,10 +6129,12 @@ ${members}};
     classinstance 130690 "eth0"
       type class_ref 133122 // Interface
       attributes
-        attribute_ref 134274 // ipv4List
-          "[u\"172.16.64.35\"]"
         end
       relations
+        relation_ref 164354 // <aggregation>
+          classinstance_ref 137730 // 172.16.64.35
+        relation_ref 164354 // <aggregation>
+          classinstance_ref 137986 // 192.168.1.35
         end
       comment "Workstation1/eth0"
     end
@@ -4279,12 +6157,14 @@ ${members}};
     end
 
     classinstance 131970 "Net1"
-      type class_ref 132866 // Net
+      type class_ref 132866 // IpNet
       attributes
         attribute_ref 130818 // ipv4
           "192.168.1.0/24"
         end
       relations
+        relation_ref 164482 // <aggregation>
+          classinstance_ref 137986 // 192.168.1.35
         end
     end
 
@@ -4299,10 +6179,10 @@ ${members}};
     classinstance 132482 "eth0"
       type class_ref 133122 // Interface
       attributes
-        attribute_ref 134274 // ipv4List
-          "[u\"172.16.64.17\"]"
         end
       relations
+        relation_ref 164354 // <aggregation>
+          classinstance_ref 137858 // 172.16.64.17
         end
       comment "Workstation2/eth0"
     end
@@ -4321,6 +6201,8 @@ ${members}};
       attributes
         end
       relations
+        relation_ref 139522 // contains
+          classinstance_ref 133122 // eth0
         end
     end
 
@@ -4467,6 +6349,147 @@ ${members}};
           classinstance_ref 130050 // P1/1
         end
     end
+
+    classinstance 137730 "172.16.64.35"
+      type class_ref 152450 // IpAddress
+      attributes
+        end
+      relations
+        end
+    end
+
+    classinstance 137858 "172.16.64.17"
+      type class_ref 152450 // IpAddress
+      attributes
+        end
+      relations
+        end
+    end
+
+    classinstance 137986 "192.168.1.35"
+      type class_ref 152450 // IpAddress
+      attributes
+        attribute_ref 160898 // ipv4
+          "192.168.1.35/24"
+        end
+      relations
+        end
+    end
+
+    classinstance 138114 "Net2"
+      type class_ref 132866 // IpNet
+      attributes
+        attribute_ref 130818 // ipv4
+          "172.16.64.0/24"
+        end
+      relations
+        relation_ref 164482 // <aggregation>
+          classinstance_ref 137730 // 172.16.64.35
+        relation_ref 164482 // <aggregation>
+          classinstance_ref 137858 // 172.16.64.17
+        end
+    end
+
+    classinstance 139266 "EMail Support"
+      type class_ref 153730 // Product
+      attributes
+        attribute_ref 140418 // dbgLevel
+          "0"
+        attribute_ref 139778 // ikAuthor
+          "Markus Leist"
+        attribute_ref 130690 // ikName
+          "E-Mail 01"
+        attribute_ref 135938 // isTemplate
+          "False"
+        end
+      relations
+        relation_ref 166146 // ProductServices
+          classinstance_ref 139394 // DNS
+        relation_ref 166146 // ProductServices
+          classinstance_ref 139650 // SMTP
+        relation_ref 166146 // ProductServices
+          classinstance_ref 139522 // IMAP
+        relation_ref 165762 // ProductPhysicalComponents
+          classinstance_ref 133122 // eth0
+        relation_ref 165762 // ProductPhysicalComponents
+          classinstance_ref 130690 // eth0
+        relation_ref 166274 // ProductSoftware
+          classinstance_ref 139778 // bind9
+        relation_ref 166274 // ProductSoftware
+          classinstance_ref 140034 // dovecot
+        relation_ref 166274 // ProductSoftware
+          classinstance_ref 139906 // postfix
+        relation_ref 166274 // ProductSoftware
+          classinstance_ref 140162 // Ubuntu
+        end
+    end
+
+    classinstance 139394 "DNS"
+      type class_ref 133250 // Service
+      attributes
+        end
+      relations
+        end
+    end
+
+    classinstance 139522 "IMAP"
+      type class_ref 133250 // Service
+      attributes
+        end
+      relations
+        end
+    end
+
+    classinstance 139650 "SMTP"
+      type class_ref 133250 // Service
+      attributes
+        end
+      relations
+        end
+    end
+
+    classinstance 139778 "bind9"
+      type class_ref 138114 // ApplicationSoftware
+      attributes
+        end
+      relations
+        end
+      comment "DNS-Server"
+    end
+
+    classinstance 139906 "postfix"
+      type class_ref 138114 // ApplicationSoftware
+      attributes
+        end
+      relations
+        end
+      comment "SMTP-IN-Server"
+    end
+
+    classinstance 140034 "dovecot"
+      type class_ref 138114 // ApplicationSoftware
+      attributes
+        end
+      relations
+        end
+      comment "IMAP-Server"
+    end
+
+    classinstance 140162 "Ubuntu"
+      type class_ref 137986 // OperatingSoftware
+      attributes
+        attribute_ref 130690 // ikName
+          "Ubuntu"
+        attribute_ref 137986 // majorVersion
+          "9"
+        attribute_ref 138114 // minorVersion
+          "04"
+        end
+      relations
+        end
+      comment "Ubuntu Server 9.04"
+    end
+
   end
 
   componentview 128002 "Compon01"
@@ -4478,5 +6501,41 @@ ${members}};
       draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
       size A3-Landscape
     end
+  end
+
+  classview 130562 "ict base"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+  end
+
+  classview 130690 "ict classes"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
   end
 end

@@ -1,4 +1,4 @@
-format 62
+format 66
 
 deploymentnodecanvas 128002 deploymentnode_ref 129154 // Node01
   xyzwh 503 473 2000 71 33
@@ -17,5 +17,11 @@ artifactcanvas 128770 artifact_ref 129538 // Outlet
 end
 artifactcanvas 129154 artifact_ref 129282 // PatchPanel
   xyz 207 207 2000
+end
+artifactcanvas 129282 artifact_ref 140930 // ApplicationSoftware
+  xyz 273 92 2000
+end
+artifactcanvas 129410 artifact_ref 142594 // X509Certificate
+  xyz 458 93 2000
 end
 end
