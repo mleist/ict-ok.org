@@ -93,7 +93,6 @@ def allRequirementHierVocab(dummy_context):
 def allRequirementVocab(dummy_context):
     """Which locations are there
     """
-    print "allRequirementVocab"
     terms = []
     my_catalog = zapi.getUtility(ICatalog)
     try:
