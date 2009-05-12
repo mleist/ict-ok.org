@@ -21,5 +21,3 @@ AppSchemaManager = SchemaManager(
     minimum_generation = 2,
     generation = 2,
     package_name=key)
-
-print "generation #####################################"

@@ -33,8 +33,6 @@ from org.ict_ok.components.site.interfaces import INewSiteEvent
 class NewSiteEvent(object):
     implements(INewSiteEvent)
 
-    print "ddd: NewSiteEvent"
-
     def __init__(self, site):
         print "NewSiteEvent:__init__(%s)" % (site)
         self.object = site
