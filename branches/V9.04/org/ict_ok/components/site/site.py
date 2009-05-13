@@ -213,6 +213,21 @@ def createLocalUtils(event):
     from org.ict_ok.components.ip_address.bootstrap import \
         createUtils as createIpAddressUtils
 
+    from org.ict_ok.components.product.bootstrap import \
+        createUtils as createProductUtils
+    from org.ict_ok.components.address.bootstrap import \
+        createUtils as createAddressUtils
+    from org.ict_ok.components.organization.bootstrap import \
+        createUtils as createOrganizationUtils
+    from org.ict_ok.components.person.bootstrap import \
+        createUtils as createPersonUtils
+    from org.ict_ok.components.contact.bootstrap import \
+        createUtils as createContactUtils
+    from org.ict_ok.components.contact_item.bootstrap import \
+        createUtils as createContactItemUtils
+    from org.ict_ok.components.work_order.bootstrap import \
+        createUtils as createWorkOrderUtils
+
     setSite(event.object)
 #    default = zapi.traverse(event.object, '++etc++site/default')
     
@@ -272,3 +287,11 @@ def createLocalUtils(event):
     createLatencyUtils(event.object)
     createX509certificateUtils(event.object)
     createIpAddressUtils(event.object)
+
+    createProductUtils(event.object)
+    createAddressUtils(event.object)
+    createOrganizationUtils(event.object)
+    createPersonUtils(event.object)
+    createContactUtils(event.object)
+    createContactItemUtils(event.object)
+    createWorkOrderUtils(event.object)

@@ -54,7 +54,6 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                  u'org.ict_ok.components.osoftware.osoftware.OperatingSoftwareFolder',
                  root_folder,
                  sitem)
-
     transaction.get().commit()
     if connection is not None:
         connection.close()
