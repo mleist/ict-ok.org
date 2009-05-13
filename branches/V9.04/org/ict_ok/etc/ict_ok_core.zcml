@@ -95,4 +95,12 @@
 
     <include package="org.ict_ok.components.x509certificate" />
 
+    <include package="org.ict_ok.components.product" />
+    <include package="org.ict_ok.components.address" />
+    <include package="org.ict_ok.components.organization" />
+    <include package="org.ict_ok.components.person" />
+    <include package="org.ict_ok.components.contact" />
+    <include package="org.ict_ok.components.contact_item" />
+    <include package="org.ict_ok.components.work_order" />
+
 </configure>

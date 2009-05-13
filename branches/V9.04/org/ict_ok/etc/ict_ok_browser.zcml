@@ -78,4 +78,12 @@
     <include package="org.ict_ok.components.isdnphone.browser" />
 
     <include package="org.ict_ok.components.x509certificate.browser" />
+
+    <include package="org.ict_ok.components.product.browser" />
+    <include package="org.ict_ok.components.address.browser" />
+    <include package="org.ict_ok.components.organization.browser" />
+    <include package="org.ict_ok.components.person.browser" />
+    <include package="org.ict_ok.components.contact.browser" />
+    <include package="org.ict_ok.components.contact_item.browser" />
+    <include package="org.ict_ok.components.work_order.browser" />
 </configure>

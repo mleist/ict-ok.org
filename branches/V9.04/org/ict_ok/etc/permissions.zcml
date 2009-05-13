@@ -127,8 +127,24 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.isdnphone"
              file="security.zcml" />
-             
+
     <include package="org.ict_ok.components.x509certificate"
              file="security.zcml" />
+
+    <include package="org.ict_ok.components.product"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.address"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.organization"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.person"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.contact"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.contact_item"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.work_order"
+             file="security.zcml" />
+
 
 </configure>

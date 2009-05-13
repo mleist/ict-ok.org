@@ -76,6 +76,13 @@ from org.ict_ok.components.service.interfaces import IService
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.components.switch.interfaces import ISwitch
 from org.ict_ok.components.x509certificate.interfaces import IX509Certificate
+from org.ict_ok.components.product.interfaces import IProduct
+from org.ict_ok.components.address.interfaces import IAddress
+from org.ict_ok.components.organization.interfaces import IOrganization
+from org.ict_ok.components.person.interfaces import IPerson
+from org.ict_ok.components.contact.interfaces import IContact
+from org.ict_ok.components.contact_item.interfaces import IContactItem
+from org.ict_ok.components.work_order.interfaces import IWorkOrder
 
 
 _ = MessageFactory('org.ict_ok')
@@ -505,6 +512,20 @@ class AdmUtilReportsDetails(SupernodeDetails):
                                              'Switches'))
         objsList.append(self._makeObjectList(IX509Certificate,
                                              'X509 Certificates'))
+        objsList.append(self._makeObjectList(IProduct,
+                                             'Products'))
+        objsList.append(self._makeObjectList(IAddress,
+                                             'Addresses'))
+        objsList.append(self._makeObjectList(IOrganization,
+                                             'Organizaions'))
+        objsList.append(self._makeObjectList(IPerson,
+                                             'Persons'))
+        objsList.append(self._makeObjectList(IContact,
+                                             'Contacts'))
+        objsList.append(self._makeObjectList(IContactItem,
+                                             'Contact items'))
+        objsList.append(self._makeObjectList(IWorkOrder,
+                                             'Work orders'))
         #return self.reportPdfByQueryList(queryList)
         return self.reportPdfByObjectList(objsList)
 
