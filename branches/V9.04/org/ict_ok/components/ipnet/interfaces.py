@@ -63,7 +63,10 @@ class IIpNet(Interface):
         """publicKey must be valid PEM string
         """
         if obj.parentnet is not None:
-            parentnet = IP(obj.parentnet)
+            if IIpNet.providedBy(obj.parentnet):
+                parentnet = IP(obj.parentnet.ipv4)
+            else:
+                parentnet = IP(obj.parentnet)
             mynet = IP(obj.ipv4)
             if not mynet in parentnet:
                 raise Invalid(u"'%s' not in '%s'" % (obj.ipv4, obj.parentnet.ipv4))
