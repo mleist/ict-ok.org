@@ -17,9 +17,12 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
+import zope.interface
 from zope.i18nmessageid import MessageFactory
 from zope.component import getUtility
 from zope.app import zapi
+import zope.event
+import zope.lifecycleevent
 
 # z3c imports
 from z3c.form import field
