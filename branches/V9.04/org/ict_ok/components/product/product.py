@@ -74,7 +74,7 @@ class Product(Component):
 
     mainProduct = RelationPropertyIn(Product_Products_RelManager)
     workOrder = RelationPropertyIn(WorkOrder_Products_RelManager)
-    subProduct = RelationPropertyOut(Product_Products_RelManager)
+    subProducts = RelationPropertyOut(Product_Products_RelManager)
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Component.fullTextSearchFields)
