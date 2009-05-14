@@ -53,7 +53,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
             u" bootstrap: ICatalog - create index for entry type 'appsoftware'")
 
     ensureComponentFolderOnBootstrap(IAddressFolder,
-                 u"Addresss",
+                 u"Addresses",
                  u'org.ict_ok.components.address.address.AddressFolder',
                  root_folder,
                  sitem)

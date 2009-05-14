@@ -43,11 +43,11 @@ from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import \
      IBrwsOverview, IEventIfSuperclass
 from org.ict_ok.admin_utils.netscan.interfaces import INetScan
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 from org.ict_ok.components.ipnet.interfaces import \
-    IIpNet, IEventIfEventIpNet, IAddIpNet
+    IIpNet, IEventIfEventIpNet, IAddIpNet, IIpNetFolder
 from org.ict_ok.components.ipnet.ipnet import AllIpNets, IpNet
 from org.ict_ok.admin_utils.netscan.interfaces import \
      IScanner
@@ -70,6 +70,14 @@ class MSubAddIpNet(GlobalMenuSubItem):
     title = _(u'Add IpNet')
     viewURL = 'add_ipnet.html'
     weight = 50
+
+
+class MGlobalAddIpNet(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add IpNet')
+    viewURL = 'add_ipnet.html'
+    weight = 50
+    folderInterface = IIpNetFolder
 
 # --------------- helper funktions -----------------------------
 

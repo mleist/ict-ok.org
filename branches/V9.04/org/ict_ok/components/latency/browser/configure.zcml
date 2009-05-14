@@ -220,10 +220,18 @@
         permission="org.ict_ok.components.latency.View"
         />
     <viewlet
-        name="add_mobilephone"
+        name="add_latency"
         for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.latency.browser.latency.MSubAddLatency"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
+        />
+    <viewlet
+        name="add_latency"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.latency.browser.latency.MGlobalAddLatency"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.latency.Add"
         />

@@ -42,11 +42,11 @@ from z3c.pagelet.browser import BrowserPagelet
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
 from org.ict_ok.components.snmpvalue.interfaces import \
-    ISnmpValue, IAddSnmpValue
+    ISnmpValue, IAddSnmpValue, ISnmpValueFolder
 from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm, raw_cell_formatter
 from org.ict_ok.components.browser.component import AddComponentForm
@@ -64,6 +64,14 @@ class MSubAddSnmpValue(GlobalMenuSubItem):
     title = _(u'Add SNMP Value')
     viewURL = 'add_snmpvalue.html'
     weight = 50
+
+
+class MGlobalAddSnmpValue(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add SNMP Value')
+    viewURL = 'add_snmpvalue.html'
+    weight = 50
+    folderInterface = ISnmpValueFolder
 
 class MSubAddSnmpValueByVendor(GlobalMenuSubItem):
     """ Menu Item """

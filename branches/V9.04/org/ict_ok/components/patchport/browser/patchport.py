@@ -25,11 +25,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.patchport.interfaces import IPatchPort, IAddPatchPort
+from org.ict_ok.components.patchport.interfaces import \
+    IPatchPort, IAddPatchPort, IPatchPortFolder
 from org.ict_ok.components.patchport.patchport import PatchPort
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.browser.component import AddComponentForm
@@ -48,8 +49,15 @@ class MSubAddPatchPort(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Patch port')
     viewURL = 'add_patchport.html'
-
     weight = 50
+
+
+class MGlobalAddPatchPort(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Patch port')
+    viewURL = 'add_patchport.html'
+    weight = 50
+    folderInterface = IPatchPortFolder
 
 # --------------- object details ---------------------------
 

@@ -29,11 +29,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.building.interfaces import IBuilding, IAddBuilding
+from org.ict_ok.components.building.interfaces import \
+    IBuilding, IAddBuilding, IBuildingFolder
 from org.ict_ok.components.building.building import Building
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.browser.component import AddComponentForm
@@ -51,6 +52,14 @@ class MSubAddBuilding(GlobalMenuSubItem):
     title = _(u'Add Building')
     viewURL = 'add_building.html'
     weight = 50
+
+
+class MGlobalAddBuilding(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Building')
+    viewURL = 'add_building.html'
+    weight = 50
+    folderInterface = IBuildingFolder
 
 
 # --------------- object details ---------------------------

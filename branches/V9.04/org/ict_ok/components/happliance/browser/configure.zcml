@@ -163,6 +163,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.happliance.Add"
         />
+    <viewlet
+        name="add_happliance"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.happliance.browser.happliance.MGlobalAddHardwareAppliance"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.happliance.Add"
+        />
     <!-- page
         name="exportcsvdata.html"
         for="org.ict_ok.components.happliance.interfaces.IHardwareApplianceFolder"

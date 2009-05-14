@@ -163,6 +163,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.patchpanel.Add"
         />
+    <viewlet
+        name="add_patchpanel"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.patchpanel.browser.patchpanel.MGlobalAddPatchPanel"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.patchpanel.Add"
+        />
     <!-- page
         name="exportcsvdata.html"
         for="org.ict_ok.components.patchpanel.interfaces.IPatchPanelFolder"

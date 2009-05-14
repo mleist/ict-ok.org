@@ -33,6 +33,7 @@ from z3c.menu.simple.menu import Tab
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.util_manager.interfaces import IUtilManager
+from org.ict_ok.libs.lib import getFirstObjectFor
 
 _ = MessageFactory('org.ict_ok')
 
@@ -111,6 +112,26 @@ class GlobalMenuSubItem(ContextMenuItem):
                 return u"navsub first selected"
             else:
                 return u"navsub"
+
+    
+class GlobalMenuAddItem(GlobalMenuSubItem):
+    def __init__(self, context, request, view, manager):
+        GlobalMenuSubItem.__init__(self, context, request, view, manager)
+        self.firstFolder = getFirstObjectFor(self.folderInterface)
+    @property
+    def url(self):
+        if self.firstFolder is not None:
+            contextURL = absoluteURL(self.firstFolder, self.request)
+        else:
+            contextURL = absoluteURL(self.context, self.request)
+        return contextURL + '/' + self.viewURL
+    def render(self):
+        """Return the template with the option 'menus'"""
+        if self.firstFolder is not None:
+            return self.template()
+        else:
+            return ""
+
 
     
 class GlobalMenuSubSubItem(ContextMenuItem):

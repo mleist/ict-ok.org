@@ -29,6 +29,7 @@ from zope.app.catalog.interfaces import ICatalog
 from zope.app.intid.interfaces import IIntIds
 from zope.dublincore.interfaces import IZopeDublinCore
 from zope.component import createObject
+from zope.component import getUtility
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -160,6 +161,13 @@ def nodeIsUnder(underNodeOid, upperNodeOid):
        upperObj is not None:
         return _helperNodeIsUnder(underObj, upperObj)
 
+def getFirstObjectFor(interf):
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if interf.providedBy(oobj.object):
+            return oobj.object
+    return None
+            
 
 def oid2dcTitle(arg_oid):
     """ converts an oid into the object dc title """

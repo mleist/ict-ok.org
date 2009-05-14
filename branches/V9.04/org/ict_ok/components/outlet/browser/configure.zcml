@@ -164,6 +164,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.outlet.Add"
         />
+    <viewlet
+        name="add_outlet"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.outlet.browser.outlet.MGlobalAddOutlet"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.outlet.Add"
+        />
     <page
         name="exportcsvdata.html"
         for="org.ict_ok.components.outlet.interfaces.IOutletFolder"

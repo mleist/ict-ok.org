@@ -40,12 +40,12 @@ from zc.table.column import GetterColumn
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.host.interfaces import \
-    IHost, IEventIfEventHost, IAddHost
+    IHost, IEventIfEventHost, IAddHost, IHostFolder
 from org.ict_ok.components.host.host import getAllHosts, Host
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.superclass.browser.superclass import applyChanges
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
@@ -73,6 +73,14 @@ class MSubAddHost(GlobalMenuSubItem):
     title = _(u'Add Host')
     viewURL = 'add_host.html'
     weight = 50
+
+
+class MGlobalAddHost(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Host')
+    viewURL = 'add_host.html'
+    weight = 50
+    folderInterface = IHostFolder
 
 # --------------- helper funktions -----------------------------
 

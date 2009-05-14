@@ -163,6 +163,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.contact_item.Add"
         />
+    <viewlet
+        name="add_contact_item"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.contact_item.browser.contact_item.MGlobalAddContactItem"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contact_item.Add"
+        />
     <!-- page
         name="exportcsvdata.html"
         for="org.ict_ok.components.contact_item.interfaces.IContactItemFolder"

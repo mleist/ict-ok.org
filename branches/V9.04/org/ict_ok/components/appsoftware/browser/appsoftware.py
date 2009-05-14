@@ -25,11 +25,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware, IAddApplicationSoftware
+from org.ict_ok.components.appsoftware.interfaces import \
+    IApplicationSoftware, IAddApplicationSoftware, IApplicationSoftwareFolder
 from org.ict_ok.components.appsoftware.appsoftware import ApplicationSoftware
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -54,8 +55,15 @@ class MSubAddApplicationSoftware(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Application Software')
     viewURL = 'add_appsoftware.html'
-
     weight = 50
+
+
+class MGlobalAddApplicationSoftware(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Application Software')
+    viewURL = 'add_appsoftware.html'
+    weight = 50
+    folderInterface = IApplicationSoftwareFolder
 
 # --------------- object details ---------------------------
 
@@ -66,10 +74,6 @@ class ApplicationSoftwareDetails(SoftwareComponentDetails):
     omit_viewfields = SoftwareComponentDetails.omit_viewfields + []
     omit_addfields = SoftwareComponentDetails.omit_addfields + []
     omit_editfields = SoftwareComponentDetails.omit_editfields + []
-
-    def aaa(self):
-        aaa = IApplicationSoftware(self.context)
-        return aaa
 
 
 class ApplicationSoftwareFolderDetails(SoftwareComponentFolderDetails):

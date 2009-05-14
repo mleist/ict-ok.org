@@ -61,7 +61,7 @@ connInTuples.append(('contactItem', u'Contact item', 'ContactItem'))  # mul 1
 #additionalClassImports.append('from org.ict_ok.components.interface.interfaces import IInterface')
 #additionalClassImports.append('from org.ict_ok.components.ipnet.ipnet import IpNet_IpAddresses_RelManager')
 #additionalClassImports.append('from org.ict_ok.components.ipnet.interfaces import IIpNet')
-additionalClassImports.append('from org.ict_ok.components.contact_item.contact_item import ContactItem_Addresss_RelManager')
+additionalClassImports.append('from org.ict_ok.components.contact_item.contact_item import ContactItem_Addresses_RelManager')
 additionalClassImports.append('from org.ict_ok.components.contact_item.interfaces import IContactItem')
 
 # 'n'-part of the '1..n'-relation 

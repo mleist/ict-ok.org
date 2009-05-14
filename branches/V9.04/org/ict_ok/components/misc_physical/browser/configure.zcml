@@ -180,6 +180,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.misc_physical.Add"
         />
+    <viewlet
+        name="add_misc_physical"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.misc_physical.browser.misc_physical.MGlobalAddMiscPhysical"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.misc_physical.Add"
+        />
     <!-- page
         name="exportcsvdata.html"
         for="org.ict_ok.components.misc_physical.interfaces.IMiscPhysicalFolder"

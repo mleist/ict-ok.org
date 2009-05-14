@@ -26,11 +26,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.misc_physical.interfaces import IMiscPhysical, IAddMiscPhysical
+from org.ict_ok.components.misc_physical.interfaces import \
+    IMiscPhysical, IAddMiscPhysical, IMiscPhysicalFolder
 from org.ict_ok.components.misc_physical.misc_physical import MiscPhysical
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -58,8 +59,15 @@ class MSubAddMiscPhysical(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add miscellaneous physical component')
     viewURL = 'add_misc_physical.html'
-
     weight = 50
+
+
+class MGlobalAddMiscPhysical(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add miscellaneous physical component')
+    viewURL = 'add_misc_physical.html'
+    weight = 50
+    folderInterface = IMiscPhysicalFolder
 
 
 class MSubInvMiscPhysical(GlobalMenuSubItem):

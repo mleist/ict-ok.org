@@ -163,6 +163,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.organization.Add"
         />
+    <viewlet
+        name="add_organization"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.organization.browser.organization.MGlobalAddOrganization"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.organization.Add"
+        />
     <!-- page
         name="exportcsvdata.html"
         for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"

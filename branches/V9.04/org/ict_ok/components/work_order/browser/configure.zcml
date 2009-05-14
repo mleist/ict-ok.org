@@ -163,6 +163,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.work_order.Add"
         />
+    <viewlet
+        name="add_work_order"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.work_order.browser.work_order.MGlobalAddWorkOrder"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.work_order.Add"
+        />
     <!-- page
         name="exportcsvdata.html"
         for="org.ict_ok.components.work_order.interfaces.IWorkOrderFolder"

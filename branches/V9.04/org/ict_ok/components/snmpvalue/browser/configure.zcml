@@ -291,13 +291,21 @@
         permission="org.ict_ok.components.snmpvalue.View"
         />
     <viewlet
-        name="add_mobilephone"
+        name="add_snmpvalue"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValueFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MSubAddSnmpValue"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.Add"
         />
+    <viewlet
+        name="add_snmpvalue"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.snmpvalue.browser.snmpvalue.MGlobalAddSnmpValue"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.Add"
+        />        
     <page
         name="exportcsvdata.html"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValueFolder"

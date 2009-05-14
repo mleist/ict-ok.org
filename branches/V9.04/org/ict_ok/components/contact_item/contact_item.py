@@ -57,7 +57,7 @@ def AllUnusedOrUsedWorkOrderContactItems(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IContactItem, 'workOrder')
 
 
-ContactItem_Addresss_RelManager = \
+ContactItem_Addresses_RelManager = \
        FieldRelationManager(IContactItem['adresses'],
                             IAddress['contactItem'],
                             relType='contactItem:adresses')
@@ -76,7 +76,7 @@ class ContactItem(Component):
 
     contact = RelationPropertyIn(Contact_ContactItems_RelManager)
     workOrder = RelationPropertyIn(WorkOrder_ContactItems_RelManager)
-    adresses = RelationPropertyOut(ContactItem_Addresss_RelManager)
+    adresses = RelationPropertyOut(ContactItem_Addresses_RelManager)
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Component.fullTextSearchFields)

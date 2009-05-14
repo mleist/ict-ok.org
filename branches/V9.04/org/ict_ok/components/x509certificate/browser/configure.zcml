@@ -155,6 +155,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.x509certificate.Add"
         />
+    <viewlet
+        name="add_x509certificate"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.x509certificate.browser.x509certificate.MGlobalAddX509Certificate"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.x509certificate.Add"
+        />
     <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"

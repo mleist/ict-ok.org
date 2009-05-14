@@ -150,8 +150,8 @@
         
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".address.AllAddresss"
-        name="AllAddresss"
+        component=".address.AllAddresses"
+        name="AllAddresses"
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -161,8 +161,8 @@
 
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".address.AllUnusedOrUsedContactItemAddresss"
-        name="AllUnusedOrUsedContactItemAddresss"
+        component=".address.AllUnusedOrUsedContactItemAddresses"
+        name="AllUnusedOrUsedContactItemAddresses"
     />
 
                     

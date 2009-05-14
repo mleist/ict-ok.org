@@ -31,11 +31,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.latency.interfaces import ILatency, IAddLatency
+from org.ict_ok.components.latency.interfaces import \
+    ILatency, IAddLatency, ILatencyFolder
 from org.ict_ok.components.latency.latency import Latency
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.browser.component import AddComponentForm
@@ -51,6 +52,14 @@ class MSubAddLatency(GlobalMenuSubItem):
     title = _(u'Add latency check')
     viewURL = 'add_latency.html'
     weight = 50
+
+
+class MGlobalAddLatency(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add latency check')
+    viewURL = 'add_latency.html'
+    weight = 50
+    folderInterface = ILatencyFolder
 
 class MSubDisplayLatency(GlobalMenuSubItem):
     """ Menu Item """

@@ -24,11 +24,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.organization.interfaces import IOrganization, IAddOrganization
+from org.ict_ok.components.organization.interfaces import \
+    IOrganization, IAddOrganization, IOrganizationFolder
 from org.ict_ok.components.organization.organization import Organization
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.browser.component import AddComponentForm
@@ -45,8 +46,15 @@ class MSubAddOrganization(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Organization')
     viewURL = 'add_organization.html'
-
     weight = 50
+
+
+class MGlobalAddOrganization(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Organization')
+    viewURL = 'add_organization.html'
+    weight = 50
+    folderInterface = IOrganizationFolder
 
 # --------------- object details ---------------------------
 

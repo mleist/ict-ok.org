@@ -179,10 +179,18 @@
         permission="org.ict_ok.components.mobilephone.View"
         />
     <viewlet
-        name="add_mobilephone"
+        name="add_service"
         for="org.ict_ok.components.service.interfaces.IServiceFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.service.browser.service.MSubAddService"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Add"
+        />
+    <viewlet
+        name="add_service"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.service.browser.service.MGlobalAddService"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.service.Add"
         />

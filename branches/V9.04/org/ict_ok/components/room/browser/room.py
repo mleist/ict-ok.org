@@ -27,12 +27,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.room.interfaces import IRoom, IAddRoom
+from org.ict_ok.components.room.interfaces import IRoom, IAddRoom, IRoomFolder
 from org.ict_ok.components.room.room import Room
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.supernode.interfaces import IContentList
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -52,6 +52,14 @@ class MSubAddRoom(GlobalMenuSubItem):
     title = _(u'Add Room')
     viewURL = 'add_room.html'
     weight = 50
+
+
+class MGlobalAddRoom(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Room')
+    viewURL = 'add_room.html'
+    weight = 50
+    folderInterface = IRoomFolder
 
 
 # --------------- object details ---------------------------

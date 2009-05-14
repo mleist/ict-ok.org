@@ -28,11 +28,12 @@ from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.switch.interfaces import ISwitch, IAddSwitch
+from org.ict_ok.components.switch.interfaces import \
+    ISwitch, IAddSwitch, ISwitchFolder
 from org.ict_ok.components.switch.switch import Switch
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.browser.component import AddComponentForm
@@ -51,8 +52,15 @@ class MSubAddSwitch(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Switch')
     viewURL = 'add_switch.html'
-
     weight = 50
+
+
+class MGlobalAddSwitch(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Switch')
+    viewURL = 'add_switch.html'
+    weight = 50
+    folderInterface = ISwitchFolder
 
 # --------------- object details ---------------------------
 

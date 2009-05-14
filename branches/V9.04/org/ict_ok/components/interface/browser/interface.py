@@ -36,11 +36,11 @@ from z3c.pagelet.interfaces import IPagelet
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.interface.interfaces import \
-    IInterface, IInterfaceSnmpScanWizard, IAddInterface
+    IInterface, IInterfaceSnmpScanWizard, IAddInterface, IInterfaceFolder
 from org.ict_ok.components.interface.interface import Interface
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm, EditContent
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -69,6 +69,14 @@ class MSubAddInterface(GlobalMenuSubItem):
     title = _(u'Add Interface')
     viewURL = 'add_interface.html'
     weight = 50
+
+
+class MGlobalAddInterface(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Interface')
+    viewURL = 'add_interface.html'
+    weight = 50
+    folderInterface = IInterfaceFolder
 
 
 # --------------- object details ---------------------------

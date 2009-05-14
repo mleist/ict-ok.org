@@ -24,11 +24,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.outlet.interfaces import IOutlet, IAddOutlet
+from org.ict_ok.components.outlet.interfaces import \
+    IOutlet, IAddOutlet, IOutletFolder
 from org.ict_ok.components.outlet.outlet import Outlet
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.browser.component import AddComponentForm
@@ -47,8 +48,15 @@ class MSubAddOutlet(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add an network outlet')
     viewURL = 'add_outlet.html'
-
     weight = 50
+
+
+class MGlobalAddOutlet(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add an network outlet')
+    viewURL = 'add_outlet.html'
+    weight = 50
+    folderInterface = IOutletFolder
 
 # --------------- object details ---------------------------
 

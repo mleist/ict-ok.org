@@ -26,11 +26,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.display_unit.interfaces import IDisplayUnit, IAddDisplayUnit
+from org.ict_ok.components.display_unit.interfaces import \
+    IDisplayUnit, IAddDisplayUnit, IDisplayUnitFolder
 from org.ict_ok.components.display_unit.display_unit import DisplayUnit
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -58,8 +59,15 @@ class MSubAddDisplayUnit(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Display unit instance')
     viewURL = 'add_display_unit.html'
-
     weight = 50
+
+
+class MGlobalAddDisplayUnit(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Display unit instance')
+    viewURL = 'add_display_unit.html'
+    weight = 50
+    folderInterface = IDisplayUnitFolder
 
 
 class MSubInvDisplayUnit(GlobalMenuSubItem):

@@ -26,11 +26,12 @@ from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.service.interfaces import IService, IAddService
+from org.ict_ok.components.service.interfaces import \
+    IService, IAddService, IServiceFolder
 from org.ict_ok.components.service.service import Service, getAllServices
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -50,6 +51,14 @@ class MSubAddService(GlobalMenuSubItem):
     title = _(u'Add Service')
     viewURL = 'add_service.html'
     weight = 50
+
+
+class MGlobalAddService(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Service')
+    viewURL = 'add_service.html'
+    weight = 50
+    folderInterface = IServiceFolder
 
 
 # --------------- object details ---------------------------

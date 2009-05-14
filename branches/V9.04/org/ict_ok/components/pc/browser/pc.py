@@ -24,11 +24,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.pc.interfaces import IPersonalComputer, IAddPersonalComputer
+from org.ict_ok.components.pc.interfaces import \
+    IPersonalComputer, IAddPersonalComputer, IPersonalComputerFolder
 from org.ict_ok.components.pc.pc import PersonalComputer
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -50,8 +51,15 @@ class MSubAddPersonalComputer(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Personal Computer')
     viewURL = 'add_pc.html'
-
     weight = 50
+
+
+class MGlobalAddPersonalComputer(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Personal Computer')
+    viewURL = 'add_pc.html'
+    weight = 50
+    folderInterface = IPersonalComputerFolder
 
 # --------------- object details ---------------------------
 

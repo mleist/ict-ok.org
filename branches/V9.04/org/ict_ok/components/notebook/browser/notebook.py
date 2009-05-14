@@ -26,11 +26,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.notebook.interfaces import INotebook, IAddNotebook
+from org.ict_ok.components.notebook.interfaces import \
+    INotebook, IAddNotebook, INotebookFolder
 from org.ict_ok.components.notebook.notebook import Notebook
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -55,6 +56,15 @@ class MSubAddNotebook(GlobalMenuSubItem):
     title = _(u'Add Notebook')
     viewURL = 'add_notebook.html'
     weight = 50
+
+
+class MGlobalAddNotebook(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Notebook')
+    viewURL = 'add_notebook.html'
+    weight = 50
+    folderInterface = INotebookFolder
+
 
 class MSubInvNotebook(GlobalMenuSubItem):
     """ Menu Item """

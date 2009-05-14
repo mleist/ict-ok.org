@@ -39,7 +39,7 @@ class IContactItem(Interface):
 
     adresses = List(
         title = _(u'Addresses'),
-        value_type=Choice(vocabulary='AllUnusedOrUsedContactItemAddresss'),
+        value_type=Choice(vocabulary='AllUnusedOrUsedContactItemAddresses'),
         default=[],
         required = False)
         

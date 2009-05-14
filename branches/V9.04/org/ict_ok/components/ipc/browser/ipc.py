@@ -24,11 +24,12 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.ipc.interfaces import IIndustrialComputer, IAddIndustrialComputer
+from org.ict_ok.components.ipc.interfaces import \
+    IIndustrialComputer, IAddIndustrialComputer, IIndustrialComputerFolder
 from org.ict_ok.components.ipc.ipc import IndustrialComputer
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -50,8 +51,15 @@ class MSubAddIndustrialComputer(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Add Industrial Computer')
     viewURL = 'add_ipc.html'
-
     weight = 50
+
+
+class MGlobalAddIndustrialComputer(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Industrial Computer')
+    viewURL = 'add_ipc.html'
+    weight = 50
+    folderInterface = IIndustrialComputerFolder
 
 # --------------- object details ---------------------------
 

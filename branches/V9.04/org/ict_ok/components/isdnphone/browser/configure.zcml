@@ -180,6 +180,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.isdnphone.Add"
         />
+    <viewlet
+        name="add_isdnphone"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.isdnphone.browser.isdnphone.MGlobalAddISDNPhone"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.isdnphone.Add"
+        />
     <!-- page
         name="exportcsvdata.html"
         for="org.ict_ok.components.isdnphone.interfaces.IISDNPhoneFolder"

@@ -163,6 +163,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.ipc.Add"
         />
+    <viewlet
+        name="add_ipc"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.ipc.browser.ipc.MGlobalAddIndustrialComputer"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.ipc.Add"
+        />
     <!-- page
         name="exportcsvdata.html"
         for="org.ict_ok.components.ipc.interfaces.IIndustrialComputerFolder"
