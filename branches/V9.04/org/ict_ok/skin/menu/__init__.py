@@ -121,7 +121,10 @@ class GlobalMenuAddItem(GlobalMenuSubItem):
     @property
     def url(self):
         if self.firstFolder is not None:
-            contextURL = absoluteURL(self.firstFolder, self.request)
+            try:
+                contextURL = absoluteURL(self.firstFolder, self.request)
+            except TypeError:
+                contextURL = u''
         else:
             contextURL = absoluteURL(self.context, self.request)
         return contextURL + '/' + self.viewURL
