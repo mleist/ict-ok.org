@@ -39,14 +39,15 @@ from z3c.form.browser import checkbox
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 #[[[cog
 #   cog.out('''\
-#   from %(longpath_interface)s import I%(componentname)s, IAdd%(componentname)s
+#   from %(longpath_interface)s import \\
+#       I%(componentname)s, IAdd%(componentname)s, I%(componentname)sFolder
 #   from %(longpath_file)s import %(componentname)s
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.browser.component import AddComponentForm
@@ -65,8 +66,15 @@ _ = MessageFactory('org.ict_ok')
 #       """ Menu Item """
 #       title = _(u'Add %(moduletitle)s')
 #       viewURL = 'add_%(filename)s.html'
-#
 #       weight = 50
+#
+#
+#   class MGlobalAdd%(componentname)s(GlobalMenuAddItem):
+#       """ Menu Item """
+#       title = _(u'Add %(moduletitle)s')
+#       viewURL = 'add_%(filename)s.html'
+#       weight = 50
+#       folderInterface = I%(componentname)sFolder
 #   ''' % props.__dict__, dedent=True)
 #]]]
 #[[[end]]]

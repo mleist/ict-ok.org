@@ -182,6 +182,14 @@
                         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
                         permission="org.ict_ok.components.%(filename)s.Add"
                         />
+                    <viewlet
+                        name="add_%(filename)s"
+                        for="*"
+                        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+                        class="%(longpath_browser_file)s.MGlobalAdd%(componentname)s"
+                        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+                        permission="org.ict_ok.components.%(filename)s.Add"
+                        />
                     <!-- page
                         name="exportcsvdata.html"
                         for="%(longpath_interface)s.I%(componentname)sFolder"
