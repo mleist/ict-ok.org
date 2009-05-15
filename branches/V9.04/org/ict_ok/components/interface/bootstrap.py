@@ -49,17 +49,17 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for entry type 'interface'")
-    if not "interface_ip_index" in instUtilityICatalog.keys():
-        interface_ip_index = TextIndex(interface=ISearchableText,
-                                       field_name='getSearchableInterfaceIp',
-                                       field_callable=True)
-        instUtilityICatalog['interface_ip_index'] = interface_ip_index
-        # search for IAdmUtilSupervisor
-        utils = [ util for util in sitem.registeredUtilities()
-                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
-        instAdmUtilSupervisor = utils[0].component
-        instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create ip index for 'interface'")
+#    if not "interface_ip_index" in instUtilityICatalog.keys():
+#        interface_ip_index = TextIndex(interface=ISearchableText,
+#                                       field_name='getSearchableInterfaceIp',
+#                                       field_callable=True)
+#        instUtilityICatalog['interface_ip_index'] = interface_ip_index
+#        # search for IAdmUtilSupervisor
+#        utils = [ util for util in sitem.registeredUtilities()
+#                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+#        instAdmUtilSupervisor = utils[0].component
+#        instAdmUtilSupervisor.appendEventHistory(\
+#            u" bootstrap: ICatalog - create ip index for 'interface'")
     if not "interface_mac_index" in instUtilityICatalog.keys():
         interface_mac_index = TextIndex(interface=ISearchableText,
                                         field_name='getSearchableInterfaceMac',

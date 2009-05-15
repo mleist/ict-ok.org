@@ -47,8 +47,8 @@ class Searchable(SuperSearchable):
         """
         return self.context.getObjectId()
 
-    def getSearchableInterfaceIp(self):
-        return convertIpV4(self.context.ipv4List)
+#    def getSearchableInterfaceIp(self):
+#        return convertIpV4(self.context.ipAddresses)
 
     def getSearchableInterfaceMac(self):
         return self.context.mac
