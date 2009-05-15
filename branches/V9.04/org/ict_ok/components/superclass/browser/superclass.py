@@ -996,6 +996,35 @@ class DeleteForm(layout.FormLayoutSupport, form.Form):
         form.Form.update(self)
 
 
+class DeleteFolderForm(layout.FormLayoutSupport, form.Form):
+    """
+    """
+    @button.buttonAndHandler(u'Cancel')
+    def handleCancel(self, action):
+        """cancel was pressed"""
+        url = absoluteURL(self.context, self.request)
+        self.request.response.redirect(url)
+
+    @button.buttonAndHandler(u'Delete')
+    def handleDelete(self, action):
+        """delete was pressed"""
+        if ISuperclass.providedBy(self.context):
+            parent = self.context.__parent__
+            parentList = list(parent.items())
+            oname = [oname for oname, oobj in parentList \
+                     if oobj == self.context][0]
+            del parent[oname]
+            self.deleted = True
+            self.context = parent
+            url = absoluteURL(parent, self.request)
+            self.request.response.redirect(url)
+
+    def update(self):
+        """update all widgets"""
+        if ISuperclass.providedBy(self.context):
+            self.label = self.context.ikName
+        form.Form.update(self)
+
 
 class Overview(BrowserPagelet):
     """Overview Pagelet"""

@@ -45,6 +45,14 @@
         permission="org.ict_ok.components.superclass.exportxml"
     />
 
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.DeleteFolderForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.x509certificate.Delete"
+    />
+
     <page
         name="reportPdf.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
