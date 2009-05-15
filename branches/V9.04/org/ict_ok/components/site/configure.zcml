@@ -66,10 +66,6 @@
             interface="zope.app.container.interfaces.IReadContainer"
             />
         <!--require
-            permission="org.ict_ok.components.site.View"
-            interface="zope.app.container.interfaces.IReadContainer"
-            />
-        <require
             permission="org.ict_ok.components.site.Edit"
             interface="zope.app.container.interfaces.IWriteContainer"
             /-->

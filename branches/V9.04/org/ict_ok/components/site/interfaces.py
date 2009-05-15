@@ -37,6 +37,9 @@ class ISite(Interface):
         default = _("mysite"),
         required = True)
 
+    def __delitem__(name):
+        """Delete the named object from the container.
+        """
     
 class IEventIfEventSite(Interface):
     """ event interface of object """
