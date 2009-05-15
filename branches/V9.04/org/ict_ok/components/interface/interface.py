@@ -86,7 +86,7 @@ class Interface(PhysicalComponent):
     __name__ = __parent__ = None
     netType = FieldProperty(IInterface['netType'])
     mac = FieldProperty(IInterface['mac'])
-    ipv4List = FieldProperty(IInterface['ipv4List'])
+    #ipv4List = FieldProperty(IInterface['ipv4List'])
     
     device = RelationPropertyIn(Device_Interface_RelManager)
     #host2 = RelationPropertyIn(Host_Interfaces_RelManager)
