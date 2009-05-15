@@ -52,20 +52,11 @@
 
     <!--viewlet
         name="add_document"
-        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.libs.browser.document.MSubAddDocument"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.libs.document.Add"
-        /-->
-    <viewlet
-        name="add_document"
         for="org.ict_ok.libs.interfaces.IDocumentAddable"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.libs.browser.document.MSubAddDocument"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.libs.document.Add"
-        />
-
+        /-->
 
 </configure>

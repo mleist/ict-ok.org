@@ -104,7 +104,7 @@
         permission="org.ict_ok.components.ipnet.Edit"
     />
 
-    <z3c:pagelet
+    <!--z3c:pagelet
         name="add_ipnet.html"
         for="org.ict_ok.components.ipnet.interfaces.IIpNet"
         class=".ipnet.AddIpNetForm"
@@ -117,7 +117,7 @@
         class=".ipnet.AddIpNetForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.ipnet.Add"
-    />
+    /-->
     <z3c:pagelet
         name="edit.html"
         for="org.ict_ok.components.ipnet.interfaces.IIpNet"
