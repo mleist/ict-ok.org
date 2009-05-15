@@ -186,7 +186,8 @@ def notifyModifiedEvent(instance, event):
         smokePingAdapter = IGenSmokePing(event.object)
         if smokePingAdapter is not None:
             if smokePingAdapter.eventModifiesCfgFile(event):
-                utilSmokePing = getUtility(IAdmUtilGeneratorSmokePing)
+                utilSmokePing = getUtility(IAdmUtilGeneratorSmokePing,
+                                           name='AdmUtilGeneratorSmokePing')
                 utilSmokePing.allConfigFilesOut(False, event, False)
 
 @adapter(ISuperclass, IObjectMovedEvent)
