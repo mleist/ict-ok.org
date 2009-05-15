@@ -96,8 +96,7 @@ class Interface(PhysicalComponent):
 #    physicalConnector = RelationPropertyOut(PhysicalConnector_Interface_RelManager)
     ipAddresses = RelationPropertyOut(Interface_IpAddresses_RelManager)
 
-    fullTextSearchFields = ['netType', 'mac',
-                            'ipv4List']
+    fullTextSearchFields = ['netType', 'mac']
     fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
     
     def __init__(self, **data):
