@@ -65,6 +65,15 @@ class ProductDetails(ComponentDetails):
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
+    
+    def subProductsAsHtmlUL(self, startObj):
+        retString = u'<ul class="odisplay">'
+        for subProduct in startObj.subProducts:
+            retString += u'<li class="odisplay">%s</li>' % self.getHrefTitle(subProduct)
+            if len(subProduct.subProducts) > 0:
+                retString += u'<li>%s</li>' % self.subProductsAsHtmlUL(subProduct)
+        retString += u'</ul>'
+        return retString
 
 
 class ProductFolderDetails(ComponentDetails):

@@ -77,6 +77,8 @@ from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
 from org.ict_ok.components.switch.interfaces import ISwitch
 from org.ict_ok.components.x509certificate.interfaces import IX509Certificate
 from org.ict_ok.components.product.interfaces import IProduct
+from org.ict_ok.components.product.product import \
+    getFirstLevelObjectList as getFirstLevelProductList
 from org.ict_ok.components.address.interfaces import IAddress
 from org.ict_ok.components.organization.interfaces import IOrganization
 from org.ict_ok.components.person.interfaces import IPerson
@@ -512,8 +514,9 @@ class AdmUtilReportsDetails(SupernodeDetails):
                                              'Switches'))
         objsList.append(self._makeObjectList(IX509Certificate,
                                              'X509 Certificates'))
-        objsList.append(self._makeObjectList(IProduct,
-                                             'Products'))
+        objsList.append(getFirstLevelProductList('Products'))
+#        objsList.append(self._makeObjectList(IProduct,
+#                                             'Products'))
         objsList.append(self._makeObjectList(IAddress,
                                              'Addresses'))
         objsList.append(self._makeObjectList(IOrganization,

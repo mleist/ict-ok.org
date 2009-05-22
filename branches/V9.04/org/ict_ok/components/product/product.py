@@ -61,6 +61,14 @@ Product_Products_RelManager = \
                             relType='mainProduct:subProducts')
 
 
+def getFirstLevelObjectList(foldername):
+    uidutil = getUtility(IIntIds)
+    i_list = [oobj.object for (oid, oobj) in uidutil.items() \
+              if IProduct.providedBy(oobj.object) and \
+              oobj.object.mainProduct is None]
+    i_list.sort(cmp=lambda x,y: x.ikName < y.ikName)
+    return (foldername, i_list)
+
 
 
 class Product(Component):

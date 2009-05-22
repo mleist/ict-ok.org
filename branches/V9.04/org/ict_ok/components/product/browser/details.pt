@@ -60,6 +60,20 @@
            <td tal:content="structure python: view.getHrefTitle(context.workOrder)" />
        </tr>
 
+
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: len(context.subProducts) > 0">
+           <td i18n:translate="">Sub product</td>
+           <td>
+               <div tal:content="structure python: view.subProductsAsHtmlUL(context)" />
+               <!--ul>
+                   <li tal:repeat="lelem view/subProductsAsIndentList"
+                       tal:content="structure python: view.getHrefTitle(lelem[1])" />
+                   
+               <ul-->
+           </td>
+       </tr>
+
           
        <tr tal:attributes="class view/getNextTabClass"
            tal:condition="context/subProduct|nothing">

@@ -656,6 +656,24 @@ input.text-widget {
   /*width: 500px;*/
 /*}*/
 
+/*---[ object display lists ]--------------------------------------------------------*/
+
+
+li.odisplay {
+  list-style-type:circle;
+  margin:2px 0px 0px 0px;
+  padding:0px 0px 0px 0px;
+  color:#000;
+}
+
+ul.odisplay {
+  list-style-type:circle;
+  padding:0 0 0 14px;
+}
+
+
+
+
 /*---[ multi widget ]--------------------------------------------------------*/
 div.multi-widget {
     float: left;
