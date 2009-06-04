@@ -50,7 +50,8 @@ def AllPhysicalMediaTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IPhysicalMedia)
 
 def AllPhysicalMedia(dummy_context):
-    return AllComponents(dummy_context, IPhysicalMedia)
+    return AllComponents(dummy_context, IPhysicalMedia,
+                         additionalAttrNames=['device'])
 
 def AllUnusedOrUsedDevicePhysicalMedia(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IPhysicalMedia, 'device')
