@@ -110,9 +110,13 @@
             <td i18n:translate="">physical Media</td>
             <td>
                 <ul>
-                    <li tal:repeat="physicalMedium context/physicalMedia"
-                        tal:content="structure python: view.getHrefTitle(physicalMedium)" />
-                    
+                    <li tal:repeat="physicalMedium context/physicalMedia">
+                        <span  tal:omit-tag=""
+                               tal:content="structure python: view.getHrefTitle(physicalMedium)" />
+                        <span  tal:omit-tag=""
+                               tal:condition="python: physicalMedium.device is not None"
+                               tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(physicalMedium.device)" />
+                    </li>
                 <ul>
             </td>
         </tr>
