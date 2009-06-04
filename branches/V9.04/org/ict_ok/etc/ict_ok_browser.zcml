@@ -89,4 +89,5 @@
 
     <include package="org.ict_ok.components.physical_media.browser" />
     <include package="org.ict_ok.components.role.browser" />
+    <include package="org.ict_ok.components.group.browser" />
 </configure>

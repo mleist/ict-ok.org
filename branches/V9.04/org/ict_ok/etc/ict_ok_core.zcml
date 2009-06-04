@@ -105,4 +105,5 @@
 
     <include package="org.ict_ok.components.physical_media" />
     <include package="org.ict_ok.components.role" />
+    <include package="org.ict_ok.components.group" />
 </configure>

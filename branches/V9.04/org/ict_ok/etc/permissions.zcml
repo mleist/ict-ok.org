@@ -150,5 +150,7 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.role"
              file="security.zcml" />
+    <include package="org.ict_ok.components.group"
+             file="security.zcml" />
 
 </configure>

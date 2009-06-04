@@ -45,6 +45,7 @@ from org.ict_ok.components.work_order.work_order import WorkOrder_ContactItems_R
 from org.ict_ok.components.contact.interfaces import IContact
 from org.ict_ok.components.address.interfaces import IAddress
 from org.ict_ok.components.role.role import Roles_ContactItems_RelManager
+from org.ict_ok.components.group.group import Group_ContactItems_RelManager
 
 def AllContactItemTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IContactItem)
@@ -81,7 +82,8 @@ class ContactItem(Component):
     workOrder = RelationPropertyIn(WorkOrder_ContactItems_RelManager)
     adresses = RelationPropertyOut(ContactItem_Addresses_RelManager)
     roles = RelationPropertyIn(Roles_ContactItems_RelManager)
-
+    groups = RelationPropertyIn(Group_ContactItems_RelManager)
+    
     fullTextSearchFields = []
     fullTextSearchFields.extend(Component.fullTextSearchFields)
         

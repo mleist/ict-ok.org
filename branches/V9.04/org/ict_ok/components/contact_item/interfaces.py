@@ -42,6 +42,12 @@ class IContactItem(Interface):
         default=[],
         required = False)
 
+    groups = List(
+        title=_(u'Groups'),
+        value_type=Choice(vocabulary='AllGroups'),
+        default=[],
+        required = False)
+
     adresses = List(
         title = _(u'Addresses'),
         value_type=Choice(vocabulary='AllUnusedOrUsedContactItemAddresses'),

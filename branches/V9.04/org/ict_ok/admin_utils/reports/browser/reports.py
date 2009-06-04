@@ -50,6 +50,7 @@ from org.ict_ok.admin_utils.reports.reports import PDFReporter
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.building.interfaces import IBuilding
 from org.ict_ok.components.display_unit.interfaces import IDisplayUnit
+from org.ict_ok.components.group.interfaces import IGroup
 from org.ict_ok.components.happliance.interfaces import IHardwareAppliance
 from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.components.interface.interfaces import IInterface
@@ -69,8 +70,10 @@ from org.ict_ok.components.patchpanel.interfaces import IPatchPanel
 from org.ict_ok.components.patchport.interfaces import IPatchPort
 from org.ict_ok.components.pc.interfaces import IPersonalComputer
 from org.ict_ok.components.physical_link.interfaces import IPhysicalLink
+from org.ict_ok.components.physical_media.interfaces import IPhysicalMedia
 from org.ict_ok.components.printer.interfaces import IPrinter
 from org.ict_ok.components.rack.interfaces import IRack
+from org.ict_ok.components.role.interfaces import IRole
 from org.ict_ok.components.room.interfaces import IRoom
 from org.ict_ok.components.service.interfaces import IService
 from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
@@ -529,6 +532,12 @@ class AdmUtilReportsDetails(SupernodeDetails):
                                              'Contact items'))
         objsList.append(self._makeObjectList(IWorkOrder,
                                              'Work orders'))
+        objsList.append(self._makeObjectList(IPhysicalMedia,
+                                             'Physical media'))
+        objsList.append(self._makeObjectList(IRole,
+                                             'Roles'))
+        objsList.append(self._makeObjectList(IGroup,
+                                             'Groups'))
         #return self.reportPdfByQueryList(queryList)
         return self.reportPdfByObjectList(objsList)
 
