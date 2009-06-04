@@ -60,7 +60,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                  sitem)
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
 
 
 def bootStrapSubscriber(event):

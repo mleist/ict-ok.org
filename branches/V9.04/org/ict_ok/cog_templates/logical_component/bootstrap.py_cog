@@ -84,7 +84,8 @@ from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 #                            sitem)
 #           
 #               transaction.get().commit()
-#               connection.close()
+#               if connection is not None:
+#                   connection.close()
 #
 #           def bootStrapSubscriber(event):
 #               """initialisation of IntId utility on first database startup
