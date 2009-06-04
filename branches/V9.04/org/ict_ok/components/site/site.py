@@ -228,6 +228,13 @@ def createLocalUtils(event):
     from org.ict_ok.components.work_order.bootstrap import \
         createUtils as createWorkOrderUtils
 
+    from org.ict_ok.components.group.bootstrap import \
+        createUtils as createGroupUtils
+    from org.ict_ok.components.role.bootstrap import \
+        createUtils as createRoleUtils
+    from org.ict_ok.components.physical_media.bootstrap import \
+        createUtils as createPhysicalMediaUtils
+
     setSite(event.object)
 #    default = zapi.traverse(event.object, '++etc++site/default')
     
@@ -295,3 +302,7 @@ def createLocalUtils(event):
     createContactUtils(event.object)
     createContactItemUtils(event.object)
     createWorkOrderUtils(event.object)
+
+    createRoleUtils(event.object)
+    createGroupUtils(event.object)
+    createPhysicalMediaUtils(event.object)
