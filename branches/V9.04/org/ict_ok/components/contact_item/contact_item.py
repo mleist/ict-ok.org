@@ -44,6 +44,7 @@ from org.ict_ok.components.contact.contact import Contact_ContactItems_RelManage
 from org.ict_ok.components.work_order.work_order import WorkOrder_ContactItems_RelManager
 from org.ict_ok.components.contact.interfaces import IContact
 from org.ict_ok.components.address.interfaces import IAddress
+from org.ict_ok.components.role.role import Roles_ContactItems_RelManager
 
 def AllContactItemTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IContactItem)
@@ -55,6 +56,8 @@ def AllUnusedOrUsedContactContactItems(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IContactItem, 'contact')
 def AllUnusedOrUsedWorkOrderContactItems(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IContactItem, 'workOrder')
+def AllUnusedOrUsedRolesContactItems(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, IContactItem, 'roles')
 
 
 ContactItem_Addresses_RelManager = \
@@ -77,6 +80,7 @@ class ContactItem(Component):
     contact = RelationPropertyIn(Contact_ContactItems_RelManager)
     workOrder = RelationPropertyIn(WorkOrder_ContactItems_RelManager)
     adresses = RelationPropertyOut(ContactItem_Addresses_RelManager)
+    roles = RelationPropertyIn(Roles_ContactItems_RelManager)
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Component.fullTextSearchFields)

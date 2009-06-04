@@ -455,6 +455,8 @@ class AddComponentForm(AddForm):
     @button.buttonAndHandler(_('Add'), name='add')
     def handleAdd(self, action):
         """submit was pressed"""
+        #import pdb
+        #pdb.set_trace()
         session = ISession(self.request)[self._session_key]
         if 'template' in self.widgets and \
             self.widgets['template'] is not None and \

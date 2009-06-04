@@ -86,4 +86,7 @@
     <include package="org.ict_ok.components.contact.browser" />
     <include package="org.ict_ok.components.contact_item.browser" />
     <include package="org.ict_ok.components.work_order.browser" />
+
+    <include package="org.ict_ok.components.physical_media.browser" />
+    <include package="org.ict_ok.components.role.browser" />
 </configure>

@@ -36,6 +36,11 @@ class IContactItem(Interface):
         vocabulary = 'AllWorkOrders',
         required = False)
         
+    roles = List(
+        title=_(u'Roles'),
+        value_type=Choice(vocabulary='AllRoles'),
+        default=[],
+        required = False)
 
     adresses = List(
         title = _(u'Addresses'),

@@ -30,14 +30,14 @@
     <!-- [[[cog
             cog.out('''\
             
-                    <!--  Interfaces ---------------------------------------------------- -->
+                    <!--  Interfaces ==================================================== -->
                     
                     <interface
                         interface=".interfaces.I%(componentname)s"
                         type="zope.app.content.interfaces.IContentType"
                         />
                     
-                    <!--  Classes ------------------------------------------------------- -->
+                    <!--  Classes ======================================================= -->
                     
                     <class class=".%(filename)s.%(componentname)s">
                         <implements
@@ -143,35 +143,35 @@
                             />
                     </class>
 
-                    <!--  Event subscribers --------------------------------------------- -->
+                    <!--  Event subscribers ============================================= -->
                     
                     <subscriber
                         handler=".bootstrap.bootStrapSubscriber"
                         for="zope.app.appsetup.IDatabaseOpenedEvent"
                         />
                 
-                    <!--  Search adapters ----------------------------------------------- -->
+                    <!--  Search adapters =============================================== -->
 
                     <adapter
                         factory="org.ict_ok.components.%(filename)s.adapter.search.Searchable"
                     />
 
-                    <!--  Report adapters ----------------------------------------------- -->
+                    <!--  Report adapters =============================================== -->
                 
-                    <!--  OSI adapters -------------------------------------------------- -->
+                    <!--  OSI adapters ================================================== -->
 
                     <adapter
                         factory=".adapter.osi.OSIModel"
                         permission="org.ict_ok.components.%(filename)s.View"
                     />
                 
-                    <!--  other adapters ------------------------------------------------ -->
+                    <!--  other adapters ================================================ -->
                 
                     <adapter
                         factory=".adapter.state.State"
                         />
                         
-                    <!--  Vocabulary stuff ---------------------------------------------- -->
+                    <!--  Vocabulary stuff ============================================== -->
                     
                     <utility
                         provides="zope.schema.interfaces.IVocabularyFactory"
@@ -207,7 +207,7 @@
     <!-- [[[cog
             cog.out('''\
                 
-                    <!--  Includes ------------------------------------------------------ -->
+                    <!--  Includes ====================================================== -->
 
                     <include package=".generations" />
             ''' % props.__dict__, dedent=True)

@@ -146,5 +146,9 @@
     <include package="org.ict_ok.components.work_order"
              file="security.zcml" />
 
+    <include package="org.ict_ok.components.physical_media"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.role"
+             file="security.zcml" />
 
 </configure>

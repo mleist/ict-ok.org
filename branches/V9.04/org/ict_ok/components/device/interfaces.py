@@ -58,6 +58,10 @@ class IDevice(Interface):
                       required=False,
                       default=[])
 
+    physicalMedia = List(title=_(u"Physical Media"),
+                      value_type=Choice(vocabulary='AllPhysicalMedia'),
+                      required=False,
+                      default=[])
 
 class IDeviceFolder(Interface):
     """Container for Notebook objects

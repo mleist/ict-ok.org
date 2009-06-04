@@ -103,4 +103,6 @@
     <include package="org.ict_ok.components.contact_item" />
     <include package="org.ict_ok.components.work_order" />
 
+    <include package="org.ict_ok.components.physical_media" />
+    <include package="org.ict_ok.components.role" />
 </configure>

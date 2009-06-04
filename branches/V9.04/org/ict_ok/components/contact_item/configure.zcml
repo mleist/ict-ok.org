@@ -169,6 +169,11 @@
         component=".contact_item.AllUnusedOrUsedWorkOrderContactItems"
         name="AllUnusedOrUsedWorkOrderContactItems"
     />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".contact_item.AllUnusedOrUsedRolesContactItems"
+        name="AllUnusedOrUsedRolesContactItems"
+    />
 
                     
 

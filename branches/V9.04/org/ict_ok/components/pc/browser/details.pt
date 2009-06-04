@@ -106,6 +106,18 @@
         </tr>
 
         <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/physicalMedia|nothing">
+            <td i18n:translate="">physical Media</td>
+            <td>
+                <ul>
+                    <li tal:repeat="physicalMedium context/physicalMedia"
+                        tal:content="structure python: view.getHrefTitle(physicalMedium)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/manufacturer|nothing">
             <td i18n:translate="">Manufacturer</td>
             <td tal:content="structure python: view.fsearchLink(context.manufacturer)" />

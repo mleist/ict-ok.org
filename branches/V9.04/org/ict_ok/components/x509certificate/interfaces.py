@@ -9,6 +9,7 @@
 #
 # pylint: disable-msg=E0213,E0211,W0232
 #
+from docutils.nodes import title
 """Interface of X509Certificate"""
 
 
@@ -21,7 +22,8 @@ from OpenSSL import crypto
 from zope.interface import Interface
 from zope.interface import Attribute, Invalid, invariant
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Date, Int, Text
+from zope.schema import Choice, Date, Int, Text, Bytes, Object
+
 
 # ict_ok.org imports
 
@@ -35,6 +37,9 @@ class IX509Certificate(Interface):
         title = _("public key (PEM)"),
         description = _("The PEM-encoded raw public key."),
         required = True)
+
+    ddd1 = Bytes(
+         title = u'ddd1')
 
     @invariant
     def ensureValidPublicKey(obj_x509):

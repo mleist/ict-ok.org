@@ -33,6 +33,7 @@ from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
 from org.ict_ok.components.logical_device.interfaces import ILogicalDevice
+from org.ict_ok.components.physical_media.interfaces import IPhysicalMedia
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -69,6 +70,10 @@ Devices_LogicalDevices_RelManager = \
     FieldRelationManager(IDevice['logicalDevices'],
                          ILogicalDevice['devices'],
                          relType='devices:logicalDevices')
+Devices_PhysicalMedia_RelManager = \
+    FieldRelationManager(IDevice['physicalMedia'],
+                         IPhysicalMedia['device'],
+                         relType='device:physicalMedia')
 
 
 class Device(PhysicalComponent):
@@ -86,6 +91,7 @@ class Device(PhysicalComponent):
     osoftwares = RelationPropertyOut(Device_OSoftware_RelManager)
 #    logicalDevices = RelationPropertyOut(Device_LogicalDevices_RelManager)
     logicalDevices = RelationPropertyOut(Devices_LogicalDevices_RelManager)
+    physicalMedia = RelationPropertyOut(Devices_PhysicalMedia_RelManager)
 
     fullTextSearchFields = ['cpuType']
     fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
