@@ -23,29 +23,34 @@ from zope.i18nmessageid import MessageFactory
 from zope.app import zapi
 
 # ict_ok.org imports
+from org.ict_ok.components.pc.interfaces import IPersonalComputer
 from org.ict_ok.components.superclass.interfaces import \
-    ISuperclass, INavigation
+    INavigation
+from org.ict_ok.components.superclass.adapter.navigation import \
+    Navigation as SuperNavigation
+
 
 _ = MessageFactory('org.ict_ok')
 
 
-class Navigation(object):
+class Navigation(SuperNavigation):
     """navigation-Adapter."""
 
     implements(INavigation)
-    adapts(ISuperclass)
+    adapts(IPersonalComputer)
 
     def __init__(self, context):
         self.context = context
 
-    def getContextObjList(self, preList=None, postList=None):
+    def getContextObjList(self, preList=[], postList=[]):
         """
         get an Object list of all interesting objects in the context
         """
         retList = []
-        if preList is not None:
-            retList.extend(preList)
-        retList.append(zapi.getParent(self.context))
-        if postList is not None:
-            retList.extend(postList)
+        #retList.extend(preList)
+        #retList.extend(list(self.context.interfaces))
+        #retList.extend(list(self.context.physicalMedia))
+        retList.append((self.context, 'physicalMedia', u'physical media'))
+        #retList.extend(SuperNavigation.getContextObjList(self))
+        #retList.extend(postList)
         return retList

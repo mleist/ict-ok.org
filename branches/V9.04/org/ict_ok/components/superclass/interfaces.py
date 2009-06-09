@@ -202,7 +202,13 @@ class IFocus(Interface):
     """Interface for objects to display on focus-page
     """
 
-
+class INavigation(Interface):
+    """Interface for objects to display the navigation
+    """
+    def getContextObjList(preList=[], postList=[]):
+        """
+        get an Object list of all interesting objects in the context
+        """
 
 class IMsgEvent(Interface):
     """ Interface of an async event event

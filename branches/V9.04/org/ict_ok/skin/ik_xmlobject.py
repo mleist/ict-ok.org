@@ -32,6 +32,7 @@ from zope.security.interfaces import ForbiddenAttribute
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.supernode.interfaces import IContentList
+from org.ict_ok.components.superclass.interfaces import INavigation
 
 _ = MessageFactory('org.ict_ok')
 
@@ -70,7 +71,8 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         result = ''
         try:
             stateAdapter = getAdapter(item, IState)
-            if stateAdapter:
+            if stateAdapter and \
+               hasattr(stateAdapter, 'getStateValue'):
                 result = str(stateAdapter.getStateValue())
         except ComponentLookupError, err:
             pass
@@ -183,7 +185,194 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                 % self.children_utility(container))
         return res
 
+    def getCollectionAttributes(self, obj_arg):
+        additionalAttributes = ''
+        if type(obj_arg) is tuple:
+            #import pdb
+            #pdb.set_trace()
+            (obj, attributeName, displayTitle) = obj_arg
+            appendUrl = '?getAttr&attrName=%s' % attributeName
+        else:
+            appendUrl = ''
+            obj = obj_arg
+        
+        parentItem = zapi.getParent(obj)
+        obj_url = urlparse(zapi.absoluteURL(obj, self.request))
+        parent_url = urlparse(zapi.absoluteURL(parentItem, self.request))
+        if type(obj_arg) is tuple:
+            xml_title = displayTitle
+            additionalAttributes += ' expable="" '
+            attrList = getattr(obj, attributeName, None)
+            iklen = len(attrList)
+        else:
+            try:
+                xml_title = obj.getDcTitle()
+            except ForbiddenAttribute:
+                xml_title = _('[top]')
+            iklen = len(obj)
+        name = obj_url.path.split('/')[-1] + appendUrl
+        stateIconUrl = self.getStateIconUrl(obj)
+        stateValue = self.getStateValue(obj)
+        stateOverview = self.getStateOverview(obj)
+        item_ppath = parent_url.path + u'/'
+        item_ppath = item_ppath.replace('//', '/')
+#        try:
+#            item_len = len(IContentList(oldItem).getContentList())
+#        except TypeError:
+#            item_len = self.getLengthOf(oldItem)
+        return (xml_title, name, item_ppath,
+                iklen, stateIconUrl, stateValue,
+                stateOverview, additionalAttributes)
+        
+        
+        
     def singleBranchTree(self, root=''):
+        result = ''
+        oldItem = self.context
+        # -----------------------------------
+        subItems = []
+        try:
+            oldItemNav = INavigation(oldItem)
+            objList = oldItemNav.getContextObjList()
+            for obj in objList:
+                (xml_title, name, item_ppath, iklen,
+                 stateIconUrl, stateValue,
+                 stateOverview, additionalAttributes) = \
+                    self.getCollectionAttributes(obj)
+                subItems.append(xmlEscapeWithCData(
+                    u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+                    u'icon_url=%s isopen="" expable="" state_url=%s path=%s '
+                    u'state_val=%s>%s</collection>',
+                    xml_title, name, iklen, stateIconUrl,
+                    stateIconUrl, item_ppath, stateOverview,
+                    result))
+        except TypeError:
+            return self.singleBranchTree2(root)
+        # -----------------------------------
+#        try:
+#            parentItem = zapi.getParent(oldItem)
+#            (xml_title, name, item_ppath, iklen,
+#             stateIconUrl, stateValue, stateOverview) = \
+#                self.getCollectionAttributes(parentItem)
+#            subItems.append(xmlEscapeWithCData(
+#                u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+#                u'icon_url=%s isopen="" expable="" state_url=%s path=%s '
+#                u'state_val=%s>%s</collection>',
+#                u'All '+xml_title, name, iklen, stateIconUrl,
+#                stateIconUrl, item_ppath, stateOverview,
+#                result))
+#        except TypeError:
+#            pass
+        # -----------------------------------
+
+        result = u' '.join(subItems)
+
+        # -----------------------------------
+        (xml_title, name, item_ppath, iklen,
+         stateIconUrl, stateValue, stateOverview,
+         additionalAttributes) = \
+            self.getCollectionAttributes(oldItem)
+        if len(result) > 0: # collection has content
+            result = xmlEscapeWithCData(
+                      u'<collection isfocused2="" title=%s name=%s iklen=%s rem="3.1" '
+                      u'icon_url=%s state_url=%s path=%s isopen="" isroot="">%s</collection>',
+                      xml_title, name, iklen, stateIconUrl, stateIconUrl,
+                      item_ppath, result)
+        else:
+            result = xmlEscapeWithCData(
+                      u'<collection isfocused2="" title=%s name=%s iklen=%s rem="3.2" '
+                      u'icon_url=%s state_url=%s path=%s expable="" '
+                      u'isroot="">%s</collection>',
+                      xml_title, name, iklen, stateIconUrl, stateIconUrl,
+                      item_ppath, result)
+        self.request.response.setHeader('Content-Type', 'text/xml')
+        setNoCacheHeaders(self.request.response)
+        title = translate(titleTemplate,
+                          context=self.request, default=titleTemplate)
+        loading = translate(loadingMsg,
+                          context=self.request, default=loadingMsg)
+        return xmlEscapeWithCData(
+                u'<?xml version="1.0" encoding="ISO-8859-1"?>'
+                u'<children title_tpl=%s title=%s '
+                u'loading_msg=%s>%s</children>',
+                title, title, loading, result)
+        
+        
+    def singleBranchTree3(self, root=''):
+        result = ''
+        oldItem = self.context
+        xml_title = '11111'
+        name = '22222'
+        subitem_len = 0
+        #oldItem = []
+        iconUrl = ''
+        stateIconUrl = ''
+        item_ppath = ''
+        stateOverview = ''
+        rootName = '8888'
+        baseURL = ''
+        subItems = []
+        #import pdb
+        #pdb.set_trace()
+#        subItems.append(xmlEscapeWithCData(
+#            u'<collection isfocused="" title=%s '
+#            u'name=%s iklen=%s rem="2.2.1.1" '
+#            u'icon_url=%s state_url=%s path=%s '
+#            u'state_val=%s>%s</collection>', 
+#            xml_title, name, subitem_len, iconUrl,
+#            stateIconUrl, item_ppath, stateOverview,
+#            result))
+        result = u' '.join(subItems)
+
+#        dcAdapter = IGeneralDublinCore(oldItem)
+        xml_title = oldItem.getDcTitle()
+#        if dcAdapter:
+#            if dcAdapter.title:
+#                xml_title = dcAdapter.title
+        iconUrl = self.getIconUrl(oldItem)
+        url2=urlparse(zapi.absoluteURL(oldItem,self.request))
+        name = url2[2].split('/')[-1]
+        parentItem = zapi.getParent(oldItem)
+        #parentItem.keys()[parentItem.values().index(oldItem)]
+        stateIconUrl = self.getStateIconUrl(oldItem)
+        #stateValue = self.getStateValue(oldItem)
+        stateOverview = self.getStateOverview(oldItem)
+        try:
+            item_len = len(IContentList(oldItem).getContentList())
+        except TypeError:
+            item_len = self.getLengthOf(oldItem)
+#            item_ppath = zapi.canonicalPath(zapi.getParent(item)) + u'/'
+        url = urlparse(zapi.absoluteURL(zapi.getParent(oldItem),
+                                        self.request))
+        item_ppath = url.path + u'/'
+        item_ppath = item_ppath.replace('//', '/')
+        
+        if len(result) > 0: # collection has content
+            result = xmlEscapeWithCData(
+                      u'<collection title=%s name=%s iklen=%s rem="3.1" '
+                      u'icon_url=%s path=%s isopen="" isroot="">%s</collection>',
+                      xml_title, name, len(oldItem), iconUrl,
+                      item_ppath, result)
+        else:
+            result = xmlEscapeWithCData(
+                      u'<collection title=%s name=%s iklen=%s rem="3.2" '
+                      u'icon_url=%s path=%s expable="" '
+                      u'isroot="">%s</collection>',
+                      xml_title, name, len(oldItem), iconUrl,
+                      item_ppath, result)
+        self.request.response.setHeader('Content-Type', 'text/xml')
+        setNoCacheHeaders(self.request.response)
+        title = translate(titleTemplate,
+                          context=self.request, default=titleTemplate)
+        loading = translate(loadingMsg,
+                          context=self.request, default=loadingMsg)
+        return xmlEscapeWithCData(
+                u'<?xml version="1.0" encoding="ISO-8859-1"?>'
+                u'<children title_tpl=%s title=%s '
+                u'loading_msg=%s>%s</children>',
+                title, title, loading, result)
+
+    def singleBranchTree2(self, root=''):
         """Return an XML document with the siblings and parents of an object.
 
         There is only one branch expanded, in other words, the tree is
@@ -265,7 +454,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                 if zapi.getParent(subItem):
 #                    item_ppath = zapi.canonicalPath(zapi.getParent(subItem)) \
 #                               + u'/'
-                    url = urlparse(zapi.absoluteURL(zapi.getParent(item),
+                    url = urlparse(zapi.absoluteURL(zapi.getParent(subItem),
                                                     self.request))
                     item_ppath = url.path + u'/'
                     item_ppath = item_ppath.replace('//', '/')

@@ -44,6 +44,9 @@
         factory=".adapter.ticker.Ticker"
     />
     <adapter
+        factory=".adapter.navigation.Navigation"
+    />
+    <adapter
         factory=".adapter.search.Searchable"
     />
     <adapter

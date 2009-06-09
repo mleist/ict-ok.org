@@ -19,21 +19,17 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.component import adapts
-from zope.i18nmessageid import MessageFactory
-from zope.app import zapi
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import \
-    ISuperclass, INavigation
-
-_ = MessageFactory('org.ict_ok')
+from org.ict_ok.components.superclass.interfaces import INavigation
+from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 
 
 class Navigation(object):
     """navigation-Adapter."""
 
     implements(INavigation)
-    adapts(ISuperclass)
+    adapts(IAdmUtilSupervisor)
 
     def __init__(self, context):
         self.context = context
@@ -43,9 +39,4 @@ class Navigation(object):
         get an Object list of all interesting objects in the context
         """
         retList = []
-        if preList is not None:
-            retList.extend(preList)
-        retList.append(zapi.getParent(self.context))
-        if postList is not None:
-            retList.extend(postList)
         return retList

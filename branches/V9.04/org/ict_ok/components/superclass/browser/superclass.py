@@ -389,12 +389,15 @@ def applyChanges(form, content, data):
             (content, field.field), interfaces.IDataManager)
         oldValue = dm.get()
         # Only update the data, if it is different
-        if dm.get() != data[name]:
-            dm.set(data[name])
-            # Record the change using information required later
-            #changes.setdefault(dm.field.interface, []).append(name)
-            changes.setdefault(dm.field.interface, {}).setdefault(name, {})['newval'] = data[name]
-            changes.setdefault(dm.field.interface, {}).setdefault(name, {})['oldval'] = oldValue
+        if data[name] is interfaces.NOT_CHANGED:
+            pass
+        else:
+            if dm.get() != data[name]:
+                dm.set(data[name])
+                # Record the change using information required later
+                #changes.setdefault(dm.field.interface, []).append(name)
+                changes.setdefault(dm.field.interface, {}).setdefault(name, {})['newval'] = data[name]
+                changes.setdefault(dm.field.interface, {}).setdefault(name, {})['oldval'] = oldValue
     return changes
 
 class DateGetterColumn(GetterColumn):
@@ -915,8 +918,8 @@ class AddForm(layout.FormLayoutSupport, form.AddForm):
         if hasattr(obj, "store_refs"):
             obj.store_refs(**self.newdata)
         # workaround for gocept.objectquery
-        import transaction
-        transaction.savepoint()
+        #import transaction
+        #transaction.savepoint()
         return obj
 
 

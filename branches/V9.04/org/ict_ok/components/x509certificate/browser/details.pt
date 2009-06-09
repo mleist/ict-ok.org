@@ -43,5 +43,11 @@
             <td i18n:translate="">Comment</td>
             <td tal:content="context/ikComment" />
         </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ddd1|nothing">
+            <td i18n:translate="">ddd1</td>
+            <td tal:content="python: len(context.ddd1)" />
+        </tr>
     </table>
 </i18n:block>

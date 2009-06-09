@@ -485,7 +485,8 @@ class AddComponentForm(AddForm):
         else:
             self.fields = self.allFields
             data, errors = self.extractData()
-            if not data['isTemplate']:
+            if not hasattr(data, 'isTemplate') or \
+               not data['isTemplate']:
                 idChoosers = list(getUtilitiesFor(IIdChooser))
                 for (i_key, i_val) in data.items():
                     if type(i_val) is type(u''):

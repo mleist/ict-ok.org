@@ -21,6 +21,7 @@ from zope.security.proxy import removeSecurityProxy
 
 # z3c imports
 from z3c.form.browser import checkbox
+from z3c.form.browser import file
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
@@ -125,7 +126,7 @@ class DetailsX509CertificateForm(DisplayForm):
     factory = X509Certificate
     omitFields = X509CertificateDetails.omit_viewfields
     fields = fieldsForFactory(factory, omitFields)
-
+    fields['ddd1'].widgetFactory = file.FileFieldWidget
 
 class AddX509CertificateForm(AddComponentForm):
     """Add X.509 Certificate form"""
@@ -138,6 +139,7 @@ class AddX509CertificateForm(AddComponentForm):
     allFields = fieldsForFactory(factory, omitFields)
     addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = checkbox.SingleCheckBoxFieldWidget
+    allFields['ddd1'].widgetFactory = file.FileFieldWidget
 
 
 class EditX509CertificateForm(EditForm):
@@ -146,6 +148,7 @@ class EditX509CertificateForm(EditForm):
     factory = X509Certificate
     omitFields = X509CertificateDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
+    fields['ddd1'].widgetFactory = file.FileFieldWidget
 
 
 class DeleteX509CertificateForm(DeleteForm):

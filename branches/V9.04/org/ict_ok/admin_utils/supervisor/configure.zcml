@@ -50,12 +50,15 @@
 
     <adapter
         factory="org.ict_ok.admin_utils.supervisor.supervisor.AdmUtilSupervisorSized"
-        />
+    />
     <adapter
         factory=".adapter.state.State"
-        />
+    />
     <adapter
         factory=".adapter.ticker.Ticker"
+    />
+    <adapter
+        factory=".adapter.navigation.Navigation"
     />
 
     <subscriber handler="lovely.relation.event.o2oIntIdRemoved" />
