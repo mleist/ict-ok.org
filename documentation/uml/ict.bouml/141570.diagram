@@ -25,7 +25,7 @@ classcanvas 129026 class_ref 133762 // IIpNet
   xyz 783 773 2004
 end
 note 129410 "cl_inventory10_diag
-$Id: 131714.diagram 472 2009-03-05 12:51:18Z markusleist $"
+$Id$"
   xyzwh 36 29 2000 483 52
 relationcanvas 128258 relation_ref 164226 // <realization>
   from ref 128002 z 1999 to ref 128130

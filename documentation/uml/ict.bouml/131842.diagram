@@ -1,30 +1,33 @@
 format 66
 
 classinstancecanvas 128130 classinstance_ref 129922 // Panel1
-  xyz 263 436 2000
+  xyz 289 507 2000
 end
 classinstancecanvas 128258 classinstance_ref 130178 // P1
-  xyz 381 326 2004
+  xyz 407 397 2004
 end
 classinstancecanvas 129410 classinstance_ref 133506 // P2
-  xyz 354 549 2000
+  xyz 380 620 2000
 end
 classinstancecanvas 129666 classinstance_ref 136194 // link01
-  xyz 539 77 3005
+  xyz 565 148 3005
 end
 classinstancecanvas 129922 classinstance_ref 136450 // link02
-  xyz 269 75 3005
+  xyz 295 146 3005
 end
+note 130178 "obj02_diag
+$Id$"
+  xyzwh 38 26 2000 384 52
 objectlinkcanvas 129282 rel relation_ref 139906 // contains
-  from ref 128130 z 1999 label "contains" italic xyz 349 376 1999 to ref 128258
-  role_a_pos 412 352 3000 role_b_pos 341 418 3000
+  from ref 128130 z 1999 label "contains" italic xyz 375 447 1999 to ref 128258
+  role_a_pos 438 429 3000 role_b_pos 373 485 3000
 objectlinkcanvas 129538 rel relation_ref 139906 // contains
-  from ref 128130 z 1999 label "contains" italic xyz 338 488 1999 to ref 129410
-  role_a_pos 391 531 3000 role_b_pos 337 462 3000
+  from ref 128130 z 1999 label "contains" italic xyz 364 559 1999 to ref 129410
+  role_a_pos 418 598 3000 role_b_pos 369 539 3000
 objectlinkcanvas 129794 rel relation_ref 156290 // linkHasConnector
-  from ref 129666 z 1999 label "linkHasConnector" italic xyz 459 214 1999 to ref 128258
-  role_a_pos 442 308 3000 role_b_pos 586 137 3000
+  from ref 129666 z 1999 label "linkHasConnector" italic xyz 485 285 1999 to ref 128258
+  role_a_pos 472 375 3000 role_b_pos 611 220 3000
 objectlinkcanvas 130050 rel relation_ref 156290 // linkHasConnector
-  from ref 129922 z 1999 label "linkHasConnector" italic xyz 333 213 1999 to ref 128258
-  role_a_pos 423 308 3000 role_b_pos 355 135 3000
+  from ref 129922 z 1999 label "linkHasConnector" italic xyz 359 284 1999 to ref 128258
+  role_a_pos 452 375 3000 role_b_pos 389 218 3000
 end

@@ -1,62 +1,65 @@
 format 66
 
 classinstancecanvas 128002 classinstance_ref 132738 // neon.server.ifdd.de
-  xyz 871 113 2000
+  xyz 912 279 2000
 end
 classinstancecanvas 128130 classinstance_ref 130306 // 3Com-01
-  xyz 343 278 2000
+  xyz 384 444 2000
 end
 classinstancecanvas 128258 classinstance_ref 130434 // P1
-  xyz 352 391 2000
+  xyz 393 557 2000
 end
 classinstancecanvas 128386 classinstance_ref 129794 // Infra1
-  xyz 286 165 2000
+  xyz 327 331 2000
 end
 classinstancecanvas 128514 classinstance_ref 130178 // P1
-  xyz 37 389 2000
+  xyz 78 555 2000
 end
 classinstancecanvas 128642 classinstance_ref 129922 // Panel1
-  xyz 93 282 2000
+  xyz 134 448 2000
 end
 classinstancecanvas 128770 classinstance_ref 129538 // Serverroom
-  xyz 265 63 2000
+  xyz 306 229 2000
 end
 classinstancecanvas 129666 classinstance_ref 132866 // helium.server.ifdd.de
-  xyz 883 483 2000
+  xyz 924 649 2000
 end
 classinstancecanvas 129794 classinstance_ref 133122 // eth0
-  xyz 879 201 2000
+  xyz 920 367 2000
 end
 classinstancecanvas 129922 classinstance_ref 132994 // eth0
-  xyz 885 393 2000
+  xyz 926 559 2000
 end
 classinstancecanvas 130306 classinstance_ref 133250 // P2
-  xyz 616 202 2000
+  xyz 657 368 2000
 end
 classinstancecanvas 130434 classinstance_ref 133378 // P3
-  xyz 619 394 2000
+  xyz 660 560 2000
 end
 note 131458 "Server Neon"
-  xyzwh 934 60 2000 110 34
+  xyzwh 975 226 2000 110 34
 note 131586 "Server Helium"
-  xyzwh 945 528 2000 112 34
+  xyzwh 986 694 2000 112 34
+note 132226 "obj04_diag
+$Id$"
+  xyzwh 36 30 2000 384 52
 objectlinkcanvas 128898 rel relation_ref 139266 // Interface in Switch
-  from ref 128130 z 1999 label "Interface in Switch" italic xyz 358 329 1999 to ref 128258
+  from ref 128130 z 1999 label "Interface in Switch" italic xyz 399 495 1999 to ref 128258
   no_role_a no_role_b
 objectlinkcanvas 129026 rel relation_ref 134914 // Panel in Rack
-  from ref 128386 z 1999 label "Panel in Rack" italic xyz 195 218 1999 to ref 128642
+  from ref 128386 z 1999 label "Panel in Rack" italic xyz 236 384 1999 to ref 128642
   no_role_a no_role_b
 objectlinkcanvas 129154 norel
   from ref 128514 z 1999 to ref 128258
   no_role_a no_role_b
 objectlinkcanvas 129282 rel relation_ref 134786 // Rack in Room
-  from ref 128770 z 1999 label "Rack in Room" italic xyz 284 109 1999 to ref 128386
+  from ref 128770 z 1999 label "Rack in Room" italic xyz 325 275 1999 to ref 128386
   no_role_a no_role_b
 objectlinkcanvas 129410 norel
   from ref 128642 z 1999 to ref 128514
   no_role_a no_role_b
 objectlinkcanvas 129538 rel relation_ref 135426 // Switch in Rack
-  from ref 128386 z 1999 label "Switch in Rack" italic xyz 337 216 1999 to ref 128130
+  from ref 128386 z 1999 label "Switch in Rack" italic xyz 378 382 1999 to ref 128130
   no_role_a no_role_b
 objectlinkcanvas 130050 norel
   from ref 128002 z 1999 to ref 129794
@@ -65,10 +68,10 @@ objectlinkcanvas 130178 norel
   from ref 129666 z 1999 to ref 129922
   no_role_a no_role_b
 objectlinkcanvas 130562 rel relation_ref 139266 // Interface in Switch
-  from ref 128130 z 1999 label "Interface in Switch" italic xyz 485 235 1999 to ref 130306
+  from ref 128130 z 1999 label "Interface in Switch" italic xyz 526 401 1999 to ref 130306
   no_role_a no_role_b
 objectlinkcanvas 130690 rel relation_ref 139266 // Interface in Switch
-  from ref 128130 z 1999 label "Interface in Switch" italic xyz 494 331 1999 to ref 130434
+  from ref 128130 z 1999 label "Interface in Switch" italic xyz 535 497 1999 to ref 130434
   no_role_a no_role_b
 objectlinkcanvas 130946 norel
   from ref 130306 z 1999 to ref 129794
@@ -77,8 +80,8 @@ objectlinkcanvas 131074 norel
   from ref 130434 z 1999 to ref 129922
   no_role_a no_role_b
 objectlinkcanvas 131714 rel relation_ref 139906 // contains
-  from ref 128642 z 1999 label "contains" italic xyz 90 332 1999 to ref 128514
-  role_a_pos 95 371 3000 role_b_pos 145 308 3000
+  from ref 128642 z 1999 label "contains" italic xyz 131 498 1999 to ref 128514
+  role_a_pos 142 533 3000 role_b_pos 188 480 3000
 objectlinkcanvas 131842 norel
   from ref 128002 z 1999 to ref 129794
   no_role_a no_role_b
@@ -86,6 +89,6 @@ objectlinkcanvas 131970 norel
   from ref 128002 z 1999 to ref 129794
   no_role_a no_role_b
 objectlinkcanvas 132098 rel relation_ref 139522 // contains
-  from ref 128002 z 1999 label "contains" italic xyz 928 152 1999 to ref 129794
-  role_a_pos 945 179 3000 role_b_pos 977 145 3000
+  from ref 128002 z 1999 label "contains" italic xyz 969 318 1999 to ref 129794
+  role_a_pos 986 345 3000 role_b_pos 1018 311 3000
 end

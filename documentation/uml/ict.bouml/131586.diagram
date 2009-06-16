@@ -47,7 +47,7 @@ classinstancecanvas 134146 classinstance_ref 136578 // link03
 end
 note 135042 "obj01_diag
 $Id$"
-  xyzwh 36 27 2000 382 45
+  xyzwh 36 27 2000 384 52
 objectlinkcanvas 128898 rel relation_ref 134146 // Building in Location
   from ref 128002 z 1999 label "Building in Location" italic xyz 534 88 1999 to ref 128130
   no_role_a no_role_b

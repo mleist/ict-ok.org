@@ -24,4 +24,28 @@ end
 artifactcanvas 129410 artifact_ref 142594 // X509Certificate
   xyz 458 93 2000
 end
+artifactcanvas 129538 artifact_ref 146306 // Address
+  xyz 181 792 2000
+end
+artifactcanvas 129666 artifact_ref 146434 // Contact
+  xyz 518 714 2000
+end
+artifactcanvas 129794 artifact_ref 146562 // ContactItem
+  xyz 826 634 2000
+end
+artifactcanvas 129922 artifact_ref 146690 // IpAddress
+  xyz 926 148 2000
+end
+artifactcanvas 130050 artifact_ref 146818 // Organization
+  xyz 1002 289 2000
+end
+artifactcanvas 130178 artifact_ref 146946 // Person
+  xyz 1030 471 2000
+end
+artifactcanvas 130306 artifact_ref 147074 // Product
+  xyz 904 793 2000
+end
+artifactcanvas 130434 artifact_ref 147202 // WorkOrder
+  xyz 654 876 2000
+end
 end

@@ -195,7 +195,8 @@ ${members}}
 "
   python_2_2
   python_indent_step "    "
-  python_default_src_content "# -*- coding: utf-8 -*-
+  python_default_src_content "#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 #
 # Copyright (c) 2004, 2005, 2006, 2007, 2008,
 #               Markus Leist <leist@ikom-online.de>
@@ -218,26 +219,21 @@ ${docstring}${members}
 ${docstring}${members}
 "
   python_default_external_class_decl "${name}"
-  python_default_attribute_declaration "${comment}${self}${name} = ${value}
-" // multiplicity 1
-  "${comment}${self}${name} = ${stereotype}()
-" // multiplicity != 1
+  python_default_attribute_declaration "attrTuples.append(\\
+    ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))" // multiplicity 1
+  "attrTuples.append(\\
+    ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))" // multiplicity != 1
   python_default_enum_item_decl "${comment}${self}${name} = ${value}
 "
-  python_default_relation_declaration"${comment}${self}${name} = ${value}
-" // multiplicity 1
-  "${comment}${self}${name} = ${stereotype}()
-" // multiplicity != 1
+  python_default_relation_declaration"connInTuples.append(('${name}', u'@{displayName}', '@{otherClassName}'))  # mul 1" // multiplicity 1
+  "connOutTuples.append(('${name}', u'@{displayName}', '@{otherClassName}')) # other mul" // multiplicity != 1
   python_default_composition_declaration"${comment}${self}${name} = ${type}()
 " // multiplicity 1
-  "${comment}${self}${name} = ${stereotype}()
-" // multiplicity != 1
-  python_default_operation_definition "${@}${static}${abstract}def ${name}${(}${)}:
+  "${comment}${self}${name} = ${stereotype}()" // multiplicity != 1
+  python_default_operation_definition "ddd2 ${@}${static}${abstract}def ${name}${(}${)}:
 ${docstring}${body}
 "
-  python_default_initoperation_definition "${@}${static}${abstract}def ${name}${(}${p0}${v0}${)}:
-${docstring}super(${class}, ${p0}).__init__()
-${body}
+  python_default_initoperation_definition "ddd1 ${body}
 "
   python_get "get${Name}"
   python_set "set${Name}"

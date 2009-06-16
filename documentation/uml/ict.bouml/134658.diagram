@@ -1,0 +1,21 @@
+format 66
+
+note 128002 "obj05_diag
+$Id$"
+  xyzwh 35 31 2000 384 52
+classinstancecanvas 128130 classinstance_ref 134658 // Mobile01
+  xyz 51 331 2000
+end
+classinstancecanvas 128386 classinstance_ref 142850 // O3
+  xyz 469 200 2000
+end
+classinstancecanvas 128642 classinstance_ref 142978 // cancellation
+  xyz 939 403 2000
+end
+objectlinkcanvas 128514 rel relation_ref 175618 // concluded
+  from ref 128130 z 1999 label "concluded" italic xyz 339 333 3000 to ref 128386
+  no_role_a no_role_b
+objectlinkcanvas 128770 rel relation_ref 175362 // attached
+  from ref 128386 z 1999 label "attached" italic xyz 823 352 3000 to ref 128642
+  no_role_a no_role_b
+end

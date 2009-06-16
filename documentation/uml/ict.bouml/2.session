@@ -7,7 +7,7 @@ diagrams
   classdiagram_ref 131970 // cl_inventory03_diag
     1256 826 100 4 0 0
   classdiagram_ref 134402 // cl_inventory04_diag
-    1256 826 100 17 0 0
+    1548 1013 100 17 221 0
   classdiagram_ref 134530 // cl_inventory05_diag
     1256 826 100 17 0 0
   classdiagram_ref 135810 // cl_inventory06_diag
@@ -32,7 +32,7 @@ diagrams
     1241 826 100 18 0 0
   objectdiagram_ref 133250 // obj04_diag
     1241 826 100 18 0 0
-  active  classdiagram_ref 144002 // cl_inventory12_diag
+  classdiagram_ref 144002 // cl_inventory12_diag
     1548 1013 100 17 0 0
   classdiagram_ref 144258 // cl_inventory14_diag
     1241 826 100 17 0 0
@@ -48,23 +48,24 @@ diagrams
     1241 826 100 17 0 0
   classdiagram_ref 144898 // cl_inventory19_diag
     1241 826 100 17 0 0
+  deploymentdiagram_ref 129282 // deployment01_diag
+    1241 826 100 3 0 0
+  objectdiagram_ref 146050 // obj08_roles_diag
+    1548 1013 100 17 0 0
+  objectdiagram_ref 136962 // obj06_MobilePhoneFolder_diag
+    1241 826 100 4 0 0
+  active  objectdiagram_ref 134658 // obj05_diag
+    1548 1013 100 17 0 0
+  classdiagram_ref 147202 // cl_inventory20_diag
+    1241 826 100 17 0 0
+  classdiagram_ref 148354 // cl_inventory21_diag
+    1241 826 100 17 0 0
 end
 show_stereotypes
-selected classview_ref 130690 // ict classes
+selected classview_ref 130306 // ict dias
 open
-  class_ref 156034 // Address
-  class_ref 156290 // Organization
-  class_ref 155778 // Person
-  class_ref 133250 // Service
-  class_ref 155010 // WorkOrder
-  class_ref 156162 // IAddress
-  class_ref 156418 // IOrganization
-  class_ref 129410 // IOutlet
-  class_ref 128898 // IPatchPanel
-  class_ref 155906 // IPerson
-  class_ref 137346 // IPhysicalConnector
-  class_ref 147842 // IPrinter
-  class_ref 153858 // IProduct
-  classinstance_ref 140162 // Ubuntu
+  objectdiagram_ref 146050 // obj08_roles_diag
+  classview_ref 128002 // cl_inventory01
 end
 end
+verbose

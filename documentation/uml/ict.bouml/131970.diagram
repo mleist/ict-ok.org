@@ -53,8 +53,8 @@ $Id$"
   xyzwh 38 29 2000 479 55
 relationcanvas 129154 relation_ref 139906 // contains
   from ref 128002 z 1999 label "contains" italic xyz 127 727 1999 to ref 128130
-  role_a_pos 158 618 3000 role_b_pos 157 854 3000
-  multiplicity_a_pos 119 618 3000 no_multiplicity_b
+  role_a_pos 158 624 3000 role_b_pos 160 850 3000
+  multiplicity_a_pos 116 624 3000 no_multiplicity_b
 end
 relationcanvas 130946 relation_ref 135554 // <realization>
   from ref 128130 z 1999 to ref 130818
@@ -83,12 +83,12 @@ relationcanvas 131714 relation_ref 155906 // <realization>
 end
 relationcanvas 131842 relation_ref 156290 // linkHasConnector
   from ref 130562 z 1999 label "linkHasConnector" italic xyz 93 469 1999 to ref 128130
-  role_a_pos 156 558 3000 role_b_pos 141 396 3000
-  multiplicity_a_pos 116 558 3000 multiplicity_b_pos 115 396 3000
+  role_a_pos 157 554 3000 role_b_pos 150 404 3000
+  multiplicity_a_pos 113 554 3000 multiplicity_b_pos 124 404 3000
 end
 relationcanvas 131970 relation_ref 156674 // linkHasConnector
   from ref 130562 z 1999 label "linkHasConnector" italic xyz 225 288 1999 to ref 129282
-  role_a_pos 325 240 3000 role_b_pos 190 322 3000
-  multiplicity_a_pos 333 263 3000 multiplicity_b_pos 190 345 3000
+  role_a_pos 321 240 3000 role_b_pos 204 318 3000
+  multiplicity_a_pos 329 269 3000 multiplicity_b_pos 204 347 3000
 end
 end

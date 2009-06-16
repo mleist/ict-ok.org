@@ -45,7 +45,7 @@ classcanvas 130818 class_ref 128514 // ISupernode
   xyz 879 202 2000
 end
 note 132354 "cl_inventory11_diag
-$Id: 131714.diagram 472 2009-03-05 12:51:18Z markusleist $"
+$Id$"
   xyzwh 38 28 2000 483 52
 relationcanvas 128258 relation_ref 165634 // <realization>
   from ref 128002 z 1999 to ref 128130
@@ -73,8 +73,8 @@ relationcanvas 129666 relation_ref 166402 // ProductParentChild
   from ref 128002 z 1999 label "ProductParentChild" italic xyz 634 782 1999 to point 623 770
   line 129794 z 1999 to point 715 770
   line 129922 z 1999 to ref 128002
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  role_a_pos 575 626 3000 role_b_pos 563 647 3000
+  multiplicity_a_pos 575 655 3000 multiplicity_b_pos 519 647 3000
 end
 relationcanvas 130946 relation_ref 128130 // <realization>
   from ref 130178 z 1999 to ref 130818

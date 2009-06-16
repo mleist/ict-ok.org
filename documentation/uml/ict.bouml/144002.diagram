@@ -1,11 +1,11 @@
 format 66
 
 note 130306 "cl_inventory13_diag
-$Id: 131714.diagram 472 2009-03-05 12:51:18Z markusleist $"
+$Id$"
   xyzwh 39 28 2000 483 52
 classcanvas 130434 class_ref 153730 // Product
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 426 172 3005
+  xyz 422 169 3005
 end
 classcanvas 130946 class_ref 155266 // Contact
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
@@ -13,11 +13,11 @@ classcanvas 130946 class_ref 155266 // Contact
 end
 classcanvas 131074 class_ref 155650 // ContactItem
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 484 577 2000
+  xyz 746 595 2000
 end
 classcanvas 131202 class_ref 155778 // Person
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 637 764 2000
+  xyz 1182 826 2000
 end
 classcanvas 131330 class_ref 156290 // Organization
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
@@ -25,15 +25,15 @@ classcanvas 131330 class_ref 156290 // Organization
 end
 classcanvas 131842 class_ref 156034 // Address
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 716 335 2000
+  xyz 1173 230 2000
 end
 classcanvas 132354 class_ref 155010 // WorkOrder
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 372 388 2000
+  xyz 504 421 2000
 end
 classcanvas 132482 class_ref 155906 // IPerson
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 805 739 2004
+  xyz 1350 801 2004
 end
 classcanvas 132738 class_ref 156418 // IOrganization
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
@@ -45,7 +45,7 @@ classcanvas 132994 class_ref 155394 // IContact
 end
 classcanvas 133250 class_ref 156162 // IAddress
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
-  xyz 888 275 2004
+  xyz 1345 170 2004
 end
 classcanvas 133506 class_ref 155138 // IWorkOrder
   draw_all_relations default hide_attributes default hide_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_infonote default shadow default show_stereotype_properties default
@@ -56,21 +56,22 @@ classcanvas 133762 class_ref 153858 // IProduct
   xyz 579 160 2004
 end
 relationcanvas 130562 relation_ref 166402 // ProductParentChild
-  from ref 130434 z 1999 label "ProductParentChild" italic xyz 356 162 3000 to point 396 172
-  line 130690 z 1999 to point 396 202
+  decenter_begin 219
+  from ref 130434 z 1999 label "ProductParentChild" italic xyz 246 187 1999 to point 312 125
+  line 130690 z 1999 to point 310 279
   line 130818 z 1999 to ref 130434
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  role_a_pos 340 180 3000 role_b_pos 339 160 3000
+  multiplicity_a_pos 405 209 3000 multiplicity_b_pos 387 189 3000
 end
 relationcanvas 131714 relation_ref 168706 // <aggregation>
   from ref 130946 z 1999 to ref 131074
-  no_role_a no_role_b
-  multiplicity_a_pos 467 604 3000 multiplicity_b_pos 317 604 3000
+  role_a_pos 663 591 3000 role_b_pos 317 575 3000
+  multiplicity_a_pos 729 620 3000 multiplicity_b_pos 317 604 3000
 end
 relationcanvas 131970 relation_ref 168834 // <aggregation>
   from ref 131074 z 1999 to ref 131842
-  no_role_a no_role_b
-  multiplicity_a_pos 702 383 3000 multiplicity_b_pos 519 555 3000
+  role_a_pos 1117 241 3000 role_b_pos 819 565 3000
+  multiplicity_a_pos 1163 270 3000 multiplicity_b_pos 819 594 3000
 end
 relationcanvas 132098 relation_ref 168962 // <generalisation>
   from ref 131202 z 1999 to ref 131074
@@ -114,24 +115,24 @@ relationcanvas 133890 relation_ref 165634 // <realization>
 end
 relationcanvas 134018 relation_ref 169218 // <aggregation>
   from ref 132354 z 1999 to ref 130434
-  no_role_a no_role_b
-  multiplicity_a_pos 432 220 3000 multiplicity_b_pos 396 366 3000
+  role_a_pos 469 217 3000 role_b_pos 542 399 3000
+  multiplicity_a_pos 443 217 3000 multiplicity_b_pos 514 399 3000
 end
 relationcanvas 134146 relation_ref 169346 // <aggregation>
   from ref 132354 z 1999 to ref 131074
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  role_a_pos 679 580 3000 role_b_pos 582 447 3000
+  multiplicity_a_pos 745 609 3000 multiplicity_b_pos 582 476 3000
 end
 relationcanvas 134274 relation_ref 169474 // <aggregation>
   from ref 132354 z 1999 to ref 130946
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  role_a_pos 317 550 3000 role_b_pos 432 435 3000
+  multiplicity_a_pos 317 579 3000 multiplicity_b_pos 486 464 3000
 end
 relationcanvas 134402 relation_ref 169602 // <aggregation>
-  from ref 132354 z 1999 to point 491 377
-  line 134530 z 1999 to point 491 427
+  from ref 132354 z 1999 to point 788 294
+  line 134530 z 1999 to point 856 383
   line 134658 z 1999 to ref 132354
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  role_a_pos 592 411 3000 role_b_pos 583 394 3000
+  multiplicity_a_pos 592 440 3000 multiplicity_b_pos 583 423 3000
 end
 end
