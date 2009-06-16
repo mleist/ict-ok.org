@@ -17,7 +17,7 @@
 
 <a name="refclass137730"></a>
 <p>Declaration :</p><ul><li>Java : package interface IDevice </li><li>Php :  interface IDevice </li><li>Python : class IDevice(object)</li></ul><p>Directly inherited by : <a href="class137858.html#refclass137858"><b>Device</b></a> </p>
-<p>Stereotype: interface</p>
+<p>Artifact : <a href="index.html#refartifact143234"><b>IDevice</b></a></p><p>Stereotype: interface</p>
 <div class="sub">
 <a name="refattribute146690"></a>
 <table><tr><td><div class="element">Attribute <b>cpuType</b></div></td></tr></table>
@@ -28,10 +28,16 @@
 <p>Declaration :</p><ul><li>Uml : + interfaces : <a href="class133122.html#refclass133122"><b>Interface</b></a>, multiplicity : *</li><li>Python : self.interfaces = None<br /></li></ul><p>Stereotype: list</p>
 <a name="refattribute136834"></a>
 <table><tr><td><div class="element">Attribute <b>osoftwares</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + osoftwares : , multiplicity : *</li><li>Python : self.osoftwares = None<br /></li></ul><p>Stereotype: list</p>
+<p>Declaration :</p><ul><li>Uml : + osoftwares : <a href="class144898.html#refclass144898"><b>IOperatingSoftware</b></a>, multiplicity : *</li><li>Python : self.osoftwares = None<br /></li></ul><p>Stereotype: list</p>
 <a name="refattribute136962"></a>
 <table><tr><td><div class="element">Attribute <b>appsoftwares</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + appsoftwares : , multiplicity : *</li><li>Python : self.appsoftwares = None<br /></li></ul><p>Stereotype: list</p>
+<p>Declaration :</p><ul><li>Uml : + appsoftwares : <a href="class137602.html#refclass137602"><b>IApplicationSoftware</b></a>, multiplicity : *</li><li>Python : self.appsoftwares = None<br /></li></ul><p>Stereotype: list</p>
+<a name="refattribute157314"></a>
+<table><tr><td><div class="element">Attribute <b>logicalDevices</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + logicalDevices : <a href="class149506.html#refclass149506"><b>ILogicalDevice</b></a>, multiplicity : *</li></ul><p>Stereotype: list</p>
+<a name="refattribute164866"></a>
+<table><tr><td><div class="element">Attribute <b>physicalMedia</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + physicalMedia : <a href="class160130.html#refclass160130"><b>IPhysicalMedia</b></a>, multiplicity : *</li><li>Python : attrTuples.append(\<br />    ('physicalMedia', '<a href="class160130.html#refclass160130"><b>IPhysicalMedia</b></a>', u'@{displayName}', u'@{displayDescription}'))</li></ul><p>Stereotype: list</p>
 </div>
 </body>
 </html>

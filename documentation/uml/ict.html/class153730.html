@@ -1,0 +1,40 @@
+<!-- Documentation produced by the Html generator of Bouml (http://bouml.free.fr) -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class Product</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class Product</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="refclass153730"></a>
+<p>Declaration :</p><ul><li>Python : class Product(<a href="class153858.html#refclass153858"><b>IProduct</b></a>, <a href="class128258.html#refclass128258"><b>Component</b></a>)</li></ul><p>Artifact : <a href="index.html#refartifact147074"><b>Product</b></a></p><div class="sub">
+<a name="refrelation170370"></a>
+<table><tr><td><div class="element">Relation <b>(ProductPhysicalComponents)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : +  : <a href="class143106.html#refclass143106"><b>PhysicalComponent</b></a>, multiplicity : *</li><li>Python : self. = ()<br /></li></ul><a name="refrelation171138"></a>
+<table><tr><td><div class="element">Relation <b>(ProductServices)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : +  : <a href="class133250.html#refclass133250"><b>Service</b></a>, multiplicity : *</li><li>Python : self. = None<br /></li></ul><a name="refrelation171394"></a>
+<table><tr><td><div class="element">Relation <b>(ProductSoftware)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : +  : <a href="class144770.html#refclass144770"><b>SoftwareComponent</b></a>, multiplicity : *</li><li>Python : self. = None<br /></li></ul><a name="refrelation171650"></a>
+<table><tr><td><div class="element">Relation <b>subProducts (ProductParentChild)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + subProducts : <a href="class153730.html#refclass153730"><b>Product</b></a>, multiplicity : *</li><li>Python : connOutTuples.append(('subProducts', u'Sub products', 'Product')) # other mul</li></ul><p>Properties:<ul>
+<li>displayName:<br /><div class="sub">Sub products</div></p></li>
+<li>otherClassName:<br /><div class="sub">Product</div></p></li>
+</ul></p>
+<a name="refrelation171778"></a>
+<table><tr><td><div class="element">Relation <b>mainProduct (ProductParentChild)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + mainProduct : <a href="class153730.html#refclass153730"><b>Product</b></a>, multiplicity : 0..1</li><li>Python : connInTuples.append(('mainProduct', u'Main product', 'Product'))  # mul 1</li></ul><p>Properties:<ul>
+<li>displayName:<br /><div class="sub">Main product</div></p></li>
+<li>otherClassName:<br /><div class="sub">Product</div></p></li>
+</ul></p>
+<a name="refrelation175234"></a>
+<table><tr><td><div class="element">Relation <b>&lt;aggregation&gt;</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + workOrder : <a href="class155010.html#refclass155010"><b>WorkOrder</b></a>, multiplicity : 1</li><li>Python : connInTuples.append(('workOrder', u'Work order', 'WorkOrder'))  # mul 1</li></ul><p>Properties:<ul>
+<li>displayName:<br /><div class="sub">Work order</div></p></li>
+<li>otherClassName:<br /><div class="sub">WorkOrder</div></p></li>
+</ul></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!-- Documentation produced by the Html generator of Bouml (http://bouml.free.fr) -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<title>Class WorkOrder</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body bgcolor="#ffffff">
+
+<div class = "title">Class WorkOrder</div>
+<p></p>
+
+<!-- ============================================================= -->
+
+<a name="refclass155010"></a>
+<p>Declaration :</p><ul><li>Python : class WorkOrder(<a href="class155138.html#refclass155138"><b>IWorkOrder</b></a>, <a href="class128258.html#refclass128258"><b>Component</b></a>)</li></ul><p>Artifact : <a href="index.html#refartifact147202"><b>WorkOrder</b></a></p><div class="sub">
+<a name="refrelation175106"></a>
+<table><tr><td><div class="element">Relation <b>products (&lt;aggregation&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + products : <a href="class153730.html#refclass153730"><b>Product</b></a>, multiplicity : *</li><li>Python : connOutTuples.append(('products', u'Products', 'Product')) # other mul</li></ul><p>Properties:<ul>
+<li>displayName:<br /><div class="sub">Products</div></p></li>
+<li>otherClassName:<br /><div class="sub">Product</div></p></li>
+</ul></p>
+<a name="refrelation175362"></a>
+<table><tr><td><div class="element">Relation <b>contactItems (&lt;aggregation&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + contactItems : <a href="class155650.html#refclass155650"><b>ContactItem</b></a>, multiplicity : *</li><li>Python : connOutTuples.append(('contactItems', u'Contact Items', 'ContactItem')) # other mul</li></ul><p>Properties:<ul>
+<li>displayName:<br /><div class="sub">Contact Items</div></p></li>
+<li>otherClassName:<br /><div class="sub">ContactItem</div></p></li>
+</ul></p>
+<a name="refrelation175618"></a>
+<table><tr><td><div class="element">Relation <b>contacts (&lt;aggregation&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + contacts : <a href="class155266.html#refclass155266"><b>Contact</b></a>, multiplicity : *</li><li>Python : connOutTuples.append(('contacts', u'Contacts', 'Contact')) # other mul</li></ul><p>Properties:<ul>
+<li>displayName:<br /><div class="sub">Contacts</div></p></li>
+<li>otherClassName:<br /><div class="sub">Contact</div></p></li>
+</ul></p>
+<a name="refrelation175874"></a>
+<table><tr><td><div class="element">Relation <b>subWorkOrders (&lt;aggregation&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + subWorkOrders : <a href="class155010.html#refclass155010"><b>WorkOrder</b></a>, multiplicity : *</li><li>Python : connOutTuples.append(('subWorkOrders', u'Sub work orders', 'WorkOrder')) # other mul</li></ul><p>Properties:<ul>
+<li>displayName:<br /><div class="sub">Sub work orders</div></p></li>
+<li>otherClassName:<br /><div class="sub">WorkOrder</div></p></li>
+</ul></p>
+<a name="refrelation176002"></a>
+<table><tr><td><div class="element">Relation <b>mainWorkOrder (&lt;aggregation&gt;)</b></div></td></tr></table><p>Declaration :</p><ul><li>Uml : + mainWorkOrder : <a href="class155010.html#refclass155010"><b>WorkOrder</b></a>, multiplicity : 0..1</li><li>Python : connInTuples.append(('mainWorkOrder', u'Main work order', 'WorkOrder'))  # mul 1</li></ul><p>Properties:<ul>
+<li>displayName:<br /><div class="sub">Main work order</div></p></li>
+<li>otherClassName:<br /><div class="sub">WorkOrder</div></p></li>
+</ul></p>
+</div>
+</body>
+</html>
