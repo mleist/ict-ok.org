@@ -46,6 +46,11 @@ from org.ict_ok.components.contact.interfaces import IContact
 from org.ict_ok.components.address.interfaces import IAddress
 from org.ict_ok.components.role.role import Roles_ContactItems_RelManager
 from org.ict_ok.components.group.group import Group_ContactItems_RelManager
+from org.ict_ok.components.contract.contract import \
+    Responsible4Contracts_ContactItems_RelManager
+from org.ict_ok.components.contract.contract import \
+    ClosedContracts_ContactItems_RelManager
+
 
 def AllContactItemTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IContactItem)
@@ -67,8 +72,6 @@ ContactItem_Addresses_RelManager = \
                             relType='contactItem:adresses')
 
 
-
-
 class ContactItem(Component):
     """
     the template instance
@@ -83,11 +86,11 @@ class ContactItem(Component):
     adresses = RelationPropertyOut(ContactItem_Addresses_RelManager)
     roles = RelationPropertyIn(Roles_ContactItems_RelManager)
     groups = RelationPropertyIn(Group_ContactItems_RelManager)
-    
+    closedContracts = RelationPropertyIn(ClosedContracts_ContactItems_RelManager)
+    responsible4Contracts = RelationPropertyIn(Responsible4Contracts_ContactItems_RelManager)
+        
     fullTextSearchFields = []
     fullTextSearchFields.extend(Component.fullTextSearchFields)
-        
-
 
     def __init__(self, **data):
         """

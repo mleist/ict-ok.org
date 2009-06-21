@@ -1,0 +1,238 @@
+<configure 
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:help="http://namespaces.zope.org/help"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id: configure.zcml_cog 529 2009-05-14 17:46:43Z markusleist $ -->
+
+    <!-- Copyright (c) 2009, 
+                     Markus Leist <leist@ikom-online.de>
+    -->
+
+    <defaultView
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        name="details.html"
+    />
+
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.View"
+        />
+
+    <z3c:pagelet
+        name="details2.html"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        class="org.ict_ok.components.contract.browser.contract.DetailsContractForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.View"
+    />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        class="org.ict_ok.components.contract.browser.contract.ContractDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.View"
+    />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.components.contract.browser.contract.ContractDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        class="org.ict_ok.components.contract.browser.contract.EditContractForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Edit"
+    />
+
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        class="org.ict_ok.components.contract.browser.contract.DeleteContractForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Delete"
+    />
+    <!--    for="org.ict_ok.components.contract.interfaces.IContract"  -->
+
+    <!-- Folder  -->
+
+    <defaultView
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        name="overview.html"
+    />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.View"
+        />
+
+    <z3c:pagelet
+        name="add_contract.html"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        class="org.ict_ok.components.contract.browser.contract.AddContractForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Add"
+    />
+
+    <!-- Sub Menu  -->
+
+    <viewlet
+        name="history"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.View"
+        />
+    <viewlet
+        name="details"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Edit"
+        />
+    <viewlet
+        name="delete"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Delete"
+        />
+    <viewlet
+        name="editcontent"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Edit"
+        />
+    <viewlet
+        name="add_dashboard"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubAddDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+        />
+    <viewlet
+        name="del_dashboard"
+        for="org.ict_ok.components.contract.interfaces.IContract"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+        />
+
+    <!-- Folder  -->
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.View"
+        />
+    <viewlet
+        name="add_contract"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.contract.browser.contract.MSubAddContract"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Add"
+        />
+    <viewlet
+        name="add_contract"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.contract.browser.contract.MGlobalAddContract"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Add"
+        />
+    <!-- page
+        name="exportcsvdata.html"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        class=".contract.ContractFolderDetails"
+        permission="org.ict_ok.components.contract.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportCsvData"
+    / -->
+    <page
+        name="exportxlsdata.html"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        class=".contract.ContractFolderDetails"
+        permission="org.ict_ok.components.contract.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsData"
+    />
+    <!-- z3c:pagelet
+        name="importcsvdata.html"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        class=".contract.ImportCsvDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Add"
+    / -->
+    <z3c:pagelet
+        name="importxlsdata.html"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        class=".contract.ImportXlsDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Add"
+    />
+    <!-- viewlet
+        name="exportcsvdata"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.View"
+        / -->
+    <viewlet
+        name="exportxlsdata"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.View"
+        />
+    <!-- viewlet
+        name="importcsvdata"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Add"
+        / -->
+    <viewlet
+        name="importxlsdata"
+        for="org.ict_ok.components.contract.interfaces.IContractFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contract.Add"
+        />
+                        
+
+</configure>

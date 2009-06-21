@@ -28,5 +28,10 @@
         component=".component.AllXlsCodepages"
         name="AllXlsCodepages"
     />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".component.AllComponents"
+        name="AllComponents"
+    />
 
 </configure>

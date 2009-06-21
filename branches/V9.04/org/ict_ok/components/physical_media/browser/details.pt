@@ -67,7 +67,7 @@
        <tr tal:attributes="class view/getNextTabClass"
            tal:condition="context/capacity|nothing">
            <td i18n:translate="">Capacity</td>
-           <td tal:content="structure python: view.fsearchLink(context.capacity)" />
+           <td tal:content="structure python: view.adjustQuantity(view.convertQuantity(context.capacity))" />
        </tr>
           
        <tr tal:attributes="class view/getNextTabClass"

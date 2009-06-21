@@ -23,11 +23,16 @@ from zope.app.intid.interfaces import IIntIds
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
+
 # ict_ok.org imports
 from org.ict_ok.libs.interfaces import IDocumentAddable
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.supernode import Supernode
-
+from org.ict_ok.components.contract.interfaces import IContract
 
 def AllComponentTemplates(dummy_context, interface):
     """Which MobilePhone templates exists
@@ -44,7 +49,8 @@ def AllComponentTemplates(dummy_context, interface):
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
 
-def AllComponents(dummy_context, interface, additionalAttrNames=None):
+def AllComponents(dummy_context, interface=IComponent,
+                  additionalAttrNames=None):
     """In which production state a host may be
     """
     terms = []
@@ -55,7 +61,8 @@ def AllComponents(dummy_context, interface, additionalAttrNames=None):
             if additionalAttrNames is not None:
                 for additionalAttrName in additionalAttrNames:
                     try:
-                        additionalAttribute = getattr(oobj.object, additionalAttrName)
+                        additionalAttribute = getattr(oobj.object, 
+                                                      additionalAttrName)
                     except AttributeError:
                         additionalAttribute = None
                     if additionalAttribute is not None:
@@ -79,6 +86,7 @@ def AllComponents(dummy_context, interface, additionalAttrNames=None):
                            title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
+
     
 def AllUnusedOrSelfComponents(dummy_context, interface,
                               obj_attr_name, additionalAttrNames=None):
@@ -184,6 +192,11 @@ def ComponentsFromObjList(dummy_context, obj_list, additionalAttrNames=None):
                        title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)    
+
+Component_Contracts_RelManager = \
+       FieldRelationManager(IComponent['contracts'],
+                            IContract['component'],
+                            relType='component:contracts')
 
 
 class Component(Supernode):

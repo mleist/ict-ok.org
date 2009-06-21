@@ -15,10 +15,14 @@
 __version__ = "$Id$"
 
 # zope imports
-from zope.interface import Interface
+from zope.interface import Attribute, Interface, Invalid, invariant
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Choice, Int, List, TextLine, Bool, Float, Datetime
 from zope.app.folder.interfaces import IFolder
+
+# ict_ok.org imports
+from org.ict_ok.schema.physicalvalid import PhysicalQuantity
+from org.ict_ok.libs.physicalquantity import convertQuantity
 
 _ = MessageFactory('org.ict_ok')
 
@@ -26,7 +30,7 @@ _ = MessageFactory('org.ict_ok')
 class IPhysicalMedia(Interface):
     """A PhysicalMedia object."""
 
-    capacity = Int(
+    capacity = PhysicalQuantity(
         title = _(u'Capacity'),
         description = _(u"The number of bytes that can be read from or written to a Media."),
         required = False)
@@ -77,6 +81,15 @@ class IPhysicalMedia(Interface):
         title = _(u'Device'),
         vocabulary = 'AllDevices',
         required = False)
+
+    @invariant
+    def ensureCapacityUnit(physicalMedia):
+        if physicalMedia.capacity is not None:
+            physicalInput = convertQuantity(physicalMedia.capacity)
+            if not physicalInput.isBitUnit():
+                raise Invalid(
+                    "No capacity specification: '%s'." % \
+                    (physicalMedia.capacity))
         
     def trigger_online():
         """

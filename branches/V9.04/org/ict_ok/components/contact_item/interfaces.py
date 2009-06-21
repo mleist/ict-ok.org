@@ -53,6 +53,19 @@ class IContactItem(Interface):
         value_type=Choice(vocabulary='AllUnusedOrUsedContactItemAddresses'),
         default=[],
         required = False)
+
+    closedContracts = List(
+        title=_(u'Closed contracts'),
+        value_type=Choice(vocabulary='AllContracts'),
+        default=[],
+        required = False)
+
+    responsible4Contracts = List(
+        title=_(u'Responsible for contracts'),
+        value_type=Choice(vocabulary='AllContracts'),
+        default=[],
+        required = False)
+
         
     def trigger_online():
         """

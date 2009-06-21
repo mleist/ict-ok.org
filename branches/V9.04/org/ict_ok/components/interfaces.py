@@ -62,6 +62,11 @@ class IComponent(Interface):
         readonly = False,
         required = False)
 
+    contracts = List(
+        title = _(u'Contracts'),
+        value_type=Choice(vocabulary='AllUnusedOrUsedComponentContracts'),
+        default=[],
+        required = False)
 
     
     def get_health():

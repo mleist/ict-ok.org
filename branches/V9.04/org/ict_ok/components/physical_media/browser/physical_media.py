@@ -48,7 +48,7 @@ from org.ict_ok.components.physical_component.browser.physical_component import 
     PhysicalComponentDetails
 from org.ict_ok.osi.interfaces import IOSIModel
 from org.ict_ok.osi.interfaces import IPhysicalLayer
-
+from org.ict_ok.libs.physicalquantity import convertQuantity, physq
 _ = MessageFactory('org.ict_ok')
 
 
@@ -85,7 +85,14 @@ class PhysicalMediaDetails(PhysicalComponentDetails):
     omit_viewfields = PhysicalComponentDetails.omit_viewfields + []
     omit_addfields = PhysicalComponentDetails.omit_addfields + []
     omit_editfields = PhysicalComponentDetails.omit_editfields + []
+    
+    def convertQuantity(self, quantityString):
+        return convertQuantity(quantityString)
 
+    def adjustQuantity(self, quantity):
+        import pdb
+        pdb.set_trace()
+        return quantity.ounit('Gb')
 
 class PhysicalMediaFolderDetails(ComponentDetails):
     """ Class for PhysicalMedia details
