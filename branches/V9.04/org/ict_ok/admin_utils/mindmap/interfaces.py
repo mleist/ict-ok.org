@@ -6,7 +6,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py_cog 88 2007-10-16 13:36:24Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E0211,W0232,W0622
 #
@@ -15,7 +15,7 @@
 the mind map util will display some information from ict-ok in form of a mind map
 """
 
-__version__ = "$Id: interfaces.py_cog 88 2007-10-16 13:36:24Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 

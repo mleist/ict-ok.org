@@ -6,7 +6,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: bootstrap.py_cog 273 2008-08-26 13:23:57Z markusleist $
+# $Id$
 #
 # pylint: disable-msg=E1101
 #
@@ -15,7 +15,7 @@
 the mind map util will display some information from ict-ok in form of a mind map
 """
 
-__version__ = "$Id: bootstrap.py_cog 273 2008-08-26 13:23:57Z markusleist $"
+__version__ = "$Id$"
 
 # python imports
 import logging

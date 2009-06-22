@@ -3,7 +3,7 @@
     i18n_domain="org.ict_ok"
     >
 
-    <!-- $Id: security.zcml_cog 334 2008-09-26 09:41:12Z markusleist $ -->
+    <!-- $Id$ -->
 
     <permission
         id="org.ict_ok.admin_utils.mindmap.View"
