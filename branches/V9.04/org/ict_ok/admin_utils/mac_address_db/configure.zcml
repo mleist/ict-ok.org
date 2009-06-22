@@ -1,0 +1,53 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:xmlrpc="http://namespaces.zope.org/xmlrpc"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+                       Sebastian Napiorkowski <s.napiorkowski@ikom-online.de>
+    -->
+
+    <class class=".mac_address_db.AdmUtilMacAddressDb">
+        <factory
+            id="org.ict_ok.admin_utils.mac_address_db.mac_address_db.AdmUtilMacAddressDb" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.mac_address_db.View"
+            interface=".interfaces.IAdmUtilMacAddressDb"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mac_address_db.Edit"
+            set_schema=".interfaces.IAdmUtilMacAddressDb"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mac_address_db.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mac_address_db.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mac_address_db.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mac_address_db.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <include package=".browser" />
+    
+</configure>
