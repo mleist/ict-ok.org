@@ -1,0 +1,53 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:xmlrpc="http://namespaces.zope.org/xmlrpc"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id: configure.zcml_cog 91 2007-10-16 19:07:08Z markusleist $ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+                       Sebastian Napiorkowski <s.napiorkowski@ikom-online.de>
+    -->
+
+    <class class=".mindmap.AdmUtilMindMap">
+        <factory
+            id="org.ict_ok.admin_utils.mindmap.mindmap.AdmUtilMindMap" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.mindmap.View"
+            interface=".interfaces.IAdmUtilMindMap"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mindmap.Edit"
+            set_schema=".interfaces.IAdmUtilMindMap"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mindmap.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mindmap.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mindmap.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.mindmap.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <!-- setup local utilities -->
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <include package=".browser" />
+    
+</configure>
