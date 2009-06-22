@@ -152,5 +152,10 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.group"
              file="security.zcml" />
-
+    <include package="org.ict_ok.components.int_attachment"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.reminder"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.contract"
+             file="security.zcml" />
 </configure>
