@@ -21,6 +21,7 @@ from zope.interface import implements
 from zope.component import adapts
 from zope.index.text.interfaces import ISearchableText
 from zope.i18nmessageid import MessageFactory
+from zope.component import queryUtility
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.adapter.search import \
@@ -28,6 +29,8 @@ from org.ict_ok.components.superclass.adapter.search import \
 from org.ict_ok.components.interface.interfaces import \
      IInterface, convertIpV4
 from org.ict_ok.components.interface.interface import Interface
+from org.ict_ok.admin_utils.mac_address_db.interfaces import \
+     IAdmUtilMacAddressDb
 
 _ = MessageFactory('org.ict_ok')
 
@@ -57,3 +60,19 @@ class Searchable(SuperSearchable):
         """
         """
         return Interface.fullTextSearchFields
+
+    def getSearchableFullText(self):
+        """
+        get Object id as string for catalog
+        """
+        stringList = []
+        for field in self.getFullTextSearchFields():
+            #print u"%s : '%s'" % (field, getattr(self.context, field))
+            stringList.append(u"%s" % getattr(self.context, field))
+        macAddressDb = queryUtility(IAdmUtilMacAddressDb,
+                                    name="AdmUtilMacAddressDb")
+        organization = macAddressDb.getOrganization(self.context.mac)
+        if organization is not None:
+            longString = organization['short']
+            stringList.append(longString)
+        return u" ".join(stringList)

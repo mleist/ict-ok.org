@@ -46,6 +46,19 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
+    <z3c:macro
+        template="details2.pt"
+        name="Lego2x4"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:macro
+        template="details2.pt"
+        macro="ddd2"
+        for="org.ict_ok.components.person.browser.person.PersonDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <z3c:pagelet
         name="edit.html"
         for="org.ict_ok.components.person.interfaces.IPerson"

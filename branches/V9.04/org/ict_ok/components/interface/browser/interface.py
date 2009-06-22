@@ -26,6 +26,7 @@ from zope.traversing.browser import absoluteURL
 from zope.lifecycleevent import ObjectCreatedEvent
 from zope.event import notify
 from zope.component import createObject
+from zope.component import queryUtility
 
 # z3c imports
 from z3c.form import field
@@ -57,6 +58,8 @@ from org.ict_ok.components.physical_component.browser.physical_component import 
     PhysicalComponentDetails
 from org.ict_ok.osi.interfaces import IOSIModel
 from org.ict_ok.osi.interfaces import IPhysicalLayer
+from org.ict_ok.admin_utils.mac_address_db.interfaces import \
+     IAdmUtilMacAddressDb
 
 _ = MessageFactory('org.ict_ok')
 
@@ -119,6 +122,7 @@ class InterfaceDetails(PhysicalComponentDetails):
     def otherConnectedInterfaces(self):
         return [i for i in self.connectedComponentsOnPhysicalLayer()
                 if IInterface.providedBy(i) and i is not self.context]
+                
         
 class InterfaceFolderDetails(ComponentDetails):
     """ Class for MobilePhone details
@@ -500,12 +504,24 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
     factoryId = u'org.ict_ok.components.interface.interface.Interface'
     allFields = fieldsForInterface(attrInterface, [])
 
-
-
 def getRoom(item, formatter):
     if item.device is not None:
         return item.device.room
     return None
+
+def getBrand(item, formatter):
+    if item.mac is not None:
+        macAddressDb = queryUtility(IAdmUtilMacAddressDb, name="AdmUtilMacAddressDb")
+        organization = macAddressDb.getOrganization(item.mac)
+        if organization is None:
+            return None
+        longString = organization['short']
+        if len(longString) > 10:
+            return longString[:10] + u'...'
+        else:
+            return longString
+    return None
+
 
 class Overview(SuperOverview):
     columns = (
@@ -517,6 +533,9 @@ class Overview(SuperOverview):
         IctGetterColumn(title=_('Title'),
                         getter=getTitle,
                         cell_formatter=link('overview.html')),
+        IctGetterColumn(title=_('Brand'),
+                        getter=getBrand,
+                        cell_formatter=raw_cell_formatter),
         IctGetterColumn(title=_('Device'),
                         getter=lambda i,f: i.device,
                         cell_formatter=link('details.html')),

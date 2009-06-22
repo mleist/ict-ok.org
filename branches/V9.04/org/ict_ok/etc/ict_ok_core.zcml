@@ -25,6 +25,8 @@
     <include package="org.ict_ok.admin_utils.graphviz" />
     <include package="org.ict_ok.admin_utils.idchooser" />
     <!-- <include package="org.ict_ok.admin_utils.linux_ha" /> -->
+    <include package="org.ict_ok.admin_utils.mac_address_db" />
+    <include package="org.ict_ok.admin_utils.mindmap" />
     <include package="org.ict_ok.admin_utils.netscan" />
     <include package="org.ict_ok.admin_utils.netscan.nmap" />
     <include package="org.ict_ok.admin_utils.netscan.simple1" />

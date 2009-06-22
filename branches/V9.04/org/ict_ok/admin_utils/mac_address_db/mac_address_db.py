@@ -29,6 +29,7 @@ from zope.schema.fieldproperty import FieldProperty
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.mac_address_db.interfaces import \
      IAdmUtilMacAddressDb
+from org.ict_ok.libs.mac_db import MacDB
 
 logger = logging.getLogger("AdmUtilMacAddressDb")
 
@@ -45,3 +46,24 @@ class AdmUtilMacAddressDb(Supernode):
         """ stupid place holder
         """
         return u"i'm not here"
+    
+    def getOrganization(self, macString):
+        """you have a mac address, we have the organization
+        """
+        return globalMacAddressDb.getOrganization(macString)
+
+
+
+#class GlobalMacAddressDb(object):
+#    def __init__(self):
+#        self.__data__ = u"ich bin doch nicht da"
+#    def getOrganization(self, macString):
+#        """you have a mac address, we have the organization
+#        """
+#        return self.__data__
+        
+
+
+#globalMacAddressDb = GlobalMacAddressDb()
+globalMacAddressDb = MacDB()
+

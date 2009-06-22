@@ -79,6 +79,16 @@
         permission="org.ict_ok.components.superclass.exportxml"
     />
 
+    <page
+        name="as_mindmap.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.SuperclassDetails"
+        permission="org.ict_ok.admin_utils.mindmap.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="asMindmap"
+    />
+
+
     <z3c:pagelet
         name="moveup.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
@@ -162,5 +172,13 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubReportXML"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.generate.xml"
+        />
+    <viewlet
+        name="asMindmap"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubAsMindMap"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mindmap.View"
         />
 </configure>

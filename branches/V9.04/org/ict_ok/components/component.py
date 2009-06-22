@@ -208,6 +208,7 @@ class Component(Supernode):
     isTemplate = FieldProperty(IComponent['isTemplate'])
 #    requirement = FieldProperty(IComponent['requirement'])
     requirements = FieldProperty(IComponent['requirements'])
+    contracts = RelationPropertyOut(Component_Contracts_RelManager)
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Supernode.fullTextSearchFields)

@@ -20,6 +20,8 @@
     <include package="org.ict_ok.admin_utils.graphviz.browser" />
     <include package="org.ict_ok.admin_utils.idchooser.browser" />
     <!--<include package="org.ict_ok.admin_utils.linux_ha.browser" /> -->
+    <include package="org.ict_ok.admin_utils.mac_address_db.browser" />
+    <include package="org.ict_ok.admin_utils.mindmap.browser" />
     <include package="org.ict_ok.admin_utils.netscan.browser" />
     <include package="org.ict_ok.admin_utils.netscan.nmap.browser" />
     <include package="org.ict_ok.admin_utils.netscan.simple1.browser" />

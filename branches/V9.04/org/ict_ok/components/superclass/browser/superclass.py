@@ -73,6 +73,9 @@ from org.ict_ok.components.superclass.interfaces import \
      IEventIfSuperclass
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.schema.IPy import IP
+from org.ict_ok.admin_utils.mindmap.interfaces import IAdmUtilMindMap
+from org.ict_ok.admin_utils.mac_address_db.interfaces import \
+     IAdmUtilMacAddressDb
 
 _ = MessageFactory('org.ict_ok')
 
@@ -324,6 +327,8 @@ def getStateIcon(item, formatter):
                                        icon_name)
 
 def raw_cell_formatter(value, item, formatter):
+    if value is None:
+        return u''
     return unicode(value)
 
 def link(view='index.html'):
@@ -553,6 +558,13 @@ class MSubEditContent(GlobalMenuSubItem):
     weight = 30
 
 
+class MSubAsMindMap(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'as mind map')
+    viewURL = '@@as_mindmap.html'
+    weight = 100
+
+
 # --------------- object details ---------------------------
 
 
@@ -770,6 +782,20 @@ class SuperclassDetails:
                 self,
                 self.context,
                 u"<div>%s</div>" % self.context.ikName)
+
+    def asMindmap(self):
+        mindMapUtil = queryUtility(IAdmUtilMindMap, name="AdmUtilMindMap")
+        from zope.proxy import removeAllProxies
+        mindMapUtil.context = removeAllProxies(self.context)
+        return mindMapUtil.placeHolder()
+
+    def getOrganizationForMacAddress(self, macAddress):
+        macAddressDb = queryUtility(IAdmUtilMacAddressDb, name="AdmUtilMacAddressDb")
+        return macAddressDb
+        #return u'Apfel'
+
+    def macAddressUtility(self):
+        return queryUtility(IAdmUtilMacAddressDb, name="AdmUtilMacAddressDb")
 
 
 class IctGetterColumn(GetterColumn):

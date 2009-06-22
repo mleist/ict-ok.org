@@ -64,7 +64,8 @@ class IComponent(Interface):
 
     contracts = List(
         title = _(u'Contracts'),
-        value_type=Choice(vocabulary='AllUnusedOrUsedComponentContracts'),
+        #value_type=Choice(vocabulary='AllUnusedOrUsedComponentContracts'),
+        value_type=Choice(vocabulary='AllContracts'),
         default=[],
         required = False)
 

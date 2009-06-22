@@ -66,6 +66,16 @@ class PersonDetails(ComponentDetails):
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
 
+    def stop(self):
+        import pdb
+        pdb.set_trace()
+#  >>> from z3c.macro import interfaces
+#  >>> view = View(content, request)
+#
+#  >>> macro = zope.component.queryMultiAdapter((content, view, request),
+#  ...     interface=interfaces.IMacroTemplate, name='title')
+
+
 
 class PersonFolderDetails(ComponentDetails):
     """ Class for Person details

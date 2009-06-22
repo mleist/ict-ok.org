@@ -40,8 +40,19 @@ class AdmUtilMindMap(Supernode):
     implements(IAdmUtilMindMap)
 
     version = FieldProperty(IAdmUtilMindMap['version'])
+
+    def __init__(self, **data):
+        """
+        constructor of Supernode
+        """
+        Supernode.__init__(self, **data)
+        self.context = None
+        self.ikRevision = __version__
     
     def placeHolder(self):
         """ stupid place holder
         """
-        return u"i'm not here"
+        if self.context is not None:
+            return u"%s is not here" % (self.context.ikName)
+        else:
+            return u"I'm not here"
