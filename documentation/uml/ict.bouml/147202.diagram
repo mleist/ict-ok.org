@@ -76,10 +76,10 @@ end
 relationcanvas 130946 relation_ref 175618 // concluded
   decenter_begin 894
   decenter_end 861
-  from ref 128386 z 1999 label "concluded" italic xyz 699 444 3000 to point 723 405
+  from ref 128386 z 1999 label "concluded" italic xyz 699 444 1999 to point 723 405
   line 131458 z 1999 to point 723 487
   line 131202 z 1999 to ref 130562
-  no_role_a no_role_b
+  role_a_pos 620 521 3000 role_b_pos 637 386 3000
   multiplicity_a_pos 620 550 3000 multiplicity_b_pos 637 415 3000
 end
 end

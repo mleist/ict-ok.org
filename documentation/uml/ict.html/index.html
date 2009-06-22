@@ -272,7 +272,7 @@ Documentation</title>
 <li><a href="class139522.html#refattribute143490"><b>puk</b></a> = 654321</li>
 <li><a href="class139522.html#refattribute143618"><b>simNumber</b></a> = sim-34567898765</li>
 </ul></p><p>relations :<ul>
-<li><a href="class128258.html#refrelation182274"><b></b></a> = <a href="index.html#refclass instance142850"><b>O3</b></a></li>
+<li><a href="class128258.html#refrelation182274"><b>contracts</b></a> = <a href="index.html#refclass instance142850"><b>O3</b></a></li>
 <li><a href="class140930.html#refrelation150658"><b></b></a> = <a href="index.html#refclass instance134914"><b>Mobiles</b></a></li>
 </ul></p><a name="refclass instance134786"></a>
 <table><tr><td><div class="element">Class instance  <b>Mobile02</div></td></tr></table><p>type :<a href="class140930.html#refclass140930"><b>MobilePhone</b></a></p><p>attributes :<ul>
@@ -492,7 +492,7 @@ Documentation</title>
 <a name="refclass instance142850"></a>
 <table><tr><td><div class="element">Class instance  <b>O3</div></td></tr></table><p>type :<a href="class161282.html#refclass161282"><b>Contract</b></a></p><p>attributes :<ul>
 <li><a href="class161410.html#refattribute166658"><b>annualCharges</b></a> = 320 ?</li>
-<li><a href="class161410.html#refattribute166146"><b>contractor</b></a> = O3 Germany</li>
+<li><a href="class161410.html#refattribute166146"><b>contractors</b></a> = O3 Germany</li>
 <li><a href="class161410.html#refattribute166530"><b>expirationDate</b></a> = 31.12.2009</li>
 <li><a href="class161410.html#refattribute166914"><b>externalContractNumber</b></a> = O3-1234-567890</li>
 <li><a href="class161410.html#refattribute167298"><b>minimumTerm</b></a> = 12 mon.</li>
@@ -500,13 +500,13 @@ Documentation</title>
 <li><a href="class161410.html#refattribute166274"><b>startDate</b></a> = 01.01.2009</li>
 <li><a href="class161410.html#refattribute166402"><b>state</b></a> = draft</li>
 </ul></p><p>relations :<ul>
-<li><a href="class128258.html#refrelation181890"><b></b></a> = <a href="index.html#refclass instance142978"><b>cancellation</b></a></li>
-<li><a href="class161282.html#refrelation182402"><b></b></a> = <a href="index.html#refclass instance134658"><b>Mobile01</b></a></li>
+<li><a href="class128258.html#refrelation181890"><b>reminders</b></a> = <a href="index.html#refclass instance142978"><b>cancellation</b></a></li>
+<li><a href="class161282.html#refrelation182402"><b>component</b></a> = <a href="index.html#refclass instance134658"><b>Mobile01</b></a></li>
 </ul></p><a name="refclass instance142978"></a>
 <table><tr><td><div class="element">Class instance  <b>cancellation</div></td></tr></table><p>type :<a href="class162690.html#refclass162690"><b>Reminder</b></a></p><p>attributes :<ul>
 <li><a href="class162818.html#refattribute168450"><b>dueDate</b></a> = 01.09.2009</li>
 </ul></p><p>relations :<ul>
-<li><a href="class162690.html#refrelation182018"><b></b></a> = <a href="index.html#refclass instance142850"><b>O3</b></a></li>
+<li><a href="class162690.html#refrelation182018"><b>component</b></a> = <a href="index.html#refclass instance142850"><b>O3</b></a></li>
 </ul></p></div>
 <a name="refdeployment view128002"></a>
 <h2 class ="view">1.7 Deployment View deployment01</h2>
@@ -905,6 +905,22 @@ Documentation</title>
 <table><tr><td><div class="element">Artifact <b>PhysicalMedia</b></div></td></tr></table>
 <p>Stereotype: source</p>
 <p>Artifact <i>source</i> associated with : <a href="class160002.html#refclass160002"><b>PhysicalMedia</b></a></p>
+<a name="refartifact150914"></a>
+<table><tr><td><div class="element">Artifact <b>Contract</b></div></td></tr></table>
+<p>Stereotype: source</p>
+<p>Artifact <i>source</i> associated with : <a href="class161282.html#refclass161282"><b>Contract</b></a></p>
+<a name="refartifact151042"></a>
+<table><tr><td><div class="element">Artifact <b>IContract</b></div></td></tr></table>
+<p>Stereotype: source</p>
+<p>Artifact <i>source</i> associated with : <a href="class161410.html#refclass161410"><b>IContract</b></a></p>
+<a name="refartifact151170"></a>
+<table><tr><td><div class="element">Artifact <b>Reminder</b></div></td></tr></table>
+<p>Stereotype: source</p>
+<p>Artifact <i>source</i> associated with : <a href="class162690.html#refclass162690"><b>Reminder</b></a></p>
+<a name="refartifact151298"></a>
+<table><tr><td><div class="element">Artifact <b>IReminder</b></div></td></tr></table>
+<p>Stereotype: source</p>
+<p>Artifact <i>source</i> associated with : <a href="class162818.html#refclass162818"><b>IReminder</b></a></p>
 </div>
 <a name="refclass view128002"></a>
 <h2 class ="view">1.8 Class View cl_inventory01</h2>

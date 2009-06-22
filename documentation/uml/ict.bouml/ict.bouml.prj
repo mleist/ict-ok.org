@@ -1,6 +1,6 @@
 format 66
 "ict.bouml"
-  revision 20
+  revision 22
   modified_by 2 "markus"
   python_root_dir "/Users/markus/Repositories/svn.ict-ok.org/documentation/uml/ict.py/"
 
@@ -38,7 +38,7 @@ the ....
   
   class_color yellow duration_color transparent continuation_color gray note_color blue fragment_color transparent subject_color transparent usecase_color yellow package_color transparent component_color green artifact_color green deploymentnode_color gray state_color yellow stateaction_color transparent activity_color transparent activityregion_color transparent activitypartition_color transparent activityaction_color transparent parameterpin_color white 
   font_size 12
-  diagram_format A4
+  diagram_format A3-Landscape
 
   mark_for_import
   

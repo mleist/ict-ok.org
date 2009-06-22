@@ -54,16 +54,20 @@ diagrams
     1548 1013 100 17 0 0
   objectdiagram_ref 136962 // obj06_MobilePhoneFolder_diag
     1241 826 100 4 0 0
-  active  objectdiagram_ref 134658 // obj05_diag
+  objectdiagram_ref 134658 // obj05_diag
     1548 1013 100 17 0 0
-  classdiagram_ref 147202 // cl_inventory20_diag
-    1241 826 100 17 0 0
+  active  classdiagram_ref 147202 // cl_inventory20_diag
+    1548 1013 100 17 221 0
   classdiagram_ref 148354 // cl_inventory21_diag
     1241 826 100 17 0 0
 end
 show_stereotypes
-selected classview_ref 130306 // ict dias
+selected class_ref 155522 // IContactItem
 open
+  class_ref 156034 // Address
+  class_ref 161282 // Contract
+  class_ref 155778 // Person
+  class_ref 155010 // WorkOrder
   objectdiagram_ref 146050 // obj08_roles_diag
   classview_ref 128002 // cl_inventory01
 end

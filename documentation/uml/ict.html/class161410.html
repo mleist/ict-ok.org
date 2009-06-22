@@ -17,31 +17,75 @@
 
 <a name="refclass161410"></a>
 <p>Declaration :</p><ul><li>Java : package interface IContract </li><li>Php :  interface IContract </li><li>Python : class IContract(object)</li></ul><p>Directly inherited by : <a href="class161282.html#refclass161282"><b>Contract</b></a> </p>
-<p>Stereotype: interface</p>
+<p>Artifact : <a href="index.html#refartifact151042"><b>IContract</b></a></p><p>Stereotype: interface</p>
 <div class="sub">
 <a name="refattribute166018"></a>
 <table><tr><td><div class="element">Attribute <b>type</b></div></td></tr></table>
-<p>Contract type<br /></p><p>Declaration :</p><ul><li>Uml : + type : , multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('type', '', u'@{displayName}', u'@{displayDescription}'))</li></ul><a name="refattribute166146"></a>
-<table><tr><td><div class="element">Attribute <b>contractor</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + contractor : <a href="class155650.html#refclass155650"><b>ContactItem</b></a>, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('contractor', '<a href="class155650.html#refclass155650"><b>ContactItem</b></a>', u'@{displayName}', u'@{displayDescription}'))</li></ul><p>Stereotype: list</p>
+<p>Contract type<br /></p><p>Declaration :</p><ul><li>Uml : + type : , multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('type', '', u'Contract type', u'Contract type'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">Contract type</div></p></li>
+<li>displayName:<br /><div class="sub">Contract type</div></p></li>
+</ul></p>
+<a name="refattribute166146"></a>
+<table><tr><td><div class="element">Attribute <b>contractors</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + contractors : <a href="class155650.html#refclass155650"><b>ContactItem</b></a>, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('contractors', '<a href="class155650.html#refclass155650"><b>ContactItem</b></a>', u'Contractor', u'Contractor'))</li></ul><p>Stereotype: list</p>
+<p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">Contractor</div></p></li>
+<li>displayName:<br /><div class="sub">Contractor</div></p></li>
+</ul></p>
 <a name="refattribute166274"></a>
 <table><tr><td><div class="element">Attribute <b>startDate</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + startDate : <a href="class140802.html#refclass140802"><b>Date</b></a>, multiplicity : 1</li><li>Python : attrTuples.append(\<br />    ('startDate', '<a href="class140802.html#refclass140802"><b>Date</b></a>', u'@{displayName}', u'@{displayDescription}'))</li></ul><a name="refattribute166402"></a>
+<p>Declaration :</p><ul><li>Uml : + startDate : <a href="class140802.html#refclass140802"><b>Date</b></a>, multiplicity : 1</li><li>Python : attrTuples.append(\<br />    ('startDate', '<a href="class140802.html#refclass140802"><b>Date</b></a>', u'start date', u'contract start date'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">contract start date</div></p></li>
+<li>displayName:<br /><div class="sub">start date</div></p></li>
+</ul></p>
+<a name="refattribute166402"></a>
 <table><tr><td><div class="element">Attribute <b>state</b></div></td></tr></table>
-<p>e.g. draft, approved, signed, ...<br /></p><p>Declaration :</p><ul><li>Uml : + state : , multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('state', '', u'@{displayName}', u'@{displayDescription}'))</li></ul><a name="refattribute166530"></a>
+<p>e.g. draft, approved, signed, ...<br /></p><p>Declaration :</p><ul><li>Uml : + state : , multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('state', '', u'State', u'State'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">State</div></p></li>
+<li>displayName:<br /><div class="sub">State</div></p></li>
+</ul></p>
+<a name="refattribute166530"></a>
 <table><tr><td><div class="element">Attribute <b>expirationDate</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + expirationDate : <a href="class140802.html#refclass140802"><b>Date</b></a>, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('expirationDate', '<a href="class140802.html#refclass140802"><b>Date</b></a>', u'@{displayName}', u'@{displayDescription}'))</li></ul><a name="refattribute166658"></a>
+<p>Declaration :</p><ul><li>Uml : + expirationDate : <a href="class140802.html#refclass140802"><b>Date</b></a>, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('expirationDate', '<a href="class140802.html#refclass140802"><b>Date</b></a>', u'expiration date', u'expiration of contract'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">expiration of contract</div></p></li>
+<li>displayName:<br /><div class="sub">expiration date</div></p></li>
+</ul></p>
+<a name="refattribute166658"></a>
 <table><tr><td><div class="element">Attribute <b>annualCharges</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + annualCharges : <a href="class146306.html#refclass146306"><b>PhysicalQuantity</b></a>, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('annualCharges', '<a href="class146306.html#refclass146306"><b>PhysicalQuantity</b></a>', u'@{displayName}', u'@{displayDescription}'))</li></ul><a name="refattribute166786"></a>
+<p>Declaration :</p><ul><li>Uml : + annualCharges : <a href="class146306.html#refclass146306"><b>PhysicalQuantity</b></a>, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('annualCharges', '<a href="class146306.html#refclass146306"><b>PhysicalQuantity</b></a>', u'annual charges', u'annual charges'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">annual charges</div></p></li>
+<li>displayName:<br /><div class="sub">annual charges</div></p></li>
+</ul></p>
+<a name="refattribute166786"></a>
 <table><tr><td><div class="element">Attribute <b>internalContractNumber</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + internalContractNumber : string, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('internalContractNumber', 'string', u'@{displayName}', u'@{displayDescription}'))</li></ul><a name="refattribute166914"></a>
+<p>Declaration :</p><ul><li>Uml : + internalContractNumber : string, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('internalContractNumber', 'string', u'internal contract number', u'internal contract number'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">internal contract number</div></p></li>
+<li>displayName:<br /><div class="sub">internal contract number</div></p></li>
+</ul></p>
+<a name="refattribute166914"></a>
 <table><tr><td><div class="element">Attribute <b>externalContractNumber</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + externalContractNumber : string, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('externalContractNumber', 'string', u'@{displayName}', u'@{displayDescription}'))</li></ul><a name="refattribute167042"></a>
-<table><tr><td><div class="element">Attribute <b>responsible</b></div></td></tr></table>
-<p>Declaration :</p><ul><li>Uml : + responsible : <a href="class155650.html#refclass155650"><b>ContactItem</b></a>, multiplicity : *</li><li>Python : attrTuples.append(\<br />    ('responsible', '<a href="class155650.html#refclass155650"><b>ContactItem</b></a>', u'@{displayName}', u'@{displayDescription}'))</li></ul><a name="refattribute167170"></a>
+<p>Declaration :</p><ul><li>Uml : + externalContractNumber : string, multiplicity : 0..1</li><li>Python : attrTuples.append(\<br />    ('externalContractNumber', 'string', u'external contract number', u'external contract number'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">external contract number</div></p></li>
+<li>displayName:<br /><div class="sub">external contract number</div></p></li>
+</ul></p>
+<a name="refattribute167042"></a>
+<table><tr><td><div class="element">Attribute <b>responsibles</b></div></td></tr></table>
+<p>Declaration :</p><ul><li>Uml : + responsibles : <a href="class155650.html#refclass155650"><b>ContactItem</b></a>, multiplicity : *</li><li>Python : attrTuples.append(\<br />    ('responsibles', '<a href="class155650.html#refclass155650"><b>ContactItem</b></a>', u'responsible', u'responsible'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">responsible</div></p></li>
+<li>displayName:<br /><div class="sub">responsible</div></p></li>
+</ul></p>
+<a name="refattribute167170"></a>
 <table><tr><td><div class="element">Attribute <b>periodOfNotice</b></div></td></tr></table>
-<p>de_DE: Kündigungsfrist<br /></p><p>Declaration :</p><ul><li>Uml : + periodOfNotice : <a href="class161538.html#refclass161538"><b>Timedelta</b></a>, multiplicity : 1</li><li>Python : attrTuples.append(\<br />    ('periodOfNotice', '<a href="class161538.html#refclass161538"><b>Timedelta</b></a>', u'@{displayName}', u'@{displayDescription}'))</li></ul><a name="refattribute167298"></a>
+<p>de_DE: Kündigungsfrist<br /></p><p>Declaration :</p><ul><li>Uml : + periodOfNotice : <a href="class161538.html#refclass161538"><b>Timedelta</b></a>, multiplicity : 1</li><li>Python : attrTuples.append(\<br />    ('periodOfNotice', '<a href="class161538.html#refclass161538"><b>Timedelta</b></a>', u'period of notice', u'period of notice'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">period of notice</div></p></li>
+<li>displayName:<br /><div class="sub">period of notice</div></p></li>
+</ul></p>
+<a name="refattribute167298"></a>
 <table><tr><td><div class="element">Attribute <b>minimumTerm</b></div></td></tr></table>
-<p>de_DE: Mindestlaufzeit<br /></p><p>Declaration :</p><ul><li>Uml : + minimumTerm : <a href="class161538.html#refclass161538"><b>Timedelta</b></a>, multiplicity : 1</li><li>Python : attrTuples.append(\<br />    ('minimumTerm', '<a href="class161538.html#refclass161538"><b>Timedelta</b></a>', u'@{displayName}', u'@{displayDescription}'))</li></ul></div>
+<p>de_DE: Mindestlaufzeit<br /></p><p>Declaration :</p><ul><li>Uml : + minimumTerm : <a href="class161538.html#refclass161538"><b>Timedelta</b></a>, multiplicity : 1</li><li>Python : attrTuples.append(\<br />    ('minimumTerm', '<a href="class161538.html#refclass161538"><b>Timedelta</b></a>', u'minimum term', u'minimum term'))</li></ul><p>Properties:<ul>
+<li>displayDescription:<br /><div class="sub">minimum term</div></p></li>
+<li>displayName:<br /><div class="sub">minimum term</div></p></li>
+</ul></p>
+</div>
 </body>
 </html>

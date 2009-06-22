@@ -1,6 +1,6 @@
 format 66
 "pkg_inv01" // pkg_inv01
-  revision 35
+  revision 37
   modified_by 2 "markus"
   // class settings
   //class diagram settings
@@ -289,24 +289,30 @@ ${docstring}${members}
 	  b parent class_ref 128130 // Supernode
       end
 
-      classrelation 181890 // (attached)
-	relation 175362 o--- name "attached"
-	  a role_name "" multiplicity "*" public
+      classrelation 181890 // reminders (contained)
+	relation 175362 o--- name "contained"
+	  a role_name "reminders" multiplicity "*" public
 	    python "connInTuples.append(('${name}', u'@{displayName}', '@{otherClassName}'))  # mul 1"
-	    classrelation_ref 181890 // (attached)
-	  b role_name "" multiplicity "1" public
+	    classrelation_ref 181890 // reminders (contained)
+	  b role_name "component" multiplicity "1" public
 	    python "connInTuples.append(('${name}', u'@{displayName}', '@{otherClassName}'))  # mul 1"
-	    classrelation_ref 182018 // (attached)
+	    classrelation_ref 182018 // component (contained)
+	ncouples 2
+	key "displayName" value "Reminders"
+	key "otherClassName" value "Reminder"
       end
 
-      classrelation 182274 // (concluded)
+      classrelation 182274 // contracts (concluded)
 	relation 175618 o--- name "concluded"
-	  a role_name "" multiplicity "*" public
+	  a role_name "contracts" multiplicity "*" public
 	    python "connInTuples.append(('${name}', u'@{displayName}', '@{otherClassName}'))  # mul 1"
-	    classrelation_ref 182274 // (concluded)
-	  b role_name "" multiplicity "0..1" public
+	    classrelation_ref 182274 // contracts (concluded)
+	  b role_name "component" multiplicity "0..1" public
 	    python "connInTuples.append(('${name}', u'@{displayName}', '@{otherClassName}'))  # mul 1"
-	    classrelation_ref 182402 // (concluded)
+	    classrelation_ref 182402 // component (concluded)
+	ncouples 2
+	key "displayName" value "Contracts"
+	key "otherClassName" value "Contract"
       end
     end
 
@@ -1252,8 +1258,11 @@ ${docstring}${members}
 	  b parent class_ref 128258 // Component
       end
 
-      classrelation 182402 // (concluded)
+      classrelation 182402 // component (concluded)
 	relation_ref 175618 // concluded
+	ncouples 2
+	key "displayName" value "Component"
+	key "otherClassName" value "Component"
       end
     end
 
@@ -2354,8 +2363,11 @@ ${docstring}${members}
 	  b parent class_ref 162818 // IReminder
       end
 
-      classrelation 182018 // (attached)
-	relation_ref 175362 // attached
+      classrelation 182018 // component (contained)
+	relation_ref 175362 // contained
+	ncouples 2
+	key "displayName" value "Component"
+	key "otherClassName" value "Component"
       end
 
       classrelation 182146 // <generalisation>
@@ -2875,10 +2887,13 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "Contract type"
+	key "displayDescription" value "Contract type"
 	comment "Contract type"
       end
 
-      attribute 166146 "contractor"
+      attribute 166146 "contractors"
 	public type class_ref 155650 // ContactItem
 	multiplicity "0..1"
 	stereotype "list"
@@ -2888,6 +2903,9 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "Contractor"
+	key "displayDescription" value "Contractor"
       end
 
       attribute 166274 "startDate"
@@ -2899,6 +2917,9 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "start date"
+	key "displayDescription" value "contract start date"
       end
 
       attribute 166402 "state"
@@ -2910,6 +2931,9 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "State"
+	key "displayDescription" value "State"
 	comment "e.g. draft, approved, signed, ..."
       end
 
@@ -2922,6 +2946,9 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "expiration date"
+	key "displayDescription" value "expiration of contract"
       end
 
       attribute 166658 "annualCharges"
@@ -2933,6 +2960,9 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "annual charges"
+	key "displayDescription" value "annual charges"
       end
 
       attribute 166786 "internalContractNumber"
@@ -2944,6 +2974,9 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "internal contract number"
+	key "displayDescription" value "internal contract number"
       end
 
       attribute 166914 "externalContractNumber"
@@ -2955,9 +2988,12 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "external contract number"
+	key "displayDescription" value "external contract number"
       end
 
-      attribute 167042 "responsible"
+      attribute 167042 "responsibles"
 	public type class_ref 155650 // ContactItem
 	multiplicity "*"
 	cpp_decl ""
@@ -2966,6 +3002,9 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "responsible"
+	key "displayDescription" value "responsible"
       end
 
       attribute 167170 "periodOfNotice"
@@ -2977,6 +3016,9 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
+	ncouples 2
+	key "displayName" value "period of notice"
+	key "displayDescription" value "period of notice"
 	comment "de_DE: Kündigungsfrist"
       end
 
@@ -2989,7 +3031,10 @@ ${members}};
 	python_decl "attrTuples.append(\\
     ('${name}', '${type}', u'@{displayName}', u'@{displayDescription}'))"
 	idl_decl ""
-	comment "de_DE: Mindestlaufzeit"
+	ncouples 2
+	key "displayName" value "minimum term"
+	key "displayDescription" value "minimum term"
+	comment "			de_DE: Mindestlaufzeit"
       end
     end
 
@@ -5389,7 +5434,7 @@ ${members}};
       attributes
         attribute_ref 166658 // annualCharges
           "320 ?"
-        attribute_ref 166146 // contractor
+        attribute_ref 166146 // contractors
           "O3 Germany"
         attribute_ref 166530 // expirationDate
           "31.12.2009"
@@ -5405,7 +5450,7 @@ ${members}};
           "draft"
         end
       relations
-        relation_ref 175362 // attached
+        relation_ref 175362 // contained
           classinstance_ref 142978 // cancellation
         end
     end
@@ -7744,6 +7789,140 @@ ${definition}
 "
       associated_classes
 	class_ref 160002 // PhysicalMedia
+      end
+    end
+
+    artifact 150914 "Contract"
+      stereotype "source"
+      python_src "#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 161282 // Contract
+      end
+    end
+
+    artifact 151042 "IContract"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      python_src "#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 161410 // IContract
+      end
+    end
+
+    artifact 151170 "Reminder"
+      stereotype "source"
+      python_src "#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      associated_classes
+	class_ref 162690 // Reminder
+      end
+    end
+
+    artifact 151298 "IReminder"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${definition}
+?>
+"
+      python_src "#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2004, 2005, 2006, 2007, 2008,
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=
+#
+
+${comment}
+${import}
+${definition}
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_classes
+	class_ref 162818 // IReminder
       end
     end
   end

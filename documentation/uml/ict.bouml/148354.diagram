@@ -65,9 +65,9 @@ relationcanvas 130306 relation_ref 175234 // <realization>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 130434 relation_ref 175362 // attached
-  from ref 128642 z 1999 label "attached" italic xyz 635 531 3000 to ref 130178
-  no_role_a no_role_b
+relationcanvas 130434 relation_ref 175362 // contained
+  from ref 128642 z 1999 label "contained" italic xyz 605 518 1999 to ref 130178
+  role_a_pos 735 581 3000 role_b_pos 473 451 3000
   multiplicity_a_pos 788 610 3000 multiplicity_b_pos 473 480 3000
 end
 relationcanvas 130562 relation_ref 175490 // <generalisation>

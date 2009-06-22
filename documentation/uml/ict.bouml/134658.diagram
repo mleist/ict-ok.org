@@ -13,9 +13,9 @@ classinstancecanvas 128642 classinstance_ref 142978 // cancellation
   xyz 939 403 2000
 end
 objectlinkcanvas 128514 rel relation_ref 175618 // concluded
-  from ref 128130 z 1999 label "concluded" italic xyz 339 333 3000 to ref 128386
-  no_role_a no_role_b
-objectlinkcanvas 128770 rel relation_ref 175362 // attached
-  from ref 128386 z 1999 label "attached" italic xyz 823 352 3000 to ref 128642
-  no_role_a no_role_b
+  from ref 128130 z 1999 label "concluded" italic xyz 339 333 1999 to ref 128386
+  role_a_pos 406 299 3000 role_b_pos 279 354 3000
+objectlinkcanvas 128770 rel relation_ref 175362 // contained
+  from ref 128386 z 1999 label "contained" italic xyz 821 352 1999 to ref 128642
+  role_a_pos 878 384 3000 role_b_pos 761 316 3000
 end
