@@ -36,13 +36,12 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.contract.interfaces import IContract
 from org.ict_ok.components.contract.interfaces import IContractFolder
 from org.ict_ok.components.contract.interfaces import IAddContract
-from org.ict_ok.components.component import Component
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.components.component import Component_Contracts_RelManager
 from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.components.component import Component #, Contracts_Component_RelManager
 from org.ict_ok.components.contact_item.interfaces import IContactItem
 
 def AllContractTemplates(dummy_context):
@@ -85,6 +84,7 @@ Responsible4Contracts_ContactItems_RelManager = \
                             relType='responsible4Contracts:responsibles')
 
 
+
 class Contract(Component):
     """
     the template instance
@@ -103,9 +103,9 @@ class Contract(Component):
     externalContractNumber = FieldProperty(IContract['externalContractNumber'])
     periodOfNotice = FieldProperty(IContract['periodOfNotice'])
     minimumTerm = FieldProperty(IContract['minimumTerm'])
-    component = RelationPropertyIn(Component_Contracts_RelManager)
     responsibles = RelationPropertyOut(Responsible4Contracts_ContactItems_RelManager)
     contractors = RelationPropertyOut(ClosedContracts_ContactItems_RelManager)
+#    component = RelationPropertyOut(Contracts_Component_RelManager)
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Component.fullTextSearchFields)

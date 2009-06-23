@@ -34,6 +34,7 @@ from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.components.contract.interfaces import IContract
 
+
 def AllComponentTemplates(dummy_context, interface):
     """Which MobilePhone templates exists
     """
@@ -193,10 +194,12 @@ def ComponentsFromObjList(dummy_context, obj_list, additionalAttrNames=None):
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)    
 
-Component_Contracts_RelManager = \
-       FieldRelationManager(IComponent['contracts'],
-                            IContract['component'],
-                            relType='component:contracts')
+
+#Contracts_Component_RelManager = \
+#       FieldRelationManager(IContract['component'],
+#                            IComponent['contracts'],
+#                            relType='contracts:component')
+
 
 
 class Component(Supernode):
@@ -208,7 +211,7 @@ class Component(Supernode):
     isTemplate = FieldProperty(IComponent['isTemplate'])
 #    requirement = FieldProperty(IComponent['requirement'])
     requirements = FieldProperty(IComponent['requirements'])
-    contracts = RelationPropertyOut(Component_Contracts_RelManager)
+#    contracts = RelationPropertyIn(Contracts_Component_RelManager)
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Supernode.fullTextSearchFields)
