@@ -1,0 +1,10 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="Lego2x4">
+    OO<br />
+    OO<br />
+    OO<br />
+    OO<br />    
+    <span tal:content="dateform" />
+</metal:block>
