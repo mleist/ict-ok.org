@@ -44,6 +44,13 @@ class ILocation(Interface):
         description = _("URL of the location at google maps."),
         default = u"",
         required = False)
+    
+    gmapcode = TextLine(
+        max_length = 1500,
+        title = _("GoogleMap HTML-Code"),
+        description = _("HTML Code of the location at google maps."),
+        default = u"",
+        required = False)
 
 class ILocationFolder(Interface):
     """Container for Location objects

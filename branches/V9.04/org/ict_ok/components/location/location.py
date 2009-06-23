@@ -103,6 +103,7 @@ class Location(Component):
     #ikAttr = FieldProperty(ILocation['ikAttr'])
     coordinates = FieldProperty(ILocation['coordinates'])
     gmapsurl = FieldProperty(ILocation['gmapsurl'])
+    gmapcode = FieldProperty(ILocation['gmapcode'])
 
     buildings = RelationPropertyOut(Location_Buildings_RelManager)
 
