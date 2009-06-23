@@ -74,6 +74,7 @@
 
     <include package="org.ict_ok.components.logical_device" />
     <include package="org.ict_ok.components.logical_component" />
+    <include package="org.ict_ok.components.software_component" />
 
     <include package="org.ict_ok.components.credential" />
 
@@ -108,7 +109,6 @@
     <include package="org.ict_ok.components.physical_media" />
     <include package="org.ict_ok.components.role" />
     <include package="org.ict_ok.components.group" />
-    <include package="org.ict_ok.components.int_attachment" />
     <include package="org.ict_ok.components.reminder" />
     <include package="org.ict_ok.components.contract" />
 </configure>

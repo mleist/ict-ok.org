@@ -62,7 +62,11 @@
         permission="org.ict_ok.components.appsoftware.Delete"
     />
     <!--    for="org.ict_ok.components.appsoftware.interfaces.IApplicationSoftware"  -->
-    
+    <z3c:macro
+        template="appsoftware_details.pt"
+        name="AppsoftwareDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
     <!-- Folder  -->
 
     <defaultView

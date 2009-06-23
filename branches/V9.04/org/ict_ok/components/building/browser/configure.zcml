@@ -77,6 +77,13 @@
         permission="org.ict_ok.components.room.Add"
     />
 
+    <z3c:macro
+        template="building_details.pt"
+        name="BuildingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+
 
     <!-- Folder  -->
 

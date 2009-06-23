@@ -38,52 +38,52 @@ class IPhysicalComponent(Interface):
         vocabulary="AllLdapUser",
         required = False)
 
-    manufacturer = TextLine(
+    manufacturer = TextLine(#
         max_length = 200,
         title = _("Manufacturer"),
         description = _("Name/Address of the manufacturer."),
         required = False)
 
-    modelType = TextLine(
+    modelType = TextLine(#
         title = _(u'Model type'),
         description = _(u'model type'),
         required = False)
 
-    vendor = TextLine(
+    vendor = TextLine(#
         max_length = 500,
         title = _("Vendor"),
         description = _("Name/Address of the vendor."),
         default = u"",
         required = False)
     
-    deliveryDate = Date(
+    deliveryDate = Date(#
         title = _(u'Delivery date'),
         description = _(u'delivery date'),
         required = False)
         
-    room = Choice(
+    room = Choice(#
         title=_(u'Room'),
         vocabulary='AllRooms',
         required=False
         )
 
-    serialNumber = TextLine(
+    serialNumber = TextLine(#
         title = _(u'Serial number'),
         description = _(u'Serial number'),
         required = False)
         
-    inv_id = TextLine(
+    inv_id = TextLine(#
         title = _(u'Inventory id'),
         description = _(u'Id of inventory.'),
         required = False)
 
-    documentNumber = TextLine(
+    documentNumber = TextLine(#
         title = _(u'Document number'),
         description = _(u'Document number'),
         required = False)
 
     productionState = Choice(
-        title = _("Production state"),
+        title = _("Production state"),#
         vocabulary="AllHostProductionStates",
         default = 'production',
         readonly = False,

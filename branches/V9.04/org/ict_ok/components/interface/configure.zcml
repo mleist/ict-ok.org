@@ -187,6 +187,9 @@
         factory=".adapter.smokeping.GenSmokePing"
         permission="org.ict_ok.admin_utils.generators.smokeping.View"
     />
+    <adapter
+        factory=".adapter.navigation.Navigation"
+    />
 
     <!--  Vocabulary stuff ============================================== -->
 

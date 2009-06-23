@@ -102,6 +102,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.display_unit.Add"
     />
+    <z3c:macro
+        template="display_unit_details.pt"
+        name="DisplayUnitDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

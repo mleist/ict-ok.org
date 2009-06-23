@@ -63,6 +63,12 @@
     />
     <!--    for="org.ict_ok.components.address.interfaces.IAddress"  -->
 
+    <z3c:macro
+        template="address_details.pt"
+        name="AddressDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    
     <!-- Folder  -->
 
     <defaultView

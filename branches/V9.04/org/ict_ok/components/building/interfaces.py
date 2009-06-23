@@ -45,12 +45,19 @@ class IBuilding(Interface):
         required = False)
 
     gmapsurl = TextLine(
-        max_length = 200,
+        max_length = 500,
         title = _("GoogleMap URL"),
         description = _("URL of the location at google maps."),
         default = u"",
         required = False)
-    
+
+    gmapcode = TextLine(
+        max_length = 1500,
+        title = _("GoogleMap HTML-Code"),
+        description = _("HTML Code of the location at google maps."),
+        default = u"",
+        required = False)
+
 class IBuildingFolder(Interface):
     """Container for Building objects
     """

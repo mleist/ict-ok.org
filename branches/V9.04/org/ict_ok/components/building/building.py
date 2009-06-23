@@ -74,6 +74,7 @@ class Building(Component):
     #ikAttr = FieldProperty(IBuilding['ikAttr'])
     coordinates = FieldProperty(IBuilding['coordinates'])
     gmapsurl = FieldProperty(IBuilding['gmapsurl'])
+    gmapcode = FieldProperty(IBuilding['gmapcode'])
 
     location = RelationPropertyIn(Location_Buildings_RelManager)
     rooms = RelationPropertyOut(Building_Rooms_RelManager)

@@ -85,7 +85,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.contract.Add"
     />
-
+    <z3c:macro
+        template="contract_details.pt"
+        name="ContractDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
     <!-- Sub Menu  -->
 
     <viewlet

@@ -86,6 +86,12 @@
         permission="org.ict_ok.components.contact.Add"
     />
 
+    <z3c:macro
+        template="contact_details.pt"
+        name="ContactDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    
     <!-- Sub Menu  -->
 
     <viewlet

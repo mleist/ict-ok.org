@@ -7,70 +7,8 @@
     <h3 tal:condition="not:context/isTemplate" i18n:translate="">Contact details</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">Name</td>
-            <td tal:content="context/ikName" />
-        </tr>
-        <!-- #### vvv    some examples, please remove     vvv ####
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="python: context.room is not None">
-            <td i18n:translate="">Room</td>
-            <td>
-            <span tal:content="structure python: view.getHrefTitle(context.room)" />
-            <div tal:omit-tag=""
-                 tal:condition="python: context.room.building is not None">
-                <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building)" />
-                <div tal:omit-tag=""
-                     tal:condition="python: context.room.building.location is not None">
-                    <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building.location)" />
-                </div>
-            </div>
-            </td>
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/productionState|nothing">
-            <td i18n:translate="">Production state</td>
-            <td tal:content="python: view.vocabValue('AllHostProductionStates',
-                                                     context.productionState)" />
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/interfaces|nothing">
-            <td i18n:translate="">Interfaces</td>
-            <td>
-                <ul>
-                    <li tal:repeat="obj context/interfaces"
-                        tal:content="structure python: view.getHrefTitle(obj)" />
-                    
-                <ul>
-            </td>
-        </tr>
-        #### ^^^    some examples, please remove     ^^^ #### -->
 
+    <metal:block use-macro="macro:ContactDetails" />
 
-          
-       <tr tal:attributes="class view/getNextTabClass"
-           tal:condition="python: context.workOrder is not None">
-           <td i18n:translate="">Work Order</td>
-           <td tal:content="structure python: view.getHrefTitle(context.workOrder)" />
-       </tr>
-
-          
-       <tr tal:attributes="class view/getNextTabClass"
-           tal:condition="context/contactItems|nothing">
-           <td i18n:translate="">Contact Items</td>
-           <td>
-               <ul>
-                   <li tal:repeat="obj context/contactItems"
-                       tal:content="structure python: view.getHrefTitle(obj)" />
-                   
-               <ul>
-           </td>
-       </tr>
-
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/ikComment|nothing">
-            <td i18n:translate="">Comment</td>
-            <td tal:content="context/ikComment" />
-        </tr>
     </table>
 </i18n:block>

@@ -71,7 +71,6 @@ class Person(ContactItem):
     fullTextSearchFields.extend(ContactItem.fullTextSearchFields)
         
 
-
     def __init__(self, **data):
         """
         constructor of the object
