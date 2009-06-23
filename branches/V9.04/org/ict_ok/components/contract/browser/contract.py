@@ -99,8 +99,6 @@ class AddContractForm(AddComponentForm):
     allFields = fieldsForFactory(factory, omitFields)
     addFields = fieldsForInterface(addInterface, [])
     _session_key = 'org.ict_ok.components.contract'
-    allFields['isTemplate'].widgetFactory = \
-        checkbox.SingleCheckBoxFieldWidget
 
 
 class EditContractForm(EditForm):

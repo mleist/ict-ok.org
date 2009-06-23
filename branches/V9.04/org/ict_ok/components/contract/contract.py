@@ -41,7 +41,7 @@ from org.ict_ok.components.interfaces import \
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.interfaces import IComponent
-from org.ict_ok.components.component import Component #, Contracts_Component_RelManager
+from org.ict_ok.components.component import Component, Contracts_Component_RelManager
 from org.ict_ok.components.contact_item.interfaces import IContactItem
 
 def AllContractTemplates(dummy_context):
@@ -105,7 +105,7 @@ class Contract(Component):
     minimumTerm = FieldProperty(IContract['minimumTerm'])
     responsibles = RelationPropertyOut(Responsible4Contracts_ContactItems_RelManager)
     contractors = RelationPropertyOut(ClosedContracts_ContactItems_RelManager)
-#    component = RelationPropertyOut(Contracts_Component_RelManager)
+    component = RelationPropertyOut(Contracts_Component_RelManager)
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Component.fullTextSearchFields)
@@ -125,6 +125,7 @@ class Contract(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        Component.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(Contract)
         for (name, value) in data.items():
             if name in refAttributeNames:

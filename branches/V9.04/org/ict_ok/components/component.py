@@ -29,6 +29,7 @@ from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.libs.interfaces import IDocumentAddable
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -195,10 +196,10 @@ def ComponentsFromObjList(dummy_context, obj_list, additionalAttrNames=None):
     return SimpleVocabulary(terms)    
 
 
-#Contracts_Component_RelManager = \
-#       FieldRelationManager(IContract['component'],
-#                            IComponent['contracts'],
-#                            relType='contracts:component')
+Contracts_Component_RelManager = \
+       FieldRelationManager(IContract['component'],
+                            IComponent['contracts'],
+                            relType='contracts:component')
 
 
 
@@ -211,7 +212,7 @@ class Component(Supernode):
     isTemplate = FieldProperty(IComponent['isTemplate'])
 #    requirement = FieldProperty(IComponent['requirement'])
     requirements = FieldProperty(IComponent['requirements'])
-#    contracts = RelationPropertyIn(Contracts_Component_RelManager)
+    contracts = RelationPropertyIn(Contracts_Component_RelManager)
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Supernode.fullTextSearchFields)
@@ -222,13 +223,18 @@ class Component(Supernode):
         """
         Supernode.__init__(self, **data)
         self.requirements = []
-        #self.myFactory = str(self.__class__).split("'")[1]
+        refAttributeNames = getRefAttributeNames(Component)
         for (name, value) in data.items():
-            if name in IComponent.names():
+            if name in IComponent.names() and \
+               name not in refAttributeNames:
                 setattr(self, name, value)
-        if not hasattr(self, 'isTemplate'):
-            self.isTemplate = False
         self.ikRevision = __version__
+
+    def store_refs(self, **data):
+        refAttributeNames = getRefAttributeNames(Component)
+        for (name, value) in data.items():
+            if name in refAttributeNames:
+                setattr(self, name, value)
 
     def get_health(self):
         """

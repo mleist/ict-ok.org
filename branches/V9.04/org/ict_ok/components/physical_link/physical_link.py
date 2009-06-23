@@ -146,6 +146,7 @@ class PhysicalLink(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        Component.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(PhysicalLink)
         for (name, value) in data.items():
             if name in refAttributeNames:

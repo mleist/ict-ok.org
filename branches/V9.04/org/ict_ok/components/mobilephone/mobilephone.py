@@ -115,6 +115,7 @@ class MobilePhone(Component):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
+        Component.store_refs(self, **data)
         refAttributeNames = getRefAttributeNames(MobilePhone)
         for (name, value) in data.items():
             if name in refAttributeNames:
