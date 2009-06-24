@@ -49,6 +49,10 @@ class ColorValidError(ValidationError):
     """Error notification for non valid Email-Address"""
     __doc__ = _("""Color not ok (#rrggbb)""")
 
+class DateValidError(ValidationError):
+    """Error notification for non valid Dates"""
+    __doc__ = _("""Date not valid""")
+
 class EmailValidError(ValidationError):
     """Error notification for non valid Email-Address"""
     __doc__ = _("""Email-address not ok""")
