@@ -100,6 +100,7 @@
     <include package="org.ict_ok.components.physical_media.browser" />
     <include package="org.ict_ok.components.role.browser" />
     <include package="org.ict_ok.components.group.browser" />
+    <include package="org.ict_ok.components.int_attachment.browser" />
     <include package="org.ict_ok.components.reminder.browser" />
     <include package="org.ict_ok.components.contract.browser" />
 </configure>
