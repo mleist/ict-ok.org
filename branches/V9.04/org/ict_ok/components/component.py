@@ -98,10 +98,39 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
     uidutil = getUtility(IIntIds)
     for (oid, oobj) in uidutil.items():
         if interface.providedBy(oobj.object):
-            if not oobj.object.isTemplate:
-                if obj_attr_name is not None and \
-                    ( getattr(oobj.object, obj_attr_name) is None or \
-                      len(getattr(oobj.object, obj_attr_name)) == 0):
+            #if not oobj.object.isTemplate:
+            if obj_attr_name is not None and \
+                ( getattr(oobj.object, obj_attr_name) is None or \
+                  len(getattr(oobj.object, obj_attr_name)) == 0):
+                myString = u"%s" % (oobj.object.getDcTitle())
+                if additionalAttrNames is not None:
+                    for additionalAttrName in additionalAttrNames:
+                        try:
+                            additionalAttribute = getattr(oobj.object, additionalAttrName)
+                        except AttributeError:
+                            additionalAttribute = None
+                        if additionalAttribute is not None:
+                            if hasattr(additionalAttribute, 'ikName'):
+                                if len(additionalAttribute.ikName) > 70:
+                                    dotted = u'...)'
+                                else:
+                                    dotted = u')'
+                                myString = myString + u" (%s" % \
+                                    additionalAttribute.ikName[:70] + dotted
+                            else:
+                                if len(additionalAttribute) > 70:
+                                    dotted = u'...)'
+                                else:
+                                    dotted = u')'
+                                myString = myString + u" (%s" % \
+                                    additionalAttribute[:70] + dotted
+                terms.append(\
+                    SimpleTerm(oobj.object,
+                               token=oid,
+                               title=myString))
+            else:
+                if getattr(oobj.object, obj_attr_name) == dummy_context or \
+                   dummy_context in getattr(oobj.object, obj_attr_name):
                     myString = u"%s" % (oobj.object.getDcTitle())
                     if additionalAttrNames is not None:
                         for additionalAttrName in additionalAttrNames:
@@ -128,35 +157,6 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
                         SimpleTerm(oobj.object,
                                    token=oid,
                                    title=myString))
-                else:
-                    if getattr(oobj.object, obj_attr_name) == dummy_context or \
-                       dummy_context in getattr(oobj.object, obj_attr_name):
-                        myString = u"%s" % (oobj.object.getDcTitle())
-                        if additionalAttrNames is not None:
-                            for additionalAttrName in additionalAttrNames:
-                                try:
-                                    additionalAttribute = getattr(oobj.object, additionalAttrName)
-                                except AttributeError:
-                                    additionalAttribute = None
-                                if additionalAttribute is not None:
-                                    if hasattr(additionalAttribute, 'ikName'):
-                                        if len(additionalAttribute.ikName) > 70:
-                                            dotted = u'...)'
-                                        else:
-                                            dotted = u')'
-                                        myString = myString + u" (%s" % \
-                                            additionalAttribute.ikName[:70] + dotted
-                                    else:
-                                        if len(additionalAttribute) > 70:
-                                            dotted = u'...)'
-                                        else:
-                                            dotted = u')'
-                                        myString = myString + u" (%s" % \
-                                            additionalAttribute[:70] + dotted
-                        terms.append(\
-                            SimpleTerm(oobj.object,
-                                       token=oid,
-                                       title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
 
