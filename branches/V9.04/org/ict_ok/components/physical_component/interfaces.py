@@ -17,9 +17,10 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface, Invalid, invariant
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Date, Int, TextLine
+from zope.schema import Choice, Int, TextLine
 
 # ict_ok.org imports
+from org.ict_ok.schema.date import Date
 
 _ = MessageFactory('org.ict_ok')
 

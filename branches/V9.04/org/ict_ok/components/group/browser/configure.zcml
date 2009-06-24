@@ -87,6 +87,12 @@
         permission="org.ict_ok.components.group.Add"
     />
 
+    <z3c:macro
+        template="group_details.pt"
+        name="GroupDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <!-- Sub Menu  -->
 
     <viewlet
