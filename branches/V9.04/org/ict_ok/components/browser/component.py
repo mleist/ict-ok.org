@@ -482,6 +482,14 @@ class AddComponentForm(AddForm):
                     if i_val is not None and \
                         field_n != "isTemplate":
                         self.widgets[field_n].value = i_wval
+                    if interfaces.IOrderedSelectWidget.providedBy(i_widgets):
+                        for value in i_wval:
+                            for item in i_widgets.items:
+                                if value in item["value"]:
+                                    i_widgets.selectedItems.append(item)
+                        i_widgets.notselectedItems = i_widgets.deselect()
+                        #import pdb
+                        #pdb.set_trace()
         else:
             self.fields = self.allFields
             data, errors = self.extractData()
