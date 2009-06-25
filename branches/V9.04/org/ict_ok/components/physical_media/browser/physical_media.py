@@ -90,8 +90,6 @@ class PhysicalMediaDetails(PhysicalComponentDetails):
         return convertQuantity(quantityString)
 
     def adjustQuantity(self, quantity):
-        import pdb
-        pdb.set_trace()
         return quantity.ounit('Gb')
 
 class PhysicalMediaFolderDetails(ComponentDetails):
