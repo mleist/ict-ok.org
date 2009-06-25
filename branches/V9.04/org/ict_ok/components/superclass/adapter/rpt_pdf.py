@@ -157,9 +157,12 @@ class RptPdf(object):
         if vocabReg is not None:
             vocab = vocabReg.get(self.request, vocabName)
             if vocab is not None:
-                vocabTerm = vocab.getTerm(token)
-                if vocabTerm:
-                    return vocabTerm.title
+                try:
+                    vocabTerm = vocab.getTerm(token)
+                    if vocabTerm:
+                        return vocabTerm.title
+                except LookupError:
+                    return None
 
     def prependAttributeTable(self):
         return []
