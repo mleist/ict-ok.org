@@ -71,8 +71,9 @@ class Searchable(SuperSearchable):
             stringList.append(u"%s" % getattr(self.context, field))
         macAddressDb = queryUtility(IAdmUtilMacAddressDb,
                                     name="AdmUtilMacAddressDb")
-        organization = macAddressDb.getOrganization(self.context.mac)
-        if organization is not None:
-            longString = organization['short']
-            stringList.append(longString)
+        if macAddressDb is not None:
+            organization = macAddressDb.getOrganization(self.context.mac)
+            if organization is not None:
+                longString = organization['short']
+                stringList.append(longString)
         return u" ".join(stringList)
