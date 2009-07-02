@@ -45,7 +45,7 @@ class Navigation(SuperNavigation):
         if preList is not None:
             retList.extend(preList)
         retList.append(zapi.getParent(self.context))
-        retList.append(self.context.device)
+        #retList.append(self.context.device)
         #retList.append(('__parent__', _(u'All IP Addresses'), self.context))
         if len(self.context.device) > 0:
             # (navView, viewTitle, contextObj)

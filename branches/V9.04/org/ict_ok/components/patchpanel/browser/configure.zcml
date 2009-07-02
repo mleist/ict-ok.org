@@ -86,8 +86,8 @@
         permission="org.ict_ok.components.patchpanel.Add"
     />
     <z3c:macro
-        template="outlet_details.pt"
-        name="OutletDetails"
+        template="patchpanel_details.pt"
+        name="PatchpanelDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 

@@ -7,6 +7,6 @@
     <h3 tal:condition="not:context/isTemplate" i18n:translate="">Patch panel details</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
-    <metal:block use-macro="macro:OutletDetails" />
+    <metal:block use-macro="macro:PatchpanelDetails" />
     </table>
 </i18n:block>
