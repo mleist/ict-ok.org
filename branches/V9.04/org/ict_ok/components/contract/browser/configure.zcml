@@ -73,7 +73,7 @@
     <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.components.contract.interfaces.IContractFolder"
-        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        class=".contract.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.contract.View"
         />

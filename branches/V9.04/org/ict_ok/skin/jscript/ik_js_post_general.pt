@@ -43,7 +43,8 @@ kl2.enable();
       failure:handleFailure,
       argument: { node:node }
     };
-    var request2 = YAHOO.util.Connect.asyncRequest('POST', node.data.path + node.data.name +"/@@children.xml", callback);
+    var request2 = YAHOO.util.Connect.asyncRequest('POST', node.data.path +
+      node.data.name +"/@@children.xml", callback, node.data.navParam);
   }
   function recNodes(parent, newNodeList) {
     for (var i = 0, leni = newNodeList.length; i < leni; ++i)
@@ -53,6 +54,7 @@ kl2.enable();
         var subnodeList = newNodeList[i].childNodes;
         var newData = Object();
         newData.label = ''
+        newData.ikView = ''
         newData.state_url = ''
         newData.isopen = false;
         newData.ictHasFocus = false;
@@ -80,6 +82,10 @@ kl2.enable();
           }
           if ( attributes[j].nodeName == 'isfocused') {
             newData.isfocused = true;
+          }
+          if ( attributes[j].nodeName == 'navparam') {
+            newData.navParam = attributes[j].nodeValue;
+            newData.label = newData.label + " (PARAM:" + newData.navParam +")";
           }
           if ( attributes[j].nodeName == 'path') {
             newData.path = attributes[j].nodeValue;

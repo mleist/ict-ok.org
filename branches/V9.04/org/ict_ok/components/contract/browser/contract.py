@@ -35,6 +35,11 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
+    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
+from org.ict_ok.components.superclass.browser.superclass import \
+    Overview as SuperOverview
 
 _ = MessageFactory('org.ict_ok')
 
@@ -128,3 +133,32 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
     omitFields = ContractDetails.omit_viewfields
     factoryId = u'org.ict_ok.components.contract.contract.Contract'
     allFields = fieldsForInterface(attrInterface, [])
+
+
+class Overview(SuperOverview):
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+        IctGetterColumn(title=_('Title'),
+                        getter=getTitle,
+                        cell_formatter=link('overview.html')),
+        IctGetterColumn(title=_('Contract type')),
+#                        getter=lambda i,f: i.type,
+#                        cell_formatter=raw_cell_formatter),
+        IctGetterColumn(title=_('expiration date'),
+                        getter=lambda i,f: i.expirationDate,
+                        cell_formatter=link('details.html')),
+        IctGetterColumn(title=_('annual charges'),
+                        getter=lambda i,f: i.annualCharges,
+                        cell_formatter=link('details.html')),
+        DateGetterColumn(title=_('Modified'),
+                        getter=getModifiedDate,
+                        subsort=True,
+                        cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    pos_column_index = 1
+    sort_columns = [1, 2, 3, 4, 5]

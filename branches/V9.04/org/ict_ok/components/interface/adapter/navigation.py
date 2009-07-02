@@ -24,20 +24,19 @@ from zope.app import zapi
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import INavigation
+from org.ict_ok.components.superclass.adapter.navigation import \
+    Navigation as SuperNavigation
 from org.ict_ok.components.interface.interfaces import IInterface
 
 _ = MessageFactory('org.ict_ok')
 
 
-class Navigation(object):
+class Navigation(SuperNavigation):
     """navigation-Adapter."""
 
     implements(INavigation)
     adapts(IInterface)
-
-    def __init__(self, context):
-        self.context = context
-
+    
     def getContextObjList(self, preList=None, postList=None):
         """
         get an Object list of all interesting objects in the context
@@ -45,8 +44,21 @@ class Navigation(object):
         retList = []
         if preList is not None:
             retList.extend(preList)
-        #retList.append(zapi.getParent(self.context))
+        retList.append(zapi.getParent(self.context))
         retList.append(self.context.device)
+        #retList.append(('__parent__', _(u'All IP Addresses'), self.context))
+        if len(self.context.device) > 0:
+            # (navView, viewTitle, contextObj)
+            retList.append(('device', _(u'From Device'), self.context))
+        if len(self.context.ipAddresses) > 0:
+            # (navView, viewTitle, contextObj)
+            retList.append(('ipAddresses', _(u'IP Addresses'), self.context))
+        if len(self.context.links) > 0:
+            # (navView, viewTitle, contextObj)
+            retList.append(('links', _(u'Links'), self.context))
+
+        #print "ddd3: ", self.context.device
+        #retList.append(self.context.ipAddresses)
         if postList is not None:
             retList.extend(postList)
         return retList

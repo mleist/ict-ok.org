@@ -49,3 +49,17 @@ class Navigation(object):
         if postList is not None:
             retList.extend(postList)
         return retList
+
+    def getViewObjList(self, viewName):
+        """
+        """
+        retList = []
+        value = getattr(self.context, viewName, None)
+        if viewName == '__parent__':
+            retList.extend(value.values())
+        else:
+            if value is not None:
+                retList.extend(value)
+            else:
+                locValue = getattr(self, viewName, None)
+        return retList

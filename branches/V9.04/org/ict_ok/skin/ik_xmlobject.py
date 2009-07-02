@@ -149,30 +149,58 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                 if stateOverview:
                     result.append(xmlEscape(
                         u'<collection title=%s name=%s iklen=%s icon_url=%s rem="1.1.1" ' +
-                        u'state_url=%s path=%s expable="" state_val=%s/>',
+                        u'state_url=%s path=%s navparam="children1.xml" expable="" state_val=%s/>',
                         xml_title, name, item_len, iconUrl, stateIconUrl,
                         item_ppath, stateOverview))
                 else:
                     result.append(xmlEscape(
                         u'<collection title=%s name=%s iklen=%s icon_url=%s rem="1.1.2" ' +
-                        u'state_url=%s expable="" path=%s/>',
+                        u'state_url=%s navparam="children2.xml" expable="" path=%s/>',
                         xml_title, name, item_len, iconUrl, stateIconUrl,
                         item_ppath))
             else:
                 if stateOverview:
                     result.append(xmlEscape(
                         u'<collection title=%s name=%s iklen=%s icon_url=%s rem="1.2.1" ' +
-                        u'state_url=%s path=%s state_val=%s/>',
+                        u'state_url=%s navparam="children3.xml" path=%s state_val=%s/>',
                         xml_title, name, item_len, iconUrl, stateIconUrl,
                         item_ppath, stateOverview))
                 else:
                     result.append(xmlEscape(
                         u'<collection title=%s name=%s iklen=%s icon_url=%s rem="1.2.2" ' +
-                        u'state_url=%s path=%s/>',
+                        u'state_url=%s navparam="children4.xml" path=%s/>',
                         xml_title, name, item_len, iconUrl, stateIconUrl,
                         item_ppath))
 
         return u' '.join(result)
+
+
+    def getViewList(self, container):
+        """Return an XML document that contains the children of an object."""
+        subItems = []
+        try:
+            itemNav = INavigation(self.context)
+            view_name = self.request.get('view', None)
+            if itemNav is not None and view_name is not None:
+                objList = itemNav.getViewObjList(view_name)
+                print "ooooooooooooooo: ", objList
+            print "ddd4: ", objList
+            for obj in objList:
+                (xml_title, name, item_ppath, iklen,
+                 stateIconUrl, stateValue,
+                 stateOverview, additionalAttributes) = \
+                    self.getCollectionAttributes(obj)
+                subItems.append(xmlEscapeWithCData(
+                    u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+                    u'icon_url=%s isopen="" expable="" state_url=%s path=%s '
+                    u'state_val=%s>%s</collection>',
+                    xml_title, name, iklen, stateIconUrl,
+                    stateIconUrl, u'/'+ item_ppath, stateOverview,
+                    'result'))
+            #for obj in objList:
+        except TypeError:
+            pass
+        return u' '.join(subItems)
 
 
     def children(self):
@@ -181,8 +209,12 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         self.request.response.setHeader('content-type',
                                         'text/xml;charset=utf-8')
         setNoCacheHeaders(self.request.response)
-        res = (u'<?xml version="1.0" ?><children> %s </children>'
-                % self.children_utility(container))
+        if self.request.get('view', None):
+            res = (u'<?xml version="1.0" ?><children> %s </children>'
+                    % self.getViewList(container))
+        else:
+            res = (u'<?xml version="1.0" ?><children> %s </children>'
+                    % self.children_utility(container))
         return res
 
     def getCollectionAttributes(self, obj_arg):
@@ -216,6 +248,8 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         stateOverview = self.getStateOverview(obj)
         item_ppath = parent_url.path + u'/'
         item_ppath = item_ppath.replace('//', '/')
+        if item_ppath[0] == "/":
+            item_ppath = item_ppath[1:]
 #        try:
 #            item_len = len(IContentList(oldItem).getContentList())
 #        except TypeError:
@@ -234,18 +268,55 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         try:
             oldItemNav = INavigation(oldItem)
             objList = oldItemNav.getContextObjList()
+            print "ddd4: ", objList
             for obj in objList:
-                (xml_title, name, item_ppath, iklen,
-                 stateIconUrl, stateValue,
-                 stateOverview, additionalAttributes) = \
-                    self.getCollectionAttributes(obj)
-                subItems.append(xmlEscapeWithCData(
-                    u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
-                    u'icon_url=%s isopen="" expable="" state_url=%s path=%s '
-                    u'state_val=%s>%s</collection>',
-                    xml_title, name, iklen, stateIconUrl,
-                    stateIconUrl, item_ppath, stateOverview,
-                    result))
+                if type(obj) is tuple: # obj is a special view
+                    print "uuuuu: ", obj
+                    (navView, viewTitle, contextObj) = obj
+                    (xml_title, name, item_ppath, iklen,
+                     stateIconUrl, stateValue,
+                     stateOverview, additionalAttributes) = \
+                        self.getCollectionAttributes(contextObj)
+                    subItems.append(xmlEscapeWithCData(
+                        u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+                        u'icon_url=%s expable="" navparam=%s state_url=%s path=%s '
+                        u'>%s</collection>',
+                        viewTitle,
+                        item_ppath + name , 
+                        '1', 'generic',
+                        xmlEscapeWithCData('view=%s', navView),
+                        'generic', '/', 
+                        'result'))
+#                    subItems.append(xmlEscapeWithCData(
+#                        u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+#                        u'icon_url=%s expable="" state_url=%s path=%s '
+#                        u'>%s</collection>',
+#                        viewTitle, 'Interfaces/15eaa7b86bf9ec0217f9b6d0fe084fd1b', '1', '',
+#                        'stateIconUrl', '/', 
+#                        'result'))
+                else:
+                    (xml_title, name, item_ppath, iklen,
+                     stateIconUrl, stateValue,
+                     stateOverview, additionalAttributes) = \
+                        self.getCollectionAttributes(obj)
+                    subItems.append(xmlEscapeWithCData(
+                        u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+                        u'icon_url=%s isopen="" expable="" state_url=%s path=%s '
+                        u'state_val=%s>%s</collection>',
+                        xml_title, name, iklen, stateIconUrl,
+                        stateIconUrl, item_ppath, stateOverview,
+                        result))
+#            try:
+#                subItems.append(xmlEscapeWithCData(
+#                    u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+#                    u'icon_url=%s expable="" state_url=%s path=%s '
+#                    u'>%s</collection>',
+#                    'Addresses2', 'Interfaces/15eaa7b86bf9ec0217f9b6d0fe084fd1b', '1', '',
+#                    'stateIconUrl', '/', 
+#                    'result'))
+#            except Exception, errText:
+#                print "errText: ", errText
+#            subItems.append('<collection title="Addresses" name="Addresses" iklen="1" icon_url="" rem="1.1.2" state_url="generic" expable="" path="/"/>')
         except TypeError:
             return self.singleBranchTree2(root)
         # -----------------------------------
@@ -275,13 +346,13 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         if len(result) > 0: # collection has content
             result = xmlEscapeWithCData(
                       u'<collection isfocused2="" title=%s name=%s iklen=%s rem="3.1" '
-                      u'icon_url=%s state_url=%s path=%s isopen="" isroot="">%s</collection>',
+                      u'icon_url=%s state_url=%s navparam="children5.xml" path=%s isopen="" isroot="">%s</collection>',
                       xml_title, name, iklen, stateIconUrl, stateIconUrl,
                       item_ppath, result)
         else:
             result = xmlEscapeWithCData(
                       u'<collection isfocused2="" title=%s name=%s iklen=%s rem="3.2" '
-                      u'icon_url=%s state_url=%s path=%s expable="" '
+                      u'icon_url=%s state_url=%s navparam="children6.xml" path=%s expable="" '
                       u'isroot="">%s</collection>',
                       xml_title, name, iklen, stateIconUrl, stateIconUrl,
                       item_ppath, result)

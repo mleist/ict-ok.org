@@ -143,8 +143,6 @@ def appendEvaluationList(obj, document):
         ])
         #pos = 0
         for evaluation in evaluations:
-#            import pdb
-#            pdb.set_trace()
 #            pos = pos + 1
 #            if evaluation.value == 'Pass':
 #                ik_tbl_style.add('BACKGROUND', (1, pos), (1, pos), colors.green)

@@ -81,6 +81,7 @@ class Device(PhysicalComponent):
     the template instance
     """
     implements(IDevice)
+    shortName = "device"
     __name__ = __parent__ = None
     cpuType = FieldProperty(IDevice['cpuType'])
     memsize = FieldProperty(IDevice['memsize'])

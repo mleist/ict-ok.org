@@ -67,8 +67,7 @@ class PersonDetails(ComponentDetails):
     omit_editfields = ComponentDetails.omit_editfields + []
 
     def stop(self):
-        import pdb
-        pdb.set_trace()
+        pass
 #  >>> from z3c.macro import interfaces
 #  >>> view = View(content, request)
 #

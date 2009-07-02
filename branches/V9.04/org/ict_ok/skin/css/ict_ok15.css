@@ -1254,6 +1254,32 @@ font size is adjusted here (default is 77%) */
   margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -510px no-repeat; }
 
+.icon-notebook {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -480px no-repeat; }
+.icon-notebook0 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -490px no-repeat; }
+.icon-notebook1 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -500px no-repeat; }
+.icon-notebook2 {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0 -510px no-repeat; }
+
+
 .icon-ipc {
   display:block;
   height: 10px;
@@ -1303,6 +1329,19 @@ font size is adjusted here (default is 77%) */
   padding-left: 12px;
   margin-top: 3px;
   background: transparent url(/@@/mini/icons_all.gif) 0 -590px no-repeat; }
+
+.icon-device {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -10px no-repeat; }
+.icon-ip_address {
+  display:block;
+  height: 10px;
+  padding-left: 12px;
+  margin-top: 3px;
+  background: transparent url(/@@/mini/icons_all.gif) 0  -10px no-repeat; }
 
 /*-----------------------------------------------*/
 
