@@ -77,6 +77,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.x509certificate.Add"
     />
+    <z3c:macro
+        template="x509certificate_details.pt"
+        name="X509CertificateDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

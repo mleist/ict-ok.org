@@ -86,6 +86,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.role.Add"
     />
+    <z3c:macro
+        template="role_details.pt"
+        name="RoleDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

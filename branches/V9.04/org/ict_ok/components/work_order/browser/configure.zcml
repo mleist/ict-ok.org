@@ -85,6 +85,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.work_order.Add"
     />
+    <z3c:macro
+        template="work_order_details.pt"
+        name="WorkOrderDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

@@ -7,39 +7,7 @@
                 <td i18n:translate="">title</td>
                 <td tal:content="context/title" />
             </tr>
-            <tr tal:attributes="class view/getNextTabClass">
-                <td i18n:translate="">Date 1</td>
-                <td tal:content="context/ikdate1" />
-            </tr>
-            <tr tal:attributes="class view/getNextTabClass"
-                tal:condition="context/ikComment|nothing">
-                <td i18n:translate="">Comment</td>
-                <td><pre tal:content="context/ikComment" /></td>
-            </tr>
-            <tr tal:attributes="class view/getNextTabClass">
-                <td i18n:translate="">Notes</td>
-                <td>
-                    <table id="sortable" class="listing">
-                        <tr tal:repeat="note context/ikNotes">
-                            <td tal:content="note">I am a note</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-            <!--tr>
-                <td class="label" i18n:translate="">Date 2</td>
-                <td tal:content="context/ikdate2" />
-            </tr>
-            <tr>
-                <td class="label" i18n:translate="">Date 3</td>
-                <td tal:content="context/ikdate3" />
-            </tr>
-            <tr>
-                <td class="label" i18n:translate="">Date 4</td>
-                <td tal:content="context/ikdate4" />
-            </tr-->
         </table>
-
     </div>
 </body>
 </html>

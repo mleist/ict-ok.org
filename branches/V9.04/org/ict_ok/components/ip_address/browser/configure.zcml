@@ -102,6 +102,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.ip_address.Add"
     />
+    <z3c:macro
+        template="ip_address_details.pt"
+        name="IpAdressDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

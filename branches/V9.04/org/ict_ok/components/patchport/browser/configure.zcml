@@ -85,6 +85,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.patchport.Add"
     />
+    <z3c:macro
+        template="patchport_details.pt"
+        name="PatchportDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

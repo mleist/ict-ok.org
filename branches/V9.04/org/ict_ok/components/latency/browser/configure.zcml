@@ -125,6 +125,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.latency.Add"
     />
+    <z3c:macro
+        template="latency_details.pt"
+        name="LatencyDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!--##### Sub Menu ##### -->
 

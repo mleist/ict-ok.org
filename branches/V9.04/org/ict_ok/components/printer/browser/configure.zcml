@@ -102,6 +102,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.printer.Add"
     />
+    <z3c:macro
+        template="printer_details.pt"
+        name="PrinterDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

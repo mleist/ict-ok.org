@@ -85,6 +85,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.rack.Add"
     />
+    <z3c:macro
+        template="rack_details.pt"
+        name="RackDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

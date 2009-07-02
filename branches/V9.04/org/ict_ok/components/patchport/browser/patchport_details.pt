@@ -1,0 +1,11 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="PatchportDetails">
+    <metal:block use-macro="macro:PhysicalComponentDetails" />
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.patchpanel is not None">
+           <td i18n:translate="">Patch panel</td>
+           <td tal:content="structure python: view.getHrefTitle(context.patchpanel)" />
+       </tr>
+</metal:block>

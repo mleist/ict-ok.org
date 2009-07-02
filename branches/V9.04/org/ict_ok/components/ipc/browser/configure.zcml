@@ -85,6 +85,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.ipc.Add"
     />
+    <z3c:macro
+        template="ipc_details.pt"
+        name="IpcDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

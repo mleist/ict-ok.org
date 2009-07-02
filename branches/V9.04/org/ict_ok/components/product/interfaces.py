@@ -35,7 +35,6 @@ class IProduct(Interface):
         title = _(u'Work order'),
         vocabulary = 'AllWorkOrders',
         required = False)
-        
 
     subProducts = List(
         title = _(u'Sub products'),

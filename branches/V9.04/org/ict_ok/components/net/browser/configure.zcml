@@ -170,7 +170,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.net.Add"
     />
-
+    <z3c:macro
+        template="net_details.pt"
+        name="NetDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!--##### Sub Menu ##### -->
 

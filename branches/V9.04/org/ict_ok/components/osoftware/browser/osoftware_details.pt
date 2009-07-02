@@ -1,0 +1,67 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="OsoftwareDetails">
+    <metal:block use-macro="macro:SoftwareComponentDetails" />
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/manufacturer|nothing">
+            <td i18n:translate="">Manufacturer</td>
+            <td tal:content="structure python: view.fsearchLink(context.manufacturer)" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/osType|nothing">
+            <td i18n:translate="">OS type</td>
+            <td tal:content="structure python: view.fsearchLink(context.osType)" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/otherType|nothing">
+            <td i18n:translate="">Other type</td>
+            <td tal:content="structure python: view.fsearchLink(context.otherType)" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/versionText|nothing">
+            <td i18n:translate="">Version text</td>
+            <td tal:content="structure python: view.fsearchLink(context.versionText)" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/licenseKey|nothing">
+            <td i18n:translate="">License key</td>
+            <td tal:content="structure python: view.fsearchLink(context.licenseKey)" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/language|nothing">
+            <td i18n:translate="">Language</td>
+            <td tal:content="structure python: view.fsearchLink(context.language)" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/majorVersion|nothing">
+            <td i18n:translate="">Major version</td>
+            <td tal:content="context/majorVersion" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/minorVersion|nothing">
+            <td i18n:translate="">Minor version</td>
+            <td tal:content="context/minorVersion" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/revisionNumber|nothing">
+            <td i18n:translate="">Revision number</td>
+            <td tal:content="context/revisionNumber" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/buildNumber|nothing">
+            <td i18n:translate="">Build number</td>
+            <td tal:content="context/buildNumber" />
+        </tr>
+
+</metal:block>

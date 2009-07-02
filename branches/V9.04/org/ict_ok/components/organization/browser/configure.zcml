@@ -85,7 +85,12 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.organization.Add"
     />
-
+    <z3c:macro
+        template="organization_details.pt"
+        name="OrganizationDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    
     <!-- Sub Menu  -->
 
     <viewlet

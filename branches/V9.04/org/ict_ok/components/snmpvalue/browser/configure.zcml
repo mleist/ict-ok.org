@@ -179,7 +179,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.Add"
     />
-
+    <z3c:macro
+        template="snmpvalue_details.pt"
+        name="SnmapvalueDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!--##### Sub Menu ##### -->
 

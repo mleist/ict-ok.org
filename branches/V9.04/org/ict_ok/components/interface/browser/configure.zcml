@@ -151,6 +151,12 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.interface.Add"
     />
+    
+    <z3c:macro
+        template="interface_details.pt"
+        name="InterfaceDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!--##### Sub Menu ##### -->
 

@@ -156,6 +156,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.ipnet.Add"
     />
+    <z3c:macro
+        template="ipnet_details.pt"
+        name="IpnetDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
 
     <!--##### Sub Menu ##### -->

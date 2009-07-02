@@ -51,5 +51,11 @@
         contents="org.ict_ok.slave.Edit"
         add="org.ict_ok.slave.Add"
         /-->
+        
+<z3c:macro
+        template="slave_details.pt"
+        name="SlaveDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
 </configure>

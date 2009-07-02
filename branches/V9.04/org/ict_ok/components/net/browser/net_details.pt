@@ -1,0 +1,29 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="NetDetails">
+    <metal:block use-macro="macro:ComponentsDetails" />
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ipv4|nothing">
+            <td i18n:translate="">Network IP</td>
+            <td tal:content="context/ipv4" />
+        </tr>
+
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.parentnet is not None">
+           <td i18n:translate="">Parent net</td>
+           <td tal:content="structure python: view.getHrefTitle(context.parentnet)" />
+       </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/subnets|nothing">
+            <td i18n:translate="">Sub nets</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/subnets"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+</metal:block>

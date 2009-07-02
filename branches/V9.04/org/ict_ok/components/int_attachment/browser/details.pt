@@ -7,27 +7,6 @@
     <h3 tal:condition="not:context/isTemplate" i18n:translate="">Internal Attachment details</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">Name</td>
-            <td tal:content="context/ikName" />
-        </tr>
-          
-       <tr tal:attributes="class view/getNextTabClass"
-           tal:condition="context/filename|nothing">
-           <td i18n:translate="">filename</td>
-           <td tal:content="structure python: view.fsearchLink(context.filename)" />
-       </tr>
-          
-       <tr tal:attributes="class view/getNextTabClass"
-           tal:condition="context/mimeType|nothing">
-           <td i18n:translate="">mime type</td>
-           <td tal:content="structure python: view.fsearchLink(context.mimeType)" />
-       </tr>
-
-       <tr tal:attributes="class view/getNextTabClass">
-           <td i18n:translate="">Download</td>
-           <td tal:content="structure python: view.getDownloadHref()" />
-       </tr>
-
+    <metal:block use-macro="macro:IntAttachmentDetails" />
     </table>
 </i18n:block>

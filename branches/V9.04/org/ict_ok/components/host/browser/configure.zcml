@@ -188,6 +188,12 @@
         permission="org.ict_ok.components.interface.Add"
     />
 
+    <z3c:macro
+        template="host_details.pt"
+        name="HostDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <!-- Folder  -->
 
     <defaultView

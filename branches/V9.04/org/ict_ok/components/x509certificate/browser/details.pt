@@ -3,51 +3,7 @@
     <h3 i18n:translate="">X.509 Certificate Details</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">Name</td>
-            <td tal:content="context/ikName" />
-        </tr>
-        
+    <metal:block use-macro="macro:X509CertificateDetails" />
 
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">X.509 subject</td>
-            <td tal:content="view/getSubject" />
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">X.509 issuer name</td>
-            <td tal:content="view/getIssuerName" />
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">X.509 serial number</td>
-            <td tal:content="context/getSerialNumber" />
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">Public key size</td>
-            <td tal:content="python: u'%s bit' % context.getPublicKeySize()" />
-        </tr>
-        <!--tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">X.509 version</td>
-            <td tal:content="context/getVersion" />
-        </tr-->
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">X.509 valid not before</td>
-            <td tal:content="python: dateform.format(context.validNotBefore)">test</td>
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">X.509 valid not after</td>
-            <td tal:content="python: dateform.format(context.validNotAfter)">test</td>
-        </tr>
-
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/ikComment|nothing">
-            <td i18n:translate="">Comment</td>
-            <td tal:content="context/ikComment" />
-        </tr>
-
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/ddd1|nothing">
-            <td i18n:translate="">ddd1</td>
-            <td tal:content="python: len(context.ddd1)" />
-        </tr>
     </table>
 </i18n:block>

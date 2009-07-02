@@ -102,6 +102,12 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.notebook.Add"
     />
+    <z3c:macro
+        template="notebook_details.pt"
+        name="NotebookDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
 
 
     <!-- Sub Menu  -->

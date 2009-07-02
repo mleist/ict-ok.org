@@ -92,6 +92,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.physical_link.Add"
     />
+    <z3c:macro
+        template="physical_link_details.pt"
+        name="PhysicalLinkDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

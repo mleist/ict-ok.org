@@ -86,6 +86,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.outlet.Add"
     />
+    <z3c:macro
+        template="outlet_details.pt"
+        name="OutletDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!-- Sub Menu  -->
 

@@ -94,6 +94,12 @@
         permission="org.ict_ok.components.int_attachment.Add"
     />
 
+    <z3c:macro
+        template="int_attachment_details.pt"
+        name="IntAttachmentDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <!-- Sub Menu  -->
 
     <viewlet
