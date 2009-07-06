@@ -43,7 +43,10 @@ def vocabValue(vocabName=None, token=None, request=None):
     if vocabReg is not None:
         vocab = vocabReg.get(request, vocabName)
         if vocab is not None:
-            vocabTerm = vocab.getTerm(token)
+            try:
+                vocabTerm = vocab.getTerm(token)
+            except LookupError:
+                return None
             if vocabTerm:
                 return vocabTerm.title
     return None
