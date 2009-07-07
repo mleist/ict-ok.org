@@ -2,7 +2,7 @@
 <!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
 
 <metal:block define-macro="PersonAttributesDetails">
-    <metal:block use-macro="macro:Contact_ItemAttributesDetails" />
+    <metal:block use-macro="macro:Contact_ItemDetails" />
     <tr tal:attributes="class view/getNextTabClass"
         tal:condition="context/firstName|nothing">
         <td i18n:translate="">first name</td>

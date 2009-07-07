@@ -5,6 +5,8 @@
             tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
     <h3 tal:condition="context/isTemplate" i18n:translate="">Personal Computer details [Template]</h3>
     <h3 tal:condition="not:context/isTemplate" i18n:translate="">Personal Computer details</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
     <metal:block use-macro="macro:PcDetails" />
     </table>
 </i18n:block>

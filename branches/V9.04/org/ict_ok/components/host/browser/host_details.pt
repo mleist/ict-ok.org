@@ -3,9 +3,8 @@
 
 <metal:block define-macro="HostDetails">
     <metal:block use-macro="macro:LogicalDeviceDetails" />
-            <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/hostname|nothing">
-            <td i18n:translate="">Hostname</td>
-            <td tal:content="context/hostname" />
-        </tr>
+    <tr tal:attributes="class view/getNextTabClass" tal:condition="context/hostname|nothing">
+        <td i18n:translate="">Hostname</td>
+        <td tal:content="context/hostname" />
+    </tr>
 </metal:block>

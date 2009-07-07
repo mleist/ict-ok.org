@@ -7,11 +7,11 @@
 
     <metal:block use-macro="macro:BuildingDetails" />
 
-        <tr tal:attributes="class view/getNextTabClass"
+        <!-- tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/file2|nothing">
             <td i18n:translate="">file2</td>
             <td tal:content="python: len(context.file2)" />
-        </tr>
+        </tr-->
     
     </table>
 </i18n:block>

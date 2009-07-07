@@ -27,41 +27,41 @@ class IContactItem(Interface):
     """A ContactItem object."""
 
     contact = Choice(
-        title = _(u'Contact'),#
+        title = _(u'Contact'),
         vocabulary = 'AllContacts',
         required = False)
         
     workOrder = Choice(
-        title = _(u'WorkOrder'),#
+        title = _(u'WorkOrder'),
         vocabulary = 'AllWorkOrders',
         required = False)
         
     roles = List(
-        title=_(u'Roles'),#
+        title=_(u'Roles'),
         value_type=Choice(vocabulary='AllRoles'),
         default=[],
         required = False)
 
     groups = List(
-        title=_(u'Groups'),#
+        title=_(u'Groups'),
         value_type=Choice(vocabulary='AllGroups'),
         default=[],
         required = False)
 
     adresses = List(
-        title = _(u'Addresses'),#
+        title = _(u'Addresses'),
         value_type=Choice(vocabulary='AllUnusedOrUsedContactItemAddresses'),
         default=[],
         required = False)
 
     closedContracts = List(
-        title=_(u'Closed contracts'),#
+        title=_(u'Closed contracts'),
         value_type=Choice(vocabulary='AllContracts'),
         default=[],
         required = False)
 
     responsible4Contracts = List(
-        title=_(u'Responsible for contracts'),#
+        title=_(u'Responsible for contracts'),
         value_type=Choice(vocabulary='AllContracts'),
         default=[],
         required = False)

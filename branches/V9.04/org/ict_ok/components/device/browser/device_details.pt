@@ -4,14 +4,18 @@
 <metal:block define-macro="DeviceDetails">
     <metal:block use-macro="macro:PhysicalComponentDetails" />
 
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/cpuType|nothing">
-            <td i18n:translate="">CPU Type</td>
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/memsize|nothing">
-            <td i18n:translate="">Memory Size</td>
-        </tr>
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/memsize|nothing">
+           <td i18n:translate="">Memory size</td>
+           <td tal:content="structure python: u'%d&nbsp;MB' % context.memsize" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/cpuType|nothing">
+           <td i18n:translate="">CPU type</td>
+           <td tal:content="structure python: view.fsearchLink(context.cpuType)" />
+       </tr>
+
         
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="python: context.interfaces is not None and

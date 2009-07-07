@@ -9,7 +9,7 @@
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
 
-        <metal:block use-macro="macro:Contact_ItemAttributesDetails" />
+        <metal:block use-macro="macro:Contact_ItemDetails" />
 
     </table>
 </i18n:block>

@@ -1,9 +1,5 @@
-<metal:block define-macro="Contact_ItemAttributesDetails">
+<metal:block define-macro="Contact_ItemDetails">
 <metal:block use-macro="macro:ComponentsDetails" />
-    <tr>
-        <td>contact_item</td>
-        <td>-----------------------------</td>
-    </tr>
     <tr tal:attributes="class view/getNextTabClass"
         tal:condition="python: context.contact is not None">
         <td i18n:translate="">Contact</td>

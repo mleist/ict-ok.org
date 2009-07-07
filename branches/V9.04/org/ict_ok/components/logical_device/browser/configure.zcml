@@ -13,7 +13,7 @@
     -->
         <z3c:macro
         template="logical_device_details.pt"
-        name="LogicalDeviceDetails "
+        name="LogicalDeviceDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 </configure>

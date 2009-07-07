@@ -51,7 +51,7 @@
 
     <z3c:macro
         template="contact_item_details.pt"
-        name="Contact_ItemAttributesDetails"
+        name="Contact_ItemDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
