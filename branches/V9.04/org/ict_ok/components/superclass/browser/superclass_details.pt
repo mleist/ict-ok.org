@@ -1,8 +1,4 @@
 <metal:block define-macro="SuperclassDetails">
-    <tr>
-        <td>SuperClassDetails</td>
-        <td>-----------------------------</td>
-    </tr>
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Name</td>
             <td tal:content="context/ikName" />
