@@ -88,6 +88,14 @@
         attribute="asMindmap"
     />
 
+    <page
+        name="as_mindmapdata.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.SuperclassDetails"
+        permission="org.ict_ok.admin_utils.mindmap.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="asMindmapData"
+    />
 
     <z3c:pagelet
         name="moveup.html"

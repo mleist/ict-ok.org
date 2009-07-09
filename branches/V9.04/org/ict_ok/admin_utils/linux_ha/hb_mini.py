@@ -196,7 +196,7 @@ class miniManager(object):
                 if failed_reason != "" :
                     print(failed_reason)
 
-        if new_attrs != [] :		
+        if new_attrs != [] :
             for attr in new_attrs:
                 cmd = up_cmd
                 for key in keys :

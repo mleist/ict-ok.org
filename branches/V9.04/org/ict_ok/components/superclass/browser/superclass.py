@@ -784,10 +784,18 @@ class SuperclassDetails:
                 u"<div>%s</div>" % self.context.ikName)
 
     def asMindmap(self):
+        self.request.response.setHeader('Content-Type', 'text/html')
         mindMapUtil = queryUtility(IAdmUtilMindMap, name="AdmUtilMindMap")
         from zope.proxy import removeAllProxies
         mindMapUtil.context = removeAllProxies(self.context)
-        return mindMapUtil.placeHolder()
+        return mindMapUtil.asMindmap(request=self.request)
+    
+    def asMindmapData(self):
+        #self.request.response.setHeader('Content-Type', 'text/html')
+        mindMapUtil = queryUtility(IAdmUtilMindMap, name="AdmUtilMindMap")
+        from zope.proxy import removeAllProxies
+        mindMapUtil.context = removeAllProxies(self.context)
+        return mindMapUtil.asMindmapData(request=self.request)
 
     def getOrganizationForMacAddress(self, macAddress):
         macAddressDb = queryUtility(IAdmUtilMacAddressDb, name="AdmUtilMacAddressDb")

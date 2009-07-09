@@ -26,7 +26,7 @@ from zope.app import zapi
 from org.ict_ok.components.superclass.interfaces import INavigation
 from org.ict_ok.components.superclass.adapter.navigation import \
     Navigation as SuperNavigation
-from org.ict_ok.components.interface.interfaces import IInterface
+from org.ict_ok.components.ipc.interfaces import IIndustrialComputer
 
 _ = MessageFactory('org.ict_ok')
 
@@ -35,7 +35,7 @@ class Navigation(SuperNavigation):
     """navigation-Adapter."""
 
     implements(INavigation)
-    adapts(IInterface)
+    adapts(IIndustrialComputer)
     
     def getContextObjList(self, preList=None, postList=None):
         """
@@ -45,17 +45,21 @@ class Navigation(SuperNavigation):
         if preList is not None:
             retList.extend(preList)
         retList.append((None, None, zapi.getParent(self.context)))
-        #retList.append(self.context.device)
         #retList.append(('__parent__', _(u'All IP Addresses'), self.context))
-        if self.context.device is not None:
-            retList.append(('device', _(u'From Device'), self.context))
-        if len(self.context.ipAddresses) > 0:
-            retList.append(('ipAddresses', _(u'IP Addresses'), self.context))
-        if len(self.context.links) > 0:
-            retList.append(('links', _(u'Links'), self.context))
-        #print "===== %s" % retList
-        #print "ddd3: ", self.context.device
-        #retList.append(self.context.ipAddresses)
+        #if len(self.context.user) > 0:
+            ## (navView, viewTitle, contextObj)
+            #retList.append(('user', _(u'User'), self.context))
+        #import pdb
+        #pdb.set_trace()
+        if len(self.context.interfaces) > 0:
+            retList.append(('interfaces', _(u'Interfaces'), self.context))
+        if len(self.context.osoftwares) > 0:
+            # (navView, viewTitle, contextObj)
+            retList.append(('osoftwares', _(u'Operating software'), self.context))
+        if len(self.context.appsoftwares) > 0:
+            # (navView, viewTitle, contextObj)
+            retList.append(('appsoftwares', _(u'Application software'), self.context))
         if postList is not None:
             retList.extend(postList)
+        print retList
         return retList

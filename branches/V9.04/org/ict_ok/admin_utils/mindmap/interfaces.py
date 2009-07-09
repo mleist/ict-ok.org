@@ -38,6 +38,10 @@ class IAdmUtilMindMap(ISupernode):
         readonly = False,
         required = False)
 
-    def placeHolder():
-        """ stupid place holder
+    def asMindmap(request=None):
+        """ generate our mindmap root frame
+        """
+        
+    def asMindmapData(request=None):
+        """ generate our raw mindmap data
         """

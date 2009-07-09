@@ -45,7 +45,7 @@ class Navigation(object):
         retList = []
         if preList is not None:
             retList.extend(preList)
-        retList.append(zapi.getParent(self.context))
+        retList.append((None, None, zapi.getParent(self.context)))
         if postList is not None:
             retList.extend(postList)
         return retList

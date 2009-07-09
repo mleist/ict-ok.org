@@ -205,6 +205,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
 
     def children(self):
         """ """
+        print "children"
         container = self.context
         self.request.response.setHeader('content-type',
                                         'text/xml;charset=utf-8')
@@ -222,7 +223,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         if type(obj_arg) is tuple:
             #import pdb
             #pdb.set_trace()
-            (obj, attributeName, displayTitle) = obj_arg
+            (attributeName, displayTitle, obj) = obj_arg
             appendUrl = '?getAttr&attrName=%s' % attributeName
         else:
             appendUrl = ''
@@ -261,6 +262,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         
         
     def singleBranchTree(self, root=''):
+        print "singleBranchTree"
         result = ''
         oldItem = self.context
         # -----------------------------------
@@ -317,7 +319,8 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
 #            except Exception, errText:
 #                print "errText: ", errText
 #            subItems.append('<collection title="Addresses" name="Addresses" iklen="1" icon_url="" rem="1.1.2" state_url="generic" expable="" path="/"/>')
-        except TypeError:
+        except TypeError, errText:
+            print "lange Nase gezogen: ", errText
             return self.singleBranchTree2(root)
         # -----------------------------------
 #        try:
