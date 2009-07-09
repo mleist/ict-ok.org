@@ -151,6 +151,9 @@
     <!--  OSI adapters ================================================== -->
 
     <!--  other adapters ================================================ -->
+        <adapter
+             factory=".adapter.navigation.Navigation"
+         />
 
     <adapter
         factory=".adapter.state.State"

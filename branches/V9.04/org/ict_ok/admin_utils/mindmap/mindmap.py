@@ -44,7 +44,7 @@ logger = logging.getLogger("AdmUtilMindMap")
 class AdmUtilMindMap(Supernode):
     """MindMap Utiltiy
     """
-    
+
     implements(IAdmUtilMindMap)
 
     version = FieldProperty(IAdmUtilMindMap['version'])
@@ -119,46 +119,65 @@ function giveFocus()
                }
                var fo = new FlashObject("http://localhost:8080/@@/js/visorFreemind.swf", "visorFreeMind", "100%%", "100%%", 6, "#9999ff");
                fo.addParam("quality", "high");
-               fo.addParam("bgcolor", "#a0a0f0");
+               fo.addParam("bgcolor", "#ffffff");
                fo.addVariable("openUrl", "_blank");
-               fo.addVariable("startCollapsedToLevel","2");
-               fo.addVariable("maxNodeWidth","200");
-               //
-               fo.addVariable("mainNodeShape","elipse");
-               fo.addVariable("justMap","false");
-               fo.addVariable("initLoadFile",getMap("%(as_mindmapdata)s"));
+               fo.addVariable("initLoadFile", getMap("%(as_mindmapdata)s"));
+               fo.addVariable("startCollapsedToLevel","2")
                fo.addVariable("defaultToolTipWordWrap",200);
-               fo.addVariable("offsetX","left");
-               fo.addVariable("offsetY","top");
-               fo.addVariable("buttonsPos","top");
                fo.addVariable("min_alpha_buttons",20);
                fo.addVariable("max_alpha_buttons",100);
-               fo.addVariable("scaleTooltips","false");
                fo.write("flashcontent");
                // ]]>
                </script>
 </body>
 </html>""" % params
+                #fo.addParam("quality", "high");
+                #fo.addParam("bgcolor", "#a0a0f0");
+                #fo.addVariable("openUrl", "_blank");
+                #fo.addVariable("startCollapsedToLevel","2");
+                #fo.addVariable("maxNodeWidth","200");
+                #//
+                #fo.addVariable("mainNodeShape","elipse");
+                #fo.addVariable("justMap","false");
+                #fo.addVariable("initLoadFile",getMap("%(as_mindmapdata)s"));
+                #fo.addVariable("defaultToolTipWordWrap",200);
+                #fo.addVariable("offsetX","left");
+                #fo.addVariable("offsetY","top");
+                #fo.addVariable("buttonsPos","top");
+                #fo.addVariable("min_alpha_buttons",20);
+                #fo.addVariable("max_alpha_buttons",100);
+                #fo.addVariable("scaleTooltips","false");
 
-    def recursiveHelper(self, tupleList, contextdepth, alreadySeenSet=set([])):
+    def recursiveHelper(self, tupleList, contextdepth, alreadySeenSet):
+        """alreadySeenSet needs a set([])
+        """
         if contextdepth > 0:
             contextdepth -= 1
             nodelist = []
             for (attrName, viewTitle, contextObj) in tupleList:
                 if attrName is not None and viewTitle is not None:
+                    if type(attrName) is not type("aa"):
+                        import pdb
+                        pdb.set_trace()
                     objList = getattr(contextObj, attrName)
                     if type(objList) is not list:
                         objList = [objList]
                     for obj in objList:
-                        node = MMNode(obj.objectID, obj.ikName)
-                        #print "obj: %s" % obj.ikName
-                        itemNav = INavigation(obj)
-                        sublist = itemNav.getContextObjList()
-                        from copy import copy
-                        subnodes = self.recursiveHelper(sublist, copy(contextdepth), alreadySeenSet)
-                        if subnodes is not None:
-                            node.add_nodes(subnodes)
-                        nodelist.append(node)
+                        node = None
+                        #import pdb
+                        #pdb.set_trace()
+                        if obj not in alreadySeenSet:
+                            alreadySeenSet.add(obj)
+                            node = MMNode(obj.objectID, obj.ikName, {"link": zapi.getPath(obj)})
+                            #print "obj: %s" % obj.ikName
+                            itemNav = INavigation(obj)
+                            sublist = itemNav.getContextObjList()
+                            from copy import copy
+                            subnodes = self.recursiveHelper(sublist, copy(contextdepth), alreadySeenSet)
+                            if subnodes is not None:
+                                node.add_nodes(subnodes)
+                        if node is not None:
+                            nodelist.append(node)
             return nodelist
         else:
             return None
@@ -171,25 +190,24 @@ function giveFocus()
         objList = itemNav.getContextObjList()
         if itemNav is None:
             return u"""
-            <map version="0.8.1">
-            <node ID="0001" TEXT="Error" >
-            </node>
-            </map>
-            """
+                   <map version="0.8.1">
+                   <node ID="0001" TEXT="Error" >
+                   </node>
+                   </map>
+                   """
         root_node = MMNode(self.context.objectID, self.context.ikName)
-        root_node.add_nodes(self.recursiveHelper(objList, 10))
+        root_node.add_nodes(self.recursiveHelper(objList, 10, set([])))
         return root_node.generate_map()
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -25,6 +25,7 @@ class MMNode(object):
      "edge_width": 1
      "edge_color": "#000000"
      "cloud_color": "#000000"
+     "link": "http://google.de"
     }
     """
     def __init__(self, id, text, style=None, subnodes=None):
@@ -93,6 +94,8 @@ class MMNode(object):
             #self.style_inner_tag["POSITION"] = style["pos"]
         if style.has_key("node_type"):
             self.style_inner_tag["STYLE"] = style["node_type"]
+        if style.has_key("link"):
+            self.style_inner_tag["LINK"] = style["link"]
         if style.has_key("icon"):
             pass
         if style.has_key("font_i"):
