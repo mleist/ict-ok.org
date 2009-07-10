@@ -26,7 +26,7 @@ from zope.app import zapi
 from org.ict_ok.components.superclass.interfaces import INavigation
 from org.ict_ok.components.superclass.adapter.navigation import \
     Navigation as SuperNavigation
-from org.ict_ok.components.ipc.interfaces import IIndustrialComputer
+from org.ict_ok.components.building.interfaces import IBuilding
 
 _ = MessageFactory('org.ict_ok')
 
@@ -35,7 +35,7 @@ class Navigation(SuperNavigation):
     """navigation-Adapter."""
 
     implements(INavigation)
-    adapts(IIndustrialComputer)
+    adapts(IBuilding)
     
     def getContextObjList(self, preList=None, postList=None):
         """
@@ -45,18 +45,12 @@ class Navigation(SuperNavigation):
         if preList is not None:
             retList.extend(preList)
         retList.append((None, None, zapi.getParent(self.context)))
-        if self.context.room is not None:
-            retList.append(('room', _(u'Room'), self.context))
-        if len(self.context.interfaces) > 0:
-            retList.append(('interfaces', _(u'Interfaces'), self.context))
-        if len(self.context.osoftwares) > 0:
-            retList.append(('osoftwares', _(u'Operating Software'), self.context))
-        if len(self.context.appsoftwares) > 0:
-            retList.append(('appsoftwares', _(u'Application Software'), self.context))
-        if len(self.context.logicalDevices) > 0:
-            retList.append(('logicalDevices', _(u'Logical Devices'), self.context))
-        if len(self.context.physicalMedia) > 0:
-            retList.append(('physicalMedia', _(u'Physical Media'), self.context))
+        if self.context.location is not None:
+            retList.append(('location', _(u'Location'), self.context))
+        if len(self.context.rooms) > 0:
+            retList.append(('rooms', _(u'Rooms'), self.context))
+        if len(self.context.contracts) > 0:
+            retList.append(('contracts', _(u'Contracts'), self.context))
         if postList is not None:
             retList.extend(postList)
         print retList

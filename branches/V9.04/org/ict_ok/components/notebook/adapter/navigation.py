@@ -26,7 +26,7 @@ from zope.app import zapi
 from org.ict_ok.components.superclass.interfaces import INavigation
 from org.ict_ok.components.superclass.adapter.navigation import \
     Navigation as SuperNavigation
-from org.ict_ok.components.ipc.interfaces import IIndustrialComputer
+from org.ict_ok.components.notebook.interfaces import INotebook
 
 _ = MessageFactory('org.ict_ok')
 
@@ -35,7 +35,7 @@ class Navigation(SuperNavigation):
     """navigation-Adapter."""
 
     implements(INavigation)
-    adapts(IIndustrialComputer)
+    adapts(INotebook)
     
     def getContextObjList(self, preList=None, postList=None):
         """

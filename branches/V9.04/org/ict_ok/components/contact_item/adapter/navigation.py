@@ -26,7 +26,7 @@ from zope.app import zapi
 from org.ict_ok.components.superclass.interfaces import INavigation
 from org.ict_ok.components.superclass.adapter.navigation import \
     Navigation as SuperNavigation
-from org.ict_ok.components.ipc.interfaces import IIndustrialComputer
+from org.ict_ok.components.contact_item.interfaces import IContactItem
 
 _ = MessageFactory('org.ict_ok')
 
@@ -35,7 +35,7 @@ class Navigation(SuperNavigation):
     """navigation-Adapter."""
 
     implements(INavigation)
-    adapts(IIndustrialComputer)
+    adapts(IContactItem)
     
     def getContextObjList(self, preList=None, postList=None):
         """
@@ -45,18 +45,20 @@ class Navigation(SuperNavigation):
         if preList is not None:
             retList.extend(preList)
         retList.append((None, None, zapi.getParent(self.context)))
-        if self.context.room is not None:
-            retList.append(('room', _(u'Room'), self.context))
-        if len(self.context.interfaces) > 0:
-            retList.append(('interfaces', _(u'Interfaces'), self.context))
-        if len(self.context.osoftwares) > 0:
-            retList.append(('osoftwares', _(u'Operating Software'), self.context))
-        if len(self.context.appsoftwares) > 0:
-            retList.append(('appsoftwares', _(u'Application Software'), self.context))
-        if len(self.context.logicalDevices) > 0:
-            retList.append(('logicalDevices', _(u'Logical Devices'), self.context))
-        if len(self.context.physicalMedia) > 0:
-            retList.append(('physicalMedia', _(u'Physical Media'), self.context))
+        if self.context.contact is not None:
+            retList.append(('contact', _(u'Contact'), self.context))
+        if self.context.workOrder is not None:
+            retList.append(('workOrder', _(u'Work Order'), self.context))
+        if len(self.context.adresses) > 0:
+            retList.append(('adresses', _(u'Adresses'), self.context))
+        if len(self.context.groups) > 0:
+            retList.append(('groups', _(u'Groups'), self.context))
+        if len(self.context.roles) > 0:
+            retList.append(('roles', _(u'Roles'), self.context))
+        if len(self.context.closedContracts) > 0:
+            retList.append(('closedContracts', _(u'Closed Contracts'), self.context))
+        if len(self.context.responsible4Contracts) > 0:
+            retList.append(('responsible4Contracts', _(u'Responsible for contracts'), self.context))
         if postList is not None:
             retList.extend(postList)
         print retList

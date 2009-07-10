@@ -23,13 +23,10 @@ from zope.i18nmessageid import MessageFactory
 from zope.app import zapi
 
 # ict_ok.org imports
-from org.ict_ok.components.pc.interfaces import IPersonalComputer
-from org.ict_ok.components.superclass.interfaces import \
-    INavigation
+from org.ict_ok.components.superclass.interfaces import INavigation
 from org.ict_ok.components.superclass.adapter.navigation import \
     Navigation as SuperNavigation
-
-
+from org.ict_ok.components.pc.interfaces import IPersonalComputer
 _ = MessageFactory('org.ict_ok')
 
 
@@ -38,19 +35,28 @@ class Navigation(SuperNavigation):
 
     implements(INavigation)
     adapts(IPersonalComputer)
-
-    def __init__(self, context):
-        self.context = context
-
-    def getContextObjList(self, preList=[], postList=[]):
+    
+    def getContextObjList(self, preList=None, postList=None):
         """
         get an Object list of all interesting objects in the context
         """
         retList = []
-        #retList.extend(preList)
-        #retList.extend(list(self.context.interfaces))
-        #retList.extend(list(self.context.physicalMedia))
-        retList.append(('physicalMedia', u'physical media', self.context))
-        #retList.extend(SuperNavigation.getContextObjList(self))
-        #retList.extend(postList)
+        if preList is not None:
+            retList.extend(preList)
+        retList.append((None, None, zapi.getParent(self.context)))
+        if self.context.room is not None:
+            retList.append(('room', _(u'Room'), self.context))
+        if len(self.context.interfaces) > 0:
+            retList.append(('interfaces', _(u'Interfaces'), self.context))
+        if len(self.context.osoftwares) > 0:
+            retList.append(('osoftwares', _(u'Operating Software'), self.context))
+        if len(self.context.appsoftwares) > 0:
+            retList.append(('appsoftwares', _(u'Application Software'), self.context))
+        if len(self.context.logicalDevices) > 0:
+            retList.append(('logicalDevices', _(u'Logical Devices'), self.context))
+        if len(self.context.physicalMedia) > 0:
+            retList.append(('physicalMedia', _(u'Physical Media'), self.context))
+        if postList is not None:
+            retList.extend(postList)
+        print retList
         return retList
