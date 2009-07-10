@@ -149,7 +149,9 @@
     <adapter
         factory="org.ict_ok.components.location.adapter.ipickle.Pickle"
     />
-
+<adapter
+        factory="org.ict_ok.components.location.adapter.navigation.Navigation"
+    />
     <!--  Vocabulary stuff ============================================== -->
     
     <utility

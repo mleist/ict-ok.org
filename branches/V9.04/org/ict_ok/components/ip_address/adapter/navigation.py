@@ -26,7 +26,7 @@ from zope.app import zapi
 from org.ict_ok.components.superclass.interfaces import INavigation
 from org.ict_ok.components.superclass.adapter.navigation import \
     Navigation as SuperNavigation
-from org.ict_ok.components.contact_item.interfaces import IContactItem
+from org.ict_ok.components.ip_address.interfaces import IIpAddress
 
 _ = MessageFactory('org.ict_ok')
 
@@ -35,7 +35,7 @@ class Navigation(SuperNavigation):
     """navigation-Adapter."""
 
     implements(INavigation)
-    adapts(IContactItem)
+    adapts(IIpAddress)
     
     def getContextObjList(self, preList=None, postList=None):
         """
@@ -45,22 +45,10 @@ class Navigation(SuperNavigation):
         if preList is not None:
             retList.extend(preList)
         retList.append((None, None, zapi.getParent(self.context)))
-        if len(self.context.contracts)>0:
-            retList.append(('contracts', _(u'Contracts'), self.context))
-        if self.context.contact is not None:
-            retList.append(('contact', _(u'Contact'), self.context))
-        if self.context.workOrder is not None:
-            retList.append(('workOrder', _(u'Work Order'), self.context))
-        if len(self.context.adresses) > 0:
-            retList.append(('adresses', _(u'Adresses'), self.context))
-        if len(self.context.groups) > 0:
-            retList.append(('groups', _(u'Groups'), self.context))
-        if len(self.context.roles) > 0:
-            retList.append(('roles', _(u'Roles'), self.context))
-        if len(self.context.closedContracts) > 0:
-            retList.append(('closedContracts', _(u'Closed Contracts'), self.context))
-        if len(self.context.responsible4Contracts) > 0:
-            retList.append(('responsible4Contracts', _(u'Responsible for contracts'), self.context))
+        if self.context.ipNet != None:
+            retList.append(('ipNet', _(u'Ip Net'), self.context))
+        if self.context.interface != None:
+            retList.append(('interface', _(u'Interface'), self.context))
         if postList is not None:
             retList.extend(postList)
         print retList

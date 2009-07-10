@@ -47,12 +47,16 @@ class Navigation(SuperNavigation):
         retList.append((None, None, zapi.getParent(self.context)))
         #retList.append(self.context.device)
         #retList.append(('__parent__', _(u'All IP Addresses'), self.context))
+        if self.context.user is not None:
+            retList.append(('user', _(u'User'), self.context))
+        if self.context.room is not None:
+            retList.append(('room', _(u'Room'), self.context))
         if self.context.device is not None:
             retList.append(('device', _(u'From Device'), self.context))
         if len(self.context.ipAddresses) > 0:
             retList.append(('ipAddresses', _(u'IP Addresses'), self.context))
         if len(self.context.links) > 0:
-            retList.append(('links', _(u'Links'), self.context))
+            retList.append(('links', _(u'Connected to'), self.context))
         #print "===== %s" % retList
         #print "ddd3: ", self.context.device
         #retList.append(self.context.ipAddresses)
