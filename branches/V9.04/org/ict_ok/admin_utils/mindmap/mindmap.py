@@ -164,18 +164,28 @@ function giveFocus()
                         #import pdb
                         #pdb.set_trace()
                         if obj not in alreadySeenDict.keys():
-                            node = MMNode(obj.objectID, obj.ikName, {"link": zapi.getPath(obj)})
-                            alreadySeenDict[obj] = node
-                            #print "obj: %s" % obj.ikName
-                            itemNav = INavigation(obj)
-                            sublist = itemNav.getContextObjList()
-                            from copy import copy
-                            subnodes = self.recursiveHelper(sublist, copy(contextdepth), alreadySeenDict)
-                            if len(subnodes) > 0:
-                                node.change_style({"cloud_color":"#EFEFEF"})
-                                node.add_nodes(subnodes)
+                            if not hasattr(obj, "objectID"):
+                                Oid = "tmp%s" % generateOid()
+                                node = MMNode(Oid, obj)
+                                alreadySeenDict[obj] = node
+                                print obj
+                            else:
+                                node = MMNode(obj.objectID, obj.ikName, {"link": zapi.getPath(obj)})
+                                alreadySeenDict[obj] = node
+                                #print "obj: %s" % obj.ikName
+                                itemNav = INavigation(obj)
+                                sublist = itemNav.getContextObjList()
+                                from copy import copy
+                                subnodes = self.recursiveHelper(sublist, copy(contextdepth), alreadySeenDict)
+                                if len(subnodes) > 0:
+                                    node.change_style({"cloud_color":"#EFEFEF"})
+                                    node.add_nodes(subnodes)
                         else:
                             #arrorw
+                            #if not hasattr(obj, "objectID"):
+                                #Oid = "tmp%s" % generateOid()
+                                #alreadySeenDict[obj].connect_with_node_id(contextObj.objectID, {"COLOR": "#CBCBCB"})
+                            #else:
                             alreadySeenDict[obj].connect_with_node_id(contextObj.objectID, {"COLOR": "#CBCBCB"})
                         if node is not None:
                             nodelist.append(node)
@@ -197,7 +207,7 @@ function giveFocus()
                    </map>
                    """
         root_node = MMNode(self.context.objectID, self.context.ikName)
-        root_node.add_nodes(self.recursiveHelper(objList, 10, {}))
+        root_node.add_nodes(self.recursiveHelper(objList, 10, {self.context:root_node}))
         return root_node.generate_map()
 
 
