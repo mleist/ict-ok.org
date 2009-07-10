@@ -32,7 +32,20 @@
         for=".mindmap.AdmUtilMindMapDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
+<!--    <z3c:pagelet
+        name="ddd.html"
+        for="org.ict_ok.admin_utils.mindmap.interfaces.IAdmUtilMindMap"
+        class="org.ict_ok.admin_utils.mindmap.browser.mindmap.AdmUtilMindMapFrame"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mindmap.View"
+        />
 
+    <z3c:template
+        template="ddd.pt"
+        for=".mindmap.AdmUtilMindMapFrame"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+-->
     <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.admin_utils.mindmap.interfaces.IAdmUtilMindMap"

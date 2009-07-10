@@ -34,6 +34,7 @@ class MMNode(object):
         self.subnodes = subnodes
         self.style_inner_tag = {}
         self.style_outer_tag = {}
+        self.__arrows = []
         self.change_style(style)
 
     def generate_map(self):
@@ -56,6 +57,9 @@ class MMNode(object):
             for k, v in value.items():
                 xml_string += '%s="%s" ' % (k, v)
             xml_string += '/>\n'    
+        if len(self.__arrows) > 0:
+            for ar in self.__arrows:
+                xml_string += ar + "\n"
         if self.subnodes != None:
             if len(self.subnodes) != 0:
                 for subnode in self.subnodes:
@@ -63,27 +67,33 @@ class MMNode(object):
         xml_string += '</node>\n'
         return xml_string
 
-    #def connect_with(self, node, style=None):
-        #""" conects two Nodes with Arrow
-        #style dict
-        #{
-          #"COLOR": "#e01f1f"
-          #"ENDARROW": "Default"
-          #"STARTARROW": "None"
-        #}
-        #"""
-        #if node != type(MmDocument):
-            #return False
-        #link = '<arrowlink DESTINATION="%s"' % node.id
-        #style_str = ""
-        #if style != None:
-            #for key, value in style.items():
-                #style_str += "%s=%s " % (key.upper(), value)
+    def connect_with_node(self, node, style=None):
+        """ conects two Nodes with Arrow
+        style dict
+        {
+          "COLOR": "#e01f1f"
+          "ENDARROW": "Default"
+          "STARTARROW": "None"
+        }
+        """
+        self.connect_with_node_id(node.id, style)
+        
+    def connect_with_node_id(self, nodeid, style=None):
+        #if not self.style_outer_tag.has_key("arrowlink"):
+                #self.style_outer_tag["arrowlink"] = {}
+        #else:
+            #if self.
+        #self.style_outer_tag["arrowlink"]["DESTINATION"] = nodeid
+        link = '<arrowlink DESTINATION="%s"' % nodeid
+        style_str = ""
+        if style != None:
+            for key, value in style.items():
+                style_str += '%s="%s" ' % (key.upper(), value)
         #for value in self.style_outer_tag.values():
             #if value[:len(link)] == link:
                 #value = '%s %s/>' % (link, style_str)
             #else:
-                #self.style_outer_tag.apppend('%s %s/>' % (link, style_str))
+        self.__arrows.append('%s %s/>' % (link, style_str))
 
     def change_style(self, style):
         if style == None:

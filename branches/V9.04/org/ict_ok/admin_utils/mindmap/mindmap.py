@@ -148,17 +148,14 @@ function giveFocus()
                 #fo.addVariable("max_alpha_buttons",100);
                 #fo.addVariable("scaleTooltips","false");
 
-    def recursiveHelper(self, tupleList, contextdepth, alreadySeenSet):
-        """alreadySeenSet needs a set([])
-        """
+    def recursiveHelper(self, tupleList, contextdepth, alreadySeenDict={}):
         if contextdepth > 0:
             contextdepth -= 1
             nodelist = []
             for (attrName, viewTitle, contextObj) in tupleList:
                 if attrName is not None and viewTitle is not None:
-                    if type(attrName) is not type("aa"):
-                        import pdb
-                        pdb.set_trace()
+                    if type(attrName) is not type("str"):
+                        print "Nav_tuple_wrong: %s" % type(attrName)
                     objList = getattr(contextObj, attrName)
                     if type(objList) is not list:
                         objList = [objList]
@@ -166,21 +163,25 @@ function giveFocus()
                         node = None
                         #import pdb
                         #pdb.set_trace()
-                        if obj not in alreadySeenSet:
-                            alreadySeenSet.add(obj)
+                        if obj not in alreadySeenDict.keys():
                             node = MMNode(obj.objectID, obj.ikName, {"link": zapi.getPath(obj)})
+                            alreadySeenDict[obj] = node
                             #print "obj: %s" % obj.ikName
                             itemNav = INavigation(obj)
                             sublist = itemNav.getContextObjList()
                             from copy import copy
-                            subnodes = self.recursiveHelper(sublist, copy(contextdepth), alreadySeenSet)
-                            if subnodes is not None:
+                            subnodes = self.recursiveHelper(sublist, copy(contextdepth), alreadySeenDict)
+                            if len(subnodes) > 0:
+                                node.change_style({"cloud_color":"#EFEFEF"})
                                 node.add_nodes(subnodes)
+                        else:
+                            #arrorw
+                            alreadySeenDict[obj].connect_with_node_id(contextObj.objectID, {"COLOR": "#CBCBCB"})
                         if node is not None:
                             nodelist.append(node)
             return nodelist
         else:
-            return None
+            return []
 
 
     def asMindmapData(self, request=None):
@@ -196,7 +197,7 @@ function giveFocus()
                    </map>
                    """
         root_node = MMNode(self.context.objectID, self.context.ikName)
-        root_node.add_nodes(self.recursiveHelper(objList, 10, set([])))
+        root_node.add_nodes(self.recursiveHelper(objList, 10, {}))
         return root_node.generate_map()
 
 
