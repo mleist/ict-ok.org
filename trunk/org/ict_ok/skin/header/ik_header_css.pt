@@ -5,7 +5,7 @@
 <LINK rel="StyleSheet" type="text/css" href="css/grids.css"
       tal:attributes="href context/++resource++yui/grids/grids.css" />
 <LINK rel="stylesheet" type="text/css" href="css/tree.css"
-      tal:attributes="href context/++resource++yui/treeview/assets/treeview.css" />
+      tal:attributes="href context/++resource++yui/treeview/assets/treeview-skin.css" />
 <LINK rel="stylesheet" type="text/css" href="css/container.css"
       tal:attributes="href context/++resource++yui/container/assets/skins/sam/container.css" /> 
 <LINK rel="stylesheet" type="text/css" href="css/menu.css"

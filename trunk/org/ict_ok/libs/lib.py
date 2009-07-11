@@ -26,6 +26,14 @@ from zope.app import zapi
 from zope.exceptions.interfaces import UserError
 from zope.i18nmessageid import MessageFactory
 from zope.app.catalog.interfaces import ICatalog
+from zope.app.intid.interfaces import IIntIds
+from zope.dublincore.interfaces import IZopeDublinCore
+from zope.component import createObject
+from zope.component import getUtility
+
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
 
 # ict_ok.org imports
 
@@ -153,6 +161,13 @@ def nodeIsUnder(underNodeOid, upperNodeOid):
        upperObj is not None:
         return _helperNodeIsUnder(underObj, upperObj)
 
+def getFirstObjectFor(interf):
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if interf.providedBy(oobj.object):
+            return oobj.object
+    return None
+            
 
 def oid2dcTitle(arg_oid):
     """ converts an oid into the object dc title """
@@ -165,3 +180,56 @@ def oid2dcTitle(arg_oid):
     if len(res) > 0:
         return iter(res).next().getDcTitle()
     return "Oid not found"
+
+def getRefAttributeNames(arg_class):
+    """return a string list of attribute names with
+    RelationPropertyIn- or RelationPropertyOut-type
+    """
+    retList = []
+    for attrName, attrValue in arg_class.__dict__.items():
+        if type(attrValue)==RelationPropertyIn or \
+           type(attrValue)==RelationPropertyOut:
+            retList.append(attrName)
+    return retList
+    
+def ensureComponentFolderOnBootstrap(interface, folderName, factoryId,
+                                     root_folder, siteManager):
+    allSubFolders = [folder for folder in root_folder.values()
+                     if interface.providedBy(folder)]
+    utils = [ util for util in siteManager.registeredUtilities()
+              if util.provided.isOrExtends(IIntIds)]
+    instUtilityIIntIds = utils[0].component
+    if len(allSubFolders) < 1: # there is no subfolder
+        newFolder = createObject(factoryId)
+        root_folder[folderName] = newFolder
+        dcore = IZopeDublinCore(newFolder, None)
+        #dcore.creators = [u'ikportscan']
+        #newFolder.ikComment += u"scanner: %s" % (dateNow)
+        newFolder.__setattr__("ikName", folderName)
+        dcore.title = folderName
+        instUtilityIIntIds.register(newFolder)
+    else:
+        for obj in allSubFolders:
+            instUtilityIIntIds.register(obj)
+
+from zope.interface import implementedBy
+from z3c.form.field import Fields
+
+def fieldsForFactory(factory, omitFields, additionalInterfaces=[]):
+    """return z3c.form fields for the given ict-factory
+    """
+    interfaceList = [i for i in implementedBy(factory)
+                     if i.__identifier__[:10] == 'org.ict_ok']
+    interfaceList.reverse()
+    interfaceList.extend(additionalInterfaces)
+    return Fields(*interfaceList).omit(*omitFields)
+
+def fieldsForInterface(interface_s, omitFields):
+    """return z3c.form fields for the given ict-interface
+    """
+    if type(interface_s) == type(list):
+        interfaceList = [i for i in interface_s
+                         if i.__identifier__[:10] == 'org.ict_ok']
+    else:
+        interfaceList = [interface_s]
+    return Fields(*interfaceList).omit(*omitFields)

@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 350 2008-10-12 09:18:43Z markusleist $
+# $Id$
 #
 # no_pylint: disable-msg=W0232
 #
@@ -14,7 +14,7 @@
 style-class for ict-ok.org reporting 
 """
 
-__version__ = "$Id: $"
+__version__ = "$Id$"
 
 # phython imports
 
@@ -27,7 +27,8 @@ from reportlab.lib.styles import \
      TA_CENTER, ParagraphStyle, StyleSheet1
 
 # ict-ok.org imports
-from org.ict_ok.admin_utils.reports.rpt_color import colors, getColor1
+from org.ict_ok.admin_utils.reports.rpt_color import \
+    colors, getColor1, getTabBackgroundColor
 from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 
 #rptNormalStyle = ParagraphStyle(name='Normal',
@@ -45,7 +46,7 @@ from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 def getRptStyleSheet():
     """Returns a stylesheet object"""
     
-    admUtilReports = getUtility(IAdmUtilReports)
+    admUtilReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
 
     if admUtilReports.fontName1 is None:
         locFontName1 = 'Helvetica'
@@ -69,6 +70,7 @@ def getRptStyleSheet():
         locFontName5 = admUtilReports.fontName5
         
     cmyk_color1 = getColor1()
+    cmyk_color2 = getTabBackgroundColor()
     
     stylesheet = StyleSheet1()
     stylesheet.add(ParagraphStyle(name='Normal',
@@ -110,7 +112,7 @@ def getRptStyleSheet():
                                   borderWidth = 0,
                                   borderPadding = 1 * mm,
                                   parent=stylesheet['Para'],
-                                  backColor = colors.lightgrey)
+                                  backColor = cmyk_color2)
                    )
     stylesheet.add(ParagraphStyle(name='Normal_R',
                                   fontName=locFontName1,

@@ -21,7 +21,7 @@
     <include package="org.ict_ok.admin_utils.generators.smokeping" />
 
     <include package="org.ict_ok.components.superclass" />
-    <include package="org.ict_ok.components.net" />
+    <include package="org.ict_ok.components.ipnet" />
     <include package="org.ict_ok.components.host" />
     <include package="org.ict_ok.components.host.special" />
     <include package="org.ict_ok.components.interface" />

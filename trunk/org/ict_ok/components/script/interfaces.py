@@ -15,10 +15,13 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.interface import Interface
 from zope.interface import Attribute
 from zope.schema import Text
+from zope.app.folder.interfaces import IFolder
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')

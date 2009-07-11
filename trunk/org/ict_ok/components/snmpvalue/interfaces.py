@@ -15,11 +15,11 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.interface import Interface
 from zope.interface import Attribute, Invalid, invariant
 from zope.schema import Bool, Choice, List
 
 # ict_ok.org imports
-from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.schema.snmpoidvalid import SnmpOidValid
 from org.ict_ok.schema.physicalvalid import PhysicalQuantity, \
      PhysicalUnit
@@ -29,7 +29,7 @@ from org.ict_ok.libs.physicalquantity import physq, convertQuantity, \
 _ = MessageFactory('org.ict_ok')
 
 
-class ISnmpValue(IComponent):
+class ISnmpValue(Interface):
     """A service object."""
 
     checktype = Choice(
@@ -367,3 +367,14 @@ class ISnmpValue(IComponent):
     def generateValuePng(params=None):
         """generate Picture
         """
+
+class ISnmpValueFolder(Interface):
+    """Container for SnmpValue objects
+    """
+
+class IAddSnmpValue(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllSnmpValueTemplates",
+        required = False)

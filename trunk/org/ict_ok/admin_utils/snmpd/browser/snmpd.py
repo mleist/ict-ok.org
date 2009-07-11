@@ -17,21 +17,18 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
-
 from zope.i18nmessageid import MessageFactory
 
 
 # zc imports
 
-# z3c imports
-from z3c.form import field
-
 # ict-ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
+from org.ict_ok.admin_utils.snmpd.snmpd import AdmUtilSnmpd
 
 _ = MessageFactory('org.ict_ok')
 
@@ -57,11 +54,14 @@ class AdmUtilSnmpdDetails(SupernodeDetails):
 class DetailsAdmUtilSnmpdForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of snmpd')
-    fields = field.Fields(IAdmUtilSnmpd).omit(\
-        *AdmUtilSnmpdDetails.omit_viewfields)
+    factory = AdmUtilSnmpd
+    omitFields = AdmUtilSnmpdDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
+
 
 class EditAdmUtilSnmpdForm(EditForm):
     """ Edit for for site """
     label = _(u'edit snmpd settings')
-    fields = field.Fields(IAdmUtilSnmpd).omit(\
-        *AdmUtilSnmpdDetails.omit_editfields)
+    factory = AdmUtilSnmpd
+    omitFields = AdmUtilSnmpdDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

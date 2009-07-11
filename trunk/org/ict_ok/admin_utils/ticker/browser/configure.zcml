@@ -41,7 +41,7 @@
         for="org.ict_ok.admin_utils.ticker.interfaces.IAdmUtilTicker"
         class=".ticker.EditAdmUtilTickerEventIfForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.EditEventIf"
+        permission="org.ict_ok.components.ipnet.EditEventIf"
     />
     <z3c:pagelet
         name="history.html"
@@ -82,7 +82,7 @@
         manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.EditEventIf"
+        permission="org.ict_ok.components.ipnet.EditEventIf"
         />
 
 </configure>

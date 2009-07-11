@@ -19,6 +19,22 @@
             permission="org.ict_ok.admin_utils.netscan.View"
             set_schema=".interfaces.IAdmUtilDemo1"
             />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />            
     </class>
 
     <!--adapter

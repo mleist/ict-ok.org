@@ -1,4 +1,17 @@
 <script type="text/javascript">
+function eee3() {
+	a = 1
+	}
+	
+var kl2 = new YAHOO.util.KeyListener(document, { ctrl:true, keys:89 }, 
+											   { fn:eee3, 
+												 scope:document,
+												 correctScope:true } );
+
+kl2.enable();
+</script>
+
+<script type="text/javascript">
   ik_el_ikh_time = document.getElementById("ikh_time");
   ik_el_status_pic = document.getElementById("statusPic");
   ik_el_navtree_h1 = document.getElementById("navTreeH1");
@@ -30,7 +43,8 @@
       failure:handleFailure,
       argument: { node:node }
     };
-    var request2 = YAHOO.util.Connect.asyncRequest('POST', node.data.path + node.data.name +"/@@children.xml", callback);
+    var request2 = YAHOO.util.Connect.asyncRequest('POST', node.data.path +
+      node.data.name +"/@@children.xml", callback, node.data.navParam);
   }
   function recNodes(parent, newNodeList) {
     for (var i = 0, leni = newNodeList.length; i < leni; ++i)
@@ -40,8 +54,10 @@
         var subnodeList = newNodeList[i].childNodes;
         var newData = Object();
         newData.label = ''
+        newData.ikView = ''
         newData.state_url = ''
         newData.isopen = false;
+        newData.ictHasFocus = false;
         for (var j = 0, lenj = attributes.length; j < lenj; ++j)
         {
           if ( attributes[j].nodeName == 'name') {
@@ -50,13 +66,14 @@
           if ( attributes[j].nodeName == 'title') {
             if (newData.isfocused) {
               newData.label = newData.label + "\<b\>" + attributes[j].nodeValue + "\<\/b\>";
+              //newData.ictHasFocus = true;
             } else {
               newData.label = newData.label + attributes[j].nodeValue;
             }
           }
           if ( attributes[j].nodeName == 'length') {
             newData.mylength = attributes[j].nodeValue;
-            //newData.label = newData.label; // + " (" + newData.mylength +")"
+            //newData.label = newData.label + " (" + newData.mylength +")";
           }
           if ( attributes[j].nodeName == 'rem') {
             newData.rem = attributes[j].nodeValue;
@@ -66,8 +83,16 @@
           if ( attributes[j].nodeName == 'isfocused') {
             newData.isfocused = true;
           }
+          if ( attributes[j].nodeName == 'navparam') {
+            newData.navParam = attributes[j].nodeValue;
+            newData.label = newData.label + " (PARAM:" + newData.navParam +")";
+          }
           if ( attributes[j].nodeName == 'path') {
             newData.path = attributes[j].nodeValue;
+            //newData.path = 'http://www.kiel.de';
+            //newData.href = 'http://www.essen.de';
+            //newData.label = newData.label + " (PTH:" + newData.path +")";
+            //newData.label = newData.label + " (HREF:" + newData.href +")";
           }
           if ( attributes[j].nodeName == 'iklen') {
             newData.iklen = attributes[j].nodeValue;
@@ -87,7 +112,9 @@
           }
         }
         newData.href = newData.path + newData.name;
+        //newData.label = newData.label + " (HREF:" + newData.href +")";
         var tmpNode = new YAHOO.widget.TextNode(newData, parent, false);
+        //var tmpNode = new YAHOO.widget.HTMLNode(newData, parent, false);
         if (newData.isopen) {
             if (newData.isfocused) {
                 tmpNode.setDynamicLoad(loadNodeData,0);
@@ -104,6 +131,8 @@
         if (newData.state_url != '') {
             tmpNode.labelStyle = "icon-" + newData.state_url; 
         }
+        if (newData.ictHasFocus) {
+        }        
       }
     }
   }
@@ -128,9 +157,15 @@
       o.argument.node.loadComplete();
     }
   }
+  function ik_fsearch() {
+		window.location.href = '/@@fsearch';
+		}
   function ik_init() {
     tree816 = new YAHOO.widget.TreeView("treeDiv1");
     //tree816.setDynamicLoad(loadNodeData,0);
+    tree816.subscribe("clickEvent",tree816.onEventToggleHighlight);
+    tree816.setNodesProperty("propagateHighlightUp",true); 
+    tree816.setNodesProperty("propagateHighlightDown",true); 
     var sUrl = "@@children.xml";
     var callback =
     {
@@ -139,6 +174,12 @@
       argument: { node:tree816.getRoot() }
     };
     var request1 = YAHOO.util.Connect.asyncRequest('POST', "@@singleBranchTree.xml", callback);
+		
+	var searchkl = new YAHOO.util.KeyListener(document, { ctrl:true, keys:70 }, 
+												   { fn:ik_fsearch, 
+													 scope:document,
+													 correctScope:true } );
+	searchkl.enable();
   }
 </script>
 <script type="text/javascript">

@@ -22,16 +22,13 @@ from zope.i18nmessageid import MessageFactory
 from zope.security import checkPermission
 from zope.app.pagetemplate.urlquote import URLQuote
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.notifier.jabber.interfaces import \
-     INotifierJabber
+from org.ict_ok.admin_utils.notifier.jabber.jabber import NotifierJabber
 
 _ = MessageFactory('org.ict_ok')
 
@@ -55,7 +52,7 @@ class NotifierJabberDetails(SupernodeDetails):
                 tmpDict['oid'] = u"c000stop_connector"
                 tmpDict['title'] = _(u"stop jabber-connector")
                 tmpDict['href'] = u"%s/@@stop_connector?nextURL=%s" % \
-                       (zapi.getPath(self.context),
+                       (zapi.absoluteURL(self.context, self.request),
                         quoter.quote())
                 tmpDict['tooltip'] = _(u"stops the jabber-connector (as user:%s)"\
                                        % self.request.principal.title)
@@ -64,7 +61,7 @@ class NotifierJabberDetails(SupernodeDetails):
                 tmpDict['oid'] = u"c000get_isup"
                 tmpDict['title'] = _(u"is jabber-connector up")
                 tmpDict['href'] = u"%s/@@get_isup?nextURL=%s" % \
-                       (zapi.getPath(self.context),
+                       (zapi.absoluteURL(self.context, self.request),
                         quoter.quote())
                 tmpDict['tooltip'] = _(u"ask the jabber-connector for watchdog")
                 retList.append(tmpDict)
@@ -72,7 +69,7 @@ class NotifierJabberDetails(SupernodeDetails):
                 tmpDict['oid'] = u"c000send_test"
                 tmpDict['title'] = _(u"send test message")
                 tmpDict['href'] = u"%s/@@send_test?nextURL=%s" % \
-                       (zapi.getPath(self.context),
+                       (zapi.absoluteURL(self.context, self.request),
                         quoter.quote())
                 tmpDict['tooltip'] = _(u"send test message to im-server")
                 retList.append(tmpDict)
@@ -82,7 +79,7 @@ class NotifierJabberDetails(SupernodeDetails):
                 tmpDict['oid'] = u"c000start_connector"
                 tmpDict['title'] = _(u"start jabber-connector")
                 tmpDict['href'] = u"%s/@@start_connector?nextURL=%s" % \
-                       (zapi.getPath(self.context),
+                       (zapi.absoluteURL(self.context, self.request),
                         quoter.quote())
                 tmpDict['tooltip'] = _(u"starts the jabber-connector (as user:%s)"\
                                        % self.request.principal.title)
@@ -154,13 +151,14 @@ class NotifierJabberDetails(SupernodeDetails):
 class ViewNotifierJabberForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of graphviz adapter')
-    fields = field.Fields(INotifierJabber).omit(\
-        *NotifierJabberDetails.omit_viewfields)
+    factory = NotifierJabber
+    omitFields = NotifierJabberDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditNotifierJabberForm(EditForm):
     """ Edit for for net """
     label = _(u'edit graphviz adapter')
-    fields = field.Fields(INotifierJabber).omit(\
-        *NotifierJabberDetails.omit_editfields)
-
+    factory = NotifierJabber
+    omitFields = NotifierJabberDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

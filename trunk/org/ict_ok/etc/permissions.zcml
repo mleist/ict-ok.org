@@ -30,7 +30,13 @@
              file="security.zcml" />
     <include package="org.ict_ok.admin_utils.graphviz"
              file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.idchooser"
+             file="security.zcml" />
     <include package="org.ict_ok.admin_utils.linux_ha"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.mac_address_db"
+             file="security.zcml" />
+    <include package="org.ict_ok.admin_utils.mindmap"
              file="security.zcml" />
     <include package="org.ict_ok.admin_utils.netscan"
              file="security.zcml" />
@@ -55,6 +61,9 @@
     <include package="org.ict_ok.admin_utils.wfmc"
              file="security.zcml" />
 
+    <include package="org.ict_ok.libs"
+             file="security.zcml" />
+
     <!--security settings of components (hierarchical)-->
     <include package="org.ict_ok.components.superclass"
              file="security.zcml" />
@@ -63,6 +72,10 @@
     <include package="org.ict_ok.components.slave"
              file="security.zcml" />
     <include package="org.ict_ok.components.net"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.ipnet"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.ip_address"
              file="security.zcml" />
     <include package="org.ict_ok.components.host"
              file="security.zcml" />
@@ -81,5 +94,72 @@
     <include package="org.ict_ok.components.room"
              file="security.zcml" />
     <include package="org.ict_ok.components.script"
+             file="security.zcml" />
+
+
+    <include package="org.ict_ok.components.mobilephone"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.outlet"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.notebook"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.appsoftware"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.osoftware"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.patchpanel"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.patchport"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.rack"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.pc"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.physical_link"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.happliance"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.ipc"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.switch"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.display_unit"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.printer"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.misc_physical"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.isdnphone"
+             file="security.zcml" />
+
+    <include package="org.ict_ok.components.x509certificate"
+             file="security.zcml" />
+
+    <include package="org.ict_ok.components.product"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.address"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.organization"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.person"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.contact"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.contact_item"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.work_order"
+             file="security.zcml" />
+
+    <include package="org.ict_ok.components.physical_media"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.role"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.group"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.int_attachment" 
+             file="security.zcml" /> 
+    <include package="org.ict_ok.components.reminder"
+             file="security.zcml" />
+    <include package="org.ict_ok.components.contract"
              file="security.zcml" />
 </configure>

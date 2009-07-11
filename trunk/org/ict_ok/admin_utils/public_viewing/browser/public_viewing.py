@@ -24,6 +24,7 @@ from zope.i18nmessageid import MessageFactory
 from z3c.form import field
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
@@ -32,7 +33,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.admin_utils.public_viewing.interfaces import \
      IAdmUtilPublicViewing, IShadowObject
 from org.ict_ok.admin_utils.public_viewing.public_viewing import \
-     ShadowObject
+     AdmUtilPublicViewing, ShadowObject
 
 _ = MessageFactory('org.ict_ok')
 
@@ -82,7 +83,6 @@ class AddShadowObjectForm(AddForm):
     #wo hole ich mir die fields her später!!!
     fields = field.Fields(IShadowObject)#.omit(*HostDetails.omit_addfields)
     factory = ShadowObject
-    
     #überladen der add-methode (getUtility(IAdmUtilPublicViewing)
     #da reinschreiben
 
@@ -90,12 +90,14 @@ class AddShadowObjectForm(AddForm):
 class ViewAdmUtilPublicViewingForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of public viewing')
-    fields = field.Fields(IAdmUtilPublicViewing).omit(\
-        *AdmUtilPublicViewingDetails.omit_viewfields)
+    factory = AdmUtilPublicViewing
+    omitFields = AdmUtilPublicViewingDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilPublicViewingForm(EditForm):
     """ Edit form for net """
     label = _(u'edit public viewing')
-    fields = field.Fields(IAdmUtilPublicViewing).omit(\
-        *AdmUtilPublicViewingDetails.omit_editfields)
+    factory = AdmUtilPublicViewing
+    omitFields = AdmUtilPublicViewingDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

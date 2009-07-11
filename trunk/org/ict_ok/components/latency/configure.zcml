@@ -33,6 +33,87 @@
             permission="org.ict_ok.components.latency.Edit"
             set_schema=".interfaces.ILatency"
             />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+    
+    <class class=".latency.LatencyFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <implements
+            interface="org.ict_ok.components.superclass.interfaces.IFocus"
+            />
+        <factory
+            id="org.ict_ok.components.latency.latency.LatencyFolder"
+            description="LatencyFolder"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface=".interfaces.ILatencyFolder"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema=".interfaces.ILatencyFolder"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.latency.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.latency.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+            
     </class>
 
     <subscriber
@@ -66,6 +147,11 @@
 
     <adapter
         factory=".adapter.ticker.Ticker"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".latency.AllLatencyTemplates"
+        name="AllLatencyTemplates"
     />
     
     <include package=".generations" />

@@ -6,9 +6,16 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
          Markus Leist <leist@ikom-online.de> -->
 
+    <!-- usr - User - view & analyse data, generate reports & leave notes at any object. -->
     <role id="org.ict_ok.usr" title="User" />
+
+    <!-- mgr - Manager - search, connect, configure & delete devices  -->
     <role id="org.ict_ok.mgr" title="Manager" />
+
+    <!-- adm - Administrator - install, configure & administrate IKOMtrol -->
     <role id="org.ict_ok.adm" title="Administrator" />
+
+    <!-- dvl - Developer - individual adaption & development on IKOMtrol -->
     <role id="org.ict_ok.dvl" title="Developer" />
 
     <!--grantAll role="org.ict_ok.dvl" /-->

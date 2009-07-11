@@ -28,21 +28,21 @@ from zope.app.pagetemplate.urlquote import URLQuote
 # zc imports
 from zc.table.column import GetterColumn
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
+from org.ict_ok.admin_utils.compliance.requirement import Requirement
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm, DisplayForm, EditForm
+     DisplayForm, EditForm, AddForm, DeleteForm
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, getModifiedDate, raw_cell_formatter, \
      link, getActionBottons, getSize
 from org.ict_ok.components.superclass.browser.superclass import \
      getActionBotton_Detail
+from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 
 _ = MessageFactory('org.ict_ok')
 
@@ -125,6 +125,13 @@ class MSubAllRequirements(GlobalMenuSubItem):
     viewURL = 'allreqs.html'
     weight = 80
 
+class MSubAddRequirement(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Add Requirement')
+    viewURL = 'add_requirement.html'
+    weight = 50
+
+
 # --------------- details -----------------------------
 
 class AdmUtilRequirementDetails(SupernodeDetails):
@@ -132,6 +139,8 @@ class AdmUtilRequirementDetails(SupernodeDetails):
     """
     
     omit_viewfields = SupernodeDetails.omit_viewfields + \
+                    ['__name__', '__parent__', 'title']
+    omit_addfields = SupernodeDetails.omit_addfields + \
                     ['__name__', '__parent__', 'title']
     omit_editfields = SupernodeDetails.omit_editfields + \
                     ['__name__', '__parent__', 'title']
@@ -152,11 +161,14 @@ class DetailsAdmUtilRequirementForm(Overview):
     """ Display form for the object """
     
     label = _(u'settings of Requirement')
+    factory = Requirement
+    omitFields = AdmUtilRequirementDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
     columns = (
         GetterColumn(title=_('Title'),
                      getter=getTitle,
                      cell_formatter=link('overview.html')),
-        GetterColumn(title=_('Modified On'),
+        GetterColumn(title=_('Modified'),
                      getter=getModifiedDate,
                      subsort=True,
                      cell_formatter=raw_cell_formatter),
@@ -170,9 +182,6 @@ class DetailsAdmUtilRequirementForm(Overview):
     pos_colum_index = 3
     sort_columns = [1]
     status = None
-
-    fields = field.Fields(IRequirement).omit(
-       *AdmUtilRequirementDetails.omit_viewfields)
     
     def objs(self):
         """List of Content objects"""
@@ -191,9 +200,42 @@ class AdmUtilRequirementDisplayAll(DisplayForm):
     label = _(u'display all requirements')
 
 
+class AddAdmUtilRequirementForm(AddForm):
+    """Add form."""
+    label = _(u'add Requirement')
+    factory = Requirement
+    omitFields = AdmUtilRequirementDetails.omit_addfields
+    fields = fieldsForFactory(factory, omitFields)
+    
+    def create(self, data):
+        """ will create the object """
+        # arg1 must be title for schooltool requirement
+        # this will be reused later by ikName=arg1
+        titleArg = data.pop('ikName')
+        obj = self.factory(titleArg, **data)
+        self.newdata = data
+        IBrwsOverview(obj).setTitle(titleArg)
+        obj.__post_init__()
+        return obj
+    
+    def nextURL(self):
+        """ don't forward the browser """
+        return absoluteURL(self.context, self.request)
+
+    
 class EditAdmUtilRequirementForm(EditForm):
     """ Display form for the object """
     
     label = _(u'edit Requirement properties')
-    fields = field.Fields(IRequirement).omit(
-       *AdmUtilRequirementDetails.omit_editfields)
+    factory = Requirement
+    omitFields = AdmUtilRequirementDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
+
+
+class DeleteAdmUtilRequirementForm(DeleteForm):
+    """ Delete the Requirement """
+    
+    def getTitle(self):
+        """this title will be displayed in the head of form"""
+        return _(u"Delete this Requirement: '%s'?") % \
+               self.context.ikName

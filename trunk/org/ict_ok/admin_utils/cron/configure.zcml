@@ -22,6 +22,22 @@
             permission="org.ict_ok.admin_utils.cron.View"
             set_schema=".interfaces.IAdmUtilCron"
             />
+        <require
+            permission="org.ict_ok.admin_utils.cron.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.cron.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.cron.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.cron.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <!-- setup local utilities -->

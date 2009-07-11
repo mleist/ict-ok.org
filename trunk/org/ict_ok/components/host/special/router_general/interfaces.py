@@ -14,13 +14,13 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.host.interfaces import IHost
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IHostRouterGeneral(IHost):
+class IHostRouterGeneral(Interface):
     """A host object."""

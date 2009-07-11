@@ -30,7 +30,7 @@ from org.ict_ok.schema.datetime import IctDatetime
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilEvent(ISupernode):
+class IAdmUtilEvent(Interface):
     """
     Interface auf an event which is distributed in event crossbar
     """
@@ -142,7 +142,7 @@ class IAdmUtilEvent(ISupernode):
         """ sends an the event to the list of ALL receivers
         """
 
-class IAdmUtilEventCrossbar(ISupernode):
+class IAdmUtilEventCrossbar(Interface):
     """
     major component for registration and event distribution 
     """
@@ -186,17 +186,17 @@ class IAdmUtilEventCrossbar(ISupernode):
         """ debug out the event history """
 
 
-class IEventLogic(ISupernode):
+class IEventLogic(Interface):
     """
     superclass for any kind of 'logical' event objects
     """
 
 
-class IEventIfEventLogic(IEventIfSupernode):
+class IEventIfEventLogic(Interface):
     """ event interface of object """
 
 
-class IEventTimingRelay(IEventLogic):
+class IEventTimingRelay(Interface):
     """
     timing relay with trigger- and reset-input and
     one delayed output
@@ -217,7 +217,7 @@ class IEventTimingRelay(IEventLogic):
         default = False)
 
 
-class IEventIfEventTimingRelay(IEventIfEventLogic):
+class IEventIfEventTimingRelay(Interface):
     """ event interface of object """
     eventInpObjs_trigger = Set(
         title = _("trigger event <-"),
@@ -251,7 +251,7 @@ class IEventIfEventTimingRelay(IEventIfEventLogic):
         """ sends one-second event """
 
 
-class IEventTimer(IEventLogic):
+class IEventTimer(Interface):
     """
     timer with start- and stop-input and
     one pulse output
@@ -277,7 +277,7 @@ class IEventTimer(IEventLogic):
         """
 
 
-class IEventIfEventTimer(IEventIfEventLogic):
+class IEventIfEventTimer(Interface):
     """ event interface of object """
     eventInpObjs_start = Set(
         title = _("start event <-"),

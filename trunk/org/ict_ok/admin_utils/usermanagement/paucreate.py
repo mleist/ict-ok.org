@@ -71,6 +71,7 @@ def createAuthenticationUtils(obj):
         IAuthentication,
         '',
         PluggableAuthentication,
+        name='PluggableAuthentication',
         copy_to_zlog=False,
         asObject=True)
 

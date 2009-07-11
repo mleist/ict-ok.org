@@ -19,16 +19,13 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.objmq.interfaces import \
-     IAdmUtilObjMQ
+from org.ict_ok.admin_utils.objmq.objmq import AdmUtilObjMQ
 
 _ = MessageFactory('org.ict_ok')
 
@@ -46,12 +43,14 @@ class AdmUtilObjMQDetails(SupernodeDetails):
 class ViewAdmUtilObjMQForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of object message queue')
-    fields = field.Fields(IAdmUtilObjMQ).omit(\
-        *AdmUtilObjMQDetails.omit_viewfields)
+    factory = AdmUtilObjMQ
+    omitFields = AdmUtilObjMQDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilObjMQForm(EditForm):
     """ Edit for for net """
     label = _(u'edit object message queue')
-    fields = field.Fields(IAdmUtilObjMQ).omit(\
-        *AdmUtilObjMQDetails.omit_editfields)
+    factory = AdmUtilObjMQ
+    omitFields = AdmUtilObjMQDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

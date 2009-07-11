@@ -9,6 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611,W0613,W0232,W0142,R0901
 #
+from twisted.web.sux import ParseError
 """implementation of browser class of supervisor
 """
 
@@ -30,9 +31,9 @@ from zope.app.zapi import getPath
 from zope.interface import directlyProvides
 from zope.app.pagetemplate.urlquote import URLQuote
 from zope.app.generations.generations import findManagers
+from zope.app.catalog.interfaces import ICatalog
 
 # z3c imports
-from z3c.form import field
 from z3c.pagelet.browser import BrowserPagelet
 
 # zc imports
@@ -42,13 +43,14 @@ from zc.table.interfaces import ISortableColumn
 from zc.i18n.duration import format as i18nformat
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
-     DisplayForm, EditForm
-from org.ict_ok.admin_utils.supervisor.interfaces import \
-     IAdmUtilSupervisor
+     DisplayForm, EditForm, Overview
+from org.ict_ok.admin_utils.supervisor.supervisor import \
+     AdmUtilSupervisor
 from org.ict_ok.components.superclass.browser import \
      superclass
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
@@ -81,8 +83,8 @@ class MSubGenerations(GlobalMenuSubItem):
 class AdmUtilSupervisorDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
-    omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
+    omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName', 'fsearchText']
+    omit_editfields = SupernodeDetails.omit_editfields + ['ikName', 'fsearchText']
 
     def actions(self):
         """
@@ -101,7 +103,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%sreindex_db" % objId
             tmpDict['title'] = _(u"reindex database")
             tmpDict['href'] = u"%s/@@reindex_db?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"will reindex the catalogs of all "\
                                    u"tables in database")
@@ -113,7 +115,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%spack_db" % objId
             tmpDict['title'] = _(u"pack database")
             tmpDict['href'] = u"%s/@@pack_db?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"will pack the database and delete "\
                                    u"all backups")
@@ -179,10 +181,9 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         """
         commnds for objmq
         """
-        #obj = removeAllProxies(self.context)
         obj = self.context
         print "cmd/objmq"
-        print "path: %s" % (zapi.getPath(obj))
+        print "path: %s" % (zapi.absoluteURL(obj, self.request))
         action = self.request.get('cmd', default=None)
         if action:
             if action == 'start':
@@ -210,7 +211,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
                 #mq_utility.sendPerMq(toxml(python_pickle))
                 #mq_utility = zapi.getUtility(IMailDelivery, 'ikObjTransportQueue')
                 #from_adr = u"http://%s@%s:8080%s" % \
-                         #(obj.objectID, obj.ipv4My, zapi.getPath(obj))
+                         #(obj.objectID, obj.ipv4My, zapi.absoluteURL(obj, self.request))
                 #to_adr = u"http://%s@%s:8080/++etc++site/default/AdmUtilSupervisor" % \
                          #(str(obj.oidMaster), str(obj.ipv4Master))
                 #mq_utility.send(from_adr, [to_adr], "msg_start")
@@ -220,7 +221,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
                 mq_utility = zapi.getUtility(IMailDelivery,
                                               'ikObjTransportQueue')
                 from_adr = u"http://%s@%s:8080%s" % \
-                         (obj.objectID, obj.ipv4My, zapi.getPath(obj))
+                         (obj.objectID, obj.ipv4My, zapi.absoluteURL(obj, self.request))
                 to_adr = u"http://%s@%s:8080/++etc++site/"+\
                        "default/AdmUtilSupervisor" % \
                          (str(obj.oidMaster), str(obj.ipv4Master))
@@ -358,7 +359,7 @@ class ViewAdmUtilSupervisorGenerationsForm(BrowserPagelet):
         formatter = StandaloneFullFormatter(
             self.context, self.request, self.objs(),
             columns=self.columns, sort_on=((_('Name'), False),))
-        formatter.batch_size = 30
+        formatter.batch_size = 150
         formatter.cssClasses['table'] = 'listing'
         return formatter()
 
@@ -369,12 +370,67 @@ class ViewAdmUtilSupervisorGenerationsForm(BrowserPagelet):
 class ViewAdmUtilSupervisorForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of supervisor')
-    fields = field.Fields(IAdmUtilSupervisor).omit(\
-        *AdmUtilSupervisorDetails.omit_viewfields)
+    factory = AdmUtilSupervisor
+    omitFields = AdmUtilSupervisorDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilSupervisorForm(EditForm):
     """ Edit for for net """
     label = _(u'edit supervisor')
-    fields = field.Fields(IAdmUtilSupervisor).omit(\
-        *AdmUtilSupervisorDetails.omit_editfields)
+    factory = AdmUtilSupervisor
+    omitFields = AdmUtilSupervisorDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
+
+
+class FSearchForm(Overview):
+    """ Search Form """
+#    form.extends(form.Form)
+    label = _(u"Search for what?")
+    fsearchText = None
+    
+    def objs(self):
+        """List of Content objects"""
+        retList = []
+        if self.fsearchText is not None:
+            my_catalog = zapi.getUtility(ICatalog)
+            try:
+                res = my_catalog.searchResults(all_fulltext_index=self.fsearchText)
+                for obj in res:
+                    retList.append(obj)
+            except ParseError, errText:
+                self.status = u"Error: '%s'" % errText
+        return retList
+    
+    def update(self):
+        if self.request.has_key('key'):
+            self.fsearchText = self.request['key']
+        else:
+            myForm = self.request.form
+            if myForm.has_key('form.widgets.fsearchText'):
+                self.fsearchText = myForm['form.widgets.fsearchText']
+
+
+class TypeSearchForm(Overview):
+    """ Search Form """
+#    form.extends(form.Form)
+    fsearchText = None
+    
+    def objs(self):
+        """List of Content objects"""
+        retList = []
+        uidutil = getUtility(IIntIds)
+        for (oid, oobj) in uidutil.items():
+            retList.append(oobj.object)
+#            import pprint
+#            pprint.pprint(retList)
+        return retList
+    
+#    def update(self):
+#        if self.request.has_key('key'):
+#            self.fsearchText = self.request['key']
+#        else:
+#            myForm = self.request.form
+#            if myForm.has_key('form.widgets.fsearchText'):
+#                self.fsearchText = myForm['form.widgets.fsearchText']
+

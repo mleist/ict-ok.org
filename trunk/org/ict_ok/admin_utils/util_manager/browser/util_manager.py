@@ -17,24 +17,23 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
+from zope.interface import Interface
 from zope.app import zapi
-from zope.component import getAllUtilitiesRegisteredFor
+from zope.component import getAllUtilitiesRegisteredFor, getUtilitiesFor
 from zope.i18nmessageid import MessageFactory
 from zope.security.checker import canAccess
 
 # zc imports
 from zc.table.column import GetterColumn
 
-# z3c imports
-from z3c.form import field
-
 # ict-ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.util_manager.interfaces import IUtilManager
+from org.ict_ok.admin_utils.util_manager.util_manager import UtilManager
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview as SuperclassOverview
 from org.ict_ok.components.superclass.browser import \
@@ -63,7 +62,7 @@ class Overview(SuperclassOverview):
         GetterColumn(title=_('Title'),
                      getter=superclass.getTitle,
                      cell_formatter=superclass.link('')),
-        GetterColumn(title=_('Modified On'),
+        GetterColumn(title=_('Modified'),
                      getter=superclass.getModifiedDate,
                      cell_formatter=superclass.raw_cell_formatter),
         GetterColumn(title=_('Size'),
@@ -76,12 +75,16 @@ class Overview(SuperclassOverview):
     def objs(self):
         """List of Content objects"""
         objWithPermisson = []
-        allObj = getAllUtilitiesRegisteredFor(ISuperclass)
+#        allObj = getAllUtilitiesRegisteredFor(ISuperclass)
+#        allObj = getAllUtilitiesRegisteredFor(Interface, context=self.context)
+        smFolder = self.context.getParent()
+        allObj = smFolder.values()
         for obj in allObj:
-            myAdapter = zapi.queryMultiAdapter((obj, self.request),
-                                               name='details.html')
-            if myAdapter is not None and canAccess(myAdapter, 'render'):
-                objWithPermisson.append(obj)
+            if ISuperclass.providedBy(obj):
+                myAdapter = zapi.queryMultiAdapter((obj, self.request),
+                                                   name='details.html')
+                if myAdapter is not None and canAccess(myAdapter, 'render'):
+                    objWithPermisson.append(obj)
         return objWithPermisson
 
 
@@ -91,12 +94,14 @@ class Overview(SuperclassOverview):
 class ViewAdmUtilManagerForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of utility manager')
-    fields = field.Fields(IUtilManager).omit(\
-        *AdmUtilManagerDetails.omit_viewfields)
+    factory = UtilManager
+    omitFields = AdmUtilManagerDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilManagerForm(EditForm):
     """ Edit for for net """
     label = _(u'edit utility manager')
-    fields = field.Fields(IUtilManager).omit(\
-        *AdmUtilManagerDetails.omit_editfields)
+    factory = UtilManager
+    omitFields = AdmUtilManagerDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

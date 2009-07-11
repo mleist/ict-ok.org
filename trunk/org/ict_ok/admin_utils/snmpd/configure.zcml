@@ -25,6 +25,22 @@
             permission="org.ict_ok.admin_utils.snmpd.Edit"
             set_schema=".interfaces.IAdmUtilSnmpd"
             />
+        <require
+            permission="org.ict_ok.admin_utils.snmpd.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.snmpd.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.snmpd.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.snmpd.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <!-- setup local utilities -->

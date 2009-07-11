@@ -41,7 +41,7 @@ from org.ict_ok.admin_utils.generators.smokeping.interfaces import \
 from org.ict_ok.admin_utils.generators.generators import \
      AdmUtilGenerators
 from org.ict_ok.components.latency.interfaces import ILatency
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.ipnet.interfaces import IIpNet
 from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.components.interface.interfaces import IInterface
 
@@ -155,7 +155,7 @@ class AdmUtilGeneratorSmokePing(AdmUtilGenerators):
 
 def objEventSupported(instance):
     for tmpInterface in [
-        INet,
+        IIpNet,
         IHost,
         IInterface,
         ILatency
@@ -171,7 +171,8 @@ def notifyAddedEvent(instance, event):
     """
     if objEventSupported(event.object):
         #print "generators.smokeping.notifyAddedEvent [%s]" % event.object.ikName
-        utilSmokePing = getUtility(IAdmUtilGeneratorSmokePing)
+        utilSmokePing = getUtility(IAdmUtilGeneratorSmokePing,
+                                   name='AdmUtilGeneratorSmokePing')
         utilSmokePing.allConfigFilesOut(True, event, False)
 
 @adapter(ISuperclass, IObjectModifiedEvent)
@@ -185,7 +186,8 @@ def notifyModifiedEvent(instance, event):
         smokePingAdapter = IGenSmokePing(event.object)
         if smokePingAdapter is not None:
             if smokePingAdapter.eventModifiesCfgFile(event):
-                utilSmokePing = getUtility(IAdmUtilGeneratorSmokePing)
+                utilSmokePing = getUtility(IAdmUtilGeneratorSmokePing,
+                                           name='AdmUtilGeneratorSmokePing')
                 utilSmokePing.allConfigFilesOut(False, event, False)
 
 @adapter(ISuperclass, IObjectMovedEvent)

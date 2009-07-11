@@ -45,6 +45,14 @@
         permission="org.ict_ok.components.superclass.exportxml"
     />
 
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.DeleteFolderForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.x509certificate.Delete"
+    />
+
     <page
         name="reportPdf.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
@@ -54,12 +62,39 @@
         attribute="reportPdf"
     />
     <page
+        name="reportXML.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.SuperclassDetails"
+        permission="org.ict_ok.admin_utils.reports.generate.xml"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="reportXML"
+    />
+
+    <page
         name="exportxmldata.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         class=".superclass.SuperclassDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXmlData"
         permission="org.ict_ok.components.superclass.exportxml"
+    />
+
+    <page
+        name="as_mindmap.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.SuperclassDetails"
+        permission="org.ict_ok.admin_utils.mindmap.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="asMindmap"
+    />
+
+    <page
+        name="as_mindmapdata.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class="org.ict_ok.components.superclass.browser.superclass.SuperclassDetails"
+        permission="org.ict_ok.admin_utils.mindmap.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="asMindmapData"
     />
 
     <z3c:pagelet
@@ -137,5 +172,27 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubReportPdf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
+        />
+    <viewlet
+        name="reportXML"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubReportXML"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.reports.generate.xml"
+        />
+    <viewlet
+        name="asMindmap"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuReports"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubAsMindMap"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mindmap.View"
+        />
+        
+    <z3c:macro
+        template="superclass_details.pt"
+        name="SuperclassDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 </configure>

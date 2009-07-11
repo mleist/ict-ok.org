@@ -20,17 +20,16 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.supernode.interfaces import ISupernode
 from schooltool.requirement import interfaces as ischooltool
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilCompliance(ISupernode):
+class IAdmUtilCompliance(Interface):
     """Compliance Utiltiy
     """
     def generateAllPdf(absFilename, authorStr, versionStr):
@@ -41,7 +40,7 @@ class IAdmUtilCompliance(ISupernode):
         """ append Requirement
         """
 
-class IRequirement(ISuperclass, ischooltool.IRequirement):
+class IRequirement(ischooltool.IRequirement):
     """ ict-ok.org wrapper
     """
 

@@ -19,16 +19,13 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.netscan.simple1.interfaces import \
-     IAdmUtilSimple1
+from org.ict_ok.admin_utils.netscan.simple1.simple1 import AdmUtilSimple1
 
 _ = MessageFactory('org.ict_ok')
 
@@ -52,12 +49,14 @@ class AdmUtilSimple1Details(SupernodeDetails):
 class ViewAdmUtilSimple1Form(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of simple scanner')
-    fields = field.Fields(IAdmUtilSimple1).omit(\
-        *AdmUtilSimple1Details.omit_viewfields)
+    factory = AdmUtilSimple1
+    omitFields = AdmUtilSimple1Details.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilSimple1Form(EditForm):
     """ Edit for for net """
     label = _(u'edit simple scanner')
-    fields = field.Fields(IAdmUtilSimple1).omit(\
-        *AdmUtilSimple1Details.omit_editfields)
+    factory = AdmUtilSimple1
+    omitFields = AdmUtilSimple1Details.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

@@ -13,7 +13,7 @@
 
     <defaultView
         for="org.ict_ok.components.location.interfaces.ILocation"
-        name="overview.html"
+        name="details.html"
         />
 
     <z3c:pagelet
@@ -33,12 +33,25 @@
         />
 
     <z3c:pagelet
-        name="details.html"
+        name="details2.html"
         for="org.ict_ok.components.location.interfaces.ILocation"
         class=".location.DetailsLocationForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.location.View"
     />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.location.interfaces.ILocation"
+        class="org.ict_ok.components.location.browser.location.LocationDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.View"
+    />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.components.location.browser.location.LocationDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="edit.html"
@@ -64,6 +77,34 @@
         permission="org.ict_ok.components.building.Add"
     />
 
+    <!-- Folder  -->
+
+    <defaultView
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        name="overview.html"
+    />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.View"
+        />
+        
+    <z3c:pagelet
+        name="add_location.html"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        class="org.ict_ok.components.location.browser.location.AddLocationForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+    />
+    <z3c:macro
+        template="location_details.pt"
+        name="LocationDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <!--##### Sub Menu ##### -->
 
     <viewlet
@@ -79,6 +120,14 @@
         for="org.ict_ok.components.location.interfaces.ILocation"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.View"
+        />
+    <viewlet
+        name="details"
+        for="org.ict_ok.components.location.interfaces.ILocation"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.location.View"
         />
@@ -130,5 +179,95 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.dashboard.Edit"
         />
+
+    <!-- Folder  -->
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.View"
+        />
+    <viewlet
+        name="add_location"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.location.browser.location.MSubAddLocation"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+        />
+    <viewlet
+        name="add_location"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.location.browser.location.MGlobalAddLocation"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+        />
+    <page
+        name="exportcsvdata.html"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        class=".location.LocationFolderDetails"
+        permission="org.ict_ok.components.location.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportCsvData"
+    />
+    <page
+        name="exportxlsdata.html"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        class=".location.LocationFolderDetails"
+        permission="org.ict_ok.components.location.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsData"
+    />
+    <z3c:pagelet
+        name="importcsvdata.html"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        class=".location.ImportCsvDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+    />
+    <z3c:pagelet
+        name="importxlsdata.html"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        class=".location.ImportXlsDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+    />
+    <viewlet
+        name="exportcsvdata"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.View"
+        />
+    <viewlet
+        name="exportxlsdata"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.View"
+        />
+    <viewlet
+        name="importcsvdata"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+        />
+    <viewlet
+        name="importxlsdata"
+        for="org.ict_ok.components.location.interfaces.ILocationFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.location.Add"
+        />
+
 
 </configure>

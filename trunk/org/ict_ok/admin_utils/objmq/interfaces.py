@@ -14,6 +14,7 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.schema import TextLine
 from zope.i18nmessageid import MessageFactory
 from zope.sendmail.interfaces import IMailer
@@ -24,7 +25,7 @@ from org.ict_ok.components.supernode.interfaces import ISupernode
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilObjMQ(ISupernode):
+class IAdmUtilObjMQ(Interface):
     """
     component for message queueing between object of different instances
     """

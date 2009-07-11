@@ -18,7 +18,7 @@
 
     <z3c:pagelet
         name="add_host_linux_workstation.html"
-        for="org.ict_ok.components.net.interfaces.INet"
+        for="org.ict_ok.components.ipnet.interfaces.IIpNet"
         class="org.ict_ok.components.host.special.linux_workstation.browser.host.AddHostForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.host.Add"
@@ -28,7 +28,7 @@
 
     <!--viewlet
         name="add_host_linux_workstation"
-        for="org.ict_ok.components.net.interfaces.INet"
+        for="org.ict_ok.components.ipnet.interfaces.IIpNet"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.host.special.linux_workstation.browser.host.MSubAddHost"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"

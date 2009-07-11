@@ -14,19 +14,30 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
 from zope.schema import Int
 
 # ict_ok.org imports
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class ILatency(IComponent):
+class ILatency(Interface):
     """A service object."""
 
     checkcount = Int(
         title = _(u"Check count"),
         default = 20,
         required = True)
+
+class IMuninValueFolder(Interface):
+    """Container for MuninValue objects
+    """
+
+class IAddMuninValue(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllMuninValueTemplates",
+        required = False)

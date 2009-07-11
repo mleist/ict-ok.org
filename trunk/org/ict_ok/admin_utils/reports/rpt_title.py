@@ -5,16 +5,17 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 350 2008-10-12 09:18:43Z markusleist $
+# $Id$
 #
 # no_pylint: disable-msg=W0232
 #
+from zope.configuration.xmlconfig import _context
 """rpt_title 
 
 Title class for ict-ok.org reporting 
 """
 
-__version__ = "$Id: $"
+__version__ = "$Id$"
 
 # reportlab imports
 from reportlab.lib.units import mm
@@ -37,11 +38,11 @@ class RptTitle(RptSuperclass, Paragraph):
     """Title class for IKOMtrol reporting
     """
 
-    def __init__(self, text, intype='Heading1', doc = None):
+    def __init__(self, text, intype='Heading1', doc=None, context=None):
         """
         constructor of the object
         """
-        RptSuperclass.__init__(self, doc)
+        RptSuperclass.__init__(self, doc, context)
         self.setText(text)
         self._element_type = "title"
         self._type = intype
@@ -74,18 +75,20 @@ class RptTitle(RptSuperclass, Paragraph):
                     style=rpt_tbl_style,
                     colWidths=colWidths,
                     hAlign='LEFT')
-        t_1.keepWithNext = True
+        # for href stuff
+        if hasattr(self._context, 'objectID'):
+            t_1.ikoid = self._context.objectID
+        if self.getDocument().firstH1Seen:
+            t_1.keepWithNext = True
         t_1.ik_type = self._type
         if self._type.lower() == "heading1":
             if self.getDocument().firstH1Seen:
-                return KeepTogether([CondPageBreak(A4[1]/2), t_1])
+                return KeepTogether([CondPageBreak(A4[1]/5), t_1])
             else:
                 self.getDocument().firstH1Seen = True
                 return t_1
         else:
             return t_1
-
-    
 
     def __str__(self):
         return u"-- " + unicode(self.getText()) + u" --"

@@ -25,15 +25,21 @@ from zope.i18nmessageid import MessageFactory
 
 # z3c imports
 from z3c.form import field
+from z3c.form.browser import checkbox
 
 # ict_ok.org imports
-from org.ict_ok.components.building.interfaces import IBuilding
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
+from org.ict_ok.components.building.interfaces import \
+    IBuilding, IAddBuilding, IBuildingFolder
 from org.ict_ok.components.building.building import Building
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -48,6 +54,14 @@ class MSubAddBuilding(GlobalMenuSubItem):
     weight = 50
 
 
+class MGlobalAddBuilding(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Building')
+    viewURL = 'add_building.html'
+    weight = 50
+    folderInterface = IBuildingFolder
+
+
 # --------------- object details ---------------------------
 
 
@@ -58,26 +72,57 @@ class BuildingDetails(ComponentDetails):
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
 
+
+class BuildingFolderDetails(ComponentDetails):
+    """ Class for MobilePhone details
+    """
+    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
+    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
+    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_viewfields)
+    attrInterface = IBuilding
+    factory = Building
+    fields = fieldsForFactory(factory, omit_editfields)
+
 # --------------- forms ------------------------------------
 
 
 class DetailsBuildingForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of building')
-    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_viewfields)
-
-
-class AddBuildingForm(AddForm):
-    """Add form."""
-    label = _(u'Add Building')
-    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_addfields)
     factory = Building
+    omitFields = BuildingDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
+
+
+#class AddBuildingForm(AddForm):
+#    """Add form."""
+#    label = _(u'Add Building')
+#    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_addfields)
+#    factory = Building
+    
+    
+class AddBuildingForm(AddComponentForm):
+    label = _(u'Add Building')
+    factory = Building
+    attrInterface = IBuilding
+    addInterface = IAddBuilding
+    omitFields = BuildingDetails.omit_addfields
+    _session_key = 'org.ict_ok.components.building'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class EditBuildingForm(EditForm):
     """ Edit for for net """
     label = _(u'Building Edit Form')
-    fields = field.Fields(IBuilding).omit(*BuildingDetails.omit_editfields)
+    factory = Building
+    omitFields = BuildingDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
+    fields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class DeleteBuildingForm(DeleteForm):
@@ -89,3 +134,12 @@ class DeleteBuildingForm(DeleteForm):
                IBrwsOverview(self.context).getTitle()
 
 
+class ImportCsvDataForm(ImportCsvDataComponentForm):
+    pass
+
+
+class ImportXlsDataForm(ImportXlsDataComponentForm):
+    attrInterface = IBuilding
+    factory = Building
+    factoryId = u'org.ict_ok.components.building.building.Building'
+    allFields = fieldsForInterface(attrInterface, [])

@@ -540,17 +540,11 @@ def fillUtilitiyWithReqs(context):
     # ####### vorläufiges Ende
     # ###############################
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of eventcrossbar utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilCompliance = ensureUtility(root_folder, IAdmUtilCompliance,
-                                       'AdmUtilCompliance', AdmUtilCompliance, '',
-                                       copy_to_zlog=False, asObject=True)
+                                          'AdmUtilCompliance', AdmUtilCompliance,
+                                          name='AdmUtilCompliance',
+                                          copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilCompliance, AdmUtilCompliance):
         logger.info(u"bootstrap: Ensure named AdmUtilCompliance")
@@ -566,23 +560,6 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made Compliance Utiltiy")
     else:
-        ## search in global component registry
-        #sitem = root_folder.getSiteManager()
-        ## search for ICatalog
-        #utils = [ util for util in sitem.registeredUtilities()
-                  #if util.provided.isOrExtends(ICatalog)]
-        #instUtilityICatalog = utils[0].component
-        #if not "host_oid_index" in instUtilityICatalog.keys():
-            #host_oid_index = FieldIndex(interface=ISearchableText,
-                                        #field_name='getSearchableHostOid',
-                                        #field_callable=True)
-            #instUtilityICatalog['host_oid_index'] = host_oid_index
-            ## search for IAdmUtilSupervisor
-            #utils = [ util for util in sitem.registeredUtilities()
-                      #if util.provided.isOrExtends(IAdmUtilSupervisor)]
-            #instAdmUtilSupervisor = utils[0].component
-            #instAdmUtilSupervisor.appendEventHistory(\
-                #u" bootstrap: ICatalog - create oid index for entry type 'host'")
         if False:
             sitem = root_folder.getSiteManager()
             utils = [ util for util in sitem.registeredUtilities()
@@ -591,4 +568,14 @@ def bootStrapSubscriberDatabase(event):
             logger.info(u"replacing all Requirements")
             fillUtilitiyWithReqs(instAdmUtilCompliance)
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of eventcrossbar utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)

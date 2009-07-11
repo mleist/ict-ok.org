@@ -29,10 +29,8 @@ from zope.app.pagetemplate.urlquote import URLQuote
 
 # zc imports
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEvent
 from org.ict_ok.admin_utils.eventcrossbar.event import \
@@ -43,8 +41,6 @@ from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import applyChanges
 from org.ict_ok.skin.menu import GlobalMenuSubItem
-from org.ict_ok.components.superclass.interfaces import \
-     IEventIfSuperclass
 
 _ = MessageFactory('org.ict_ok')
 
@@ -79,7 +75,7 @@ class AdmUtilEventDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%ssend_event" % objId
             tmpDict['title'] = _(u"send it")
             tmpDict['href'] = u"%s/@@send_event.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"sends an the event to the list of receivers")
             retList.append(tmpDict)
@@ -104,9 +100,10 @@ class AdmUtilEventDetails(SupernodeDetails):
 class DetailsAdmUtilEventForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of Event')
-    fields = field.Fields(IAdmUtilEvent).omit(\
-        *AdmUtilEventDetails.omit_viewfields) #+ \
-           #field.Fields(IZopeDublinCore).select('modified')
+    factory = AdmUtilEvent
+    omitFields = AdmUtilEventDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
+
     def update(self):
         self.context.removeInvalidOidFromInpOutObjects()
         DisplayForm.update(self)
@@ -115,15 +112,18 @@ class DetailsAdmUtilEventForm(DisplayForm):
 class AddAdmUtilEventForm(AddForm):
     """Add form."""
     label = _(u'add event')
-    fields = field.Fields(IAdmUtilEvent).omit(*AdmUtilEventDetails.omit_addfields)
     factory = AdmUtilEvent
+    omitFields = AdmUtilEventDetails.omit_addfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilEventForm(EditForm):
     """ Edit form for the object """
     label = _(u'edit event properties')
-    fields = field.Fields(IAdmUtilEvent).omit(\
-        *AdmUtilEventDetails.omit_editfields)
+    factory = AdmUtilEvent
+    omitFields = AdmUtilEventDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
+
     def update(self):
         self.context.removeInvalidOidFromInpOutObjects()
         EditForm.update(self)

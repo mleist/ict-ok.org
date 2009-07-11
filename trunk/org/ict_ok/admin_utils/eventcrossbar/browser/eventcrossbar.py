@@ -19,31 +19,23 @@ __version__ = "$Id$"
 # zope imports
 from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
-from zope.dublincore.interfaces import IZopeDublinCore
-from zope.app.catalog.interfaces import ICatalog
 
 # zc imports
 from zc.table.column import GetterColumn
 from zc.table.table import StandaloneFullFormatter
 
 # z3c imports
-from z3c.form import field
 from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
-     IAdmUtilEventCrossbar
+from org.ict_ok.libs.lib import fieldsForFactory
+from org.ict_ok.admin_utils.eventcrossbar.eventcrossbar import \
+     AdmUtilEventCrossbar
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
 from org.ict_ok.skin.menu import GlobalMenuSubItem
-from org.ict_ok.admin_utils.graphviz.interfaces import \
-     IGenGraphvizDot
-from org.ict_ok.admin_utils.eventcrossbar.interfaces import IAdmUtilEvent
-from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
-     IEventLogic
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
@@ -142,7 +134,7 @@ class SignalGraph(BrowserPagelet):
     def getValuePngHref(self):
         """get path of object as string
         """
-        return zapi.getPath(self.context)
+        return zapi.absoluteURL(self.context, self.request)
 
 
 # --------------- forms ------------------------------------
@@ -151,13 +143,15 @@ class SignalGraph(BrowserPagelet):
 class DetailsAdmUtilEventCrossbarForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of Event')
-    fields = field.Fields(IAdmUtilEventCrossbar).omit(\
-        *AdmUtilEventCrossbarDetails.omit_viewfields) + \
-           field.Fields(IZopeDublinCore).select('modified')
+    factory = AdmUtilEventCrossbar
+    omitFields = AdmUtilEventCrossbarDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilEventCrossbarForm(EditForm):
     """ Edit form for the object """
     label = _(u'edit crossbar properties')
-    fields = field.Fields(IAdmUtilEventCrossbar).omit(\
-        *AdmUtilEventCrossbarDetails.omit_editfields)
+    factory = AdmUtilEventCrossbar
+    omitFields = AdmUtilEventCrossbarDetails.omit_editfields
+
+    fields = fieldsForFactory(factory, omitFields)

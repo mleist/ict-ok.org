@@ -19,16 +19,13 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.netscan.nmap.interfaces import \
-     IAdmUtilNMap
+from org.ict_ok.admin_utils.netscan.nmap.nmap import AdmUtilNMap
 
 _ = MessageFactory('org.ict_ok')
 
@@ -52,12 +49,14 @@ class AdmUtilNMapDetails(SupernodeDetails):
 class ViewAdmUtilNMapForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of nmap scanner')
-    fields = field.Fields(IAdmUtilNMap).omit(\
-        *AdmUtilNMapDetails.omit_viewfields)
+    factory = AdmUtilNMap
+    omitFields = AdmUtilNMapDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilNMapForm(EditForm):
     """ Edit for for net """
     label = _(u'edit nmap scanner')
-    fields = field.Fields(IAdmUtilNMap).omit(\
-        *AdmUtilNMapDetails.omit_editfields)
+    factory = AdmUtilNMap
+    omitFields = AdmUtilNMapDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+
+    <!-- $Id: security.zcml_cog 506 2009-04-30 14:24:56Z markusleist $ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <permission
+        id="org.ict_ok.components.contact_item.View"
+        title="View Contact Item"
+    />
+
+    <permission
+        id="org.ict_ok.components.contact_item.Add"
+        title="Add Contact Item"
+    />
+
+    <permission
+        id="org.ict_ok.components.contact_item.Edit"
+        title="Edit Contact Item"
+    />
+
+    <permission
+        id="org.ict_ok.components.contact_item.Delete"
+        title="Delete Contact Item"
+    />
+
+    <grant permission="org.ict_ok.components.contact_item.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.components.contact_item.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.contact_item.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.contact_item.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.contact_item.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.contact_item.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.contact_item.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.contact_item.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.contact_item.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>

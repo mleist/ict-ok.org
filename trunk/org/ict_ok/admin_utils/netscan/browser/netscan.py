@@ -20,15 +20,14 @@ __version__ = "$Id$"
 from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.netscan.interfaces import INetScan, IScanner
+from org.ict_ok.admin_utils.netscan.interfaces import IScanner
+from org.ict_ok.admin_utils.netscan.netscan import NetScan
 
 _ = MessageFactory('org.ict_ok')
 
@@ -59,7 +58,7 @@ class NetScanDetails(SupernodeDetails):
         for name, scanner in self.context.getAllScannerObjs():
             retDict = {}
             retDict['name'] = name
-            retDict['href'] = zapi.getPath(scanner) + '/@@status'
+            retDict['href'] = zapi.absoluteURL(scanner, self.request) + '/@@status'
             retList.append(retDict)
         return retList
         
@@ -71,7 +70,7 @@ class NetScanDetails(SupernodeDetails):
         for name, scanner in self.context.getScannerObjs():
             retDict = {}
             retDict['name'] = name
-            retDict['href'] = zapi.getPath(scanner) + '/@@status'
+            retDict['href'] = zapi.absoluteURL(scanner, self.request) + '/@@status'
             retList.append(retDict)
         return retList
         
@@ -122,12 +121,14 @@ class NetScanDetails(SupernodeDetails):
 class DetailsNetScanForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of all net scanner')
-    fields = field.Fields(INetScan).omit(\
-        *NetScanDetails.omit_viewfields)
+    factory = NetScan
+    omitFields = NetScanDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditNetScanForm(EditForm):
     """ Edit for for net """
     label = _(u'edit central net scanner')
-    fields = field.Fields(INetScan).omit(\
-        *NetScanDetails.omit_editfields)
+    factory = NetScan
+    omitFields = NetScanDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

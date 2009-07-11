@@ -29,11 +29,15 @@ from org.ict_ok.components.superclass.superclass import Superclass
 
 
 class Supernode(BTreeContainer, Superclass):
+#class Supernode(Superclass):
     """
     the supernode
     """
 
     implements(ISupernode)
+
+    fullTextSearchFields = []
+    fullTextSearchFields.extend(Superclass.fullTextSearchFields)
 
     def __init__(self, **data):
         """

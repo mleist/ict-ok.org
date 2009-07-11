@@ -25,17 +25,13 @@ from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import ensureComponentFolderOnBootstrap
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
+from org.ict_ok.components.room.interfaces import IRoomFolder
 
 logger = logging.getLogger("Compon. Room")
 
-def bootStrapSubscriber(event):
-    """initialisation of IntId utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
+def createUtils(root_folder, connection=None, dummy_db=None):
     # search in global component registry
     sitem = root_folder.getSiteManager()
     # search for ICatalog
@@ -54,5 +50,22 @@ def bootStrapSubscriber(event):
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for entry type 'room'")
         
+    ensureComponentFolderOnBootstrap(\
+         IRoomFolder,
+         u"Rooms",
+         u'org.ict_ok.components.room.room.RoomFolder',
+         root_folder,
+         sitem)
+
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriber(event):
+    """initialisation of IntId utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)

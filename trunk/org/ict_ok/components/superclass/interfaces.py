@@ -15,8 +15,10 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Attribute, Interface
+import zope.component.interfaces
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, List, Text, TextLine, Set
+from zope.schema import Choice, List, Text, TextLine, Set, Object, Int
+#from zope.mimetype.interfaces import IContentTypeAware
 
 # z3c imports
 from z3c.reference.schema import ViewReferenceField
@@ -84,6 +86,7 @@ class ISuperclass(Interface):
     outEReceiver = Attribute("receiver object for output events")
     workflows = Attribute("dict of object workflows")
     wf_worklist = Attribute("list of ongoing workflow apps")
+    shortName = Attribute("class shortname")
 
     def canBeDeleted():
         """
@@ -135,6 +138,10 @@ class ISuperclass(Interface):
     def generatePdf(absFilename, authorStr, versionStr):
         """
         will generate a object pdf report
+        """
+    def generateXML(absFilename, authorStr, versionStr):
+        """
+        will generate a object XML report
         """
 
 
@@ -191,6 +198,18 @@ class IBrwsOverview(Interface):
         """
 
 
+class IFocus(Interface):
+    """Interface for objects to display on focus-page
+    """
+
+class INavigation(Interface):
+    """Interface for objects to display the navigation
+    """
+    def getContextObjList(preList=[], postList=[]):
+        """
+        get an Object list of all interesting objects in the context
+        """
+
 class IMsgEvent(Interface):
     """ Interface of an async event event
     """
@@ -226,3 +245,8 @@ class IEventIfSuperclass(Interface):
         #""" trigger ping request in object """
     #def eventOut_Pong(self):
         #""" sends a ping response """
+
+class IObjectAddedEvent(zope.component.interfaces.IObjectEvent):
+    """An object has been created.
+
+    The location will usually be ``None`` for this event."""

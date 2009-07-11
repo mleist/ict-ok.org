@@ -1,0 +1,34 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
+    <h3 i18n:translate="">Document Details</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td tal:content="context/ikComment" />
+        </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Size</td>
+            <td tal:content="python: context.getSize()" />
+        </tr>
+
+<!--        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Data</td>
+            <td tal:content="python: context.data" />
+        </tr> -->
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/contentType|nothing">
+            <td i18n:translate="">Content type</td>
+            <td tal:content="context/contentType" />
+        </tr>
+        
+    </table>
+</i18n:block>

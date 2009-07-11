@@ -26,8 +26,6 @@ from zope.app.pagetemplate.urlquote import URLQuote
 # ict_ok.org imports
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
-from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm, DisplayForm, EditForm
 
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      getUserTimezone

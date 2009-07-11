@@ -14,18 +14,23 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import TextLine
+from zope.schema import Choice, List, TextLine
 
 # ict_ok.org imports
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class ILocation(IComponent):
+class ILocation(Interface):
     """A service object."""
 
+    buildings = List(title=_(u"Buildings"),
+                      value_type=Choice(vocabulary='AllUnusedOrSelfBuildings'),
+                      required=False,
+                      default=[])
+    
     coordinates = TextLine(
         max_length = 80,
         title = _("coordinates"),
@@ -38,4 +43,22 @@ class ILocation(IComponent):
         title = _("GoogleMap URL"),
         description = _("URL of the location at google maps."),
         default = u"",
+        required = False)
+    
+    gmapcode = TextLine(
+        max_length = 1500,
+        title = _("GoogleMap HTML-Code"),
+        description = _("HTML Code of the location at google maps."),
+        default = u"",
+        required = False)
+
+class ILocationFolder(Interface):
+    """Container for Location objects
+    """
+
+class IAddLocation(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllLocationTemplates",
         required = False)

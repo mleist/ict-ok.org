@@ -49,18 +49,11 @@ def recursiveEsxVimSubscriber(obj):
             if IAdmUtilEsxVim.providedBy(utilObj) :
                 globalEsxVimUtility.subscribeToEsxVim(utilObj)
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of esx_vim utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    EsxVimConnectionThread.database = event.database
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilEsxVim = ensureUtility(root_folder, IAdmUtilEsxVim,
-                                        'AdmUtilEsxVim', AdmUtilEsxVim, '',
-                                        copy_to_zlog=False, asObject=True)
+                                      'AdmUtilEsxVim', AdmUtilEsxVim,
+                                      name='AdmUtilEsxVim',
+                                      copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilEsxVim, AdmUtilEsxVim):
         logger.info(u"bootstrap: Ensure named AdmUtilEsxVim")
@@ -76,13 +69,6 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made IAdmUtilEsxVim-Utility")
-    #else:
-        #sitem = root_folder.getSiteManager()
-        #utils = [ util for util in sitem.registeredUtilities()
-                  #if util.provided.isOrExtends(IAdmUtilEsxVim)]
-        #instAdmUtilEsxVim = utils[0].component
-        #instAdmUtilEsxVim.connect2VimServer()
-
     sitem = root_folder.getSiteManager()
     # search for ICatalog
     utils = [ util for util in sitem.registeredUtilities()
@@ -104,4 +90,15 @@ def bootStrapSubscriberDatabase(event):
     recursiveEsxVimSubscriber(root_folder)
     
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of esx_vim utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    EsxVimConnectionThread.database = event.database
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)

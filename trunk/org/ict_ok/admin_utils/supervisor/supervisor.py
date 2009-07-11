@@ -25,6 +25,7 @@ from pytz import timezone
 from types import UnicodeType
 
 # zope imports
+from ZODB.interfaces import IConnection
 from zope.app import zapi
 from zope.app.zapi import getPath
 from zope.component import adapts, createObject
@@ -36,13 +37,17 @@ from zope.lifecycleevent import ObjectCreatedEvent
 from zope.event import notify
 from zope.app.catalog.interfaces import ICatalog
 from zope.copypastemove.interfaces import IObjectMover
+from zope.security.proxy import removeSecurityProxy
+from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
-from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
+from org.ict_ok.admin_utils.supervisor.interfaces import \
+    IAdmUtilSupervisor, IFSearchText
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.components.slave.interfaces import ISlave
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 
 _ = MessageFactory('org.ict_ok')
 utcTZ = timezone('UTC')
@@ -53,11 +58,11 @@ class AdmUtilSupervisor(Supernode):
     """Supervisor instance
     """
 
-    implements(IAdmUtilSupervisor)
+    implements(IAdmUtilSupervisor, IFSearchText)
 
     nbrStarts = FieldProperty(IAdmUtilSupervisor['nbrStarts'])
     ipv4My = FieldProperty(IAdmUtilSupervisor['ipv4My'])
-    objectID = FieldProperty(IAdmUtilSupervisor['objectID'])
+#    objectID = FieldProperty(IAdmUtilSupervisor['objectID'])
     ipv4Master = FieldProperty(IAdmUtilSupervisor['ipv4Master'])
     oidMaster = FieldProperty(IAdmUtilSupervisor['oidMaster'])
     lastSeenMaster = FieldProperty(IAdmUtilSupervisor['lastSeenMaster'])
@@ -357,7 +362,7 @@ class AdmUtilSupervisor(Supernode):
         will pack the database
         """
         #pass
-        print "ddd: <%s>" % dir(db)
+        #print "ddd: <%s>" % dir(db)
         if not db:
             size_pre = db.getSize()
             db.pack(days=0)
@@ -443,11 +448,23 @@ class AdmUtilSupervisor(Supernode):
         """
         will reindex the catalogs of all tables in database
         """
-        print "reindex_db"
+        iid = zapi.getUtility(IIntIds, '')
         my_catalog = zapi.getUtility(ICatalog)
         my_catalog.updateIndexes()
         self.appendEventHistory(\
             u"reindex the catalogs of all tables in database")
+#        connection = IConnection(self)
+#        oc = connection.root()['_oq_collection']
+#        for (oid, oobj) in iid.items():
+#            if ISuperclass.providedBy(oobj.object):
+#                try:
+#                    oc.index(oobj.object)
+#                except AttributeError:
+#                    pass
+#                except TypeError:
+#                    pass
+#        self.appendEventHistory(\
+#            u"reindex the object query catalogs in database")
 
     def removeObject(self, msgHeader, msgOldparent,
                      msgNewparent, msgObjectOid):

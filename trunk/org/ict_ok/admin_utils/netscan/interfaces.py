@@ -14,16 +14,16 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.schema import Choice, Set
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class INetScan(ISupernode):
+class INetScan(Interface):
     """
     component for scanning local network
     """
@@ -47,7 +47,7 @@ class INetScan(ISupernode):
         get list of enabled Scanner-Tupel (name, obj)
         """
 
-class IScanner(ISupernode):
+class IScanner(Interface):
     """
     abstract scanner for networks
     """

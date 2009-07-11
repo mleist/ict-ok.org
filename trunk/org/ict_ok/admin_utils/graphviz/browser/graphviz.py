@@ -19,16 +19,14 @@ from zope.app import zapi
 from zope.proxy import removeAllProxies
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.graphviz.interfaces import \
-     IAdmUtilGraphviz
+from org.ict_ok.admin_utils.graphviz.graphviz import \
+     AdmUtilGraphviz
 
 _ = MessageFactory('org.ict_ok')
 
@@ -53,7 +51,7 @@ class AdmUtilGraphvizDetails(SupernodeDetails):
         """get path of object as string
         """
         obj = removeAllProxies(self.context)
-        return zapi.getPath(obj)
+        return zapi.absoluteURL(obj, self.request)
 
 # --------------- forms ------------------------------------
 
@@ -61,12 +59,14 @@ class AdmUtilGraphvizDetails(SupernodeDetails):
 class ViewAdmUtilGraphvizForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of graphviz adapter')
-    fields = field.Fields(IAdmUtilGraphviz).omit(\
-        *AdmUtilGraphvizDetails.omit_viewfields)
+    factory = AdmUtilGraphviz
+    omitFields = AdmUtilGraphvizDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilGraphvizForm(EditForm):
     """ Edit for for net """
     label = _(u'edit graphviz adapter')
-    fields = field.Fields(IAdmUtilGraphviz).omit(\
-        *AdmUtilGraphvizDetails.omit_editfields)
+    factory = AdmUtilGraphviz
+    omitFields = AdmUtilGraphvizDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

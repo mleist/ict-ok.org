@@ -23,6 +23,30 @@
             permission="org.ict_ok.admin_utils.usermanagement.Edit"
             set_schema=".interfaces.IAdmUtilUserManagement"
             />
+        <require
+            permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+            interface=".interfaces.IAdmUtilUserPreferences"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+            set_schema=".interfaces.IAdmUtilUserPreferences"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.usermanagement.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.usermanagement.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.usermanagement.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.usermanagement.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <!-- setup local utilities -->
@@ -41,6 +65,17 @@
     <adapter factory=".usermanagement.AdmUtilUserProperties"
         provides=".interfaces.IAdmUtilUserProperties"
         />
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".usermanagement.allLdapUser"
+        name="AllLdapUser"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".usermanagement.UserCfgStartView"
+        name="UserCfgStartView"
+    />
 
     <include package=".generations" />
     

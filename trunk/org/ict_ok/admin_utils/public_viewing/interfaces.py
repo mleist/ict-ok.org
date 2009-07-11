@@ -15,12 +15,12 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 
-class IAdmUtilPublicViewing(ISupernode):
+class IAdmUtilPublicViewing(Interface):
     """
     major component for viewing by non authorized user
     """
@@ -34,7 +34,7 @@ class IAdmUtilPublicViewing(ISupernode):
         returns a list of all shadow objects
         """
 
-class IShadowObject(ISupernode):
+class IShadowObject(Interface):
     """
     
     """

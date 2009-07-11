@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E0611
+# pylint: disable-msg=E0611,W0612
 #
 """startup of subsystem"""
 
@@ -29,6 +29,10 @@ from zope.app.authentication.principalfolder import PrincipalFolder
 from zope.app.authentication.groupfolder import GroupInformation, \
      GroupFolder
 from zope.securitypolicy.interfaces import IPrincipalRoleManager
+from ldapadapter.interfaces import IManageableLDAPAdapter
+from ldapadapter.utility import ManageableLDAPAdapter
+from ldappas.interfaces import ILDAPAuthentication
+from ldappas.authentication import LDAPAuthentication
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
@@ -40,19 +44,43 @@ from org.ict_ok.admin_utils.usermanagement.usermanagement import \
 
 logger = logging.getLogger("AdmUtilUserManagement")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of usermanagement utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
+def createUtils(root_folder, connection=None, dummy_db=None):
+    madeLdapAdapter = ensureUtility(\
+        root_folder,
+        IManageableLDAPAdapter,
+        'ManageableLDAPAdapter',
+        ManageableLDAPAdapter,
+        name='ManageableLDAPAdapter',
+        copy_to_zlog=False,
+        asObject=True)
+
+    madeLdapPas = ensureUtility(\
+        root_folder,
+        ILDAPAuthentication,
+        'LDAPAuthentication',
+        LDAPAuthentication,
+        name='LDAPAuthentication',
+        copy_to_zlog=False,
+        asObject=True)
+
+    if isinstance(madeLdapPas, LDAPAuthentication):
+        madeLdapPas.adapterName = 'ManageableLDAPAdapter'
+        madeLdapPas.searchBase = u'ou=staff,o=ikom-online,c=de,o=ifdd'
+        madeLdapPas.searchScope = u'sub'
+        madeLdapPas.groupsSearchBase = u'o=ikom-online,c=de,o=ifdd'
+        madeLdapPas.groupsSearchScope = u'one'
+        madeLdapPas.loginAttribute = u'uid'
+        madeLdapPas.principalIdPrefix = u'LDAPAuthentication.'
+        madeLdapPas.idAttribute = u'uid'
+        madeLdapPas.titleAttribute = u'cn'
+        madeLdapPas.groupIdAttribute = u'cn'
 
     madePluggableAuthentication = ensureUtility(\
         root_folder,
         IAdmUtilUserManagement,
         'AdmUtilUserManagement',
         AdmUtilUserManagement,
+        name='',
         copy_to_zlog=False,
         asObject=True)
 
@@ -112,12 +140,26 @@ def bootStrapSubscriberDatabase(event):
         groups[u'Manager'] = grp_mgr
         groups[u'Administrator'] = grp_adm
         groups[u'Developer'] = grp_dvl
-        madePluggableAuthentication.authenticatorPlugins = (u'groups',
-                                                            u'principals')
+        madePluggableAuthentication[u'LDAPAuthentication'] = madeLdapPas
+        madePluggableAuthentication.authenticatorPlugins = \
+            (u'groups', u'principals', u'LDAPAuthentication')
         prm = IPrincipalRoleManager(root_folder)
         prm.assignRoleToPrincipal(u'org.ict_ok.usr', u'group.User')
         prm.assignRoleToPrincipal(u'org.ict_ok.mgr', u'group.Manager')
         prm.assignRoleToPrincipal(u'org.ict_ok.adm', u'group.Administrator')
         prm.assignRoleToPrincipal(u'org.ict_ok.dvl', u'group.Developer')
+    
+
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of usermanagement utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

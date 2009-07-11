@@ -1,0 +1,184 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <!--  Interfaces ==================================================== -->
+
+    <interface
+        interface=".interfaces.ISwitch"
+        type="zope.app.content.interfaces.IContentType"
+        />
+    
+    <!--  Classes ======================================================= -->
+
+    <class class=".switch.Switch">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.switch.switch.Switch"
+            description="Switch"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface=".interfaces.ISwitch"
+            />
+        <require
+            permission="org.ict_ok.components.switch.Edit"
+            set_schema=".interfaces.ISwitch"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface="org.ict_ok.components.device.interfaces.IDevice"
+            />
+        <require
+            permission="org.ict_ok.components.switch.Edit"
+            set_schema="org.ict_ok.components.device.interfaces.IDevice"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.interface.Edit"
+            set_schema="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.switch.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.switch.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.switch.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <class class=".switch.SwitchFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <implements
+            interface="org.ict_ok.components.superclass.interfaces.IFocus"
+            />
+        <factory
+            id="org.ict_ok.components.switch.switch.SwitchFolder"
+            description="Switch"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface=".interfaces.ISwitchFolder"
+            />
+        <require
+            permission="org.ict_ok.components.switch.Edit"
+            set_schema=".interfaces.ISwitchFolder"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.switch.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.switch.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+        <require
+            permission="org.ict_ok.components.switch.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.switch.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+    </class>
+
+    <!--  Event subscribers ============================================= -->
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <!--  Search adapters =============================================== -->
+
+    <adapter
+        factory="org.ict_ok.components.switch.adapter.search.Searchable"
+    />
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+        <adapter
+             factory=".adapter.navigation.Navigation"
+         />
+
+    <adapter
+        factory=".adapter.state.State"
+        />
+
+    <!--  Vocabulary stuff ============================================== -->
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".switch.AllSwitches"
+        name="AllSwitches"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".switch.AllSwitchTemplates"
+        name="AllSwitchTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".switch.AllUnusedOrUsedRackSwitches"
+        name="AllUnusedOrUsedRackSwitches"
+    />
+
+    <!--  Includes ====================================================== -->
+
+    <include package=".generations" />
+
+</configure>

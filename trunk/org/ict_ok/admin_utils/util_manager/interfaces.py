@@ -18,12 +18,12 @@ __version__ = "$Id$"
 # ict_ok imports
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
+from zope.interface import Interface
 
 # ict_ok imports
 
 
-class IUtilManager(ISupernode):
+class IUtilManager(Interface):
     """
     major component for registration and event distribution in ICT_Ok
     """

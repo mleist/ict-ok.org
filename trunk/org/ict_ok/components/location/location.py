@@ -26,11 +26,22 @@ from zope.component import getUtility
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.app.folder import Folder
+
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.components.component import Component
-from org.ict_ok.components.location.interfaces import ILocation
-
+from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.location.interfaces import \
+    ILocation, IAddLocation, ILocationFolder
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
+from org.ict_ok.components.building.interfaces import IBuilding
 
 
 def AllLocationsVocab(dummy_context):
@@ -47,6 +58,39 @@ def AllLocationsVocab(dummy_context):
     return SimpleVocabulary(terms)
 
 
+def AllLocations(dummy_context):
+    """In which production state a host may be
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if ILocation.providedBy(oobj.object):
+            myString = u"%s" % (oobj.object.getDcTitle())
+            terms.append(\
+                SimpleTerm(oobj.object,
+                           token=oid,
+                           title=myString))
+    return SimpleVocabulary(terms)
+    
+def AllLocationTemplates(dummy_context):
+    """Which MobilePhone templates exists
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if ILocation.providedBy(oobj.object) and \
+        oobj.object.isTemplate:
+            myString = u"%s [T]" % (oobj.object.getDcTitle())
+            terms.append(SimpleTerm(oobj.object,
+                                    token=oid,
+                                    title=myString))
+    return SimpleVocabulary(terms)
+
+Location_Buildings_RelManager = FieldRelationManager(ILocation['buildings'],
+                                                 IBuilding['location'],
+                                                 relType='location:buildings')
+
+
 class Location(Component):
     """
     the template instance
@@ -59,13 +103,38 @@ class Location(Component):
     #ikAttr = FieldProperty(ILocation['ikAttr'])
     coordinates = FieldProperty(ILocation['coordinates'])
     gmapsurl = FieldProperty(ILocation['gmapsurl'])
+    gmapcode = FieldProperty(ILocation['gmapcode'])
+
+    buildings = RelationPropertyOut(Location_Buildings_RelManager)
 
     def __init__(self, **data):
         """
         constructor of the object
         """
         Component.__init__(self, **data)
+        refAttributeNames = getRefAttributeNames(Location)
         for (name, value) in data.items():
             if name in ILocation.names():
-                setattr(self, name, value)
+                if name not in refAttributeNames:
+                    setattr(self, name, value)
         self.ikRevision = __version__
+
+    def store_refs(self, **data):
+        Component.store_refs(self, **data)
+        refAttributeNames = getRefAttributeNames(Location)
+        for (name, value) in data.items():
+            if name in refAttributeNames:
+                setattr(self, name, value)
+
+
+class LocationFolder(Superclass, Folder):
+    implements(ILocationFolder, 
+               IImportCsvData,
+               IImportXlsData,
+               IAddLocation)
+    def __init__(self, **data):
+        """
+        constructor of the object
+        """
+        Superclass.__init__(self, **data)
+        Folder.__init__(self)

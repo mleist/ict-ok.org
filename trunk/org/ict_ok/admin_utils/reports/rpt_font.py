@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 350 2008-10-12 09:18:43Z markusleist $
+# $Id$
 #
 # no_pylint: disable-msg=W0232
 #
@@ -14,7 +14,7 @@
 font-class for ict-ok.org reporting 
 """
 
-__version__ = "$Id: $"
+__version__ = "$Id$"
 
 # phython imports
 import os
@@ -36,7 +36,7 @@ def __registerFont__(fontname, afmFilename, pfbFilename):
     pdfmetrics.registerFont(justFont)
 
 def registerRptFonts():
-    admUtilReports = getUtility(IAdmUtilReports)
+    admUtilReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
     if admUtilReports.fontName1 is not None and \
        admUtilReports.afmFile1 is not None and \
        admUtilReports.pfbFile1 is not None:

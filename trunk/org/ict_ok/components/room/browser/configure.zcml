@@ -13,11 +13,11 @@
 
     <defaultView
         for="org.ict_ok.components.room.interfaces.IRoom"
-        name="overview.html"
+        name="details.html"
         />
 
     <z3c:pagelet
-        name="overview.html"
+        name="details3.html"
         for="org.ict_ok.components.room.interfaces.IRoom"
         class="org.ict_ok.components.room.browser.room.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -33,12 +33,25 @@
         />
 
     <z3c:pagelet
-        name="details.html"
+        name="details2.html"
         for="org.ict_ok.components.room.interfaces.IRoom"
         class=".room.DetailsRoomForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.room.View"
     />
+    
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.room.interfaces.IRoom"
+        class="org.ict_ok.components.room.browser.room.RoomDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.View"
+    />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.components.room.browser.room.RoomDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="edit.html"
@@ -53,9 +66,36 @@
         for="org.ict_ok.components.room.interfaces.IRoom"
         class=".room.DeleteRoomForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.Delete"
+        permission="org.ict_ok.components.ipnet.Delete"
     />
 
+    <!-- Folder  -->
+
+    <defaultView
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        name="overview.html"
+    />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.View"
+        />
+        
+    <z3c:pagelet
+        name="add_room.html"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        class="org.ict_ok.components.room.browser.room.AddRoomForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.Add"
+    />
+    <z3c:macro
+        template="room_details.pt"
+        name="RoomDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
     <!--##### Sub Menu ##### -->
 
     <viewlet
@@ -71,6 +111,14 @@
         for="org.ict_ok.components.room.interfaces.IRoom"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.View"
+        />
+    <viewlet
+        name="details"
+        for="org.ict_ok.components.room.interfaces.IRoom"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.room.View"
         />
@@ -114,5 +162,95 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.dashboard.Edit"
         />
+
+    <!-- Folder  -->
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.View"
+        />
+    <viewlet
+        name="add_room"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.room.browser.room.MSubAddRoom"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.Add"
+        />
+    <viewlet
+        name="add_room"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.room.browser.room.MGlobalAddRoom"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.Add"
+        />
+    <page
+        name="exportcsvdata.html"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        class=".room.RoomFolderDetails"
+        permission="org.ict_ok.components.room.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportCsvData"
+    />
+    <page
+        name="exportxlsdata.html"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        class=".room.RoomFolderDetails"
+        permission="org.ict_ok.components.room.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsData"
+    />
+    <z3c:pagelet
+        name="importcsvdata.html"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        class=".room.ImportCsvDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.Add"
+    />
+    <z3c:pagelet
+        name="importxlsdata.html"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        class=".room.ImportXlsDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.Add"
+    />
+    <viewlet
+        name="exportcsvdata"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.View"
+        />
+    <viewlet
+        name="exportxlsdata"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.View"
+        />
+    <viewlet
+        name="importcsvdata"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.Add"
+        />
+    <viewlet
+        name="importxlsdata"
+        for="org.ict_ok.components.room.interfaces.IRoomFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.room.Add"
+        />
+
 
 </configure>

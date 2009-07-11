@@ -18,7 +18,10 @@
     <include package="org.ict_ok.admin_utils.generators.nagios.browser" />
     <include package="org.ict_ok.admin_utils.generators.smokeping.browser" />
     <include package="org.ict_ok.admin_utils.graphviz.browser" />
-    <include package="org.ict_ok.admin_utils.linux_ha.browser" />
+    <include package="org.ict_ok.admin_utils.idchooser.browser" />
+    <!--<include package="org.ict_ok.admin_utils.linux_ha.browser" /> -->
+    <include package="org.ict_ok.admin_utils.mac_address_db.browser" />
+    <include package="org.ict_ok.admin_utils.mindmap.browser" />
     <include package="org.ict_ok.admin_utils.netscan.browser" />
     <include package="org.ict_ok.admin_utils.netscan.nmap.browser" />
     <include package="org.ict_ok.admin_utils.netscan.simple1.browser" />
@@ -35,10 +38,15 @@
     <include package="org.ict_ok.admin_utils.util_manager.browser" />
     <include package="org.ict_ok.admin_utils.wfmc.browser" />
     <include package="org.ict_ok.components.browser" />
+    
+    <include package="org.ict_ok.libs.browser" />
+    
     <include package="org.ict_ok.components.superclass.browser" />
     <include package="org.ict_ok.components.site.browser" />
     <!--<include package="org.ict_ok.components.slave.browser" />-->
-    <include package="org.ict_ok.components.net.browser" />
+    <!--include package="org.ict_ok.components.net.browser" /-->
+    <include package="org.ict_ok.components.ipnet.browser" />
+    <include package="org.ict_ok.components.ip_address.browser" />
     <include package="org.ict_ok.components.host.browser" />
     <include package="org.ict_ok.components.host.special"
              file="configure_brws.zcml" />
@@ -52,5 +60,47 @@
     <include package="org.ict_ok.components.location.browser" />
     <include package="org.ict_ok.components.building.browser" />
     <include package="org.ict_ok.components.room.browser" />
+    
+    <include package="org.ict_ok.components.device.browser" />
+    <include package="org.ict_ok.components.physical_connector.browser" />
+    <include package="org.ict_ok.components.physical_component.browser" />
 
+    <include package="org.ict_ok.components.logical_device.browser" />
+    <include package="org.ict_ok.components.logical_component.browser" />
+    <include package="org.ict_ok.components.software_component.browser" />
+
+    <include package="org.ict_ok.components.mobilephone.browser" />
+    <include package="org.ict_ok.components.outlet.browser" />
+    <include package="org.ict_ok.components.notebook.browser" />
+    <include package="org.ict_ok.components.appsoftware.browser" />
+    <include package="org.ict_ok.components.osoftware.browser" />
+    <include package="org.ict_ok.components.patchpanel.browser" />
+    <include package="org.ict_ok.components.patchport.browser" />
+    <include package="org.ict_ok.components.rack.browser" />
+    <include package="org.ict_ok.components.pc.browser" />
+    <include package="org.ict_ok.components.physical_link.browser" />
+    <include package="org.ict_ok.components.happliance.browser" />
+    <include package="org.ict_ok.components.ipc.browser" />
+    <include package="org.ict_ok.components.switch.browser" />
+    <include package="org.ict_ok.components.display_unit.browser" />
+    <include package="org.ict_ok.components.printer.browser" />
+    <include package="org.ict_ok.components.misc_physical.browser" />
+    <include package="org.ict_ok.components.isdnphone.browser" />
+
+    <include package="org.ict_ok.components.x509certificate.browser" />
+
+    <include package="org.ict_ok.components.product.browser" />
+    <include package="org.ict_ok.components.address.browser" />
+    <include package="org.ict_ok.components.organization.browser" />
+    <include package="org.ict_ok.components.person.browser" />
+    <include package="org.ict_ok.components.contact.browser" />
+    <include package="org.ict_ok.components.contact_item.browser" />
+    <include package="org.ict_ok.components.work_order.browser" />
+
+    <include package="org.ict_ok.components.physical_media.browser" />
+    <include package="org.ict_ok.components.role.browser" />
+    <include package="org.ict_ok.components.group.browser" />
+    <include package="org.ict_ok.components.int_attachment.browser" />
+    <include package="org.ict_ok.components.reminder.browser" />
+    <include package="org.ict_ok.components.contract.browser" />
 </configure>

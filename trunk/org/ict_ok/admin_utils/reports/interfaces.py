@@ -18,18 +18,17 @@ import os
 
 # zope imports
 from zope.interface import Interface
-from zope.schema import TextLine
+from zope.schema import TextLine, List, Dict, Set
 from zope.interface import invariant, Invalid
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.schema.colorvalid import ColorValid
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilReports(ISupernode):
+class IAdmUtilReports(Interface):
     """A configuration utility."""
     
     color1 = ColorValid(
@@ -228,8 +227,68 @@ class IAdmUtilReports(ISupernode):
         will generate a complete pdf report
         """
 
+
+class IBaseReporter(Interface):
+    """A configuration utility."""
+    
+#    firstLevelContent = List(
+#        #title = _("color1"),
+#        default = [],
+#        required = True)
+
+    allContentObjects = Set(
+        #title = _("color1"),
+        default = set([]),
+        required = True)
+
+    alreadyReported = Dict(
+        #title = _("logo1 file path (4:1)"),
+        default = {},
+        required = False)
+
+
 class IRptPdf(Interface):
     """Interface of PDF-report-Adapter
+    """
+    def traverse4RptPre(level, comments, autoAppend=True):
+        """pdf report object preamble
+        
+        level: indent-level (int 0..)
+        comments: should there comments are in the output?
+        autoAppend: normal usecase: append the pdf elements to the document
+                    not autoAppend: returns a list with pdf elements
+        """
+
+    def traverse4RptPost(level, comments):
+        """pdf report object postamble
+        
+        level: indent-level (int 0..)
+        comments: should there comments are in the output?
+
+        """
+
+    def traverse4RptBody(level, comments):
+        """pdf report data of/in object
+        
+        level: indent-level (int 0..)
+        comments: should there comments are in the output?
+
+        """
+
+    def traverse4Rpt(level, comments):
+        """object pdf report
+        
+        level: indent-level (int 0..)
+        comments: should there comments are in the output?
+
+        """
+    def getRefTitle():
+        """
+        get title and reference for reportlab pdf stuff
+        """
+
+class IRptXML(Interface):
+    """Interface of XML-report-Adapter
     """
     def traverse4RptPre(level, comments, autoAppend=True):
         """pdf report object preamble

@@ -22,6 +22,26 @@
             permission="org.ict_ok.admin_utils.categories.Edit"
             set_schema=".interfaces.IAdmUtilCategories"
             />
+        <require
+            permission="org.ict_ok.admin_utils.categories.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.categories.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <!--require
+            permission="org.ict_ok.admin_utils.categories.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.categories.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            /-->
+        <require
+            permission="org.ict_ok.admin_utils.categories.View"
+            interface="zope.app.container.interfaces.IOrderedContainer"
+            />
     </class>
 
     <class class=".cat_hostgroup.AdmUtilCatHostGroup">
@@ -36,6 +56,22 @@
         <require
             permission="org.ict_ok.admin_utils.categories.Edit"
             set_schema=".interfaces.IAdmUtilCatHostGroup"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.categories.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.categories.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.categories.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.categories.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
     </class>
 

@@ -19,16 +19,13 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.cron.interfaces import \
-     IAdmUtilCron
+from org.ict_ok.admin_utils.cron.cron import AdmUtilCron
 
 _ = MessageFactory('org.ict_ok')
 
@@ -54,13 +51,15 @@ class AdmUtilCronDetails(SupernodeDetails):
 class ViewAdmUtilCronForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of cron')
-    fields = field.Fields(IAdmUtilCron).omit(\
-        *AdmUtilCronDetails.omit_viewfields)
+    factory = AdmUtilCron
+    omitFields = AdmUtilCronDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilCronForm(EditForm):
     """ Edit for for net """
     label = _(u'edit cron')
-    fields = field.Fields(IAdmUtilCron).omit(\
-        *AdmUtilCronDetails.omit_editfields)
+    factory = AdmUtilCron
+    omitFields = AdmUtilCronDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
 

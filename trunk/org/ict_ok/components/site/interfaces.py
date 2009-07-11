@@ -20,14 +20,11 @@ from zope.i18nmessageid import MessageFactory
 from zope.app.container.constraints import contains
 
 # ict_ok.org imports
-from org.ict_ok.components.interfaces import IComponent
-from org.ict_ok.components.supernode.interfaces import \
-     IEventIfSupernode
 
 _ = MessageFactory('org.ict_ok')
 
 
-class ISite(IComponent):
+class ISite(Interface):
     """
     The interface of Site-objects
     """
@@ -40,8 +37,11 @@ class ISite(IComponent):
         default = _("mysite"),
         required = True)
 
+    def __delitem__(name):
+        """Delete the named object from the container.
+        """
     
-class IEventIfEventSite(IEventIfSupernode):
+class IEventIfEventSite(Interface):
     """ event interface of object """
     
     eventInpObjs_inward_relaying_shutdown = Set(
@@ -66,3 +66,7 @@ class IIkDeleteConfirm(Interface):
         description = _(u"please confirm"),
         default = False)
 
+from zope.component.interfaces import IObjectEvent
+
+class INewSiteEvent(IObjectEvent):
+    """Indicates that a new WorldCookery site has been created"""

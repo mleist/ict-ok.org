@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 350 2008-10-12 09:18:43Z markusleist $
+# $Id$
 #
 # no_pylint: disable-msg=W0232
 #
@@ -14,7 +14,7 @@
 page-class for ict-ok.org reporting 
 """
 
-__version__ = "$Id: $"
+__version__ = "$Id$"
 
 # phython imports
 
@@ -32,7 +32,7 @@ from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 
 class RptPageTemplate(PageTemplate):
     def afterDrawPage(self, canv, doc):
-        admUtilReports = getUtility(IAdmUtilReports)
+        admUtilReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
         canv.saveState()
         cmyk_color1 = getColor1()
         canv.setStrokeColor(cmyk_color1)

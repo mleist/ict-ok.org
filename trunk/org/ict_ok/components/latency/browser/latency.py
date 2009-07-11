@@ -27,15 +27,21 @@ from zope.i18nmessageid import MessageFactory
 
 # z3c imports
 from z3c.form import field
+from z3c.form.browser import checkbox
 
 # ict_ok.org imports
-from org.ict_ok.components.latency.interfaces import ILatency
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
+from org.ict_ok.components.latency.interfaces import \
+    ILatency, IAddLatency, ILatencyFolder
 from org.ict_ok.components.latency.latency import Latency
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -46,6 +52,14 @@ class MSubAddLatency(GlobalMenuSubItem):
     title = _(u'Add latency check')
     viewURL = 'add_latency.html'
     weight = 50
+
+
+class MGlobalAddLatency(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add latency check')
+    viewURL = 'add_latency.html'
+    weight = 50
+    folderInterface = ILatencyFolder
 
 class MSubDisplayLatency(GlobalMenuSubItem):
     """ Menu Item """
@@ -66,7 +80,7 @@ class LatencyDetails(ComponentDetails):
     def getValuePngHref(self):
         """Url to picture"""
         obj = self.context
-        return zapi.getPath(obj)
+        return zapi.absoluteURL(obj, self.request)
 
     def getValuePngDeltaT(self):
         """get Picture for special time interval"""
@@ -117,6 +131,18 @@ class LatencyDetails(ComponentDetails):
         os.remove(params['targetname'])
         return picMem
 
+
+class LatencyFolderDetails(ComponentDetails):
+    """ Class for MobilePhone details
+    """
+    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
+    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
+    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    attrInterface = ILatency
+    factory = Latency
+    fields = fieldsForFactory(factory, omit_editfields)
+
+
 class LatencyDisplay(LatencyDetails):
     """
     """
@@ -128,23 +154,35 @@ class LatencyDisplay(LatencyDetails):
 class DetailsLatencyForm(DisplayForm):
     """ Display form for the object """
     label = _(u'Details of Snmp value')
-    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_viewfields)
+    factory = Latency
+    omitFields = LatencyDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
     
     def update(self):
         DisplayForm.update(self)
 
 
-class AddLatencyForm(AddForm):
-    """Add form."""
+class AddLatencyForm(AddComponentForm):
     label = _(u'Add Latency')
-    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_addfields)
     factory = Latency
+    omitFields = LatencyDetails.omit_addfields
+    attrInterface = ILatency
+    addInterface = IAddLatency
+    _session_key = 'org.ict_ok.components.latency'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class EditLatencyForm(EditForm):
     """ Edit for for net """
     label = _(u'Latency Edit Form')
-    fields = field.Fields(ILatency).omit(*LatencyDetails.omit_editfields)
+    factory = Latency
+    omitFields = LatencyDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
+    fields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class DeleteLatencyForm(DeleteForm):
@@ -155,3 +193,13 @@ class DeleteLatencyForm(DeleteForm):
         return _(u"Delete this latency: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
+
+class ImportCsvDataForm(ImportCsvDataComponentForm):
+    pass
+
+
+class ImportXlsDataForm(ImportXlsDataComponentForm):
+    attrInterface = ILatency
+    factory = Latency
+    factoryId = u'org.ict_ok.components.latency.latency.Latency'
+    allFields = fieldsForInterface(attrInterface, [])

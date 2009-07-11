@@ -12,7 +12,6 @@
 """Adapter implementation for generating graphviz-dot configuration
 """
 
-
 __version__ = "$Id$"
 
 # python imports
@@ -21,11 +20,9 @@ __version__ = "$Id$"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.location.interfaces import ILocation
+from org.ict_ok.components.location.location import Location
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
@@ -37,12 +34,5 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(ILocation)
-    
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.location.browser.location import \
-             LocationDetails
-        return field.Fields(ILocation).omit(\
-            *LocationDetails.omit_viewfields)
-
+    factory = Location
+    omitFields = ParentRptPdf.omitFields + []

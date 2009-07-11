@@ -106,7 +106,7 @@ class Script(Component):
             code = compile_restricted(tmpScript, '<string>', 'exec')
             exec(code) in restricted_globals
             #print "ddd: ", hello_world()
-            print "eee: ", restricted_globals['result']
+            #print "eee: ", restricted_globals['result']
             self.appendHistoryEntry(restricted_globals['result'])
         except Exception, errText:
             print "err1:", str(errText)

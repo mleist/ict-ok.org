@@ -32,16 +32,10 @@ from org.ict_ok.admin_utils.notifier.notifier import NotifierUtil
 
 logger = logging.getLogger("Notifier")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of Message-Queue-Utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeNotifier = ensureUtility(root_folder, INotifierUtil,
-                                  'Notifier', NotifierUtil, '',
+                                  'Notifier', NotifierUtil,
+                                  name='Notifier',
                                   copy_to_zlog=False, asObject=True)
 
     if isinstance(madeNotifier, NotifierUtil):
@@ -59,4 +53,15 @@ def bootStrapSubscriberDatabase(event):
             u" bootstrap: made INotifier-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of Message-Queue-Utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

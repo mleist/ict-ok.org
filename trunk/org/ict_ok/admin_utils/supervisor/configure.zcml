@@ -22,17 +22,46 @@
             permission="org.ict_ok.admin_utils.supervisor.View"
             set_schema=".interfaces.IAdmUtilSupervisor"
             />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.Search"
+            interface=".interfaces.IFSearchText"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.Search"
+            set_schema=".interfaces.IFSearchText"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <adapter
         factory="org.ict_ok.admin_utils.supervisor.supervisor.AdmUtilSupervisorSized"
-        />
+    />
     <adapter
         factory=".adapter.state.State"
-        />
+    />
     <adapter
         factory=".adapter.ticker.Ticker"
     />
+    <adapter
+        factory=".adapter.navigation.Navigation"
+    />
+
+    <subscriber handler="lovely.relation.event.o2oIntIdRemoved" />
 
     <!-- setup local utilities -->
     <subscriber

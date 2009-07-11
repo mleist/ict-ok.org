@@ -14,18 +14,44 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import TextLine
+from zope.schema import Choice, List, TextLine 
 
 # ict_ok.org imports
-from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IRoom(IComponent):
+class IRoom(Interface):
     """A service object."""
 
+    building = Choice(
+        title=_(u'Building'),
+        vocabulary='AllBuildings',
+        required=False
+        )
+
+#    devices = List(title=_(u"Devices"),
+#        value_type=Choice(vocabulary='AllUnusedOrUsedRoomDevices'),
+#        required=False,
+#        default=[])
+#    
+#    physicalConnectors = List(title=_(u"Physical connectors"),
+#        value_type=Choice(vocabulary='AllUnusedOrUsedRoomPhysicalConnectors'),
+#        required=False,
+#        default=[])
+    
+#    racks = List(title=_(u"Racks"),
+#        value_type=Choice(vocabulary='AllUnusedOrUsedRoomRacks'),
+#        required=False,
+#        default=[])
+#    
+    physicalComponents = List(title=_(u"Physical components"),
+        value_type=Choice(vocabulary='AllUnusedOrUsedRoomPhysicalComponents'),
+        required=False,
+        default=[])
+    
     level = TextLine(
         max_length = 80,
         title = _("Level"),
@@ -38,4 +64,15 @@ class IRoom(IComponent):
         title = _("coordinates"),
         description = _("Coordinates of the room."),
         default = u"",
+        required = False)
+
+class IRoomFolder(Interface):
+    """Container for room objects
+    """
+
+class IAddRoom(Interface):
+    """Interface for all Objects"""
+    template = Choice(
+        title = _("Template"),
+        vocabulary="AllRoomTemplates",
         required = False)

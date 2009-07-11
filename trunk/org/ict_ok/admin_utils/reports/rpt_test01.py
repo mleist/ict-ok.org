@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 350 2008-10-12 09:18:43Z markusleist $
+# $Id$
 #
 # no_pylint: disable-msg=W0232
 #
@@ -14,7 +14,7 @@
 fill ict-ok.org reporting with karl may 
 """
 
-__version__ = "$Id: $"
+__version__ = "$Id$"
 
 # ict-ok.org imports
 from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
@@ -32,7 +32,7 @@ class RptTest01:
         self._document = RptDocument(filename)
         self._document.setVolumeNo("B")
         self._document.setAuthorName("Karl May")
-        self._document.setVersionStr("Vers. 0.0.1 $Rev: xxx $")
+        self._document.setVersionStr("Vers. 0.0.1 $Rev$")
         
         title = RptTitle(u"Der Schatz im Silbersee",
                          doc=self._document)

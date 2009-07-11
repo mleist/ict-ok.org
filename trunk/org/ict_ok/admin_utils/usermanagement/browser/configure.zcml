@@ -49,6 +49,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.VersionDisplay"
     />
+    <page
+        for="*"
+        name="fsearch"
+        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.AdmUtilUserManagementPreferences"
+        attribute="fsearch"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.VersionDisplay"
+    />
 
 
     <!--======================================================-->
@@ -82,6 +90,13 @@
         permission="org.ict_ok.admin_utils.usermanagement.Edit"
     />
     <z3c:pagelet
+        name="preferences.html"
+        for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"
+        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.PreferencesAdmUtilUserManagementForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+    />
+    <z3c:pagelet
         name="password.html"
         for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"
         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.EditPasswordForm"
@@ -113,6 +128,14 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.usermanagement.Edit"
+        />
+    <viewlet
+        name="preferences"
+        for="org.ict_ok.admin_utils.usermanagement.interfaces.IAdmUtilUserManagement"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class=".usermanagement.MSubPreferences"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.usermanagement.Preferences"
         />
     <viewlet
         name="password"

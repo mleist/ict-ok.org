@@ -37,6 +37,22 @@
             permission="org.ict_ok.admin_utils.linux_ha.View"
             set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.IAdmUtilLinuxHa"
             />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <class class="org.ict_ok.admin_utils.linux_ha.linux_ha_node.LinuxHaObjNode">
@@ -54,6 +70,22 @@
         <require
             permission="org.ict_ok.admin_utils.linux_ha.View"
             set_schema="org.ict_ok.admin_utils.linux_ha.interfaces.ILinuxHaObjNode"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.linux_ha.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
     </class>
 

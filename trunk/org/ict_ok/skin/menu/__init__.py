@@ -33,6 +33,7 @@ from z3c.menu.simple.menu import Tab
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.util_manager.interfaces import IUtilManager
+from org.ict_ok.libs.lib import getFirstObjectFor
 
 _ = MessageFactory('org.ict_ok')
 
@@ -97,6 +98,46 @@ class GlobalMenuMainItem(GlobalMenuItem):
                 return u"navmainstart"
 
 class GlobalMenuSubItem(ContextMenuItem):
+    """Menu item viewlet generating global/site related links."""
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_item.pt')
+    @property
+    def menu_class(self):
+        if self.posInManager > 0:
+            if self.selected:
+                return u"navsub selected"
+            else:
+                return u"navsub"
+        else:
+            if self.selected:
+                return u"navsub first selected"
+            else:
+                return u"navsub"
+
+    
+class GlobalMenuAddItem(GlobalMenuSubItem):
+    def __init__(self, context, request, view, manager):
+        GlobalMenuSubItem.__init__(self, context, request, view, manager)
+        self.firstFolder = getFirstObjectFor(self.folderInterface)
+    @property
+    def url(self):
+        if self.firstFolder is not None:
+            try:
+                contextURL = absoluteURL(self.firstFolder, self.request)
+            except TypeError:
+                contextURL = u''
+        else:
+            contextURL = absoluteURL(self.context, self.request)
+        return contextURL + '/' + self.viewURL
+    def render(self):
+        """Return the template with the option 'menus'"""
+        if self.firstFolder is not None:
+            return self.template()
+        else:
+            return ""
+
+
+    
+class GlobalMenuSubSubItem(ContextMenuItem):
     """Menu item viewlet generating global/site related links."""
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_item.pt')
     @property
@@ -183,11 +224,23 @@ class MenuSubTab(Tab):
 class MenuSubGeneralTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_general_tab.pt')
 
+class MenuSubGeneralAddsTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_general_adds_tab.pt')
+
 class MenuSubInventoryTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_tab.pt')
 
+class MenuSubInventoryByTypeTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_by_type_tab.pt')
+
+class MenuSubInventoryWarningsTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_warnings_tab.pt')
+
 class MenuSubReportsTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_reports_tab.pt')
+
+class MenuSubReportsOvervPdfTab(Tab):
+    template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_reports_overv_pdf_tab.pt')
 
 class MenuSubEventTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_event_tab.pt')

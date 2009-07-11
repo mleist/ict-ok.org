@@ -85,6 +85,11 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.site.Add"
     />
+    <z3c:macro
+        template="site_details.pt"
+        name="SiteDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!--##### Sub Menu ##### -->
 
@@ -135,14 +140,6 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.site.Edit"
-        />
-    <viewlet
-        name="add_net"
-        for="org.ict_ok.components.site.interfaces.ISite"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.components.net.browser.net.MSubAddNet"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.net.Add"
         />
     <viewlet
         name="add_site"

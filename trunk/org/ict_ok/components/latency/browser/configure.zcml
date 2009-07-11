@@ -103,6 +103,34 @@
     />
 
 
+    <!-- Folder  -->
+
+    <defaultView
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        name="overview.html"
+    />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.View"
+        />
+        
+    <z3c:pagelet
+        name="add_latency.html"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        class="org.ict_ok.components.latency.browser.latency.AddLatencyForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
+    />
+    <z3c:macro
+        template="latency_details.pt"
+        name="LatencyDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <!--##### Sub Menu ##### -->
 
     <!--<viewlet-->
@@ -185,5 +213,95 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.dashboard.Edit"
         />
+
+    <!-- Folder  -->
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.View"
+        />
+    <viewlet
+        name="add_latency"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.latency.browser.latency.MSubAddLatency"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
+        />
+    <viewlet
+        name="add_latency"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.latency.browser.latency.MGlobalAddLatency"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
+        />
+    <page
+        name="exportcsvdata.html"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        class=".latency.LatencyFolderDetails"
+        permission="org.ict_ok.components.latency.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportCsvData"
+    />
+    <page
+        name="exportxlsdata.html"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        class=".latency.LatencyFolderDetails"
+        permission="org.ict_ok.components.latency.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsData"
+    />
+    <z3c:pagelet
+        name="importcsvdata.html"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        class=".latency.ImportCsvDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
+    />
+    <z3c:pagelet
+        name="importxlsdata.html"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        class=".latency.ImportXlsDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
+    />
+    <viewlet
+        name="exportcsvdata"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.View"
+        />
+    <viewlet
+        name="exportxlsdata"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.View"
+        />
+    <viewlet
+        name="importcsvdata"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
+        />
+    <viewlet
+        name="importxlsdata"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.Add"
+        />
+
 
 </configure>

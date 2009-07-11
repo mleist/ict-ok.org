@@ -1,0 +1,179 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <!--  Interfaces ==================================================== -->
+    
+    <interface
+        interface=".interfaces.IIndustrialComputer"
+        type="zope.app.content.interfaces.IContentType"
+        />
+
+    <!--  Classes ======================================================= -->
+
+    <class class=".ipc.IndustrialComputer">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.ipc.ipc.IndustrialComputer"
+            description="IndustrialComputer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface=".interfaces.IIndustrialComputer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema=".interfaces.IIndustrialComputer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="org.ict_ok.components.device.interfaces.IDevice"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema="org.ict_ok.components.device.interfaces.IDevice"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <class class=".ipc.IndustrialComputerFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <implements
+            interface="org.ict_ok.components.superclass.interfaces.IFocus"
+            />
+        <factory
+            id="org.ict_ok.components.ipc.ipc.IndustrialComputerFolder"
+            description="IndustrialComputer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface=".interfaces.IIndustrialComputerFolder"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema=".interfaces.IIndustrialComputerFolder"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.ipc.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+    </class>
+
+    <!--  Event subscribers ============================================= -->
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <!--  Search adapters =============================================== -->
+
+    <adapter
+        factory="org.ict_ok.components.ipc.adapter.search.Searchable"
+    />
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory=".adapter.state.State"
+        />
+    <adapter
+        factory=".adapter.navigation.Navigation"
+    />
+
+    <!--  Vocabulary stuff ============================================== -->
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".ipc.AllIndustrialComputers"
+        name="AllIndustrialComputers"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".ipc.AllIndustrialComputerTemplates"
+        name="AllIndustrialComputerTemplates"
+    />
+
+    <!--  Includes ====================================================== -->
+
+    <include package=".generations" />
+
+</configure>

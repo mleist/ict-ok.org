@@ -22,6 +22,22 @@
             permission="org.ict_ok.admin_utils.eventcrossbar.View"
             set_schema=".interfaces.IAdmUtilEventCrossbar"
             />
+       <require
+            permission="org.ict_ok.admin_utils.eventcrossbar.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.eventcrossbar.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.eventcrossbar.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.eventcrossbar.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <class class=".event.AdmUtilEvent">
@@ -36,6 +52,22 @@
         <require
             permission="org.ict_ok.admin_utils.event.View"
             set_schema=".interfaces.IAdmUtilEvent"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
     </class>
 
@@ -60,6 +92,22 @@
             permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
             set_schema=".interfaces.IEventIfEventTimingRelay"
             />
+        <require
+            permission="org.ict_ok.admin_utils.event_timingrelay.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timingrelay.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timingrelay.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <class class=".event_timer.EventTimer">
@@ -82,6 +130,22 @@
         <require
             permission="org.ict_ok.admin_utils.event_timer.Edit"
             set_schema=".interfaces.IEventIfEventTimer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timer.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timer.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timer.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.event_timer.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
     </class>
 

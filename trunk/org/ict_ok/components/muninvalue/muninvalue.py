@@ -22,10 +22,32 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.component import getUtility
+from zope.app.intid.interfaces import IIntIds
+from zope.app.folder import Folder
 
 # ict_ok.org imports
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.latency.interfaces import ILatency
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
+
+
+def AllMuninValueTemplates(dummy_context):
+    """Which MobilePhone templates exists
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if ILatency.providedBy(oobj.object) and \
+        oobj.object.isTemplate:
+            myString = u"%s [T]" % (oobj.object.getDcTitle())
+            terms.append(SimpleTerm(oobj.object,
+                                    token=oid,
+                                    title=myString))
+    return SimpleVocabulary(terms)
 
 
 class Latency(Component):
@@ -61,3 +83,16 @@ class Latency(Component):
         """ got ticker event from ticker thread every minute
         """
         print "Unsinn"
+
+
+class MuninValueFolder(Superclass, Folder):
+    implements(IMobilePhoneFolder, 
+               IImportCsvData,
+               IImportXlsData,
+               IAddMobilePhones)
+    def __init__(self, **data):
+        """
+        constructor of the object
+        """
+        Superclass.__init__(self, **data)
+        Folder.__init__(self)

@@ -14,18 +14,18 @@
 __version__ = "$Id$"
 
 # zope imports
-from zope.schema import Choice, Datetime, Int
+from zope.interface import Interface
+from zope.schema import Choice, Datetime, Int, TextLine
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.schema.ipvalid import HostIpValid
 from org.ict_ok.schema.objectidvalid import ObjectIdValid
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IAdmUtilSupervisor(ISupernode):
+class IAdmUtilSupervisor(Interface):
     """
     major component for registration and event distribution 
     """
@@ -47,11 +47,11 @@ class IAdmUtilSupervisor(ISupernode):
         readonly = True,
         required = True)
     
-    objectID = ObjectIdValid(
-        title = _("My object id"),
-        description = _("object id of this supervisor"),
-        readonly = True,
-        required = True)
+#    objectID = ObjectIdValid(
+#        title = _("My object id"),
+#        description = _("object id of this supervisor"),
+#        readonly = True,
+#        required = True)
     
     ipv4Master = HostIpValid(
         min_length = 1,
@@ -254,3 +254,8 @@ class IAdmUtilSupervisor(ISupernode):
         will reindex the catalogs of all tables in database
         """
 
+class IFSearchText(Interface):
+    """Interface for all Objects"""
+    fsearchText = TextLine(
+        title = _("Search text"),
+        required = True)

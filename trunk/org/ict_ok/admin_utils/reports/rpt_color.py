@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 350 2008-10-12 09:18:43Z markusleist $
+# $Id$
 #
 # no_pylint: disable-msg=W0232
 #
@@ -14,7 +14,10 @@
 color-class for ict-ok.org reporting 
 """
 
-__version__ = "$Id: $"
+__version__ = "$Id$"
+
+# python
+from math import sqrt
 
 # zope imports
 from zope.component import getUtility
@@ -25,10 +28,8 @@ from reportlab.lib import colors
 # ict-ok.org imports
 from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
 
-#CMYK_RPT1=colors.CMYKColor(1.0, 0.49, 0.612, 0.0)
-
 def getColor1():
-    admUtilReports = getUtility(IAdmUtilReports)
+    admUtilReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
     if admUtilReports.color1 is not None:
         rString = admUtilReports.color1[1:3]
         gString = admUtilReports.color1[3:5]
@@ -40,3 +41,16 @@ def getColor1():
         return colors.CMYKColor(*cmyk_tuple)
     else:
         return colors.CMYKColor(1.0, 0.49, 0.612, 0.0)
+
+def getLinkColor():
+    color1 = getColor1()
+    distance = colors.colorDistance(color1, colors.white) / sqrt(3)
+    return colors.Blacker(color1, distance)
+
+def getTabBackgroundColor():
+    color1 = getColor1()
+    return colors.Whiter(color1, 0.1)
+
+def getTabBackgroundColorLight():
+    color1 = getColor1()
+    return colors.Whiter(color1, 0.03)

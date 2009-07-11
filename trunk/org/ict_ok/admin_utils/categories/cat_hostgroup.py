@@ -82,7 +82,8 @@ class AdmUtilCatHostGroup(Supernode):
             if IHost.providedBy(oobj.object):
                 if self.objectID in oobj.object.hostGroups:
                     retList.append(oobj.object)
-        utilXbar = getUtility(IAdmUtilEventCrossbar)
+        utilXbar = getUtility(IAdmUtilEventCrossbar,
+                              name='AdmUtilEventCrossbar')
         for (oid, obj) in utilXbar.items():
             if IAdmUtilEvent.providedBy(obj):
                 if self.objectID == obj.hostGroup:

@@ -19,16 +19,14 @@ __version__ = "$Id$"
 # zope imports
 from zope.i18nmessageid import MessageFactory
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
-from org.ict_ok.admin_utils.generators.honeyd.interfaces import \
-     IAdmUtilGeneratorHoneyd
+from org.ict_ok.admin_utils.generators.honeyd.honeyd import \
+     AdmUtilGeneratorHoneyd
 
 _ = MessageFactory('org.ict_ok')
 
@@ -52,12 +50,14 @@ class AdmUtilGeneratorHoneydDetails(SupernodeDetails):
 class ViewAdmUtilGeneratorHoneydForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of graphviz adapter')
-    fields = field.Fields(IAdmUtilGeneratorHoneyd).omit(\
-        *AdmUtilGeneratorHoneydDetails.omit_viewfields)
+    factory = AdmUtilGeneratorHoneyd
+    omitFields = AdmUtilGeneratorHoneydDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilGeneratorHoneydForm(EditForm):
     """ Edit for for net """
     label = _(u'edit graphviz adapter')
-    fields = field.Fields(IAdmUtilGeneratorHoneyd).omit(\
-        *AdmUtilGeneratorHoneydDetails.omit_editfields)
+    factory = AdmUtilGeneratorHoneyd
+    omitFields = AdmUtilGeneratorHoneydDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

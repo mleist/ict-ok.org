@@ -35,17 +35,23 @@ from zc.table.interfaces import ISortableColumn
 
 # z3c imports
 from z3c.form import field
+from z3c.form.browser import checkbox
 from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.admin_utils.snmpd.interfaces import IAdmUtilSnmpd
-from org.ict_ok.components.snmpvalue.interfaces import ISnmpValue
+from org.ict_ok.components.snmpvalue.interfaces import \
+    ISnmpValue, IAddSnmpValue, ISnmpValueFolder
 from org.ict_ok.components.snmpvalue.snmpvalue import SnmpValue
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm, raw_cell_formatter
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -58,6 +64,14 @@ class MSubAddSnmpValue(GlobalMenuSubItem):
     title = _(u'Add SNMP Value')
     viewURL = 'add_snmpvalue.html'
     weight = 50
+
+
+class MGlobalAddSnmpValue(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add SNMP Value')
+    viewURL = 'add_snmpvalue.html'
+    weight = 50
+    folderInterface = ISnmpValueFolder
 
 class MSubAddSnmpValueByVendor(GlobalMenuSubItem):
     """ Menu Item """
@@ -132,7 +146,7 @@ class SnmpValueDetails(ComponentDetails):
     def getValuePngHref(self):
         """Url to picture"""
         obj = self.context
-        return zapi.getPath(obj)
+        return zapi.absoluteURL(obj, self.request)
 
     def getValues(self):
         retList = []
@@ -148,6 +162,17 @@ class SnmpValueDetails(ComponentDetails):
     def nowTS(self):
         return datetime.now()
     
+
+class SnmpValueFolderDetails(ComponentDetails):
+    """ Class for MobilePhone details
+    """
+    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
+    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
+    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    attrInterface = ISnmpValue
+    factory = SnmpValue
+    fields = fieldsForFactory(factory, omit_editfields)
+
 
 class SnmpValueDisplay(SnmpValueDetails):
     """
@@ -289,40 +314,60 @@ class AddSnmpByVendorClass(BrowserPagelet):
 
 # --------------- forms ------------------------------------
 
-
 class DetailsSnmpValueForm(DisplayForm):
     """ Display form for the object """
     label = _(u'Details of Snmp value')
-    fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_viewfields)
-
-
-class AddSnmpValueForm(AddForm):
-    """Add form."""
-    label = _(u'Add SnmpValue')
-    fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_addfields)
     factory = SnmpValue
+    omitFields = SnmpValueDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
-    def update(self):
-        snmpd_utility = getUtility(IAdmUtilSnmpd)
-        if self.request.has_key('ictvendor'):
-            if self.request.has_key('ictproduct'):
-                if self.request.has_key('icttemplate'):
-                    templateData = snmpd_utility.mrtg_data[self.request['ictvendor']]\
-                                                          [self.request['ictproduct']]\
-                                                          [self.request['icttemplate']]
-                    if templateData.has_key('oid1') and \
-                       templateData.has_key('oid2'):
-                        # must do a copy otherwise all future defaults will change
-                        self.fields = copy.deepcopy(self.fields)
-                        self.fields['inp_addrs'].field.default = \
-                            [u"%s" % templateData['oid1'],
-                             u"%s" % templateData['oid2']]
-        AddForm.update(self)
+
+#class AddSnmpValueForm(AddForm):
+#    """Add form."""
+#    label = _(u'Add SnmpValue')
+#    fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_addfields)
+#    factory = SnmpValue
+#
+#    def update(self):
+#        snmpd_utility = getUtility(IAdmUtilSnmpd)
+#        if self.request.has_key('ictvendor'):
+#            if self.request.has_key('ictproduct'):
+#                if self.request.has_key('icttemplate'):
+#                    templateData = snmpd_utility.mrtg_data[self.request['ictvendor']]\
+#                                                          [self.request['ictproduct']]\
+#                                                          [self.request['icttemplate']]
+#                    if templateData.has_key('oid1') and \
+#                       templateData.has_key('oid2'):
+#                        # must do a copy otherwise all future defaults will change
+#                        self.fields = copy.deepcopy(self.fields)
+#                        self.fields['inp_addrs'].field.default = \
+#                            [u"%s" % templateData['oid1'],
+#                             u"%s" % templateData['oid2']]
+#        AddForm.update(self)
+        
+        
+class AddSnmpValueForm(AddComponentForm):
+    label = _(u'Add SnmpValue')
+    factory = SnmpValue
+    omitFields = SnmpValueDetails.omit_addfields
+    attrInterface = ISnmpValue
+    addInterface = IAddSnmpValue
+    _session_key = 'org.ict_ok.components.snmpvalue'
+    allFields = fieldsForFactory(factory, omitFields, [])
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
+
 
 class EditSnmpValueForm(EditForm):
     """ Edit for for net """
     label = _(u'SnmpValue Edit Form')
+    factory = SnmpValue
+    omitFields = SnmpValueDetails.omit_editfields
     fields = field.Fields(ISnmpValue).omit(*SnmpValueDetails.omit_editfields)
+    fields = fieldsForFactory(factory, omitFields)
+    fields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class DeleteSnmpValueForm(DeleteForm):
@@ -333,3 +378,13 @@ class DeleteSnmpValueForm(DeleteForm):
         return _(u"Delete this snmp value: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
+
+class ImportCsvDataForm(ImportCsvDataComponentForm):
+    pass
+
+
+class ImportXlsDataForm(ImportXlsDataComponentForm):
+    attrInterface = ISnmpValue
+    factory = SnmpValue
+    factoryId = u'org.ict_ok.components.snmpvalue.snmpvalue.SnmpValue'
+    allFields = fieldsForInterface(attrInterface, [])

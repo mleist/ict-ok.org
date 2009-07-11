@@ -79,17 +79,10 @@ def updateMrtgData(madeAdmUtilSnmpd):
         dbgOut = u" bootstrap: Hmm, no mrtg data file"
     return dbgOut
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of ict_ok supervisor on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    SnmpdThread.database = event.database
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilSnmpd = ensureUtility(root_folder, IAdmUtilSnmpd,
-                                       'AdmUtilSnmpd', AdmUtilSnmpd, '',
+                                       'AdmUtilSnmpd', AdmUtilSnmpd,
+                                       name='AdmUtilSnmpd',
                                        copy_to_zlog=False, asObject=True)
 
     if isinstance(madeAdmUtilSnmpd, AdmUtilSnmpd):
@@ -122,4 +115,16 @@ def bootStrapSubscriberDatabase(event):
             instAdmUtilSupervisor.appendEventHistory(dbgOut)
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of ict_ok supervisor on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    SnmpdThread.database = event.database
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

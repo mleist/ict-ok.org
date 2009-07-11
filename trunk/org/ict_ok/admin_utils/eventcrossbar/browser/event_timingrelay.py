@@ -21,12 +21,8 @@ from zope.i18nmessageid import MessageFactory
 
 # zc imports
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
-from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
-     IEventTimingRelay, IEventIfEventTimingRelay
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.admin_utils.eventcrossbar.event_timingrelay import \
      EventTimingRelay
 from org.ict_ok.components.supernode.browser.supernode import \
@@ -59,34 +55,30 @@ class EventTimingRelayDetails(SupernodeDetails):
 class DetailsEventTimingRelayForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of Event')
-    fields = field.Fields(IEventTimingRelay).omit(\
-        *EventTimingRelayDetails.omit_viewfields) #+ \
-           #field.Fields(IZopeDublinCore).select('modified')
-    #def update(self):
-        #self.context.removeInvalidOidFromInpOutObjects()
-        #DisplayForm.update(self)
+    factory = EventTimingRelay
+    omitFields = EventTimingRelayDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class AddEventTimingRelayForm(AddForm):
     """Add form."""
     label = _(u'add timing relay')
-    fields = field.Fields(IEventTimingRelay,
-                          omitReadOnly = True).omit(\
-        *EventTimingRelayDetails.omit_addfields)
     factory = EventTimingRelay
+    omitFields = EventTimingRelayDetails.omit_addfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditEventTimingRelayForm(EditForm):
     """ Edit form for the object """
     label = _(u'edit timing relay properties')
-    fields = field.Fields(IEventTimingRelay,
-                          omitReadOnly = True).omit(\
-        *EventTimingRelayDetails.omit_editfields)
-    #def update(self):
-        #self.context.removeInvalidOidFromInpOutObjects()
-        #EditForm.update(self)
+    factory = EventTimingRelay
+    omitFields = EventTimingRelayDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
+
         
 class EditEventTimingRelayEventIfForm(EditForm):
     """ Edit Event Interface of object """
     label = _(u'timing relay event interfaces form')
-    fields = field.Fields(IEventIfEventTimingRelay)
+#    factory = 
+#    omitFields = 
+#    fields = fieldsForFactory(factory, omitFields)

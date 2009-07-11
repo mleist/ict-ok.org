@@ -26,19 +26,40 @@ from zope.traversing.browser import absoluteURL
 from zope.lifecycleevent import ObjectCreatedEvent
 from zope.event import notify
 from zope.component import createObject
+from zope.component import queryUtility
 
 # z3c imports
 from z3c.form import field
+from z3c.form.browser import checkbox
 from z3c.pagelet.interfaces import IPagelet
 
 # ict_ok.org imports
-from org.ict_ok.components.interface.interfaces import IInterface, IInterfaceSnmpScanWizard
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
+from org.ict_ok.components.supernode.interfaces import IState
+from org.ict_ok.components.interface.interfaces import \
+    IInterface, IInterfaceSnmpScanWizard, IAddInterface, IInterfaceFolder
 from org.ict_ok.components.interface.interface import Interface
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm, EditContent
+from org.ict_ok.components.superclass.browser.superclass import \
+    Overview as SuperOverview
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
+    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
+from org.ict_ok.components.physical_connector.interfaces import \
+    IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
+from org.ict_ok.components.physical_component.browser.physical_component import \
+    PhysicalComponentDetails
+from org.ict_ok.osi.interfaces import IOSIModel
+from org.ict_ok.osi.interfaces import IPhysicalLayer
+from org.ict_ok.admin_utils.mac_address_db.interfaces import \
+     IAdmUtilMacAddressDb
 
 _ = MessageFactory('org.ict_ok')
 
@@ -53,18 +74,66 @@ class MSubAddInterface(GlobalMenuSubItem):
     weight = 50
 
 
+class MGlobalAddInterface(GlobalMenuAddItem):
+    """ Menu Item """
+    title = _(u'Add Interface')
+    viewURL = 'add_interface.html'
+    weight = 50
+    folderInterface = IInterfaceFolder
+
+
 # --------------- object details ---------------------------
 
 
-class InterfaceDetails(ComponentDetails):
+class InterfaceDetails(PhysicalComponentDetails):
     """ Class for Web-Browser-Details
     """
     #omit_viewfields = ComponentDetails.omit_viewfields + ['ipv4List']
     #omit_addfields = ComponentDetails.omit_addfields + ['ipv4List']
     #omit_editfields = ComponentDetails.omit_editfields + ['ipv4List']
-    omit_viewfields = ComponentDetails.omit_viewfields + []
-    omit_addfields = ComponentDetails.omit_addfields + []
-    omit_editfields = ComponentDetails.omit_editfields + []
+    omit_viewfields = PhysicalComponentDetails.omit_viewfields + ['host21']
+    omit_addfields = PhysicalComponentDetails.omit_addfields + ['host21']
+    omit_editfields = PhysicalComponentDetails.omit_editfields + ['host21']
+    
+    def state(self):
+        """
+        gives us the state dict of the object
+        """
+        return IState(self.context).getStateDict()
+    
+#    def ddd(self):
+#        deviceSet = set([])
+#        osiModelAdapter = IOSIModel(self.context)
+#        if osiModelAdapter:
+#            #osiModelAdapter.connectedComponentsOnLayer1(deviceSet, 10)
+#            osiModelAdapter.connectedComponentsOnLayer(\
+#                (IPhysicalLayer,), deviceSet, 10)
+#        #self.context.getAllPhysicalConnectors(deviceSet, 10)
+#        return u"dd(%s)dd" % deviceSet
+#
+#    def connectedComponentsOnPhysicalLayer(self):
+#        Components = []
+#        osiModelAdapter = IOSIModel(self.context)
+#        if osiModelAdapter:
+#            osiModelAdapter.connectedComponentsOnLayer(\
+#                (IPhysicalLayer,), Components, 10)
+#        return Components
+#
+    def otherConnectedInterfaces(self):
+        return [i for i in self.connectedComponentsOnPhysicalLayer()
+                if IInterface.providedBy(i) and i is not self.context]
+                
+        
+class InterfaceFolderDetails(ComponentDetails):
+    """ Class for MobilePhone details
+    """
+    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
+    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
+    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_viewfields)
+    attrInterface = IInterface
+    factory = Interface
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 
@@ -72,20 +141,39 @@ class InterfaceDetails(ComponentDetails):
 class DetailsInterfaceForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of interface')
-    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_viewfields)
-
-
-class AddInterfaceForm(AddForm):
-    """Add form."""
-    label = _(u'Add Interface')
-    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_addfields)
     factory = Interface
+    omitFields = InterfaceDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
+
+
+#class AddInterfaceForm(AddForm):
+#    """Add form."""
+#    label = _(u'Add Interface')
+#    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_addfields)
+#    factory = Interface
+    
+    
+class AddInterfaceForm(AddComponentForm):
+    label = _(u'Add Interface')
+    factory = Interface
+    attrInterface = IInterface
+    addInterface = IAddInterface
+    omitFields = InterfaceDetails.omit_addfields
+    _session_key = 'org.ict_ok.components.interface'
+    allFields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class EditInterfaceForm(EditForm):
     """ Edit for for net """
     label = _(u'Interface Edit Form')
-    fields = field.Fields(IInterface).omit(*InterfaceDetails.omit_editfields)
+    factory = Interface
+    omitFields = InterfaceDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields, [IPhysicalConnector])
+    fields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class DeleteInterfaceForm(DeleteForm):
@@ -404,3 +492,63 @@ class SnmpScanWizardForm(AddForm):
             #travp = self.context.__parent__
         #travp[obj.objectID] = obj
         #return obj
+
+
+class ImportCsvDataForm(ImportCsvDataComponentForm):
+    pass
+
+
+class ImportXlsDataForm(ImportXlsDataComponentForm):
+    attrInterface = IInterface
+    factory = Interface
+    factoryId = u'org.ict_ok.components.interface.interface.Interface'
+    allFields = fieldsForInterface(attrInterface, [])
+
+def getRoom(item, formatter):
+    if item.device is not None:
+        return item.device.room
+    return None
+
+def getBrand(item, formatter):
+    if item.mac is not None:
+        macAddressDb = queryUtility(IAdmUtilMacAddressDb, name="AdmUtilMacAddressDb")
+        organization = macAddressDb.getOrganization(item.mac)
+        if organization is None:
+            return None
+        longString = organization['short']
+        if len(longString) > 10:
+            return longString[:10] + u'...'
+        else:
+            return longString
+    return None
+
+
+class Overview(SuperOverview):
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Health'),
+                     getter=getHealth),
+        IctGetterColumn(title=_('Title'),
+                        getter=getTitle,
+                        cell_formatter=link('overview.html')),
+        IctGetterColumn(title=_('Brand'),
+                        getter=getBrand,
+                        cell_formatter=raw_cell_formatter),
+        IctGetterColumn(title=_('Device'),
+                        getter=lambda i,f: i.device,
+                        cell_formatter=link('details.html')),
+        IctGetterColumn(title=_('Room'),
+                        getter=getRoom,
+                        cell_formatter=link('details.html')),
+        DateGetterColumn(title=_('Modified'),
+                        getter=getModifiedDate,
+                        subsort=True,
+                        cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    pos_column_index = 1
+    sort_columns = [1, 2, 3, 4, 5]

@@ -3,18 +3,7 @@
     <h3 i18n:translate="">Details of the latency Value</h3>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">Name</td>
-            <td tal:content="context/ikName" />
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass"
-            tal:condition="context/ikComment|nothing">
-            <td i18n:translate="">Comment</td>
-            <td><pre tal:content="context/ikComment" /></td>
-        </tr>
+    <metal:block use-macro="macro:LatencyDetails" />
     </table>
-    <h3>24h</h3>
-    <a href="#" tal:attributes="href python: '%s/@@display.html' % (view.getValuePngHref())">
-        <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
-    </a>
+
 </i18n:block>

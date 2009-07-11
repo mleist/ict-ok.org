@@ -33,6 +33,22 @@
             permission="org.ict_ok.admin_utils.notifier.Edit"
             set_schema=".interfaces.IEventIfNotifierEmail"
             />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.notifier.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <!--adapter

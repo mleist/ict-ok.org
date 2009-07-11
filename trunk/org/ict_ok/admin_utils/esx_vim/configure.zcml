@@ -39,6 +39,22 @@
             permission="org.ict_ok.admin_utils.esx_vim.View"
             set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IAdmUtilEsxVim"
             />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <class class="org.ict_ok.admin_utils.esx_vim.esx_vim_datacenter.EsxVimDatacenter">
@@ -56,6 +72,22 @@
         <require
             permission="org.ict_ok.admin_utils.esx_vim.View"
             set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimDatacenter"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
     </class>
 
@@ -77,6 +109,22 @@
             permission="org.ict_ok.admin_utils.esx_vim.View"
             set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimFolder"
             />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
 
@@ -95,6 +143,22 @@
         <require
             permission="org.ict_ok.admin_utils.esx_vim.View"
             set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimHostSystem"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
             />
     </class>
 
@@ -115,6 +179,22 @@
             permission="org.ict_ok.admin_utils.esx_vim.View"
             set_schema="org.ict_ok.admin_utils.esx_vim.interfaces.IEsxVimVirtualMachine"
             />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.esx_vim.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />            
     </class>
 
     <include package=".generations" />

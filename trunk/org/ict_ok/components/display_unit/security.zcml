@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <permission
+        id="org.ict_ok.components.display_unit.View"
+        title="View Display unit instance"
+    />
+
+    <permission
+        id="org.ict_ok.components.display_unit.Add"
+        title="Add Display unit instance"
+    />
+
+    <permission
+        id="org.ict_ok.components.display_unit.Edit"
+        title="Edit Display unit instance"
+    />
+
+    <permission
+        id="org.ict_ok.components.display_unit.Delete"
+        title="Delete Display unit instance"
+    />
+
+    <grant permission="org.ict_ok.components.display_unit.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.components.display_unit.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.display_unit.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.display_unit.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.display_unit.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.display_unit.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.display_unit.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.display_unit.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.display_unit.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>

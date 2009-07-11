@@ -12,25 +12,20 @@
 """Adapter implementation for generating graphviz-dot configuration
 """
 
-
 __version__ = "$Id$"
 
 # python imports
 
 # zope imports
-from zope.app import zapi
 from zope.interface import implements
 from zope.component import adapts
-from zope.app.catalog.interfaces import ICatalog
 
 # z3c imports
 from z3c.form import field
 
 # reportlab imports
 from reportlab.lib.units import mm
-from reportlab.lib import colors
-from reportlab.platypus import Spacer, KeepTogether
-from reportlab.platypus.tables import Table, TableStyle
+from reportlab.platypus import Spacer
 
 # ict_ok.org imports
 from org.ict_ok.components.host.interfaces import IHost
@@ -39,8 +34,7 @@ from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 from org.ict_ok.admin_utils.reports.rpt_para import RptPara
-from org.ict_ok.admin_utils.reports.rpt_style import getRptStyleSheet
-from org.ict_ok.admin_utils.compliance.evaluation import getEvaluations
+
 
 class RptPdf(ParentRptPdf):
     """adapter implementation of latency -> PDF Report
@@ -48,27 +42,29 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(IHost)
+    factory = None
+    omitFields = ParentRptPdf.omitFields + []
 
-    def getReportFields(self):
-        """
-        """
-        from org.ict_ok.components.host.browser.host import HostDetails
-        omitField = [
-            'snmpVersion',
-            'snmpPort',
-            'snmpReadCommunity',
-            'snmpWriteCommunity',
-            'url',
-            'url_type',
-            'url_authname',
-            'url_authpasswd',
-            'console',
-            'genNagios',
-            'requirement',
-            'hostGroups',
-        ]
-        omitField.extend(HostDetails.omit_viewfields)
-        return field.Fields(IHost).omit(*omitField)
+#    def getReportFields(self):
+#        """
+#        """
+#        from org.ict_ok.components.host.browser.host import HostDetails
+#        omitField = [
+#            'snmpVersion',
+#            'snmpPort',
+#            'snmpReadCommunity',
+#            'snmpWriteCommunity',
+#            'url',
+#            'url_type',
+#            'url_authname',
+#            'url_authpasswd',
+#            'console',
+#            'genNagios',
+#            'requirement',
+#            'hostGroups',
+#        ]
+#        omitField.extend(HostDetails.omit_viewfields)
+#        return field.Fields(IHost).omit(*omitField)
 
     def traverse4RptPre(self, level, comments, autoAppend=True):
         """pdf report object preamble

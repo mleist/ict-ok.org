@@ -23,6 +23,8 @@ from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
+from zope.dublincore.interfaces import IZopeDublinCore
+from zope.component import createObject
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
@@ -54,5 +56,16 @@ def bootStrapSubscriber(event):
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for entry type 'script'")
         
+    folderName = u"MobilePhones"
+    if folderName not in root_folder.keys():
+        #newFolder = TestComponentFolder()
+        newFolder = createObject(u'org.ict_ok.components.mobilephone.mobilephone.MobilePhoneFolder')
+        root_folder[folderName] = newFolder
+        dcore = IZopeDublinCore(newFolder, None)
+        #dcore.creators = [u'ikportscan']
+        #newFolder.ikComment += u"scanner: %s" % (dateNow)
+        newFolder.__setattr__("ikName", folderName)
+        dcore.title = folderName
+
     transaction.get().commit()
     connection.close()

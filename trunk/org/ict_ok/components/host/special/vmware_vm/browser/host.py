@@ -76,14 +76,14 @@ class HostDetails(SuperHostDetails):
             tmpDict['oid'] = u"c%spoweroff" % objId
             tmpDict['title'] = _(u"Power off")
             tmpDict['href'] = u"%s/@@poweroff.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             retList.append(tmpDict)
             tmpDict = {}
             tmpDict['oid'] = u"c%spoweron" % objId
             tmpDict['title'] = _(u"Power on")
             tmpDict['href'] = u"%s/@@poweron.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             retList.append(tmpDict)
         return SuperHostDetails.actions(self) + retList

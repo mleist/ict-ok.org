@@ -29,6 +29,7 @@ from zope.interface import directlyProvides
 
 # z3c imports
 from z3c.form import button, field
+from z3c.form.browser import checkbox
 
 # zc imports
 from zc.table.column import Column, GetterColumn
@@ -36,6 +37,7 @@ from zc.table.table import StandaloneFullFormatter
 from zc.table.interfaces import ISortableColumn
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import \
@@ -44,14 +46,18 @@ from org.ict_ok.admin_utils.netscan.interfaces import INetScan
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditContent, EditForm
-from org.ict_ok.components.net.interfaces import INet, IEventIfEventNet
-from org.ict_ok.components.net.net import getAllNetworks, Net
+from org.ict_ok.components.net.interfaces import \
+    INet, IEventIfEventNet, IAddNet
+from org.ict_ok.components.net.net import AllNets, Net
 from org.ict_ok.admin_utils.netscan.interfaces import \
      IScanner
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, \
      getStateIcon, getTitle, getModifiedDate, getActionBottons, getHealth, \
      raw_cell_formatter, IPsGetterColumn, TitleGetterColumn
+from org.ict_ok.components.browser.component import AddComponentForm
+from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
+from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
 
@@ -100,7 +106,7 @@ class NetDetails(ComponentDetails):
             tmpDict['oid'] = u"c%sstart_scanner" % objId
             tmpDict['title'] = _(u"start scanner")
             tmpDict['href'] = u"%s/@@start_scanner.html" % \
-                   zapi.getPath(self.context)
+                   zapi.absoluteURL(self.context, self.request)
             tmpDict['tooltip'] = _(u"starts the network scanner (as user:%s)"\
                                    % self.request.principal.title)
             retList.append(tmpDict)
@@ -136,6 +142,17 @@ class NetDetails(ComponentDetails):
         slaveSupervisor = zapi.queryUtility(IAdmUtilSupervisor,
                                             context=self.context)
         return slaveSupervisor.objectID
+    
+
+class NetFolderDetails(ComponentDetails):
+    """ Class for MobilePhone details
+    """
+    omit_viewfields = ComponentDetails.omit_viewfields + ['requirement']
+    omit_addfields = ComponentDetails.omit_addfields + ['requirement']
+    omit_editfields = ComponentDetails.omit_editfields + ['requirement']
+    attrInterface = INet
+    factory = Net
+    fields = fieldsForFactory(factory, omit_editfields)
 
 # --------------- forms ------------------------------------
 
@@ -143,20 +160,35 @@ class NetDetails(ComponentDetails):
 class DetailsNetForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of net')
-    fields = field.Fields(INet).omit(*NetDetails.omit_viewfields)
-
-class AddNetForm(AddForm):
-    """Add form."""
-    label = _(u'Add Net')
-    fields = field.Fields(INet).omit(*NetDetails.omit_addfields)
     factory = Net
+    omitFields = NetDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
+
+    
+    
+class AddNetForm(AddComponentForm):
+    label = _(u'Add Net')
+    factory = Net
+    omitFields = NetDetails.omit_addfields
+    attrInterface = INet
+    addInterface = IAddNet
+    _session_key = 'org.ict_ok.components.net'
+    allFields = fieldsForFactory(factory, omitFields)
+    addFields = fieldsForInterface(addInterface, [])
+    allFields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
 
 
 class EditNetForm(EditForm):
     """ Edit for for net """
     label = _(u'Net Edit Form')
+    factory = Net
+    omitFields = NetDetails.omit_editfields
     fields = field.Fields(INet).omit(*NetDetails.omit_editfields)
-    
+    fields = fieldsForFactory(factory, omitFields)
+    fields['isTemplate'].widgetFactory = \
+        checkbox.SingleCheckBoxFieldWidget
+
     ##TODO: Test-Button
     #@button.buttonAndHandler(u'test', name='test')
     #def handleApplyView(self, action):
@@ -198,7 +230,7 @@ class AllNetworks(Overview):
                           getter=getTitle),
         IPsGetterColumn(title=_('Network'),
                         getter=getNetworkIp),
-        GetterColumn(title=_('Modified On'),
+        GetterColumn(title=_('Modified'),
                      getter=getModifiedDate,
                      cell_formatter=raw_cell_formatter),
         GetterColumn(title=_('Actions'),
@@ -209,7 +241,7 @@ class AllNetworks(Overview):
     
     def objs(self):
         """List of Content objects"""
-        return getAllNetworks()
+        return AllNets()
     
     #def table(self):
         #""" Properties of table are defined here"""
@@ -248,3 +280,14 @@ def NamePrefixes(dummy_context=None):
         except ValueError:
             pass
     return SimpleVocabulary(terms)
+
+
+class ImportCsvDataForm(ImportCsvDataComponentForm):
+    pass
+
+
+class ImportXlsDataForm(ImportXlsDataComponentForm):
+    attrInterface = INet
+    factory = Net
+    factoryId = u'org.ict_ok.components.net.net.Net'
+    allFields = fieldsForInterface(attrInterface, [])

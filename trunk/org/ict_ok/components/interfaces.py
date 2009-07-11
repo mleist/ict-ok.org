@@ -14,17 +14,27 @@
 __version__ = "$Id$"
 
 # zope imports
-from zope.interface import Attribute
-from zope.schema import Bool, Choice
+from zope.interface import Attribute, Interface
+from zope.schema import Bool, Bytes, Choice, List, Object
 from zope.i18nmessageid import MessageFactory
+from zope.app.folder.interfaces import IFolder
+
+from zope.app.file.interfaces import IFile
+from z3c.form.interfaces import IFileWidget
+from z3c.blobfile.interfaces import IBlobFile
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
+from zope.schema.interfaces import IBytes
 
 _ = MessageFactory('org.ict_ok')
 
 
-class IComponent(ISupernode):
+class IDocument(IBlobFile):
+    pass
+
+class IComponent(Interface):
     """A general component object."""
 
     myFactory = Attribute("Factory String of this object")
@@ -36,11 +46,29 @@ class IComponent(ISupernode):
         default = False,
         required = False)
 
-    requirement = Choice(
-        title = _("Requirement"),
-        description = _("The Requirement."),
-        vocabulary="AllRequirementVocab",
+#    requirement = Choice(
+#        title = _("Requirement"),
+#        description = _("The Requirement."),
+#        vocabulary="AllRequirementVocab",
+#        required = False)
+
+    requirements = List (
+        title = _("Requirements"),
+        value_type = Choice(
+            title = _("Requirement"),
+            description = _("Requirement."),
+            vocabulary="AllRequirementVocab",
+            required = False),
+        readonly = False,
         required = False)
+
+    contracts = List(
+        title = _(u'Contracts'),
+        #value_type=Choice(vocabulary='AllUnusedOrUsedComponentContracts'),
+        value_type=Choice(vocabulary='AllContracts'),
+        default=[],
+        required = False)
+
     
     def get_health():
         """
@@ -53,3 +81,31 @@ class IComponent(ISupernode):
         weighted count of accesses
         !!!!!! has to be implemented by subclass !!!!!!
         """
+
+
+class IComponentFolder(ISuperclass, IFolder):
+    """Container for MobilePhone objects
+    """
+
+        
+class IImportXlsData(Interface):
+    """Interface for all Objects"""
+    xlsdata = Bytes(
+        title = _("XLS data"),
+        required = True)
+    
+    codepage = Choice(
+        title = _("Codepage"),
+        description = _("Codepage of XLS"),
+        vocabulary="AllXlsCodepages",
+        default = 'cp850',
+        required = True)
+
+
+class IImportCsvData(Interface):
+    """Interface for all Objects"""
+    csvdata = Bytes(
+        title = _("CSV data"),
+        required = True)
+
+

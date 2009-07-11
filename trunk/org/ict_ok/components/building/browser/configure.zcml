@@ -13,7 +13,7 @@
 
     <defaultView
         for="org.ict_ok.components.building.interfaces.IBuilding"
-        name="overview.html"
+        name="details.html"
         />
 
     <z3c:pagelet
@@ -33,12 +33,25 @@
         />
 
     <z3c:pagelet
-        name="details.html"
+        name="details2.html"
         for="org.ict_ok.components.building.interfaces.IBuilding"
         class=".building.DetailsBuildingForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.building.View"
     />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        class="org.ict_ok.components.building.browser.building.BuildingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+    />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.components.building.browser.building.BuildingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <z3c:pagelet
         name="edit.html"
@@ -64,6 +77,38 @@
         permission="org.ict_ok.components.room.Add"
     />
 
+    <z3c:macro
+        template="building_details.pt"
+        name="BuildingDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+
+
+    <!-- Folder  -->
+
+    <defaultView
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        name="overview.html"
+    />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+        
+    <z3c:pagelet
+        name="add_building.html"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        class="org.ict_ok.components.building.browser.building.AddBuildingForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Add"
+    />
+
+
     <!--##### Sub Menu ##### -->
 
     <viewlet
@@ -79,6 +124,14 @@
         for="org.ict_ok.components.building.interfaces.IBuilding"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+    <viewlet
+        name="details"
+        for="org.ict_ok.components.building.interfaces.IBuilding"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.building.View"
         />
@@ -130,5 +183,96 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.dashboard.Edit"
         />
+
+
+    <!-- Folder  -->
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+    <viewlet
+        name="add_building"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.building.browser.building.MSubAddBuilding"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Add"
+        />
+    <viewlet
+        name="add_building"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.building.browser.building.MGlobalAddBuilding"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Add"
+        />
+    <page
+        name="exportcsvdata.html"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        class=".building.BuildingFolderDetails"
+        permission="org.ict_ok.components.building.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportCsvData"
+    />
+    <page
+        name="exportxlsdata.html"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        class=".building.BuildingFolderDetails"
+        permission="org.ict_ok.components.building.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsData"
+    />
+    <z3c:pagelet
+        name="importcsvdata.html"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        class=".building.ImportCsvDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Add"
+    />
+    <z3c:pagelet
+        name="importxlsdata.html"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        class=".building.ImportXlsDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Add"
+    />
+    <viewlet
+        name="exportcsvdata"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+    <viewlet
+        name="exportxlsdata"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.View"
+        />
+    <viewlet
+        name="importcsvdata"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Add"
+        />
+    <viewlet
+        name="importxlsdata"
+        for="org.ict_ok.components.building.interfaces.IBuildingFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.building.Add"
+        />
+
 
 </configure>

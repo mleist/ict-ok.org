@@ -88,7 +88,7 @@ class SuperclassGenGraphvizDot(object):
         print >> cfgFile, '%sfillcolor = chartreuse2,' % ("\t" * (level + 1))
         print >> cfgFile, '%smargin = 0,' % ("\t" * (level + 1))
         print >> cfgFile, '%shref = "%s/@@details.html",' \
-              % ("\t" * (level + 1), zapi.getPath(self.context))
+              % ("\t" * (level + 1), zapi.absoluteURL(self.context, self.request))
         print >> cfgFile, '%slabel = <<TABLE BORDER = "0" CELLBORDER = "0" ' \
               'CELLPADDING = "0" CELLSPACING = "0"><TR><TD>' \
               '<IMG SRC = "/home/markus/Projekte/IKOMtrol-hp/apple-red.png"/>' \

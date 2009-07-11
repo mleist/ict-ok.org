@@ -32,6 +32,7 @@ from zope.component.interfaces import ComponentLookupError
 # zc imports
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.admin_utils.compliance.interfaces import \
      IRequirement, IAdmUtilCompliance
@@ -57,9 +58,11 @@ def buildRequirementVocab(inRequirement, inTitlePath=u"",
 def allRequirementHierVocab(dummy_context):
     """Which locations are there
     """
+    print "allRequirementHierVocab"
     terms = []
     try:
-        complianceUtil = getUtility(IAdmUtilCompliance)
+        complianceUtil = getUtility(IAdmUtilCompliance,
+                                    name='AdmUtilCompliance')
         for (oid, oobj) in complianceUtil.items():
             buildRequirementVocab(oobj, terms=terms)
             #reqList = getRequirementList(oobj)
@@ -94,7 +97,8 @@ def allRequirementVocab(dummy_context):
     my_catalog = zapi.getUtility(ICatalog)
     try:
         reqOidList = []
-        complianceUtil = getUtility(IAdmUtilCompliance)
+        complianceUtil = getUtility(IAdmUtilCompliance,
+                                    name='AdmUtilCompliance')
         for (oid, oobj) in complianceUtil.items():
             for req in getRequirementList(oobj):
                 reqOidList.append(req.objectID)
@@ -119,6 +123,7 @@ def allRequirementVocab(dummy_context):
     except ComponentLookupError:
         return SimpleVocabulary([])
 
+
 class Requirement(Superclass,
                   schooltool.requirement.requirement.Requirement):
     """ ict-ok.org wrapper
@@ -135,6 +140,23 @@ class Requirement(Superclass,
         else:
             self[subObj.ikName] = subObj
 
+    def getIndex(self):
+        indexList = []
+        current = self
+        parent = current.getParent()
+        while IRequirement.providedBy(parent):
+            # prepend to list
+            indexList.insert(0, parent.values().index(current)+1)
+            current = parent
+            parent = current.getParent()
+        return indexList
+    
+    def getIndexString(self):
+        try:
+            index = self.getIndex()
+            return '.'.join(['%d' % i for i in index])
+        except TypeError:
+            return "-deleted-"
 
 def getRequirement(context):
     """Adapt an ``IHaveRequirement`` object to ``IRequirement``."""

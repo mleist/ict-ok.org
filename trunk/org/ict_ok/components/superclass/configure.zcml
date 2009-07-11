@@ -44,6 +44,9 @@
         factory=".adapter.ticker.Ticker"
     />
     <adapter
+        factory=".adapter.navigation.Navigation"
+    />
+    <adapter
         factory=".adapter.search.Searchable"
     />
     <adapter
@@ -69,6 +72,10 @@
         factory=".adapter.rpt_pdf.RptPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
+    <adapter
+        factory=".adapter.rpt_xml.RptXML"
+        permission="org.ict_ok.admin_utils.reports.generate.xml"
+    />
 
     <!--<subscriber handler=".superclass.notifyAddedEvent" />-->
     <!--<subscriber handler=".superclass.notifyModifiedEvent" />-->
@@ -79,6 +86,12 @@
     <subscriber handler=".objmq.notifyCopiedEvent" />
     <subscriber handler=".objmq.notifyCreatedEvent" />
     <subscriber handler=".objmq.notifyModifiedEvent" />
+
+    <!-- <subscriber handler=".objcollect.notifyCopiedEvent" />
+    <subscriber handler=".objcollect.notifyRemovedEvent" />
+    <subscriber handler=".objcollect.notifyModifiedEvent" />
+    <subscriber handler=".objcollect.notifyAddedEvent" /> -->
+
     <subscriber handler=".dublincore.updateSuperclassDCTitle" />
     <subscriber handler=".dublincore.createSuperclassDCTitle" />
 

@@ -20,15 +20,18 @@ __version__ = "$Id$"
 import logging
 
 # zope imports
+from zope.app import zapi
 from zope.interface import implements
 from zope.annotation.interfaces import IAnnotations
 from zope.location import location
 from zope.proxy import removeAllProxies
+from zope.app.catalog.interfaces import ICatalog
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.admin_utils.compliance.interfaces import \
      IEvaluations, IEvaluation
+from org.ict_ok.admin_utils.compliance.requirement import getRequirementList
 import schooltool.requirement.evaluation
 
 logger = logging.getLogger("AdmUtilCompliance")
@@ -51,7 +54,7 @@ class Evaluations(schooltool.requirement.evaluation.Evaluations):
     """
     implements(IEvaluations)
 
-def getEvaluations(context):
+def getEvaluationsDone(context):
     """Adapt an ``IHaveEvaluations`` object to ``IEvaluations``."""
     annotations = IAnnotations(removeAllProxies(context))
     try:
@@ -62,5 +65,24 @@ def getEvaluations(context):
         location.locate(evaluations, removeAllProxies(context),
                         '++evaluations++')
         return evaluations
+
+def getEvaluationsTodo(context):
+    """List of Content objects"""
+    #retList = []
+    retSet = set([])
+    my_catalog = zapi.getUtility(ICatalog)
+    if context.requirements is not None:
+        for requirement in context.requirements:
+            res = my_catalog.searchResults(oid_index=requirement)
+            if len(res) > 0:
+                startReq = iter(res).next()
+                allObjReqs = getRequirementList(startReq)
+                allObjEvaluations = getEvaluationsDone(context)
+                alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
+                #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
+                retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
+#        return retList
+    return list(retSet)
+
 # Convention to make adapter introspectable
-getEvaluations.factory = Evaluations
+getEvaluationsDone.factory = Evaluations

@@ -22,7 +22,7 @@ from zope.component import adapts
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.ipnet.interfaces import IIpNet
 from org.ict_ok.components.superclass.interfaces import IPickle
 from org.ict_ok.components.superclass.adapter.ipickle import \
      Pickle as PickleSupernode
@@ -34,7 +34,7 @@ class Pickle(PickleSupernode):
     """Pickle-Adapter."""
 
     implements(IPickle)
-    adapts(INet)
+    adapts(IIpNet)
 
     def exportAsDict(self, mode='backup'):
         """

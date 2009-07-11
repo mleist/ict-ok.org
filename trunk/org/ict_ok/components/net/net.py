@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,E0611,W0142
+# pylint: disable-msg=E1101,E0611,W0612,W0142
 #
 """implementation of Net
 
@@ -22,18 +22,96 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
+from zope.app.folder import Folder
+
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.schema.IPy import IP
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.superclass.superclass import MsgEvent
-from org.ict_ok.components.net.interfaces import INet, IEventIfEventNet
+from org.ict_ok.components.net.interfaces import \
+    INet, IEventIfEventNet, IAddNet, INetFolder
 from org.ict_ok.components.host.special.vmware_vm.interfaces import \
      IHostVMwareVm
 from org.ict_ok.components.host.special.vmware_esx.interfaces import \
      IHostVMwareEsx
+from org.ict_ok.components.component import \
+    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents, \
+    ComponentsFromObjList
+
+
+#def getAllNetworks():
+#    """ get a list of all Nets
+#    """
+#    retList = []
+#    uidutil = getUtility(IIntIds)
+#    for (myid, myobj) in uidutil.items():
+#        if INet.providedBy(myobj.object):
+#            retList.append(myobj.object)
+#    return retList
+#
+#def AllNetTemplates(dummy_context):
+#    """Which Net templates exists
+#    """
+#    terms = []
+#    uidutil = getUtility(IIntIds)
+#    for (oid, oobj) in uidutil.items():
+#        if INet.providedBy(oobj.object) and \
+#        oobj.object.isTemplate:
+#            myString = u"%s [T]" % (oobj.object.getDcTitle())
+#            terms.append(SimpleTerm(oobj.object,
+#                                    token=oid,
+#                                    title=myString))
+#    return SimpleVocabulary(terms)
+
+def AllNetTemplates(dummy_context):
+    return AllComponentTemplates(dummy_context, INet,
+                                 additionalAttrNames=['ipv4'])
+
+def AllNets(dummy_context):
+    return AllComponents(dummy_context, INet,
+                         additionalAttrNames=['ipv4'])
+
+def AllUnusedOrSelfNets(dummy_context):
+    return AllUnusedOrSelfComponents(dummy_context, INet,
+                                     'parentnet',
+                                     additionalAttrNames=['ipv4'])
+
+def AllValidSubNets(dummy_context):
+    uidutil = getUtility(IIntIds)
+    validObjects = []
+    if INet.providedBy(dummy_context):
+        myNetIp = IP(dummy_context.ipv4)
+        for (oid, oobj) in uidutil.items():
+            if INet.providedBy(oobj.object):
+                i_NetIp = IP(oobj.object.ipv4)
+                if i_NetIp in myNetIp and \
+                    oobj.object != dummy_context:
+                    validObjects.append(oobj.object)
+    else:
+        for (oid, oobj) in uidutil.items():
+            if INet.providedBy(oobj.object):
+                validObjects.append(oobj.object)
+    return ComponentsFromObjList(dummy_context, validObjects,
+                                 additionalAttrNames=['ipv4'])
+
+
+
+Net_Nets_RelManager = \
+       FieldRelationManager(INet['subnets'],
+                            INet['parentnet'],
+                            relType='parentnet:subnets')
 
 class Net(Component):
     """
@@ -46,6 +124,9 @@ class Net(Component):
     __name__ = __parent__ = None
     ipv4 = FieldProperty(INet['ipv4'])
 
+    subnets = RelationPropertyOut(Net_Nets_RelManager)
+    parentnet = RelationPropertyIn(Net_Nets_RelManager)
+    
     eventInpObjs_inward_relaying_shutdown = FieldProperty(\
         IEventIfEventNet['eventInpObjs_inward_relaying_shutdown'])
 
@@ -54,11 +135,20 @@ class Net(Component):
         constructor of the object
         """
         Component.__init__(self, **data)
+        refAttributeNames = getRefAttributeNames(Net)
         for (name, value) in data.items():
             if name in INet.names():
-                setattr(self, name, value)
+                if name not in refAttributeNames:
+                    setattr(self, name, value)
         self.eventInpObjs_inward_relaying_shutdown = set([])
         self.ikRevision = __version__
+
+    def store_refs(self, **data):
+        Component.store_refs(self, **data)
+        refAttributeNames = getRefAttributeNames(Net)
+        for (name, value) in data.items():
+            if name in refAttributeNames:
+                setattr(self, name, value)
 
     def containsIp(self, ipString):
         """ is ip(String) part of this network?
@@ -142,15 +232,18 @@ class Net(Component):
         return health
 
 
-def getAllNetworks():
-    """ get a list of all Nets
-    """
-    retList = []
-    uidutil = getUtility(IIntIds)
-    for (myid, myobj) in uidutil.items():
-        if INet.providedBy(myobj.object):
-            retList.append(myobj.object)
-    return retList
+class NetFolder(Superclass, Folder):
+    implements(INetFolder, 
+               IImportCsvData,
+               IImportXlsData,
+               IAddNet)
+    def __init__(self, **data):
+        """
+        constructor of the object
+        """
+        Superclass.__init__(self, **data)
+        Folder.__init__(self)
+
 
 class SoapTest:
     def __init__(self, context, request):

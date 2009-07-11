@@ -26,6 +26,10 @@
         factory=".adapter.rpt_pdf.RptPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
+    <adapter
+        factory=".adapter.rpt_xml.RptXML"
+        permission="org.ict_ok.admin_utils.reports.generate.xml"
+    />
 
     <subscriber
         handler=".bootstrap.bootStrapSubscriber"

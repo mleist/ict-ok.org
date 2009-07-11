@@ -14,6 +14,7 @@
 __version__ = "$Id$"
 
 # zope imports
+from zope.interface import Attribute, Interface
 from zope.schema import TextLine
 from zope.i18nmessageid import MessageFactory
 
@@ -23,18 +24,10 @@ from org.ict_ok.components.superclass.interfaces import ISuperclass
 _ = MessageFactory('org.ict_ok')
 
 
-class ICodetemplate(ISuperclass):
-    """A template object."""
+class IDocument(Interface):
+    """A file object."""
 
-    ikAttr = TextLine(
-        min_length = 2,
-        max_length = 40,
-        title = _("Attribute"),
-        description = _("Attribute of the instance."),
-        readonly = False,
-        required = False)
 
-    def method(self, arg1):
-        """
-        this instance method does ....
-        """
+class IDocumentAddable(Interface):
+    """Document can be Add"""
+

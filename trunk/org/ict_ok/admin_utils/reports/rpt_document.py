@@ -5,7 +5,7 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 350 2008-10-12 09:18:43Z markusleist $
+# $Id$
 #
 # no_pylint: disable-msg=W0232
 #
@@ -14,7 +14,7 @@
 Document class for ict-ok.org reporting 
 """
 
-__version__ = "$Id: $"
+__version__ = "$Id$"
 
 # reportlab imports
 from reportlab.platypus import BaseDocTemplate
@@ -98,6 +98,8 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
                 key = str(hash(flowable))
                 c = self.canv
                 c.bookmarkPage(key)
+                if hasattr(flowable, 'ikoid'):
+                    c.bookmarkPage(str(flowable.ikoid))
                 c.addOutlineEntry(text, key, level=level-1, closed=0)
                 nbr = flowable._cellvalues[0][0].getPlainText()
                 self.lastPageTitle = "%s %s" % (nbr, text)
@@ -113,6 +115,8 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
                 key = str(hash(flowable))
                 c = self.canv
                 c.bookmarkPage(key)
+                if hasattr(flowable, 'ikoid'):
+                    c.bookmarkPage(str(flowable.ikoid))
                 c.addOutlineEntry(text, key, level=level-1, closed=0)
                 nbr = flowable._cellvalues[0][0].getPlainText()
                 self.lastPageTitle = "%s %s" % (nbr, text)

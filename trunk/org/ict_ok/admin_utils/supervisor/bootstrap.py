@@ -30,6 +30,10 @@ from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
 
+from lovely.relation.app import O2OStringTypeRelationships
+from lovely.relation.interfaces import IO2OStringTypeRelationships
+from lovely.relation.event import o2oIntIdRemoved
+
 # ict_ok.org imports
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
@@ -37,17 +41,12 @@ from org.ict_ok.admin_utils.supervisor.supervisor import AdmUtilSupervisor
 
 logger = logging.getLogger("AdmUtilSupervisor")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of ict_ok supervisor on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilSupervisor = ensureUtility(root_folder, 
                                           IAdmUtilSupervisor,
                                           'AdmUtilSupervisor', 
-                                          AdmUtilSupervisor, '',
+                                          AdmUtilSupervisor,
+                                          name='AdmUtilSupervisor',
                                           copy_to_zlog=False, 
                                           asObject=True)
 
@@ -76,9 +75,10 @@ def bootStrapSubscriberDatabase(event):
         IAdmUtilSupervisor['nbrStarts'].readonly = False
         instAdmUtilSupervisor.nbrStarts += 1
         IAdmUtilSupervisor['nbrStarts'].readonly = True
-        instAdmUtilSupervisor.appendEventHistory(\
-            u"'web service' started (Vers. %s) (%d bytes) (%d objects)" \
-            % (getIkVersion(), dummy_db.getSize(), dummy_db.objectCount()))
+        if dummy_db is not None:
+            instAdmUtilSupervisor.appendEventHistory(\
+                u"'web service' started (Vers. %s) (%d bytes) (%d objects)" \
+                % (getIkVersion(), dummy_db.getSize(), dummy_db.objectCount()))
         dcore = IWriteZopeDublinCore(instAdmUtilSupervisor)
         dcore.title = u"ICT_Ok Supervisor"
         dcore.modified = datetime.utcnow()
@@ -87,7 +87,7 @@ def bootStrapSubscriberDatabase(event):
                                        IIntIds, 
                                        '', 
                                        IntIds, 
-                                       '', 
+                                       name='', 
                                        copy_to_zlog=False, 
                                        asObject=True)
 
@@ -102,12 +102,32 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made IIntIds-Utility")
+        
+    madeUtilityO2ORels = ensureUtility(root_folder, 
+                                       IO2OStringTypeRelationships, 
+                                       '', 
+                                       O2OStringTypeRelationships, 
+                                       name='',
+                                       copy_to_zlog=False, 
+                                       asObject=True)
+
+    if isinstance(madeUtilityO2ORels, O2OStringTypeRelationships):
+        logger.info(u"bootstrap: made O2ORels-Utility")
+        #dcore = IWriteZopeDublinCore(madeUtilityO2ORels)
+        #dcore.title = u"ICT_Ok Object Relation Manager"
+        #dcore.created = datetime.utcnow()
+        sitem = root_folder.getSiteManager()
+        utils = [ util for util in sitem.registeredUtilities()
+                    if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: made O2ORels-Utility")
 
     madeUtilityICatalog = ensureUtility(root_folder, 
                                         ICatalog, 
                                         '', 
                                         Catalog, 
-                                        '', 
+                                        name='',
                                         copy_to_zlog=False, 
                                         asObject=True)
 
@@ -155,7 +175,26 @@ def bootStrapSubscriberDatabase(event):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for all notes")
-
-        
+    if not "all_fulltext_index" in instUtilityICatalog.keys():
+        all_fulltext_index = TextIndex(interface=ISearchableText,
+                                        field_name='getSearchableFullText',
+                                        field_callable=True)
+        instUtilityICatalog['all_fulltext_index'] = all_fulltext_index
+        # search for IAdmUtilSupervisor
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: ICatalog - create index for all fulltext")
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of ict_ok supervisor on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)

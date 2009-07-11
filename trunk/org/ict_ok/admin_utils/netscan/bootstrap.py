@@ -32,16 +32,10 @@ from org.ict_ok.admin_utils.netscan.netscan import NetScan
 
 logger = logging.getLogger("NetScan")
 
-def bootStrapSubscriberDatabase(event):
-    """initialisation of Message-Queue-Utility on first database startup
-    """
-    if appsetup.getConfigContext().hasFeature('devmode'):
-        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
-    dummy_db, connection, dummy_root, root_folder = \
-            getInformationFromEvent(event)
-
+def createUtils(root_folder, connection=None, dummy_db=None):
     madeNetScan = ensureUtility(root_folder, INetScan,
-                                 'NetScan', NetScan, '',
+                                 'NetScan', NetScan,
+                                 name='NetScan',
                                  copy_to_zlog=False, asObject=True)
 
     if isinstance(madeNetScan, NetScan):
@@ -59,4 +53,15 @@ def bootStrapSubscriberDatabase(event):
             u" bootstrap: made INetScan-Utility")
 
     transaction.get().commit()
-    connection.close()
+    if connection is not None:
+        connection.close()
+
+def bootStrapSubscriberDatabase(event):
+    """initialisation of Message-Queue-Utility on first database startup
+    """
+    if appsetup.getConfigContext().hasFeature('devmode'):
+        logger.info(u"starting bootStrapSubscriberDatabase (org.ict_ok...)")
+    dummy_db, connection, dummy_root, root_folder = \
+            getInformationFromEvent(event)
+    createUtils(root_folder, connection, dummy_db)
+

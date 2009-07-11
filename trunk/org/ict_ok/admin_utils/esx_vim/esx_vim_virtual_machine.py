@@ -31,7 +31,7 @@ from org.ict_ok.admin_utils.esx_vim.esx_vim_obj import EsxVimObj
 from org.ict_ok.admin_utils.esx_vim.interfaces import \
      IEsxVimVirtualMachine
 from org.ict_ok.admin_utils.esx_vim.esx_vim import globalEsxVimUtility
-from org.ict_ok.components.net.net import getAllNetworks
+from org.ict_ok.components.ipnet.ipnet import getAllNetworks
 
 
 class EsxVimVirtualMachine(EsxVimObj):

@@ -24,16 +24,13 @@ from zope.component import getUtility
 from zope.security import checkPermission
 from zope.app.pagetemplate.urlquote import URLQuote
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm, Overview
-from org.ict_ok.admin_utils.notifier.interfaces import \
-     INotifierUtil
+from org.ict_ok.admin_utils.notifier.notifier import NotifierUtil
 from org.ict_ok.components.interfaces import IComponent
 
 _ = MessageFactory('org.ict_ok')
@@ -61,7 +58,7 @@ class NotifierDetails(SupernodeDetails):
             tmpDict['oid'] = u"c%snotifier_send" % objId
             tmpDict['title'] = _(u"send test")
             tmpDict['href'] = u"%s/@@send_test?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"will send a test message "\
                                    u"by the selected notifier")
@@ -89,7 +86,7 @@ class NotifierDetails(SupernodeDetails):
         for name, notifier in self.context.getAllNotifierObjs():
             retDict = {}
             retDict['name'] = name
-            retDict['href'] = zapi.getPath(notifier) + '/@@details.html'
+            retDict['href'] = zapi.absoluteURL(notifier, self.request) + '/@@details.html'
             retList.append(retDict)
         return retList
         
@@ -102,7 +99,7 @@ class NotifierDetails(SupernodeDetails):
             for name, notifier in self.context.getNotifierObjs():
                 retDict = {}
                 retDict['name'] = name
-                retDict['href'] = zapi.getPath(notifier) + '/@@details.html'
+                retDict['href'] = zapi.absoluteURL(notifier, self.request) + '/@@details.html'
                 retList.append(retDict)
         return retList
 
@@ -113,15 +110,18 @@ class NotifierDetails(SupernodeDetails):
 class ViewNotifierForm(DisplayForm):
     """ Display form for the notifier """
     label = _(u'settings of notifier')
-    fields = field.Fields(INotifierUtil).omit(\
-        *NotifierDetails.omit_viewfields)
+    factory = NotifierUtil
+    omitFields = NotifierDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditNotifierForm(EditForm):
     """ Edit for for notifier """
     label = _(u'edit notifier')
-    fields = field.Fields(INotifierUtil).omit(\
-        *NotifierDetails.omit_editfields)
+    factory = NotifierUtil
+    omitFields = NotifierDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)
+
 
 class ViewNotifications(Overview):
     label = _(u"Notifications")

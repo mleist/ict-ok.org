@@ -30,7 +30,11 @@ from reportlab.lib import colors
 # ict_ok.org imports
 from org.ict_ok.admin_utils.reports.rpt_para import RptPara
 from org.ict_ok.admin_utils.reports.rpt_style import getRptStyleSheet
-from org.ict_ok.admin_utils.compliance.evaluation import getEvaluations
+from org.ict_ok.admin_utils.compliance.evaluation import \
+    getEvaluationsDone, getEvaluationsTodo
+from org.ict_ok.admin_utils.reports.rpt_color import \
+    getColor1, getLinkColor, \
+    getTabBackgroundColor, getTabBackgroundColorLight
 
 
 def appendEvaluationList(obj, document):
@@ -48,28 +52,32 @@ def appendEvaluationList(obj, document):
             elemList.append(RptPara(reqComment,
                                     doc=document))
             elemList.append(Spacer(0, 4 * mm))
-    # Evaluations
-    evaluations = getEvaluations(obj)
+    # Evaluations Done
+    evaluations = getEvaluationsDone(obj)
     if len(evaluations) > 0:
         styleSheet = getRptStyleSheet()
         style1 = styleSheet['Small']
         style2 = styleSheet['Infobox']
         elemList.append(
-            RptPara('Evaluations: ', style=style2, doc=document))
-        colWidths = [75 * mm, 20 * mm, 40 * mm]
+            RptPara('Evaluations Done: ', style=style2, doc=document))
+        colWidths = [15 * mm, 60 * mm, 20 * mm, 40 * mm]
         data = [[
+            RptPara('<b>Pos</b>', style=style1, doc=document),
             RptPara('<b>Requirement</b>', style=style1, doc=document),
             RptPara('<b>Value</b>', style=style1, doc=document),
             RptPara('<b>Evaluator</b>', style=style1, doc=document)
         ]]
+        rowColor = getTabBackgroundColor()
+        rowColorLight = getTabBackgroundColorLight()
         ik_tbl_style = TableStyle([\
-            ('BACKGROUND', (0, 0), (-1, 0), colors.lightgrey),
-            ('LEFTPADDING', (0, 0), (-1, -1), 2 * mm),
-            ('RIGHTPADDING', (0, 0), (-1, -1), 2 * mm),
-            ('BOTTOMPADDING', (0, 0), (-1, -1), 2 * mm),
+            ('BACKGROUND', (0, 0), (-1, 0), rowColor),
+            ('LEFTPADDING', (0, 0), (-1, -1), 1 * mm),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 1 * mm),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 1 * mm),
             ('TOPPADDING', (0, 0), (-1, -1), 2 * mm),
             ('FONTSIZE', (0, 0), (-1, -1), 8),
             ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+            ('ROWBACKGROUNDS',(0,0),(-1,-1),[rowColor, rowColorLight]),
             ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
             ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
         ])
@@ -77,26 +85,90 @@ def appendEvaluationList(obj, document):
         for evaluation in evaluations.values():
             pos = pos + 1
             if evaluation.value == 'Pass':
-                ik_tbl_style.add('BACKGROUND', (1, pos), (1, pos), colors.green)
+                ik_tbl_style.add('BACKGROUND', (2, pos), (2, pos), colors.green)
             elif evaluation.value == 'Fail':
-                ik_tbl_style.add('BACKGROUND', (1, pos), (1, pos), colors.red)
+                ik_tbl_style.add('BACKGROUND', (2, pos), (2, pos), colors.red)
             else:
                 pass
-            data.append([
-                RptPara(evaluation.requirement.ikName,
-                        style=style1,
-                        doc=document),
-                RptPara(evaluation.value,
-                        style=style1, 
-                        doc=document),
-                RptPara(evaluation.evaluator.title,
-                        style=style1, 
-                        doc=document),
+            if len(evaluation.requirement) == 0:
+                data.append([
+                    RptPara(evaluation.requirement.getIndexString(),
+                            style=style1,
+                            doc=document),
+                    RptPara(evaluation.requirement.ikName,
+                            style=style1,
+                            doc=document),
+                    RptPara(evaluation.value,
+                            style=style1, 
+                            doc=document),
+                    RptPara(evaluation.evaluator.title,
+                            style=style1, 
+                            doc=document),
+                ])
+        t0 = Table(data,
+                   hAlign='RIGHT',
+                   style=ik_tbl_style,
+                   colWidths=colWidths)
+        elemList.append(t0)
+        elemList.append(Spacer(0, 3 * mm))
+    # Evaluations ToDo
+    evaluations = getEvaluationsTodo(obj)
+    if len(evaluations) > 0:
+        styleSheet = getRptStyleSheet()
+        style1 = styleSheet['Small']
+        style2 = styleSheet['Infobox']
+        elemList.append(
+            RptPara('Evaluations ToDo: ', style=style2, doc=document))
+        #colWidths = [75 * mm, 20 * mm, 40 * mm]
+        colWidths = [15 * mm, 120 * mm]
+        data = [[
+            RptPara('<b>Pos</b>', style=style1, doc=document),
+            RptPara('<b>Requirement</b>', style=style1, doc=document),
+            #RptPara('<b>Value</b>', style=style1, doc=document),
+            #RptPara('<b>Evaluator</b>', style=style1, doc=document)
+        ]]
+        rowColor = getTabBackgroundColor()
+        rowColorLight = getTabBackgroundColorLight()
+        ik_tbl_style = TableStyle([\
+            ('BACKGROUND', (0, 0), (-1, 0), rowColor),
+            ('LEFTPADDING', (0, 0), (-1, -1), 1 * mm),
+            ('RIGHTPADDING', (0, 0), (-1, -1), 1 * mm),
+            ('BOTTOMPADDING', (0, 0), (-1, -1), 1 * mm),
+            ('TOPPADDING', (0, 0), (-1, -1), 2 * mm),
+            ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+            ('ROWBACKGROUNDS',(0,0),(-1,-1),[rowColor, rowColorLight]),
+            ('INNERGRID', (0, 0), (-1, -1), 0.25, colors.black),
+            ('BOX', (0, 0), (-1, -1), 0.25, colors.black),
+        ])
+        #pos = 0
+        for evaluation in evaluations:
+#            pos = pos + 1
+#            if evaluation.value == 'Pass':
+#                ik_tbl_style.add('BACKGROUND', (1, pos), (1, pos), colors.green)
+#            elif evaluation.value == 'Fail':
+#                ik_tbl_style.add('BACKGROUND', (1, pos), (1, pos), colors.red)
+#            else:
+#                pass
+            if len(evaluation.keys()) == 0:
+                data.append([
+                    RptPara(evaluation.getIndexString(),
+                            style=style1,
+                            doc=document),
+                    RptPara(evaluation.ikName,
+                            style=style1,
+                            doc=document),
+#                RptPara(evaluation.value,
+#                        style=style1, 
+#                        doc=document),
+#                RptPara(evaluation.evaluator.title,
+#                        style=style1, 
+#                        doc=document),
             ])
         t0 = Table(data,
                    hAlign='RIGHT',
                    style=ik_tbl_style,
                    colWidths=colWidths)
         elemList.append(t0)
-        elemList.append(Spacer(0, 4 * mm))
+        elemList.append(Spacer(0, 3 * mm))
     return elemList

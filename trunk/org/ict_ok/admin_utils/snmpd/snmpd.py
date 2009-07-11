@@ -32,6 +32,7 @@ from zope.app.intid.interfaces import IIntIds
 from zope.security.simplepolicies import ParanoidSecurityPolicy
 from zope.security.interfaces import IParticipation
 from zope.app.catalog.interfaces import ICatalog
+from zope.configuration.config import ConfigurationExecutionError
 
 # pysnmp imports
 from pysnmp.v4.carrier.asynsock.dispatch import AsynsockDispatcher
@@ -80,7 +81,6 @@ class SystemSnmpdParticipation(object):
     principal = systemSnmpdPrincipal
     interaction = None
 
-
 class SnmpdThread(threading.Thread):
     """This thread is started at configuration time from the
     `mail:queuedDelivery` directive handler.
@@ -95,15 +95,19 @@ class SnmpdThread(threading.Thread):
     def __init__(self):
         self.log.info("started (org)")
         # Use the default thread transaction manager.
-        self.transaction_manager = transaction.manager
-        self.interaction = ParanoidSecurityPolicy(SystemSnmpdParticipation())
-        self.transportDispatcher = AsynsockDispatcher()
-        self.transportDispatcher.registerTransport(
-            #    udp.domainName, udp.UdpSocketTransport().openServerMode(('localhost', 162))
-            udp.domainName, udp.UdpSocketTransport().openServerMode(('', 11162))
-        )
-        self.transportDispatcher.registerRecvCbFun(self.cbFun)
-        self.transportDispatcher.jobStarted(1) # this job would never finish
+        try:
+            self.transaction_manager = transaction.manager
+            self.interaction = ParanoidSecurityPolicy(SystemSnmpdParticipation())
+            self.transportDispatcher = AsynsockDispatcher()
+            self.transportDispatcher.registerTransport(
+                #    udp.domainName, udp.UdpSocketTransport().openServerMode(('localhost', 162))
+                udp.domainName, udp.UdpSocketTransport().openServerMode(('', 11162))
+            )
+            self.transportDispatcher.registerRecvCbFun(self.cbFun)
+            self.transportDispatcher.jobStarted(1) # this job would never finish
+        except:
+            # TODO: don't do this
+            pass
         threading.Thread.__init__(self)
 
     def run(self, forever=True):

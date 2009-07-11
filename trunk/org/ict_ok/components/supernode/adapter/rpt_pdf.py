@@ -22,7 +22,6 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.components.superclass.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
@@ -37,6 +36,8 @@ class RptPdf(ParentRptPdf):
 
     implements(IRptPdf)
     adapts(ISupernode)
+    factory = None
+    omitFields = ParentRptPdf.omitFields + []
 
     attributeList = []
     attributeList.extend(ParentRptPdf.attributeList)

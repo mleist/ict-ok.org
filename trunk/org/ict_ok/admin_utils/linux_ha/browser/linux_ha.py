@@ -25,19 +25,17 @@ from zope.security import checkPermission
 from zope.i18nmessageid import MessageFactory
 
 # zc imports
-from zc.table.column import Column, GetterColumn
+from zc.table.column import GetterColumn
 from zc.table.table import StandaloneFullFormatter
 from zc.table.interfaces import ISortableColumn
 
 # z3c imports
-from z3c.form import button, field, form
-from z3c.formui import layout
-from z3c.pagelet.interfaces import IPagelet
 from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
-from org.ict_ok.admin_utils.linux_ha.interfaces import \
-     IAdmUtilLinuxHa
+from org.ict_ok.libs.lib import fieldsForFactory
+from org.ict_ok.admin_utils.linux_ha.linux_ha import \
+     AdmUtilLinuxHa
 from org.ict_ok.components.superclass.browser.superclass import \
      getActionBottons, getStateIcon, link, raw_cell_formatter, \
      DisplayForm, EditForm
@@ -133,7 +131,7 @@ class LinuxHaVirtualMachineDetails(LinuxHaObjDetails):
             tmpDict['oid'] = u"c%sshutdown" % objId
             tmpDict['title'] = _(u"shutdown")
             tmpDict['href'] = u"%s/@@shutdown.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"shutdow the virtual machine")
             retList.append(tmpDict)
@@ -145,7 +143,7 @@ class LinuxHaVirtualMachineDetails(LinuxHaObjDetails):
             tmpDict['oid'] = u"c%sconvertobj" % objId
             tmpDict['title'] = _(u"convert to intern")
             tmpDict['href'] = u"%s/@@convertobj.html?nextURL=%s" % \
-                   (zapi.getPath( self.context),
+                   (zapi.absoluteURL(self.context, self.request),
                     quoter.quote())
             tmpDict['tooltip'] = _(u"convert to internal object")
             retList.append(tmpDict)
@@ -169,7 +167,7 @@ class LinuxHaVirtualMachineDetails(LinuxHaObjDetails):
         """
         print("LinuxHaVirtualMachineDetails.convertobj")
         r_obj = self.context.convertobj()
-        return self.request.response.redirect(zapi.getPath(r_obj)+\
+        return self.request.response.redirect(zapi.absoluteURL(r_obj, self.request)+\
                                               '/@@details.html')
         #nextURL = self.request.get('nextURL', default=None)
         #if nextURL:
@@ -242,12 +240,14 @@ class OverviewLinuxHaFolder(Overview):
 class ViewAdmUtilLinuxHaForm(DisplayForm):
     """ Display form for the object """
     label = _(u'settings of linux_ha')
-    fields = field.Fields(IAdmUtilLinuxHa).omit(\
-        *AdmUtilLinuxHaDetails.omit_viewfields)
+    factory = AdmUtilLinuxHa
+    omitFields = AdmUtilLinuxHaDetails.omit_viewfields
+    fields = fieldsForFactory(factory, omitFields)
 
 
 class EditAdmUtilLinuxHaForm(EditForm):
     """ Edit for for net """
     label = _(u'edit linux_ha')
-    fields = field.Fields(IAdmUtilLinuxHa).omit(\
-        *AdmUtilLinuxHaDetails.omit_editfields)
+    factory = AdmUtilLinuxHa
+    omitFields = AdmUtilLinuxHaDetails.omit_editfields
+    fields = fieldsForFactory(factory, omitFields)

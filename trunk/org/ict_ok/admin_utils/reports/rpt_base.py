@@ -5,27 +5,29 @@
 # See also LICENSE.txt or http://www.ict-ok.org/LICENSE
 # This file is part of ict-ok.org.
 #
-# $Id: interfaces.py 350 2008-10-12 09:18:43Z markusleist $
+# $Id$
 #
 # no_pylint: disable-msg=W0232
 #
 """rpt_base classes for ict-ok.org reporting 
 """
 
-__version__ = "$Id: $"
+__version__ = "$Id$"
 
 
 class RptSuperclass:
     """superclass for all reporting classes 
     """
 
-    def __init__(self, arg_document = None):
+    def __init__(self, arg_document=None, arg_context=None):
         """
         constructor of the object
         """
         self._element_type = "superclass"
         self._document = arg_document
+        self._context = arg_context
         self._content = []
+        self._reporter = None
 
     def __repr__(self):
         return u"IctReportSuperclass(%s)" % (self._content)
@@ -35,6 +37,9 @@ class RptSuperclass:
 
     def getDocument(self):
         return self._document
+
+    def setReporter(self, reporter):
+        self._reporter = reporter
 
     def append(self, arg_obj):
         """

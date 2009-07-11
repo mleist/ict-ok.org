@@ -35,12 +35,15 @@ from zope.publisher.interfaces import IRequest
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.container.contained import Contained
 from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
+from ldapadapter.interfaces import IManageableLDAPAdapter
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
      IAdmUtilUserDashboard, IAdmUtilUserDashboardItem,\
-     IAdmUtilUserProperties, IAdmUtilUserManagement
+     IAdmUtilUserProperties, IAdmUtilUserManagement, \
+     IAdmUtilUserPreferences
 
 logger = logging.getLogger("AdmUtilUserManagement")
 
@@ -61,9 +64,12 @@ class MappingProperty(object):
 class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     """Implementation of local UserManagement Utility"""
 
-    implements(IAdmUtilUserManagement)
+    implements(IAdmUtilUserManagement, IAdmUtilUserPreferences)
     adapts(IPrincipal)
 
+    serverURL = FieldProperty(IAdmUtilUserManagement['serverURL'])
+    baseDN = FieldProperty(IAdmUtilUserManagement['baseDN'])
+    useLdap = FieldProperty(IAdmUtilUserManagement['useLdap'])
     #email = FieldProperty(IAdmUtilUserManagement['email'])
 
     def __init__(self):
@@ -104,6 +110,18 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         """ property setter"""
         AdmUtilUserProperties(self.getRequest().principal).email = my_val
     email = property(get_email, set_email)
+    
+    # temp. workaround for "user specific email" in normal form
+    def get_startView(self):
+        """ property getter"""
+        try:
+            return AdmUtilUserProperties(self.getRequest().principal).startView
+        except KeyError, errText:
+            AdmUtilUserProperties(self.getRequest().principal).startView = "view_dashboard.html"
+    def set_startView(self, my_val):
+        """ property setter"""
+        AdmUtilUserProperties(self.getRequest().principal).startView = my_val
+    startView = property(get_startView, set_startView)
     
     # temp. workaround for "user specific notifierLevel" in normal form
     def get_notifierChannels(self):
@@ -218,7 +236,8 @@ class AdmUtilUserProperties(object):
         mapping = annotations.get(KEY)
         if mapping is None:
             blank = { 'timezone': u'',
-                      'email': u'', 
+                      'email': u'',
+                      'startView': u'view_dashboard.html',
                       'notifierChannels': set([]),
                       'notifierLevel': 100,
                       'shortEmail': u'',
@@ -229,6 +248,7 @@ class AdmUtilUserProperties(object):
         self.mapping = mapping
             
     email = MappingProperty('email')
+    startView = MappingProperty('startView')
     notifierChannels = MappingProperty('notifierChannels')
     notifierLevel = MappingProperty('notifierLevel')
     shortEmail = MappingProperty('shortEmail')
@@ -322,6 +342,7 @@ def getNotifierDict4User(principal_id):
     """will return notifier props for a special principal id
     """
     retDict = {'timezone': None,
+               'startView': None,
                'email': None,
                'notifierChannels': None,
                'notifierLevel': None,
@@ -338,3 +359,39 @@ def getNotifierDict4User(principal_id):
                 if principal_annos.data[KEY].has_key(dictKey):
                     retDict[dictKey] = principal_annos.data[KEY][dictKey]
     return retDict
+
+def allLdapUser(dummy_context):
+    """Ask the ldap for our user ĺist
+    """
+    terms = []
+    userManagement = queryUtility(IAdmUtilUserManagement)
+    if userManagement is not None and userManagement.useLdap:
+        ldapUtil = queryUtility(IManageableLDAPAdapter,
+                                name='ManageableLDAPAdapter')
+        if ldapUtil.serverURL != userManagement.serverURL:
+            ldapUtil.serverURL = userManagement.serverURL
+        conn = ldapUtil.connect()
+        # "ou=staff,o=ikom-online,c=de,o=ifdd"
+        ldapResultList = conn.search(userManagement.baseDN,
+                          scope='sub',
+                          filter='(objectClass=*)',
+                          attrs=['uid', 'cn'])
+        ldapResultList.sort()
+        for ldapKey, ldapDict in ldapResultList:
+            if ldapDict.has_key('cn'):
+                terms.append(\
+                    SimpleTerm(ldapKey,
+                               token=str(ldapKey),
+                               title=ldapDict['cn'][0]))
+        conn.conn.unbind()
+    return SimpleVocabulary(terms)
+
+def UserCfgStartView(dummy_context):
+    terms = []
+    for (gkey, gname) in {
+        "overview.html": u"Overview",
+        "view_dashboard.html": u"Dashboard",
+        "focus.html": u"Focus",
+        }.items():
+        terms.append(SimpleTerm(gkey, str(gkey), gname))
+    return SimpleVocabulary(terms)

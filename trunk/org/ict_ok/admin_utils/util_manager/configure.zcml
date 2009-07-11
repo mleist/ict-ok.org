@@ -33,6 +33,22 @@
             permission="org.ict_ok.admin_utils.util_manager.Edit"
             set_schema=".interfaces.IUtilManager"
             />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
     </class>
 
     <adapter

@@ -9,11 +9,15 @@
     <!-- Copyright (c) 2004, 2005, 2006, 2007 Ingenieurbuero IKOM,
         Markus Leist <leist at ikom-online.de> -->
 
+    <!--  Interfaces ==================================================== -->
+    
     <interface
         interface=".interfaces.ISite"
         type="zope.app.content.interfaces.IContentType"
         />
         
+    <!--  Classes ======================================================= -->
+
     <class class=".site.Site">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
@@ -41,25 +45,55 @@
             permission="org.ict_ok.components.site.Edit"
             set_schema=".interfaces.IEventIfEventSite"
             />
+        <require
+            permission="org.ict_ok.components.site.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.site.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.site.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.site.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.site.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <!--require
+            permission="org.ict_ok.components.site.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            /-->
+        <require
+            permission="org.ict_ok.components.site.View"
+            interface="zope.location.interfaces.IPossibleSite"
+            />
+            
     </class>
-    <!--<class class=".site.Site">-->
-        <!--<allow-->
-            <!--interface=".interfaces.ISite"-->
-        <!--/>-->
-        <!--<require-->
-            <!--permission="zope.View"-->
-            <!--interface=".interfaces.ISite"-->
-            <!--/>-->
-        <!--<require-->
-            <!--permission="zope.View"-->
-            <!--set_schema=".interfaces.ISite"-->
-        <!--/>-->
-    <!--</class>-->
 
+    <!--  Event subscribers ============================================= -->
 
-    <!--<adapter-->
-        <!--factory=".adapter.sized.SiteSized"-->
-        <!--/>-->
+    <subscriber handler=".site.setSiteManagerWhenAdded" />
+    <subscriber handler=".site.createLocalUtils" />
+
+    <!--  Search adapters =============================================== -->
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
     <adapter
         factory=".adapter.ikstate.State"
         />
@@ -71,6 +105,10 @@
         provides="org.ict_ok.components.superclass.interfaces.IBrwsOverview"
         for=".interfaces.ISite"
     />
+
+    <!--  Vocabulary stuff ============================================== -->
+
+    <!--  Includes ====================================================== -->
 
     <include package=".generations" />
 

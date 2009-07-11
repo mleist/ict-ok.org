@@ -26,17 +26,29 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
+from zope.app.folder import Folder
+
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.libs.lib import getRefAttributeNames
 from org.ict_ok.libs.lib import nodeIsUnder
-from org.ict_ok.components.host.interfaces import IHost, IEventIfEventHost
+from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.host.interfaces import \
+    IHost, IEventIfEventHost, IAddHost, IHostFolder
+from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import Component
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.host.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
-
+from org.ict_ok.components.logical_device.logical_device import LogicalDevice
 
 #def AllHostGroups(dummy_context):
     #"""Which host group are there
@@ -54,6 +66,16 @@ from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
         #terms.append(SimpleTerm(gkey, str(gkey), gname))
     #return SimpleVocabulary(terms)
 
+def getAllHosts():
+    """ get a list of all Hosts
+    """
+    retList = []
+    uidutil = getUtility(IIntIds)
+    for (myid, myobj) in uidutil.items():
+        if IHost.providedBy(myobj.object):
+            retList.append(myobj.object)
+    return retList
+
 def AllHostProductionStates(dummy_context):
     """In which production state a host may be
     """
@@ -68,8 +90,41 @@ def AllHostProductionStates(dummy_context):
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)
 
+def AllHosts(dummy_context):
+    """In which production state a host may be
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IHost.providedBy(oobj.object):
+            myString = u"%s" % (oobj.object.getDcTitle())
+            terms.append(\
+                SimpleTerm(oobj.object,
+                           token=oid,
+                           title=myString))
+    return SimpleVocabulary(terms)
+    
+def AllHostTemplates(dummy_context):
+    """Which MobilePhone templates exists
+    """
+    terms = []
+    uidutil = getUtility(IIntIds)
+    for (oid, oobj) in uidutil.items():
+        if IHost.providedBy(oobj.object) and \
+        oobj.object.isTemplate:
+            myString = u"%s [T]" % (oobj.object.getDcTitle())
+            terms.append(SimpleTerm(oobj.object,
+                                    token=oid,
+                                    title=myString))
+    return SimpleVocabulary(terms)
 
-class Host(Component):
+
+
+#Host_Interfaces_RelManager = FieldRelationManager(IHost['interfaces2'],
+#                                                 IInterface['host2'],
+#                                                 relType='host:interfaces')
+
+class Host(LogicalDevice):
     """
     the template instance
     """
@@ -79,31 +134,33 @@ class Host(Component):
     # for ..Contained we have to:
     __name__ = __parent__ = None
     hostname = FieldProperty(IHost['hostname'])
-    manufacturer = FieldProperty(IHost['manufacturer'])
-    vendor = FieldProperty(IHost['vendor'])
-    hostGroups = FieldProperty(IHost['hostGroups'])
-    productionState = FieldProperty(IHost['productionState'])
-    workinggroup = FieldProperty(IHost['workinggroup'])
-    hardware = FieldProperty(IHost['hardware'])
-    user = FieldProperty(IHost['user'])
-    inv_id = FieldProperty(IHost['inv_id'])
-    room = FieldProperty(IHost['room'])
-    osList = FieldProperty(IHost['osList'])
-    snmpVersion = FieldProperty(IHost['snmpVersion'])
-    snmpPort = FieldProperty(IHost['snmpPort'])
-    snmpReadCommunity = FieldProperty(IHost['snmpReadCommunity'])
-    snmpWriteCommunity = FieldProperty(IHost['snmpWriteCommunity'])
-    url = FieldProperty(IHost['url'])
-    url_type = FieldProperty(IHost['url_type'])
-    url_authname = FieldProperty(IHost['url_authname'])
-    url_authpasswd = FieldProperty(IHost['url_authpasswd'])
-    console = FieldProperty(IHost['console'])
-    genNagios = FieldProperty(IHost['genNagios'])
+#    manufacturer = FieldProperty(IHost['manufacturer'])
+#    vendor = FieldProperty(IHost['vendor'])
+#    hostGroups = FieldProperty(IHost['hostGroups'])
+#    productionState = FieldProperty(IHost['productionState'])
+#    workinggroup = FieldProperty(IHost['workinggroup'])
+#    hardware = FieldProperty(IHost['hardware'])
+#    user = FieldProperty(IHost['user'])
+#    inv_id = FieldProperty(IHost['inv_id'])
+#    room = FieldProperty(IHost['room'])
+#    osList = FieldProperty(IHost['osList'])
+#    snmpVersion = FieldProperty(IHost['snmpVersion'])
+#    snmpPort = FieldProperty(IHost['snmpPort'])
+#    snmpReadCommunity = FieldProperty(IHost['snmpReadCommunity'])
+#    snmpWriteCommunity = FieldProperty(IHost['snmpWriteCommunity'])
+#    url = FieldProperty(IHost['url'])
+#    url_type = FieldProperty(IHost['url_type'])
+#    url_authname = FieldProperty(IHost['url_authname'])
+#    url_authpasswd = FieldProperty(IHost['url_authpasswd'])
+#    console = FieldProperty(IHost['console'])
+#    genNagios = FieldProperty(IHost['genNagios'])
     # Event interface
     eventInpObjs_shutdown = FieldProperty(\
         IEventIfEventHost['eventInpObjs_shutdown'])
     eventOutObjs_nagiosError = FieldProperty(\
         IEventIfEventHost['eventOutObjs_nagiosError'])
+    
+#    interfaces2 = RelationPropertyOut(Host_Interfaces_RelManager)
     
     wf_pd_dict = {}
     wf_pd_dict[WfPdNagios.id] = WfPdNagios
@@ -113,14 +170,16 @@ class Host(Component):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        LogicalDevice.__init__(self, **data)
+        refAttributeNames = getRefAttributeNames(Host)
         # initialize OS List
         self.osList = []
         self.eventInpObjs_shutdown = set([])
         for (name, value) in data.items():
             if name in IHost.names() or \
                name in IEventIfEventHost.names():
-                setattr(self, name, value)
+                if name not in refAttributeNames:
+                    setattr(self, name, value)
         self.ikRevision = __version__
         self.workflows[WfPdNagios.id] = nagios_wf = WfPdNagios()
         setattr(nagios_wf.workflowRelevantData, "ddd", 5)
@@ -133,6 +192,14 @@ class Host(Component):
         self._health = 1.0
         self._weight = {'r': 1.0}
         self._weight_user = 0.5
+        
+    def store_refs(self, **data):
+        LogicalDevice.store_refs(self, **data)
+        refAttributeNames = getRefAttributeNames(Host)
+        for (name, value) in data.items():
+            if name in refAttributeNames:
+                setattr(self, name, value)
+
 
     def trigger_online(self):
         """
@@ -155,8 +222,6 @@ class Host(Component):
         #self._counter['r'] -= 10
         #print '§§§ self.get_health():', self.get_health()
         #print '§§§ self.get_wcnt():', self.get_wcnt()
-        #import pdb
-        #pdb.set_trace()
         #(Pdb) from z3c.form import datamanager
         #(Pdb) from z3c.form import term
         #(Pdb) dm1=datamanager.AttributeField(self, IHost['hostGroups'])
@@ -281,12 +346,14 @@ class Host(Component):
             return None
 
 
-def getAllHosts():
-    """ get a list of all Hosts
-    """
-    retList = []
-    uidutil = getUtility(IIntIds)
-    for (myid, myobj) in uidutil.items():
-        if IHost.providedBy(myobj.object):
-            retList.append(myobj.object)
-    return retList
+class HostFolder(Superclass, Folder):
+    implements(IHostFolder, 
+               IImportCsvData,
+               IImportXlsData,
+               IAddHost)
+    def __init__(self, **data):
+        """
+        constructor of the object
+        """
+        Superclass.__init__(self, **data)
+        Folder.__init__(self)

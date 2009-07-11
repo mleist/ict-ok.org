@@ -9,6 +9,7 @@
 #
 # pylint: disable-msg=W0232
 #
+from zope.schema._bootstrapfields import TextLine
 """Interface of UserManagement-Utility"""
 
 __version__ = "$Id$"
@@ -18,7 +19,7 @@ import pytz
 
 # zope imports
 from zope.interface import Attribute, Interface, invariant, Invalid
-from zope.schema import List, Object, TextLine, Choice, Password, Set
+from zope.schema import Choice, Password, Set, URI, Bool
 from zope.i18nmessageid import MessageFactory
 from zope.app.security.interfaces import IAuthentication
 
@@ -56,7 +57,29 @@ class IAdmUtilUserProperties(Interface):
     dashboard_objs = Attribute("list of object ids for the dashboard")
 
 
-class IAdmUtilUserManagement(ISupernode, IAuthentication):
+#class IAdmUtilUserManagement(Interface):
+class IAdmUtilUserManagement(IAuthentication):
+    """
+    major component for user registration and management
+    """
+    useLdap = Bool(
+        title = _("Usersearch by LDAP"),
+        description = _("uses same LDAP connects"),
+        default = False,
+        required = False)
+    serverURL = URI(
+        max_length = 200,
+        title = _("LDAP Server URL"),
+        default = "ldap://127.0.0.1:389",
+        required = False)
+    baseDN = TextLine(
+        max_length = 200,
+        title = _("LDAP search base"),
+        default = u"ou=staff,o=ict-ok,c=org",
+        required = False)
+
+
+class IAdmUtilUserPreferences(Interface):
     """
     major component for user registration and management
     """
@@ -69,6 +92,12 @@ class IAdmUtilUserManagement(ISupernode, IAuthentication):
         title = _(u"Email address"),
         required=False
         )
+    startView = Choice(
+        title=_("Start View"),
+        default=u"view_dashboard.html",
+        required = True,
+        vocabulary = "UserCfgStartView")
+    
     notifierChannels = Set(
         title = _("Notifier channels"),
         value_type = Choice(
