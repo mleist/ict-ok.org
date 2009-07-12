@@ -156,9 +156,9 @@ function giveFocus()
                 elif health>100:
                     health = 100
                 if health <= 50:
-                    rgbtupel = (255, health * 5.1, 0)
+                    rgbtupel = (255, int(round(health * 5.1,0)), 0)
                 else:
-                    rgbtupel = ((50 - (health - 50)) * 5.1, 255, 0)
+                    rgbtupel = ((50 - int(round((health - 50)) * 5.1,0)), 255, 0)
                 if health in range(0,34):
                     node.append_builtin_icon("stop")
                 if health in range(34,67):
