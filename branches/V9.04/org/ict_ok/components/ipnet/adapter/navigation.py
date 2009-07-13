@@ -47,6 +47,8 @@ class Navigation(SuperNavigation):
         retList.append((None, None, zapi.getParent(self.context)))
         if len(self.context.contracts) > 0:
             retList.append(('contracts', _(u'Contracts'), self.context))
+        if len(self.context.requirements) > 0:
+            retList.append(('requirements', _(u'Requirements'), self.context))
         if len(self.context.subnets) > 0:
             retList.append(('subnets', _(u'Sub nets'), self.context))
         if len(self.context.parentnet) > 0:
@@ -55,5 +57,5 @@ class Navigation(SuperNavigation):
             retList.append(('ipAddresses', _(u'Ip Addresses'), self.context))
         if postList is not None:
             retList.extend(postList)
-        print retList
+        
         return retList

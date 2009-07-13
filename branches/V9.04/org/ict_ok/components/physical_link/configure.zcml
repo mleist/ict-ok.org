@@ -150,7 +150,9 @@
     />
 
     <!--  other adapters ================================================ -->
-
+    <adapter
+        factory=".adapter.navigation.Navigation"
+    />
     <!--  Vocabulary stuff ============================================== -->
 
     <utility

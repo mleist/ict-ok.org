@@ -26,7 +26,7 @@ from zope.app import zapi
 from org.ict_ok.components.superclass.interfaces import INavigation
 from org.ict_ok.components.superclass.adapter.navigation import \
     Navigation as SuperNavigation
-from org.ict_ok.components.organization.interfaces import IOrganization
+from org.ict_ok.components.patchport.interfaces import IPatchPort
 
 _ = MessageFactory('org.ict_ok')
 
@@ -35,7 +35,7 @@ class Navigation(SuperNavigation):
     """navigation-Adapter."""
 
     implements(INavigation)
-    adapts(IOrganization)
+    adapts(IPatchPort)
     
     def getContextObjList(self, preList=None, postList=None):
         """
@@ -45,24 +45,18 @@ class Navigation(SuperNavigation):
         if preList is not None:
             retList.extend(preList)
         retList.append((None, None, zapi.getParent(self.context)))
+        if self.context.user != None:
+            retList.append(('user', _(u'User'), self.context))
+        if self.context.room != None:
+            retList.append(('room', _(u'Room'), self.context))
+        if len(self.context.links) > 0:
+            retList.append(('links', _(u'Connected to'), self.context))
         if len(self.context.contracts) > 0:
             retList.append(('contracts', _(u'Contracts'), self.context))
         if len(self.context.requirements) > 0:
             retList.append(('requirements', _(u'Requirements'), self.context))
-        if self.context.contact is not None:
-            retList.append(('contact', _(u'Contact'), self.context))
-        if self.context.workOrder is not None:
-            retList.append(('workOrder', _(u'Work Order'), self.context))
-        if len(self.context.adresses) > 0:
-            retList.append(('adresses', _(u'Adresses'), self.context))
-        if len(self.context.groups) > 0:
-            retList.append(('groups', _(u'Groups'), self.context))
-        if len(self.context.roles) > 0:
-            retList.append(('roles', _(u'Roles'), self.context))
-        if len(self.context.closedContracts) > 0:
-            retList.append(('closedContracts', _(u'Closed Contracts'), self.context))
-        if len(self.context.responsible4Contracts) > 0:
-            retList.append(('responsible4Contracts', _(u'Responsible for contracts'), self.context))
+        if self.context.patchpanel != None:
+            retList.append(('patchpanel', _(u'Patchpanel'), self.context))
         if postList is not None:
             retList.extend(postList)
         
