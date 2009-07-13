@@ -189,7 +189,7 @@ function giveFocus()
                                 Oid = "tmp%s" % generateOid()
                                 node = MMNode(Oid, obj)
                                 alreadySeenDict[obj] = node
-                                print obj
+                                print "recursiveHelper %s" % obj
                             else:
                                 #import pdb
                                 #pdb.set_trace()

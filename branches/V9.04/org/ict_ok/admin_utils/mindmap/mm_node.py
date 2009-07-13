@@ -155,7 +155,7 @@ class MMNode(object):
     def add_nodes(self, nodes):
         if type(nodes) != type([]):
             return False
-        else:
+        elif len(nodes)>0:
             node = nodes[0]
             if type(node) != type(self):
                 return False
