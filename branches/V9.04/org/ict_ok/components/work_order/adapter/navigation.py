@@ -53,7 +53,7 @@ class Navigation(SuperNavigation):
             retList.append(('products', _(u'Products'), self.context))
         if len(self.context.contracts) > 0:
             retList.append(('contracts', _(u'Contracts'), self.context))
-        if len(self.context.requirements) > 0:
+        if self.context.requirements!=None and len(self.context.requirements) > 0:
             retList.append(('requirements', _(u'Requirements'), self.context))
         if len(self.context.contactItems) > 0:
             retList.append(('subWorkOrders', _(u'Sub work orders'), self.context))
