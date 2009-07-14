@@ -53,7 +53,7 @@ class Navigation(SuperNavigation):
             retList.append(('room', _(u'Room'), self.context))
         if self.context.device is not None:
             retList.append(('device', _(u'From Device'), self.context))
-        if len(self.context.ipAddresses) > 0:
+        if self.context.ipAddresses and len(self.context.ipAddresses) > 0:
             retList.append(('ipAddresses', _(u'IP Addresses'), self.context))
         if len(self.context.links) > 0:
             retList.append(('links', _(u'Connected to'), self.context))

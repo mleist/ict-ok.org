@@ -49,8 +49,8 @@ class Navigation(SuperNavigation):
             retList.append(('user', _(u'User'), self.context))
         if self.context.room != None:
             retList.append(('room', _(u'Room'), self.context))
-        if len(self.context.links) > 0:
-            retList.append(('links', _(u'Connected to'), self.context))
+        #if len(self.context.links) > 0:
+            #retList.append(('links', _(u'Connected to'), self.context))
         if self.context.contracts!=None and len(self.context.contracts) > 0:
             retList.append(('contracts', _(u'Contracts'), self.context))
         if self.context.requirements!=None and len(self.context.requirements) > 0:

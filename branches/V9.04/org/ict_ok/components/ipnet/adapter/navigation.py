@@ -51,9 +51,9 @@ class Navigation(SuperNavigation):
             retList.append(('requirements', _(u'Requirements'), self.context))
         if len(self.context.subnets) > 0:
             retList.append(('subnets', _(u'Sub nets'), self.context))
-        if len(self.context.parentnet) > 0:
+        if self.context.parentnet and len(self.context.parentnet) > 0:
             retList.append(('parentnet', _(u'Parentnet'), self.context))
-        if len(self.context.ipAddresses) > 0:
+        if self.context.ipAddresses and len(self.context.ipAddresses) > 0:
             retList.append(('ipAddresses', _(u'Ip Addresses'), self.context))
         if postList is not None:
             retList.extend(postList)
