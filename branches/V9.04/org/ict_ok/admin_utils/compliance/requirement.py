@@ -45,6 +45,12 @@ logger = logging.getLogger("AdmUtilCompliance")
 
 REQUIREMENT_KEY = "org.ict_ok.admin_utils.compliance.requirement"
 
+# TODO: ml nur geparkt
+#def getSecondLevelRequirements(self):
+#    """ the requirements list in second level
+#    """
+#    return []
+
 def buildRequirementVocab(inRequirement, inTitlePath=u"",
                           inOidPath=u"", terms=[]):
     newTitlePath = u"%s/%s" % (inTitlePath, inRequirement.ikName)

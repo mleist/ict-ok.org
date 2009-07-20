@@ -25,7 +25,7 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.component import queryUtility
 from zope.i18nmessageid import MessageFactory
-
+from zope.app.catalog.interfaces import ICatalog
 # zc imports
 
 # ict_ok.org imports
@@ -35,6 +35,8 @@ from org.ict_ok.admin_utils.mindmap.interfaces import \
      IAdmUtilMindMap
 from org.ict_ok.admin_utils.mindmap.mm_node import MMNode
 from org.ict_ok.libs.lib import generateOid
+#schooltool
+from schooltool.requirement import interfaces as ischooltool
 
 #_ = MessageFactory('org.ict_ok')
 
@@ -173,26 +175,35 @@ function giveFocus()
         if contextdepth > 0:
             contextdepth -= 1
             nodelist = []
+            my_catalog = zapi.getUtility(ICatalog)
             for (attrName, viewTitle, contextObj) in tupleList:
                 if attrName is not None and viewTitle is not None:
                     if type(attrName) is not type("str"):
-                        print "Nav_tuple_wrong: %s" % type(attrName)
+                        raise TypeError("Nav_tuple_wrong: %s" % type(attrName))
                     objList = getattr(contextObj, attrName)
                     if type(objList) is not list:
                         objList = [objList]
                     for obj in objList:
                         node = None
-                        #import pdb
-                        #pdb.set_trace()
                         if obj not in alreadySeenDict.keys():
+                            if type(obj) is type("str") or type(obj) is type(u'ustr'):
+                                try:
+                                    maybe_obj = my_catalog.searchResults(oid_index=obj)
+                                    if len(maybe_obj)>0:
+                                        maybe_obj = iter(maybe_obj).next()
+                                        #hope thats only one ...
+                                except:
+                                    pass
+                                if ischooltool.IRequirement.providedBy(maybe_obj):
+                                        #oh its a requiremnt
+                                        objList.append(maybe_obj)
+                                        continue
                             if not hasattr(obj, "objectID"):
                                 Oid = "tmp%s" % generateOid()
                                 node = MMNode(Oid, obj)
                                 alreadySeenDict[obj] = node
-                                print "recursiveHelper %s" % obj
+                                print "reursiveHelper %s" % obj
                             else:
-                                #import pdb
-                                #pdb.set_trace()
                                 node = MMNode(obj.objectID, obj.ikName, {"link": zapi.absoluteURL(obj, request), "node_type":"bubble"})
                                 self.style_health(obj, node)
                                 alreadySeenDict[obj] = node
