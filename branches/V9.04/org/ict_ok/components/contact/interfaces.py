@@ -37,6 +37,18 @@ class IContact(Interface):
         value_type=Choice(vocabulary='AllUnusedOrUsedContactContactItems'),
         default=[],
         required = False)
+
+    mainContact = Choice(
+        title = _(u'Main contact'),
+        vocabulary = 'AllContacts',
+        required = False)
+        
+    subContacts = List(
+        title = _(u'Sub contacts'),
+        value_type=Choice(vocabulary='AllUnusedOrUsedContactContacts'),
+        default=[],
+        required = False)
+        
         
     def trigger_online():
         """
