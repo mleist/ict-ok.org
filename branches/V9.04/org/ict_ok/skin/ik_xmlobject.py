@@ -183,8 +183,8 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             view_name = self.request.get('view', None)
             if itemNav is not None and view_name is not None:
                 objList = itemNav.getViewObjList(view_name)
-                print "ooooooooooooooo: ", objList
-            print "ddd4: ", objList
+                #print "ooooooooooooooo: ", objList
+            #print "ddd4: ", objList
             for obj in objList:
                 (xml_title, name, item_ppath, iklen,
                  stateIconUrl, stateValue,
@@ -262,7 +262,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         
         
     def singleBranchTree(self, root=''):
-        print "singleBranchTree"
+        #print "singleBranchTree"
         result = ''
         oldItem = self.context
         # -----------------------------------
@@ -270,10 +270,10 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         try:
             oldItemNav = INavigation(oldItem)
             objList = oldItemNav.getContextObjList()
-            print "ddd4: ", objList
+            #print "ddd4: ", objList
             for obj in objList:
                 if type(obj) is tuple: # obj is a special view
-                    print "uuuuu: ", obj
+                    #print "uuuuu: ", obj
                     (navView, viewTitle, contextObj) = obj
                     (xml_title, name, item_ppath, iklen,
                      stateIconUrl, stateValue,

@@ -85,7 +85,7 @@ kl2.enable();
           }
           if ( attributes[j].nodeName == 'navparam') {
             newData.navParam = attributes[j].nodeValue;
-            newData.label = newData.label + " (PARAM:" + newData.navParam +")";
+            //newData.label = newData.label + " (PARAM:" + newData.navParam +")";
           }
           if ( attributes[j].nodeName == 'path') {
             newData.path = attributes[j].nodeValue;
