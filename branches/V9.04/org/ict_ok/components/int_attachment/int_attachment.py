@@ -86,9 +86,12 @@ class InternalAttachment(Component):
         setattr(self, 'file', file)
         self.ikRevision = __version__
 
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(InternalAttachment)
+
     def store_refs(self, **data):
         Component.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(InternalAttachment)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

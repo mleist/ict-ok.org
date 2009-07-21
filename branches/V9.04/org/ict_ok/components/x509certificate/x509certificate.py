@@ -69,9 +69,12 @@ class X509Certificate(Credential):
                     setattr(self, name, value)
         self.ikRevision = __version__
 
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(X509Certificate)
+
     def store_refs(self, **data):
         Credential.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(X509Certificate)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

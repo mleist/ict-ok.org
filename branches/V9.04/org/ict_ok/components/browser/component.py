@@ -358,23 +358,39 @@ class EvaluationsTodoDisplay(Overview):
     sort_columns = []
     status = None
     
-    def objs(self):
+    def reqList1stLevel(self):
         """List of Content objects"""
+        return self.evaluationsTodo4Obj(self.context)
+
+    def reqList2ndLevel(self):
+        """List of Content objects"""
+        attrs = self.context.getRefAttributeNames()
         retList = []
+        for attr in attrs:
+            obj = getattr(self.context, attr)
+            if hasattr(obj, "requirements"):
+                retList.extend(self.evaluationsTodo4Obj(obj))
+        return retList
+
+    def evaluationsTodo4Obj(self, obj):
         retSet = set([])
+        base_reqs = set([])
         my_catalog = zapi.getUtility(ICatalog)
-        if self.context.requirements is not None:
-            for requirement in self.context.requirements:
+        if obj.requirements is not None:
+            for requirement in obj.requirements:
                 res = my_catalog.searchResults(oid_index=requirement)
                 if len(res) > 0:
                     startReq = iter(res).next()
                     allObjReqs = getRequirementList(startReq)
-                    allObjEvaluations = getEvaluationsDone(self.context)
+                    allObjEvaluations = getEvaluationsDone(obj)
                     alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
                     #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
                     retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
-#        return retList
-        return list(retSet)
+            for req in retSet:
+                req_list = getRequirementList(req)
+                if len(req_list) == 1 and req_list[0] is req:
+                    base_reqs.add(req)
+        return list(base_reqs)
 
 
 class EvaluationsDoneDisplay(Overview):
@@ -402,12 +418,22 @@ class EvaluationsDoneDisplay(Overview):
     sort_columns = []
     status = None
     
-    def objs(self):
+    def reqList1stLevel(self):
         """List of Content objects"""
-        retList = getEvaluationsDone(self.context)
-        return [ev[1] for ev in retList.items()]
-    
-    
+        evaluations = getEvaluationsDone(self.context)
+        return [ev[1] for ev in evaluations.items()]
+
+    def reqList2ndLevel(self):
+        """List of Content objects"""
+        attrs = self.context.getRefAttributeNames()
+        retList = []
+        for attr in attrs:
+            obj = getattr(self.context, attr)
+            if hasattr(obj, "requirements"):
+                evaluations = getEvaluationsDone(obj)
+                retList.extend([ev[1] for ev in evaluations.items()])
+        return retList
+
 class AddComponentForm(AddForm):
     """ template add form """
     

@@ -85,9 +85,12 @@ class DisplayUnit(PhysicalComponent):
                 setattr(self, name, value)
         self.ikRevision = __version__
 
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(DisplayUnit)
+
     def store_refs(self, **data):
         PhysicalComponent.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(DisplayUnit)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

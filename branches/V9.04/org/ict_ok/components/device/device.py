@@ -109,9 +109,12 @@ class Device(PhysicalComponent):
                 setattr(self, name, value)
         self.ikRevision = __version__
 
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(Device)
+
     def store_refs(self, **data):
         PhysicalComponent.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(Device)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

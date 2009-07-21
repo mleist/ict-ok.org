@@ -61,9 +61,12 @@ class SoftwareComponent(LogicalComponent):
                     setattr(self, name, value)
         self.ikRevision = __version__
 
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(SoftwareComponent)
+
     def store_refs(self, **data):
         LogicalComponent.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(SoftwareComponent)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

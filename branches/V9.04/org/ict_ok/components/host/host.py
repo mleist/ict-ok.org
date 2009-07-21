@@ -192,10 +192,13 @@ class Host(LogicalDevice):
         self._health = 1.0
         self._weight = {'r': 1.0}
         self._weight_user = 0.5
-        
+
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(Host)
+
     def store_refs(self, **data):
         LogicalDevice.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(Host)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

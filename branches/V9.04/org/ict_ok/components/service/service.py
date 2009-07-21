@@ -97,9 +97,12 @@ class Service(Component):
                     setattr(self, name, value)
         self.ikRevision = __version__
 
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(Service)
+
     def store_refs(self, **data):
         Component.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(Service)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

@@ -7,13 +7,29 @@
         i18n:translate="">
     Something happened.
     </div>
+    <h4>first Level</h4>
     <form action="" method="post"
-        tal:attributes="action request/URL">
+        tal:attributes="action request/URL"
+        tal:define="reqList python: view.reqList1stLevel()">
     <tal:block
-        condition="view/objs|nothing"
-        replace="structure view/table" />
+        condition="reqList|nothing"
+        replace="structure python: view.table(reqList)" />
     <div
-        tal:condition="not: view/objs|nothing"
+        tal:condition="not: reqList|nothing"
+        i18n:translate="">
+        There are no objects.
+    </div>
+    </form>
+    <hr />
+    <h4>second Level</h4>
+    <form action="" method="post"
+        tal:attributes="action request/URL"
+        tal:define="reqList python: view.reqList2ndLevel()">
+    <tal:block
+        condition="reqList|nothing"
+        replace="structure python: view.table(reqList)" />
+    <div
+        tal:condition="not: reqList|nothing"
         i18n:translate="">
         There are no objects.
     </div>
