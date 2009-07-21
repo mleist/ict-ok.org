@@ -22,8 +22,10 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
+from zope.schema import Datetime
 
 # ict_ok.org imports
+from org.ict_ok.schema.date import Date
 from schooltool.requirement import interfaces as ischooltool
 
 _ = MessageFactory('org.ict_ok')
@@ -40,9 +42,15 @@ class IAdmUtilCompliance(Interface):
         """ append Requirement
         """
 
-class IRequirement(ischooltool.IRequirement):
+#class IRequirement(ischooltool.IRequirement):
+class IRequirement(Interface):
     """ ict-ok.org wrapper
     """
+    resubmitDate = Datetime(
+        title = _(u'resubmit date'),
+        description = _(u'resubmit the workitem on date'),
+        required = False)
+    
 
 class IHaveRequirement(ischooltool.IHaveRequirement):
     """ ict-ok.org wrapper

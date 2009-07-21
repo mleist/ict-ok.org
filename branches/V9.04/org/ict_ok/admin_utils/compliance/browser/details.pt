@@ -28,6 +28,26 @@
             <td i18n:translate="">Comment</td>
             <td><pre tal:content="context/ikComment" /></td>
         </tr>
+
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">resubmit date</td>
+            <div tal:omit-tag=""  tal:condition="context/resubmitDate">
+                <td class="cb_ir" tal:content="python: dateform.format(context.resubmitDate)">test</td>
+            </div>
+            <div tal:omit-tag=""  tal:condition="not: context/resubmitDate">
+                <td>---</td>
+            </div>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">resubmit date</td>
+            <div tal:omit-tag=""  tal:condition="context/resubmitDate">
+                <td tal:content="python: dateform.format(context.resubmitDate)">test</td>
+            </div>
+            <div tal:omit-tag=""  tal:condition="not: context/resubmitDate">
+                <td>---</td>
+            </div>
+        </tr>
+        
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Modification time</td>
             <div tal:omit-tag=""  tal:condition="context/getModifiedTime">
