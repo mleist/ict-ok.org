@@ -23,7 +23,7 @@ from persistent.dict import PersistentDict
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
-from zope.component import adapts, queryUtility
+from zope.component import adapts, queryUtility, adapter
 from zope.security.interfaces import IPrincipal
 from zope.annotation.interfaces import IAnnotations
 from zope.app.authentication.authentication import PluggableAuthentication
@@ -44,6 +44,17 @@ from org.ict_ok.admin_utils.usermanagement.interfaces import \
      IAdmUtilUserDashboard, IAdmUtilUserDashboardItem,\
      IAdmUtilUserProperties, IAdmUtilUserManagement, \
      IAdmUtilUserPreferences
+
+from zope.app.authentication.interfaces import IAuthenticatedPrincipalCreated
+
+@adapter(IAuthenticatedPrincipalCreated)
+def ddd(event):
+    print "+++++++++++++++++++++++++++++++++++++++++++++++"
+    #import pdb
+    #pdb.set_trace()
+    if event.principal.id == u'LDAPAuthentication.markus':
+        print "rrr:", event.principal.groups
+        event.principal.groups.append(u'group.Manager')
 
 logger = logging.getLogger("AdmUtilUserManagement")
 
@@ -333,7 +344,8 @@ def getUserTimezone():
 
 def convert2UserTimezone(timest):
     userTZ = getUserTimezone()
-    if timest.tzinfo is None:
+    if not hasattr(timest, 'tzinfo') or \
+        timest.tzinfo is None:
         return timest.replace(tzinfo=timezone("UTC")).astimezone(userTZ)
     else:
         return timest.astimezone(userTZ)

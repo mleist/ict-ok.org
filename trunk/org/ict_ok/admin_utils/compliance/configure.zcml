@@ -63,6 +63,9 @@
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
+        <implements
+            interface="schooltool.requirement.interfaces.IRequirement"
+            />
         <!--allow interface="zope.app.container.interfaces.ISimpleReadContainer" /-->
         <!--require
             permission="org.ict_ok.admin_utils.compliance.View"
@@ -73,6 +76,10 @@
             attributes="updateOrder"
             /-->
             
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface=".interfaces.IRequirement"
+            />
         <require
             permission="org.ict_ok.admin_utils.compliance.Edit"
             set_schema=".interfaces.IRequirement"

@@ -22,6 +22,7 @@ import logging
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
+from zope.schema.fieldproperty import FieldProperty
 from zope import annotation
 import zope.app.container.contained
 from zope.component import getUtility
@@ -44,6 +45,12 @@ from schooltool.requirement.scoresystem import \
 logger = logging.getLogger("AdmUtilCompliance")
 
 REQUIREMENT_KEY = "org.ict_ok.admin_utils.compliance.requirement"
+
+# TODO: ml nur geparkt
+#def getSecondLevelRequirements(self):
+#    """ the requirements list in second level
+#    """
+#    return []
 
 def buildRequirementVocab(inRequirement, inTitlePath=u"",
                           inOidPath=u"", terms=[]):
@@ -129,6 +136,8 @@ class Requirement(Superclass,
     """ ict-ok.org wrapper
     """
     implements(IRequirement)
+    resubmitDate = FieldProperty(IRequirement['resubmitDate'])
+
     def __init__(self, title, **data):
         schooltool.requirement.requirement.Requirement.__init__(self, title)
         Superclass.__init__(self, ikName=title, **data)

@@ -680,9 +680,12 @@ class SuperclassDetails:
         if vocabReg is not None:
             vocab = vocabReg.get(self.request, vocabName)
             if vocab is not None:
-                vocabTerm = vocab.getTerm(token)
-                if vocabTerm:
-                    return vocabTerm.title
+                try:
+                    vocabTerm = vocab.getTerm(token)
+                    if vocabTerm:
+                        return vocabTerm.title
+                except LookupError:
+                    return None
         return None
     
     def getHrefTitle(self, obj, displayShort=False):
@@ -1120,8 +1123,15 @@ class Overview(BrowserPagelet):
 #            pass
         return retList
 
-    def table(self):
+    def table(self, arg_objList=None):
         """ Properties of table are defined here"""
+        if arg_objList is None:
+            objList = self.objs()
+        else:
+            if type(arg_objList) is list:
+                objList = arg_objList
+            else:
+                objList = []
         columnList = list(self.columns)
         containerIsOrderd = IOrderedContainer.providedBy(self.context)
         if containerIsOrderd:
@@ -1132,7 +1142,7 @@ class Overview(BrowserPagelet):
             #StandaloneFullFormatter
             #BatchedFormatter
             formatter = BatchedFormatter(
-                self.context, self.request, self.objs(),
+                self.context, self.request, objList,
                 columns=columnList,
                 sort_on=((_('Pos'), False),),
                 batch_size=50)
@@ -1145,7 +1155,7 @@ class Overview(BrowserPagelet):
             #StandaloneFullFormatter
             #BatchedFormatter
             formatter = BatchedFormatter(
-                self.context, self.request, self.objs(),
+                self.context, self.request, objList,
                 columns=columnList,
                 sort_on=((_('Title'), False),),
                 batch_size=50)

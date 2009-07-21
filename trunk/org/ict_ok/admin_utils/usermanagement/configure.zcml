@@ -77,6 +77,8 @@
         name="UserCfgStartView"
     />
 
+    <!-- subscriber handler=".usermanagement.ddd" / -->
+
     <include package=".generations" />
     
 </configure>

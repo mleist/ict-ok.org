@@ -231,10 +231,13 @@ class Component(Supernode):
         self.ikRevision = __version__
 
     def store_refs(self, **data):
-        refAttributeNames = getRefAttributeNames(Component)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
+    
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(Component)
 
     def get_health(self):
         """

@@ -6,6 +6,8 @@ bin/zopectl debug
 
 --->
 
+itup = root['39ec82dfc57bcd08e2c15e050dc29342c']
+
 from org.ict_ok.admin_utils.usermanagement.interfaces import IAdmUtilUserManagement
 from zope.app.authentication.principalfolder import InternalPrincipal
 

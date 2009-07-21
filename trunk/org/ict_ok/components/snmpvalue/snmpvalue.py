@@ -161,9 +161,12 @@ class SnmpValue(Component):
         self.snmpIndexDict = None
         self.snmpIndexDictTimeStamp = 0.0
 
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(SnmpValue)
+
     def store_refs(self, **data):
         Component.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(SnmpValue)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

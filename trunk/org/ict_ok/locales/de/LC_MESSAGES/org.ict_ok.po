@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ict-ok.org $Id$\n"
-"POT-Creation-Date: Mon Jun 22 13:56:57 2009\n"
-"PO-Revision-Date: 2009-06-22 14:47+0100\n"
-"Last-Translator: \n"
+"POT-Creation-Date: Tue Jul 21 12:14:47 2009\n"
+"PO-Revision-Date: 2009-07-21 12:20+0100\n"
+"Last-Translator: Markus Leist <leist@ikom-online.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,11 +47,12 @@ msgstr "Gruppen-Informationen hinzufügen"
 #: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:62
 #: lib/python/org/ict_ok/components/appsoftware/browser/appsoftware.py:151
 #: lib/python/org/ict_ok/components/browser/component.py:344
-#: lib/python/org/ict_ok/components/browser/component.py:385
+#: lib/python/org/ict_ok/components/browser/component.py:401
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:143
 #: lib/python/org/ict_ok/components/display_unit/browser/display_unit.py:162
 #: lib/python/org/ict_ok/components/happliance/browser/happliance.py:148
 #: lib/python/org/ict_ok/components/host/browser/host.py:391
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:517
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:533
 #: lib/python/org/ict_ok/components/ip_address/browser/ip_address.py:162
 #: lib/python/org/ict_ok/components/ipc/browser/ipc.py:149
 #: lib/python/org/ict_ok/components/ipnet/browser/ipnet.py:237
@@ -62,14 +63,14 @@ msgstr "Gruppen-Informationen hinzufügen"
 #: lib/python/org/ict_ok/components/notebook/browser/notebook.py:161
 #: lib/python/org/ict_ok/components/osoftware/browser/osoftware.py:145
 #: lib/python/org/ict_ok/components/pc/browser/pc.py:148
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:169
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:167
 #: lib/python/org/ict_ok/components/printer/browser/printer.py:168
 #: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:261
 #: lib/python/org/ict_ok/components/snmpvalue/browser/snmpvalue.py:311
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1042
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1116
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1176
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1201
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1079
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1160
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1220
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1245
 #: lib/python/org/ict_ok/components/x509certificate/browser/x509certificate.py:185
 #, fuzzy
 msgid "Title"
@@ -86,11 +87,12 @@ msgstr ""
 #: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:65
 #: lib/python/org/ict_ok/components/appsoftware/browser/appsoftware.py:157
 #: lib/python/org/ict_ok/components/browser/component.py:347
-#: lib/python/org/ict_ok/components/browser/component.py:394
+#: lib/python/org/ict_ok/components/browser/component.py:410
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:155
 #: lib/python/org/ict_ok/components/display_unit/browser/display_unit.py:171
 #: lib/python/org/ict_ok/components/happliance/browser/happliance.py:157
 #: lib/python/org/ict_ok/components/host/browser/host.py:395
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:526
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:545
 #: lib/python/org/ict_ok/components/ip_address/browser/ip_address.py:171
 #: lib/python/org/ict_ok/components/ipc/browser/ipc.py:158
 #: lib/python/org/ict_ok/components/ipnet/browser/ipnet.py:241
@@ -101,10 +103,10 @@ msgstr ""
 #: lib/python/org/ict_ok/components/notebook/browser/notebook.py:170
 #: lib/python/org/ict_ok/components/osoftware/browser/osoftware.py:151
 #: lib/python/org/ict_ok/components/pc/browser/pc.py:157
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:178
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:176
 #: lib/python/org/ict_ok/components/printer/browser/printer.py:177
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1045
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1182
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1082
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1226
 #: lib/python/org/ict_ok/components/x509certificate/browser/x509certificate.py:194
 #, fuzzy
 msgid "Modified"
@@ -120,11 +122,12 @@ msgstr " hängt ab von "
 #: lib/python/org/ict_ok/admin_utils/util_manager/browser/util_manager.py:70
 #: lib/python/org/ict_ok/components/appsoftware/browser/appsoftware.py:161
 #: lib/python/org/ict_ok/components/browser/component.py:354
-#: lib/python/org/ict_ok/components/browser/component.py:398
+#: lib/python/org/ict_ok/components/browser/component.py:414
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:159
 #: lib/python/org/ict_ok/components/display_unit/browser/display_unit.py:175
 #: lib/python/org/ict_ok/components/happliance/browser/happliance.py:161
 #: lib/python/org/ict_ok/components/host/browser/host.py:398
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:530
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:549
 #: lib/python/org/ict_ok/components/ip_address/browser/ip_address.py:175
 #: lib/python/org/ict_ok/components/ipc/browser/ipc.py:162
 #: lib/python/org/ict_ok/components/ipnet/browser/ipnet.py:244
@@ -135,9 +138,9 @@ msgstr " hängt ab von "
 #: lib/python/org/ict_ok/components/notebook/browser/notebook.py:174
 #: lib/python/org/ict_ok/components/osoftware/browser/osoftware.py:155
 #: lib/python/org/ict_ok/components/pc/browser/pc.py:161
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:182
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:180
 #: lib/python/org/ict_ok/components/printer/browser/printer.py:181
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1049
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1086
 #: lib/python/org/ict_ok/components/x509certificate/browser/x509certificate.py:198
 msgid "Actions"
 msgstr "Tätigkeiten"
@@ -171,6 +174,60 @@ msgstr "Gruppen-Informationen hinzufügen"
 #: lib/python/org/ict_ok/admin_utils/categories/security.zcml:30
 msgid "editCatHostGroupUtil"
 msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/allreqs.pt:15
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/display_reqs.pt:15
+#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/overview_esx.pt:8
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/crossbar.pt:15
+#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/overview_ha.pt:8
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/events.pt:16
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/fsearch.pt:36
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/generations.pt:16
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/tsearch.pt:36
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/overview.pt:13
+#: lib/python/org/ict_ok/components/browser/evaluations_done.pt:17
+#: lib/python/org/ict_ok/components/browser/evaluations_done.pt:31
+#: lib/python/org/ict_ok/components/browser/evaluations_todo.pt:17
+#: lib/python/org/ict_ok/components/browser/evaluations_todo.pt:31
+#: lib/python/org/ict_ok/components/latency/browser/add_snmps_by_vendor.pt:21
+#: lib/python/org/ict_ok/components/muninvalue/browser/add_snmps_by_vendor.pt:21
+#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:21
+#: lib/python/org/ict_ok/components/superclass/browser/overview.pt:15
+#, fuzzy
+msgid "There are no objects."
+msgstr "Keine Einträge vorhanden"
+
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/allreqs.pt:4
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/details.pt:5
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/display_reqs.pt:4
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/overview.pt:5
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/crossbar.pt:4
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/signalgraph.pt:4
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/events.pt:4
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/fsearch.pt:4
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/generations.pt:4
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/tsearch.pt:4
+#: lib/python/org/ict_ok/admin_utils/util_manager/browser/overview.pt:2
+#: lib/python/org/ict_ok/admin_utils/wfmc/browser/wflist.pt:4
+#: lib/python/org/ict_ok/components/browser/evaluations_done.pt:4
+#: lib/python/org/ict_ok/components/browser/evaluations_todo.pt:4
+#: lib/python/org/ict_ok/components/host/browser/add_hosts.pt:3
+#: lib/python/org/ict_ok/components/latency/browser/add_snmps_by_vendor.pt:3
+#: lib/python/org/ict_ok/components/latency/browser/add_snmps_by_vendor.pt:6
+#: lib/python/org/ict_ok/components/latency/browser/add_snmps_by_vendor.pt:9
+#: lib/python/org/ict_ok/components/muninvalue/browser/add_snmps_by_vendor.pt:3
+#: lib/python/org/ict_ok/components/muninvalue/browser/add_snmps_by_vendor.pt:6
+#: lib/python/org/ict_ok/components/muninvalue/browser/add_snmps_by_vendor.pt:9
+#: lib/python/org/ict_ok/components/service/browser/add_services.pt:3
+#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:3
+#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:6
+#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:9
+#: lib/python/org/ict_ok/components/superclass/browser/overview.pt:4
+#: lib/python/org/ict_ok/skin/formui/table-form.pt:30
+#: lib/python/org/ict_ok/skin/formui/table-form.pt:64
+#, fuzzy
+msgid "${DYNAMIC_CONTENT}"
+msgstr "${DYNAMIC_CONTENT}"
 
 #: lib/python/org/ict_ok/admin_utils/compliance/browser/compliance.py:101
 msgid "will import requirements"
@@ -218,6 +275,90 @@ msgstr ""
 msgid "import requirements"
 msgstr ""
 
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/details.pt:11
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/overview.pt:11
+#: lib/python/org/ict_ok/admin_utils/cron/browser/details.pt:3
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/details.pt:6
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/details.pt:4
+#: lib/python/org/ict_ok/admin_utils/generators/smokeping/browser/details.pt:4
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/browser/details.pt:3
+#: lib/python/org/ict_ok/admin_utils/mindmap/browser/details.pt:3
+#: lib/python/org/ict_ok/admin_utils/netscan/browser/details.pt:4
+#: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:6
+#: lib/python/org/ict_ok/admin_utils/notifier/browser/status.pt:3
+#: lib/python/org/ict_ok/admin_utils/notifier/imail/browser/details.pt:4
+#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/details.pt:6
+#: lib/python/org/ict_ok/admin_utils/reports/browser/details.pt:3
+#: lib/python/org/ict_ok/admin_utils/snmpd/browser/details.pt:4
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/details.pt:4
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/version.pt:4
+#: lib/python/org/ict_ok/admin_utils/ticker/browser/details.pt:3
+#: lib/python/org/ict_ok/admin_utils/usermanagement/browser/details.pt:3
+#: lib/python/org/ict_ok/admin_utils/wfmc/browser/details.pt:3
+#: lib/python/org/ict_ok/components/address/browser/details.pt:8
+#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:5
+#: lib/python/org/ict_ok/components/building/browser/details.pt:5
+#: lib/python/org/ict_ok/components/contact/browser/details.pt:8
+#: lib/python/org/ict_ok/components/contact_item/browser/details.pt:9
+#: lib/python/org/ict_ok/components/contract/browser/details.pt:8
+#: lib/python/org/ict_ok/components/credential/browser/details.pt:4
+#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:8
+#: lib/python/org/ict_ok/components/group/browser/details.pt:8
+#: lib/python/org/ict_ok/components/happliance/browser/details.pt:8
+#: lib/python/org/ict_ok/components/host/browser/details.pt:5
+#: lib/python/org/ict_ok/components/int_attachment/browser/details.pt:8
+#: lib/python/org/ict_ok/components/interface/browser/details.pt:5
+#: lib/python/org/ict_ok/components/ip_address/browser/details.pt:8
+#: lib/python/org/ict_ok/components/ipc/browser/details.pt:8
+#: lib/python/org/ict_ok/components/isdnphone/browser/details.pt:8
+#: lib/python/org/ict_ok/components/latency/browser/details.pt:4
+#: lib/python/org/ict_ok/components/location/browser/details.pt:5
+#: lib/python/org/ict_ok/components/misc_physical/browser/details.pt:8
+#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:5
+#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:4
+#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:118
+#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:4
+#: lib/python/org/ict_ok/components/net/browser/details.pt:5
+#: lib/python/org/ict_ok/components/notebook/browser/details.pt:5
+#: lib/python/org/ict_ok/components/organization/browser/details.pt:8
+#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:5
+#: lib/python/org/ict_ok/components/outlet/browser/details.pt:5
+#: lib/python/org/ict_ok/components/patchpanel/browser/details.pt:8
+#: lib/python/org/ict_ok/components/patchport/browser/details.pt:8
+#: lib/python/org/ict_ok/components/pc/browser/details.pt:8
+#: lib/python/org/ict_ok/components/person/browser/details.pt:21
+#: lib/python/org/ict_ok/components/physical_connector/browser/details.pt:4
+#: lib/python/org/ict_ok/components/physical_link/browser/details.pt:4
+#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:8
+#: lib/python/org/ict_ok/components/printer/browser/details.pt:8
+#: lib/python/org/ict_ok/components/product/browser/details.pt:8
+#: lib/python/org/ict_ok/components/rack/browser/details.pt:8
+#: lib/python/org/ict_ok/components/reminder/browser/details.pt:8
+#: lib/python/org/ict_ok/components/role/browser/details.pt:8
+#: lib/python/org/ict_ok/components/room/browser/details.pt:5
+#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:4
+#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:9
+#: lib/python/org/ict_ok/components/switch/browser/details.pt:8
+#: lib/python/org/ict_ok/components/work_order/browser/details.pt:8
+#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:4
+#: lib/python/org/ict_ok/libs/browser/details.pt:4
+#: lib/python/org/ict_ok/skin/focus.pt:9
+#, fuzzy
+msgid "Content listing"
+msgstr "Inhaltsauflistung"
+
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/details.pt:32
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/overview.pt:32
+#: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/details.pt:12
+#: lib/python/org/ict_ok/admin_utils/generators/smokeping/browser/details.pt:12
+#: lib/python/org/ict_ok/admin_utils/netscan/browser/details.pt:12
+#: lib/python/org/ict_ok/admin_utils/notifier/imail/browser/details.pt:19
+#: lib/python/org/ict_ok/admin_utils/snmpd/browser/details.pt:12
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/details.pt:12
+#, fuzzy
+msgid "Modification time"
+msgstr "Einen Status hinzufügen"
+
 #: lib/python/org/ict_ok/admin_utils/compliance/browser/evaluation.py:56
 msgid "change evaluation to <b>no</b>"
 msgstr ""
@@ -235,7 +376,43 @@ msgid "changing evaluation to <b>yes</b> is not permitted"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/compliance/browser/requirement.py:118
+#: lib/python/org/ict_ok/components/address/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/appsoftware/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/building/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/contact/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/contact_item/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/contract/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/display_unit/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/group/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/happliance/adapter/navigation.py:63
+#: lib/python/org/ict_ok/components/host/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/interface/adapter/navigation.py:63
 #: lib/python/org/ict_ok/components/interfaces.py:56
+#: lib/python/org/ict_ok/components/ip_address/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/ipc/adapter/navigation.py:63
+#: lib/python/org/ict_ok/components/ipnet/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/isdnphone/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/location/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/misc_physical/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/mobilephone/adapter/navigation.py:52
+#: lib/python/org/ict_ok/components/notebook/adapter/navigation.py:63
+#: lib/python/org/ict_ok/components/organization/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/osoftware/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/outlet/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/patchpanel/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/patchport/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/pc/adapter/navigation.py:62
+#: lib/python/org/ict_ok/components/person/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/physical_link/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/physical_media/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/printer/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/product/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/rack/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/role/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/room/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/snmpvalue/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/switch/adapter/navigation.py:73
+#: lib/python/org/ict_ok/components/work_order/adapter/navigation.py:57
 msgid "Requirements"
 msgstr ""
 
@@ -282,6 +459,14 @@ msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/compliance/browser/requirement.py:97
 msgid "checking requirement to <b>yes</b> is not permitted"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/compliance/interfaces.py:49
+msgid "resubmit date"
+msgstr "Datum zur Wiedervorlage"
+
+#: lib/python/org/ict_ok/admin_utils/compliance/interfaces.py:50
+msgid "resubmit the workitem on date"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/compliance/security.zcml:13
@@ -881,9 +1066,9 @@ msgid "host group"
 msgstr "Eine Gruppe Nutzungsberechtigter"
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:79
+#: lib/python/org/ict_ok/components/building/adapter/navigation.py:49
 #: lib/python/org/ict_ok/components/building/interfaces.py:30
 #: lib/python/org/ict_ok/components/location/configure.zcml:31
-#: lib/python/org/ict_ok/components/building/browser/details.pt:14
 #, fuzzy
 msgid "Location"
 msgstr "Standort:"
@@ -894,10 +1079,10 @@ msgid "The Location."
 msgstr "Standort:"
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:86
+#: lib/python/org/ict_ok/components/room/adapter/navigation.py:49
 #: lib/python/org/ict_ok/components/room/interfaces.py:30
 #: lib/python/org/ict_ok/components/building/configure.zcml:28
 #: lib/python/org/ict_ok/components/building/configure.zcml:75
-#: lib/python/org/ict_ok/components/room/browser/details.pt:14
 #, fuzzy
 msgid "Building"
 msgstr "Abhängigkeitsbaum wird aufgebaut"
@@ -908,28 +1093,31 @@ msgid "The Building."
 msgstr "Abhängigkeitsbaum wird aufgebaut"
 
 #: lib/python/org/ict_ok/admin_utils/eventcrossbar/interfaces.py:93
+#: lib/python/org/ict_ok/components/display_unit/adapter/navigation.py:51
 #: lib/python/org/ict_ok/components/display_unit/browser/display_unit.py:168
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:523
+#: lib/python/org/ict_ok/components/happliance/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/interface/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:542
 #: lib/python/org/ict_ok/components/ip_address/browser/ip_address.py:168
+#: lib/python/org/ict_ok/components/ipc/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/isdnphone/adapter/navigation.py:51
 #: lib/python/org/ict_ok/components/isdnphone/browser/isdnphone.py:170
+#: lib/python/org/ict_ok/components/misc_physical/adapter/navigation.py:49
 #: lib/python/org/ict_ok/components/misc_physical/browser/misc_physical.py:168
+#: lib/python/org/ict_ok/components/notebook/adapter/navigation.py:49
 #: lib/python/org/ict_ok/components/notebook/browser/notebook.py:167
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:65
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:175
+#: lib/python/org/ict_ok/components/outlet/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/patchpanel/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/patchport/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/pc/adapter/navigation.py:48
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:66
+#: lib/python/org/ict_ok/components/physical_media/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:173
+#: lib/python/org/ict_ok/components/printer/adapter/navigation.py:51
 #: lib/python/org/ict_ok/components/printer/browser/printer.py:174
+#: lib/python/org/ict_ok/components/rack/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/switch/adapter/navigation.py:61
 #: lib/python/org/ict_ok/components/room/configure.zcml:28
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:34
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:21
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:17
-#: lib/python/org/ict_ok/components/outlet/browser/details.pt:31
-#: lib/python/org/ict_ok/components/patchpanel/browser/details.pt:63
-#: lib/python/org/ict_ok/components/isdnphone/browser/details.pt:58
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:25
-#: lib/python/org/ict_ok/components/rack/browser/details.pt:59
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:24
-#: lib/python/org/ict_ok/components/patchport/browser/details.pt:51
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:25
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:75
 msgid "Room"
 msgstr "Raum"
 
@@ -1067,18 +1255,6 @@ msgstr "Umleitung durch %s von: %s\n"
 #, fuzzy
 msgid "Add from AdmUtilGeneratorHoneyd."
 msgstr "Umleitung durch %s von: %s\n"
-
-#: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/details.pt:12
-#: lib/python/org/ict_ok/admin_utils/generators/smokeping/browser/details.pt:12
-#: lib/python/org/ict_ok/admin_utils/notifier/imail/browser/details.pt:19
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/details.pt:32
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/overview.pt:32
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/details.pt:12
-#: lib/python/org/ict_ok/admin_utils/netscan/browser/details.pt:12
-#: lib/python/org/ict_ok/admin_utils/snmpd/browser/details.pt:12
-#, fuzzy
-msgid "Modification time"
-msgstr "Einen Status hinzufügen"
 
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/details.pt:21
 #: lib/python/org/ict_ok/admin_utils/generators/smokeping/browser/details.pt:21
@@ -1468,6 +1644,84 @@ msgstr ""
 msgid "Administration of hosts and virtual machines (e.g. restart, shutdown)"
 msgstr ""
 
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/browser/details.pt:11
+#: lib/python/org/ict_ok/admin_utils/mindmap/browser/details.pt:11
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/version.pt:3
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/version.pt:8
+#, fuzzy
+msgid "Version"
+msgstr "[Version]"
+
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/browser/details.pt:15
+#: lib/python/org/ict_ok/admin_utils/mindmap/browser/details.pt:15
+msgid "zzz"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/browser/details.pt:2
+#, fuzzy
+msgid "details of MAC address database"
+msgstr "ZMI Einstellungen"
+
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/browser/details.pt:6
+#: lib/python/org/ict_ok/admin_utils/mindmap/browser/details.pt:6
+msgid "aaa"
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/browser/mac_address_db.py:64
+#, fuzzy
+msgid "settings of MacAddressDb"
+msgstr "ZMI Einstellungen"
+
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/browser/mac_address_db.py:72
+#, fuzzy
+msgid "edit MacAddressDb properties"
+msgstr "Felderinhalt bearbeiten"
+
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/interfaces.py:36
+#, fuzzy
+msgid "mac address db version"
+msgstr "E-Mail-Adresse des Übersetzerteams:"
+
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/interfaces.py:37
+msgid "mac address dbs must have a version."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/security.zcml:8
+#: lib/python/org/ict_ok/admin_utils/mac_address_db/security.zcml:13
+#, fuzzy
+msgid "View from MacAddressDb Utiltiy"
+msgstr "Umleitung durch %s von: %s\n"
+
+#: lib/python/org/ict_ok/admin_utils/mindmap/browser/details.pt:2
+#, fuzzy
+msgid "details of mindmap utility"
+msgstr "Startordner-Verwaltung"
+
+#: lib/python/org/ict_ok/admin_utils/mindmap/browser/mindmap.py:118
+#, fuzzy
+msgid "settings of MindMap"
+msgstr "ZMI Einstellungen"
+
+#: lib/python/org/ict_ok/admin_utils/mindmap/browser/mindmap.py:126
+#, fuzzy
+msgid "edit MindMap properties"
+msgstr "Eine kurze Beschreibung des Ereignisses."
+
+#: lib/python/org/ict_ok/admin_utils/mindmap/interfaces.py:36
+#, fuzzy
+msgid "mind map version"
+msgstr "[Version]"
+
+#: lib/python/org/ict_ok/admin_utils/mindmap/interfaces.py:37
+msgid "mind maps must have a version."
+msgstr ""
+
+#: lib/python/org/ict_ok/admin_utils/mindmap/security.zcml:8
+#: lib/python/org/ict_ok/admin_utils/mindmap/security.zcml:13
+#, fuzzy
+msgid "View from MindMap Utiltiy"
+msgstr "Umleitung durch %s von: %s\n"
+
 #: lib/python/org/ict_ok/admin_utils/netscan/adapter/sized.py:48
 msgid "%d scanner"
 msgstr ""
@@ -1491,7 +1745,7 @@ msgid "edit central net scanner"
 msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/netscan/browser/netscan.py:51
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:578
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:590
 #, fuzzy
 msgid "Unavailable"
 msgstr "nicht verfügbar"
@@ -1812,7 +2066,6 @@ msgstr ""
 
 #: lib/python/org/ict_ok/admin_utils/objmq/interfaces.py:37
 #: lib/python/org/ict_ok/components/host/interfaces.py:45
-#: lib/python/org/ict_ok/components/host/browser/details.pt:14
 #, fuzzy
 msgid "Hostname"
 msgstr "Servername"
@@ -2283,8 +2536,8 @@ msgstr "Irgendeine Zahl"
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:312
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:330
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1145
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1167
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1189
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1211
 #, fuzzy
 msgid "Date"
 msgstr "Veraltet"
@@ -2296,68 +2549,23 @@ msgstr "Nachricht"
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:340
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/supervisor.py:361
-#: lib/python/org/ict_ok/skin/focus.pt:12
-#: lib/python/org/ict_ok/libs/browser/details.pt:7
-#: lib/python/org/ict_ok/components/credential/browser/details.pt:7
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:8
-#: lib/python/org/ict_ok/components/ipnet/browser/details.pt:8
-#: lib/python/org/ict_ok/components/location/browser/details.pt:8
-#: lib/python/org/ict_ok/components/misc_physical/browser/details.pt:11
-#: lib/python/org/ict_ok/components/product/browser/details.pt:11
-#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:8
-#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:7
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:8
-#: lib/python/org/ict_ok/components/person/browser/details.pt:11
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:8
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:11
-#: lib/python/org/ict_ok/components/address/browser/details.pt:11
-#: lib/python/org/ict_ok/components/outlet/browser/details.pt:8
-#: lib/python/org/ict_ok/components/host/browser/details.pt:8
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:11
-#: lib/python/org/ict_ok/components/organization/browser/details.pt:11
-#: lib/python/org/ict_ok/components/physical_component/browser/details.pt:7
-#: lib/python/org/ict_ok/components/contact_item/browser/details.pt:11
-#: lib/python/org/ict_ok/components/physical_link/browser/details.pt:7
-#: lib/python/org/ict_ok/components/patchpanel/browser/details.pt:11
-#: lib/python/org/ict_ok/components/ip_address/browser/details.pt:11
-#: lib/python/org/ict_ok/components/isdnphone/browser/details.pt:11
-#: lib/python/org/ict_ok/components/latency/browser/details.pt:7
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:8
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:11
-#: lib/python/org/ict_ok/components/rack/browser/details.pt:11
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:7
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:8
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:11
-#: lib/python/org/ict_ok/components/role/browser/details.pt:11
-#: lib/python/org/ict_ok/components/patchport/browser/details.pt:11
-#: lib/python/org/ict_ok/components/room/browser/details.pt:8
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:11
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:11
-#: lib/python/org/ict_ok/components/group/browser/details.pt:11
-#: lib/python/org/ict_ok/components/physical_connector/browser/details.pt:7
-#: lib/python/org/ict_ok/components/contact/browser/details.pt:11
-#: lib/python/org/ict_ok/components/work_order/browser/details.pt:11
-#: lib/python/org/ict_ok/components/net/browser/details.pt:8
-#: lib/python/org/ict_ok/components/logical_component/browser/details.pt:7
-#: lib/python/org/ict_ok/components/snmpvalue/browser/display.pt:8
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:7
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:11
-#: lib/python/org/ict_ok/components/software_component/browser/details.pt:7
-#: lib/python/org/ict_ok/components/printer/browser/details.pt:11
-#: lib/python/org/ict_ok/components/building/browser/details.pt:8
-#: lib/python/org/ict_ok/components/reminder/browser/details.pt:11
+#: lib/python/org/ict_ok/admin_utils/cron/browser/details.pt:7
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:6
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:6
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/details.pt:8
 #: lib/python/org/ict_ok/admin_utils/generators/smokeping/browser/details.pt:8
-#: lib/python/org/ict_ok/admin_utils/cron/browser/details.pt:7
-#: lib/python/org/ict_ok/admin_utils/notifier/browser/status.pt:6
-#: lib/python/org/ict_ok/admin_utils/ticker/browser/details.pt:6
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/details.pt:8
-#: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:9
 #: lib/python/org/ict_ok/admin_utils/netscan/browser/details.pt:8
+#: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:9
+#: lib/python/org/ict_ok/admin_utils/notifier/browser/status.pt:6
 #: lib/python/org/ict_ok/admin_utils/snmpd/browser/details.pt:8
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/details.pt:8
+#: lib/python/org/ict_ok/admin_utils/ticker/browser/details.pt:6
 #: lib/python/org/ict_ok/admin_utils/wfmc/browser/details.pt:7
+#: lib/python/org/ict_ok/components/credential/browser/details.pt:7
+#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:7
+#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:8
+#: lib/python/org/ict_ok/libs/browser/details.pt:7
+#: lib/python/org/ict_ok/skin/focus.pt:12
 #, fuzzy
 msgid "Name"
 msgstr "Name"
@@ -2401,12 +2609,6 @@ msgstr "Generationen"
 #, fuzzy
 msgid "Size of Database"
 msgstr "Name der Datenbank:"
-
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/version.pt:3
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/version.pt:8
-#, fuzzy
-msgid "Version"
-msgstr "[Version]"
 
 #: lib/python/org/ict_ok/admin_utils/supervisor/interfaces.py:101
 #: lib/python/org/ict_ok/admin_utils/supervisor/browser/details.pt:71
@@ -2910,6 +3112,52 @@ msgstr "Umleitung durch %s von: %s\n"
 msgid "View from AdmUtilWFMC"
 msgstr "Umleitung durch %s von: %s\n"
 
+#: lib/python/org/ict_ok/components/address/adapter/navigation.py:49
+#, fuzzy
+msgid "Contact Item"
+msgstr "Inhaltsauflistung"
+
+#: lib/python/org/ict_ok/components/address/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/appsoftware/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/building/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/contact/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/contact_item/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/contract/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/display_unit/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/group/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/happliance/adapter/navigation.py:61
+#: lib/python/org/ict_ok/components/host/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/interface/adapter/navigation.py:61
+#: lib/python/org/ict_ok/components/interfaces.py:66
+#: lib/python/org/ict_ok/components/ip_address/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/ipc/adapter/navigation.py:61
+#: lib/python/org/ict_ok/components/ipnet/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/isdnphone/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/location/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/misc_physical/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/mobilephone/adapter/navigation.py:50
+#: lib/python/org/ict_ok/components/notebook/adapter/navigation.py:61
+#: lib/python/org/ict_ok/components/organization/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/osoftware/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/outlet/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/patchpanel/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/patchport/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/pc/adapter/navigation.py:60
+#: lib/python/org/ict_ok/components/person/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/physical_link/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/physical_media/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/printer/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/product/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/rack/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/role/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/room/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/snmpvalue/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/switch/adapter/navigation.py:71
+#: lib/python/org/ict_ok/components/work_order/adapter/navigation.py:55
+#, fuzzy
+msgid "Contracts"
+msgstr "Schnittstelle"
+
 #: lib/python/org/ict_ok/components/address/browser/address.py:108
 #, fuzzy
 msgid "Address Edit Form"
@@ -2950,7 +3198,6 @@ msgid "Address"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/address/interfaces.py:30
-#: lib/python/org/ict_ok/components/address/browser/details.pt:52
 #, fuzzy
 msgid "Address1"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
@@ -2961,7 +3208,6 @@ msgid "Address line 1"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/address/interfaces.py:35
-#: lib/python/org/ict_ok/components/address/browser/details.pt:58
 #, fuzzy
 msgid "Address2"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
@@ -2972,7 +3218,6 @@ msgid "Address line 2"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/address/interfaces.py:40
-#: lib/python/org/ict_ok/components/address/browser/details.pt:64
 #, fuzzy
 msgid "Address3"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
@@ -2984,46 +3229,43 @@ msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/address/interfaces.py:45
 #: lib/python/org/ict_ok/components/address/interfaces.py:46
-#: lib/python/org/ict_ok/components/address/browser/details.pt:70
 msgid "City"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/address/interfaces.py:50
 #: lib/python/org/ict_ok/components/address/interfaces.py:51
-#: lib/python/org/ict_ok/components/address/browser/details.pt:76
 msgid "Postal code"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/address/interfaces.py:55
 #: lib/python/org/ict_ok/components/address/interfaces.py:56
-#: lib/python/org/ict_ok/components/address/browser/details.pt:82
 #, fuzzy
 msgid "Country"
 msgstr "Bemerkung"
 
 #: lib/python/org/ict_ok/components/address/interfaces.py:61
-#: lib/python/org/ict_ok/components/address/browser/details.pt:89
 #, fuzzy
 msgid "Contact item"
 msgstr "Inhaltsauflistung"
 
 #: lib/python/org/ict_ok/components/address/interfaces.py:79
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:91
-#: lib/python/org/ict_ok/components/building/interfaces.py:61
-#: lib/python/org/ict_ok/components/contact/interfaces.py:55
+#: lib/python/org/ict_ok/components/building/interfaces.py:68
+#: lib/python/org/ict_ok/components/contact/interfaces.py:67
 #: lib/python/org/ict_ok/components/contact_item/interfaces.py:84
 #: lib/python/org/ict_ok/components/contract/interfaces.py:120
 #: lib/python/org/ict_ok/components/display_unit/interfaces.py:53
 #: lib/python/org/ict_ok/components/group/interfaces.py:50
 #: lib/python/org/ict_ok/components/happliance/interfaces.py:44
 #: lib/python/org/ict_ok/components/host/interfaces.py:244
+#: lib/python/org/ict_ok/components/int_attachment/interfaces.py:60
 #: lib/python/org/ict_ok/components/interface/interfaces.py:162
 #: lib/python/org/ict_ok/components/ip_address/interfaces.py:74
 #: lib/python/org/ict_ok/components/ipc/interfaces.py:44
 #: lib/python/org/ict_ok/components/ipnet/interfaces.py:109
 #: lib/python/org/ict_ok/components/isdnphone/interfaces.py:48
 #: lib/python/org/ict_ok/components/latency/interfaces.py:47
-#: lib/python/org/ict_ok/components/location/interfaces.py:55
+#: lib/python/org/ict_ok/components/location/interfaces.py:62
 #: lib/python/org/ict_ok/components/misc_physical/interfaces.py:42
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:142
 #: lib/python/org/ict_ok/components/muninvalue/interfaces.py:41
@@ -3039,7 +3281,7 @@ msgstr "Inhaltsauflistung"
 #: lib/python/org/ict_ok/components/physical_link/interfaces.py:116
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:108
 #: lib/python/org/ict_ok/components/printer/interfaces.py:48
-#: lib/python/org/ict_ok/components/product/interfaces.py:60
+#: lib/python/org/ict_ok/components/product/interfaces.py:59
 #: lib/python/org/ict_ok/components/rack/interfaces.py:55
 #: lib/python/org/ict_ok/components/reminder/interfaces.py:43
 #: lib/python/org/ict_ok/components/role/interfaces.py:50
@@ -3068,6 +3310,20 @@ msgstr "E-Mail-Adresse des Übersetzerteams:"
 msgid "Delete Address"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
+#: lib/python/org/ict_ok/components/appsoftware/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/appsoftware/browser/appsoftware.py:154
+#: lib/python/org/ict_ok/components/appsoftware/interfaces.py:31
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:539
+#: lib/python/org/ict_ok/components/interface/interfaces.py:46
+#: lib/python/org/ict_ok/components/osoftware/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/osoftware/browser/osoftware.py:148
+#: lib/python/org/ict_ok/components/osoftware/interfaces.py:31
+#: lib/python/org/ict_ok/components/physical_media/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/physical_media/interfaces.py:81
+#, fuzzy
+msgid "Device"
+msgstr "Port des SMTP-Dienstes"
+
 #: lib/python/org/ict_ok/components/appsoftware/browser/appsoftware.py:105
 #: lib/python/org/ict_ok/components/appsoftware/security.zcml:18
 msgid "Add Application Software Instance"
@@ -3087,7 +3343,7 @@ msgstr "Resource löschen"
 #: lib/python/org/ict_ok/components/display_unit/browser/display_unit.py:160
 #: lib/python/org/ict_ok/components/happliance/browser/happliance.py:146
 #: lib/python/org/ict_ok/components/host/browser/host.py:389
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:515
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:531
 #: lib/python/org/ict_ok/components/ip_address/browser/ip_address.py:160
 #: lib/python/org/ict_ok/components/ipc/browser/ipc.py:147
 #: lib/python/org/ict_ok/components/ipnet/browser/ipnet.py:235
@@ -3098,27 +3354,13 @@ msgstr "Resource löschen"
 #: lib/python/org/ict_ok/components/notebook/browser/notebook.py:159
 #: lib/python/org/ict_ok/components/osoftware/browser/osoftware.py:143
 #: lib/python/org/ict_ok/components/pc/browser/pc.py:146
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:167
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:165
 #: lib/python/org/ict_ok/components/printer/browser/printer.py:166
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1038
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1075
 #: lib/python/org/ict_ok/components/x509certificate/browser/x509certificate.py:183
 #, fuzzy
 msgid "Health"
 msgstr "Hilfe"
-
-#: lib/python/org/ict_ok/components/appsoftware/browser/appsoftware.py:154
-#: lib/python/org/ict_ok/components/appsoftware/interfaces.py:31
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:520
-#: lib/python/org/ict_ok/components/interface/interfaces.py:46
-#: lib/python/org/ict_ok/components/osoftware/browser/osoftware.py:148
-#: lib/python/org/ict_ok/components/osoftware/interfaces.py:31
-#: lib/python/org/ict_ok/components/physical_media/interfaces.py:81
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:14
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:80
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:124
-#, fuzzy
-msgid "Device"
-msgstr "Port des SMTP-Dienstes"
 
 #: lib/python/org/ict_ok/components/appsoftware/browser/appsoftware.py:56
 #: lib/python/org/ict_ok/components/appsoftware/browser/appsoftware.py:63
@@ -3141,7 +3383,7 @@ msgstr ""
 #: lib/python/org/ict_ok/components/appsoftware/browser/interface.py:104
 #: lib/python/org/ict_ok/components/credential/browser/interface.py:101
 #: lib/python/org/ict_ok/components/happliance/browser/interface.py:101
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:185
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:189
 #: lib/python/org/ict_ok/components/ipc/browser/interface.py:104
 #: lib/python/org/ict_ok/components/logical_component/browser/interface.py:104
 #: lib/python/org/ict_ok/components/mobilephone/browser/interface.py:101
@@ -3165,7 +3407,7 @@ msgstr "Serverkontrolle"
 #: lib/python/org/ict_ok/components/appsoftware/browser/interface.py:284
 #: lib/python/org/ict_ok/components/credential/browser/interface.py:281
 #: lib/python/org/ict_ok/components/happliance/browser/interface.py:281
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:365
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:369
 #: lib/python/org/ict_ok/components/ipc/browser/interface.py:284
 #: lib/python/org/ict_ok/components/logical_component/browser/interface.py:284
 #: lib/python/org/ict_ok/components/mobilephone/browser/interface.py:281
@@ -3191,9 +3433,9 @@ msgstr ""
 #: lib/python/org/ict_ok/components/credential/browser/interface.py:80
 #: lib/python/org/ict_ok/components/happliance/browser/interface.py:51
 #: lib/python/org/ict_ok/components/happliance/browser/interface.py:80
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:69
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:76
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:153
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:72
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:79
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:157
 #: lib/python/org/ict_ok/components/ipc/browser/interface.py:51
 #: lib/python/org/ict_ok/components/ipc/browser/interface.py:80
 #: lib/python/org/ict_ok/components/logical_component/browser/interface.py:51
@@ -3233,7 +3475,7 @@ msgstr "Schnittstellen-Einzelheiten"
 #: lib/python/org/ict_ok/components/appsoftware/browser/interface.py:74
 #: lib/python/org/ict_ok/components/credential/browser/interface.py:74
 #: lib/python/org/ict_ok/components/happliance/browser/interface.py:74
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:139
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:143
 #: lib/python/org/ict_ok/components/ipc/browser/interface.py:74
 #: lib/python/org/ict_ok/components/logical_component/browser/interface.py:74
 #: lib/python/org/ict_ok/components/mobilephone/browser/interface.py:74
@@ -3257,7 +3499,7 @@ msgstr "Schnittstellen-Einzelheiten"
 #: lib/python/org/ict_ok/components/appsoftware/browser/interface.py:87
 #: lib/python/org/ict_ok/components/credential/browser/interface.py:87
 #: lib/python/org/ict_ok/components/happliance/browser/interface.py:87
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:167
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:171
 #: lib/python/org/ict_ok/components/ipc/browser/interface.py:87
 #: lib/python/org/ict_ok/components/logical_component/browser/interface.py:87
 #: lib/python/org/ict_ok/components/mobilephone/browser/interface.py:87
@@ -3281,7 +3523,7 @@ msgstr "Browser-Formular-Herausforderer"
 #: lib/python/org/ict_ok/components/appsoftware/browser/interface.py:99
 #: lib/python/org/ict_ok/components/credential/browser/interface.py:96
 #: lib/python/org/ict_ok/components/happliance/browser/interface.py:96
-#: lib/python/org/ict_ok/components/interface/browser/interface.py:180
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:184
 #: lib/python/org/ict_ok/components/ipc/browser/interface.py:99
 #: lib/python/org/ict_ok/components/logical_component/browser/interface.py:99
 #: lib/python/org/ict_ok/components/mobilephone/browser/interface.py:96
@@ -3309,30 +3551,19 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:38
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:38
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:43
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:132
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:138
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:14
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:126
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:14
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:133
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:110
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:51
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:51
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:44
 msgid "Manufacturer"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:39
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:39
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:44
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:45
 #, fuzzy
 msgid "Name/Address of the manufacturer."
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:43
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:48
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:20
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:26
 #, fuzzy
 msgid "Other type"
 msgstr "Schnittstellen-Typ"
@@ -3344,7 +3575,6 @@ msgid "other type description."
 msgstr "Beschreibung zum Menü"
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:48
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:26
 msgid "Target OS"
 msgstr ""
 
@@ -3355,55 +3585,41 @@ msgstr "Betriebssystem"
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:53
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:53
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:32
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:32
 #, fuzzy
 msgid "Version text"
 msgstr "[Version]"
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:57
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:57
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:38
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:38
 msgid "License key"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:61
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:61
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:44
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:44
 #, fuzzy
 msgid "Language"
 msgstr "[Sprache]"
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:64
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:64
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:50
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:50
 #, fuzzy
 msgid "Major version"
 msgstr "[Version]"
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:67
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:67
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:56
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:56
 #, fuzzy
 msgid "Minor version"
 msgstr "[Version]"
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:70
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:70
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:62
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:62
 #, fuzzy
 msgid "Revision number"
 msgstr "Telefonnummer"
 
 #: lib/python/org/ict_ok/components/appsoftware/interfaces.py:73
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:73
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:68
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:68
 #, fuzzy
 msgid "Build number"
 msgstr "Seriennummer"
@@ -3428,28 +3644,28 @@ msgstr ""
 msgid "evaluations to do"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/browser/component.py:383
+#: lib/python/org/ict_ok/components/browser/component.py:399
 msgid "evaluations done"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/browser/component.py:388
+#: lib/python/org/ict_ok/components/browser/component.py:404
 msgid "Evaluator"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/browser/component.py:391
+#: lib/python/org/ict_ok/components/browser/component.py:407
 msgid "Value"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/browser/component.py:455
+#: lib/python/org/ict_ok/components/browser/component.py:481
 #, fuzzy
 msgid "Add"
 msgstr "Utility hinzufügen"
 
-#: lib/python/org/ict_ok/components/browser/component.py:514
+#: lib/python/org/ict_ok/components/browser/component.py:548
 msgid "Import CSV data"
 msgstr "Importiere CSV Daten"
 
-#: lib/python/org/ict_ok/components/browser/component.py:552
+#: lib/python/org/ict_ok/components/browser/component.py:586
 msgid "Import XLS data"
 msgstr "Importiere XLS Daten"
 
@@ -3464,6 +3680,12 @@ msgstr "Utility hinzufügen"
 #: lib/python/org/ict_ok/components/browser/component.py:95
 msgid "Evaluations to do"
 msgstr ""
+
+#: lib/python/org/ict_ok/components/building/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/building/interfaces.py:35
+#, fuzzy
+msgid "Rooms"
+msgstr "Raum"
 
 #: lib/python/org/ict_ok/components/building/browser/building.py:120
 #, fuzzy
@@ -3497,24 +3719,9 @@ msgstr ""
 msgid "Building Details"
 msgstr "Abhängigkeitsbaum wird aufgebaut"
 
-#: lib/python/org/ict_ok/components/building/browser/details.pt:50
-#, fuzzy
-msgid "file2"
-msgstr "Titel"
-
-#: lib/python/org/ict_ok/components/building/interfaces.py:35
-#: lib/python/org/ict_ok/components/building/browser/details.pt:20
-#, fuzzy
-msgid "Rooms"
-msgstr "Raum"
-
 #: lib/python/org/ict_ok/components/building/interfaces.py:42
 #: lib/python/org/ict_ok/components/location/interfaces.py:36
 #: lib/python/org/ict_ok/components/room/interfaces.py:64
-#: lib/python/org/ict_ok/components/location/browser/details.pt:26
-#: lib/python/org/ict_ok/components/room/browser/details.pt:68
-#: lib/python/org/ict_ok/components/building/browser/details.pt:32
-#: lib/python/org/ict_ok/components/building/browser/details.pt:38
 msgid "coordinates"
 msgstr ""
 
@@ -3525,7 +3732,6 @@ msgstr "Abhängigkeitsbaum wird aufgebaut"
 
 #: lib/python/org/ict_ok/components/building/interfaces.py:49
 #: lib/python/org/ict_ok/components/location/interfaces.py:43
-#: lib/python/org/ict_ok/components/location/browser/details.pt:32
 #, fuzzy
 msgid "GoogleMap URL"
 msgstr "Anfrage-URL"
@@ -3534,6 +3740,37 @@ msgstr "Anfrage-URL"
 #: lib/python/org/ict_ok/components/location/interfaces.py:44
 msgid "URL of the location at google maps."
 msgstr ""
+
+#: lib/python/org/ict_ok/components/building/interfaces.py:56
+#: lib/python/org/ict_ok/components/location/interfaces.py:50
+#, fuzzy
+msgid "GoogleMap HTML-Code"
+msgstr "Anfrage-URL"
+
+#: lib/python/org/ict_ok/components/building/interfaces.py:57
+#: lib/python/org/ict_ok/components/location/interfaces.py:51
+#, fuzzy
+msgid "HTML Code of the location at google maps."
+msgstr "Standort:&nbsp;"
+
+#: lib/python/org/ict_ok/components/contact/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/contact/interfaces.py:30
+#: lib/python/org/ict_ok/components/contact_item/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/organization/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/person/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/product/adapter/navigation.py:53
+msgid "Work Order"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/contact/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/contact/interfaces.py:36
+#: lib/python/org/ict_ok/components/group/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/role/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/work_order/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/work_order/interfaces.py:42
+#, fuzzy
+msgid "Contact Items"
+msgstr "Inhaltsauflistung"
 
 #: lib/python/org/ict_ok/components/contact/browser/contact.py:108
 #, fuzzy
@@ -3568,18 +3805,15 @@ msgstr "Dieses Objekt ist registriert als:"
 msgid "Contact details"
 msgstr "Details"
 
-#: lib/python/org/ict_ok/components/contact/interfaces.py:30
-#: lib/python/org/ict_ok/components/contact/browser/details.pt:53
-msgid "Work Order"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/contact/interfaces.py:36
-#: lib/python/org/ict_ok/components/work_order/interfaces.py:42
-#: lib/python/org/ict_ok/components/contact/browser/details.pt:60
-#: lib/python/org/ict_ok/components/work_order/browser/details.pt:72
+#: lib/python/org/ict_ok/components/contact/interfaces.py:42
 #, fuzzy
-msgid "Contact Items"
-msgstr "Inhaltsauflistung"
+msgid "Main contact"
+msgstr "Bitte kontaktieren Sie den Administrator."
+
+#: lib/python/org/ict_ok/components/contact/interfaces.py:47
+#, fuzzy
+msgid "Sub contacts"
+msgstr "Bemerkung"
 
 #: lib/python/org/ict_ok/components/contact/security.zcml:13
 #, fuzzy
@@ -3595,6 +3829,52 @@ msgstr "Felderinhalt bearbeiten"
 #, fuzzy
 msgid "Delete Contact"
 msgstr "ungültiger Info-Eintrag"
+
+#: lib/python/org/ict_ok/components/contact_item/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/contact_item/interfaces.py:30
+#: lib/python/org/ict_ok/components/organization/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/person/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/contact/configure.zcml:30
+#: lib/python/org/ict_ok/components/contact/configure.zcml:78
+#, fuzzy
+msgid "Contact"
+msgstr "Bemerkung"
+
+#: lib/python/org/ict_ok/components/contact_item/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/organization/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/person/adapter/navigation.py:57
+#, fuzzy
+msgid "Adresses"
+msgstr "E-Mail-Adresse des Übersetzerteams:"
+
+#: lib/python/org/ict_ok/components/contact_item/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/contact_item/interfaces.py:46
+#: lib/python/org/ict_ok/components/organization/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/person/adapter/navigation.py:59
+msgid "Groups"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/contact_item/adapter/navigation.py:61
+#: lib/python/org/ict_ok/components/contact_item/interfaces.py:40
+#: lib/python/org/ict_ok/components/organization/adapter/navigation.py:61
+#: lib/python/org/ict_ok/components/person/adapter/navigation.py:61
+#, fuzzy
+msgid "Roles"
+msgstr "Anmerkungen"
+
+#: lib/python/org/ict_ok/components/contact_item/adapter/navigation.py:63
+#: lib/python/org/ict_ok/components/organization/adapter/navigation.py:63
+#: lib/python/org/ict_ok/components/person/adapter/navigation.py:63
+#, fuzzy
+msgid "Closed Contracts"
+msgstr "Registrierungsstatus"
+
+#: lib/python/org/ict_ok/components/contact_item/adapter/navigation.py:65
+#: lib/python/org/ict_ok/components/contact_item/interfaces.py:64
+#: lib/python/org/ict_ok/components/organization/adapter/navigation.py:65
+#: lib/python/org/ict_ok/components/person/adapter/navigation.py:65
+msgid "Responsible for contracts"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/contact_item/browser/contact_item.py:108
 #: lib/python/org/ict_ok/components/contact_item/browser/contactitem.py:100
@@ -3640,48 +3920,21 @@ msgstr "Schnittstelle"
 msgid "ContactItem"
 msgstr "Inhaltsauflistung"
 
-#: lib/python/org/ict_ok/components/contact_item/interfaces.py:30
-#: lib/python/org/ict_ok/components/contact/configure.zcml:30
-#: lib/python/org/ict_ok/components/contact/configure.zcml:78
-#: lib/python/org/ict_ok/components/contact_item/browser/details.pt:53
-#, fuzzy
-msgid "Contact"
-msgstr "Bemerkung"
-
 #: lib/python/org/ict_ok/components/contact_item/interfaces.py:35
 #: lib/python/org/ict_ok/components/work_order/configure.zcml:30
 #: lib/python/org/ict_ok/components/work_order/configure.zcml:78
-#: lib/python/org/ict_ok/components/contact_item/browser/details.pt:59
 msgid "WorkOrder"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/contact_item/interfaces.py:40
-#: lib/python/org/ict_ok/components/person/browser/details.pt:82
-#, fuzzy
-msgid "Roles"
-msgstr "Anmerkungen"
-
-#: lib/python/org/ict_ok/components/contact_item/interfaces.py:46
-#: lib/python/org/ict_ok/components/person/browser/details.pt:70
-msgid "Groups"
-msgstr ""
-
 #: lib/python/org/ict_ok/components/contact_item/interfaces.py:52
-#: lib/python/org/ict_ok/components/contact_item/browser/details.pt:66
 #, fuzzy
 msgid "Addresses"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/contact_item/interfaces.py:58
-#: lib/python/org/ict_ok/components/person/browser/details.pt:94
 #, fuzzy
 msgid "Closed contracts"
 msgstr "Registrierungsstatus"
-
-#: lib/python/org/ict_ok/components/contact_item/interfaces.py:64
-#: lib/python/org/ict_ok/components/person/browser/details.pt:106
-msgid "Responsible for contracts"
-msgstr ""
 
 #: lib/python/org/ict_ok/components/contact_item/security.zcml:13
 msgid "View Contact Item"
@@ -3697,35 +3950,62 @@ msgstr "Felderinhalt bearbeiten"
 msgid "Delete Contact Item"
 msgstr "SQL Skript"
 
-#: lib/python/org/ict_ok/components/contract/browser/contract.py:108
+#: lib/python/org/ict_ok/components/contract/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/contract/interfaces.py:80
+#: lib/python/org/ict_ok/components/contract/interfaces.py:81
+msgid "Contractors"
+msgstr "Vertragspartner"
+
+#: lib/python/org/ict_ok/components/contract/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/contract/interfaces.py:87
+#: lib/python/org/ict_ok/components/contract/interfaces.py:88
+msgid "Responsibles"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/contract/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/contract/interfaces.py:93
+#, fuzzy
+msgid "Component"
+msgstr "Bemerkung"
+
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:111
 #, fuzzy
 msgid "Contract Edit Form"
 msgstr "Browser-Formular-Herausforderer"
 
-#: lib/python/org/ict_ok/components/contract/browser/contract.py:119
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:122
 #, fuzzy
 msgid "Delete this Contract: '%s'?"
 msgstr "Resource löschen"
 
-#: lib/python/org/ict_ok/components/contract/browser/contract.py:47
-#: lib/python/org/ict_ok/components/contract/browser/contract.py:54
-#: lib/python/org/ict_ok/components/contract/browser/contract.py:94
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:146
+#: lib/python/org/ict_ok/components/contract/interfaces.py:33
+#: lib/python/org/ict_ok/components/contract/interfaces.py:34
+msgid "Contract type"
+msgstr "Vertragsart"
+
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:149
+#: lib/python/org/ict_ok/components/contract/interfaces.py:50
+msgid "expiration date"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:152
+#: lib/python/org/ict_ok/components/contract/interfaces.py:55
+#: lib/python/org/ict_ok/components/contract/interfaces.py:56
+msgid "annual charges"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:52
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:59
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:99
+#: lib/python/org/ict_ok/components/contract/security.zcml:18
 msgid "Add Contract"
 msgstr "Vertrag hinzufügen"
 
-#: lib/python/org/ict_ok/components/contract/browser/contract.py:86
+#: lib/python/org/ict_ok/components/contract/browser/contract.py:91
 #, fuzzy
 msgid "settings of Contract"
 msgstr "Schnittstellen-Einzelheiten"
-
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:100
-msgid "responsible"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:58
-#, fuzzy
-msgid "Contractor"
-msgstr "Vertragsmodell"
 
 #: lib/python/org/ict_ok/components/contract/browser/details.pt:6
 #, fuzzy
@@ -3737,26 +4017,25 @@ msgstr "Dieses Objekt ist registriert als:"
 msgid "Contract details"
 msgstr "Vertragsmodell"
 
-#: lib/python/org/ict_ok/components/contract/contract.py:63
+#: lib/python/org/ict_ok/components/contract/configure.zcml:30
+#: lib/python/org/ict_ok/components/contract/configure.zcml:78
+#, fuzzy
+msgid "Contract"
+msgstr "Schnittstelle"
+
+#: lib/python/org/ict_ok/components/contract/contract.py:62
 msgid "Contract of sale"
 msgstr "Kaufvertrag"
 
-#: lib/python/org/ict_ok/components/contract/contract.py:71
+#: lib/python/org/ict_ok/components/contract/contract.py:70
 msgid "Draft"
 msgstr "Entwurf"
 
-#: lib/python/org/ict_ok/components/contract/contract.py:72
+#: lib/python/org/ict_ok/components/contract/contract.py:71
 msgid "Approved"
 msgstr "Genehmigt"
 
-#: lib/python/org/ict_ok/components/contract/interfaces.py:33
-#: lib/python/org/ict_ok/components/contract/interfaces.py:34
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:52
-msgid "Contract type"
-msgstr "Vertragsart"
-
 #: lib/python/org/ict_ok/components/contract/interfaces.py:39
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:64
 #, fuzzy
 msgid "start date"
 msgstr "Anfang der Auswahl"
@@ -3768,98 +4047,67 @@ msgstr "Vertragsende"
 
 #: lib/python/org/ict_ok/components/contract/interfaces.py:44
 #: lib/python/org/ict_ok/components/contract/interfaces.py:45
-#: lib/python/org/ict_ok/skin/sidebar/ik_sb_status.pt:18
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:70
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:10
 #: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:10
+#: lib/python/org/ict_ok/skin/sidebar/ik_sb_status.pt:18
 msgid "State"
 msgstr "Status"
-
-#: lib/python/org/ict_ok/components/contract/interfaces.py:50
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:76
-msgid "expiration date"
-msgstr ""
 
 #: lib/python/org/ict_ok/components/contract/interfaces.py:51
 #, fuzzy
 msgid "expiration of contract"
 msgstr "Schnittstellen-Einzelheiten"
 
-#: lib/python/org/ict_ok/components/contract/interfaces.py:55
-#: lib/python/org/ict_ok/components/contract/interfaces.py:56
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:82
-msgid "annual charges"
-msgstr ""
-
 #: lib/python/org/ict_ok/components/contract/interfaces.py:60
 #: lib/python/org/ict_ok/components/contract/interfaces.py:61
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:88
 msgid "internal contract number"
 msgstr "Vertragsnummer (intern)"
 
 #: lib/python/org/ict_ok/components/contract/interfaces.py:65
 #: lib/python/org/ict_ok/components/contract/interfaces.py:66
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:94
 msgid "external contract number"
 msgstr "Vertragsnummer (extern)"
 
 #: lib/python/org/ict_ok/components/contract/interfaces.py:70
 #: lib/python/org/ict_ok/components/contract/interfaces.py:71
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:106
 #, fuzzy
 msgid "period of notice"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/contract/interfaces.py:75
 #: lib/python/org/ict_ok/components/contract/interfaces.py:76
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:112
 #, fuzzy
 msgid "minimum term"
 msgstr "Niedrigste Generation"
 
-#: lib/python/org/ict_ok/components/contract/interfaces.py:80
-#: lib/python/org/ict_ok/components/contract/interfaces.py:81
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:125
-msgid "Contractors"
-msgstr "Vertragspartner"
-
-#: lib/python/org/ict_ok/components/contract/interfaces.py:87
-#: lib/python/org/ict_ok/components/contract/interfaces.py:88
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:137
-msgid "Responsibles"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/contract/interfaces.py:93
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:119
+#: lib/python/org/ict_ok/components/contract/security.zcml:13
 #, fuzzy
-msgid "Component"
-msgstr "Bemerkung"
+msgid "View Contract"
+msgstr "Bitte kontaktieren Sie den Administrator."
+
+#: lib/python/org/ict_ok/components/contract/security.zcml:23
+#, fuzzy
+msgid "Edit Contract"
+msgstr "Felderinhalt bearbeiten"
+
+#: lib/python/org/ict_ok/components/contract/security.zcml:28
+#, fuzzy
+msgid "Delete Contract"
+msgstr "ungültiger Info-Eintrag"
 
 #: lib/python/org/ict_ok/components/credential/browser/details.pt:12
-#: lib/python/org/ict_ok/components/physical_component/browser/details.pt:12
-#: lib/python/org/ict_ok/components/physical_connector/browser/details.pt:12
-#: lib/python/org/ict_ok/components/logical_component/browser/details.pt:12
-#: lib/python/org/ict_ok/components/software_component/browser/details.pt:12
 #, fuzzy
 msgid "Connected interface"
 msgstr "Registrierungsstatus"
 
 #: lib/python/org/ict_ok/components/credential/browser/details.pt:3
 #: lib/python/org/ict_ok/components/interface/browser/details.pt:4
-#: lib/python/org/ict_ok/components/physical_component/browser/details.pt:3
 #: lib/python/org/ict_ok/components/physical_connector/browser/details.pt:3
-#: lib/python/org/ict_ok/components/logical_component/browser/details.pt:3
-#: lib/python/org/ict_ok/components/software_component/browser/details.pt:3
 #, fuzzy
 msgid "Interface Details"
 msgstr "Schnittstelle"
 
 #: lib/python/org/ict_ok/components/device/interfaces.py:31
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:150
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:156
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:144
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:151
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:128
 msgid "CPU type"
 msgstr ""
 
@@ -3876,45 +4124,66 @@ msgid "Memory size in MB"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/device/interfaces.py:41
+#: lib/python/org/ict_ok/components/ip_address/adapter/navigation.py:51
 #: lib/python/org/ict_ok/components/ip_address/interfaces.py:41
 #: lib/python/org/ict_ok/components/interface/configure.zcml:34
-#: lib/python/org/ict_ok/components/ip_address/browser/details.pt:59
 #, fuzzy
 msgid "Interface"
 msgstr "Schnittstelle"
 
 #: lib/python/org/ict_ok/components/device/interfaces.py:46
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:108
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:114
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:74
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:109
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:74
+#: lib/python/org/ict_ok/components/switch/adapter/navigation.py:66
 msgid "Operating software"
 msgstr "Betriebssystem"
 
 #: lib/python/org/ict_ok/components/device/interfaces.py:51
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:120
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:126
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:86
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:121
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:86
+#: lib/python/org/ict_ok/components/switch/adapter/navigation.py:69
 msgid "Application software"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/device/interfaces.py:56
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:98
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:98
+#: lib/python/org/ict_ok/components/happliance/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/ipc/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/notebook/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/pc/adapter/navigation.py:56
+#: lib/python/org/ict_ok/components/switch/adapter/navigation.py:55
 #, fuzzy
 msgid "Logical Devices"
 msgstr "für _alle Benutzer"
 
 #: lib/python/org/ict_ok/components/device/interfaces.py:61
+#: lib/python/org/ict_ok/components/happliance/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/ipc/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/notebook/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/pc/adapter/navigation.py:58
+#: lib/python/org/ict_ok/components/switch/adapter/navigation.py:57
 msgid "Physical Media"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:116
-msgid "Resolution"
-msgstr ""
+#: lib/python/org/ict_ok/components/display_unit/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/display_unit/browser/display_unit.py:165
+#: lib/python/org/ict_ok/components/interface/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/ip_address/browser/ip_address.py:165
+#: lib/python/org/ict_ok/components/isdnphone/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/isdnphone/browser/isdnphone.py:167
+#: lib/python/org/ict_ok/components/misc_physical/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/misc_physical/browser/misc_physical.py:165
+#: lib/python/org/ict_ok/components/mobilephone/adapter/navigation.py:48
+#: lib/python/org/ict_ok/components/mobilephone/interfaces.py:62
+#: lib/python/org/ict_ok/components/notebook/browser/notebook.py:164
+#: lib/python/org/ict_ok/components/outlet/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/patchpanel/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/patchport/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:37
+#: lib/python/org/ict_ok/components/physical_media/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:170
+#: lib/python/org/ict_ok/components/printer/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/printer/browser/printer.py:171
+#: lib/python/org/ict_ok/components/rack/adapter/navigation.py:49
+#: lib/python/org/ict_ok/admin_utils/usermanagement/security-global.zcml:10
+#, fuzzy
+msgid "User"
+msgstr "Benutzer"
 
 #: lib/python/org/ict_ok/components/display_unit/browser/details.pt:6
 msgid "Display unit details [Template]"
@@ -3939,28 +4208,6 @@ msgstr "Browser-Formular-Herausforderer"
 #, fuzzy
 msgid "Delete this DisplayUnit: '%s'?"
 msgstr "Resource löschen"
-
-#: lib/python/org/ict_ok/components/display_unit/browser/display_unit.py:165
-#: lib/python/org/ict_ok/components/ip_address/browser/ip_address.py:165
-#: lib/python/org/ict_ok/components/isdnphone/browser/isdnphone.py:167
-#: lib/python/org/ict_ok/components/misc_physical/browser/misc_physical.py:165
-#: lib/python/org/ict_ok/components/mobilephone/interfaces.py:62
-#: lib/python/org/ict_ok/components/notebook/browser/notebook.py:164
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:36
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:172
-#: lib/python/org/ict_ok/components/printer/browser/printer.py:171
-#: lib/python/org/ict_ok/admin_utils/usermanagement/security-global.zcml:10
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:26
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:20
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:13
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:86
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:17
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:86
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:16
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:17
-#, fuzzy
-msgid "User"
-msgstr "Benutzer"
 
 #: lib/python/org/ict_ok/components/display_unit/browser/display_unit.py:60
 #: lib/python/org/ict_ok/components/display_unit/browser/display_unit.py:67
@@ -4047,8 +4294,6 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/group/interfaces.py:31
 #: lib/python/org/ict_ok/components/role/interfaces.py:31
-#: lib/python/org/ict_ok/components/role/browser/details.pt:54
-#: lib/python/org/ict_ok/components/group/browser/details.pt:54
 #, fuzzy
 msgid "Contact items"
 msgstr "Inhaltsauflistung"
@@ -4067,6 +4312,30 @@ msgstr "Gruppen-Informationen hinzufügen"
 #, fuzzy
 msgid "Delete Group"
 msgstr "SQL Skript"
+
+#: lib/python/org/ict_ok/components/happliance/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/ipc/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/notebook/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/pc/adapter/navigation.py:50
+#: lib/python/org/ict_ok/components/switch/adapter/navigation.py:63
+msgid "Interfaces"
+msgstr "Schnittstelle"
+
+#: lib/python/org/ict_ok/components/happliance/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/ipc/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/notebook/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/pc/adapter/navigation.py:52
+#, fuzzy
+msgid "Operating Software"
+msgstr "Betriebssystem"
+
+#: lib/python/org/ict_ok/components/happliance/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/ipc/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/notebook/adapter/navigation.py:55
+#: lib/python/org/ict_ok/components/pc/adapter/navigation.py:54
+#, fuzzy
+msgid "Application Software"
+msgstr "Betriebssystem"
 
 #: lib/python/org/ict_ok/components/happliance/browser/details.pt:6
 msgid "Hardware Appliance details [Template]"
@@ -4115,6 +4384,12 @@ msgstr ""
 #: lib/python/org/ict_ok/components/happliance/security.zcml:28
 msgid "Delete Hardware Appliance"
 msgstr ""
+
+#: lib/python/org/ict_ok/components/host/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/logical_device/interfaces.py:41
+#, fuzzy
+msgid "Devices"
+msgstr "Dienste"
 
 #: lib/python/org/ict_ok/components/host/adapter/sized.py:47
 #: lib/python/org/ict_ok/components/interface/adapter/sized.py:47
@@ -4635,27 +4910,117 @@ msgstr " hängt ab von "
 msgid "HostVMwareVm"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:109
-#: lib/python/org/ict_ok/components/outlet/browser/details.pt:47
-#: lib/python/org/ict_ok/components/isdnphone/browser/details.pt:91
-#: lib/python/org/ict_ok/components/patchport/browser/details.pt:79
-msgid "Connected components<br>(physical layer)"
+#: lib/python/org/ict_ok/components/int_attachment/browser/details.pt:6
+#, fuzzy
+msgid "Internal Attachment details [Template]"
+msgstr "Schnittstelle"
+
+#: lib/python/org/ict_ok/components/int_attachment/browser/details.pt:7
+#, fuzzy
+msgid "Internal Attachment details"
+msgstr "Schnittstelle"
+
+#: lib/python/org/ict_ok/components/int_attachment/browser/int_attachment.py:129
+#, fuzzy
+msgid "settings of Internal Attachment"
+msgstr "Schnittstellen-Einzelheiten"
+
+#: lib/python/org/ict_ok/components/int_attachment/browser/int_attachment.py:203
+#, fuzzy
+msgid "Internal Attachment Edit Form"
+msgstr "Browser-Formular-Herausforderer"
+
+#: lib/python/org/ict_ok/components/int_attachment/browser/int_attachment.py:214
+#, fuzzy
+msgid "Delete this InternalAttachment: '%s'?"
+msgstr "Resource löschen"
+
+#: lib/python/org/ict_ok/components/int_attachment/browser/int_attachment.py:50
+#: lib/python/org/ict_ok/components/int_attachment/browser/int_attachment.py:57
+#: lib/python/org/ict_ok/components/int_attachment/browser/int_attachment.py:140
+#: lib/python/org/ict_ok/components/int_attachment/security.zcml:18
+#, fuzzy
+msgid "Add Internal Attachment"
+msgstr "Schnittstellen-Einzelheiten"
+
+#: lib/python/org/ict_ok/components/int_attachment/configure.zcml:30
+#: lib/python/org/ict_ok/components/int_attachment/configure.zcml:78
+msgid "InternalAttachment"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:169
+#: lib/python/org/ict_ok/components/int_attachment/interfaces.py:30
 #, fuzzy
-msgid "IPv4 addresses"
+msgid "filename"
+msgstr "Servername"
+
+#: lib/python/org/ict_ok/components/int_attachment/interfaces.py:31
+msgid "long description text line"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/int_attachment/interfaces.py:35
+#, fuzzy
+msgid "content type"
+msgstr "Inhaltsauflistung"
+
+#: lib/python/org/ict_ok/components/int_attachment/interfaces.py:36
+msgid "long description choice"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/int_attachment/interfaces.py:40
+#, fuzzy
+msgid "data"
+msgstr "CSV Daten"
+
+#: lib/python/org/ict_ok/components/int_attachment/interfaces.py:41
+#, fuzzy
+msgid "long description date"
+msgstr "Registrierungsstatus"
+
+#: lib/python/org/ict_ok/components/int_attachment/security.zcml:13
+msgid "View Internal Attachment"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/int_attachment/security.zcml:23
+msgid "Edit Internal Attachment"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/int_attachment/security.zcml:28
+#, fuzzy
+msgid "Delete Internal Attachment"
+msgstr "ungültiger Info-Eintrag"
+
+#: lib/python/org/ict_ok/components/interface/adapter/navigation.py:55
+#, fuzzy
+msgid "From Device"
+msgstr "Port des SMTP-Dienstes"
+
+#: lib/python/org/ict_ok/components/interface/adapter/navigation.py:57
+#: lib/python/org/ict_ok/components/interface/interfaces.py:99
+#: lib/python/org/ict_ok/components/ipnet/interfaces.py:45
+#, fuzzy
+msgid "IP Addresses"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
+
+#: lib/python/org/ict_ok/components/interface/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/isdnphone/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/outlet/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/patchport/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/physical_connector/interfaces.py:54
+#: lib/python/org/ict_ok/components/physical_link/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/physical_link/interfaces.py:79
+#: lib/python/org/ict_ok/components/physical_link/interfaces.py:123
+#, fuzzy
+msgid "Connected to"
+msgstr "Port des SMTP-Dienstes"
 
 #: lib/python/org/ict_ok/components/interface/browser/details.pt:3
 #, fuzzy
 msgid "Interface Details [Template]"
 msgstr "Schnittstelle"
 
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:83
-#, fuzzy
-msgid "Connected interfaces"
-msgstr "Registrierungsstatus"
+#: lib/python/org/ict_ok/components/interface/browser/interface.py:536
+msgid "Brand"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/configure.zcml:98
 #, fuzzy
@@ -4673,7 +5038,6 @@ msgid "Index type"
 msgstr "Nächster Reiter"
 
 #: lib/python/org/ict_ok/components/interface/interfaces.py:58
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:132
 #, fuzzy
 msgid "interface type"
 msgstr "Schnittstellen-Typ"
@@ -4683,7 +5047,6 @@ msgid "Networktype of this interface (OSI Layer1-2)"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/interface/interfaces.py:72
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:138
 #, fuzzy
 msgid "MAC address"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
@@ -4693,16 +5056,7 @@ msgstr "E-Mail-Adresse des Übersetzerteams:"
 msgid "MAC address of the host."
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
-#: lib/python/org/ict_ok/components/interface/interfaces.py:99
-#: lib/python/org/ict_ok/components/ipnet/interfaces.py:45
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:143
-#: lib/python/org/ict_ok/components/ipnet/browser/details.pt:19
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:82
-#, fuzzy
-msgid "IP Addresses"
-msgstr "E-Mail-Adresse des Übersetzerteams:"
-
-#: lib/python/org/ict_ok/components/interfaces.py:107
+#: lib/python/org/ict_ok/components/interfaces.py:108
 #, fuzzy
 msgid "CSV data"
 msgstr "CSV Daten"
@@ -4725,22 +5079,22 @@ msgstr ""
 msgid "Requirement."
 msgstr "ZMI Einstellungen"
 
-#: lib/python/org/ict_ok/components/interfaces.py:66
-#, fuzzy
-msgid "Contracts"
-msgstr "Schnittstelle"
-
-#: lib/python/org/ict_ok/components/interfaces.py:93
+#: lib/python/org/ict_ok/components/interfaces.py:94
 msgid "XLS data"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/interfaces.py:97
+#: lib/python/org/ict_ok/components/interfaces.py:98
 msgid "Codepage"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/interfaces.py:98
+#: lib/python/org/ict_ok/components/interfaces.py:99
 msgid "Codepage of XLS"
 msgstr ""
+
+#: lib/python/org/ict_ok/components/ip_address/adapter/navigation.py:49
+#, fuzzy
+msgid "Ip Net"
+msgstr "Netz"
 
 #: lib/python/org/ict_ok/components/ip_address/browser/details.pt:6
 #, fuzzy
@@ -4787,7 +5141,6 @@ msgid "IpAddress"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/ip_address/interfaces.py:35
-#: lib/python/org/ict_ok/components/ip_address/browser/details.pt:52
 #, fuzzy
 msgid "IP Address"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
@@ -4798,7 +5151,6 @@ msgid "IP address of the device."
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/ip_address/interfaces.py:46
-#: lib/python/org/ict_ok/components/ip_address/browser/details.pt:75
 #, fuzzy
 msgid "IP Net"
 msgstr "Netz"
@@ -4865,21 +5217,26 @@ msgstr ""
 msgid "Delete Industrial Computer"
 msgstr ""
 
+#: lib/python/org/ict_ok/components/ipnet/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/ipnet/interfaces.py:56
+#: lib/python/org/ict_ok/components/net/interfaces.py:50
+msgid "Sub nets"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/ipnet/adapter/navigation.py:55
+msgid "Parentnet"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/ipnet/adapter/navigation.py:57
+#, fuzzy
+msgid "Ip Addresses"
+msgstr "E-Mail-Adresse des Übersetzerteams:"
+
 #: lib/python/org/ict_ok/components/ipnet/adapter/state.py:58
 #: lib/python/org/ict_ok/components/net/adapter/state.py:58
 #, fuzzy
 msgid "'no hosts in net'"
 msgstr "Keine Dateien in:"
-
-#: lib/python/org/ict_ok/components/ipnet/browser/details.pt:3
-#, fuzzy
-msgid "IpNet Details [Template]"
-msgstr "Objekt ist eine Vorlage"
-
-#: lib/python/org/ict_ok/components/ipnet/browser/details.pt:4
-#, fuzzy
-msgid "IpNet Details"
-msgstr "Details"
 
 #: lib/python/org/ict_ok/components/ipnet/browser/ipnet.py:115
 #: lib/python/org/ict_ok/components/net/browser/net.py:107
@@ -4931,7 +5288,6 @@ msgid "IpNetFolder"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/ipnet/interfaces.py:38
-#: lib/python/org/ict_ok/components/ipnet/browser/details.pt:14
 #, fuzzy
 msgid "IpNetwork IP"
 msgstr "Netzwerk"
@@ -4943,16 +5299,7 @@ msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/ipnet/interfaces.py:51
 #: lib/python/org/ict_ok/components/net/interfaces.py:45
-#: lib/python/org/ict_ok/components/ipnet/browser/details.pt:46
-#: lib/python/org/ict_ok/components/net/browser/details.pt:20
 msgid "Parent net"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/ipnet/interfaces.py:56
-#: lib/python/org/ict_ok/components/net/interfaces.py:50
-#: lib/python/org/ict_ok/components/ipnet/browser/details.pt:52
-#: lib/python/org/ict_ok/components/net/browser/details.pt:26
-msgid "Sub nets"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/isdnphone/browser/details.pt:6
@@ -4997,7 +5344,6 @@ msgid "ISDNPhone"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/isdnphone/interfaces.py:30
-#: lib/python/org/ict_ok/components/isdnphone/browser/details.pt:52
 #, fuzzy
 msgid "Phone number"
 msgstr "Telefonnummer"
@@ -5062,6 +5408,34 @@ msgstr "Felderinhalt hinzufügen"
 msgid "Display latency check"
 msgstr ""
 
+#: lib/python/org/ict_ok/components/latency/browser/trend.pt:16
+#: lib/python/org/ict_ok/components/muninvalue/browser/trend.pt:16
+#: lib/python/org/ict_ok/components/snmpvalue/browser/trend.pt:16
+#, fuzzy
+msgid "SNMP Trend2"
+msgstr "Felderinhalt hinzufügen"
+
+#: lib/python/org/ict_ok/components/latency/browser/trend.pt:29
+#: lib/python/org/ict_ok/components/muninvalue/browser/trend.pt:29
+#: lib/python/org/ict_ok/components/snmpvalue/browser/trend.pt:29
+#, fuzzy
+msgid "SNMP Trend3"
+msgstr "Felderinhalt hinzufügen"
+
+#: lib/python/org/ict_ok/components/latency/browser/trend.pt:3
+#: lib/python/org/ict_ok/components/muninvalue/browser/trend.pt:3
+#: lib/python/org/ict_ok/components/snmpvalue/browser/trend.pt:3
+#, fuzzy
+msgid "SNMP Trend1"
+msgstr "Felderinhalt hinzufügen"
+
+#: lib/python/org/ict_ok/components/latency/browser/trend.pt:42
+#: lib/python/org/ict_ok/components/muninvalue/browser/trend.pt:42
+#: lib/python/org/ict_ok/components/snmpvalue/browser/trend.pt:42
+#, fuzzy
+msgid "SNMP Trend4"
+msgstr "Felderinhalt hinzufügen"
+
 #: lib/python/org/ict_ok/components/latency/configure.zcml:24
 msgid "Latency"
 msgstr ""
@@ -5076,6 +5450,12 @@ msgstr "Browser-Formular-Herausforderer"
 #, fuzzy
 msgid "Check count"
 msgstr "Kommandozeile"
+
+#: lib/python/org/ict_ok/components/location/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/location/interfaces.py:29
+#, fuzzy
+msgid "Buildings"
+msgstr "Abhängigkeitsbaum wird aufgebaut"
 
 #: lib/python/org/ict_ok/components/location/browser/details.pt:3
 msgid "Location Details [Template]"
@@ -5113,16 +5493,15 @@ msgstr "Standort:&nbsp;"
 msgid "LocationFolder"
 msgstr "Standort:"
 
-#: lib/python/org/ict_ok/components/location/interfaces.py:29
-#: lib/python/org/ict_ok/components/location/browser/details.pt:14
-#, fuzzy
-msgid "Buildings"
-msgstr "Abhängigkeitsbaum wird aufgebaut"
-
 #: lib/python/org/ict_ok/components/location/interfaces.py:37
 #, fuzzy
 msgid "Coordinates of the location."
 msgstr "Standort:&nbsp;"
+
+#: lib/python/org/ict_ok/components/logical_component/browser/details.pt:3
+#, fuzzy
+msgid "Logical Component Details"
+msgstr "Standort:"
 
 #: lib/python/org/ict_ok/components/logical_device/interfaces.py:31
 msgid "power managed"
@@ -5131,12 +5510,6 @@ msgstr ""
 #: lib/python/org/ict_ok/components/logical_device/interfaces.py:32
 msgid "the Device can be power managed"
 msgstr ""
-
-#: lib/python/org/ict_ok/components/logical_device/interfaces.py:41
-#: lib/python/org/ict_ok/components/host/browser/details.pt:26
-#, fuzzy
-msgid "Devices"
-msgstr "Dienste"
 
 #: lib/python/org/ict_ok/components/misc_physical/browser/details.pt:6
 msgid "miscellaneous physical component details [Template]"
@@ -5227,7 +5600,6 @@ msgid "MobilePhone"
 msgstr "Mobiltelefon"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:103
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:58
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -5236,7 +5608,6 @@ msgid "International Mobile Equipment Identity"
 msgstr "International Mobile Equipment Identity"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:110
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:64
 msgid "PIN"
 msgstr "PIN"
 
@@ -5245,7 +5616,6 @@ msgid "Personal Identification Number"
 msgstr "Persönliche Identifikationsnummer"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:117
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:70
 msgid "PUK"
 msgstr "PUK"
 
@@ -5254,7 +5624,6 @@ msgid "Personal Unblocking Key"
 msgstr "Personal Unblocking Key-Nummer"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:125
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:76
 msgid "SIM number"
 msgstr "SIM Nummer"
 
@@ -5264,61 +5633,40 @@ msgstr "Subscriber Identity Module-Nummer"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:56
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:57
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:14
 msgid "phone number"
 msgstr "Telefonnummer"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:63
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:37
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:38
 msgid "User of the mobile phone"
 msgstr "Benutzer des Telefons"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:70
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:71
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:28
 msgid "contract model"
 msgstr "Vertragsmodell"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:76
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:77
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:34
 msgid "contract end date"
 msgstr "Vertragsende"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:82
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:83
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:61
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:40
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:183
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:189
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:174
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:181
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:158
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:69
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:62
 msgid "delivery date"
 msgstr "Lieferdatum"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:89
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:90
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:49
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:46
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:177
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:183
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:50
 msgid "model type"
 msgstr "Modell"
 
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:96
 #: lib/python/org/ict_ok/components/mobilephone/interfaces.py:97
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:71
 #: lib/python/org/ict_ok/components/physical_component/interfaces.py:72
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:52
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:163
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:169
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:156
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:163
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:140
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:91
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:63
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:73
 msgid "Serial number"
 msgstr "Seriennummer"
 
@@ -5334,102 +5682,45 @@ msgstr "Mobiltelefon bearbeiten"
 msgid "Delete Mobile phone"
 msgstr "Mobiltelefon löschen"
 
-#: lib/python/org/ict_ok/components/muninvalue/browser/add_snmps_by_vendor.pt:21
-#: lib/python/org/ict_ok/components/browser/evaluations_todo.pt:15
-#: lib/python/org/ict_ok/components/browser/evaluations_done.pt:15
-#: lib/python/org/ict_ok/components/latency/browser/add_snmps_by_vendor.pt:21
-#: lib/python/org/ict_ok/components/superclass/browser/overview.pt:15
-#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:21
-#: lib/python/org/ict_ok/admin_utils/esx_vim/browser/overview_esx.pt:8
-#: lib/python/org/ict_ok/admin_utils/util_manager/browser/overview.pt:13
-#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/crossbar.pt:15
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/display_reqs.pt:15
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/allreqs.pt:15
-#: lib/python/org/ict_ok/admin_utils/linux_ha/browser/overview_ha.pt:8
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/tsearch.pt:36
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/events.pt:16
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/fsearch.pt:36
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/generations.pt:16
-#, fuzzy
-msgid "There are no objects."
-msgstr "Keine Einträge vorhanden"
+#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:107
+#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:47
+msgid "Over max quota"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:122
+#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:16
+#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:13
+msgid "current values"
+msgstr ""
 
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:3
 #: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:3
 msgid "Details of the SNMP Value"
 msgstr ""
 
+#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:85
+#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:34
+msgid "Under min quota"
+msgstr ""
+
 #: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:12
-#: lib/python/org/ict_ok/components/snmpvalue/browser/display.pt:12
 msgid "Timestamp"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:16
-#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:122
-#: lib/python/org/ict_ok/components/snmpvalue/browser/display.pt:16
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:124
-msgid "current values"
-msgstr ""
-
 #: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:28
-#: lib/python/org/ict_ok/components/snmpvalue/browser/display.pt:28
 #, fuzzy
 msgid "min. level"
 msgstr "min_max"
 
 #: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:3
-#: lib/python/org/ict_ok/components/snmpvalue/browser/display.pt:3
 #, fuzzy
 msgid "Display SNMP Values"
 msgstr "Option -%c benötigt einen Wert"
 
-#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:34
-#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:85
-#: lib/python/org/ict_ok/components/snmpvalue/browser/display.pt:34
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:86
-msgid "Under min quota"
-msgstr ""
-
 #: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:41
-#: lib/python/org/ict_ok/components/snmpvalue/browser/display.pt:41
 #, fuzzy
 msgid "max. level"
 msgstr "min_max"
-
-#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:47
-#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:107
-#: lib/python/org/ict_ok/components/snmpvalue/browser/display.pt:47
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:108
-msgid "Over max quota"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/muninvalue/browser/trend.pt:16
-#: lib/python/org/ict_ok/components/latency/browser/trend.pt:16
-#: lib/python/org/ict_ok/components/snmpvalue/browser/trend.pt:16
-#, fuzzy
-msgid "SNMP Trend2"
-msgstr "Felderinhalt hinzufügen"
-
-#: lib/python/org/ict_ok/components/muninvalue/browser/trend.pt:29
-#: lib/python/org/ict_ok/components/latency/browser/trend.pt:29
-#: lib/python/org/ict_ok/components/snmpvalue/browser/trend.pt:29
-#, fuzzy
-msgid "SNMP Trend3"
-msgstr "Felderinhalt hinzufügen"
-
-#: lib/python/org/ict_ok/components/muninvalue/browser/trend.pt:3
-#: lib/python/org/ict_ok/components/latency/browser/trend.pt:3
-#: lib/python/org/ict_ok/components/snmpvalue/browser/trend.pt:3
-#, fuzzy
-msgid "SNMP Trend1"
-msgstr "Felderinhalt hinzufügen"
-
-#: lib/python/org/ict_ok/components/muninvalue/browser/trend.pt:42
-#: lib/python/org/ict_ok/components/latency/browser/trend.pt:42
-#: lib/python/org/ict_ok/components/snmpvalue/browser/trend.pt:42
-#, fuzzy
-msgid "SNMP Trend4"
-msgstr "Felderinhalt hinzufügen"
 
 #: lib/python/org/ict_ok/components/net/browser/details.pt:3
 #, fuzzy
@@ -5462,7 +5753,6 @@ msgid "Add Net"
 msgstr "Utility hinzufügen"
 
 #: lib/python/org/ict_ok/components/net/interfaces.py:38
-#: lib/python/org/ict_ok/components/net/browser/details.pt:14
 msgid "Network IP"
 msgstr ""
 
@@ -5470,29 +5760,6 @@ msgstr ""
 #, fuzzy
 msgid "IP address of the Network."
 msgstr "E-Mail-Adresse des Übersetzerteams:"
-
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:144
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:150
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:138
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:145
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:122
-msgid "Memory size"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:156
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:162
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:150
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:157
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:134
-#, fuzzy
-msgid "Hardware"
-msgstr "Hardware"
-
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:170
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:176
-#, fuzzy
-msgid "inventory id"
-msgstr "Prozessnummer"
 
 #: lib/python/org/ict_ok/components/notebook/browser/details.pt:3
 msgid "Notebook Details [Template]"
@@ -5502,14 +5769,6 @@ msgstr ""
 #, fuzzy
 msgid "Notebook Details"
 msgstr "Mobiltelefon Details"
-
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:52
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:102
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:48
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:83
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:48
-msgid "Interfaces"
-msgstr "Schnittstelle"
 
 #: lib/python/org/ict_ok/components/notebook/browser/notebook.py:101
 #, fuzzy
@@ -5599,7 +5858,6 @@ msgstr "Navigation"
 
 #: lib/python/org/ict_ok/components/organization/interfaces.py:30
 #: lib/python/org/ict_ok/components/organization/interfaces.py:31
-#: lib/python/org/ict_ok/components/organization/browser/details.pt:52
 msgid "Organization name"
 msgstr ""
 
@@ -5657,7 +5915,6 @@ msgid "OperatingSoftware"
 msgstr "Betriebssystem"
 
 #: lib/python/org/ict_ok/components/osoftware/interfaces.py:43
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:20
 msgid "OS type"
 msgstr ""
 
@@ -5732,6 +5989,20 @@ msgstr "Instanzobjekt"
 msgid "Delete An network outlet instance"
 msgstr "Instanzobjekt"
 
+#: lib/python/org/ict_ok/components/patchpanel/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/patchpanel/interfaces.py:37
+#: lib/python/org/ict_ok/components/switch/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/switch/interfaces.py:37
+#: lib/python/org/ict_ok/components/rack/configure.zcml:27
+#: lib/python/org/ict_ok/components/rack/configure.zcml:83
+msgid "Rack"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/patchpanel/adapter/navigation.py:55
+#, fuzzy
+msgid "Patchports"
+msgstr "Port"
+
 #: lib/python/org/ict_ok/components/patchpanel/browser/details.pt:6
 msgid "Patch panel details [Template]"
 msgstr ""
@@ -5769,8 +6040,6 @@ msgid "PatchPanel"
 msgstr "Eine Datei ändern"
 
 #: lib/python/org/ict_ok/components/patchpanel/interfaces.py:31
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:87
-#: lib/python/org/ict_ok/components/patchpanel/browser/details.pt:80
 msgid "Port quantity"
 msgstr ""
 
@@ -5778,18 +6047,7 @@ msgstr ""
 msgid "Quantity of all patch ports"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/patchpanel/interfaces.py:37
-#: lib/python/org/ict_ok/components/switch/interfaces.py:37
-#: lib/python/org/ict_ok/components/rack/configure.zcml:27
-#: lib/python/org/ict_ok/components/rack/configure.zcml:83
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:94
-#: lib/python/org/ict_ok/components/patchpanel/browser/details.pt:87
-msgid "Rack"
-msgstr ""
-
 #: lib/python/org/ict_ok/components/patchpanel/interfaces.py:43
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:39
-#: lib/python/org/ict_ok/components/patchpanel/browser/details.pt:16
 #, fuzzy
 msgid "Patch ports"
 msgstr "Port"
@@ -5807,16 +6065,14 @@ msgstr ""
 msgid "Delete Patch panel"
 msgstr "Startordner-Verwaltung"
 
-#: lib/python/org/ict_ok/components/patchport/browser/details.pt:143
-msgid "ddd"
-msgstr ""
+#: lib/python/org/ict_ok/components/patchport/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/rack/interfaces.py:36
+#, fuzzy
+msgid "Patchpanel"
+msgstr "Eine Datei ändern"
 
 #: lib/python/org/ict_ok/components/patchport/browser/details.pt:6
 msgid "Patch port details [Template]"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/patchport/browser/details.pt:67
-msgid "Links"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/patchport/browser/details.pt:7
@@ -5852,7 +6108,6 @@ msgid "PatchPort"
 msgstr "Port"
 
 #: lib/python/org/ict_ok/components/patchport/interfaces.py:31
-#: lib/python/org/ict_ok/components/patchport/browser/details.pt:130
 #, fuzzy
 msgid "Patch panel"
 msgstr "Eine Datei ändern"
@@ -5871,10 +6126,6 @@ msgstr "Ein SQL Skript bearbeiten"
 #, fuzzy
 msgid "Delete Patch port"
 msgstr "SQL Skript"
-
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:110
-msgid "physical Media"
-msgstr ""
 
 #: lib/python/org/ict_ok/components/pc/browser/details.pt:6
 msgid "Personal Computer details [Template]"
@@ -5934,25 +6185,25 @@ msgstr "Dieses Objekt ist registriert als:"
 msgid "Person details"
 msgstr "Schnittstelle"
 
-#: lib/python/org/ict_ok/components/person/browser/person.py:108
+#: lib/python/org/ict_ok/components/person/browser/person.py:117
 #, fuzzy
 msgid "Person Edit Form"
 msgstr "Ein SQL Skript bearbeiten"
 
-#: lib/python/org/ict_ok/components/person/browser/person.py:119
+#: lib/python/org/ict_ok/components/person/browser/person.py:128
 #, fuzzy
 msgid "Delete this Person: '%s'?"
 msgstr "Resource löschen"
 
 #: lib/python/org/ict_ok/components/person/browser/person.py:47
 #: lib/python/org/ict_ok/components/person/browser/person.py:54
-#: lib/python/org/ict_ok/components/person/browser/person.py:94
+#: lib/python/org/ict_ok/components/person/browser/person.py:103
 #: lib/python/org/ict_ok/components/person/security.zcml:18
 #, fuzzy
 msgid "Add Person"
 msgstr "Webseitenverwaltung hinzufügen"
 
-#: lib/python/org/ict_ok/components/person/browser/person.py:86
+#: lib/python/org/ict_ok/components/person/browser/person.py:95
 #, fuzzy
 msgid "settings of Person"
 msgstr "ZMI Einstellungen"
@@ -5964,7 +6215,6 @@ msgid "Person"
 msgstr "[Version]"
 
 #: lib/python/org/ict_ok/components/person/interfaces.py:30
-#: lib/python/org/ict_ok/components/person/browser/details.pt:52
 #, fuzzy
 msgid "first name"
 msgstr "Servername"
@@ -5975,7 +6225,6 @@ msgid "first name of the person"
 msgstr "Benutzer: ${user_title}"
 
 #: lib/python/org/ict_ok/components/person/interfaces.py:35
-#: lib/python/org/ict_ok/components/person/browser/details.pt:58
 #, fuzzy
 msgid "last name"
 msgstr "Servername"
@@ -5986,7 +6235,6 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/person/interfaces.py:40
 #: lib/python/org/ict_ok/components/slave/browser/details.pt:7
-#: lib/python/org/ict_ok/components/person/browser/details.pt:64
 #, fuzzy
 msgid "title"
 msgstr "Titel"
@@ -6011,95 +6259,60 @@ msgstr "Bearbeiten Popup"
 msgid "Delete Person"
 msgstr "SQL Skript"
 
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:48
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:168
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:175
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:152
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:57
+#: lib/python/org/ict_ok/components/physical_component/browser/details.pt:3
+#, fuzzy
+msgid "Physical Component Details"
+msgstr "Schnittstellen-Einzelheiten"
+
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:49
 #, fuzzy
 msgid "Model type"
 msgstr "Modell"
 
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:54
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:138
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:144
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:132
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:139
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:116
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:63
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:57
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:55
 msgid "Vendor"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:55
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:56
 #, fuzzy
 msgid "Name/Address of the vendor."
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:60
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:61
 #, fuzzy
 msgid "Delivery date"
 msgstr "Lieferdatum"
 
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:76
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:162
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:169
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:146
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:97
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:77
 #, fuzzy
 msgid "Inventory id"
 msgstr "Prozessnummer"
 
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:77
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:78
 #, fuzzy
 msgid "Id of inventory."
 msgstr "Prozessnummer"
 
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:81
 #: lib/python/org/ict_ok/components/physical_component/interfaces.py:82
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:189
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:195
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:180
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:187
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:164
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:103
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:83
 #, fuzzy
 msgid "Document number"
 msgstr "Telefonnummer"
 
-#: lib/python/org/ict_ok/components/physical_component/interfaces.py:86
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:37
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:33
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:41
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:76
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:41
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:109
+#: lib/python/org/ict_ok/components/physical_component/interfaces.py:87
 msgid "Production state"
 msgstr "Produktionszustand"
 
 #: lib/python/org/ict_ok/components/physical_connector/interfaces.py:32
 #: lib/python/org/ict_ok/components/physical_link/interfaces.py:63
-#: lib/python/org/ict_ok/components/outlet/browser/details.pt:14
 #, fuzzy
 msgid "Connector pinout"
-msgstr "Port des SMTP-Dienstes"
-
-#: lib/python/org/ict_ok/components/physical_connector/interfaces.py:54
-#: lib/python/org/ict_ok/components/physical_link/interfaces.py:79
-#: lib/python/org/ict_ok/components/physical_link/interfaces.py:123
-#: lib/python/org/ict_ok/components/physical_link/browser/details.pt:44
-#, fuzzy
-msgid "Connected to"
 msgstr "Port des SMTP-Dienstes"
 
 #: lib/python/org/ict_ok/components/physical_link/browser/details.pt:3
 #, fuzzy
 msgid "Link Details"
 msgstr "Details"
-
-#: lib/python/org/ict_ok/components/physical_link/browser/details.pt:33
-msgid "wired"
-msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_link/browser/physical_link.py:120
 msgid "physical link Edit"
@@ -6145,7 +6358,6 @@ msgid "PhysicalLink"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_link/interfaces.py:34
-#: lib/python/org/ict_ok/components/physical_link/browser/details.pt:13
 msgid "Length"
 msgstr ""
 
@@ -6154,7 +6366,6 @@ msgid "The length of the physical link."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_link/interfaces.py:40
-#: lib/python/org/ict_ok/components/physical_link/browser/details.pt:20
 msgid "Maximum length"
 msgstr ""
 
@@ -6163,7 +6374,6 @@ msgid "The maximum length of the physical link."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_link/interfaces.py:45
-#: lib/python/org/ict_ok/components/physical_link/browser/details.pt:26
 #, fuzzy
 msgid "Media type"
 msgstr "Nächster Reiter"
@@ -6201,24 +6411,24 @@ msgstr "Dieses Objekt ist registriert als:"
 msgid "Physical Media details"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:113
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:111
 #, fuzzy
 msgid "settings of Physical Media"
 msgstr "ZMI Einstellungen"
 
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:135
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:133
 #, fuzzy
 msgid "Physical Media Edit Form"
 msgstr "Browser-Formular-Herausforderer"
 
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:146
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:144
 #, fuzzy
 msgid "Delete this PhysicalMedia: '%s'?"
 msgstr "Resource löschen"
 
 #: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:60
 #: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:67
-#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:121
+#: lib/python/org/ict_ok/components/physical_media/browser/physical_media.py:119
 #: lib/python/org/ict_ok/components/physical_media/security.zcml:18
 msgid "Add Physical Media"
 msgstr ""
@@ -6233,7 +6443,6 @@ msgid "PhysicalMedia"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:34
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:69
 msgid "Capacity"
 msgstr ""
 
@@ -6242,7 +6451,6 @@ msgid "The number of bytes that can be read from or written to a Media."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:39
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:75
 msgid "Cleaner media"
 msgstr ""
 
@@ -6251,7 +6459,6 @@ msgid "Indicating that the PhysicalMedia is used for cleaning purposes and not d
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:44
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:81
 msgid "Dual sided"
 msgstr ""
 
@@ -6260,7 +6467,6 @@ msgid "Indicating that the Media has two recording sides (TRUE) or only a single
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:49
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:87
 msgid "Max mounts"
 msgstr ""
 
@@ -6269,7 +6475,6 @@ msgid "For removable Media, the maximum number of times that the Media can be mo
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:54
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:93
 #, fuzzy
 msgid "Media size"
 msgstr "Nächster Reiter"
@@ -6280,7 +6485,6 @@ msgid "Size of the Media in inches."
 msgstr "Instanzobjekt"
 
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:59
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:99
 #, fuzzy
 msgid "Media Type"
 msgstr "Nächster Reiter"
@@ -6290,7 +6494,6 @@ msgid "Specifies the type of the PhysicalMedia."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:65
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:105
 #, fuzzy
 msgid "Time of last mount"
 msgstr "Benutzer: ${user_title}"
@@ -6300,7 +6503,6 @@ msgid "For removable or cleaner Media, the date and time that the Media was last
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:70
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:111
 msgid "Write protect on"
 msgstr ""
 
@@ -6309,7 +6511,6 @@ msgid "Specifying whether the Media is currently write protected by some kind of
 msgstr ""
 
 #: lib/python/org/ict_ok/components/physical_media/interfaces.py:75
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:117
 #, fuzzy
 msgid "Label Format"
 msgstr "Port"
@@ -6372,7 +6573,6 @@ msgid "Printer"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/printer/interfaces.py:30
-#: lib/python/org/ict_ok/components/printer/browser/details.pt:52
 msgid "Available paper types"
 msgstr ""
 
@@ -6395,16 +6595,22 @@ msgstr "Webseitenverwaltung hinzufügen"
 msgid "Delete Printer"
 msgstr "SQL Skript"
 
+#: lib/python/org/ict_ok/components/product/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/product/interfaces.py:30
+#, fuzzy
+msgid "Main product"
+msgstr "Produkt"
+
+#: lib/python/org/ict_ok/components/product/adapter/navigation.py:51
+#: lib/python/org/ict_ok/components/product/interfaces.py:40
+#, fuzzy
+msgid "Sub products"
+msgstr "Produkt"
+
 #: lib/python/org/ict_ok/components/product/browser/details.pt:6
 #, fuzzy
 msgid "Product details [Template]"
 msgstr "Dieses Objekt ist registriert als:"
-
-#: lib/python/org/ict_ok/components/product/browser/details.pt:66
-#: lib/python/org/ict_ok/components/product/browser/details.pt:80
-#, fuzzy
-msgid "Sub product"
-msgstr "Produkt"
 
 #: lib/python/org/ict_ok/components/product/browser/details.pt:7
 #, fuzzy
@@ -6434,21 +6640,9 @@ msgstr "Produkt"
 msgid "settings of Product"
 msgstr "ZMI Einstellungen"
 
-#: lib/python/org/ict_ok/components/product/interfaces.py:30
-#: lib/python/org/ict_ok/components/product/browser/details.pt:53
-#, fuzzy
-msgid "Main product"
-msgstr "Produkt"
-
 #: lib/python/org/ict_ok/components/product/interfaces.py:35
-#: lib/python/org/ict_ok/components/product/browser/details.pt:59
 msgid "Work order"
 msgstr ""
-
-#: lib/python/org/ict_ok/components/product/interfaces.py:41
-#, fuzzy
-msgid "Sub products"
-msgstr "Produkt"
 
 #: lib/python/org/ict_ok/components/product/security.zcml:13
 #, fuzzy
@@ -6464,6 +6658,11 @@ msgstr "Produkt"
 #, fuzzy
 msgid "Delete Product"
 msgstr "SQL Skript"
+
+#: lib/python/org/ict_ok/components/rack/adapter/navigation.py:57
+#, fuzzy
+msgid "Patchpanels"
+msgstr "Eine Datei ändern"
 
 #: lib/python/org/ict_ok/components/rack/browser/details.pt:6
 msgid "Device rack details [Template]"
@@ -6497,7 +6696,6 @@ msgid "settings of Device rack"
 msgstr "ZMI Einstellungen"
 
 #: lib/python/org/ict_ok/components/rack/interfaces.py:31
-#: lib/python/org/ict_ok/components/rack/browser/details.pt:52
 msgid "Height"
 msgstr ""
 
@@ -6505,12 +6703,6 @@ msgstr ""
 #, fuzzy
 msgid "Height of the rack"
 msgstr "Schnittstellen-Einzelheiten"
-
-#: lib/python/org/ict_ok/components/rack/interfaces.py:36
-#: lib/python/org/ict_ok/components/rack/browser/details.pt:75
-#, fuzzy
-msgid "Patchpanel"
-msgstr "Eine Datei ändern"
 
 #: lib/python/org/ict_ok/components/rack/security.zcml:13
 msgid "View Device rack"
@@ -6547,6 +6739,7 @@ msgstr "Resource löschen"
 
 #: lib/python/org/ict_ok/components/reminder/browser/reminder.py:47
 #: lib/python/org/ict_ok/components/reminder/browser/reminder.py:87
+#: lib/python/org/ict_ok/components/reminder/security.zcml:18
 #, fuzzy
 msgid "Add Reminder"
 msgstr "Webseitenverwaltung hinzufügen"
@@ -6556,8 +6749,12 @@ msgstr "Webseitenverwaltung hinzufügen"
 msgid "settings of Reminder"
 msgstr "Webseitenverwaltung"
 
+#: lib/python/org/ict_ok/components/reminder/configure.zcml:30
+#, fuzzy
+msgid "Reminder"
+msgstr "Webseitenverwaltung hinzufügen"
+
 #: lib/python/org/ict_ok/components/reminder/interfaces.py:30
-#: lib/python/org/ict_ok/components/reminder/browser/details.pt:52
 #, fuzzy
 msgid "due date"
 msgstr "Lieferdatum"
@@ -6565,6 +6762,21 @@ msgstr "Lieferdatum"
 #: lib/python/org/ict_ok/components/reminder/interfaces.py:31
 msgid "due date of reminder"
 msgstr ""
+
+#: lib/python/org/ict_ok/components/reminder/security.zcml:13
+#, fuzzy
+msgid "View Reminder"
+msgstr "Webseitenverwaltung hinzufügen"
+
+#: lib/python/org/ict_ok/components/reminder/security.zcml:23
+#, fuzzy
+msgid "Edit Reminder"
+msgstr "Webseitenverwaltung hinzufügen"
+
+#: lib/python/org/ict_ok/components/reminder/security.zcml:28
+#, fuzzy
+msgid "Delete Reminder"
+msgstr "SQL Skript"
 
 #: lib/python/org/ict_ok/components/role/browser/details.pt:6
 #, fuzzy
@@ -6619,23 +6831,20 @@ msgstr "Felderinhalt bearbeiten"
 msgid "Delete Role"
 msgstr "SQL Skript"
 
+#: lib/python/org/ict_ok/components/room/adapter/navigation.py:51
+#, fuzzy
+msgid "Physical Components"
+msgstr "Bemerkung"
+
 #: lib/python/org/ict_ok/components/room/browser/details.pt:3
 #, fuzzy
 msgid "Room Details [Template]"
 msgstr "Dieses Objekt ist registriert als:"
 
-#: lib/python/org/ict_ok/components/room/browser/details.pt:38
-msgid "Physical connectors"
-msgstr ""
-
 #: lib/python/org/ict_ok/components/room/browser/details.pt:4
 #, fuzzy
 msgid "Room Details"
 msgstr "Details"
-
-#: lib/python/org/ict_ok/components/room/browser/details.pt:50
-msgid "Racks"
-msgstr ""
 
 #: lib/python/org/ict_ok/components/room/browser/room.py:119
 #, fuzzy
@@ -6664,13 +6873,11 @@ msgid "RoomFolder"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/room/interfaces.py:50
-#: lib/python/org/ict_ok/components/room/browser/details.pt:20
 msgid "Physical components"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/room/interfaces.py:57
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1143
-#: lib/python/org/ict_ok/components/room/browser/details.pt:62
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1187
 msgid "Level"
 msgstr "Etage"
 
@@ -7059,16 +7266,6 @@ msgstr "ungültiger Info-Eintrag"
 msgid "View the Template Entry and all its content."
 msgstr ""
 
-#: lib/python/org/ict_ok/components/slave/browser/details.pt:11
-#, fuzzy
-msgid "Date 1"
-msgstr "Veraltet"
-
-#: lib/python/org/ict_ok/components/slave/browser/details.pt:20
-#, fuzzy
-msgid "Notes"
-msgstr "Anmerkungen"
-
 #: lib/python/org/ict_ok/components/slave/browser/details.pt:4
 #, fuzzy
 msgid "DummyContainer Details"
@@ -7172,63 +7369,53 @@ msgstr "Browser-Formular-Herausforderer"
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:103
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:64
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:65
 msgid "Display unit (acceleration)"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:108
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:69
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:70
 msgid "Min. quantity"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:113
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:74
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:75
 msgid "Min. quantity (velocity)"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:118
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:79
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:80
 msgid "Min. quantity (acceleration)"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:123
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:91
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:92
 msgid "Max. quantity"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:128
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:96
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:97
 msgid "Max. quantity (velocity)"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:133
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:101
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:102
 msgid "Max. quantity (acceleration)"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:36
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:11
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:11
 #, fuzzy
 msgid "Check Type"
 msgstr "Präsentationstyp:"
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:42
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:16
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:16
 #, fuzzy
 msgid "SNMP address type"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:48
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:21
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:21
 #, fuzzy
 msgid "input addresses"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
@@ -7246,7 +7433,6 @@ msgstr "E-Mail-Adresse des Übersetzerteams:"
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:59
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:60
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:31
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:32
 #, fuzzy
 msgid "Check Command"
 msgstr "Kommandozeile"
@@ -7254,7 +7440,6 @@ msgstr "Kommandozeile"
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:66
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:67
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:36
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:37
 #, fuzzy
 msgid "Input Type"
 msgstr "Präsentationstyp:"
@@ -7265,7 +7450,6 @@ msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:74
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:41
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:42
 msgid "enable the display of min and max values"
 msgstr ""
 
@@ -7276,215 +7460,220 @@ msgstr "min_max"
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:80
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:45
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:46
 msgid "enable check 'max' for this entry"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:86
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:49
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:50
 msgid "Input quantity"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:92
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:54
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:55
 msgid "Display unit"
 msgstr ""
 
 #: lib/python/org/ict_ok/components/snmpvalue/interfaces.py:98
 #: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:59
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:60
 msgid "Display unit (velocity)"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:104
+#: lib/python/org/ict_ok/components/software_component/browser/details.pt:3
+#, fuzzy
+msgid "Software Component Details"
+msgstr "Mobiltelefon Details"
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1005
+#, fuzzy
+msgid "Delete this object?"
+msgstr "Resource löschen"
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1009
+#, fuzzy
+msgid "Delete this object: '%s'?"
+msgstr "Resource löschen"
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:107
 #, fuzzy
 msgid "details of this object"
 msgstr "Dieses Objekt ist registriert als:"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:108
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:111
 msgid "viewing details is not permitted"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1094
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1103
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1138
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1147
 msgid "Pos"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1124
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1168
 #: lib/python/org/ict_ok/skin/menu/__init__.py:158
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1126
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1170
 msgid "Dashboard of %s"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1148
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1192
 msgid "R"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1150
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1194
 #, fuzzy
 msgid "Text"
 msgstr "Text"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1175
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1219
 msgid " "
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1209
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1253
 msgid "You did not confirm the deletion correctly."
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1217
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1261
 msgid "Objects were successfully deleted."
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1219
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:1263
 msgid "No objects were selected."
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:127
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:130
 #, fuzzy
 msgid "edit this object"
 msgstr "Resource löschen"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:131
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:134
 #, fuzzy
 msgid "editing is not permitted"
 msgstr "ZMI Einstellungen"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:150
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:153
 #, fuzzy
 msgid "history this object"
 msgstr "Dieses Objekt ist registriert als:"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:154
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:157
 msgid "viewing the history is not permitted"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:174
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:177
 #, fuzzy
 msgid "delete this object"
 msgstr "Resource löschen"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:178
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:181
 msgid "deleting this object is not permitted"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:180
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:183
 msgid ",<br/>referenced by other objects"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:433
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:438
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:2
 msgid "Details"
 msgstr "Details"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:440
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:445
 #, fuzzy
 msgid "Smart view"
 msgstr "Anfang der Auswahl"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:447
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:452
 msgid "Overview"
 msgstr "Übersicht"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:460
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:465
 msgid "normal PDF"
 msgstr ""
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:467
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:472
 #, fuzzy
 msgid "report XML"
 msgstr "Exportiere XML"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:474
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:479
 msgid "History"
 msgstr "Historie"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:481
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:486
 #: lib/python/org/ict_ok/components/script/configure.zcml:24
 #, fuzzy
 msgid "Script"
 msgstr "Skript"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:488
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:493
 msgid "Dump data"
 msgstr "Daten abrufen"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:495
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:500
 msgid "Export XML"
 msgstr "Exportiere XML"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:502
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:507
 msgid "Export CSV"
 msgstr "Exportiere CSV"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:509
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:514
 msgid "Export XLS"
 msgstr "Exportiere XLS"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:516
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:521
 msgid "Import CSV"
 msgstr "Importiere CSV"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:523
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:528
 msgid "Import XLS"
 msgstr "Importiere XLS"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:530
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:535
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:537
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:542
 #, fuzzy
 msgid "Delete"
 msgstr "SQL Skript"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:544
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:549
 #, fuzzy
 msgid "Event Interface"
 msgstr "Schnittstellen-Einzelheiten"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:551
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:556
 #, fuzzy
 msgid "Edit Content"
 msgstr "Felderinhalt bearbeiten"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:607
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:631
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:824
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:563
+msgid "as mind map"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:619
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:643
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:861
 #, fuzzy
 msgid "no pickle adapter"
 msgstr "Adapter-Factory/Factories"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:882
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:919
 #, fuzzy
 msgid "View Superclass"
 msgstr "Ansichtenname"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:892
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:929
 #, fuzzy
 msgid "Add Superclass"
 msgstr "Utility hinzufügen"
 
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:930
+#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:967
 #, fuzzy
 msgid "Edit Superclass"
 msgstr "Bearbeiten Popup"
-
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:968
-#, fuzzy
-msgid "Delete this object?"
-msgstr "Resource löschen"
-
-#: lib/python/org/ict_ok/components/superclass/browser/superclass.py:972
-#, fuzzy
-msgid "Delete this object: '%s'?"
-msgstr "Resource löschen"
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:39
 #, fuzzy
@@ -7535,72 +7724,27 @@ msgid "Note for the instance (in the context of using)."
 msgstr ""
 
 #: lib/python/org/ict_ok/components/superclass/interfaces.py:71
-#: lib/python/org/ict_ok/libs/browser/details.pt:13
-#: lib/python/org/ict_ok/components/credential/browser/details.pt:17
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:181
-#: lib/python/org/ict_ok/components/ipnet/browser/details.pt:64
-#: lib/python/org/ict_ok/components/location/browser/details.pt:38
-#: lib/python/org/ict_ok/components/misc_physical/browser/details.pt:54
-#: lib/python/org/ict_ok/components/product/browser/details.pt:92
-#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:113
-#: lib/python/org/ict_ok/components/slave/browser/details.pt:16
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:82
-#: lib/python/org/ict_ok/components/person/browser/details.pt:119
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:195
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:201
-#: lib/python/org/ict_ok/components/address/browser/details.pt:96
-#: lib/python/org/ict_ok/components/outlet/browser/details.pt:61
-#: lib/python/org/ict_ok/components/host/browser/details.pt:39
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:149
-#: lib/python/org/ict_ok/components/organization/browser/details.pt:60
-#: lib/python/org/ict_ok/components/physical_component/browser/details.pt:17
-#: lib/python/org/ict_ok/components/contact_item/browser/details.pt:78
-#: lib/python/org/ict_ok/components/physical_link/browser/details.pt:55
-#: lib/python/org/ict_ok/components/patchpanel/browser/details.pt:94
-#: lib/python/org/ict_ok/components/ip_address/browser/details.pt:88
-#: lib/python/org/ict_ok/components/isdnphone/browser/details.pt:106
-#: lib/python/org/ict_ok/components/latency/browser/details.pt:12
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:74
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:188
-#: lib/python/org/ict_ok/components/rack/browser/details.pt:88
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:43
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:74
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:195
-#: lib/python/org/ict_ok/components/role/browser/details.pt:66
-#: lib/python/org/ict_ok/components/patchport/browser/details.pt:137
-#: lib/python/org/ict_ok/components/room/browser/details.pt:74
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:172
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:123
-#: lib/python/org/ict_ok/components/group/browser/details.pt:66
-#: lib/python/org/ict_ok/components/physical_connector/browser/details.pt:17
-#: lib/python/org/ict_ok/components/contact/browser/details.pt:72
-#: lib/python/org/ict_ok/components/work_order/browser/details.pt:108
-#: lib/python/org/ict_ok/components/net/browser/details.pt:38
-#: lib/python/org/ict_ok/components/logical_component/browser/details.pt:17
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:114
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:131
-#: lib/python/org/ict_ok/components/software_component/browser/details.pt:17
-#: lib/python/org/ict_ok/components/printer/browser/details.pt:60
-#: lib/python/org/ict_ok/components/building/browser/details.pt:44
-#: lib/python/org/ict_ok/components/reminder/browser/details.pt:60
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/details.pt:28
+#: lib/python/org/ict_ok/admin_utils/compliance/browser/overview.pt:28
+#: lib/python/org/ict_ok/admin_utils/cron/browser/details.pt:16
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details.pt:30
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_host.pt:34
 #: lib/python/org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:84
+#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/details.pt:24
 #: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/details.pt:26
 #: lib/python/org/ict_ok/admin_utils/generators/smokeping/browser/details.pt:26
-#: lib/python/org/ict_ok/admin_utils/cron/browser/details.pt:16
-#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/details.pt:24
-#: lib/python/org/ict_ok/admin_utils/notifier/imail/browser/details.pt:29
-#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/details.pt:24
-#: lib/python/org/ict_ok/admin_utils/ticker/browser/details.pt:11
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/details.pt:28
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/overview.pt:28
 #: lib/python/org/ict_ok/admin_utils/linux_ha/browser/details.pt:35
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/details.pt:76
-#: lib/python/org/ict_ok/admin_utils/usermanagement/browser/details.pt:15
 #: lib/python/org/ict_ok/admin_utils/netscan/browser/details.pt:22
+#: lib/python/org/ict_ok/admin_utils/notifier/imail/browser/details.pt:29
+#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/details.pt:24
 #: lib/python/org/ict_ok/admin_utils/snmpd/browser/details.pt:26
+#: lib/python/org/ict_ok/admin_utils/supervisor/browser/details.pt:76
+#: lib/python/org/ict_ok/admin_utils/ticker/browser/details.pt:11
+#: lib/python/org/ict_ok/admin_utils/usermanagement/browser/details.pt:15
 #: lib/python/org/ict_ok/admin_utils/wfmc/browser/details.pt:25
+#: lib/python/org/ict_ok/components/credential/browser/details.pt:17
+#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:113
+#: lib/python/org/ict_ok/libs/browser/details.pt:13
 msgid "Comment"
 msgstr "Bemerkung"
 
@@ -7677,6 +7821,22 @@ msgstr "Ein SQL Skript bearbeiten"
 msgid "Delete Switch"
 msgstr "SQL Skript"
 
+#: lib/python/org/ict_ok/components/work_order/adapter/navigation.py:49
+#: lib/python/org/ict_ok/components/work_order/interfaces.py:30
+msgid "Main work order"
+msgstr ""
+
+#: lib/python/org/ict_ok/components/work_order/adapter/navigation.py:53
+#: lib/python/org/ict_ok/components/work_order/interfaces.py:36
+#, fuzzy
+msgid "Products"
+msgstr "Produkt"
+
+#: lib/python/org/ict_ok/components/work_order/adapter/navigation.py:59
+#: lib/python/org/ict_ok/components/work_order/interfaces.py:54
+msgid "Sub work orders"
+msgstr ""
+
 #: lib/python/org/ict_ok/components/work_order/browser/details.pt:6
 #, fuzzy
 msgid "Work order details [Template]"
@@ -7714,27 +7874,10 @@ msgstr ""
 msgid "settings of Work order"
 msgstr "ZMI Einstellungen"
 
-#: lib/python/org/ict_ok/components/work_order/interfaces.py:30
-#: lib/python/org/ict_ok/components/work_order/browser/details.pt:53
-msgid "Main work order"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/work_order/interfaces.py:36
-#: lib/python/org/ict_ok/components/work_order/browser/details.pt:60
-#, fuzzy
-msgid "Products"
-msgstr "Produkt"
-
 #: lib/python/org/ict_ok/components/work_order/interfaces.py:48
-#: lib/python/org/ict_ok/components/work_order/browser/details.pt:84
 #, fuzzy
 msgid "Contacts"
 msgstr "Bemerkung"
-
-#: lib/python/org/ict_ok/components/work_order/interfaces.py:54
-#: lib/python/org/ict_ok/components/work_order/browser/details.pt:96
-msgid "Sub work orders"
-msgstr ""
 
 #: lib/python/org/ict_ok/components/work_order/security.zcml:13
 msgid "View Work order"
@@ -7749,39 +7892,10 @@ msgstr ""
 msgid "Delete Work order"
 msgstr "SQL Skript"
 
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:13
-msgid "X.509 subject"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:17
-msgid "X.509 issuer name"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:21
-#, fuzzy
-msgid "X.509 serial number"
-msgstr "Seriennummer"
-
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:25
-msgid "Public key size"
-msgstr ""
-
 #: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:3
 #, fuzzy
 msgid "X.509 Certificate Details"
 msgstr "Schnittstelle"
-
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:33
-msgid "X.509 valid not before"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:37
-msgid "X.509 valid not after"
-msgstr ""
-
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:49
-msgid "ddd1"
-msgstr ""
 
 #: lib/python/org/ict_ok/components/x509certificate/browser/x509certificate.py:125
 #, fuzzy
@@ -7930,28 +8044,33 @@ msgstr ""
 
 #: lib/python/org/ict_ok/schema/interfaces.py:54
 #, fuzzy
+msgid "Date not valid"
+msgstr "Präfix für Gruppenkennungen"
+
+#: lib/python/org/ict_ok/schema/interfaces.py:58
+#, fuzzy
 msgid "Email-address not ok"
 msgstr "E-Mail-Adresse des Übersetzerteams:"
 
-#: lib/python/org/ict_ok/schema/interfaces.py:58
+#: lib/python/org/ict_ok/schema/interfaces.py:62
 msgid "SNMP oid not ok"
 msgstr ""
 
-#: lib/python/org/ict_ok/schema/interfaces.py:62
+#: lib/python/org/ict_ok/schema/interfaces.py:66
 #, fuzzy
 msgid "netaddress is not ok"
 msgstr "Pfad ist nicht richtig!"
 
-#: lib/python/org/ict_ok/schema/interfaces.py:66
+#: lib/python/org/ict_ok/schema/interfaces.py:70
 #, fuzzy
 msgid "Universe ID not ok"
 msgstr "Die angegebene Kennung ist nicht gültig."
 
-#: lib/python/org/ict_ok/schema/interfaces.py:70
+#: lib/python/org/ict_ok/schema/interfaces.py:74
 msgid "Physical quantity not ok"
 msgstr ""
 
-#: lib/python/org/ict_ok/schema/interfaces.py:73
+#: lib/python/org/ict_ok/schema/interfaces.py:77
 msgid "Physical unit not ok"
 msgstr ""
 
@@ -7982,112 +8101,6 @@ msgstr "Bemerkung"
 msgid "Focus"
 msgstr ""
 
-#: lib/python/org/ict_ok/skin/focus.pt:9
-#: lib/python/org/ict_ok/libs/browser/details.pt:4
-#: lib/python/org/ict_ok/components/credential/browser/details.pt:4
-#: lib/python/org/ict_ok/components/interface/browser/details.pt:5
-#: lib/python/org/ict_ok/components/ipnet/browser/details.pt:5
-#: lib/python/org/ict_ok/components/location/browser/details.pt:5
-#: lib/python/org/ict_ok/components/misc_physical/browser/details.pt:8
-#: lib/python/org/ict_ok/components/product/browser/details.pt:8
-#: lib/python/org/ict_ok/components/muninvalue/browser/display.pt:4
-#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:4
-#: lib/python/org/ict_ok/components/muninvalue/browser/details.pt:118
-#: lib/python/org/ict_ok/components/mobilephone/browser/details.pt:5
-#: lib/python/org/ict_ok/components/person/browser/details.pt:8
-#: lib/python/org/ict_ok/components/notebook/browser/details.pt:5
-#: lib/python/org/ict_ok/components/switch/browser/details.pt:8
-#: lib/python/org/ict_ok/components/address/browser/details.pt:8
-#: lib/python/org/ict_ok/components/outlet/browser/details.pt:5
-#: lib/python/org/ict_ok/components/host/browser/details.pt:5
-#: lib/python/org/ict_ok/components/contract/browser/details.pt:8
-#: lib/python/org/ict_ok/components/organization/browser/details.pt:8
-#: lib/python/org/ict_ok/components/physical_component/browser/details.pt:4
-#: lib/python/org/ict_ok/components/contact_item/browser/details.pt:8
-#: lib/python/org/ict_ok/components/physical_link/browser/details.pt:4
-#: lib/python/org/ict_ok/components/patchpanel/browser/details.pt:8
-#: lib/python/org/ict_ok/components/ip_address/browser/details.pt:8
-#: lib/python/org/ict_ok/components/isdnphone/browser/details.pt:8
-#: lib/python/org/ict_ok/components/latency/browser/details.pt:4
-#: lib/python/org/ict_ok/components/appsoftware/browser/details.pt:5
-#: lib/python/org/ict_ok/components/pc/browser/details.pt:8
-#: lib/python/org/ict_ok/components/rack/browser/details.pt:8
-#: lib/python/org/ict_ok/components/x509certificate/browser/details.pt:4
-#: lib/python/org/ict_ok/components/osoftware/browser/details.pt:5
-#: lib/python/org/ict_ok/components/ipc/browser/details.pt:8
-#: lib/python/org/ict_ok/components/role/browser/details.pt:8
-#: lib/python/org/ict_ok/components/patchport/browser/details.pt:8
-#: lib/python/org/ict_ok/components/room/browser/details.pt:5
-#: lib/python/org/ict_ok/components/happliance/browser/details.pt:8
-#: lib/python/org/ict_ok/components/display_unit/browser/details.pt:8
-#: lib/python/org/ict_ok/components/group/browser/details.pt:8
-#: lib/python/org/ict_ok/components/physical_connector/browser/details.pt:4
-#: lib/python/org/ict_ok/components/contact/browser/details.pt:8
-#: lib/python/org/ict_ok/components/work_order/browser/details.pt:8
-#: lib/python/org/ict_ok/components/net/browser/details.pt:5
-#: lib/python/org/ict_ok/components/logical_component/browser/details.pt:4
-#: lib/python/org/ict_ok/components/snmpvalue/browser/display.pt:4
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:4
-#: lib/python/org/ict_ok/components/snmpvalue/browser/details.pt:120
-#: lib/python/org/ict_ok/components/physical_media/browser/details.pt:8
-#: lib/python/org/ict_ok/components/software_component/browser/details.pt:4
-#: lib/python/org/ict_ok/components/printer/browser/details.pt:8
-#: lib/python/org/ict_ok/components/building/browser/details.pt:5
-#: lib/python/org/ict_ok/components/reminder/browser/details.pt:8
-#: lib/python/org/ict_ok/admin_utils/generators/nagios/browser/details.pt:4
-#: lib/python/org/ict_ok/admin_utils/generators/smokeping/browser/details.pt:4
-#: lib/python/org/ict_ok/admin_utils/cron/browser/details.pt:3
-#: lib/python/org/ict_ok/admin_utils/public_viewing/browser/details.pt:6
-#: lib/python/org/ict_ok/admin_utils/notifier/browser/status.pt:3
-#: lib/python/org/ict_ok/admin_utils/notifier/imail/browser/details.pt:4
-#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/details.pt:6
-#: lib/python/org/ict_ok/admin_utils/ticker/browser/details.pt:3
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/details.pt:11
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/overview.pt:11
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/details.pt:4
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/version.pt:4
-#: lib/python/org/ict_ok/admin_utils/usermanagement/browser/details.pt:3
-#: lib/python/org/ict_ok/admin_utils/reports/browser/details.pt:3
-#: lib/python/org/ict_ok/admin_utils/netscan/demo1/browser/status.pt:6
-#: lib/python/org/ict_ok/admin_utils/netscan/browser/details.pt:4
-#: lib/python/org/ict_ok/admin_utils/snmpd/browser/details.pt:4
-#: lib/python/org/ict_ok/admin_utils/wfmc/browser/details.pt:3
-#, fuzzy
-msgid "Content listing"
-msgstr "Inhaltsauflistung"
-
-#: lib/python/org/ict_ok/skin/formui/table-form.pt:30
-#: lib/python/org/ict_ok/skin/formui/table-form.pt:64
-#: lib/python/org/ict_ok/components/service/browser/add_services.pt:3
-#: lib/python/org/ict_ok/components/muninvalue/browser/add_snmps_by_vendor.pt:3
-#: lib/python/org/ict_ok/components/muninvalue/browser/add_snmps_by_vendor.pt:6
-#: lib/python/org/ict_ok/components/muninvalue/browser/add_snmps_by_vendor.pt:9
-#: lib/python/org/ict_ok/components/host/browser/add_hosts.pt:3
-#: lib/python/org/ict_ok/components/browser/evaluations_todo.pt:4
-#: lib/python/org/ict_ok/components/browser/evaluations_done.pt:4
-#: lib/python/org/ict_ok/components/latency/browser/add_snmps_by_vendor.pt:3
-#: lib/python/org/ict_ok/components/latency/browser/add_snmps_by_vendor.pt:6
-#: lib/python/org/ict_ok/components/latency/browser/add_snmps_by_vendor.pt:9
-#: lib/python/org/ict_ok/components/superclass/browser/overview.pt:4
-#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:3
-#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:6
-#: lib/python/org/ict_ok/components/snmpvalue/browser/add_snmps_by_vendor.pt:9
-#: lib/python/org/ict_ok/admin_utils/util_manager/browser/overview.pt:2
-#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/crossbar.pt:4
-#: lib/python/org/ict_ok/admin_utils/eventcrossbar/browser/signalgraph.pt:4
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/details.pt:5
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/display_reqs.pt:4
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/allreqs.pt:4
-#: lib/python/org/ict_ok/admin_utils/compliance/browser/overview.pt:5
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/tsearch.pt:4
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/events.pt:4
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/fsearch.pt:4
-#: lib/python/org/ict_ok/admin_utils/supervisor/browser/generations.pt:4
-#: lib/python/org/ict_ok/admin_utils/wfmc/browser/wflist.pt:4
-#, fuzzy
-msgid "${DYNAMIC_CONTENT}"
-msgstr "${DYNAMIC_CONTENT}"
-
 #: lib/python/org/ict_ok/skin/hd/ik_hd_menu.pt:4
 msgid "[Version]"
 msgstr "[Version]"
@@ -8108,9 +8121,9 @@ msgstr "[Sprache]"
 msgid "[Search]"
 msgstr ""
 
-#: lib/python/org/ict_ok/skin/ik_xmlobject.py:211
-#: lib/python/org/ict_ok/skin/ik_xmlobject.py:401
-#: lib/python/org/ict_ok/skin/ik_xmlobject.py:404
+#: lib/python/org/ict_ok/skin/ik_xmlobject.py:244
+#: lib/python/org/ict_ok/skin/ik_xmlobject.py:475
+#: lib/python/org/ict_ok/skin/ik_xmlobject.py:478
 msgid "[top]"
 msgstr "[oben]"
 
@@ -8149,6 +8162,54 @@ msgstr "Meine Tätigkeiten"
 #: lib/python/org/ict_ok/skin/sidebar/ik_sb_console.pt:4
 msgid "Console"
 msgstr "Konsole"
+
+#, fuzzy
+#~ msgid "file2"
+#~ msgstr "Titel"
+
+#, fuzzy
+#~ msgid "Contractor"
+#~ msgstr "Vertragsmodell"
+
+#, fuzzy
+#~ msgid "IPv4 addresses"
+#~ msgstr "E-Mail-Adresse des Übersetzerteams:"
+
+#, fuzzy
+#~ msgid "Connected interfaces"
+#~ msgstr "Registrierungsstatus"
+
+#, fuzzy
+#~ msgid "IpNet Details [Template]"
+#~ msgstr "Objekt ist eine Vorlage"
+
+#, fuzzy
+#~ msgid "IpNet Details"
+#~ msgstr "Details"
+
+#, fuzzy
+#~ msgid "Hardware"
+#~ msgstr "Hardware"
+
+#, fuzzy
+#~ msgid "inventory id"
+#~ msgstr "Prozessnummer"
+
+#, fuzzy
+#~ msgid "Sub product"
+#~ msgstr "Produkt"
+
+#, fuzzy
+#~ msgid "Date 1"
+#~ msgstr "Veraltet"
+
+#, fuzzy
+#~ msgid "Notes"
+#~ msgstr "Anmerkungen"
+
+#, fuzzy
+#~ msgid "X.509 serial number"
+#~ msgstr "Seriennummer"
 
 #, fuzzy
 #~ msgid "IP address of the host."
