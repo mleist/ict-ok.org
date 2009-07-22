@@ -1,6 +1,0 @@
-<i18n:block domain="org.ict_ok"
-            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
-    <h3 i18n:translate="">Software Component Details</h3>
-
-    <metal:block use-macro="macro:SoftwareComponentDetails" />
-</i18n:block>
