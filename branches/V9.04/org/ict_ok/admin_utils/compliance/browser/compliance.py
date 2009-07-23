@@ -30,6 +30,8 @@ from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 from zope.security import checkPermission
 from zope.app.rotterdam.xmlobject import setNoCacheHeaders
+from zope.component import getUtility
+from zope.app.catalog.interfaces import ICatalog
 
 # zc imports
 from zc.table.column import GetterColumn
@@ -44,8 +46,7 @@ from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      getUserTimezone
 from org.ict_ok.admin_utils.compliance.interfaces import \
      IAdmUtilCompliance
-from org.ict_ok.admin_utils.compliance.compliance import \
-     AdmUtilCompliance
+from org.ict_ok.admin_utils.compliance.compliance import AdmUtilCompliance
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -56,9 +57,11 @@ from org.ict_ok.components.superclass.browser.superclass import \
      getActionBotton_Detail, getActionBotton_Edit, \
      getActionBotton_History, getActionBotton_Delete
 from org.ict_ok.components.superclass.browser.superclass import \
-     Overview, getModifiedDate, raw_cell_formatter, \
+     Overview, getModifiedDate, getTitle, getActionBottons, raw_cell_formatter, \
      link, getSize
-
+from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.admin_utils.compliance.evaluation import \
+     getEvaluationsDone, Evaluation, getEvaluationsTodo
 _ = MessageFactory('org.ict_ok')
 
 # --------------- menu entries -----------------------------
@@ -185,24 +188,25 @@ class DetailsAdmUtilComplianceForm(DisplayForm):
                 #pass
         DisplayForm.update(self)
 
-def getActionBottons(item, formatter):
-    """Action Buttons for Overview in Web-Browser
-    """
-    retHtml = u""
-    retHtml += getActionBotton_Detail(item, formatter)
-    retHtml += getActionBotton_Edit(item, formatter)
-    retHtml += getActionBotton_History(item, formatter)
-    retHtml += getActionBotton_Delete(item, formatter)
-    return retHtml
+#def getActionBottons(item, formatter):
+    #"""Action Buttons for Overview in Web-Browser
+    #"""
+    #retHtml = u""
+    #retHtml += getActionBotton_Detail(item, formatter)
+    #retHtml += getActionBotton_Edit(item, formatter)
+    #retHtml += getActionBotton_History(item, formatter)
+    #retHtml += getActionBotton_Delete(item, formatter)
+    #return retHtml
 
-def getTitle(item, formatter):
-    """
-    Titel for Overview
-    """
-    try:
-        return item.ikName
-    except TypeError:
-        return str(item.__class__.__name__)
+#def getTitle(item, formatter):
+    #"""
+    #Titel for Overview
+    #"""
+    #try:
+        #return item.ikName
+    #except TypeError:
+        #return str(item.__class__.__name__)
+
 
 
 class AdmUtilRequirementDisplay(Overview):
@@ -243,11 +247,11 @@ class AdmUtilRequirementDisplayAll(AdmUtilRequirementDisplay):
                      cell_formatter=raw_cell_formatter),
         GetterColumn(title=_('Size'),
                      getter=getSize,
-                     cell_formatter=raw_cell_formatter),
-        GetterColumn(title=_('Actions'),
-                     getter=getActionBottons,
-                     cell_formatter=raw_cell_formatter),
-        )
+                     cell_formatter=raw_cell_formatter))
+        #GetterColumn(title=_('Actions'),
+                     #getter=,
+                     #cell_formatter=raw_cell_formatter),
+        #)
     pos_colum_index = 3
     sort_columns = [0, 1, 2]
     status = None
@@ -259,6 +263,7 @@ class AdmUtilRequirementDisplayAll(AdmUtilRequirementDisplay):
                 retList.extend(getRequirementList(reqObj))
         return retList
 
+
 class EditAdmUtilComplianceForm(EditForm):
     """ Display form for the object """
     
@@ -266,3 +271,77 @@ class EditAdmUtilComplianceForm(EditForm):
     factory = AdmUtilCompliance
     omitFields = AdmUtilComplianceDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
+
+def getTupleObjTitle(item, formatter):
+    """
+    Titel for Overview
+    """
+    try:
+        return item["component"].ikName
+    except TypeError:
+        return str(item["component"].__class__.__name__)
+
+#class TupleReqGetterColumn(GetterColumn):
+    #def getSortKey(self, item, formatter):
+        #return getTupleReqTitle(item, formatter).lower()
+        ##if ISuperclass.providedBy(self.getter(item, formatter)):
+            ##key = self.getter(item, formatter).ikName
+            ##if key is not None:
+                ##key = key.lower()
+            ##else:
+                ##key = u'\xffff' * 80
+            ##return key
+        ##else:
+            ##key = self.getter(item, formatter)
+            ##if key is not None:
+                ##key = key.lower()
+            ##else:
+                ##key = u'\xffff' * 80
+            ##return key
+
+class TupleObjGetterColumn(GetterColumn):
+    def getSortKey(self, item, formatter):
+        return getTupleObjTitle(item, formatter).lower()
+
+class AdmUtilEvalTodo(Overview):
+    """for all Evaluations
+    """
+    label = _(u'display all Evaluations Todo')
+    columns = (
+        GetterColumn(title=_('Component'),
+                     getter=getTupleObjTitle,
+                     cell_formatter=link('overview.html')),
+        GetterColumn(title=_('Requirement'),
+                     getter=getTitle,
+                     cell_formatter=link('overview.html')),
+        #GetterColumn(title=_('Modified'),
+                     #getter=getModifiedDate,
+                     #subsort=True,
+                     #cell_formatter=raw_cell_formatter),
+        #GetterColumn(title=_('Size'),
+                     #getter=getSize,
+                     #cell_formatter=raw_cell_formatter),
+        #GetterColumn(title=_('Actions'),
+                     #getter=getActionBottons,
+                     #cell_formatter=raw_cell_formatter),
+        )
+    #pos_colum_index = 3
+    #sort_columns = [0, 1, 2]
+    status = None
+    sort_columns = [0,1]
+    pos_colum_index = 0
+    firstSortOn = _('Component')
+    
+    def objs(self):
+        #import pdb
+        #pdb.set_trace()
+        retList = []
+        uidutil = getUtility(IIntIds)
+        for (myid, myobj) in uidutil.items():
+            if IComponent.providedBy(myobj.object):
+                base_reqs = getEvaluationsTodo(myobj.object)
+                for req in base_reqs:
+                    retList.append({'obj':req, 'component':myobj.object})
+                    #retList.append((req, myobj.object))
+        return retList
+

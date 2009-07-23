@@ -76,6 +76,7 @@ def getRequirementBotton_Cross(item, formatter):
     return view_html + tooltip
 
 def getRequirementBotton_Tick(item, formatter):
+    #markierung
     """Action Buttons for Overview in Web-Browser
     """
     fromURLq = URLQuote(formatter.request['PATH_INFO']).quote()
@@ -130,6 +131,12 @@ class MSubAddRequirement(GlobalMenuSubItem):
     title = _(u'Add Requirement')
     viewURL = 'add_requirement.html'
     weight = 50
+
+class MSubDisplayEvalTodo(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'All Evaluations todo')
+    viewURL = 'display_eval_todo.html'
+    weight = 82
 
 
 # --------------- details -----------------------------

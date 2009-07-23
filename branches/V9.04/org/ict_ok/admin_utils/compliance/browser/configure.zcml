@@ -91,6 +91,20 @@
         for="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplay"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
+
+    <z3c:pagelet
+        name="display_eval_todo.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilEvalTodo"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <z3c:template
+        template="display_eval_todo.pt"
+        for="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilEvalTodo"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
     <z3c:pagelet
         name="allreqs.html"
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
@@ -222,6 +236,14 @@
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.admin_utils.compliance.browser.requirement.MSubDisplayRequirements"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.View"
+        />
+    <viewlet
+        name="display_eval_todo"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.admin_utils.compliance.browser.requirement.MSubDisplayEvalTodo"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.compliance.View"
         />

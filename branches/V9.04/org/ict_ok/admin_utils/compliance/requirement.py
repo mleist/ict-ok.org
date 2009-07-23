@@ -142,7 +142,13 @@ class Requirement(Superclass,
         schooltool.requirement.requirement.Requirement.__init__(self, title)
         Superclass.__init__(self, ikName=title, **data)
         Superclass.__post_init__(self, **data)
-        
+
+    def isReportable(self):
+        if len(dict(self.items()).values()) == 0:
+            return True
+        else:
+            return False
+
     def append(self, subObj):
         if hasattr(subObj, 'objectID'):
             self[subObj.objectID] = subObj

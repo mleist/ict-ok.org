@@ -33,6 +33,7 @@ from org.ict_ok.admin_utils.compliance.interfaces import \
      IEvaluations, IEvaluation
 from org.ict_ok.admin_utils.compliance.requirement import getRequirementList
 import schooltool.requirement.evaluation
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 
 logger = logging.getLogger("AdmUtilCompliance")
 EVALUATIONS_KEY = "org.ict_ok.components.evaluations"
@@ -68,21 +69,27 @@ def getEvaluationsDone(context):
 
 def getEvaluationsTodo(context):
     """List of Content objects"""
-    #retList = []
     retSet = set([])
     my_catalog = zapi.getUtility(ICatalog)
     if context.requirements is not None:
         for requirement in context.requirements:
-            res = my_catalog.searchResults(oid_index=requirement)
+            if ISuperclass.providedBy(requirement):
+                res = my_catalog.searchResults(oid_index=requirement.objectID)
+            else:
+                res = my_catalog.searchResults(oid_index=requirement)
             if len(res) > 0:
                 startReq = iter(res).next()
+                #import pdb
+                #pdb.set_trace()
                 allObjReqs = getRequirementList(startReq)
                 allObjEvaluations = getEvaluationsDone(context)
                 alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
-                #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
                 retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
-#        return retList
-    return list(retSet)
+    retList = []
+    for req in retSet:
+        if req.isReportable():
+            retList.append(req)
+    return retList
 
 # Convention to make adapter introspectable
 getEvaluationsDone.factory = Evaluations

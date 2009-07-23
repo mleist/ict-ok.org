@@ -65,7 +65,7 @@ def getEvaluationBotton_Cross(item, formatter):
     return view_html + tooltip
 
 def getEvaluationBotton_Tick(item, formatter):
-    """Action Buttons for Overview in Web-Browser
+    """Action Bottons for Overview in Web-Browser
     """
     evaluations = item.getParent()
     evalObj = evaluations.__parent__

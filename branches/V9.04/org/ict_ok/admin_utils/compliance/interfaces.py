@@ -46,6 +46,8 @@ class IAdmUtilCompliance(Interface):
 class IRequirement(Interface):
     """ ict-ok.org wrapper
     """
+    #resubmitType
+    #ValueModificationTime
     resubmitDate = Datetime(
         title = _(u'resubmit date'),
         description = _(u'resubmit the workitem on date'),
