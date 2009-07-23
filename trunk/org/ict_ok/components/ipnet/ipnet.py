@@ -150,9 +150,12 @@ class IpNet(Component):
         self.eventInpObjs_inward_relaying_shutdown = set([])
         self.ikRevision = __version__
 
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(IpNet)
+
     def store_refs(self, **data):
         Component.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(IpNet)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

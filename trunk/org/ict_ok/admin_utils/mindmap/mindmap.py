@@ -25,7 +25,7 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.component import queryUtility
 from zope.i18nmessageid import MessageFactory
-
+from zope.app.catalog.interfaces import ICatalog
 # zc imports
 
 # ict_ok.org imports
@@ -35,6 +35,8 @@ from org.ict_ok.admin_utils.mindmap.interfaces import \
      IAdmUtilMindMap
 from org.ict_ok.admin_utils.mindmap.mm_node import MMNode
 from org.ict_ok.libs.lib import generateOid
+#schooltool
+from schooltool.requirement import interfaces as ischooltool
 
 #_ = MessageFactory('org.ict_ok')
 
@@ -69,10 +71,8 @@ class AdmUtilMindMap(Supernode):
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<meta name="description" content="freemind flash browser"/>
-<meta name="keywords" content="freemind,flash"/>
-<title>MINDMAPS</title>
-<script type="text/javascript" src="http://localhost:8080/@@/js/flashobject.js"></script>
+<title>ict-ok MINDMAP</title>
+<script type="text/javascript" src="/@@/js/flashobject.js"></script>
 <style type="text/css">
 
                /* hide from ie on mac \*/
@@ -117,7 +117,7 @@ function giveFocus()
                }
                return result;
                }
-               var fo = new FlashObject("http://localhost:8080/@@/js/visorFreemind.swf", "visorFreeMind", "100%%", "100%%", 6, "#9999ff");
+               var fo = new FlashObject("/@@/js/visorFreemind.swf", "visorFreeMind", "100%%", "100%%", 6, "#9999ff");
                fo.addParam("quality", "high");
                fo.addParam("bgcolor", "#ffffff");
                fo.addVariable("openUrl", "_blank");
@@ -126,6 +126,7 @@ function giveFocus()
                fo.addVariable("defaultToolTipWordWrap",200);
                fo.addVariable("min_alpha_buttons",20);
                fo.addVariable("max_alpha_buttons",100);
+               fo.addVariable("CSSFile","/@@/js/flashfreemind.css");
                fo.write("flashcontent");
                // ]]>
                </script>
@@ -147,36 +148,70 @@ function giveFocus()
                 #fo.addVariable("min_alpha_buttons",20);
                 #fo.addVariable("max_alpha_buttons",100);
                 #fo.addVariable("scaleTooltips","false");
+    
+    def style_health(self, obj, node):
+        if hasattr(obj, "get_health"):
+            health = obj.get_health()
+            if health != None:
+                if health < 0:
+                    health = 0
+                elif health>100:
+                    health = 100
+                if health <= 50:
+                    rgbtupel = (255, int(round(health * 5.1,0)), 0)
+                else:
+                    rgbtupel = ((50 - int(round((health - 50)) * 5.1,0)), 255, 0)
+                if health in range(0,34):
+                    node.append_builtin_icon("stop")
+                if health in range(34,67):
+                    node.append_builtin_icon("prepare")
+                if health in range(67,101):
+                    node.append_builtin_icon("go")
+                bgcolor = '#%02x%02x%02x' % rgbtuple
+                node.change_style({"background_color":bgcolor})
 
-    def recursiveHelper(self, tupleList, contextdepth, alreadySeenDict={}):
+
+    def recursiveHelper(self, tupleList, contextdepth, request=None, alreadySeenDict={}):
         if contextdepth > 0:
             contextdepth -= 1
             nodelist = []
+            my_catalog = zapi.getUtility(ICatalog)
             for (attrName, viewTitle, contextObj) in tupleList:
                 if attrName is not None and viewTitle is not None:
                     if type(attrName) is not type("str"):
-                        print "Nav_tuple_wrong: %s" % type(attrName)
+                        raise TypeError("Nav_tuple_wrong: %s" % type(attrName))
                     objList = getattr(contextObj, attrName)
                     if type(objList) is not list:
                         objList = [objList]
                     for obj in objList:
                         node = None
-                        #import pdb
-                        #pdb.set_trace()
                         if obj not in alreadySeenDict.keys():
+                            if type(obj) is type("str") or type(obj) is type(u'ustr'):
+                                try:
+                                    maybe_obj = my_catalog.searchResults(oid_index=obj)
+                                    if len(maybe_obj)>0:
+                                        maybe_obj = iter(maybe_obj).next()
+                                        #hope thats only one ...
+                                except:
+                                    pass
+                                if ischooltool.IRequirement.providedBy(maybe_obj):
+                                        #oh its a requiremnt
+                                        objList.append(maybe_obj)
+                                        continue
                             if not hasattr(obj, "objectID"):
                                 Oid = "tmp%s" % generateOid()
                                 node = MMNode(Oid, obj)
                                 alreadySeenDict[obj] = node
-                                print obj
+                                print "reursiveHelper %s" % obj
                             else:
-                                node = MMNode(obj.objectID, obj.ikName, {"link": zapi.getPath(obj)})
+                                node = MMNode(obj.objectID, obj.ikName, {"link": zapi.absoluteURL(obj, request), "node_type":"bubble"})
+                                self.style_health(obj, node)
                                 alreadySeenDict[obj] = node
                                 #print "obj: %s" % obj.ikName
                                 itemNav = INavigation(obj)
                                 sublist = itemNav.getContextObjList()
                                 from copy import copy
-                                subnodes = self.recursiveHelper(sublist, copy(contextdepth), alreadySeenDict)
+                                subnodes = self.recursiveHelper(sublist, copy(contextdepth), request, alreadySeenDict)
                                 if len(subnodes) > 0:
                                     node.change_style({"cloud_color":"#EFEFEF"})
                                     node.add_nodes(subnodes)
@@ -207,7 +242,7 @@ function giveFocus()
                    </map>
                    """
         root_node = MMNode(self.context.objectID, self.context.ikName)
-        root_node.add_nodes(self.recursiveHelper(objList, 10, {self.context:root_node}))
+        root_node.add_nodes(self.recursiveHelper(objList, 10, request, {self.context:root_node}))
         return root_node.generate_map()
 
 

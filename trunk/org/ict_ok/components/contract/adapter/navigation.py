@@ -51,7 +51,11 @@ class Navigation(SuperNavigation):
             retList.append(('responsibles', _(u'Responsibles'), self.context))
         if self.context.component is not None:
             retList.append(('component', _(u'Component'), self.context))
+        if self.context.contracts!=None and len(self.context.contracts) > 0:
+            retList.append(('contracts', _(u'Contracts'), self.context))
+        if self.context.requirements!=None and len(self.context.requirements) > 0:
+            retList.append(('requirements', _(u'Requirements'), self.context))
         if postList is not None:
             retList.extend(postList)
-        print retList
+        
         return retList

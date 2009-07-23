@@ -49,7 +49,11 @@ class Navigation(SuperNavigation):
             retList.append(('ipNet', _(u'Ip Net'), self.context))
         if self.context.interface != None:
             retList.append(('interface', _(u'Interface'), self.context))
+        if self.context.contracts!=None and len(self.context.contracts) > 0:
+            retList.append(('contracts', _(u'Contracts'), self.context))
+        if self.context.requirements!=None and len(self.context.requirements) > 0:
+            retList.append(('requirements', _(u'Requirements'), self.context))
         if postList is not None:
             retList.extend(postList)
-        print retList
+        
         return retList

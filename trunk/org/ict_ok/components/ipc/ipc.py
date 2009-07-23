@@ -69,9 +69,12 @@ class IndustrialComputer(Device):
                 setattr(self, name, value)
         self.ikRevision = __version__
 
+    def getRefAttributeNames(self):
+        return getRefAttributeNames(IndustrialComputer)
+
     def store_refs(self, **data):
         Device.store_refs(self, **data)
-        refAttributeNames = getRefAttributeNames(IndustrialComputer)
+        refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)

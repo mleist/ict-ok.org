@@ -25,6 +25,7 @@ class MMNode(object):
      "edge_width": 1
      "edge_color": "#000000"
      "cloud_color": "#000000"
+     "background_color": "#1400ff
      "link": "http://google.de"
     }
     """
@@ -35,6 +36,7 @@ class MMNode(object):
         self.style_inner_tag = {}
         self.style_outer_tag = {}
         self.__arrows = []
+        self.__icons = []
         self.change_style(style)
 
     def generate_map(self):
@@ -60,6 +62,9 @@ class MMNode(object):
         if len(self.__arrows) > 0:
             for ar in self.__arrows:
                 xml_string += ar + "\n"
+        if len(self.__icons) > 0:
+            for ic in self.__icons:
+                xml_string += ic + "\n"
         if self.subnodes != None:
             if len(self.subnodes) != 0:
                 for subnode in self.subnodes:
@@ -104,10 +109,10 @@ class MMNode(object):
             #self.style_inner_tag["POSITION"] = style["pos"]
         if style.has_key("node_type"):
             self.style_inner_tag["STYLE"] = style["node_type"]
+        if style.has_key("background_color"):
+            self.style_inner_tag["BACKGROUND_COLOR"] = style["background_color"]
         if style.has_key("link"):
             self.style_inner_tag["LINK"] = style["link"]
-        if style.has_key("icon"):
-            pass
         if style.has_key("font_i"):
             if not self.style_outer_tag.has_key("font"):
                 self.style_outer_tag["font"] = {}
@@ -136,13 +141,24 @@ class MMNode(object):
             if not self.style_outer_tag.has_key("cloud"):
                 self.style_outer_tag["cloud"] = {}
             self.style_outer_tag["cloud"]["COLOR"] = style["cloud_color"]
+    
+    def append_builtin_icon(self, icon):
+        self.__icons.append('<icon BUILTIN="%s"/>' % icon)
 
     def add_node(self, node):
+        if type(node) != type(self):
+            return False
         if self.subnodes == None:
             self.subnodes = []
         self.subnodes.append(node)
         
     def add_nodes(self, nodes):
+        if type(nodes) != type([]):
+            return False
+        elif len(nodes)>0:
+            node = nodes[0]
+            if type(node) != type(self):
+                return False
         if self.subnodes == None:
             self.subnodes = []
         self.subnodes.extend(nodes)

@@ -49,9 +49,11 @@ class Navigation(SuperNavigation):
             retList.append(('location', _(u'Location'), self.context))
         if len(self.context.rooms) > 0:
             retList.append(('rooms', _(u'Rooms'), self.context))
-        if len(self.context.contracts) > 0:
+        if self.context.contracts!=None and len(self.context.contracts) > 0:
             retList.append(('contracts', _(u'Contracts'), self.context))
+        if self.context.requirements!=None and len(self.context.requirements) > 0:
+            retList.append(('requirements', _(u'Requirements'), self.context))
         if postList is not None:
             retList.extend(postList)
-        print retList
+        
         return retList
