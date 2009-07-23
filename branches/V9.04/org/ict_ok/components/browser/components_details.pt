@@ -3,4 +3,19 @@
 
 <metal:block define-macro="ComponentsDetails">
     <metal:block use-macro="macro:SuperclassDetails" />
+        <span tal:omit-tag=""
+              tal:define="reqCntTupel view/resumee">
+          <a tal:attributes="href view/todoHref" href="#">
+            <span tal:omit-tag="" tal:content="python: u'%03d' % (reqCntTupel[0])" />
+            <span tal:omit-tag="" i18n:translate="">ToDo</span>
+          </a> /
+          <a tal:attributes="href view/passHref" href="#">
+            <span tal:omit-tag="" tal:content="python: u'%03d' % (reqCntTupel[1])" />
+            <span tal:omit-tag="" i18n:translate="">Pass</span> /
+          </a> /
+          <a tal:attributes="href view/failHref" href="#">
+            <span tal:omit-tag="" tal:content="python: u'%03d' % (reqCntTupel[2])" />
+            <span tal:omit-tag="" i18n:translate="">Fail</span>
+          </a> /
+        </span>
 </metal:block>

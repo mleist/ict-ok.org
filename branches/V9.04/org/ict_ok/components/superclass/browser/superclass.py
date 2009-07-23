@@ -95,6 +95,8 @@ class CheckboxColumn(Column):
 def getActionBotton_Detail(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if item is dict:
+        item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"details" + item.getObjectId()
     view_url = absoluteURL(item, formatter.request) + '/@@details.html'
@@ -118,6 +120,8 @@ def getActionBotton_Detail(item, formatter):
 def getActionBotton_Edit(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if item is dict:
+        item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"edit" + item.getObjectId()
     edit_url = absoluteURL(item, formatter.request) + '/@@edit.html'
@@ -141,6 +145,8 @@ def getActionBotton_Edit(item, formatter):
 def getActionBotton_History(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if item is dict:
+        item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"history" + item.getObjectId()
     hist_url = absoluteURL(item, formatter.request) + '/@@history.html'
@@ -164,6 +170,8 @@ def getActionBotton_History(item, formatter):
 def getActionBotton_Delete(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if item is dict:
+        item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"delete" + item.getObjectId()
     trash_url = absoluteURL(item, formatter.request) + '/@@delete.html'
@@ -190,6 +198,8 @@ def getActionBotton_Delete(item, formatter):
 def getActionBotton_UpDown(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if item is dict:
+        item = item["obj"]
     retHtml = u""
     parentIsOrderd = IOrderedContainer.providedBy(item.__parent__)
     resource_path = getAdapter(formatter.request, name='pics')()
@@ -224,6 +234,8 @@ def getActionBotton_UpDown(item, formatter):
 def getActionBottons(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if item is dict:
+        item = item["obj"]
     retHtml = u""
     retHtml += getActionBotton_Detail(item, formatter)
     retHtml += getActionBotton_Edit(item, formatter)
@@ -234,6 +246,8 @@ def getActionBottons(item, formatter):
 
 def getSize(item, formatter):
     """display size of object"""
+    if item is dict:
+        item = item["obj"]
     try:
         return translate(ISized(item).sizeForDisplay())
     except AttributeError:
@@ -243,6 +257,8 @@ def getSize(item, formatter):
 
 def getModifiedDate(item, formatter):
     """Modified Date for Overview in Web-Browser"""
+    if item is dict:
+        item = item["obj"]
     try:
         userTZ = getUserTimezone()
         my_formatter = formatter.request.locale.dates.getFormatter(
@@ -318,6 +334,8 @@ def formatEntryRepeatCounter(entry, formatter):
 
 def getStateIcon(item, formatter):
     """State Icon of Object"""
+    if item is dict:
+        item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     try:
         icon_name = IState(item).getIconName()
@@ -363,12 +381,16 @@ def getTitle(item, formatter):
     """
     Titel for Overview
     """
+    if item is dict:
+        item = item["obj"]
     try:
         return IBrwsOverview(item).getTitle()
     except TypeError:
         return str(item.__class__.__name__)
 
 def getHealth(item, formatter):
+    if item is dict:
+        item = item["obj"]
     """State Icon of Object"""
     if IComponent.providedBy(item):
         try:
@@ -377,6 +399,8 @@ def getHealth(item, formatter):
             return u"-"
 
 def getPosition(item, formatter):
+    if item is dict:
+        item = item["obj"]
     """
     Titel for Overview
     """
@@ -1090,7 +1114,8 @@ class Overview(BrowserPagelet):
     pos_column_index = 1
     sort_columns = [1, 2, 3]
     status = None
-
+    firstSortOn = _('Title') 
+    
     def convert2UserTimezone(self, argTS):
         if argTS is not None:
             return convert2UserTimezone(argTS)
@@ -1157,7 +1182,7 @@ class Overview(BrowserPagelet):
             formatter = BatchedFormatter(
                 self.context, self.request, objList,
                 columns=columnList,
-                sort_on=((_('Title'), False),),
+                sort_on=((self.firstSortOn, False),),
                 batch_size=50)
         formatter.cssClasses['table'] = 'listing'
         return formatter()

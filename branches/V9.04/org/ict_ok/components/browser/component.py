@@ -57,7 +57,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.admin_utils.compliance.evaluation import \
-     getEvaluationsDone, Evaluation
+     getEvaluationsDone, Evaluation, getEvaluationsTodo
 from org.ict_ok.admin_utils.compliance.browser.requirement import \
      getTitle as getReqTitle
 from org.ict_ok.admin_utils.compliance.browser.requirement import \
@@ -335,6 +335,28 @@ class ComponentDetails(SupernodeDetails):
                 (IPhysicalLayer,), Components, 10)
         return Components
 
+    def todoHref(self):
+        return "%s/evaluations_todo.html" % zapi.absoluteURL(self.context, self.request)
+    
+    def passHref(self):
+        return "%s/evaluations_done.html" % zapi.absoluteURL(self.context, self.request)
+
+    def failHref(self):
+        return "%s/evaluations_done.html" % zapi.absoluteURL(self.context, self.request)
+
+    def resumee(self):
+        allObjEvaluations = getEvaluationsDone(self.context)
+        reqs = allObjEvaluations.items()
+        reqs_ok = 0
+        reqs_fail = 0
+        for req_tupel in reqs:
+            if req_tupel[1].value == "Pass":
+                reqs_ok += 1
+            elif req_tupel[1].value == "Fail":
+                reqs_fail += 1
+        reqs_todo = len(getEvaluationsTodo(self.context))
+        return (reqs_todo, reqs_ok, reqs_fail)
+
 
 class EvaluationsTodoDisplay(Overview):
     """for evaluation which are open
@@ -360,7 +382,7 @@ class EvaluationsTodoDisplay(Overview):
     
     def reqList1stLevel(self):
         """List of Content objects"""
-        return self.evaluationsTodo4Obj(self.context)
+        return getEvaluationsTodo(self.context)
 
     def reqList2ndLevel(self):
         """List of Content objects"""
@@ -369,28 +391,8 @@ class EvaluationsTodoDisplay(Overview):
         for attr in attrs:
             obj = getattr(self.context, attr)
             if hasattr(obj, "requirements"):
-                retList.extend(self.evaluationsTodo4Obj(obj))
+                retList.extend(getEvaluationsTodo(obj))
         return retList
-
-    def evaluationsTodo4Obj(self, obj):
-        retSet = set([])
-        base_reqs = set([])
-        my_catalog = zapi.getUtility(ICatalog)
-        if obj.requirements is not None:
-            for requirement in obj.requirements:
-                res = my_catalog.searchResults(oid_index=requirement)
-                if len(res) > 0:
-                    startReq = iter(res).next()
-                    allObjReqs = getRequirementList(startReq)
-                    allObjEvaluations = getEvaluationsDone(obj)
-                    alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
-                    #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
-                    retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
-            for req in retSet:
-                req_list = getRequirementList(req)
-                if len(req_list) == 1 and req_list[0] is req:
-                    base_reqs.add(req)
-        return list(base_reqs)
 
 
 class EvaluationsDoneDisplay(Overview):
