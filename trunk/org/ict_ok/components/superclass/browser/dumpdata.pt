@@ -1,0 +1,8 @@
+<html>
+    <body>
+        <div i18n:domain="ict-ok.org">
+            <h1 i18n:translate="">Dump Data</h1>
+            <pre class="dumpdata" tal:content="view/dumpData" />
+        </div>
+    </body>
+</html>

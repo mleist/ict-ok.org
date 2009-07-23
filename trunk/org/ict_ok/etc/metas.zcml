@@ -1,0 +1,47 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+>
+    <!-- $Id$ -->
+        
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+                Markus Leist <leist@ikom-online.de> -->
+
+    <!--all meta definitions-->
+    <include package="zope.app.apidoc"
+             file="meta.zcml" />
+    <include package="zope.app.onlinehelp"
+             file="meta.zcml"/>
+    <include package="zope.app.preference"
+             file="meta.zcml" />
+    <include package="zope.app.renderer"
+             file="meta.zcml"/>
+    <include package="zope.app.securitypolicy"
+             file="meta.zcml" />
+    <include package="zope.sendmail"
+             file="meta.zcml"/>
+    <include package="zope.viewlet"
+             file="meta.zcml" />
+    <include package="zope.app.zcmlfiles" />
+    <include package="zc.resourcelibrary"
+             file="meta.zcml"/>
+    <include package="z3c.form"
+             file="meta.zcml" />
+    <include package="z3c.macro"
+             file="meta.zcml" />
+    <include package="z3c.pagelet"
+             file="meta.zcml" />
+    <include package="z3c.template"
+             file="meta.zcml" />
+
+    <include package="soap"
+             file="meta.zcml" />
+
+    <include package="org.ict_ok.admin_utils.objmq"
+             file="meta.zcml"/>
+    <include package="org.ict_ok.admin_utils.snmpd"
+             file="meta.zcml"/>
+    <!--<include package="org.ict_ok.admin_utils.ticker"-->
+             <!--file="meta.zcml"/>-->
+
+</configure>

@@ -1,0 +1,66 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007 Ingenieurbuero IKOM,
+        Markus Leist <leist at ikom-online.de> -->
+
+    <interface
+        interface=".interfaces.IUtilManager"
+        type="zope.app.content.interfaces.IContentType"
+        />
+        
+    <class class=".util_manager.UtilManager">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.admin_utils.util_manager.util_manager.UtilManager"
+            description="Utility Manager"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.View"
+            interface=".interfaces.IUtilManager"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.Edit"
+            set_schema=".interfaces.IUtilManager"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.util_manager.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <adapter
+        factory="org.ict_ok.components.superclass.adapter.search.Searchable"
+        for=".interfaces.IUtilManager"
+    />
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <include package=".generations" />
+
+</configure>

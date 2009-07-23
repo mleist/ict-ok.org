@@ -1,0 +1,56 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+                       Sebastian Napiorkowski <i_am@not-there.org>
+    -->
+
+    <permission
+        id="org.ict_ok.components.group.View"
+        title="View Group"
+    />
+
+    <permission
+        id="org.ict_ok.components.group.Add"
+        title="Add Group"
+    />
+
+    <permission
+        id="org.ict_ok.components.group.Edit"
+        title="Edit Group"
+    />
+
+    <permission
+        id="org.ict_ok.components.group.Delete"
+        title="Delete Group"
+    />
+
+    <grant permission="org.ict_ok.components.group.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.components.group.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.group.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.group.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.group.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.group.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.group.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.group.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.group.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>

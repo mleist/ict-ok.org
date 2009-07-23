@@ -1,0 +1,40 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+    <!-- [[[cog
+            import sys; sys.path.extend(['.'])
+            import props
+            import cog
+         ]]] -->
+    <!-- [[[end]]] -->
+
+    <!-- $Id$ -->
+
+    <!-- [[[cog
+            cog.out("<!-- Copyright (c) ")
+            for year in props.copyrights:
+                cog.out("%4d, " % year)
+            cog.outl()
+            for author in props.authors:
+                cog.outl("                   %s <"\
+                         "%s>" % (author['name'], author['email']))
+            cog.outl("--"+">")
+         ]]] -->
+    <!-- Copyright (c) 2006, 2007, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+    <!-- [[[end]]] -->
+
+    <!-- [[[cog
+            cog.out('''\
+                    <utility
+                        name="org.ict_ok.%(filename)s" 
+                        provides="zope.app.generations.interfaces.ISchemaManager"
+                        component=".AppSchemaManager"
+                        />
+            ''' % props.__dict__, dedent=True)
+         ]]] -->
+    <!-- [[[end]]] -->
+
+</configure>

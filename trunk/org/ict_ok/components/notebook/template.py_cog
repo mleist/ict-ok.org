@@ -1,0 +1,129 @@
+# -*- coding: utf-8 -*-
+#
+# [[[cog
+#    import sys; sys.path.extend(['.'])
+#    import props
+#    import cog
+#    cog.out("# Copyright (c) ")
+#    for year in props.copyrights:
+#        cog.out("%4d, " % year)
+#    cog.outl()
+#    for author in props.authors:
+#       cog.outl("#               %s <%s>" % (author['name'], author['email']))
+#    cog.out("%s" % props.filename ) ]]]
+# Copyright (c) 2006, 2007, 
+#               Markus Leist <leist@ikom-online.de>
+# [[[end]]]
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=E1101,W0142
+#
+# [[[cog cog.outl('"""implementation of %(componentname)s"""' % props.__dict__)]]]
+# [[[end]]]
+
+__version__ = "$Id$"
+
+# python imports
+
+# zope imports
+from zope.interface import implements
+from zope.schema.fieldproperty import FieldProperty
+from zope.app.intid.interfaces import IIntIds
+from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.component import getUtility
+from zope.app.intid.interfaces import IIntIds
+from zope.app.folder import Folder
+
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+from lovely.relation.property import RelationPropertyOut
+from lovely.relation.property import FieldRelationManager
+
+# ict_ok.org imports
+from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.components.superclass.superclass import Superclass
+#[[[cog
+#   cog.out('''\
+#   from %(longpath_interface)s import I%(componentname)s
+#   from %(longpath_interface)s import I%(componentname)sFolder
+#   ''' % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]
+from org.ict_ok.components.component import Component
+
+#[[[cog
+#   cog.out('''\
+#   def All%(componentname)ss(dummy_context):
+#       """Which %(componentname)s are there
+#       """
+#       terms = []
+#       uidutil = getUtility(IIntIds)
+#       for (oid, oobj) in uidutil.items():
+#           if I%(componentname)s.providedBy(oobj.object):
+#               myString = u"%%s" %% (oobj.object.getDcTitle())
+#               terms.append(\
+#                   SimpleTerm(oobj.object,
+#                             token=oid,
+#                             title=myString))
+#       return SimpleVocabulary(terms)
+#   ''' % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]
+
+#[[[cog
+#   cog.out('''\
+#   %(componentname)s_Conns_RelManager = FieldRelationManager(I%(componentname)s['conns'],
+#                                                    I%(componentname)s['conn'],
+#                                                    relType='%(filename)s:conns')
+#   ''' % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]
+
+#[[[cog
+#   cog.out('''\
+#   class %(componentname)s(Component):
+#       """
+#       the template instance
+#       """
+#       implements(I%(componentname)s)
+#       shortName = "%(filename)s"
+#       # for ..Contained we have to:
+#       __name__ = __parent__ = None
+#       attrFoo = FieldProperty(I%(componentname)s['attrFoo'])
+#
+#       conns = RelationPropertyOut(%(componentname)s_Conns_RelManager)
+#       conn = RelationPropertyIn(%(componentname)s_Conns_RelManager)
+#
+#       def __init__(self, **data):
+#           """
+#           constructor of the object
+#           """
+#           Component.__init__(self, **data)
+#           refAttributeNames = getRefAttributeNames(%(componentname)s)
+#           for (name, value) in data.items():
+#               if name in I%(componentname)s.names() and \\
+#                  name not in refAttributeNames:
+#                   setattr(self, name, value)
+#           self.ikRevision = __version__
+#
+#       def store_refs(self, **data):
+#           refAttributeNames = getRefAttributeNames(%(componentname)s)
+#           for (name, value) in data.items():
+#               if name in refAttributeNames:
+#                   setattr(self, name, value)
+#
+#
+#   class %(componentname)sFolder(Superclass, Folder):
+#       implements(I%(componentname)sFolder)
+#       def __init__(self, **data):
+#           """
+#           constructor of the object
+#           """
+#           Superclass.__init__(self, **data)
+#           Folder.__init__(self)
+#   ''' % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]

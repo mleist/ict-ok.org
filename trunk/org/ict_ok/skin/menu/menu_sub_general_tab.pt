@@ -1,0 +1,12 @@
+<div id="menu_general" class="yuimenu">
+    <div class="bd">
+        <ul>
+            <li class="yuimenuitem">
+               <a class="yuimenubaritemlabel" href="#" i18n:translate="">Adds</a>
+               <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.general.adds" />
+            </li>
+            <tal:block repeat="viewlet view/viewlets"
+                    content="structure viewlet/render" />
+        </ul>
+    </div>
+</div>

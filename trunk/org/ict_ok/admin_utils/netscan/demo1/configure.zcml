@@ -1,0 +1,73 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007 Ingenieurbuero IKOM,
+         Markus Leist <leist at ikom-online.de> -->
+
+    <class class=".demo1.AdmUtilDemo1">
+        <factory
+            id="org.ict_ok.admin_utils.netscan.demo1.demo1.AdmUtilDemo1" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.View"
+            interface=".interfaces.IAdmUtilDemo1"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.View"
+            set_schema=".interfaces.IAdmUtilDemo1"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.netscan.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />            
+    </class>
+
+    <!--adapter
+        for="org.ict_ok.iksuperclass.interfaces.IIkSuperclass"
+        provides="org.ict_ok.admin_utils.netscan.demo1.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.netscan.demo1.demo1.IkSuperclassGenHoneyd"
+        permission="org.ict_ok.admin_utils.netscan.View"
+    />
+
+    <adapter
+        for="org.ict_ok.iksupernode.interfaces.IIkSupernode"
+        provides="org.ict_ok.admin_utils.netscan.demo1.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.netscan.demo1.demo1.IkSupernodeGenHoneyd"
+        permission="org.ict_ok.admin_utils.netscan.View"
+    />
+
+    <adapter
+        for="org.ict_ok.ikdummycontainer.interfaces.IIkDummyContainer"
+        provides="org.ict_ok.admin_utils.netscan.demo1.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.netscan.demo1.demo1.IkDummyContainerGenHoneyd"
+        permission="org.ict_ok.admin_utils.netscan.View"
+    />
+
+    <adapter
+        for="org.ict_ok.ikdummy.interfaces.IIkDummy"
+        provides="org.ict_ok.admin_utils.netscan.demo1.interfaces.IIKGenHoneyd"
+        factory="org.ict_ok.admin_utils.netscan.demo1.demo1.IkDummyGenHoneyd"
+        permission="org.ict_ok.admin_utils.netscan.View"
+    /-->
+
+    <!-- setup local utilities -->
+    <subscriber
+                handler=".bootstrap.bootStrapSubscriberDatabase"
+                for="zope.app.appsetup.IDatabaseOpenedEvent"
+                />
+</configure>

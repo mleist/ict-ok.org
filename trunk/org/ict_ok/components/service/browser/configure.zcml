@@ -1,0 +1,261 @@
+<configure 
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:help="http://namespaces.zope.org/help"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <defaultView
+        for="org.ict_ok.components.service.interfaces.IService"
+        name="overview.html"
+        />
+
+    <z3c:pagelet
+        name="all_services.html"
+        for="*"
+        class="org.ict_ok.components.service.browser.service.AllServices"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+    />
+    <z3c:template
+        template="../../superclass/browser/overview.pt"
+        for="org.ict_ok.components.service.browser.service.AllServices"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.components.service.interfaces.IService"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+        />
+
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.components.service.interfaces.IService"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+        />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.components.service.interfaces.IService"
+        class=".service.DetailsServiceForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+    />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.components.service.interfaces.IService"
+        class=".service.EditServiceForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Edit"
+    />
+
+    <z3c:pagelet
+        name="delete.html"
+        for="org.ict_ok.components.service.interfaces.IService"
+        class="org.ict_ok.components.service.browser.service.DeleteServiceForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Delete"
+    />
+
+    <!-- Folder  -->
+
+    <defaultView
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        name="overview.html"
+    />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+        />
+        
+    <z3c:pagelet
+        name="add_service.html"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        class="org.ict_ok.components.service.browser.service.AddServiceForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Add"
+    />
+
+
+    <!--##### Sub Menu ##### -->
+
+    <!--<viewlet-->
+        <!--name="view"-->
+        <!--for="org.ict_ok.components.service.interfaces.IService"-->
+        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
+        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubView"-->
+        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+        <!--permission="org.ict_ok.components.service.View"-->
+        <!--/>-->
+    <viewlet
+        name="details"
+        for="org.ict_ok.components.service.interfaces.IService"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+        />
+    <viewlet
+        name="overview"
+        for="org.ict_ok.components.service.interfaces.IService"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+        />
+    <viewlet
+        name="history"
+        for="org.ict_ok.components.service.interfaces.IService"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+        />
+    <viewlet
+        name="edit"
+        for="org.ict_ok.components.service.interfaces.IService"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Edit"
+        />
+    <viewlet
+        name="delete"
+        for="org.ict_ok.components.service.interfaces.IService"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Delete"
+        />
+    <viewlet
+        name="editcontent"
+        for="org.ict_ok.components.service.interfaces.IService"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Edit"
+        />
+    <viewlet
+        name="add_dashboard"
+        for="org.ict_ok.components.service.interfaces.IService"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubAddDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+        />
+    <viewlet
+        name="del_dashboard"
+        for="org.ict_ok.components.service.interfaces.IService"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
+        class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+        />
+
+    <!-- Folder  -->
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.mobilephone.View"
+        />
+    <viewlet
+        name="add_service"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.service.browser.service.MSubAddService"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Add"
+        />
+    <viewlet
+        name="add_service"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
+        class="org.ict_ok.components.service.browser.service.MGlobalAddService"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Add"
+        />
+    <page
+        name="exportcsvdata.html"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        class=".service.ServiceFolderDetails"
+        permission="org.ict_ok.components.service.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportCsvData"
+    />
+    <page
+        name="exportxlsdata.html"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        class=".service.ServiceFolderDetails"
+        permission="org.ict_ok.components.service.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsData"
+    />
+    <z3c:pagelet
+        name="importcsvdata.html"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        class=".service.ImportCsvDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Add"
+    />
+    <z3c:pagelet
+        name="importxlsdata.html"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        class=".service.ImportXlsDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Add"
+    />
+    <viewlet
+        name="exportcsvdata"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+        />
+    <viewlet
+        name="exportxlsdata"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.View"
+        />
+    <viewlet
+        name="importcsvdata"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Add"
+        />
+    <viewlet
+        name="importxlsdata"
+        for="org.ict_ok.components.service.interfaces.IServiceFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.service.Add"
+        />
+
+
+</configure>

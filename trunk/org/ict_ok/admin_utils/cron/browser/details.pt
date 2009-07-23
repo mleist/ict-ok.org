@@ -1,0 +1,21 @@
+<i18n:block domain="org.ict_ok">
+    <h3 i18n:translate="">details of timer</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary"
+            tal:define="runtime_info view/getZopeRuntimeInfo">
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Name</td>
+            <td tal:content="context/ikName" />
+        </tr>
+        <tr tal:define="cronTime view/getCronTime">
+            <td>last Cron event</td>
+            <td tal:content="cronTime" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/ikComment|nothing">
+            <td i18n:translate="">Comment</td>
+            <td><pre tal:content="context/ikComment" /></td>
+            
+        </tr>
+    </table>
+</i18n:block>

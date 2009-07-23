@@ -1,0 +1,44 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="ProductDetails">
+    <metal:block use-macro="macro:ComponentsDetails" />
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.mainProduct is not None">
+           <td i18n:translate="">Main product</td>
+           <td tal:content="structure python: view.getHrefTitle(context.mainProduct)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.workOrder is not None">
+           <td i18n:translate="">Work order</td>
+           <td tal:content="structure python: view.getHrefTitle(context.workOrder)" />
+       </tr>
+
+
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: len(context.subProducts) > 0">
+           <td i18n:translate="">Sub product</td>
+           <td>
+               <div tal:content="structure python: view.subProductsAsHtmlUL(context)" />
+               <!--ul>
+                   <li tal:repeat="lelem view/subProductsAsIndentList"
+                       tal:content="structure python: view.getHrefTitle(lelem[1])" />
+                   
+               <ul-->
+           </td>
+       </tr>
+
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/subProduct|nothing">
+           <td i18n:translate="">Sub product</td>
+           <td>
+               <ul>
+                   <li tal:repeat="obj context/subProduct"
+                       tal:content="structure python: view.getHrefTitle(obj)" />
+                   
+               <ul>
+           </td>
+       </tr>
+</metal:block>

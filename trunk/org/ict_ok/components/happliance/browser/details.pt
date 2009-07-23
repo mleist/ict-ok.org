@@ -1,0 +1,36 @@
+
+<!-- $Id$ -->
+
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
+    <h3 tal:condition="context/isTemplate" i18n:translate="">Hardware Appliance details [Template]</h3>
+    <h3 tal:condition="not:context/isTemplate" i18n:translate="">Hardware Appliance details</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+
+
+    <metal:block use-macro="macro:DeviceDetails" />
+
+<!--
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/memsize|nothing">
+           <td i18n:translate="">Memory size</td>
+           <td tal:content="structure python: u'%d&nbsp;MB' % context.memsize" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/cpuType|nothing">
+           <td i18n:translate="">CPU type</td>
+           <td tal:content="structure python: view.fsearchLink(context.cpuType)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/hardware|nothing">
+           <td i18n:translate="">Hardware</td>
+           <td tal:content="structure python: view.fsearchLink(context.hardware)" />
+       </tr>
+-->
+
+
+    </table>
+</i18n:block>

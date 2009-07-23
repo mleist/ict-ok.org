@@ -1,0 +1,36 @@
+<html metal:use-macro="views/standard_macros/view">
+<body>
+    <div metal:fill-slot="body" i18n:domain="ict-ok.org">
+			<h3 i18n:translate="">Systeminfo</h3>
+            <table id="sortable" class="listing" summary="Content listing"
+                i18n:attributes="summary">
+                <tr tal:attributes="class view/getNextTabClass">
+                    <th i18n:translate="">Name</th>
+                    <th i18n:translate="">Value</th>
+                </tr>
+                <tr tal:attributes="class view/getNextTabClass">
+                    <td i18n:translate="">aktive Scanner</td>
+                    <td>
+						<ul>
+							<span tal:omit-tag="" tal:repeat="scanner view/getScannerObjs">
+								<li><a href="#" tal:attributes="href python:scanner['href']"
+										tal:content="python: scanner['name']">Scanner1</a></li>
+							</span>
+						</ul>
+					</td>
+                </tr>
+                <tr tal:attributes="class view/getNextTabClass">
+                    <td i18n:translate="">all Scanner</td>
+                    <td>
+						<ul>
+							<span tal:omit-tag="" tal:repeat="scanner view/getAllScannerObjs">
+								<li><a href="#" tal:attributes="href python:scanner['href']"
+										tal:content="python: scanner['name']">Scanner1</a></li>
+							</span>
+						</ul>
+					</td>
+                </tr>
+			</table>
+    </div>
+	</body>
+</html>

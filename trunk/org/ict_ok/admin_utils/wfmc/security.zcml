@@ -1,0 +1,32 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <permission
+        id="org.ict_ok.admin_utils.wfmc.View"
+        title="View from AdmUtilWFMC"
+        description="View from AdmUtilWFMC."
+        />
+
+    <permission
+        id="org.ict_ok.admin_utils.wfmc.Edit"
+        title="Edit from AdmUtilWFMC"
+        description="Edit from AdmUtilWFMC."
+        />
+
+    <!--<grant permission="org.ict_ok.admin_utils.wfmc.View"-->
+                    <!--role="org.ict_ok.usr" />-->
+    <grant permission="org.ict_ok.admin_utils.wfmc.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.wfmc.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.wfmc.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.wfmc.Edit"
+                    role="org.ict_ok.adm" />
+</configure>

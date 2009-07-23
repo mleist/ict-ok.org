@@ -1,0 +1,32 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <permission
+        id="org.ict_ok.admin_utils.mindmap.View"
+        title="View from MindMap Utiltiy"
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.mindmap.Edit"
+        title="View from MindMap Utiltiy"
+    />
+
+    <!-- Copyright (c) 2009, 
+                     Markus Leist <leist@ikom-online.de>
+                     Sebastian Napiorkowski <s.napiorkowski@ikom-online.de>
+    -->
+
+    <grant permission="org.ict_ok.admin_utils.mindmap.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.mindmap.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.mindmap.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.mindmap.Edit"
+                    role="org.ict_ok.adm" />
+</configure>

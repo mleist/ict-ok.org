@@ -1,0 +1,83 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+         Markus Leist <leist@ikom-online.de> -->
+
+    <permission
+        id="org.ict_ok.admin_utils.usermanagement.View"
+        title="View from AdmUtilUserManagement"
+        description="View from AdmUtilUserManagement."
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.usermanagement.Edit"
+        title="Edit from AdmUtilUserManagement"
+        description="Edit from AdmUtilUserManagement."
+    />
+    <permission
+        id="org.ict_ok.admin_utils.usermanagement.Preferences"
+        title="Preferences for the user"
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.dashboard.View"
+        title="View from UserDashboard"
+        description="View from user dashboard."
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.dashboard.Edit"
+        title="Edit from UserDashboard"
+        description="Edit from user dashboard."
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.notifications.View"
+        title="View from Notifications"
+        description="View from user notifications."
+    />
+
+    <grant permission="org.ict_ok.admin_utils.usermanagement.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.usermanagement.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.usermanagement.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.usermanagement.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.dashboard.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.dashboard.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.dashboard.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.dashboard.Edit"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.dashboard.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.dashboard.Edit"
+                    role="org.ict_ok.adm" />
+                    
+    <grant permission="org.ict_ok.admin_utils.notifications.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.admin_utils.notifications.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.notifications.View"
+                    role="org.ict_ok.adm" />
+
+</configure>

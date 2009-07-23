@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+    
+    <!-- viewlet manager -->
+    
+    <viewletManager
+        name="ict_ok.Headers"
+        provides=".interfaces.IHeaders"
+        class="z3c.viewlet.manager.WeightOrderedViewletManager"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="zope.Public"
+        />
+    
+    <!-- viewlets -->
+    
+    <viewlet
+        name="css"
+        for="*"
+        manager=".interfaces.IHeaders"
+        template="ik_header_css.pt"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="zope.Public"
+        weight="30"
+        />
+    
+</configure>

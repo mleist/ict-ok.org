@@ -1,0 +1,121 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id: configure.zcml_cog 519 2009-05-12 07:44:37Z markusleist $ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+        
+    <!--  Interfaces ==================================================== -->
+
+    <interface
+        interface=".interfaces.IReminder"
+        type="zope.app.content.interfaces.IContentType"
+        />
+
+    <!--  Classes ======================================================= -->
+        
+    <class class=".reminder.Reminder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.reminder.reminder.Reminder"
+            description="Reminder"
+            />
+        <require
+            permission="org.ict_ok.components.reminder.View"
+            interface=".interfaces.IReminder"
+            />
+        <require
+            permission="org.ict_ok.components.reminder.Edit"
+            set_schema=".interfaces.IReminder"
+            />
+        <require
+            permission="org.ict_ok.components.reminder.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.reminder.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.reminder.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.reminder.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.reminder.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.reminder.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <!--  Event subscribers ============================================= -->
+        
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <!--  Search adapters =============================================== -->
+        
+    <adapter
+        factory="org.ict_ok.components.reminder.adapter.search.Searchable"
+    />
+
+    <!--  Report adapters =============================================== -->
+        
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+        
+    <adapter
+        factory=".adapter.osi.OSIModel"
+        permission="org.ict_ok.components.reminder.View"
+    />
+
+    <!--  other adapters ================================================ -->
+        
+    <adapter
+        factory=".adapter.state.State"
+        />
+
+    <!--  Vocabulary stuff ============================================== -->
+        
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".reminder.AllReminders"
+        name="AllReminders"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".reminder.AllReminderTemplates"
+        name="AllReminderTemplates"
+    />
+
+
+                    
+
+    <!--  Includes ====================================================== -->
+        
+    <include package=".generations" />
+
+</configure>
