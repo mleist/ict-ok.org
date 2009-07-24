@@ -186,6 +186,8 @@ def getRefAttributeNames(arg_class):
     RelationPropertyIn- or RelationPropertyOut-type
     """
     retList = []
+    #import pdb
+    #pdb.set_trace()
     for attrName, attrValue in arg_class.__dict__.items():
         if type(attrValue)==RelationPropertyIn or \
            type(attrValue)==RelationPropertyOut:

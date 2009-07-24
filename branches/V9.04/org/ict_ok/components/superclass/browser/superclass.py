@@ -95,7 +95,7 @@ class CheckboxColumn(Column):
 def getActionBotton_Detail(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"details" + item.getObjectId()
@@ -120,7 +120,7 @@ def getActionBotton_Detail(item, formatter):
 def getActionBotton_Edit(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"edit" + item.getObjectId()
@@ -145,7 +145,7 @@ def getActionBotton_Edit(item, formatter):
 def getActionBotton_History(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"history" + item.getObjectId()
@@ -170,7 +170,7 @@ def getActionBotton_History(item, formatter):
 def getActionBotton_Delete(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"delete" + item.getObjectId()
@@ -198,7 +198,7 @@ def getActionBotton_Delete(item, formatter):
 def getActionBotton_UpDown(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     retHtml = u""
     parentIsOrderd = IOrderedContainer.providedBy(item.__parent__)
@@ -234,7 +234,7 @@ def getActionBotton_UpDown(item, formatter):
 def getActionBottons(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     retHtml = u""
     retHtml += getActionBotton_Detail(item, formatter)
@@ -246,7 +246,7 @@ def getActionBottons(item, formatter):
 
 def getSize(item, formatter):
     """display size of object"""
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     try:
         return translate(ISized(item).sizeForDisplay())
@@ -257,7 +257,7 @@ def getSize(item, formatter):
 
 def getModifiedDate(item, formatter):
     """Modified Date for Overview in Web-Browser"""
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     try:
         userTZ = getUserTimezone()
@@ -334,7 +334,7 @@ def formatEntryRepeatCounter(entry, formatter):
 
 def getStateIcon(item, formatter):
     """State Icon of Object"""
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     resource_path = getAdapter(formatter.request, name='pics')()
     try:
@@ -381,7 +381,7 @@ def getTitle(item, formatter):
     """
     Titel for Overview
     """
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     try:
         return IBrwsOverview(item).getTitle()
@@ -389,7 +389,7 @@ def getTitle(item, formatter):
         return str(item.__class__.__name__)
 
 def getHealth(item, formatter):
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     """State Icon of Object"""
     if IComponent.providedBy(item):
@@ -399,7 +399,7 @@ def getHealth(item, formatter):
             return u"-"
 
 def getPosition(item, formatter):
-    if item is dict:
+    if type(item) is dict:
         item = item["obj"]
     """
     Titel for Overview

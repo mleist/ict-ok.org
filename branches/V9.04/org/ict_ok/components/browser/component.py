@@ -58,20 +58,20 @@ from org.ict_ok.components.supernode.browser.supernode import SupernodeDetails
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.admin_utils.compliance.evaluation import \
      getEvaluationsDone, Evaluation, getEvaluationsTodo
-from org.ict_ok.admin_utils.compliance.browser.requirement import \
-     getTitle as getReqTitle
+from org.ict_ok.admin_utils.compliance.browser.evaluation import \
+     getEvaluationRequirementTitle
 from org.ict_ok.admin_utils.compliance.browser.requirement import \
      link as linkReq
 from org.ict_ok.admin_utils.compliance.requirement import getRequirementList
 from org.ict_ok.admin_utils.compliance.browser.requirement import \
-     getRequirementBottons
+     getRequirementBottons, getReqModifiedDate, getRequirementTitle
 from org.ict_ok.admin_utils.compliance.browser.evaluation import \
      getEvaluationRequirementTitle, \
      evaluationValue_formatter, \
      getEvaluationBottons, getEvalModifiedDate, \
      getEvaluatorTitle, getEvaluationValue
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm
+     AddForm, getTitle
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.admin_utils.idchooser.interfaces import IIdChooser
@@ -116,10 +116,16 @@ class ComponentDetails(SupernodeDetails):
         """ trigger an evaluation process
         """
         requirementId = self.request.get('req_id', default=None)
-        evaluations = getEvaluationsDone(self.context)
+        objectId = self.request.get('obj_id', default=None)
+        my_catalog = zapi.getUtility(ICatalog)
+        if objectId != None:
+            obj = my_catalog.searchResults(oid_index=objectId)
+            obj = iter(obj).next()
+        else:
+            obj = self.context
+        evaluations = getEvaluationsDone(obj)
         if requirementId is not None \
            and evaluations is not None:
-            my_catalog = zapi.getUtility(ICatalog)
             res = my_catalog.searchResults(oid_index=requirementId)
             if len(res) > 0:
                 requirementObj = iter(res).next()
@@ -141,10 +147,16 @@ class ComponentDetails(SupernodeDetails):
         """ trigger an evaluation process
         """
         requirementId = self.request.get('req_id', default=None)
-        evaluations = getEvaluationsDone(self.context)
+        objectId = self.request.get('obj_id', default=None)
+        my_catalog = zapi.getUtility(ICatalog)
+        if objectId != None:
+            obj = my_catalog.searchResults(oid_index=objectId)
+            obj = iter(obj).next()
+        else:
+            obj = self.context
+        evaluations = getEvaluationsDone(obj)
         if requirementId is not None \
            and evaluations is not None:
-            my_catalog = zapi.getUtility(ICatalog)
             res = my_catalog.searchResults(oid_index=requirementId)
             if len(res) > 0:
                 requirementObj = iter(res).next()
@@ -364,10 +376,13 @@ class EvaluationsTodoDisplay(Overview):
     label = _(u'evaluations to do')
     columns = (
         GetterColumn(title=_('Title'),
-                     getter=getReqTitle,
+                     getter=getRequirementTitle,
                      cell_formatter=linkReq('overview.html')),
+        GetterColumn(title=_('Component'),
+                     getter=getTitle,
+                     cell_formatter=link('overview.html')),
         GetterColumn(title=_('Modified'),
-                     getter=getModifiedDate,
+                     getter=getReqModifiedDate,
                      subsort=True,
                      cell_formatter=raw_cell_formatter),
         #GetterColumn(title=_('Size'),
@@ -382,16 +397,24 @@ class EvaluationsTodoDisplay(Overview):
     
     def reqList1stLevel(self):
         """List of Content objects"""
-        return getEvaluationsTodo(self.context)
+        retList = []
+        evaluations = getEvaluationsTodo(self.context)
+        for ev in evaluations:
+            retList.append({"req": ev, "obj": self.context})
+        return retList
 
     def reqList2ndLevel(self):
         """List of Content objects"""
         attrs = self.context.getRefAttributeNames()
+        #import pdb
+        #pdb.set_trace()
         retList = []
         for attr in attrs:
             obj = getattr(self.context, attr)
             if hasattr(obj, "requirements"):
-                retList.extend(getEvaluationsTodo(obj))
+                evaluations = getEvaluationsTodo(obj)
+                for ev in evaluations:
+                    retList.append({"req": ev, "obj": obj})
         return retList
 
 
@@ -400,8 +423,11 @@ class EvaluationsDoneDisplay(Overview):
     """
     label = _(u'evaluations done')
     columns = (
-        GetterColumn(title=_('Title'),
+        GetterColumn(title=_('Requirement'),
                      getter=getEvaluationRequirementTitle,
+                     cell_formatter=link('overview.html')),
+        GetterColumn(title=_('Component'),
+                     getter=getTitle,
                      cell_formatter=link('overview.html')),
         GetterColumn(title=_('Evaluator'),
                      getter=getEvaluatorTitle,
@@ -419,11 +445,15 @@ class EvaluationsDoneDisplay(Overview):
         )
     sort_columns = []
     status = None
-    
+    firstSortOn = _("Component")
+
     def reqList1stLevel(self):
         """List of Content objects"""
+        retList = []
         evaluations = getEvaluationsDone(self.context)
-        return [ev[1] for ev in evaluations.items()]
+        for ev in evaluations.items():
+            retList.append({"eval": ev[1], "obj": self.context})
+        return retList
 
     def reqList2ndLevel(self):
         """List of Content objects"""
@@ -433,7 +463,8 @@ class EvaluationsDoneDisplay(Overview):
             obj = getattr(self.context, attr)
             if hasattr(obj, "requirements"):
                 evaluations = getEvaluationsDone(obj)
-                retList.extend([ev[1] for ev in evaluations.items()])
+                for ev in evaluations.items():
+                    retList.append({"eval": ev[1], "obj": obj})
         return retList
 
 class AddComponentForm(AddForm):
