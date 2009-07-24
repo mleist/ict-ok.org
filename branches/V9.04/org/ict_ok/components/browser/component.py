@@ -406,15 +406,16 @@ class EvaluationsTodoDisplay(Overview):
     def reqList2ndLevel(self):
         """List of Content objects"""
         attrs = self.context.getRefAttributeNames()
-        #import pdb
-        #pdb.set_trace()
         retList = []
         for attr in attrs:
-            obj = getattr(self.context, attr)
-            if hasattr(obj, "requirements"):
-                evaluations = getEvaluationsTodo(obj)
-                for ev in evaluations:
-                    retList.append({"req": ev, "obj": obj})
+            objs = getattr(self.context, attr)
+            if type(objs) is not list:
+                objs = [objs]
+            for obj in objs:
+                if hasattr(obj, "requirements"):
+                    evaluations = getEvaluationsTodo(obj)
+                    for ev in evaluations:
+                        retList.append({"req": ev, "obj": obj})
         return retList
 
 
@@ -460,11 +461,16 @@ class EvaluationsDoneDisplay(Overview):
         attrs = self.context.getRefAttributeNames()
         retList = []
         for attr in attrs:
-            obj = getattr(self.context, attr)
-            if hasattr(obj, "requirements"):
-                evaluations = getEvaluationsDone(obj)
-                for ev in evaluations.items():
-                    retList.append({"eval": ev[1], "obj": obj})
+            objs = getattr(self.context, attr)
+            if type(objs) is not list:
+                objs = [objs]
+            for obj in objs:
+                if hasattr(obj, "requirements"):
+                    evaluations = getEvaluationsDone(obj)
+                    for ev in evaluations.items():
+                        retList.append({"eval": ev[1], "obj": obj})
+        #import pdb
+        #pdb.set_trace()
         return retList
 
 class AddComponentForm(AddForm):
