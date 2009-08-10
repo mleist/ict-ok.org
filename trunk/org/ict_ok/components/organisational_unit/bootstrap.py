@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E1101
 #
-"""startup of Organization"""
+"""startup of OrganisationalUnit"""
 
 __version__ = "$Id: bootstrap.py_cog 506 2009-04-30 14:24:56Z markusleist $"
 
@@ -27,9 +27,9 @@ from zope.index.text.interfaces import ISearchableText
 # ict_ok.org imports
 from org.ict_ok.libs.lib import ensureComponentFolderOnBootstrap
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
-from org.ict_ok.components.organization.interfaces import IOrganizationFolder
+from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnitFolder
 
-logger = logging.getLogger("Compon. Organization")
+logger = logging.getLogger("Compon. OrganisationalUnit")
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     # search in global component registry
@@ -38,23 +38,23 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     utils = [ util for util in sitem.registeredUtilities()
               if util.provided.isOrExtends(ICatalog)]
     instUtilityICatalog = utils[0].component
-    if not "organization_oid_index" in instUtilityICatalog.keys():
-        organization_oid_index = TextIndex(interface=ISearchableText,
-                                        field_name='getSearchableOrganizationOid',
+    if not "organisational_unit_oid_index" in instUtilityICatalog.keys():
+        organisational_unit_oid_index = TextIndex(interface=ISearchableText,
+                                        field_name='getSearchableOrganisationalUnitOid',
                                         field_callable=True)
-        instUtilityICatalog['organization_oid_index'] = organization_oid_index
+        instUtilityICatalog['organisational_unit_oid_index'] = organisational_unit_oid_index
         # search for IAdmUtilSupervisor
         utils = [ util for util in sitem.registeredUtilities()
                   if util.provided.isOrExtends(IAdmUtilSupervisor)]
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create index for entry type 'organization'")
+            u" bootstrap: ICatalog - create index for entry type 'organisational_unit'")
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for entry type 'appsoftware'")
 
-    ensureComponentFolderOnBootstrap(IOrganizationFolder,
-                 u"Organizations",
-                 u'org.ict_ok.components.organization.organization.OrganizationFolder',
+    ensureComponentFolderOnBootstrap(IOrganisationalUnitFolder,
+                 u"OrganisationalUnits",
+                 u'org.ict_ok.components.organisational_unit.organisational_unit.OrganisationalUnitFolder',
                  root_folder,
                  sitem)
     transaction.get().commit()

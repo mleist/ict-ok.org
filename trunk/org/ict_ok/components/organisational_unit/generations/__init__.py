@@ -7,14 +7,14 @@
 #
 # $Id: __init__.py_cog 506 2009-04-30 14:24:56Z markusleist $
 #
-"""define the range of generations of Organization"""
+"""define the range of generations of OrganisationalUnit"""
 
 __version__ = "$Id: __init__.py_cog 506 2009-04-30 14:24:56Z markusleist $"
 
 # zope imports
 from zope.app.generations.generations import SchemaManager
 
-key = 'org.ict_ok.components.organization.generations'
+key = 'org.ict_ok.components.organisational_unit.generations'
 
 AppSchemaManager = SchemaManager(
     minimum_generation = 1,

@@ -11,45 +11,45 @@
     -->
 
     <permission
-        id="org.ict_ok.components.organization.View"
-        title="View Organization"
+        id="org.ict_ok.components.organisational_unit.View"
+        title="View OrganisationalUnit"
     />
 
     <permission
-        id="org.ict_ok.components.organization.Add"
-        title="Add Organization"
+        id="org.ict_ok.components.organisational_unit.Add"
+        title="Add OrganisationalUnit"
     />
 
     <permission
-        id="org.ict_ok.components.organization.Edit"
-        title="Edit Organization"
+        id="org.ict_ok.components.organisational_unit.Edit"
+        title="Edit OrganisationalUnit"
     />
 
     <permission
-        id="org.ict_ok.components.organization.Delete"
-        title="Delete Organization"
+        id="org.ict_ok.components.organisational_unit.Delete"
+        title="Delete OrganisationalUnit"
     />
 
-    <grant permission="org.ict_ok.components.organization.View"
+    <grant permission="org.ict_ok.components.organisational_unit.View"
                     role="org.ict_ok.usr" />
-    <grant permission="org.ict_ok.components.organization.View"
+    <grant permission="org.ict_ok.components.organisational_unit.View"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.organization.View"
+    <grant permission="org.ict_ok.components.organisational_unit.View"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.organization.Add"
+    <grant permission="org.ict_ok.components.organisational_unit.Add"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.organization.Add"
+    <grant permission="org.ict_ok.components.organisational_unit.Add"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.organization.Edit"
+    <grant permission="org.ict_ok.components.organisational_unit.Edit"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.organization.Edit"
+    <grant permission="org.ict_ok.components.organisational_unit.Edit"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.components.organization.Delete"
+    <grant permission="org.ict_ok.components.organisational_unit.Delete"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.components.organization.Delete"
+    <grant permission="org.ict_ok.components.organisational_unit.Delete"
                     role="org.ict_ok.adm" />
 
 </configure>

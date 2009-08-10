@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=W0232,W0142
 #
-"""implementation of browser class of Organization"""
+"""implementation of browser class of OrganisationalUnit"""
 
 __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
@@ -24,9 +24,9 @@ from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
-from org.ict_ok.components.organization.interfaces import \
-    IOrganization, IAddOrganization, IOrganizationFolder
-from org.ict_ok.components.organization.organization import Organization
+from org.ict_ok.components.organisational_unit.interfaces import \
+    IOrganisationalUnit, IAddOrganisationalUnit, IOrganisationalUnitFolder
+from org.ict_ok.components.organisational_unit.organisational_unit import OrganisationalUnit
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
@@ -42,81 +42,81 @@ _ = MessageFactory('org.ict_ok')
 # --------------- menu entries -----------------------------
 
 
-class MSubAddOrganization(GlobalMenuSubItem):
+class MSubAddOrganisationalUnit(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'Add Organization')
-    viewURL = 'add_organization.html'
+    title = _(u'Add OrganisationalUnit')
+    viewURL = 'add_organisational_unit.html'
     weight = 50
 
 
-class MGlobalAddOrganization(GlobalMenuAddItem):
+class MGlobalAddOrganisationalUnit(GlobalMenuAddItem):
     """ Menu Item """
-    title = _(u'Add Organization')
-    viewURL = 'add_organization.html'
+    title = _(u'Add OrganisationalUnit')
+    viewURL = 'add_organisational_unit.html'
     weight = 50
-    folderInterface = IOrganizationFolder
+    folderInterface = IOrganisationalUnitFolder
 
 # --------------- object details ---------------------------
 
 
-class OrganizationDetails(ComponentDetails):
-    """ Class for Organization details
+class OrganisationalUnitDetails(ComponentDetails):
+    """ Class for OrganisationalUnit details
     """
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
 
 
-class OrganizationFolderDetails(ComponentDetails):
-    """ Class for Organization details
+class OrganisationalUnitFolderDetails(ComponentDetails):
+    """ Class for OrganisationalUnit details
     """
     omit_viewfields = ComponentDetails.omit_viewfields + []
     omit_addfields = ComponentDetails.omit_addfields + []
     omit_editfields = ComponentDetails.omit_editfields + []
-    attrInterface = IOrganization
-    factory = Organization
-    omitFields = OrganizationDetails.omit_viewfields
+    attrInterface = IOrganisationalUnit
+    factory = OrganisationalUnit
+    omitFields = OrganisationalUnitDetails.omit_viewfields
     fields = fieldsForFactory(factory, omitFields)
 
 # --------------- forms ------------------------------------
 
 
-class DetailsOrganizationForm(DisplayForm):
+class DetailsOrganisationalUnitForm(DisplayForm):
     """ Display form for the object """
-    label = _(u'settings of Organization')
-    factory = Organization
-    omitFields = OrganizationDetails.omit_viewfields
+    label = _(u'settings of OrganisationalUnit')
+    factory = OrganisationalUnit
+    omitFields = OrganisationalUnitDetails.omit_viewfields
     fields = fieldsForFactory(factory, omitFields)
 
 
-class AddOrganizationForm(AddComponentForm):
-    """Add Organization form"""
-    label = _(u'Add Organization')
-    factory = Organization
-    attrInterface = IOrganization
-    addInterface = IAddOrganization
-    omitFields = OrganizationDetails.omit_addfields
+class AddOrganisationalUnitForm(AddComponentForm):
+    """Add OrganisationalUnit form"""
+    label = _(u'Add OrganisationalUnit')
+    factory = OrganisationalUnit
+    attrInterface = IOrganisationalUnit
+    addInterface = IAddOrganisationalUnit
+    omitFields = OrganisationalUnitDetails.omit_addfields
     allFields = fieldsForFactory(factory, omitFields)
     addFields = fieldsForInterface(addInterface, [])
-    _session_key = 'org.ict_ok.components.organization'
+    _session_key = 'org.ict_ok.components.organisational_unit'
     allFields['isTemplate'].widgetFactory = \
         checkbox.SingleCheckBoxFieldWidget
 
 
-class EditOrganizationForm(EditForm):
-    """ Edit for Organization """
-    label = _(u'Organization Edit Form')
-    factory = Organization
-    omitFields = OrganizationDetails.omit_editfields
+class EditOrganisationalUnitForm(EditForm):
+    """ Edit for OrganisationalUnit """
+    label = _(u'OrganisationalUnit Edit Form')
+    factory = OrganisationalUnit
+    omitFields = OrganisationalUnitDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
 
 
-class DeleteOrganizationForm(DeleteForm):
-    """ Delete the Organization """
+class DeleteOrganisationalUnitForm(DeleteForm):
+    """ Delete the OrganisationalUnit """
     
     def getTitle(self):
         """this title will be displayed in the head of form"""
-        return _(u"Delete this Organization: '%s'?") % \
+        return _(u"Delete this OrganisationalUnit: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
 
@@ -125,8 +125,8 @@ class ImportCsvDataForm(ImportCsvDataComponentForm):
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):
-    factory = Organization
-    attrInterface = IOrganization
-    omitFields = OrganizationDetails.omit_viewfields
-    factoryId = u'org.ict_ok.components.organization.organization.Organization'
+    factory = OrganisationalUnit
+    attrInterface = IOrganisationalUnit
+    omitFields = OrganisationalUnitDetails.omit_viewfields
+    factoryId = u'org.ict_ok.components.organisational_unit.organisational_unit.OrganisationalUnit'
     allFields = fieldsForInterface(attrInterface, [])

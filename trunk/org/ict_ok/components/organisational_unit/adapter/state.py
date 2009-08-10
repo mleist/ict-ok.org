@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E0611
 #
-"""Adapter implementation of state-methods for Organization"""
+"""Adapter implementation of state-methods for OrganisationalUnit"""
 
 __version__ = "$Id: state.py_cog 506 2009-04-30 14:24:56Z markusleist $"
 
@@ -18,15 +18,15 @@ from zope.interface import implements
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.organization.interfaces import IOrganization
+from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnit
 from org.ict_ok.components.supernode.interfaces import IState
 
 
 class State(object):
-    """Implementation of state adapter for Organization
+    """Implementation of state adapter for OrganisationalUnit
     """
     implements(IState)
-    adapts(IOrganization)
+    adapts(IOrganisationalUnit)
 
 
     def __init__(self, context):

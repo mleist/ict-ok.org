@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E0611
 #
-"""Adapter implementation of state-methods for Organization"""
+"""Adapter implementation of state-methods for OrganisationalUnit"""
 
 __version__ = "$Id: osi.py_cog 506 2009-04-30 14:24:56Z markusleist $"
 
@@ -17,7 +17,7 @@ __version__ = "$Id: osi.py_cog 506 2009-04-30 14:24:56Z markusleist $"
 from zope.component import adapts
 
 # ict_ok.org imports
-from org.ict_ok.components.organization.interfaces import IOrganization
+from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnit
 from org.ict_ok.osi.interfaces import IPhysicalLayer
 from org.ict_ok.osi import osi
 
@@ -25,5 +25,5 @@ from org.ict_ok.osi import osi
 class OSIModel(osi.OSIModel):
     """OSI adapter."""
 
-    adapts(IOrganization)
+    adapts(IOrganisationalUnit)
     linkedObjects = {}

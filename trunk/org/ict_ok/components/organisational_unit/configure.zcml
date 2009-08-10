@@ -13,13 +13,13 @@
     <!--  Interfaces ==================================================== -->
 
     <interface
-        interface=".interfaces.IOrganization"
+        interface=".interfaces.IOrganisationalUnit"
         type="zope.app.content.interfaces.IContentType"
         />
 
     <!--  Classes ======================================================= -->
         
-    <class class=".organization.Organization">
+    <class class=".organisational_unit.OrganisationalUnit">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
@@ -27,16 +27,16 @@
             interface="zope.app.container.interfaces.IContentContainer"
             />
         <factory
-            id="org.ict_ok.components.organization.organization.Organization"
-            description="Organization"
+            id="org.ict_ok.components.organisational_unit.organisational_unit.OrganisationalUnit"
+            description="OrganisationalUnit"
             />
         <require
-            permission="org.ict_ok.components.organization.View"
-            interface=".interfaces.IOrganization"
+            permission="org.ict_ok.components.organisational_unit.View"
+            interface=".interfaces.IOrganisationalUnit"
             />
         <require
-            permission="org.ict_ok.components.organization.Edit"
-            set_schema=".interfaces.IOrganization"
+            permission="org.ict_ok.components.organisational_unit.Edit"
+            set_schema=".interfaces.IOrganisationalUnit"
             />
         <require
             permission="org.ict_ok.components.person.View"
@@ -47,32 +47,32 @@
             set_schema="org.ict_ok.components.contact_item.interfaces.IContactItem"
             />
         <require
-            permission="org.ict_ok.components.organization.View"
+            permission="org.ict_ok.components.organisational_unit.View"
             interface="org.ict_ok.components.interfaces.IComponent"
             />
         <require
-            permission="org.ict_ok.components.organization.Edit"
+            permission="org.ict_ok.components.organisational_unit.Edit"
             set_schema="org.ict_ok.components.interfaces.IComponent"
             />
         <require
-            permission="org.ict_ok.components.organization.View"
+            permission="org.ict_ok.components.organisational_unit.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require
-            permission="org.ict_ok.components.organization.Edit"
+            permission="org.ict_ok.components.organisational_unit.Edit"
             set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require
-            permission="org.ict_ok.components.organization.View"
+            permission="org.ict_ok.components.organisational_unit.View"
             interface="zope.app.container.interfaces.IReadContainer"
             />
         <require
-            permission="org.ict_ok.components.organization.Edit"
+            permission="org.ict_ok.components.organisational_unit.Edit"
             interface="zope.app.container.interfaces.IWriteContainer"
             />
     </class>
 
-    <class class=".organization.OrganizationFolder">
+    <class class=".organisational_unit.OrganisationalUnitFolder">
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
@@ -83,39 +83,39 @@
             interface="org.ict_ok.components.superclass.interfaces.IFocus"
             />
         <factory
-            id="org.ict_ok.components.organization.organization.OrganizationFolder"
-            description="Organization"
+            id="org.ict_ok.components.organisational_unit.organisational_unit.OrganisationalUnitFolder"
+            description="OrganisationalUnit"
             />
         <require
-            permission="org.ict_ok.components.organization.View"
-            interface=".interfaces.IOrganizationFolder"
+            permission="org.ict_ok.components.organisational_unit.View"
+            interface=".interfaces.IOrganisationalUnitFolder"
             />
         <require
-            permission="org.ict_ok.components.organization.Edit"
-            set_schema=".interfaces.IOrganizationFolder"
+            permission="org.ict_ok.components.organisational_unit.Edit"
+            set_schema=".interfaces.IOrganisationalUnitFolder"
             />
         <require
-            permission="org.ict_ok.components.organization.View"
+            permission="org.ict_ok.components.organisational_unit.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require
-            permission="org.ict_ok.components.organization.Edit"
+            permission="org.ict_ok.components.organisational_unit.Edit"
             set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require
-            permission="org.ict_ok.components.organization.View"
+            permission="org.ict_ok.components.organisational_unit.View"
             interface="zope.app.container.interfaces.IReadContainer"
             />
         <require
-            permission="org.ict_ok.components.organization.Edit"
+            permission="org.ict_ok.components.organisational_unit.Edit"
             interface="zope.app.container.interfaces.IWriteContainer"
             />
         <require
-            permission="org.ict_ok.components.organization.View"
+            permission="org.ict_ok.components.organisational_unit.View"
             interface="org.ict_ok.components.interfaces.IImportXlsData"
             />
         <require
-            permission="org.ict_ok.components.organization.Edit"
+            permission="org.ict_ok.components.organisational_unit.Edit"
             set_schema="org.ict_ok.components.interfaces.IImportXlsData"
             />
     </class>
@@ -130,7 +130,7 @@
     <!--  Search adapters =============================================== -->
         
     <adapter
-        factory="org.ict_ok.components.organization.adapter.search.Searchable"
+        factory="org.ict_ok.components.organisational_unit.adapter.search.Searchable"
     />
 
     <!--  Report adapters =============================================== -->
@@ -144,7 +144,7 @@
         
     <adapter
         factory=".adapter.osi.OSIModel"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
     />
 
     <!--  other adapters ================================================ -->
@@ -159,15 +159,24 @@
         
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".organization.AllOrganizations"
-        name="AllOrganizations"
+        component=".organisational_unit.AllOrganisationalUnits"
+        name="AllOrganisationalUnits"
     />
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".organization.AllOrganizationTemplates"
-        name="AllOrganizationTemplates"
+        component=".organisational_unit.AllOrganisationalUnitTemplates"
+        name="AllOrganisationalUnitTemplates"
     />
-
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".organisational_unit.AllValidSubOrganisationalUnits"
+        name="AllValidSubOrganisationalUnits"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".organisational_unit.AllOrganisationsAndOrganisationalUnits"
+        name="AllOrganisationsAndOrganisationalUnits"
+    />
 
                     
 

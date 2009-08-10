@@ -30,6 +30,12 @@ class IOrganization(Interface):
         title = _(u'Organization name'),
         description = _(u"Organization name"),
         required = False)
+
+    subOUs = List(
+        title = _(u'Sub organisational units'),
+        value_type=Choice(vocabulary='AllValidSubOrganisationalUnits'),
+        default=[],
+        required = False)
         
 #    def trigger_online():
 #        """

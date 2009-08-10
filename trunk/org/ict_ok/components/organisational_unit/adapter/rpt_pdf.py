@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611,W0142
 #
-"""Adapter implementation for generating pdf reports of Organization"""
+"""Adapter implementation for generating pdf reports of OrganisationalUnit"""
 
 __version__ = "$Id: rpt_pdf.py_cog 506 2009-04-30 14:24:56Z markusleist $"
 
@@ -23,21 +23,21 @@ from zope.component import adapts
 from z3c.form import field
 
 # ict_ok.org imports
-from org.ict_ok.components.organization.interfaces import IOrganization
-from org.ict_ok.components.organization.organization import Organization
-from org.ict_ok.components.organization.browser.organization import \
-    OrganizationDetails
+from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnit
+from org.ict_ok.components.organisational_unit.organisational_unit import OrganisationalUnit
+from org.ict_ok.components.organisational_unit.browser.organisational_unit import \
+    OrganisationalUnitDetails
 from org.ict_ok.components.contact_item.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
 
 class RptPdf(ParentRptPdf):
-    """adapter implementation of Organization -> PDF Report
+    """adapter implementation of OrganisationalUnit -> PDF Report
     """
 
     implements(IRptPdf)
-    adapts(IOrganization)
-    factory = Organization
-    omitFields = OrganizationDetails.omit_viewfields
+    adapts(IOrganisationalUnit)
+    factory = OrganisationalUnit
+    omitFields = OrganisationalUnitDetails.omit_viewfields
 

@@ -16,17 +16,17 @@ authors = [
     r'email': r'leist@ikom-online.de'},
     ]
 
-filename = r'organization'
+filename = r'organisational_unit'
 longpath = r'org.ict_ok.components'
 longpath_interface = longpath + r'.%s.interfaces' % (filename)
 longpath_file = longpath + r'.%s.%s' % (filename, filename)
 longpath_browser_file = longpath + r'.%s.browser.%s' % (filename, filename)
 additionalClassImports = []
 
-moduletitle = r'Organization'
-componentname = r'Organization'
+moduletitle = r'OrganisationalUnit'
+componentname = r'OrganisationalUnit'
 
-purpose = r"""organization instance
+purpose = r"""organisational_unit instance
 """
 # ------------------------------------------
 

@@ -10,7 +10,7 @@
     -->
 
     <utility
-        name="org.ict_ok.organization" 
+        name="org.ict_ok.organisational_unit" 
         provides="zope.app.generations.interfaces.ISchemaManager"
         component=".AppSchemaManager"
         />

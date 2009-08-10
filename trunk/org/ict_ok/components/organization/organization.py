@@ -41,6 +41,8 @@ from org.ict_ok.components.interfaces import \
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.contact_item.contact_item import ContactItem
+from org.ict_ok.components.organisational_unit.organisational_unit import \
+    OrganisationalUnit_OrganisationalUnits_RelManager
 
 def AllOrganizationTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IOrganization)
@@ -64,6 +66,8 @@ class Organization(ContactItem):
     __name__ = __parent__ = None
 
     name = FieldProperty(IOrganization['name'])
+    subOUs = RelationPropertyOut(\
+         OrganisationalUnit_OrganisationalUnits_RelManager)
 
     fullTextSearchFields = ['name']
     fullTextSearchFields.extend(ContactItem.fullTextSearchFields)

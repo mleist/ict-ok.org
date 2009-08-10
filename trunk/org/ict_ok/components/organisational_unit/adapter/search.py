@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E0611,W0212
 #
-"""Adapter implementation of search-methods for Organization"""
+"""Adapter implementation of search-methods for OrganisationalUnit"""
 
 __version__ = "$Id: search.py_cog 506 2009-04-30 14:24:56Z markusleist $"
 
@@ -22,8 +22,8 @@ from zope.index.text.interfaces import ISearchableText
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
-from org.ict_ok.components.organization.interfaces import IOrganization
-from org.ict_ok.components.organization.organization import Organization
+from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnit
+from org.ict_ok.components.organisational_unit.organisational_unit import OrganisationalUnit
 from org.ict_ok.components.superclass.adapter.search import \
      Searchable as SuperSearchable
 
@@ -34,12 +34,12 @@ class Searchable(SuperSearchable):
     """Searchable-Adapter."""
 
     implements(ISearchableText)
-    adapts(IOrganization)
+    adapts(IOrganisationalUnit)
 
     def __init__(self, context):
         SuperSearchable.__init__(self, context)
 
-    def getSearchableOrganizationOid(self):
+    def getSearchableOrganisationalUnitOid(self):
         """
         get Object id as string for catalog
         """
@@ -48,4 +48,4 @@ class Searchable(SuperSearchable):
     def getFullTextSearchFields(self):
         """
         """
-        return Organization.fullTextSearchFields
+        return OrganisationalUnit.fullTextSearchFields

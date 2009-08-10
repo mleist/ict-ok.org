@@ -9,7 +9,7 @@
 #
 # pylint: disable-msg=E0213,W0232
 #
-"""Interface of Organization"""
+"""Interface of OrganisationalUnit"""
 
 
 __version__ = "$Id: interfaces.py_cog 465 2009-03-05 02:34:02Z markusleist $"
@@ -23,12 +23,23 @@ from zope.app.folder.interfaces import IFolder
 _ = MessageFactory('org.ict_ok')
 
 
-class IOrganization(Interface):
-    """A Organization object."""
+class IOrganisationalUnit(Interface):
+    """A OrganisationalUnit object."""
 
     name = TextLine(
-        title = _(u'Organization name'),
-        description = _(u"Organization name"),
+        title = _(u'OrganisationalUnit name'),
+        description = _(u"OrganisationalUnit name"),
+        required = False)
+
+    parent_O_OU = Choice(
+        title = _(u'Parent'),
+        vocabulary = 'AllOrganisationsAndOrganisationalUnits',
+        required = False)
+
+    subOUs = List(
+        title = _(u'Sub organisational units'),
+        value_type=Choice(vocabulary='AllValidSubOrganisationalUnits'),
+        default=[],
         required = False)
         
 #    def trigger_online():
@@ -37,14 +48,14 @@ class IOrganization(Interface):
 #        """
 
 
-class IOrganizationFolder(Interface):
-    """Container for Organization objects
+class IOrganisationalUnitFolder(Interface):
+    """Container for OrganisationalUnit objects
     """
 
 
-class IAddOrganization(Interface):
+class IAddOrganisationalUnit(Interface):
     """Interface for all Objects"""
     template = Choice(
         title = _("Template"),
-        vocabulary="AllOrganizationTemplates",
+        vocabulary="AllOrganisationalUnitTemplates",
         required = False)

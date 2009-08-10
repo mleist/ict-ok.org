@@ -13,81 +13,81 @@
     -->
 
     <defaultView
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
         name="details.html"
     />
 
     <z3c:pagelet
         name="history.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
         class="org.ict_ok.components.superclass.browser.superclass.History"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
         />
 
     <z3c:pagelet
         name="details2.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
-        class="org.ict_ok.components.organization.browser.organization.DetailsOrganizationForm"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
+        class="org.ict_ok.components.organisational_unit.browser.organisational_unit.DetailsOrganisationalUnitForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
     />
 
     <z3c:pagelet
         name="details.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
-        class="org.ict_ok.components.organization.browser.organization.OrganizationDetails"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
+        class="org.ict_ok.components.organisational_unit.browser.organisational_unit.OrganisationalUnitDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
     />
     <z3c:template
         template="details.pt"
-        for="org.ict_ok.components.organization.browser.organization.OrganizationDetails"
+        for="org.ict_ok.components.organisational_unit.browser.organisational_unit.OrganisationalUnitDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
     <z3c:pagelet
         name="edit.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
-        class="org.ict_ok.components.organization.browser.organization.EditOrganizationForm"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
+        class="org.ict_ok.components.organisational_unit.browser.organisational_unit.EditOrganisationalUnitForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Edit"
+        permission="org.ict_ok.components.organisational_unit.Edit"
     />
 
     <z3c:pagelet
         name="delete.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
-        class="org.ict_ok.components.organization.browser.organization.DeleteOrganizationForm"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
+        class="org.ict_ok.components.organisational_unit.browser.organisational_unit.DeleteOrganisationalUnitForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Delete"
+        permission="org.ict_ok.components.organisational_unit.Delete"
     />
-    <!--    for="org.ict_ok.components.organization.interfaces.IOrganization"  -->
+    <!--    for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"  -->
 
     <!-- Folder  -->
 
     <defaultView
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
         name="overview.html"
     />
 
     <z3c:pagelet
         name="overview.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
         class="org.ict_ok.components.superclass.browser.superclass.Overview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
         />
 
     <z3c:pagelet
-        name="add_organization.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
-        class="org.ict_ok.components.organization.browser.organization.AddOrganizationForm"
+        name="add_organisational_unit.html"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
+        class="org.ict_ok.components.organisational_unit.browser.organisational_unit.AddOrganisationalUnitForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Add"
+        permission="org.ict_ok.components.organisational_unit.Add"
     />
     <z3c:macro
-        template="organization_details.pt"
-        name="OrganizationDetails"
+        template="organisational_unit_details.pt"
+        name="OrganisationalUnitDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
     
@@ -95,47 +95,47 @@
 
     <viewlet
         name="history"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
         />
     <viewlet
         name="details"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
         />
     <viewlet
         name="edit"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Edit"
+        permission="org.ict_ok.components.organisational_unit.Edit"
         />
     <viewlet
         name="delete"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubDelete"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Delete"
+        permission="org.ict_ok.components.organisational_unit.Delete"
         />
     <viewlet
         name="editcontent"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Edit"
+        permission="org.ict_ok.components.organisational_unit.Edit"
         />
     <viewlet
         name="add_dashboard"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
         manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubAddDashboard"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -143,7 +143,7 @@
         />
     <viewlet
         name="del_dashboard"
-        for="org.ict_ok.components.organization.interfaces.IOrganization"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnit"
         manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
         class="org.ict_ok.admin_utils.usermanagement.browser.usermanagement.MSubDelDashboard"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
@@ -154,89 +154,89 @@
 
     <viewlet
         name="overview"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
         />
     <viewlet
-        name="add_organization"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
+        name="add_organisational_unit"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.components.organization.browser.organization.MSubAddOrganization"
+        class="org.ict_ok.components.organisational_unit.browser.organisational_unit.MSubAddOrganisationalUnit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Add"
+        permission="org.ict_ok.components.organisational_unit.Add"
         />
     <viewlet
-        name="add_organization"
+        name="add_organisational_unit"
         for="*"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneralAdds"
-        class="org.ict_ok.components.organization.browser.organization.MGlobalAddOrganization"
+        class="org.ict_ok.components.organisational_unit.browser.organisational_unit.MGlobalAddOrganisationalUnit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Add"
+        permission="org.ict_ok.components.organisational_unit.Add"
         />
     <!-- page
         name="exportcsvdata.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
-        class=".organization.OrganizationFolderDetails"
-        permission="org.ict_ok.components.organization.View"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
+        class=".organisational_unit.OrganisationalUnitFolderDetails"
+        permission="org.ict_ok.components.organisational_unit.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportCsvData"
     / -->
     <page
         name="exportxlsdata.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
-        class=".organization.OrganizationFolderDetails"
-        permission="org.ict_ok.components.organization.View"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
+        class=".organisational_unit.OrganisationalUnitFolderDetails"
+        permission="org.ict_ok.components.organisational_unit.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
     <!-- z3c:pagelet
         name="importcsvdata.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
-        class=".organization.ImportCsvDataForm"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
+        class=".organisational_unit.ImportCsvDataForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Add"
+        permission="org.ict_ok.components.organisational_unit.Add"
     / -->
     <z3c:pagelet
         name="importxlsdata.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
-        class=".organization.ImportXlsDataForm"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
+        class=".organisational_unit.ImportXlsDataForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Add"
+        permission="org.ict_ok.components.organisational_unit.Add"
     />
     <!-- viewlet
         name="exportcsvdata"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
         / -->
     <viewlet
         name="exportxlsdata"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
+        permission="org.ict_ok.components.organisational_unit.View"
         />
     <!-- viewlet
         name="importcsvdata"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Add"
+        permission="org.ict_ok.components.organisational_unit.Add"
         / -->
     <viewlet
         name="importxlsdata"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
+        for="org.ict_ok.components.organisational_unit.interfaces.IOrganisationalUnitFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubImportXlsData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Add"
+        permission="org.ict_ok.components.organisational_unit.Add"
         />
                         
 

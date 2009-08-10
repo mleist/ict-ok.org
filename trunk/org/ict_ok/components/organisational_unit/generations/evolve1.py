@@ -7,7 +7,7 @@
 #
 # $Id: evolve1.py_cog 506 2009-04-30 14:24:56Z markusleist $
 #
-"""What to do when upgrade Organization from gen 0 to gen 1"""
+"""What to do when upgrade OrganisationalUnit from gen 0 to gen 1"""
 
 __version__ = "$Id: evolve1.py_cog 506 2009-04-30 14:24:56Z markusleist $"
 
@@ -16,7 +16,7 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.components.organization.interfaces import IOrganization
+from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnit
 
 generation = 1
 
@@ -27,9 +27,9 @@ def evolve(context):
     
     root = getRootFolder(context) # the Zope-Root-Folders
 
-    for ikobj in findObjectsProviding(root, IOrganization):
+    for ikobj in findObjectsProviding(root, IOrganisationalUnit):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
-        print "Organization(%s): " % ikobj.ikName + evolve_msg
+        print "OrganisationalUnit(%s): " % ikobj.ikName + evolve_msg
         ikobj.appendHistoryEntry(evolve_msg)
