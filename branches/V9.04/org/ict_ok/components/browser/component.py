@@ -398,7 +398,7 @@ class EvaluationsTodoDisplay(Overview):
     def reqList1stLevel(self):
         """List of Content objects"""
         retList = []
-        evaluations = getEvaluationsTodo(self.context)
+        evaluations = self.context.getEvaluationsTodo()
         for ev in evaluations:
             retList.append({"req": ev, "obj": self.context})
         return retList
@@ -413,9 +413,9 @@ class EvaluationsTodoDisplay(Overview):
                 objs = [objs]
             for obj in objs:
                 if hasattr(obj, "requirements"):
-                    evaluations = getEvaluationsTodo(obj)
+                    evaluations = self.context.getEvaluationsTodo()
                     for ev in evaluations:
-                        retList.append({"req": ev, "obj": obj})
+                        retList.append({"req": ev, "obj": self.context})
         return retList
 
 
@@ -451,9 +451,9 @@ class EvaluationsDoneDisplay(Overview):
     def reqList1stLevel(self):
         """List of Content objects"""
         retList = []
-        evaluations = getEvaluationsDone(self.context)
-        for ev in evaluations.items():
-            retList.append({"eval": ev[1], "obj": self.context})
+        evaluations = self.context.getEvaluationsDone()
+        for ev in evaluations:
+            retList.append({"eval": ev, "obj": self.context})
         return retList
 
     def reqList2ndLevel(self):
@@ -466,11 +466,9 @@ class EvaluationsDoneDisplay(Overview):
                 objs = [objs]
             for obj in objs:
                 if hasattr(obj, "requirements"):
-                    evaluations = getEvaluationsDone(obj)
-                    for ev in evaluations.items():
-                        retList.append({"eval": ev[1], "obj": obj})
-        #import pdb
-        #pdb.set_trace()
+                    evaluations = self.context.getEvaluationsDone()
+                    for ev in evaluations:
+                        retList.append({"eval": ev, "obj": self.context})
         return retList
 
 class AddComponentForm(AddForm):

@@ -34,6 +34,8 @@ from org.ict_ok.libs.interfaces import IDocumentAddable
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.components.contract.interfaces import IContract
+from org.ict_ok.admin_utils.compliance.evaluation import \
+     getEvaluationsDone, getEvaluationsTodo
 
 
 def AllComponentTemplates(dummy_context, interface):
@@ -238,6 +240,21 @@ class Component(Supernode):
     
     def getRefAttributeNames(self):
         return getRefAttributeNames(Component)
+
+    def getEvaluationsTodo(self):
+        """ returns: [Requirement(u'ReqA1'), Requirement(u'ReqA2')]
+        """
+        return getEvaluationsTodo(self)
+
+    def getEvaluationsDone(self):
+        """returns [<Evaluation for Requirement(u'ReqA1'), value='Fail'>),
+        <Evaluation for Requirement(u'ReqA2'), value='Pass'>]
+        """
+        retList = []
+        evaluations = getEvaluationsDone(self)
+        for ev in evaluations.items():
+            retList.append(ev[1])
+        return retList
 
     def get_health(self):
         """

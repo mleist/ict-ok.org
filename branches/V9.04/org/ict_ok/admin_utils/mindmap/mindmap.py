@@ -169,9 +169,67 @@ function giveFocus()
                     node.append_builtin_icon("go")
                 bgcolor = '#%02x%02x%02x' % rgbtuple
                 node.change_style({"background_color":bgcolor})
+                
+    
+    def manageEvaluations(self, obj, request=None):
+        retList = []
+        if hasattr(obj, "getEvaluationsDone"):
+            evals = obj.getEvaluationsDone()
+            if len(evals) > 0:
+                eval_name = _("Evaluation")
+                eval_evaluator = _("Evaluator")
+                longest_eval_name = len(eval_name)
+                longest_eval_evaluator = len(eval_evaluator)
+                for eval in evals:
+                    if longest_eval_name < len(str(eval.ikName)):
+                        longest_eval_name = len(str(eval.ikName))
+                    if longest_eval_evaluator < len(str(eval.evaluator.title)):
+                        longest_eval_evaluator = len(str(eval.evaluator.title))
+                for i in range(0, longest_eval_name-len(eval_name)):
+                        eval_name += " "
+                for i in range(0, longest_eval_evaluator-len(eval_evaluator)):
+                        eval_evaluator += " "
+                name_str = "%s\t%s\t%s\n" % (eval_name, eval_evaluator, _("Value"))
+                for eval in evals:
+                    eval_name = str(eval.ikName)
+                    eval_evaluator = str(eval.evaluator.title)
+                    for i in range(0, longest_eval_name-len(eval_name)):
+                        eval_name += " "
+                    for i in range(0, longest_eval_evaluator-len(eval_evaluator)):
+                        eval_evaluator += " "
+                    name_str += "%s\t%s\t%s\n" % (eval_name, eval_evaluator, str(eval.value))
+                name_str = name_str.replace("\t", "&#x9;").replace("\n", "&#xa;").replace(" ", "&#32;")
+                node = MMNode("tmp%s" % generateOid(), name_str, {"node_type":"bubble"})
+                retList.append(node)
+        if hasattr(obj, "getEvaluationsTodo"):
+            reqs = obj.getEvaluationsTodo()
+            if len(reqs)>0:
+                name_str = "Evaluations Todo\n"
+                for req in reqs:
+                    name_str += str(req.title) + "\n"
+                name_str = name_str.replace("\t", "&#x9;").replace("\n", "&#xa;").replace(" ", "&#32;")
+                node = MMNode("tmp%s" % generateOid(), name_str, {"node_type":"bubble"})
+                node.append_builtin_icon("messagebox_warning")
+                retList.append(node)
+        return retList
+    
+    #def __htmlTable(self, table_list):
+        #""" wants list = [(t1,t2,t3),(z1,z1,z1),(z2,z2,z2)]
+        #"""
+        #table_str = '<html><table border="1">'
+        #for zeile in table_list:
+            #table_str += '<tr>'
+            #for s in zeile:
+                #table_str += '<td>'
+                #table_str += s
+                #table_str += '</td>'
+            #table_str += '</tr>'
+        #table_str += '</table></html>'
+        #return table_str.replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
-    def recursiveHelper(self, tupleList, contextdepth, request=None, alreadySeenDict={}):
+
+    def recursiveHelper(self, tupleList, contextdepth, cloud=False, request=None, alreadySeenDict={}):
         if contextdepth > 0:
             contextdepth -= 1
             nodelist = []
@@ -187,33 +245,41 @@ function giveFocus()
                         node = None
                         if obj not in alreadySeenDict.keys():
                             if type(obj) is type("str") or type(obj) is type(u'ustr'):
-                                try:
-                                    maybe_obj = my_catalog.searchResults(oid_index=obj)
-                                    if len(maybe_obj)>0:
-                                        maybe_obj = iter(maybe_obj).next()
-                                        #hope thats only one ...
-                                except:
-                                    pass
-                                if ischooltool.IRequirement.providedBy(maybe_obj):
-                                        #oh its a requiremnt
-                                        objList.append(maybe_obj)
-                                        continue
+                                continue
+                                #try:
+                                    #maybe_obj = my_catalog.searchResults(oid_index=obj)
+                                    #if len(maybe_obj)>0:
+                                        #maybe_obj = iter(maybe_obj).next()
+                                        ##hope thats only one ...
+                                #except:
+                                    #pass
+                                #if ischooltool.IRequirement.providedBy(maybe_obj):
+                                        ##oh its a requiremnt
+                                        ##objList.append(maybe_obj)
+                                        
+                                        #continue
                             if not hasattr(obj, "objectID"):
                                 Oid = "tmp%s" % generateOid()
                                 node = MMNode(Oid, obj)
                                 alreadySeenDict[obj] = node
                                 print "reursiveHelper %s" % obj
                             else:
-                                node = MMNode(obj.objectID, obj.ikName, {"link": zapi.absoluteURL(obj, request), "node_type":"bubble"})
+                                try:
+                                    node = MMNode(obj.objectID, obj.ikName, {"link": zapi.absoluteURL(obj, request), "node_type":"bubble"})
+                                except:
+                                    import pdb
+                                    pdb.set_trace()
                                 self.style_health(obj, node)
                                 alreadySeenDict[obj] = node
                                 #print "obj: %s" % obj.ikName
                                 itemNav = INavigation(obj)
                                 sublist = itemNav.getContextObjList()
                                 from copy import copy
-                                subnodes = self.recursiveHelper(sublist, copy(contextdepth), request, alreadySeenDict)
+                                subnodes = self.recursiveHelper(sublist, copy(contextdepth), cloud, request, alreadySeenDict)
+                                subnodes.extend(self.manageEvaluations(obj))
                                 if len(subnodes) > 0:
-                                    node.change_style({"cloud_color":"#EFEFEF"})
+                                    if cloud:
+                                        node.change_style({"cloud_color":"#EFEFEF"})
                                     node.add_nodes(subnodes)
                         else:
                             #arrorw
@@ -229,7 +295,7 @@ function giveFocus()
             return []
 
 
-    def asMindmapData(self, request=None):
+    def asMindmapData(self, cloud=False,request=None):
         """ generate our raw mindmap data
         """
         itemNav = INavigation(self.context)
@@ -242,7 +308,8 @@ function giveFocus()
                    </map>
                    """
         root_node = MMNode(self.context.objectID, self.context.ikName)
-        root_node.add_nodes(self.recursiveHelper(objList, 10, request, {self.context:root_node}))
+        root_node.add_nodes(self.recursiveHelper(objList, 10, cloud, request, {self.context:root_node}))
+        root_node.add_nodes(self.manageEvaluations(self.context))
         return root_node.generate_map()
 
 
