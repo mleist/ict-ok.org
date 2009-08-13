@@ -50,7 +50,8 @@ class AdmUtilMindMap(Supernode):
     implements(IAdmUtilMindMap)
 
     version = FieldProperty(IAdmUtilMindMap['version'])
-
+    cloudDisplay = FieldProperty(IAdmUtilMindMap['cloudDisplay'])
+    
     def __init__(self, **data):
         """
         constructor of Supernode
@@ -189,22 +190,27 @@ function giveFocus()
                         eval_name += " "
                 for i in range(0, longest_eval_evaluator-len(eval_evaluator)):
                         eval_evaluator += " "
-                name_str = "%s\t%s\t%s\n" % (eval_name, eval_evaluator, _("Value"))
+                name_str = "<html>%s\t%s\t%s\n" % (eval_name, eval_evaluator, _("Value"))
                 for eval in evals:
                     eval_name = str(eval.ikName)
                     eval_evaluator = str(eval.evaluator.title)
-                    for i in range(0, longest_eval_name-len(eval_name)):
+                    for i in range(0, longest_eval_name-len(eval.ikName)):
                         eval_name += " "
                     for i in range(0, longest_eval_evaluator-len(eval_evaluator)):
                         eval_evaluator += " "
-                    name_str += "%s\t%s\t%s\n" % (eval_name, eval_evaluator, str(eval.value))
-                name_str = name_str.replace("\t", "&#x9;").replace("\n", "&#xa;").replace(" ", "&#32;")
+                    if str(eval.value) == "Pass":
+                        eval_value = str(eval.value) + "\t v"
+                    elif str(eval.value) == "Fail":
+                        eval_value = str(eval.value) + "\t X"
+                    name_str += '%s\t%s\t%s\n' % (eval_name, eval_evaluator, eval_value)
+                name_str += "</html>"
+                name_str = name_str.replace("\t", "&#x9;").replace("\n", "&#xa;").replace(" ", "&#32;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
                 node = MMNode("tmp%s" % generateOid(), name_str, {"node_type":"bubble"})
                 retList.append(node)
         if hasattr(obj, "getEvaluationsTodo"):
             reqs = obj.getEvaluationsTodo()
             if len(reqs)>0:
-                name_str = "Evaluations Todo\n"
+                name_str = _("Evaluations Todo")+u"\n"
                 for req in reqs:
                     name_str += str(req.title) + "\n"
                 name_str = name_str.replace("\t", "&#x9;").replace("\n", "&#xa;").replace(" ", "&#32;")
@@ -229,7 +235,7 @@ function giveFocus()
 
 
 
-    def recursiveHelper(self, tupleList, contextdepth, cloud=False, request=None, alreadySeenDict={}):
+    def recursiveHelper(self, tupleList, contextdepth, request=None, alreadySeenDict={}):
         if contextdepth > 0:
             contextdepth -= 1
             nodelist = []
@@ -275,10 +281,10 @@ function giveFocus()
                                 itemNav = INavigation(obj)
                                 sublist = itemNav.getContextObjList()
                                 from copy import copy
-                                subnodes = self.recursiveHelper(sublist, copy(contextdepth), cloud, request, alreadySeenDict)
+                                subnodes = self.recursiveHelper(sublist, copy(contextdepth), request, alreadySeenDict)
                                 subnodes.extend(self.manageEvaluations(obj))
                                 if len(subnodes) > 0:
-                                    if cloud:
+                                    if self.cloudDisplay:
                                         node.change_style({"cloud_color":"#EFEFEF"})
                                     node.add_nodes(subnodes)
                         else:
@@ -295,7 +301,7 @@ function giveFocus()
             return []
 
 
-    def asMindmapData(self, cloud=False,request=None):
+    def asMindmapData(self, request=None):
         """ generate our raw mindmap data
         """
         itemNav = INavigation(self.context)
@@ -308,7 +314,7 @@ function giveFocus()
                    </map>
                    """
         root_node = MMNode(self.context.objectID, self.context.ikName)
-        root_node.add_nodes(self.recursiveHelper(objList, 10, cloud, request, {self.context:root_node}))
+        root_node.add_nodes(self.recursiveHelper(objList, 10, request, {self.context:root_node}))
         root_node.add_nodes(self.manageEvaluations(self.context))
         return root_node.generate_map()
 
