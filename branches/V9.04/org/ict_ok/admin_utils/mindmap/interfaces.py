@@ -20,7 +20,7 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
-from zope.schema import TextLine
+from zope.schema import Bool, TextLine
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -36,6 +36,12 @@ class IAdmUtilMindMap(ISupernode):
         title = _("mind map version"),
         description = _("mind maps must have a version."),
         readonly = False,
+        required = False)
+
+    cloudDisplay = Bool(
+        title = _("Display Clouds"),
+        description = _("Display Clouds"),
+        default = False,
         required = False)
 
     def asMindmap(request=None):
