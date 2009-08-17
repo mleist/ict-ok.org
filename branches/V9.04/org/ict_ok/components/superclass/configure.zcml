@@ -73,6 +73,10 @@
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
     />
     <adapter
+        factory=".adapter.rpt_dot.RptDot"
+        permission="org.ict_ok.admin_utils.graphviz.generate.dot"
+    />
+    <adapter
         factory=".adapter.rpt_xml.RptXML"
         permission="org.ict_ok.admin_utils.reports.generate.xml"
     />

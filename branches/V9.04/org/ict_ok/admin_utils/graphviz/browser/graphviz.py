@@ -14,23 +14,44 @@
 
 __version__ = "$Id$"
 
+# python imports
+from datetime import datetime
+
 # zope imports
 from zope.app import zapi
 from zope.proxy import removeAllProxies
 from zope.i18nmessageid import MessageFactory
+from zope.app.rotterdam.xmlobject import setNoCacheHeaders
+from zope.component import queryUtility
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory
+from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
+from org.ict_ok.admin_utils.usermanagement.usermanagement import \
+     getUserTimezone
 from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm
+from org.ict_ok.admin_utils.graphviz.interfaces import IAdmUtilGraphviz
 from org.ict_ok.admin_utils.graphviz.graphviz import \
      AdmUtilGraphviz
+from org.ict_ok.version import getIkVersion
 
 _ = MessageFactory('org.ict_ok')
 
 
+# --------------- helper functions -------------------------
+
+# --------------- menu entries -----------------------------
+
+class MSubGraphvizAll(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'All Graphs')
+    viewURL = '@@graphvizAll.html'
+    weight = 999
+
+# --------------- object details ---------------------------
 class AdmUtilGraphvizDetails(SupernodeDetails):
     """Browser implementation of Graphviz picture generator
     """
@@ -52,6 +73,26 @@ class AdmUtilGraphvizDetails(SupernodeDetails):
         """
         obj = removeAllProxies(self.context)
         return zapi.absoluteURL(obj, self.request)
+
+    def graphvizAll(self):
+        """
+        will send the complete dot report to the browser
+        """
+        utilGraphviz = queryUtility(IAdmUtilGraphviz, name='AdmUtilGraphviz')
+        my_formatter = self.request.locale.dates.getFormatter(
+            'dateTime', 'medium')
+        userTZ = getUserTimezone()
+        longTimeString = my_formatter.format(\
+            userTZ.fromutc(datetime.utcnow()))
+        versionStr = "%s [%s]" % (longTimeString, getIkVersion())
+        self.request.response.setHeader('Content-Type', 'image/png')
+        #filename = "*.png"
+        #self.request.response.setHeader(\
+            #'Content-Disposition',
+            #'attachment; filename=\"%s\"' % filename)
+        setNoCacheHeaders(self.request.response)
+        return utilGraphviz.getPngFile(self.context)
+
 
 # --------------- forms ------------------------------------
 

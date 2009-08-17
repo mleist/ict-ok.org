@@ -20,6 +20,11 @@
         description="Edit from AdmUtilGraphviz."
         />
 
+    <permission
+        id="org.ict_ok.admin_utils.graphviz.generate.dot"
+        title="genDotReport"
+        />
+
     <grant permission="org.ict_ok.admin_utils.graphviz.View"
                     role="org.ict_ok.usr" />
     <grant permission="org.ict_ok.admin_utils.graphviz.View"
@@ -30,6 +35,11 @@
     <grant permission="org.ict_ok.admin_utils.graphviz.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.graphviz.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.graphviz.generate.dot"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.graphviz.generate.dot"
                     role="org.ict_ok.adm" />
 
 </configure>

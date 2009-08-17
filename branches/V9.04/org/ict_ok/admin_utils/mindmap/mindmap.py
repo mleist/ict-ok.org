@@ -38,7 +38,7 @@ from org.ict_ok.libs.lib import generateOid
 #schooltool
 from schooltool.requirement import interfaces as ischooltool
 
-#_ = MessageFactory('org.ict_ok')
+_ = MessageFactory('org.ict_ok')
 
 logger = logging.getLogger("AdmUtilMindMap")
 

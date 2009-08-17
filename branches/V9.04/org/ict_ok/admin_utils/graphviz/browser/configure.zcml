@@ -27,6 +27,15 @@
         permission="org.ict_ok.admin_utils.graphviz.View"
         attribute="getPngFile"/>
 
+    <page
+        name="graphvizAll.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class=".graphviz.AdmUtilGraphvizDetails"
+        permission="org.ict_ok.admin_utils.graphviz.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="graphvizAll"
+    />
+
 
 
     <!--======================================================-->
@@ -79,5 +88,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.graphviz.Edit"
         />
+
+    <viewlet
+        name="graphvizAll"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuReportsOvervPdf"
+        class="org.ict_ok.admin_utils.graphviz.browser.graphviz.MSubGraphvizAll"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.graphviz.View"
+        />        
 
 </zope:configure>
