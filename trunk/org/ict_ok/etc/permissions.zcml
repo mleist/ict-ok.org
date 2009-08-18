@@ -139,6 +139,8 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.address"
              file="security.zcml" />
+    <include package="org.ict_ok.components.organisational_unit"
+             file="security.zcml" />
     <include package="org.ict_ok.components.organization"
              file="security.zcml" />
     <include package="org.ict_ok.components.person"

@@ -18,6 +18,7 @@ implementation of browser class of eventCrossbar handler
 __version__ = "$Id$"
 
 # python imports
+from datetime import datetime
 
 # zope imports
 from zope.traversing.browser import absoluteURL
@@ -43,6 +44,8 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.superclass.browser.superclass import \
      getActionBotton_Detail
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+from org.ict_ok.admin_utils.usermanagement.usermanagement import \
+     getUserTimezone
 
 _ = MessageFactory('org.ict_ok')
 
@@ -145,6 +148,9 @@ class AdmUtilRequirementDetails(SupernodeDetails):
     omit_editfields = SupernodeDetails.omit_editfields + \
                     ['__name__', '__parent__', 'title']
 
+    def overResubmitDate(self):
+        userTZ = getUserTimezone()
+        nowTS = userTZ.fromutc(datetime.utcnow())
         
 # --------------- forms ------------------------------------
 

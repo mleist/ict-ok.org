@@ -91,6 +91,7 @@
 
     <include package="org.ict_ok.components.product.browser" />
     <include package="org.ict_ok.components.address.browser" />
+    <include package="org.ict_ok.components.organisational_unit.browser" />
     <include package="org.ict_ok.components.organization.browser" />
     <include package="org.ict_ok.components.person.browser" />
     <include package="org.ict_ok.components.contact.browser" />

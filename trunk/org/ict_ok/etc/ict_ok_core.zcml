@@ -100,6 +100,7 @@
 
     <include package="org.ict_ok.components.product" />
     <include package="org.ict_ok.components.address" />
+    <include package="org.ict_ok.components.organisational_unit" />
     <include package="org.ict_ok.components.organization" />
     <include package="org.ict_ok.components.person" />
     <include package="org.ict_ok.components.contact" />

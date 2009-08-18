@@ -52,7 +52,7 @@ def AllComponentTemplates(dummy_context, interface):
     return SimpleVocabulary(terms)
 
 def AllComponents(dummy_context, interface=IComponent,
-                  additionalAttrNames=None):
+                  additionalAttrNames=None, includeSelf=True):
     """In which production state a host may be
     """
     terms = []
@@ -82,10 +82,17 @@ def AllComponents(dummy_context, interface=IComponent,
                                 dotted = u')'
                             myString = myString + u" (%s" % \
                                 additionalAttribute[:70] + dotted
-            terms.append(\
-                SimpleTerm(oobj.object,
-                           token=oid,
-                           title=myString))
+            if oobj.object == dummy_context:
+                if includeSelf:
+                    terms.append(\
+                        SimpleTerm(oobj.object,
+                                   token=oid,
+                                   title=myString))
+            else:
+                terms.append(\
+                    SimpleTerm(oobj.object,
+                               token=oid,
+                               title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
 
