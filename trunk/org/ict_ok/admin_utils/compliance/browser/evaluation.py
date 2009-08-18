@@ -39,11 +39,14 @@ _ = MessageFactory('org.ict_ok')
 def getEvaluationBotton_Cross(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if type(item) is dict:
+        obj = item["obj"]
+        item = item["eval"]
     evaluations = item.getParent()
     evalObj = evaluations.__parent__
     fromURLq = URLQuote(formatter.request['PATH_INFO']).quote()
-    urlExt = '/@@change_eval_no?nextURL=%s&req_id=%s' % \
-           (fromURLq, item.requirement.getObjectId())
+    urlExt = '/@@change_eval_no?nextURL=%s&req_id=%s&obj_id=%s' % \
+           (fromURLq, item.requirement.getObjectId(), obj.objectID)
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"evcross" + evalObj.getObjectId()
     view_url = absoluteURL(formatter.context,
@@ -67,11 +70,14 @@ def getEvaluationBotton_Cross(item, formatter):
 def getEvaluationBotton_Tick(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if type(item) is dict:
+        obj = item["obj"]
+        item = item["eval"]
     evaluations = item.getParent()
     evalObj = evaluations.__parent__
     fromURLq = URLQuote(formatter.request['PATH_INFO']).quote()
-    urlExt = '/@@change_eval_yes?nextURL=%s&req_id=%s' % \
-           (fromURLq, item.requirement.getObjectId())
+    urlExt = '/@@change_eval_yes?nextURL=%s&req_id=%s&obj_id=%s' % \
+           (fromURLq, item.requirement.getObjectId(), obj.objectID)
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"evtick" + evalObj.getObjectId()
     view_url = absoluteURL(formatter.context,
@@ -96,6 +102,8 @@ def getEvaluationRequirementTitle(item, formatter):
     """
     Titel for Overview
     """
+    if type(item) is dict:
+        item = item["eval"]
     try:
         return item.requirement.ikName
     except TypeError:
@@ -105,6 +113,8 @@ def getEvaluatorTitle(item, formatter):
     """
     Titel for Overview
     """
+    if type(item) is dict:
+        item = item["eval"]
     try:
         return item.evaluator.title
     except TypeError:
@@ -114,10 +124,14 @@ def getEvaluationValue(item, formatter):
     """
     Titel for Overview
     """
+    if type(item) is dict:
+        item = item["eval"]
     #self.scoreSystem = scoreSystem
     return item.value
 
 def evaluationValue_formatter(value, item, formatter):
+    if type(item) is dict:
+        item = item["eval"]
     if item.scoreSystem.title == u'Pass/Fail':
         if value == u'Pass':
             return u'<B CLASS="cb_ig">%s</b>' % (value)
@@ -128,6 +142,8 @@ def evaluationValue_formatter(value, item, formatter):
 
 def getEvalModifiedDate(item, formatter):
     """Modified Date for Overview in Web-Browser"""
+    if type(item) is dict:
+        item = item["eval"]
     try:
         #self.scoreSystem = scoreSystem
         #item.time

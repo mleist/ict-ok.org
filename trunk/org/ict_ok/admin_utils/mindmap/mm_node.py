@@ -37,6 +37,7 @@ class MMNode(object):
         self.style_outer_tag = {}
         self.__arrows = []
         self.__icons = []
+        self.__attributes = []
         self.change_style(style)
 
     def generate_map(self):
@@ -65,6 +66,9 @@ class MMNode(object):
         if len(self.__icons) > 0:
             for ic in self.__icons:
                 xml_string += ic + "\n"
+        if len(self.__attributes) > 0:
+            for at in self.__attributes:
+                xml_string += at + "\n"
         if self.subnodes != None:
             if len(self.subnodes) != 0:
                 for subnode in self.subnodes:
@@ -144,6 +148,12 @@ class MMNode(object):
     
     def append_builtin_icon(self, icon):
         self.__icons.append('<icon BUILTIN="%s"/>' % icon)
+    
+    def append_attribute(self, attr):
+        """ attr tupel of (Name, Value)
+        """
+        if type(attr) is tuple:
+            self.__attributes.append('<attribute NAME="%s" VALUE="%s"/>' % attr)
 
     def add_node(self, node):
         if type(node) != type(self):

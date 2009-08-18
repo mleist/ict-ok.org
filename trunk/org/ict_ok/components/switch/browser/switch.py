@@ -116,7 +116,7 @@ class AddSwitchForm(AddComponentForm):
             if IInterfaceFolder.providedBy(oobj.object):
                 oneParent = oobj.object
                 break
-        if oneParent is not None:
+        if oneParent is not None and obj.ifCount != None:
             for i in range(1, obj.ifCount+1):
                 dataVect = {}
                 dataVect['ikName'] = u'%s-%02d' % (obj.ikName, i)

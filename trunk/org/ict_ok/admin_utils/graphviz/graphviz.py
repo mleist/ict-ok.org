@@ -49,55 +49,55 @@ class AdmUtilGraphviz(Supernode):
         self.graphviz_type = u'dot'
         self.ikRevision = __version__
 
-    def fillDotFile(self, objList, dotFile):
+    def fillDotFile(self, oobj, dotFile, request=None):
         """generate the dot file
         """
         print >> dotFile, '// GraphViz DOT-File'
-        print >> dotFile, 'graph "%s" {' % (zapi.getRoot(self).__name__)
+        print >> dotFile, 'graph "%s" {' % (oobj.ikName)
         print >> dotFile, '\tgraph [bgcolor="#E5FFF9"];'
         print >> dotFile, '\tedge [style = "setlinewidth(2)", color = gray];'
         print >> dotFile, '\trankdir = LR;'
-        for (dummy_name, oobj) in objList:
-            if ISupernode.providedBy(oobj):
-                try:
-                    adapterGenGraphvizDot = IGenGraphvizDot(oobj)
-                    if adapterGenGraphvizDot:
-                        adapterGenGraphvizDot.setParent(zapi.getRoot(self))
-                        adapterGenGraphvizDot.traverse4DotGenerator(\
-                            dotFile,
-                            level=1, 
-                            comments=False)
-                except TypeError, err:
-                    logger.error("TypeError in fillDotFile() [%s]" % err)
+        print >> dotFile, 'node [URL="\N"];'
+        #for (dummy_name, oobj) in objList:
+            #if ISupernode.providedBy(oobj):
+                #try:
+        adapterGenGraphvizDot = IGenGraphvizDot(oobj)
+        if adapterGenGraphvizDot:
+            #adapterGenGraphvizDot.setParent(oobj)
+            adapterGenGraphvizDot.traverse4DotGenerator(\
+                dotFile, 1, False, request)
+                #except TypeError, err:
+                    #logger.error("TypeError in fillDotFile() [%s]" % err)
         print >> dotFile, '}'
         dotFile.flush()
             
-    def getPngFile(self, root_obj):
+    def getPngFile(self, root_obj, request=None):
         """get dot file and convert to png
         """
-        its = root_obj.items()
+        #its = root_obj.items()
         dotFileName = '/tmp/dotFile_%s.dot' % os.getpid()
         outFileName = '/tmp/dotFile_%s.out' % os.getpid()
         dotFile = open(dotFileName, 'w')
-        self.fillDotFile(its, dotFile)
+        #self.fillDotFile(its, dotFile)
+        self.fillDotFile(root_obj, dotFile, request)
         dotFile.close()
         os.system("%s -Tpng -o %s %s" % (self.graphviz_type, 
                                          outFileName, 
                                          dotFileName))
-        print "self.graphviz_type: %s" % self.graphviz_type
+        #print "self.graphviz_type: %s" % self.graphviz_type
         pic = open(outFileName, "r")
         picMem = pic.read()
         pic.close()
         return picMem
                 
-    def getCmapxText(self, root_obj):
+    def getCmapxText(self, root_obj, request=None):
         """get dot file and convert to client side image map
         """
-        its = root_obj.items()
+        #its = root_obj.items()
         dotFileName = '/tmp/dotFile_%s.dot' % os.getpid()
         outFileName = '/tmp/dotFile_%s.out' % os.getpid()
         dotFile = open(dotFileName, 'w')
-        self.fillDotFile(its, dotFile)
+        self.fillDotFile(root_obj, dotFile, request)
         dotFile.close()
         os.system("%s -Tcmapx -o %s %s" % (self.graphviz_type, 
                                            outFileName, 

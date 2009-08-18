@@ -81,6 +81,18 @@ class IComponent(Interface):
         weighted count of accesses
         !!!!!! has to be implemented by subclass !!!!!!
         """
+    def getRefAttributeNames(self):
+        """ gets all referenced Attributes
+        """
+
+    def getEvaluationsTodo(self):
+        """ returns: [Requirement(u'ReqA1'), Requirement(u'ReqA2')]
+        """
+
+    def getEvaluationsDone(self):
+        """returns [<Evaluation for Requirement(u'ReqA1'), value='Fail'>),
+        <Evaluation for Requirement(u'ReqA2'), value='Pass'>]
+        """
 
 
 class IComponentFolder(ISuperclass, IFolder):

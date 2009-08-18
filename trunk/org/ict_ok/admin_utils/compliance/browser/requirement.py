@@ -42,7 +42,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
      Overview, getModifiedDate, raw_cell_formatter, \
      link, getActionBottons, getSize
 from org.ict_ok.components.superclass.browser.superclass import \
-     getActionBotton_Detail
+     getActionBotton_Detail, getTitle
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      getUserTimezone
@@ -55,9 +55,12 @@ _ = MessageFactory('org.ict_ok')
 def getRequirementBotton_Cross(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if type(item) is dict:
+        obj = item["obj"]
+        item = item["req"]
     fromURLq = URLQuote(formatter.request['PATH_INFO']).quote()
-    urlExt = '/@@change_eval_no?nextURL=%s&req_id=%s' % \
-           (fromURLq, item.getObjectId())
+    urlExt = '/@@change_eval_no?nextURL=%s&req_id=%s&obj_id=%s' % \
+           (fromURLq, item.getObjectId(), obj.objectID)
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"cross" + formatter.context.getObjectId()
     view_url = absoluteURL(formatter.context,
@@ -81,9 +84,12 @@ def getRequirementBotton_Cross(item, formatter):
 def getRequirementBotton_Tick(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
+    if type(item) is dict:
+        obj = item["obj"]
+        item = item["req"]
     fromURLq = URLQuote(formatter.request['PATH_INFO']).quote()
-    urlExt = '/@@change_eval_yes?nextURL=%s&req_id=%s' % \
-           (fromURLq, item.getObjectId())
+    urlExt = '/@@change_eval_yes?nextURL=%s&req_id=%s&obj_id=%s' % \
+           (fromURLq, item.getObjectId(), obj.objectID)
     resource_path = getAdapter(formatter.request, name='pics')()
     ttid = u"tick" + formatter.context.getObjectId()
     view_url = absoluteURL(formatter.context,
@@ -113,6 +119,22 @@ def getRequirementBottons(item, formatter):
     retHtml += getRequirementBotton_Tick(item, formatter)
     retHtml += getRequirementBotton_Cross(item, formatter)
     return retHtml
+
+def getRequirementTitle(item, formatter):
+    """
+    Titel for Overview
+    """
+    if type(item) is dict:
+        item = item["req"]
+    try:
+        return item.ikName
+    except TypeError:
+        return str(item.__class__.__name__)
+
+def getReqModifiedDate(item, formatter):
+    if type(item) is dict:
+        item = item["req"]
+    getModifiedDate(item, formatter)
 
 # --------------- menu entries -----------------------------
 
@@ -154,14 +176,6 @@ class AdmUtilRequirementDetails(SupernodeDetails):
         
 # --------------- forms ------------------------------------
 
-
-def getTitle(item, formatter):
-    """
-    Titel for Overview
-    """
-    text_html = "%s" % item.ikName
-    return text_html
-    
 
 class DetailsAdmUtilRequirementForm(Overview):
     """ Display form for the object """
