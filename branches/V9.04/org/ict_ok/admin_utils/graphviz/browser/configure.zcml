@@ -19,22 +19,22 @@
         permission="org.ict_ok.admin_utils.graphviz.View"
         menu="zmi_views" title="Status"/>
 
-    <page
+    <!--page
         name="getPNG"
         for="org.ict_ok.admin_utils.graphviz.interfaces.IAdmUtilGraphviz"
         class=".graphviz.AdmUtilGraphvizDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.graphviz.View"
-        attribute="getPngFile"/>
+        attribute="getPngFile"/-->
 
-    <page
+    <!--page
         name="graphvizAll.html"
         for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         class=".graphviz.AdmUtilGraphvizDetails"
         permission="org.ict_ok.admin_utils.graphviz.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="graphvizAll"
-    />
+    /-->
 
 
 
@@ -54,7 +54,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.graphviz.View"
         />
-
     <z3c:pagelet
         name="edit.html"
         for="org.ict_ok.admin_utils.graphviz.interfaces.IAdmUtilGraphviz"
@@ -62,6 +61,18 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.graphviz.Edit"
     />
+    <z3c:pagelet
+        name="graphvizAll.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class=".graphviz.AdmUtilGraphvizAll"
+        permission="org.ict_ok.admin_utils.graphviz.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <z3c:template
+        template="graphvizAll.pt"
+        for=".graphviz.AdmUtilGraphvizAll"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
 
     <!--##### Sub Menu ##### -->
     <viewlet
@@ -96,6 +107,6 @@
         class="org.ict_ok.admin_utils.graphviz.browser.graphviz.MSubGraphvizAll"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.graphviz.View"
-        />        
+        />
 
 </zope:configure>

@@ -74,6 +74,7 @@ class RptDot(object):
                                  cfgFile, 
                                  level=0, 
                                  comments=True,
+                                 request=None, 
                                  alreadySeenList=None):
         """graphviz configuration preamble
         """
@@ -82,7 +83,7 @@ class RptDot(object):
                   % ("\t" * level, self.context, level)
 
     def traverse4DotGeneratorBody(self, cfgFile, level=0,
-                                  comments=True, alreadySeenList=None):
+                                  comments=True, request=None, alreadySeenList=None):
         """graphviz configuration data of object
         """
         if comments:
@@ -90,8 +91,10 @@ class RptDot(object):
                   % ("\t" * level, self.context, level)
         dot_str = '%s"%s" [' % ("\t" * level, self.context.objectID)
         dot_str += 'shape="diamond", '
-        dot_str += 'label="%s", ' % self.context.ikName
+        dot_str += 'label=<%s>,' % (self.context.ikName)
         dot_str += 'fontsize=10.0'
+        if request:
+            dot_str += ', \nURL="%s"' % zapi.absoluteURL(self.context, request)
         dot_str += '];'
         print >> cfgFile, dot_str
         if alreadySeenList == None:
@@ -99,8 +102,6 @@ class RptDot(object):
         alreadySeenList.append(self.context)
         itemNav = INavigation(self.context)
         tuplelist = itemNav.getContextObjList()
-        #import pdb
-        #pdb.set_trace()
         for (attrName, viewTitle, contextObj) in tuplelist:
                 if attrName is not None and viewTitle is not None:
                     if type(attrName) is not type("str"):
@@ -120,13 +121,14 @@ class RptDot(object):
                                     cfgFile,
                                     level+1,
                                     comments,
+                                    request,
                                     alreadySeenList)
-        self.manageEvaluations(self.context, cfgFile, level)
+        self.manageEvaluations(self.context, cfgFile, level, request)
         if self.parent != None:
-            print >> cfgFile, '%s"%s" -- "%s"' \
+            print >> cfgFile, '%s"%s" -- "%s";' \
                   % ("\t" * level, self.parent.objectID, self.context.objectID)
 
-    def traverse4DotGeneratorPost(self, cfgFile, level=0, comments=True, alreadySeenList=None):
+    def traverse4DotGeneratorPost(self, cfgFile, level=0, comments=True, request=None, alreadySeenList=None):
         """graphviz configurations text after object
         """
         if comments:
@@ -135,17 +137,17 @@ class RptDot(object):
 
 
     def traverse4DotGenerator(self, cfgFile, level=0, comments=True,
-                              alreadySeenList=None):
+                              request=None, alreadySeenList=None):
         """
         cfgFile: handle to open file
         level: indent-level
         """
         if ISuperclass.providedBy(self.context):
-            self.traverse4DotGeneratorPre(cfgFile, level, comments, alreadySeenList)
-            self.traverse4DotGeneratorBody(cfgFile, level, comments, alreadySeenList)
-            self.traverse4DotGeneratorPost(cfgFile, level, comments, alreadySeenList)
+            self.traverse4DotGeneratorPre(cfgFile, level, comments, request, alreadySeenList)
+            self.traverse4DotGeneratorBody(cfgFile, level, comments, request, alreadySeenList)
+            self.traverse4DotGeneratorPost(cfgFile, level, comments, request, alreadySeenList)
     
-    def manageEvaluations(self, obj, cfgFile, level):
+    def manageEvaluations(self, obj, cfgFile, level, request=None):
         if hasattr(obj, "getEvaluationsDone"):
             evals = obj.getEvaluationsDone()
             if len(evals) > 0:
@@ -158,8 +160,10 @@ class RptDot(object):
                 dot_str += 'shape="note", '
                 dot_str += 'label=<%s>, ' % self.__htmlTable(table_list)
                 dot_str += 'fontsize=10.0'
+                if request:
+                    dot_str += ', \nURL="%s/evaluations_done.html"' % zapi.absoluteURL(obj, request)
                 dot_str += '];\n'
-                dot_str += '%s"%s" -- "%s"' % ("\t" * level, tmpID, obj.objectID)
+                dot_str += '%s"%s" -- "%s";' % ("\t" * level, tmpID, obj.objectID)
                 print >> cfgFile, dot_str
         if hasattr(obj, "getEvaluationsTodo"):
             reqs = obj.getEvaluationsTodo()
@@ -179,79 +183,3 @@ class RptDot(object):
             table_str += '</tr>'
         table_str += '</table>'
         return table_str#.replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
-
-
-
-    #def traverse4RptPre(self, level, comments, autoAppend=True):
-        #"""pdf report object preamble
-        
-        #level: indent-level (int 0..)
-        #comments: should there comments are in the output?
-        #"""
-        #if comments:
-            #self.writeComment(u"%s## Pre (%s,%d) - SuperclassRptPdfPre" % \
-                              #("\t" * level, self.context.ikName, level))
-        #if self.document is not None:
-            #titleStr = u"%s: %s" % \
-                     #(self.context.myFactory.split('.')[-1],
-                      #self.context.ikName)
-            #title = RptTitle(titleStr,
-                             #intype="Heading%d" % level,
-                             #doc=self.document,
-                             #context=self.context)
-##            elemList = [title.genElements()]
-            #attrTable = self.getAttributeTable()
-            #if attrTable:
-                #elemList = [title.genElements(),
-                            #self.getAttributeTable(),
-                            #Spacer(0, 4 * mm)]
-            #else:
-                #elemList = [title.genElements(),
-                            #Spacer(0, 4 * mm)]
-            #elemList.extend(\
-                #appendEvaluationList(self.context, self.document))
-            #if autoAppend is True:
-                #comp = KeepTogether(elemList)
-                #self.document.append(comp)
-                ##for elem in elemList:
-                    ##self.document.append(elem)
-            #else:
-                #return elemList
-        #return None
-    
-            ##elemList.extend(\
-                ##appendEvaluationList(self.context, self.document))
-
-    #def traverse4RptPost(self, level, comments):
-        #"""pdf report object postamble
-        
-        #level: indent-level (int 0..)
-        #comments: should there comments are in the output?
-        #"""
-        #if comments:
-            #self.writeComment(u"%s## Post (%s,%d) - SuperclassRptPdfPost" % \
-                              #("\t" * level, self.context.ikName, level))
-
-    #def traverse4RptBody(self, level, comments):
-        #"""pdf report data of/in object
-        
-        #level: indent-level (int 0..)
-        #comments: should there comments are in the output?
-        #"""
-        #if comments:
-            #self.writeComment(u"%s## Body (%s,%d) - SuperclassRptPdfBody" % \
-                              #("\t" * level, self.context.ikName, level))
-
-    #def traverse4Rpt(self, level, comments):
-        #"""object pdf report
-        
-        #level: indent-level (int 0..)
-        #comments: should there comments are in the output?
-        #"""
-        #if ISuperclass.providedBy(self.context):
-            #self.traverse4RptPre(level, comments)
-            #self.traverse4RptBody(level, comments)
-            #self.traverse4RptPost(level, comments)
-            #if self.document is not None and \
-                #self.document._reporter is not None:
-                #self.document._reporter.alreadyReported[self.context.objectID] = self
