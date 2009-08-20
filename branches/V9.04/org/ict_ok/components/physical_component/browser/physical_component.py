@@ -55,7 +55,10 @@ def getUserName(item, formatter):
     """
     Titel for Overview
     """
-    username = vocabValue('AllLdapUser', item.user, formatter.request)
+    if hasattr(item, 'user'):
+        username = vocabValue('AllLdapUser', item.user, formatter.request)
+    else:
+        return u''
     if username:
         return username
     else:

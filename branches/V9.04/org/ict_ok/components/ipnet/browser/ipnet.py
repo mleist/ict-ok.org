@@ -106,18 +106,18 @@ class IpNetDetails(ComponentDetails):
         except KeyError:
             objId = 1000
         retList = []
-        adapSize = ISized(self.context)
-        # adapSize.sizeForSorting() returns ('item', n)
-        if checkPermission('org.ict_ok.components.host.Add', self.context) and \
-           (adapSize.sizeForSorting()[1] < 1):
-            tmpDict = {}
-            tmpDict['oid'] = u"c%sstart_scanner" % objId
-            tmpDict['title'] = _(u"start scanner")
-            tmpDict['href'] = u"%s/@@start_scanner.html" % \
-                   zapi.absoluteURL(self.context, self.request)
-            tmpDict['tooltip'] = _(u"starts the network scanner (as user:%s)"\
-                                   % self.request.principal.title)
-            retList.append(tmpDict)
+#        adapSize = ISized(self.context)
+#        # adapSize.sizeForSorting() returns ('item', n)
+#        if checkPermission('org.ict_ok.components.host.Add', self.context) and \
+#           (adapSize.sizeForSorting()[1] < 1):
+#            tmpDict = {}
+#            tmpDict['oid'] = u"c%sstart_scanner" % objId
+#            tmpDict['title'] = _(u"start scanner")
+#            tmpDict['href'] = u"%s/@@start_scanner.html" % \
+#                   zapi.absoluteURL(self.context, self.request)
+#            tmpDict['tooltip'] = _(u"starts the network scanner (as user:%s)"\
+#                                   % self.request.principal.title)
+#            retList.append(tmpDict)
         #tmpDict = {}
         #tmpDict['oid'] = u"a%s" % objId
         #tmpDict['title'] = u"ich bin ein Titel"
