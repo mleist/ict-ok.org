@@ -50,13 +50,13 @@ class State(object):
         errorList = []
         retDict = {}
         adapSize = ISized(self.context)
-        # adapSize.sizeForSorting() returns ('item', n)
-        if adapSize.sizeForSorting()[1] < 1:
-            if overviewNum < 1:
-                overviewNum = 1
-            mesg = _(u'Warning: ')
-            mesg += _(u"'no hosts in net'")
-            warnList.append(mesg)
+#        # adapSize.sizeForSorting() returns ('item', n)
+#        if adapSize.sizeForSorting()[1] < 1:
+#            if overviewNum < 1:
+#                overviewNum = 1
+#            mesg = _(u'Warning: ')
+#            mesg += _(u"'no hosts in net'")
+#            warnList.append(mesg)
         retDict['overview'] = ('ok', 'warn', 'error')[overviewNum]
         retDict['warnings'] = warnList
         retDict['errors'] = errorList
