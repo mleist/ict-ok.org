@@ -65,7 +65,10 @@ def getUserName(item, formatter):
         return u''
 
 def fsearch_user_formatter(value, item, formatter):
-    username = vocabValue('AllLdapUser', item.user, formatter.request)
+    if hasattr(item, 'user'):
+        username = vocabValue('AllLdapUser', item.user, formatter.request)
+    else:
+        return u''
     if username:
         quoter = URLQuote(item.user)
         return u'<a href="/@@fsearch?key=%s">%s</a>' % (quoter.quote(), username)
