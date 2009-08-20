@@ -4,7 +4,8 @@
 <metal:block define-macro="ComponentsDetails">
     <metal:block use-macro="macro:SuperclassDetails" />
         <span tal:omit-tag=""
-              tal:define="reqCntTupel view/resumee">
+              tal:define="reqCntTupel view/resumee"
+              tal:condition="python: reqCntTupel[0]+reqCntTupel[1]+reqCntTupel[2]>0">
           <a tal:attributes="href view/todoHref" href="#">
             <span tal:omit-tag="" tal:content="python: u'%03d' % (reqCntTupel[0])" />
             <span tal:omit-tag="" i18n:translate="">ToDo</span>
