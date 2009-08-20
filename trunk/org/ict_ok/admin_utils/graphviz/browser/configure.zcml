@@ -19,13 +19,13 @@
         permission="org.ict_ok.admin_utils.graphviz.View"
         menu="zmi_views" title="Status"/>
 
-    <!--page
+    <page
         name="getPNG"
-        for="org.ict_ok.admin_utils.graphviz.interfaces.IAdmUtilGraphviz"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
         class=".graphviz.AdmUtilGraphvizDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.graphviz.View"
-        attribute="getPngFile"/-->
+        attribute="getPngFile"/>
 
     <!--page
         name="graphvizAll.html"

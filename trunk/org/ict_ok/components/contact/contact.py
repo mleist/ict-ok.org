@@ -53,13 +53,13 @@ def AllContacts(dummy_context):
 def AllUnusedOrUsedWorkOrderContacts(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IContact, 'workOrder')
 
+#def AllUnusedOrUsedContactContacts(dummy_context):
+    #return AllUnusedOrSelfComponents(dummy_context, IContact, 'workOrder')
 
 Contact_ContactItems_RelManager = \
        FieldRelationManager(IContact['contactItems'],
                             IContactItem['contact'],
                             relType='contact:contactItems')
-
-
 
 
 class Contact(Component):

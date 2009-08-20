@@ -58,25 +58,8 @@ class AdmUtilGraphvizDetails(SupernodeDetails):
     omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
     omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
-    #def getPngFile(self):
-        #"""get dot file and convert to png
-        #"""
-        #return self.context.getPngFile(zapi.getRoot(self))
-
-    #def getCmapxText(self):
-        #"""get dot file and convert to client side image map
-        #"""
-        #return self.context.getCmapxText(zapi.getRoot(self))
-
-    def getValuePngHref(self):
-        """get path of object as string
-        """
-        obj = removeAllProxies(self.context)
-        return zapi.absoluteURL(obj, self.request)
-
-    def graphvizAll(self):
-        """
-        will send the complete dot report to the browser
+    def getPngFile(self):
+        """get dot file and convert to png
         """
         utilGraphviz = queryUtility(IAdmUtilGraphviz, name='AdmUtilGraphviz')
         my_formatter = self.request.locale.dates.getFormatter(
@@ -85,26 +68,56 @@ class AdmUtilGraphvizDetails(SupernodeDetails):
         longTimeString = my_formatter.format(\
             userTZ.fromutc(datetime.utcnow()))
         versionStr = "%s [%s]" % (longTimeString, getIkVersion())
-        #self.request.response.setHeader('Content-Type', 'image/png')
-        #filename = "*.png"
-        #self.request.response.setHeader(\
-            #'Content-Disposition',
-            #'attachment; filename=\"%s\"' % filename)
+        self.request.response.setHeader('Content-Type', 'image/png')
+        filename = "graphviz_%s.png" % self.context.ikName
+        self.request.response.setHeader(\
+            'Content-Disposition',
+            'attachment; filename=\"%s\"' % filename)
+        setNoCacheHeaders(self.request.response)
+        return utilGraphviz.getPngFile(self.context, self.request)
+
+    def getCmapxText(self):
+        """get dot file and convert to client side image map
+        """
+        utilGraphviz = queryUtility(IAdmUtilGraphviz, name='AdmUtilGraphviz')
+        my_formatter = self.request.locale.dates.getFormatter(
+            'dateTime', 'medium')
+        userTZ = getUserTimezone()
+        longTimeString = my_formatter.format(\
+            userTZ.fromutc(datetime.utcnow()))
+        versionStr = "%s [%s]" % (longTimeString, getIkVersion())
         setNoCacheHeaders(self.request.response)
         return utilGraphviz.getCmapxText(self.context, self.request)
 
 
+    def getValuePngHref(self):
+        """get path of object as string
+        """
+        obj = removeAllProxies(self.context)
+        return zapi.absoluteURL(obj, self.request)
+
+    #def graphvizAll(self):
+        #"""
+        #will send the complete dot report to the browser
+        #"""
+        #utilGraphviz = queryUtility(IAdmUtilGraphviz, name='AdmUtilGraphviz')
+        #my_formatter = self.request.locale.dates.getFormatter(
+            #'dateTime', 'medium')
+        #userTZ = getUserTimezone()
+        #longTimeString = my_formatter.format(\
+            #userTZ.fromutc(datetime.utcnow()))
+        #versionStr = "%s [%s]" % (longTimeString, getIkVersion())
+        ##self.request.response.setHeader('Content-Type', 'image/png')
+        ##filename = "*.png"
+        ##self.request.response.setHeader(\
+            ##'Content-Disposition',
+            ##'attachment; filename=\"%s\"' % filename)
+        #setNoCacheHeaders(self.request.response)
+        #return utilGraphviz.getCmapxText(self.context, self.request)
+
+
 class AdmUtilGraphvizAll(AdmUtilGraphvizDetails):
-    def meth(self):
-        print self.request
-        return u"ich <b>bin doch nicht</b> doof!"
-
-class AdmUtilGraphvizAll1(AdmUtilGraphvizDetails):
     pass
-
-class AdmUtilGraphvizAll2(AdmUtilGraphvizDetails):
-    pass
-    
 # --------------- forms ------------------------------------
 
 

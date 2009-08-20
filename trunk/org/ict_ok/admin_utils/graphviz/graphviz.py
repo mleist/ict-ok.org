@@ -53,11 +53,17 @@ class AdmUtilGraphviz(Supernode):
         """generate the dot file
         """
         print >> dotFile, '// GraphViz DOT-File'
-        print >> dotFile, 'graph "%s" {' % (oobj.ikName)
-        print >> dotFile, '\tgraph [bgcolor="#E5FFF9"];'
-        print >> dotFile, '\tedge [style = "setlinewidth(2)", color = gray];'
+        print >> dotFile, 'graph "map_%s" {' % (oobj.ikName)
+        if request:
+            mode = request.get('mode', default=None)
+        if mode and mode.lower() == "fview":
+            print >> dotFile, '\tgraph [bgcolor="#E5FFF9", dpi="100.0"];'
+        else:
+            print >> dotFile, '\tgraph [bgcolor="#E5FFF9", size="6.2,5.2",' +\
+            ' splines="true", ratio = "auto", dpi="100.0"];'
+        print >> dotFile, '\tnode [fontname = "Sans",fontsize = 10, URL="\N"];'
+        print >> dotFile, '\tedge [style = "setlinewidth(2)", color = black];'
         print >> dotFile, '\trankdir = LR;'
-        print >> dotFile, 'node [URL="\N"];'
         #for (dummy_name, oobj) in objList:
             #if ISupernode.providedBy(oobj):
                 #try:

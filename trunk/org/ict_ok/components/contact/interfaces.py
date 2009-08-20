@@ -45,7 +45,7 @@ class IContact(Interface):
         
     subContacts = List(
         title = _(u'Sub contacts'),
-        value_type=Choice(vocabulary='AllUnusedOrUsedContactContacts'),
+        value_type=Choice(vocabulary='AllContacts'),
         default=[],
         required = False)
         

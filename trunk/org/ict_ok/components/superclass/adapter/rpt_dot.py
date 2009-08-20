@@ -92,7 +92,8 @@ class RptDot(object):
         dot_str = '%s"%s" [' % ("\t" * level, self.context.objectID)
         dot_str += 'shape="diamond", '
         dot_str += 'label=<%s>,' % (self.context.ikName)
-        dot_str += 'fontsize=10.0'
+        dot_str += 'fontsize=10.0,'
+        dot_str += 'fonttype="Sans"'
         if request:
             dot_str += ', \nURL="%s"' % zapi.absoluteURL(self.context, request)
         dot_str += '];'
@@ -173,7 +174,7 @@ class RptDot(object):
     def __htmlTable(self, table_list):
         """ wants list = [(t1,t2,t3),(z1,z1,z1),(z2,z2,z2)]
         """
-        table_str = '<table border="1">'
+        table_str = '<table border="0">'
         for zeile in table_list:
             table_str += '<tr>'
             for s in zeile:

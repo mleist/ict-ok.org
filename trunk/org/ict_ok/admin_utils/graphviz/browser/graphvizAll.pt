@@ -1,39 +1,11 @@
+<!-- $Id$  -->
 <html>
-    HALLLOOOOOOOOOOO
-    <div i18n:domain="ict-ok.org" tal:content="structure view/meth">
-    Testinhalt
-    </div>
-    HALLLOOOOOOOOOOO
-    <body tal:condition="request/name|nothing">
-        <div i18n:domain="ict-ok.org" tal:condition="request/pdid|nothing">
-            <h1 tal:content="python: 'Workflow of \'%s\':' % request['name']" />
-            <img tal:attributes="src python: '%s/@@getIMG?type=png&pdid=%s' % (view.getValuePngHref(), request['pdid'])" />
-            <a href="#" tal:attributes="href python: '%s/@@getIMG?type=png&pdid=%s&mode=fview' % (view.getValuePngHref(), request['pdid'])">[PNG]</a>
-            <!--<a href="#" tal:attributes="href python: '%s/@@getIMG?type=svg&pdid=%s&mode=fview' % (view.getValuePngHref(), request['pdid'])">[SVG]</a>-->
-            <!--<a href="#" tal:attributes="href python: '%s/@@getIMG?type=jpg&pdid=%s&mode=fview' % (view.getValuePngHref(), request['pdid'])">[JPG]</a>-->
-            <!--<a href="#" tal:attributes="href python: '%s/@@getIMG?type=gif&pdid=%s&mode=fview' % (view.getValuePngHref(), request['pdid'])">[GIF]</a>-->
+    <body>
+    <div i18n:domain="ict-ok.org">
+        <h3>Graphviz</h3>
+        <div tal:content="structure view/getCmapxText" />
+            <img tal:attributes="src python: '%s/@@getPNG' % (view.getValuePngHref()); usemap python: '#map_%s' % context.ikName" />
         </div>
+        <a href="#" tal:attributes="href python: '%s/@@getPNG?mode=fview' % view.getValuePngHref()">[PNG]</a>
     </body>
 </html>
-
-<!-- $Id$  -->
-<!--html metal:use-macro="views/standard_macros/view">
-    <body>
-    <div metal:fill-slot="body" i18n:domain="ikadmin">
-        <h3>Systeminfo</h3>
-        <table id="sortable" class="listing" summary="Content listing" i18n:attributes ="summary">
-            <tr>
-                <th i18n:translate="">Name</th>
-                <thi18n:translate="">State</th>
-            </tr>
-                <!--tr tal:define="RootDotview/getRootDot">
-                <td>getTestDot</td>
-                <td tal:content="RootDot" />
-            </tr
-        </table>
-        <!-- img tal:attributes="src python:'%s/@@getPNG?hours=8760' % (view.getValuePngHref())" /
-        <div tal:content="structure view/getCmapxText" />
-            <img usemap="#None" tal:attributes="src python: '%s/@@getPNG?out_type=PNG' % (view.getValuePngHref())" />
-        </div>
-    </body>
-</html>-->
