@@ -165,9 +165,6 @@ class Overview(SuperOverview):
         IctGetterColumn(title=_('User'),
                         getter=getUserName,
                         cell_formatter=fsearch_user_formatter),
-        IctGetterColumn(title=_('Room'),
-                        getter=lambda i,f: i.room,
-                        cell_formatter=link('details.html')),
         DateGetterColumn(title=_('Modified'),
                         getter=getModifiedDate,
                         subsort=True,
@@ -177,7 +174,7 @@ class Overview(SuperOverview):
                      cell_formatter=raw_cell_formatter),
         )
     pos_column_index = 1
-    sort_columns = [1, 2, 3, 4, 5]
+    sort_columns = [1, 2, 3, 4]
 
 
 
