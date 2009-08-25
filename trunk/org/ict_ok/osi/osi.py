@@ -60,19 +60,19 @@ class OSIModel(object):
         targets: set of connected components
         searchDepth: searchDepth will be decreased on every recursive step
         """
-        if searchDepth < 0:
-            raise Exception
-        layersMatch = [layerInterface for layerInterface in layerTuple
-                       if layerInterface.providedBy(self.context)]
-        if self.context not in targets and \
-            len(layersMatch) > 0:
-            targets.append(self.context)
-            for relationLayer, relationNames in self.linkedObjects.items():
-                for relationName in relationNames:
-                    if relationLayer in layerTuple:
-                        relations = getattr(self.context, relationName)
-                        for obj in relations:
-                            nextAdapter = IOSIModel(obj)
-                            if nextAdapter:
-                                nextAdapter.connectedComponentsOnLayer(
-                                   layerTuple, targets, searchDepth-1)
+        if searchDepth > 0:
+            #raise Exception
+            layersMatch = [layerInterface for layerInterface in layerTuple
+                           if layerInterface.providedBy(self.context)]
+            if self.context not in targets and \
+                len(layersMatch) > 0:
+                targets.append(self.context)
+                for relationLayer, relationNames in self.linkedObjects.items():
+                    for relationName in relationNames:
+                        if relationLayer in layerTuple:
+                            relations = getattr(self.context, relationName)
+                            for obj in relations:
+                                nextAdapter = IOSIModel(obj)
+                                if nextAdapter:
+                                    nextAdapter.connectedComponentsOnLayer(
+                                       layerTuple, targets, searchDepth-1)

@@ -71,17 +71,18 @@ def getEvaluationsTodo(context):
     #retList = []
     retSet = set([])
     my_catalog = zapi.getUtility(ICatalog)
-    if context.requirements is not None:
-        for requirement in context.requirements:
-            res = my_catalog.searchResults(oid_index=requirement)
-            if len(res) > 0:
-                startReq = iter(res).next()
-                allObjReqs = getRequirementList(startReq)
-                allObjEvaluations = getEvaluationsDone(context)
-                alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
-                #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
-                retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
-#        return retList
+    if hasattr(context, "requirements"):
+        if context.requirements is not None:
+            for requirement in context.requirements:
+                res = my_catalog.searchResults(oid_index=requirement)
+                if len(res) > 0:
+                    startReq = iter(res).next()
+                    allObjReqs = getRequirementList(startReq)
+                    allObjEvaluations = getEvaluationsDone(context)
+                    alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
+                    #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
+                    retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
+    #        return retList
     return list(retSet)
 
 # Convention to make adapter introspectable
