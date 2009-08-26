@@ -65,6 +65,8 @@ def PhysicalLinkMediaTypes(dummy_context):
         15: u"Optical 9um",
         16: u"Optical 50um",
         17: u"Optical 62.5um",
+        1001: u"Cat6",
+        1002: u"Cat7",
         }.items():
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)

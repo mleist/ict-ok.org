@@ -87,6 +87,10 @@ class ISDNPhoneDetails(PhysicalComponentDetails):
     omit_viewfields = PhysicalComponentDetails.omit_viewfields + []
     omit_addfields = PhysicalComponentDetails.omit_addfields + []
     omit_editfields = PhysicalComponentDetails.omit_editfields + []
+    
+    def otherConnectedInterfaces(self):
+        return [i for i in self.connectedComponentsOnPhysicalLayer()
+                if IISDNPhone.providedBy(i) and i is not self.context]
 
 
 class ISDNPhoneFolderDetails(ComponentDetails):
