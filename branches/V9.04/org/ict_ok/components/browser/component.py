@@ -287,7 +287,10 @@ class ComponentDetails(SupernodeDetails):
                                     interfaces.IDataConverter)
                     #print u"ddd55: %s: %s" % (attr, dateValue)
                     if dateValue is not None:
-                        value = v_dataconverter.toWidgetValue(dateValue)[0]
+                        try:
+                            value = v_dataconverter.toWidgetValue(dateValue)[0]
+                        except IndexError:
+                            Value = None
                         #print "value3->   %s: %s " % (attr, value)
 #                elif ICollection.providedBy(attrField):
 #                    v_style.num_format_str = '@'
