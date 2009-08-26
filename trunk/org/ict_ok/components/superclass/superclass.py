@@ -594,8 +594,6 @@ class Superclass(Persistent):
         #document.setVolumeNo("1")
         document.setAuthorName(authorStr)
         document.setVersionStr(versionStr)
-        import pdb
-        pdb.set_trace()
         adapterRptPdf = IRptPdf(self)
         if adapterRptPdf:
             adapterRptPdf.document = document
