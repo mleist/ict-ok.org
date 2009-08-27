@@ -27,6 +27,9 @@ from zope.app.security.interfaces import IAuthentication
 from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.schema.emailvalid import EmailValid
 
+#other imports
+from ldappas.interfaces import ILDAPAuthentication
+
 _ = MessageFactory('org.ict_ok')
 
 
@@ -77,6 +80,22 @@ class IAdmUtilUserManagement(IAuthentication):
         title = _("LDAP search base"),
         default = u"ou=staff,o=ict-ok,c=org",
         required = False)
+    bindDN = TextLine(
+        max_length = 200,
+        title = _("LDAP bindDN"),
+        default = u"ou=staff,o=ict-ok,c=org",
+        required = False)
+    bindPassword = TextLine(
+        max_length = 200,
+        title = _("Bind Password"),
+        default = u"",
+        required = False)
+    useSSL = Bool(
+        title = _("Use SSL on LDAP connect"),
+        description = _("Use SSL on LDAP connect"),
+        default = False,
+        required = False)
+
 
 
 class IAdmUtilUserPreferences(Interface):
@@ -165,4 +184,9 @@ class IAdmUtilUserDashboard(Interface):
 
 class IAdmUtilUserDashboardItem(Interface):
     """ user dashboard """
+    
+class IMyLDAPAuthentication(ILDAPAuthentication):
+    """ LDAP-specifc Autentication Plugin for the Pluggable Authentication.
+    """
+    
 

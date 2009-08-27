@@ -31,16 +31,16 @@ from zope.app.authentication.groupfolder import GroupInformation, \
 from zope.securitypolicy.interfaces import IPrincipalRoleManager
 from ldapadapter.interfaces import IManageableLDAPAdapter
 from ldapadapter.utility import ManageableLDAPAdapter
-from ldappas.interfaces import ILDAPAuthentication
-from ldappas.authentication import LDAPAuthentication
+#from ldappas.interfaces import ILDAPAuthentication
+#from ldappas.authentication import LDAPAuthentication
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
-     IAdmUtilUserManagement
+     IAdmUtilUserManagement, IMyLDAPAuthentication
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
-     AdmUtilUserManagement
+     AdmUtilUserManagement, MyLDAPAuthentication
 
 logger = logging.getLogger("AdmUtilUserManagement")
 
@@ -56,21 +56,21 @@ def createUtils(root_folder, connection=None, dummy_db=None):
 
     madeLdapPas = ensureUtility(\
         root_folder,
-        ILDAPAuthentication,
-        'LDAPAuthentication',
-        LDAPAuthentication,
-        name='LDAPAuthentication',
+        IMyLDAPAuthentication,
+        'MyLDAPAuthentication',
+        MyLDAPAuthentication,
+        name='MyLDAPAuthentication',
         copy_to_zlog=False,
         asObject=True)
 
-    if isinstance(madeLdapPas, LDAPAuthentication):
+    if isinstance(madeLdapPas, MyLDAPAuthentication):
         madeLdapPas.adapterName = 'ManageableLDAPAdapter'
         madeLdapPas.searchBase = u'ou=staff,o=ikom-online,c=de,o=ifdd'
         madeLdapPas.searchScope = u'sub'
-        madeLdapPas.groupsSearchBase = u'o=ikom-online,c=de,o=ifdd'
+        madeLdapPas.groupsSearchBase = u'cn=testIKOMtrol,o=ikom-online,c=de,o=ifdd'
         madeLdapPas.groupsSearchScope = u'one'
         madeLdapPas.loginAttribute = u'uid'
-        madeLdapPas.principalIdPrefix = u'LDAPAuthentication.'
+        madeLdapPas.principalIdPrefix = u'principal.'
         madeLdapPas.idAttribute = u'uid'
         madeLdapPas.titleAttribute = u'cn'
         madeLdapPas.groupIdAttribute = u'cn'
@@ -140,6 +140,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         groups[u'Manager'] = grp_mgr
         groups[u'Administrator'] = grp_adm
         groups[u'Developer'] = grp_dvl
+        #import pdb
+        #pdb.set_trace()
         madePluggableAuthentication[u'LDAPAuthentication'] = madeLdapPas
         madePluggableAuthentication.authenticatorPlugins = \
             (u'groups', u'principals', u'LDAPAuthentication')
@@ -148,7 +150,8 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         prm.assignRoleToPrincipal(u'org.ict_ok.mgr', u'group.Manager')
         prm.assignRoleToPrincipal(u'org.ict_ok.adm', u'group.Administrator')
         prm.assignRoleToPrincipal(u'org.ict_ok.dvl', u'group.Developer')
-    
+
+
 
     transaction.get().commit()
     if connection is not None:

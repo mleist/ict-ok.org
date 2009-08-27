@@ -37,6 +37,7 @@ from zope.app.container.contained import Contained
 from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
 from ldapadapter.interfaces import IManageableLDAPAdapter
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.app.authentication.interfaces import IAuthenticatedPrincipalCreated
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -45,7 +46,9 @@ from org.ict_ok.admin_utils.usermanagement.interfaces import \
      IAdmUtilUserProperties, IAdmUtilUserManagement, \
      IAdmUtilUserPreferences
 
-from zope.app.authentication.interfaces import IAuthenticatedPrincipalCreated
+#other imports
+from ldappas.authentication import LDAPAuthentication
+from ldapadapter.interfaces import ILDAPAdapter
 
 @adapter(IAuthenticatedPrincipalCreated)
 def ddd(event):
@@ -81,6 +84,9 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     serverURL = FieldProperty(IAdmUtilUserManagement['serverURL'])
     baseDN = FieldProperty(IAdmUtilUserManagement['baseDN'])
     useLdap = FieldProperty(IAdmUtilUserManagement['useLdap'])
+    bindDN = FieldProperty(IAdmUtilUserManagement['bindDN'])
+    bindPassword = FieldProperty(IAdmUtilUserManagement['bindPassword'])
+    useSSL =FieldProperty(IAdmUtilUserManagement['useSSL'])
     #email = FieldProperty(IAdmUtilUserManagement['email'])
 
     def __init__(self):
@@ -407,3 +413,30 @@ def UserCfgStartView(dummy_context):
         }.items():
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)
+
+class MyLDAPAuthentication(LDAPAuthentication):
+
+    def getLDAPAdapter(self):
+        """Get the LDAP adapter according to our configuration.
+        and sets all needed attributes
+        """
+        ldapAdapter = queryUtility(ILDAPAdapter, self.adapterName)
+        self.setLDAPAdapterAttrs(ldapAdapter)
+        return ldapAdapter
+
+    def setLDAPAdapterAttrs(self, ldapAdapter):
+        """ Sets LDAP Attributes from our AdmUtilUserManagement
+        """
+        userManagement = queryUtility(IAdmUtilUserManagement)
+        if userManagement is None:
+            raise Exception
+        if ldapAdapter.serverURL != userManagement.serverURL:
+            ldapAdapter._setServerURL(userManagement.serverURL)
+        if ldapAdapter.bindDN != userManagement.bindDN:
+            ldapAdapter.bindDN = userManagement.bindDN
+        if ldapAdapter.bindPassword != userManagement.bindPassword and userManagement.bindPassword is not None:
+            ldapAdapter.bindPassword = userManagement.bindPassword
+        if ldapAdapter.useSSL != userManagement.useSSL:
+            ldapAdapter.useSSL = userManagement.useSSL
+
+
