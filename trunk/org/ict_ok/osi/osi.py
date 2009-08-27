@@ -61,7 +61,7 @@ class OSIModel(object):
         searchDepth: searchDepth will be decreased on every recursive step
         """
         if searchDepth < 0:
-            raise Exception
+            raise ValueError, "Only positive Numbers please: %s (searchDepth)" % (searchDepth)
         layersMatch = [layerInterface for layerInterface in layerTuple
                        if layerInterface.providedBy(self.context)]
         if self.context not in targets and \
@@ -73,6 +73,6 @@ class OSIModel(object):
                         relations = getattr(self.context, relationName)
                         for obj in relations:
                             nextAdapter = IOSIModel(obj)
-                            if nextAdapter:
+                            if nextAdapter and searchDepth > 1:
                                 nextAdapter.connectedComponentsOnLayer(
-                                   layerTuple, targets, searchDepth-1)
+                                    layerTuple, targets, searchDepth-1)
