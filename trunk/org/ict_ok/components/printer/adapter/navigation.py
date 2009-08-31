@@ -47,6 +47,8 @@ class Navigation(SuperNavigation):
         retList.append((None, None, zapi.getParent(self.context)))
         if self.context.room is not None:
             retList.append(('room', _(u'Room'), self.context))
+        if self.context.user is not None:
+            retList.append(('user', _(u'User'), self.context))
         if len(self.context.interfaces) > 0:
             retList.append(('interfaces', _(u'Interfaces'), self.context))
         if len(self.context.osoftwares) > 0:
