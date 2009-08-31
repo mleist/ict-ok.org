@@ -2,7 +2,7 @@
 <!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
 
 <metal:block define-macro="PrinterDetails">
-    <metal:block use-macro="macro:PhysicalComponentDetails" />
+    <metal:block use-macro="macro:DeviceDetails" />
         <tr tal:attributes="class view/getNextTabClass"
            tal:condition="context/paperTypesAvailable|nothing">
            <td i18n:translate="">Available paper types</td>

@@ -41,8 +41,7 @@ from org.ict_ok.components.interfaces import \
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.osi import osi
-from org.ict_ok.components.physical_component.physical_component import \
-    PhysicalComponent
+from org.ict_ok.components.device.device import Device
 
 def AllMiscPhysicalTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IMiscPhysical)
@@ -56,7 +55,7 @@ def AllMiscPhysicals(dummy_context):
 
 
 
-class MiscPhysical(PhysicalComponent):
+class MiscPhysical(Device):
     """
     the template instance
     """
@@ -67,7 +66,7 @@ class MiscPhysical(PhysicalComponent):
 
 
     fullTextSearchFields = []
-    fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
+    fullTextSearchFields.extend(Device.fullTextSearchFields)
         
 
 
@@ -75,7 +74,7 @@ class MiscPhysical(PhysicalComponent):
         """
         constructor of the object
         """
-        PhysicalComponent.__init__(self, **data)
+        Device.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(MiscPhysical)
         for (name, value) in data.items():
             if name in IMiscPhysical.names() and \
@@ -87,7 +86,7 @@ class MiscPhysical(PhysicalComponent):
         return getRefAttributeNames(MiscPhysical)
 
     def store_refs(self, **data):
-        PhysicalComponent.store_refs(self, **data)
+        Device.store_refs(self, **data)
         refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:

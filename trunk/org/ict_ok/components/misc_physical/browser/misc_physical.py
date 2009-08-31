@@ -44,8 +44,8 @@ from org.ict_ok.components.superclass.browser.superclass import \
     getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
 from org.ict_ok.components.physical_component.browser.physical_component import \
     getUserName, fsearch_user_formatter
-from org.ict_ok.components.physical_component.browser.physical_component import \
-    PhysicalComponentDetails
+from org.ict_ok.components.device.browser.device import \
+    DeviceDetails
 from org.ict_ok.osi.interfaces import IOSIModel
 from org.ict_ok.osi.interfaces import IPhysicalLayer
 
@@ -79,12 +79,12 @@ class MSubInvMiscPhysical(GlobalMenuSubItem):
 # --------------- object details ---------------------------
 
 
-class MiscPhysicalDetails(PhysicalComponentDetails):
+class MiscPhysicalDetails(DeviceDetails):
     """ Class for MiscPhysical details
     """
-    omit_viewfields = PhysicalComponentDetails.omit_viewfields + []
-    omit_addfields = PhysicalComponentDetails.omit_addfields + []
-    omit_editfields = PhysicalComponentDetails.omit_editfields + []
+    omit_viewfields = DeviceDetails.omit_viewfields + []
+    omit_addfields = DeviceDetails.omit_addfields + []
+    omit_editfields = DeviceDetails.omit_editfields + []
 
 
 class MiscPhysicalFolderDetails(ComponentDetails):

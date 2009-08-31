@@ -420,6 +420,8 @@ class MyLDAPAuthentication(LDAPAuthentication):
         """Get the LDAP adapter according to our configuration.
         and sets all needed attributes
         """
+        #import pdb
+        #pdb.set_trace()
         ldapAdapter = queryUtility(ILDAPAdapter, self.adapterName)
         self.setLDAPAdapterAttrs(ldapAdapter)
         return ldapAdapter
