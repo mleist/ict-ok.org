@@ -41,8 +41,7 @@ from org.ict_ok.components.interfaces import \
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.osi import osi
-from org.ict_ok.components.physical_component.physical_component import \
-    PhysicalComponent
+from org.ict_ok.components.device.device import Device
 
 def AllPrinterTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IPrinter)
@@ -56,7 +55,7 @@ def AllPrinters(dummy_context):
 
 
 
-class Printer(PhysicalComponent):
+class Printer(Device):
     """
     the template instance
     """
@@ -68,7 +67,7 @@ class Printer(PhysicalComponent):
     paperTypesAvailable = FieldProperty(IPrinter['paperTypesAvailable'])
 
     fullTextSearchFields = ['paperTypesAvailable']
-    fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
+    fullTextSearchFields.extend(Device.fullTextSearchFields)
         
 
 
@@ -76,7 +75,7 @@ class Printer(PhysicalComponent):
         """
         constructor of the object
         """
-        PhysicalComponent.__init__(self, **data)
+        Device.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(Printer)
         for (name, value) in data.items():
             if name in IPrinter.names() and \
@@ -88,7 +87,7 @@ class Printer(PhysicalComponent):
         return getRefAttributeNames(Printer)
 
     def store_refs(self, **data):
-        PhysicalComponent.store_refs(self, **data)
+        Device.store_refs(self, **data)
         refAttributeNames = self.getRefAttributeNames()
         for (name, value) in data.items():
             if name in refAttributeNames:

@@ -43,10 +43,18 @@
             />
         <require
             permission="org.ict_ok.components.printer.View"
-            interface="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            interface="org.ict_ok.components.device.interfaces.IDevice"
             />
         <require
             permission="org.ict_ok.components.printer.Edit"
+            set_schema="org.ict_ok.components.device.interfaces.IDevice"
+            />
+        <require
+            permission="org.ict_ok.components.pc.View"
+            interface="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
+            />
+        <require
+            permission="org.ict_ok.components.pc.Edit"
             set_schema="org.ict_ok.components.physical_component.interfaces.IPhysicalComponent"
             />
         <require
