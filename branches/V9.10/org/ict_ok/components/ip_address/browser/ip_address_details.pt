@@ -1,0 +1,40 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="IpAdressDetails">
+    <metal:block use-macro="macro:LogicalComponentDetails" />
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/ipv4|nothing">
+           <td i18n:translate="">IP Address</td>
+           <td tal:content="structure python: view.fsearchLink(context.ipv4)" />
+       </tr>
+
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.interface is not None">
+           <td i18n:translate="">Interface</td>
+           <td>
+                <div tal:omit-tag=""
+                     tal:content="structure python: view.getHrefTitle(context.interface)">
+                </div>
+                <div tal:omit-tag=""
+                     tal:condition="python: context.interface is not None and context.interface.device is not None"
+                     tal:content="structure python: u' / %s' % (view.getHrefTitle(context.interface.device))">
+                </div>
+           </td>
+
+
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.ipNet is not None">
+           <td i18n:translate="">IP Net</td>
+           <td>
+               <div tal:omit-tag=""
+                    tal:content="structure python: view.getHrefTitle(context.ipNet)" />
+               <div tal:omit-tag=""
+                    tal:condition="python: context.ipNet.ipv4 is not None"
+                    tal:content="structure python: u' (%s)' % context.ipNet.ipv4" />
+           </td>
+       </tr>
+</metal:block>

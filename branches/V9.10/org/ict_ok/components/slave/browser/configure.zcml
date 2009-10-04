@@ -1,0 +1,61 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    xmlns:help="http://namespaces.zope.org/help"
+    xmlns:zope="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007 Ingenieurbuero IKOM,
+         Markus Leist <leist at ikom-online.de> -->
+
+    <addform
+        label="Add IkSlave"
+        name="AddIkSlave.html"
+        schema="org.ict_ok.slave.interfaces.ISlave"
+        fields="title ikComment"
+        content_factory="org.ict_ok.slave.slave.Slave"
+        permission="org.ict_ok.slave.Add"
+    />
+
+    <addMenuItem
+        class="org.ict_ok.slave.slave.Slave"
+        title="IkSlave"
+        description="An ICT_Ok Dummy"
+        permission="org.ict_ok.slave.Add"
+        view="AddIkSlave.html" 
+    />
+
+    <editform
+        schema="org.ict_ok.slave.interfaces.ISlave"
+        for="org.ict_ok.slave.interfaces.ISlave"
+        label="Change IkSlave"
+        name="edit.html"
+        permission="org.ict_ok.slave.Edit"
+        menu="zmi_views" title="Edit" 
+    />
+
+    <page
+        name="details.html"
+        for="org.ict_ok.slave.interfaces.ISlave"
+        class=".slave.SlaveDetails"
+        template="details.pt"
+        permission="org.ict_ok.slave.View"
+        menu="zmi_views" title="Details"
+    />
+
+    <!--containerViews
+        for="org.ict_ok.slave.interfaces.ISlave"
+        index="org.ict_ok.slave.View"
+        contents="org.ict_ok.slave.Edit"
+        add="org.ict_ok.slave.Add"
+        /-->
+        
+<z3c:macro
+        template="slave_details.pt"
+        name="SlaveDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+</configure>

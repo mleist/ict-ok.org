@@ -1,0 +1,24 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('date',length='full')">
+    <h3 i18n:translate="">Focus</h3>
+    <span tal:omit-tag="" tal:repeat="focusItem view/getHtmlList">
+        <span tal:omit-tag="" tal:define="i_classname python:focusItem[1];
+                                          i_view python:focusItem[2];
+                                          i_context python:focusItem[3];
+                                          i_html python:focusItem[4];">
+            <table id="sortable" class="listing" summary="Content listing"
+                    i18n:attributes="summary">
+                <tr>
+                    <th i18n:translate="">Name</th>
+                    <th i18n:translate="">Count</th>
+                </tr>
+                <tr>
+                    <td tal:content="structure i_html">
+                    </td>
+                    <td tal:content="python: len(i_context)">
+                    </td>
+                </tr>
+            </table>
+        </span>
+    </span>
+</i18n:block>

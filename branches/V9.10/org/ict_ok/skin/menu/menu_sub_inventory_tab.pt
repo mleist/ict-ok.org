@@ -1,0 +1,16 @@
+<div id="menu_inventory" class="yuimenu">
+    <div class="bd">
+        <ul>
+            <li class="yuimenuitem">
+               <a class="yuimenubaritemlabel" href="#" i18n:translate="">By type</a>
+               <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.inventory.by_type" />
+            </li>
+            <li class="yuimenuitem">
+               <a class="yuimenubaritemlabel" href="#" i18n:translate="">Warnings</a>
+               <div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.inventory.warnings" />
+            </li>
+            <tal:block repeat="viewlet view/viewlets"
+                    content="structure viewlet/render" />
+        </ul>
+    </div>
+</div>

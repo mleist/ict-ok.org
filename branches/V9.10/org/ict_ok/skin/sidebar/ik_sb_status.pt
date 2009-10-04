@@ -1,0 +1,31 @@
+<i18n:block domain="org.ict_ok">
+  <div class="bg-315-top" tal:condition="context/@@state | nothing">
+    <div class="bg-315-bottom" tal:define="mystate context/@@state">
+      <span tal:omit-tag="" tal:condition="python: mystate.has_key('overview')">
+        <img id="statusGPic" src="sig_r.gif" align="right"
+             vspace="3px" hspace="3px" alt="Error"
+             tal:condition="python: mystate['overview'] == 'error'"
+             tal:attributes="src context/++resource++pics/sig_r.gif">
+        <img id="statusGPic" src="sig_y.gif" align="right"
+             vspace="3px" hspace="3px" alt="Warning"
+             tal:condition="python: mystate['overview'] == 'warn'"
+             tal:attributes="src context/++resource++pics/sig_y.gif">
+        <img id="statusGPic" src="sig_g.gif" align="right"
+             vspace="3px" hspace="3px" alt="OK"
+             tal:condition="python: mystate['overview'] == 'ok'"
+             tal:attributes="src context/++resource++pics/sig_g.gif">
+      </span>
+      <h1 i18n:translate="">State</h1>
+      <ul class="state_error">
+        <span tal:omit-tag="" tal:repeat="error python: mystate['errors']">
+          <li tal:content="error">Error...</li>
+        </span>
+      </ul>
+      <ul class="state_warn">
+        <span tal:omit-tag="" tal:repeat="warning python: mystate['warnings']">
+          <li tal:content="warning">Warning...</li>
+        </span>
+      </ul>
+    </div>
+  </div>
+</i18n:block>

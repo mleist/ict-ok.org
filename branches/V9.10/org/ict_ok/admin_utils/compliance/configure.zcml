@@ -1,0 +1,198 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:xmlrpc="http://namespaces.zope.org/xmlrpc"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2007, 2008
+                     Markus Leist <leist@ikom-online.de>
+    -->
+
+    <!--       Utility           -->
+
+    <class class=".compliance.AdmUtilCompliance">
+        <factory
+            id="org.ict_ok.admin_utils.compliance.compliance.AdmUtilCompliance" />
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface=".interfaces.IAdmUtilCompliance"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            set_schema=".interfaces.IAdmUtilCompliance"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <!-- setup local utilities -->
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriberDatabase"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <!--              Requirement              -->
+
+    <adapter
+        for=".interfaces.IHaveRequirement"
+        provides=".interfaces.IRequirement"
+        factory=".requirement.getRequirement"
+        trusted="true"
+        />
+
+    <class class=".requirement.Requirement">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="schooltool.requirement.interfaces.IRequirement"
+            />
+        <!--allow interface="zope.app.container.interfaces.ISimpleReadContainer" /-->
+        <!--require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            attributes="keys __iter__ values items __len__ addBase removeBase title"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            attributes="updateOrder"
+            /-->
+            
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface=".interfaces.IRequirement"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            set_schema=".interfaces.IRequirement"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <!-- require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface="schooltool.requirement.interfaces.IRequirement"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            set_schema="schooltool.requirement.interfaces.IRequirement"
+            / -->
+        <!--require
+            permission="org.ict_ok.admin_utils.compliance.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            /-->
+        <!--require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            /-->
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Edit"
+            interface="zope.app.container.interfaces.IOrderedContainer"
+            />
+            
+    </class>
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptRequirementPdf"
+        permission="org.ict_ok.admin_utils.compliance.generate.pdf"
+    />
+    <adapter
+        factory=".adapter.search.Searchable"
+    />
+    
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".requirement.allRequirementVocab"
+        name="AllRequirementVocab"
+        />
+
+    <!--              Evaluations              -->
+
+    <adapter
+        for=".interfaces.IHaveEvaluations"
+        provides=".interfaces.IEvaluations"
+        factory=".evaluation.getEvaluationsDone"
+        trusted="true"
+        />
+
+    <class class="org.ict_ok.components.component.Component">
+        <implements interface=".interfaces.IHaveEvaluations" />
+    </class>
+
+    <!--              Evaluation              -->
+
+    <class class=".evaluation.Evaluation">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.app.container.interfaces.IContentContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.evaluations.View"
+            interface=".interfaces.IEvaluation"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+            set_schema=".interfaces.IEvaluation"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.evaluations.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.evaluations.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <!--              Score Systems              -->
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component="schooltool.requirement.scoresystem.ScoreSystemsVocabulary"
+        name="schooltool.requirement.scoresystems"
+      />
+
+    <utility
+        provides="schooltool.requirement.interfaces.IScoreSystem"
+        component="schooltool.requirement.scoresystem.PassFail"
+        name="Comp_Pass/Fail"
+        />
+
+    <!--              includes              -->
+
+    <include package=".generations" />
+
+</configure>

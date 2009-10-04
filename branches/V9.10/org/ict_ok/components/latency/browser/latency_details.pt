@@ -1,0 +1,10 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="LatencyDetails">
+    <metal:block use-macro="macro:ComponentsDetails" />
+    <h3>24h</h3>
+    <a href="#" tal:attributes="href python: '%s/@@display.html' % (view.getValuePngHref())">
+        <img class="img_reload" tal:attributes="src python: '%s/@@getPNG?hours=24' % (view.getValuePngHref())" />
+    </a>
+</metal:block>

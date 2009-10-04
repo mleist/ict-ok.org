@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <permission
+        id="org.ict_ok.components.misc_physical.View"
+        title="View miscellaneous physical component"
+    />
+
+    <permission
+        id="org.ict_ok.components.misc_physical.Add"
+        title="Add miscellaneous physical component"
+    />
+
+    <permission
+        id="org.ict_ok.components.misc_physical.Edit"
+        title="Edit miscellaneous physical component"
+    />
+
+    <permission
+        id="org.ict_ok.components.misc_physical.Delete"
+        title="Delete miscellaneous physical component"
+    />
+
+    <grant permission="org.ict_ok.components.misc_physical.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.components.misc_physical.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.misc_physical.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.misc_physical.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.misc_physical.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.misc_physical.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.misc_physical.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.misc_physical.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.misc_physical.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>

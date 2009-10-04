@@ -1,0 +1,5 @@
+<li class="yuimenuitem"><a class="yuimenuitemlabel" 
+       href="#" 
+       tal:attributes="href view/url; class view/menu_class" 
+       tal:content="view/title" 
+       i18n:translate="">Title</a></li>
