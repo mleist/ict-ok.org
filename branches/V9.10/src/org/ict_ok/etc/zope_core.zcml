@@ -10,10 +10,12 @@
     <!--registration of core components-->
     <include package="zope.sendmail"/>
     <include package="zope.contentprovider" />
+    <include package="zope.authentication" />
 
     <include package="zope.viewlet" />
     <include package="zope.app.zcmlfiles"
              file="menus.zcml" />
+    <include package="zope.app.zapi"/>
     <include package="zope.app.apidoc"/>
     <!-- include package="zope.app.onlinehelp"/ -->
     <include package="zope.app.preference" />

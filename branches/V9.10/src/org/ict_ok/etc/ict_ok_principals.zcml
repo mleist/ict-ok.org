@@ -55,14 +55,14 @@
       />
 
     <!--TODO create an own cron role-->
-    <!--grant
+    <grant
         role="zope.Manager"
         principal="ict.cron"
-        /-->
+        />
 
-    <!--grant
+    <grant
         role="zope.Manager"
         principal="zope.manager"
-        /-->
+        />
 
 </configure>
