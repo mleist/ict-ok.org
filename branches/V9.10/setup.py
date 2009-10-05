@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 #
-# Copyright (c) 2008 PlusServer AG
-# author/contact:  <M.Leist@plusserver.de>
-#
-# $Id: setup.py 27 2008-11-26 10:00:25Z mleist $
-#
 import os
 from setuptools import setup, find_packages
 
