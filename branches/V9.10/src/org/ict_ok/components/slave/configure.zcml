@@ -32,7 +32,7 @@
         />
         <!--allow attributes="getSiteManager" /-->
         <implements
-            interface="zope.app.container.interfaces.IContentContainer"
+            interface="zope.container.interfaces.IContentContainer"
         />
         <factory
             id="org.ict_ok.slave.slave.Slave"

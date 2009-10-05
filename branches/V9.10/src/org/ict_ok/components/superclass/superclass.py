@@ -25,7 +25,7 @@ from datetime import datetime
 import pytz
 from logging import INFO, log, NOTSET
 import xml.dom.minidom
-import xml.dom.ext
+#import xml.dom.ext
 
 # zope imports
 from zope.app import zapi
@@ -39,9 +39,11 @@ from zope.component import adapter, queryUtility
 from zope.app.catalog.interfaces import ICatalog
 from zope.app.container.interfaces import \
      IObjectAddedEvent, \
-     IObjectModifiedEvent, \
      IObjectMovedEvent, \
      IObjectRemovedEvent
+from zope.lifecycleevent.interfaces import \
+     IObjectModifiedEvent
+
 
 # zc imports
 from zc.queue.interfaces import IQueue
@@ -625,7 +627,7 @@ class Superclass(Persistent):
             del adapterRptXML
         #document.buildPdf()
         file_object = open(absFilename, "w")
-        xml.dom.ext.PrettyPrint(document, file_object)
+        # what here? xml.dom.ext.PrettyPrint(document, file_object)
         file_object.close()
         #for i_filename in files2delete:
             #try:

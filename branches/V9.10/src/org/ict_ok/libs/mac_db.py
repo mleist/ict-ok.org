@@ -20,7 +20,7 @@ import re
 
 class MacDB():
     def __init__(self):
-        f = open("./lib/python/org/ict_ok/libs/oui.txt", "r") #oui: http://standards.ieee.org/regauth/oui/oui.txt
+        f = open("src/org/ict_ok/libs/oui.txt", "r") #oui: http://standards.ieee.org/regauth/oui/oui.txt
         self._data = IOBTree()
         last_mac = None
         EOF = False

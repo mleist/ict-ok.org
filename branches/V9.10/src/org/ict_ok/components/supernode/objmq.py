@@ -19,10 +19,12 @@ import logging
 # zope imports
 from zope.component import adapter, queryUtility
 from zope.app.zapi import getPath
-from zope.app.container.interfaces import IObjectAddedEvent
-from zope.app.container.interfaces import IObjectModifiedEvent
-from zope.app.container.interfaces import IObjectMovedEvent
-from zope.app.container.interfaces import IObjectRemovedEvent
+from zope.app.container.interfaces import \
+     IObjectAddedEvent, \
+     IObjectMovedEvent, \
+     IObjectRemovedEvent
+from zope.lifecycleevent.interfaces import \
+     IObjectModifiedEvent
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import IPickle

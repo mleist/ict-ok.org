@@ -30,13 +30,11 @@ from zope.component import adapts, provideUtility
 # ict_ok.org imports
 from org.ict_ok.admin_utils.notifier.notifier import NotifyUserEvent
 
-path_splits = os.environ['PYTHONPATH'].split(':')
-for path_split in path_splits:
-    if os.path.exists(path_split + \
-                      '/org/ict_ok/components/host/wf/host_nagios.xpdl'):
-        xpdl_filename = path_split + \
-                      '/org/ict_ok/components/host/wf/host_nagios.xpdl'
-        break
+#path_splits = os.environ['PYTHONPATH'].split(':')
+#for path_split in path_splits:
+if os.path.exists('src/org/ict_ok/components/host/wf/host_nagios.xpdl'):
+    xpdl_filename = 'src/org/ict_ok/components/host/wf/host_nagios.xpdl'
+#    break
 
 package = xpdl.read(open(xpdl_filename))
 

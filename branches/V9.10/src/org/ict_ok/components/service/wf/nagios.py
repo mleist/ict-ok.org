@@ -22,13 +22,11 @@ from zope.wfmc import interfaces
 from zope.interface import implements
 from zope.wfmc import xpdl
 
-path_splits = os.environ['PYTHONPATH'].split(':')
-for path_split in path_splits:
-    if os.path.exists(path_split + \
-                      '/org/ict_ok/components/service/wf/service_nagios.xpdl'):
-        xpdl_filename = path_split + \
-                      '/org/ict_ok/components/service/wf/service_nagios.xpdl'
-        break
+#path_splits = os.environ['PYTHONPATH'].split(':')
+#for path_split in path_splits:
+if os.path.exists('src/org/ict_ok/components/service/wf/service_nagios.xpdl'):
+    xpdl_filename = 'src/org/ict_ok/components/service/wf/service_nagios.xpdl'
+#        break
 
 package = xpdl.read(open(xpdl_filename))
 

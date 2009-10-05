@@ -20,7 +20,7 @@ import logging
 
 # zope imports
 from zope.interface import implements
-from zope.app.container.interfaces import IObjectModifiedEvent
+from zope.container.interfaces import IObjectModifiedEvent
 from zope.component import adapter
 
 # ict_ok.org imports

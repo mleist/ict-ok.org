@@ -10,19 +10,22 @@
     <!--registration of core components-->
     <include package="zope.sendmail"/>
     <include package="zope.contentprovider" />
+
     <include package="zope.viewlet" />
+    <include package="zope.app.zcmlfiles"
+             file="menus.zcml" />
     <include package="zope.app.apidoc"/>
-    <include package="zope.app.onlinehelp"/>
+    <!-- include package="zope.app.onlinehelp"/ -->
     <include package="zope.app.preference" />
-    <include package="zope.app.pythonpage"/>
+    <!-- include package="zope.app.pythonpage"/ -->
     <include package="zope.app.renderer"/>
     <include package="zope.app.workflow"/>
     <include package="zope.app.authentication" />
-    <include package="zope.app.boston" />
+    <!-- include package="zope.app.boston" / -->
     <include package="zope.app.catalog"/>
     <include package="zope.app.intid" />
     <include package="zope.app.keyreference" />
-    <include package="zope.app.pluggableauth" />
+    <!-- include package="zope.app.pluggableauth" / -->
     <include package="zope.app.schema" />
     <include package="zope.app.server" />
     <include package="zope.app.session" />
@@ -30,7 +33,7 @@
     <include package="zope.app.wfmc" />
     <include package="zope.app.securitypolicy" />
 
-    <include package="soap" />
+    <!-- include package="soap" / -->
 
     <include package="zc.resourcelibrary"/>
     <include package="zc.table"/>

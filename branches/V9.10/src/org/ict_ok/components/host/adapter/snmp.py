@@ -25,7 +25,7 @@ from org.ict_ok.admin_utils.snmpd.interfaces import ISnmptrapd
 from org.ict_ok.components.host.interfaces import IHost
 
 # pysnmp imports
-from pysnmp.v4.proto import api
+from pysnmp.proto import api
 
 
 class Snmptrapd(object):

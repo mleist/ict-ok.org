@@ -27,9 +27,10 @@ from zope.component import getUtility
 from zope.component import adapter
 from zope.app.container.interfaces import \
      IObjectAddedEvent, \
-     IObjectModifiedEvent, \
      IObjectMovedEvent, \
      IObjectRemovedEvent
+from zope.lifecycleevent.interfaces import \
+     IObjectModifiedEvent
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ISuperclass

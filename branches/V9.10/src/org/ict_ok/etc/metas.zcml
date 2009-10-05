@@ -8,21 +8,45 @@
                 Markus Leist <leist@ikom-online.de> -->
 
     <!--all meta definitions-->
+    <include package="zope.security"
+             file="meta.zcml" />
+    <include package="zope.i18n"
+             file="meta.zcml" />
+    <include package="zope.component"
+             file="meta.zcml" />
+    <include package="zope.browserpage"
+             file="meta.zcml" />
+    <include package="zope.publisher"
+             file="meta.zcml" />
+    <include package="zope.app.publisher"
+             file="meta.zcml" />
+    <include package="zope.browsermenu"
+             file="meta.zcml" />
+    <include package="zope.browserresource"
+             file="meta.zcml" />
     <include package="zope.app.apidoc"
              file="meta.zcml" />
     <include package="zope.app.onlinehelp"
              file="meta.zcml"/>
     <include package="zope.app.preference"
              file="meta.zcml" />
-    <include package="zope.app.renderer"
-             file="meta.zcml"/>
+    <include package="zope.app.container.browser"
+             file="meta.zcml" />
+    <!-- include package="zope.app.renderer"
+             file="meta.zcml"/ -->
     <include package="zope.app.securitypolicy"
+             file="meta.zcml" />
+    <include package="zope.app.pagetemplate"
              file="meta.zcml" />
     <include package="zope.sendmail"
              file="meta.zcml"/>
     <include package="zope.viewlet"
              file="meta.zcml" />
-    <include package="zope.app.zcmlfiles" />
+    <include package="zope.principalregistry"
+             file="meta.zcml" />
+    <include package="zope.securitypolicy"
+             file="meta.zcml" />
+    <!-- include package="zope.app.zcmlfiles" / -->
     <include package="zc.resourcelibrary"
              file="meta.zcml"/>
     <include package="z3c.form"
@@ -33,9 +57,11 @@
              file="meta.zcml" />
     <include package="z3c.template"
              file="meta.zcml" />
-
-    <include package="soap"
+    <include package="z3c.ptcompat"
              file="meta.zcml" />
+
+    <!-- include package="soap"
+             file="meta.zcml" / -->
 
     <include package="org.ict_ok.admin_utils.objmq"
              file="meta.zcml"/>
