@@ -135,7 +135,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         grp_usr.principals = [u'principal.User']
         grp_mgr.principals = [u'principal.Manager']
         grp_adm.principals = [u'principal.Administrator']
-        grp_dvl.principals = [u'principal.Developer', u'ldap.sebastian']
+        grp_dvl.principals = [u'principal.Developer']
         groups[u'User'] = grp_usr
         groups[u'Manager'] = grp_mgr
         groups[u'Administrator'] = grp_adm
