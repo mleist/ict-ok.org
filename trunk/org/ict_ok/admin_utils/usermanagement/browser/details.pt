@@ -3,13 +3,61 @@
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
         <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">e-mail</td>
-            <td tal:content="python: u'%s' % context.email" />
+            <td i18n:translate="">serverURL</td>
+            <td tal:content="context/serverURL" />
         </tr>
         <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">baseDN</td>
+            <td tal:content="context/baseDN" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">bindDN</td>
+            <td tal:content="context/bindDN" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">bindPassword</td>
+            <td tal:content="context/bindPassword" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">searchBase</td>
+            <td tal:content="context/searchBase" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">searchScope</td>
+            <td tal:content="context/searchScope" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">groupsSearchBase</td>
+            <td tal:content="context/groupsSearchBase" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">groupsSearchScope</td>
+            <td tal:content="context/groupsSearchScope" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">loginAttribute</td>
+            <td tal:content="context/loginAttribute" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">idAttribute</td>
+            <td tal:content="context/idAttribute" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">titleAttribute</td>
+            <td tal:content="context/titleAttribute" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">groupIdAttribute</td>
+            <td tal:content="context/groupIdAttribute" />
+        </tr>
+        <!--tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">e-mail</td>
+            <td tal:content="python: u'%s' % context.email" />
+        </tr-->
+        <!--tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Timezone</td>
             <td tal:content="context/timezone" />
-        </tr>
+        </tr-->
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">
             <td i18n:translate="">Comment</td>

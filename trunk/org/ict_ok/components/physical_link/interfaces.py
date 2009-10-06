@@ -22,6 +22,14 @@ from zope.schema import Bool, Choice, List, TextLine
 # ict_ok.org imports
 from org.ict_ok.schema.physicalvalid import PhysicalQuantity
 from org.ict_ok.libs.physicalquantity import convertQuantity
+#from org.ict_ok.components.physical_link.physical_link import maxLength4LinkType
+
+#
+# ToDo: dirty location
+#
+def maxLength4LinkType(linkType):
+    return convertQuantity('100 m');
+
 
 _ = MessageFactory('org.ict_ok')
 
@@ -89,8 +97,16 @@ class IPhysicalLink(Interface):
                 raise Invalid(
                     "No length specification: '%s'." % \
                     (link.length))
-    
 
+    @invariant
+    def ensureMaxLength4LinkType(link):
+        if link.length is not None:
+            physicalInput = convertQuantity(link.length)
+            physicalMaxLength = maxLength4LinkType(link.mediaType)
+            if physicalInput > physicalMaxLength:
+                raise Invalid(
+                    "Length over: '%s'." % \
+                    (physicalMaxLength))
 
 #class IPhysicalConnectorFolder(ISuperclass, IFolder):
 #    """Container for PhysicalConnector objects

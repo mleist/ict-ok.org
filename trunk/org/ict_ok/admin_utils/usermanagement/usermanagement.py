@@ -37,7 +37,8 @@ from zope.app.container.contained import Contained
 from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
 from ldapadapter.interfaces import IManageableLDAPAdapter
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.app.authentication.interfaces import IAuthenticatedPrincipalCreated
+from zope.app.authentication.interfaces import IAuthenticatedPrincipalCreated, IAuthenticatorPlugin
+
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -87,12 +88,30 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     bindDN = FieldProperty(IAdmUtilUserManagement['bindDN'])
     bindPassword = FieldProperty(IAdmUtilUserManagement['bindPassword'])
     useSSL =FieldProperty(IAdmUtilUserManagement['useSSL'])
+    searchBase = FieldProperty(IAdmUtilUserManagement['searchBase'])
+    searchScope = FieldProperty(IAdmUtilUserManagement['searchScope'])
+    groupsSearchBase = FieldProperty(IAdmUtilUserManagement['groupsSearchBase'])
+    groupsSearchScope = FieldProperty(IAdmUtilUserManagement['groupsSearchScope'])
+    loginAttribute = FieldProperty(IAdmUtilUserManagement['loginAttribute'])
+    idAttribute = FieldProperty(IAdmUtilUserManagement['idAttribute'])
+    titleAttribute = FieldProperty(IAdmUtilUserManagement['titleAttribute'])
+    groupIdAttribute = FieldProperty(IAdmUtilUserManagement['groupIdAttribute'])
+    
+    
     #email = FieldProperty(IAdmUtilUserManagement['email'])
 
     def __init__(self):
         PluggableAuthentication.__init__(self)
         Supernode.__init__(self)
         self.ikRevision = __version__
+
+    def getAuthenticatorPlugins(self):
+        authenticatorPlugins = list(self.authenticatorPlugins)
+        if "LDAPAuthentication" in authenticatorPlugins:
+            if not self.useLdap:
+                authenticatorPlugins.remove("LDAPAuthentication")
+        authenticatorPlugins = tuple(authenticatorPlugins)
+        return self._plugins(authenticatorPlugins, IAuthenticatorPlugin)
 
     def getRequest(self):
         """ this trick will return the request from the working interaction
@@ -420,8 +439,6 @@ class MyLDAPAuthentication(LDAPAuthentication):
         """Get the LDAP adapter according to our configuration.
         and sets all needed attributes
         """
-        #import pdb
-        #pdb.set_trace()
         ldapAdapter = queryUtility(ILDAPAdapter, self.adapterName)
         self.setLDAPAdapterAttrs(ldapAdapter)
         return ldapAdapter
@@ -440,5 +457,22 @@ class MyLDAPAuthentication(LDAPAuthentication):
             ldapAdapter.bindPassword = userManagement.bindPassword
         if ldapAdapter.useSSL != userManagement.useSSL:
             ldapAdapter.useSSL = userManagement.useSSL
+            
+        if self.searchBase != userManagement.searchBase:
+            self.searchBase = userManagement.searchBase
+        if self.searchScope != userManagement.searchScope:
+            self.searchScope = userManagement.searchScope
+        if self.groupsSearchBase != userManagement.groupsSearchBase:
+            self.groupsSearchBase = userManagement.groupsSearchBase
+        if self.groupsSearchScope != userManagement.groupsSearchScope:
+            self.groupsSearchScope = userManagement.groupsSearchScope
+        if self.loginAttribute != userManagement.loginAttribute:
+            self.loginAttribute = userManagement.loginAttribute
+        if self.idAttribute != userManagement.idAttribute:
+            self.idAttribute = userManagement.idAttribute
+        if self.titleAttribute != userManagement.titleAttribute:
+            self.titleAttribute = userManagement.titleAttribute
+        if self.groupIdAttribute != userManagement.groupIdAttribute:
+            self.groupIdAttribute = userManagement.groupIdAttribute
 
 

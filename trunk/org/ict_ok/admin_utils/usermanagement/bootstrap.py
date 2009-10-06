@@ -65,15 +65,15 @@ def createUtils(root_folder, connection=None, dummy_db=None):
 
     if isinstance(madeLdapPas, MyLDAPAuthentication):
         madeLdapPas.adapterName = 'ManageableLDAPAdapter'
-        madeLdapPas.searchBase = u'ou=staff,o=ikom-online,c=de,o=ifdd'
-        madeLdapPas.searchScope = u'sub'
-        madeLdapPas.groupsSearchBase = u'cn=testIKOMtrol,o=ikom-online,c=de,o=ifdd'
-        madeLdapPas.groupsSearchScope = u'one'
-        madeLdapPas.loginAttribute = u'uid'
-        madeLdapPas.principalIdPrefix = u'principal.'
-        madeLdapPas.idAttribute = u'uid'
-        madeLdapPas.titleAttribute = u'cn'
-        madeLdapPas.groupIdAttribute = u'cn'
+        #madeLdapPas.searchBase = u""
+        #madeLdapPas.searchScope = u""
+        #madeLdapPas.groupsSearchBase = u""
+        #madeLdapPas.groupsSearchScope = u""
+        #madeLdapPas.loginAttribute = u""
+        madeLdapPas.principalIdPrefix = u'ldap.'
+        #madeLdapPas.idAttribute = u""
+        #madeLdapPas.titleAttribute = u""
+        #madeLdapPas.groupIdAttribute = u""
 
     madePluggableAuthentication = ensureUtility(\
         root_folder,
@@ -135,7 +135,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         grp_usr.principals = [u'principal.User']
         grp_mgr.principals = [u'principal.Manager']
         grp_adm.principals = [u'principal.Administrator']
-        grp_dvl.principals = [u'principal.Developer']
+        grp_dvl.principals = [u'principal.Developer', u'ldap.sebastian']
         groups[u'User'] = grp_usr
         groups[u'Manager'] = grp_mgr
         groups[u'Administrator'] = grp_adm
