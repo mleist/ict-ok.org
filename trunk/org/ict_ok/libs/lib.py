@@ -193,7 +193,7 @@ def getClassParents(arg_class, end_class=None):
     return retList
 
 def getRefAttributeNames(arg_class):
-    """return a string list of attribute names with
+    """return a string list of class attribute names with
     RelationPropertyIn- or RelationPropertyOut-type
     """
     retList = []
@@ -204,6 +204,25 @@ def getRefAttributeNames(arg_class):
             if type(attrValue)==RelationPropertyIn or \
                type(attrValue)==RelationPropertyOut:
                 retList.append(attrName)
+    return retList
+    
+def getValAttributeNames(arg_instance):
+    """return a string list of instance attribute names
+    """
+    classOfInstance = arg_instance.__class__
+    #(Pdb) pp classOfInstance.__dict__['address1']
+    #<zope.schema.fieldproperty.FieldProperty object at 0xb86d1ec>
+    #(Pdb) getattr(classOfInstance, attrName)
+    #*** AttributeError: type object 'Address' has no attribute '__annotations__'
+    #(Pdb) hasattr(classOfInstance, attrName)
+    #False
+
+    retList = []
+    for attrName, attrValue in arg_instance.__dict__.items():
+        if hasattr(classOfInstance, attrName):
+            classField = getattr(classOfInstance, attrName)
+        if False and classField.blala():
+            retList.append(attrName)
     return retList
     
 def ensureComponentFolderOnBootstrap(interface, folderName, factoryId,

@@ -443,6 +443,12 @@ class MyLDAPAuthentication(LDAPAuthentication):
         #print "__contains__(%s, %s)" % (self, key)
         return False
 
+    def __len__(self):
+        return 0
+
+    def __iter__(self):
+        return iter([])
+
     def getLDAPAdapter(self):
         """Get the LDAP adapter according to our configuration.
         and sets all needed attributes

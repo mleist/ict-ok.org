@@ -187,6 +187,21 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.Edit"
     />
+    <z3c:pagelet
+        name="importalldata.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.ImportAllDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+    />
+    <page
+        name="exportalldata.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportAllData"
+    />
 
     <!--##### Sub Menu ##### -->
     <viewlet
@@ -228,6 +243,22 @@
         class="org.ict_ok.admin_utils.supervisor.browser.supervisor.MSubEvents"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.View"
+        />
+    <viewlet
+        name="exportalldata"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.MSubExportAllData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+        />
+    <viewlet
+        name="importalldata"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.MSubImportAllData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
         />
 
 

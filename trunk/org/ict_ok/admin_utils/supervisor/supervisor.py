@@ -23,6 +23,7 @@ from os import access, getloadavg, popen, uname, R_OK
 from datetime import datetime
 from pytz import timezone
 from types import UnicodeType
+import pickle
 
 # zope imports
 from ZODB.interfaces import IConnection
@@ -39,11 +40,12 @@ from zope.app.catalog.interfaces import ICatalog
 from zope.copypastemove.interfaces import IObjectMover
 from zope.security.proxy import removeSecurityProxy
 from zope.app.intid.interfaces import IIntIds
+from zope.xmlpickle import toxml, fromxml, loads
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.supervisor.interfaces import \
-    IAdmUtilSupervisor, IFSearchText
+    IAdmUtilSupervisor, IFSearchText, IImportAllData
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.components.slave.interfaces import ISlave
@@ -58,7 +60,9 @@ class AdmUtilSupervisor(Supernode):
     """Supervisor instance
     """
 
-    implements(IAdmUtilSupervisor, IFSearchText)
+    implements(IAdmUtilSupervisor,
+               IFSearchText,
+               IImportAllData)
 
     nbrStarts = FieldProperty(IAdmUtilSupervisor['nbrStarts'])
     ipv4My = FieldProperty(IAdmUtilSupervisor['ipv4My'])
@@ -548,6 +552,35 @@ class AdmUtilSupervisor(Supernode):
         #setter for status2master
         #"""
         #self.status2Master = statustext
+
+
+    def exportAllData(self):
+        """get data file for all objects"""
+        #dataStructure = {
+            #'objects': ['a', 'b', 'c'],
+            #'conns': [1, 2, 3],
+            #}
+        dataStructure = {
+            'objects': [],
+            'conns': [],
+            }
+        name1 = zapi.getParent(self)
+        name2 = zapi.getParent(name1)
+        name3 = zapi.getParent(name2)
+        addressFolder = name3[u"Addresses"]
+        for addressName, addressObj in addressFolder.items():
+            addressObj.getAllExportData(dataStructure)
+        python_pickle = pickle.dumps(dataStructure)
+        return toxml(python_pickle)
+
+    def importAllData(self, xml_str):
+        """get data file for all objects"""
+        import pdb
+        pdb.set_trace()
+        data_structure = loads(xml_str)
+        print data_structure
+        return True
+
 
 class AdmUtilSupervisorSized(object):
     """ISized adapter for WorkflowProcessRepository."""

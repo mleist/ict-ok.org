@@ -29,7 +29,7 @@ from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
-from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.libs.lib import getRefAttributeNames, getValAttributeNames
 from org.ict_ok.libs.interfaces import IDocumentAddable
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -278,6 +278,51 @@ class Component(Supernode):
         """
         #raise Exception, 'Not implemented yet'
         return None
+
+    def _getAllExportData_Step1(self):
+        """return a list of attribute-dict ict-objects _without_ all
+        references by lovely.relation in form of
+        [{'ikName': 'bla bla',
+          'objectID': '1234...',
+         },
+        ]
+        """
+        retDict = {}
+        import pdb
+        pdb.set_trace()
+        valAttributeNames = getValAttributeNames(self)
+        for (name, value) in self.__dict__.items():
+            if name in valAttributeNames:
+                retDict[name] = value
+        return [retDict]
+
+    def _getAllExportData_Step2(self):
+        """return a list of relation-tuples by lovely.relation
+        in form of
+        [ (('obj1Id'. 'obj1AttrName'), ('obj2Id'. 'obj2AttrName')),
+        ]
+        """
+        retList = []
+        refAttributeNames = self.getRefAttributeNames()
+        for (name, value) in self.__dict__.items():
+            if name in refAttributeNames:
+                retList.append(
+                    (('1','2'), ('3', '4')),
+                    )
+        return retList
+
+    def getAllExportData(self, dataStructure):
+        """returns a python data structure
+        """
+        #if self.len() > 0:
+        #    for obj in self:
+        #        if hasattr(obj, 'getAllExportData'):
+        #            obj.getAllExportData(dataStructure)
+        objDataList = self._getAllExportData_Step1()
+        connDataList = self._getAllExportData_Step2()
+        dataStructure['objects'].extend(objDataList)
+        dataStructure['conns'].extend(connDataList)
+
 
 def AllXlsCodepages(dummy_context):
     """Which MobilePhone are there

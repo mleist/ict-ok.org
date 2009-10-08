@@ -15,7 +15,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import Interface
-from zope.schema import Choice, Datetime, Int, TextLine
+from zope.schema import Choice, Datetime, Int, TextLine, Bytes
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -258,4 +258,10 @@ class IFSearchText(Interface):
     """Interface for all Objects"""
     fsearchText = TextLine(
         title = _("Search text"),
+        required = True)
+
+class IImportAllData(Interface):
+    """Interface for all Objects"""
+    alldata = Bytes(
+        title = _("Data file"),
         required = True)
