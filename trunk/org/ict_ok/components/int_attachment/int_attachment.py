@@ -35,7 +35,7 @@ from lovely.relation.property import FieldRelationManager
 from z3c.blobfile.file import File
 
 # ict_ok.org imports
-from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.int_attachment.interfaces import IInternalAttachment
 from org.ict_ok.components.int_attachment.interfaces import IInternalAttachmentFolder

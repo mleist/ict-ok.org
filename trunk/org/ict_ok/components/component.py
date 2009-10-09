@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-# pylint: disable-msg=E1101,W0612,W0142
+# pylint: disable-msg=E1101,E0611,W0612,W0142
 #
 """superclass for all content-objects
 """
@@ -22,6 +22,8 @@ from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from zope.schema.interfaces import IField
+from org.ict_ok.components.superclass.superclass import Superclass
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -29,7 +31,6 @@ from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
-from org.ict_ok.libs.lib import getRefAttributeNames, getValAttributeNames
 from org.ict_ok.libs.interfaces import IDocumentAddable
 from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -303,12 +304,24 @@ class Component(Supernode):
         ]
         """
         retList = []
+        import pdb
+        pdb.set_trace()
         refAttributeNames = self.getRefAttributeNames()
-        for (name, value) in self.__dict__.items():
-            if name in refAttributeNames:
-                retList.append(
-                    (('1','2'), ('3', '4')),
-                    )
+        for attr_name in refAttributeNames:
+            if hasattr(self, attr_name):
+                rel_manager = getattr(self.__class__, attr_name)._manager
+                for conntuple in retList:
+                    if rel_manager in conntuple[1]:
+                        conntuple[1] = (self.objectID, attr_name)
+                    else:
+                        retList.append(
+                            ((self.objectID, attr_name), rel_manager)
+                        )
+        #for (name, value) in self.__dict__.items():
+            #if name in refAttributeNames:
+                #retList.append(
+                    #(('1','2'), ('3', '4')),
+                    #)
         return retList
 
     def getAllExportData(self, dataStructure):
@@ -370,3 +383,76 @@ def AllXlsCodepages(dummy_context):
                                 token=codepage,
                                 title=codepage))
     return SimpleVocabulary(terms)
+
+def getClassInheritancePath(startClass, endClass=None):
+    """Class inheritance path in form of list
+    """
+    retList = []
+    if endClass == None:
+        endClass = Component
+    if startClass is not endClass:
+        for i_class in startClass.__bases__:
+            if issubclass(i_class, endClass):
+                retList.append(i_class)
+                retList.extend(getClassInheritancePath(i_class, endClass))
+    return retList
+
+def getRefAttributeNames(arg_class):
+    """return a string list of class attribute names with
+    RelationPropertyIn- or RelationPropertyOut-type
+    """
+    retList = []
+    classInheritancePath = getClassInheritancePath(arg_class,
+                                                   endClass=Component)
+    classInheritancePath.append(arg_class)
+    for i_class in classInheritancePath:
+        for attrName, attrValue in i_class.__dict__.items():
+            if type(attrValue)==RelationPropertyIn or \
+               type(attrValue)==RelationPropertyOut:
+                retList.append(attrName)
+    return retList
+
+#def getRefAttributeNamesTypes(arg_class):
+    #"""return a tuple list of class attribute names with
+    #RelationPropertyIn- or RelationPropertyOut-type
+    #[(attrname, reltype),]
+    #"""
+    #retList = []
+    #class_parents = getClassParents(arg_class)
+    #class_parents.append(arg_class)
+    #for arg_class in class_parents:
+        #for attrName, attrValue in arg_class.__dict__.items():
+            #if type(attrValue)==RelationPropertyIn or \
+               #type(attrValue)==RelationPropertyOut:
+                #retList.append((attrName, attrValue._relType))
+    #return retList
+
+def getValAttributeNames(arg_instance):
+    """return a string list of instance attribute names
+    """
+    classOfInstance = arg_instance.__class__
+    #(Pdb) pp classOfInstance.__dict__['address1']
+    #<zope.schema.fieldproperty.FieldProperty object at 0xb86d1ec>
+    #(Pdb) getattr(classOfInstance, attrName)
+    #*** AttributeError: type object 'Address' has no attribute '__annotations__'
+    #(Pdb) hasattr(classOfInstance, attrName)
+    #False
+    retList = []
+    classInheritancePath = getClassInheritancePath(classOfInstance,
+                                                   endClass=Superclass)
+    classInheritancePath.append(classOfInstance)
+    askAttributes = []
+    allAttributesList = [i_class.__dict__.keys() for i_class in classInheritancePath]
+    for j_attrList in allAttributesList:
+        askAttributes.extend(j_attrList)
+
+    from zope.interface import Attribute
+    for attrName, attrValue in arg_instance.__dict__.items():
+        if hasattr(classOfInstance, attrName):
+            classField = getattr(classOfInstance, attrName)
+            print "%s: (%s): %s" % (attrName, classField, isinstance(classField, Attribute))
+            if IField.providedBy(classField) and \
+               attrName in askAttributes:
+                retList.append(attrName)
+    print "dumdidumm: ", retList
+    return retList

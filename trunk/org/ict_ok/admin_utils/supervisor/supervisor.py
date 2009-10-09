@@ -564,12 +564,12 @@ class AdmUtilSupervisor(Supernode):
             'objects': [],
             'conns': [],
             }
-        name1 = zapi.getParent(self)
-        name2 = zapi.getParent(name1)
-        name3 = zapi.getParent(name2)
-        addressFolder = name3[u"Addresses"]
-        for addressName, addressObj in addressFolder.items():
-            addressObj.getAllExportData(dataStructure)
+        sitemanger = zapi.getParent(self)
+        locSitemanager = zapi.getParent(sitemanger)
+        root_folder = zapi.getParent(locSitemanager)
+        for folder in root_folder.values():
+            for obj in folder.values():
+                obj.getAllExportData(dataStructure)
         python_pickle = pickle.dumps(dataStructure)
         return toxml(python_pickle)
 

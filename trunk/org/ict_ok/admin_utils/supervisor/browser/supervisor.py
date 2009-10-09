@@ -257,7 +257,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
             'Content-Disposition',
             'attachment; filename=\"%s.xml\"' % self.context.objectID)
         setNoCacheHeaders(self.request.response)
-        return self.context.exportAllData()
+        return self.context.exportAllData()        #self.context is AdmUtilSupervisor
 
 class AdmUtilSupervisorVersion(SupernodeDetails):
     """ for version display

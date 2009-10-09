@@ -31,7 +31,7 @@ from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
-from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnit
 from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnitFolder

@@ -20,7 +20,7 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 
 # ict_ok.org imports
-from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.notebook.interfaces import \
     INotebook, INotebookFolder, IAddNotebook
 from org.ict_ok.components.device.device import Device, DeviceFolder
