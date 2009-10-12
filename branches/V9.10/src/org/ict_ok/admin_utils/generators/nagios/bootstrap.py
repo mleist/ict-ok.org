@@ -40,8 +40,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                                'AdmUtilGeneratorNagios', 
                                                AdmUtilGeneratorNagios,
                                                name='AdmUtilGeneratorNagios',
-                                               copy_to_zlog=False, 
-                                               asObject=True)
+                                               copy_to_zlog=False)
 
     if isinstance(madeAdmUtilGeneratorNagios, AdmUtilGeneratorNagios):
         logger.info(u"bootstrap: Ensure named AdmUtilGeneratorNagios")

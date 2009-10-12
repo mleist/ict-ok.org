@@ -38,8 +38,8 @@
     <!-- <browser:defaultSkin name="" /> -->
     <browser:defaultSkin name="ICT_Ok" />
 
-    <!-- securityPolicy
-    component="zope.app.securitypolicy.zopepolicy.ZopeSecurityPolicy" / -->
+    <securityPolicy
+    component="zope.securitypolicy.zopepolicy.ZopeSecurityPolicy" />
 
     <adapter factory="zope.app.security.LogoutSupported" />
 

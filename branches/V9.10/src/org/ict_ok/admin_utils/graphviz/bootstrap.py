@@ -40,8 +40,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                           'AdmUtilGraphviz', 
                                           AdmUtilGraphviz,
                                           name='AdmUtilGraphviz',
-                                          copy_to_zlog=False, 
-                                          asObject=True)
+                                          copy_to_zlog=False)
 
     if isinstance(madeAdmUtilGraphviz, AdmUtilGraphviz):
         logger.info(u"bootstrap: Ensure named AdmUtilGraphviz")

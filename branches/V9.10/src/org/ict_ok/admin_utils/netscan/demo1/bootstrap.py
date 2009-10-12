@@ -39,8 +39,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                              'AdmUtilDemo1', 
                              AdmUtilDemo1,
                              name='NetScanner:Demo1',
-                             copy_to_zlog=False, 
-                             asObject=True)
+                             copy_to_zlog=False)
 
     if isinstance(madeNmap, AdmUtilDemo1):
         logger.info(u"bootstrap: Ensure named AdmUtilDemo1")

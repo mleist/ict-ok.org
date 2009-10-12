@@ -40,7 +40,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilTicker = ensureUtility(root_folder, IAdmUtilTicker,
                                        'AdmUtilTicker', AdmUtilTicker,
                                        name='AdmUtilTicker',
-                                       copy_to_zlog=False, asObject=True)
+                                       copy_to_zlog=False)
 
     if isinstance(madeAdmUtilTicker, AdmUtilTicker):
         logger.info(u"bootstrap: Ensure named AdmUtilTicker")

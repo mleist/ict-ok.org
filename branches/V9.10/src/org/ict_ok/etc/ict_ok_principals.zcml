@@ -19,6 +19,12 @@
     <grant permission="org.ict_ok.public.View"
                     role="zope.Anonymous" />
 
+    <!--grant permission="zope.View"
+           role="zope.Anonymous" />
+    <grant permission="zope.app.dublincore.view"
+           role="zope.Anonymous" / -->
+
+
     <unauthenticatedPrincipal
         id="zope.anybody"
         title="Unauthenticated User" />
@@ -64,5 +70,8 @@
         role="zope.Manager"
         principal="zope.manager"
         />
+
+    <!-- grantAll role="zope.Anonymous" / -->
+    <!--grantAll role="zope.anybody" /-->
 
 </configure>

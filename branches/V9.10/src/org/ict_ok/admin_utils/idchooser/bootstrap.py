@@ -40,7 +40,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                        'AdmUtilIdChooser',
                                        AdmUtilIdChooser,
                                        name='AdmUtilIdChooser',
-                                       copy_to_zlog=False, asObject=True)
+                                       copy_to_zlog=False)
 
     if isinstance(madeAdmUtilIdChooser, AdmUtilIdChooser):
         logger.info(u"bootstrap: Ensure named AdmUtilIdChooser")

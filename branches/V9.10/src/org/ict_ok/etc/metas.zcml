@@ -28,6 +28,10 @@
              file="meta.zcml"/>
     <include package="zope.app.preference"
              file="meta.zcml" />
+    <include package="zope.app.publisher"
+             file="meta.zcml" />
+    <include package="zope.app.publication"
+             file="meta.zcml" />
     <include package="zope.app.container.browser"
              file="meta.zcml" />
     <!-- include package="zope.app.renderer"

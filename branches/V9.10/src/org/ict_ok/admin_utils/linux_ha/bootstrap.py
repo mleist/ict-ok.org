@@ -37,7 +37,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilLinuxHa = ensureUtility(root_folder, IAdmUtilLinuxHa,
                                        'AdmUtilLinuxHa', AdmUtilLinuxHa,
                                        name='AdmUtilLinuxHa',
-                                       copy_to_zlog=False, asObject=True)
+                                       copy_to_zlog=False)
 
     if isinstance(madeAdmUtilLinuxHa, AdmUtilLinuxHa):
         logger.info(u"bootstrap: Ensure named AdmUtilLinuxHa")

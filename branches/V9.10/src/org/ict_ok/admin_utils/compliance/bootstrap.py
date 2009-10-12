@@ -27,7 +27,7 @@ from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
-from zope.app.component.interfaces import ISite
+from zope.location.interfaces import ISite
 from zope.app.container.interfaces import IContainer
 
 # ict_ok.org imports
@@ -544,7 +544,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilCompliance = ensureUtility(root_folder, IAdmUtilCompliance,
                                           'AdmUtilCompliance', AdmUtilCompliance,
                                           name='AdmUtilCompliance',
-                                          copy_to_zlog=False, asObject=True)
+                                          copy_to_zlog=False)
 
     if isinstance(madeAdmUtilCompliance, AdmUtilCompliance):
         logger.info(u"bootstrap: Ensure named AdmUtilCompliance")

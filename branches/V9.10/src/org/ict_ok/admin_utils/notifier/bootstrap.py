@@ -36,7 +36,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeNotifier = ensureUtility(root_folder, INotifierUtil,
                                   'Notifier', NotifierUtil,
                                   name='Notifier',
-                                  copy_to_zlog=False, asObject=True)
+                                  copy_to_zlog=False)
 
     if isinstance(madeNotifier, NotifierUtil):
         logger.info(u"bootstrap: Ensure named Notifier")

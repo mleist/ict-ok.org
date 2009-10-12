@@ -23,7 +23,7 @@ from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
-from zope.app.component.interfaces import ISite
+from zope.location.interfaces import ISite
 from zope.app.container.interfaces import IContainer
 
 # ict_ok.org imports
@@ -56,7 +56,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilEventCrossbar = ensureUtility(root_folder, IAdmUtilEventCrossbar,
                                              'AdmUtilEventCrossbar', AdmUtilEventCrossbar,
                                              name='AdmUtilEventCrossbar',
-                                             copy_to_zlog=False, asObject=True)
+                                             copy_to_zlog=False)
 
     if isinstance(madeAdmUtilEventCrossbar, AdmUtilEventCrossbar):
         logger.info(u"bootstrap: Ensure named AdmUtilEventCrossbar")

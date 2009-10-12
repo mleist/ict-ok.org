@@ -47,8 +47,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                           'AdmUtilSupervisor', 
                                           AdmUtilSupervisor,
                                           name='AdmUtilSupervisor',
-                                          copy_to_zlog=False, 
-                                          asObject=True)
+                                          copy_to_zlog=False)
 
     if isinstance(madeAdmUtilSupervisor, AdmUtilSupervisor):
         logger.info(u"bootstrap: Ensure named AdmUtilSupervisor")
@@ -88,8 +87,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                        '', 
                                        IntIds, 
                                        name='', 
-                                       copy_to_zlog=False, 
-                                       asObject=True)
+                                       copy_to_zlog=False)
 
     if isinstance(madeUtilityIIntIds, IntIds):
         logger.info(u"bootstrap: made IIntIds-Utility")
@@ -108,8 +106,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                        '', 
                                        O2OStringTypeRelationships, 
                                        name='',
-                                       copy_to_zlog=False, 
-                                       asObject=True)
+                                       copy_to_zlog=False)
 
     if isinstance(madeUtilityO2ORels, O2OStringTypeRelationships):
         logger.info(u"bootstrap: made O2ORels-Utility")
@@ -128,8 +125,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                         '', 
                                         Catalog, 
                                         name='',
-                                        copy_to_zlog=False, 
-                                        asObject=True)
+                                        copy_to_zlog=False)
 
     if isinstance(madeUtilityICatalog, Catalog):
         logger.info(u"bootstrap: made ICatalog-Utility")

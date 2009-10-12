@@ -36,7 +36,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeNetScan = ensureUtility(root_folder, INetScan,
                                  'NetScan', NetScan,
                                  name='NetScan',
-                                 copy_to_zlog=False, asObject=True)
+                                 copy_to_zlog=False)
 
     if isinstance(madeNetScan, NetScan):
         logger.info(u"bootstrap: Ensure named NetScan")

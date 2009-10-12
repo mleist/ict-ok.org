@@ -40,8 +40,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                'NotifierJabber', 
                                NotifierJabber,
                                name='Notifier:Jabber',
-                               copy_to_zlog=False, 
-                               asObject=True)
+                               copy_to_zlog=False)
 
     if isinstance(madeSimple, NotifierJabber):
         logger.info(u"bootstrap: Ensure named NotifierJabber")
