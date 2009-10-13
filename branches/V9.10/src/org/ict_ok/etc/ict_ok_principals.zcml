@@ -19,11 +19,61 @@
     <grant permission="org.ict_ok.public.View"
                     role="zope.Anonymous" />
 
-    <!--grant permission="zope.View"
+    <grant permission="zope.View"
            role="zope.Anonymous" />
     <grant permission="zope.app.dublincore.view"
-           role="zope.Anonymous" / -->
+           role="zope.Anonymous" />
+    <grant permission="zope.Public"
+           role="zope.Anonymous" />
 
+    <!-- ================================================= -->
+  <include package="zope.securitypolicy" file="meta.zcml" />
+  <include package="zope.app.securitypolicy" />
+  <securityPolicy 
+      component="zope.securitypolicy.zopepolicy.ZopeSecurityPolicy" />
+
+  <!-- unauthenticatedPrincipal id="zope.anybody"
+                            title="Unauthenticated User" />
+  <unauthenticatedGroup id="zope.Anybody"
+                        title="Unauthenticated Users" />
+  <authenticatedGroup id="zope.Authenticated"
+                      title="Authenticated Users" />
+  <everybodyGroup id="zope.Everybody"
+                  title="All Users" /-->
+
+  <!-- principal id="zope.manager"
+             title="Manager"
+             login="admin"
+             password_manager="Plain Text"
+             password="admin"
+             / -->
+
+  <!-- role id="zope.Anonymous"
+        title="Everybody"
+        description="All users have this role implicitly" />
+
+  <grant permission="zope.View"
+         role="zope.Anonymous" />
+  <grant permission="zope.app.dublincore.view"
+         role="zope.Anonymous" />
+    
+  <role id="zope.Manager" title="Site Manager" />
+  <role id="zope.Member" title="Site Member" />
+  <grantAll role="zope.Manager" />
+  <grant role="zope.Manager"
+         principal="zope.manager" />
+
+  <grant permission="org.ict_ok.admin_utils.dashboard.View"
+         role="zope.Anonymous" />
+
+  <grant permission="org.ict_ok.admin_utils.dashboard.Edit"
+         role="zope.Manager" /-->
+
+    <!-- ================================================= -->
+
+
+
+    <!-- zope.Public -->
 
     <unauthenticatedPrincipal
         id="zope.anybody"
@@ -45,12 +95,12 @@
         />
 
     <!--some Users are defined in org.ict_ok.admin_utils.usermanagement.bootstrap-->
-    <principal
+    <!--principal
         id="zope.manager"
         title="ict-ok Manager"
         login="admin"
         password="admin"
-        />
+        /-->
 
     <principal
       id="ict.cron"
@@ -66,10 +116,16 @@
         principal="ict.cron"
         />
 
-    <grant
+    <!--grant
         role="zope.Manager"
         principal="zope.manager"
-        />
+        /-->
+
+  <grant permission="org.ict_ok.admin_utils.dashboard.View"
+         role="zope.Anonymous" />
+
+  <!-- grant permission="org.ict_ok.admin_utils.dashboard.Edit"
+         role="zope.Manager" /-->
 
     <!-- grantAll role="zope.Anonymous" / -->
     <!--grantAll role="zope.anybody" /-->

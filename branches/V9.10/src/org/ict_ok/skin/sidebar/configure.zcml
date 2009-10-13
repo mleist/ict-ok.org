@@ -23,7 +23,7 @@
         manager=".interfaces.ISidebar"
         template="ik_sb_console.pt"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="zope.View"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
         weight="25"
         />
     

@@ -13,14 +13,15 @@
 
     <include package="zope.dublincore" />
     <include package="zope.annotation"/>
-    <include package="zope.authentication" />
+    <include package="zope.authentication" />			<!-- new -->
     <include package="zope.component"/>
     <include package="zope.contentprovider" />
     <include package="zope.error" />
-    <include package="zope.i18n"/>
+    <!--include package="zope.i18n"/ -->
     <include package="zope.location"/>
+    <include package="zope.password" />
     <include package="zope.publisher" />
-    <include package="zope.security" />
+    <include package="zope.security" />           		<!-- new -->
     <include package="zope.securitypolicy" />
     <include package="zope.sendmail"/>
     <include package="zope.session"/>
@@ -29,7 +30,7 @@
     <include package="zope.viewlet" />
 
     <include package="zope.app.appsetup"/>
-    <include package="zope.app.authentication"/>
+    <!--include package="zope.app.authentication"/-->
     <include package="zope.app.catalog"/>
     <include package="zope.app.component" />
     <include package="zope.app.container" />
@@ -42,7 +43,7 @@
     <include package="zope.app.intid" />
     <include package="zope.app.keyreference" />
     <include package="zope.app.pagetemplate" />
-    <!-- include package="zope.app.pluggableauth" / -->
+    <!-- include package="zope.app.pluggableauth" /-->
     <include package="zope.app.preference" />
     <include package="zope.app.principalannotation" />
     <include package="zope.app.publication" />
@@ -60,7 +61,7 @@
     <include package="zope.app.zapi"/>
     <include package="zope.app.zopeappgenerations"/>
     <include package="zope.app.zptpage"/>
-    <include package="zc.i18n" />
+    <!--include package="zc.i18n" /-->
     <include package="zc.resourcelibrary"/>
     <include package="zc.table"/>
 
