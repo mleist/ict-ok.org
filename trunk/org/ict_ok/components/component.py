@@ -289,8 +289,8 @@ class Component(Supernode):
         ]
         """
         retDict = {}
-        import pdb
-        pdb.set_trace()
+        #import pdb
+        #pdb.set_trace()
         valAttributeNames = getValAttributeNames(self)
         for (name, value) in self.__dict__.items():
             if name in valAttributeNames:
@@ -304,24 +304,18 @@ class Component(Supernode):
         ]
         """
         retList = []
-        import pdb
-        pdb.set_trace()
         refAttributeNames = self.getRefAttributeNames()
         for attr_name in refAttributeNames:
             if hasattr(self, attr_name):
-                rel_manager = getattr(self.__class__, attr_name)._manager
-                for conntuple in retList:
-                    if rel_manager in conntuple[1]:
-                        conntuple[1] = (self.objectID, attr_name)
-                    else:
+                objList = getattr(self, attr_name)
+                if type(objList) != type([]):
+                    objList = [objList]
+                for obj in objList:
+                    if IComponent.providedBy(obj):
+                        rel_manager = getattr(self.__class__, attr_name)._manager
                         retList.append(
-                            ((self.objectID, attr_name), rel_manager)
+                            ((self.objectID, attr_name), (obj.objectID, rel_manager))
                         )
-        #for (name, value) in self.__dict__.items():
-            #if name in refAttributeNames:
-                #retList.append(
-                    #(('1','2'), ('3', '4')),
-                    #)
         return retList
 
     def getAllExportData(self, dataStructure):
@@ -333,6 +327,21 @@ class Component(Supernode):
         #            obj.getAllExportData(dataStructure)
         objDataList = self._getAllExportData_Step1()
         connDataList = self._getAllExportData_Step2()
+        for newConntuple in connDataList:
+            for oldConntuple in dataStructure['conns']:
+                oldConnObjId = oldConntuple[1][0]
+                oldConnRelMan = oldConntuple[1][1]
+                newConnObjId = newConntuple[0][0]
+                newConnRelMan = newConntuple[1][1]
+                #import pdb
+                #pdb.set_trace()
+                if oldConnObjId == newConnObjId and \
+                   oldConnRelMan == newConnRelMan:
+                    print "DRIN: ", newConntuple[0]
+                    tmplist = list(oldConntuple)
+                    tmplist[1] = newConntuple[0]
+                    oldConntuple = tuple(tmplist)
+                    print "eee: ", oldConntuple
         dataStructure['objects'].extend(objDataList)
         dataStructure['conns'].extend(connDataList)
 
@@ -450,9 +459,9 @@ def getValAttributeNames(arg_instance):
     for attrName, attrValue in arg_instance.__dict__.items():
         if hasattr(classOfInstance, attrName):
             classField = getattr(classOfInstance, attrName)
-            print "%s: (%s): %s" % (attrName, classField, isinstance(classField, Attribute))
+            #print "%s: (%s): %s" % (attrName, classField, isinstance(classField, Attribute))
             if IField.providedBy(classField) and \
                attrName in askAttributes:
                 retList.append(attrName)
-    print "dumdidumm: ", retList
+    #print "dumdidumm: ", retList
     return retList
