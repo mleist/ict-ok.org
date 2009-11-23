@@ -1,0 +1,48 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="BuildingDetails">
+    <metal:block use-macro="macro:ComponentsDetails" />
+
+            <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="python: context.location is not None">
+            <td i18n:translate="">Location</td>
+            <td tal:content="structure python: view.getHrefTitle(context.location)" />
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/rooms|nothing">
+            <td i18n:translate="">Rooms</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/rooms"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/coordinates|nothing">
+            <td i18n:translate="">coordinates</td>
+            <td tal:content="context/coordinates" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/gmapsurl|nothing">
+            <td i18n:translate="">gmapsurl</td>
+            <td>
+            <a tal:attributes="href context/gmapsurl"
+                href="http://www.google.de">Google</a>
+            </td>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/coordinates|nothing">
+            <td i18n:translate="">coordinates</td>
+            <td tal:content="context/coordinates" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/gmapcode|nothing">
+            <td i18n:translate="">gmapcode</td>
+            <td tal:content="structure context/gmapcode" />
+        </tr>
+        
+</metal:block>

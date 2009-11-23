@@ -1,0 +1,18 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <utility
+        name="org.ict_ok.pc" 
+        provides="zope.app.generations.interfaces.ISchemaManager"
+        component=".AppSchemaManager"
+        />
+
+</configure>

@@ -1,0 +1,60 @@
+# -*- coding: utf-8 -*-
+#
+# [[[cog
+#    import props
+#    import cog
+#    cog.out("# Copyright (c) ")
+#    for year in props.copyrights:
+#        cog.out("%4d, " % year)
+#    cog.outl()
+#    for author in props.authors:
+#       cog.outl("#               %s <%s>" % (author['name'], author['email']))
+#    cog.out("%s" % props.filename ) ]]]
+# Copyright (c) 2006, 2007, 
+#               Markus Leist <leist@ikom-online.de>
+# [[[end]]]
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id$
+#
+# pylint: disable-msg=E0213,W0232
+#
+# [[[cog cog.outl('"""Interface of Service %(servicename)s"""' % props.__dict__)]]]
+"""Interface of Service TestMod"""
+# [[[end]]]
+
+
+__version__ = "$Id$"
+
+# zope imports
+from zope.i18nmessageid import MessageFactory
+from zope.schema import Int
+
+# ict_ok.org imports
+from org.ict_ok.components.service.interfaces import IService
+
+_ = MessageFactory('org.ict_ok')
+
+
+#[[[cog
+#   cog.out("""\
+#   class IService%(servicename)s(IService):
+#       \"\"\"%(purpose)s
+#       \"\"\"
+#   """ % props.__dict__, dedent=True)
+#]]]
+#[[[end]]]
+
+    #[[[cog
+    #cog.out("""\
+    # port = Int(
+    #     min = 1,
+    #     max = 65535,
+    #     title = _("Port"),
+    #     description = _("Number of port."),
+    #     default = %(serviceport)s,
+    #     required = True)
+    #""" % props.__dict__, dedent=True)
+    #]]]
+    #[[[end]]]

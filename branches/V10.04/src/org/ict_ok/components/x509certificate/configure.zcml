@@ -1,0 +1,172 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2008, 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <!--  Interfaces ==================================================== -->
+    
+    <interface
+        interface=".interfaces.IX509Certificate"
+        type="zope.app.content.interfaces.IContentType"
+        />
+
+    <!--  Classes ======================================================= -->
+
+    <class class=".x509certificate.X509Certificate">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.x509certificate.x509certificate.X509Certificate"
+            description="X509Certificate"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.View"
+            interface=".interfaces.IX509Certificate"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.Edit"
+            set_schema=".interfaces.IX509Certificate"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.View"
+            interface="org.ict_ok.components.credential.interfaces.ICredential"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.Edit"
+            set_schema="org.ict_ok.components.credential.interfaces.ICredential"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+
+    <class class=".x509certificate.X509CertificateFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.container.interfaces.IContentContainer"
+            />
+        <implements
+            interface="org.ict_ok.components.superclass.interfaces.IFocus"
+            />
+        <factory
+            id="org.ict_ok.components.x509certificate.x509certificate.X509CertificateFolder"
+            description="X509Certificate"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.View"
+            interface=".interfaces.IX509CertificateFolder"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.Edit"
+            set_schema=".interfaces.IX509CertificateFolder"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.x509certificate.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+    </class>
+
+    <!--  Event subscribers ============================================= -->
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <!--  Search adapters =============================================== -->
+
+    <adapter
+        factory="org.ict_ok.components.x509certificate.adapter.search.Searchable"
+    />
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <!--  Vocabulary stuff ============================================== -->
+
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".x509certificate.AllX509Certificates"
+        name="AllX509Certificates"
+    />
+    <!--utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".x509certificate.AllX509CertificateTemplates"
+        name="AllX509CertificateTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".x509certificate.AllUnusedOrUsedRoomX509Certificates"
+        name="AllUnusedOrUsedRoomX509Certificates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".x509certificate.AllUnusedOrUsedInterfaceX509Certificates"
+        name="AllUnusedOrUsedInterfaceX509Certificates"
+    / -->
+
+    <!--  Includes ====================================================== -->
+
+</configure>

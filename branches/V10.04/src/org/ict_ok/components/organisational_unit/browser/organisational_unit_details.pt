@@ -1,0 +1,34 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="OrganisationalUnitDetails">
+    <metal:block use-macro="macro:Contact_ItemDetails" />
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/name|nothing">
+           <td i18n:translate="">OrganisationalUnit name</td>
+           <td tal:content="structure python: view.fsearchLink(context.name)" />
+       </tr>
+
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.parent_O_OU is not None">
+           <td i18n:translate="">u'Parent</td>
+           <td>
+                <div tal:omit-tag=""
+                     tal:content="structure python: view.getHrefTitle(context.parent_O_OU)">
+                </div>
+           </td>
+       </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/subOUs|nothing">
+            <td i18n:translate="">Sub organisational units</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/subOUs"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+        
+</metal:block>

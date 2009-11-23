@@ -1,0 +1,75 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+    <!-- [[[cog
+            import props
+            import cog
+         ]]] -->
+    <!-- [[[end]]] -->
+
+    <!-- $Id$ -->
+
+    <!-- [[[cog
+            cog.out("""\
+            <permission
+                id="%(longpath)s.%(filename)s.View"
+                title="View from %(utilitytitle)s"
+            />
+            
+            <permission
+                id="%(longpath)s.%(filename)s.Edit"
+                title="View from %(utilitytitle)s"
+            />
+            """ % props.__dict__, dedent=True)
+         ]]] -->
+    <permission
+        id="org.ict_ok.admin_utils.testmod.View"
+        title="View from Test Utiltiy"
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.testmod.Edit"
+        title="View from Test Utiltiy"
+    />
+    <!-- [[[end]]] -->
+
+    <!-- [[[cog
+            cog.out("<!-- Copyright (c) ")
+            for year in props.copyrights:
+                cog.out("%4d, " % year)
+            cog.outl()
+            for author in props.authors:
+                cog.outl("                 %s <"\
+                         "%s>" % (author['name'], author['email']))
+            cog.outl("--"+">")
+         ]]] -->
+    <!-- Copyright (c) 2006, 2007, 
+                     Markus Leist <leist@ikom-online.de>
+    -->
+    <!-- [[[end]]] -->
+
+    <!-- [[[cog
+            cog.out("""\
+            <grant permission="%(longpath)s.%(filename)s.View"
+                            role="org.ict_ok.mgr" />
+            <grant permission="%(longpath)s.%(filename)s.View"
+                            role="org.ict_ok.adm" />
+
+            <grant permission="%(longpath)s.%(filename)s.Edit"
+                            role="org.ict_ok.mgr" />
+            <grant permission="%(longpath)s.%(filename)s.Edit"
+                            role="org.ict_ok.adm" />
+            """ % props.__dict__, dedent=True)
+         ]]] -->
+    <grant permission="org.ict_ok.admin_utils.testmod.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.testmod.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.testmod.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.testmod.Edit"
+                    role="org.ict_ok.adm" />
+    <!-- [[[end]]] -->
+</configure>

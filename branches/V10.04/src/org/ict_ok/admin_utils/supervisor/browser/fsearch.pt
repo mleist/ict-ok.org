@@ -1,0 +1,43 @@
+<i18n:block domain="org.ict_ok">
+  <h3 tal:condition="view/label|nothing"
+      tal:content="view/label" />
+  <div class="message"
+    tal:condition="view/status|nothing"
+    tal:content="view/status"
+    i18n:translate="">
+  Something happened.
+  </div>
+  <form name="search" action="" method="post"
+    tal:attributes="action request/URL">
+    <table class="form-fields">
+		<tr class="row">
+        	<td class="label">
+          		<label for="form-widgets-fsearchText">
+                	<span>Search text</span>
+                	<span class="required"></span>
+                </label>
+          	</td>
+            <td class="field">
+            	<div class="widget">
+				    <input id="form-widgets-fsearchText"
+				           name="form.widgets.fsearchText"
+				           class="text-widget required textline-field"
+				           value="" type="text"
+				           tal:attributes="value view/fsearchText" />
+				</div>
+        	</td>
+   		</tr>
+	</table>
+  &nbsp;
+  <br />
+  <tal:block
+    condition="view/objs|nothing"
+    replace="structure view/table" />
+  <div
+    tal:condition="not: view/objs|nothing"
+    i18n:translate="">
+    There are no objects.
+  </div>
+  </form>
+  <script type="text/javascript" language="JavaScript"> document.getElementById('form-widgets-fsearchText').focus(); </script>
+</i18n:block>

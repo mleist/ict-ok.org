@@ -1,0 +1,15 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+    <h3 i18n:translate="">Host smartview</h3>
+    <ul class="state_error">
+        <li i18n:translate="">non implemented yet</li>
+    </ul>
+    <!--<table id="sortable" class="listing" summary="Content listing"-->
+            <!--i18n:attributes="summary"-->
+            <!--tal:define="runtime_info view/getZopeRuntimeInfo">-->
+        <!--<tr tal:attributes="class view/getNextTabClass">-->
+            <!--<td i18n:translate="">Name</td>-->
+            <!--<td tal:content="context/ikName" />-->
+        <!--</tr>-->
+    <!--</table>-->
+</i18n:block>

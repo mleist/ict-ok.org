@@ -1,0 +1,42 @@
+<configure xmlns='http://namespaces.zope.org/zope'
+    xmlns:meta="http://namespaces.zope.org/meta"
+    >
+    <!-- $Id$ -->
+    
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <include package="zope.app.zcmlfiles" />
+    <include package="zope.app.twisted" />
+    <include package="zope.app.securitypolicy" file="meta.zcml" />
+
+    <securityPolicy
+        component="zope.securitypolicy.zopepolicy.ZopeSecurityPolicy" />
+
+    <!--security settings of ict-ok-->
+    <include package="org.ict_ok.etc" file="permissions.zcml" />
+
+    <include package="org.ict_ok.admin_utils.supervisor" />
+    <include package="org.ict_ok.admin_utils.generators.nagios" />
+    <include package="org.ict_ok.admin_utils.generators.smokeping" />
+
+    <include package="org.ict_ok.components.superclass" />
+    <include package="org.ict_ok.components.ipnet" />
+    <include package="org.ict_ok.components.host" />
+    <include package="org.ict_ok.components.host.special" />
+    <include package="org.ict_ok.components.interface" />
+    <include package="org.ict_ok.components.latency" />
+    <include package="org.ict_ok.components.snmpvalue" />
+
+    <subscriber
+        handler="runner.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+    />
+
+    <principal
+        id="zope.mgr"
+        title="Manager"
+        login="zmgr"
+        password="mgrpw" />
+
+</configure>

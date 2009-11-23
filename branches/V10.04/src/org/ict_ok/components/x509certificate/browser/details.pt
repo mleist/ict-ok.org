@@ -1,0 +1,9 @@
+<i18n:block domain="org.ict_ok"
+            tal:define="dateform python:request.locale.dates.getFormatter('dateTime',length='full')">
+    <h3 i18n:translate="">X.509 Certificate Details</h3>
+    <table id="sortable" class="listing" summary="Content listing"
+            i18n:attributes="summary">
+    <metal:block use-macro="macro:X509CertificateDetails" />
+
+    </table>
+</i18n:block>

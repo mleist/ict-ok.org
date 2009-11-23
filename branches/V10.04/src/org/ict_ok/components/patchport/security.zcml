@@ -1,0 +1,55 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="org.ict_ok"
+    >
+
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2009, 
+                       Markus Leist <leist@ikom-online.de>
+    -->
+
+    <permission
+        id="org.ict_ok.components.patchport.View"
+        title="View Patch port"
+    />
+
+    <permission
+        id="org.ict_ok.components.patchport.Add"
+        title="Add Patch port"
+    />
+
+    <permission
+        id="org.ict_ok.components.patchport.Edit"
+        title="Edit Patch port"
+    />
+
+    <permission
+        id="org.ict_ok.components.patchport.Delete"
+        title="Delete Patch port"
+    />
+
+    <grant permission="org.ict_ok.components.patchport.View"
+                    role="org.ict_ok.usr" />
+    <grant permission="org.ict_ok.components.patchport.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.patchport.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.patchport.Add"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.patchport.Add"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.patchport.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.patchport.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.patchport.Delete"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.patchport.Delete"
+                    role="org.ict_ok.adm" />
+
+</configure>

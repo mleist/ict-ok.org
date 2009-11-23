@@ -1,0 +1,50 @@
+<configure
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- viewlet manager -->
+    
+    <viewletManager
+        name="ict_ok.Sidebar"
+        provides=".interfaces.ISidebar"
+        class="z3c.viewlet.manager.WeightOrderedViewletManager"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="zope.View"
+        />
+    
+    <!-- viewlets -->
+    
+    <viewlet
+        name="sb_console"
+        for="*"
+        manager=".interfaces.ISidebar"
+        template="ik_sb_console.pt"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.dashboard.Edit"
+        weight="25"
+        />
+    
+    <viewlet
+        name="sb_status"
+        for="*"
+        manager=".interfaces.ISidebar"
+        template="ik_sb_status.pt"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="zope.View"
+        weight="30"
+        />
+    
+    <viewlet
+        name="sb_actions"
+        for="*"
+        manager=".interfaces.ISidebar"
+        template="ik_sb_actions.pt"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="zope.View"
+        weight="40"
+        />
+    
+</configure>

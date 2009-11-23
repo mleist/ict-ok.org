@@ -1,0 +1,75 @@
+<metal:block define-macro="Contact_ItemDetails">
+<metal:block use-macro="macro:ComponentsDetails" />
+    <tr tal:attributes="class view/getNextTabClass"
+        tal:condition="python: context.contact is not None">
+        <td i18n:translate="">Contact</td>
+        <td tal:content="structure python: view.getHrefTitle(context.contact)" />
+    </tr>
+       
+    <tr tal:attributes="class view/getNextTabClass"
+        tal:condition="python: context.workOrder is not None">
+        <td i18n:translate="">WorkOrder</td>
+        <td tal:content="structure python: view.getHrefTitle(context.workOrder)" />
+    </tr>
+    
+       
+    <tr tal:attributes="class view/getNextTabClass"
+        tal:condition="context/adresses|nothing">
+        <td i18n:translate="">Addresses</td>
+        <td>
+            <ul>
+                <li tal:repeat="obj context/adresses"
+                    tal:content="structure python: view.getHrefTitle(obj)" />
+                
+            <ul>
+        </td>
+    </tr>
+    
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/groups|nothing">
+            <td i18n:translate="">Groups</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/groups"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/roles|nothing">
+            <td i18n:translate="">Roles</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/roles"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/closedContracts|nothing">
+            <td i18n:translate="">Closed contracts</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/closedContracts"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/responsible4Contracts|nothing">
+            <td i18n:translate="">Responsible for contracts</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/responsible4Contracts"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+</metal:block>

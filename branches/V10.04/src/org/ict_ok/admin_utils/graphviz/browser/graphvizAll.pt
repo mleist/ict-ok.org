@@ -1,0 +1,11 @@
+<!-- $Id$  -->
+<html>
+    <body>
+    <div i18n:domain="ict-ok.org">
+        <h3>Graphviz</h3>
+        <div tal:content="structure view/getCmapxText" />
+            <img tal:attributes="src python: '%s/@@getPNG' % (view.getValuePngHref()); usemap python: '#map_%s' % context.ikName" />
+        </div>
+        <a href="#" tal:attributes="href python: '%s/@@getPNG?mode=fview' % view.getValuePngHref()">[PNG]</a>
+    </body>
+</html>

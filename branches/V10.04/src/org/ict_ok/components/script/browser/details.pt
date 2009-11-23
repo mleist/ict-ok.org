@@ -1,0 +1,8 @@
+<i18n:block domain="org.ict_ok">
+    <h3 i18n:translate="">Script:</h3>
+    <pre class="source" tal:content="context/pythonScript">ddd</pre>
+    <h3 i18n:translate="">Last 10 outputs:</h3>
+    <div tal:repeat="hentry context/printHistory">
+        <p class="cb_il" tal:content="hentry">ddd</p>
+    </div>
+</i18n:block>

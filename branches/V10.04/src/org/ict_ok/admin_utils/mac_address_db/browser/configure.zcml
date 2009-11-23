@@ -1,0 +1,97 @@
+<zope:configure
+    xmlns:zope="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns="http://namespaces.zope.org/browser"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2009, 
+                     Markus Leist <leist@ikom-online.de>
+                     Sebastian Napiorkowski <s.napiorkowski@ikom-online.de>
+    -->
+
+    <!--##### MacAddressDb ##### -->
+
+    <defaultView
+        for="org.ict_ok.admin_utils.mac_address_db.interfaces.IAdmUtilMacAddressDb"
+        name="details.html"
+        />
+
+    <z3c:pagelet
+        name="details.html"
+        for="org.ict_ok.admin_utils.mac_address_db.interfaces.IAdmUtilMacAddressDb"
+        class="org.ict_ok.admin_utils.mac_address_db.browser.mac_address_db.AdmUtilMacAddressDbDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mac_address_db.View"
+        />
+
+    <z3c:template
+        template="details.pt"
+        for=".mac_address_db.AdmUtilMacAddressDbDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <z3c:pagelet
+        name="overview.html"
+        for="org.ict_ok.admin_utils.mac_address_db.interfaces.IAdmUtilMacAddressDb"
+        class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mac_address_db.View"
+        />
+
+    <z3c:pagelet
+        name="history.html"
+        for="org.ict_ok.admin_utils.mac_address_db.interfaces.IAdmUtilMacAddressDb"
+        class="org.ict_ok.components.superclass.browser.superclass.History"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mac_address_db.View"
+        />
+
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.mac_address_db.interfaces.IAdmUtilMacAddressDb"
+        class="org.ict_ok.admin_utils.mac_address_db.browser.mac_address_db.EditAdmUtilMacAddressDbForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mac_address_db.Edit"
+        />
+
+    <!--##### MacAddressDb ##### -->
+    <!--##### Sub Menu ##### -->
+    <viewlet
+        name="details"
+        for="org.ict_ok.admin_utils.mac_address_db.interfaces.IAdmUtilMacAddressDb"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mac_address_db.View"
+        />
+
+    <viewlet
+        name="overview"
+        for="org.ict_ok.admin_utils.mac_address_db.interfaces.IAdmUtilMacAddressDb"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubOverview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mac_address_db.View"
+        />
+
+    <viewlet
+        name="history"
+        for="org.ict_ok.admin_utils.mac_address_db.interfaces.IAdmUtilMacAddressDb"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mac_address_db.View"
+        />
+
+    <viewlet
+        name="edit"
+        for="org.ict_ok.admin_utils.mac_address_db.interfaces.IAdmUtilMacAddressDb"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.mac_address_db.Edit"
+        />
+</zope:configure>

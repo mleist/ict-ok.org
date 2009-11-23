@@ -1,0 +1,84 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="PhysicalMediaDetails">
+    <metal:block use-macro="macro:PhysicalComponentDetails" />
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/manufacturer|nothing">
+            <td i18n:translate="">Manufacturer</td>
+            <td tal:content="structure python: view.fsearchLink(context.manufacturer)" />
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/vendor|nothing">
+            <td i18n:translate="">Vendor</td>
+            <td tal:content="structure python: view.fsearchLink(context.vendor)" />
+        </tr>
+
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/serialNumber|nothing">
+           <td i18n:translate="">Serial number</td>
+           <td tal:content="structure python: view.fsearchLink(context.serialNumber)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/capacity|nothing">
+           <td i18n:translate="">Capacity</td>
+           <td tal:content="structure python: view.adjustQuantity(view.convertQuantity(context.capacity))" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/cleanerMedia|nothing">
+           <td i18n:translate="">Cleaner media</td>
+           <td tal:content="structure python: view.fsearchLink(context.cleanerMedia)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/dualSided|nothing">
+           <td i18n:translate="">Dual sided</td>
+           <td tal:content="structure python: view.fsearchLink(context.dualSided)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/maxMounts|nothing">
+           <td i18n:translate="">Max mounts</td>
+           <td tal:content="structure python: view.fsearchLink(context.maxMounts)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/mediaSize|nothing">
+           <td i18n:translate="">Media size</td>
+           <td tal:content="structure python: view.fsearchLink(context.mediaSize)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/mediaType|nothing">
+           <td i18n:translate="">Media Type</td>
+           <td tal:content="structure python: view.fsearchLink(context.mediaType)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/timeOfLastMount|nothing">
+           <td i18n:translate="">Time of last mount</td>
+           <td tal:content="structure python: view.fsearchLink(context.timeOfLastMount)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/writeProtectOn|nothing">
+           <td i18n:translate="">Write protect on</td>
+           <td tal:content="structure python: view.fsearchLink(context.writeProtectOn)" />
+       </tr>
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/labelFormat|nothing">
+           <td i18n:translate="">Label Format</td>
+           <td tal:content="structure python: view.fsearchLink(context.labelFormat)" />
+       </tr>
+
+          
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: context.device is not None">
+           <td i18n:translate="">Device</td>
+           <td tal:content="structure python: view.getHrefTitle(context.device)" />
+       </tr>
+</metal:block>

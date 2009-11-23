@@ -1,0 +1,17 @@
+<i18n:block domain="org.ict_ok">
+    <h3 i18n:translate="">details of mindmap utility</h3>
+    <table id="sortable" class="sublisting" summary="Content listing"
+            i18n:attributes="summary">
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/version|nothing">
+            <td i18n:translate="">Version</td>
+            <td tal:content="context/version" />
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/cloudDisplay|nothing">
+            <td i18n:translate="">Display Clouds</td>
+            <td tal:content="context/cloudDisplay" />
+        </tr>
+
+     </table>
+</i18n:block>

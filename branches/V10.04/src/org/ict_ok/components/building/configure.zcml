@@ -1,0 +1,179 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    i18n_domain="org.ict_ok"
+    >
+
+    <!-- $Id$ -->
+
+    <!-- Copyright (c) 2004, 2005, 2006, 2007, 2008,
+        Markus Leist <leist@ikom-online.de> -->
+
+    <!--  Interfaces ==================================================== -->
+    
+    <interface
+        interface=".interfaces.IBuilding"
+        type="zope.app.content.interfaces.IContentType"
+        />
+
+    <!--  Classes ======================================================= -->
+
+    <class class=".building.Building">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.container.interfaces.IContentContainer"
+            />
+        <factory
+            id="org.ict_ok.components.building.building.Building"
+            description="Building"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface=".interfaces.IBuilding"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema=".interfaces.IBuilding"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponent"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+    </class>
+    <class class=".building.BuildingFolder">
+        <implements
+            interface="zope.annotation.interfaces.IAttributeAnnotatable"
+            />
+        <implements
+            interface="zope.container.interfaces.IContentContainer"
+            />
+        <implements
+            interface="org.ict_ok.components.superclass.interfaces.IFocus"
+            />
+        <factory
+            id="org.ict_ok.components.building.building.BuildingFolder"
+            description="Building"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface=".interfaces.IBuildingFolder"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema=".interfaces.IBuildingFolder"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="zope.app.container.interfaces.IReadContainer"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            interface="zope.app.container.interfaces.IWriteContainer"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
+            />
+        <require
+            permission="org.ict_ok.components.building.View"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.components.building.Edit"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+    </class>
+
+    <!--  Event subscribers ============================================= -->
+
+    <subscriber
+        handler=".bootstrap.bootStrapSubscriber"
+        for="zope.app.appsetup.IDatabaseOpenedEvent"
+        />
+
+    <!--  Search adapters =============================================== -->
+
+    <adapter
+        factory="org.ict_ok.components.building.adapter.search.Searchable"
+    />
+
+    <!--  Report adapters =============================================== -->
+
+    <adapter
+        factory=".adapter.rpt_pdf.RptPdf"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+    />
+
+    <!--  OSI adapters ================================================== -->
+
+    <!--  other adapters ================================================ -->
+
+    <adapter
+        factory="org.ict_ok.components.building.adapter.ipickle.Pickle"
+    />
+    <adapter
+        factory="org.ict_ok.components.building.adapter.navigation.Navigation"
+    />
+
+    <!--  Vocabulary stuff ============================================== -->
+
+    <!--utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".building.AllBuildingsVocab"
+        name="AllBuildingsVocab"
+        /-->
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".building.AllBuildingTemplates"
+        name="AllBuildingTemplates"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".building.AllUnusedOrSelfBuildings"
+        name="AllUnusedOrSelfBuildings"
+    />
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".building.AllBuildings"
+        name="AllBuildings"
+    />
+
+    <!--  Includes ====================================================== -->
+
+    <!-- include package=".generations" / -->
+
+</configure>
