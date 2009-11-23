@@ -22,8 +22,8 @@ Version information
 
 import re
 
-__versMajor = "9"
-__versMinor = "10pre"
+__versMajor = "99"
+__versMinor = "99trunk"
 __versId = "$Id$"
 __versLastChangedDate = "$LastChangedDate$"
 __versRevision = "$LastChangedRevision$"
