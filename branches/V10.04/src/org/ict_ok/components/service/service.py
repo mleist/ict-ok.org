@@ -26,7 +26,7 @@ from zope.interface import implements
 from zope.app.folder import Folder
 
 # ict_ok.org imports
-from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.service.interfaces import \

@@ -96,6 +96,46 @@ class IAdmUtilUserManagement(IAuthentication):
         default = False,
         required = False)
 
+    searchBase = TextLine(
+        max_length = 200,
+        title = _("Search Base"),
+        default = u'ou=staff,o=ikom-online,c=de,o=ifdd',
+        required = False)
+    searchScope = Choice(
+        title = _("Search Scope"),
+        default = u'sub',
+        values = [u'sub', u'one', u'base'],
+        required = False)
+    groupsSearchBase = TextLine(
+        max_length = 200,
+        title = _("Groups Search Base"),
+        default = u'cn=testIKOMtrol,o=ikom-online,c=de,o=ifdd',
+        required = False)
+    groupsSearchScope = TextLine(
+        max_length = 200,
+        title = _("Groups Search Scope"),
+        default = u'one',
+        required = False)
+    loginAttribute = TextLine(
+        max_length = 200,
+        title = _("Login Attribute"),
+        default = u'uid',
+        required = False)
+    idAttribute = TextLine(
+        max_length = 200,
+        title = _("Id Attribute"),
+        default = u'uid',
+        required = False)
+    titleAttribute = TextLine(
+        max_length = 200,
+        title = _("Title Attribute"),
+        default = u'cn',
+        required = False)
+    groupIdAttribute = TextLine(
+        max_length = 200,
+        title = _("Group Id Attribute"),
+        default = u'cn',
+        required = False)
 
 
 class IAdmUtilUserPreferences(Interface):

@@ -19,7 +19,7 @@ __version__ = "$Id$"
 from zope.interface import implements
 
 # ict_ok.org imports
-from org.ict_ok.libs.lib import getRefAttributeNames
+from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.credential.interfaces import ICredential
 from org.ict_ok.components.component import Component
 

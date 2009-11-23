@@ -635,6 +635,8 @@ class Superclass(Persistent):
             #except OSError:
                 #pass
 
+
+
 class MsgEvent:
     """ Interface of an async event message
     """

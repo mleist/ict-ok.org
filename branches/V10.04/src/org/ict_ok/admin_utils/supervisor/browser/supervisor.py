@@ -32,8 +32,12 @@ from zope.interface import directlyProvides
 from zope.app.pagetemplate.urlquote import URLQuote
 from zope.app.generations.generations import findManagers
 from zope.app.catalog.interfaces import ICatalog
+from zope.traversing.browser import absoluteURL
+from zope.app.rotterdam.xmlobject import setNoCacheHeaders
 
 # z3c imports
+from z3c.form import button, field, form, interfaces
+from z3c.formui import layout
 from z3c.pagelet.browser import BrowserPagelet
 
 # zc imports
@@ -58,6 +62,7 @@ from org.ict_ok.admin_utils.usermanagement.usermanagement import \
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.version import getIkVersion
+from org.ict_ok.admin_utils.supervisor.interfaces import IImportAllData
 
 _ = MessageFactory('org.ict_ok')
 
@@ -75,6 +80,19 @@ class MSubGenerations(GlobalMenuSubItem):
     title = _(u'Generations')
     viewURL = 'generations.html'
     weight = 50
+
+class MSubImportAllData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Import All Data')
+    viewURL = 'importalldata.html'
+    weight = 290
+
+class MSubExportAllData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Export All Data')
+    viewURL = 'exportalldata.html'
+    weight = 291
+
 
 
 # --------------- object details ---------------------------
@@ -231,6 +249,15 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
             else:
                 pass
         return self.request.response.redirect('./@@objmq')
+
+    def exportAllData(self):
+        """get data file for all objects"""
+        self.request.response.setHeader('Content-Type', 'application/x-ict-ok-data')
+        self.request.response.setHeader(\
+            'Content-Disposition',
+            'attachment; filename=\"%s.xml\"' % self.context.objectID)
+        setNoCacheHeaders(self.request.response)
+        return self.context.exportAllData()        #self.context is AdmUtilSupervisor
 
 class AdmUtilSupervisorVersion(SupernodeDetails):
     """ for version display
@@ -434,3 +461,34 @@ class TypeSearchForm(Overview):
 #            if myForm.has_key('form.widgets.fsearchText'):
 #                self.fsearchText = myForm['form.widgets.fsearchText']
 
+class ImportAllDataForm(layout.FormLayoutSupport, form.Form):
+    """ Delete the net """
+    
+    form.extends(form.Form)
+    label = _(u"Import an 'all-data file' data")
+    fields = field.Fields(IImportAllData)
+    
+    @button.buttonAndHandler(u'Submit')
+    def handleSubmit(self, action):
+        """submit was pressed"""
+        if 'alldata' in self.widgets:
+            fileWidget=self.widgets['alldata']
+            fileUpload = fileWidget.extract()
+            xml_string = ''.join(fileUpload.readlines())
+            if self.context.importAllData(xml_string):
+                # ERROR behandlung
+                pass
+        url = absoluteURL(self.context, self.request)
+        self.request.response.redirect(url)
+
+    @button.buttonAndHandler(u'Cancel')
+    def handleCancel(self, action):
+        """cancel was pressed"""
+        url = absoluteURL(self.context, self.request)
+        self.request.response.redirect(url)
+
+    def update(self):
+        """update all widgets"""
+        #if ISuperclass.providedBy(self.context):
+            #self.label = self.getTitle()
+        form.Form.update(self)

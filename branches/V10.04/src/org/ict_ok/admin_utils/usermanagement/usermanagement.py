@@ -19,6 +19,7 @@ from datetime import datetime
 from pytz import timezone
 import logging
 from persistent.dict import PersistentDict
+from ldap.filter import filter_format
 
 # zope imports
 from zope.app import zapi
@@ -26,6 +27,7 @@ from zope.interface import implements
 from zope.component import adapts, queryUtility, adapter
 from zope.security.interfaces import IPrincipal
 from zope.annotation.interfaces import IAnnotations
+from zope.app import authentication
 from zope.app.authentication.authentication import PluggableAuthentication
 from zope.app.container.interfaces import IReadContainer
 from zope.app.catalog.interfaces import ICatalog
@@ -37,27 +39,18 @@ from zope.app.container.contained import Contained
 from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
 from ldapadapter.interfaces import IManageableLDAPAdapter
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.app.authentication.interfaces import IAuthenticatedPrincipalCreated
-
+from zope.app.authentication.interfaces import IAuthenticatedPrincipalCreated, IAuthenticatorPlugin
+from zope.app.component import queryNextUtility
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
      IAdmUtilUserDashboard, IAdmUtilUserDashboardItem,\
      IAdmUtilUserProperties, IAdmUtilUserManagement, \
      IAdmUtilUserPreferences
-
 #other imports
+from ldappas.interfaces import ILDAPAuthentication
 from ldappas.authentication import LDAPAuthentication
 from ldapadapter.interfaces import ILDAPAdapter
-
-@adapter(IAuthenticatedPrincipalCreated)
-def ddd(event):
-    print "+++++++++++++++++++++++++++++++++++++++++++++++"
-    #import pdb
-    #pdb.set_trace()
-    if event.principal.id == u'LDAPAuthentication.markus':
-        print "rrr:", event.principal.groups
-        event.principal.groups.append(u'group.Manager')
 
 logger = logging.getLogger("AdmUtilUserManagement")
 
@@ -87,12 +80,30 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     bindDN = FieldProperty(IAdmUtilUserManagement['bindDN'])
     bindPassword = FieldProperty(IAdmUtilUserManagement['bindPassword'])
     useSSL =FieldProperty(IAdmUtilUserManagement['useSSL'])
+    searchBase = FieldProperty(IAdmUtilUserManagement['searchBase'])
+    searchScope = FieldProperty(IAdmUtilUserManagement['searchScope'])
+    groupsSearchBase = FieldProperty(IAdmUtilUserManagement['groupsSearchBase'])
+    groupsSearchScope = FieldProperty(IAdmUtilUserManagement['groupsSearchScope'])
+    loginAttribute = FieldProperty(IAdmUtilUserManagement['loginAttribute'])
+    idAttribute = FieldProperty(IAdmUtilUserManagement['idAttribute'])
+    titleAttribute = FieldProperty(IAdmUtilUserManagement['titleAttribute'])
+    groupIdAttribute = FieldProperty(IAdmUtilUserManagement['groupIdAttribute'])
+    
+    
     #email = FieldProperty(IAdmUtilUserManagement['email'])
 
     def __init__(self):
         PluggableAuthentication.__init__(self)
         Supernode.__init__(self)
         self.ikRevision = __version__
+
+    def getAuthenticatorPlugins(self):
+        authenticatorPlugins = list(self.authenticatorPlugins)
+        if "LDAPAuthentication" in authenticatorPlugins:
+            if not self.useLdap:
+                authenticatorPlugins.remove("LDAPAuthentication")
+        authenticatorPlugins = tuple(authenticatorPlugins)
+        return self._plugins(authenticatorPlugins, IAuthenticatorPlugin)
 
     def getRequest(self):
         """ this trick will return the request from the working interaction
@@ -416,12 +427,32 @@ def UserCfgStartView(dummy_context):
 
 class MyLDAPAuthentication(LDAPAuthentication):
 
+    implements(
+        ILDAPAuthentication,
+        authentication.groupfolder.IGroupFolder,
+        authentication.interfaces.IAuthenticatorPlugin,
+        authentication.interfaces.IQueriableAuthenticator,
+        authentication.interfaces.IQuerySchemaSearch)
+    
+    def __init__(self, prefix=u''):
+        super(MyLDAPAuthentication, self).__init__()
+        self.prefix = prefix
+
+    def __contains__(self, key):
+        # ToDo: What's up
+        #print "__contains__(%s, %s)" % (self, key)
+        return False
+
+    def __len__(self):
+        return 0
+
+    def __iter__(self):
+        return iter([])
+
     def getLDAPAdapter(self):
         """Get the LDAP adapter according to our configuration.
         and sets all needed attributes
         """
-        #import pdb
-        #pdb.set_trace()
         ldapAdapter = queryUtility(ILDAPAdapter, self.adapterName)
         self.setLDAPAdapterAttrs(ldapAdapter)
         return ldapAdapter
@@ -440,5 +471,72 @@ class MyLDAPAuthentication(LDAPAuthentication):
             ldapAdapter.bindPassword = userManagement.bindPassword
         if ldapAdapter.useSSL != userManagement.useSSL:
             ldapAdapter.useSSL = userManagement.useSSL
+            
+        if self.searchBase != userManagement.searchBase:
+            self.searchBase = userManagement.searchBase
+        if self.searchScope != userManagement.searchScope:
+            self.searchScope = userManagement.searchScope
+        if self.groupsSearchBase != userManagement.groupsSearchBase:
+            self.groupsSearchBase = userManagement.groupsSearchBase
+        if self.groupsSearchScope != userManagement.groupsSearchScope:
+            self.groupsSearchScope = userManagement.groupsSearchScope
+        if self.loginAttribute != userManagement.loginAttribute:
+            self.loginAttribute = userManagement.loginAttribute
+        if self.idAttribute != userManagement.idAttribute:
+            self.idAttribute = userManagement.idAttribute
+        if self.titleAttribute != userManagement.titleAttribute:
+            self.titleAttribute = userManagement.titleAttribute
+        if self.groupIdAttribute != userManagement.groupIdAttribute:
+            self.groupIdAttribute = userManagement.groupIdAttribute
 
+    def getGroupsForPrincipal(self, principalid):
+        """Get groups the given principal belongs to"""
+        searchObjectclass = u'groupOfNames'
+        searchMember = u'uid=%s,ou=staff,o=ikom-online,c=de,o=ifdd' % principalid[len(self.prefix):]
+        return self.groupsSearch({'objectClass':searchObjectclass,
+                                  'member':searchMember})
 
+    def getPrincipalsForGroup(self, groupid):
+        """Get principals which belong to the group"""
+        return []
+    
+    def groupsSearch(self, query):
+        """See zope.app.authentication.interfaces.IQuerySchemaSearch."""
+        da = self.getLDAPAdapter()
+        if da is None:
+            return ()
+        try:
+            conn = da.connect()
+        except ServerDown:
+            return ()
+
+        # Build the filter based on the query
+        filter_elems = []
+        for key, value in query.items():
+            if not value:
+                continue
+            filter_elems.append(filter_format('(%s=%s)',
+                                              (key, value)))
+        filter = ''.join(filter_elems)
+        if len(filter_elems) > 1:
+            filter = '(&%s)' % filter
+
+        if not filter:
+            filter = '(objectClass=*)'
+
+        try:
+            res = conn.search(self.groupsSearchBase, self.groupsSearchScope, filter=filter,
+                              attrs=[self.groupIdAttribute])
+        except NoSuchObject:
+            return ()
+
+        #prefix = self.principalIdPrefix
+        prefix = u'group.'
+        infos = []
+        for dn, entry in res:
+            try:
+                infos.append(prefix+entry[self.groupIdAttribute][0])
+            except (KeyError, IndexError):
+                pass
+
+        return infos

@@ -46,6 +46,10 @@
             permission="org.ict_ok.admin_utils.supervisor.Edit"
             interface="zope.app.container.interfaces.IWriteContainer"
             />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+            set_schema="org.ict_ok.admin_utils.supervisor.interfaces.IImportAllData"
+            />
     </class>
 
     <adapter

@@ -32,10 +32,9 @@ from zope.component import createObject
 from zope.component import getUtility
 
 # lovely imports
-from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
 
 # ict_ok.org imports
+
 _ = MessageFactory('org.ict_ok')
 
 
@@ -181,31 +180,6 @@ def oid2dcTitle(arg_oid):
     return "Oid not found"
 
 
-def getClassParents(arg_class, end_class=None):
-    retList = []
-    from org.ict_ok.components.component import Component
-    if end_class == None:
-        end_class = Component
-    if arg_class is not end_class:
-        for aclass in arg_class.__bases__:
-            retList.append(aclass)
-            retList.extend(getClassParents(aclass, end_class))
-    return retList
-
-def getRefAttributeNames(arg_class):
-    """return a string list of attribute names with
-    RelationPropertyIn- or RelationPropertyOut-type
-    """
-    retList = []
-    class_parents = getClassParents(arg_class)
-    class_parents.append(arg_class)
-    for arg_class in class_parents:
-        for attrName, attrValue in arg_class.__dict__.items():
-            if type(attrValue)==RelationPropertyIn or \
-               type(attrValue)==RelationPropertyOut:
-                retList.append(attrName)
-    return retList
-    
 def ensureComponentFolderOnBootstrap(interface, folderName, factoryId,
                                      root_folder, siteManager):
     allSubFolders = [folder for folder in root_folder.values()
