@@ -39,8 +39,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                              'AdmUtilNMap', 
                              AdmUtilNMap,
                              name='NetScanner:NMap',
-                             copy_to_zlog=False, 
-                             asObject=True)
+                             copy_to_zlog=False)
 
     if isinstance(madeNmap, AdmUtilNMap):
         logger.info(u"bootstrap: Ensure named AdmUtilNMap")

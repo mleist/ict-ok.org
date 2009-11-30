@@ -8,42 +8,71 @@
                 Markus Leist <leist@ikom-online.de> -->
 
     <!--registration of core components-->
-    <include package="zope.sendmail"/>
+    <include package="zope.app.zcmlfiles"
+             file="menus.zcml" />
+
+    <include package="zope.dublincore" />
+    <include package="zope.annotation"/>
+    <include package="zope.authentication" />			<!-- new -->
+    <include package="zope.component"/>
     <include package="zope.contentprovider" />
+    <include package="zope.error" />
+    <!--include package="zope.i18n"/ -->
+    <include package="zope.location"/>
+    <include package="zope.password" />
+    <include package="zope.publisher" />
+    <include package="zope.security" />           		<!-- new -->
+    <include package="zope.securitypolicy" />
+    <include package="zope.sendmail"/>
+    <include package="zope.session"/>
+    <include package="zope.traversing"/>
+    <include package="zope.traversing.browser"/>
     <include package="zope.viewlet" />
-    <include package="zope.app.apidoc"/>
-    <include package="zope.app.onlinehelp"/>
-    <include package="zope.app.preference" />
-    <include package="zope.app.pythonpage"/>
-    <include package="zope.app.renderer"/>
-    <include package="zope.app.workflow"/>
-    <include package="zope.app.authentication" />
-    <include package="zope.app.boston" />
+
+    <include package="zope.app.appsetup"/>
+    <include package="zope.app.authentication"/>
     <include package="zope.app.catalog"/>
+    <include package="zope.app.component" />
+    <include package="zope.app.container" />
+    <include package="zope.app.content" />
+    <include package="zope.app.error" />
+    <include package="zope.app.exception.browser" />
+    <include package="zope.app.folder" />
+    <include package="zope.app.generations" />
+    <include package="zope.app.i18n"/>
     <include package="zope.app.intid" />
     <include package="zope.app.keyreference" />
-    <include package="zope.app.pluggableauth" />
+    <include package="zope.app.pagetemplate" />
+    <!-- include package="zope.app.pluggableauth" /-->
+    <include package="zope.app.preference" />
+    <include package="zope.app.principalannotation" />
+    <include package="zope.app.publication" />
+    <include package="zope.app.publisher" />
+    <include package="zope.app.renderer"/>
     <include package="zope.app.schema" />
+    <include package="zope.app.security" />
+    <include package="zope.app.securitypolicy" />
     <include package="zope.app.server" />
     <include package="zope.app.session" />
     <include package="zope.app.twisted" />
     <include package="zope.app.wfmc" />
-    <include package="zope.app.securitypolicy" />
-
-    <include package="soap" />
-
+    <include package="zope.app.workflow"/>
+    <include package="zope.app.wsgi"/>
+    <include package="zope.app.zapi"/>
+    <include package="zope.app.zopeappgenerations"/>
+    <include package="zope.app.zptpage"/>
+    <!--include package="zc.i18n" /-->
     <include package="zc.resourcelibrary"/>
     <include package="zc.table"/>
-    <include package="zc.i18n" />
 
+    <include package="z3c.blobfile" />
     <include package="z3c.form" />
     <include package="z3c.form"
              file="file.zcml" />
-    <!-- include package="z3checkins" /-->
+    <include package="z3c.layer.minimal" />
     <include package="z3c.layer.pagelet" />
     <include package="z3c.macro" />
     <include package="z3c.pagelet" />
-    <include package="z3c.blobfile" />
 
     <include package="ldapadapter" />
     <include package="ldappas" />

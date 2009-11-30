@@ -23,7 +23,7 @@ from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
-from zope.app.component.interfaces import ISite
+from zope.location.interfaces import ISite
 from zope.app.container.interfaces import IContainer
 from zope.component import getSiteManager
 
@@ -55,7 +55,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilCron = ensureUtility(root_folder, IAdmUtilCron,
                                     'AdmUtilCron', AdmUtilCron,
                                     name='AdmUtilCron',
-                                    copy_to_zlog=False, asObject=True)
+                                    copy_to_zlog=False)
 
     if isinstance(madeAdmUtilCron, AdmUtilCron):
         logger.info(u"bootstrap: Ensure named AdmUtilCron")

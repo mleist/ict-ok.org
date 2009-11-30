@@ -36,7 +36,7 @@ from zope.app.security.interfaces import IAuthentication
 from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
 
 # z3c imports
-from z3c.rml import pagetemplate
+#from z3c.rml import pagetemplate
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.notifier.notifier import \

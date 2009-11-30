@@ -39,7 +39,7 @@
                             interface="zope.annotation.interfaces.IAttributeAnnotatable"
                             />
                         <implements
-                            interface="zope.app.container.interfaces.IContentContainer"
+                            interface="zope.container.interfaces.IContentContainer"
                             />
                         <factory
                             id="org.ict_ok.components.%(filename)s.%(filename)s.%(componentname)s"
@@ -60,7 +60,7 @@
                             interface="zope.annotation.interfaces.IAttributeAnnotatable"
                             />
                         <implements
-                            interface="zope.app.container.interfaces.IContentContainer"
+                            interface="zope.container.interfaces.IContentContainer"
                             />
                         <factory
                             id="org.ict_ok.components.%(filename)s.%(filename)s.%(componentname)sFolder"

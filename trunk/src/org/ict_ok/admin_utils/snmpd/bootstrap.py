@@ -83,7 +83,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilSnmpd = ensureUtility(root_folder, IAdmUtilSnmpd,
                                        'AdmUtilSnmpd', AdmUtilSnmpd,
                                        name='AdmUtilSnmpd',
-                                       copy_to_zlog=False, asObject=True)
+                                       copy_to_zlog=False)
 
     if isinstance(madeAdmUtilSnmpd, AdmUtilSnmpd):
         logger.info(u"bootstrap: Ensure named AdmUtilSnmpd")

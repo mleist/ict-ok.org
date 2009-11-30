@@ -35,10 +35,10 @@ from zope.app.catalog.interfaces import ICatalog
 from zope.configuration.config import ConfigurationExecutionError
 
 # pysnmp imports
-from pysnmp.v4.carrier.asynsock.dispatch import AsynsockDispatcher
-from pysnmp.v4.carrier.asynsock.dgram import udp
+from pysnmp.carrier.asynsock.dispatch import AsynsockDispatcher
+from pysnmp.carrier.asynsock.dgram import udp
 from pyasn1.codec.ber import decoder
-from pysnmp.v4.proto import api
+from pysnmp.proto import api
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import \

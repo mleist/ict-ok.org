@@ -19,7 +19,7 @@
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
         <implements
-            interface="zope.app.container.interfaces.IContentContainer"
+            interface="zope.container.interfaces.IContentContainer"
             />
         <factory
             id="org.ict_ok.components.host.host.HostVMwareEsx"

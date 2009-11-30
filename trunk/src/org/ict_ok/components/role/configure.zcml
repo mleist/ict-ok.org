@@ -26,7 +26,7 @@
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
         <implements
-            interface="zope.app.container.interfaces.IContentContainer"
+            interface="zope.container.interfaces.IContentContainer"
             />
         <factory
             id="org.ict_ok.components.role.role.Role"
@@ -71,7 +71,7 @@
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
         <implements
-            interface="zope.app.container.interfaces.IContentContainer"
+            interface="zope.container.interfaces.IContentContainer"
             />
         <implements
             interface="org.ict_ok.components.superclass.interfaces.IFocus"

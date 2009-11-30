@@ -40,8 +40,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                                     'AdmUtilWFMC', 
                                     AdmUtilWFMC,
                                     name='AdmUtilWFMC',
-                                    copy_to_zlog=False, 
-                                    asObject=True)
+                                    copy_to_zlog=False)
     
     if isinstance(madeAdmUtilWFMC, AdmUtilWFMC):
         logger.info(u"bootstrap: Ensure named AdmUtilWFMC")

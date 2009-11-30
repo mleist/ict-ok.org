@@ -404,7 +404,7 @@ class GlobalEventCrossbarUtility(object):
 
     def __init__(self):
         self.subscriber_list = []
-        super(GlobalEventCrossbarUtility, self).__init__(self)
+        super(GlobalEventCrossbarUtility, self).__init__()
 
     def subscribeToEventCrossbar(self, obj):
         if obj not in self.subscriber_list:

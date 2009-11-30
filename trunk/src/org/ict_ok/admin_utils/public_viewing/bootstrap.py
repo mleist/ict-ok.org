@@ -42,8 +42,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         'AdmUtilPublicViewing',
         AdmUtilPublicViewing,
         name='AdmUtilPublicViewing',
-        copy_to_zlog=False,
-        asObject=True)
+        copy_to_zlog=False)
 
     if isinstance(madePublicViewing, AdmUtilPublicViewing):
         logger.info(u"bootstrap: Ensure named AdmUtilPublicViewing")

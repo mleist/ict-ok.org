@@ -51,8 +51,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         'ManageableLDAPAdapter',
         ManageableLDAPAdapter,
         name='ManageableLDAPAdapter',
-        copy_to_zlog=False,
-        asObject=True)
+        copy_to_zlog=False)
 
     madeLdapPas = ensureUtility(\
         root_folder,
@@ -60,8 +59,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         'MyLDAPAuthentication',
         MyLDAPAuthentication,
         name='MyLDAPAuthentication',
-        copy_to_zlog=False,
-        asObject=True)
+        copy_to_zlog=False)
 
     if isinstance(madeLdapPas, MyLDAPAuthentication):
         madeLdapPas.adapterName = 'ManageableLDAPAdapter'
@@ -81,8 +79,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         'AdmUtilUserManagement',
         AdmUtilUserManagement,
         name='',
-        copy_to_zlog=False,
-        asObject=True)
+        copy_to_zlog=False)
 
     if isinstance(madePluggableAuthentication, PluggableAuthentication):
         logger.info(u"bootstrap: Ensure named AdmUtilUserManagement")

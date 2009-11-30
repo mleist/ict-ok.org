@@ -75,7 +75,7 @@ class GlobalCronUtility(object):
     def __init__(self):
         #logger.info(u"GlobalCronUtility started")
         self.subscriber_list = []
-        super(GlobalCronUtility, self).__init__(self)
+        super(GlobalCronUtility, self).__init__()
 
     def subscribeToCron(self, obj):
         #logger.info(u"GlobalCronUtility::subscribe2cron(%s)" % obj)

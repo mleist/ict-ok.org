@@ -51,8 +51,7 @@ def bootStrapSubscriber(event):
                                        '', 
                                        IntIds, 
                                        name='IntIds',
-                                       copy_to_zlog=False, 
-                                       asObject=True)
+                                       copy_to_zlog=False)
 
     if isinstance(madeUtilityIIntIds, IntIds):
         logger.info(u"bootstrap: made IIntIds-Utility")
@@ -71,8 +70,7 @@ def bootStrapSubscriber(event):
                                         '', 
                                         Catalog, 
                                         name='Catalog',
-                                        copy_to_zlog=False, 
-                                        asObject=True)
+                                        copy_to_zlog=False)
 
     if isinstance(madeUtilityICatalog, Catalog):
         logger.info(u"bootstrap: made ICatalog-Utility")

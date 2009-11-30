@@ -27,7 +27,7 @@ from org.ict_ok.components.host.adapter.snmp import Snmptrapd as BaseSnmptrapd
 from org.ict_ok.components.host.special.mge_ups.interfaces import IHostMgeUps
 
 # pysnmp imports
-from pysnmp.v4.proto import api
+from pysnmp.proto import api
 
 
 class Snmptrapd(BaseSnmptrapd):

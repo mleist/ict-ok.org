@@ -39,8 +39,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                              'NotifierEmail', 
                              NotifierEmail,
                              name='Notifier:Email',
-                             copy_to_zlog=False, 
-                             asObject=True)
+                             copy_to_zlog=False)
 
     if isinstance(madeNmap, NotifierEmail):
         logger.info(u"bootstrap: Ensure named NotifierEmail")
