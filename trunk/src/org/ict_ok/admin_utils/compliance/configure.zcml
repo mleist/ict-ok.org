@@ -41,6 +41,10 @@
             permission="org.ict_ok.admin_utils.compliance.Edit"
             interface="zope.app.container.interfaces.IWriteContainer"
             />
+        <require
+            permission="org.ict_ok.admin_utils.compliance.Import"
+            set_schema="org.ict_ok.admin_utils.compliance.interfaces.IImportXmlData"
+            />
     </class>
 
     <!-- setup local utilities -->

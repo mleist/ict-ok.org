@@ -56,7 +56,7 @@ def fillUtilitiyWithReqs(context):
     # ##########  detaillierte Übersicht für Mitarbeiter
     
     reqItMediaVentures = Requirement(
-        u"IT-Anforderungen Media Ventures GmbH",
+        u"IT-Anforderungen M. GmbH",
         ikComment = u"vollständiger Requirement-Katalog")
     managementOBJ.append(reqItMediaVentures)
     
@@ -579,3 +579,5 @@ def bootStrapSubscriberDatabase(event):
     dummy_db, connection, dummy_root, root_folder = \
             getInformationFromEvent(event)
     createUtils(root_folder, connection, dummy_db)
+    from org.ict_ok.admin_utils.compliance.lxml_demo import lxmlDemo
+    lxmlDemo()

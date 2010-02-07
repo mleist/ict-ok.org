@@ -42,10 +42,10 @@
             <span tal:content="structure python: view.getHrefTitle(context.room)" />
             <div tal:omit-tag=""
                  tal:condition="python: context.room.building is not None">
-                <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building)" />
+                <span tal:content="structure python: u'&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building)" />
                 <div tal:omit-tag=""
                      tal:condition="python: context.room.building.location is not None">
-                    <span tal:content="structure python: '&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building.location)" />
+                    <span tal:content="structure python: u'&nbsp;/&nbsp;%s' % view.getHrefTitle(context.room.building.location)" />
                 </div>
             </div>
             </td>

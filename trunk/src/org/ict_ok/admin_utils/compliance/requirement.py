@@ -18,6 +18,7 @@ __version__ = "$Id$"
 
 # python imports
 import logging
+from lxml import etree
 
 # zope imports
 from zope.app import zapi
@@ -166,6 +167,24 @@ class Requirement(Superclass,
             return '.'.join(['%d' % i for i in index])
         except TypeError:
             return "-deleted-"
+    
+    def asXml(self):
+        print "Pre:", self.title
+        #import pdb
+        #pdb.set_trace()
+        for subReq in self.values():
+            subReq.asXml()
+        print "Post:", self.title
+
+    def asETree(self):
+        reqObj = etree.Element("Req")
+        titleObj = etree.Element("Title")
+        titleObj.text = self.title
+        reqObj.append(titleObj)
+        for subReq in self.values():
+            reqObj.append( subReq.asETree())
+        return reqObj
+
 
 def getRequirement(context):
     """Adapt an ``IHaveRequirement`` object to ``IRequirement``."""

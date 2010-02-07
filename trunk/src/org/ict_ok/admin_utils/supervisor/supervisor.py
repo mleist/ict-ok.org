@@ -570,15 +570,31 @@ class AdmUtilSupervisor(Supernode):
         for folder in root_folder.values():
             for obj in folder.values():
                 obj.getAllExportData(dataStructure)
+        print "*" * 80
+        from pprint import pprint
+        pprint(dataStructure)
+        print "*" * 80
         python_pickle = pickle.dumps(dataStructure)
         return toxml(python_pickle)
 
     def importAllData(self, xml_str):
         """get data file for all objects"""
-        import pdb
-        pdb.set_trace()
+        from pprint import pprint
+        print "#" * 80
         data_structure = loads(xml_str)
-        print data_structure
+        print 'objects'
+        pprint(data_structure['objects'])
+        print 'conns'
+        pprint(data_structure['conns'])
+        print "#" * 80
+        for obj in data_structure['objects']:
+            #import pdb
+            #pdb.set_trace()
+            print "Obj: ", obj['ikName']
+            print "myFactory: ", obj['meta']['myFactory']
+            o2=zapi.createObject(obj['meta']['myFactory'])
+            print o2
+        #print data_structure
         return True
 
 

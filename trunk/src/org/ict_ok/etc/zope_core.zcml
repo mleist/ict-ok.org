@@ -61,6 +61,7 @@
     <include package="zope.app.zapi"/>
     <include package="zope.app.zopeappgenerations"/>
     <include package="zope.app.zptpage"/>
+    <include package="zope.app.zcmlfiles"/>
     <!--include package="zc.i18n" /-->
     <include package="zc.resourcelibrary"/>
     <include package="zc.table"/>

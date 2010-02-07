@@ -19,12 +19,12 @@
     <grant permission="org.ict_ok.public.View"
                     role="zope.Anonymous" />
 
-    <grant permission="zope.View"
+    <!--grant permission="zope.View"
            role="zope.Anonymous" />
     <grant permission="zope.app.dublincore.view"
            role="zope.Anonymous" />
     <grant permission="zope.Public"
-           role="zope.Anonymous" />
+           role="zope.Anonymous" /-->
 
     <!-- ================================================= -->
   <include package="zope.securitypolicy" file="meta.zcml" />
@@ -121,8 +121,8 @@
         principal="zope.manager"
         /-->
 
-  <grant permission="org.ict_ok.admin_utils.dashboard.View"
-         role="zope.Anonymous" />
+  <!--grant permission="org.ict_ok.admin_utils.dashboard.View"
+         role="zope.Anonymous" /-->
 
   <!-- grant permission="org.ict_ok.admin_utils.dashboard.Edit"
          role="zope.Manager" /-->

@@ -280,6 +280,25 @@ class Component(Supernode):
         #raise Exception, 'Not implemented yet'
         return None
 
+    def _getAllExportData_Step0(self):
+        """return a list of meta-attribute-dict
+        [{'myFactory': 'bla bla',
+          'objectID': '1234...',
+         },
+        ]
+        """
+        retDict = {}
+        retDict['myFactory'] = self.myFactory
+        retDict['shortName'] = self.shortName
+        retDict['ikRevision'] = self.ikRevision
+        historyDictList = []
+#        import pdb
+#        pdb.set_trace()
+        for historyEvent in self.history.data:
+            historyDictList.append(historyEvent.exportAsDict())
+        retDict['events'] = historyDictList
+        return retDict
+
     def _getAllExportData_Step1(self):
         """return a list of attribute-dict ict-objects _without_ all
         references by lovely.relation in form of
@@ -289,8 +308,10 @@ class Component(Supernode):
         ]
         """
         retDict = {}
-        #import pdb
-        #pdb.set_trace()
+        metaDataDict = self._getAllExportData_Step0()
+        retDict['meta'] = metaDataDict
+#        import pdb
+#        pdb.set_trace()
         valAttributeNames = getValAttributeNames(self)
         for (name, value) in self.__dict__.items():
             if name in valAttributeNames:
@@ -304,6 +325,9 @@ class Component(Supernode):
         ]
         """
         retList = []
+        if self.objectID == u'c9d940953025c14dda58c86804eea1bd0':
+            import pdb
+            pdb.set_trace()
         refAttributeNames = self.getRefAttributeNames()
         for attr_name in refAttributeNames:
             if hasattr(self, attr_name):
@@ -314,7 +338,7 @@ class Component(Supernode):
                     if IComponent.providedBy(obj):
                         rel_manager = getattr(self.__class__, attr_name)._manager
                         retList.append(
-                            ((self.objectID, attr_name), (obj.objectID, rel_manager))
+                            ((self.objectID, attr_name), (obj.objectID, rel_manager.relType))
                         )
         return retList
 
@@ -327,6 +351,8 @@ class Component(Supernode):
         #            obj.getAllExportData(dataStructure)
         objDataList = self._getAllExportData_Step1()
         connDataList = self._getAllExportData_Step2()
+#        import pdb
+#        pdb.set_trace()
         for newConntuple in connDataList:
             for oldConntuple in dataStructure['conns']:
                 oldConnObjId = oldConntuple[1][0]
@@ -342,8 +368,11 @@ class Component(Supernode):
                     tmplist[1] = newConntuple[0]
                     oldConntuple = tuple(tmplist)
                     print "eee: ", oldConntuple
+#        print "ddd: ", self.ikName
         dataStructure['objects'].extend(objDataList)
         dataStructure['conns'].extend(connDataList)
+#        print "1:", dataStructure['objects']
+#        print "2:", dataStructure['conns']
 
 
 def AllXlsCodepages(dummy_context):
@@ -450,6 +479,7 @@ def getValAttributeNames(arg_instance):
     classInheritancePath = getClassInheritancePath(classOfInstance,
                                                    endClass=Superclass)
     classInheritancePath.append(classOfInstance)
+    print "classInheritancePath: ", classInheritancePath
     askAttributes = []
     allAttributesList = [i_class.__dict__.keys() for i_class in classInheritancePath]
     for j_attrList in allAttributesList:

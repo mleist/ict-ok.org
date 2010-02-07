@@ -119,6 +119,13 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made O2ORels-Utility")
+    else:
+        sitem = root_folder.getSiteManager()
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IO2OStringTypeRelationships)]
+        instUtilityO2ORels = utils[0].component
+#        import pdb
+#        pdb.set_trace()
 
     madeUtilityICatalog = ensureUtility(root_folder, 
                                         ICatalog, 
