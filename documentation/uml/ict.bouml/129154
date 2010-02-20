@@ -1,6 +1,6 @@
 format 66
 "pkg_inv01" // pkg_inv01
-  revision 37
+  revision 38
   modified_by 2 "markus"
   // class settings
   //class diagram settings
@@ -2859,6 +2859,7 @@ ${docstring}${members}
       idl_decl ""
       explicit_switch_type ""
       
+      comment "				"
     end
 
     class 161410 "IContract"

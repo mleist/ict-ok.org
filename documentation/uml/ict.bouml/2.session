@@ -14,7 +14,7 @@ diagrams
     1256 826 100 17 0 0
   classdiagram_ref 138114 // cl_inventory07_diag
     1256 826 100 3 0 0
-  classdiagram_ref 139266 // cl_inventory08_diag
+  active  classdiagram_ref 139266 // cl_inventory08_diag
     1256 826 100 17 0 0
   classdiagram_ref 140418 // cl_inventory09_diag
     1256 826 100 17 0 0
@@ -56,18 +56,15 @@ diagrams
     1241 826 100 4 0 0
   objectdiagram_ref 134658 // obj05_diag
     1548 1013 100 17 0 0
-  active  classdiagram_ref 147202 // cl_inventory20_diag
+  classdiagram_ref 147202 // cl_inventory20_diag
     1548 1013 100 17 221 0
   classdiagram_ref 148354 // cl_inventory21_diag
     1241 826 100 17 0 0
 end
 show_stereotypes
-selected class_ref 155522 // IContactItem
+selected classview_ref 129154 // zope
 open
-  class_ref 156034 // Address
-  class_ref 161282 // Contract
-  class_ref 155778 // Person
-  class_ref 155010 // WorkOrder
+  classview_ref 129154 // zope
   objectdiagram_ref 146050 // obj08_roles_diag
   classview_ref 128002 // cl_inventory01
 end
