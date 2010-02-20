@@ -1,16 +1,16 @@
-format 66
+format 71
 
 classinstancecanvas 128002 classinstance_ref 134658 // Mobile01
-  xyz 125 527 2000
+  xyz 125.2 527.2 2000
 end
 classinstancecanvas 128130 classinstance_ref 134786 // Mobile02
-  xyz 476 528 2000
+  xyz 476.5 528.5 2000
 end
 classinstancecanvas 128258 classinstance_ref 134914 // Mobiles
-  xyz 355 289 2000
+  xyz 355.7 289.3 2000
 end
 classinstancecanvas 128642 classinstance_ref 135042 // ict_ok.org
-  xyz 370 88 2000
+  xyz 370.1 88 2000
 end
 objectlinkcanvas 128386 rel relation_ref 147714 // contains
   from ref 128258 z 1999 label "contains" italic xyz 288 444 1999 to ref 128002
@@ -20,5 +20,5 @@ objectlinkcanvas 128514 rel relation_ref 147714 // contains
   no_role_a no_role_b
 objectlinkcanvas 129154 rel relation_ref 147842 // contains
   from ref 128642 z 1999 label "contains" italic xyz 412 185 1999 to ref 128258
-  no_role_a role_b_pos 441 114 3000
+  no_role_a role_b_pos 447 120 3000
 end

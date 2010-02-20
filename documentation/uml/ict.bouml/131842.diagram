@@ -1,23 +1,23 @@
-format 66
+format 71
 
 classinstancecanvas 128130 classinstance_ref 129922 // Panel1
-  xyz 289 507 2000
+  xyz 289.1 507.7 2000
 end
 classinstancecanvas 128258 classinstance_ref 130178 // P1
-  xyz 407 397 2004
+  xyz 407.7 397.7 2004
 end
 classinstancecanvas 129410 classinstance_ref 133506 // P2
-  xyz 380 620 2000
+  xyz 380.6 620.6 2000
 end
 classinstancecanvas 129666 classinstance_ref 136194 // link01
-  xyz 565 148 3005
+  xyz 565.8 148 3005
 end
 classinstancecanvas 129922 classinstance_ref 136450 // link02
-  xyz 295 146 3005
+  xyz 295.8 146.4 3005
 end
 note 130178 "obj02_diag
 $Id$"
-  xyzwh 38 26 2000 384 52
+  xyzwh 37.7 26.3 2000 384 52
 objectlinkcanvas 129282 rel relation_ref 139906 // contains
   from ref 128130 z 1999 label "contains" italic xyz 375 447 1999 to ref 128258
   role_a_pos 438 429 3000 role_b_pos 373 485 3000

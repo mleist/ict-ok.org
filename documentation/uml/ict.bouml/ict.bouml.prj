@@ -1,6 +1,6 @@
-format 66
+format 71
 "ict.bouml"
-  revision 22
+  revision 23
   modified_by 2 "markus"
   python_root_dir "/Users/markus/Repositories/svn.ict-ok.org/documentation/uml/ict.py/"
 
@@ -14,7 +14,7 @@ the ....
   // class settings
   default_attribute_visibility public default_relation_visibility public default_operation_visibility public
   //class diagram settings
-  draw_all_relations yes hide_attributes no hide_operations no show_members_full_definition yes show_members_visibility no show_members_stereotype yes show_members_multiplicity yes show_members_initialization yes show_attribute_modifiers yes member_max_width 127 show_parameter_dir yes show_parameter_name yes package_name_in_tab yes class_drawing_mode natural drawing_language uml show_context_mode python_package auto_label_position yes show_relation_modifiers no show_infonote no shadow yes show_stereotype_properties yes
+  draw_all_relations yes hide_attributes no hide_operations no hide_getset_operations no show_members_full_definition yes show_members_visibility no show_members_stereotype yes show_members_multiplicity yes show_members_initialization yes show_attribute_modifiers yes member_max_width 127 show_parameter_dir yes show_parameter_name yes package_name_in_tab yes class_drawing_mode natural drawing_language uml show_context_mode python_package auto_label_position yes show_relation_modifiers no show_relation_visibility no show_infonote no shadow yes show_stereotype_properties yes
   //use case diagram settings
   package_name_in_tab no show_context no auto_label_position yes draw_all_relations yes class_drawing_mode actor shadow yes show_stereotype_properties no
   //sequence diagram settings

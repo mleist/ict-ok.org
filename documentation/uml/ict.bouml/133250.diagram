@@ -1,48 +1,48 @@
-format 66
+format 71
 
 classinstancecanvas 128002 classinstance_ref 132738 // neon.server.ifdd.de
-  xyz 912 279 2000
+  xyz 912.9 279.3 2000
 end
 classinstancecanvas 128130 classinstance_ref 130306 // 3Com-01
-  xyz 384 444 2000
+  xyz 384.9 444.8 2000
 end
 classinstancecanvas 128258 classinstance_ref 130434 // P1
-  xyz 393 557 2000
+  xyz 393.9 557.7 2000
 end
 classinstancecanvas 128386 classinstance_ref 129794 // Infra1
-  xyz 327 331 2000
+  xyz 327.8 331.9 2000
 end
 classinstancecanvas 128514 classinstance_ref 130178 // P1
-  xyz 78 555 2000
+  xyz 78 555.1 2000
 end
 classinstancecanvas 128642 classinstance_ref 129922 // Panel1
-  xyz 134 448 2000
+  xyz 134.6 448 2000
 end
 classinstancecanvas 128770 classinstance_ref 129538 // Serverroom
-  xyz 306 229 2000
+  xyz 306.9 229.3 2000
 end
 classinstancecanvas 129666 classinstance_ref 132866 // helium.server.ifdd.de
-  xyz 924 649 2000
+  xyz 924 649.3 2000
 end
 classinstancecanvas 129794 classinstance_ref 133122 // eth0
-  xyz 920 367 2000
+  xyz 920.8 367.7 2000
 end
 classinstancecanvas 129922 classinstance_ref 132994 // eth0
-  xyz 926 559 2000
+  xyz 926.6 559.3 2000
 end
 classinstancecanvas 130306 classinstance_ref 133250 // P2
-  xyz 657 368 2000
+  xyz 657.1 368 2000
 end
 classinstancecanvas 130434 classinstance_ref 133378 // P3
-  xyz 660 560 2000
+  xyz 660 560.6 2000
 end
 note 131458 "Server Neon"
-  xyzwh 975 226 2000 110 34
+  xyzwh 974.7 225.6 2000 110 34
 note 131586 "Server Helium"
-  xyzwh 986 694 2000 112 34
+  xyzwh 986.3 694 2000 112 34
 note 132226 "obj04_diag
 $Id$"
-  xyzwh 36 30 2000 384 52
+  xyzwh 36.1 29.5 2000 384 52
 objectlinkcanvas 128898 rel relation_ref 139266 // Interface in Switch
   from ref 128130 z 1999 label "Interface in Switch" italic xyz 399 495 1999 to ref 128258
   no_role_a no_role_b

@@ -1,21 +1,21 @@
-format 66
+format 71
 
 note 128002 "obj08_roles_diag
 $Id$"
-  xyzwh 39 24 2000 382 52
+  xyzwh 38.7 23.7 2000 382 52
 classinstancecanvas 128130 classinstance_ref 141314 // markusleist
-  xyz 181 250 2000
+  xyz 181.3 250.3 2000
 end
 classinstancecanvas 128258 classinstance_ref 141442 // developer
-  xyz 641 280 2000
+  xyz 641.1 280.9 2000
 end
 classinstancecanvas 128514 classinstance_ref 141570 // Peter Lustig
-  xyz 196 441 2000
+  xyz 196.9 441.6 2000
 end
 objectlinkcanvas 128386 rel relation_ref 172802 // performs
-  from ref 128258 z 1999 label "performs" italic xyz 454 280 3000 to ref 128130
+  from ref 128258 z 1999 label "performs" italic xyz 454 280 1999 to ref 128130
   no_role_a no_role_b
 objectlinkcanvas 128642 rel relation_ref 172802 // performs
-  from ref 128258 z 1999 label "performs" italic xyz 460 373 3000 to ref 128514
+  from ref 128258 z 1999 label "performs" italic xyz 460 373 1999 to ref 128514
   no_role_a no_role_b
 end
