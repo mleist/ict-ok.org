@@ -35,7 +35,7 @@ from org.ict_ok.components.mobilephone.interfaces import \
     IMobilePhone, IMobilePhoneFolder, IAddMobilePhone
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 
 def AllMobilePhones(dummy_context):
     """Which MobilePhone exists
@@ -125,14 +125,13 @@ class MobilePhone(Component):
                 setattr(self, name, value)
 
 
-class MobilePhoneFolder(Superclass, Folder):
+class MobilePhoneFolder(ComponentFolder):
     implements(IMobilePhoneFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddMobilePhone)
+    contentFactory = MobilePhone
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

@@ -29,6 +29,7 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.logical_device.interfaces import ILogicalDevice, ILogicalDeviceFolder
 from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -82,13 +83,12 @@ class LogicalDevice(LogicalComponent):
                 setattr(self, name, value)
 
 
-class LogicalDeviceFolder(Superclass, Folder):
-    implements(ILogicalDeviceFolder,
-               IImportCsvData,
-               IImportXlsData)
+class LogicalDeviceFolder(ComponentFolder):
+    implements(ILogicalDeviceFolder)
+    contentFactory = LogicalDevice
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

@@ -40,7 +40,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.host.interfaces import \
     IHost, IEventIfEventHost, IAddHost, IHostFolder
 from org.ict_ok.components.interface.interfaces import IInterface
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.supernode.interfaces import IState
@@ -349,14 +349,13 @@ class Host(LogicalDevice):
             return None
 
 
-class HostFolder(Superclass, Folder):
+class HostFolder(ComponentFolder):
     implements(IHostFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddHost)
+    contentFactory = Host
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

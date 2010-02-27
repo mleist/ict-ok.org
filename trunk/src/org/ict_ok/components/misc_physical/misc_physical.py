@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.misc_physical.interfaces import IMiscPhysical
 from org.ict_ok.components.misc_physical.interfaces import IMiscPhysicalFolder
 from org.ict_ok.components.misc_physical.interfaces import IAddMiscPhysical
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -93,14 +93,13 @@ class MiscPhysical(Device):
                 setattr(self, name, value)
 
 
-class MiscPhysicalFolder(Superclass, Folder):
+class MiscPhysicalFolder(ComponentFolder):
     implements(IMiscPhysicalFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddMiscPhysical)
+    contentFactory = MiscPhysical
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

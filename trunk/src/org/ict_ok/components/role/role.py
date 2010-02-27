@@ -36,7 +36,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.role.interfaces import IRole
 from org.ict_ok.components.role.interfaces import IRoleFolder
 from org.ict_ok.components.role.interfaces import IAddRole
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -96,14 +96,13 @@ class Role(Component):
                 setattr(self, name, value)
 
 
-class RoleFolder(Superclass, Folder):
+class RoleFolder(ComponentFolder):
     implements(IRoleFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddRole)
+    contentFactory = Role
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

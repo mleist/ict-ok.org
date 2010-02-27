@@ -32,7 +32,7 @@ from org.ict_ok.components.patchport.interfaces import \
     IPatchPort, IPatchPortFolder, IAddPatchPort
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 #from org.ict_ok.components.physical_connector.physical_connector import \
 #    PhysicalConnector, PhysicalConnectorFolder
 from org.ict_ok.components.component import \
@@ -127,14 +127,13 @@ class PatchPort(PhysicalComponent):
                
 
 
-class PatchPortFolder(Superclass, Folder):
+class PatchPortFolder(ComponentFolder):
     implements(IPatchPortFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddPatchPort)
+    contentFactory = PatchPort
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

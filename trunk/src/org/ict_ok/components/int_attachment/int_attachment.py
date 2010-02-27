@@ -41,7 +41,7 @@ from org.ict_ok.components.int_attachment.interfaces import IInternalAttachment
 from org.ict_ok.components.int_attachment.interfaces import IInternalAttachmentFolder
 from org.ict_ok.components.int_attachment.interfaces import IAddInternalAttachment
 from zope.app.container.interfaces import IObjectRemovedEvent
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -103,14 +103,13 @@ def notifyRemovedEvent(instance, event):
     del instance.file
 
 
-class InternalAttachmentFolder(Superclass, Folder):
+class InternalAttachmentFolder(ComponentFolder):
     implements(IInternalAttachmentFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddInternalAttachment)
+    contentFactory = InternalAttachment
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

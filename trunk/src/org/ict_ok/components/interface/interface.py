@@ -31,7 +31,7 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.interface.interfaces import \
     IInterface, IAddInterface, IInterfaceFolder
@@ -130,14 +130,13 @@ class Interface(PhysicalComponent):
                 link.getAllPhysicalConnectors(connectorSet, maxDepth-1)
 
 
-class InterfaceFolder(Superclass, Folder):
+class InterfaceFolder(ComponentFolder):
     implements(IInterfaceFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddInterface)
+    contentFactory = Interface
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

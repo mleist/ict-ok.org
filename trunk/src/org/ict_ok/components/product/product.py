@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.product.interfaces import IProduct
 from org.ict_ok.components.product.interfaces import IProductFolder
 from org.ict_ok.components.product.interfaces import IAddProduct
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -112,14 +112,13 @@ class Product(Component):
                 setattr(self, name, value)
 
 
-class ProductFolder(Superclass, Folder):
+class ProductFolder(ComponentFolder):
     implements(IProductFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddProduct)
+    contentFactory = Product
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

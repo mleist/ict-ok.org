@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.organization.interfaces import IOrganization
 from org.ict_ok.components.organization.interfaces import IOrganizationFolder
 from org.ict_ok.components.organization.interfaces import IAddOrganization
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -97,14 +97,13 @@ class Organization(ContactItem):
                 setattr(self, name, value)
 
 
-class OrganizationFolder(Superclass, Folder):
+class OrganizationFolder(ComponentFolder):
     implements(IOrganizationFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddOrganization)
+    contentFactory = Organization
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

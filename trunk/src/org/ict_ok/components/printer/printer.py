@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.printer.interfaces import IPrinter
 from org.ict_ok.components.printer.interfaces import IPrinterFolder
 from org.ict_ok.components.printer.interfaces import IAddPrinter
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -94,14 +94,13 @@ class Printer(Device):
                 setattr(self, name, value)
 
 
-class PrinterFolder(Superclass, Folder):
+class PrinterFolder(ComponentFolder):
     implements(IPrinterFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddPrinter)
+    contentFactory = Printer
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

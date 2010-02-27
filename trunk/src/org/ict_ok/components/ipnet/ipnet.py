@@ -36,7 +36,7 @@ from lovely.relation.property import FieldRelationManager
 from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.schema.IPy import IP
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.superclass.superclass import MsgEvent
@@ -242,17 +242,16 @@ class IpNet(Component):
         return health
 
 
-class IpNetFolder(Superclass, Folder):
+class IpNetFolder(ComponentFolder):
     implements(IIpNetFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddIpNet)
+    contentFactory = IpNet
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)
 
 
 class SoapTest:

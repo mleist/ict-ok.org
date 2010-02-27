@@ -38,7 +38,7 @@ from zope.app.folder import Folder
 from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.components.superclass.superclass import Superclass
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.latency.interfaces import \
@@ -292,14 +292,13 @@ class Latency(Component):
         rrdtool.graph(*argList)
 
 
-class LatencyFolder(Superclass, Folder):
+class LatencyFolder(ComponentFolder):
     implements(ILatencyFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddLatency)
+    contentFactory = Latency
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

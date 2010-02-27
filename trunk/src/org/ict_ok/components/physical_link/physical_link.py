@@ -40,6 +40,7 @@ from org.ict_ok.components.component import Component
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+from org.ict_ok.components.component import Component, ComponentFolder
 #from org.ict_ok.components.room.room import Room_PhysicalConnectors_RelManager
 
 #def AllPhysicalConnectorTemplates(dummy_context):
@@ -169,17 +170,16 @@ class PhysicalLink(Component):
                 connector.getAllPhysicalConnectors(connectorSet, maxDepth-1)
 
 
-class PhysicalLinkFolder(Superclass, Folder):
+class PhysicalLinkFolder(ComponentFolder):
     implements(IPhysicalLinkFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddPhysicalLink)
+    contentFactory = PhysicalLink
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)
 
 
 #class PhysicalConnector(Component):
@@ -219,7 +219,7 @@ class PhysicalLinkFolder(Superclass, Folder):
 #                setattr(self, name, value)
 #
 #
-#class PhysicalConnectorFolder(Superclass, Folder):
+#class PhysicalConnectorFolder(ComponentFolder):
 #    implements(IPhysicalConnectorFolder, 
 #               IImportCsvData,
 #               IImportXlsData,

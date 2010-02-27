@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.physical_media.interfaces import IPhysicalMedia
 from org.ict_ok.components.physical_media.interfaces import IPhysicalMediaFolder
 from org.ict_ok.components.physical_media.interfaces import IAddPhysicalMedia
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -195,14 +195,13 @@ class PhysicalMedia(PhysicalComponent):
                 setattr(self, name, value)
 
 
-class PhysicalMediaFolder(Superclass, Folder):
+class PhysicalMediaFolder(ComponentFolder):
     implements(IPhysicalMediaFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddPhysicalMedia)
+    contentFactory = PhysicalMedia
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

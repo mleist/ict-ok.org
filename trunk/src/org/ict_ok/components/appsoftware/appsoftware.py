@@ -31,7 +31,7 @@ from org.ict_ok.components.software_component.software_component import \
 from org.ict_ok.components.superclass.interfaces import IFocus
 from org.ict_ok.components.appsoftware.interfaces import \
     IAddApplicationSoftware, IApplicationSoftware, IApplicationSoftwareFolder
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.device.device import Device_AppSoftware_RelManager
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
@@ -100,14 +100,13 @@ class ApplicationSoftware(SoftwareComponent):
                 setattr(self, name, value)
 
 
-class ApplicationSoftwareFolder(Superclass, Folder):
+class ApplicationSoftwareFolder(ComponentFolder):
     implements(IApplicationSoftwareFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddApplicationSoftware)
+    contentFactory = ApplicationSoftware
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

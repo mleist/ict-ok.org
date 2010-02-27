@@ -30,7 +30,7 @@ from org.ict_ok.components.software_component.software_component import \
     SoftwareComponent
 from org.ict_ok.components.osoftware.interfaces import \
     IAddOperatingSoftware, IOperatingSoftware, IOperatingSoftwareFolder
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.device.device import Device_OSoftware_RelManager
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
@@ -99,14 +99,13 @@ class OperatingSoftware(SoftwareComponent):
                 setattr(self, name, value)
 
 
-class OperatingSoftwareFolder(Superclass, Folder):
+class OperatingSoftwareFolder(ComponentFolder):
     implements(IOperatingSoftwareFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddOperatingSoftware)
+    contentFactory = OperatingSoftware
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.work_order.interfaces import IWorkOrder
 from org.ict_ok.components.work_order.interfaces import IWorkOrderFolder
 from org.ict_ok.components.work_order.interfaces import IAddWorkOrder
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -117,14 +117,13 @@ class WorkOrder(Component):
                 setattr(self, name, value)
 
 
-class WorkOrderFolder(Superclass, Folder):
+class WorkOrderFolder(ComponentFolder):
     implements(IWorkOrderFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddWorkOrder)
+    contentFactory = WorkOrder
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

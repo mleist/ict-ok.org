@@ -32,7 +32,7 @@ from org.ict_ok.components.patchpanel.interfaces import \
     IAddPatchPanel, IPatchPanel, IPatchPanelFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.rack.rack import Rack_PatchPanels_RelManager
@@ -99,14 +99,13 @@ class PatchPanel(PhysicalComponent):
                 setattr(self, name, value)
 
 
-class PatchPanelFolder(Superclass, Folder):
+class PatchPanelFolder(ComponentFolder):
     implements(IPatchPanelFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddPatchPanel)
+    contentFactory = PatchPanel
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.display_unit.interfaces import IDisplayUnit
 from org.ict_ok.components.display_unit.interfaces import IDisplayUnitFolder
 from org.ict_ok.components.display_unit.interfaces import IAddDisplayUnit
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -96,14 +96,13 @@ class DisplayUnit(PhysicalComponent):
                 setattr(self, name, value)
 
 
-class DisplayUnitFolder(Superclass, Folder):
+class DisplayUnitFolder(ComponentFolder):
     implements(IDisplayUnitFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddDisplayUnit)
+    contentFactory = DisplayUnit
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

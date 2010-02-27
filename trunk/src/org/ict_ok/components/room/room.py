@@ -36,7 +36,7 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.location.interfaces import ILocation
 from org.ict_ok.components.building.interfaces import IBuilding
@@ -126,14 +126,13 @@ class Room(Component):
 
 from zope.app.container.interfaces import IReadContainer
 
-class RoomFolder(Superclass, Folder):
+class RoomFolder(ComponentFolder):
     implements(IRoomFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddRoom)
+    contentFactory = Room
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

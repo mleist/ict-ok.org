@@ -40,6 +40,7 @@ from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.physical_component.physical_component import \
     PhysicalComponent
+from org.ict_ok.components.component import Component, ComponentFolder
 
 def AllDeviceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IDevice)
@@ -120,13 +121,12 @@ class Device(PhysicalComponent):
                 setattr(self, name, value)
 
 
-class DeviceFolder(Superclass, Folder):
-    implements(IDeviceFolder,
-               IImportCsvData,
-               IImportXlsData)
+class DeviceFolder(ComponentFolder):
+    implements(IDeviceFolder)
+    contentFactory = Device
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

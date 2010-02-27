@@ -33,9 +33,9 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+    IComponentFolder, IImportCsvData, IImportXlsData
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.building.interfaces import \
     IBuilding, IAddBuilding, IBuildingFolder
@@ -103,14 +103,13 @@ class Building(Component):
                 setattr(self, name, value)
 
 
-class BuildingFolder(Superclass, Folder):
-    implements(IBuildingFolder, 
-               IImportCsvData,
-               IImportXlsData,
+class BuildingFolder(ComponentFolder):
+    implements(IBuildingFolder,
                IAddBuilding)
+    contentFactory = Building
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

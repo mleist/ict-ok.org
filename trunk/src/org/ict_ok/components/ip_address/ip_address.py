@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.ip_address.interfaces import IIpAddress
 from org.ict_ok.components.ip_address.interfaces import IIpAddressFolder
 from org.ict_ok.components.ip_address.interfaces import IAddIpAddress
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -108,14 +108,13 @@ class IpAddress(LogicalComponent):
                 setattr(self, name, value)
 
 
-class IpAddressFolder(Superclass, Folder):
+class IpAddressFolder(ComponentFolder):
     implements(IIpAddressFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddIpAddress)
+    contentFactory = IpAddress
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

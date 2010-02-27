@@ -36,7 +36,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.group.interfaces import IGroup
 from org.ict_ok.components.group.interfaces import IGroupFolder
 from org.ict_ok.components.group.interfaces import IAddGroup
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -98,14 +98,13 @@ class Group(Component):
                 setattr(self, name, value)
 
 
-class GroupFolder(Superclass, Folder):
+class GroupFolder(ComponentFolder):
     implements(IGroupFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddGroup)
+    contentFactory = Group
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

@@ -32,7 +32,7 @@ from org.ict_ok.components.rack.interfaces import \
     IAddRack, IRack, IRackFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.patchpanel.interfaces import IPatchPanel
@@ -103,14 +103,13 @@ class Rack(PhysicalComponent):
                 setattr(self, name, value)
 
 
-class RackFolder(Superclass, Folder):
+class RackFolder(ComponentFolder):
     implements(IRackFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddRack)
+    contentFactory = Rack
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

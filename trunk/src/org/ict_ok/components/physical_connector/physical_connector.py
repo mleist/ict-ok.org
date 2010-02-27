@@ -32,7 +32,7 @@ from org.ict_ok.components.physical_connector.interfaces import \
     IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
@@ -105,7 +105,7 @@ def AllUnusedOrUsedPhysikalLinkPhysicalConnectors(dummy_context):
 #                setattr(self, name, value)
 #
 #
-#class PhysicalConnectorFolder(Superclass, Folder):
+#class PhysicalConnectorFolder(ComponentFolder):
 #    implements(IPhysicalConnectorFolder, 
 #               IImportCsvData,
 #               IImportXlsData,

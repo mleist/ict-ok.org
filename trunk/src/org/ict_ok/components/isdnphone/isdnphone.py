@@ -35,7 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.isdnphone.interfaces import IISDNPhone
 from org.ict_ok.components.isdnphone.interfaces import IISDNPhoneFolder
 from org.ict_ok.components.isdnphone.interfaces import IAddISDNPhone
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
@@ -102,14 +102,13 @@ class ISDNPhone(PhysicalComponent):
                 setattr(self, name, value)
 
 
-class ISDNPhoneFolder(Superclass, Folder):
+class ISDNPhoneFolder(ComponentFolder):
     implements(IISDNPhoneFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddISDNPhone)
+    contentFactory = ISDNPhone
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

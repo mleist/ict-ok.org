@@ -41,7 +41,8 @@ from org.ict_ok.components.interfaces import \
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.interfaces import IComponent
-from org.ict_ok.components.component import Component, Contracts_Component_RelManager
+from org.ict_ok.components.component import Contracts_Component_RelManager
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.contact_item.interfaces import IContactItem
 
 def AllContractTemplates(dummy_context):
@@ -135,14 +136,13 @@ class Contract(Component):
                 setattr(self, name, value)
 
 
-class ContractFolder(Superclass, Folder):
+class ContractFolder(ComponentFolder):
     implements(IContractFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddContract)
+    contentFactory = Contract
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)
