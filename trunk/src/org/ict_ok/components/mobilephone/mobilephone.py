@@ -21,20 +21,13 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
-from zope.app.folder import Folder
 
 # lovely imports
-from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.mobilephone.interfaces import \
     IMobilePhone, IMobilePhoneFolder, IAddMobilePhone
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import Component, ComponentFolder
 
 def AllMobilePhones(dummy_context):
@@ -64,10 +57,6 @@ def AllMobilePhoneTemplates(dummy_context):
                                     title=myString))
     return SimpleVocabulary(terms)
 
-
-#MobilePhone_Conns_RelManager = FieldRelationManager(IMobilePhone['conns'],
-                                                 #IMobilePhone['conn'],
-                                                 #relType='mobilephone:conns')
 
 class MobilePhone(Component):
     """

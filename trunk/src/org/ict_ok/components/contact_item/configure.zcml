@@ -89,6 +89,14 @@
             />
         <require
             permission="org.ict_ok.components.contact_item.View"
+            interface="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.contact_item.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.contact_item.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require

@@ -17,12 +17,6 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
 # zope imports
 from zope.interface import implements
-from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -31,13 +25,10 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.work_order.interfaces import IWorkOrder
 from org.ict_ok.components.work_order.interfaces import IWorkOrderFolder
 from org.ict_ok.components.work_order.interfaces import IAddWorkOrder
 from org.ict_ok.components.component import Component, ComponentFolder
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.product.interfaces import IProduct
@@ -52,7 +43,6 @@ def AllWorkOrders(dummy_context):
 
 def AllUnusedOrUsedWorkOrderWorkOrders(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IWorkOrder, 'mainWorkOrder')
-
 
 WorkOrder_Products_RelManager = \
        FieldRelationManager(IWorkOrder['products'],
@@ -70,8 +60,6 @@ WorkOrder_WorkOrders_RelManager = \
        FieldRelationManager(IWorkOrder['subWorkOrders'],
                             IWorkOrder['mainWorkOrder'],
                             relType='mainWorkOrder:subWorkOrders')
-
-
 
 
 class WorkOrder(Component):
@@ -92,7 +80,6 @@ class WorkOrder(Component):
     fullTextSearchFields = []
     fullTextSearchFields.extend(Component.fullTextSearchFields)
         
-
 
     def __init__(self, **data):
         """

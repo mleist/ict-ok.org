@@ -19,29 +19,20 @@ __version__ = "$Id$"
 from zope.interface import implements
 from zope.interface import Invalid
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.folder import Folder
 
 # lovely imports
-from lovely.relation.property import RelationPropertyIn, RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
+from lovely.relation.property import RelationPropertyIn
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.patchport.interfaces import \
     IPatchPort, IPatchPortFolder, IAddPatchPort
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component, ComponentFolder
-#from org.ict_ok.components.physical_connector.physical_connector import \
-#    PhysicalConnector, PhysicalConnectorFolder
+from org.ict_ok.components.component import ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.patchpanel.patchpanel import PatchPanel_PatchPorts_RelManager
 from org.ict_ok.components.physical_connector.interfaces import \
     IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
-from org.ict_ok.components.physical_link.interfaces import \
-    IPhysicalLink, IPhysicalLinkFolder, IAddPhysicalLink
 from org.ict_ok.components.physical_link.physical_link import \
     PhysicalLinks_PhysicalConnectors_RelManager
 from org.ict_ok.components.physical_component.physical_component import \
@@ -89,7 +80,6 @@ class PatchPort(PhysicalComponent):
 #    frontLink = RelationPropertyIn(FrontLink_PatchPort_RelManager)
 #    rearLink = RelationPropertyIn(RearLink_PatchPort_RelManager)
     #, relType='physicalConnector:physicalConnector')
-
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)

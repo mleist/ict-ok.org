@@ -18,26 +18,20 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.software_component.software_component import \
     SoftwareComponent
-from org.ict_ok.components.superclass.interfaces import IFocus
 from org.ict_ok.components.appsoftware.interfaces import \
     IAddApplicationSoftware, IApplicationSoftware, IApplicationSoftwareFolder
-from org.ict_ok.components.component import Component, ComponentFolder
+from org.ict_ok.components.component import ComponentFolder
 from org.ict_ok.components.device.device import Device_AppSoftware_RelManager
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.components.supernode.supernode import Supernode
 
 
 def AllApplicationSoftwareTemplates(dummy_context):

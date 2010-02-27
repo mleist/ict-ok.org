@@ -94,6 +94,14 @@
             />
         <require
             permission="org.ict_ok.components.physical_link.View"
+            interface="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.physical_link.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.physical_link.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require

@@ -17,12 +17,6 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
 # zope imports
 from zope.interface import implements
-from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -31,17 +25,13 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.contact.interfaces import IContact
 from org.ict_ok.components.contact.interfaces import IContactFolder
 from org.ict_ok.components.contact.interfaces import IAddContact
 from org.ict_ok.components.component import Component, ComponentFolder
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.work_order.work_order import WorkOrder_Contacts_RelManager
-from org.ict_ok.components.work_order.interfaces import IWorkOrder
 from org.ict_ok.components.contact_item.interfaces import IContactItem
 
 def AllContactTemplates(dummy_context):

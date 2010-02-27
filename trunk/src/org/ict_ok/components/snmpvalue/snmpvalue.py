@@ -29,16 +29,12 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.component import Component, ComponentFolder
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.snmpvalue.interfaces import \
     ISnmpValue, IAddSnmpValue, ISnmpValueFolder
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
 from org.ict_ok.libs.physicalquantity import convertQuantity, \
      convertUnit
 

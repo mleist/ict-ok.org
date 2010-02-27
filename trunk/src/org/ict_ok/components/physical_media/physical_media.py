@@ -18,33 +18,22 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.physical_media.interfaces import IPhysicalMedia
 from org.ict_ok.components.physical_media.interfaces import IPhysicalMediaFolder
 from org.ict_ok.components.physical_media.interfaces import IAddPhysicalMedia
-from org.ict_ok.components.component import Component, ComponentFolder
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.component import ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.osi import osi
 from org.ict_ok.components.physical_component.physical_component import \
     PhysicalComponent
 from org.ict_ok.components.device.device import Devices_PhysicalMedia_RelManager
-from org.ict_ok.components.device.interfaces import IDevice
 
 def AllPhysicalMediaTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IPhysicalMedia)
@@ -55,7 +44,6 @@ def AllPhysicalMedia(dummy_context):
 
 def AllUnusedOrUsedDevicePhysicalMedia(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IPhysicalMedia, 'device')
-
 
 def PhysicalMediaMediaTypes(dummy_context):
     terms = []
@@ -145,8 +133,6 @@ def PhysicalMediaLabelFormats(dummy_context):
     return SimpleVocabulary(terms)
 
 
-
-
 class PhysicalMedia(PhysicalComponent):
     """
     the template instance
@@ -170,7 +156,6 @@ class PhysicalMedia(PhysicalComponent):
     fullTextSearchFields = []
     fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
         
-
 
     def __init__(self, **data):
         """

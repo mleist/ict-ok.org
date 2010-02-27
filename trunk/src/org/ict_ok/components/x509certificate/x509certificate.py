@@ -21,19 +21,13 @@ import pytz
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.folder import Folder
-
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.credential.credential import Credential
 from org.ict_ok.components.x509certificate.interfaces import \
     IX509Certificate, IX509CertificateFolder, IAddX509Certificate
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component, ComponentFolder
-from org.ict_ok.components.interface.interfaces import IInterface
+from org.ict_ok.components.component import ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 

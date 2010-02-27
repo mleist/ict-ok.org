@@ -18,20 +18,15 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.logical_device.interfaces import ILogicalDevice, ILogicalDeviceFolder
-from org.ict_ok.components.superclass.superclass import Superclass
-from org.ict_ok.components.component import Component, ComponentFolder
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.component import ComponentFolder
+
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.logical_component.logical_component import \
