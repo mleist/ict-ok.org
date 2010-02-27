@@ -106,7 +106,7 @@ def AllSnmpValueTemplates(dummy_context):
         oobj.object.isTemplate:
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
+                                    token=getattr(oobj.object, 'objectID', oid),
                                     title=myString))
     return SimpleVocabulary(terms)
 

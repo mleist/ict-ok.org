@@ -19,11 +19,13 @@ will notice special events in an event-history
 __version__ = "$Id$"
 
 # python imports
-from os import access, getloadavg, popen, uname, R_OK
+import os
+import tempfile
 from datetime import datetime
 from pytz import timezone
 from types import UnicodeType
 import pickle
+from pyExcelerator import Workbook
 
 # zope imports
 from ZODB.interfaces import IConnection
@@ -50,6 +52,7 @@ from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.components.slave.interfaces import ISlave
 from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 
 _ = MessageFactory('org.ict_ok')
 utcTZ = timezone('UTC')
@@ -147,7 +150,7 @@ class AdmUtilSupervisor(Supernode):
         """
         searchString = "".join([" " + dtype.strip() + '\n' \
                                 for dtype in dev_types])
-        tmpFile = popen("/sbin/ip link | grep -F '%s'" % searchString)
+        tmpFile = os.popen("/sbin/ip link | grep -F '%s'" % searchString)
         stringLines = tmpFile.readlines()
         tmpFile.close()
         ethDevs = []
@@ -161,7 +164,7 @@ class AdmUtilSupervisor(Supernode):
         argument is device name, default is 'eth0'
         returns string
         """
-        tmpFile = popen("/sbin/ip link show %s| grep 'link/ether'" % dev)
+        tmpFile = os.popen("/sbin/ip link show %s| grep 'link/ether'" % dev)
         tmpString = tmpFile.readline().strip()
         tmpFile.close()
         try:
@@ -176,7 +179,7 @@ class AdmUtilSupervisor(Supernode):
         argument is device name, default is 'eth0'
         returns list of strings
         """
-        tmpFile = popen("/sbin/ip addr show %s | grep ' inet '" % dev)
+        tmpFile = os.popen("/sbin/ip addr show %s | grep ' inet '" % dev)
         stringLines = tmpFile.readlines()
         tmpFile.close()
         ipV4s = []
@@ -202,7 +205,7 @@ class AdmUtilSupervisor(Supernode):
         get the cpu vendor of the running system
         no args, returns string
         """
-        tmpFile = popen("cat /proc/cpuinfo | grep '^vendor_id'")
+        tmpFile = os.popen("cat /proc/cpuinfo | grep '^vendor_id'")
         tmpString = tmpFile.readline().strip()
         tmpFile.close()
         try:
@@ -216,7 +219,7 @@ class AdmUtilSupervisor(Supernode):
         get the cpu model of the running system
         no args, returns string
         """
-        tmpFile = popen("cat /proc/cpuinfo | grep '^model\ name'")
+        tmpFile = os.popen("cat /proc/cpuinfo | grep '^model\ name'")
         tmpString = tmpFile.readline().strip()
         tmpFile.close()
         try:
@@ -234,21 +237,21 @@ class AdmUtilSupervisor(Supernode):
         #tmpString = tmpFile.readline().strip()
         #tmpFile.close()
         #return tmpString
-        return uname()[2]
+        return os.uname()[2]
     
     def getNodeName(self):
         """
         get the name of the running system
         no args, returns string
         """
-        return uname()[1]
+        return os.uname()[1]
     
     def getSystemUptime(self):
         """
         get the uptime of the running system
         no args, returns float
         """
-        if access("/proc/uptime", R_OK):
+        if os.access("/proc/uptime", os.R_OK):
             f_uptime = open('/proc/uptime', 'r')
             data = f_uptime.read()
             data = data[:-1]          # Remove the newline
@@ -270,7 +273,7 @@ class AdmUtilSupervisor(Supernode):
         #(load1min, load5min, load15min, nr_runningNr_tasks, last_pid) = \
          #data.split(" ")
         #return [float(load1min), float(load5min), float(load15min)]
-        return getloadavg()
+        return os.getloadavg()
     
     def appendSlave(self, msgHeader, nodename=None):
         """
@@ -588,14 +591,68 @@ class AdmUtilSupervisor(Supernode):
         pprint(data_structure['conns'])
         print "#" * 80
         for obj in data_structure['objects']:
-            #import pdb
-            #pdb.set_trace()
+#            import pdb
+#            pdb.set_trace()
             print "Obj: ", obj['ikName']
             print "myFactory: ", obj['meta']['myFactory']
-            o2=zapi.createObject(obj['meta']['myFactory'])
+            o2 = zapi.createObject(obj['meta']['myFactory'], **obj)
             print o2
+            o2.importAllData(obj)
+            IBrwsOverview(o2).setTitle(obj['ikName'])
+            o2.__post_init__()
+            c2 = o2.getFirstContainer()
+            print c2
+            print "len1: ", len(c2)
+            c2[o2.objectID] = o2
+            print "len2: ", len(c2)
         #print data_structure
+        print "conn"
+        my_catalog = zapi.getUtility(ICatalog)
+        for conn in data_structure['conns']:
+            #(('obj1Id'. 'obj1AttrName'), ('obj2Id'. 'obj2AttrName'))
+            ((obj1Id, obj1AttrName), (obj2Id, obj2AttrName)) = conn
+            print "()(): ", ((obj1Id, obj1AttrName), (obj2Id, obj2AttrName))
+            res1 = my_catalog.searchResults(oid_index=obj1Id)
+            res2 = my_catalog.searchResults(oid_index=obj2Id)
+            if len(res1) > 0 and len(res2) > 0:
+                obj1 = iter(res1).next()
+                obj2 = iter(res2).next()
+                import pdb
+                pdb.set_trace()
+                print "obj1: ", obj1
+                print "obj2: ", obj2
+                attr1 = getattr(obj1, obj1AttrName, None)
+                if attr1 is not None:
+                    if type(attr1) is list:
+                        attr1.append(obj2)
+                    else:
+                        attr1 = obj2
+                    obj1._p_changed = 1
+                    obj2._p_changed = 1
+#            for relation in 
+#            res = my_catalog.searchResults(oid_index=arg_oid)
+#            if len(res) > 0:
+#                return iter(res).next().getDcTitle()
+#            
         return True
+    
+    def exportAllXlsData(self):
+        """get XLS file for all folder objects"""
+        sitemanger = zapi.getParent(self)
+        locSitemanager = zapi.getParent(sitemanger)
+        root_folder = zapi.getParent(locSitemanager)
+        filename = datetime.now().strftime('ict_all_%Y%m%d%H%M%S.xls')
+        f_handle, f_name = tempfile.mkstemp(filename)
+        wbook = Workbook()
+        for folder in root_folder.values():
+            for obj in folder.values():
+                obj.getAllExportData(dataStructure)
+        wbook.save(f_name)
+        datafile = open(f_name, "r")
+        dataMem = datafile.read()
+        datafile.close()
+        os.remove(f_name)
+        return dataMem
 
 
 class AdmUtilSupervisorSized(object):
@@ -617,3 +674,5 @@ class AdmUtilSupervisorSized(object):
         size = _('%d starts' % self.context.nbrStarts)
         #size.mapping = {'items': str(4)}
         return size
+
+class RootFolderUtils:

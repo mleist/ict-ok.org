@@ -68,7 +68,7 @@ def AllLocations(dummy_context):
             myString = u"%s" % (oobj.object.getDcTitle())
             terms.append(\
                 SimpleTerm(oobj.object,
-                           token=oid,
+                           token=getattr(oobj.object, 'objectID', oid),
                            title=myString))
     return SimpleVocabulary(terms)
     
@@ -82,7 +82,7 @@ def AllLocationTemplates(dummy_context):
         oobj.object.isTemplate:
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
+                                    token=getattr(oobj.object, 'objectID', oid),
                                     title=myString))
     return SimpleVocabulary(terms)
 
@@ -98,6 +98,7 @@ class Location(Component):
 
     implements(ILocation)
     shortName = "location"
+    containerIface = ILocationFolder
     # for ..Contained we have to:
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(ILocation['ikAttr'])

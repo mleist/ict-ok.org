@@ -62,7 +62,8 @@ from org.ict_ok.admin_utils.usermanagement.usermanagement import \
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.version import getIkVersion
-from org.ict_ok.admin_utils.supervisor.interfaces import IImportAllData
+from org.ict_ok.admin_utils.supervisor.interfaces import \
+    IAdmUtilSupervisor, IImportAllData
 
 _ = MessageFactory('org.ict_ok')
 
@@ -492,3 +493,18 @@ class ImportAllDataForm(layout.FormLayoutSupport, form.Form):
         #if ISuperclass.providedBy(self.context):
             #self.label = self.getTitle()
         form.Form.update(self)
+
+
+class ImportAllXlsDataForm:
+    pass
+
+class RootFolderDetails:
+    def exportAllXlsData(self):
+        """get XLS file for all folder objects"""
+        supervisor = getUtility(IAdmUtilSupervisor)
+        self.request.response.setHeader('Content-Type', 'application/vnd.ms-excel')
+        self.request.response.setHeader(\
+            'Content-Disposition',
+            'attachment; filename=\"%s\"' % filename)
+        setNoCacheHeaders(self.request.response)
+        return supervisor.exportAllXlsData()

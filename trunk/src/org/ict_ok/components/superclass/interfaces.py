@@ -100,6 +100,11 @@ class ISuperclass(Interface):
         get 'Universe ID' of object
         returns str
         """
+    def setObjectId(arg_oid):
+        """
+        set 'Universe ID' of object
+        only for backup/restore functions
+        """
     def getShortname():
         """
         get a short class name of object

@@ -50,7 +50,7 @@ from zc.queue.interfaces import IQueue
 from zc.queue import Queue
 
 # ict_ok.org imports
-from org.ict_ok.libs.lib import fieldsForFactory
+from org.ict_ok.libs.lib import fieldsForFactory, oidIsValid
 from org.ict_ok.components.superclass.interfaces import \
      IEventIfSuperclass, IMsgEvent, ISuperclass
 from org.ict_ok.libs.lib import generateOid, oidIsValid, RingBuffer
@@ -101,11 +101,11 @@ class Superclass(Persistent):
         Persistent.__init__(self)
         ISuperclass['objectID'].readonly = False
         self.objectID = generateOid(self)
-        ISuperclass['objectID'].readonly = True
         self.ikName = self.objectID
         for (name, value) in data.items():
             if name in ISuperclass.names():
                 setattr(self, name, value)
+        ISuperclass['objectID'].readonly = True
         self.ikAuthor = u""
         self.dbgLevel = NOTSET
         self.history = RingBuffer(20)
@@ -171,7 +171,17 @@ class Superclass(Persistent):
         returns str
         """
         return self.objectID
-    
+
+    def setObjectId(self, arg_oid):
+        """
+        set 'Universe ID' of object
+        only for backup/restore functions
+        """
+        if oidIsValid(arg_oid):
+            ISuperclass['objectID'].readonly = False
+            self.objectID = arg_oid
+            ISuperclass['objectID'].readonly = True
+
     def getShortname(self):
         """
         get a short class name of object

@@ -90,6 +90,7 @@ class Room(Component):
 
     implements(IRoom)
     shortName = "room"
+    containerIface = IRoomFolder
     # for ..Contained we have to:
     __name__ = __parent__ = None
     level = FieldProperty(IRoom['level'])
@@ -123,9 +124,10 @@ class Room(Component):
             if name in refAttributeNames:
                 setattr(self, name, value)
 
+from zope.app.container.interfaces import IReadContainer
 
 class RoomFolder(Superclass, Folder):
-    implements(IRoomFolder, 
+    implements(IRoomFolder,
                IImportCsvData,
                IImportXlsData,
                IAddRoom)

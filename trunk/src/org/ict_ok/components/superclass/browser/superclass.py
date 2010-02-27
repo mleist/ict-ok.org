@@ -553,6 +553,18 @@ class MSubImportXlsData(GlobalMenuSubItem):
     viewURL = '@@importxlsdata.html'
     weight = 60
 
+class MSubExportAllXlsData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Export All XLS')
+    viewURL = '@@exportallxlsdata.html'
+    weight = 55
+
+class MSubImportAllXlsData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Import All XLS')
+    viewURL = '@@importallxlsdata.html'
+    weight = 53
+
 
 class MSubEdit(GlobalMenuSubItem):
     """ Menu Item """

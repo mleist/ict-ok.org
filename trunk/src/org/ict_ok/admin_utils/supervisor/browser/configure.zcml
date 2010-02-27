@@ -203,6 +203,51 @@
         attribute="exportAllData"
     />
 
+<!--    <z3c:pagelet-->
+<!--        name="focus.html"-->
+<!--        for="zope.app.folder.interfaces.IRootFolder"-->
+<!--        class="org.ict_ok.components.superclass.browser.superclass.FocusDetails"-->
+<!--        layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+<!--        permission="org.ict_ok.components.superclass.focus"-->
+<!--    />-->
+<!--    <z3c:template-->
+<!--        template="focus.pt"-->
+<!--        for="org.ict_ok.components.superclass.browser.superclass.FocusDetails"-->
+<!--        layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+<!--        />-->
+    <viewlet
+        name="exportallxlsdata"
+        for="zope.app.folder.interfaces.IRootFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportAllXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+        />
+    <viewlet
+        name="importallxlsdata"
+        for="zope.app.folder.interfaces.IRootFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportAllXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+        />
+    <page
+        name="exportallxlsdata.html"
+        for="zope.app.folder.interfaces.IRootFolder"
+        class=".supervisor.RootFolderDetails"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportAllXlsData"
+    />
+    <z3c:pagelet
+        name="importallxlsdata.html"
+        for="zope.app.folder.interfaces.IRootFolder"
+        class=".supervisor.ImportAllXlsDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+    />
+
+
     <!--##### Sub Menu ##### -->
     <viewlet
         name="details.html"

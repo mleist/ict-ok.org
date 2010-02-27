@@ -9,6 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611,W0613,W0612,W0232,W0142
 #
+from org.ict_ok.components.supernode.interfaces import ISupernode
 """implementation of browser class of Host object
 """
 
@@ -51,6 +52,7 @@ from z3c.form.browser import checkbox
 from schooltool.requirement.interfaces import IScoreSystem
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, getModifiedDate, \
      link, raw_cell_formatter, GetterColumn
@@ -198,21 +200,25 @@ class ComponentDetails(SupernodeDetails):
         setNoCacheHeaders(self.request.response)
         return tmpText
     
-    def exportXlsData(self):
+    def exportXlsData(self, sheetName=u'ict', wbook=None):
         """get XLS file for all folder objects"""
-        filename = datetime.now().strftime('ict_%Y%m%d%H%M%S.xls')
-        f_handle, f_name = tempfile.mkstemp(filename)
-        wbook = Workbook()
-        wb_hosts = wbook.add_sheet('ddd')
+        if wbook is None:
+            localWbook = True
+            filename = datetime.now().strftime('ict_%Y%m%d%H%M%S.xls')
+            f_handle, f_name = tempfile.mkstemp(filename)
+            wbook = Workbook()
+        else:
+            localWbook = False
+        wb_hosts = wbook.add_sheet(getattr(self.context, 'ikName', sheetName))
         style0 = XFStyle()
         font0 = Font()
         font0.height = 6*20
-        style0.num_format_str = '@'
+        #style0.num_format_str = '@'
         style0.font = font0
         style1 = XFStyle()
         font1 = Font()
         font1.height = 6*20
-        style1.num_format_str = '@'
+        #style1.num_format_str = '@'
         style1.font = font1
         heading_pattern = xl.Pattern()
         heading_pattern.pattern = xl.Pattern.SOLID_PATTERN
@@ -224,17 +230,19 @@ class ComponentDetails(SupernodeDetails):
         pos_y = 0
         pos_x = 0
         for attr in attrList:
-            wb_data = Formula(u'"%s"' % attr)
+#            wb_data = Formula(u'"%s"' % attr)
             style0.pattern = heading_pattern 
-            wb_hosts.write(pos_y, pos_x, wb_data, style0)
+#            wb_hosts.write(pos_y, pos_x, wb_data, style0)
+            wb_hosts.write(pos_y, pos_x, attr, style0)
             pos_x += 1
-        # IntID
-        wb_data = Formula(u'"IntID"')
-        wb_hosts.write(pos_y, pos_x, wb_data, style0)
-        pos_x += 1
+#        # IntID
+#        wb_data = Formula(u'"IntID"')
+#        wb_hosts.write(pos_y, pos_x, wb_data, style0)
+#        pos_x += 1
         # objectID
-        wb_data = Formula(u'"objectID"')
-        wb_hosts.write(pos_y, pos_x, wb_data, style0)
+#        wb_data = Formula(u'"objectID"')
+#        wb_hosts.write(pos_y, pos_x, wb_data, style0)
+        wb_hosts.write(pos_y, pos_x, "objectID", style0)
         wb_hosts.col(pos_x).width *= 3
         pos_x += 1
         pos_y = 1
@@ -249,15 +257,7 @@ class ComponentDetails(SupernodeDetails):
         for item_n, item_v in itemList:
             pos_x = 0
             for attr in attrList:
-#                from zope.interface import implementedBy
-#                ff=self.factory
-#                tt=[i for i in implementedBy(ff)]
-#                it=tt[-1]
-                #attrField = self.attrInterface[attr]
                 attrField = allAttributes[attr]
-#                tmpFieldProperty = getattr(self.factory, attr)
-#                if hasattr(tmpFieldProperty, '_FieldProperty__field'):
-#                    attrField = getattr(self.factory, attr)._FieldProperty__field
                 attrDm = datamanager.AttributeField(item_v, attrField)
                 v_style = XFStyle()
                 v_font = Font()
@@ -271,32 +271,11 @@ class ComponentDetails(SupernodeDetails):
                                     (attrField,self.request),
                                     interfaces.IFieldWidget)
                     v_widget.context = item_v
-#                    dm = zope.component.getMultiAdapter(
-#                        (self.content, field.field), interfaces.IDataManager)
-#                    zope.component.getMultiAdapter(
-#                        (self.context,
-#                         self.request,
-#                         self.form,
-#                         getattr(widget, 'field', None),
-#                         widget),
-#                        interfaces.IValidator).validate(fvalue)
-#                    dm = zope.component.getMultiAdapter(
-#                        (self.__context__, field), interfaces.IDataManager)
                     v_dataconverter = queryMultiAdapter(\
                                     (attrDm.field, v_widget),
                                     interfaces.IDataConverter)
-                    #print u"ddd55: %s: %s" % (attr, dateValue)
                     if dateValue is not None:
                         value = v_dataconverter.toWidgetValue(dateValue)[0]
-                        #print "value3->   %s: %s " % (attr, value)
-#                elif ICollection.providedBy(attrField):
-#                    v_style.num_format_str = '@'
-#                    value = getattr(item_v, attr)
-#                    print "ddd66: %s: %s" % (attr, value)
-#                elif IBool.providedBy(attrField):
-#                    v_style.num_format_str = '@'
-#                    value = getattr(item_v, attr)
-#                    print "value2->   %s: %s " % (attr, value)
                 else:
                     v_style.num_format_str = '@'
                     dateValue = attrDm.get()
@@ -307,37 +286,36 @@ class ComponentDetails(SupernodeDetails):
                     v_dataconverter = queryMultiAdapter(\
                                     (attrDm.field, v_widget),
                                     interfaces.IDataConverter)
-                    #d2 = queryMultiAdapter((attrDm.field, v_widget),interfaces.IDataConverter)
                     if dateValue is not None:
                         value = v_dataconverter.toWidgetValue(dateValue)
                     if type(value) is list:
                         value = u";".join(value)
-                    #print u"value1->   %s: %s " % (attr, value)
                 if value is not None:
-                    #print u"wb_hosts.write(%s, %s, %s, %s)" % (pos_y, pos_x, value, v_style)
                     wb_hosts.write(pos_y, pos_x, value, v_style)
                 pos_x += 1
-            # IntID
-            uidutil = queryUtility(IIntIds)
-            wb_data = Formula(u'"%s"' % uidutil.getId(item_v))
-            wb_hosts.write(pos_y, pos_x, wb_data, style0)
-            pos_x += 1
+#            # IntID
+#            uidutil = queryUtility(IIntIds)
+#            wb_data = Formula(u'"%s"' % uidutil.getId(item_v))
+#            wb_hosts.write(pos_y, pos_x, wb_data, style0)
+#            pos_x += 1
             # objectID
-            wb_data = Formula(u'"%s"' % item_v.objectID)
-            wb_hosts.write(pos_y, pos_x, wb_data, style0)
+#            wb_data = Formula(u'"%s"' % item_v.objectID)
+#            wb_hosts.write(pos_y, pos_x, wb_data, style0)
+            wb_hosts.write(pos_y, pos_x, item_v.objectID, style0)
             pos_x += 1
             pos_y += 1
-        wbook.save(f_name)
-        self.request.response.setHeader('Content-Type', 'application/vnd.ms-excel')
-        self.request.response.setHeader(\
-            'Content-Disposition',
-            'attachment; filename=\"%s\"' % filename)
-        setNoCacheHeaders(self.request.response)
-        datafile = open(f_name, "r")
-        dataMem = datafile.read()
-        datafile.close()
-        os.remove(f_name)
-        return dataMem
+        if localWbook is True:
+            wbook.save(f_name)
+            self.request.response.setHeader('Content-Type', 'application/vnd.ms-excel')
+            self.request.response.setHeader(\
+                'Content-Disposition',
+                'attachment; filename=\"%s\"' % filename)
+            setNoCacheHeaders(self.request.response)
+            datafile = open(f_name, "r")
+            dataMem = datafile.read()
+            datafile.close()
+            os.remove(f_name)
+            return dataMem
 
     def connectedComponentsOnPhysicalLayer(self):
         Components = []
@@ -630,6 +608,8 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
     @button.buttonAndHandler(u'Submit')
     def handleSubmit(self, action):
         """submit was pressed"""
+        #import pdb
+        #pdb.set_trace()
         if 'xlsdata' in self.widgets:
             fields = self.allFields
             codepage=self.widgets['codepage'].value[0]
@@ -642,6 +622,8 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
             outf.close()
             parseRet = xl.parse_xls(f_name, codepage)
             os.remove(f_name)
+            from pprint import pprint
+            pprint(parseRet)
             #
             allAttributes = {}
             for interface in implementedBy(self.factory):
@@ -674,9 +656,10 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                     for attrIndex, attrVal in enumerate(attrValVector):
                         attrDict[attrNameList[attrIndex]] = attrVal
                     # ---------------------------------------
-                    if attrDict.has_key('IntID'):
-                        attrDict.pop('IntID')
-                    if attrDict.has_key('objectID'):
+#                    if attrDict.has_key('IntID'):
+#                        attrDict.pop('IntID')
+                    if attrDict.has_key('objectID') and \
+                       attrDict['objectID'] in self.context:
                         attrObjectID = attrDict.pop('objectID')
                         oldObj = self.context[attrObjectID]
                         for attrName, newValString in attrDict.items():
@@ -737,7 +720,10 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                                                 (attrField, v_widget),
                                                 interfaces.IDataConverter)
                                 if len(newValString) > 0:
-                                    newVal = v_dataconverter.toFieldValue([newValString])
+                                    try:
+                                        newVal = v_dataconverter.toFieldValue([newValString])
+                                    except LookupError:
+                                        newVal = v_dataconverter.toFieldValue([])
                                 else:
                                     newVal = v_dataconverter.toFieldValue([])
                             else:
@@ -763,6 +749,9 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
                         #self.context.__setitem__(newObj.objectID, newObj)
                         #print "dataVect: ", dataVect
                         newObj = self.factory(**dataVect)
+                        # new Object, but already have an object id
+                        if attrDict.has_key('objectID'):
+                            newObj.setObjectId(attrDict['objectID'])
                         newObj.__post_init__()
                         if oldObj is not None:
                             dcore = IWriteZopeDublinCore(oldObj)

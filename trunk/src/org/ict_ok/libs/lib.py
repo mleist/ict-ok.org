@@ -221,3 +221,4 @@ def fieldsForInterface(interface_s, omitFields):
     else:
         interfaceList = [interface_s]
     return Fields(*interfaceList).omit(*omitFields)
+
