@@ -85,7 +85,7 @@ class Superclass(Persistent):
     ikNotes = FieldProperty(ISuperclass['ikNotes'])
     ikAuthor = FieldProperty(ISuperclass['ikAuthor'])
     ikEventTarget = FieldProperty(ISuperclass['ikEventTarget'])
-    ref = FieldProperty(ISuperclass['ref'])
+    #ref = FieldProperty(ISuperclass['ref'])
     
     fullTextSearchFields = ['objectID', 'ikName',
                             'ikComment', 'ikAuthor']

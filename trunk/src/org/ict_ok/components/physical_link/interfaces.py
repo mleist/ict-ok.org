@@ -63,7 +63,7 @@ class IPhysicalLink(Interface):
                         u"actual cable (TRUE) or a "
                         u"wireless connection (FALSE)."),
         default = True,
-        required = True)
+        required = False)
 
 
     connectorPinout = TextLine(

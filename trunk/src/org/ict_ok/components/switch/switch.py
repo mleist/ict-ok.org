@@ -84,7 +84,6 @@ class Switch(Device):
         """
         Device.__init__(self, **data)
         refAttributeNames = getRefAttributeNames(Switch)
-        print "dddd: ", refAttributeNames
         for (name, value) in data.items():
             if name in ISwitch.names() and \
                name not in refAttributeNames:
@@ -107,6 +106,8 @@ class SwitchFolder(DeviceFolder):
                IImportCsvData,
                IImportXlsData,
                IAddSwitch)
+    contentFactory = Switch
+
     def __init__(self, **data):
         """
         constructor of the object

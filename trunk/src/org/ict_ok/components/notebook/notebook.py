@@ -78,6 +78,8 @@ class NotebookFolder(DeviceFolder):
                IImportCsvData,
                IImportXlsData,
                IAddNotebook)
+    contentFactory = Notebook
+
     def __init__(self, **data):
         """
         constructor of the object

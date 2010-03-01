@@ -25,14 +25,15 @@ from datetime import datetime
 from pytz import timezone
 from types import UnicodeType
 import pickle
-from pyExcelerator import Workbook
+from pyExcelerator import Workbook, XFStyle, Font, Formula
+import pyExcelerator as xl
 
 # zope imports
 from ZODB.interfaces import IConnection
 from zope.app import zapi
 from zope.app.zapi import getPath
 from zope.component import adapts, createObject
-from zope.interface import implements
+from zope.interface import implements, implementedBy
 from zope.schema.fieldproperty import FieldProperty
 from zope.size.interfaces import ISized
 from zope.i18nmessageid import MessageFactory
@@ -43,6 +44,17 @@ from zope.copypastemove.interfaces import IObjectMover
 from zope.security.proxy import removeSecurityProxy
 from zope.app.intid.interfaces import IIntIds
 from zope.xmlpickle import toxml, fromxml, loads
+from zope.schema.interfaces import IField, IChoice, ICollection
+from zope.component import queryUtility, queryMultiAdapter, \
+    getMultiAdapter, getUtilitiesFor
+from zope.app.folder import Folder
+from zope.dublincore.interfaces import IWriteZopeDublinCore
+
+# z3c imports
+from z3c.form import button, field, form, interfaces
+from z3c.formui import layout
+from z3c.form import datamanager
+from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -53,6 +65,7 @@ from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.components.slave.interfaces import ISlave
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 
 _ = MessageFactory('org.ict_ok')
 utcTZ = timezone('UTC')
@@ -636,7 +649,7 @@ class AdmUtilSupervisor(Supernode):
 #            
         return True
     
-    def exportAllXlsData(self):
+    def exportAllXlsData(self, request):
         """get XLS file for all folder objects"""
         sitemanger = zapi.getParent(self)
         locSitemanager = zapi.getParent(sitemanger)
@@ -645,14 +658,176 @@ class AdmUtilSupervisor(Supernode):
         f_handle, f_name = tempfile.mkstemp(filename)
         wbook = Workbook()
         for folder in root_folder.values():
-            for obj in folder.values():
-                obj.getAllExportData(dataStructure)
+            folder.exportXlsData(request, folder.ikName, wbook)
         wbook.save(f_name)
         datafile = open(f_name, "r")
         dataMem = datafile.read()
         datafile.close()
         os.remove(f_name)
-        return dataMem
+        return (filename, dataMem)
+
+    def _xlsSheet2folder_(self, request, values, folder):
+        # dbg # print "_xlsSheet2folder_(folder=%s)" % folder
+        fields = fieldsForFactory(folder.contentFactory, ['objectID'])
+        allAttributes = {}
+        for interface in implementedBy(folder.contentFactory):
+            for i_attrName in interface:
+                i_attr = interface[i_attrName]
+                if IField.providedBy(i_attr):
+                    allAttributes[i_attrName] = i_attr
+        matrix = [[]]
+        for row_idx, col_idx in sorted(values.keys()):
+            v = values[(row_idx, col_idx)]
+            if isinstance(v, unicode):
+                v = u"%s" % v # v.encode(codepage, 'backslashreplace')
+            else:
+                v = `v`
+            v = u'%s' % v.strip()
+            last_row, last_col = len(matrix), len(matrix[-1])
+            while last_row <= row_idx:
+                matrix.extend([[]])
+                last_row = len(matrix)
+            while last_col < col_idx:
+                matrix[-1].extend([''])
+                last_col = len(matrix[-1])
+            matrix[-1].extend([v])
+        attrNameList = matrix[0]
+        attrValMatrix = matrix[1:]
+        for attrValVector in attrValMatrix:
+            attrDict = {}
+            for attrIndex, attrVal in enumerate(attrValVector):
+                attrDict[attrNameList[attrIndex]] = attrVal
+            # ---------------------------------------
+#                    if attrDict.has_key('IntID'):
+#                        attrDict.pop('IntID')
+            if attrDict.has_key('objectID') and \
+               attrDict['objectID'] in folder:
+                attrObjectID = attrDict.pop('objectID')
+                oldObj = folder[attrObjectID]
+                # dbg # print "update old object: ", oldObj.ikName
+                for attrName, newValString in attrDict.items():
+                    attrField = allAttributes[attrName]
+                    if IChoice.providedBy(attrField):
+                        v_widget = getMultiAdapter(\
+                                        (attrField,request),
+                                        interfaces.IFieldWidget)
+                        v_widget.context = oldObj
+                        v_dataconverter = queryMultiAdapter(\
+                                        (attrField, v_widget),
+                                        interfaces.IDataConverter)
+                        if len(newValString) > 0:
+                            try:
+                                newVal = v_dataconverter.toFieldValue([newValString])
+                            except LookupError:
+                                newVal = v_dataconverter.toFieldValue([])
+                        else:
+                            newVal = v_dataconverter.toFieldValue([])
+                    else:
+                        if attrName == "isTemplate":
+                            v_widget = checkbox.SingleCheckBoxFieldWidget(\
+                                        attrField,request)
+                        else:
+                            v_widget = getMultiAdapter(\
+                                            (attrField,request),
+                                            interfaces.IFieldWidget)
+                        v_widget.context = oldObj
+                        v_dataconverter = queryMultiAdapter(\
+                                        (attrField, v_widget),
+                                        interfaces.IDataConverter)
+                        if ICollection.providedBy(attrField):
+                            if len(newValString) > 0:
+                                newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+                            else:
+                                newVal = v_dataconverter.toFieldValue([])
+                        else:
+                            try:
+                                newVal = v_dataconverter.toFieldValue(newValString)
+                            except LookupError:
+                                newVal = getattr(oldObj, attrName)
+                    if getattr(oldObj, attrName) != newVal:
+                        # dbg # print "change Value  old:'%s'  new:'%s'" % \
+                        # dbg #     (getattr(oldObj, attrName), newVal)
+                        setattr(oldObj, attrName, newVal)
+                        dcore = IWriteZopeDublinCore(oldObj)
+                        dcore.modified = datetime.utcnow()
+                        if attrName == "ikName":
+                            IBrwsOverview(oldObj).setTitle(newVal)
+            else:
+                oldObj = None
+                # new Object
+#                        newObj = createObject(self.factoryId)
+#                        newObj.__post_init__()
+                # dbg # print "new object: ", attrDict['ikName']
+                dataVect = {}
+                for attrName, newValString in attrDict.items():
+                    attrField = allAttributes[attrName]
+                    if IChoice.providedBy(attrField):
+                        v_widget = getMultiAdapter(\
+                                        (attrField,request),
+                                        interfaces.IFieldWidget)
+                        v_dataconverter = queryMultiAdapter(\
+                                        (attrField, v_widget),
+                                        interfaces.IDataConverter)
+                        if len(newValString) > 0:
+                            try:
+                                newVal = v_dataconverter.toFieldValue([newValString])
+                            except LookupError:
+                                newVal = v_dataconverter.toFieldValue([])
+                        else:
+                            newVal = v_dataconverter.toFieldValue([])
+                    else:
+                        if attrName == "isTemplate":
+                            v_widget = checkbox.SingleCheckBoxFieldWidget(\
+                                        attrField,request)
+                        else:
+                            v_widget = getMultiAdapter(\
+                                            (attrField,request),
+                                            interfaces.IFieldWidget)
+                        v_dataconverter = queryMultiAdapter(\
+                                        (attrField, v_widget),
+                                        interfaces.IDataConverter)
+                        if ICollection.providedBy(attrField):
+                            if len(newValString) > 0:
+                                try:
+                                    newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+                                except LookupError:
+                                    newVal = v_dataconverter.toFieldValue([])
+                            else:
+                                newVal = v_dataconverter.toFieldValue([])
+                        else:
+                            try:
+                                newVal = v_dataconverter.toFieldValue(newValString)
+                            except LookupError:
+                                newVal = None
+                    dataVect[str(attrName)] = newVal
+                    #setattr(newObj, attrName, newVal)
+                #self.context.__setitem__(newObj.objectID, newObj)
+                #print "dataVect: ", dataVect
+                newObj = folder.contentFactory(**dataVect)
+                # new Object, but already have an object id
+                if attrDict.has_key('objectID'):
+                    newObj.setObjectId(attrDict['objectID'])
+                newObj.__post_init__()
+                if oldObj is not None:
+                    dcore = IWriteZopeDublinCore(oldObj)
+                    dcore.modified = datetime.utcnow()
+                IBrwsOverview(newObj).setTitle(dataVect['ikName'])
+                folder[newObj.objectID] = newObj
+                if hasattr(newObj, "store_refs"):
+                    newObj.store_refs(**dataVect)
+                notify(ObjectCreatedEvent(newObj))
+
+    def importAllXlsData(self, request, f_name, codepage):
+        """set data from XLS file on new or modified folder objects"""
+        sitemanger = zapi.getParent(self)
+        locSitemanager = zapi.getParent(sitemanger)
+        root_folder = zapi.getParent(locSitemanager)
+        parseRet = xl.parse_xls(f_name, codepage)
+        for sheet_name, values in parseRet:
+            # dbg # print "sheet_name: ", sheet_name
+            if sheet_name in root_folder:
+                folder = root_folder[sheet_name]
+                self._xlsSheet2folder_(request, values, folder)
 
 
 class AdmUtilSupervisorSized(object):
@@ -676,3 +851,4 @@ class AdmUtilSupervisorSized(object):
         return size
 
 class RootFolderUtils:
+    pass

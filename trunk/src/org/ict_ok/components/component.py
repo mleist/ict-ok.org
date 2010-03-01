@@ -47,6 +47,7 @@ from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.libs.interfaces import IDocumentAddable
 from org.ict_ok.libs.history.entry import Entry
@@ -74,6 +75,7 @@ def AllComponentTemplates(dummy_context, interface):
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
                                     token=getattr(oobj.object, 'objectID', oid),
+                                    #token=oid,
                                     title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
@@ -114,11 +116,13 @@ def AllComponents(dummy_context, interface=IComponent,
                     terms.append(\
                         SimpleTerm(oobj.object,
                                    token=getattr(oobj.object, 'objectID', oid),
+                                   #token=oid,
                                    title=myString))
             else:
                 terms.append(\
                     SimpleTerm(oobj.object,
                                token=getattr(oobj.object, 'objectID', oid),
+                               #token=oid,
                                title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
@@ -161,6 +165,7 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
                 terms.append(\
                     SimpleTerm(oobj.object,
                                token=getattr(oobj.object, 'objectID', oid),
+                               #token=oid,
                                title=myString))
             else:
                 if getattr(oobj.object, obj_attr_name) == dummy_context or \
@@ -190,6 +195,7 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
                     terms.append(\
                         SimpleTerm(oobj.object,
                                    token=getattr(oobj.object, 'objectID', oid),
+                                   #token=oid,
                                    title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
@@ -529,6 +535,7 @@ class ComponentFolder(Superclass, Folder):
                 value = None
                 if IChoice.providedBy(attrField):
                     v_style.num_format_str = '@'
+#                    try:
                     dateValue = attrDm.get()
                     v_widget = getMultiAdapter(\
                                     (attrField,request),
@@ -537,20 +544,52 @@ class ComponentFolder(Superclass, Folder):
                     v_dataconverter = queryMultiAdapter(\
                                     (attrDm.field, v_widget),
                                     interfaces.IDataConverter)
+#                    except AttributeError, errText:
+#                        print "Error2:  ### ", errText
+#                        print "item_v: ", item_v
+#                        print "item_v.ikName: ", item_v.ikName
+#                        print "attr: ", attr
+#                        dateValue = None
+#                        #import pdb
+#                        #pdb.set_trace()
                     if dateValue is not None:
-                        value = v_dataconverter.toWidgetValue(dateValue)[0]
+#                        try:
+                        valueVector = v_dataconverter.toWidgetValue(dateValue)
+                        if len(valueVector) > 0:
+                            value = valueVector[0]
+#                        except IndexError, errText:
+#                            print "Error3:  ### ", errText
+#                            print "item_v: ", item_v
+#                            print "item_v.ikName: ", item_v.ikName
+#                            print "attr: ", attr
                 else:
                     v_style.num_format_str = '@'
-                    dateValue = attrDm.get()
-                    v_widget = getMultiAdapter(\
-                                    (attrField,request),
-                                    interfaces.IFieldWidget)
-                    v_widget.context = item_v
-                    v_dataconverter = queryMultiAdapter(\
-                                    (attrDm.field, v_widget),
-                                    interfaces.IDataConverter)
+                    try:
+#                        import pdb
+#                        pdb.set_trace()
+                        dateValue = attrDm.get()
+                        v_widget = getMultiAdapter(\
+                                        (attrField,request),
+                                        interfaces.IFieldWidget)
+                        v_widget.context = item_v
+                        v_dataconverter = queryMultiAdapter(\
+                                        (attrDm.field, v_widget),
+                                        interfaces.IDataConverter)
+                    except AttributeError, errText:
+                        print "Error1:  ### ", errText
+                        print "item_v: ", item_v
+                        print "item_v.ikName: ", item_v.ikName
+                        print "attr: ", attr
+                        dateValue = None
                     if dateValue is not None:
-                        value = v_dataconverter.toWidgetValue(dateValue)
+                        try:
+                            value = v_dataconverter.toWidgetValue(dateValue)
+                        except AttributeError, errText:
+                            print "Error4:  ### ", errText
+                            print "item_v: ", item_v
+                            print "item_v.ikName: ", item_v.ikName
+                            print "attr: ", attr
+                            value = None
                     if type(value) is list:
                         value = u";".join(value)
                 if value is not None:
@@ -570,149 +609,157 @@ class ComponentFolder(Superclass, Folder):
 
     def importXlsData(self, request, f_name, codepage):
         """set data from XLS file on new or modified folder objects"""
-        #import pdb
-        #pdb.set_trace()
-        fields = fieldsForFactory(self.contentFactory, ['objectID'])
-        parseRet = xl.parse_xls(f_name, codepage)
-        from pprint import pprint
-        pprint(parseRet)
-        #
-        allAttributes = {}
-        for interface in implementedBy(self.contentFactory):
-            for i_attrName in interface:
-                i_attr = interface[i_attrName]
-                if IField.providedBy(i_attr):
-                    allAttributes[i_attrName] = i_attr
-        #
-        for sheet_name, values in parseRet:
-            matrix = [[]]
-            for row_idx, col_idx in sorted(values.keys()):
-                v = values[(row_idx, col_idx)]
-                if isinstance(v, unicode):
-                    v = u"%s" % v # v.encode(codepage, 'backslashreplace')
-                else:
-                    v = `v`
-                v = u'%s' % v.strip()
-                last_row, last_col = len(matrix), len(matrix[-1])
-                while last_row <= row_idx:
-                    matrix.extend([[]])
-                    last_row = len(matrix)
-                while last_col < col_idx:
-                    matrix[-1].extend([''])
-                    last_col = len(matrix[-1])
-                matrix[-1].extend([v])
-            attrNameList = matrix[0]
-            attrValMatrix = matrix[1:]
-            for attrValVector in attrValMatrix:
-                attrDict = {}
-                for attrIndex, attrVal in enumerate(attrValVector):
-                    attrDict[attrNameList[attrIndex]] = attrVal
-                # ---------------------------------------
-#                    if attrDict.has_key('IntID'):
-#                        attrDict.pop('IntID')
-                if attrDict.has_key('objectID') and \
-                   attrDict['objectID'] in self:
-                    attrObjectID = attrDict.pop('objectID')
-                    oldObj = self.context[attrObjectID]
-                    for attrName, newValString in attrDict.items():
-                        #print u"ddd4-> %s" % (attrName)
-                        attrField = allAttributes[attrName]
-                        #print u"type(%s): %s" % (attrField, type(attrField))
-#                            if attrName == "rooms":
-                        if IChoice.providedBy(attrField):
-                            v_widget = getMultiAdapter(\
-                                            (attrField,request),
-                                            interfaces.IFieldWidget)
-                            v_widget.context = oldObj
-                            v_dataconverter = queryMultiAdapter(\
-                                            (attrField, v_widget),
-                                            interfaces.IDataConverter)
-                            if len(newValString) > 0:
-                                newVal = v_dataconverter.toFieldValue([newValString])
-                            else:
-                                newVal = v_dataconverter.toFieldValue([])
-                        else:
-                            if attrName == "isTemplate":
-                                v_widget = checkbox.SingleCheckBoxFieldWidget(\
-                                            attrField,request)
-                            else:
-                                v_widget = getMultiAdapter(\
-                                                (attrField,request),
-                                                interfaces.IFieldWidget)
-                            v_widget.context = oldObj
-                            v_dataconverter = queryMultiAdapter(\
-                                            (attrField, v_widget),
-                                            interfaces.IDataConverter)
-                            if ICollection.providedBy(attrField):
-                                if len(newValString) > 0:
-                                    newVal = v_dataconverter.toFieldValue(newValString.split(';'))
-                                else:
-                                    newVal = v_dataconverter.toFieldValue([])
-                            else:
-                                newVal = v_dataconverter.toFieldValue(newValString)
-                        if getattr(oldObj, attrName) != newVal:
-                            setattr(oldObj, attrName, newVal)
-                            dcore = IWriteZopeDublinCore(oldObj)
-                            dcore.modified = datetime.utcnow()
-                            if attrName == "ikName":
-                                IBrwsOverview(oldObj).setTitle(newVal)
-                else:
-                    oldObj = None
-                    # new Object
-#                        newObj = createObject(self.factoryId)
-#                        newObj.__post_init__()
-                    dataVect = {}
-                    for attrName, newValString in attrDict.items():
-                        attrField = allAttributes[attrName]
-                        if IChoice.providedBy(attrField):
-                            v_widget = getMultiAdapter(\
-                                            (attrField,request),
-                                            interfaces.IFieldWidget)
-                            v_dataconverter = queryMultiAdapter(\
-                                            (attrField, v_widget),
-                                            interfaces.IDataConverter)
-                            if len(newValString) > 0:
-                                try:
-                                    newVal = v_dataconverter.toFieldValue([newValString])
-                                except LookupError:
-                                    newVal = v_dataconverter.toFieldValue([])
-                            else:
-                                newVal = v_dataconverter.toFieldValue([])
-                        else:
-                            if attrName == "isTemplate":
-                                v_widget = checkbox.SingleCheckBoxFieldWidget(\
-                                            attrField,request)
-                            else:
-                                v_widget = getMultiAdapter(\
-                                                (attrField,request),
-                                                interfaces.IFieldWidget)
-                            v_dataconverter = queryMultiAdapter(\
-                                            (attrField, v_widget),
-                                            interfaces.IDataConverter)
-                            if ICollection.providedBy(attrField):
-                                if len(newValString) > 0:
-                                    newVal = v_dataconverter.toFieldValue(newValString.split(';'))
-                                else:
-                                    newVal = v_dataconverter.toFieldValue([])
-                            else:
-                                newVal = v_dataconverter.toFieldValue(newValString)
-                        dataVect[str(attrName)] = newVal
-                        #setattr(newObj, attrName, newVal)
-                    #self.context.__setitem__(newObj.objectID, newObj)
-                    #print "dataVect: ", dataVect
-                    newObj = self.contentFactory(**dataVect)
-                    # new Object, but already have an object id
-                    if attrDict.has_key('objectID'):
-                        newObj.setObjectId(attrDict['objectID'])
-                    newObj.__post_init__()
-                    if oldObj is not None:
-                        dcore = IWriteZopeDublinCore(oldObj)
-                        dcore.modified = datetime.utcnow()
-                    IBrwsOverview(newObj).setTitle(dataVect['ikName'])
-                    self[newObj.objectID] = newObj
-                    if hasattr(newObj, "store_refs"):
-                        newObj.store_refs(**dataVect)
-                    notify(ObjectCreatedEvent(newObj))
+        supervisorUtil = getUtility(IAdmUtilSupervisor,
+                                    name='AdmUtilSupervisor')
+        supervisorUtil.importAllXlsData(request, f_name, codepage)
+
+
+        
+#    def importXlsData(self, request, f_name, codepage):
+#        """set data from XLS file on new or modified folder objects"""
+#        #import pdb
+#        #pdb.set_trace()
+#        fields = fieldsForFactory(self.contentFactory, ['objectID'])
+#        parseRet = xl.parse_xls(f_name, codepage)
+#        from pprint import pprint
+#        pprint(parseRet)
+#        #
+#        allAttributes = {}
+#        for interface in implementedBy(self.contentFactory):
+#            for i_attrName in interface:
+#                i_attr = interface[i_attrName]
+#                if IField.providedBy(i_attr):
+#                    allAttributes[i_attrName] = i_attr
+#        #
+#        for sheet_name, values in parseRet:
+#            matrix = [[]]
+#            for row_idx, col_idx in sorted(values.keys()):
+#                v = values[(row_idx, col_idx)]
+#                if isinstance(v, unicode):
+#                    v = u"%s" % v # v.encode(codepage, 'backslashreplace')
+#                else:
+#                    v = `v`
+#                v = u'%s' % v.strip()
+#                last_row, last_col = len(matrix), len(matrix[-1])
+#                while last_row <= row_idx:
+#                    matrix.extend([[]])
+#                    last_row = len(matrix)
+#                while last_col < col_idx:
+#                    matrix[-1].extend([''])
+#                    last_col = len(matrix[-1])
+#                matrix[-1].extend([v])
+#            attrNameList = matrix[0]
+#            attrValMatrix = matrix[1:]
+#            for attrValVector in attrValMatrix:
+#                attrDict = {}
+#                for attrIndex, attrVal in enumerate(attrValVector):
+#                    attrDict[attrNameList[attrIndex]] = attrVal
+#                # ---------------------------------------
+##                    if attrDict.has_key('IntID'):
+##                        attrDict.pop('IntID')
+#                if attrDict.has_key('objectID') and \
+#                   attrDict['objectID'] in self:
+#                    attrObjectID = attrDict.pop('objectID')
+#                    oldObj = self.context[attrObjectID]
+#                    for attrName, newValString in attrDict.items():
+#                        #print u"ddd4-> %s" % (attrName)
+#                        attrField = allAttributes[attrName]
+#                        #print u"type(%s): %s" % (attrField, type(attrField))
+##                            if attrName == "rooms":
+#                        if IChoice.providedBy(attrField):
+#                            v_widget = getMultiAdapter(\
+#                                            (attrField,request),
+#                                            interfaces.IFieldWidget)
+#                            v_widget.context = oldObj
+#                            v_dataconverter = queryMultiAdapter(\
+#                                            (attrField, v_widget),
+#                                            interfaces.IDataConverter)
+#                            if len(newValString) > 0:
+#                                newVal = v_dataconverter.toFieldValue([newValString])
+#                            else:
+#                                newVal = v_dataconverter.toFieldValue([])
+#                        else:
+#                            if attrName == "isTemplate":
+#                                v_widget = checkbox.SingleCheckBoxFieldWidget(\
+#                                            attrField,request)
+#                            else:
+#                                v_widget = getMultiAdapter(\
+#                                                (attrField,request),
+#                                                interfaces.IFieldWidget)
+#                            v_widget.context = oldObj
+#                            v_dataconverter = queryMultiAdapter(\
+#                                            (attrField, v_widget),
+#                                            interfaces.IDataConverter)
+#                            if ICollection.providedBy(attrField):
+#                                if len(newValString) > 0:
+#                                    newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+#                                else:
+#                                    newVal = v_dataconverter.toFieldValue([])
+#                            else:
+#                                newVal = v_dataconverter.toFieldValue(newValString)
+#                        if getattr(oldObj, attrName) != newVal:
+#                            setattr(oldObj, attrName, newVal)
+#                            dcore = IWriteZopeDublinCore(oldObj)
+#                            dcore.modified = datetime.utcnow()
+#                            if attrName == "ikName":
+#                                IBrwsOverview(oldObj).setTitle(newVal)
+#                else:
+#                    oldObj = None
+#                    # new Object
+##                        newObj = createObject(self.factoryId)
+##                        newObj.__post_init__()
+#                    dataVect = {}
+#                    for attrName, newValString in attrDict.items():
+#                        attrField = allAttributes[attrName]
+#                        if IChoice.providedBy(attrField):
+#                            v_widget = getMultiAdapter(\
+#                                            (attrField,request),
+#                                            interfaces.IFieldWidget)
+#                            v_dataconverter = queryMultiAdapter(\
+#                                            (attrField, v_widget),
+#                                            interfaces.IDataConverter)
+#                            if len(newValString) > 0:
+#                                try:
+#                                    newVal = v_dataconverter.toFieldValue([newValString])
+#                                except LookupError:
+#                                    newVal = v_dataconverter.toFieldValue([])
+#                            else:
+#                                newVal = v_dataconverter.toFieldValue([])
+#                        else:
+#                            if attrName == "isTemplate":
+#                                v_widget = checkbox.SingleCheckBoxFieldWidget(\
+#                                            attrField,request)
+#                            else:
+#                                v_widget = getMultiAdapter(\
+#                                                (attrField,request),
+#                                                interfaces.IFieldWidget)
+#                            v_dataconverter = queryMultiAdapter(\
+#                                            (attrField, v_widget),
+#                                            interfaces.IDataConverter)
+#                            if ICollection.providedBy(attrField):
+#                                if len(newValString) > 0:
+#                                    newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+#                                else:
+#                                    newVal = v_dataconverter.toFieldValue([])
+#                            else:
+#                                newVal = v_dataconverter.toFieldValue(newValString)
+#                        dataVect[str(attrName)] = newVal
+#                        #setattr(newObj, attrName, newVal)
+#                    #self.context.__setitem__(newObj.objectID, newObj)
+#                    #print "dataVect: ", dataVect
+#                    newObj = self.contentFactory(**dataVect)
+#                    # new Object, but already have an object id
+#                    if attrDict.has_key('objectID'):
+#                        newObj.setObjectId(attrDict['objectID'])
+#                    newObj.__post_init__()
+#                    if oldObj is not None:
+#                        dcore = IWriteZopeDublinCore(oldObj)
+#                        dcore.modified = datetime.utcnow()
+#                    IBrwsOverview(newObj).setTitle(dataVect['ikName'])
+#                    self[newObj.objectID] = newObj
+#                    if hasattr(newObj, "store_refs"):
+#                        newObj.store_refs(**dataVect)
+#                    notify(ObjectCreatedEvent(newObj))
 
 
 

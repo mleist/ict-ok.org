@@ -83,6 +83,8 @@ class HardwareAppliance(Device):
 class HardwareApplianceFolder(DeviceFolder):
     implements(IHardwareApplianceFolder,
                IAddHardwareAppliance)
+    contentFactory = HardwareAppliance
+
     def __init__(self, **data):
         """
         constructor of the object

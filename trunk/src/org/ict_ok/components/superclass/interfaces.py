@@ -74,10 +74,10 @@ class ISuperclass(Interface):
         default = u"",
         required = False)
     
-    ref = ViewReferenceField(
-        title=u"Reference",
-        required = False)
-    
+#    ref = ViewReferenceField(
+#        title=u"Reference",
+#        required = False)
+#    
     history = Attribute("history list")
     dbgLevel = Attribute("Object Debug Level")
     ikEventTarget = Attribute("target list for events")

@@ -17,6 +17,9 @@ __version__ = "$Id$"
 
 # python imports
 from datetime import timedelta
+import os
+from datetime import datetime
+import tempfile
 
 # zope imports
 from zope.interface import implements
@@ -64,6 +67,7 @@ from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.supervisor.interfaces import \
     IAdmUtilSupervisor, IImportAllData
+from org.ict_ok.components.interfaces import IImportXlsData
 
 _ = MessageFactory('org.ict_ok')
 
@@ -81,6 +85,12 @@ class MSubGenerations(GlobalMenuSubItem):
     title = _(u'Generations')
     viewURL = 'generations.html'
     weight = 50
+
+class MSubIndices(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Indices')
+    viewURL = 'indices.html'
+    weight = 51
 
 class MSubImportAllData(GlobalMenuSubItem):
     """ Menu Item """
@@ -323,6 +333,15 @@ def formatGenerationMinimum(genManager, formatter):
 def formatGenerationName(genManager, formatter):
     return genManager.package_name
 
+def formatIndicesName(index, formatter):
+    return index.__name__
+
+def formatIndicesDocuments(index, formatter):
+    return index.documentCount()
+
+def formatIndicesWords(index, formatter):
+    return index.wordCount()
+
 class DateGetterColumn(GetterColumn):
     """Getter columnt that has locale aware sorting."""
     implements(ISortableColumn)
@@ -377,6 +396,39 @@ class ViewAdmUtilSupervisorGenerationsForm(BrowserPagelet):
         retList =[]
         for (genManagerName, genManagerObj) in findManagers():
             retList.append(genManagerObj)
+        return retList
+
+    def table(self):
+        """ Properties of table are defined here"""
+        directlyProvides(self.columns[0], ISortableColumn)
+        directlyProvides(self.columns[1], ISortableColumn)
+        directlyProvides(self.columns[2], ISortableColumn)
+        formatter = StandaloneFullFormatter(
+            self.context, self.request, self.objs(),
+            columns=self.columns, sort_on=((_('Name'), False),))
+        formatter.batch_size = 150
+        formatter.cssClasses['table'] = 'listing'
+        return formatter()
+
+
+class ViewAdmUtilSupervisorIndicesForm(BrowserPagelet):
+    """Generation Pagelet"""
+    label = _(u'Indices')
+    columns = (
+        GetterColumn(title=_('Name'),
+                     getter=formatIndicesName),
+        GetterColumn(title=_('Documents'),
+                     getter=formatIndicesDocuments),
+        GetterColumn(title=_('Words'),
+                     getter=formatIndicesWords),
+    )
+    
+    def objs(self):
+        """list of generation manager objects"""
+        retList =[]
+        utilCatalog = getUtility(ICatalog)
+        for idx_name, idx_obj in utilCatalog.items():
+            retList.append(idx_obj)
         return retList
 
     def table(self):
@@ -495,16 +547,60 @@ class ImportAllDataForm(layout.FormLayoutSupport, form.Form):
         form.Form.update(self)
 
 
-class ImportAllXlsDataForm:
-    pass
+class ImportAllXlsDataForm(layout.FormLayoutSupport, form.Form):
+    """ Import all objects """
+    
+    form.extends(form.Form)
+    label = _(u"Import all XLS data")
+    fields = field.Fields(IImportXlsData)
+    
+    def getTitle(self):
+        """this title will be displayed in the head of form"""
+        return u"aaa"
+
+    @button.buttonAndHandler(u'Submit')
+    def handleSubmit(self, action):
+        """submit was pressed"""
+        #import pdb
+        #pdb.set_trace()
+        supervisor = getUtility(IAdmUtilSupervisor,
+                                name='AdmUtilSupervisor')
+        if 'xlsdata' in self.widgets:
+            codepage=self.widgets['codepage'].value[0]
+            fileWidget=self.widgets['xlsdata']
+            fileUpload = fileWidget.extract()
+            filename = datetime.now().strftime('in_%Y%m%d%H%M%S.xls')
+            f_handle, f_name = tempfile.mkstemp(filename)
+            outf = open(f_name, 'wb')
+            outf.write(fileUpload.read())
+            outf.close()
+            try:
+                supervisor.importAllXlsData(self.request, f_name, codepage)
+            finally:
+                os.remove(f_name)
+        url = absoluteURL(self.context, self.request)
+        self.request.response.redirect(url)
+
+    @button.buttonAndHandler(u'Cancel')
+    def handleCancel(self, action):
+        """cancel was pressed"""
+        url = absoluteURL(self.context, self.request)
+        self.request.response.redirect(url)
+    def update(self):
+        """update all widgets"""
+        #if ISuperclass.providedBy(self.context):
+            #self.label = self.getTitle()
+        form.Form.update(self)
 
 class RootFolderDetails:
     def exportAllXlsData(self):
         """get XLS file for all folder objects"""
-        supervisor = getUtility(IAdmUtilSupervisor)
+        supervisor = getUtility(IAdmUtilSupervisor,
+                                name='AdmUtilSupervisor')
+        (filename, dataMem) = supervisor.exportAllXlsData(self.request)
         self.request.response.setHeader('Content-Type', 'application/vnd.ms-excel')
         self.request.response.setHeader(\
             'Content-Disposition',
             'attachment; filename=\"%s\"' % filename)
         setNoCacheHeaders(self.request.response)
-        return supervisor.exportAllXlsData()
+        return dataMem

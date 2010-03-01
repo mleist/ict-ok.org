@@ -45,11 +45,6 @@ def AllPersonalComputers(dummy_context):
     return AllComponents(dummy_context, IPersonalComputer)
 
 
-
-
-
-
-
 class PersonalComputer(Device):
     """
     the template instance
@@ -88,6 +83,8 @@ class PersonalComputer(Device):
 class PersonalComputerFolder(DeviceFolder):
     implements(IPersonalComputerFolder,
                IAddPersonalComputer)
+    contentFactory = PersonalComputer
+
     def __init__(self, **data):
         """
         constructor of the object

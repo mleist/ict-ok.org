@@ -106,6 +106,18 @@
         for="org.ict_ok.admin_utils.supervisor.browser.supervisor.ViewAdmUtilSupervisorGenerationsForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
+    <z3c:pagelet
+        name="indices.html"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.ViewAdmUtilSupervisorIndicesForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        />
+    <z3c:template
+        template="indices.pt"
+        for="org.ict_ok.admin_utils.supervisor.browser.supervisor.ViewAdmUtilSupervisorIndicesForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
         
     <z3c:pagelet
         name="details.html"
@@ -270,6 +282,14 @@
         for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.admin_utils.supervisor.browser.supervisor.MSubGenerations"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.View"
+        />
+    <viewlet
+        name="indices"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
+        class="org.ict_ok.admin_utils.supervisor.browser.supervisor.MSubIndices"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.View"
         />

@@ -46,6 +46,7 @@ def AllMuninValueTemplates(dummy_context):
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
                                     token=getattr(oobj.object, 'objectID', oid),
+                                    #token=oid,
                                     title=myString))
     return SimpleVocabulary(terms)
 

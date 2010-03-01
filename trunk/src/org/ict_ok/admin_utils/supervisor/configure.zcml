@@ -65,6 +65,21 @@
         factory=".adapter.navigation.Navigation"
     />
 
+    <class class="zope.site.folder.Folder">
+        <implements
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+    </class>
+
+
     <subscriber handler="lovely.relation.event.o2oIntIdRemoved" />
 
     <!-- setup local utilities -->
