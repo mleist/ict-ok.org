@@ -66,7 +66,6 @@ def buildRequirementVocab(inRequirement, inTitlePath=u"",
 def allRequirementHierVocab(dummy_context):
     """Which locations are there
     """
-    print "allRequirementHierVocab"
     terms = []
     try:
         complianceUtil = getUtility(IAdmUtilCompliance,
@@ -169,12 +168,12 @@ class Requirement(Superclass,
             return "-deleted-"
     
     def asXml(self):
-        print "Pre:", self.title
+        #print u"Pre:", self.title
         #import pdb
         #pdb.set_trace()
         for subReq in self.values():
             subReq.asXml()
-        print "Post:", self.title
+        #print u"Post:", self.title
 
     def asETree(self):
         reqObj = etree.Element("Req")
