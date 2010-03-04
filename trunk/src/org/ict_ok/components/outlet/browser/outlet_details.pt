@@ -3,4 +3,18 @@
 
 <metal:block define-macro="OutletDetails">
     <metal:block use-macro="macro:PhysicalComponentDetails" />
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/links|nothing">
+            <td i18n:translate="">Physical links</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/links">
+                        <span tal:omit-tag=""
+                              tal:content="structure python: view.getHrefTitle(obj)" />
+                    </li>
+                <ul>
+            </td>
+        </tr>
+
 </metal:block>
