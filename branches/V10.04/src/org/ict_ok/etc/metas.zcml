@@ -42,8 +42,8 @@
              file="meta.zcml"/ -->
     <include package="zope.app.security"
              file="meta.zcml" />
-    <include package="zope.app.securitypolicy"
-             file="meta.zcml" />
+    <!--include package="zope.app.securitypolicy"
+             file="meta.zcml" / -->
     <include package="zope.app.pagetemplate"
              file="meta.zcml" />
     <include package="zope.sendmail"
