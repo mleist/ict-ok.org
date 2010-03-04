@@ -22,6 +22,7 @@ from pyExcelerator import Workbook, XFStyle, Font, Formula
 import pyExcelerator as xl
 
 # zope imports
+from zope.traversing.browser import absoluteURL
 from zope.interface import implements, implementedBy
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
@@ -760,6 +761,16 @@ class ComponentFolder(Superclass, Folder):
 #                    if hasattr(newObj, "store_refs"):
 #                        newObj.store_refs(**dataVect)
 #                    notify(ObjectCreatedEvent(newObj))
+
+    def renderAddObjectButton(self, request):
+        """ render html code for a generic add button
+        """
+        view_url = absoluteURL(self, request)\
+                    + '/@@add_%s.html' % self.contentFactory.shortName
+        # contentFactory
+        #self.context
+        return u'<a href="%s">Add %s</a>' % (view_url,
+                                             self.contentFactory.shortName)
 
 
 

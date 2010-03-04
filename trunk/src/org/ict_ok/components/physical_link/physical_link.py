@@ -167,6 +167,7 @@ class PhysicalLinkFolder(ComponentFolder):
     implements(IPhysicalLinkFolder,
                IAddPhysicalLink)
     contentFactory = PhysicalLink
+    shortName = "physicallink folder"
 
     def __init__(self, **data):
         """

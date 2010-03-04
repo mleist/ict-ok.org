@@ -92,6 +92,7 @@ class GroupFolder(ComponentFolder):
     implements(IGroupFolder,
                IAddGroup)
     contentFactory = Group
+    shortName = "group folder"
 
     def __init__(self, **data):
         """

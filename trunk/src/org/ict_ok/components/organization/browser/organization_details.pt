@@ -8,4 +8,15 @@
            <td i18n:translate="">Organization name</td>
            <td tal:content="structure python: view.fsearchLink(context.name)" />
        </tr>
+       
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/subOUs|nothing">
+            <td i18n:translate="">Sub organisational units</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/subOUs"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                <ul>
+            </td>
+        </tr>
 </metal:block>

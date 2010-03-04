@@ -109,6 +109,7 @@ class ContactItemFolder(ComponentFolder):
     implements(IContactItemFolder,
                IAddContactItem)
     contentFactory = ContactItem
+    shortName = "contact_item folder"
 
     def __init__(self, **data):
         """

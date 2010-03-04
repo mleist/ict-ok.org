@@ -344,6 +344,7 @@ class HostFolder(ComponentFolder):
     implements(IHostFolder, 
                IAddHost)
     contentFactory = Host
+    shortName = "host folder"
 
     def __init__(self, **data):
         """

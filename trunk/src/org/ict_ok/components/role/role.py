@@ -90,6 +90,7 @@ class RoleFolder(ComponentFolder):
     implements(IRoleFolder,
                IAddRole)
     contentFactory = Role
+    shortName = "role folder"
 
     def __init__(self, **data):
         """

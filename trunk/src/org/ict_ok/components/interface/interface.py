@@ -126,6 +126,7 @@ class InterfaceFolder(ComponentFolder):
     implements(IInterfaceFolder, 
                IAddInterface)
     contentFactory = Interface
+    shortName = "interface folder"
 
     def __init__(self, **data):
         """

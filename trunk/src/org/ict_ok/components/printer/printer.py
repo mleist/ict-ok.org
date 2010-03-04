@@ -80,6 +80,7 @@ class PrinterFolder(ComponentFolder):
     implements(IPrinterFolder,
                IAddPrinter)
     contentFactory = Printer
+    shortName = "printer folder"
 
     def __init__(self, **data):
         """

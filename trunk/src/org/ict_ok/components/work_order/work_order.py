@@ -108,6 +108,7 @@ class WorkOrderFolder(ComponentFolder):
     implements(IWorkOrderFolder,
                IAddWorkOrder)
     contentFactory = WorkOrder
+    shortName = "work_order folder"
 
     def __init__(self, **data):
         """

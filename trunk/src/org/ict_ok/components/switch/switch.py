@@ -107,6 +107,7 @@ class SwitchFolder(DeviceFolder):
                IImportXlsData,
                IAddSwitch)
     contentFactory = Switch
+    shortName = "switch folder"
 
     def __init__(self, **data):
         """

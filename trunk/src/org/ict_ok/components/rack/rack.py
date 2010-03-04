@@ -100,6 +100,7 @@ class RackFolder(ComponentFolder):
     implements(IRackFolder,
                IAddRack)
     contentFactory = Rack
+    shortName = "rack folder"
 
     def __init__(self, **data):
         """

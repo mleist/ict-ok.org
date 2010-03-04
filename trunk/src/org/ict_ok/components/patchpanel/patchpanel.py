@@ -99,6 +99,7 @@ class PatchPanelFolder(ComponentFolder):
     implements(IPatchPanelFolder,
                IAddPatchPanel)
     contentFactory = PatchPanel
+    shortName = "patchpanel folder"
 
     def __init__(self, **data):
         """

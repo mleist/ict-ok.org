@@ -231,6 +231,11 @@ class Superclass(Persistent):
         dcore = IWriteZopeDublinCore(self)
         dcore.title = unicode(title)
         
+    def getDisplayTitle(self):
+        """ display text for some views
+        """
+        return self.getDcTitle()
+
     def getModifiedTime(self):
         """
         get the modified time from Dublin Core

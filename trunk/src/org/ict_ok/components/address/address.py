@@ -90,6 +90,7 @@ class AddressFolder(ComponentFolder):
     implements(IAddressFolder,
                IAddAddress)
     contentFactory = Address
+    shortName = "address folder"
 
     def __init__(self, **data):
         """

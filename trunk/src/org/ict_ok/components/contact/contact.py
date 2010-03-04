@@ -93,6 +93,7 @@ class ContactFolder(ComponentFolder):
     implements(IContactFolder,
                IAddContact)
     contentFactory = Contact
+    shortName = "contact folder"
 
     def __init__(self, **data):
         """

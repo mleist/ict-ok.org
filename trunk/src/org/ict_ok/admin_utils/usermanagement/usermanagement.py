@@ -37,7 +37,9 @@ from zope.publisher.interfaces import IRequest
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.container.contained import Contained
 from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
-from ldapadapter.interfaces import IManageableLDAPAdapter
+from ldapadapter.interfaces import IManageableLDAPAdapter, \
+    NoSuchObject, ServerDown
+
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.app.authentication.interfaces import IAuthenticatedPrincipalCreated, IAuthenticatorPlugin
 from zope.app.component import queryNextUtility
@@ -122,10 +124,26 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
             return AdmUtilUserProperties(self.getRequest().principal).timezone
         except KeyError, errText:
             AdmUtilUserProperties(self.getRequest().principal).timezone = u""
+            return AdmUtilUserProperties(self.getRequest().principal).timezone
     def set_timezone(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(self.getRequest().principal).timezone = my_val
     timezone = property(get_timezone, set_timezone)
+
+    # temp. workaround for "user specific navExplanation" in normal form
+    def get_navExplanation(self):
+        """ property getter"""
+        principal = self.getRequest().principal
+        try:
+            return AdmUtilUserProperties(principal).navExplanation
+        except KeyError, errText:
+            AdmUtilUserProperties(principal).navExplanation = False
+            return AdmUtilUserProperties(principal).navExplanation
+    def set_navExplanation(self, my_val):
+        """ property setter"""
+        principal = self.getRequest().principal
+        AdmUtilUserProperties(principal).navExplanation = my_val
+    navExplanation = property(get_navExplanation, set_navExplanation)
 
     # temp. workaround for "user specific email" in normal form
     def get_email(self):
@@ -134,6 +152,7 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
             return AdmUtilUserProperties(self.getRequest().principal).email
         except KeyError, errText:
             AdmUtilUserProperties(self.getRequest().principal).email = u""
+            return AdmUtilUserProperties(self.getRequest().principal).timezone
     def set_email(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(self.getRequest().principal).email = my_val
@@ -146,6 +165,7 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
             return AdmUtilUserProperties(self.getRequest().principal).startView
         except KeyError, errText:
             AdmUtilUserProperties(self.getRequest().principal).startView = "view_dashboard.html"
+            return AdmUtilUserProperties(self.getRequest().principal).startView
     def set_startView(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(self.getRequest().principal).startView = my_val
@@ -160,6 +180,8 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         except KeyError, errText:
             AdmUtilUserProperties(\
                 self.getRequest().principal).notifierChannels = set([])
+            return AdmUtilUserProperties(\
+                self.getRequest().principal).notifierChannels
     def set_notifierChannels(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(\
@@ -176,6 +198,8 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         except KeyError, errText:
             AdmUtilUserProperties(\
                 self.getRequest().principal).notifierLevel = 100
+            return AdmUtilUserProperties(\
+                self.getRequest().principal).notifierLevel
     def set_notifierLevel(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(\
@@ -189,6 +213,7 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
             return AdmUtilUserProperties(self.getRequest().principal).shortEmail
         except KeyError, errText:
             AdmUtilUserProperties(self.getRequest().principal).shortEmail = u""
+            return AdmUtilUserProperties(self.getRequest().principal).shortEmail
     def set_shortEmail(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(self.getRequest().principal).shortEmail = my_val
@@ -203,6 +228,8 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         except KeyError, errText:
             AdmUtilUserProperties(\
                 self.getRequest().principal).shortNotifierChannels = set([])
+            return AdmUtilUserProperties(\
+                self.getRequest().principal).shortNotifierChannels
     def set_shortNotifierChannels(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(\
@@ -219,6 +246,8 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         except KeyError, errText:
             AdmUtilUserProperties(\
                 self.getRequest().principal).shortNotifierLevel = 1000
+            return AdmUtilUserProperties(\
+                self.getRequest().principal).shortNotifierLevel
     def set_shortNotifierLevel(self, my_val):
         """ property setter"""
         AdmUtilUserProperties(\
@@ -264,6 +293,7 @@ class AdmUtilUserProperties(object):
         mapping = annotations.get(KEY)
         if mapping is None:
             blank = { 'timezone': u'',
+                      'navExplanation': False,
                       'email': u'',
                       'startView': u'view_dashboard.html',
                       'notifierChannels': set([]),
@@ -276,6 +306,7 @@ class AdmUtilUserProperties(object):
         self.mapping = mapping
             
     email = MappingProperty('email')
+    navExplanation = MappingProperty('navExplanation')
     startView = MappingProperty('startView')
     notifierChannels = MappingProperty('notifierChannels')
     notifierLevel = MappingProperty('notifierLevel')

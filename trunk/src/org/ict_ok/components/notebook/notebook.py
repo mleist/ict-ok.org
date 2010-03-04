@@ -79,6 +79,7 @@ class NotebookFolder(DeviceFolder):
                IImportXlsData,
                IAddNotebook)
     contentFactory = Notebook
+    shortName = "notebook folder"
 
     def __init__(self, **data):
         """

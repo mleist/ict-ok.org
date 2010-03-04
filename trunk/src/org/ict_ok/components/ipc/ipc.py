@@ -74,6 +74,7 @@ class IndustrialComputerFolder(DeviceFolder):
     implements(IIndustrialComputerFolder,
                IAddIndustrialComputer)
     contentFactory = IndustrialComputer
+    shortName = "ipc folder"
 
     def __init__(self, **data):
         """

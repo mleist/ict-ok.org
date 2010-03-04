@@ -95,6 +95,7 @@ class InternalAttachmentFolder(ComponentFolder):
     implements(IInternalAttachmentFolder,
                IAddInternalAttachment)
     contentFactory = InternalAttachment
+    shortName = "int_attachment folder"
 
     def __init__(self, **data):
         """

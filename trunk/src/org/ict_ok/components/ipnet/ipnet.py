@@ -216,6 +216,7 @@ class IpNetFolder(ComponentFolder):
     implements(IIpNetFolder, 
                IAddIpNet)
     contentFactory = IpNet
+    shortName = "net folder"
 
     def __init__(self, **data):
         """

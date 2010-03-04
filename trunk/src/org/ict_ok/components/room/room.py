@@ -103,6 +103,7 @@ class RoomFolder(ComponentFolder):
     implements(IRoomFolder,
                IAddRoom)
     contentFactory = Room
+    shortName = "room folder"
 
     def __init__(self, **data):
         """

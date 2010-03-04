@@ -113,7 +113,7 @@ class SnmpValue(Component):
     """
 
     implements(ISnmpValue)
-    shortName = "value"
+    shortName = "snmp_value"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     checktype = FieldProperty(ISnmpValue['checktype'])
@@ -857,6 +857,7 @@ class SnmpValueFolder(ComponentFolder):
     implements(ISnmpValueFolder, 
                IAddSnmpValue)
     contentFactory = SnmpValue
+    shortName = "snmp_value folder"
 
     def __init__(self, **data):
         """

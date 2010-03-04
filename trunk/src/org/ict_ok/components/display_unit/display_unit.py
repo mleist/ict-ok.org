@@ -82,6 +82,7 @@ class DisplayUnitFolder(ComponentFolder):
     implements(IDisplayUnitFolder,
                IAddDisplayUnit)
     contentFactory = DisplayUnit
+    shortName = "display_unit folder"
 
     def __init__(self, **data):
         """

@@ -118,6 +118,7 @@ class MobilePhoneFolder(ComponentFolder):
     implements(IMobilePhoneFolder, 
                IAddMobilePhone)
     contentFactory = MobilePhone
+    shortName = "mobilephone folder"
 
     def __init__(self, **data):
         """

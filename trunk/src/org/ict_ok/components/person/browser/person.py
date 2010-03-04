@@ -17,6 +17,8 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.component import queryUtility
+from zope.app.intid.interfaces import IIntIds
 
 # z3c imports
 from z3c.form import field
@@ -32,9 +34,16 @@ from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    Overview as SuperOverview
 from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
+    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
+from org.ict_ok.components.physical_component.browser.physical_component import \
+    getUserName, fsearch_user_formatter
 
 _ = MessageFactory('org.ict_ok')
 
@@ -56,6 +65,12 @@ class MGlobalAddPerson(GlobalMenuAddItem):
     weight = 50
     folderInterface = IPersonFolder
 
+class MSubInvPeron(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'All persons')
+    viewURL = '/@@all_persons.html'
+    weight = 100
+
 # --------------- object details ---------------------------
 
 
@@ -68,6 +83,7 @@ class PersonDetails(ComponentDetails):
 
     def stop(self):
         pass
+
 #  >>> from z3c.macro import interfaces
 #  >>> view = View(content, request)
 #
@@ -139,3 +155,53 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
     omitFields = PersonDetails.omit_viewfields
     factoryId = u'org.ict_ok.components.person.person.Person'
     allFields = fieldsForInterface(attrInterface, [])
+
+from org.ict_ok.components.contact_item.browser.contact_item import getRoles
+
+class Overview(SuperOverview):
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+#        GetterColumn(title=_('Health'),
+#                     getter=getHealth),
+#        IctGetterColumn(title=_('Title'),
+#                        getter=getTitle,
+#                        cell_formatter=link('overview.html')),
+#        IctGetterColumn(title=_('User'),
+#                        getter=getUserName,
+#                        cell_formatter=fsearch_user_formatter),
+#        IctGetterColumn(title=_('Room'),
+#                        getter=lambda i,f: i.room,
+#                        cell_formatter=link('details.html')),
+        IctGetterColumn(title=_('first name'),
+                    getter=lambda i,f: i.firstName,
+                    cell_formatter=link('details.html')),
+        IctGetterColumn(title=_('last name'),
+                        getter=lambda i,f: i.lastName,
+                        cell_formatter=link('details.html')),
+        IctGetterColumn(title=_('Roles'),
+                        getter=getRoles,
+                        cell_formatter=raw_cell_formatter),
+        DateGetterColumn(title=_('Modified'),
+                        getter=getModifiedDate,
+                        subsort=True,
+                        cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    firstSortOn = _('last name') 
+    pos_column_index = 1
+    sort_columns = [1, 2, 3, 4]
+
+
+class AllPersons(Overview):
+    def objs(self):
+        """List of all objects with selected interface"""
+        retList = []
+        uidutil = queryUtility(IIntIds)
+        for (oid, oobj) in uidutil.items():
+            if IPerson.providedBy(oobj.object):
+                retList.append(oobj.object)
+        return retList

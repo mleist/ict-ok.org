@@ -129,6 +129,7 @@ class ContractFolder(ComponentFolder):
     implements(IContractFolder,
                IAddContract)
     contentFactory = Contract
+    shortName = "contract folder"
 
     def __init__(self, **data):
         """

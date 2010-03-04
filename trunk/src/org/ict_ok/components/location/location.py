@@ -129,6 +129,7 @@ class LocationFolder(ComponentFolder):
     implements(ILocationFolder, 
                IAddLocation)
     contentFactory = Location
+    shortName = "location folder"
 
     def __init__(self, **data):
         """

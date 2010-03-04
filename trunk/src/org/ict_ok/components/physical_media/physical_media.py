@@ -184,6 +184,7 @@ class PhysicalMediaFolder(ComponentFolder):
     implements(IPhysicalMediaFolder,
                IAddPhysicalMedia)
     contentFactory = PhysicalMedia
+    shortName = "physical_media folder"
 
     def __init__(self, **data):
         """

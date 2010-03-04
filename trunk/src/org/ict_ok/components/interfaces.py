@@ -99,10 +99,14 @@ class IComponentFolder(Interface):
     """Container for MobilePhone objects
     """
     
+    contentFactory = Attribute("Factory of contained objects")
     def exportXlsData(sheetName, wbook):
         """get XLS file for all folder objects"""
     def importXlsData(request, f_name, codepage):
         """set data from XLS file on new or modified folder objects"""
+    def renderAddObjectButton(request):
+        """ render html code for a generic add button
+        """
 
         
 class IImportXlsData(Interface):

@@ -84,6 +84,7 @@ class HardwareApplianceFolder(DeviceFolder):
     implements(IHardwareApplianceFolder,
                IAddHardwareAppliance)
     contentFactory = HardwareAppliance
+    shortName = "happliance folder"
 
     def __init__(self, **data):
         """

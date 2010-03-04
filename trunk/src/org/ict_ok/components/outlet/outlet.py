@@ -86,6 +86,7 @@ class OutletFolder(ComponentFolder):
     implements(IOutletFolder, 
                IAddOutlet)
     contentFactory = Outlet
+    shortName = "outlet folder"
 
     def __init__(self, **data):
         """

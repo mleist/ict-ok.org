@@ -43,6 +43,7 @@ class Site(Component, SiteManagerContainer):
 #class Site(Component):
     """ ICT_Ok site object """
     implements(ISite, IEventIfEventSite)
+    shortName = "site"
     sitename = FieldProperty(ISite['sitename'])
     eventInpObjs_inward_relaying_shutdown = FieldProperty(\
         IEventIfEventSite['eventInpObjs_inward_relaying_shutdown'])

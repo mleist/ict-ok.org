@@ -93,6 +93,7 @@ class IpAddressFolder(ComponentFolder):
     implements(IIpAddressFolder,
                IAddIpAddress)
     contentFactory = IpAddress
+    shortName = "ip_address folder"
 
     def __init__(self, **data):
         """

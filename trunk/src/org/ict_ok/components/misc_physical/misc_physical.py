@@ -77,6 +77,7 @@ class MiscPhysicalFolder(ComponentFolder):
     implements(IMiscPhysicalFolder,
                IAddMiscPhysical)
     contentFactory = MiscPhysical
+    shortName = "misc_physical folder"
 
     def __init__(self, **data):
         """

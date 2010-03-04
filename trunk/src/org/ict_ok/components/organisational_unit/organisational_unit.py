@@ -35,6 +35,7 @@ from org.ict_ok.components.component import ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates
 from org.ict_ok.components.contact_item.contact_item import ContactItem
+from org.ict_ok.components.person.person import Persons_OrganisationalUnits_RelManager
 #from org.ict_ok.components.organization.organization import AllOrganizations
 
 def AllOrganisationalUnitTemplates(dummy_context):
@@ -86,6 +87,7 @@ class OrganisationalUnit(ContactItem):
          OrganisationalUnit_OrganisationalUnits_RelManager)
     parent_O_OU = RelationPropertyIn(\
          OrganisationalUnit_OrganisationalUnits_RelManager)
+    members = RelationPropertyIn(Persons_OrganisationalUnits_RelManager)
 
     fullTextSearchFields = ['name']
     fullTextSearchFields.extend(ContactItem.fullTextSearchFields)
@@ -118,6 +120,7 @@ class OrganisationalUnitFolder(ComponentFolder):
     implements(IOrganisationalUnitFolder,
                IAddOrganisationalUnit)
     contentFactory = OrganisationalUnit
+    shortName = "organisational_unit folder"
 
     def __init__(self, **data):
         """

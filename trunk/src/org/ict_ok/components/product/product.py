@@ -108,6 +108,7 @@ class ProductFolder(ComponentFolder):
     implements(IProductFolder,
                IAddProduct)
     contentFactory = Product
+    shortName = "product folder"
 
     def __init__(self, **data):
         """

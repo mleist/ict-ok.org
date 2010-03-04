@@ -41,6 +41,9 @@
         <!--factory=".adapter.ikpickle.Pickle"-->
     <!--/>-->
     <adapter
+        factory=".adapter.navigation.RootNavigation"
+    />
+    <adapter
         factory=".adapter.ticker.Ticker"
     />
     <adapter

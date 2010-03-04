@@ -107,6 +107,7 @@ class ServiceFolder(ComponentFolder):
     implements(IServiceFolder, 
                IAddService)
     contentFactory = Service
+    shortName = "service folder"
 
     def __init__(self, **data):
         """

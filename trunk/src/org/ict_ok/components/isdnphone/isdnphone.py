@@ -89,6 +89,7 @@ class ISDNPhoneFolder(ComponentFolder):
     implements(IISDNPhoneFolder,
                IAddISDNPhone)
     contentFactory = ISDNPhone
+    shortName = "isdnphone folder"
 
     def __init__(self, **data):
         """

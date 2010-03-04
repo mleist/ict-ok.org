@@ -99,6 +99,7 @@ class OperatingSoftwareFolder(ComponentFolder):
     implements(IOperatingSoftwareFolder,
                IAddOperatingSoftware)
     contentFactory = OperatingSoftware
+    shortName = "osoftware folder"
 
     def __init__(self, **data):
         """

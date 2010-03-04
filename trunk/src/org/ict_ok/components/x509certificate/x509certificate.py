@@ -137,6 +137,7 @@ class X509CertificateFolder(ComponentFolder):
     implements(IX509CertificateFolder,
                IAddX509Certificate)
     contentFactory = X509Certificate
+    shortName = "x509certificate folder"
 
     def __init__(self, **data):
         """

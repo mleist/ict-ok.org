@@ -85,6 +85,7 @@ class OrganizationFolder(ComponentFolder):
     implements(IOrganizationFolder,
                IAddOrganization)
     contentFactory = Organization
+    shortName = "organization folder"
 
     def __init__(self, **data):
         """

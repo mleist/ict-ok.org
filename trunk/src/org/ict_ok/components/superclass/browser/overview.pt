@@ -15,7 +15,8 @@
   <div
     tal:condition="not: view/objs|nothing"
     i18n:translate="">
-    There are no objects.
+    There are no objects.<br /><br />
+    <div tal:replace="structure python: view.context.renderAddObjectButton(request)" />
   </div>
   </form>
 </i18n:block>

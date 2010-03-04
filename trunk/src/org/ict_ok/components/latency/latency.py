@@ -289,6 +289,7 @@ class LatencyFolder(ComponentFolder):
     implements(ILatencyFolder, 
                IAddLatency)
     contentFactory = Latency
+    shortName = "value folder"
 
     def __init__(self, **data):
         """

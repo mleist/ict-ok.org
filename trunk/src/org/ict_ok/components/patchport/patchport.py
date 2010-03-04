@@ -121,6 +121,7 @@ class PatchPortFolder(ComponentFolder):
     implements(IPatchPortFolder,
                IAddPatchPort)
     contentFactory = PatchPort
+    shortName = "patchport folder"
 
     def __init__(self, **data):
         """

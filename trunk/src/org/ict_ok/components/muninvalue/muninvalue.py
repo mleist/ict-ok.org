@@ -90,6 +90,7 @@ class MuninValueFolder(ComponentFolder):
     implements(IMobilePhoneFolder, 
                IAddMobilePhones)
     contentFactory = Latency
+    shortName = "value folder"
 
     def __init__(self, **data):
         """

@@ -84,6 +84,7 @@ class PersonalComputerFolder(DeviceFolder):
     implements(IPersonalComputerFolder,
                IAddPersonalComputer)
     contentFactory = PersonalComputer
+    shortName = "pc folder"
 
     def __init__(self, **data):
         """

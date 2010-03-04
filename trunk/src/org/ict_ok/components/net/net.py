@@ -234,6 +234,7 @@ class NetFolder(ComponentFolder):
     implements(INetFolder, 
                IAddNet)
     contentFactory = Net
+    shortName = "net folder"
 
     def __init__(self, **data):
         """

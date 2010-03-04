@@ -102,6 +102,7 @@ class BuildingFolder(ComponentFolder):
     implements(IBuildingFolder,
                IAddBuilding)
     contentFactory = Building
+    shortName = "building folder"
 
     def __init__(self, **data):
         """

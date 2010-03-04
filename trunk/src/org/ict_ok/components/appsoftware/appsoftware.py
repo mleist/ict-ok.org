@@ -98,6 +98,7 @@ class ApplicationSoftwareFolder(ComponentFolder):
     implements(IApplicationSoftwareFolder,
                IAddApplicationSoftware)
     contentFactory = ApplicationSoftware
+    shortName = "appsoftware folder"
 
     def __init__(self, **data):
         """

@@ -119,6 +119,7 @@ class Device(PhysicalComponent):
 class DeviceFolder(ComponentFolder):
     implements(IDeviceFolder)
     contentFactory = Device
+    shortName = "device folder"
 
     def __init__(self, **data):
         """

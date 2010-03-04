@@ -45,6 +45,10 @@ class Navigation(SuperNavigation):
         if preList is not None:
             retList.extend(preList)
         retList.append((None, None, zapi.getParent(self.context)))
+        if self.context.parent_O_OU!=None and len(self.context.parent_O_OU) > 0:
+            retList.append(('parent_O_OU', _(u'Parent'), self.context))
+        if self.context.subOUs!=None and len(self.context.subOUs) > 0:
+            retList.append(('subOUs', _(u'Sub organisational units'), self.context))
         if self.context.contracts!=None and len(self.context.contracts) > 0:
             retList.append(('contracts', _(u'Contracts'), self.context))
         if self.context.requirements!=None and len(self.context.requirements) > 0:
@@ -65,5 +69,4 @@ class Navigation(SuperNavigation):
             retList.append(('responsible4Contracts', _(u'Responsible for contracts'), self.context))
         if postList is not None:
             retList.extend(postList)
-        
         return retList
