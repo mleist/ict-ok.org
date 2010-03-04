@@ -87,6 +87,14 @@
             />
         <require
             permission="org.ict_ok.components.room.View"
+            interface="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.room.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.room.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require

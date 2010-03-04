@@ -16,6 +16,12 @@
     tal:condition="not: view/objs|nothing"
     i18n:translate="">
     There are no objects.
+    
+    <span tal:omit-tag=""
+          tal:condition="python: hasattr(view.context, 'renderAddObjectButton')">
+	    <br /><br />
+	    <div tal:replace="structure python: view.context.renderAddObjectButton(request)" />
+	</span>
   </div>
   </form>
 </i18n:block>

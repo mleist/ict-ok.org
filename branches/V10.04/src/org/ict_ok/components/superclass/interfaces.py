@@ -74,10 +74,10 @@ class ISuperclass(Interface):
         default = u"",
         required = False)
     
-    ref = ViewReferenceField(
-        title=u"Reference",
-        required = False)
-    
+#    ref = ViewReferenceField(
+#        title=u"Reference",
+#        required = False)
+#    
     history = Attribute("history list")
     dbgLevel = Attribute("Object Debug Level")
     ikEventTarget = Attribute("target list for events")
@@ -100,6 +100,11 @@ class ISuperclass(Interface):
         get 'Universe ID' of object
         returns str
         """
+    def setObjectId(arg_oid):
+        """
+        set 'Universe ID' of object
+        only for backup/restore functions
+        """
     def getShortname():
         """
         get a short class name of object
@@ -116,6 +121,9 @@ class ISuperclass(Interface):
     def setDcTitle(title):
         """
         set the Title to Dublin Core
+        """
+    def getDisplayTitle():
+        """ display text for some views
         """
     def getModifiedTime():
         """

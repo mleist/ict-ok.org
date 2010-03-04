@@ -29,16 +29,12 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.component import Component
-from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.snmpvalue.interfaces import \
     ISnmpValue, IAddSnmpValue, ISnmpValueFolder
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
 from org.ict_ok.libs.physicalquantity import convertQuantity, \
      convertUnit
 
@@ -106,7 +102,7 @@ def AllSnmpValueTemplates(dummy_context):
         oobj.object.isTemplate:
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
+                                    token=getattr(oobj.object, 'objectID', oid),
                                     title=myString))
     return SimpleVocabulary(terms)
 
@@ -117,7 +113,7 @@ class SnmpValue(Component):
     """
 
     implements(ISnmpValue)
-    shortName = "value"
+    shortName = "snmp_value"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     checktype = FieldProperty(ISnmpValue['checktype'])
@@ -857,14 +853,14 @@ class SnmpValue(Component):
             rrdtool.graph(*argList)
 
 
-class SnmpValueFolder(Superclass, Folder):
+class SnmpValueFolder(ComponentFolder):
     implements(ISnmpValueFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddSnmpValue)
+    contentFactory = SnmpValue
+    shortName = "snmp_value folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

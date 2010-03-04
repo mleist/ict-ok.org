@@ -15,15 +15,32 @@
 __version__ = "$Id$"
 
 # python imports
+import os
+from datetime import datetime
+import tempfile
+from pyExcelerator import Workbook, XFStyle, Font, Formula
+import pyExcelerator as xl
 
 # zope imports
-from zope.interface import implements
+from zope.traversing.browser import absoluteURL
+from zope.interface import implements, implementedBy
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.schema.interfaces import IField
-from org.ict_ok.components.superclass.superclass import Superclass
+from zope.schema.interfaces import IField, IChoice, ICollection
+from zope.component import queryUtility, queryMultiAdapter, \
+    getMultiAdapter, getUtilitiesFor
+from zope.app.folder import Folder
+from zope.dublincore.interfaces import IWriteZopeDublinCore
+from zope.lifecycleevent import ObjectCreatedEvent
+from zope.event import notify
+
+# z3c imports
+from z3c.form import button, field, form, interfaces
+from z3c.formui import layout
+from z3c.form import datamanager
+from z3c.form.browser import checkbox
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -31,12 +48,21 @@ from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
+from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.libs.interfaces import IDocumentAddable
-from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.libs.history.entry import Entry
+from org.ict_ok.libs.lib import getFirstObjectFor
+from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
+from org.ict_ok.components.superclass.interfaces import ISuperclass
+from org.ict_ok.components.interfaces import IComponent, IComponentFolder
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.components.contract.interfaces import IContract
 from org.ict_ok.admin_utils.compliance.evaluation import \
      getEvaluationsDone, getEvaluationsTodo
+from org.ict_ok.components.interfaces import \
+    IImportCsvData, IImportXlsData
+from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 
 
 def AllComponentTemplates(dummy_context, interface):
@@ -49,7 +75,8 @@ def AllComponentTemplates(dummy_context, interface):
         oobj.object.isTemplate:
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
+                                    token=getattr(oobj.object, 'objectID', oid),
+                                    #token=oid,
                                     title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
@@ -89,12 +116,14 @@ def AllComponents(dummy_context, interface=IComponent,
                 if includeSelf:
                     terms.append(\
                         SimpleTerm(oobj.object,
-                                   token=oid,
+                                   token=getattr(oobj.object, 'objectID', oid),
+                                   #token=oid,
                                    title=myString))
             else:
                 terms.append(\
                     SimpleTerm(oobj.object,
-                               token=oid,
+                               token=getattr(oobj.object, 'objectID', oid),
+                               #token=oid,
                                title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
@@ -136,7 +165,8 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
                                     additionalAttribute[:70] + dotted
                 terms.append(\
                     SimpleTerm(oobj.object,
-                               token=oid,
+                               token=getattr(oobj.object, 'objectID', oid),
+                               #token=oid,
                                title=myString))
             else:
                 if getattr(oobj.object, obj_attr_name) == dummy_context or \
@@ -165,7 +195,8 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
                                         additionalAttribute[:70] + dotted
                     terms.append(\
                         SimpleTerm(oobj.object,
-                                   token=oid,
+                                   token=getattr(oobj.object, 'objectID', oid),
+                                   #token=oid,
                                    title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
@@ -219,6 +250,7 @@ class Component(Supernode):
     """
 
     implements(IComponent, IDocumentAddable)
+    containerIface = None
     isTemplate = FieldProperty(IComponent['isTemplate'])
 #    requirement = FieldProperty(IComponent['requirement'])
     requirements = FieldProperty(IComponent['requirements'])
@@ -264,6 +296,14 @@ class Component(Supernode):
             retList.append(ev[1])
         return retList
 
+    def getFirstContainer(self):
+        """
+        """
+        if self.containerIface is not None:
+            return getFirstObjectFor(self.containerIface)
+        else:
+            return None
+
     def get_health(self):
         """
         output of health, 0-1 (float)
@@ -280,6 +320,25 @@ class Component(Supernode):
         #raise Exception, 'Not implemented yet'
         return None
 
+    def _getAllExportData_Step0(self):
+        """return a list of meta-attribute-dict
+        [{'myFactory': 'bla bla',
+          'objectID': '1234...',
+         },
+        ]
+        """
+        retDict = {}
+        retDict['myFactory'] = self.myFactory
+        retDict['shortName'] = self.shortName
+        retDict['ikRevision'] = self.ikRevision
+        historyDictList = []
+#        import pdb
+#        pdb.set_trace()
+        for historyEvent in self.history.data:
+            historyDictList.append(historyEvent.exportAsDict())
+        retDict['events'] = historyDictList
+        return retDict
+
     def _getAllExportData_Step1(self):
         """return a list of attribute-dict ict-objects _without_ all
         references by lovely.relation in form of
@@ -289,8 +348,10 @@ class Component(Supernode):
         ]
         """
         retDict = {}
-        #import pdb
-        #pdb.set_trace()
+        metaDataDict = self._getAllExportData_Step0()
+        retDict['meta'] = metaDataDict
+#        import pdb
+#        pdb.set_trace()
         valAttributeNames = getValAttributeNames(self)
         for (name, value) in self.__dict__.items():
             if name in valAttributeNames:
@@ -304,6 +365,9 @@ class Component(Supernode):
         ]
         """
         retList = []
+        if self.objectID == u'c9d940953025c14dda58c86804eea1bd0':
+            import pdb
+            pdb.set_trace()
         refAttributeNames = self.getRefAttributeNames()
         for attr_name in refAttributeNames:
             if hasattr(self, attr_name):
@@ -314,7 +378,7 @@ class Component(Supernode):
                     if IComponent.providedBy(obj):
                         rel_manager = getattr(self.__class__, attr_name)._manager
                         retList.append(
-                            ((self.objectID, attr_name), (obj.objectID, rel_manager))
+                            ((self.objectID, attr_name), (obj.objectID, rel_manager.relType))
                         )
         return retList
 
@@ -327,6 +391,8 @@ class Component(Supernode):
         #            obj.getAllExportData(dataStructure)
         objDataList = self._getAllExportData_Step1()
         connDataList = self._getAllExportData_Step2()
+#        import pdb
+#        pdb.set_trace()
         for newConntuple in connDataList:
             for oldConntuple in dataStructure['conns']:
                 oldConnObjId = oldConntuple[1][0]
@@ -342,8 +408,370 @@ class Component(Supernode):
                     tmplist[1] = newConntuple[0]
                     oldConntuple = tuple(tmplist)
                     print "eee: ", oldConntuple
+#        print "ddd: ", self.ikName
         dataStructure['objects'].extend(objDataList)
         dataStructure['conns'].extend(connDataList)
+#        print "1:", dataStructure['objects']
+#        print "2:", dataStructure['conns']
+
+    def _importAllData_Step0(self, metaData):
+        """imports a list of meta-attribute-dict
+        """
+        print "############ meta :"
+        if metaData.has_key('ikRevision'):
+            self.ikRevision = metaData['ikRevision']
+        if metaData.has_key('events'):
+            for eventEntry in metaData['events']:
+                print "Event-Entry: ", eventEntry
+                newEntry = Entry(eventEntry, self)
+                self.history.append(newEntry)
+        try:
+            #ISlave['objectID'].readonly = False
+            for attrName, attrVal in metaData.items():
+                print "attr:  %s = %s" % (attrName, attrVal)
+                #newObj.__setattr__(i, msgObj['listAttr'][i])
+        finally:
+            pass
+            #ISlave['objectID'].readonly = True
+        pass
+        
+    def _importAllData_Step1(self, objData):
+        """return a list of attribute-dict ict-objects _without_ all
+        references by lovely.relation in form of
+        """
+        print "############ obj :"
+        try:
+            ISuperclass['objectID'].readonly = False
+            #valAttributeNames = getValAttributeNames(self)
+            for attrName, attrVal in objData.items():
+                #if attrName in valAttributeNames:
+                print "attr:  %s = %s  (SET)" % (attrName, attrVal)
+                self.__setattr__(attrName, attrVal)
+                #else:
+                #    print "attr:  %s = %s  (NOSET)" % (attrName, attrVal)
+        finally:
+            ISuperclass['objectID'].readonly = True
+
+    def _importAllData_Step2(self):
+        """return a list of relation-tuples by lovely.relation
+        in form of
+        [ (('obj1Id'. 'obj1AttrName'), ('obj2Id'. 'obj2AttrName')),
+        ]
+        """
+        
+
+    def importAllData(self, argData):
+        objData = argData
+        metaData = objData.pop('meta')
+        self._importAllData_Step0(metaData)
+        self._importAllData_Step1(objData)
+
+
+class ComponentFolder(Superclass, Folder):
+    implements(IComponentFolder, 
+               IImportCsvData,
+               IImportXlsData)
+    def __init__(self, **data):
+        """
+        constructor of the object
+        """
+        Superclass.__init__(self, **data)
+        Folder.__init__(self)
+
+    def exportXlsData(self, request, sheetName=u'ict', wbook=None):
+        """get XLS file for all folder objects"""
+        if wbook is None:
+            localWbook = True
+            filename = datetime.now().strftime('ict_%Y%m%d%H%M%S.xls')
+            f_handle, f_name = tempfile.mkstemp(filename)
+            wbook = Workbook()
+        else:
+            localWbook = False
+        wb_hosts = wbook.add_sheet(getattr(self, 'ikName', sheetName))
+        style0 = XFStyle()
+        font0 = Font()
+        font0.height = 6*20
+        #style0.num_format_str = '@'
+        style0.font = font0
+        style1 = XFStyle()
+        font1 = Font()
+        font1.height = 6*20
+        #style1.num_format_str = '@'
+        style1.font = font1
+        heading_pattern = xl.Pattern()
+        heading_pattern.pattern = xl.Pattern.SOLID_PATTERN
+        heading_pattern.pattern_back_colour = 0x5
+        heading_pattern.pattern_fore_colour = 0x5   
+        fields = fieldsForFactory(self.contentFactory, ['objectID'])
+        attrList = [ fname for fname, fval in fields.items()]
+        itemList = self.items()
+        pos_y = 0
+        pos_x = 0
+        for attr in attrList:
+            style0.pattern = heading_pattern 
+            wb_hosts.write(pos_y, pos_x, attr, style0)
+            pos_x += 1
+        # objectID
+        wb_hosts.write(pos_y, pos_x, "objectID", style0)
+        wb_hosts.col(pos_x).width *= 3
+        pos_x += 1
+        pos_y = 1
+        #
+        allAttributes = {}
+        for interface in implementedBy(self.contentFactory):
+            for i_attrName in interface:
+                i_attr = interface[i_attrName]
+                if IField.providedBy(i_attr):
+                    allAttributes[i_attrName] = i_attr
+        #
+        for item_n, item_v in itemList:
+            pos_x = 0
+            for attr in attrList:
+                attrField = allAttributes[attr]
+                attrDm = datamanager.AttributeField(item_v, attrField)
+                v_style = XFStyle()
+                v_font = Font()
+                v_font.height = 6*20
+                v_style.font = v_font
+                value = None
+                if IChoice.providedBy(attrField):
+                    v_style.num_format_str = '@'
+#                    try:
+                    dateValue = attrDm.get()
+                    v_widget = getMultiAdapter(\
+                                    (attrField,request),
+                                    interfaces.IFieldWidget)
+                    v_widget.context = item_v
+                    v_dataconverter = queryMultiAdapter(\
+                                    (attrDm.field, v_widget),
+                                    interfaces.IDataConverter)
+#                    except AttributeError, errText:
+#                        print "Error2:  ### ", errText
+#                        print "item_v: ", item_v
+#                        print "item_v.ikName: ", item_v.ikName
+#                        print "attr: ", attr
+#                        dateValue = None
+#                        #import pdb
+#                        #pdb.set_trace()
+                    if dateValue is not None:
+#                        try:
+                        valueVector = v_dataconverter.toWidgetValue(dateValue)
+                        if len(valueVector) > 0:
+                            value = valueVector[0]
+#                        except IndexError, errText:
+#                            print "Error3:  ### ", errText
+#                            print "item_v: ", item_v
+#                            print "item_v.ikName: ", item_v.ikName
+#                            print "attr: ", attr
+                else:
+                    v_style.num_format_str = '@'
+                    try:
+#                        import pdb
+#                        pdb.set_trace()
+                        dateValue = attrDm.get()
+                        v_widget = getMultiAdapter(\
+                                        (attrField,request),
+                                        interfaces.IFieldWidget)
+                        v_widget.context = item_v
+                        v_dataconverter = queryMultiAdapter(\
+                                        (attrDm.field, v_widget),
+                                        interfaces.IDataConverter)
+                    except AttributeError, errText:
+                        print "Error1:  ### ", errText
+                        print "item_v: ", item_v
+                        print "item_v.ikName: ", item_v.ikName
+                        print "attr: ", attr
+                        dateValue = None
+                    if dateValue is not None:
+                        try:
+                            value = v_dataconverter.toWidgetValue(dateValue)
+                        except AttributeError, errText:
+                            print "Error4:  ### ", errText
+                            print "item_v: ", item_v
+                            print "item_v.ikName: ", item_v.ikName
+                            print "attr: ", attr
+                            value = None
+                    if type(value) is list:
+                        value = u";".join(value)
+                if value is not None:
+                    wb_hosts.write(pos_y, pos_x, value, v_style)
+                pos_x += 1
+            # objectID
+            wb_hosts.write(pos_y, pos_x, item_v.objectID, style0)
+            pos_x += 1
+            pos_y += 1
+        if localWbook is True:
+            wbook.save(f_name)
+            datafile = open(f_name, "r")
+            dataMem = datafile.read()
+            datafile.close()
+            os.remove(f_name)
+            return (filename, dataMem)
+
+    def importXlsData(self, request, f_name, codepage):
+        """set data from XLS file on new or modified folder objects"""
+        supervisorUtil = getUtility(IAdmUtilSupervisor,
+                                    name='AdmUtilSupervisor')
+        supervisorUtil.importAllXlsData(request, f_name, codepage)
+
+
+        
+#    def importXlsData(self, request, f_name, codepage):
+#        """set data from XLS file on new or modified folder objects"""
+#        #import pdb
+#        #pdb.set_trace()
+#        fields = fieldsForFactory(self.contentFactory, ['objectID'])
+#        parseRet = xl.parse_xls(f_name, codepage)
+#        from pprint import pprint
+#        pprint(parseRet)
+#        #
+#        allAttributes = {}
+#        for interface in implementedBy(self.contentFactory):
+#            for i_attrName in interface:
+#                i_attr = interface[i_attrName]
+#                if IField.providedBy(i_attr):
+#                    allAttributes[i_attrName] = i_attr
+#        #
+#        for sheet_name, values in parseRet:
+#            matrix = [[]]
+#            for row_idx, col_idx in sorted(values.keys()):
+#                v = values[(row_idx, col_idx)]
+#                if isinstance(v, unicode):
+#                    v = u"%s" % v # v.encode(codepage, 'backslashreplace')
+#                else:
+#                    v = `v`
+#                v = u'%s' % v.strip()
+#                last_row, last_col = len(matrix), len(matrix[-1])
+#                while last_row <= row_idx:
+#                    matrix.extend([[]])
+#                    last_row = len(matrix)
+#                while last_col < col_idx:
+#                    matrix[-1].extend([''])
+#                    last_col = len(matrix[-1])
+#                matrix[-1].extend([v])
+#            attrNameList = matrix[0]
+#            attrValMatrix = matrix[1:]
+#            for attrValVector in attrValMatrix:
+#                attrDict = {}
+#                for attrIndex, attrVal in enumerate(attrValVector):
+#                    attrDict[attrNameList[attrIndex]] = attrVal
+#                # ---------------------------------------
+##                    if attrDict.has_key('IntID'):
+##                        attrDict.pop('IntID')
+#                if attrDict.has_key('objectID') and \
+#                   attrDict['objectID'] in self:
+#                    attrObjectID = attrDict.pop('objectID')
+#                    oldObj = self.context[attrObjectID]
+#                    for attrName, newValString in attrDict.items():
+#                        #print u"ddd4-> %s" % (attrName)
+#                        attrField = allAttributes[attrName]
+#                        #print u"type(%s): %s" % (attrField, type(attrField))
+##                            if attrName == "rooms":
+#                        if IChoice.providedBy(attrField):
+#                            v_widget = getMultiAdapter(\
+#                                            (attrField,request),
+#                                            interfaces.IFieldWidget)
+#                            v_widget.context = oldObj
+#                            v_dataconverter = queryMultiAdapter(\
+#                                            (attrField, v_widget),
+#                                            interfaces.IDataConverter)
+#                            if len(newValString) > 0:
+#                                newVal = v_dataconverter.toFieldValue([newValString])
+#                            else:
+#                                newVal = v_dataconverter.toFieldValue([])
+#                        else:
+#                            if attrName == "isTemplate":
+#                                v_widget = checkbox.SingleCheckBoxFieldWidget(\
+#                                            attrField,request)
+#                            else:
+#                                v_widget = getMultiAdapter(\
+#                                                (attrField,request),
+#                                                interfaces.IFieldWidget)
+#                            v_widget.context = oldObj
+#                            v_dataconverter = queryMultiAdapter(\
+#                                            (attrField, v_widget),
+#                                            interfaces.IDataConverter)
+#                            if ICollection.providedBy(attrField):
+#                                if len(newValString) > 0:
+#                                    newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+#                                else:
+#                                    newVal = v_dataconverter.toFieldValue([])
+#                            else:
+#                                newVal = v_dataconverter.toFieldValue(newValString)
+#                        if getattr(oldObj, attrName) != newVal:
+#                            setattr(oldObj, attrName, newVal)
+#                            dcore = IWriteZopeDublinCore(oldObj)
+#                            dcore.modified = datetime.utcnow()
+#                            if attrName == "ikName":
+#                                IBrwsOverview(oldObj).setTitle(newVal)
+#                else:
+#                    oldObj = None
+#                    # new Object
+##                        newObj = createObject(self.factoryId)
+##                        newObj.__post_init__()
+#                    dataVect = {}
+#                    for attrName, newValString in attrDict.items():
+#                        attrField = allAttributes[attrName]
+#                        if IChoice.providedBy(attrField):
+#                            v_widget = getMultiAdapter(\
+#                                            (attrField,request),
+#                                            interfaces.IFieldWidget)
+#                            v_dataconverter = queryMultiAdapter(\
+#                                            (attrField, v_widget),
+#                                            interfaces.IDataConverter)
+#                            if len(newValString) > 0:
+#                                try:
+#                                    newVal = v_dataconverter.toFieldValue([newValString])
+#                                except LookupError:
+#                                    newVal = v_dataconverter.toFieldValue([])
+#                            else:
+#                                newVal = v_dataconverter.toFieldValue([])
+#                        else:
+#                            if attrName == "isTemplate":
+#                                v_widget = checkbox.SingleCheckBoxFieldWidget(\
+#                                            attrField,request)
+#                            else:
+#                                v_widget = getMultiAdapter(\
+#                                                (attrField,request),
+#                                                interfaces.IFieldWidget)
+#                            v_dataconverter = queryMultiAdapter(\
+#                                            (attrField, v_widget),
+#                                            interfaces.IDataConverter)
+#                            if ICollection.providedBy(attrField):
+#                                if len(newValString) > 0:
+#                                    newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+#                                else:
+#                                    newVal = v_dataconverter.toFieldValue([])
+#                            else:
+#                                newVal = v_dataconverter.toFieldValue(newValString)
+#                        dataVect[str(attrName)] = newVal
+#                        #setattr(newObj, attrName, newVal)
+#                    #self.context.__setitem__(newObj.objectID, newObj)
+#                    #print "dataVect: ", dataVect
+#                    newObj = self.contentFactory(**dataVect)
+#                    # new Object, but already have an object id
+#                    if attrDict.has_key('objectID'):
+#                        newObj.setObjectId(attrDict['objectID'])
+#                    newObj.__post_init__()
+#                    if oldObj is not None:
+#                        dcore = IWriteZopeDublinCore(oldObj)
+#                        dcore.modified = datetime.utcnow()
+#                    IBrwsOverview(newObj).setTitle(dataVect['ikName'])
+#                    self[newObj.objectID] = newObj
+#                    if hasattr(newObj, "store_refs"):
+#                        newObj.store_refs(**dataVect)
+#                    notify(ObjectCreatedEvent(newObj))
+
+    def renderAddObjectButton(self, request):
+        """ render html code for a generic add button
+        """
+        view_url = absoluteURL(self, request)\
+                    + '/@@add_%s.html' % self.contentFactory.shortName
+        # contentFactory
+        #self.context
+        return u'<a href="%s">Add %s</a>' % (view_url,
+                                             self.contentFactory.shortName)
+
 
 
 def AllXlsCodepages(dummy_context):
@@ -450,6 +878,7 @@ def getValAttributeNames(arg_instance):
     classInheritancePath = getClassInheritancePath(classOfInstance,
                                                    endClass=Superclass)
     classInheritancePath.append(classOfInstance)
+    print "classInheritancePath: ", classInheritancePath
     askAttributes = []
     allAttributesList = [i_class.__dict__.keys() for i_class in classInheritancePath]
     for j_attrList in allAttributesList:

@@ -18,27 +18,19 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.outlet.interfaces import \
     IOutlet, IOutletFolder, IAddOutlet
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component
-#from org.ict_ok.components.physical_connector.physical_connector import \
-#    PhysicalConnector, PhysicalConnectorFolder
+from org.ict_ok.components.component import ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates
 from org.ict_ok.components.physical_connector.interfaces import \
-    IPhysicalConnector#, IPhysicalConnectorFolder, IAddPhysicalConnector
+    IPhysicalConnector
 from org.ict_ok.components.physical_link.physical_link import \
     PhysicalLinks_PhysicalConnectors_RelManager
 from org.ict_ok.components.physical_component.physical_component import \
@@ -90,14 +82,14 @@ class Outlet(PhysicalComponent):
                 setattr(self, name, value)
 
 
-class OutletFolder(Superclass, Folder):
+class OutletFolder(ComponentFolder):
     implements(IOutletFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddOutlet)
+    contentFactory = Outlet
+    shortName = "outlet folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

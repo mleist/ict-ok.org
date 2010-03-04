@@ -28,11 +28,15 @@ from zope.app import zapi
 from zope.security import checkPermission
 from zope.app.catalog.interfaces import ICatalog
 from zope.security.interfaces import ForbiddenAttribute
+from zope.component import queryUtility
+from zope.i18n import translate
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.supernode.interfaces import IContentList
 from org.ict_ok.components.superclass.interfaces import INavigation
+from org.ict_ok.admin_utils.usermanagement.interfaces import \
+     IAdmUtilUserManagement
 
 _ = MessageFactory('org.ict_ok')
 
@@ -132,6 +136,23 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             if dcAdapter:
                 if dcAdapter.title:
                     xml_title = dcAdapter.title
+            userManagement = queryUtility(IAdmUtilUserManagement)
+            if userManagement is not None and\
+                hasattr(item, 'shortName') and\
+                userManagement.navExplanation is True:
+                shortName = item.shortName
+                item_cnt = len(item)
+                if item_cnt > 0:
+                    xml_title = u'%d ' % item_cnt \
+                        + translate(xml_title,
+                                    domain='org.ict_ok',
+                                    context=self.request) \
+                        + u' (%s)' % (shortName)
+                else:
+                    xml_title = translate(xml_title,
+                                          domain='org.ict_ok',
+                                          context=self.request) \
+                        + u' (%s)' % (shortName)
             iconUrl = self.getIconUrl(item)
             stateIconUrl = self.getStateIconUrl(item)
             #stateValue = self.getStateValue(item)
@@ -191,7 +212,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                  stateOverview, additionalAttributes) = \
                     self.getCollectionAttributes(obj)
                 subItems.append(xmlEscapeWithCData(
-                    u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+                    u'<collection title=%s name=%s iklen=%s rem="2.1.1.2.1" '
                     u'icon_url=%s isopen="" expable="" state_url=%s path=%s '
                     u'state_val=%s>%s</collection>',
                     xml_title, name, iklen, stateIconUrl,
@@ -205,7 +226,6 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
 
     def children(self):
         """ """
-        print "children"
         container = self.context
         self.request.response.setHeader('content-type',
                                         'text/xml;charset=utf-8')
@@ -230,8 +250,8 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
             obj = obj_arg
         
         parentItem = zapi.getParent(obj)
-        obj_url = urlparse(zapi.absoluteURL(obj, self.request))
         parent_url = urlparse(zapi.absoluteURL(parentItem, self.request))
+        obj_url = urlparse(zapi.absoluteURL(obj, self.request))
         if type(obj_arg) is tuple:
             xml_title = displayTitle
             additionalAttributes += ' expable="" '
@@ -251,10 +271,6 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         item_ppath = item_ppath.replace('//', '/')
         if item_ppath[0] == "/":
             item_ppath = item_ppath[1:]
-#        try:
-#            item_len = len(IContentList(oldItem).getContentList())
-#        except TypeError:
-#            item_len = self.getLengthOf(oldItem)
         return (xml_title, name, item_ppath,
                 iklen, stateIconUrl, stateValue,
                 stateOverview, additionalAttributes)
@@ -279,16 +295,17 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                      stateIconUrl, stateValue,
                      stateOverview, additionalAttributes) = \
                         self.getCollectionAttributes(contextObj)
-                    subItems.append(xmlEscapeWithCData(
-                        u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
-                        u'icon_url=%s expable="" navparam=%s state_url=%s path=%s '
-                        u'>%s</collection>',
-                        viewTitle,
-                        item_ppath + name , 
-                        '1', 'generic',
-                        xmlEscapeWithCData('view=%s', navView),
-                        'generic', '/', 
-                        'result'))
+                    if viewTitle is not None:
+                        subItems.append(xmlEscapeWithCData(
+                            u'<collection title=%s name=%s iklen=%s rem="2.1.1.2.2" '
+                            u'icon_url=%s expable="" navparam=%s state_url=%s path=%s '
+                            u'>%s</collection>',
+                            viewTitle,
+                            item_ppath + name , 
+                            '1', 'generic',
+                            xmlEscapeWithCData('view=%s', navView),
+                            'generic', '/', 
+                            'result'))
 #                    subItems.append(xmlEscapeWithCData(
 #                        u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
 #                        u'icon_url=%s expable="" state_url=%s path=%s '
@@ -302,7 +319,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                      stateOverview, additionalAttributes) = \
                         self.getCollectionAttributes(obj)
                     subItems.append(xmlEscapeWithCData(
-                        u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+                        u'<collection title=%s name=%s iklen=%s rem="2.1.1.2.3" '
                         u'icon_url=%s isopen="" expable="" state_url=%s path=%s '
                         u'state_val=%s>%s</collection>',
                         xml_title, name, iklen, stateIconUrl,
@@ -320,7 +337,9 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
 #                print "errText: ", errText
 #            subItems.append('<collection title="Addresses" name="Addresses" iklen="1" icon_url="" rem="1.1.2" state_url="generic" expable="" path="/"/>')
         except TypeError, errText:
-            print "lange Nase gezogen: ", errText
+#            print "lange Nase gezogen: ", errText
+#            import traceback
+#            print traceback.format_exc()
             return self.singleBranchTree2(root)
         # -----------------------------------
 #        try:
@@ -554,7 +573,7 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
                                 result))
                         else:
                             subItems.append(xmlEscapeWithCData(
-                                u'<collection title=%s name=%s iklen=%s rem="2.1.1.2" '
+                                u'<collection title=%s name=%s iklen=%s rem="2.1.1.2.4" '
                                 u'icon_url=%s isopen="" expable="" state_url=%s path=%s '
                                 u'state_val=%s>%s</collection>', 
                                 xml_title, name, subitem_len, iconUrl,

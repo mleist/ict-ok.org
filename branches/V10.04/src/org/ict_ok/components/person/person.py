@@ -18,11 +18,6 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -31,22 +26,26 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.person.interfaces import IPerson
 from org.ict_ok.components.person.interfaces import IPersonFolder
 from org.ict_ok.components.person.interfaces import IAddPerson
-from org.ict_ok.components.component import Component
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.component import ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.contact_item.contact_item import ContactItem
+from org.ict_ok.components.organisational_unit.interfaces import \
+    IOrganisationalUnit
 
 def AllPersonTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IPerson)
 
 def AllPersons(dummy_context):
     return AllComponents(dummy_context, IPerson)
+
+Persons_OrganisationalUnits_RelManager = \
+       FieldRelationManager(IPerson['inOUs'],
+                            IOrganisationalUnit['members'],
+                            relType='members:inOUs')
 
 
 class Person(ContactItem):
@@ -61,6 +60,8 @@ class Person(ContactItem):
     firstName = FieldProperty(IPerson['firstName'])
     lastName = FieldProperty(IPerson['lastName'])
     title = FieldProperty(IPerson['title'])
+    inOUs = RelationPropertyOut(\
+         Persons_OrganisationalUnits_RelManager)
 
     fullTextSearchFields = ['firstName', 'lastName', 'title']
     fullTextSearchFields.extend(ContactItem.fullTextSearchFields)
@@ -88,15 +89,20 @@ class Person(ContactItem):
             if name in refAttributeNames:
                 setattr(self, name, value)
 
+    def getDisplayTitle(self):
+        """ display text for some views
+        """
+        return u'%s %s %s' % (self.title, self.firstName, self.lastName)
 
-class PersonFolder(Superclass, Folder):
+
+class PersonFolder(ComponentFolder):
     implements(IPersonFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddPerson)
+    contentFactory = Person
+    shortName = "person folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

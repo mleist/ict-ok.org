@@ -1,4 +1,3 @@
-
 <!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
 
 <metal:block define-macro="DeviceDetails">

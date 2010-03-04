@@ -18,11 +18,7 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
+from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema import vocabulary
 
 # lovely imports
@@ -32,16 +28,14 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnit
 from org.ict_ok.components.organisational_unit.interfaces import IOrganisationalUnitFolder
 from org.ict_ok.components.organisational_unit.interfaces import IAddOrganisationalUnit
-from org.ict_ok.components.component import Component
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.component import ComponentFolder
 from org.ict_ok.components.component import \
-    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+    AllComponents, AllComponentTemplates
 from org.ict_ok.components.contact_item.contact_item import ContactItem
+from org.ict_ok.components.person.person import Persons_OrganisationalUnits_RelManager
 #from org.ict_ok.components.organization.organization import AllOrganizations
 
 def AllOrganisationalUnitTemplates(dummy_context):
@@ -73,13 +67,10 @@ def AllOrganisationsAndOrganisationalUnits(dummy_context):
     return SimpleVocabulary(terms)
 
 
-
 OrganisationalUnit_OrganisationalUnits_RelManager = \
        FieldRelationManager(IOrganisationalUnit['subOUs'],
                             IOrganisationalUnit['parent_O_OU'],
                             relType='parent_O_OU:subOUs')
-
-
 
 
 class OrganisationalUnit(ContactItem):
@@ -96,11 +87,11 @@ class OrganisationalUnit(ContactItem):
          OrganisationalUnit_OrganisationalUnits_RelManager)
     parent_O_OU = RelationPropertyIn(\
          OrganisationalUnit_OrganisationalUnits_RelManager)
+    members = RelationPropertyIn(Persons_OrganisationalUnits_RelManager)
 
     fullTextSearchFields = ['name']
     fullTextSearchFields.extend(ContactItem.fullTextSearchFields)
         
-
 
     def __init__(self, **data):
         """
@@ -125,14 +116,14 @@ class OrganisationalUnit(ContactItem):
                 setattr(self, name, value)
 
 
-class OrganisationalUnitFolder(Superclass, Folder):
+class OrganisationalUnitFolder(ComponentFolder):
     implements(IOrganisationalUnitFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddOrganisationalUnit)
+    contentFactory = OrganisationalUnit
+    shortName = "organisational_unit folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

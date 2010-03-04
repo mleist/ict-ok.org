@@ -22,10 +22,8 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -34,11 +32,8 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.schema.IPy import IP
-from org.ict_ok.components.component import Component
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.superclass.superclass import MsgEvent
 from org.ict_ok.components.ipnet.interfaces import \
     IIpNet, IEventIfEventIpNet, IAddIpNet, IIpNetFolder
@@ -50,31 +45,6 @@ from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents, \
     ComponentsFromObjList
 from org.ict_ok.components.ip_address.interfaces import IIpAddress
-
-
-#def getAllIpNetworks():
-#    """ get a list of all IpNets
-#    """
-#    retList = []
-#    uidutil = getUtility(IIntIds)
-#    for (myid, myobj) in uidutil.items():
-#        if IIpNet.providedBy(myobj.object):
-#            retList.append(myobj.object)
-#    return retList
-#
-#def AllIpNetTemplates(dummy_context):
-#    """Which IpNet templates exists
-#    """
-#    terms = []
-#    uidutil = getUtility(IIntIds)
-#    for (oid, oobj) in uidutil.items():
-#        if IIpNet.providedBy(oobj.object) and \
-#        oobj.object.isTemplate:
-#            myString = u"%s [T]" % (oobj.object.getDcTitle())
-#            terms.append(SimpleTerm(oobj.object,
-#                                    token=oid,
-#                                    title=myString))
-#    return SimpleVocabulary(terms)
 
 def AllIpNetTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IIpNet,
@@ -242,17 +212,17 @@ class IpNet(Component):
         return health
 
 
-class IpNetFolder(Superclass, Folder):
+class IpNetFolder(ComponentFolder):
     implements(IIpNetFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddIpNet)
+    contentFactory = IpNet
+    shortName = "net folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)
 
 
 class SoapTest:

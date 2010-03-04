@@ -24,6 +24,7 @@ from zope.app.component import hooks
 from zope.component import getUtility
 from zope.traversing.browser import absoluteURL
 from zope.app.pagetemplate import viewpagetemplatefile
+from zope.i18n import translate
 
 # z3c imports
 from z3c.menu.simple.menu import TabMenu
@@ -36,6 +37,13 @@ from org.ict_ok.admin_utils.util_manager.interfaces import IUtilManager
 from org.ict_ok.libs.lib import getFirstObjectFor
 
 _ = MessageFactory('org.ict_ok')
+
+def getSortableTitel((name, viewlet)):
+    try:
+        return translate(viewlet.title, domain='org.ict_ok', context=viewlet.request).upper()
+    except AttributeError:
+        return 0
+
 
 class GlobalMenuItem(menu.TabItem):
     """Menu item viewlet generating global/site related links."""
@@ -224,14 +232,19 @@ class MenuSubTab(Tab):
 class MenuSubGeneralTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_general_tab.pt')
 
+
 class MenuSubGeneralAddsTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_general_adds_tab.pt')
+    def sort(self, viewlets):
+        return sorted(viewlets, key=getSortableTitel)
 
 class MenuSubInventoryTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_tab.pt')
 
 class MenuSubInventoryByTypeTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_by_type_tab.pt')
+    def sort(self, viewlets):
+        return sorted(viewlets, key=getSortableTitel)
 
 class MenuSubInventoryWarningsTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_inventory_warnings_tab.pt')

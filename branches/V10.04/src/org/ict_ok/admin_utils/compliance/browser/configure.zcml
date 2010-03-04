@@ -103,6 +103,21 @@
         for="org.ict_ok.admin_utils.compliance.browser.compliance.AdmUtilRequirementDisplayAll"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
+    <z3c:pagelet
+        name="importreqxmldata.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.ImportReqXmlDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Import"
+    />
+    <page
+        name="exportreqxmldata.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.AdmUtilComplianceDetails"
+        permission="org.ict_ok.admin_utils.compliance.Export"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportReqXmlData"
+    />
         
     <!--##### Requirements ##### -->
     <defaultView
@@ -225,6 +240,23 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.compliance.View"
         />
+    <viewlet
+        name="exportreqxmldata"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.admin_utils.compliance.browser.compliance.MSubExportXmlData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Export"
+        />
+    <viewlet
+        name="importreqxmldata"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.admin_utils.compliance.browser.compliance.MSubImportXmlData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Import"
+        />
+
     <!--##### Requirements ##### -->
     <viewlet
         name="details"

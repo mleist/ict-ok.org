@@ -253,6 +253,11 @@ class IAdmUtilSupervisor(Interface):
         """
         will reindex the catalogs of all tables in database
         """
+    def exportAllData():
+        """get data file for all objects"""
+
+    def importAllData(xml_str):
+        """get data file for all objects"""
 
 class IFSearchText(Interface):
     """Interface for all Objects"""
@@ -265,3 +270,5 @@ class IImportAllData(Interface):
     alldata = Bytes(
         title = _("Data file"),
         required = True)
+
+    

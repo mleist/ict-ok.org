@@ -89,6 +89,14 @@
             />
         <require
             permission="org.ict_ok.components.address.View"
+            interface="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.address.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.address.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require

@@ -22,7 +22,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Datetime
+from zope.schema import Bytes, Datetime
 
 # ict_ok.org imports
 from org.ict_ok.schema.date import Date
@@ -87,3 +87,9 @@ class IEvaluations(ischooltool.IEvaluations):
 class IEvaluationsQuery(ischooltool.IEvaluationsQuery):
     """ ict-ok.org wrapper
     """
+
+class IImportXmlData(Interface):
+    """Interface for all Objects"""
+    alldata = Bytes(
+        title = _("Data file"),
+        required = True)

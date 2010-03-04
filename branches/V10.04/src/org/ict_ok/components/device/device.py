@@ -18,28 +18,24 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.folder import Folder
 
 # lovely imports
-from lovely.relation.property import RelationPropertyIn
 from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.device.interfaces import IDevice, IDeviceFolder
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
 from org.ict_ok.components.logical_device.interfaces import ILogicalDevice
 from org.ict_ok.components.physical_media.interfaces import IPhysicalMedia
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.physical_component.physical_component import \
     PhysicalComponent
+from org.ict_ok.components.component import ComponentFolder
 
 def AllDeviceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IDevice)
@@ -120,13 +116,13 @@ class Device(PhysicalComponent):
                 setattr(self, name, value)
 
 
-class DeviceFolder(Superclass, Folder):
-    implements(IDeviceFolder,
-               IImportCsvData,
-               IImportXlsData)
+class DeviceFolder(ComponentFolder):
+    implements(IDeviceFolder)
+    contentFactory = Device
+    shortName = "device folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

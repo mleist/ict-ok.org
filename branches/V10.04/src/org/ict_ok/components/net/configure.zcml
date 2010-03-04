@@ -96,6 +96,14 @@
             />
         <require
             permission="org.ict_ok.components.net.View"
+            interface="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.net.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.net.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require

@@ -22,6 +22,7 @@ __version__ = "$Id$"
 import os
 from datetime import datetime
 import tempfile
+from lxml import etree
 
 # zope imports
 from zope.app import zapi
@@ -30,12 +31,15 @@ from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
 from zope.security import checkPermission
 from zope.app.rotterdam.xmlobject import setNoCacheHeaders
+from zope.traversing.browser import absoluteURL
 
 # zc imports
 from zc.table.column import GetterColumn
 
 # z3c imports
-from z3c.form import field
+from z3c.form import button, field, form, interfaces
+from z3c.formui import layout
+from z3c.pagelet.browser import BrowserPagelet
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory
@@ -43,13 +47,14 @@ from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      getUserTimezone
 from org.ict_ok.admin_utils.compliance.interfaces import \
-     IAdmUtilCompliance
+     IAdmUtilCompliance, IImportXmlData
 from org.ict_ok.admin_utils.compliance.compliance import \
      AdmUtilCompliance
 from org.ict_ok.components.supernode.browser.supernode import \
      SupernodeDetails
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DisplayForm, EditForm
+from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
 from org.ict_ok.admin_utils.compliance.requirement import getRequirementList
 from org.ict_ok.components.superclass.browser.superclass import \
@@ -62,6 +67,18 @@ from org.ict_ok.components.superclass.browser.superclass import \
 _ = MessageFactory('org.ict_ok')
 
 # --------------- menu entries -----------------------------
+
+class MSubImportXmlData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Import XML Data')
+    viewURL = 'importreqxmldata.html'
+    weight = 290
+
+class MSubExportXmlData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Export XML Data')
+    viewURL = 'exportreqxmldata.html'
+    weight = 291
 
 
 # --------------- details -----------------------------
@@ -137,7 +154,29 @@ class AdmUtilComplianceDetails(SupernodeDetails):
             return self.request.response.redirect(nextURL)
         else:
             return self.request.response.redirect('./@@details.html')
-        
+
+    def exportXmlData(self):
+        """get xml file for all objects"""
+        self.request.response.setHeader('Content-Type', 'application/x-ict-ok-data')
+        self.request.response.setHeader(\
+            'Content-Disposition',
+            'attachment; filename=\"%s.xml\"' % self.context.objectID)
+        setNoCacheHeaders(self.request.response)
+        import pdb
+        pdb.set_trace()
+        return self.context.exportXmlData()
+
+    def exportReqXmlData(self):
+        """get xml file for all objects"""
+        self.request.response.setHeader('Content-Type', 'application/x-ict-ok-data')
+        self.request.response.setHeader(\
+            'Content-Disposition',
+            'attachment; filename=\"%s.xml\"' % self.context.objectID)
+        setNoCacheHeaders(self.request.response)
+        return self.context.exportReqXmlData()
+
+
+
 # --------------- forms ------------------------------------
 
 
@@ -266,3 +305,40 @@ class EditAdmUtilComplianceForm(EditForm):
     factory = AdmUtilCompliance
     omitFields = AdmUtilComplianceDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
+
+class ImportReqXmlDataForm(layout.FormLayoutSupport, form.Form):
+    """ Delete the net """
+    
+    form.extends(form.Form)
+    label = _(u"Import an 'all-data file' data")
+    fields = field.Fields(IImportXmlData)
+    
+    @button.buttonAndHandler(u'Submit')
+    def handleSubmit(self, action):
+        """submit was pressed"""
+        if 'alldata' in self.widgets:
+            fileWidget=self.widgets['alldata']
+            fileUpload = fileWidget.extract()
+            #xml_string = ''.join(fileUpload.readlines())
+            parser = etree.XMLParser(load_dtd=True,
+                                     remove_blank_text=True)
+            tree   = etree.parse(fileUpload, parser)
+            print "--->", etree.tostring(tree.getroot(), pretty_print=True)
+#
+#            if self.context.importAllData(xml_string):
+#                # ERROR behandlung
+#                pass
+        url = absoluteURL(self.context, self.request)
+        self.request.response.redirect(url)
+
+    @button.buttonAndHandler(u'Cancel')
+    def handleCancel(self, action):
+        """cancel was pressed"""
+        url = absoluteURL(self.context, self.request)
+        self.request.response.redirect(url)
+
+    def update(self):
+        """update all widgets"""
+        #if ISuperclass.providedBy(self.context):
+            #self.label = self.getTitle()
+        form.Form.update(self)

@@ -21,21 +21,14 @@ from zope.schema.fieldproperty import FieldProperty
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
-from zope.app.folder import Folder
 
 # lovely imports
-from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.mobilephone.interfaces import \
     IMobilePhone, IMobilePhoneFolder, IAddMobilePhone
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 
 def AllMobilePhones(dummy_context):
     """Which MobilePhone exists
@@ -46,7 +39,7 @@ def AllMobilePhones(dummy_context):
         if IMobilePhone.providedBy(oobj.object):
             myString = u"%s" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
+                                    token=getattr(oobj.object, 'objectID', oid),
                                     title=myString))
     return SimpleVocabulary(terms)
 
@@ -60,14 +53,10 @@ def AllMobilePhoneTemplates(dummy_context):
         oobj.object.isTemplate:
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
+                                    token=getattr(oobj.object, 'objectID', oid),
                                     title=myString))
     return SimpleVocabulary(terms)
 
-
-#MobilePhone_Conns_RelManager = FieldRelationManager(IMobilePhone['conns'],
-                                                 #IMobilePhone['conn'],
-                                                 #relType='mobilephone:conns')
 
 class MobilePhone(Component):
     """
@@ -125,14 +114,14 @@ class MobilePhone(Component):
                 setattr(self, name, value)
 
 
-class MobilePhoneFolder(Superclass, Folder):
+class MobilePhoneFolder(ComponentFolder):
     implements(IMobilePhoneFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddMobilePhone)
+    contentFactory = MobilePhone
+    shortName = "mobilephone folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

@@ -21,6 +21,7 @@ from zope.interface import implements
 from zope.component import adapts
 from zope.i18nmessageid import MessageFactory
 from zope.app import zapi
+from zope.site.interfaces import IFolder, IRootFolder
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import \
@@ -45,7 +46,12 @@ class Navigation(object):
         retList = []
         if preList is not None:
             retList.extend(preList)
-        retList.append((None, None, zapi.getParent(self.context)))
+        try:
+            retList.append((None, None, zapi.getParent(self.context)))
+        except Exception:
+            print "111e"
+            import traceback
+            print traceback.format_exc()
         if postList is not None:
             retList.extend(postList)
         return retList
@@ -63,3 +69,8 @@ class Navigation(object):
             else:
                 locValue = getattr(self, viewName, None)
         return retList
+
+
+class RootNavigation(Navigation):
+    implements(INavigation)
+    adapts(IRootFolder)

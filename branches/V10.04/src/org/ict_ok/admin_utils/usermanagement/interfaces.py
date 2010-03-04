@@ -147,6 +147,11 @@ class IAdmUtilUserPreferences(Interface):
         description=_("Time Zone used to display your calendar"),
         values=pytz.common_timezones,
         required = False)
+    navExplanation = Bool(
+        title = _("Explanation on navigation"),
+        description = _("Explanation on navigation"),
+        default = False,
+        required = False)
     email = EmailValid(
         title = _(u"Email address"),
         required=False

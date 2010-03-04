@@ -81,23 +81,32 @@ class IComponent(Interface):
         weighted count of accesses
         !!!!!! has to be implemented by subclass !!!!!!
         """
-    def getRefAttributeNames(self):
+    def getRefAttributeNames():
         """ gets all referenced Attributes
         """
 
-    def getEvaluationsTodo(self):
+    def getEvaluationsTodo():
         """ returns: [Requirement(u'ReqA1'), Requirement(u'ReqA2')]
         """
 
-    def getEvaluationsDone(self):
+    def getEvaluationsDone():
         """returns [<Evaluation for Requirement(u'ReqA1'), value='Fail'>),
         <Evaluation for Requirement(u'ReqA2'), value='Pass'>]
         """
 
 
-class IComponentFolder(ISuperclass, IFolder):
+class IComponentFolder(Interface):
     """Container for MobilePhone objects
     """
+    
+    contentFactory = Attribute("Factory of contained objects")
+    def exportXlsData(sheetName, wbook):
+        """get XLS file for all folder objects"""
+    def importXlsData(request, f_name, codepage):
+        """set data from XLS file on new or modified folder objects"""
+    def renderAddObjectButton(request):
+        """ render html code for a generic add button
+        """
 
         
 class IImportXlsData(Interface):

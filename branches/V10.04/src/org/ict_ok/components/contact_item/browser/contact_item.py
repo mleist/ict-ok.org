@@ -17,6 +17,7 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.traversing.browser import absoluteURL
 
 # z3c imports
 from z3c.form import field
@@ -130,3 +131,50 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
     omitFields = ContactItemDetails.omit_viewfields
     factoryId = u'org.ict_ok.components.contact_item.contact_item.ContactItem'
     allFields = fieldsForInterface(attrInterface, [])
+
+
+def getRoles(item, formatter):
+    """
+    Roles for overview table
+    """
+    if type(item) is dict:
+        item = item["obj"]
+    ttid = u"roles" + item.getObjectId()
+    if len(item.roles) > 2:
+        view_url = absoluteURL(item, formatter.request) + '/@@details.html'
+        view_html = u'<a href="%s" id="%s">' % (view_url, ttid) + u'[...]</a>'
+        rolesList = [i.ikName for i in item.roles]
+        rolesList.sort()
+        tooltip_text = _(u'<b>Roles:</b>') + u'<br />' +\
+            u'<br />'.join(rolesList)
+    elif len(item.roles) > 1:
+        view0_url = absoluteURL(item.roles[0], formatter.request) +\
+                    '/@@details.html'
+        view1_url = absoluteURL(item.roles[1], formatter.request) +\
+                    '/@@details.html'
+        view_html = u'<span id="%s"><a href="%s">' %\
+                    (ttid, view0_url) + u'%s</a>' %\
+                    item.roles[0].ikName + \
+                    u', <a href="%s">' %  (view1_url) + u'%s</a></span>' %\
+                    item.roles[1].ikName
+        rolesList = [i.ikName for i in item.roles]
+        rolesList.sort()
+        tooltip_text = _(u'<b>Roles:</b>') + u'<br />' +\
+            u'<br />'.join(rolesList)
+    elif len(item.roles) == 1:
+        view_url = absoluteURL(item.roles[0], formatter.request) +\
+                    '/@@details.html'
+        view_html = u'<a href="%s" id="%s">' %  (view_url, ttid) + u'%s</a>' %\
+                    item.roles[0].ikName
+        membersList = [i.ikName for i in item.roles[0].contactItems]
+        membersList.sort()
+        tooltip_text = _(u'<b>Members:</b>') + u'<br />' +\
+            u'<br />'.join(membersList)
+    else:
+        view_html = u'-'
+        tooltip_text = _(u'No roles')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return view_html + tooltip

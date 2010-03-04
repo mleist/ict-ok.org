@@ -388,6 +388,17 @@ def getTitle(item, formatter):
     except TypeError:
         return str(item.__class__.__name__)
 
+def getTypeName(item, formatter):
+    """
+    Type name of object for Overview
+    """
+    if type(item) is dict:
+        item = item["obj"]
+    textTransl = translate(item.shortName,
+                           domain='org.ict_ok',
+                           context=formatter.request)
+    return textTransl
+
 def getHealth(item, formatter):
     if type(item) is dict:
         item = item["obj"]
@@ -553,6 +564,18 @@ class MSubImportXlsData(GlobalMenuSubItem):
     viewURL = '@@importxlsdata.html'
     weight = 60
 
+class MSubExportAllXlsData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Export All XLS')
+    viewURL = '@@exportallxlsdata.html'
+    weight = 55
+
+class MSubImportAllXlsData(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Import All XLS')
+    viewURL = '@@importallxlsdata.html'
+    weight = 53
+
 
 class MSubEdit(GlobalMenuSubItem):
     """ Menu Item """
@@ -714,7 +737,10 @@ class SuperclassDetails:
     
     def getHrefTitle(self, obj, displayShort=False):
         href = zapi.absoluteURL(obj, self.request)
-        title = obj.ikName
+        if hasattr(obj, 'getDisplayTitle'):
+            title = obj.getDisplayTitle()
+        else:
+            title = obj.ikName
         if displayShort and hasattr(obj, 'shortName'):
             return u'<a href="%s">%s [%s]</a>' % (href, title, obj.shortName)
         else:

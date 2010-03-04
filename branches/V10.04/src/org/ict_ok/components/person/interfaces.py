@@ -40,6 +40,12 @@ class IPerson(Interface):
         title = _(u'title'),
         description = _(u"title of person"),
         required = False)
+    inOUs = List(
+        title = _(u'Member in OUs'),
+        value_type=Choice(vocabulary='AllOrganisationalUnits'),
+        default=[],
+        required = False)
+        
         
 #    def trigger_online():
 #        """

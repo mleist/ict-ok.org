@@ -36,6 +36,11 @@
     />
 
     <permission
+        id="org.ict_ok.admin_utils.compliance.Export"
+        title="Data Export"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.compliance.evaluations.View"
         title="View evaluations from objects"
     />
@@ -75,6 +80,9 @@
                     role="org.ict_ok.adm" />
                     
     <grant permission="org.ict_ok.admin_utils.compliance.Import"
+                    role="org.ict_ok.adm" />
+                    
+    <grant permission="org.ict_ok.admin_utils.compliance.Export"
                     role="org.ict_ok.adm" />
                     
     <grant permission="org.ict_ok.admin_utils.compliance.evaluations.View"

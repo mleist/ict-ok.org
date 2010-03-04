@@ -83,10 +83,27 @@
         name="overview.html"
     />
 
+    <viewlet
+        name="all_persons"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuInventoryByType"
+        class="org.ict_ok.components.person.browser.person.MSubInvPeron"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.person.View"
+        />
+
     <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.components.person.interfaces.IPersonFolder"
         class="org.ict_ok.components.superclass.browser.superclass.Overview"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.person.View"
+        />
+
+    <z3c:pagelet
+        name="all_persons.html"
+        for="*"
+        class=".person.AllPersons"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.person.View"
         />

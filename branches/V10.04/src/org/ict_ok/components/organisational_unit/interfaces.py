@@ -41,6 +41,12 @@ class IOrganisationalUnit(Interface):
         value_type=Choice(vocabulary='AllValidSubOrganisationalUnits'),
         default=[],
         required = False)
+
+    members = List(
+        title=_(u'Members'),
+        value_type=Choice(vocabulary='AllPersons'),
+        default=[],
+        required = False)
         
 #    def trigger_online():
 #        """

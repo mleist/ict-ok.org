@@ -77,6 +77,8 @@ class AddressFolderDetails(ComponentDetails):
     factory = Address
     omitFields = AddressDetails.omit_viewfields
     fields = fieldsForFactory(factory, omitFields)
+    addMenuEntry = MSubAddAddress
+
 
 # --------------- forms ------------------------------------
 

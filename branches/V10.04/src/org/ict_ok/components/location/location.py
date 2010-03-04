@@ -20,27 +20,21 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
-from zope.app import zapi
 from zope.interface import implements
 from zope.component import getUtility
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.app.folder import Folder
 
 # lovely imports
-from lovely.relation.property import RelationPropertyIn
 from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.component import Component
-from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.location.interfaces import \
     ILocation, IAddLocation, ILocationFolder
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
 from org.ict_ok.components.building.interfaces import IBuilding
 
 
@@ -68,7 +62,7 @@ def AllLocations(dummy_context):
             myString = u"%s" % (oobj.object.getDcTitle())
             terms.append(\
                 SimpleTerm(oobj.object,
-                           token=oid,
+                           token=getattr(oobj.object, 'objectID', oid),
                            title=myString))
     return SimpleVocabulary(terms)
     
@@ -82,7 +76,7 @@ def AllLocationTemplates(dummy_context):
         oobj.object.isTemplate:
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
+                                    token=getattr(oobj.object, 'objectID', oid),
                                     title=myString))
     return SimpleVocabulary(terms)
 
@@ -98,6 +92,7 @@ class Location(Component):
 
     implements(ILocation)
     shortName = "location"
+    containerIface = ILocationFolder
     # for ..Contained we have to:
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(ILocation['ikAttr'])
@@ -130,14 +125,14 @@ class Location(Component):
                 setattr(self, name, value)
 
 
-class LocationFolder(Superclass, Folder):
+class LocationFolder(ComponentFolder):
     implements(ILocationFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddLocation)
+    contentFactory = Location
+    shortName = "location folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

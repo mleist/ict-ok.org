@@ -21,9 +21,6 @@ __version__ = "$Id$"
 from math import sqrt
 import os
 import rrdtool
-import time
-import tempfile
-from datetime import datetime
 
 # zope imports
 from zope.interface import implements
@@ -32,15 +29,11 @@ from zope.app import zapi
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
 from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.version import getIkVersion
-from org.ict_ok.components.superclass.superclass import Superclass
-from org.ict_ok.components.component import Component
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.latency.interfaces import \
     ILatency, IAddLatency, ILatencyFolder
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
@@ -97,7 +90,7 @@ def AllLatencyTemplates(dummy_context):
         oobj.object.isTemplate:
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
+                                    token=getattr(oobj.object, 'objectID', oid),
                                     title=myString))
     return SimpleVocabulary(terms)
 
@@ -292,14 +285,14 @@ class Latency(Component):
         rrdtool.graph(*argList)
 
 
-class LatencyFolder(Superclass, Folder):
+class LatencyFolder(ComponentFolder):
     implements(ILatencyFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddLatency)
+    contentFactory = Latency
+    shortName = "value folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

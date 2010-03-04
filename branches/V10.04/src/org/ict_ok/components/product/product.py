@@ -17,12 +17,8 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
 # zope imports
 from zope.interface import implements
-from zope.schema.fieldproperty import FieldProperty
 from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -31,17 +27,13 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.product.interfaces import IProduct
 from org.ict_ok.components.product.interfaces import IProductFolder
 from org.ict_ok.components.product.interfaces import IAddProduct
-from org.ict_ok.components.component import Component
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.components.work_order.work_order import WorkOrder_Products_RelManager
-from org.ict_ok.components.work_order.interfaces import IWorkOrder
 
 def AllProductTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IProduct)
@@ -112,14 +104,14 @@ class Product(Component):
                 setattr(self, name, value)
 
 
-class ProductFolder(Superclass, Folder):
+class ProductFolder(ComponentFolder):
     implements(IProductFolder,
-               IImportCsvData,
-               IImportXlsData,
                IAddProduct)
+    contentFactory = Product
+    shortName = "product folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

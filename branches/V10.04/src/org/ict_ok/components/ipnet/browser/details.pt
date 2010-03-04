@@ -6,5 +6,4 @@
             i18n:attributes="summary">
         <metal:block use-macro="macro:IpnetDetails" />
     </table>
-    </table>
 </i18n:block>

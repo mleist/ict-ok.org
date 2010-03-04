@@ -43,7 +43,7 @@ class NetIpValidError(ValidationError):
 
 class MacValidError(ValidationError):
     """Error notification for non valid IPv4-Address"""
-    __doc__ = _("""IP-address not ok""")
+    __doc__ = _("""Mac-address not ok (xx:xx:xx:xx:xx:xx)""")
 
 class ColorValidError(ValidationError):
     """Error notification for non valid Email-Address"""

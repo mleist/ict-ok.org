@@ -17,26 +17,16 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import implements
-from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
-from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
-from zope.app.folder import Folder
 
 # lovely imports
-from lovely.relation.property import RelationPropertyIn
-from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.device.device import Device, DeviceFolder
 from org.ict_ok.components.ipc.interfaces \
     import IIndustrialComputer, IIndustrialComputerFolder, IAddIndustrialComputer
 from org.ict_ok.components.component import \
-    AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+    AllComponents, AllComponentTemplates
 
 def AllIndustrialComputerTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IIndustrialComputer)
@@ -83,6 +73,9 @@ class IndustrialComputer(Device):
 class IndustrialComputerFolder(DeviceFolder):
     implements(IIndustrialComputerFolder,
                IAddIndustrialComputer)
+    contentFactory = IndustrialComputer
+    shortName = "ipc folder"
+
     def __init__(self, **data):
         """
         constructor of the object

@@ -22,9 +22,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.app import zapi
 from zope.interface import implements
-from zope.component import getUtility
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.folder import Folder
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -33,10 +31,7 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
-from org.ict_ok.components.component import Component
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
-from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.building.interfaces import \
     IBuilding, IAddBuilding, IBuildingFolder
 from org.ict_ok.components.room.interfaces import IRoom
@@ -69,6 +64,7 @@ class Building(Component):
 
     implements(IBuilding)
     shortName = "building"
+    containerIface = IBuildingFolder
     # for ..Contained we have to:
     __name__ = __parent__ = None
     #ikAttr = FieldProperty(IBuilding['ikAttr'])
@@ -102,14 +98,14 @@ class Building(Component):
                 setattr(self, name, value)
 
 
-class BuildingFolder(Superclass, Folder):
-    implements(IBuildingFolder, 
-               IImportCsvData,
-               IImportXlsData,
+class BuildingFolder(ComponentFolder):
+    implements(IBuildingFolder,
                IAddBuilding)
+    contentFactory = Building
+    shortName = "building folder"
+
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Superclass.__init__(self, **data)
-        Folder.__init__(self)
+        ComponentFolder.__init__(self, **data)

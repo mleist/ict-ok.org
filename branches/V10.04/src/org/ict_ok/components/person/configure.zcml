@@ -97,6 +97,14 @@
             />
         <require
             permission="org.ict_ok.components.person.View"
+            interface="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.person.Edit"
+            set_schema="org.ict_ok.components.interfaces.IComponentFolder"
+            />
+        <require
+            permission="org.ict_ok.components.person.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require

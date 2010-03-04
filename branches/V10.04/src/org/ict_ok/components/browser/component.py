@@ -9,6 +9,7 @@
 #
 # pylint: disable-msg=E1101,E0611,W0613,W0612,W0232,W0142
 #
+from org.ict_ok.components.supernode.interfaces import ISupernode
 """implementation of browser class of Host object
 """
 
@@ -51,6 +52,7 @@ from z3c.form.browser import checkbox
 from schooltool.requirement.interfaces import IScoreSystem
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview, getModifiedDate, \
      link, raw_cell_formatter, GetterColumn
@@ -198,146 +200,132 @@ class ComponentDetails(SupernodeDetails):
         setNoCacheHeaders(self.request.response)
         return tmpText
     
-    def exportXlsData(self):
+    def exportXlsData(self, sheetName=u'ict', wbook=None, filename='ict.xls'):
         """get XLS file for all folder objects"""
-        filename = datetime.now().strftime('ict_%Y%m%d%H%M%S.xls')
-        f_handle, f_name = tempfile.mkstemp(filename)
-        wbook = Workbook()
-        wb_hosts = wbook.add_sheet('ddd')
-        style0 = XFStyle()
-        font0 = Font()
-        font0.height = 6*20
-        style0.num_format_str = '@'
-        style0.font = font0
-        style1 = XFStyle()
-        font1 = Font()
-        font1.height = 6*20
-        style1.num_format_str = '@'
-        style1.font = font1
-        heading_pattern = xl.Pattern()
-        heading_pattern.pattern = xl.Pattern.SOLID_PATTERN
-        heading_pattern.pattern_back_colour = 0x5
-        heading_pattern.pattern_fore_colour = 0x5   
-        fields = self.fields
-        attrList = [ fname for fname, fval in fields.items()]
-        itemList = self.context.items()
-        pos_y = 0
-        pos_x = 0
-        for attr in attrList:
-            wb_data = Formula(u'"%s"' % attr)
-            style0.pattern = heading_pattern 
-            wb_hosts.write(pos_y, pos_x, wb_data, style0)
-            pos_x += 1
-        # IntID
-        wb_data = Formula(u'"IntID"')
-        wb_hosts.write(pos_y, pos_x, wb_data, style0)
-        pos_x += 1
-        # objectID
-        wb_data = Formula(u'"objectID"')
-        wb_hosts.write(pos_y, pos_x, wb_data, style0)
-        wb_hosts.col(pos_x).width *= 3
-        pos_x += 1
-        pos_y = 1
-        #
-        allAttributes = {}
-        for interface in implementedBy(self.factory):
-            for i_attrName in interface:
-                i_attr = interface[i_attrName]
-                if IField.providedBy(i_attr):
-                    allAttributes[i_attrName] = i_attr
-        #
-        for item_n, item_v in itemList:
-            pos_x = 0
-            for attr in attrList:
-#                from zope.interface import implementedBy
-#                ff=self.factory
-#                tt=[i for i in implementedBy(ff)]
-#                it=tt[-1]
-                #attrField = self.attrInterface[attr]
-                attrField = allAttributes[attr]
-#                tmpFieldProperty = getattr(self.factory, attr)
-#                if hasattr(tmpFieldProperty, '_FieldProperty__field'):
-#                    attrField = getattr(self.factory, attr)._FieldProperty__field
-                attrDm = datamanager.AttributeField(item_v, attrField)
-                v_style = XFStyle()
-                v_font = Font()
-                v_font.height = 6*20
-                v_style.font = v_font
-                value = None
-                if IChoice.providedBy(attrField):
-                    v_style.num_format_str = '@'
-                    dateValue = attrDm.get()
-                    v_widget = getMultiAdapter(\
-                                    (attrField,self.request),
-                                    interfaces.IFieldWidget)
-                    v_widget.context = item_v
-#                    dm = zope.component.getMultiAdapter(
-#                        (self.content, field.field), interfaces.IDataManager)
-#                    zope.component.getMultiAdapter(
-#                        (self.context,
-#                         self.request,
-#                         self.form,
-#                         getattr(widget, 'field', None),
-#                         widget),
-#                        interfaces.IValidator).validate(fvalue)
-#                    dm = zope.component.getMultiAdapter(
-#                        (self.__context__, field), interfaces.IDataManager)
-                    v_dataconverter = queryMultiAdapter(\
-                                    (attrDm.field, v_widget),
-                                    interfaces.IDataConverter)
-                    #print u"ddd55: %s: %s" % (attr, dateValue)
-                    if dateValue is not None:
-                        value = v_dataconverter.toWidgetValue(dateValue)[0]
-                        #print "value3->   %s: %s " % (attr, value)
-#                elif ICollection.providedBy(attrField):
-#                    v_style.num_format_str = '@'
-#                    value = getattr(item_v, attr)
-#                    print "ddd66: %s: %s" % (attr, value)
-#                elif IBool.providedBy(attrField):
-#                    v_style.num_format_str = '@'
-#                    value = getattr(item_v, attr)
-#                    print "value2->   %s: %s " % (attr, value)
-                else:
-                    v_style.num_format_str = '@'
-                    dateValue = attrDm.get()
-                    v_widget = getMultiAdapter(\
-                                    (attrField,self.request),
-                                    interfaces.IFieldWidget)
-                    v_widget.context = item_v
-                    v_dataconverter = queryMultiAdapter(\
-                                    (attrDm.field, v_widget),
-                                    interfaces.IDataConverter)
-                    #d2 = queryMultiAdapter((attrDm.field, v_widget),interfaces.IDataConverter)
-                    if dateValue is not None:
-                        value = v_dataconverter.toWidgetValue(dateValue)
-                    if type(value) is list:
-                        value = u";".join(value)
-                    #print u"value1->   %s: %s " % (attr, value)
-                if value is not None:
-                    #print u"wb_hosts.write(%s, %s, %s, %s)" % (pos_y, pos_x, value, v_style)
-                    wb_hosts.write(pos_y, pos_x, value, v_style)
-                pos_x += 1
-            # IntID
-            uidutil = queryUtility(IIntIds)
-            wb_data = Formula(u'"%s"' % uidutil.getId(item_v))
-            wb_hosts.write(pos_y, pos_x, wb_data, style0)
-            pos_x += 1
-            # objectID
-            wb_data = Formula(u'"%s"' % item_v.objectID)
-            wb_hosts.write(pos_y, pos_x, wb_data, style0)
-            pos_x += 1
-            pos_y += 1
-        wbook.save(f_name)
+        (filename, dataMem) = self.context.exportXlsData(self.request,
+                                                         sheetName=sheetName,
+                                                         wbook=wbook)
+
         self.request.response.setHeader('Content-Type', 'application/vnd.ms-excel')
         self.request.response.setHeader(\
             'Content-Disposition',
             'attachment; filename=\"%s\"' % filename)
         setNoCacheHeaders(self.request.response)
-        datafile = open(f_name, "r")
-        dataMem = datafile.read()
-        datafile.close()
-        os.remove(f_name)
         return dataMem
+#        if wbook is None:
+#            localWbook = True
+#            filename = datetime.now().strftime('ict_%Y%m%d%H%M%S.xls')
+#            f_handle, f_name = tempfile.mkstemp(filename)
+#            wbook = Workbook()
+#        else:
+#            localWbook = False
+#        wb_hosts = wbook.add_sheet(getattr(self.context, 'ikName', sheetName))
+#        style0 = XFStyle()
+#        font0 = Font()
+#        font0.height = 6*20
+#        #style0.num_format_str = '@'
+#        style0.font = font0
+#        style1 = XFStyle()
+#        font1 = Font()
+#        font1.height = 6*20
+#        #style1.num_format_str = '@'
+#        style1.font = font1
+#        heading_pattern = xl.Pattern()
+#        heading_pattern.pattern = xl.Pattern.SOLID_PATTERN
+#        heading_pattern.pattern_back_colour = 0x5
+#        heading_pattern.pattern_fore_colour = 0x5   
+#        fields = self.fields
+#        attrList = [ fname for fname, fval in fields.items()]
+#        itemList = self.context.items()
+#        pos_y = 0
+#        pos_x = 0
+#        for attr in attrList:
+##            wb_data = Formula(u'"%s"' % attr)
+#            style0.pattern = heading_pattern 
+##            wb_hosts.write(pos_y, pos_x, wb_data, style0)
+#            wb_hosts.write(pos_y, pos_x, attr, style0)
+#            pos_x += 1
+##        # IntID
+##        wb_data = Formula(u'"IntID"')
+##        wb_hosts.write(pos_y, pos_x, wb_data, style0)
+##        pos_x += 1
+#        # objectID
+##        wb_data = Formula(u'"objectID"')
+##        wb_hosts.write(pos_y, pos_x, wb_data, style0)
+#        wb_hosts.write(pos_y, pos_x, "objectID", style0)
+#        wb_hosts.col(pos_x).width *= 3
+#        pos_x += 1
+#        pos_y = 1
+#        #
+#        allAttributes = {}
+#        for interface in implementedBy(self.factory):
+#            for i_attrName in interface:
+#                i_attr = interface[i_attrName]
+#                if IField.providedBy(i_attr):
+#                    allAttributes[i_attrName] = i_attr
+#        #
+#        for item_n, item_v in itemList:
+#            pos_x = 0
+#            for attr in attrList:
+#                attrField = allAttributes[attr]
+#                attrDm = datamanager.AttributeField(item_v, attrField)
+#                v_style = XFStyle()
+#                v_font = Font()
+#                v_font.height = 6*20
+#                v_style.font = v_font
+#                value = None
+#                if IChoice.providedBy(attrField):
+#                    v_style.num_format_str = '@'
+#                    dateValue = attrDm.get()
+#                    v_widget = getMultiAdapter(\
+#                                    (attrField,self.request),
+#                                    interfaces.IFieldWidget)
+#                    v_widget.context = item_v
+#                    v_dataconverter = queryMultiAdapter(\
+#                                    (attrDm.field, v_widget),
+#                                    interfaces.IDataConverter)
+#                    if dateValue is not None:
+#                        value = v_dataconverter.toWidgetValue(dateValue)[0]
+#                else:
+#                    v_style.num_format_str = '@'
+#                    dateValue = attrDm.get()
+#                    v_widget = getMultiAdapter(\
+#                                    (attrField,self.request),
+#                                    interfaces.IFieldWidget)
+#                    v_widget.context = item_v
+#                    v_dataconverter = queryMultiAdapter(\
+#                                    (attrDm.field, v_widget),
+#                                    interfaces.IDataConverter)
+#                    if dateValue is not None:
+#                        value = v_dataconverter.toWidgetValue(dateValue)
+#                    if type(value) is list:
+#                        value = u";".join(value)
+#                if value is not None:
+#                    wb_hosts.write(pos_y, pos_x, value, v_style)
+#                pos_x += 1
+##            # IntID
+##            uidutil = queryUtility(IIntIds)
+##            wb_data = Formula(u'"%s"' % uidutil.getId(item_v))
+##            wb_hosts.write(pos_y, pos_x, wb_data, style0)
+##            pos_x += 1
+#            # objectID
+##            wb_data = Formula(u'"%s"' % item_v.objectID)
+##            wb_hosts.write(pos_y, pos_x, wb_data, style0)
+#            wb_hosts.write(pos_y, pos_x, item_v.objectID, style0)
+#            pos_x += 1
+#            pos_y += 1
+#        if localWbook is True:
+#            wbook.save(f_name)
+#            self.request.response.setHeader('Content-Type', 'application/vnd.ms-excel')
+#            self.request.response.setHeader(\
+#                'Content-Disposition',
+#                'attachment; filename=\"%s\"' % filename)
+#            setNoCacheHeaders(self.request.response)
+#            datafile = open(f_name, "r")
+#            dataMem = datafile.read()
+#            datafile.close()
+#            os.remove(f_name)
+#            return dataMem
 
     def connectedComponentsOnPhysicalLayer(self):
         Components = []
@@ -528,9 +516,13 @@ class AddComponentForm(AddForm):
                 url = absoluteURL(self, self.request)
                 session['state'] = "novalue" 
                 return self.request.response.redirect(url)
-            addObjIntId = int(self.widgets['template'].value[0])
-            intIdUtil = queryUtility(IIntIds)
-            addObj = intIdUtil.queryObject(addObjIntId)
+            addObjId = str(self.widgets['template'].value[0])
+            my_catalog = zapi.getUtility(ICatalog)
+            obj = my_catalog.searchResults(oid_index=addObjId)
+            addObj = iter(obj).next()
+            #addObjIntId = int(self.widgets['template'].value[0])
+            #intIdUtil = queryUtility(IIntIds)
+            #addObj = intIdUtil.queryObject(addObjIntId)
             if addObj is not None:
                 self.context = addObj
                 session['state'] = "templateOk" 
@@ -630,8 +622,9 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
     @button.buttonAndHandler(u'Submit')
     def handleSubmit(self, action):
         """submit was pressed"""
+        #import pdb
+        #pdb.set_trace()
         if 'xlsdata' in self.widgets:
-            fields = self.allFields
             codepage=self.widgets['codepage'].value[0]
             fileWidget=self.widgets['xlsdata']
             fileUpload = fileWidget.extract()
@@ -640,140 +633,166 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
             outf = open(f_name, 'wb')
             outf.write(fileUpload.read())
             outf.close()
-            parseRet = xl.parse_xls(f_name, codepage)
-            os.remove(f_name)
-            #
-            allAttributes = {}
-            for interface in implementedBy(self.factory):
-                for i_attrName in interface:
-                    i_attr = interface[i_attrName]
-                    if IField.providedBy(i_attr):
-                        allAttributes[i_attrName] = i_attr
-            #
-            for sheet_name, values in parseRet:
-                matrix = [[]]
-                for row_idx, col_idx in sorted(values.keys()):
-                    v = values[(row_idx, col_idx)]
-                    if isinstance(v, unicode):
-                        v = u"%s" % v # v.encode(codepage, 'backslashreplace')
-                    else:
-                        v = `v`
-                    v = u'%s' % v.strip()
-                    last_row, last_col = len(matrix), len(matrix[-1])
-                    while last_row <= row_idx:
-                        matrix.extend([[]])
-                        last_row = len(matrix)
-                    while last_col < col_idx:
-                        matrix[-1].extend([''])
-                        last_col = len(matrix[-1])
-                    matrix[-1].extend([v])
-                attrNameList = matrix[0]
-                attrValMatrix = matrix[1:]
-                for attrValVector in attrValMatrix:
-                    attrDict = {}
-                    for attrIndex, attrVal in enumerate(attrValVector):
-                        attrDict[attrNameList[attrIndex]] = attrVal
-                    # ---------------------------------------
-                    if attrDict.has_key('IntID'):
-                        attrDict.pop('IntID')
-                    if attrDict.has_key('objectID'):
-                        attrObjectID = attrDict.pop('objectID')
-                        oldObj = self.context[attrObjectID]
-                        for attrName, newValString in attrDict.items():
-                            #print u"ddd4-> %s" % (attrName)
-                            attrField = allAttributes[attrName]
-                            #print u"type(%s): %s" % (attrField, type(attrField))
-#                            if attrName == "rooms":
-                            if IChoice.providedBy(attrField):
-                                v_widget = getMultiAdapter(\
-                                                (attrField,self.request),
-                                                interfaces.IFieldWidget)
-                                v_widget.context = oldObj
-                                v_dataconverter = queryMultiAdapter(\
-                                                (attrField, v_widget),
-                                                interfaces.IDataConverter)
-                                if len(newValString) > 0:
-                                    newVal = v_dataconverter.toFieldValue([newValString])
-                                else:
-                                    newVal = v_dataconverter.toFieldValue([])
-                            else:
-                                if attrName == "isTemplate":
-                                    v_widget = checkbox.SingleCheckBoxFieldWidget(\
-                                                attrField,self.request)
-                                else:
-                                    v_widget = getMultiAdapter(\
-                                                    (attrField,self.request),
-                                                    interfaces.IFieldWidget)
-                                v_widget.context = oldObj
-                                v_dataconverter = queryMultiAdapter(\
-                                                (attrField, v_widget),
-                                                interfaces.IDataConverter)
-                                if ICollection.providedBy(attrField):
-                                    if len(newValString) > 0:
-                                        newVal = v_dataconverter.toFieldValue(newValString.split(';'))
-                                    else:
-                                        newVal = v_dataconverter.toFieldValue([])
-                                else:
-                                    newVal = v_dataconverter.toFieldValue(newValString)
-                            if getattr(oldObj, attrName) != newVal:
-                                setattr(oldObj, attrName, newVal)
-                                dcore = IWriteZopeDublinCore(oldObj)
-                                dcore.modified = datetime.utcnow()
-                                if attrName == "ikName":
-                                    IBrwsOverview(oldObj).setTitle(newVal)
-                    else:
-                        oldObj = None
-                        # new Object
-#                        newObj = createObject(self.factoryId)
-#                        newObj.__post_init__()
-                        dataVect = {}
-                        for attrName, newValString in attrDict.items():
-                            attrField = allAttributes[attrName]
-                            if IChoice.providedBy(attrField):
-                                v_widget = getMultiAdapter(\
-                                                (attrField,self.request),
-                                                interfaces.IFieldWidget)
-                                v_dataconverter = queryMultiAdapter(\
-                                                (attrField, v_widget),
-                                                interfaces.IDataConverter)
-                                if len(newValString) > 0:
-                                    newVal = v_dataconverter.toFieldValue([newValString])
-                                else:
-                                    newVal = v_dataconverter.toFieldValue([])
-                            else:
-                                if attrName == "isTemplate":
-                                    v_widget = checkbox.SingleCheckBoxFieldWidget(\
-                                                attrField,self.request)
-                                else:
-                                    v_widget = getMultiAdapter(\
-                                                    (attrField,self.request),
-                                                    interfaces.IFieldWidget)
-                                v_dataconverter = queryMultiAdapter(\
-                                                (attrField, v_widget),
-                                                interfaces.IDataConverter)
-                                if ICollection.providedBy(attrField):
-                                    if len(newValString) > 0:
-                                        newVal = v_dataconverter.toFieldValue(newValString.split(';'))
-                                    else:
-                                        newVal = v_dataconverter.toFieldValue([])
-                                else:
-                                    newVal = v_dataconverter.toFieldValue(newValString)
-                            dataVect[str(attrName)] = newVal
-                            #setattr(newObj, attrName, newVal)
-                        #self.context.__setitem__(newObj.objectID, newObj)
-                        #print "dataVect: ", dataVect
-                        newObj = self.factory(**dataVect)
-                        newObj.__post_init__()
-                        if oldObj is not None:
-                            dcore = IWriteZopeDublinCore(oldObj)
-                            dcore.modified = datetime.utcnow()
-                        IBrwsOverview(newObj).setTitle(dataVect['ikName'])
-                        self.context[newObj.objectID] = newObj
-                        if hasattr(newObj, "store_refs"):
-                            newObj.store_refs(**dataVect)
-                        notify(ObjectCreatedEvent(newObj))
+            try:
+                self.context.importXlsData(self.request, f_name, codepage)
+            finally:
+                os.remove(f_name)
         url = absoluteURL(self.context, self.request)
         self.request.response.redirect(url)
+#
+#        if 'xlsdata' in self.widgets:
+#            fields = self.allFields
+#            codepage=self.widgets['codepage'].value[0]
+#            fileWidget=self.widgets['xlsdata']
+#            fileUpload = fileWidget.extract()
+#            filename = datetime.now().strftime('in_%Y%m%d%H%M%S.xls')
+#            f_handle, f_name = tempfile.mkstemp(filename)
+#            outf = open(f_name, 'wb')
+#            outf.write(fileUpload.read())
+#            outf.close()
+#            parseRet = xl.parse_xls(f_name, codepage)
+#            os.remove(f_name)
+#            from pprint import pprint
+#            pprint(parseRet)
+#            #
+#            allAttributes = {}
+#            for interface in implementedBy(self.factory):
+#                for i_attrName in interface:
+#                    i_attr = interface[i_attrName]
+#                    if IField.providedBy(i_attr):
+#                        allAttributes[i_attrName] = i_attr
+#            #
+#            for sheet_name, values in parseRet:
+#                matrix = [[]]
+#                for row_idx, col_idx in sorted(values.keys()):
+#                    v = values[(row_idx, col_idx)]
+#                    if isinstance(v, unicode):
+#                        v = u"%s" % v # v.encode(codepage, 'backslashreplace')
+#                    else:
+#                        v = `v`
+#                    v = u'%s' % v.strip()
+#                    last_row, last_col = len(matrix), len(matrix[-1])
+#                    while last_row <= row_idx:
+#                        matrix.extend([[]])
+#                        last_row = len(matrix)
+#                    while last_col < col_idx:
+#                        matrix[-1].extend([''])
+#                        last_col = len(matrix[-1])
+#                    matrix[-1].extend([v])
+#                attrNameList = matrix[0]
+#                attrValMatrix = matrix[1:]
+#                for attrValVector in attrValMatrix:
+#                    attrDict = {}
+#                    for attrIndex, attrVal in enumerate(attrValVector):
+#                        attrDict[attrNameList[attrIndex]] = attrVal
+#                    # ---------------------------------------
+##                    if attrDict.has_key('IntID'):
+##                        attrDict.pop('IntID')
+#                    if attrDict.has_key('objectID') and \
+#                       attrDict['objectID'] in self.context:
+#                        attrObjectID = attrDict.pop('objectID')
+#                        oldObj = self.context[attrObjectID]
+#                        for attrName, newValString in attrDict.items():
+#                            #print u"ddd4-> %s" % (attrName)
+#                            attrField = allAttributes[attrName]
+#                            #print u"type(%s): %s" % (attrField, type(attrField))
+##                            if attrName == "rooms":
+#                            if IChoice.providedBy(attrField):
+#                                v_widget = getMultiAdapter(\
+#                                                (attrField,self.request),
+#                                                interfaces.IFieldWidget)
+#                                v_widget.context = oldObj
+#                                v_dataconverter = queryMultiAdapter(\
+#                                                (attrField, v_widget),
+#                                                interfaces.IDataConverter)
+#                                if len(newValString) > 0:
+#                                    newVal = v_dataconverter.toFieldValue([newValString])
+#                                else:
+#                                    newVal = v_dataconverter.toFieldValue([])
+#                            else:
+#                                if attrName == "isTemplate":
+#                                    v_widget = checkbox.SingleCheckBoxFieldWidget(\
+#                                                attrField,self.request)
+#                                else:
+#                                    v_widget = getMultiAdapter(\
+#                                                    (attrField,self.request),
+#                                                    interfaces.IFieldWidget)
+#                                v_widget.context = oldObj
+#                                v_dataconverter = queryMultiAdapter(\
+#                                                (attrField, v_widget),
+#                                                interfaces.IDataConverter)
+#                                if ICollection.providedBy(attrField):
+#                                    if len(newValString) > 0:
+#                                        newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+#                                    else:
+#                                        newVal = v_dataconverter.toFieldValue([])
+#                                else:
+#                                    newVal = v_dataconverter.toFieldValue(newValString)
+#                            if getattr(oldObj, attrName) != newVal:
+#                                setattr(oldObj, attrName, newVal)
+#                                dcore = IWriteZopeDublinCore(oldObj)
+#                                dcore.modified = datetime.utcnow()
+#                                if attrName == "ikName":
+#                                    IBrwsOverview(oldObj).setTitle(newVal)
+#                    else:
+#                        oldObj = None
+#                        # new Object
+##                        newObj = createObject(self.factoryId)
+##                        newObj.__post_init__()
+#                        dataVect = {}
+#                        for attrName, newValString in attrDict.items():
+#                            attrField = allAttributes[attrName]
+#                            if IChoice.providedBy(attrField):
+#                                v_widget = getMultiAdapter(\
+#                                                (attrField,self.request),
+#                                                interfaces.IFieldWidget)
+#                                v_dataconverter = queryMultiAdapter(\
+#                                                (attrField, v_widget),
+#                                                interfaces.IDataConverter)
+#                                if len(newValString) > 0:
+#                                    try:
+#                                        newVal = v_dataconverter.toFieldValue([newValString])
+#                                    except LookupError:
+#                                        newVal = v_dataconverter.toFieldValue([])
+#                                else:
+#                                    newVal = v_dataconverter.toFieldValue([])
+#                            else:
+#                                if attrName == "isTemplate":
+#                                    v_widget = checkbox.SingleCheckBoxFieldWidget(\
+#                                                attrField,self.request)
+#                                else:
+#                                    v_widget = getMultiAdapter(\
+#                                                    (attrField,self.request),
+#                                                    interfaces.IFieldWidget)
+#                                v_dataconverter = queryMultiAdapter(\
+#                                                (attrField, v_widget),
+#                                                interfaces.IDataConverter)
+#                                if ICollection.providedBy(attrField):
+#                                    if len(newValString) > 0:
+#                                        newVal = v_dataconverter.toFieldValue(newValString.split(';'))
+#                                    else:
+#                                        newVal = v_dataconverter.toFieldValue([])
+#                                else:
+#                                    newVal = v_dataconverter.toFieldValue(newValString)
+#                            dataVect[str(attrName)] = newVal
+#                            #setattr(newObj, attrName, newVal)
+#                        #self.context.__setitem__(newObj.objectID, newObj)
+#                        #print "dataVect: ", dataVect
+#                        newObj = self.factory(**dataVect)
+#                        # new Object, but already have an object id
+#                        if attrDict.has_key('objectID'):
+#                            newObj.setObjectId(attrDict['objectID'])
+#                        newObj.__post_init__()
+#                        if oldObj is not None:
+#                            dcore = IWriteZopeDublinCore(oldObj)
+#                            dcore.modified = datetime.utcnow()
+#                        IBrwsOverview(newObj).setTitle(dataVect['ikName'])
+#                        self.context[newObj.objectID] = newObj
+#                        if hasattr(newObj, "store_refs"):
+#                            newObj.store_refs(**dataVect)
+#                        notify(ObjectCreatedEvent(newObj))
+#        url = absoluteURL(self.context, self.request)
+#        self.request.response.redirect(url)
 
     @button.buttonAndHandler(u'Cancel')
     def handleCancel(self, action):

@@ -28,7 +28,7 @@ from zope.app.intid.interfaces import IIntIds
 from zope.app.folder import Folder
 
 # ict_ok.org imports
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.latency.interfaces import ILatency
 from org.ict_ok.components.interfaces import \
@@ -45,7 +45,8 @@ def AllMuninValueTemplates(dummy_context):
         oobj.object.isTemplate:
             myString = u"%s [T]" % (oobj.object.getDcTitle())
             terms.append(SimpleTerm(oobj.object,
-                                    token=oid,
+                                    token=getattr(oobj.object, 'objectID', oid),
+                                    #token=oid,
                                     title=myString))
     return SimpleVocabulary(terms)
 
@@ -85,11 +86,12 @@ class Latency(Component):
         print "Unsinn"
 
 
-class MuninValueFolder(Superclass, Folder):
+class MuninValueFolder(ComponentFolder):
     implements(IMobilePhoneFolder, 
-               IImportCsvData,
-               IImportXlsData,
                IAddMobilePhones)
+    contentFactory = Latency
+    shortName = "value folder"
+
     def __init__(self, **data):
         """
         constructor of the object
