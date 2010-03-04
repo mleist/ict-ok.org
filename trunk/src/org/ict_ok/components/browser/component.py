@@ -516,9 +516,13 @@ class AddComponentForm(AddForm):
                 url = absoluteURL(self, self.request)
                 session['state'] = "novalue" 
                 return self.request.response.redirect(url)
-            addObjIntId = int(self.widgets['template'].value[0])
-            intIdUtil = queryUtility(IIntIds)
-            addObj = intIdUtil.queryObject(addObjIntId)
+            addObjId = str(self.widgets['template'].value[0])
+            my_catalog = zapi.getUtility(ICatalog)
+            obj = my_catalog.searchResults(oid_index=addObjId)
+            addObj = iter(obj).next()
+            #addObjIntId = int(self.widgets['template'].value[0])
+            #intIdUtil = queryUtility(IIntIds)
+            #addObj = intIdUtil.queryObject(addObjIntId)
             if addObj is not None:
                 self.context = addObj
                 session['state'] = "templateOk" 
