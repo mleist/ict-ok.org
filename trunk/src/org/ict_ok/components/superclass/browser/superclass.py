@@ -388,6 +388,17 @@ def getTitle(item, formatter):
     except TypeError:
         return str(item.__class__.__name__)
 
+def getTypeName(item, formatter):
+    """
+    Type name of object for Overview
+    """
+    if type(item) is dict:
+        item = item["obj"]
+    textTransl = translate(item.shortName,
+                           domain='org.ict_ok',
+                           context=formatter.request)
+    return textTransl
+
 def getHealth(item, formatter):
     if type(item) is dict:
         item = item["obj"]

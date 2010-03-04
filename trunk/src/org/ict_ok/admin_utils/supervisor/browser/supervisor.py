@@ -68,6 +68,9 @@ from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.supervisor.interfaces import \
     IAdmUtilSupervisor, IImportAllData
 from org.ict_ok.components.interfaces import IImportXlsData
+from org.ict_ok.components.superclass.browser.superclass import \
+    getStateIcon, raw_cell_formatter, getHealth, IctGetterColumn, \
+    getModifiedDate, getActionBottons, link, getTypeName, getTitle
 
 _ = MessageFactory('org.ict_ok')
 
@@ -463,16 +466,44 @@ class EditAdmUtilSupervisorForm(EditForm):
     fields = fieldsForFactory(factory, omitFields)
 
 
+
 class FSearchForm(Overview):
     """ Search Form """
 #    form.extends(form.Form)
     label = _(u"Search for what?")
     fsearchText = None
+    columns = (
+       GetterColumn(title="",
+                    getter=getStateIcon,
+                    cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Health'),
+                     getter=getHealth),
+        #TitleGetterColumn(title=_('Title'),
+                          #getter=getTitle),
+        GetterColumn(title=_('Type'),
+                     getter=getTypeName,
+                     cell_formatter=raw_cell_formatter),
+        IctGetterColumn(title=_('Title'),
+                        getter=getTitle,
+                        cell_formatter=link('overview.html')),
+        GetterColumn(title=_('Modified'),
+                     getter=getModifiedDate,
+                     subsort=True,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    pos_column_index = 1
+    sort_columns = [1, 2, 3, 4]
+    status = None
+    firstSortOn = _('Title') 
     
     def objs(self):
         """List of Content objects"""
         retList = []
-        if self.fsearchText is not None:
+        if self.fsearchText is not None and \
+            len(self.fsearchText) > 0:
             my_catalog = zapi.getUtility(ICatalog)
             try:
                 res = my_catalog.searchResults(all_fulltext_index=self.fsearchText)
