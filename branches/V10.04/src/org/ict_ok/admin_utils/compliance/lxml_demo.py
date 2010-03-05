@@ -23,7 +23,7 @@ __version__ = "$Id$"
 from org.ict_ok.admin_utils.compliance.requirement import Requirement
 
 def lxmlDemo():
-    print "#" * 80
+#    print "#" * 80
     
     reqMainList = []
     
@@ -68,8 +68,8 @@ def lxmlDemo():
     reqOrganisation.append(reqFirewallKonzept01)
 
     
-    print reqMainList
-    print "-" * 80
+#    print reqMainList
+#    print "-" * 80
     for reqMain in reqMainList:
         reqMain.asXml()
-    print "#" * 80
+#    print "#" * 80
