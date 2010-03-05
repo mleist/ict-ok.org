@@ -4,19 +4,23 @@
 
 bin/zopectl debug
 
---->
-
 itup = root['39ec82dfc57bcd08e2c15e050dc29342c']
+
+--->
 
 from org.ict_ok.admin_utils.usermanagement.interfaces import IAdmUtilUserManagement
 from zope.app.authentication.principalfolder import InternalPrincipal
+from zope.app.authentication.groupfolder import GroupInformation
+from zope.securitypolicy.interfaces import IPrincipalRoleManager
 
+prm = IPrincipalRoleManager(root)
 sitem = root.getSiteManager()
 utils = [ util for util in sitem.registeredUtilities() if util.provided.isOrExtends(IAdmUtilUserManagement)]
 userUtil = utils[0].component
 authPlugs = list(userUtil.getAuthenticatorPlugins())
 authGroup=authPlugs[0][1]
 principals=authPlugs[1][1]
+ldaps=authPlugs[2][1]
 
 
 p_newuser = InternalPrincipal(u'User22', u'Password', u'Initial User', passwordManagerName="SHA1")
@@ -29,3 +33,49 @@ import transaction
 transaction.commit()
 
 <----
+
+ldapu=list(userUtil.getAuthenticatorPlugins())[2]
+ldapuu=ldapu[1]
+ldapuu.prefix=u'ldap.'
+import transaction
+transaction.commit()
+
+
+------------
+
+
+### grp_dvl22 = GroupInformation(u'Developer22', u'individual adaption & development on System')
+
+prm.assignRoleToPrincipal(u'org.ict_ok.dvl', u'ldap.mleist')
+
+prm.assignRoleToPrincipal(u'org.ict_ok.dvl', u'ldap.ict_t_devel')
+prm.assignRoleToPrincipal(u'org.ict_ok.usr', u'ldap.ict_t_user')
+
+
+prm.removeRoleFromPrincipal(u'org.ict_ok.dvl', u'ldap.mleist')  -> marks deny
+
+prm.unsetRoleForPrincipal(u'org.ict_ok.dvl', u'ldap.Entwicklung ict-ok')  -> deletes
+
+import pprint
+pprint.pprint( prm.__dict__)
+
+>>> pprint.pprint( prm.__dict__)
+{'__parent__': <zope.site.folder.Folder object at 0x104d280c8>,
+ '_bycol': {u'group.Administrator': {u'org.ict_ok.adm': PermissionSetting: Allow},
+            u'group.Developer': {u'org.ict_ok.dvl': PermissionSetting: Allow},
+            u'group.Manager': {u'org.ict_ok.mgr': PermissionSetting: Allow},
+            u'group.User': {u'org.ict_ok.usr': PermissionSetting: Allow},
+            u'ldap.ict_t_devel': {u'org.ict_ok.dvl': PermissionSetting: Allow},
+            u'ldap.ict_t_user': {u'org.ict_ok.usr': PermissionSetting: Allow}},
+ '_byrow': {u'org.ict_ok.adm': {u'group.Administrator': PermissionSetting: Allow},
+            u'org.ict_ok.dvl': {u'group.Developer': PermissionSetting: Allow,
+                                u'ldap.ict_t_devel': PermissionSetting: Allow},
+            u'org.ict_ok.mgr': {u'group.Manager': PermissionSetting: Allow},
+            u'org.ict_ok.usr': {u'group.User': PermissionSetting: Allow,
+                                u'ldap.ict_t_user': PermissionSetting: Allow}},
+ '_context': <zope.site.folder.Folder object at 0x104d280c8>,
+ 'map': <zope.securitypolicy.securitymap.PersistentSecurityMap object at 0x10898e2a8>}
+
+
+import transaction
+transaction.commit()

@@ -465,13 +465,14 @@ class MyLDAPAuthentication(LDAPAuthentication):
         authentication.interfaces.IQueriableAuthenticator,
         authentication.interfaces.IQuerySchemaSearch)
     
-    def __init__(self, prefix=u''):
+    def __init__(self, prefix=u'ldap.'):
         super(MyLDAPAuthentication, self).__init__()
         self.prefix = prefix
 
     def __contains__(self, key):
         # ToDo: What's up
         #print "__contains__(%s, %s)" % (self, key)
+        #return len(self.getGroupsForPrincipal(self.prefix+key))>0
         return False
 
     def __len__(self):
@@ -523,7 +524,8 @@ class MyLDAPAuthentication(LDAPAuthentication):
     def getGroupsForPrincipal(self, principalid):
         """Get groups the given principal belongs to"""
         searchObjectclass = u'groupOfNames'
-        searchMember = u'uid=%s,ou=staff,o=ikom-online,c=de,o=ifdd' % principalid[len(self.prefix):]
+        #searchMember = u'uid=%s,ou=personal,o=ikom-online,c=de,dc=ifdd' % principalid[len(self.prefix):]
+        searchMember = u'%s=%s,%s' % (self.loginAttribute, principalid[len(self.prefix):], self.searchBase)
         return self.groupsSearch({'objectClass':searchObjectclass,
                                   'member':searchMember})
 
@@ -558,16 +560,16 @@ class MyLDAPAuthentication(LDAPAuthentication):
         try:
             res = conn.search(self.groupsSearchBase, self.groupsSearchScope, filter=filter,
                               attrs=[self.groupIdAttribute])
-        except NoSuchObject:
+        except NoSuchObject, errText:
+            print "errText: ", errText
             return ()
 
-        #prefix = self.principalIdPrefix
-        prefix = u'group.'
+        prefix = self.principalIdPrefix
+        #prefix = u'group.'
         infos = []
         for dn, entry in res:
             try:
                 infos.append(prefix+entry[self.groupIdAttribute][0])
             except (KeyError, IndexError):
                 pass
-
         return infos
