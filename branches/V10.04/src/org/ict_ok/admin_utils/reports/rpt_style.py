@@ -261,9 +261,13 @@ def getRptStyleSheet():
                                   fontName = locFontName2,
                                   fontSize=18,
                                   leading=22,
-                                  alignment=TA_CENTER,
                                   spaceAfter=6),
                    alias='title')
+    stylesheet.add(ParagraphStyle(name='Titler',
+                                  parent=stylesheet['Title'],
+                                  textColor = cmyk_color1,
+                                  alignment=2)
+                              )
     stylesheet.add(ParagraphStyle(name='Bullet',
                                   parent=stylesheet['Normal'],
                                   firstLineIndent=0,
@@ -284,4 +288,17 @@ def getRptStyleSheet():
                                   leading=8.8,
                                   firstLineIndent=0,
                                   leftIndent=36))
+    stylesheet.add(ParagraphStyle(name='TOCHeading1',
+                                  parent=stylesheet['Para'],
+                                  firstLineIndent=0))
+    stylesheet.add(ParagraphStyle(name='TOCHeading2',
+                                  parent=stylesheet['Para'],
+                                  firstLineIndent=0))
+    stylesheet.add(ParagraphStyle(name='TOCHeading3',
+                                  parent=stylesheet['Para'],
+                                  firstLineIndent=0))
+    stylesheet.add(ParagraphStyle(name='TOCHeading4',
+                                  parent=stylesheet['Para'],
+                                  firstLineIndent=0))
     return stylesheet
+

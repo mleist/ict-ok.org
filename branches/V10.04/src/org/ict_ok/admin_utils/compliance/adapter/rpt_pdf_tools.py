@@ -37,6 +37,18 @@ from org.ict_ok.admin_utils.reports.rpt_color import \
     getTabBackgroundColor, getTabBackgroundColorLight
 
 
+def appendRequirementNames(obj, document):
+    reqTitleList = []
+    if hasattr(obj, 'requirements') \
+       and obj.requirements is not None:
+        for requirement in obj.requirements:
+            my_catalog = zapi.getUtility(ICatalog)
+            res = my_catalog.searchResults(oid_index=requirement)
+            if len(res) > 0:
+                requirementObj = iter(res).next()
+                reqTitleList.append(requirementObj.ikName)
+    return reqTitleList
+
 def appendEvaluationList(obj, document):
     elemList = []
     if hasattr(obj, 'requirement') \

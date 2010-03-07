@@ -18,7 +18,7 @@ import os
 
 # zope imports
 from zope.interface import Interface
-from zope.schema import TextLine, List, Dict, Set
+from zope.schema import TextLine, List, Dict, Set, Choice
 from zope.interface import invariant, Invalid
 from zope.i18nmessageid import MessageFactory
 
@@ -30,6 +30,11 @@ _ = MessageFactory('org.ict_ok')
 
 class IAdmUtilReports(Interface):
     """A configuration utility."""
+    
+    operatingCompany = Choice(
+        title = _(u'Operating company'),
+        vocabulary = 'AllOrganizations',
+        required = False)
     
     color1 = ColorValid(
         title = _("color1"),

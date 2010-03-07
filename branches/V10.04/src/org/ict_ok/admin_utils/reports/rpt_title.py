@@ -64,6 +64,8 @@ class RptTitle(RptSuperclass, Paragraph):
         elif self._type.lower() == "heading6":
             numString = u'%(Chapter01)s.%(Chapter02)s.%(Chapter03)s.' \
                       u'%(Chapter04)s.%(Chapter05)s.%(Chapter02+)s.'
+        elif self._type.lower() == "title":
+            numString = u''
         else:
             numString = u'%(Chapter01)s.'
             
@@ -81,7 +83,8 @@ class RptTitle(RptSuperclass, Paragraph):
         if self.getDocument().firstH1Seen:
             t_1.keepWithNext = True
         t_1.ik_type = self._type
-        if self._type.lower() == "heading1":
+        if self._type.lower() == "heading1" or \
+            self._type.lower() == "title":
             if self.getDocument().firstH1Seen:
                 return KeepTogether([CondPageBreak(A4[1]/5), t_1])
             else:

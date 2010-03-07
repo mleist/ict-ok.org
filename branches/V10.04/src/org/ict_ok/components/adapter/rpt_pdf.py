@@ -16,6 +16,7 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
+from zope.i18nmessageid import MessageFactory
 from zope.interface import implements
 from zope.component import adapts
 from zope.i18n import translate
@@ -26,6 +27,9 @@ from org.ict_ok.components.component import Component
 from org.ict_ok.components.supernode.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
+from org.ict_ok.admin_utils.compliance.adapter.rpt_pdf_tools import appendRequirementNames
+
+_ = MessageFactory('org.ict_ok')
 
 
 class RptPdf(ParentRptPdf):
@@ -47,4 +51,12 @@ class RptPdf(ParentRptPdf):
             valPara = self._convertValPara(u'<b>%s</b><br />' % textTransl)
             data.append([namePara, valPara])
             data.append([u'', u''])
+        return data
+
+    def appendAttributeTable(self):
+        data = ParentRptPdf.appendAttributeTable(self)
+        reqTitleList = appendRequirementNames(self.context, self.document)
+        namePara = self._convertNamePara(_(u'Requirements'))
+        valPara = self._convertValPara(u', '.join(reqTitleList))
+        data.append([namePara, valPara])
         return data

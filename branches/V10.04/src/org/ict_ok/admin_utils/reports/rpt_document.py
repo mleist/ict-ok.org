@@ -82,7 +82,8 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
         self.versionStr = arg_VersionStr
 
     def buildPdf(self):
-        self.build(self._content)
+        #self.build(self._content)
+        self.multiBuild(self._content)
 
     def afterFlowable(self, flowable):
         if flowable.__class__.__name__ == 'Table':
@@ -94,7 +95,8 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
                 text = flowable._cellvalues[0][2].getPlainText()
                 level = int(styleName[7:])
                 pageNum = self.page
-                self.notify('TOCEntry', (level, text, pageNum))
+                if styleName[:8] == 'Heading1':
+                    self.notify('TOCEntry', (level, text, pageNum))
                 key = str(hash(flowable))
                 c = self.canv
                 c.bookmarkPage(key)
@@ -111,7 +113,8 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
                 text = flowable.getPlainText()
                 level = int(styleName[7:])
                 pageNum = self.page
-                self.notify('TOCEntry', (level, text, pageNum))
+                if styleName[:8] == 'Heading1':
+                    self.notify('TOCEntry', (level, text, pageNum))
                 key = str(hash(flowable))
                 c = self.canv
                 c.bookmarkPage(key)
