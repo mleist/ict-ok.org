@@ -39,5 +39,5 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IContactItem)
     factory = ContactItem
-    omitFields = ContactItemDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []
 

@@ -35,4 +35,4 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(ILocation)
     factory = Location
-    omitFields = ParentRptPdf.omitFields + []
+    omitFields = ParentRptPdf.omitFields + ['gmapsurl', 'gmapcode']

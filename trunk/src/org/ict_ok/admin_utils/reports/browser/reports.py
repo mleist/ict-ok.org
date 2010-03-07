@@ -48,6 +48,7 @@ from org.ict_ok.skin.menu import GlobalMenuSubItem
 from org.ict_ok.admin_utils.reports.reports import PDFReporter
 # Report Objects
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
+from org.ict_ok.components.appsoftware.appsoftware import ApplicationSoftwareFolder
 from org.ict_ok.components.building.interfaces import IBuilding
 from org.ict_ok.components.display_unit.interfaces import IDisplayUnit
 from org.ict_ok.components.group.interfaces import IGroup
@@ -121,6 +122,12 @@ class MSubReportAllPdf(GlobalMenuSubItem):
     viewURL = '@@reportAllPdf.html'
     weight = 73
 
+class MSubReportPersonsPdf(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'Persons (PDF)')
+    viewURL = '@@reportPersonsPdf.html'
+    weight = 101
+
 # --------------- object details ---------------------------
 
 class AdmUtilReportsDetails(SupernodeDetails):
@@ -182,6 +189,7 @@ class AdmUtilReportsDetails(SupernodeDetails):
         """
         will send the complete pdf report to the browser
         """
+        print "xX-" * 30
         filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
         f_handle, f_name = tempfile.mkstemp(filename)
         authorStr = self.request.principal.title
@@ -256,7 +264,7 @@ class AdmUtilReportsDetails(SupernodeDetails):
 #        # second run
 #        for (queryName, queryResults) in queryResultsList:
 #            thisReporter.extendAllContentObjects(queryResults)
-#            thisReporter.appendTitle1(queryName)
+#            thisReporter.appendHeading1(queryName)
 #            thisReporter.append(queryResults)
 #
 #        
@@ -277,13 +285,13 @@ class AdmUtilReportsDetails(SupernodeDetails):
 ###            query('/Folder/BuildingFolder/Building'))
 ###        thisReporter.extend(\
 ###            query('/Folder/LocationFolder/Location'))
-##        thisReporter.appendTitle1(u"/HardwareApplianceFolder/HardwareAppliance")
+##        thisReporter.appendHeading1(u"/HardwareApplianceFolder/HardwareAppliance")
 ##        thisReporter.append(ff)
-##        thisReporter.appendTitle1(u"/RoomFolder/Room")
+##        thisReporter.appendHeading1(u"/RoomFolder/Room")
 ##        thisReporter.append(gg)
-##        thisReporter.appendTitle1(u"/BuildingFolder/Building")
+##        thisReporter.appendHeading1(u"/BuildingFolder/Building")
 ##        thisReporter.append(hh)
-##        thisReporter.appendTitle1(u"/LocationFolder/Location")
+##        thisReporter.appendHeading1(u"/LocationFolder/Location")
 ##        thisReporter.append(ii)
 #
 #
@@ -330,7 +338,7 @@ class AdmUtilReportsDetails(SupernodeDetails):
             thisReporter.extendAllContentObjects(queryResults)
         # second run
         for (queryName, queryResults) in queryResultsList:
-            thisReporter.appendTitle1(queryName)
+            thisReporter.appendHeading1(queryName)
             thisReporter.append(queryResults)
         # debug output
         #for i_obj in thisReporter.allContentObjects:
@@ -348,7 +356,10 @@ class AdmUtilReportsDetails(SupernodeDetails):
         os.remove(f_name)
         return dataMem
 
-    def reportPdfByObjectList(self, objsList):
+    def reportPdfByObjectList(self, objsList, title=_(u'Report')):
+        """
+        generate a report from oll container-objects in objsList
+        """
         filename = datetime.now().strftime('ictrpt_%Y%m%d%H%M%S.pdf')
         f_handle, f_name = tempfile.mkstemp(filename)
         authorStr = self.request.principal.title
@@ -364,9 +375,33 @@ class AdmUtilReportsDetails(SupernodeDetails):
         # first run
         for (queryName, queryResults) in objsList:
             thisReporter.extendAllContentObjects(queryResults)
+        from org.ict_ok.admin_utils.reports.interfaces import IAdmUtilReports
+        utilAdmReports = getUtility(IAdmUtilReports, name='AdmUtilReports')
+        thisReporter.appendTitle(title)
+        thisReporter.appendVSpace(0.7)
+        thisReporter.appendPara(_(u'Company') + u':')
+        thisReporter.appendVSpace(0.7)
+        if utilAdmReports.operatingCompany is not None:
+            operatingCompany = utilAdmReports.operatingCompany
+            if operatingCompany.adresses is not None and \
+                len(operatingCompany.adresses) > 0:
+                firstAddress = operatingCompany.adresses[0]
+                thisReporter.appendPara(u'%s' % operatingCompany.ikName)
+                if firstAddress.address1 is not None:
+                    thisReporter.appendPara(u'%s' % firstAddress.address1 )
+                if firstAddress.address2 is not None:
+                    thisReporter.appendPara(u'%s' % firstAddress.address2 )
+                if firstAddress.address3 is not None:
+                    thisReporter.appendPara(u'%s' % firstAddress.address3 )
+                if firstAddress.postalCode is not None:
+                    thisReporter.appendPara(u'%s %s' % (firstAddress.postalCode, firstAddress.city))
+                if firstAddress.country is not None:
+                    thisReporter.appendPara(u'%s' % firstAddress.country )
+        thisReporter.appendVSpace(0.7)
+        thisReporter.appendToc()
         # second run
         for (queryName, queryResults) in objsList:
-            thisReporter.appendTitle1(queryName)
+            thisReporter.appendHeading1(queryName)
             thisReporter.append(queryResults)
         # debug output
         #for i_obj in thisReporter.allContentObjects:
@@ -423,7 +458,10 @@ class AdmUtilReportsDetails(SupernodeDetails):
         i_list = [oobj.object for (oid, oobj) in uidutil.items() \
                   if interf.providedBy(oobj.object)]
         i_list.sort(cmp=lambda x,y: x.ikName < y.ikName)
-        return (foldername, i_list)
+        if len(i_list) > 0:
+            return [(foldername, i_list)]
+        else:
+            return []
     
     def reportAllPdf(self):
         queryList = [
@@ -459,88 +497,98 @@ class AdmUtilReportsDetails(SupernodeDetails):
                      ]
         uidutil = getUtility(IIntIds)
         objsList = []
-        objsList.append(self._makeObjectList(IApplicationSoftware,
-                                             'Application Software'))
-        objsList.append(self._makeObjectList(IBuilding,
-                                             'Buildings'))
-        objsList.append(self._makeObjectList(IDisplayUnit,
-                                             'Display Units'))
-        objsList.append(self._makeObjectList(IHardwareAppliance,
-                                             'Hardware Appliances'))
-        objsList.append(self._makeObjectList(IHost,
-                                             'Hosts'))
-        objsList.append(self._makeObjectList(IInterface,
-                                             'Interfaces'))
-        objsList.append(self._makeObjectList(IIpAddress,
-                                             'Ip Addresses'))
-        objsList.append(self._makeObjectList(IIndustrialComputer,
-                                             'Industrial Computers'))
-        objsList.append(self._makeObjectList(IIpNet,
-                                             'Ip Networks'))
-        objsList.append(self._makeObjectList(IISDNPhone,
-                                             'ISDN Phones'))
-        objsList.append(self._makeObjectList(ILatency,
-                                             'Latencies'))
-        objsList.append(self._makeObjectList(ILocation,
-                                             'Locations'))
-        objsList.append(self._makeObjectList(IMiscPhysical,
-                                             'Misc Physicals'))
-        objsList.append(self._makeObjectList(IMobilePhone,
-                                             'Mobile Phones'))
-        objsList.append(self._makeObjectList(INet,
-                                             'Nets'))
-        objsList.append(self._makeObjectList(INotebook,
-                                             'Notebooks'))
-        objsList.append(self._makeObjectList(IOperatingSoftware,
-                                             'Operating Software'))
-        objsList.append(self._makeObjectList(IOutlet,
-                                             'Outlets'))
-        objsList.append(self._makeObjectList(IPatchPanel,
-                                             'Patch Panels'))
-        objsList.append(self._makeObjectList(IPatchPort,
-                                             'Patch Ports'))
-        objsList.append(self._makeObjectList(IPersonalComputer,
-                                             'Personal Computers'))
-        objsList.append(self._makeObjectList(IPhysicalLink,
-                                             'Physical Links'))
-        objsList.append(self._makeObjectList(IPrinter,
-                                             'Printers'))
-        objsList.append(self._makeObjectList(IRack,
-                                             'Racks'))
-        objsList.append(self._makeObjectList(IRoom,
-                                             'Rooms'))
-        objsList.append(self._makeObjectList(IService,
-                                             'Services'))
-        objsList.append(self._makeObjectList(ISnmpValue,
-                                             'Snmp Value'))
-        objsList.append(self._makeObjectList(ISwitch,
-                                             'Switches'))
-        objsList.append(self._makeObjectList(IX509Certificate,
-                                             'X509 Certificates'))
-        objsList.append(getFirstLevelProductList('Products'))
-#        objsList.append(self._makeObjectList(IProduct,
-#                                             'Products'))
-        objsList.append(self._makeObjectList(IAddress,
-                                             'Addresses'))
-        objsList.append(self._makeObjectList(IOrganization,
-                                             'Organizaions'))
-        objsList.append(self._makeObjectList(IPerson,
-                                             'Persons'))
-        objsList.append(self._makeObjectList(IContact,
-                                             'Contacts'))
-        objsList.append(self._makeObjectList(IContactItem,
-                                             'Contact items'))
-        objsList.append(self._makeObjectList(IWorkOrder,
-                                             'Work orders'))
-        objsList.append(self._makeObjectList(IPhysicalMedia,
-                                             'Physical media'))
-        objsList.append(self._makeObjectList(IRole,
-                                             'Roles'))
-        objsList.append(self._makeObjectList(IGroup,
-                                             'Groups'))
+        objsList.extend(self._makeObjectList(IApplicationSoftware,
+                                             _(u'Application Software')))
+        objsList.extend(self._makeObjectList(IBuilding,
+                                             _(u'Buildings')))
+        objsList.extend(self._makeObjectList(IDisplayUnit,
+                                             _(u'Display Units')))
+        objsList.extend(self._makeObjectList(IHardwareAppliance,
+                                             _(u'Hardware Appliances')))
+        objsList.extend(self._makeObjectList(IHost,
+                                             _(u'Hosts')))
+        objsList.extend(self._makeObjectList(IInterface,
+                                             _(u'Interfaces')))
+        objsList.extend(self._makeObjectList(IIpAddress,
+                                             _(u'Ip Addresses')))
+        objsList.extend(self._makeObjectList(IIndustrialComputer,
+                                             _(u'Industrial Computers')))
+        objsList.extend(self._makeObjectList(IIpNet,
+                                             _(u'Ip Networks')))
+        objsList.extend(self._makeObjectList(IISDNPhone,
+                                             _(u'ISDN Phones')))
+        objsList.extend(self._makeObjectList(ILatency,
+                                             _(u'Latencies')))
+        objsList.extend(self._makeObjectList(ILocation,
+                                             _(u'Locations')))
+        objsList.extend(self._makeObjectList(IMiscPhysical,
+                                             _(u'Misc Physicals')))
+        objsList.extend(self._makeObjectList(IMobilePhone,
+                                             _(u'Mobile Phones')))
+        objsList.extend(self._makeObjectList(INet,
+                                             _(u'Nets')))
+        objsList.extend(self._makeObjectList(INotebook,
+                                             _(u'Notebooks')))
+        objsList.extend(self._makeObjectList(IOperatingSoftware,
+                                             _(u'Operating Software')))
+        objsList.extend(self._makeObjectList(IOutlet,
+                                             _(u'Outlets')))
+        objsList.extend(self._makeObjectList(IPatchPanel,
+                                             _(u'Patch Panels')))
+        objsList.extend(self._makeObjectList(IPatchPort,
+                                             _(u'Patch Ports')))
+        objsList.extend(self._makeObjectList(IPersonalComputer,
+                                             _(u'Personal Computers')))
+        objsList.extend(self._makeObjectList(IPhysicalLink,
+                                             _(u'Physical Links')))
+        objsList.extend(self._makeObjectList(IPrinter,
+                                             _(u'Printers')))
+        objsList.extend(self._makeObjectList(IRack,
+                                             _(u'Racks')))
+        objsList.extend(self._makeObjectList(IRoom,
+                                             _(u'Rooms')))
+        objsList.extend(self._makeObjectList(IService,
+                                             _(u'Services')))
+        objsList.extend(self._makeObjectList(ISnmpValue,
+                                             _(u'Snmp Value')))
+        objsList.extend(self._makeObjectList(ISwitch,
+                                             _(u'Switches')))
+        objsList.extend(self._makeObjectList(IX509Certificate,
+                                             _(u'X509 Certificates')))
+        objsList.append(getFirstLevelProductList(_(u'Products')))
+#        objsList.extend(self._makeObjectList(IProduct,
+#                                             'Products')))
+        objsList.extend(self._makeObjectList(IAddress,
+                                             _(u'Addresses')))
+        objsList.extend(self._makeObjectList(IOrganization,
+                                             _(u'Organizaions')))
+        objsList.extend(self._makeObjectList(IPerson,
+                                             _(u'Persons')))
+        objsList.extend(self._makeObjectList(IContact,
+                                             _(u'Contacts')))
+        objsList.extend(self._makeObjectList(IContactItem,
+                                             _(u'Contact items')))
+        objsList.extend(self._makeObjectList(IWorkOrder,
+                                             _(u'Work orders')))
+        objsList.extend(self._makeObjectList(IPhysicalMedia,
+                                             _(u'Physical media')))
+        objsList.extend(self._makeObjectList(IRole,
+                                             _(u'Roles')))
+        objsList.extend(self._makeObjectList(IGroup,
+                                             _(u'Groups')))
         #return self.reportPdfByQueryList(queryList)
-        return self.reportPdfByObjectList(objsList)
+        return self.reportPdfByObjectList(objsList, _(u'All objects'))
 
+    def reportPersonsPdf(self):
+        objsList = []
+        objsList.extend(self._makeObjectList(IPerson,
+                                             _(u'Persons')))
+        return self.reportPdfByObjectList(objsList, _(u'All persons'))
+
+    def appendFolder(self, folderClass):
+        ApplicationSoftwareFolder.contentFactory
+        ApplicationSoftwareFolder.shortName
+        
 
 # --------------- forms ------------------------------------
 

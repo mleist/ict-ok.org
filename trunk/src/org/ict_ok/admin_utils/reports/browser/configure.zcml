@@ -101,6 +101,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="reportAllPdf"
     />
+    <page
+        name="reportPersonsPdf.html"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        class=".reports.AdmUtilReportsDetails"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="reportPersonsPdf"
+    />
 
     <!--##### Sub Menu ##### -->
     <viewlet
@@ -158,5 +166,13 @@
         class="org.ict_ok.admin_utils.reports.browser.reports.MSubReportAllPdf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
-        />        
+        />
+    <viewlet
+        name="reportPersonsPdf"
+        for="org.ict_ok.components.superclass.interfaces.ISuperclass"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuReportsOvervPdf"
+        class="org.ict_ok.admin_utils.reports.browser.reports.MSubReportPersonsPdf"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.reports.generate.pdf"
+        />
 </configure>

@@ -17,6 +17,9 @@ __version__ = "$Id$"
 # python imports
 import os
 import logging
+from reportlab.lib.units import cm
+from reportlab.platypus import Spacer
+from reportlab.platypus.tableofcontents import TableOfContents
 
 # zope imports
 from zope.app import zapi
@@ -57,6 +60,7 @@ class AdmUtilReports(Supernode):
     pfbFile4 = FieldProperty(IAdmUtilReports['pfbFile4'])
     afmFile5 = FieldProperty(IAdmUtilReports['afmFile5'])
     pfbFile5 = FieldProperty(IAdmUtilReports['pfbFile5'])
+    operatingCompany = FieldProperty(IAdmUtilReports['operatingCompany'])
 
     def __init__(self):
         Supernode.__init__(self)
@@ -73,12 +77,13 @@ class AdmUtilReports(Supernode):
         document.setVersionStr(versionStr)
         its = zapi.getRoot(self).items()
         for (dummy_name, oobj) in its:
-            if ISupernode.providedBy(oobj):
+            if ISupernode.providedBy(oobj) and \
+                len(oobj) > 0:
                 try:
                     adapterRptPdf = IRptPdf(oobj)
                     if adapterRptPdf:
                         adapterRptPdf.document = document
-                        adapterRptPdf.traverse4Rpt(1, False)
+                        adapterRptPdf.traverse4Rpt(1, True)
                         files2delete.extend(adapterRptPdf.files2delete)
                         del adapterRptPdf
                 except TypeError, errText:
@@ -143,14 +148,36 @@ class PDFReporter(SimpleReporter):
 #    def fill(self):
 #        self.append(self.firstLevelContent)
 
-    def appendTitle1(self, title):
+    def appendToc(self):
+        toc = TableOfContents()
+        toc.levelStyles = [self.document.styles['TOCHeading1'],
+                           self.document.styles['TOCHeading2'],
+                           self.document.styles['TOCHeading3'],
+                           self.document.styles['TOCHeading4']
+                           ]
+        self.document.append(toc)
+
+    def appendTitle(self, title):
+        title = RptTitle(title, doc=self.document, intype='Title')
+        self.document.append(title.genElements())
+        
+    def appendHeading1(self, title):
         title = RptTitle(title, doc=self.document, intype='Heading1')
         self.document.append(title.genElements())
         
-    def appendTitle2(self, title):
+    def appendHeading2(self, title):
         title = RptTitle(title, doc=self.document, intype='Heading2')
         self.document.append(title.genElements())
         
+    def appendPara(self, title):
+        para = RptPara(title, doc=self.document)
+        self.document.append(para)
+        
+    def appendVSpace(self, space=1.0):
+        """ append a vertical spacer of 'space' cm
+        """
+        self.document.append(Spacer(0, space * cm))
+
     def append(self, obj):
         if type(obj) is list:
             for i in obj:

@@ -56,6 +56,9 @@ from z3c.formui import layout
 from z3c.form import datamanager
 from z3c.form.browser import checkbox
 
+# lovely imports
+from lovely.relation.property import RelationPropertyOut
+
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.supervisor.interfaces import \

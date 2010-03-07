@@ -17,6 +17,7 @@ Paragraph class for ict-ok.org reporting
 __version__ = "$Id$"
 
 # phython imports
+import logging
 from copy import deepcopy
 
 # reportlab imports
@@ -25,6 +26,10 @@ from reportlab.platypus import ParaLines, Paragraph
 # ict-ok.org imports
 from org.ict_ok.admin_utils.reports.rpt_base import RptSuperclass
 #from org.ict_ok.admin_utils.reports.rpt_style import rptNormalStyle
+
+logger = logging.getLogger("AdmUtilReports")
+
+
 
 class RptPara(RptSuperclass, Paragraph):
     """Paragraph class for ict-ok.org reporting
@@ -42,8 +47,12 @@ class RptPara(RptSuperclass, Paragraph):
             style_d = doc.styles['Para']
         else:
             style_d = None
-        Paragraph.__init__(self, text, style_d, bulletText, \
-                           frags, caseSensitive, encoding)
+        try:
+            Paragraph.__init__(self, text, style_d, bulletText, \
+                               frags, caseSensitive, encoding)
+        except ValueError, errText:
+            logger.error(u'Error in RptPara: <%s>' % errText)
+            logger.error(u'orig. Text: <%s>' % text)
         self._element_type = "paragraph"
 
     def __str__(self):

@@ -21,6 +21,7 @@ import os
 from zope.interface import implements
 from zope.component import adapts
 from zope.i18n import translate
+from zope.i18nmessageid.message import Message
 from zope.schema import vocabulary
 
 # reportlab imports
@@ -123,6 +124,8 @@ class RptPdf(object):
             reportFieldsTransl = translate(f_obj,
                                            domain='org.ict_ok',
                                            context=self.request)
+        elif type(f_obj) is Message: # already translated
+            reportFieldsTransl = f_obj
         else: # f_obj is zope.schema-field
             reportFieldsTransl = translate(f_obj.field.title,
                                            domain='org.ict_ok',
