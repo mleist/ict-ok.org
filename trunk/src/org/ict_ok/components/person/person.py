@@ -92,7 +92,19 @@ class Person(ContactItem):
     def getDisplayTitle(self):
         """ display text for some views
         """
-        return u'%s %s %s' % (self.title, self.firstName, self.lastName)
+        if self.title is None:
+            titleStr = u''
+        else:
+            titleStr = u'%s ' % self.title
+        if self.firstName is None:
+            firstNameStr = u''
+        else:
+            firstNameStr = u'%s ' % self.firstName
+        if self.lastName is None:
+            lastNameStr = u''
+        else:
+            lastNameStr = u'%s' % self.lastName
+        return titleStr + firstNameStr + lastNameStr
 
 
 class PersonFolder(ComponentFolder):

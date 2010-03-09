@@ -52,6 +52,10 @@ def ContractTypes(dummy_context):
     terms = []
     for (gkey, gname) in {
         'Contract of sale': _(u'Contract of sale'),
+        'Service contract': _(u'Service contract'),
+        'Rental agreement': _(u'Rental agreement'),
+        'Lease contract': _(u'Lease contract'),
+            
         }.items():
         terms.append(SimpleTerm(gkey, str(gkey), gname))
     return SimpleVocabulary(terms)

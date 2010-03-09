@@ -88,6 +88,7 @@ from org.ict_ok.components.organization.interfaces import IOrganization
 from org.ict_ok.components.person.interfaces import IPerson
 from org.ict_ok.components.contact.interfaces import IContact
 from org.ict_ok.components.contact_item.interfaces import IContactItem
+from org.ict_ok.components.contract.interfaces import IContract
 from org.ict_ok.components.work_order.interfaces import IWorkOrder
 
 
@@ -555,7 +556,9 @@ class AdmUtilReportsDetails(SupernodeDetails):
                                              _(u'Switches')))
         objsList.extend(self._makeObjectList(IX509Certificate,
                                              _(u'X509 Certificates')))
-        objsList.append(getFirstLevelProductList(_(u'Products')))
+        productList = getFirstLevelProductList(_(u'Products'))
+        if len(productList[1]) > 0:
+            objsList.append(productList)
 #        objsList.extend(self._makeObjectList(IProduct,
 #                                             'Products')))
         objsList.extend(self._makeObjectList(IAddress,
@@ -576,6 +579,8 @@ class AdmUtilReportsDetails(SupernodeDetails):
                                              _(u'Roles')))
         objsList.extend(self._makeObjectList(IGroup,
                                              _(u'Groups')))
+        objsList.extend(self._makeObjectList(IContract,
+                                             _(u'Contracts')))
         #return self.reportPdfByQueryList(queryList)
         return self.reportPdfByObjectList(objsList, _(u'All objects'))
 

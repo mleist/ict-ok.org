@@ -19,7 +19,7 @@
        <tr tal:attributes="class view/getNextTabClass"
            tal:condition="context/startDate|nothing">
            <td i18n:translate="">start date</td>
-           <td tal:content="structure python: view.fsearchLink(context.startDate)" />
+           <td tal:content="python: dateform.format(context.startDate)">24.12.2009</td>
        </tr>
           
        <tr tal:attributes="class view/getNextTabClass"

@@ -19,15 +19,10 @@ __version__ = "$Id: rpt_pdf.py_cog 506 2009-04-30 14:24:56Z markusleist $"
 from zope.interface import implements
 from zope.component import adapts
 
-# z3c imports
-from z3c.form import field
-
 # ict_ok.org imports
 from org.ict_ok.components.address.interfaces import IAddress
 from org.ict_ok.components.address.address import Address
-from org.ict_ok.components.address.browser.address import \
-    AddressDetails
-from org.ict_ok.components.supernode.adapter.rpt_pdf import \
+from org.ict_ok.components.adapter.rpt_pdf import \
      RptPdf as ParentRptPdf
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 
@@ -39,5 +34,5 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IAddress)
     factory = Address
-    omitFields = AddressDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []
 

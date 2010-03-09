@@ -133,6 +133,18 @@
         name="AllRequirementVocab"
         />
 
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".requirement.allValid1stRequirementVocab"
+        name="AllValid1stRequirementVocab"
+        />
+        
+    <utility
+        provides="zope.schema.interfaces.IVocabularyFactory"
+        component=".requirement.allNotValid1stRequirementVocab"
+        name="AllNotValid1stRequirementVocab"
+        />
+
     <!--              Evaluations              -->
 
     <adapter

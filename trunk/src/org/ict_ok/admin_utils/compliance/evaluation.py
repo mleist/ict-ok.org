@@ -77,13 +77,21 @@ def getEvaluationsTodo(context):
                 res = my_catalog.searchResults(oid_index=requirement)
                 if len(res) > 0:
                     startReq = iter(res).next()
-                    allObjReqs = getRequirementList(startReq)
+                    allObjReqs = []
+                    allTmpObjReqs = getRequirementList(startReq)
+                    for req in allTmpObjReqs:
+                        if req.validAsFirst and len(req) > 0:
+                            pass
+                        else:
+                            allObjReqs.append(req)
                     allObjEvaluations = getEvaluationsDone(context)
                     alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
                     #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
                     retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
     #        return retList
-    return list(retSet)
+    retList = list(retSet)
+    retList.sort()
+    return retList
 
 # Convention to make adapter introspectable
 getEvaluationsDone.factory = Evaluations

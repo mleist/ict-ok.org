@@ -57,7 +57,7 @@ class IComponent(Interface):
         value_type = Choice(
             title = _("Requirement"),
             description = _("Requirement."),
-            vocabulary="AllRequirementVocab",
+            vocabulary="AllValid1stRequirementVocab",
             required = False),
         readonly = False,
         required = False)
