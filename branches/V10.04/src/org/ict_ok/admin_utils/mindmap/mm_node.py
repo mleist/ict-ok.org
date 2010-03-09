@@ -74,6 +74,7 @@ class MMNode(object):
                 for subnode in self.subnodes:
                     xml_string += subnode.generate_nodes()
         xml_string += '</node>\n'
+        #xml_string += '</node ID="%s">\n' % (self.id)
         return xml_string
 
     def connect_with_node(self, node, style=None):

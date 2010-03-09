@@ -125,7 +125,7 @@ def appendEvaluationList(obj, document):
         elemList.append(Spacer(0, 3 * mm))
     # Evaluations ToDo
     evaluations = getEvaluationsTodo(obj)
-    if len(evaluations) > 0:
+    if evaluations is not None and len(evaluations) > 0:
         styleSheet = getRptStyleSheet()
         style1 = styleSheet['Small']
         style2 = styleSheet['Infobox']

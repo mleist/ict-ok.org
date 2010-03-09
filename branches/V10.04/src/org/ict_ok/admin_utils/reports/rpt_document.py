@@ -83,7 +83,14 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
 
     def buildPdf(self):
         #self.build(self._content)
-        self.multiBuild(self._content)
+        from reportlab.platypus.doctemplate import LayoutError
+        try:
+            self.multiBuild(self._content)
+        except LayoutError, errText:
+            print errText
+            raise LayoutError(errText)
+            #import pdb
+            #pdb.set_trace()
 
     def afterFlowable(self, flowable):
         if flowable.__class__.__name__ == 'Table':
@@ -91,6 +98,12 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
                 styleName = flowable.ik_type
             except AttributeError:
                 styleName = ""
+            if styleName[:5] == 'Title':
+                text = flowable._cellvalues[0][2].getPlainText()
+                nbr = flowable._cellvalues[0][0].getPlainText()
+                self.lastPageTitle = "%s %s" % (nbr, text)
+                if not self.firstPageTitle:
+                    self.firstPageTitle = "%s %s" % (nbr, text)
             if styleName[:7] == 'Heading':
                 text = flowable._cellvalues[0][2].getPlainText()
                 level = int(styleName[7:])
@@ -109,6 +122,11 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
                     self.firstPageTitle = "%s %s" % (nbr, text)
         if flowable.__class__.__name__ == 'Paragraph':
             styleName = flowable.style.name
+            if styleName[:5] == 'Title':
+                text = flowable.getPlainText()
+                self.lastPageTitle = "%s %s" % (nbr, text)
+                if not self.firstPageTitle:
+                    self.firstPageTitle = "%s %s" % (nbr, text)
             if styleName[:7] == 'Heading':
                 text = flowable.getPlainText()
                 level = int(styleName[7:])

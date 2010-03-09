@@ -22,7 +22,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Bytes, Datetime
+from zope.schema import Bytes, Datetime, Bool
 
 # ict_ok.org imports
 from org.ict_ok.schema.date import Date
@@ -46,6 +46,13 @@ class IAdmUtilCompliance(Interface):
 class IRequirement(Interface):
     """ ict-ok.org wrapper
     """
+    validAsFirst = Bool(
+        title = _("Valid as first"),
+        description = _("Requirement can be the first requirement with "
+                        "more sub-requirement"),
+        default = False,
+        required = False)
+
     resubmitDate = Datetime(
         title = _(u'resubmit date'),
         description = _(u'resubmit the workitem on date'),

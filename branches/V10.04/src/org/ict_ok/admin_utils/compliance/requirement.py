@@ -97,7 +97,7 @@ def allRequirementHierVocab(dummy_context):
     except ComponentLookupError:
         return SimpleVocabulary([])
     
-def allRequirementVocab(dummy_context):
+def allRequirementVocab(dummy_context, getFirsts=True, getNotFirsts=True):
     """Which locations are there
     """
     terms = []
@@ -122,13 +122,29 @@ def allRequirementVocab(dummy_context):
                                   (req.ikName, parentReq.ikName)
                     else:
                         newString = req.ikName
-                    terms.append(\
-                        SimpleTerm(req.objectID,
-                                   str(req.objectID),
-                                   newString))
+                    appendIt = False
+                    if getFirsts and req.validAsFirst:
+                        appendIt = True
+                    if getNotFirsts and not req.validAsFirst:
+                        appendIt = True
+                    if appendIt:
+                        terms.append(\
+                            SimpleTerm(req.objectID,
+                                       str(req.objectID),
+                                       newString))
         return SimpleVocabulary(terms)
     except ComponentLookupError:
         return SimpleVocabulary([])
+
+def allValid1stRequirementVocab(dummy_context):
+    """Which locations are there
+    """
+    return allRequirementVocab(dummy_context, True, False)
+
+def allNotValid1stRequirementVocab(dummy_context):
+    """Which locations are there
+    """
+    return allRequirementVocab(dummy_context, False, True)
 
 
 class Requirement(Superclass,
@@ -136,6 +152,7 @@ class Requirement(Superclass,
     """ ict-ok.org wrapper
     """
     implements(IRequirement)
+    validAsFirst = FieldProperty(IRequirement['validAsFirst'])
     resubmitDate = FieldProperty(IRequirement['resubmitDate'])
 
     def __init__(self, title, **data):

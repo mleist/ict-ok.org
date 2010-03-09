@@ -56,7 +56,8 @@ class RptPdf(ParentRptPdf):
     def appendAttributeTable(self):
         data = ParentRptPdf.appendAttributeTable(self)
         reqTitleList = appendRequirementNames(self.context, self.document)
-        namePara = self._convertNamePara(_(u'Requirements'))
-        valPara = self._convertValPara(u', '.join(reqTitleList))
-        data.append([namePara, valPara])
+        if len(reqTitleList) > 0:
+            namePara = self._convertNamePara(_(u'Requirements'))
+            valPara = self._convertValPara(u', '.join(reqTitleList))
+            data.append([namePara, valPara])
         return data

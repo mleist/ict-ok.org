@@ -63,6 +63,8 @@ class Navigation(SuperNavigation):
             retList.append(('groups', _(u'Groups'), self.context))
         if len(self.context.roles) > 0:
             retList.append(('roles', _(u'Roles'), self.context))
+        if len(self.context.members) > 0:
+            retList.append(('members', _(u'Members'), self.context))
         if len(self.context.closedContracts) > 0:
             retList.append(('closedContracts', _(u'Closed Contracts'), self.context))
         if len(self.context.responsible4Contracts) > 0:

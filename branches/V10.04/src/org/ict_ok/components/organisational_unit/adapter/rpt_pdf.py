@@ -39,5 +39,5 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IOrganisationalUnit)
     factory = OrganisationalUnit
-    omitFields = OrganisationalUnitDetails.omit_viewfields
+    omitFields = ParentRptPdf.omitFields + []
 

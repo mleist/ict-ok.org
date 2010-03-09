@@ -58,7 +58,7 @@ class Searchable(object):
         """
         if not self.context.ikNotes:
             return ""
-        return ' '.join([str(note) for note in self.context.ikNotes])
+        return u' '.join([unicode(note) for note in self.context.ikNotes])
 
     def getFullTextSearchFields(self):
         """
