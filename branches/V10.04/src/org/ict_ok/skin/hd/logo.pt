@@ -1,5 +1,5 @@
 <DIV id="logo" class="yui-u first">
   <a href="/">
-    <img src="pics/g19962c3.gif" alt="ICT_Ok" tal:attributes="src context/++resource++pics/g19962c3.gif"/>
+    <img src="pics/g19962c3i.gif" alt="ICT_Ok" tal:attributes="src context/++resource++pics/g19962c3i.gif"/>
   </a>
 </DIV>

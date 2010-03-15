@@ -17,11 +17,9 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
-from zope.app import zapi
 from zope.interface import implements
 from zope.component.interfaces import ComponentLookupError
 from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # ict_ok.org imports
@@ -31,6 +29,7 @@ from org.ict_ok.components.host.interfaces import IHost
 from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar, IAdmUtilEvent
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 def AllHostGroups(dummy_context):
     """Which host group are there
@@ -77,11 +76,9 @@ class AdmUtilCatHostGroup(Supernode):
         this object is used at least in one host (returns object list)
         """
         retList = []
-        iid = zapi.getUtility(IIntIds, '')
-        for (oid, oobj) in iid.items():
-            if IHost.providedBy(oobj.object):
-                if self.objectID in oobj.object.hostGroups:
-                    retList.append(oobj.object)
+        for object in objectsWithInterface(IHost):
+            if self.objectID in object.hostGroups:
+                retList.append(object)
         utilXbar = getUtility(IAdmUtilEventCrossbar,
                               name='AdmUtilEventCrossbar')
         for (oid, obj) in utilXbar.items():
@@ -89,4 +86,3 @@ class AdmUtilCatHostGroup(Supernode):
                 if self.objectID == obj.hostGroup:
                     retList.append(obj)
         return retList
- 

@@ -19,12 +19,9 @@ __version__ = "$Id$"
 from zope.i18nmessageid import MessageFactory
 
 # z3c imports
-from z3c.form import field
 from z3c.form.browser import checkbox
 from zope.lifecycleevent import ObjectCreatedEvent
 from zope.event import notify
-from zope.component import queryUtility
-from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
@@ -41,6 +38,7 @@ from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 from org.ict_ok.components.patchport.patchport import PatchPort
 from org.ict_ok.components.patchport.interfaces import IPatchPortFolder
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 _ = MessageFactory('org.ict_ok')
 
@@ -110,12 +108,10 @@ class AddPatchPanelForm(AddComponentForm):
         obj = self.create(data)
         notify(ObjectCreatedEvent(obj))
         self.add(obj)
-        uidutil = queryUtility(IIntIds)
         oneParent = None
-        for (oid, oobj) in uidutil.items():
-            if IPatchPortFolder.providedBy(oobj.object):
-                oneParent = oobj.object
-                break
+        for object in objectsWithInterface(IPatchPortFolder):
+            oneParent = object
+            break
         if oneParent is not None:
             for i in range(1, obj.portCount+1):
                 dataVect = {}

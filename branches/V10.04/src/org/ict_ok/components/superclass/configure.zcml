@@ -53,6 +53,9 @@
         factory=".adapter.search.Searchable"
     />
     <adapter
+        factory="org.ict_ok.components.superclass.adapter.search.SearchableKeywords"
+    />
+    <adapter
         factory=".adapter.namechooser.SuperclassNameChooser"
         />
     <adapter

@@ -17,8 +17,6 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.component import queryUtility
-from zope.app.intid.interfaces import IIntIds
 
 # z3c imports
 from z3c.form import field
@@ -177,15 +175,5 @@ class Overview(SuperOverview):
     sort_columns = [1, 2, 3, 4]
 
 
-
 class AllIpAddresses(Overview):
-    def objs(self):
-        """List of all objects with selected interface"""
-        retList = []
-        uidutil = queryUtility(IIntIds)
-        for (oid, oobj) in uidutil.items():
-            if IIpAddress.providedBy(oobj.object):
-                retList.append(oobj.object)
-        return retList
-
-
+    objListInterface = IIpAddress

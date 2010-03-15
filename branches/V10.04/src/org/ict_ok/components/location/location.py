@@ -21,9 +21,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import implements
-from zope.component import getUtility
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 
 # lovely imports
@@ -36,19 +34,18 @@ from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.location.interfaces import \
     ILocation, IAddLocation, ILocationFolder
 from org.ict_ok.components.building.interfaces import IBuilding
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 
 def AllLocationsVocab(dummy_context):
     """Which locations are there
     """
     terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if ILocation.providedBy(oobj.object):
-            terms.append(\
-                SimpleTerm(oobj.object.objectID,
-                           str(oobj.object.objectID),
-                           oobj.object.getDcTitle()))
+    for object in objectsWithInterface(ILocation):
+        terms.append(\
+            SimpleTerm(object.objectID,
+                       str(object.objectID),
+                       object.getDcTitle()))
     return SimpleVocabulary(terms)
 
 
@@ -56,27 +53,23 @@ def AllLocations(dummy_context):
     """In which production state a host may be
     """
     terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if ILocation.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(\
-                SimpleTerm(oobj.object,
-                           token=getattr(oobj.object, 'objectID', oid),
-                           title=myString))
+    for object in objectsWithInterface(ILocation):
+        myString = u"%s" % (object.getDcTitle())
+        terms.append(\
+            SimpleTerm(object,
+                       token=getattr(object, 'objectID'),
+                       title=myString))
     return SimpleVocabulary(terms)
     
 def AllLocationTemplates(dummy_context):
     """Which MobilePhone templates exists
     """
     terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if ILocation.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=getattr(oobj.object, 'objectID', oid),
+    for object in objectsWithInterface(ILocation):
+        if object.isTemplate:
+            myString = u"%s [T]" % (object.getDcTitle())
+            terms.append(SimpleTerm(object,
+                                    token=getattr(object, 'objectID'),
                                     title=myString))
     return SimpleVocabulary(terms)
 

@@ -19,8 +19,6 @@ __version__ = "$Id$"
 # zope imports
 from zope.app import zapi
 from zope.i18nmessageid import MessageFactory
-from zope.app.intid.interfaces import IIntIds
-from zope.component import getUtility
 from zope.security import checkPermission
 from zope.app.pagetemplate.urlquote import URLQuote
 
@@ -32,6 +30,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
      DisplayForm, EditForm, Overview
 from org.ict_ok.admin_utils.notifier.notifier import NotifierUtil
 from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 _ = MessageFactory('org.ict_ok')
 
@@ -47,7 +46,7 @@ class NotifierDetails(SupernodeDetails):
         gives us the action dict of the object
         """
         try:
-            objId = getUtility(IIntIds).getId(self.context)
+            objId = self.context.objectID
         except KeyError:
             objId = 1000
         retList = []
@@ -132,26 +131,9 @@ class ViewNotifications(Overview):
     def objs(self):
         """List of Content objects"""
         retList = []
-        uidutil = getUtility(IIntIds)
-        for (myid, myobj) in uidutil.items():
-            if IComponent.providedBy(myobj.object):
-                tmp_health = myobj.object.get_health()
-                if tmp_health is not None and \
-                   tmp_health < 0.9:
-                    retList.append(myobj.object)
+        for object in objectsWithInterface(IComponent):
+            tmp_health = object.get_health()
+            if tmp_health is not None and \
+               tmp_health < 0.9:
+                retList.append(object)
         return retList
-    #def objs(self):
-        #"""List of Content objects"""
-        #retList = []
-        #userProps = AdmUtilUserProperties(self.request.principal)
-        #for dashboardItem in userProps.dashboard_objs:
-            #myObj = dashboardItem.getObject(some_obj=self,
-                                            #arg_request=self.request)
-            #if myObj is not None:
-                #retList.append(myObj)
-        #return retList
-    #if IComponent.providedBy(item):
-        #try:
-            #return u"%3.0f %%" % (100.0 * item.get_health())
-        #except TypeError:
-            #return u"-"

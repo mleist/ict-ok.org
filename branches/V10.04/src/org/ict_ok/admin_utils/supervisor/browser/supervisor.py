@@ -123,7 +123,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         gives us the action dict of the object
         """
         try:
-            objId = getUtility(IIntIds).getId(self.context)
+            objId = self.context.objectID
         except KeyError:
             objId = 1000
         retList = []

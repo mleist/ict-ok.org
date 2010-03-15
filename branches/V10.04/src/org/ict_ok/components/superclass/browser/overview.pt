@@ -8,12 +8,13 @@
   Something happened.
   </div>
   <form action="" method="post"
-    tal:attributes="action request/URL">
+    tal:attributes="action request/URL"
+    tal:define="isEmpty view/isEmpty">
   <tal:block
-    condition="view/objs|nothing"
+    condition="not: isEmpty"
     replace="structure view/table" />
   <div
-    tal:condition="not: view/objs|nothing"
+    tal:condition="isEmpty"
     i18n:translate="">
     There are no objects.
     

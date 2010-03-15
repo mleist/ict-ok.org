@@ -18,9 +18,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
 
 # lovely imports
 
@@ -29,31 +27,28 @@ from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.mobilephone.interfaces import \
     IMobilePhone, IMobilePhoneFolder, IAddMobilePhone
 from org.ict_ok.components.component import Component, ComponentFolder
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 def AllMobilePhones(dummy_context):
     """Which MobilePhone exists
     """
     terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IMobilePhone.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=getattr(oobj.object, 'objectID', oid),
-                                    title=myString))
+    for object in objectsWithInterface(IMobilePhone):
+        myString = u"%s" % (object.getDcTitle())
+        terms.append(SimpleTerm(object,
+                                token=getattr(object, 'objectID'),
+                                title=myString))
     return SimpleVocabulary(terms)
 
 def AllMobilePhoneTemplates(dummy_context):
     """Which MobilePhone templates exists
     """
     terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IMobilePhone.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=getattr(oobj.object, 'objectID', oid),
+    for object in objectsWithInterface(IMobilePhone):
+        if object.isTemplate:
+            myString = u"%s [T]" % (object.getDcTitle())
+            terms.append(SimpleTerm(object,
+                                    token=getattr(object, 'objectID'),
                                     title=myString))
     return SimpleVocabulary(terms)
 
@@ -66,10 +61,6 @@ class MobilePhone(Component):
     shortName = "mobilephone"
     # for ..Contained we have to:
     __name__ = __parent__ = None
-    #attrFoo = FieldProperty(IMobilePhone['attrFoo'])
-    #user = FieldProperty(IMobilePhone['user'])
-    #pin = FieldProperty(IMobilePhone['pin'])
-    #puk = FieldProperty(IMobilePhone['puk'])
     
     phoneNumber = FieldProperty(IMobilePhone['phoneNumber'])
     user = FieldProperty(IMobilePhone['user'])

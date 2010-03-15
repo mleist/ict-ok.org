@@ -31,6 +31,7 @@ from org.ict_ok.components.notebook.interfaces import \
 from org.ict_ok.components.notebook.notebook import Notebook
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
@@ -179,11 +180,4 @@ class Overview(SuperOverview):
     sort_columns = [1, 2, 3, 4, 5]
 
 class AllNotebooks(Overview):
-    def objs(self):
-        """List of all objects with selected interface"""
-        retList = []
-        uidutil = queryUtility(IIntIds)
-        for (oid, oobj) in uidutil.items():
-            if INotebook.providedBy(oobj.object):
-                retList.append(oobj.object)
-        return retList
+    objListInterface = INotebook

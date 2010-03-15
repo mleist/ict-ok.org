@@ -74,6 +74,7 @@
     <include package="z3c.layer.pagelet" />
     <include package="z3c.macro" />
     <include package="z3c.pagelet" />
+    <include package="plone.memoize" />
 
     <include package="ldapadapter" />
     <include package="ldappas" />

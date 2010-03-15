@@ -41,8 +41,6 @@ from zope.lifecycleevent import ObjectCreatedEvent
 from zope.event import notify
 from zope.app.catalog.interfaces import ICatalog
 from zope.copypastemove.interfaces import IObjectMover
-from zope.security.proxy import removeSecurityProxy
-from zope.app.intid.interfaces import IIntIds
 from zope.xmlpickle import toxml, fromxml, loads
 from zope.schema.interfaces import IField, IChoice, ICollection
 from zope.component import queryUtility, queryMultiAdapter, \
@@ -471,7 +469,6 @@ class AdmUtilSupervisor(Supernode):
         """
         will reindex the catalogs of all tables in database
         """
-        iid = zapi.getUtility(IIntIds, '')
         my_catalog = zapi.getUtility(ICatalog)
         my_catalog.updateIndexes()
         self.appendEventHistory(\
@@ -661,6 +658,7 @@ class AdmUtilSupervisor(Supernode):
         f_handle, f_name = tempfile.mkstemp(filename)
         wbook = Workbook()
         for folder in root_folder.values():
+            print "folder: ", folder
             folder.exportXlsData(request, folder.ikName, wbook)
         wbook.save(f_name)
         datafile = open(f_name, "r")
@@ -668,6 +666,20 @@ class AdmUtilSupervisor(Supernode):
         datafile.close()
         os.remove(f_name)
         return (filename, dataMem)
+
+    def __exportAllXlsData(self, request):
+        import cProfile, pstats
+        from datetime import datetime
+        print "----------------------------------1"
+        pr = cProfile.Profile()
+        print "----------------------------------2"
+        tmpRet = pr.runcall(self._exportAllXlsData,
+                                         request)
+        filename = datetime.now().strftime('/tmp/ict_%Y%m%d%H%M%S.profile')
+        pr.dump_stats(filename)
+        print "----------------------------------3"
+        return tmpRet
+
 
     def _xlsSheet2folder_(self, request, values, folder):
         # dbg # print "_xlsSheet2folder_(folder=%s)" % folder

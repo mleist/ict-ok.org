@@ -238,22 +238,7 @@ class AllNetworks(Overview):
                      cell_formatter=raw_cell_formatter),
         )
     sort_columns = [1, 2, 3, 4]
-    
-    def objs(self):
-        """List of Content objects"""
-        return AllNets()
-    
-    #def table(self):
-        #""" Properties of table are defined here"""
-        #directlyProvides(self.columns[1], ISortableColumn)
-        #directlyProvides(self.columns[2], ISortableColumn)
-        #directlyProvides(self.columns[3], ISortableColumn)
-        #directlyProvides(self.columns[4], ISortableColumn)
-        #formatter = StandaloneFullFormatter(
-            #self.context, self.request, self.objs(),
-            #columns=self.columns, sort_on=((_('Title'), False),))
-        #formatter.cssClasses['table'] = 'listing'
-        #return formatter()
+    objListInterface = INet
 
 
 def NetScannerInstances2(dummy_context):
