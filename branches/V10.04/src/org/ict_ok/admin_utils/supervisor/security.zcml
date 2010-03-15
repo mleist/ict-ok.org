@@ -91,6 +91,8 @@
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.supervisor.ImportExport"
                     role="org.ict_ok.adm" />
 
 </configure>
