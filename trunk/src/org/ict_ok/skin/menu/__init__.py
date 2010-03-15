@@ -33,8 +33,8 @@ from z3c.menu.simple import ITab
 from z3c.menu.simple.menu import Tab
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 from org.ict_ok.admin_utils.util_manager.interfaces import IUtilManager
-from org.ict_ok.libs.lib import getFirstObjectFor
 
 _ = MessageFactory('org.ict_ok')
 
@@ -125,7 +125,7 @@ class GlobalMenuSubItem(ContextMenuItem):
 class GlobalMenuAddItem(GlobalMenuSubItem):
     def __init__(self, context, request, view, manager):
         GlobalMenuSubItem.__init__(self, context, request, view, manager)
-        self.firstFolder = getFirstObjectFor(self.folderInterface)
+        self.firstFolder = iter(objectsWithInterface(self.folderInterface)).next()
     @property
     def url(self):
         if self.firstFolder is not None:

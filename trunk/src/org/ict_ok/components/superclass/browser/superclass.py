@@ -42,6 +42,7 @@ from zope.app.container.interfaces import IOrderedContainer
 from zope.schema import vocabulary
 from zope.app.pagetemplate.urlquote import URLQuote
 from zope.component.interfaces import ComponentLookupError
+from zope.app.catalog.interfaces import ICatalog
 
 # z3c imports
 from z3c.form import button, field, form, interfaces
@@ -61,7 +62,8 @@ from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.components.superclass.interfaces import \
     IPickle, ISuperclass, IFocus
-from org.ict_ok.components.superclass.superclass import Superclass
+from org.ict_ok.components.superclass.superclass import \
+    Superclass, objectsWithInterface
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.interfaces import IComponent
@@ -1163,16 +1165,22 @@ class Overview(BrowserPagelet):
             self.request.tabClass = 'cb_wht'
         return self.request.tabClass
     
+    def isEmpty(self):
+        """
+        Table is empty
+        """
+        if hasattr(self, "objListInterface"):
+            return len(objectsWithInterface(self.objListInterface)) < 1
+        else:
+            return len(self.context) < 1
+        
     def objs(self):
         """List of Content objects"""
-        retList = []
-#        try:
-        for obj in self.context.values():
-            #if ISuperclass.providedBy(obj):
-            retList.append(obj)
-#        except:
-#            pass
-        return retList
+        if hasattr(self, "objListInterface"):
+            return objectsWithInterface(self.objListInterface)
+        else:
+            #return [obj for obj in self.context.values()]
+            return self.context.values()
 
     def table(self, arg_objList=None):
         """ Properties of table are defined here"""

@@ -159,14 +159,6 @@ def nodeIsUnder(underNodeOid, upperNodeOid):
        upperObj is not None:
         return _helperNodeIsUnder(underObj, upperObj)
 
-def getFirstObjectFor(interf):
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if interf.providedBy(oobj.object):
-            return oobj.object
-    return None
-            
-
 def oid2dcTitle(arg_oid):
     """ converts an oid into the object dc title """
     if arg_oid is None:

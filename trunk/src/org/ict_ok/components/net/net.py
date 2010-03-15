@@ -22,8 +22,6 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
@@ -44,31 +42,7 @@ from org.ict_ok.components.host.special.vmware_esx.interfaces import \
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents, \
     ComponentsFromObjList
-
-
-#def getAllNetworks():
-#    """ get a list of all Nets
-#    """
-#    retList = []
-#    uidutil = getUtility(IIntIds)
-#    for (myid, myobj) in uidutil.items():
-#        if INet.providedBy(myobj.object):
-#            retList.append(myobj.object)
-#    return retList
-#
-#def AllNetTemplates(dummy_context):
-#    """Which Net templates exists
-#    """
-#    terms = []
-#    uidutil = getUtility(IIntIds)
-#    for (oid, oobj) in uidutil.items():
-#        if INet.providedBy(oobj.object) and \
-#        oobj.object.isTemplate:
-#            myString = u"%s [T]" % (oobj.object.getDcTitle())
-#            terms.append(SimpleTerm(oobj.object,
-#                                    token=oid,
-#                                    title=myString))
-#    return SimpleVocabulary(terms)
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 def AllNetTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, INet,
@@ -84,20 +58,17 @@ def AllUnusedOrSelfNets(dummy_context):
                                      additionalAttrNames=['ipv4'])
 
 def AllValidSubNets(dummy_context):
-    uidutil = getUtility(IIntIds)
     validObjects = []
     if INet.providedBy(dummy_context):
         myNetIp = IP(dummy_context.ipv4)
-        for (oid, oobj) in uidutil.items():
-            if INet.providedBy(oobj.object):
-                i_NetIp = IP(oobj.object.ipv4)
-                if i_NetIp in myNetIp and \
-                    oobj.object != dummy_context:
-                    validObjects.append(oobj.object)
+        for object in objectsWithInterface(INet):
+            i_NetIp = IP(object.ipv4)
+            if i_NetIp in myNetIp and \
+                object != dummy_context:
+                validObjects.append(object)
     else:
-        for (oid, oobj) in uidutil.items():
-            if INet.providedBy(oobj.object):
-                validObjects.append(oobj.object)
+        for object in objectsWithInterface(INet):
+            validObjects.append(object)
     return ComponentsFromObjList(dummy_context, validObjects,
                                  additionalAttrNames=['ipv4'])
 

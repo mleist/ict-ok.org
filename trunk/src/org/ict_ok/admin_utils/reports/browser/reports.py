@@ -90,6 +90,7 @@ from org.ict_ok.components.contact.interfaces import IContact
 from org.ict_ok.components.contact_item.interfaces import IContactItem
 from org.ict_ok.components.contract.interfaces import IContract
 from org.ict_ok.components.work_order.interfaces import IWorkOrder
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 
 _ = MessageFactory('org.ict_ok')

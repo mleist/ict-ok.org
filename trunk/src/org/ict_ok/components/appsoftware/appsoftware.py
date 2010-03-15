@@ -42,7 +42,7 @@ def AllApplicationSoftwares(dummy_context):
 
 def AllUnusedOrUsedDeviceApplicationSoftwares(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IApplicationSoftware,
-                                     'device', ['licenseKey'])
+                                     'device', 'licenseKey')
 
 
 class ApplicationSoftware(SoftwareComponent):

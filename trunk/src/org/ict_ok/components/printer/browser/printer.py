@@ -186,15 +186,5 @@ class Overview(SuperOverview):
     sort_columns = [1, 2, 3, 4, 5]
 
 
-
 class AllPrinters(Overview):
-    def objs(self):
-        """List of all objects with selected interface"""
-        retList = []
-        uidutil = queryUtility(IIntIds)
-        for (oid, oobj) in uidutil.items():
-            if IPrinter.providedBy(oobj.object):
-                retList.append(oobj.object)
-        return retList
-
-
+    objListInterface = IPrinter

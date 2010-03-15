@@ -390,6 +390,7 @@ class Superclass(Persistent):
             if attrName.find("eventInpObjs_") == 0: # attribute name starts with ...
                 for tmpOid in self.__dict__[attrName]:
                     retSet.add(tmpOid)
+        print "getAllInpEventObjs:", retSet
         return retSet
 
     def getAllInpEventNames(self):
@@ -402,6 +403,7 @@ class Superclass(Persistent):
                 retDict[attrName[len('eventInpObjs_'):]] =  \
                        self.__dict__[attrName]
                 #retList.append(attrName[len('eventInpObjs_'):])
+        print "getAllInpEventNames:", retDict
         return retDict
 
     def getAllOutEventNames(self):
@@ -414,6 +416,7 @@ class Superclass(Persistent):
                 retDict[attrName[len('eventOutObjs_'):]] =  \
                        self.__dict__[attrName]
                 #retList.append(attrName[len('eventOutObjs_'):])
+        print "getAllInpEventNames:", retDict
         return retDict
 
 
@@ -695,3 +698,11 @@ def isOidInCatalog(arg_oid):
         if len(my_catalog.searchResults(oid_index=arg_oid)) > 0:
             return True
     return False
+
+def objectsWithInterface(interface):
+    """objects from catalog searhed by interface
+    """
+    my_catalog = zapi.getUtility(ICatalog)
+    dottedInterfaceName = unicode(interface.__module__ + '.' + 
+                                  interface.__name__)
+    return my_catalog.searchResults(all_interfaces_index=dottedInterfaceName)

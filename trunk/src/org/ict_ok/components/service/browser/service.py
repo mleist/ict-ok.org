@@ -140,9 +140,7 @@ class DeleteServiceForm(DeleteForm):
 
 class AllServices(Overview):
     """Overview Pagelet"""
-    def objs(self):
-        """List of Content objects"""
-        return getAllServices()
+    objListInterface = IService
 
 
 class ImportCsvDataForm(ImportCsvDataComponentForm):

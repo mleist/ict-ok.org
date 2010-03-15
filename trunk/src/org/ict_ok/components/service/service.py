@@ -30,32 +30,24 @@ from org.ict_ok.components.service.interfaces import \
     IService, IAddService, IServiceFolder
 from org.ict_ok.components.service.wf.nagios import pd as WfPdNagios
 from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 
 def getAllServices():
     """ get a list of all services
     """
-    retList = []
-    uidutil = getUtility(IIntIds)
-    for (myid, myobj) in uidutil.items():
-        if IService.providedBy(myobj.object):
-            retList.append(myobj.object)
-    return retList
+    return objectsWithInterface(IService)
 
 def AllServiceTemplates(dummy_context):
     """Which MobilePhone templates exists
     """
     terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IService.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=getattr(oobj.object, 'objectID', oid),
+    for object in objectsWithInterface(IService):
+        if object.isTemplate:
+            myString = u"%s [T]" % (object.getDcTitle())
+            terms.append(SimpleTerm(object,
+                                    token=getattr(object, 'objectID'),
                                     title=myString))
     return SimpleVocabulary(terms)
 

@@ -27,8 +27,6 @@ from pysnmp.entity.rfc3413.oneliner import cmdgen
 from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
@@ -37,6 +35,7 @@ from org.ict_ok.components.snmpvalue.interfaces import \
     ISnmpValue, IAddSnmpValue, ISnmpValueFolder
 from org.ict_ok.libs.physicalquantity import convertQuantity, \
      convertUnit
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 def SnmpVersions(dummy_context):
     terms = []
@@ -96,13 +95,12 @@ def AllSnmpValueTemplates(dummy_context):
     """Which SnmpValue templates exists
     """
     terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if ISnmpValue.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=getattr(oobj.object, 'objectID', oid),
+    for object in objectsWithInterface(ISnmpValue):
+        if object.isTemplate:
+            myString = u"%s [T]" % (object.getDcTitle())
+            terms.append(SimpleTerm(object,
+                                    token=getattr(object, 'objectID',
+                                                  object.objectID),
                                     title=myString))
     return SimpleVocabulary(terms)
 

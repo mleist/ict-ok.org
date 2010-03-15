@@ -30,7 +30,6 @@ from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.catalog.interfaces import ICatalog
 from zope.app.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
-from zope.component import getUtility
 from zope.component import queryUtility
 
 # zc imports
@@ -61,6 +60,7 @@ berlinTZ = timezone('Europe/Berlin')
 def AllObjectInstances(dummy_context):
     """Which objects are there
     """
+    print "here cleanup 3ffvd"
     iid = zapi.getUtility(IIntIds, '')
     terms = []
     for (oid, oobj) in iid.items():
@@ -87,6 +87,7 @@ def AllObjectInstances(dummy_context):
 def AllObjectInstancesWithEventInputs(dummy_context):
     """Which objects are there
     """
+    print "here cleanup jfd98"
     iid = zapi.getUtility(IIntIds, '')
     terms = []
     for (oid, oobj) in iid.items():
@@ -122,6 +123,7 @@ def AllObjectInstancesWithEventInputs(dummy_context):
 def AllEventInstances(dummy_context):
     """Which events are there
     """
+    print "here cleanup 7dhd6"
     try:
         eventXbar = zapi.getUtility(IAdmUtilEventCrossbar, '')
     except ComponentLookupError:

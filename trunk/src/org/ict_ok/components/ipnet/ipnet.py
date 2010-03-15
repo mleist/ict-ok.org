@@ -47,17 +47,14 @@ from org.ict_ok.components.component import \
 from org.ict_ok.components.ip_address.interfaces import IIpAddress
 
 def AllIpNetTemplates(dummy_context):
-    return AllComponentTemplates(dummy_context, IIpNet,
-                                 additionalAttrNames=['ipv4'])
+    return AllComponentTemplates(dummy_context, IIpNet, 'ipv4')
 
 def AllIpNets(dummy_context):
-    return AllComponents(dummy_context, IIpNet,
-                         additionalAttrNames=['ipv4'])
+    return AllComponents(dummy_context, IIpNet, 'ipv4')
 
 def AllUnusedOrSelfIpNets(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IIpNet,
-                                     'parentnet',
-                                     additionalAttrNames=['ipv4'])
+                                     'parentnet', 'ipv4')
 
 def AllValidSubIpNets(dummy_context):
     uidutil = getUtility(IIntIds)
@@ -74,8 +71,7 @@ def AllValidSubIpNets(dummy_context):
         for (oid, oobj) in uidutil.items():
             if IIpNet.providedBy(oobj.object):
                 validObjects.append(oobj.object)
-    return ComponentsFromObjList(dummy_context, validObjects,
-                                 additionalAttrNames=['ipv4'])
+    return ComponentsFromObjList(dummy_context, validObjects, 'ipv4')
 
 
 IpNet_IpNets_RelManager = \

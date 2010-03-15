@@ -400,9 +400,7 @@ class AllHosts(Overview):
                      cell_formatter=raw_cell_formatter),
         )
     sort_columns = [1, 2, 3, 4]
-    def objs(self):
-        """List of Content objects"""
-        return getAllHosts()
+    objListInterface = IHost
 
 
 class ImportCsvDataForm(ImportCsvDataComponentForm):

@@ -38,11 +38,11 @@ def AllOperatingSoftwareTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IOperatingSoftware)
 
 def AllOperatingSoftwares(dummy_context):
-    return AllComponents(dummy_context, IOperatingSoftware, ['licenseKey'])
+    return AllComponents(dummy_context, IOperatingSoftware, 'licenseKey')
 
 def AllUnusedOrUsedDeviceOperatingSoftwares(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IOperatingSoftware,
-                                     'device', ['licenseKey'])
+                                     'device', 'licenseKey')
 
 
 class OperatingSoftware(SoftwareComponent):

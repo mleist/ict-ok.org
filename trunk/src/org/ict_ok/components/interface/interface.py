@@ -49,16 +49,15 @@ def AllInterfaceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IInterface)
 
 def AllInterfaces(dummy_context):
-    return AllComponents(dummy_context, IInterface,
-                         additionalAttrNames=['device'])
+    return AllComponents(dummy_context, IInterface, 'device')
 
 def AllUnusedOrUsedDeviceInterfaces(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IInterface, 'device',
-                                     additionalAttrNames=['device'])
+                                     'device')
 
 def AllUnusedOrUsedPhysicalConnectorInterfaces(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IInterface, 'physicalConnector',
-                                     additionalAttrNames=['device'])
+                                     'device')
 
 
 Interface_IpAddresses_RelManager = \

@@ -28,7 +28,9 @@ from zope.app.intid.interfaces import IIntIds
 from zope.app.catalog.catalog import Catalog
 from zope.app.catalog.text import TextIndex
 from zope.app.catalog.interfaces import ICatalog
+from zope.app.catalog.keyword import KeywordIndex
 from zope.index.text.interfaces import ISearchableText
+from zope.index.keyword.interfaces import IKeywordQuerying
 
 from lovely.relation.app import O2OStringTypeRelationships
 from lovely.relation.interfaces import IO2OStringTypeRelationships
@@ -189,6 +191,17 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for all fulltext")
+    if not "all_interfaces_index" in instUtilityICatalog.keys():
+        all_interfaces_index = KeywordIndex(interface=IKeywordQuerying,
+                                            field_name='getSearchableInterfaces',
+                                            field_callable=True)
+        instUtilityICatalog['all_interfaces_index'] = all_interfaces_index
+        # search for IAdmUtilSupervisor
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: ICatalog - create index for all interfaces")
     transaction.get().commit()
     if connection is not None:
         connection.close()

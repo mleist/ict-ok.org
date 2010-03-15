@@ -17,9 +17,10 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
-from zope.interface import implements
+from zope.interface import implements, providedBy
 from zope.component import adapts
 from zope.index.text.interfaces import ISearchableText
+from zope.index.keyword.interfaces import IKeywordQuerying
 from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
@@ -74,3 +75,19 @@ class Searchable(object):
             #print u"%s : '%s'" % (field, getattr(self.context, field))
             stringList.append(u"%s" % getattr(self.context, field))
         return u" ".join(stringList)
+
+class SearchableKeywords(object):
+    """Searchable-Adapter."""
+
+    implements(IKeywordQuerying)
+    adapts(ISuperclass)
+
+    def __init__(self, context):
+        self.context = context
+
+    def getSearchableInterfaces(self):
+        """
+        get a list of provided interfaces
+        """
+        return [unicode(i.__module__+'.'+i.__name__) \
+                for i in providedBy(self.context).interfaces()]

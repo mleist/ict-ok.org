@@ -17,11 +17,8 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
-from zope.component import queryUtility
-from zope.app.intid.interfaces import IIntIds
 
 # z3c imports
-from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
@@ -197,11 +194,4 @@ class Overview(SuperOverview):
 
 
 class AllPersons(Overview):
-    def objs(self):
-        """List of all objects with selected interface"""
-        retList = []
-        uidutil = queryUtility(IIntIds)
-        for (oid, oobj) in uidutil.items():
-            if IPerson.providedBy(oobj.object):
-                retList.append(oobj.object)
-        return retList
+    objListInterface = IPerson

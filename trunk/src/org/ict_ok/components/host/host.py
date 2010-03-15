@@ -24,7 +24,6 @@ from zope.interface import implements
 from zope.schema.fieldproperty import FieldProperty
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
 from zope.component import getUtility
-from zope.app.intid.interfaces import IIntIds
 
 # lovely imports
 
@@ -40,32 +39,12 @@ from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
      IAdmUtilEventCrossbar
 from org.ict_ok.components.logical_device.logical_device import LogicalDevice
-
-#def AllHostGroups(dummy_context):
-    #"""Which host group are there
-    #"""
-    #terms = []
-    #for (gkey, gname) in {
-        #u'dns': u'DNS-Server',
-        #u'file': u'File-Server',
-        #u'misc': u'Miscellaneous-Server',
-        #u'smtp': u'SMTP-Server',
-        #u'terminal': u'Terminal-Server',
-        #u'util': u'Utility-Server',
-        #u'workstation': u'Workstation',
-        #}.items():
-        #terms.append(SimpleTerm(gkey, str(gkey), gname))
-    #return SimpleVocabulary(terms)
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
 def getAllHosts():
     """ get a list of all Hosts
     """
-    retList = []
-    uidutil = getUtility(IIntIds)
-    for (myid, myobj) in uidutil.items():
-        if IHost.providedBy(myobj.object):
-            retList.append(myobj.object)
-    return retList
+    return objectsWithInterface(IHost)
 
 def AllHostProductionStates(dummy_context):
     """In which production state a host may be
@@ -85,27 +64,23 @@ def AllHosts(dummy_context):
     """In which production state a host may be
     """
     terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IHost.providedBy(oobj.object):
-            myString = u"%s" % (oobj.object.getDcTitle())
-            terms.append(\
-                SimpleTerm(oobj.object,
-                           token=getattr(oobj.object, 'objectID', oid),
-                           title=myString))
+    for object in objectsWithInterface(IHost):
+        myString = u"%s" % (object.getDcTitle())
+        terms.append(\
+            SimpleTerm(object,
+                       token=getattr(object, 'objectID'),
+                       title=myString))
     return SimpleVocabulary(terms)
     
 def AllHostTemplates(dummy_context):
     """Which MobilePhone templates exists
     """
     terms = []
-    uidutil = getUtility(IIntIds)
-    for (oid, oobj) in uidutil.items():
-        if IHost.providedBy(oobj.object) and \
-        oobj.object.isTemplate:
-            myString = u"%s [T]" % (oobj.object.getDcTitle())
-            terms.append(SimpleTerm(oobj.object,
-                                    token=getattr(oobj.object, 'objectID', oid),
+    for object in objectsWithInterface(IHost):
+        if object.isTemplate:
+            myString = u"%s [T]" % (object.getDcTitle())
+            terms.append(SimpleTerm(object,
+                                    token=getattr(object, 'objectID'),
                                     title=myString))
     return SimpleVocabulary(terms)
 
