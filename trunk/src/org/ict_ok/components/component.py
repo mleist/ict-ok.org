@@ -63,6 +63,7 @@ from plone.memoize import instance
 from plone.memoize import forever
 
 
+#@instance.memoize
 def AllComponentTemplates(dummy_context, interface):
     """Which MobilePhone templates exists
     """
@@ -79,7 +80,7 @@ def AllComponentTemplates(dummy_context, interface):
     return SimpleVocabulary(terms)
 
 
-#instance.memoize
+#@instance.memoize
 def AllComponents(dummy_context, interface=IComponent,
                   includeSelf=True, *additionalAttrNames):
     """In which production state a host may be
@@ -89,15 +90,67 @@ def AllComponents(dummy_context, interface=IComponent,
 #                                                includeSelf)
     terms = []
     for object in objectsWithInterface(interface):
-        myString = u"%s" % (object.getDcTitle())
-        if additionalAttrNames is not None:
+        myString = u"%s" % (object.ikName)
+        for additionalAttrName in additionalAttrNames:
+            additionalAttribute = getattr(object, additionalAttrName, None)
+            if additionalAttribute is not None:
+                if hasattr(additionalAttribute, 'ikName'):
+                    if len(additionalAttribute.ikName) > 70:
+                        dotted = u'...)'
+                    else:
+                        dotted = u')'
+                    myString = myString + u" (%s" % \
+                        additionalAttribute.ikName[:70] + dotted
+                else:
+                    if len(additionalAttribute) > 70:
+                        dotted = u'...)'
+                    else:
+                        dotted = u')'
+                    myString = myString + u" (%s" % \
+                        additionalAttribute[:70] + dotted
+        if object == dummy_context:
+            if includeSelf:
+                terms.append(\
+                    SimpleTerm(object,
+                               token=getattr(object, 'objectID', object.objectID),
+                               title=myString))
+        else:
+            terms.append(\
+                SimpleTerm(object,
+                           token=getattr(object, 'objectID', object.objectID),
+                           title=myString))
+    terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
+    return SimpleVocabulary(terms)
+
+
+#def All_y_UnusedOrSelfComponents(dummy_context, interface,
+#                              obj_attr_name, *additionalAttrNames):
+#    import cProfile
+#    from datetime import datetime
+#    print "----------------------------------1"
+#    pr = cProfile.Profile()
+#    print "----------------------------------2"
+#    tmpRet = pr.runcall(All_x_UnusedOrSelfComponents,
+#                        dummy_context, interface,
+#                        obj_attr_name, *additionalAttrNames)
+#    filename = datetime.now().strftime('/tmp/ict_3_%Y%m%d%H%M%S.profile')
+#    pr.dump_stats(filename)
+#    print "----------------------------------3"
+#    return tmpRet
+
+
+def AllUnusedOrSelfComponents(dummy_context, interface,
+                              obj_attr_name, *additionalAttrNames):
+    """In which production state a host may be
+    """
+    terms = []
+    for object in objectsWithInterface(interface):
+        obj_attr = getattr(object, obj_attr_name, None)
+        if obj_attr is None or \
+            len(obj_attr) == 0:
+            myString = object.ikName
             for additionalAttrName in additionalAttrNames:
-                try:
-                    additionalAttribute = getattr(object, 
-                                                  additionalAttrName)
-                    print "############### additionalAttribute:", additionalAttribute
-                except AttributeError:
-                    additionalAttribute = None
+                additionalAttribute = getattr(object, additionalAttrName, None)
                 if additionalAttribute is not None:
                     if hasattr(additionalAttribute, 'ikName'):
                         if len(additionalAttribute.ikName) > 70:
@@ -113,46 +166,16 @@ def AllComponents(dummy_context, interface=IComponent,
                             dotted = u')'
                         myString = myString + u" (%s" % \
                             additionalAttribute[:70] + dotted
-        if object == dummy_context:
-            if includeSelf:
-                terms.append(\
-                    SimpleTerm(object,
-                               token=getattr(object, 'objectID', object.objectID),
-                               #token=oid,
-                               title=myString))
-        else:
             terms.append(\
                 SimpleTerm(object,
                            token=getattr(object, 'objectID', object.objectID),
-                           #token=oid,
                            title=myString))
-    terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
-    return SimpleVocabulary(terms)
-
-
-#instance.memoize
-def AllUnusedOrSelfComponents(dummy_context, interface,
-                              obj_attr_name, *additionalAttrNames):
-    """In which production state a host may be
-    """
-#    print "AllUnusedOrSelfComponents(%s, %s, %s, %s) ->" % (dummy_context, interface,
-#                                                            obj_attr_name,
-#                                                            additionalAttrNames)
-    terms = []
-    for object in objectsWithInterface(interface):
-        if obj_attr_name is not None and \
-            ( getattr(object, obj_attr_name) is None or \
-              len(getattr(object, obj_attr_name)) == 0):
-            myString = u"%s" % (object.getDcTitle())
-            if additionalAttrNames is not None:
+        else:
+            if obj_attr == dummy_context or \
+                dummy_context in obj_attr:
+                myString = u"%s" % (object.ikName)
                 for additionalAttrName in additionalAttrNames:
-                    try:
-                        additionalAttribute = getattr(object, additionalAttrName)
-                    except TypeError:
-                        additionalAttribute = None
-                        print "additionalAttrName: ", additionalAttrName
-                    except AttributeError:
-                        additionalAttribute = None
+                    additionalAttribute = getattr(object, additionalAttrName, None)
                     if additionalAttribute is not None:
                         if hasattr(additionalAttribute, 'ikName'):
                             if len(additionalAttribute.ikName) > 70:
@@ -168,72 +191,39 @@ def AllUnusedOrSelfComponents(dummy_context, interface,
                                 dotted = u')'
                             myString = myString + u" (%s" % \
                                 additionalAttribute[:70] + dotted
-            terms.append(\
-                SimpleTerm(object,
-                           token=getattr(object, 'objectID', object.objectID),
-                           #token=oid,
-                           title=myString))
-        else:
-            if getattr(object, obj_attr_name) == dummy_context or \
-               dummy_context in getattr(object, obj_attr_name):
-                myString = u"%s" % (object.getDcTitle())
-                if additionalAttrNames is not None:
-                    for additionalAttrName in additionalAttrNames:
-                        try:
-                            additionalAttribute = getattr(object, additionalAttrName)
-                        except AttributeError:
-                            additionalAttribute = None
-                        if additionalAttribute is not None:
-                            if hasattr(additionalAttribute, 'ikName'):
-                                if len(additionalAttribute.ikName) > 70:
-                                    dotted = u'...)'
-                                else:
-                                    dotted = u')'
-                                myString = myString + u" (%s" % \
-                                    additionalAttribute.ikName[:70] + dotted
-                            else:
-                                if len(additionalAttribute) > 70:
-                                    dotted = u'...)'
-                                else:
-                                    dotted = u')'
-                                myString = myString + u" (%s" % \
-                                    additionalAttribute[:70] + dotted
                 terms.append(\
                     SimpleTerm(object,
                                token=getattr(object, 'objectID', object.objectID),
-                               #token=oid,
                                title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
 
+
+#@instance.memoize
 def ComponentsFromObjList(dummy_context, obj_list, additionalAttrNames=None):
     """In which production state a host may be
     """
-    print "ComponentsFromObjList()"
+#    print "ComponentsFromObjList()"
     terms = []
     for i_obj in obj_list:
-        myString = u"%s" % (i_obj.getDcTitle())
-        if additionalAttrNames is not None:
-            for additionalAttrName in additionalAttrNames:
-                try:
-                    additionalAttribute = getattr(i_obj, additionalAttrName)
-                except AttributeError:
-                    additionalAttribute = None
-                if additionalAttribute is not None:
-                    if hasattr(additionalAttribute, 'ikName'):
-                        if len(additionalAttribute.ikName) > 70:
-                            dotted = u'...)'
-                        else:
-                            dotted = u')'
-                        myString = myString + u" (%s" % \
-                            additionalAttribute.ikName[:70] + dotted
+        myString = u"%s" % (i_obj.ikName)
+        for additionalAttrName in additionalAttrNames:
+            additionalAttribute = getattr(object, additionalAttrName, None)
+            if additionalAttribute is not None:
+                if hasattr(additionalAttribute, 'ikName'):
+                    if len(additionalAttribute.ikName) > 70:
+                        dotted = u'...)'
                     else:
-                        if len(additionalAttribute) > 70:
-                            dotted = u'...)'
-                        else:
-                            dotted = u')'
-                        myString = myString + u" (%s" % \
-                            additionalAttribute[:70] + dotted
+                        dotted = u')'
+                    myString = myString + u" (%s" % \
+                        additionalAttribute.ikName[:70] + dotted
+                else:
+                    if len(additionalAttribute) > 70:
+                        dotted = u'...)'
+                    else:
+                        dotted = u')'
+                    myString = myString + u" (%s" % \
+                        additionalAttribute[:70] + dotted
         terms.append(\
             SimpleTerm(i_obj,
                        token=i_obj.objectID,

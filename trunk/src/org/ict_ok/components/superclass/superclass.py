@@ -705,4 +705,7 @@ def objectsWithInterface(interface):
     my_catalog = zapi.getUtility(ICatalog)
     dottedInterfaceName = unicode(interface.__module__ + '.' + 
                                   interface.__name__)
+#    for i in my_catalog.searchResults(all_interfaces_index=dottedInterfaceName):
+#        yield i
     return my_catalog.searchResults(all_interfaces_index=dottedInterfaceName)
+
