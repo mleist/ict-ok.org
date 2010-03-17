@@ -17,6 +17,7 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.traversing.browser import absoluteURL
 
 # z3c imports
 from z3c.form import field
@@ -132,3 +133,49 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
     omitFields = AddressDetails.omit_viewfields
     factoryId = u'org.ict_ok.components.address.address.Address'
     allFields = fieldsForInterface(attrInterface, [])
+
+def getAddresses(item, formatter):
+    """
+    Roles for overview table
+    """
+    if type(item) is dict:
+        item = item["obj"]
+    ttid = u"address" + item.getObjectId()
+    if len(item.adresses) > 2:
+        view_url = absoluteURL(item, formatter.request) + '/@@details.html'
+        view_html = u'<a href="%s" id="%s">' % (view_url, ttid) + u'[...]</a>'
+        addressesList = [i.ikName for i in item.adresses]
+        addressesList.sort()
+        tooltip_text = _(u'<b>Addresses:</b>') + u'<br />' +\
+            u'<br />'.join(addressesList)
+    elif len(item.adresses) > 1:
+        view0_url = absoluteURL(item.adresses[0], formatter.request) +\
+                    '/@@details.html'
+        view1_url = absoluteURL(item.adresses[1], formatter.request) +\
+                    '/@@details.html'
+        view_html = u'<span id="%s"><a href="%s">' %\
+                    (ttid, view0_url) + u'%s</a>' %\
+                    item.adresses[0].ikName + \
+                    u', <a href="%s">' %  (view1_url) + u'%s</a></span>' %\
+                    item.adresses[1].ikName
+        addressesList = [i.ikName for i in item.adresses]
+        addressesList.sort()
+        tooltip_text = _(u'<b>Addresses:</b>') + u'<br />' +\
+            u'<br />'.join(addressesList)
+    elif len(item.adresses) == 1:
+        view_url = absoluteURL(item.adresses[0], formatter.request) +\
+                    '/@@details.html'
+        view_html = u'<a href="%s" id="%s">' %  (view_url, ttid) + u'%s</a>' %\
+                    item.adresses[0].ikName
+        membersList = [i.ikName for i in item.adresses[0].contactItems]
+        membersList.sort()
+        tooltip_text = _(u'<b>Members:</b>') + u'<br />' +\
+            u'<br />'.join(membersList)
+    else:
+        view_html = u'-'
+        tooltip_text = _(u'No roles')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return view_html + tooltip

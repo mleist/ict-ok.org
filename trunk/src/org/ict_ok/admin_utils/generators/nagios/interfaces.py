@@ -138,3 +138,12 @@ class IGenNagios(Interface):
         """check for attribute changes
         """
 
+
+class INagiosCheck(Interface):
+    """ Interface for all Object whoch should support nagios checks
+    """
+    genNagios = Bool(
+        title = _("for Nagios"),
+        description = _("enabled in Nagios"),
+        default = False,
+        required = False)

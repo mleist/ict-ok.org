@@ -37,6 +37,7 @@ from org.ict_ok.components.pc.interfaces import \
     IPersonalComputer, IPersonalComputerFolder, IAddPersonalComputer
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+from org.ict_ok.admin_utils.generators.nagios.interfaces import INagiosCheck
 
 def AllPersonalComputerTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IPersonalComputer)
@@ -49,10 +50,11 @@ class PersonalComputer(Device):
     """
     the template instance
     """
-    implements(IPersonalComputer)
+    implements(IPersonalComputer, INagiosCheck)
     shortName = "pc"
     # for ..Contained we have to:
     __name__ = __parent__ = None
+    genNagios = FieldProperty(INagiosCheck['genNagios'])
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Device.fullTextSearchFields)

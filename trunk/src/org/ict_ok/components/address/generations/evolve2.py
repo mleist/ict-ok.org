@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+#
+# Copyright (c) 2009, 
+#               Markus Leist <leist@ikom-online.de>
+# See also LICENSE.txt or http://www.ict-ok.org/LICENSE
+# This file is part of ict-ok.org.
+#
+# $Id: evolve1.py_cog 506 2009-04-30 14:24:56Z markusleist $
+#
+"""What to do when upgrade Address from gen 0 to gen 1"""
+
+__version__ = "$Id: evolve1.py_cog 506 2009-04-30 14:24:56Z markusleist $"
+
+# zope imports
+from zope.app.zopeappgenerations import getRootFolder
+from zope.app.generations.utility import findObjectsProviding
+
+# ict_ok.org imports
+from org.ict_ok.components.address.interfaces import IAddress
+
+generation = 2
+
+def evolve(context):
+    u"""
+    convert contactItem -> contactItems
+    """
+    
+    root = getRootFolder(context) # the Zope-Root-Folders
+
+    for ikobj in findObjectsProviding(root, IAddress):
+        # convert this object
+        #if ikobj.contactItem is not None:
+        #    ikobj.contactItems.append(ikobj.contactItem)
+        evolve_msg = "gen. %d (%s)" % \
+                   (generation, evolve.__doc__.strip())
+        print "Address(%s): " % ikobj.ikName + evolve_msg
+        ikobj.appendHistoryEntry(evolve_msg)

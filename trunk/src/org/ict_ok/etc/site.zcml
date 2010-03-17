@@ -38,6 +38,9 @@
     <!-- <browser:defaultSkin name="" /> -->
     <browser:defaultSkin name="ICT_Ok" />
 
+    <includeOverrides package="org.ict_ok.etc"
+                      file="ict_ok_overrides.zcml" />
+
     <!-- securityPolicy
     component="zope.securitypolicy.zopepolicy.ZopeSecurityPolicy" / -->
 

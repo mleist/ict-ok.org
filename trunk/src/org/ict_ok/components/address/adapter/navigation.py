@@ -45,8 +45,8 @@ class Navigation(SuperNavigation):
         if preList is not None:
             retList.extend(preList)
         retList.append((None, None, zapi.getParent(self.context)))
-        if self.context.contactItem != None:
-            retList.append(('contactItem', _(u'Contact Item'), self.context))
+        if self.context.contactItems != None:
+            retList.append(('contactItems', _(u'Contact Items'), self.context))
         if self.context.contracts!=None and len(self.context.contracts) > 0:
             retList.append(('contracts', _(u'Contracts'), self.context))
         if self.context.requirements!=None and len(self.context.requirements) > 0:

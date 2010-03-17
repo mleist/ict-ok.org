@@ -17,7 +17,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, Date, Int, TextLine
+from zope.schema import Choice, Date, Int, TextLine, Bool
 
 # ict_ok.org imports
 

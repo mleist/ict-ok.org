@@ -19,22 +19,27 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 from zope.i18nmessageid import MessageFactory
 
 # z3c imports
-from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
 from org.ict_ok.components.organization.interfaces import \
     IOrganization, IAddOrganization, IOrganizationFolder
+from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.organization.organization import Organization
 from org.ict_ok.components.browser.component import ComponentDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    Overview as SuperOverview
 from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
+    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
+from org.ict_ok.components.address.browser.address import getAddresses
 
 _ = MessageFactory('org.ict_ok')
 
@@ -55,6 +60,12 @@ class MGlobalAddOrganization(GlobalMenuAddItem):
     viewURL = 'add_organization.html'
     weight = 50
     folderInterface = IOrganizationFolder
+
+class MSubInvOrganization(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'All Organizations')
+    viewURL = '/@@all_organizations.html'
+    weight = 100
 
 # --------------- object details ---------------------------
 
@@ -130,3 +141,30 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
     omitFields = OrganizationDetails.omit_viewfields
     factoryId = u'org.ict_ok.components.organization.organization.Organization'
     allFields = fieldsForInterface(attrInterface, [])
+
+class Overview(SuperOverview):
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Health'),
+                     getter=getHealth),
+        IctGetterColumn(title=_('Title'),
+                        getter=getTitle,
+                        cell_formatter=link('overview.html')),
+        IctGetterColumn(title=_('Addresses'),
+                        getter=getAddresses,
+                        cell_formatter=raw_cell_formatter),
+        DateGetterColumn(title=_('Modified'),
+                        getter=getModifiedDate,
+                        subsort=True,
+                        cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    pos_column_index = 1
+    sort_columns = [1, 2, 3, 4, 5]
+
+class AllOrganizations(Overview):
+    objListInterface = IOrganization

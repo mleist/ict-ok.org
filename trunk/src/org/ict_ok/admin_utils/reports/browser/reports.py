@@ -565,7 +565,7 @@ class AdmUtilReportsDetails(SupernodeDetails):
         objsList.extend(self._makeObjectList(IAddress,
                                              _(u'Addresses')))
         objsList.extend(self._makeObjectList(IOrganization,
-                                             _(u'Organizaions')))
+                                             _(u'Organizations')))
         objsList.extend(self._makeObjectList(IPerson,
                                              _(u'Persons')))
         objsList.extend(self._makeObjectList(IContact,

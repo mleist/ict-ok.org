@@ -17,6 +17,7 @@ __version__ = "$Id$"
 
 # zope imports
 from zope.interface import implements
+from zope.schema.fieldproperty import FieldProperty
 
 # lovely imports
 
@@ -27,6 +28,7 @@ from org.ict_ok.components.ipc.interfaces \
     import IIndustrialComputer, IIndustrialComputerFolder, IAddIndustrialComputer
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates
+from org.ict_ok.admin_utils.generators.nagios.interfaces import INagiosCheck
 
 def AllIndustrialComputerTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IIndustrialComputer)
@@ -39,10 +41,11 @@ class IndustrialComputer(Device):
     """
     the template instance
     """
-    implements(IIndustrialComputer)
+    implements(IIndustrialComputer, INagiosCheck)
     shortName = "ipc"
     # for ..Contained we have to:
     __name__ = __parent__ = None
+    genNagios = FieldProperty(INagiosCheck['genNagios'])
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Device.fullTextSearchFields)

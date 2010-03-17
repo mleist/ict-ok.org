@@ -126,8 +126,9 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         utils = [ util for util in sitem.registeredUtilities()
                   if util.provided.isOrExtends(IO2OStringTypeRelationships)]
         instUtilityO2ORels = utils[0].component
-#        import pdb
-#        pdb.set_trace()
+
+#    import pdb
+#    pdb.set_trace()
 
     madeUtilityICatalog = ensureUtility(root_folder, 
                                         ICatalog, 

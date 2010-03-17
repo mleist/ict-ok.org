@@ -8,4 +8,11 @@
            <td i18n:translate="">Available paper types</td>
            <td tal:content="structure python: view.fsearchLink(context.paperTypesAvailable)" />
         </tr>
+        
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: view.canDisplay('genNagios')">
+           <td i18n:translate="">generate Nagios</td>
+           <td tal:content="context/genNagios" />
+       </tr>
+       
 </metal:block>

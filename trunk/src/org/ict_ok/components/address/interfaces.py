@@ -57,9 +57,15 @@ class IAddress(Interface):
         required = False)
         
 
-    contactItem = Choice(
-        title = _(u'Contact item'),
-        vocabulary = 'AllContactItems',
+#    contactItem = Choice(
+#        title = _(u'Contact item'),
+#        vocabulary = 'AllContactItems',
+#        required = False)
+#    
+    contactItems = List(
+        title = _(u'Contact items'),
+        value_type=Choice(vocabulary='AllContactItems'),
+        default=[],
         required = False)
         
     def trigger_online():

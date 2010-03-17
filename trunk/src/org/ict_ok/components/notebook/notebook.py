@@ -28,6 +28,7 @@ from org.ict_ok.components.interfaces import \
     IImportCsvData, IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
+from org.ict_ok.admin_utils.generators.nagios.interfaces import INagiosCheck
 
 
 def AllNotebookTemplates(dummy_context):
@@ -44,9 +45,11 @@ class Notebook(Device):
     """
     the template instance
     """
-    implements(INotebook)
+    implements(INotebook, INagiosCheck)
     shortName = "notebook"
     
+    genNagios = FieldProperty(INagiosCheck['genNagios'])
+
     fullTextSearchFields = []
     fullTextSearchFields.extend(Device.fullTextSearchFields)
 
