@@ -1,0 +1,18 @@
+
+<!-- $Id: details.pt_cog 465 2009-03-05 02:34:02Z markusleist $ -->
+
+<metal:block define-macro="CategoryDetails">
+    <metal:block use-macro="macro:SuperclassDetails" />
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/components|nothing">
+            <td i18n:translate="">Components</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/components"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                    
+                <ul>
+            </td>
+        </tr>
+</metal:block>
