@@ -24,8 +24,7 @@ from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.notebook.interfaces import \
     INotebook, INotebookFolder, IAddNotebook
 from org.ict_ok.components.device.device import Device, DeviceFolder
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.interfaces import IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 from org.ict_ok.admin_utils.generators.nagios.interfaces import INagiosCheck
@@ -78,7 +77,6 @@ class Notebook(Device):
 
 class NotebookFolder(DeviceFolder):
     implements(INotebookFolder,
-               IImportCsvData,
                IImportXlsData,
                IAddNotebook)
     contentFactory = Notebook

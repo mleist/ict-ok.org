@@ -122,11 +122,3 @@ class IImportXlsData(Interface):
         default = 'cp850',
         required = True)
 
-
-class IImportCsvData(Interface):
-    """Interface for all Objects"""
-    csvdata = Bytes(
-        title = _("CSV data"),
-        required = True)
-
-

@@ -73,6 +73,14 @@
             permission="org.ict_ok.components.site.View"
             interface="zope.location.interfaces.IPossibleSite"
             />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+            interface="org.ict_ok.components.interfaces.IImportXlsData"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+            set_schema="org.ict_ok.components.interfaces.IImportXlsData"
+            />
             
     </class>
 

@@ -54,8 +54,7 @@ from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.components.contract.interfaces import IContract
 from org.ict_ok.admin_utils.compliance.evaluation import \
      getEvaluationsDone, getEvaluationsTodo
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.interfaces import IImportXlsData
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.superclass.superclass import objectsWithInterface
 
@@ -464,7 +463,6 @@ class Component(Supernode):
 
 class ComponentFolder(Superclass, Folder):
     implements(IComponentFolder, 
-               IImportCsvData,
                IImportXlsData)
     def __init__(self, **data):
         """

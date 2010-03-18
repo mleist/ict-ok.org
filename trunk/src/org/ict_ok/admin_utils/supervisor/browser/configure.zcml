@@ -243,6 +243,22 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.ImportExport"
         />
+    <viewlet
+        name="exportallxlsdata"
+        for="org.ict_ok.components.site.interfaces.ISite"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportAllXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+        />
+    <viewlet
+        name="importallxlsdata"
+        for="org.ict_ok.components.site.interfaces.ISite"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubImportAllXlsData"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+        />
     <page
         name="exportallxlsdata.html"
         for="zope.app.folder.interfaces.IRootFolder"
@@ -254,6 +270,21 @@
     <z3c:pagelet
         name="importallxlsdata.html"
         for="zope.app.folder.interfaces.IRootFolder"
+        class=".supervisor.ImportAllXlsDataForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+    />
+    <page
+        name="exportallxlsdata.html"
+        for="org.ict_ok.components.site.interfaces.ISite"
+        class=".supervisor.RootFolderDetails"
+        permission="org.ict_ok.admin_utils.supervisor.ImportExport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportAllXlsData"
+    />
+    <z3c:pagelet
+        name="importallxlsdata.html"
+        for="org.ict_ok.components.site.interfaces.ISite"
         class=".supervisor.ImportAllXlsDataForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.supervisor.ImportExport"

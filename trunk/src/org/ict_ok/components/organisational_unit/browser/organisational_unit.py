@@ -17,6 +17,7 @@ __version__ = "$Id: template.py_cog 465 2009-03-05 02:34:02Z markusleist $"
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
+from zope.traversing.browser import absoluteURL
 
 # z3c imports
 from z3c.form import field
@@ -32,9 +33,14 @@ from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    Overview as SuperOverview
 from org.ict_ok.components.browser.component import AddComponentForm
-from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
+from org.ict_ok.components.superclass.browser.superclass import \
+    GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
+    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
+from org.ict_ok.components.address.browser.address import getAddresses
 
 _ = MessageFactory('org.ict_ok')
 
@@ -55,6 +61,12 @@ class MGlobalAddOrganisationalUnit(GlobalMenuAddItem):
     viewURL = 'add_organisational_unit.html'
     weight = 50
     folderInterface = IOrganisationalUnitFolder
+
+class MSubInvOrganisationalUnit(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'All OrganisationalUnits')
+    viewURL = '/@@all_organizations_unit.html'
+    weight = 100
 
 # --------------- object details ---------------------------
 
@@ -120,13 +132,82 @@ class DeleteOrganisationalUnitForm(DeleteForm):
                IBrwsOverview(self.context).getTitle()
 
 
-class ImportCsvDataForm(ImportCsvDataComponentForm):
-    pass
-
-
 class ImportXlsDataForm(ImportXlsDataComponentForm):
     factory = OrganisationalUnit
     attrInterface = IOrganisationalUnit
     omitFields = OrganisationalUnitDetails.omit_viewfields
     factoryId = u'org.ict_ok.components.organisational_unit.organisational_unit.OrganisationalUnit'
     allFields = fieldsForInterface(attrInterface, [])
+
+
+def getMembers(item, formatter):
+    """
+    Roles for overview table
+    """
+    if type(item) is dict:
+        item = item["obj"]
+    ttid = u"members" + item.getObjectId()
+
+    if len(item.members) > 2:
+        view_url = absoluteURL(item, formatter.request) + '/@@details.html'
+        view_html = u'<a href="%s" id="%s">' % (view_url, ttid) + u'[...]</a>'
+        addressesList = [i.ikName for i in item.members]
+        addressesList.sort()
+        tooltip_text = _(u'<b>Addresses:</b>') + u'<br />' +\
+            u'<br />'.join(addressesList)
+    elif len(item.members) > 1:
+        view0_url = absoluteURL(item.members[0], formatter.request) +\
+                    '/@@details.html'
+        view1_url = absoluteURL(item.members[1], formatter.request) +\
+                    '/@@details.html'
+        view_html = u'<span id="%s"><a href="%s">' %\
+                    (ttid, view0_url) + u'%s</a>' %\
+                    item.members[0].ikName + \
+                    u', <a href="%s">' %  (view1_url) + u'%s</a></span>' %\
+                    item.members[1].ikName
+        addressesList = [i.ikName for i in item.members]
+        addressesList.sort()
+        tooltip_text = _(u'<b>Addresses:</b>') + u'<br />' +\
+            u'<br />'.join(addressesList)
+    elif len(item.members) == 1:
+        view_url = absoluteURL(item.members[0], formatter.request) +\
+                    '/@@details.html'
+        view_html = u'<a href="%s" id="%s">' %  (view_url, ttid) + u'%s</a>' %\
+                    item.members[0].ikName
+        tooltip_text = u''
+    else:
+        view_html = u'-'
+        tooltip_text = _(u'No roles')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return view_html + tooltip
+
+
+class Overview(SuperOverview):
+    columns = (
+        GetterColumn(title="",
+                     getter=getStateIcon,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Health'),
+                     getter=getHealth),
+        IctGetterColumn(title=_('Title'),
+                        getter=getTitle,
+                        cell_formatter=link('overview.html')),
+        IctGetterColumn(title=_('Members'),
+                        getter=getMembers,
+                        cell_formatter=raw_cell_formatter),
+        DateGetterColumn(title=_('Modified'),
+                        getter=getModifiedDate,
+                        subsort=True,
+                        cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getActionBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    pos_column_index = 1
+    sort_columns = [1, 2, 3, 4]
+
+class AllOrganisationalUnits(Overview):
+    objListInterface = IOrganisationalUnit

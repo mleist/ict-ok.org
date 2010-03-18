@@ -539,25 +539,11 @@ class MSubExportXmlData(GlobalMenuSubItem):
     weight = 62
 
 
-class MSubExportCsvData(GlobalMenuSubItem):
-    """ Menu Item """
-    title = _(u'Export CSV')
-    viewURL = '@@exportcsvdata.html'
-    weight = 62
-
-
 class MSubExportXlsData(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Export XLS')
     viewURL = '@@exportxlsdata.html'
     weight = 62
-
-
-class MSubImportCsvData(GlobalMenuSubItem):
-    """ Menu Item """
-    title = _(u'Import CSV')
-    viewURL = '@@importcsvdata.html'
-    weight = 60
 
 
 class MSubImportXlsData(GlobalMenuSubItem):

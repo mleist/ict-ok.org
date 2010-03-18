@@ -30,8 +30,7 @@ from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.logical_component.interfaces import \
     ILogicalComponent
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.interfaces import IImportXlsData
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.component import \

@@ -56,7 +56,6 @@ from org.ict_ok.components.superclass.browser.superclass import \
      getStateIcon, getTitle, getModifiedDate, getActionBottons, getHealth, \
      raw_cell_formatter, IPsGetterColumn, TitleGetterColumn
 from org.ict_ok.components.browser.component import AddComponentForm
-from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
@@ -273,10 +272,6 @@ def NamePrefixes(dummy_context=None):
         except ValueError:
             pass
     return SimpleVocabulary(terms)
-
-
-class ImportCsvDataForm(ImportCsvDataComponentForm):
-    pass
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):

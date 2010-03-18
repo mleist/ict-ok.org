@@ -32,7 +32,6 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.superclass.browser.superclass import \
     Overview as SuperOverview
 from org.ict_ok.components.browser.component import AddComponentForm
-from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 from org.ict_ok.components.superclass.browser.superclass import \
     GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
@@ -158,10 +157,6 @@ class DeleteX509CertificateForm(DeleteForm):
         """this title will be displayed in the head of form"""
         return _(u"Delete this X509Certificate: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
-
-
-class ImportCsvDataForm(ImportCsvDataComponentForm):
-    pass
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):

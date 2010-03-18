@@ -60,7 +60,6 @@ from org.ict_ok.admin_utils.compliance.browser.requirement import raw_cell_forma
 from org.ict_ok.admin_utils.compliance.browser.compliance import \
      GetterColumn
 from org.ict_ok.components.browser.component import AddComponentForm
-from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
@@ -401,10 +400,6 @@ class AllHosts(Overview):
         )
     sort_columns = [1, 2, 3, 4]
     objListInterface = IHost
-
-
-class ImportCsvDataForm(ImportCsvDataComponentForm):
-    pass
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):

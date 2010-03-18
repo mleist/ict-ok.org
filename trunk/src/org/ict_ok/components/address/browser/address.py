@@ -34,7 +34,6 @@ from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.browser.component import AddComponentForm
-from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
@@ -121,10 +120,6 @@ class DeleteAddressForm(DeleteForm):
         """this title will be displayed in the head of form"""
         return _(u"Delete this Address: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
-
-
-class ImportCsvDataForm(ImportCsvDataComponentForm):
-    pass
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):

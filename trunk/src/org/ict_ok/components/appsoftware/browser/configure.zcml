@@ -185,27 +185,12 @@
         permission="org.ict_ok.components.appsoftware.Add"
         />
     <page
-        name="exportcsvdata.html"
-        for="org.ict_ok.components.appsoftware.interfaces.IApplicationSoftwareFolder"
-        class=".appsoftware.ApplicationSoftwareFolderDetails"
-        permission="org.ict_ok.components.appsoftware.View"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        attribute="exportCsvData"
-    />
-    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.appsoftware.interfaces.IApplicationSoftwareFolder"
         class=".appsoftware.ApplicationSoftwareFolderDetails"
         permission="org.ict_ok.components.appsoftware.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
-    />
-    <z3c:pagelet
-        name="importcsvdata.html"
-        for="org.ict_ok.components.appsoftware.interfaces.IApplicationSoftwareFolder"
-        class=".appsoftware.ImportCsvDataForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.appsoftware.Add"
     />
     <z3c:pagelet
         name="importxlsdata.html"
@@ -215,28 +200,12 @@
         permission="org.ict_ok.components.appsoftware.Add"
     />
     <viewlet
-        name="exportcsvdata"
-        for="org.ict_ok.components.appsoftware.interfaces.IApplicationSoftwareFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.appsoftware.View"
-        />
-    <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.appsoftware.interfaces.IApplicationSoftwareFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.appsoftware.View"
-        />
-    <viewlet
-        name="importcsvdata"
-        for="org.ict_ok.components.appsoftware.interfaces.IApplicationSoftwareFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.appsoftware.Add"
         />
     <viewlet
         name="importxlsdata"

@@ -31,8 +31,7 @@ from zope.app.folder import Folder
 from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.latency.interfaces import ILatency
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.interfaces import IImportXlsData
 
 
 def AllMuninValueTemplates(dummy_context):

@@ -15,7 +15,7 @@
             <td>
                 <ul>
                     <li tal:repeat="obj context/subOUs"
-                        tal:content="structure python: view.getHrefTitle(obj)" />
+                        tal:content="structure python: view.getHrefTitle(obj) + u'&nbsp;(%d)' % len(obj.members)" />
                 <ul>
             </td>
         </tr>
