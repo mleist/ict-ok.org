@@ -22,7 +22,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Bytes, Datetime, Bool
+from zope.schema import Bytes, Datetime, Bool, TextLine, List, Choice
 
 # ict_ok.org imports
 from org.ict_ok.schema.date import Date
@@ -58,6 +58,21 @@ class IRequirement(Interface):
         description = _(u'resubmit the workitem on date'),
         required = False)
     
+    version = TextLine(
+        max_length = 80,
+        title = _("Instance version"),
+        description = _("Version of the instance."),
+        default=u'',
+        required = False)
+    
+    categories = List(
+        title = _(u'Categories'),
+        #value_type=Choice(vocabulary='AllUnusedOrUsedComponentContracts'),
+        value_type=Choice(vocabulary='AllCategories'),
+        default=[],
+        required = False)
+
+
 
 class IHaveRequirement(ischooltool.IHaveRequirement):
     """ ict-ok.org wrapper

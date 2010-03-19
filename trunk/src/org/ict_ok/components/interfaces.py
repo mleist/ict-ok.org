@@ -62,6 +62,13 @@ class IComponent(Interface):
         readonly = False,
         required = False)
 
+    categories = List(
+        title = _(u'Categories'),
+        #value_type=Choice(vocabulary='AllUnusedOrUsedComponentContracts'),
+        value_type=Choice(vocabulary='AllCategories'),
+        default=[],
+        required = False)
+
     contracts = List(
         title = _(u'Contracts'),
         #value_type=Choice(vocabulary='AllUnusedOrUsedComponentContracts'),

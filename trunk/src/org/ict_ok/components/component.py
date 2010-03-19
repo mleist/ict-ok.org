@@ -40,23 +40,24 @@ from z3c.form.browser import checkbox
 # lovely imports
 from lovely.relation.property import RelationPropertyIn
 from lovely.relation.property import RelationPropertyOut
-from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.admin_utils.supervisor.interfaces import IAdmUtilSupervisor
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.libs.interfaces import IDocumentAddable
 from org.ict_ok.libs.history.entry import Entry
-from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
+from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.interfaces import IComponent, IComponentFolder
 from org.ict_ok.components.supernode.supernode import Supernode
-from org.ict_ok.components.contract.interfaces import IContract
 from org.ict_ok.admin_utils.compliance.evaluation import \
      getEvaluationsDone, getEvaluationsTodo
 from org.ict_ok.components.interfaces import IImportXlsData
-from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.superclass.superclass import objectsWithInterface
+from org.ict_ok.admin_utils.categories.rel_managers import \
+    Categories_Components_RelManager
+from org.ict_ok.components.contract.rel_managers import \
+    Contracts_Component_RelManager
 
 from plone.memoize import instance
 from plone.memoize import forever
@@ -231,13 +232,6 @@ def ComponentsFromObjList(dummy_context, obj_list, additionalAttrNames=None):
     return SimpleVocabulary(terms)    
 
 
-Contracts_Component_RelManager = \
-       FieldRelationManager(IContract['component'],
-                            IComponent['contracts'],
-                            relType='contracts:component')
-
-
-
 class Component(Supernode):
     """
     the general component instance
@@ -248,6 +242,7 @@ class Component(Supernode):
     isTemplate = FieldProperty(IComponent['isTemplate'])
 #    requirement = FieldProperty(IComponent['requirement'])
     requirements = FieldProperty(IComponent['requirements'])
+    categories = RelationPropertyIn(Categories_Components_RelManager)
     contracts = RelationPropertyIn(Contracts_Component_RelManager)
 
     fullTextSearchFields = []

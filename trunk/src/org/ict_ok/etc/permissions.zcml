@@ -71,8 +71,6 @@
              file="security.zcml" />
     <include package="org.ict_ok.components.slave"
              file="security.zcml" />
-    <include package="org.ict_ok.components.net"
-             file="security.zcml" />
     <include package="org.ict_ok.components.ipnet"
              file="security.zcml" />
     <include package="org.ict_ok.components.ip_address"

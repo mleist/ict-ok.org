@@ -63,7 +63,6 @@ from org.ict_ok.components.latency.interfaces import ILatency
 from org.ict_ok.components.location.interfaces import ILocation
 from org.ict_ok.components.misc_physical.interfaces import IMiscPhysical
 from org.ict_ok.components.mobilephone.interfaces import IMobilePhone
-from org.ict_ok.components.net.interfaces import INet
 from org.ict_ok.components.notebook.interfaces import INotebook
 from org.ict_ok.components.osoftware.interfaces import IOperatingSoftware
 from org.ict_ok.components.outlet.interfaces import IOutlet
@@ -527,8 +526,6 @@ class AdmUtilReportsDetails(SupernodeDetails):
                                              _(u'Misc Physicals')))
         objsList.extend(self._makeObjectList(IMobilePhone,
                                              _(u'Mobile Phones')))
-        objsList.extend(self._makeObjectList(INet,
-                                             _(u'Nets')))
         objsList.extend(self._makeObjectList(INotebook,
                                              _(u'Notebooks')))
         objsList.extend(self._makeObjectList(IOperatingSoftware,

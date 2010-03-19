@@ -235,7 +235,13 @@ class MenuSubGeneralTab(Tab):
 
 class MenuSubGeneralAddsTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_sub_general_adds_tab.pt')
+
     def sort(self, viewlets):
+        print ">" * 80
+        #import pdb
+        #pdb.set_trace()
+        print viewlets
+        print "<" * 80
         return sorted(viewlets, key=getSortableTitel)
 
 class MenuSubInventoryTab(Tab):

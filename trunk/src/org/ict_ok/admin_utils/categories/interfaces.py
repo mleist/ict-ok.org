@@ -16,12 +16,9 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import TextLine, Set
-from zope.app.container.interfaces import IOrderedContainer
+from zope.schema import Choice, List
 
 # ict_ok.org imports
-from org.ict_ok.components.superclass.interfaces import ISuperclass
-from org.ict_ok.components.supernode.interfaces import ISupernode
 
 _ = MessageFactory('org.ict_ok')
 
@@ -29,17 +26,28 @@ _ = MessageFactory('org.ict_ok')
 class IAdmUtilCategories(Interface):
     """A configuration utility."""
 
-class IAdmUtilCatHostGroup(Interface):
+
+class ICategory(Interface):
     """A host group entry.
     """
-#    def canBeDeleted():
-#        """
-#        a object can be deleted with normal delete permission
-#        special objects can overload this for special delete rules
-#        (e.g. IAdmUtilCatHostGroup)
-#        return True or False
-#        """
-    def isUsedIn():
-        """
-        this object is used at least in one host (returns object list)
-        """
+#    components = List (
+#        title = _("Components"),
+#        value_type = Choice(
+#            title = _("Component"),
+#            description = _("Component."),
+#            vocabulary="AllComponents",
+#            required = False),
+#        readonly = False,
+#        required = False)
+
+    components = List(
+        title = _(u'Components'),
+        description = _(u"Components"),
+        value_type=Choice(vocabulary='AllComponents'),
+        required = False)
+
+    requirements = List(
+        title = _(u'Requirements'),
+        description = _(u"Requirements"),
+        value_type=Choice(vocabulary='AllValid1stRequirementVocab'),
+        required = False)

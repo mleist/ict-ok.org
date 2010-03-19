@@ -30,32 +30,24 @@
             permission="org.ict_ok.admin_utils.categories.Edit"
             set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
-        <!--require
-            permission="org.ict_ok.admin_utils.categories.View"
-            interface="zope.app.container.interfaces.IReadContainer"
-            />
-        <require
-            permission="org.ict_ok.admin_utils.categories.Edit"
-            interface="zope.app.container.interfaces.IWriteContainer"
-            /-->
         <require
             permission="org.ict_ok.admin_utils.categories.View"
             interface="zope.app.container.interfaces.IOrderedContainer"
             />
     </class>
 
-    <class class=".cat_hostgroup.AdmUtilCatHostGroup">
+    <class class=".categories.Category">
         <factory
-            id="org.ict_ok.admin_utils.categories.cat_hostgroup.AdmUtilCatHostGroup" />
+            id="org.ict_ok.admin_utils.categories.categories.Category" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable" />
         <require
             permission="org.ict_ok.admin_utils.categories.Read"
-            interface=".interfaces.IAdmUtilCatHostGroup"
+            interface=".interfaces.ICategory"
             />
         <require
             permission="org.ict_ok.admin_utils.categories.Edit"
-            set_schema=".interfaces.IAdmUtilCatHostGroup"
+            set_schema=".interfaces.ICategory"
             />
         <require
             permission="org.ict_ok.admin_utils.categories.View"
@@ -74,6 +66,37 @@
             interface="zope.app.container.interfaces.IWriteContainer"
             />
     </class>
+    
+<!--    <class class=".cat_hostgroup.AdmUtilCatHostGroup">-->
+<!--        <factory-->
+<!--            id="org.ict_ok.admin_utils.categories.cat_hostgroup.AdmUtilCatHostGroup" />-->
+<!--        <implements-->
+<!--            interface="zope.annotation.interfaces.IAttributeAnnotatable" />-->
+<!--        <require-->
+<!--            permission="org.ict_ok.admin_utils.categories.Read"-->
+<!--            interface=".interfaces.IAdmUtilCatHostGroup"-->
+<!--            />-->
+<!--        <require-->
+<!--            permission="org.ict_ok.admin_utils.categories.Edit"-->
+<!--            set_schema=".interfaces.IAdmUtilCatHostGroup"-->
+<!--            />-->
+<!--        <require-->
+<!--            permission="org.ict_ok.admin_utils.categories.View"-->
+<!--            interface="org.ict_ok.components.superclass.interfaces.ISuperclass"-->
+<!--            />-->
+<!--        <require-->
+<!--            permission="org.ict_ok.admin_utils.categories.Edit"-->
+<!--            set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"-->
+<!--            />-->
+<!--        <require-->
+<!--            permission="org.ict_ok.admin_utils.categories.View"-->
+<!--            interface="zope.app.container.interfaces.IReadContainer"-->
+<!--            />-->
+<!--        <require-->
+<!--            permission="org.ict_ok.admin_utils.categories.Edit"-->
+<!--            interface="zope.app.container.interfaces.IWriteContainer"-->
+<!--            />-->
+<!--    </class>-->
 
     <!-- setup local utilities -->
     <subscriber
@@ -83,9 +106,16 @@
         
     <utility
         provides="zope.schema.interfaces.IVocabularyFactory"
-        component=".cat_hostgroup.AllHostGroups"
-        name="AllHostGroups"
+        component=".categories.AllCategories"
+        name="AllCategories"
         />
+
+    <!--  Search adapters =============================================== -->
+        
+    <adapter
+        factory="org.ict_ok.admin_utils.categories.adapter.search.Searchable"
+    />
+
 
     <include package=".generations" />
     

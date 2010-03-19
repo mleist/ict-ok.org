@@ -38,11 +38,12 @@ from org.ict_ok.components.superclass.browser.superclass import \
      GetterColumn, getStateIcon, getTitle, raw_cell_formatter, \
      link, getModifiedDate, getActionBottons
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.admin_utils.categories.interfaces import \
-     IAdmUtilCatHostGroup
-from org.ict_ok.admin_utils.categories.categories import AdmUtilCategories
-from org.ict_ok.admin_utils.categories.cat_hostgroup import \
-     AdmUtilCatHostGroup
+from org.ict_ok.admin_utils.categories.interfaces import ICategory
+#     IAdmUtilCatHostGroup
+from org.ict_ok.admin_utils.categories.categories import \
+    AdmUtilCategories, Category
+#from org.ict_ok.admin_utils.categories.cat_hostgroup import \
+#     AdmUtilCatHostGroup
 from org.ict_ok.skin.menu import GlobalMenuSubItem
 
 _ = MessageFactory('org.ict_ok')
@@ -52,15 +53,15 @@ _ = MessageFactory('org.ict_ok')
 
 def getUsedCounter(item, formatter):
     """display number of objects, which are using this entry"""
-    if IAdmUtilCatHostGroup.providedBy(item):
-        return len(item.isUsedIn())
+    if ICategory.providedBy(item):
+        return len(item.components)
 
 # --------------- menu entries -----------------------------
 
-class MSubAddCatHostGroup(GlobalMenuSubItem):
+class MSubAddCategory(GlobalMenuSubItem):
     """ Menu Item """
-    title = _(u'Add Host Group')
-    viewURL = 'add_hostgroup.html'
+    title = _(u'Add Category')
+    viewURL = 'add_category.html'
     weight = 50
 
 # --------------- object details ---------------------------
@@ -72,14 +73,14 @@ class AdmUtilCategoriesDetails(SupernodeDetails):
     omit_viewfields = SupernodeDetails.omit_viewfields + ['ikName']
     omit_editfields = SupernodeDetails.omit_editfields + ['ikName']
 
-class AdmUtilCatHostGroupDetails(SupernodeDetails):
+class CategoryDetails(SupernodeDetails):
     """ Class for Web-Browser-Details
     """
     omit_viewfields = SupernodeDetails.omit_viewfields
     omit_editfields = SupernodeDetails.omit_editfields
     omit_addfields = SupernodeDetails.omit_addfields
 
-    
+
 class Overview(SuperclassOverview):
     columns = (
         GetterColumn(title="",
@@ -113,25 +114,25 @@ class DetailsAdmUtilCategoriesForm(DisplayForm):
 # ------ Host Group
 
 
-class AddAdmUtilCatHostGroupForm(AddForm):
-    """Add form."""
-    label = _(u'add host group')
-    factory = AdmUtilCatHostGroup
-    omitFields = AdmUtilCatHostGroupDetails.omit_addfields
+class AddAdmUtilCategoryForm(AddForm):
+    """Add Category form."""
+    label = _(u'add category')
+    factory = Category
+    omitFields = CategoryDetails.omit_addfields
     fields = fieldsForFactory(factory, omitFields)
     
     def nextURL(self):
         """ don't forward the browser """
         return absoluteURL(self.context, self.request)
 
-class EditAdmUtilCatHostGroupForm(EditForm):
-    """ Edit of host group """
-    label = _(u'edit host group settings')
-    factory = AdmUtilCatHostGroup
-    omitFields = AdmUtilCatHostGroupDetails.omit_editfields
+class EditAdmUtilCategoryForm(EditForm):
+    """ Edit of Category """
+    label = _(u'edit category settings')
+    factory = Category
+    omitFields = CategoryDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
 
-class DeleteAdmUtilCatHostGroupForm(DeleteForm):
+class DeleteAdmUtilCategoryForm(DeleteForm):
     """ Delete the host group """
     
     def getTitle(self):
@@ -143,7 +144,7 @@ class DeleteAdmUtilCatHostGroupForm(DeleteForm):
     def handleDelete(self, action):
         """delete was pressed"""
         self.deleted = False
-        objList = self.getContent().isUsedIn()
+        objList = self.getContent().components
         nameList = [obj.ikName for obj in objList]
         if len(objList) > 0:
             self.deleted = False
