@@ -33,8 +33,16 @@
             <td i18n:translate="">validAsFirst</td>
             <td>[X]</td>
         </tr>
-        
-
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/categories|nothing">
+            <td i18n:translate="">Categories</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/categories"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                <ul>
+            </td>
+        </tr>
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">resubmit date</td>
             <div tal:omit-tag=""  tal:condition="context/resubmitDate">

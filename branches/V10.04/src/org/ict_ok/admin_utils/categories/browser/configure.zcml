@@ -14,6 +14,11 @@
         for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"
         name="overview.html"
         />
+    <defaultView
+        for="org.ict_ok.admin_utils.categories.interfaces.ICategory"
+        name="details.html"
+    />
+
     <!--Details as fake for autimatic display in utility manager-->
     <z3c:pagelet
         name="details.html"
@@ -30,56 +35,44 @@
         permission="org.ict_ok.admin_utils.categories.View"
         />
     <z3c:pagelet
-        name="add_hostgroup.html"
+        name="add_category.html"
         for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"
-        class=".categories.AddAdmUtilCatHostGroupForm"
+        class=".categories.AddAdmUtilCategoryForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.admin_utils.cat_hostgroup.Add"
+        permission="org.ict_ok.admin_utils.category.Add"
     />
     <z3c:pagelet
-        name="edit.html"
-        for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCatHostGroup"
-        class=".categories.EditAdmUtilCatHostGroupForm"
+        name="details.html"
+        for="org.ict_ok.admin_utils.categories.interfaces.ICategory"
+        class="org.ict_ok.admin_utils.categories.browser.categories.CategoryDetails"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.admin_utils.cat_hostgroup.Edit"
+        permission="org.ict_ok.admin_utils.categories.View"
+    />
+    <z3c:template
+        template="details.pt"
+        for="org.ict_ok.admin_utils.categories.browser.categories.CategoryDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+    <z3c:pagelet
+        name="edit.html"
+        for="org.ict_ok.admin_utils.categories.interfaces.ICategory"
+        class=".categories.EditAdmUtilCategoryForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.category.Edit"
     />
     <z3c:pagelet
         name="delete.html"
-        for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCatHostGroup"
-        class=".categories.DeleteAdmUtilCatHostGroupForm"
+        for="org.ict_ok.admin_utils.categories.interfaces.ICategory"
+        class=".categories.DeleteAdmUtilCategoryForm"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.admin_utils.cat_hostgroup.Edit"
+        permission="org.ict_ok.admin_utils.category.Edit"
     />
 
-    <!--<z3c:pagelet-->
-        <!--name="details.html"-->
-        <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--class=".categories.AdmUtilCategoriesDetails"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.admin_utils.categories.View"-->
-    <!--/>-->
-    <!--<z3c:pagelet-->
-        <!--name="edit.html"-->
-        <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--class=".categories.EditAdmUtilCategoriesForm"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.admin_utils.categories.Edit"-->
-    <!--/>-->
-    <!--<z3c:pagelet-->
-        <!--name="edit_event_if.html"-->
-        <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--class=".categories.EditAdmUtilCategoriesEventIfForm"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.ipnet.EditEventIf"-->
-    <!--/>-->
-    <!--<z3c:pagelet-->
-        <!--name="history.html"-->
-        <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.History"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.admin_utils.categories.View"-->
-        <!--/>-->
-
+    <z3c:macro
+        template="category_details.pt"
+        name="CategoryDetails"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
     <!--##### Sub Menu ##### -->
     <viewlet
         name="overview"
@@ -90,52 +83,19 @@
         permission="org.ict_ok.admin_utils.categories.View"
         />
     <viewlet
-        name="add_hostgroup"
+        name="add_category"
         for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.admin_utils.categories.browser.categories.MSubAddCatHostGroup"
+        class="org.ict_ok.admin_utils.categories.browser.categories.MSubAddCategory"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.admin_utils.cat_hostgroup.Add"
+        permission="org.ict_ok.admin_utils.category.Add"
         />
     <viewlet
         name="edit"
-        for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCatHostGroup"
+        for="org.ict_ok.admin_utils.categories.interfaces.ICategory"
         manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
         class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.admin_utils.cat_hostgroup.Edit"
+        permission="org.ict_ok.admin_utils.category.Edit"
         />
-    <!--<viewlet-->
-        <!--name="details.html"-->
-        <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubDetails"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.admin_utils.categories.View"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="history"-->
-        <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubHistory"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.admin_utils.categories.View"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="edit"-->
-        <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubEdit"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.admin_utils.categories.Edit"-->
-        <!--/>-->
-    <!--<viewlet-->
-        <!--name="edit_event_if"-->
-        <!--for="org.ict_ok.admin_utils.categories.interfaces.IAdmUtilCategories"-->
-        <!--manager="org.ict_ok.skin.menu.interfaces.IMenuEvent"-->
-        <!--class="org.ict_ok.components.superclass.browser.superclass.MSubEditEventIf"-->
-        <!--layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
-        <!--permission="org.ict_ok.components.ipnet.EditEventIf"-->
-        <!--/>-->
-
 </configure>

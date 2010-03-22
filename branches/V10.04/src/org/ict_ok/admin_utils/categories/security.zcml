@@ -24,11 +24,11 @@
     />
     <!--subentries-->
     <permission
-        id="org.ict_ok.admin_utils.cat_hostgroup.Add"
+        id="org.ict_ok.admin_utils.category.Add"
         title="addCatHostGroupUtil"
     />
     <permission
-        id="org.ict_ok.admin_utils.cat_hostgroup.Edit"
+        id="org.ict_ok.admin_utils.category.Edit"
         title="editCatHostGroupUtil"
     />
 
@@ -49,14 +49,14 @@
     <grant permission="org.ict_ok.admin_utils.categories.Edit"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.admin_utils.cat_hostgroup.Add"
+    <grant permission="org.ict_ok.admin_utils.category.Add"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.cat_hostgroup.Add"
+    <grant permission="org.ict_ok.admin_utils.category.Add"
                     role="org.ict_ok.adm" />
 
-    <grant permission="org.ict_ok.admin_utils.cat_hostgroup.Edit"
+    <grant permission="org.ict_ok.admin_utils.category.Edit"
                     role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.cat_hostgroup.Edit"
+    <grant permission="org.ict_ok.admin_utils.category.Edit"
                     role="org.ict_ok.adm" />
 
 </configure>

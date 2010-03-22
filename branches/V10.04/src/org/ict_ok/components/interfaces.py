@@ -62,6 +62,13 @@ class IComponent(Interface):
         readonly = False,
         required = False)
 
+    categories = List(
+        title = _(u'Categories'),
+        #value_type=Choice(vocabulary='AllUnusedOrUsedComponentContracts'),
+        value_type=Choice(vocabulary='AllCategories'),
+        default=[],
+        required = False)
+
     contracts = List(
         title = _(u'Contracts'),
         #value_type=Choice(vocabulary='AllUnusedOrUsedComponentContracts'),
@@ -121,12 +128,4 @@ class IImportXlsData(Interface):
         vocabulary="AllXlsCodepages",
         default = 'cp850',
         required = True)
-
-
-class IImportCsvData(Interface):
-    """Interface for all Objects"""
-    csvdata = Bytes(
-        title = _("CSV data"),
-        required = True)
-
 

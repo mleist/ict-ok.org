@@ -30,8 +30,7 @@ from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.switch.interfaces import \
     IAddSwitch, ISwitch, ISwitchFolder
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.interfaces import IImportXlsData
 from org.ict_ok.components.component import Component
 from org.ict_ok.components.device.device import Device, DeviceFolder
 from org.ict_ok.components.component import \
@@ -103,7 +102,6 @@ class Switch(Device):
 
 class SwitchFolder(DeviceFolder):
     implements(ISwitchFolder,
-               IImportCsvData,
                IImportXlsData,
                IAddSwitch)
     contentFactory = Switch

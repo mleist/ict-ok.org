@@ -71,6 +71,14 @@
             set_schema="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
         <require
+            permission="org.ict_ok.components.nagios_checks.View"
+            interface="org.ict_ok.admin_utils.generators.nagios.interfaces.INagiosCheck"
+            />
+        <require
+            permission="org.ict_ok.components.nagios_checks.Edit"
+            set_schema="org.ict_ok.admin_utils.generators.nagios.interfaces.INagiosCheck"
+            />
+        <require
             permission="org.ict_ok.components.ipc.View"
             interface="zope.app.container.interfaces.IReadContainer"
             />

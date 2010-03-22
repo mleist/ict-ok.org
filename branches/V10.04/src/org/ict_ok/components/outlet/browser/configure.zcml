@@ -178,27 +178,12 @@
         permission="org.ict_ok.components.outlet.Add"
         />
     <page
-        name="exportcsvdata.html"
-        for="org.ict_ok.components.outlet.interfaces.IOutletFolder"
-        class=".outlet.OutletFolderDetails"
-        permission="org.ict_ok.components.outlet.View"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        attribute="exportCsvData"
-    />
-    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.outlet.interfaces.IOutletFolder"
         class=".outlet.OutletFolderDetails"
         permission="org.ict_ok.components.outlet.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
-    />
-    <z3c:pagelet
-        name="importcsvdata.html"
-        for="org.ict_ok.components.outlet.interfaces.IOutletFolder"
-        class=".outlet.ImportCsvDataForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.outlet.Add"
     />
     <z3c:pagelet
         name="importxlsdata.html"
@@ -208,28 +193,12 @@
         permission="org.ict_ok.components.outlet.Add"
     />
     <viewlet
-        name="exportcsvdata"
-        for="org.ict_ok.components.outlet.interfaces.IOutletFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.outlet.View"
-        />
-    <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.outlet.interfaces.IOutletFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.outlet.View"
-        />
-    <viewlet
-        name="importcsvdata"
-        for="org.ict_ok.components.outlet.interfaces.IOutletFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.outlet.Add"
         />
     <viewlet
         name="importxlsdata"
@@ -239,6 +208,5 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.outlet.Add"
         />
-
 
 </configure>

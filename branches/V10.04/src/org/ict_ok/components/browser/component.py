@@ -57,12 +57,15 @@ from org.ict_ok.admin_utils.compliance.browser.evaluation import \
      getEvaluatorTitle, getEvaluationValue
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, getTitle
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.interfaces import IImportXlsData
 from org.ict_ok.admin_utils.idchooser.interfaces import IIdChooser
 from org.ict_ok.osi.interfaces import IOSIModel
 from org.ict_ok.osi.interfaces import IPhysicalLayer
 from org.ict_ok.components.superclass.superclass import objectsWithInterface
+from org.ict_ok.admin_utils.compliance.evaluation import \
+     getEvaluationsDone, getEvaluationsTodo
+from org.ict_ok.components.superclass.browser.superclass import \
+    History as SuperHistory
 
 _ = MessageFactory('org.ict_ok')
 
@@ -122,6 +125,10 @@ class ComponentDetails(SupernodeDetails):
                 evaluation = Evaluation(requirementObj, pfSystem,
                                         inpVal, internalPrincipal)
                 evaluations.addEvaluation(evaluation)
+                historyEntry = u"'%s' -> '%s'" % (requirementObj.ikName, inpVal)
+                obj.appendHistoryEntry(historyEntry,
+                                       request=self.request,
+                                       withAuthor=True)
         nextURL = self.request.get('nextURL', default=None)
         if nextURL is not None:
             return self.request.response.redirect(nextURL)
@@ -153,36 +160,16 @@ class ComponentDetails(SupernodeDetails):
                 evaluation = Evaluation(requirementObj, pfSystem,
                                         inpVal, internalPrincipal)
                 evaluations.addEvaluation(evaluation)
+                historyEntry = u"'%s' -> '%s'" % (requirementObj.ikName, inpVal)
+                obj.appendHistoryEntry(historyEntry,
+                                       request=self.request,
+                                       withAuthor=True)
         nextURL = self.request.get('nextURL', default=None)
         if nextURL is not None:
             return self.request.response.redirect(nextURL)
         else:
             return self.request.response.redirect('./@@details.html')
 
-    def exportCsvData(self):
-        """get CSV file for all folder objects"""
-        fields = self.fields
-        attrList = [ fname for fname, fval in fields.items()]
-        writerFile = os.tmpfile()
-        writer = csv.writer(writerFile, delimiter=';', quoting=csv.QUOTE_NONNUMERIC)
-        writer.writerow(attrList)
-        itemList = self.context.items()
-        for item_n, item_v in itemList:
-            valueList = []
-            for attr in attrList:
-                value = getattr(item_v, attr)
-                valueList.append(value)
-            writer.writerow(valueList)
-        writerFile.seek(0)
-        tmpText = writerFile.read()
-        #writerFile.close()
-        self.request.response.setHeader('Content-Type', 'application/vnd.ms-excel')
-        self.request.response.setHeader(\
-            'Content-Disposition',
-            'attachment; filename=\"%s.csv\"' % self.attrInterface.__name__)
-        setNoCacheHeaders(self.request.response)
-        return tmpText
-    
     def exportXlsData(self, sheetName=u'ict', wbook=None, filename='ict.xls'):
         """get XLS file for all folder objects"""
         (filename, dataMem) = self.context.exportXlsData(self.request,
@@ -289,6 +276,8 @@ class EvaluationsTodoDisplay(Overview):
 
     def reqList2ndLevel(self):
         """List of Content objects"""
+        evaluations1stLevelTodo = self.context.getEvaluationsTodo()
+        evaluations1stLevelDone = self.context.getEvaluationsDone()
         attrs = self.context.getRefAttributeNames()
         retList = []
         for attr in attrs:
@@ -297,9 +286,18 @@ class EvaluationsTodoDisplay(Overview):
                 objs = [objs]
             for obj in objs:
                 if hasattr(obj, "requirements"):
-                    evaluations = self.context.getEvaluationsTodo()
+                    evaluations = getEvaluationsTodo(obj)
+                    #evaluations = self.context.getEvaluationsTodo()
                     for ev in evaluations:
-                        retList.append({"req": ev, "obj": self.context})
+                        alreadyDoneIn1stLevel = \
+                            ev in [evaluation.requirement
+                                   for evaluation in evaluations1stLevelDone]
+                        alreadyTodoIn1stLevel = \
+                            ev in [evaluation.requirement
+                                   for evaluation in evaluations1stLevelTodo]
+                        if not alreadyDoneIn1stLevel and \
+                            not alreadyTodoIn1stLevel:
+                            retList.append({"req": ev, "obj": self.context})
         return retList
 
 
@@ -342,6 +340,7 @@ class EvaluationsDoneDisplay(Overview):
 
     def reqList2ndLevel(self):
         """List of Content objects"""
+        evaluations1stLevel = self.context.getEvaluationsDone()
         attrs = self.context.getRefAttributeNames()
         retList = []
         for attr in attrs:
@@ -350,7 +349,8 @@ class EvaluationsDoneDisplay(Overview):
                 objs = [objs]
             for obj in objs:
                 if hasattr(obj, "requirements"):
-                    evaluations = self.context.getEvaluationsDone()
+                    evaluations = getEvaluationsDone(obj)
+                    #evaluations = self.context.getEvaluationsDone()
                     for ev in evaluations:
                         retList.append({"eval": ev, "obj": self.context})
         return retList
@@ -464,44 +464,6 @@ class AddComponentForm(AddForm):
             self.request.response.redirect(url)
 
 
-class ImportCsvDataComponentForm(layout.FormLayoutSupport, form.Form):
-    """ Delete the net """
-    
-    form.extends(form.Form)
-    label = _(u"Import CSV data")
-    fields = field.Fields(IImportCsvData)
-    
-    def getTitle(self):
-        """this title will be displayed in the head of form"""
-        return u"aaa"
-        
-    @button.buttonAndHandler(u'Submit')
-    def handleSubmit(self, action):
-        """submit was pressed"""
-        if 'csvdata' in self.widgets:
-            fileWidget=self.widgets['csvdata']
-            fileUpload = fileWidget.extract()
-            reader = csv.reader(fileUpload.readlines(), 
-                                delimiter=';', 
-                                quoting=csv.QUOTE_NONNUMERIC)
-#            for row in reader:
-#                print '> ', row
-        url = absoluteURL(self.context, self.request)
-        self.request.response.redirect(url)
-
-    @button.buttonAndHandler(u'Cancel')
-    def handleCancel(self, action):
-        """cancel was pressed"""
-        url = absoluteURL(self.context, self.request)
-        self.request.response.redirect(url)
-
-    def update(self):
-        """update all widgets"""
-        #if ISuperclass.providedBy(self.context):
-            #self.label = self.getTitle()
-        form.Form.update(self)
-
-
 class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
     """ Delete the net """
     
@@ -545,3 +507,7 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
         #if ISuperclass.providedBy(self.context):
             #self.label = self.getTitle()
         form.Form.update(self)
+
+
+class EvaluationsHistory(SuperHistory):
+    pass

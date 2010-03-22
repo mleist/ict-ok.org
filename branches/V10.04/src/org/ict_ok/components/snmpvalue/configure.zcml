@@ -111,20 +111,12 @@
             />
         <require
             permission="org.ict_ok.components.snmpvalue.View"
-            interface="org.ict_ok.components.interfaces.IImportCsvData"
-            />
-        <require
-            permission="org.ict_ok.components.snmpvalue.Edit"
-            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
-            />
-        <require
-            permission="org.ict_ok.components.snmpvalue.View"
             interface="org.ict_ok.components.interfaces.IImportXlsData"
             />
         <require
             permission="org.ict_ok.components.snmpvalue.Edit"
             set_schema="org.ict_ok.components.interfaces.IImportXlsData"
-            />        
+            />
     </class>
 
     <!--  Event subscribers ============================================= -->

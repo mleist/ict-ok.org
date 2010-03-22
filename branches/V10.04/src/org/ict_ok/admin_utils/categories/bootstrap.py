@@ -22,6 +22,9 @@ from datetime import datetime
 # zope imports
 from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
+from zope.app.catalog.text import TextIndex
+from zope.app.catalog.interfaces import ICatalog
+from zope.index.text.interfaces import ISearchableText
 from zope.app.appsetup.bootstrap import ensureUtility
 from zope.dublincore.interfaces import IWriteZopeDublinCore
 from zope.app.component.hooks import setSite
@@ -31,13 +34,32 @@ from zope.app import zapi
 from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.admin_utils.categories.interfaces import IAdmUtilCategories
-from org.ict_ok.admin_utils.categories.categories import AdmUtilCategories
-from org.ict_ok.admin_utils.categories.cat_hostgroup import \
-     AdmUtilCatHostGroup
+from org.ict_ok.admin_utils.categories.categories import \
+    AdmUtilCategories, Category
+#from org.ict_ok.admin_utils.categories.cat_hostgroup import \
+#     AdmUtilCatHostGroup
 
 logger = logging.getLogger("AdmUtilCategories")
 
+
 def createUtils(root_folder, connection=None, dummy_db=None):
+    sitem = root_folder.getSiteManager()
+    # search for ICatalog
+    utils = [ util for util in sitem.registeredUtilities()
+              if util.provided.isOrExtends(ICatalog)]
+    instUtilityICatalog = utils[0].component
+    if not "category_oid_index" in instUtilityICatalog.keys():
+        category_oid_index = TextIndex(interface=ISearchableText,
+                                        field_name='getSearchableCategoryOid',
+                                        field_callable=True)
+        instUtilityICatalog['category_oid_index'] = category_oid_index
+        # search for IAdmUtilSupervisor
+        utils = [ util for util in sitem.registeredUtilities()
+                  if util.provided.isOrExtends(IAdmUtilSupervisor)]
+        instAdmUtilSupervisor = utils[0].component
+        instAdmUtilSupervisor.appendEventHistory(\
+            u" bootstrap: ICatalog - create index for entry type 'category'")
+        
     madeAdmUtilCategories = ensureUtility(root_folder, IAdmUtilCategories,
                                        'AdmUtilCategories',
                                        AdmUtilCategories,
@@ -49,21 +71,21 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         dcore.title = u"Categories Utility"
         dcore.created = datetime.utcnow()
         madeAdmUtilCategories.ikName = dcore.title
-        for strHostGroup in [
-            u'DNS-Server',
-            u'File-Server',
-            u'Miscellaneous-Server',
-            u'SMTP-Server',
-            u'Terminal-Server',
-            u'Utility-Server',
-            u'Workstation',
-            ]:
-            newHostGroup = AdmUtilCatHostGroup()
-            newHostGroup.__setattr__("ikName", strHostGroup)
-            dcore = IWriteZopeDublinCore(newHostGroup)
-            dcore.created = datetime.utcnow()
-            dcore.title = strHostGroup
-            madeAdmUtilCategories[newHostGroup.objectID] = newHostGroup
+#        for strHostGroup in [
+#            u'DNS-Server',
+#            u'File-Server',
+#            u'Miscellaneous-Server',
+#            u'SMTP-Server',
+#            u'Terminal-Server',
+#            u'Utility-Server',
+#            u'Workstation',
+#            ]:
+#            newHostGroup = AdmUtilCatHostGroup()
+#            newHostGroup.__setattr__("ikName", strHostGroup)
+#            dcore = IWriteZopeDublinCore(newHostGroup)
+#            dcore.created = datetime.utcnow()
+#            dcore.title = strHostGroup
+#            madeAdmUtilCategories[newHostGroup.objectID] = newHostGroup
         madeAdmUtilCategories.__post_init__()
         sitem = root_folder.getSiteManager()
         utils = [ util for util in sitem.registeredUtilities()

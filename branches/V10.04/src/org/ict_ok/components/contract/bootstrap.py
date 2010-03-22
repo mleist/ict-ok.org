@@ -49,8 +49,6 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for entry type 'contract'")
-        instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create index for entry type 'appsoftware'")
 
     ensureComponentFolderOnBootstrap(IContractFolder,
                  u"Contracts",

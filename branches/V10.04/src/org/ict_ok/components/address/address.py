@@ -30,7 +30,8 @@ from org.ict_ok.components.address.interfaces import IAddAddress
 from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.components.contact_item.contact_item import ContactItem_Addresses_RelManager
+#from org.ict_ok.components.contact_item.contact_item import ContactItem_Addresses_RelManager
+from org.ict_ok.components.contact_item.contact_item import ContactItems_Addresses_RelManager
 
 def AllAddressTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IAddress)
@@ -57,7 +58,8 @@ class Address(Component):
     city = FieldProperty(IAddress['city'])
     postalCode = FieldProperty(IAddress['postalCode'])
     country = FieldProperty(IAddress['country'])
-    contactItem = RelationPropertyIn(ContactItem_Addresses_RelManager)
+    #contactItem = RelationPropertyIn(ContactItem_Addresses_RelManager)
+    contactItems = RelationPropertyIn(ContactItems_Addresses_RelManager)
 
     fullTextSearchFields = ['address1', 'address2', 'address3', 'city', 'postalCode', 'country']
     fullTextSearchFields.extend(Component.fullTextSearchFields)

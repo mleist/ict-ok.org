@@ -38,7 +38,6 @@ from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
      AddForm, DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.browser.component import AddComponentForm
-from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
@@ -182,10 +181,6 @@ class CreatePhysicalLinksForm(EditForm):
             url = absoluteURL(self.context, self.request) + u'/wz_create.html'
             self.request.response.redirect(url)
     
-
-
-class ImportCsvDataForm(ImportCsvDataComponentForm):
-    pass
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):

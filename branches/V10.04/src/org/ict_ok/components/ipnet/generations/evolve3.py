@@ -7,7 +7,7 @@
 #
 # $Id$
 #
-"""What to do when upgrade Net from gen 0 to gen 1
+"""What to do when upgrade IpNet from gen 2 to gen 3
 """
 
 __version__ = "$Id$"
@@ -17,19 +17,20 @@ from zope.app.zopeappgenerations import getRootFolder
 from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
-from org.ict_ok.components.net.interfaces import INet
+from org.ict_ok.components.ipnet.interfaces import IIpNet
 
-generation = 1
+generation = 3
 
 def evolve(context):
     u"""
-    convert object to new standard
+    net object now with shortName ipnet
     """
     root = getRootFolder(context) # the Zope-Root-Folders
 
-    for net in findObjectsProviding(root, INet):
+    for net in findObjectsProviding(root, IIpNet):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
-        print "Net(%s): " % net.ikName + evolve_msg
+        print "IpNet(%s): " % net.ikName + evolve_msg
+        net.shortName = "ipnet"
         net.appendHistoryEntry(evolve_msg)

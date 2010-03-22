@@ -32,7 +32,7 @@ from zope.component import getAdapter
 from zope.proxy import removeAllProxies
 from zope.app.applicationcontrol.interfaces import IRuntimeInfo
 from zope.size.interfaces import ISized
-from zope.security.checker import canAccess
+from zope.security.checker import canWrite, canAccess
 from zope.component import queryUtility
 from zope.app.intid.interfaces import IIntIds
 from zope.component import getMultiAdapter
@@ -539,25 +539,11 @@ class MSubExportXmlData(GlobalMenuSubItem):
     weight = 62
 
 
-class MSubExportCsvData(GlobalMenuSubItem):
-    """ Menu Item """
-    title = _(u'Export CSV')
-    viewURL = '@@exportcsvdata.html'
-    weight = 62
-
-
 class MSubExportXlsData(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Export XLS')
     viewURL = '@@exportxlsdata.html'
     weight = 62
-
-
-class MSubImportCsvData(GlobalMenuSubItem):
-    """ Menu Item """
-    title = _(u'Import CSV')
-    viewURL = '@@importcsvdata.html'
-    weight = 60
 
 
 class MSubImportXlsData(GlobalMenuSubItem):
@@ -736,6 +722,11 @@ class SuperclassDetails:
                 except LookupError:
                     return None
         return None
+    
+    def canDisplay(self, attr_name):
+        """ object can and should be displayed
+        """
+        return canAccess(self.context, attr_name)
     
     def getHrefTitle(self, obj, displayShort=False):
         href = zapi.absoluteURL(obj, self.request)
@@ -1021,6 +1012,15 @@ class EditForm(layout.FormLayoutSupport, form.EditForm):
     omitFields = SuperclassDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
     
+    def update(self):
+        """ check for necessary permissions
+        """
+        for field_name in self.fields.keys():
+            if not canWrite(self.context, field_name):
+                print "delete: %s from %s" % (field_name, self.context)
+                del self.fields[field_name]
+        super(form.EditForm, self).update()
+
     def applyChanges(self, data):
         content = self.getContent()
         changes = applyChanges(self, content, data)
@@ -1144,6 +1144,17 @@ class Overview(BrowserPagelet):
     status = None
     firstSortOn = _('Title') 
     
+    def getHrefTitle(self, obj, displayShort=False):
+        href = zapi.absoluteURL(obj, self.request)
+        if hasattr(obj, 'getDisplayTitle'):
+            title = obj.getDisplayTitle()
+        else:
+            title = obj.ikName
+        if displayShort and hasattr(obj, 'shortName'):
+            return u'<a href="%s">%s [%s]</a>' % (href, title, obj.shortName)
+        else:
+            return u'<a href="%s">%s</a>' % (href, title)
+
     def convert2UserTimezone(self, argTS):
         if argTS is not None:
             return convert2UserTimezone(argTS)

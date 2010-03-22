@@ -47,10 +47,9 @@ class MSubAddSite(GlobalMenuSubItem):
 class SiteDetails(ComponentDetails):
     """ Class for Web-Browser-Details
     """
-    omit_viewfields = ComponentDetails.omit_viewfields + []
-    omit_addfields = ComponentDetails.omit_addfields + []
-    omit_editfields = ComponentDetails.omit_editfields + []
-
+    omit_viewfields = ComponentDetails.omit_viewfields + ['xlsdata', 'codepage']
+    omit_addfields = ComponentDetails.omit_addfields + ['xlsdata', 'codepage']
+    omit_editfields = ComponentDetails.omit_editfields + ['xlsdata', 'codepage']
 
 # --------------- forms ------------------------------------
 

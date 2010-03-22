@@ -91,7 +91,7 @@ class IpNet(Component):
     """
 
     implements(IIpNet, IEventIfEventIpNet)
-    shortName = "net"
+    shortName = "ipnet"
     # for ..Contained we have to:
     __name__ = __parent__ = None
     ipv4 = FieldProperty(IIpNet['ipv4'])

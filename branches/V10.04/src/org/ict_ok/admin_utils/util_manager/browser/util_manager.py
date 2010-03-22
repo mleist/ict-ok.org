@@ -81,10 +81,11 @@ class Overview(SuperclassOverview):
         allObj = smFolder.values()
         for obj in allObj:
             if ISuperclass.providedBy(obj):
-                myAdapter = zapi.queryMultiAdapter((obj, self.request),
-                                                   name='details.html')
-                if myAdapter is not None and canAccess(myAdapter, 'render'):
-                    objWithPermisson.append(obj)
+                if canAccess(obj, 'ikName'):
+                    myAdapter = zapi.queryMultiAdapter((obj, self.request),
+                                                       name='details.html')
+                    if myAdapter is not None and canAccess(myAdapter, 'render'):
+                        objWithPermisson.append(obj)
         return objWithPermisson
 
 

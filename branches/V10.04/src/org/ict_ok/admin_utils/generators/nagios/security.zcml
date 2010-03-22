@@ -26,6 +26,16 @@
         description="Add from AdmUtilGeneratorNagios."
     />
 
+    <permission
+        id="org.ict_ok.components.nagios_checks.View"
+        title="View Nagios settings for Objects"
+    />
+
+    <permission
+        id="org.ict_ok.components.nagios_checks.Edit"
+        title="Edit Nagios settings for Objects"
+    />
+
     <!--<grant permission="org.ict_ok.admin_utils.generators.nagios.View"-->
                     <!--role="org.ict_ok.usr" />-->
     <grant permission="org.ict_ok.admin_utils.generators.nagios.View"
@@ -36,6 +46,16 @@
     <grant permission="org.ict_ok.admin_utils.generators.nagios.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.generators.nagios.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.nagios_checks.View"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.nagios_checks.View"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.components.nagios_checks.Edit"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.components.nagios_checks.Edit"
                     role="org.ict_ok.adm" />
 
 </configure>

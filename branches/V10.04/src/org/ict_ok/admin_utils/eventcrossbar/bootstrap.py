@@ -49,8 +49,11 @@ def recursiveEventCrossbarSubscriber(obj):
             if IAdmUtilEventCrossbar.providedBy(utilObj) :
                 globalEventCrossbarUtility.subscribeToEventCrossbar(utilObj)
     if IContainer.providedBy(obj):
-        for (dummy_name, subObject) in obj.items():
-            recursiveEventCrossbarSubscriber(subObject)
+        try:
+            for (dummy_name, subObject) in obj.items():
+                recursiveEventCrossbarSubscriber(subObject)
+        except AttributeError:
+            pass
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilEventCrossbar = ensureUtility(root_folder, IAdmUtilEventCrossbar,

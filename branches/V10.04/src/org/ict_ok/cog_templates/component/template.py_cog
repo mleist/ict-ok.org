@@ -54,8 +54,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 #]]]
 #[[[end]]]
 from org.ict_ok.components.component import Component
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.interfaces import IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 #[[[cog

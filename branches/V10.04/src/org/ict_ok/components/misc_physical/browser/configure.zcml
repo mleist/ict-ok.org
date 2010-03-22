@@ -193,14 +193,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.misc_physical.Add"
         />
-    <!-- page
-        name="exportcsvdata.html"
-        for="org.ict_ok.components.misc_physical.interfaces.IMiscPhysicalFolder"
-        class=".misc_physical.MiscPhysicalFolderDetails"
-        permission="org.ict_ok.components.misc_physical.View"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        attribute="exportCsvData"
-    / -->
     <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.misc_physical.interfaces.IMiscPhysicalFolder"
@@ -209,13 +201,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
-    <!-- z3c:pagelet
-        name="importcsvdata.html"
-        for="org.ict_ok.components.misc_physical.interfaces.IMiscPhysicalFolder"
-        class=".misc_physical.ImportCsvDataForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.misc_physical.Add"
-    / -->
     <z3c:pagelet
         name="importxlsdata.html"
         for="org.ict_ok.components.misc_physical.interfaces.IMiscPhysicalFolder"
@@ -223,14 +208,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.misc_physical.Add"
     />
-    <!-- viewlet
-        name="exportcsvdata"
-        for="org.ict_ok.components.misc_physical.interfaces.IMiscPhysicalFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.misc_physical.View"
-        / -->
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.misc_physical.interfaces.IMiscPhysicalFolder"
@@ -239,14 +216,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.misc_physical.View"
         />
-    <!-- viewlet
-        name="importcsvdata"
-        for="org.ict_ok.components.misc_physical.interfaces.IMiscPhysicalFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.misc_physical.Add"
-        / -->
     <viewlet
         name="importxlsdata"
         for="org.ict_ok.components.misc_physical.interfaces.IMiscPhysicalFolder"
@@ -255,6 +224,5 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.misc_physical.Add"
         />
-                        
 
 </configure>

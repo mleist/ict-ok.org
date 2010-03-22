@@ -125,7 +125,10 @@ class GlobalMenuSubItem(ContextMenuItem):
 class GlobalMenuAddItem(GlobalMenuSubItem):
     def __init__(self, context, request, view, manager):
         GlobalMenuSubItem.__init__(self, context, request, view, manager)
-        self.firstFolder = iter(objectsWithInterface(self.folderInterface)).next()
+        try:
+            self.firstFolder = list(objectsWithInterface(self.folderInterface))[0]
+        except IndexError:
+            self.firstFolder = None
     @property
     def url(self):
         if self.firstFolder is not None:

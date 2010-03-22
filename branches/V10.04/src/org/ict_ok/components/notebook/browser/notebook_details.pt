@@ -4,4 +4,10 @@
 <metal:block define-macro="NotebookDetails">
     <metal:block use-macro="macro:DeviceDetails" />
 
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="python: view.canDisplay('genNagios')">
+           <td i18n:translate="">generate Nagios</td>
+           <td tal:content="context/genNagios" />
+       </tr>
+       
 </metal:block>

@@ -117,8 +117,25 @@ class AdmUtilComplianceDetails(SupernodeDetails):
                    (zapi.absoluteURL(self.context, self.request))
             tmpDict['tooltip'] = _(u"will import requirements")
             retList.append(tmpDict)
+        if checkPermission('org.ict_ok.admin_utils.compliance.Match',
+                           self.context):
+            tmpDict = {}
+            tmpDict['oid'] = u"c%smatch requirements" % objId
+            tmpDict['title'] = _(u"match requirements/categories")
+            tmpDict['href'] = u"%s/@@match_requirements" % \
+                   (zapi.absoluteURL(self.context, self.request))
+            tmpDict['tooltip'] = _(u"will match requirements over categories")
+            retList.append(tmpDict)
+        if checkPermission('org.ict_ok.admin_utils.compliance.Delete',
+                           self.context):
+            tmpDict = {}
+            tmpDict['oid'] = u"c%sdelete requirements" % objId
+            tmpDict['title'] = _(u"delete all requirements")
+            tmpDict['href'] = u"./@@deleteReqs.html"
+            tmpDict['tooltip'] = _(u"will match requirements over categories")
+            retList.append(tmpDict)
         return retList
-    
+
 
     def generateAllPdf(self):
         """
@@ -149,6 +166,14 @@ class AdmUtilComplianceDetails(SupernodeDetails):
         from org.ict_ok.admin_utils.compliance.bootstrap import \
              fillUtilitiyWithReqs
         fillUtilitiyWithReqs(self.context)
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    def match_requirements(self):
+        self.context.match_requirements()
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:
             return self.request.response.redirect(nextURL)
@@ -342,3 +367,32 @@ class ImportReqXmlDataForm(layout.FormLayoutSupport, form.Form):
         #if ISuperclass.providedBy(self.context):
             #self.label = self.getTitle()
         form.Form.update(self)
+
+class DeleteAllReqsForm(layout.FormLayoutSupport, form.Form):
+    """
+    """
+    label = _(u"Delete all Requirements?")
+
+    @button.buttonAndHandler(u'Cancel')
+    def handleCancel(self, action):
+        """cancel was pressed"""
+        url = absoluteURL(self.context, self.request)
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    @button.buttonAndHandler(u'Delete')
+    def handleDelete(self, action):
+        """delete was pressed"""
+        self.context.appendHistoryEntry(_(u"Delete all Requirements"),
+                                        request=self.request,
+                                        withAuthor=True,
+                                        dontCount=True)
+        self.context.delete_requirements()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')

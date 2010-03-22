@@ -19,7 +19,8 @@ from datetime import datetime
 from pytz import timezone
 import logging
 from persistent.dict import PersistentDict
-from ldap.filter import filter_format
+#from ldap.filter import filter_format
+import ldap
 
 # zope imports
 from zope.app import zapi
@@ -37,7 +38,7 @@ from zope.publisher.interfaces import IRequest
 from zope.schema.fieldproperty import FieldProperty
 from zope.app.container.contained import Contained
 from zope.app.principalannotation.interfaces import IPrincipalAnnotationUtility
-from ldapadapter.interfaces import IManageableLDAPAdapter, \
+from ldapadapter.interfaces import IManageableLDAPAdapter, InvalidCredentials, \
     NoSuchObject, ServerDown
 
 from zope.schema.vocabulary import SimpleVocabulary, SimpleTerm
@@ -430,8 +431,11 @@ def allLdapUser(dummy_context):
                                 name='ManageableLDAPAdapter')
         if ldapUtil.serverURL != userManagement.serverURL:
             ldapUtil.serverURL = userManagement.serverURL
+        if ldapUtil.bindDN != userManagement.bindDN:
+            ldapUtil.bindDN = userManagement.bindDN
+        if ldapUtil.bindPassword != userManagement.bindPassword:
+            ldapUtil.bindPassword = userManagement.bindPassword
         conn = ldapUtil.connect()
-        # "ou=staff,o=ikom-online,c=de,o=ifdd"
         ldapResultList = conn.search(userManagement.baseDN,
                           scope='sub',
                           filter='(objectClass=*)',
@@ -540,7 +544,11 @@ class MyLDAPAuthentication(LDAPAuthentication):
             return ()
         try:
             conn = da.connect()
+        except InvalidCredentials:
+            return ()
         except ServerDown:
+            return ()
+        except ldap.INVALID_DN_SYNTAX:
             return ()
 
         # Build the filter based on the query
@@ -548,8 +556,8 @@ class MyLDAPAuthentication(LDAPAuthentication):
         for key, value in query.items():
             if not value:
                 continue
-            filter_elems.append(filter_format('(%s=%s)',
-                                              (key, value)))
+            filter_elems.append(ldap.filter.filter_format('(%s=%s)',
+                                                          (key, value)))
         filter = ''.join(filter_elems)
         if len(filter_elems) > 1:
             filter = '(&%s)' % filter

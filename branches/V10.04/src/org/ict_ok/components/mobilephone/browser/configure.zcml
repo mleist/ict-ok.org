@@ -186,27 +186,12 @@
         permission="org.ict_ok.components.mobilephone.Add"
         />
     <page
-        name="exportcsvdata.html"
-        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
-        class=".mobilephone.MobilePhoneFolderDetails"
-        permission="org.ict_ok.components.mobilephone.View"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        attribute="exportCsvData"
-    />
-    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
         class=".mobilephone.MobilePhoneFolderDetails"
         permission="org.ict_ok.components.mobilephone.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
-    />
-    <z3c:pagelet
-        name="importcsvdata.html"
-        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
-        class=".mobilephone.ImportCsvDataForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.mobilephone.Add"
     />
     <z3c:pagelet
         name="importxlsdata.html"
@@ -216,28 +201,12 @@
         permission="org.ict_ok.components.mobilephone.Add"
     />
     <viewlet
-        name="exportcsvdata"
-        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.mobilephone.View"
-        />
-    <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
         manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
         class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsData"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.mobilephone.View"
-        />
-    <viewlet
-        name="importcsvdata"
-        for="org.ict_ok.components.mobilephone.interfaces.IMobilePhoneFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.mobilephone.Add"
         />
     <viewlet
         name="importxlsdata"

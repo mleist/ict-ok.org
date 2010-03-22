@@ -89,5 +89,7 @@ class SearchableKeywords(object):
         """
         get a list of provided interfaces
         """
+        from zope.security.proxy import removeSecurityProxy
+        prov_by = removeSecurityProxy(providedBy(self.context))
         return [unicode(i.__module__+'.'+i.__name__) \
-                for i in providedBy(self.context).interfaces()]
+                for i in prov_by.interfaces()]

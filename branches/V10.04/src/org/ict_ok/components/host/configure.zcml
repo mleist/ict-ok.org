@@ -135,14 +135,6 @@
             />
         <require
             permission="org.ict_ok.components.host.View"
-            interface="org.ict_ok.components.interfaces.IImportCsvData"
-            />
-        <require
-            permission="org.ict_ok.components.host.Edit"
-            set_schema="org.ict_ok.components.interfaces.IImportCsvData"
-            />
-        <require
-            permission="org.ict_ok.components.host.View"
             interface="org.ict_ok.components.interfaces.IImportXlsData"
             />
         <require

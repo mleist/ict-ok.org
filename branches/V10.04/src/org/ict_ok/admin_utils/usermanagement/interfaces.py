@@ -83,7 +83,7 @@ class IAdmUtilUserManagement(IAuthentication):
     bindDN = TextLine(
         max_length = 200,
         title = _("LDAP bindDN"),
-        default = u"ou=staff,o=ict-ok,c=org",
+        default = u"",
         required = False)
     bindPassword = TextLine(
         max_length = 200,

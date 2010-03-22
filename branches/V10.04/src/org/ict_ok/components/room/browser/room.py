@@ -38,7 +38,6 @@ from org.ict_ok.components.superclass.browser.superclass import \
 from org.ict_ok.components.superclass.browser.superclass import \
      Overview as SuperclassOverview
 from org.ict_ok.components.browser.component import AddComponentForm
-from org.ict_ok.components.browser.component import ImportCsvDataComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 
 _ = MessageFactory('org.ict_ok')
@@ -141,10 +140,6 @@ class Overview(SuperclassOverview):
             return IContentList(self.context).getContentList()
         except TypeError:
             return []
-
-
-class ImportCsvDataForm(ImportCsvDataComponentForm):
-    pass
 
 
 class ImportXlsDataForm(ImportXlsDataComponentForm):

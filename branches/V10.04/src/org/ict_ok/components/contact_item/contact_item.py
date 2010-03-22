@@ -56,10 +56,14 @@ def AllUnusedOrUsedRolesContactItems(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IContactItem, 'roles')
 
 
-ContactItem_Addresses_RelManager = \
+#ContactItem_Addresses_RelManager = \
+#       FieldRelationManager(IContactItem['adresses'],
+#                            IAddress['contactItem'],
+#                            relType='contactItem:adresses')
+ContactItems_Addresses_RelManager = \
        FieldRelationManager(IContactItem['adresses'],
-                            IAddress['contactItem'],
-                            relType='contactItem:adresses')
+                            IAddress['contactItems'],
+                            relType='contactItems:adresses')
 
 
 class ContactItem(Component):
@@ -73,7 +77,7 @@ class ContactItem(Component):
 
     contact = RelationPropertyIn(Contact_ContactItems_RelManager)
     workOrder = RelationPropertyIn(WorkOrder_ContactItems_RelManager)
-    adresses = RelationPropertyOut(ContactItem_Addresses_RelManager)
+    adresses = RelationPropertyOut(ContactItems_Addresses_RelManager)
     roles = RelationPropertyIn(Roles_ContactItems_RelManager)
     groups = RelationPropertyIn(Group_ContactItems_RelManager)
     closedContracts = RelationPropertyIn(ClosedContracts_ContactItems_RelManager)

@@ -33,8 +33,10 @@ from zope.component.interfaces import ComponentLookupError
 
 # zc imports
 
+# lovely imports
+from lovely.relation.property import RelationPropertyIn
+
 # ict_ok.org imports
-from org.ict_ok.libs.lib import fieldsForFactory
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.admin_utils.compliance.interfaces import \
      IRequirement, IAdmUtilCompliance
@@ -42,6 +44,8 @@ import schooltool.requirement.requirement
 from schooltool.requirement.evaluation import getRequirementList
 from schooltool.requirement.scoresystem import \
      GlobalDiscreteValuesScoreSystem, Decimal
+from org.ict_ok.admin_utils.categories.rel_managers import \
+    Categories_Requirements_RelManager
 
 logger = logging.getLogger("AdmUtilCompliance")
 
@@ -128,10 +132,10 @@ def allRequirementVocab(dummy_context, getFirsts=True, getNotFirsts=True):
                     if getNotFirsts and not req.validAsFirst:
                         appendIt = True
                     if appendIt:
-                        terms.append(\
-                            SimpleTerm(req.objectID,
-                                       str(req.objectID),
-                                       newString))
+                        terms.append( SimpleTerm(req,
+                                                 token=getattr(req, 'objectID',
+                                                               req.objectID),
+                                                 title=newString))
         return SimpleVocabulary(terms)
     except ComponentLookupError:
         return SimpleVocabulary([])
@@ -154,6 +158,8 @@ class Requirement(Superclass,
     implements(IRequirement)
     validAsFirst = FieldProperty(IRequirement['validAsFirst'])
     resubmitDate = FieldProperty(IRequirement['resubmitDate'])
+    version = FieldProperty(IRequirement['version'])
+    categories = RelationPropertyIn(Categories_Requirements_RelManager)
 
     def __init__(self, title, **data):
         schooltool.requirement.requirement.Requirement.__init__(self, title)

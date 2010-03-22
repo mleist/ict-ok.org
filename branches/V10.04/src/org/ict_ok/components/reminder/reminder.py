@@ -35,8 +35,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.reminder.interfaces import IReminder
 from org.ict_ok.components.reminder.interfaces import IAddReminder
 from org.ict_ok.components.component import Component
-from org.ict_ok.components.interfaces import \
-    IImportCsvData, IImportXlsData
+from org.ict_ok.components.interfaces import IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
 

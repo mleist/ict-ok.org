@@ -70,6 +70,15 @@
         name="overview.html"
     />
 
+    <viewlet
+        name="all_organizations"
+        for="*"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuInventoryByType"
+        class="org.ict_ok.components.organization.browser.organization.MSubInvOrganization"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.organization.View"
+        />
+
     <z3c:pagelet
         name="overview.html"
         for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
@@ -77,6 +86,15 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.organization.View"
         />
+
+    <z3c:pagelet
+        name="all_organizations.html"
+        for="*"
+        class=".organization.AllOrganizations"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.organization.View"
+        />
+        
 
     <z3c:pagelet
         name="add_organization.html"
@@ -176,14 +194,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.organization.Add"
         />
-    <!-- page
-        name="exportcsvdata.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
-        class=".organization.OrganizationFolderDetails"
-        permission="org.ict_ok.components.organization.View"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        attribute="exportCsvData"
-    / -->
     <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
@@ -192,13 +202,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
-    <!-- z3c:pagelet
-        name="importcsvdata.html"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
-        class=".organization.ImportCsvDataForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Add"
-    / -->
     <z3c:pagelet
         name="importxlsdata.html"
         for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
@@ -206,14 +209,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.organization.Add"
     />
-    <!-- viewlet
-        name="exportcsvdata"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.View"
-        / -->
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
@@ -222,14 +217,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.organization.View"
         />
-    <!-- viewlet
-        name="importcsvdata"
-        for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.organization.Add"
-        / -->
     <viewlet
         name="importxlsdata"
         for="org.ict_ok.components.organization.interfaces.IOrganizationFolder"
@@ -238,6 +225,5 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.organization.Add"
         />
-                        
 
 </configure>

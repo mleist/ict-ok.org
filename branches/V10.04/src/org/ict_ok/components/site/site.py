@@ -25,10 +25,12 @@ from zope.event import notify
 
 # ict-ok.org imports
 from org.ict_ok.components.superclass.superclass import MsgEvent
-from org.ict_ok.components.component import Component
+from org.ict_ok.components.component import Component, ComponentFolder
 from org.ict_ok.components.site.interfaces import ISite, IEventIfEventSite
 from org.ict_ok.components.ipnet.interfaces import IIpNet
 from org.ict_ok.components.site.interfaces import INewSiteEvent
+from org.ict_ok.components.interfaces import IImportXlsData
+
 
 class NewSiteEvent(object):
     implements(INewSiteEvent)
@@ -39,20 +41,21 @@ class NewSiteEvent(object):
 
 
 
-class Site(Component, SiteManagerContainer):
+class Site(ComponentFolder, SiteManagerContainer):
 #class Site(Component):
     """ ICT_Ok site object """
-    implements(ISite, IEventIfEventSite)
+    implements(ISite, IEventIfEventSite, IImportXlsData)
     shortName = "site"
     sitename = FieldProperty(ISite['sitename'])
     eventInpObjs_inward_relaying_shutdown = FieldProperty(\
         IEventIfEventSite['eventInpObjs_inward_relaying_shutdown'])
+    contentFactory = None
 
     def __init__(self, **data):
         """
         constructor of the object
         """
-        Component.__init__(self, **data)
+        ComponentFolder.__init__(self, **data)
         SiteManagerContainer.__init__(self, **data)
         for (name, value) in data.items():
             if name in ISite.names():

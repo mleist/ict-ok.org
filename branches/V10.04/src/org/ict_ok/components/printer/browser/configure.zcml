@@ -193,14 +193,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.printer.Add"
         />
-    <!-- page
-        name="exportcsvdata.html"
-        for="org.ict_ok.components.printer.interfaces.IPrinterFolder"
-        class=".printer.PrinterFolderDetails"
-        permission="org.ict_ok.components.printer.View"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        attribute="exportCsvData"
-    / -->
     <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.printer.interfaces.IPrinterFolder"
@@ -209,13 +201,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
-    <!-- z3c:pagelet
-        name="importcsvdata.html"
-        for="org.ict_ok.components.printer.interfaces.IPrinterFolder"
-        class=".printer.ImportCsvDataForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.printer.Add"
-    / -->
     <z3c:pagelet
         name="importxlsdata.html"
         for="org.ict_ok.components.printer.interfaces.IPrinterFolder"
@@ -223,14 +208,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.printer.Add"
     />
-    <!-- viewlet
-        name="exportcsvdata"
-        for="org.ict_ok.components.printer.interfaces.IPrinterFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.printer.View"
-        / -->
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.printer.interfaces.IPrinterFolder"
@@ -239,14 +216,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.printer.View"
         />
-    <!-- viewlet
-        name="importcsvdata"
-        for="org.ict_ok.components.printer.interfaces.IPrinterFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.printer.Add"
-        / -->
     <viewlet
         name="importxlsdata"
         for="org.ict_ok.components.printer.interfaces.IPrinterFolder"
@@ -255,6 +224,5 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.printer.Add"
         />
-                        
 
 </configure>

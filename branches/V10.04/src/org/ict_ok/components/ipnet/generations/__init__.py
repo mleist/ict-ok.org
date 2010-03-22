@@ -18,6 +18,6 @@ from zope.app.generations.generations import SchemaManager
 key = 'org.ict_ok.components.ipnet.generations'
 
 AppSchemaManager = SchemaManager(
-    minimum_generation = 2,
-    generation = 2,
+    minimum_generation = 3,
+    generation = 3,
     package_name=key)

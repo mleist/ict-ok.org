@@ -48,8 +48,11 @@ def recursiveCronSubscriber(obj):
             if IAdmUtilCron.providedBy(utilObj) :
                 globalCronUtility.subscribeToCron(utilObj)
     if IContainer.providedBy(obj):
-        for (dummy_name, subObject) in obj.items():
-            recursiveCronSubscriber(subObject)
+        try:
+            for (dummy_name, subObject) in obj.items():
+                recursiveCronSubscriber(subObject)
+        except AttributeError:
+            pass
 
 def createUtils(root_folder, connection=None, dummy_db=None):
     madeAdmUtilCron = ensureUtility(root_folder, IAdmUtilCron,

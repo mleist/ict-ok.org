@@ -177,14 +177,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.switch.Add"
         />
-    <!-- page
-        name="exportcsvdata.html"
-        for="org.ict_ok.components.switch.interfaces.ISwitchFolder"
-        class=".switch.SwitchFolderDetails"
-        permission="org.ict_ok.components.switch.View"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        attribute="exportCsvData"
-    / -->
     <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.switch.interfaces.ISwitchFolder"
@@ -193,13 +185,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
-    <!-- z3c:pagelet
-        name="importcsvdata.html"
-        for="org.ict_ok.components.switch.interfaces.ISwitchFolder"
-        class=".switch.ImportCsvDataForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.switch.Add"
-    / -->
     <z3c:pagelet
         name="importxlsdata.html"
         for="org.ict_ok.components.switch.interfaces.ISwitchFolder"
@@ -207,14 +192,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.switch.Add"
     />
-    <!-- viewlet
-        name="exportcsvdata"
-        for="org.ict_ok.components.switch.interfaces.ISwitchFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubExportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.switch.View"
-        / -->
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.switch.interfaces.ISwitchFolder"
@@ -223,14 +200,6 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.switch.View"
         />
-    <!-- viewlet
-        name="importcsvdata"
-        for="org.ict_ok.components.switch.interfaces.ISwitchFolder"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
-        class="org.ict_ok.components.superclass.browser.superclass.MSubImportCsvData"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.switch.Add"
-        / -->
     <viewlet
         name="importxlsdata"
         for="org.ict_ok.components.switch.interfaces.ISwitchFolder"
@@ -239,6 +208,5 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.switch.Add"
         />
-                        
 
 </configure>
