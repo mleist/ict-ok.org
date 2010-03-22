@@ -31,6 +31,5 @@ def evolve(context):
         # convert this object
         evolve_msg = u"gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
-        print u"IpNet(%s): " % net.ikName + evolve_msg
         net.shortName = "ipnet"
         net.appendHistoryEntry(evolve_msg)
