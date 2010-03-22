@@ -186,7 +186,7 @@ class AdmUtilCompliance(Supernode):
                         obj_cat_set = set(obj.categories)
                         req_cat_set = set(req.categories)
                         if not obj_cat_set.isdisjoint(req_cat_set):
-                            if req is not in obj.requirements:
+                            if not req in obj.requirements:
                                 obj.requirements.append(req)
 
     def delete_requirements(self):
