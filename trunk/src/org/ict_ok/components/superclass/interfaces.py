@@ -129,9 +129,12 @@ class ISuperclass(Interface):
         """
         get the modified time from Dublin Core
         """
-    def appendHistoryEntry(entryText):
+    def appendHistoryEntry(entryText, level=u"info",
+                           request=None, withAuthor=False,
+                           dontCount=False):
         """
         append an text entry to the history
+        withAuthor: may be String with author name
         """
     def getAllOutEventObjs():
         """ returns a list of all active referenced event

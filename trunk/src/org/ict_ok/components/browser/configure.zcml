@@ -59,6 +59,19 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
 
+    <z3c:pagelet
+        name="evaluations_history.html"
+        for="org.ict_ok.components.interfaces.IComponent"
+        class="org.ict_ok.components.browser.component.EvaluationsHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.View"
+        />
+    <z3c:template
+        template="evaluations_history.pt"
+        for="org.ict_ok.components.browser.component.EvaluationsHistory"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
         
     <!--##### Sub Menu ##### -->
 

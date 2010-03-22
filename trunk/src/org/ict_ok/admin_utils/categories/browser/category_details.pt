@@ -15,4 +15,15 @@
                 <ul>
             </td>
         </tr>
+
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/requirements|nothing">
+            <td i18n:translate="">Requirements</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/requirements"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                <ul>
+            </td>
+        </tr>
 </metal:block>

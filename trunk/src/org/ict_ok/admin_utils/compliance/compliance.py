@@ -32,9 +32,12 @@ from zope.xmlpickle import toxml, fromxml, loads
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.supernode import Supernode
+from org.ict_ok.components.interfaces import IComponent
 from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
 from org.ict_ok.admin_utils.compliance.interfaces import \
      IAdmUtilCompliance, IImportXmlData
+from org.ict_ok.components.superclass.superclass import objectsWithInterface
+from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
 
 logger = logging.getLogger("AdmUtilCompliance")
 
@@ -169,3 +172,26 @@ class AdmUtilCompliance(Supernode):
         newRoot.text, newRoot.tail = rootTmp.text, rootTmp.tail
         #return etree.tostring(newTree, xml_declaration=True, encoding="utf-8")
         return etree.tostring(newTree, pretty_print=True, xml_declaration=True, encoding="utf-8")
+
+    def match_requirements(self):
+        """ match all Components with Categories on all Requirements with
+        same Categories
+        """
+        objList = objectsWithInterface(IComponent)
+        reqList = objectsWithInterface(IRequirement)
+        for obj in objList:
+            if len(obj.categories) > 0:
+                for req in reqList:
+                    if len(req.categories) > 0:
+                        obj_cat_set = set(obj.categories)
+                        req_cat_set = set(req.categories)
+                        if not obj_cat_set.isdisjoint(req_cat_set):
+                            if req is not in obj.requirements:
+                                obj.requirements.append(req)
+
+    def delete_requirements(self):
+        """ delete all Categories from Components
+        """
+        objList = objectsWithInterface(IComponent)
+        for obj in objList:
+            obj.requirements = []

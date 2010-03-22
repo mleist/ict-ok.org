@@ -37,6 +37,7 @@ from zope.dublincore.interfaces import IWriteZopeDublinCore, IDCTimes, IZopeDubl
 from zope.app.keyreference.interfaces import IKeyReference
 from zope.component import adapter, queryUtility
 from zope.app.catalog.interfaces import ICatalog
+from zope.app.security.interfaces import IAuthentication
 from zope.app.container.interfaces import \
      IObjectAddedEvent, \
      IObjectMovedEvent, \
@@ -242,12 +243,19 @@ class Superclass(Persistent):
         """
         return IDCTimes(self).modified
 
-    def appendHistoryEntry(self, entryText, level=u"info"):
+    def appendHistoryEntry(self, entryText, level=u"info",
+                           request=None, withAuthor=False,
+                           dontCount=False):
         """
         append an text entry to the history
         """
+        if withAuthor and request is not None:
+            principalId = request.principal.id.split('.')[1]
+            pau_utility = queryUtility(IAuthentication)
+            internalPrincipal = pau_utility['principals'][principalId]
+            entryText = u'%s (%s)' % (entryText, internalPrincipal.title)
         lastEntry = self.history.get()[-1]
-        if entryText == lastEntry.getText():
+        if not dontCount and entryText == lastEntry.getText():
             lastEntry.appendRepeatCounter()
             lastEntry._p_changed = 1
         else:

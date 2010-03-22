@@ -1144,6 +1144,17 @@ class Overview(BrowserPagelet):
     status = None
     firstSortOn = _('Title') 
     
+    def getHrefTitle(self, obj, displayShort=False):
+        href = zapi.absoluteURL(obj, self.request)
+        if hasattr(obj, 'getDisplayTitle'):
+            title = obj.getDisplayTitle()
+        else:
+            title = obj.ikName
+        if displayShort and hasattr(obj, 'shortName'):
+            return u'<a href="%s">%s [%s]</a>' % (href, title, obj.shortName)
+        else:
+            return u'<a href="%s">%s</a>' % (href, title)
+
     def convert2UserTimezone(self, argTS):
         if argTS is not None:
             return convert2UserTimezone(argTS)

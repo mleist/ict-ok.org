@@ -26,6 +26,7 @@ from zope.annotation.interfaces import IAnnotations
 from zope.location import location
 from zope.proxy import removeAllProxies
 from zope.app.catalog.interfaces import ICatalog
+from zope.app.container.btree import BTreeContainer
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.superclass import Superclass
@@ -38,12 +39,13 @@ logger = logging.getLogger("AdmUtilCompliance")
 EVALUATIONS_KEY = "org.ict_ok.components.evaluations"
 
 
-class Evaluation(Superclass,
+class Evaluation(BTreeContainer, Superclass,
                  schooltool.requirement.evaluation.Evaluation):
     """ ict-ok.org wrapper
     """
     implements(IEvaluation)
     def __init__(self, requirement, scoreSystem, value, evaluator, **data):
+        BTreeContainer.__init__(self)
         schooltool.requirement.evaluation.Evaluation.__init__(
             self, requirement, scoreSystem, value, evaluator)
         Superclass.__init__(self, ikName=requirement.ikName, **data)
@@ -74,7 +76,7 @@ def getEvaluationsTodo(context):
     if hasattr(context, "requirements"):
         if context.requirements is not None:
             for requirement in context.requirements:
-                res = my_catalog.searchResults(oid_index=requirement)
+                res = my_catalog.searchResults(oid_index=requirement.objectID)
                 if len(res) > 0:
                     startReq = iter(res).next()
                     allObjReqs = []

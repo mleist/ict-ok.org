@@ -132,10 +132,10 @@ def allRequirementVocab(dummy_context, getFirsts=True, getNotFirsts=True):
                     if getNotFirsts and not req.validAsFirst:
                         appendIt = True
                     if appendIt:
-                        terms.append(\
-                            SimpleTerm(req.objectID,
-                                       str(req.objectID),
-                                       newString))
+                        terms.append( SimpleTerm(req,
+                                                 token=getattr(req, 'objectID',
+                                                               req.objectID),
+                                                 title=newString))
         return SimpleVocabulary(terms)
     except ComponentLookupError:
         return SimpleVocabulary([])

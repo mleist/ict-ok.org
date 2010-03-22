@@ -31,6 +31,11 @@
     />
 
     <permission
+        id="org.ict_ok.admin_utils.compliance.Match"
+        title="Match Reqs over Categories"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.compliance.Import"
         title="View from Compliance Utiltiy"
     />
@@ -77,6 +82,11 @@
     <grant permission="org.ict_ok.admin_utils.compliance.Delete"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.compliance.Delete"
+                    role="org.ict_ok.adm" />
+                    
+    <grant permission="org.ict_ok.admin_utils.compliance.Match"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.compliance.Match"
                     role="org.ict_ok.adm" />
                     
     <grant permission="org.ict_ok.admin_utils.compliance.Import"

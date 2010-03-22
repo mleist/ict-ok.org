@@ -41,6 +41,13 @@ class IAdmUtilCompliance(Interface):
     def append(subObj):
         """ append Requirement
         """
+    def match_requirements():
+        """ match all Components with Categories on all Requirements with
+        same Categories
+        """
+    def delete_requirements():
+        """ delete all Categories from Components
+        """
 
 #class IRequirement(ischooltool.IRequirement):
 class IRequirement(Interface):

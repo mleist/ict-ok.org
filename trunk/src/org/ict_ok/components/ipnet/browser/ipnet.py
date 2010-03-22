@@ -78,6 +78,7 @@ class MGlobalAddIpNet(GlobalMenuAddItem):
     weight = 50
     folderInterface = IIpNetFolder
 
+
 # --------------- helper funktions -----------------------------
 
 def getIpNetworkIp(item, formatter):

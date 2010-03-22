@@ -62,6 +62,10 @@ from org.ict_ok.admin_utils.idchooser.interfaces import IIdChooser
 from org.ict_ok.osi.interfaces import IOSIModel
 from org.ict_ok.osi.interfaces import IPhysicalLayer
 from org.ict_ok.components.superclass.superclass import objectsWithInterface
+from org.ict_ok.admin_utils.compliance.evaluation import \
+     getEvaluationsDone, getEvaluationsTodo
+from org.ict_ok.components.superclass.browser.superclass import \
+    History as SuperHistory
 
 _ = MessageFactory('org.ict_ok')
 
@@ -121,6 +125,10 @@ class ComponentDetails(SupernodeDetails):
                 evaluation = Evaluation(requirementObj, pfSystem,
                                         inpVal, internalPrincipal)
                 evaluations.addEvaluation(evaluation)
+                historyEntry = u"'%s' -> '%s'" % (requirementObj.ikName, inpVal)
+                obj.appendHistoryEntry(historyEntry,
+                                       request=self.request,
+                                       withAuthor=True)
         nextURL = self.request.get('nextURL', default=None)
         if nextURL is not None:
             return self.request.response.redirect(nextURL)
@@ -152,6 +160,10 @@ class ComponentDetails(SupernodeDetails):
                 evaluation = Evaluation(requirementObj, pfSystem,
                                         inpVal, internalPrincipal)
                 evaluations.addEvaluation(evaluation)
+                historyEntry = u"'%s' -> '%s'" % (requirementObj.ikName, inpVal)
+                obj.appendHistoryEntry(historyEntry,
+                                       request=self.request,
+                                       withAuthor=True)
         nextURL = self.request.get('nextURL', default=None)
         if nextURL is not None:
             return self.request.response.redirect(nextURL)
@@ -264,6 +276,8 @@ class EvaluationsTodoDisplay(Overview):
 
     def reqList2ndLevel(self):
         """List of Content objects"""
+        evaluations1stLevelTodo = self.context.getEvaluationsTodo()
+        evaluations1stLevelDone = self.context.getEvaluationsDone()
         attrs = self.context.getRefAttributeNames()
         retList = []
         for attr in attrs:
@@ -272,9 +286,18 @@ class EvaluationsTodoDisplay(Overview):
                 objs = [objs]
             for obj in objs:
                 if hasattr(obj, "requirements"):
-                    evaluations = self.context.getEvaluationsTodo()
+                    evaluations = getEvaluationsTodo(obj)
+                    #evaluations = self.context.getEvaluationsTodo()
                     for ev in evaluations:
-                        retList.append({"req": ev, "obj": self.context})
+                        alreadyDoneIn1stLevel = \
+                            ev in [evaluation.requirement
+                                   for evaluation in evaluations1stLevelDone]
+                        alreadyTodoIn1stLevel = \
+                            ev in [evaluation.requirement
+                                   for evaluation in evaluations1stLevelTodo]
+                        if not alreadyDoneIn1stLevel and \
+                            not alreadyTodoIn1stLevel:
+                            retList.append({"req": ev, "obj": self.context})
         return retList
 
 
@@ -317,6 +340,7 @@ class EvaluationsDoneDisplay(Overview):
 
     def reqList2ndLevel(self):
         """List of Content objects"""
+        evaluations1stLevel = self.context.getEvaluationsDone()
         attrs = self.context.getRefAttributeNames()
         retList = []
         for attr in attrs:
@@ -325,7 +349,8 @@ class EvaluationsDoneDisplay(Overview):
                 objs = [objs]
             for obj in objs:
                 if hasattr(obj, "requirements"):
-                    evaluations = self.context.getEvaluationsDone()
+                    evaluations = getEvaluationsDone(obj)
+                    #evaluations = self.context.getEvaluationsDone()
                     for ev in evaluations:
                         retList.append({"eval": ev, "obj": self.context})
         return retList
@@ -482,3 +507,7 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
         #if ISuperclass.providedBy(self.context):
             #self.label = self.getTitle()
         form.Form.update(self)
+
+
+class EvaluationsHistory(SuperHistory):
+    pass

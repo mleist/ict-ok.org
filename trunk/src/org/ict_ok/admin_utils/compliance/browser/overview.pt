@@ -28,6 +28,16 @@
             <td i18n:translate="">Comment</td>
             <td><pre tal:content="context/ikComment" /></td>
         </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/categories|nothing">
+            <td i18n:translate="">Categories</td>
+            <td>
+                <ul>
+                    <li tal:repeat="obj context/categories"
+                        tal:content="structure python: view.getHrefTitle(obj)" />
+                <ul>
+            </td>
+        </tr>
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Modification time</td>
             <div tal:omit-tag=""  tal:condition="context/getModifiedTime">

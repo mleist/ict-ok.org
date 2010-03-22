@@ -25,6 +25,7 @@ from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.admin_utils.categories.interfaces import \
      IAdmUtilCategories, ICategory
 from org.ict_ok.components.superclass.superclass import Superclass
@@ -62,7 +63,15 @@ class Category(Supernode):
         constructor of the object
         """
         Supernode.__init__(self, **data)
+        refAttributeNames = getRefAttributeNames(Category)
         for (name, value) in data.items():
-            if name in ICategory.names():
+            if name in ICategory.names() and \
+               name not in refAttributeNames:
                 setattr(self, name, value)
         self.ikRevision = __version__
+
+    def store_refs(self, **data):
+        refAttributeNames = getRefAttributeNames(Category)
+        for (name, value) in data.items():
+            if name in refAttributeNames:
+                setattr(self, name, value)

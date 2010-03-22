@@ -42,6 +42,15 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
     />
 
+    <page
+        name="match_requirements"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.AdmUtilComplianceDetails"
+        attribute="match_requirements"
+        permission="org.ict_ok.admin_utils.compliance.Match"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+
     <z3c:pagelet
         name="details.html"
         for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
@@ -177,6 +186,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.admin_utils.compliance.Delete"
     />
+    <z3c:pagelet
+        name="deleteReqs.html"
+        for="org.ict_ok.admin_utils.compliance.interfaces.IAdmUtilCompliance"
+        class=".compliance.DeleteAllReqsForm"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.Delete"
+    />
+
 
     <!--######################### Sub Menu ################### -->
     <!--##### Compliance ##### -->
