@@ -29,8 +29,8 @@ def evolve(context):
 
     for net in findObjectsProviding(root, IIpNet):
         # convert this object
-        evolve_msg = "gen. %d (%s)" % \
+        evolve_msg = u"gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
-        print "IpNet(%s): " % net.ikName + evolve_msg
+        print u"IpNet(%s): " % net.ikName + evolve_msg
         net.shortName = "ipnet"
         net.appendHistoryEntry(evolve_msg)
