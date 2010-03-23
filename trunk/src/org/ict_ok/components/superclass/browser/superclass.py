@@ -94,7 +94,7 @@ class CheckboxColumn(Column):
                   u'name="selected:list" value="%s">')
         return widget % (item.objectID)
 
-def getActionBotton_Detail(item, formatter):
+def getActionBotton_Detail(item, formatter, isRequirement=False):
     """Action Buttons for Overview in Web-Browser
     """
     if type(item) is dict:
@@ -108,7 +108,10 @@ def getActionBotton_Detail(item, formatter):
         view_html = u'<a href="%s">' %  (view_url) + \
                   u'<img id="%s" alt="Info" src="%s/Info.png" /></a>' % \
                   (ttid, resource_path)
-        tooltip_text = _(u'details of this object')
+        if isRequirement and item.ikComment is not None:
+            tooltip_text = item.ikComment.replace("\r\n", "<br />")
+        else:
+            tooltip_text = _(u'details of this object')
     else:
         view_html = u'<img id="%s" alt="Details" src="%s/Info_gr.png" />' % \
                   (ttid, resource_path)
@@ -357,6 +360,8 @@ def link(view='index.html'):
         """ anchor method will return a html formated anchor"""
         if value is None:
             return u''
+        if type(item) is dict:
+            item = item['obj']
         if ISuperclass.providedBy(value):
             item = value
             value = item.ikName

@@ -49,10 +49,15 @@
         id="org.ict_ok.admin_utils.compliance.evaluations.View"
         title="View evaluations from objects"
     />
-    
+
     <permission
         id="org.ict_ok.admin_utils.compliance.evaluations.Edit"
         title="Edit evaluations from objects"
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.compliance.evaluations.EditAll"
+        title="view all todos"
     />
 
     <!-- Copyright (c) 2007, 2008, 
@@ -73,28 +78,28 @@
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.compliance.Add"
                     role="org.ict_ok.adm" />
-                    
+
     <grant permission="org.ict_ok.admin_utils.compliance.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.compliance.Edit"
                     role="org.ict_ok.adm" />
-                    
+
     <grant permission="org.ict_ok.admin_utils.compliance.Delete"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.compliance.Delete"
                     role="org.ict_ok.adm" />
-                    
+
     <grant permission="org.ict_ok.admin_utils.compliance.Match"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.compliance.Match"
                     role="org.ict_ok.adm" />
-                    
+
     <grant permission="org.ict_ok.admin_utils.compliance.Import"
                     role="org.ict_ok.adm" />
-                    
+
     <grant permission="org.ict_ok.admin_utils.compliance.Export"
                     role="org.ict_ok.adm" />
-                    
+
     <grant permission="org.ict_ok.admin_utils.compliance.evaluations.View"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.compliance.evaluations.View"
@@ -103,6 +108,11 @@
     <grant permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
                     role="org.ict_ok.mgr" />
     <grant permission="org.ict_ok.admin_utils.compliance.evaluations.Edit"
+                    role="org.ict_ok.adm" />
+
+    <grant permission="org.ict_ok.admin_utils.compliance.evaluations.EditAll"
+                    role="org.ict_ok.mgr" />
+    <grant permission="org.ict_ok.admin_utils.compliance.evaluations.EditAll"
                     role="org.ict_ok.adm" />
 
 </configure>

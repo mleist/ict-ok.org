@@ -70,7 +70,6 @@ def getEvaluationsDone(context):
 
 def getEvaluationsTodo(context):
     """List of Content objects"""
-    #retList = []
     retSet = set([])
     my_catalog = zapi.getUtility(ICatalog)
     if hasattr(context, "requirements"):
@@ -82,15 +81,14 @@ def getEvaluationsTodo(context):
                     allObjReqs = []
                     allTmpObjReqs = getRequirementList(startReq)
                     for req in allTmpObjReqs:
-                        if req.validAsFirst and len(req) > 0:
+#                        if req.validAsFirst and len(req) > 0:
+                        if len(req) > 0:
                             pass
                         else:
                             allObjReqs.append(req)
                     allObjEvaluations = getEvaluationsDone(context)
                     alreadyCheckedReqs = [ev[0] for ev in allObjEvaluations.items()]
-                    #retList.extend(set(allObjReqs).difference(alreadyCheckedReqs))
                     retSet = retSet.union(set(allObjReqs).difference(alreadyCheckedReqs))
-    #        return retList
     retList = list(retSet)
     retList.sort()
     return retList

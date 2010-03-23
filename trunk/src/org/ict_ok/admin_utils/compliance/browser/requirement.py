@@ -62,8 +62,8 @@ def getRequirementBotton_Cross(item, formatter):
     urlExt = '/@@change_eval_no?nextURL=%s&req_id=%s&obj_id=%s' % \
            (fromURLq, item.getObjectId(), obj.objectID)
     resource_path = getAdapter(formatter.request, name='pics')()
-    ttid = u"cross" + formatter.context.getObjectId()
-    view_url = absoluteURL(formatter.context,
+    ttid = u"tick" + obj.objectID + item.objectID
+    view_url = absoluteURL(obj,
                            formatter.request) \
              + urlExt
     if True:
@@ -91,8 +91,8 @@ def getRequirementBotton_Tick(item, formatter):
     urlExt = '/@@change_eval_yes?nextURL=%s&req_id=%s&obj_id=%s' % \
            (fromURLq, item.getObjectId(), obj.objectID)
     resource_path = getAdapter(formatter.request, name='pics')()
-    ttid = u"tick" + formatter.context.getObjectId()
-    view_url = absoluteURL(formatter.context,
+    ttid = u"tick" + obj.objectID + item.objectID
+    view_url = absoluteURL(obj,
                            formatter.request) \
              + urlExt
     if True:
@@ -115,7 +115,8 @@ def getRequirementBottons(item, formatter):
     """Action Buttons for Overview in Web-Browser
     """
     retHtml = u""
-    retHtml += getActionBotton_Detail(item, formatter)
+    retHtml += getActionBotton_Detail(item['req'], formatter,
+                                      isRequirement=True)
     retHtml += getRequirementBotton_Tick(item, formatter)
     retHtml += getRequirementBotton_Cross(item, formatter)
     return retHtml

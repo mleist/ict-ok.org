@@ -80,6 +80,13 @@ class MSubExportXmlData(GlobalMenuSubItem):
     viewURL = 'exportreqxmldata.html'
     weight = 291
 
+class MSubInvRequirementTodos(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'All ToDos')
+    viewURL = 'all_evaluations_todo.html'
+    weight = 80
+
+
 
 # --------------- details -----------------------------
 
@@ -396,3 +403,7 @@ class DeleteAllReqsForm(layout.FormLayoutSupport, form.Form):
             return self.request.response.redirect(nextURL)
         else:
             return self.request.response.redirect('./@@details.html')
+
+
+class AllReqToDos(AdmUtilRequirementDisplayAll):
+    objListInterface = IRequirement
