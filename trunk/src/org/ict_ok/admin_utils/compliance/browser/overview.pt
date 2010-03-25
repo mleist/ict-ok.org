@@ -24,6 +24,16 @@
             <td><b tal:content="context/ikName" /></td>
         </tr>
         <tr tal:attributes="class view/getNextTabClass"
+                tal:condition="context/ikNotes|nothing">
+                <td i18n:translate="">Notes</td>
+                <td>
+                    <blockquote tal:repeat="note context/ikNotes"
+                                style="padding:2px; border:thin solid #ddd;  background-color:#ffffc0; margin-top:2px">
+                      <p tal:content="note">Klarheit ist, wenn man so will, nur die anschaulichere Variante der Wahrheit.</p>
+                    </blockquote>
+                </td>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">
             <td i18n:translate="">Comment</td>
             <td><pre tal:content="context/ikComment" /></td>

@@ -49,6 +49,17 @@ class AdmUtilCategories(OrderedContainer, Superclass):
         Superclass.__init__(self)
         OrderedContainer.__init__(self)
         self.ikRevision = __version__
+        
+    def getNamedReqDict(self):
+        """ all Reqs in Dict with ikName as key
+        """
+        retDict = {}
+        for req in self.values():
+            if retDict.has_key(req.ikName):
+                retDict[req.ikName + '-dup'] = req
+            else:
+                retDict[req.ikName] = req
+        return retDict
 
 
 class Category(Supernode):

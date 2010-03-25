@@ -25,6 +25,9 @@ _ = MessageFactory('org.ict_ok')
 
 class IAdmUtilCategories(Interface):
     """A configuration utility."""
+    def getNamedReqDict():
+        """ all Reqs in Dict with ikName as key
+        """
 
 
 class ICategory(Interface):

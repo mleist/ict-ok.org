@@ -10,18 +10,20 @@
     </div>
     <table id="sortable" class="listing" summary="Content listing"
             i18n:attributes="summary">
-        <!--<tr tal:attributes="class view/getNextTabClass">-->
-            <!--<td i18n:translate="">e-mail</td>-->
-            <!--<td tal:content="python: u'%s' % context.email" />-->
-        <!--</tr>-->
-        <!--<tr tal:attributes="class view/getNextTabClass">-->
-            <!--<td i18n:translate="">Timezone</td>-->
-            <!--<td tal:content="context/timezone" />-->
-        <!--</tr>-->
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikName|nothing">
             <td i18n:translate="">Instance name</td>
             <td><b tal:content="context/ikName" /></td>
+        </tr>
+        <tr tal:attributes="class view/getNextTabClass"
+                tal:condition="context/ikNotes|nothing">
+                <td i18n:translate="">Notes</td>
+                <td>
+                    <blockquote tal:repeat="note context/ikNotes"
+                                style="padding:2px; border:thin solid #ddd;  background-color:#ffffc0; margin-top:2px">
+                      <p tal:content="note">Klarheit ist, wenn man so will, nur die anschaulichere Variante der Wahrheit.</p>
+                    </blockquote>
+                </td>
         </tr>
         <tr tal:attributes="class view/getNextTabClass"
             tal:condition="context/ikComment|nothing">
@@ -46,15 +48,6 @@
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">resubmit date</td>
             <div tal:omit-tag=""  tal:condition="context/resubmitDate">
-                <td class="cb_ir" tal:content="python: dateform.format(context.resubmitDate)">test</td>
-            </div>
-            <div tal:omit-tag=""  tal:condition="not: context/resubmitDate">
-                <td>---</td>
-            </div>
-        </tr>
-        <tr tal:attributes="class view/getNextTabClass">
-            <td i18n:translate="">resubmit date</td>
-            <div tal:omit-tag=""  tal:condition="context/resubmitDate">
                 <td tal:content="python: dateform.format(context.resubmitDate)">test</td>
             </div>
             <div tal:omit-tag=""  tal:condition="not: context/resubmitDate">
@@ -69,6 +62,21 @@
             </div>
             <div tal:omit-tag=""  tal:condition="not: context/getModifiedTime">
                 <td>---</td>
+            </div>
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass">
+            <td i18n:translate="">Author</td>
+            <div tal:omit-tag=""  tal:condition="context/ikAuthor">
+                <td tal:content="context/ikAuthor">test</td>
+            </div>
+        </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/copyright|nothing">
+            <td i18n:translate="">Copyright</td>
+            <div tal:omit-tag="">
+                <td tal:content="context/copyright">test</td>
             </div>
         </tr>
     </table>

@@ -48,6 +48,12 @@ class IAdmUtilCompliance(Interface):
     def delete_requirements():
         """ delete all Categories from Components
         """
+    def exportReqXmlData():
+        """get data file for all objects
+        """
+    def importReqXmlData(xmlTree):
+        """set data for all objects from xml-tree
+        """
 
 #class IRequirement(ischooltool.IRequirement):
 class IRequirement(Interface):
@@ -69,7 +75,12 @@ class IRequirement(Interface):
         max_length = 80,
         title = _("Instance version"),
         description = _("Version of the instance."),
-        default=u'',
+        required = False)
+
+    copyright = TextLine(
+        max_length = 80,
+        title = _("Copyright"),
+        description = _("Copyright on this requirement."),
         required = False)
     
     categories = List(

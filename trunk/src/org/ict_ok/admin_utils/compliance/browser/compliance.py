@@ -106,24 +106,24 @@ class AdmUtilComplianceDetails(SupernodeDetails):
         except KeyError:
             objId = 1000
         retList = []
-        if checkPermission('org.ict_ok.admin_utils.compliance.generate.pdf',
-                           self.context):
-            tmpDict = {}
-            tmpDict['oid'] = u"c%sgenerate_all_pdf" % objId
-            tmpDict['title'] = _(u"generate all pdf")
-            tmpDict['href'] = u"%s/@@generate_all_pdf" % \
-                   (zapi.absoluteURL(self.context, self.request))
-            tmpDict['tooltip'] = _(u"will generate a all pdf file")
-            retList.append(tmpDict)
-        if checkPermission('org.ict_ok.admin_utils.compliance.Import',
-                           self.context):
-            tmpDict = {}
-            tmpDict['oid'] = u"c%simport requirements" % objId
-            tmpDict['title'] = _(u"import requirements")
-            tmpDict['href'] = u"%s/@@import_requirements" % \
-                   (zapi.absoluteURL(self.context, self.request))
-            tmpDict['tooltip'] = _(u"will import requirements")
-            retList.append(tmpDict)
+#        if checkPermission('org.ict_ok.admin_utils.compliance.generate.pdf',
+#                           self.context):
+#            tmpDict = {}
+#            tmpDict['oid'] = u"c%sgenerate_all_pdf" % objId
+#            tmpDict['title'] = _(u"generate all pdf")
+#            tmpDict['href'] = u"%s/@@generate_all_pdf" % \
+#                   (zapi.absoluteURL(self.context, self.request))
+#            tmpDict['tooltip'] = _(u"will generate a all pdf file")
+#            retList.append(tmpDict)
+#        if checkPermission('org.ict_ok.admin_utils.compliance.Import',
+#                           self.context):
+#            tmpDict = {}
+#            tmpDict['oid'] = u"c%simport requirements" % objId
+#            tmpDict['title'] = _(u"import requirements")
+#            tmpDict['href'] = u"%s/@@import_requirements" % \
+#                   (zapi.absoluteURL(self.context, self.request))
+#            tmpDict['tooltip'] = _(u"will import requirements")
+#            retList.append(tmpDict)
         if checkPermission('org.ict_ok.admin_utils.compliance.Match',
                            self.context):
             tmpDict = {}
@@ -356,10 +356,7 @@ class ImportReqXmlDataForm(layout.FormLayoutSupport, form.Form):
                                      remove_blank_text=True)
             tree   = etree.parse(fileUpload, parser)
             print "--->", etree.tostring(tree.getroot(), pretty_print=True)
-#
-#            if self.context.importAllData(xml_string):
-#                # ERROR behandlung
-#                pass
+            self.context.importReqXmlData(tree)
         url = absoluteURL(self.context, self.request)
         self.request.response.redirect(url)
 
