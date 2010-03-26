@@ -131,8 +131,6 @@ class DeleteNotebookForm(DeleteForm):
     
     def getTitle(self):
         """this title will be displayed in the head of form"""
-        import pdb
-        pdb.set_trace()
         return _(u"Delete this Notebook: '%s'?") % \
                IBrwsOverview(self.context).getTitle()
 
