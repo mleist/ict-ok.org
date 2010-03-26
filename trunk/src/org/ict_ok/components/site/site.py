@@ -44,11 +44,11 @@ class NewSiteEvent(object):
 class Site(ComponentFolder, SiteManagerContainer):
 #class Site(Component):
     """ ICT_Ok site object """
-    implements(ISite, IEventIfEventSite, IImportXlsData)
+    implements(ISite, IImportXlsData)
     shortName = "site"
     sitename = FieldProperty(ISite['sitename'])
-    eventInpObjs_inward_relaying_shutdown = FieldProperty(\
-        IEventIfEventSite['eventInpObjs_inward_relaying_shutdown'])
+#    eventInpObjs_inward_relaying_shutdown = FieldProperty(\
+#        IEventIfEventSite['eventInpObjs_inward_relaying_shutdown'])
     contentFactory = None
 
     def __init__(self, **data):
@@ -60,39 +60,39 @@ class Site(ComponentFolder, SiteManagerContainer):
         for (name, value) in data.items():
             if name in ISite.names():
                 setattr(self, name, value)
-        self.eventInpObjs_inward_relaying_shutdown = set([])
+#        self.eventInpObjs_inward_relaying_shutdown = set([])
         self.ikRevision = __version__
 
     def setSiteManager(self, sm):
         SiteManagerContainer.setSiteManager(self, sm)
         notify(NewSiteEvent(self))
         
-    def eventInp_inward_relaying_shutdown(self, eventMsg=None):
-        """
-        forward the event to all objects in this container through the signal filter
-        """
-        print "Site.eventInp_inward_relaying_shutdown()"
-        for name, obj in self.items():
-            if ISite.providedBy(obj):
-                targetFunctionName = "inward_relaying_shutdown"
-            elif IIpNet.providedBy(obj):
-                targetFunctionName = "inward_relaying_shutdown"
-            else:
-                targetFunctionName = None
-            if eventMsg is not None:
-                inst_event = MsgEvent(senderObj = self,
-                                      oidEventObject = eventMsg.oidEventObject,
-                                      logText = u"inward relaying by site '%s'"\
-                                      % self.ikName,
-                                      targetFunctionName = targetFunctionName)
-                eventMsg.stopit(self,
-                                u"relaying by site '%s'" % self.ikName)
-            else:
-                inst_event = MsgEvent(senderObj = self,
-                                      logText = u"inward relaying by site '%s'"\
-                                      % self.ikName,
-                                      targetFunctionName = targetFunctionName)
-            obj.injectInpEQueue(inst_event)
+#    def eventInp_inward_relaying_shutdown(self, eventMsg=None):
+#        """
+#        forward the event to all objects in this container through the signal filter
+#        """
+#        print "Site.eventInp_inward_relaying_shutdown()"
+#        for name, obj in self.items():
+#            if ISite.providedBy(obj):
+#                targetFunctionName = "inward_relaying_shutdown"
+#            elif IIpNet.providedBy(obj):
+#                targetFunctionName = "inward_relaying_shutdown"
+#            else:
+#                targetFunctionName = None
+#            if eventMsg is not None:
+#                inst_event = MsgEvent(senderObj = self,
+#                                      oidEventObject = eventMsg.oidEventObject,
+#                                      logText = u"inward relaying by site '%s'"\
+#                                      % self.ikName,
+#                                      targetFunctionName = targetFunctionName)
+#                eventMsg.stopit(self,
+#                                u"relaying by site '%s'" % self.ikName)
+#            else:
+#                inst_event = MsgEvent(senderObj = self,
+#                                      logText = u"inward relaying by site '%s'"\
+#                                      % self.ikName,
+#                                      targetFunctionName = targetFunctionName)
+#            obj.injectInpEQueue(inst_event)
 
         
 @adapter(ISite, IObjectAddedEvent)
