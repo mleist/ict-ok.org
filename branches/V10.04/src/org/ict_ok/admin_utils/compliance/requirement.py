@@ -159,6 +159,7 @@ class Requirement(Superclass,
     validAsFirst = FieldProperty(IRequirement['validAsFirst'])
     resubmitDate = FieldProperty(IRequirement['resubmitDate'])
     version = FieldProperty(IRequirement['version'])
+    copyright = FieldProperty(IRequirement['copyright'])
     categories = RelationPropertyIn(Categories_Requirements_RelManager)
 
     def __init__(self, title, **data):
@@ -199,10 +200,28 @@ class Requirement(Superclass,
         #print u"Post:", self.title
 
     def asETree(self):
-        reqObj = etree.Element("Req")
+        attrib={}
+        attrib['uid'] = unicode(self.objectID)
+        attrib['author'] = unicode(self.ikAuthor)
+        if self.copyright is not None and len(self.copyright)>0:
+            attrib['copyright'] = unicode(self.copyright)
+        if self.version is not None and len(self.version)>0:
+            attrib['version'] = unicode(self.version)
+        if self.validAsFirst is True:
+            attrib['validAsFirst'] = unicode(self.validAsFirst)
+        if self.resubmitDate is not None:
+            attrib['resubmitDate'] = unicode(self.resubmitDate)
+        reqObj = etree.Element("Req", attrib=attrib)
         titleObj = etree.Element("Title")
         titleObj.text = self.title
+        categoriesObj = etree.Element("Categories")
+        for category in self.categories:
+            categoryObj = etree.Element("Category")
+            categoryObj.text = unicode(category.ikName)
+            categoriesObj.append(categoryObj)
         reqObj.append(titleObj)
+        if len(categoriesObj) > 0:
+            reqObj.append(categoriesObj)
         for subReq in self.values():
             reqObj.append( subReq.asETree())
         return reqObj

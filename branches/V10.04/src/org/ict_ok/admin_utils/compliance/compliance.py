@@ -20,11 +20,15 @@ __version__ = "$Id$"
 import os
 import logging
 import pickle
+from datetime import datetime
 from lxml import etree
 
 # zope imports
 from zope.interface import implements
 from zope.xmlpickle import toxml, fromxml, loads
+from zope.app import zapi
+from zope.app.catalog.interfaces import ICatalog
+from zope.component import getUtility
 
 # zc imports
 
@@ -38,6 +42,9 @@ from org.ict_ok.admin_utils.compliance.interfaces import \
      IAdmUtilCompliance, IImportXmlData
 from org.ict_ok.components.superclass.superclass import objectsWithInterface
 from org.ict_ok.admin_utils.compliance.interfaces import IRequirement
+from org.ict_ok.admin_utils.compliance.requirement import Requirement
+from org.ict_ok.components.superclass.interfaces import IBrwsOverview
+from org.ict_ok.admin_utils.categories.interfaces import IAdmUtilCategories
 
 logger = logging.getLogger("AdmUtilCompliance")
 
@@ -105,7 +112,89 @@ class AdmUtilCompliance(Supernode):
 #                obj.getAllExportData(dataStructure)
         python_pickle = pickle.dumps(dataStructure)
         return toxml(python_pickle)
-    
+
+    def importReqSet(self, xmlElement, importOnNode=None):
+        """import Requirement from xml data
+        """
+        print "importReqSet(%s)" % xmlElement
+        print "tags: %s, text: %s" % (xmlElement.tag, xmlElement.text)
+        utilCategories = getUtility(IAdmUtilCategories,
+                                    name='AdmUtilCategories')
+        reqTitle = xmlElement.find('Title')
+        reqTitleText = None
+        if reqTitle is not None:
+            reqTitleText = unicode(reqTitle.text)
+        reqCategoriesList = xmlElement.findall('Categories/*')
+        attrib={}
+        oldReqObject = None
+        str_objectID = xmlElement.get('uid')
+        if str_objectID is not None:
+            attrib['objectID'] = unicode(str_objectID)
+            my_catalog = zapi.getUtility(ICatalog)
+            res = my_catalog.searchResults(oid_index=attrib['objectID'])
+            if len(res) > 0:
+                oldReqObject = iter(res).next()
+                print "oldReqObject: ", oldReqObject
+        str_ikAuthor = xmlElement.get('author')
+        if str_ikAuthor is not None:
+            attrib['ikAuthor'] = unicode(str_ikAuthor)
+        str_copyright = xmlElement.get('copyright')
+        if str_copyright is not None:
+            attrib['copyright'] = unicode(str_copyright)
+        str_version = xmlElement.get('version')
+        if str_version is not None:
+            attrib['version'] = unicode(str_version)
+        str_validAsFirst = xmlElement.get('validAsFirst')
+        if str_validAsFirst is not None:
+            attrib['validAsFirst'] = bool(str_validAsFirst)
+        str_resubmitDate = xmlElement.get('resubmitDate')
+        if str_resubmitDate is not None:
+            attrib['resubmitDate'] = \
+                datetime.strptime(str_resubmitDate,
+                                  '%Y-%m-%d %H:%M:%S')
+        attrib['categories'] = []
+        if reqCategoriesList is not None:
+            internalCategoriesDict = utilCategories.getNamedReqDict()
+            for reqCategoryElement in reqCategoriesList:
+                tmpCategoryName = reqCategoryElement.text
+                if internalCategoriesDict.has_key(tmpCategoryName):
+                    categoryObj = internalCategoriesDict[tmpCategoryName]
+                    attrib['categories'].append(categoryObj)
+        if oldReqObject is not None:
+            if reqTitleText is not None and \
+                not reqTitleText == oldReqObject.ikName:
+                    print "change1: ", (oldReqObject.ikName, reqTitleText)
+                    oldReqObject.ikName = reqTitleText
+                    IBrwsOverview(oldReqObject).setTitle(reqTitleText)
+            attrObjectID = attrib.pop('objectID')
+            for (name, value) in attrib.items():
+                if not getattr(oldReqObject, name) == value:
+                    print "change2: ", (oldReqObject, name, value)
+                    setattr(oldReqObject, name, value)
+        else:
+            obj = Requirement(reqTitleText, **attrib)
+            IBrwsOverview(obj).setTitle(reqTitleText)
+            obj.__post_init__()
+            importOnNode[obj.objectID] = obj
+            obj.store_refs(**attrib)
+            oldReqObject = obj
+        children = xmlElement.findall('Req')
+        for child in children:
+            self.importReqSet(child, importOnNode=oldReqObject)
+
+    def importReqXmlData(self, xmlTree):
+        """set data for all objects from xml-tree"""
+#        import pdb
+#        pdb.set_trace()
+        reqList = xmlTree.getroot().findall('Req')
+        for reqElement in reqList:
+            self.importReqSet(reqElement, importOnNode=self)
+
+    def appendReqXmlData(self, objects, rootElement):
+        for (dummy_name, oobj) in objects:
+            if ISuperclass.providedBy(oobj):
+                rootElement.append(oobj.asETree())
+
     def exportReqXmlData(self):
         # ...
         import StringIO
@@ -130,14 +219,15 @@ class AdmUtilCompliance(Supernode):
         
         #root.append(etree.Element('!DOCTYPE Req PUBLIC "-//IKOMtrol//DTD Reqs 1.0//EN" "reqs.dtd" []'))
         #treet = etree.fromstring('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html></html>')
-        print "--->", etree.tostring(treeTemplate, pretty_print=True)
+        #print "--->", etree.tostring(treeTemplate, pretty_print=True)
         
         #root.append(treet)
 
         its = self.items()
-        for (dummy_name, oobj) in its:
-            if ISuperclass.providedBy(oobj):
-                rootTmp.append( oobj.asETree())
+        self.appendReqXmlData(its, rootTmp)
+#        for (dummy_name, oobj) in its:
+#            if ISuperclass.providedBy(oobj):
+#                rootTmp.append( oobj.asETree())
         #etree.tostring(etree.ElementTree(tree.getroot()))
         #import pdb
         #pdb.set_trace()
@@ -170,6 +260,9 @@ class AdmUtilCompliance(Supernode):
         newRoot = newTree.getroot()
         newRoot[:] = rootTmp
         newRoot.text, newRoot.tail = rootTmp.text, rootTmp.tail
+        titleObj = etree.Element("Title")
+        titleObj.text = u'Root'
+        newRoot.insert(0, titleObj)
         #return etree.tostring(newTree, xml_declaration=True, encoding="utf-8")
         return etree.tostring(newTree, pretty_print=True, xml_declaration=True, encoding="utf-8")
 
