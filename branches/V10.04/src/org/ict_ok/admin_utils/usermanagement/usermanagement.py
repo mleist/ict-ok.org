@@ -569,7 +569,10 @@ class MyLDAPAuthentication(LDAPAuthentication):
             res = conn.search(self.groupsSearchBase, self.groupsSearchScope, filter=filter,
                               attrs=[self.groupIdAttribute])
         except NoSuchObject, errText:
-            print "errText: ", errText
+            print "NoSuchObject: errText: ", errText
+            return ()
+        except KeyError, errText:
+            print "KeyError: errText: ", errText
             return ()
 
         prefix = self.principalIdPrefix
