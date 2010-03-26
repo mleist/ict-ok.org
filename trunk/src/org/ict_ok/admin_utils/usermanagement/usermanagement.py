@@ -49,7 +49,7 @@ from org.ict_ok.components.supernode.supernode import Supernode
 from org.ict_ok.admin_utils.usermanagement.interfaces import \
      IAdmUtilUserDashboard, IAdmUtilUserDashboardItem,\
      IAdmUtilUserProperties, IAdmUtilUserManagement, \
-     IAdmUtilUserPreferences
+     IAdmUtilUserPreferences, IEditPassword
 #other imports
 from ldappas.interfaces import ILDAPAuthentication
 from ldappas.authentication import LDAPAuthentication
@@ -74,7 +74,7 @@ class MappingProperty(object):
 class AdmUtilUserManagement(Supernode, PluggableAuthentication):
     """Implementation of local UserManagement Utility"""
 
-    implements(IAdmUtilUserManagement, IAdmUtilUserPreferences)
+    implements(IAdmUtilUserManagement, IAdmUtilUserPreferences, IEditPassword)
     adapts(IPrincipal)
 
     serverURL = FieldProperty(IAdmUtilUserManagement['serverURL'])
