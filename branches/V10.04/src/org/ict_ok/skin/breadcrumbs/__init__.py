@@ -24,6 +24,7 @@ import zope.publisher.interfaces.http
 from zope.traversing.interfaces import IContainmentRoot
 from zope.publisher import browser
 from zope.viewlet import viewlet
+from zope.security.interfaces import Unauthorized
 
 # z3c imports
 from z3c.pagelet.browser import BrowserPagelet
@@ -46,15 +47,18 @@ class Breadcrumbs(browser.BrowserView):
             myobjects = []
         myobjects.reverse()
         for myobject in myobjects:
-            info = zapi.getMultiAdapter((myobject, self.request),
-                                        IBreadcrumbInfo)
-            if info.name == u'++etc++site':
+            try:
+                info = zapi.getMultiAdapter((myobject, self.request),
+                                            IBreadcrumbInfo)
+                if info.name == u'++etc++site':
+                    pass
+                elif info.name == u'default':
+                    pass
+                else:
+                    yield {'name': info.name, 'url': info.url,
+                           'active': info.active}
+            except Unauthorized:
                 pass
-            elif info.name == u'default':
-                pass
-            else:
-                yield {'name': info.name, 'url': info.url,
-                       'active': info.active}
 
 
 class GenericBreadcrumbInfo(object):
