@@ -72,13 +72,13 @@ class IRequirement(Interface):
         required = False)
     
     version = TextLine(
-        max_length = 80,
+        max_length = 200,
         title = _("Instance version"),
         description = _("Version of the instance."),
         required = False)
 
     copyright = TextLine(
-        max_length = 80,
+        max_length = 200,
         title = _("Copyright"),
         description = _("Copyright on this requirement."),
         required = False)

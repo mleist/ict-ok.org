@@ -123,7 +123,7 @@ class AdmUtilCompliance(Supernode):
         reqTitle = xmlElement.find('Title')
         reqTitleText = None
         if reqTitle is not None:
-            reqTitleText = unicode(reqTitle.text)
+            reqTitleText = unicode(reqTitle.text).strip().replace("\r", "").replace("\n", "")
         reqCategoriesList = xmlElement.findall('Categories/*')
         attrib={}
         oldReqObject = None

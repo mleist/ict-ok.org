@@ -32,6 +32,14 @@
             set_schema=".interfaces.IAdmUtilUserPreferences"
             />
         <require
+            permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+            interface=".interfaces.IEditPassword"
+            />
+        <require
+            permission="org.ict_ok.admin_utils.usermanagement.Preferences"
+            set_schema=".interfaces.IEditPassword"
+            />
+        <require
             permission="org.ict_ok.admin_utils.usermanagement.View"
             interface="org.ict_ok.components.superclass.interfaces.ISuperclass"
             />
