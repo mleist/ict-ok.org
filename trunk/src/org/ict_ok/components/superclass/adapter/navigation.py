@@ -22,6 +22,7 @@ from zope.component import adapts
 from zope.i18nmessageid import MessageFactory
 from zope.app import zapi
 from zope.site.interfaces import IFolder, IRootFolder
+from zope.security import canAccess
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import \
@@ -47,7 +48,9 @@ class Navigation(object):
         if preList is not None:
             retList.extend(preList)
         try:
-            retList.append((None, None, zapi.getParent(self.context)))
+            parentObj = zapi.getParent(self.context)
+            if parentObj is not None and canAccess(parentObj, '__len__'):
+                retList.append((None, None, parentObj))
         except Exception:
             print "111e"
             import traceback
