@@ -64,6 +64,8 @@
         />
 
     <class class=".requirement.Requirement">
+        <factory
+            id="org.ict_ok.admin_utils.compliance.requirement.Requirement" />
         <implements
             interface="zope.annotation.interfaces.IAttributeAnnotatable"
             />
