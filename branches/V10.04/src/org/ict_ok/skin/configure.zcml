@@ -28,7 +28,7 @@
     <include file="./error/configure.zcml" />
     <include file="./login/configure.zcml" />
     <include file="./hd/configure.zcml" />
-    <include file="./breadcrumbs/configure.zcml" />
+    <!-- <include file="./breadcrumbs/configure.zcml" /> -->
     <include file="./mtree/configure.zcml" />
     <include file="./menu/configure.zcml" />
     <include file="./footer/configure.zcml" />

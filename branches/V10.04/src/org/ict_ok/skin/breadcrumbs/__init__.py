@@ -24,72 +24,79 @@ import zope.publisher.interfaces.http
 from zope.traversing.interfaces import IContainmentRoot
 from zope.publisher import browser
 from zope.viewlet import viewlet
-from zope.security.interfaces import Unauthorized
 
 # z3c imports
 from z3c.pagelet.browser import BrowserPagelet
-from z3c.breadcrumb.browser import CustomNameBreadcrumb
+from z3c.breadcrumb.browser import GenericBreadcrumb as Z3GenericBreadcrumb
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.breadcrumbs.interfaces import IBreadcrumbs,\
      IBreadcrumbInfo
 
-class Breadcrumbs(browser.BrowserView):
-    """Special Breadcrumbs implementation."""
-    implements(IBreadcrumbs)
-
-    @property
-    def crumbs(self):
-        try:
-            myobjects = [self.context] + list(zapi.getParents(self.context))
-        except Exception:
-            myobjects = []
-        myobjects.reverse()
-        for myobject in myobjects:
-            try:
-                info = zapi.getMultiAdapter((myobject, self.request),
-                                            IBreadcrumbInfo)
-                if info.name == u'++etc++site':
-                    pass
-                elif info.name == u'default':
-                    pass
-                else:
-                    yield {'name': info.name, 'url': info.url,
-                           'active': info.active}
-            except Unauthorized:
-                pass
+#class Breadcrumbs(browser.BrowserView):
+#    """Special Breadcrumbs implementation."""
+#    implements(IBreadcrumbs)
+#
+#    @property
+#    def crumbs(self):
+#        try:
+#            myobjects = [self.context] + list(zapi.getParents(self.context))
+#        except Exception:
+#            myobjects = []
+#        myobjects.reverse()
+#        for myobject in myobjects:
+#            info = zapi.getMultiAdapter((myobject, self.request),
+#                                        IBreadcrumbInfo)
+#            if info.name == u'++etc++site':
+#                pass
+#            elif info.name == u'default':
+#                pass
+#            else:
+#                yield {'name': info.name, 'url': info.url,
+#                       'active': info.active}
 
 
-class GenericBreadcrumbInfo(object):
-    """A generic breadcrumb info adapter."""
-    implements(IBreadcrumbInfo)
-    adapts(zope.interface.Interface,
-           zope.publisher.interfaces.http.IHTTPRequest)
+#class GenericBreadcrumbInfo(object):
+#    """A generic breadcrumb info adapter."""
+#    implements(IBreadcrumbInfo)
+#    adapts(zope.interface.Interface,
+#           zope.publisher.interfaces.http.IHTTPRequest)
+#
+#    # See interfaces.IBreadcrumbInfo
+#    active = True
+#
+#    def __init__(self, context, request):
+#        self.context = context
+#        self.request = request
+#
+#    @property
+#    def name(self):
+#        """See interfaces.IBreadcrumbInfo"""
+#        try:
+#            name = IBrwsOverview(self.context).getTitle()
+#            if len(name) == 0:
+#                raise TypeError
+#        except TypeError:
+#            name = getattr(self.context, 'title', None)
+#        if name is None:
+#            name = getattr(self.context, '__name__', None)
+#        if name is None and IContainmentRoot.providedBy(self.context):
+#            name = 'top'
+#        return name
+#
+#    @property
+#    def url(self):
+#        """See interfaces.IBreadcrumbInfo"""
+#        return zapi.absoluteURL(self.context, self.request)
 
-    # See interfaces.IBreadcrumbInfo
-    active = True
-
-    def __init__(self, context, request):
-        self.context = context
-        self.request = request
-
+class GenericBreadcrumb(Z3GenericBreadcrumb):
     @property
     def name(self):
-        """See interfaces.IBreadcrumbInfo"""
-        try:
-            name = IBrwsOverview(self.context).getTitle()
-            if len(name) == 0:
-                raise TypeError
-        except TypeError:
-            name = getattr(self.context, 'title', None)
-        if name is None:
-            name = getattr(self.context, '__name__', None)
-        if name is None and IContainmentRoot.providedBy(self.context):
+        """See interfaces.IBreadcrumb"""
+        name = getattr(self.context, 'ikName', '')
+        if not name:
+            name = getattr(self.context, '__name__', '')
+        if not name and IContainmentRoot.providedBy(self.context):
             name = 'top'
         return name
-
-    @property
-    def url(self):
-        """See interfaces.IBreadcrumbInfo"""
-        return zapi.absoluteURL(self.context, self.request)

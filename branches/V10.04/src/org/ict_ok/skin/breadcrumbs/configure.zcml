@@ -21,19 +21,34 @@
         weight="50"
         />
 		
-    <page
-		for="*"
-		name="breadcrumbs"
-		class="org.ict_ok.skin.breadcrumbs.Breadcrumbs"
-		permission="zope.View"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-		allowed_interface="org.ict_ok.skin.breadcrumbs.interfaces.IBreadcrumbs"
-		/>
+<!--    <page-->
+<!--		for="*"-->
+<!--		name="breadcrumbs"-->
+<!--		class="org.ict_ok.skin.breadcrumbs.Breadcrumbs"-->
+<!--		permission="zope.View"-->
+<!--        layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+<!--		allowed_interface="org.ict_ok.skin.breadcrumbs.interfaces.IBreadcrumbs"-->
+<!--		/>-->
+<!---->
+<!--	<zope:adapter-->
+<!--		factory="org.ict_ok.skin.breadcrumbs.GenericBreadcrumbInfo"-->
+<!--		trusted="true"-->
+<!--		permission="zope.View"-->
+<!--		/>-->
 
-	<zope:adapter
-		factory="org.ict_ok.skin.breadcrumbs.GenericBreadcrumbInfo"
-		trusted="true"
-		permission="zope.View"
-		/>
+    <page
+        for="*"
+        name="breadcrumbs"
+        class="z3c.breadcrumb.browser.Breadcrumbs"
+        permission="zope.Public"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
+
+    <zope:adapter
+        factory="org.ict_ok.skin.breadcrumbs.GenericBreadcrumb"
+        trusted="true"
+        permission="zope.Public"
+        />
+
 
 </configure>

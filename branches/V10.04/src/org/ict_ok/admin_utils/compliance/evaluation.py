@@ -74,8 +74,9 @@ def getEvaluationsTodo(context):
     retSet = set([])
     my_catalog = zapi.getUtility(ICatalog)
     if hasattr(context, "requirements"):
-        if context.requirements is not None:
-            for requirement in context.requirements:
+        requirements = removeAllProxies(context.requirements)
+        if requirements is not None:
+            for requirement in requirements:
                 res = my_catalog.searchResults(oid_index=requirement.objectID)
                 if len(res) > 0:
                     startReq = iter(res).next()
