@@ -28,6 +28,7 @@ from zope.app.intid import IntIds
 from zope.app.intid.interfaces import IIntIds
 from zope.app.catalog.catalog import Catalog
 from zope.app.catalog.text import TextIndex
+from zope.app.catalog.keyword import KeywordIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
 

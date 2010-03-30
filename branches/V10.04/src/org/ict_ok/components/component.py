@@ -753,12 +753,13 @@ class ComponentFolder(Superclass, Folder):
     def renderAddObjectButton(self, request):
         """ render html code for a generic add button
         """
-        view_url = absoluteURL(self, request)\
-                    + '/@@add_%s.html' % self.contentFactory.shortName
-        # contentFactory
-        #self.context
-        return u'<a href="%s">Add %s</a>' % (view_url,
-                                             self.contentFactory.shortName)
+        if hasattr(self.contentFactory, 'shortName'):
+            view_url = absoluteURL(self, request)\
+                        + '/@@add_%s.html' % self.contentFactory.shortName
+            return u'<a href="%s">Add %s</a>' % (view_url,
+                                                 self.contentFactory.shortName)
+        else:
+            return u''
 
 
 

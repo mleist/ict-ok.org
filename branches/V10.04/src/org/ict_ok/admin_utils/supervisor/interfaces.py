@@ -253,6 +253,17 @@ class IAdmUtilSupervisor(Interface):
         """
         will reindex the catalogs of all tables in database
         """
+        
+    def remove_indices():
+        """
+        will remove all indices in database
+        """
+        
+    def create_indices():
+        """
+        will create all non existent indices in database
+        """
+        
     def exportAllData():
         """get data file for all objects"""
 

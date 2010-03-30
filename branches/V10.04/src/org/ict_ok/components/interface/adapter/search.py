@@ -48,7 +48,8 @@ class Searchable(SuperSearchable):
         """
         get Object id as string for catalog
         """
-        return self.context.getObjectId()
+        return (self.context.getObjectId(),)
+
 
 #    def getSearchableInterfaceIp(self):
 #        return convertIpV4(self.context.ipAddresses)

@@ -37,6 +37,9 @@ from zope.app.generations.generations import findManagers
 from zope.app.catalog.interfaces import ICatalog
 from zope.traversing.browser import absoluteURL
 from zope.app.rotterdam.xmlobject import setNoCacheHeaders
+from zope.app.catalog.text import TextIndex
+from zope.app.catalog.keyword import KeywordIndex
+from zope.app.catalog.field import FieldIndex
 
 # z3c imports
 from z3c.form import button, field, form, interfaces
@@ -71,6 +74,7 @@ from org.ict_ok.components.interfaces import IImportXlsData
 from org.ict_ok.components.superclass.browser.superclass import \
     getStateIcon, raw_cell_formatter, getHealth, IctGetterColumn, \
     getModifiedDate, getActionBottons, link, getTypeName, getTitle
+from org.ict_ok.components.site.interfaces import ISite as IIctSite
 
 _ = MessageFactory('org.ict_ok')
 
@@ -140,8 +144,32 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
             tmpDict['tooltip'] = _(u"will reindex the catalogs of all "\
                                    u"tables in database")
             retList.append(tmpDict)
-        if checkPermission('org.ict_ok.admin_utils.supervisor.PackDB',
+        if checkPermission('org.ict_ok.admin_utils.supervisor.RemoveIndices',
                            self.context):
+            quoter = URLQuote(self.request.getURL())
+            tmpDict = {}
+            tmpDict['oid'] = u"c%sremove_indices" % objId
+            tmpDict['title'] = _(u"Remove indices")
+            tmpDict['href'] = u"%s/@@remove_indices?nextURL=%s" % \
+                   (zapi.absoluteURL(self.context, self.request),
+                    quoter.quote())
+            tmpDict['tooltip'] = _(u"will remove all indices of all "\
+                                   u"tables in database")
+            retList.append(tmpDict)
+        if checkPermission('org.ict_ok.admin_utils.supervisor.CreateIndices',
+                           self.context):
+            quoter = URLQuote(self.request.getURL())
+            tmpDict = {}
+            tmpDict['oid'] = u"c%screate_indices" % objId
+            tmpDict['title'] = _(u"Create indices")
+            tmpDict['href'] = u"%s/@@create_indices?nextURL=%s" % \
+                   (zapi.absoluteURL(self.context, self.request),
+                    quoter.quote())
+            tmpDict['tooltip'] = _(u"will create all indices in database")
+            retList.append(tmpDict)
+        if not self.isInIctSite() and \
+            checkPermission('org.ict_ok.admin_utils.supervisor.PackDB',
+                            self.context):
             quoter = URLQuote(self.request.getURL())
             tmpDict = {}
             tmpDict['oid'] = u"c%spack_db" % objId
@@ -153,6 +181,7 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
                                    u"all backups")
             retList.append(tmpDict)
         return retList
+
     
     def state(self):
         """
@@ -171,23 +200,54 @@ class AdmUtilSupervisorDetails(SupernodeDetails):
         else:
             return self.request.response.redirect('./@@details.html')
 
+    def remove_indices(self):
+        """
+        will remove all indices in database
+        """
+        self.context.remove_indices()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
+    def create_indices(self):
+        """
+        will create all non existent indices in database
+        """
+        self.context.create_indices()
+        nextURL = self.request.get('nextURL', default=None)
+        if nextURL:
+            return self.request.response.redirect(nextURL)
+        else:
+            return self.request.response.redirect('./@@details.html')
+
     def pack_db(self):
         """
         will pack the database
         """
-        size_pre = self.request.publication.db.getSize()
-        self.request.publication.db.pack(days=0)
-        size_post = self.request.publication.db.getSize()
-        ratio = float(size_post)/size_pre*100
-        self.context.appendEventHistory(\
-            u"zodb packed by '%s'; %d bytes -> %d bytes (%.1f%%)" % \
-            (self.request.principal.title, size_pre, size_post, ratio))
+        if not self.isInIctSite():
+            size_pre = self.request.publication.db.getSize()
+            self.request.publication.db.pack(days=0)
+            size_post = self.request.publication.db.getSize()
+            ratio = float(size_post)/size_pre*100
+            self.context.appendEventHistory(\
+                u"zodb packed by '%s'; %d bytes -> %d bytes (%.1f%%)" % \
+                (self.request.principal.title, size_pre, size_post, ratio))
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:
             return self.request.response.redirect(nextURL)
         else:
             return self.request.response.redirect('./@@details.html')
         
+    def isInIctSite(self):
+        """ this supervisor is under a ict site
+        """
+        sitem = zapi.getSiteManager(self)
+        site = zapi.getParent(sitem)
+        if IIctSite.providedBy(site):
+            return True
+        return False
         
     def getlastEvents(self):
         """convert event history for display
@@ -339,8 +399,21 @@ def formatGenerationName(genManager, formatter):
 def formatIndicesName(index, formatter):
     return index.__name__
 
+def formatIndicesType(index, formatter):
+    if type(index) is TextIndex:
+        return _(u'TextIndex')
+    elif type(index) is FieldIndex:
+        return _(u'FieldIndex')
+    elif type(index) is KeywordIndex:
+        return _(u'KeywordIndex')
+    else:
+        return _(u'unknown index type')
+
 def formatIndicesDocuments(index, formatter):
-    return index.documentCount()
+    try:
+        return index.documentCount()
+    except NotImplementedError, errText:
+        return -1
 
 def formatIndicesWords(index, formatter):
     return index.wordCount()
@@ -420,6 +493,8 @@ class ViewAdmUtilSupervisorIndicesForm(BrowserPagelet):
     columns = (
         GetterColumn(title=_('Name'),
                      getter=formatIndicesName),
+        GetterColumn(title=_('Type'),
+                     getter=formatIndicesType),
         GetterColumn(title=_('Documents'),
                      getter=formatIndicesDocuments),
         GetterColumn(title=_('Words'),
@@ -506,6 +581,8 @@ class FSearchForm(Overview):
             len(self.fsearchText) > 0:
             my_catalog = zapi.getUtility(ICatalog)
             try:
+                import pdb
+                pdb.set_trace()
                 res = my_catalog.searchResults(all_fulltext_index=self.fsearchText)
                 for obj in res:
                     retList.append(obj)

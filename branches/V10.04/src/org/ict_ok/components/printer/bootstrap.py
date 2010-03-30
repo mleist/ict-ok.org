@@ -21,6 +21,7 @@ import transaction
 from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.catalog.text import TextIndex
+from zope.app.catalog.keyword import KeywordIndex
 from zope.app.catalog.interfaces import ICatalog
 from zope.index.text.interfaces import ISearchableText
 
@@ -39,7 +40,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
               if util.provided.isOrExtends(ICatalog)]
     instUtilityICatalog = utils[0].component
     if not "printer_oid_index" in instUtilityICatalog.keys():
-        printer_oid_index = TextIndex(interface=ISearchableText,
+        printer_oid_index = KeywordIndex(interface=ISearchableText,
                                         field_name='getSearchablePrinterOid',
                                         field_callable=True)
         instUtilityICatalog['printer_oid_index'] = printer_oid_index
@@ -49,8 +50,6 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: ICatalog - create index for entry type 'printer'")
-        instAdmUtilSupervisor.appendEventHistory(\
-            u" bootstrap: ICatalog - create index for entry type 'appsoftware'")
 
     ensureComponentFolderOnBootstrap(IPrinterFolder,
                  u"Printers",
