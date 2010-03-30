@@ -1,6 +1,6 @@
 <i18n:block domain="org.ict_ok">
   <div id="footer">
-    <div> 
+    <div>
       ICT_Ok (trunk) ($Rev$) |
       <span id="ikh_time">--</span> |
       <!--<a href="/@@support">Support</a> |-->
