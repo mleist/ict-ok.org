@@ -171,7 +171,7 @@ class Superclass(Persistent):
         get 'Universe ID' of object
         returns str
         """
-        return self.objectID
+        return str(self.objectID)
 
     def setObjectId(self, arg_oid):
         """
@@ -715,5 +715,8 @@ def objectsWithInterface(interface):
                                   interface.__name__)
 #    for i in my_catalog.searchResults(all_interfaces_index=dottedInterfaceName):
 #        yield i
-    return my_catalog.searchResults(all_interfaces_index=dottedInterfaceName)
+    try:
+        return my_catalog.searchResults(all_interfaces_index=dottedInterfaceName)
+    except KeyError:
+        return []
 

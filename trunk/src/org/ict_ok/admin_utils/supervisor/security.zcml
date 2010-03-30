@@ -36,6 +36,16 @@
     />
 
     <permission
+        id="org.ict_ok.admin_utils.supervisor.RemoveIndices"
+        title="remove all database catalogs"
+    />
+
+    <permission
+        id="org.ict_ok.admin_utils.supervisor.CreateIndices"
+        title="remove all database catalogs"
+    />
+
+    <permission
         id="org.ict_ok.admin_utils.supervisor.PackDB"
         title="pack the database"
     />
@@ -78,8 +88,6 @@
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.supervisor.ReindexDB"
-                    role="org.ict_ok.mgr" />
-    <grant permission="org.ict_ok.admin_utils.supervisor.ReindexDB"
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.supervisor.PackDB"
@@ -88,6 +96,11 @@
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.supervisor.DataDump"
+                    role="org.ict_ok.adm" />
+                    
+    <grant permission="org.ict_ok.admin_utils.supervisor.RemoveIndices"
+                    role="org.ict_ok.adm" />
+    <grant permission="org.ict_ok.admin_utils.supervisor.CreateIndices"
                     role="org.ict_ok.adm" />
 
     <grant permission="org.ict_ok.admin_utils.supervisor.ImportExport"

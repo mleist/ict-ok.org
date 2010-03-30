@@ -29,7 +29,6 @@ from pyExcelerator import Workbook, XFStyle, Font, Formula
 import pyExcelerator as xl
 
 # zope imports
-from ZODB.interfaces import IConnection
 from zope.app import zapi
 from zope.app.zapi import getPath
 from zope.component import adapts, createObject
@@ -41,21 +40,17 @@ from zope.lifecycleevent import ObjectCreatedEvent
 from zope.event import notify
 from zope.app.catalog.interfaces import ICatalog
 from zope.copypastemove.interfaces import IObjectMover
-from zope.xmlpickle import toxml, fromxml, loads
+from zope.xmlpickle import toxml, loads
 from zope.schema.interfaces import IField, IChoice, ICollection
-from zope.component import queryUtility, queryMultiAdapter, \
-    getMultiAdapter, getUtilitiesFor
-from zope.app.folder import Folder
+from zope.component import queryMultiAdapter, getMultiAdapter
 from zope.dublincore.interfaces import IWriteZopeDublinCore
+from zope.component.interfaces import ISite as IZopeSite
 
 # z3c imports
-from z3c.form import button, field, form, interfaces
-from z3c.formui import layout
-from z3c.form import datamanager
+from z3c.form import interfaces
 from z3c.form.browser import checkbox
 
 # lovely imports
-from lovely.relation.property import RelationPropertyOut
 
 # ict_ok.org imports
 from org.ict_ok.components.supernode.supernode import Supernode
@@ -64,13 +59,18 @@ from org.ict_ok.admin_utils.supervisor.interfaces import \
 from org.ict_ok.version import getIkVersion
 from org.ict_ok.admin_utils.objmq.interfaces import IAdmUtilObjMQ
 from org.ict_ok.components.slave.interfaces import ISlave
-from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
-from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
+from org.ict_ok.libs.lib import fieldsForFactory
+from org.ict_ok.components.site.interfaces import ISite as IIctSite
+from org.ict_ok.components.site.site import createLocalUtils
 
 _ = MessageFactory('org.ict_ok')
 utcTZ = timezone('UTC')
 berlinTZ = timezone('Europe/Berlin')
+
+
+class TmpEvent:
+    pass
 
 
 class AdmUtilSupervisor(Supernode):
@@ -485,6 +485,33 @@ class AdmUtilSupervisor(Supernode):
 #                    pass
 #        self.appendEventHistory(\
 #            u"reindex the object query catalogs in database")
+
+    def remove_indices(self):
+        """
+        will remove all indices in database
+        """
+        my_catalog = zapi.getUtility(ICatalog)
+        my_catalog.clear()
+        to_delete = []
+        for index_n, index_v in my_catalog.items():
+            to_delete.append(index_n)
+            del index_v
+        for name in to_delete:
+            del my_catalog[name]
+        self.appendEventHistory(\
+            u"remove all indices in database")
+
+    def create_indices(self):
+        """
+        will create all non existent indices in database
+        """
+        sitem = zapi.getSiteManager(self)
+        site = zapi.getParent(sitem)
+        tmpEvent = TmpEvent()
+        if IZopeSite.providedBy(site) or \
+            IIctSite.providedBy(site):
+            tmpEvent.object = site
+            createLocalUtils(tmpEvent)
 
     def removeObject(self, msgHeader, msgOldparent,
                      msgNewparent, msgObjectOid):

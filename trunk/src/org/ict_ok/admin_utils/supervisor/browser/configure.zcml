@@ -40,6 +40,22 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
     />
     <page
+        name="remove_indices"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        attribute="remove_indices"
+        permission="org.ict_ok.admin_utils.supervisor.RemoveIndices"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
+        name="create_indices"
+        for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
+        class=".supervisor.AdmUtilSupervisorDetails"
+        attribute="create_indices"
+        permission="org.ict_ok.admin_utils.supervisor.CreateIndices"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+    />
+    <page
         name="pack_db"
         for="org.ict_ok.admin_utils.supervisor.interfaces.IAdmUtilSupervisor"
         class=".supervisor.AdmUtilSupervisorDetails"
