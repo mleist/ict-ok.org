@@ -96,8 +96,9 @@ class RptPdf(ParentRptPdf):
             self.appendImage(24*7, elemList)
             self.appendImage(24*365, elemList)
             if autoAppend is True:
-                comp = KeepTogether(elemList)
-                self.document.append(comp)
+#                comp = KeepTogether(elemList)
+#                self.document.append(comp)
+                self.document.append(elemList)
             else:
                 return elemList
         return None

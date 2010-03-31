@@ -40,6 +40,7 @@ from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.superclass.browser.superclass import \
     SuperclassDetails
 from org.ict_ok.admin_utils.reports.interfaces import IRptPdf
+from org.ict_ok.admin_utils.reports.rpt_base import RptContent
 from org.ict_ok.admin_utils.reports.rpt_title import RptTitle
 from org.ict_ok.admin_utils.reports.rpt_para import RptPara
 from org.ict_ok.admin_utils.compliance.adapter.rpt_pdf_tools import \
@@ -176,6 +177,7 @@ class RptPdf(object):
         for f_name, f_obj in fields.items():
             f_val = getattr(self.context, f_name)
             namePara = self._convertNamePara(f_obj)
+            emptyPara = self._convertNamePara(u'')
             if f_val is not None:
                 if f_name in ['user', 'productionState']:
                     token = self._getVocabValue(f_obj.field.vocabularyName,
@@ -193,9 +195,14 @@ class RptPdf(object):
                     if type(f_val) is list:
                         valParas = []
                         for i in f_val:
-                            valParas.append(self._convertValPara(i))
-                        if len(valParas) >= 1:
-                            data.append([namePara, valParas])
+                            valPara = self._convertValPara(i)
+                            if f_val.index(i) == 0:   # first element
+                                data.append([namePara, valPara])
+                            else:
+                                data.append([emptyPara, valPara])
+#                            valParas.append(self._convertValPara(i))
+#                        if len(valParas) >= 1:
+#                            data.append([namePara, valParas])
                     else:
                         valPara = self._convertValPara(f_val)
                         data.append([namePara, valPara])
@@ -285,6 +292,8 @@ class RptPdf(object):
             if autoAppend is True:
                 comp = KeepTogether(elemList)
                 self.document.append(comp)
+#                for elem in elemList:
+#                    self.document.append(elem)
                 #for elem in elemList:
                     #self.document.append(elem)
             else:

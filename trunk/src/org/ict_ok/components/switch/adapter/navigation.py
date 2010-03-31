@@ -49,8 +49,6 @@ class Navigation(SuperNavigation):
         #if len(self.context.user) > 0:
             ## (navView, viewTitle, contextObj)
             #retList.append(('user', _(u'User'), self.context))
-        #import pdb
-        #pdb.set_trace()
         if len(self.context.logicalDevices) > 0:
             retList.append(('logicalDevices', _(u'Logical Devices'), self.context))
         if len(self.context.physicalMedia) > 0:

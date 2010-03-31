@@ -437,8 +437,6 @@ class AddComponentForm(AddForm):
     @button.buttonAndHandler(_('Add'), name='add')
     def handleAdd(self, action):
         """submit was pressed"""
-        #import pdb
-        #pdb.set_trace()
         session = ISession(self.request)[self._session_key]
         if 'template' in self.widgets and \
             self.widgets['template'] is not None and \
@@ -474,8 +472,6 @@ class AddComponentForm(AddForm):
                                 if value in item["value"]:
                                     i_widgets.selectedItems.append(item)
                         i_widgets.notselectedItems = i_widgets.deselect()
-                        #import pdb
-                        #pdb.set_trace()
         else:
             self.fields = self.allFields
             data, errors = self.extractData()
@@ -515,8 +511,6 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
     @button.buttonAndHandler(u'Submit')
     def handleSubmit(self, action):
         """submit was pressed"""
-        #import pdb
-        #pdb.set_trace()
         if 'xlsdata' in self.widgets:
             codepage=self.widgets['codepage'].value[0]
             fileWidget=self.widgets['xlsdata']

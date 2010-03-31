@@ -273,8 +273,9 @@ function giveFocus()
                                 try:
                                     node = MMNode(obj.objectID, obj.ikName, {"link": zapi.absoluteURL(obj, request), "node_type":"bubble"})
                                 except:
-                                    import pdb
-                                    pdb.set_trace()
+                                    pass
+#                                    import pdb
+#                                    pdb.set_trace()
                                 self.style_health(obj, node)
                                 alreadySeenDict[obj] = node
                                 #print "obj: %s" % obj.ikName

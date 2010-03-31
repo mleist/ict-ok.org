@@ -354,9 +354,6 @@ class Component(Supernode):
         ]
         """
         retList = []
-        if self.objectID == u'c9d940953025c14dda58c86804eea1bd0':
-            import pdb
-            pdb.set_trace()
         refAttributeNames = self.getRefAttributeNames()
         for attr_name in refAttributeNames:
             if hasattr(self, attr_name):
@@ -380,8 +377,6 @@ class Component(Supernode):
         #            obj.getAllExportData(dataStructure)
         objDataList = self._getAllExportData_Step1()
         connDataList = self._getAllExportData_Step2()
-#        import pdb
-#        pdb.set_trace()
         for newConntuple in connDataList:
             for oldConntuple in dataStructure['conns']:
                 oldConnObjId = oldConntuple[1][0]

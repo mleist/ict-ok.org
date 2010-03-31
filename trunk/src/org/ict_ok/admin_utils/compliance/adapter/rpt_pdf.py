@@ -91,8 +91,9 @@ class RptRequirementPdf(ParentRptPdf):
                 elemList.append(para)
             elemList.append(Spacer(0, 4 * mm))
             if autoAppend is True:
-                comp = KeepTogether(elemList)
-                self.document.append(comp)
+#                comp = KeepTogether(elemList)
+#                self.document.append(comp)
+                self.document.append(elemList)
             else:
                 return elemList
         return None

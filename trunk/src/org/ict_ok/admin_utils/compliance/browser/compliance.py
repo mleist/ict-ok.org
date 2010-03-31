@@ -194,8 +194,6 @@ class AdmUtilComplianceDetails(SupernodeDetails):
             'Content-Disposition',
             'attachment; filename=\"%s.xml\"' % self.context.objectID)
         setNoCacheHeaders(self.request.response)
-        import pdb
-        pdb.set_trace()
         return self.context.exportXmlData()
 
     def exportReqXmlData(self):

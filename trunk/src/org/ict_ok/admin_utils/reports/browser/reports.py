@@ -330,8 +330,6 @@ class AdmUtilReportsDetails(SupernodeDetails):
         thisReporter.setAuthorName(authorStr)
         thisReporter.setVersionStr(versionStr)
         queryproc = QueryProcessor(parser, oc)
-        import pdb
-        pdb.set_trace()
         queryResultsList = [(queryn, queryproc(queryv))
                             for (queryn, queryv) in queryList]
         # first run

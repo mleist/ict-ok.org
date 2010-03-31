@@ -60,8 +60,6 @@ def notifyCopiedEvent(instance, event):
 @adapter(ISuperclass, IObjectAddedEvent)
 def notifyAddedEvent(instance, event):
     logger.info(u"superclass.objcollect.notifyAddedEvent: event: %s" % event)
-    import pdb
-    pdb.set_trace()
     raw_instance = removeSecurityProxy(instance)
     iid = zapi.getUtility(IIntIds, '')
     iid.register(raw_instance)

@@ -19,7 +19,7 @@ __version__ = "$Id$"
 # reportlab imports
 from reportlab.platypus import BaseDocTemplate
 from reportlab.lib.units import mm, cm
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import A4, A3
 from reportlab.lib.sequencer import Sequencer
 
 # ict-ok.org imports
@@ -82,15 +82,17 @@ class RptDocument(RptSuperclass, BaseDocTemplate):
         self.versionStr = arg_VersionStr
 
     def buildPdf(self):
-        #self.build(self._content)
+#        self.build(self._content)
         from reportlab.platypus.doctemplate import LayoutError
-        try:
-            self.multiBuild(self._content)
-        except LayoutError, errText:
-            print errText
-            raise LayoutError(errText)
-            #import pdb
-            #pdb.set_trace()
+        self.multiBuild(self._content)
+#        try:
+#            self.multiBuild(self._content)
+#        except AttributeError, errText:
+#            print errText
+#            raise AttributeError(errText)
+#        except LayoutError, errText:
+#            print errText
+#            raise LayoutError(errText)
 
     def afterFlowable(self, flowable):
         if flowable.__class__.__name__ == 'Table':

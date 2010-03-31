@@ -14,6 +14,16 @@
 
 __version__ = "$Id$"
 
+from UserList import UserList
+from reportlab.platypus.flowables import Flowable
+
+
+class RptContent(UserList): #,Flowable):
+    def __init__(self, initlist=None):
+        UserList.__init__(self, initlist)
+#        Flowable.__init__(self)
+#    def draw(self):
+#        pass
 
 class RptSuperclass:
     """superclass for all reporting classes 

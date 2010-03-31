@@ -76,7 +76,10 @@ def getEvaluationsTodo(context):
         requirements = removeAllProxies(context.requirements)
         if requirements is not None:
             for requirement in requirements:
-                res = my_catalog.searchResults(oid_index=requirement.objectID)
+                if type(requirement) is unicode:
+                    res = my_catalog.searchResults(oid_index=requirement)
+                else:
+                    res = my_catalog.searchResults(oid_index=requirement.objectID)
                 if len(res) > 0:
                     startReq = iter(res).next()
                     allObjReqs = []
