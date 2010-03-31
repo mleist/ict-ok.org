@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:tal="http://xml.zope.org/namespaces/tal">
   <head>
-    <title tal:content="string:ict-ok.org: ${context/webapi:title}">ict-ok.org: title</title>
+    <title tal:content="request/getApplicationURL">ikomtrol.com</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Pragma" content="No-cache" />
     <tal:providers replace="structure provider:ict_ok.Headers" />
