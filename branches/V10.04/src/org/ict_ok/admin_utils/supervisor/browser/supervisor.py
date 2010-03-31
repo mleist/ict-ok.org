@@ -581,8 +581,6 @@ class FSearchForm(Overview):
             len(self.fsearchText) > 0:
             my_catalog = zapi.getUtility(ICatalog)
             try:
-                import pdb
-                pdb.set_trace()
                 res = my_catalog.searchResults(all_fulltext_index=self.fsearchText)
                 for obj in res:
                     retList.append(obj)
@@ -669,8 +667,6 @@ class ImportAllXlsDataForm(layout.FormLayoutSupport, form.Form):
     @button.buttonAndHandler(u'Submit')
     def handleSubmit(self, action):
         """submit was pressed"""
-        #import pdb
-        #pdb.set_trace()
         supervisor = getUtility(IAdmUtilSupervisor,
                                 name='AdmUtilSupervisor')
         if 'xlsdata' in self.widgets:

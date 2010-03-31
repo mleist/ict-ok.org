@@ -175,8 +175,6 @@ class AddInternalAttachmentForm(AddComponentForm):
 
 #    def add(self, obj):
 #        """ will store the new one in object tree """
-#        import pdb
-#        pdb.set_trace()
 #        travp = self.context
 #        # store obj id for nextURL()
 #        #self._newObjectID = obj.objectID

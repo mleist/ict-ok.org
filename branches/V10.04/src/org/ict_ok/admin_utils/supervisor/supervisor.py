@@ -631,8 +631,6 @@ class AdmUtilSupervisor(Supernode):
         pprint(data_structure['conns'])
         print "#" * 80
         for obj in data_structure['objects']:
-#            import pdb
-#            pdb.set_trace()
             print "Obj: ", obj['ikName']
             print "myFactory: ", obj['meta']['myFactory']
             o2 = zapi.createObject(obj['meta']['myFactory'], **obj)
@@ -657,8 +655,6 @@ class AdmUtilSupervisor(Supernode):
             if len(res1) > 0 and len(res2) > 0:
                 obj1 = iter(res1).next()
                 obj2 = iter(res2).next()
-                import pdb
-                pdb.set_trace()
                 print "obj1: ", obj1
                 print "obj2: ", obj2
                 attr1 = getattr(obj1, obj1AttrName, None)

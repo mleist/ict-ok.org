@@ -24,7 +24,7 @@ from copy import deepcopy
 from reportlab.platypus import ParaLines, Paragraph
 
 # ict-ok.org imports
-from org.ict_ok.admin_utils.reports.rpt_base import RptSuperclass
+from org.ict_ok.admin_utils.reports.rpt_base import RptSuperclass, RptContent
 #from org.ict_ok.admin_utils.reports.rpt_style import rptNormalStyle
 
 logger = logging.getLogger("AdmUtilReports")
@@ -72,7 +72,7 @@ class RptPara(RptSuperclass, Paragraph):
 
     def split(self, availWidth, availHeight):
         if len(self.frags) <= 0:
-            return []
+            return RptContent()
         #the split information is all inside self.blPara
         if not hasattr(self, 'blPara'):
             self.wrap(availWidth, availHeight)
@@ -84,7 +84,7 @@ class RptPara(RptSuperclass, Paragraph):
         space = int(availHeight / leading)
         if space <= 1:
             del self.blPara
-            return []
+            return RptContent()
         if cnt <= space:
             return [self]
         func = self._get_split_blParaFunc()
@@ -104,4 +104,4 @@ class RptPara(RptSuperclass, Paragraph):
         # must overload - in orig method self.__class__ is referenced
         para2 = Paragraph(None, style, bulletText=None,
                        frags=func(blPara, space, cnt))
-        return [para1, para2]
+        return RptContent(para1, para2)

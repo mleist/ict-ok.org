@@ -137,8 +137,6 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         groups[u'Manager'] = grp_mgr
         groups[u'Administrator'] = grp_adm
         groups[u'Developer'] = grp_dvl
-        #import pdb
-        #pdb.set_trace()
         madePluggableAuthentication[u'LDAPAuthentication'] = madeLdapPas
         madePluggableAuthentication.authenticatorPlugins = \
             (u'groups', u'principals', u'LDAPAuthentication')

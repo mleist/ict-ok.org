@@ -241,8 +241,6 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
     def getCollectionAttributes(self, obj_arg):
         additionalAttributes = ''
         if type(obj_arg) is tuple:
-            #import pdb
-            #pdb.set_trace()
             (attributeName, displayTitle, obj) = obj_arg
             appendUrl = '?getAttr&attrName=%s' % attributeName
         else:
@@ -405,8 +403,6 @@ class IkReadContainerXmlObjectView(ReadContainerXmlObjectView):
         rootName = '8888'
         baseURL = ''
         subItems = []
-        #import pdb
-        #pdb.set_trace()
 #        subItems.append(xmlEscapeWithCData(
 #            u'<collection isfocused="" title=%s '
 #            u'name=%s iklen=%s rem="2.2.1.1" '

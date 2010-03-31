@@ -36,7 +36,7 @@ class RptPdf(ParentRptPdf):
     implements(IRptPdf)
     adapts(IRoom)
     factory = Room
-    omitFields = ParentRptPdf.omitFields + []
+    omitFields = ParentRptPdf.omitFields # + ['physicalComponents']
 
     def getRefTitle(self):
         retString = u"<a href='%s' color='%s'>%s</a>" % \
@@ -68,3 +68,9 @@ class RptPdf(ParentRptPdf):
                     retString += u" / %s" % \
                             (self.context.building.location.ikName)
         return retString
+
+#    def makeAttributeTable(self):
+#        data = ParentRptPdf.makeAttributeTable(self)
+#        f_val = getattr(self.context, 'physicalComponents')
+#        print "ddddddd: ", f_val
+#        return data

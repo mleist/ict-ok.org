@@ -71,23 +71,24 @@ def getRptStyleSheet():
         
     cmyk_color1 = getColor1()
     cmyk_color2 = getTabBackgroundColor()
+    my_font_size = 10
     
     stylesheet = StyleSheet1()
     stylesheet.add(ParagraphStyle(name='Normal',
                                   fontName=locFontName1,
-                                  fontSize=10,
+                                  fontSize=my_font_size,
                                   leading=12)
                    )
     stylesheet.add(ParagraphStyle(name='Para',
                                   fontName=locFontName1,
-                                  fontSize=10,
+                                  fontSize=my_font_size,
                                   leftIndent = 30*mm,
                                   leading=12,
                                   )
                    )
     stylesheet.add(ParagraphStyle(name='Small',
                                   fontName=locFontName1,
-                                  fontSize=8,
+                                  fontSize=my_font_size-2,
                                   )
                    )
     stylesheet.add(ParagraphStyle(name='ErrorBox',
@@ -116,7 +117,7 @@ def getRptStyleSheet():
                    )
     stylesheet.add(ParagraphStyle(name='Normal_R',
                                   fontName=locFontName1,
-                                  fontSize=10,
+                                  fontSize=my_font_size,
                                   alignment=2,
                                   leading=12)
                    )
@@ -284,7 +285,7 @@ def getRptStyleSheet():
     stylesheet.add(ParagraphStyle(name='Code',
                                   parent=stylesheet['Normal'],
                                   fontName=locFontName5,
-                                  fontSize=8,
+                                  fontSize=my_font_size-1,
                                   leading=8.8,
                                   firstLineIndent=0,
                                   leftIndent=36))

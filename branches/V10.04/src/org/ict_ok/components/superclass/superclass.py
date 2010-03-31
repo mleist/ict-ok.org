@@ -552,8 +552,6 @@ class Superclass(Persistent):
         from org.ict_ok.components.happliance.interfaces import IHardwareAppliance
         if IHardwareAppliance.providedBy(self):
             publ = request.publication
-            import pdb
-            pdb.set_trace()
             from ZODB.interfaces import IConnection
             connection = IConnection(self)
             from gocept.objectquery.collection import ObjectCollection
