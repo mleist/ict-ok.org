@@ -17,6 +17,7 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
+from zope.app import zapi
 from org.ict_ok.skin.interfaces import IMasterMenu
 from zope.i18nmessageid import MessageFactory
 from zope.viewlet import manager
@@ -25,6 +26,7 @@ from zope.component import getUtility
 from zope.traversing.browser import absoluteURL
 from zope.app.pagetemplate import viewpagetemplatefile
 from zope.i18n import translate
+from zope.security.checker import canAccess
 
 # z3c imports
 from z3c.menu.simple.menu import TabMenu
@@ -33,6 +35,7 @@ from z3c.menu.simple import ITab
 from z3c.menu.simple.menu import Tab
 
 # ict_ok.org imports
+from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.superclass.superclass import objectsWithInterface
 from org.ict_ok.admin_utils.util_manager.interfaces import IUtilManager
 
@@ -214,6 +217,23 @@ class AdmUtilManagerItem(GlobalMenuMainItem):
             return absoluteURL(hooks.getSite(), self.request) + \
                    '/NoUtilManager'
 
+    def render(self):
+        """Return the template with the option 'menus'"""
+        objWithPermisson = []
+        utilManager = getUtility(IUtilManager)
+        smFolder = utilManager.getParent()
+        allObj = smFolder.values()
+        for obj in allObj:
+            if ISuperclass.providedBy(obj):
+                if canAccess(obj, 'ikName'):
+                    myAdapter = zapi.queryMultiAdapter((obj, self.request),
+                                                       name='details.html')
+                    if myAdapter is not None and canAccess(myAdapter, 'render'):
+                        objWithPermisson.append(obj)
+        if len(objWithPermisson) > 0:
+            return self.template()
+        else:
+            return u''
 
 class MenuMainTab(Tab):
     template = viewpagetemplatefile.ViewPageTemplateFile('menu_main_tab.pt')
