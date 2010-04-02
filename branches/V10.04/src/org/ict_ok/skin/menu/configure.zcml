@@ -132,32 +132,32 @@
         
     <!--  main menu  -->
     
-    <viewlet
-        name="networks"
-        for="*"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
-        class="org.ict_ok.skin.menu.NetworksItem"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.ipnet.View"
-        />
-        
-    <viewlet
-        name="hosts"
-        for="*"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
-        class="org.ict_ok.skin.menu.HostsItem"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.host.View"
-        />
-        
-    <viewlet
-        name="services"
-        for="*"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"
-        class="org.ict_ok.skin.menu.ServicesItem"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.service.View"
-        />
+<!--    <viewlet-->
+<!--        name="networks"-->
+<!--        for="*"-->
+<!--        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"-->
+<!--        class="org.ict_ok.skin.menu.NetworksItem"-->
+<!--        layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+<!--        permission="org.ict_ok.components.ipnet.View"-->
+<!--        />-->
+<!--        -->
+<!--    <viewlet-->
+<!--        name="hosts"-->
+<!--        for="*"-->
+<!--        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"-->
+<!--        class="org.ict_ok.skin.menu.HostsItem"-->
+<!--        layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+<!--        permission="org.ict_ok.components.host.View"-->
+<!--        />-->
+<!--        -->
+<!--    <viewlet-->
+<!--        name="services"-->
+<!--        for="*"-->
+<!--        manager="org.ict_ok.skin.menu.interfaces.IMenuMain"-->
+<!--        class="org.ict_ok.skin.menu.ServicesItem"-->
+<!--        layer="org.ict_ok.skin.interfaces.IBrowserLayer"-->
+<!--        permission="org.ict_ok.components.service.View"-->
+<!--        />-->
         
     <viewlet
         name="dashboard"
