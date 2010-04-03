@@ -79,5 +79,13 @@
                 <td tal:content="context/copyright">test</td>
             </div>
         </tr>
+        
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:condition="context/version|nothing">
+            <td i18n:translate="">Version</td>
+            <div tal:omit-tag="">
+                <td tal:content="context/version">V 99.9</td>
+            </div>
+        </tr>
     </table>
 </i18n:block>

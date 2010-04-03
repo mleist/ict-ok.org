@@ -422,7 +422,10 @@ def getPosition(item, formatter):
     """
     Titel for Overview
     """
-    return item.__parent__.keys().index(item.objectID)
+    if hasattr(item, '__parent__'):
+        return item.__parent__.keys().index(item.objectID)
+    else:
+        return 0
 
 def applyChanges(form, content, data):
     # copied from z3c.form.form

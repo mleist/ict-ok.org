@@ -19,6 +19,7 @@ import transaction
 from datetime import datetime
 
 # zope imports
+from zope.app import zapi
 from zope.app.appsetup import appsetup
 from zope.app.appsetup.bootstrap import getInformationFromEvent
 from zope.app.appsetup.bootstrap import ensureUtility
@@ -41,10 +42,14 @@ from org.ict_ok.admin_utils.supervisor.interfaces import \
      IAdmUtilSupervisor
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      AdmUtilUserManagement, MyLDAPAuthentication
+from org.ict_ok.components.site.interfaces import ISite as IIctSite
 
 logger = logging.getLogger("AdmUtilUserManagement")
 
 def createUtils(root_folder, connection=None, dummy_db=None):
+    sitem = zapi.getSiteManager(root_folder)
+    site = zapi.getParent(sitem)
+    isInSite = IIctSite.providedBy(site)
     madeLdapAdapter = ensureUtility(\
         root_folder,
         IManageableLDAPAdapter,
@@ -63,15 +68,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
 
     if isinstance(madeLdapPas, MyLDAPAuthentication):
         madeLdapPas.adapterName = 'ManageableLDAPAdapter'
-        #madeLdapPas.searchBase = u""
-        #madeLdapPas.searchScope = u""
-        #madeLdapPas.groupsSearchBase = u""
-        #madeLdapPas.groupsSearchScope = u""
-        #madeLdapPas.loginAttribute = u""
         madeLdapPas.principalIdPrefix = u'ldap.'
-        #madeLdapPas.idAttribute = u""
-        #madeLdapPas.titleAttribute = u""
-        #madeLdapPas.groupIdAttribute = u""
 
     madePluggableAuthentication = ensureUtility(\
         root_folder,
@@ -94,59 +91,63 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         instAdmUtilSupervisor = utils[0].component
         instAdmUtilSupervisor.appendEventHistory(\
             u" bootstrap: made AdmUtilUserManagement-Utility")
-        groups = GroupFolder(u'group.')
-        madePluggableAuthentication[u'groups'] = groups
-        principals = PrincipalFolder(u'principal.')
-        madePluggableAuthentication[u'principals'] = principals
-        madePluggableAuthentication.credentialsPlugins = \
-                                   (u'Session Credentials',
-                                    u'No Challenge if Authenticated',)
-        p_user = InternalPrincipal(u'User', u'User',
-                                   u'Initial User',
-                                   passwordManagerName="SHA1")
-        p_manager = InternalPrincipal(u'Manager', u'Manager',
-                                      u'Initial Manager',
-                                      passwordManagerName="SHA1")
-        p_admin = InternalPrincipal(u'Administrator', u'Administrator',
-                                    u'Initial Administrator',
-                                    passwordManagerName="SHA1")
-        p_developer = InternalPrincipal(u'Developer', u'Developer',
-                                        u'Initial Developer',
+        if not isInSite:
+            # only produce in real zope root folder not sites
+            groups = GroupFolder(u'group.')
+            madePluggableAuthentication[u'groups'] = groups
+            principals = PrincipalFolder(u'principal.')
+            madePluggableAuthentication[u'principals'] = principals
+            madePluggableAuthentication.credentialsPlugins = \
+                                       (u'Session Credentials',
+                                        u'No Challenge if Authenticated',)
+            p_user = InternalPrincipal(u'User', u'User',
+                                       u'Initial User',
+                                       passwordManagerName="SHA1")
+            p_manager = InternalPrincipal(u'Manager', u'Manager',
+                                          u'Initial Manager',
+                                          passwordManagerName="SHA1")
+            p_admin = InternalPrincipal(u'Administrator', u'Administrator',
+                                        u'Initial Administrator',
                                         passwordManagerName="SHA1")
-        principals[u'User'] = p_user
-        principals[u'Manager'] = p_manager
-        principals[u'Administrator'] = p_admin
-        principals[u'Developer'] = p_developer
-        grp_usr = GroupInformation(u'User',
-                                   u'view & analyse data, generate reports '
-                                   u'& leave notes at any object')
-        grp_mgr = GroupInformation(u'Manager',
-                                   u'search, connect, configure '
-                                   u'& delete devices')
-        grp_adm = GroupInformation(u'Administrator',
-                                   u'install, configure '
-                                   u'& administrate System')
-        grp_dvl = GroupInformation(u'Developer',
-                                   u'individual adaption '
-                                   u'& development on System')
-        grp_usr.principals = [u'principal.User']
-        grp_mgr.principals = [u'principal.Manager']
-        grp_adm.principals = [u'principal.Administrator']
-        grp_dvl.principals = [u'principal.Developer']
-        groups[u'User'] = grp_usr
-        groups[u'Manager'] = grp_mgr
-        groups[u'Administrator'] = grp_adm
-        groups[u'Developer'] = grp_dvl
-        madePluggableAuthentication[u'LDAPAuthentication'] = madeLdapPas
-        madePluggableAuthentication.authenticatorPlugins = \
-            (u'groups', u'principals', u'LDAPAuthentication')
-        prm = IPrincipalRoleManager(root_folder)
-        prm.assignRoleToPrincipal(u'org.ict_ok.usr', u'group.User')
-        prm.assignRoleToPrincipal(u'org.ict_ok.mgr', u'group.Manager')
-        prm.assignRoleToPrincipal(u'org.ict_ok.adm', u'group.Administrator')
-        prm.assignRoleToPrincipal(u'org.ict_ok.dvl', u'group.Developer')
-
-
+            p_developer = InternalPrincipal(u'Developer', u'Developer',
+                                            u'Initial Developer',
+                                            passwordManagerName="SHA1")
+            principals[u'User'] = p_user
+            principals[u'Manager'] = p_manager
+            principals[u'Administrator'] = p_admin
+            principals[u'Developer'] = p_developer
+            grp_usr = GroupInformation(u'User',
+                                       u'view & analyse data, generate reports '
+                                       u'& leave notes at any object')
+            grp_mgr = GroupInformation(u'Manager',
+                                       u'search, connect, configure '
+                                       u'& delete devices')
+            grp_adm = GroupInformation(u'Administrator',
+                                       u'install, configure '
+                                       u'& administrate System')
+            grp_dvl = GroupInformation(u'Developer',
+                                       u'individual adaption '
+                                       u'& development on System')
+            grp_usr.principals = [u'principal.User']
+            grp_mgr.principals = [u'principal.Manager']
+            grp_adm.principals = [u'principal.Administrator']
+            grp_dvl.principals = [u'principal.Developer']
+            groups[u'User'] = grp_usr
+            groups[u'Manager'] = grp_mgr
+            groups[u'Administrator'] = grp_adm
+            groups[u'Developer'] = grp_dvl
+            madePluggableAuthentication[u'LDAPAuthentication'] = madeLdapPas
+            madePluggableAuthentication.authenticatorPlugins = \
+                (u'groups', u'principals', u'LDAPAuthentication')
+            prm = IPrincipalRoleManager(root_folder)
+            prm.assignRoleToPrincipal(u'org.ict_ok.usr', u'group.User')
+            prm.assignRoleToPrincipal(u'org.ict_ok.mgr', u'group.Manager')
+            prm.assignRoleToPrincipal(u'org.ict_ok.adm', u'group.Administrator')
+            prm.assignRoleToPrincipal(u'org.ict_ok.dvl', u'group.Developer')
+        else: # is in site
+            madePluggableAuthentication[u'LDAPAuthentication'] = madeLdapPas
+            madePluggableAuthentication.authenticatorPlugins = \
+                (u'LDAPAuthentication')
 
     transaction.get().commit()
     if connection is not None:
