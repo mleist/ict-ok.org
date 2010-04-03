@@ -23,14 +23,14 @@
         permission="org.ict_ok.admin_utils.supervisor.View"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
     />
-    <!--page
+    <page
         name="generate_test_pdf"
         for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"
         class=".reports.AdmUtilReportsDetails"
         attribute="generateTestPdf"
         permission="org.ict_ok.admin_utils.reports.generate.pdf"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-    /-->
+    />
     <!--page
         name="generate_all_pdf"
         for="org.ict_ok.admin_utils.reports.interfaces.IAdmUtilReports"

@@ -18,7 +18,6 @@ __version__ = "$Id$"
 
 # ict-ok.org imports
 from org.ict_ok.admin_utils.reports.rpt_document import RptDocument
-from org.ict_ok.admin_utils.reports.rpt_chapter import RptChapter
 from org.ict_ok.admin_utils.reports.rpt_para import RptPara
 from org.ict_ok.admin_utils.reports.rpt_title import RptTitle
 
@@ -30,7 +29,7 @@ class RptTest01:
         constructor of the object
         """
         self._document = RptDocument(filename)
-        self._document.setVolumeNo("B")
+        self._document.setVolumeNo("A")
         self._document.setAuthorName("Karl May")
         self._document.setVersionStr("Vers. 0.0.1 $Rev$")
         

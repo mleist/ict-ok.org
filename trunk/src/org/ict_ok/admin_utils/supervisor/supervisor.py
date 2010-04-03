@@ -509,7 +509,8 @@ class AdmUtilSupervisor(Supernode):
         site = zapi.getParent(sitem)
         tmpEvent = TmpEvent()
         if IZopeSite.providedBy(site) or \
-            IIctSite.providedBy(site):
+            IIctSite.providedBy(site) or \
+            zapi.getParent(site) is None:
             tmpEvent.object = site
             createLocalUtils(tmpEvent)
 

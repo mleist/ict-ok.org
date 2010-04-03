@@ -221,7 +221,7 @@ def createLocalUtils(event):
         createUtils as createProductUtils
     from org.ict_ok.components.address.bootstrap import \
         createUtils as createAddressUtils
-    from org.ict_ok.components.organization.bootstrap import \
+    from org.ict_ok.components.organisational_unit.bootstrap import \
         createUtils as createOrganizationUtils
     from org.ict_ok.components.person.bootstrap import \
         createUtils as createPersonUtils
@@ -238,6 +238,10 @@ def createLocalUtils(event):
         createUtils as createRoleUtils
     from org.ict_ok.components.physical_media.bootstrap import \
         createUtils as createPhysicalMediaUtils
+    from org.ict_ok.components.contract.bootstrap import \
+        createUtils as createContractUtils
+    from org.ict_ok.components.int_attachment.bootstrap import \
+        createUtils as createIntAttachmentUtils
 
     setSite(event.object)
 #    default = zapi.traverse(event.object, '++etc++site/default')
@@ -310,3 +314,6 @@ def createLocalUtils(event):
     createRoleUtils(event.object)
     createGroupUtils(event.object)
     createPhysicalMediaUtils(event.object)
+    
+    createContractUtils(event.object)
+    createIntAttachmentUtils(event.object)
