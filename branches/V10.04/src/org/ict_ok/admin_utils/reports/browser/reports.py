@@ -155,15 +155,15 @@ class AdmUtilReportsDetails(SupernodeDetails):
                    (zapi.absoluteURL(self.context, self.request))
             tmpDict['tooltip'] = _(u"will generate a test pdf file")
             retList.append(tmpDict)
-        if checkPermission('org.ict_ok.admin_utils.reports.generate.pdf',
-                           self.context):
-            tmpDict = {}
-            tmpDict['oid'] = u"c%sgenerate_all_pdf" % objId
-            tmpDict['title'] = _(u"generate all pdf")
-            tmpDict['href'] = u"%s/@@generate_all_pdf" % \
-                   (zapi.absoluteURL(self.context, self.request))
-            tmpDict['tooltip'] = _(u"will generate a all pdf file")
-            retList.append(tmpDict)
+#        if checkPermission('org.ict_ok.admin_utils.reports.generate.pdf',
+#                           self.context):
+#            tmpDict = {}
+#            tmpDict['oid'] = u"c%sgenerate_all_pdf" % objId
+#            tmpDict['title'] = _(u"generate all pdf")
+#            tmpDict['href'] = u"%s/@@generate_all_pdf" % \
+#                   (zapi.absoluteURL(self.context, self.request))
+#            tmpDict['tooltip'] = _(u"will generate a all pdf file")
+#            retList.append(tmpDict)
         return retList
 
     def generateTestPdf(self):

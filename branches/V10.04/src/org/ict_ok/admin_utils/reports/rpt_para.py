@@ -104,4 +104,4 @@ class RptPara(RptSuperclass, Paragraph):
         # must overload - in orig method self.__class__ is referenced
         para2 = Paragraph(None, style, bulletText=None,
                        frags=func(blPara, space, cnt))
-        return RptContent(para1, para2)
+        return RptContent((para1, para2,))
