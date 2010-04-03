@@ -275,12 +275,13 @@ class AdmUtilCompliance(Supernode):
         for obj in objList:
             if len(obj.categories) > 0:
                 for req in reqList:
-                    if len(req.categories) > 0:
+                    if req.validAsFirst and len(req.categories) > 0:
                         obj_cat_set = set(obj.categories)
                         req_cat_set = set(req.categories)
                         if not obj_cat_set.isdisjoint(req_cat_set):
                             if not req in obj.requirements:
                                 obj.requirements.append(req)
+                                obj._p_changed = 1
 
     def delete_requirements(self):
         """ delete all Categories from Components

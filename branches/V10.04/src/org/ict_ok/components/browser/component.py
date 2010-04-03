@@ -30,6 +30,7 @@ from zope.component import queryUtility, queryMultiAdapter, \
 from zope.traversing.browser import absoluteURL
 from zope.session.interfaces import ISession
 from zope.app.rotterdam.xmlobject import setNoCacheHeaders
+from zope.security.checker import canWrite, canAccess
 
 # z3c imports
 from z3c.form import button, field, form, interfaces
@@ -66,6 +67,9 @@ from org.ict_ok.admin_utils.compliance.evaluation import \
      getEvaluationsDone, getEvaluationsTodo
 from org.ict_ok.components.superclass.browser.superclass import \
     History as SuperHistory
+from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.components.superclass.browser.superclass import IctGetterColumn
+from org.ict_ok.admin_utils.categories.browser.categories import getCategories
 
 _ = MessageFactory('org.ict_ok')
 
@@ -89,6 +93,35 @@ class MSubEvaluationsDone(GlobalMenuSubItem):
     title = _(u'Evaluations done')
     viewURL = 'evaluations_done.html'
     weight = 100
+
+# --------------- helper functions -------------------------
+
+def linkReq(view='index.html'):
+    """Link to the object for Overview in Web-Browser"""
+    def anchor(value, item, formatter):
+        """ anchor method will return a html formated anchor"""
+        if value is None:
+            return u''
+        if type(item) is dict:
+            item = item['req']
+        try:
+            myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                               name=view)
+            if myAdapter is not None and canAccess(myAdapter,'render'):
+                url = absoluteURL(item, formatter.request) + '/' + view
+                return u'<a href="%s">%s</a>' % (url, value)
+            else:
+#                view = "details.html"
+                myAdapter = zapi.queryMultiAdapter((item, formatter.request),
+                                                   name="details.html")
+                if myAdapter is not None and canAccess(myAdapter,'render'):
+                    url = absoluteURL(item, formatter.request) + '/' + "details.html"
+                    return u'<a href="%s">%s</a>' % (url, value)
+                else:
+                    return u'%s' % (value)
+        except Exception:
+            return u'%s' % (value)
+    return anchor
 
 # --------------- object details ---------------------------
 
@@ -279,6 +312,10 @@ class EvaluationsTodoDisplay(Overview):
         evaluations1stLevelTodo = self.context.getEvaluationsTodo()
         evaluations1stLevelDone = self.context.getEvaluationsDone()
         attrs = self.context.getRefAttributeNames()
+        if 'requirements' in attrs:
+            attrs.remove('requirements')
+        if 'categories' in attrs:
+            attrs.remove('categories')
         retList = []
         for attr in attrs:
             objs = getattr(self.context, attr)
@@ -505,3 +542,35 @@ class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):
 
 class EvaluationsHistory(SuperHistory):
     pass
+
+
+class AllEvaluationsTodoDisplay(Overview):
+    """for evaluation which are open
+    """
+    label = _(u'All evaluations to do')
+    columns = (
+        GetterColumn(title=_('Component'),
+                     getter=getTitle,
+                     cell_formatter=link('details.html')),
+        GetterColumn(title=_('Title'),
+                     getter=getRequirementTitle,
+                     cell_formatter=linkReq('details.html')),
+        GetterColumn(title=_('Category'),
+                     getter=getCategories,
+                     cell_formatter=raw_cell_formatter),
+        GetterColumn(title=_('Actions'),
+                     getter=getRequirementBottons,
+                     cell_formatter=raw_cell_formatter),
+        )
+    sort_columns = []
+    status = None
+    
+    def allReqsList(self):
+        """List of Content objects"""
+        retList = []
+        objList = objectsWithInterface(IComponent)
+        for obj in objList:
+            evaluations = getEvaluationsTodo(obj)
+            for ev in evaluations:
+                retList.append({"req": ev, "obj": obj})
+        return retList

@@ -52,7 +52,18 @@
         for="org.ict_ok.components.browser.component.EvaluationsDoneDisplay"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         />
-
+    <z3c:pagelet
+        name="all_evaluations_todo.html"
+        for="*"
+        class="org.ict_ok.components.browser.component.AllEvaluationsTodoDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.admin_utils.compliance.evaluations.EditAll"
+        />
+    <z3c:template
+        template="all_evaluations_todo.pt"
+        for="org.ict_ok.components.browser.component.AllEvaluationsTodoDisplay"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        />
      <z3c:macro
         template="components_details.pt"
         name="ComponentsDetails"

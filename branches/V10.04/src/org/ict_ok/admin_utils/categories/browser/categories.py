@@ -157,3 +157,49 @@ class DeleteAdmUtilCategoryForm(DeleteForm):
                 self.context = parent
                 url = absoluteURL(parent, self.request)
                 self.request.response.redirect(url)
+
+def getCategories(item, formatter):
+    """
+    Roles for overview table
+    """
+    if type(item) is dict and item.has_key('req'):
+        item = item["req"]
+    ttid = u"categories" + item.getObjectId()
+    if len(item.categories) > 2:
+        view_url = absoluteURL(item, formatter.request) + '/@@details.html'
+        view_html = u'<a href="%s" id="%s">' % (view_url, ttid) + u'[...]</a>'
+        rolesList = [i.ikName for i in item.categories]
+        rolesList.sort()
+        tooltip_text = _(u'<b>Categories:</b>') + u'<br />' +\
+            u'<br />'.join(rolesList)
+    elif len(item.categories) > 1:
+        view0_url = absoluteURL(item.categories[0], formatter.request) +\
+                    '/@@details.html'
+        view1_url = absoluteURL(item.categories[1], formatter.request) +\
+                    '/@@details.html'
+        view_html = u'<span id="%s"><a href="%s">' %\
+                    (ttid, view0_url) + u'%s</a>' %\
+                    item.categories[0].ikName + \
+                    u', <a href="%s">' %  (view1_url) + u'%s</a></span>' %\
+                    item.categories[1].ikName
+        rolesList = [i.ikName for i in item.categories]
+        rolesList.sort()
+        tooltip_text = _(u'<b>Categories:</b>') + u'<br />' +\
+            u'<br />'.join(rolesList)
+    elif len(item.categories) == 1:
+        view_url = absoluteURL(item.categories[0], formatter.request) +\
+                    '/@@details.html'
+        view_html = u'<a href="%s" id="%s">' %  (view_url, ttid) + u'%s</a>' %\
+                    item.categories[0].ikName
+        rolesList = [i.ikName for i in item.categories]
+        rolesList.sort()
+        tooltip_text = _(u'<b>Categories:</b>') + u'<br />' +\
+            u'<br />'.join(rolesList)
+    else:
+        view_html = u'-'
+        tooltip_text = _(u'No roles')
+    tooltip = u"<script type=\"text/javascript\">tt_%s = new YAHOO." \
+            u"widget.Tooltip('tt_%s', { autodismissdelay:'15000', " \
+            u"context:'%s', text:'%s' });</script>" \
+            % (ttid, ttid, ttid, tooltip_text)
+    return view_html + tooltip

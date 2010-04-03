@@ -40,6 +40,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
     getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
 from org.ict_ok.components.physical_component.browser.physical_component import \
     getUserName, fsearch_user_formatter
+from org.ict_ok.components.contact_item.browser.contact_item import getRoles
 
 _ = MessageFactory('org.ict_ok')
 
@@ -148,7 +149,6 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
     factoryId = u'org.ict_ok.components.person.person.Person'
     allFields = fieldsForInterface(attrInterface, [])
 
-from org.ict_ok.components.contact_item.browser.contact_item import getRoles
 
 class Overview(SuperOverview):
     columns = (

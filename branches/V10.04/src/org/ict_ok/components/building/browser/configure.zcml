@@ -69,14 +69,6 @@
         permission="org.ict_ok.components.building.Delete"
     />
 
-    <z3c:pagelet
-        name="add_room.html"
-        for="org.ict_ok.components.building.interfaces.IBuilding"
-        class="org.ict_ok.components.room.browser.room.AddRoomForm"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.room.Add"
-    />
-
     <z3c:macro
         template="building_details.pt"
         name="BuildingDetails"
@@ -158,14 +150,6 @@
         class="org.ict_ok.components.superclass.browser.superclass.MSubEditContent"
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.building.Edit"
-        />
-    <viewlet
-        name="add_room"
-        for="org.ict_ok.components.building.interfaces.IBuilding"
-        manager="org.ict_ok.skin.menu.interfaces.IMenuGeneral"
-        class="org.ict_ok.components.room.browser.room.MSubAddRoom"
-        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
-        permission="org.ict_ok.components.room.Add"
         />
     <viewlet
         name="add_dashboard"

@@ -150,7 +150,6 @@ def allNotValid1stRequirementVocab(dummy_context):
     """
     return allRequirementVocab(dummy_context, False, True)
 
-
 class Requirement(Superclass,
                   schooltool.requirement.requirement.Requirement):
     """ ict-ok.org wrapper
@@ -166,7 +165,19 @@ class Requirement(Superclass,
         schooltool.requirement.requirement.Requirement.__init__(self, title)
         Superclass.__init__(self, ikName=title, **data)
         Superclass.__post_init__(self, **data)
-        
+        refAttributeNames = ['categories']
+        for (name, value) in data.items():
+            if name in IRequirement.names() and \
+               name not in refAttributeNames:
+                setattr(self, name, value)
+        self.ikRevision = __version__
+
+    def store_refs(self, **data):
+        refAttributeNames = ['categories']
+        for (name, value) in data.items():
+            if name in refAttributeNames:
+                setattr(self, name, value)
+
     def append(self, subObj):
         if hasattr(subObj, 'objectID'):
             self[subObj.objectID] = subObj
