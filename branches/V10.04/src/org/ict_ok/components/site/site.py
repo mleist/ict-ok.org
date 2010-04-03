@@ -24,12 +24,11 @@ from zope.app.container.interfaces import IObjectAddedEvent
 from zope.event import notify
 
 # ict-ok.org imports
-from org.ict_ok.components.superclass.superclass import MsgEvent
-from org.ict_ok.components.component import Component, ComponentFolder
-from org.ict_ok.components.site.interfaces import ISite, IEventIfEventSite
-from org.ict_ok.components.ipnet.interfaces import IIpNet
+from org.ict_ok.components.component import ComponentFolder
+from org.ict_ok.components.site.interfaces import ISite
 from org.ict_ok.components.site.interfaces import INewSiteEvent
 from org.ict_ok.components.interfaces import IImportXlsData
+from zope.app.component.hooks import setSite
 
 
 class NewSiteEvent(object):
@@ -66,41 +65,10 @@ class Site(ComponentFolder, SiteManagerContainer):
     def setSiteManager(self, sm):
         SiteManagerContainer.setSiteManager(self, sm)
         notify(NewSiteEvent(self))
-        
-#    def eventInp_inward_relaying_shutdown(self, eventMsg=None):
-#        """
-#        forward the event to all objects in this container through the signal filter
-#        """
-#        print "Site.eventInp_inward_relaying_shutdown()"
-#        for name, obj in self.items():
-#            if ISite.providedBy(obj):
-#                targetFunctionName = "inward_relaying_shutdown"
-#            elif IIpNet.providedBy(obj):
-#                targetFunctionName = "inward_relaying_shutdown"
-#            else:
-#                targetFunctionName = None
-#            if eventMsg is not None:
-#                inst_event = MsgEvent(senderObj = self,
-#                                      oidEventObject = eventMsg.oidEventObject,
-#                                      logText = u"inward relaying by site '%s'"\
-#                                      % self.ikName,
-#                                      targetFunctionName = targetFunctionName)
-#                eventMsg.stopit(self,
-#                                u"relaying by site '%s'" % self.ikName)
-#            else:
-#                inst_event = MsgEvent(senderObj = self,
-#                                      logText = u"inward relaying by site '%s'"\
-#                                      % self.ikName,
-#                                      targetFunctionName = targetFunctionName)
-#            obj.injectInpEQueue(inst_event)
 
-        
 @adapter(ISite, IObjectAddedEvent)
 def setSiteManagerWhenAdded(site, event):
     site.setSiteManager(LocalSiteManager(site))
-    
-from zope.app.component.hooks import setSite
-from zope.app import zapi
 
 
 @adapter(INewSiteEvent)
