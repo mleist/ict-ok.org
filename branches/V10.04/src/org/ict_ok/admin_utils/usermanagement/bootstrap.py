@@ -138,16 +138,19 @@ def createUtils(root_folder, connection=None, dummy_db=None):
             groups[u'Developer'] = grp_dvl
             madePluggableAuthentication[u'LDAPAuthentication'] = madeLdapPas
             madePluggableAuthentication.authenticatorPlugins = \
-                (u'groups', u'principals', u'LDAPAuthentication')
+                (u'groups', u'principals', u'LDAPAuthentication', )
             prm = IPrincipalRoleManager(root_folder)
             prm.assignRoleToPrincipal(u'org.ict_ok.usr', u'group.User')
             prm.assignRoleToPrincipal(u'org.ict_ok.mgr', u'group.Manager')
             prm.assignRoleToPrincipal(u'org.ict_ok.adm', u'group.Administrator')
             prm.assignRoleToPrincipal(u'org.ict_ok.dvl', u'group.Developer')
         else: # is in site
+            madePluggableAuthentication.credentialsPlugins = \
+                                       (u'Session Credentials',
+                                        u'No Challenge if Authenticated',)
             madePluggableAuthentication[u'LDAPAuthentication'] = madeLdapPas
             madePluggableAuthentication.authenticatorPlugins = \
-                (u'LDAPAuthentication')
+                (u'LDAPAuthentication', )
 
     transaction.get().commit()
     if connection is not None:
