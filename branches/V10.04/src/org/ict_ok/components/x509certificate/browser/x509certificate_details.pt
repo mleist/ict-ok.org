@@ -11,9 +11,10 @@
             <td i18n:translate="">X.509 issuer name</td>
             <td tal:content="view/getIssuerName" />
         </tr>
-        <tr tal:attributes="class view/getNextTabClass">
+        <tr tal:attributes="class view/getNextTabClass"
+            tal:define="sn context/getSerialNumber">
             <td i18n:translate="">X.509 serial number</td>
-            <td tal:content="context/getSerialNumber" />
+            <td tal:content="structure python: u'%d<sub>10</sub> / %X<sub>16</sub>' % (sn, sn)" />
         </tr>
         <tr tal:attributes="class view/getNextTabClass">
             <td i18n:translate="">Public key size</td>
