@@ -14,6 +14,7 @@
 __version__ = "$Id$"
 
 # python imports
+from datetime import datetime
 
 # zope imports
 from zope.i18nmessageid import MessageFactory
@@ -21,7 +22,6 @@ from zope.security.proxy import removeSecurityProxy
 
 # z3c imports
 from z3c.form.browser import checkbox
-from z3c.form.browser import file
 
 # ict_ok.org imports
 from org.ict_ok.libs.lib import fieldsForFactory, fieldsForInterface
@@ -80,16 +80,6 @@ class X509CertificateDetails(CredentialDetails):
         return issue_str
 
     def getSubject(self):
-#        from ldappas.interfaces import ILDAPAuthentication
-#        from zope.component import getUtility
-#        from ldapadapter.interfaces import IManageableLDAPAdapter
-#        from org.ict_ok.admin_utils.usermanagement.interfaces import IAdmUtilUserManagement
-#        ldap = getUtility(ILDAPAuthentication,
-#                          name='LDAPAuthentication')
-#        pau=getUtility(IAdmUtilUserManagement)
-#        pau.getPrincipal(u'principal.User')
-#        pau.getPrincipal(u'LDAPAuthentication.demo')
-#        ddd = ldap.authenticateCredentials({'login': 'demo', 'password': 'ddd'})
         subject = removeSecurityProxy(self.context.getSubject())
         subject_str = u', '.join([u"%s=%s" % (i_k, i_v)
                                 for i_k, i_v in subject.get_components()])
@@ -105,8 +95,6 @@ class X509CertificateDetails(CredentialDetails):
         timeString = removeSecurityProxy(self.getCertificate().get_notAfter())
         return datetime.strptime(\
                 timeString, '%Y%m%d%H%M%SZ').replace(tzinfo=pytz.utc)
-
-
 
 
 class X509CertificateFolderDetails(CredentialFolderDetails):
@@ -125,7 +113,7 @@ class DetailsX509CertificateForm(DisplayForm):
     factory = X509Certificate
     omitFields = X509CertificateDetails.omit_viewfields
     fields = fieldsForFactory(factory, omitFields)
-    fields['ddd1'].widgetFactory = file.FileFieldWidget
+
 
 class AddX509CertificateForm(AddComponentForm):
     """Add X.509 Certificate form"""
@@ -138,7 +126,6 @@ class AddX509CertificateForm(AddComponentForm):
     allFields = fieldsForFactory(factory, omitFields)
     addFields = fieldsForInterface(addInterface, [])
     allFields['isTemplate'].widgetFactory = checkbox.SingleCheckBoxFieldWidget
-    allFields['ddd1'].widgetFactory = file.FileFieldWidget
 
 
 class EditX509CertificateForm(EditForm):
@@ -147,7 +134,6 @@ class EditX509CertificateForm(EditForm):
     factory = X509Certificate
     omitFields = X509CertificateDetails.omit_editfields
     fields = fieldsForFactory(factory, omitFields)
-    fields['ddd1'].widgetFactory = file.FileFieldWidget
 
 
 class DeleteX509CertificateForm(DeleteForm):
@@ -165,10 +151,6 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
     factoryId = u'org.ict_ok.components.x509certificate.x509certificate.X509Certificate'
     allFields = fieldsForInterface(attrInterface, [])
 
-#def getRoom(item, formatter):
-#    if item.device is not None:
-#        return item.device.room
-#    return None
 
 class Overview(SuperOverview):
     columns = (
@@ -180,12 +162,6 @@ class Overview(SuperOverview):
         IctGetterColumn(title=_('Title'),
                         getter=getTitle,
                         cell_formatter=link('overview.html')),
-#        IctGetterColumn(title=_('Device'),
-#                        getter=lambda i,f: i.device,
-#                        cell_formatter=link('details.html')),
-#        IctGetterColumn(title=_('Room'),
-#                        getter=getRoom,
-#                        cell_formatter=link('details.html')),
         DateGetterColumn(title=_('Modified'),
                         getter=getModifiedDate,
                         subsort=True,

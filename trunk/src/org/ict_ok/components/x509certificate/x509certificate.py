@@ -46,7 +46,6 @@ class X509Certificate(Credential):
     shortName = "x509certificate"
     
     publicKey = FieldProperty(IX509Certificate['publicKey'])
-    ddd1 = FieldProperty(IX509Certificate['ddd1'])
     
     fullTextSearchFields = []
     fullTextSearchFields.extend(Credential.fullTextSearchFields)
