@@ -40,7 +40,7 @@ class Searchable(SuperSearchable):
     def __init__(self, context):
         SuperSearchable.__init__(self, context)
 
-    def getSearchableOutletOid(self):
+    def getSearchableX509CertificateOid(self):
         """
         get Object id as string for catalog
         """
