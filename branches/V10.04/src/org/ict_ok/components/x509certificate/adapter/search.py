@@ -20,6 +20,7 @@ from zope.interface import implements
 from zope.component import adapts
 from zope.index.text.interfaces import ISearchableText
 from zope.i18nmessageid import MessageFactory
+from zope.security.proxy import removeSecurityProxy
 
 # ict_ok.org imports
 from org.ict_ok.components.x509certificate.interfaces import IX509Certificate
@@ -58,8 +59,8 @@ class Searchable(SuperSearchable):
         stringList = []
         for field in self.getFullTextSearchFields():
             stringList.append(u"%s" % getattr(self.context, field))
-        issuerName = self.context.getIssuerName()
-        subject = self.context.getSubject()
+        issuerName = removeSecurityProxy(self.context.getIssuerName())
+        subject = removeSecurityProxy(self.context.getSubject())
         if issuerName:
             issuerName_str = u', '.join([u"%s=%s" % (i_k, i_v)
                                     for i_k, i_v in issuerName.get_components()])
