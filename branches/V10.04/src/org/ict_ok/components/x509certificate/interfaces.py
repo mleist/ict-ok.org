@@ -33,13 +33,10 @@ _ = MessageFactory('org.ict_ok')
 class IX509Certificate(Interface):
     """A X509Certificate object."""
     publicKey = Text(
-        max_length = 4000,
+        max_length = 8000,
         title = _("public key (PEM)"),
         description = _("The PEM-encoded raw public key."),
         required = True)
-
-    ddd1 = Bytes(
-         title = u'ddd1')
 
     @invariant
     def ensureValidPublicKey(obj_x509):
