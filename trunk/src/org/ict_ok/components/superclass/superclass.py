@@ -252,7 +252,12 @@ class Superclass(Persistent):
         if withAuthor and request is not None:
             principalId = request.principal.id.split('.')[1]
             pau_utility = queryUtility(IAuthentication)
-            internalPrincipal = pau_utility['principals'][principalId]
+            if pau_utility.has_key('principals'):
+                internalPrincipal = pau_utility['principals'][principalId]
+            if pau_utility.has_key('LDAPAuthentication'):
+                ldapAuth = pau_utility[u'LDAPAuthentication']
+                internalPrincipal = ldapAuth.principalInfo(\
+                                           ldapAuth.prefix+principalId)
             entryText = u'%s (%s)' % (entryText, internalPrincipal.title)
         lastEntry = self.history.get()[-1]
         if not dontCount and entryText == lastEntry.getText():
