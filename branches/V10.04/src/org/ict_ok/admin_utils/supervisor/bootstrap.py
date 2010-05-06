@@ -64,7 +64,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
         instAdmUtilSupervisor.appendEventHistory(u"'web service' started (Vers. %s)" \
                                                  % getIkVersion())
         dcore = IWriteZopeDublinCore(madeAdmUtilSupervisor)
-        dcore.title = u"ICT_Ok Supervisor"
+        dcore.title = u"Supervisor"
         dcore.created = datetime.utcnow()
         madeAdmUtilSupervisor.ikName = dcore.title
         madeAdmUtilSupervisor.__post_init__()
@@ -83,7 +83,7 @@ def createUtils(root_folder, connection=None, dummy_db=None):
                 u"'web service' started (Vers. %s) (%d bytes) (%d objects)" \
                 % (getIkVersion(), dummy_db.getSize(), dummy_db.objectCount()))
         dcore = IWriteZopeDublinCore(instAdmUtilSupervisor)
-        dcore.title = u"ICT_Ok Supervisor"
+        dcore.title = u"Supervisor"
         dcore.modified = datetime.utcnow()
         
     madeUtilityIIntIds = ensureUtility(root_folder, 
