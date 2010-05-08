@@ -49,6 +49,19 @@ from org.ict_ok.osi.interfaces import IPhysicalLayer
 _ = MessageFactory('org.ict_ok')
 
 
+# --------------- helper functions -------------------------
+
+def getIpAddr(item, formatter):
+    """
+    IP for Overview
+    """
+    if type(item) is dict:
+        item = item["obj"]
+    if hasattr(item, 'ipv4'):
+        return item.ipv4
+    else:
+        return u'-'
+
 # --------------- menu entries -----------------------------
 
 
@@ -150,10 +163,11 @@ class Overview(SuperOverview):
         GetterColumn(title="",
                      getter=getStateIcon,
                      cell_formatter=raw_cell_formatter),
-        GetterColumn(title=_('Health'),
-                     getter=getHealth),
         IctGetterColumn(title=_('Title'),
                         getter=getTitle,
+                        cell_formatter=link('overview.html')),
+        IctGetterColumn(title=_('IP'),
+                        getter=getIpAddr,
                         cell_formatter=link('overview.html')),
         IctGetterColumn(title=_('User'),
                         getter=getUserName,
