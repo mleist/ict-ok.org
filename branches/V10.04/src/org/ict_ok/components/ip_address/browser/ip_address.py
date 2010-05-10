@@ -64,6 +64,17 @@ def getIpAddr(item, formatter):
     else:
         return u'-'
 
+def getHostname(item, formatter):
+    """
+    IP for Overview
+    """
+    if type(item) is dict:
+        item = item["obj"]
+    if hasattr(item, 'hostname'):
+        return item.hostname
+    else:
+        return u'-'
+
 class IpGetterColumn(IctGetterColumn):
     def getSortKey(self, item, formatter):
         key = self.getter(item, formatter)
@@ -175,6 +186,9 @@ class Overview(SuperOverview):
                         cell_formatter=link('overview.html')),
         IpGetterColumn(title=_('IP'),
                        getter=getIpAddr,
+                       cell_formatter=link('overview.html')),
+        IpGetterColumn(title=_('hostname'),
+                       getter=getHostname,
                        cell_formatter=link('overview.html')),
         IctGetterColumn(title=_('User'),
                         getter=getUserName,

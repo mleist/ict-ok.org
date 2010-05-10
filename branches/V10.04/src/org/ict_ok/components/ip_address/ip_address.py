@@ -58,10 +58,11 @@ class IpAddress(LogicalComponent):
     __name__ = __parent__ = None
 
     ipv4 = FieldProperty(IIpAddress['ipv4'])
+    hostname = FieldProperty(IIpAddress['hostname'])
     interface = RelationPropertyIn(Interface_IpAddresses_RelManager)
     ipNet = RelationPropertyIn(IpNet_IpAddresses_RelManager)
 
-    fullTextSearchFields = []
+    fullTextSearchFields = ['hostname']
     fullTextSearchFields.extend(LogicalComponent.fullTextSearchFields)
         
 

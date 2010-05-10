@@ -37,6 +37,12 @@ class IIpAddress(Interface):
         required = True)
         
 
+    hostname = TextLine(
+        title = _(u'Hostname'),
+        description = _(u"reverse hostname for this IP address."),
+        required = False)
+        
+
     interface = Choice(
         title = _(u'Interface'),
         vocabulary = 'AllInterfaces',

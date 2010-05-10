@@ -9,6 +9,12 @@
            <td tal:content="structure python: view.fsearchLink(context.ipv4)" />
        </tr>
 
+       <tr tal:attributes="class view/getNextTabClass"
+           tal:condition="context/hostname|nothing">
+           <td i18n:translate="">Hostname</td>
+           <td tal:content="structure python: view.fsearchLink(context.hostname)" />
+       </tr>
+
           
        <tr tal:attributes="class view/getNextTabClass"
            tal:condition="python: context.interface is not None">
