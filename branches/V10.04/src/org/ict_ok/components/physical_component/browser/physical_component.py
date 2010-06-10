@@ -70,7 +70,7 @@ def getRoom(item, formatter):
     """
     if hasattr(item, 'room'):
         room = item.room
-        if hasattr(room, 'number'):
+        if hasattr(room, 'number') and room.number is not None:
             numberStr = room.number[:8]
         else:
             numberStr = u""
