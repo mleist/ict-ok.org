@@ -68,7 +68,7 @@ def getRoom(item, formatter):
     """
     Room title for Overview
     """
-    if hasattr(item, 'room'):
+    if hasattr(item, 'room') and item.room is not None:
         room = item.room
         if hasattr(room, 'number') and room.number is not None:
             numberStr = room.number[:8]
