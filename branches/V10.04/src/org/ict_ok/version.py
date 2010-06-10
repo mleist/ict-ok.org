@@ -23,7 +23,7 @@ Version information
 import re
 
 __versMajor = "10"
-__versMinor = "04pre"
+__versMinor = "04"
 __versId = "$Id$"
 __versLastChangedDate = "$LastChangedDate$"
 __versRevision = "$LastChangedRevision$"
