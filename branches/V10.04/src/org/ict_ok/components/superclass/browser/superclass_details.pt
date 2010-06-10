@@ -15,7 +15,7 @@
             <td>
                 <blockquote tal:repeat="note context/ikNotes"
                             style="padding:2px; border:thin solid #ddd;  background-color:#ffffc0; margin-top:2px">
-                  <p tal:content="note">Klarheit ist, wenn man so will, nur die anschaulichere Variante der Wahrheit.</p>
+                  <p tal:content="structure python: view.convertHrefs(note)">Klarheit ist, wenn man so will, nur die anschaulichere Variante der Wahrheit.</p>
                 </blockquote>
             </td>
     </tr>

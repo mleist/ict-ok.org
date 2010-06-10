@@ -19,6 +19,7 @@ import os
 from datetime import datetime
 import tempfile
 import operator
+import re
 
 # zope imports
 import zope.interface
@@ -775,6 +776,10 @@ class SuperclassDetails:
         if hasattr(self.request, 'tabClass'):
             return self.request.tabClass
         return 'cb_wht'
+
+    def convertHrefs(self, text):
+        r = re.compile(r"(http://[^ ]+)")
+        return r.sub(r'<a href="\1">\1</a>', text).replace('\n', '<br />')
 
     def getNextTabClass(self):
         if hasattr(self.request, 'tabClass'):

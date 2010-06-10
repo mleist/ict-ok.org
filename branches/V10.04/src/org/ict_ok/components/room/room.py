@@ -42,11 +42,11 @@ def AllRoomTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IRoom)
 
 def AllRooms(dummy_context):
-    return AllComponents(dummy_context, IRoom, 'building')
+    return AllComponents(dummy_context, IRoom, 'building', 'number')
 
 def AllUnusedOrUsedBuildingRooms(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IRoom,
-                                     'building', 'building')
+                                     'building', 'building', 'number')
 
 Room_Devices_RelManager = FieldRelationManager(IRoom['physicalComponents'],
                                                IPhysicalComponent['room'],
@@ -67,6 +67,7 @@ class Room(Component):
     containerIface = IRoomFolder
     # for ..Contained we have to:
     __name__ = __parent__ = None
+    number = FieldProperty(IRoom['number'])
     level = FieldProperty(IRoom['level'])
     coordinates = FieldProperty(IRoom['coordinates'])
 
