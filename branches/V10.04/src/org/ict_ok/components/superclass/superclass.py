@@ -237,6 +237,11 @@ class Superclass(Persistent):
         """
         return self.getDcTitle()
 
+    def getLongTitle(self):
+        """ display text for some views
+        """
+        return self.getDcTitle()
+
     def getModifiedTime(self):
         """
         get the modified time from Dublin Core

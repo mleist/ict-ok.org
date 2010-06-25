@@ -459,6 +459,116 @@ class ComponentFolder(Superclass, Folder):
         Superclass.__init__(self, **data)
         Folder.__init__(self)
 
+    def exportXlsReport(self, request, sheetName=u'ict', wbook=None):
+        if wbook is None:
+            localWbook = True
+            filename = datetime.now().strftime('report_%Y%m%d%H%M%S.xls')
+            f_handle, f_name = tempfile.mkstemp(filename)
+            wbook = Workbook()
+        else:
+            localWbook = False
+        wb_hosts = wbook.add_sheet(getattr(self, 'ikName', sheetName))
+        style0 = XFStyle()
+        font0 = Font()
+        font0.height = 6*20
+        #style0.num_format_str = '@'
+        style0.font = font0
+        style1 = XFStyle()
+        font1 = Font()
+        font1.height = 6*20
+        #style1.num_format_str = '@'
+        style1.font = font1
+        heading_pattern = xl.Pattern()
+        heading_pattern.pattern = xl.Pattern.SOLID_PATTERN
+        heading_pattern.pattern_back_colour = 0x5
+        heading_pattern.pattern_fore_colour = 0x5   
+        fields = fieldsForFactory(self.contentFactory, ['objectID'])
+        attrList = [ fname for fname, fval in fields.items()]
+        itemList = self.items()
+        pos_y = 0
+        pos_x = 0
+        for attr in attrList:
+            style0.pattern = heading_pattern 
+            wb_hosts.write(pos_y, pos_x, attr, style0)
+            pos_x += 1
+        wb_hosts.col(pos_x).width *= 3
+        pos_y = 1
+        #
+        allAttributes = {}
+        for interface in implementedBy(self.contentFactory):
+            for i_attrName in interface:
+                i_attr = interface[i_attrName]
+                if IField.providedBy(i_attr):
+                    allAttributes[i_attrName] = i_attr
+        #
+        for item_n, item_v in itemList:
+            pos_x = 0
+            for attr in attrList:
+                attrField = allAttributes[attr]
+                attrDm = datamanager.AttributeField(item_v, attrField)
+                v_style = XFStyle()
+                v_font = Font()
+                v_font.height = 6*20
+                v_style.font = v_font
+                value = None
+                if IChoice.providedBy(attrField):
+                    v_style.num_format_str = '@'
+                    dateValue = attrDm.get()
+                    v_widget = getMultiAdapter(\
+                                    (attrField,request),
+                                    interfaces.IFieldWidget)
+                    v_widget.context = item_v
+                    v_dataconverter = queryMultiAdapter(\
+                                    (attrDm.field, v_widget),
+                                    interfaces.IDataConverter)
+                    if dateValue is not None:
+                        if hasattr(dateValue, 'getLongTitle'):
+                            value = dateValue.getLongTitle()
+                        else:
+                            valueVector = v_dataconverter.toWidgetValue(dateValue)
+                            if len(valueVector) > 0:
+                                value = valueVector[0]
+                else:
+                    v_style.num_format_str = '@'
+                    try:
+                        dateValue = attrDm.get()
+                        v_widget = getMultiAdapter(\
+                                        (attrField,request),
+                                        interfaces.IFieldWidget)
+                        v_widget.context = item_v
+                        v_dataconverter = queryMultiAdapter(\
+                                        (attrDm.field, v_widget),
+                                        interfaces.IDataConverter)
+                    except AttributeError, errText:
+                        print "Error1:  ### ", errText
+                        print "item_v: ", item_v
+                        print "item_v.ikName: ", item_v.ikName
+                        print "attr: ", attr
+                        dateValue = None
+                    if dateValue is not None:
+                        listWasWithObjects = False
+                        if type(dateValue) is list:
+                            value = []
+                            for item in dateValue:
+                                if hasattr(item, 'getLongTitle'):
+                                    value.append(item.getLongTitle())
+                                    listWasWithObjects = True
+                        if listWasWithObjects is not True:
+                            value = v_dataconverter.toWidgetValue(dateValue)
+                    if type(value) is list:
+                        value = u";".join(value)
+                if value is not None:
+                    wb_hosts.write(pos_y, pos_x, value, v_style)
+                pos_x += 1
+            pos_y += 1
+        if localWbook is True:
+            wbook.save(f_name)
+            datafile = open(f_name, "r")
+            dataMem = datafile.read()
+            datafile.close()
+            os.remove(f_name)
+            return (filename, dataMem)
+
     def exportXlsData(self, request, sheetName=u'ict', wbook=None):
         """get XLS file for all folder objects"""
         if wbook is None:

@@ -100,6 +100,16 @@ class Room(Component):
             if name in refAttributeNames:
                 setattr(self, name, value)
 
+    def getLongTitle(self):
+        """ display text for some views
+        """
+        retString = u'%s' % self.ikName
+        if self.building is not None:
+            retString += u' / %s' % self.building.ikName
+        if self.building.location is not None:
+            retString += u' / %s' % self.building.location.ikName
+        return retString
+
 
 class RoomFolder(ComponentFolder):
     implements(IRoomFolder,

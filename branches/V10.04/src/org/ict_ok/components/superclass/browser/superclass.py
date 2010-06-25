@@ -79,6 +79,8 @@ from org.ict_ok.schema.IPy import IP
 from org.ict_ok.admin_utils.mindmap.interfaces import IAdmUtilMindMap
 from org.ict_ok.admin_utils.mac_address_db.interfaces import \
      IAdmUtilMacAddressDb
+from org.ict_ok.admin_utils.usermanagement.interfaces import \
+     IAdmUtilUserManagement
 
 _ = MessageFactory('org.ict_ok')
 
@@ -552,6 +554,13 @@ class MSubExportXlsData(GlobalMenuSubItem):
     """ Menu Item """
     title = _(u'Export XLS')
     viewURL = '@@exportxlsdata.html'
+    weight = 62
+
+
+class MSubExportXlsReport(GlobalMenuSubItem):
+    """ Menu Item """
+    title = _(u'XLS Report')
+    viewURL = '@@exportxlsreport.html'
     weight = 62
 
 
@@ -1200,11 +1209,26 @@ class Overview(BrowserPagelet):
         
     def objs(self):
         """List of Content objects"""
+        compactView = False
+        userManagement = queryUtility(IAdmUtilUserManagement)
+        if userManagement is not None and\
+            userManagement.compactView is True:
+            compactView = True
         if hasattr(self, "objListInterface"):
-            return objectsWithInterface(self.objListInterface)
+            if compactView:
+                return [obj for obj in
+                        objectsWithInterface(self.objListInterface)
+                        if len(obj)>0]
+            else:
+                return objectsWithInterface(self.objListInterface)
         else:
             #return [obj for obj in self.context.values()]
-            return self.context.values()
+            if compactView:
+                return [obj for obj in
+                        self.context.values()
+                        if len(obj)>0]
+            else:
+                return self.context.values()
 
     def table(self, arg_objList=None):
         """ Properties of table are defined here"""

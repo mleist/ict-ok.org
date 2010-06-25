@@ -169,6 +169,14 @@
         permission="org.ict_ok.components.x509certificate.Add"
         />
     <page
+        name="exportxlsreport.html"
+        for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
+        class=".x509certificate.X509CertificateFolderDetails"
+        permission="org.ict_ok.components.x509certificate.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsReport"
+    />
+    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
         class=".x509certificate.X509CertificateFolderDetails"
@@ -183,6 +191,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.x509certificate.Add"
     />
+    <viewlet
+        name="exportxlsreport"
+        for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsReport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.x509certificate.View"
+        />
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.x509certificate.interfaces.IX509CertificateFolder"

@@ -265,6 +265,14 @@
         permission="org.ict_ok.components.ipnet.Add"
         />
     <page
+        name="exportxlsreport.html"
+        for="org.ict_ok.components.ipnet.interfaces.IIpNetFolder"
+        class=".ipnet.IpNetFolderDetails"
+        permission="org.ict_ok.components.ipnet.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsReport"
+    />
+    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.ipnet.interfaces.IIpNetFolder"
         class=".ipnet.IpNetFolderDetails"
@@ -279,6 +287,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.ipnet.Add"
     />
+    <viewlet
+        name="exportxlsreport"
+        for="org.ict_ok.components.ipnet.interfaces.IIpNetFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsReport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.ipnet.View"
+        />
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.ipnet.interfaces.IIpNetFolder"

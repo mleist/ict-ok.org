@@ -225,6 +225,18 @@ class ComponentDetails(SupernodeDetails):
         setNoCacheHeaders(self.request.response)
         return dataMem
 
+    def exportXlsReport(self, sheetName=u'ict', wbook=None, filename='ict.xls'):
+        """get XLS report for all folder objects"""
+        (filename, dataMem) = self.context.exportXlsReport(self.request,
+                                                           sheetName=sheetName,
+                                                           wbook=wbook)
+        self.request.response.setHeader('Content-Type', 'application/vnd.ms-excel')
+        self.request.response.setHeader(\
+            'Content-Disposition',
+            'attachment; filename=\"%s\"' % filename)
+        setNoCacheHeaders(self.request.response)
+        return dataMem
+
     def profiler_exportXlsData(self, sheetName=u'ict', wbook=None, filename='ict.xls'):
         """get XLS file for all folder objects"""
         import cProfile, pstats
