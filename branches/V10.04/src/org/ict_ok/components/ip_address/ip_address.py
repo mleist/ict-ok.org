@@ -39,7 +39,8 @@ def AllIpAddressTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IIpAddress)
 
 def AllIpAddresses(dummy_context):
-    return AllComponents(dummy_context, IIpAddress, 'ipv4')
+    return AllComponents(dummy_context, IIpAddress,
+                         True, 'ipv4')
 def AllUnusedOrUsedInterfaceIpAddresses(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IIpAddress, 'interface',
                                      'ipv4')

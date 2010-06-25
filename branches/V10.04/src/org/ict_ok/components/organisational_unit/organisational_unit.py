@@ -49,7 +49,7 @@ def AllOrganisationalUnits(dummy_context):
 
 def AllValidSubOrganisationalUnits(dummy_context):
     return AllComponents(dummy_context, IOrganisationalUnit,
-                  includeSelf=False)
+                         False)
 
 def AllOrganisationsAndOrganisationalUnits(dummy_context):
     terms = []

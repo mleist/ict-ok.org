@@ -42,7 +42,8 @@ def AllRoomTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IRoom)
 
 def AllRooms(dummy_context):
-    return AllComponents(dummy_context, IRoom, 'building', 'number')
+    return AllComponents(dummy_context, IRoom,
+                         True, 'building.location', 'number')
 
 def AllUnusedOrUsedBuildingRooms(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IRoom,

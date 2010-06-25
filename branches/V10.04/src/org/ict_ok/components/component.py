@@ -59,8 +59,8 @@ from org.ict_ok.admin_utils.categories.rel_managers import \
 from org.ict_ok.components.contract.rel_managers import \
     Contracts_Component_RelManager
 
-from plone.memoize import instance
-from plone.memoize import forever
+#from plone.memoize import instance
+#from plone.memoize import forever
 
 
 #@instance.memoize
@@ -80,34 +80,48 @@ def AllComponentTemplates(dummy_context, interface):
     return SimpleVocabulary(terms)
 
 
+def stringFromAttribute(object, additionalAttrName):
+    myString = u""
+    additionalAttribute = getattr(object, additionalAttrName, None)
+    if additionalAttribute is not None:
+        if hasattr(additionalAttribute, 'ikName'):
+            if len(additionalAttribute.ikName) > 70:
+                dotted = u'...)'
+            else:
+                dotted = u')'
+            myString = myString + u" (%s" % \
+                additionalAttribute.ikName[:70] + dotted
+        else:
+            if len(additionalAttribute) > 70:
+                dotted = u'...)'
+            else:
+                dotted = u')'
+            myString = myString + u" (%s" % \
+                additionalAttribute[:70] + dotted
+    return myString
+
 #@instance.memoize
 def AllComponents(dummy_context, interface=IComponent,
                   includeSelf=True, *additionalAttrNames):
     """In which production state a host may be
     """
-#    print "AllComponents(%s, %s, %s, %s) ->" % (dummy_context, interface,
-#                                                additionalAttrNames,
-#                                                includeSelf)
     terms = []
     for object in objectsWithInterface(interface):
         myString = u"%s" % (object.ikName)
         for additionalAttrName in additionalAttrNames:
-            additionalAttribute = getattr(object, additionalAttrName, None)
-            if additionalAttribute is not None:
-                if hasattr(additionalAttribute, 'ikName'):
-                    if len(additionalAttribute.ikName) > 70:
-                        dotted = u'...)'
-                    else:
-                        dotted = u')'
-                    myString = myString + u" (%s" % \
-                        additionalAttribute.ikName[:70] + dotted
-                else:
-                    if len(additionalAttribute) > 70:
-                        dotted = u'...)'
-                    else:
-                        dotted = u')'
-                    myString = myString + u" (%s" % \
-                        additionalAttribute[:70] + dotted
+            if additionalAttrName.count('.') == 1:
+                (additionalAttrName1,additionalAttrName2) = \
+                    additionalAttrName.split('.')
+                myString += stringFromAttribute(object, additionalAttrName1)
+                try:
+                    attribute1 = getattr(object, additionalAttrName1, None)
+                    if attribute1 is not None:
+                        myString += stringFromAttribute(attribute1,
+                                                        additionalAttrName2)
+                except Exception:
+                    pass
+            elif additionalAttrName.count('.') == 0:
+                myString += stringFromAttribute(object, additionalAttrName)
         if object == dummy_context:
             if includeSelf:
                 terms.append(\
@@ -121,22 +135,6 @@ def AllComponents(dummy_context, interface=IComponent,
                            title=myString))
     terms.sort(lambda l, r: cmp(l.title.lower(), r.title.lower()))
     return SimpleVocabulary(terms)
-
-
-#def All_y_UnusedOrSelfComponents(dummy_context, interface,
-#                              obj_attr_name, *additionalAttrNames):
-#    import cProfile
-#    from datetime import datetime
-#    print "----------------------------------1"
-#    pr = cProfile.Profile()
-#    print "----------------------------------2"
-#    tmpRet = pr.runcall(All_x_UnusedOrSelfComponents,
-#                        dummy_context, interface,
-#                        obj_attr_name, *additionalAttrNames)
-#    filename = datetime.now().strftime('/tmp/ict_3_%Y%m%d%H%M%S.profile')
-#    pr.dump_stats(filename)
-#    print "----------------------------------3"
-#    return tmpRet
 
 
 def AllUnusedOrSelfComponents(dummy_context, interface,

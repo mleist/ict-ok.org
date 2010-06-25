@@ -38,7 +38,8 @@ def AllApplicationSoftwareTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IApplicationSoftware)
 
 def AllApplicationSoftwares(dummy_context):
-    return AllComponents(dummy_context, IApplicationSoftware, ['licenseKey'])
+    return AllComponents(dummy_context, IApplicationSoftware,
+                         True, ['licenseKey'])
 
 def AllUnusedOrUsedDeviceApplicationSoftwares(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IApplicationSoftware,

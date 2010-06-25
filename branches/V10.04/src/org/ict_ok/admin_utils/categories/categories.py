@@ -37,7 +37,7 @@ from org.ict_ok.components.component import AllComponents
 
 
 def AllCategories(dummy_context):
-    return AllComponents(dummy_context, ICategory)
+    return AllComponents(dummy_context, ICategory, True)
 
 
 class AdmUtilCategories(OrderedContainer, Superclass):
