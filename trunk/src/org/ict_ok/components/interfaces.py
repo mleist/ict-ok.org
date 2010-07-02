@@ -107,6 +107,8 @@ class IComponentFolder(Interface):
     """
     
     contentFactory = Attribute("Factory of contained objects")
+    def exportXlsReport(sheetName, wbook):
+        """get XLS file for all folder objects as report"""
     def exportXlsData(sheetName, wbook):
         """get XLS file for all folder objects"""
     def importXlsData(request, f_name, codepage):

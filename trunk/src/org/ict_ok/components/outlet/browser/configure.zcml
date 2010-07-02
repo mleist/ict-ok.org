@@ -178,6 +178,14 @@
         permission="org.ict_ok.components.outlet.Add"
         />
     <page
+        name="exportxlsreport.html"
+        for="org.ict_ok.components.outlet.interfaces.IOutletFolder"
+        class=".outlet.OutletFolderDetails"
+        permission="org.ict_ok.components.outlet.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsReport"
+    />
+    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.outlet.interfaces.IOutletFolder"
         class=".outlet.OutletFolderDetails"
@@ -192,6 +200,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.outlet.Add"
     />
+    <viewlet
+        name="exportxlsreport"
+        for="org.ict_ok.components.outlet.interfaces.IOutletFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsReport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.outlet.View"
+        />
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.outlet.interfaces.IOutletFolder"

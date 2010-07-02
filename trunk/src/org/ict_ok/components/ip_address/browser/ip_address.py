@@ -38,16 +38,47 @@ from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 from org.ict_ok.components.superclass.browser.superclass import \
     GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
-    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
+    getHealth, getTitle, getModifiedDate, link, getActionBottons, \
+    IctGetterColumn
 from org.ict_ok.components.physical_component.browser.physical_component import \
     getUserName, fsearch_user_formatter
 from org.ict_ok.components.logical_component.browser.logical_component import \
     LogicalComponentDetails
 from org.ict_ok.osi.interfaces import IOSIModel
 from org.ict_ok.osi.interfaces import IPhysicalLayer
+from org.ict_ok.schema.IPy import IP
 
 _ = MessageFactory('org.ict_ok')
 
+
+# --------------- helper functions -------------------------
+
+def getIpAddr(item, formatter):
+    """
+    IP for Overview
+    """
+    if type(item) is dict:
+        item = item["obj"]
+    if hasattr(item, 'ipv4'):
+        return item.ipv4
+    else:
+        return u'-'
+
+def getHostname(item, formatter):
+    """
+    IP for Overview
+    """
+    if type(item) is dict:
+        item = item["obj"]
+    if hasattr(item, 'hostname'):
+        return item.hostname
+    else:
+        return u'-'
+
+class IpGetterColumn(IctGetterColumn):
+    def getSortKey(self, item, formatter):
+        key = self.getter(item, formatter)
+        return IP(key).int()
 
 # --------------- menu entries -----------------------------
 
@@ -150,11 +181,15 @@ class Overview(SuperOverview):
         GetterColumn(title="",
                      getter=getStateIcon,
                      cell_formatter=raw_cell_formatter),
-        GetterColumn(title=_('Health'),
-                     getter=getHealth),
         IctGetterColumn(title=_('Title'),
                         getter=getTitle,
                         cell_formatter=link('overview.html')),
+        IpGetterColumn(title=_('IP'),
+                       getter=getIpAddr,
+                       cell_formatter=link('overview.html')),
+        IpGetterColumn(title=_('hostname'),
+                       getter=getHostname,
+                       cell_formatter=link('overview.html')),
         IctGetterColumn(title=_('User'),
                         getter=getUserName,
                         cell_formatter=fsearch_user_formatter),

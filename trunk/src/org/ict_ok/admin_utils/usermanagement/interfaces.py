@@ -147,6 +147,11 @@ class IAdmUtilUserPreferences(Interface):
         description=_("Time Zone used to display your calendar"),
         values=pytz.common_timezones,
         required = False)
+    compactView = Bool(
+        title = _("Compact view"),
+        description = _("Compact view"),
+        default = False,
+        required = False)
     navExplanation = Bool(
         title = _("Explanation on navigation"),
         description = _("Explanation on navigation"),
@@ -161,7 +166,6 @@ class IAdmUtilUserPreferences(Interface):
         default=u"view_dashboard.html",
         required = True,
         vocabulary = "UserCfgStartView")
-    
     notifierChannels = Set(
         title = _("Notifier channels"),
         value_type = Choice(
@@ -176,7 +180,6 @@ class IAdmUtilUserPreferences(Interface):
         default=u"warning",
         required = True,
         vocabulary = "notifierLevels")
-
     shortEmail = EmailValid(
         title = _(u"Short email address"),
         required=False

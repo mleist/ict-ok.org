@@ -13,7 +13,7 @@
 		<tr class="row">
         	<td class="label">
           		<label for="form-widgets-fsearchText">
-                	<span>Search text</span>
+                	<span i18n:translate="">Search text</span>
                 	<span class="required"></span>
                 </label>
           	</td>

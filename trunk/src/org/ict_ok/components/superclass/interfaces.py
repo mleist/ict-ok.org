@@ -125,6 +125,9 @@ class ISuperclass(Interface):
     def getDisplayTitle():
         """ display text for some views
         """
+    def getLongTitle():
+        """ display long text for some views
+        """
     def getModifiedTime():
         """
         get the modified time from Dublin Core

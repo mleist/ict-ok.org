@@ -311,6 +311,14 @@
         permission="org.ict_ok.components.snmpvalue.Add"
         />
     <page
+        name="exportxlsreport.html"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValueFolder"
+        class=".snmpvalue.SnmpValueFolderDetails"
+        permission="org.ict_ok.components.snmpvalue.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsReport"
+    />
+    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValueFolder"
         class=".snmpvalue.SnmpValueFolderDetails"
@@ -325,6 +333,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.snmpvalue.Add"
     />
+    <viewlet
+        name="exportxlsreport"
+        for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValueFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsReport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.snmpvalue.View"
+        />
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.snmpvalue.interfaces.ISnmpValueFolder"

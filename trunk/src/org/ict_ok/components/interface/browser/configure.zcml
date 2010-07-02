@@ -299,6 +299,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
+    <page
+        name="exportxlsreport.html"
+        for="org.ict_ok.components.interface.interfaces.IInterfaceFolder"
+        class=".interface.InterfaceFolderDetails"
+        permission="org.ict_ok.components.interface.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsReport"
+    />
     <z3c:pagelet
         name="importxlsdata.html"
         for="org.ict_ok.components.interface.interfaces.IInterfaceFolder"
@@ -306,6 +314,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.interface.Add"
     />
+    <viewlet
+        name="exportxlsreport"
+        for="org.ict_ok.components.interface.interfaces.IInterfaceFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsReport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.interface.View"
+        />
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.interface.interfaces.IInterfaceFolder"

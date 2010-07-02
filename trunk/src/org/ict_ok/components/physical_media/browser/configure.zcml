@@ -194,6 +194,14 @@
         permission="org.ict_ok.components.physical_media.Add"
         />
     <page
+        name="exportxlsreport.html"
+        for="org.ict_ok.components.physical_media.interfaces.IPhysicalMediaFolder"
+        class=".physical_media.PhysicalMediaFolderDetails"
+        permission="org.ict_ok.components.physical_media.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsReport"
+    />
+    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.physical_media.interfaces.IPhysicalMediaFolder"
         class=".physical_media.PhysicalMediaFolderDetails"
@@ -208,6 +216,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.physical_media.Add"
     />
+    <viewlet
+        name="exportxlsreport"
+        for="org.ict_ok.components.physical_media.interfaces.IPhysicalMediaFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsReport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.physical_media.View"
+        />
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.physical_media.interfaces.IPhysicalMediaFolder"

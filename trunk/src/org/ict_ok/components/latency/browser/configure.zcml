@@ -248,6 +248,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         attribute="exportXlsData"
     />
+    <page
+        name="exportxlsreport.html"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        class=".latency.LatencyFolderDetails"
+        permission="org.ict_ok.components.latency.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsReport"
+    />
     <z3c:pagelet
         name="importxlsdata.html"
         for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
@@ -255,6 +263,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.latency.Add"
     />
+    <viewlet
+        name="exportxlsreport"
+        for="org.ict_ok.components.latency.interfaces.ILatencyFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsReport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.latency.View"
+        />
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.latency.interfaces.ILatencyFolder"

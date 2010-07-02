@@ -50,7 +50,8 @@ def AllIpNetTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IIpNet, 'ipv4')
 
 def AllIpNets(dummy_context):
-    return AllComponents(dummy_context, IIpNet, 'ipv4')
+    return AllComponents(dummy_context, IIpNet,
+                         True, 'ipv4')
 
 def AllUnusedOrSelfIpNets(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IIpNet,

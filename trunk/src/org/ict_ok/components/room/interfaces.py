@@ -16,7 +16,7 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import Interface
 from zope.i18nmessageid import MessageFactory
-from zope.schema import Choice, List, TextLine 
+from zope.schema import Choice, List, TextLine
 
 # ict_ok.org imports
 
@@ -52,6 +52,12 @@ class IRoom(Interface):
         required=False,
         default=[])
     
+    number = TextLine(
+        max_length = 8,
+        title = _("Room number"),
+        description = _("Number of the room."),
+        required = False)
+
     level = TextLine(
         max_length = 80,
         title = _("Level"),

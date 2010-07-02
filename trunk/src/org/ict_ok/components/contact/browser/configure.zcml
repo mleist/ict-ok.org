@@ -178,6 +178,14 @@
         permission="org.ict_ok.components.contact.Add"
         />
     <page
+        name="exportxlsreport.html"
+        for="org.ict_ok.components.contact.interfaces.IContactFolder"
+        class=".contact.ContactFolderDetails"
+        permission="org.ict_ok.components.contact.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsReport"
+    />
+    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.contact.interfaces.IContactFolder"
         class=".contact.ContactFolderDetails"
@@ -192,6 +200,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.contact.Add"
     />
+    <viewlet
+        name="exportxlsreport"
+        for="org.ict_ok.components.contact.interfaces.IContactFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsReport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.contact.View"
+        />
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.contact.interfaces.IContactFolder"

@@ -131,6 +131,22 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         AdmUtilUserProperties(self.getRequest().principal).timezone = my_val
     timezone = property(get_timezone, set_timezone)
 
+
+    # temp. workaround for "user specific compactView" in normal form
+    def get_compactView(self):
+        """ property getter"""
+        principal = self.getRequest().principal
+        try:
+            return AdmUtilUserProperties(principal).compactView
+        except KeyError, errText:
+            AdmUtilUserProperties(principal).compactView = False
+            return AdmUtilUserProperties(principal).compactView
+    def set_compactView(self, my_val):
+        """ property setter"""
+        principal = self.getRequest().principal
+        AdmUtilUserProperties(principal).compactView = my_val
+    compactView = property(get_compactView, set_compactView)
+
     # temp. workaround for "user specific navExplanation" in normal form
     def get_navExplanation(self):
         """ property getter"""
@@ -295,6 +311,7 @@ class AdmUtilUserProperties(object):
         if mapping is None:
             blank = { 'timezone': u'',
                       'navExplanation': False,
+                      'compactView': False,
                       'email': u'',
                       'startView': u'view_dashboard.html',
                       'notifierChannels': set([]),
@@ -308,6 +325,7 @@ class AdmUtilUserProperties(object):
             
     email = MappingProperty('email')
     navExplanation = MappingProperty('navExplanation')
+    compactView = MappingProperty('compactView')
     startView = MappingProperty('startView')
     notifierChannels = MappingProperty('notifierChannels')
     notifierLevel = MappingProperty('notifierLevel')

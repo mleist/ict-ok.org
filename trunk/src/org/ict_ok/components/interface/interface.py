@@ -49,7 +49,8 @@ def AllInterfaceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IInterface)
 
 def AllInterfaces(dummy_context):
-    return AllComponents(dummy_context, IInterface, 'device')
+    return AllComponents(dummy_context, IInterface,
+                         True, 'device')
 
 def AllUnusedOrUsedDeviceInterfaces(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IInterface, 'device',

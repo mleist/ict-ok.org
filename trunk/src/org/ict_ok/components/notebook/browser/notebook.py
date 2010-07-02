@@ -43,7 +43,7 @@ from org.ict_ok.components.superclass.browser.superclass import \
     GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
     getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
 from org.ict_ok.components.physical_component.browser.physical_component import \
-    getUserName, fsearch_user_formatter
+    getUserName, fsearch_user_formatter, getRoom
 
 _ = MessageFactory('org.ict_ok')
 
@@ -161,7 +161,7 @@ class Overview(SuperOverview):
                         getter=getUserName,
                         cell_formatter=fsearch_user_formatter),
         IctGetterColumn(title=_('Room'),
-                        getter=lambda i,f: i.room,
+                        getter=getRoom,
                         cell_formatter=link('details.html')),
         DateGetterColumn(title=_('Modified'),
                         getter=getModifiedDate,

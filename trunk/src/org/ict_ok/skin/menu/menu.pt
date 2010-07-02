@@ -1,3 +1,4 @@
+<i18n:block domain="org.ict_ok">
    <div tal:omit-tag="" class="3333menumain" tal:content="structure provider:ict_ok.menumain" />
    <!--<div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub.general" />-->
    <!--<div tal:omit-tag="" class="3333menusub" tal:content="structure provider:ict_ok.menusub" />-->
@@ -31,3 +32,4 @@
             </ul>            
         </div>
    </div>
+</i18n:block>

@@ -64,6 +64,21 @@ def getUserName(item, formatter):
     else:
         return u''
 
+def getRoom(item, formatter):
+    """
+    Room title for Overview
+    """
+    if hasattr(item, 'room') and item.room is not None:
+        room = item.room
+        if hasattr(room, 'number') and room.number is not None:
+            numberStr = room.number[:8]
+            return u'%s&nbsp;(%s)' % (room.ikName, numberStr)
+        else:
+            return u'%s' % (room.ikName)
+    else:
+        return u''
+    
+
 def fsearch_user_formatter(value, item, formatter):
     if hasattr(item, 'user'):
         username = vocabValue('AllLdapUser', item.user, formatter.request)

@@ -177,6 +177,14 @@
         permission="org.ict_ok.components.work_order.Add"
         />
     <page
+        name="exportxlsreport.html"
+        for="org.ict_ok.components.work_order.interfaces.IWorkOrderFolder"
+        class=".work_order.WorkOrderFolderDetails"
+        permission="org.ict_ok.components.work_order.View"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        attribute="exportXlsReport"
+    />
+    <page
         name="exportxlsdata.html"
         for="org.ict_ok.components.work_order.interfaces.IWorkOrderFolder"
         class=".work_order.WorkOrderFolderDetails"
@@ -191,6 +199,14 @@
         layer="org.ict_ok.skin.interfaces.IBrowserLayer"
         permission="org.ict_ok.components.work_order.Add"
     />
+    <viewlet
+        name="exportxlsreport"
+        for="org.ict_ok.components.work_order.interfaces.IWorkOrderFolder"
+        manager="org.ict_ok.skin.menu.interfaces.IMenuAdmin"
+        class="org.ict_ok.components.superclass.browser.superclass.MSubExportXlsReport"
+        layer="org.ict_ok.skin.interfaces.IBrowserLayer"
+        permission="org.ict_ok.components.work_order.View"
+        />
     <viewlet
         name="exportxlsdata"
         for="org.ict_ok.components.work_order.interfaces.IWorkOrderFolder"

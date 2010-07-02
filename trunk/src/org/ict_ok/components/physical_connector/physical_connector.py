@@ -28,7 +28,8 @@ from org.ict_ok.components.component import \
 
 
 def AllPhysicalConnectors(dummy_context):
-    return AllComponents(dummy_context, IPhysicalConnector, 'device', 'room')
+    return AllComponents(dummy_context, IPhysicalConnector,
+                         True, 'device', 'room')
 
 def AllUnusedOrUsedPhysikalLinkPhysicalConnectors(dummy_context):
     return AllUnusedOrSelfComponents(dummy_context, IPhysicalConnector, 'links', 'device', 'room')
