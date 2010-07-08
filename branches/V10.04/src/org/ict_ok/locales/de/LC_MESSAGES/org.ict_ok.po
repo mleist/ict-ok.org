@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ict-ok.org $Id$\n"
 "POT-Creation-Date: Fri Jun 25 06:21:07 2010\n"
-"PO-Revision-Date: 2010-06-25 07:32+0100\n"
+"PO-Revision-Date: 2010-07-08 06:59+0100\n"
 "Last-Translator: Markus Leist <leist@ikom-online.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,11 +15,11 @@ msgstr ""
 #: org/ict_ok/admin_utils/categories/browser/categories.py:109
 #: org/ict_ok/admin_utils/idchooser/browser/idchooser_util.py:90
 msgid "settings of categories"
-msgstr ""
+msgstr "Kategorie Einstellungen"
 
 #: org/ict_ok/admin_utils/categories/browser/categories.py:119
 msgid "add category"
-msgstr ""
+msgstr "Kategorie hinzufügen"
 
 #: org/ict_ok/admin_utils/categories/browser/categories.py:130
 #, fuzzy
@@ -28,7 +28,7 @@ msgstr "Einstellungen speichern"
 
 #: org/ict_ok/admin_utils/categories/browser/categories.py:140
 msgid "Delete this host group: '%s'?"
-msgstr ""
+msgstr "Diese Host-Gruppe löschen: '%s'?"
 
 #: org/ict_ok/admin_utils/categories/browser/categories.py:173
 #: org/ict_ok/admin_utils/categories/browser/categories.py:187
@@ -300,7 +300,7 @@ msgstr "Bemerkung"
 #: org/ict_ok/components/work_order/adapter/navigation.py:57
 #: org/ict_ok/admin_utils/categories/browser/category_details.pt:21
 msgid "Requirements"
-msgstr ""
+msgstr "Anforderungen"
 
 #: org/ict_ok/admin_utils/compliance/browser/allreqs.pt:15
 #: org/ict_ok/admin_utils/compliance/browser/display_reqs.pt:15
@@ -348,7 +348,7 @@ msgstr "ZMI Einstellungen"
 
 #: org/ict_ok/admin_utils/compliance/browser/compliance.py:280
 msgid "display requirements"
-msgstr ""
+msgstr "Anforderungen darstellen"
 
 #: org/ict_ok/admin_utils/compliance/browser/compliance.py:285
 #: org/ict_ok/admin_utils/compliance/browser/compliance.py:313
@@ -361,7 +361,7 @@ msgstr "Größe"
 #: org/ict_ok/admin_utils/compliance/browser/compliance.py:304
 #: org/ict_ok/admin_utils/compliance/browser/requirement.py:221
 msgid "display all requirements"
-msgstr ""
+msgstr "alle Anforderungen darstellen"
 
 #: org/ict_ok/admin_utils/compliance/browser/compliance.py:334
 #, fuzzy
@@ -371,7 +371,7 @@ msgstr "Felderinhalt bearbeiten"
 #: org/ict_ok/admin_utils/compliance/browser/compliance.py:343
 #: org/ict_ok/admin_utils/supervisor/browser/supervisor.py:627
 msgid "Import an 'all-data file' data"
-msgstr ""
+msgstr "Daten importieren ALLES"
 
 #: org/ict_ok/admin_utils/compliance/browser/compliance.py:376
 #, fuzzy
@@ -400,7 +400,7 @@ msgstr "<i>kein Name</i>"
 
 #: org/ict_ok/admin_utils/compliance/browser/details.pt:35
 msgid "validAsFirst"
-msgstr ""
+msgstr "gültig zuerst"
 
 #: org/ict_ok/admin_utils/compliance/browser/details.pt:59
 #: org/ict_ok/admin_utils/compliance/browser/overview.pt:52
@@ -416,7 +416,7 @@ msgstr "Einen Status hinzufügen"
 
 #: org/ict_ok/admin_utils/compliance/browser/details.pt:69
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: org/ict_ok/admin_utils/compliance/browser/details.pt:85
 #: org/ict_ok/admin_utils/mac_address_db/browser/details.pt:11
@@ -453,7 +453,7 @@ msgstr ""
 
 #: org/ict_ok/admin_utils/compliance/browser/requirement.py:150
 msgid "All Requirements"
-msgstr ""
+msgstr "alle Anforderungen"
 
 #: org/ict_ok/admin_utils/compliance/browser/requirement.py:156
 #, fuzzy
@@ -496,7 +496,7 @@ msgstr "Details"
 
 #: org/ict_ok/admin_utils/compliance/interfaces.py:63
 msgid "Valid as first"
-msgstr ""
+msgstr "gültige zuerst"
 
 #: org/ict_ok/admin_utils/compliance/interfaces.py:64
 msgid "Requirement can be the first requirement with more sub-requirement"
@@ -524,7 +524,7 @@ msgstr "Instanzobjekt"
 #: org/ict_ok/admin_utils/compliance/interfaces.py:82
 #: org/ict_ok/admin_utils/compliance/browser/details.pt:77
 msgid "Copyright"
-msgstr ""
+msgstr "Copyright"
 
 #: org/ict_ok/admin_utils/compliance/interfaces.py:83
 msgid "Copyright on this requirement."
@@ -534,7 +534,7 @@ msgstr ""
 #: org/ict_ok/components/interfaces.py:66
 #: org/ict_ok/components/browser/components_details.pt:25
 msgid "Categories"
-msgstr ""
+msgstr "Kategorien"
 
 #: org/ict_ok/admin_utils/cron/browser/cron.py:53
 #, fuzzy
@@ -639,7 +639,7 @@ msgstr "Online-Hilfe"
 
 #: org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:14
 msgid "Powerstate"
-msgstr ""
+msgstr "Betriebszustand"
 
 #: org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:18
 #, fuzzy
@@ -678,15 +678,15 @@ msgstr "E-Mail-Adresse des Übersetzerteams:"
 
 #: org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:44
 msgid "Guest hostname"
-msgstr ""
+msgstr "Gast Hostname"
 
 #: org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:48
 msgid "Guest mac address (net0)"
-msgstr ""
+msgstr "Gast Mac-Adresse"
 
 #: org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:52
 msgid "Guest network connected (net0)"
-msgstr ""
+msgstr "Gast Netzwerkanschluss"
 
 #: org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:56
 #, fuzzy
@@ -695,11 +695,11 @@ msgstr "Adapters (light version)"
 
 #: org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:71
 msgid "Host Machine"
-msgstr ""
+msgstr "Host-Server"
 
 #: org/ict_ok/admin_utils/esx_vim/browser/details_esx_vm.pt:75
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: org/ict_ok/admin_utils/esx_vim/browser/esx_vim.py:126
 #: org/ict_ok/admin_utils/linux_ha/browser/linux_ha.py:132
@@ -1326,7 +1326,7 @@ msgstr ""
 #: org/ict_ok/admin_utils/idchooser/browser/idchooser_util.py:71
 #: org/ict_ok/admin_utils/idchooser/interfaces.py:44
 msgid "Counter"
-msgstr ""
+msgstr "Zähler"
 
 #: org/ict_ok/admin_utils/idchooser/browser/idchooser_util.py:72
 #: org/ict_ok/admin_utils/idchooser/interfaces.py:50
@@ -1336,7 +1336,7 @@ msgstr "Webseitenverwaltung"
 
 #: org/ict_ok/admin_utils/idchooser/interfaces.py:36
 msgid "Was used"
-msgstr ""
+msgstr "wurde benutzt"
 
 #: org/ict_ok/admin_utils/idchooser/interfaces.py:37
 msgid "Id chooser was used and cannot be deleted"
@@ -1482,7 +1482,7 @@ msgstr "[Version]"
 
 #: org/ict_ok/admin_utils/mindmap/interfaces.py:37
 msgid "mind maps must have a version."
-msgstr ""
+msgstr "MindMaps müssen eine Versionsnummer haben."
 
 #: org/ict_ok/admin_utils/mindmap/interfaces.py:42
 #: org/ict_ok/admin_utils/mindmap/interfaces.py:43
@@ -1507,7 +1507,7 @@ msgstr ""
 #: org/ict_ok/components/browser/component.py:365
 #: org/ict_ok/components/superclass/adapter/rpt_dot.py:155
 msgid "Value"
-msgstr ""
+msgstr "Wert"
 
 #: org/ict_ok/admin_utils/mindmap/mindmap.py:213
 msgid "Evaluations Todo"
@@ -1547,7 +1547,7 @@ msgstr ""
 
 #: org/ict_ok/admin_utils/netscan/interfaces.py:31
 msgid "Network Scanners"
-msgstr ""
+msgstr "Netzwerkscanner"
 
 #: org/ict_ok/admin_utils/netscan/interfaces.py:32
 msgid "Which network scanners should be triggerd"
@@ -1555,7 +1555,7 @@ msgstr ""
 
 #: org/ict_ok/admin_utils/netscan/interfaces.py:34
 msgid "Network Scanner"
-msgstr ""
+msgstr "Netzwerkscanner"
 
 #: org/ict_ok/admin_utils/netscan/nmap/browser/nmap.py:51
 #, fuzzy
@@ -1617,7 +1617,7 @@ msgstr "<i>kein Name</i>"
 
 #: org/ict_ok/admin_utils/notifier/browser/status.pt:2
 msgid "Display Notifier"
-msgstr ""
+msgstr "Meldung anzeigen"
 
 #: org/ict_ok/admin_utils/notifier/browser/status.pt:21
 #, fuzzy
@@ -1690,7 +1690,7 @@ msgstr "Eine kurze Beschreibung des Ereignisses."
 
 #: org/ict_ok/admin_utils/notifier/interfaces.py:33
 msgid "Notifiers"
-msgstr ""
+msgstr "Meldungen"
 
 #: org/ict_ok/admin_utils/notifier/interfaces.py:34
 msgid "Which network notifiers should be triggerd"
@@ -1698,7 +1698,7 @@ msgstr ""
 
 #: org/ict_ok/admin_utils/notifier/interfaces.py:36
 msgid "Notifier"
-msgstr ""
+msgstr "Meldung"
 
 #: org/ict_ok/admin_utils/notifier/jabber/browser/jabber.py:53
 msgid "stop jabber-connector"
@@ -1736,7 +1736,7 @@ msgstr ""
 
 #: org/ict_ok/admin_utils/notifier/jabber/interfaces.py:35
 msgid "Connector IP"
-msgstr ""
+msgstr "Stecker IP"
 
 #: org/ict_ok/admin_utils/notifier/jabber/interfaces.py:36
 msgid "IP address of the jabber connector."
@@ -1908,7 +1908,7 @@ msgstr "Netzwerk"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:122
 msgid "All (PDF)"
-msgstr ""
+msgstr "alle (PDFs)"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:128
 #, fuzzy
@@ -1965,7 +1965,7 @@ msgstr "Hardware"
 #: org/ict_ok/admin_utils/reports/browser/reports.py:508
 #: org/ict_ok/skin/menu/__init__.py:197
 msgid "Hosts"
-msgstr ""
+msgstr "Server"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:510
 #: org/ict_ok/components/happliance/adapter/navigation.py:51
@@ -2011,7 +2011,7 @@ msgstr "Standorte"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:524
 msgid "Misc Physicals"
-msgstr ""
+msgstr "sonstige Hardware"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:526
 #, fuzzy
@@ -2036,7 +2036,7 @@ msgstr "Betriebssystem"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:532
 msgid "Outlets"
-msgstr ""
+msgstr "Patchdosen"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:534
 #, fuzzy
@@ -2064,7 +2064,7 @@ msgstr "Drucker"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:544
 msgid "Racks"
-msgstr ""
+msgstr "Racks"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:546
 #: org/ict_ok/components/building/adapter/navigation.py:51
@@ -2166,7 +2166,7 @@ msgstr "Anmerkungen"
 #: org/ict_ok/components/person/adapter/navigation.py:59
 #: org/ict_ok/components/contact_item/browser/contact_item_details.pt:30
 msgid "Groups"
-msgstr ""
+msgstr "Gruppen"
 
 #: org/ict_ok/admin_utils/reports/browser/reports.py:579
 #: org/ict_ok/components/address/adapter/navigation.py:51
@@ -2515,11 +2515,11 @@ msgstr "Text"
 
 #: org/ict_ok/admin_utils/supervisor/browser/supervisor.py:406
 msgid "FieldIndex"
-msgstr ""
+msgstr "Feldindex"
 
 #: org/ict_ok/admin_utils/supervisor/browser/supervisor.py:408
 msgid "KeywordIndex"
-msgstr ""
+msgstr "Schlüsselwortindex"
 
 #: org/ict_ok/admin_utils/supervisor/browser/supervisor.py:410
 #, fuzzy
@@ -2570,7 +2570,7 @@ msgstr "Niedrigste Generation"
 #: org/ict_ok/admin_utils/supervisor/browser/supervisor.py:496
 #: org/ict_ok/admin_utils/supervisor/browser/supervisor.py:558
 msgid "Type"
-msgstr ""
+msgstr "Typ"
 
 #: org/ict_ok/admin_utils/supervisor/browser/supervisor.py:498
 #, fuzzy
@@ -2641,7 +2641,7 @@ msgstr "Generationen"
 #: org/ict_ok/admin_utils/supervisor/browser/supervisor.py:98
 #: org/ict_ok/admin_utils/supervisor/browser/supervisor.py:492
 msgid "Indices"
-msgstr ""
+msgstr "Indexe"
 
 #: org/ict_ok/admin_utils/supervisor/browser/version.pt:17
 #, fuzzy
@@ -2680,12 +2680,12 @@ msgstr "Meine Anfragen lesen"
 
 #: org/ict_ok/admin_utils/supervisor/interfaces.py:45
 msgid "Active IP address of this host."
-msgstr ""
+msgstr "aktive IP Adresse des Servers"
 
 #: org/ict_ok/admin_utils/supervisor/interfaces.py:59
 #: org/ict_ok/admin_utils/supervisor/browser/details.pt:41
 msgid "Master IP"
-msgstr ""
+msgstr "Master IP"
 
 #: org/ict_ok/admin_utils/supervisor/interfaces.py:60
 #, fuzzy
@@ -2780,11 +2780,11 @@ msgstr "Eine kurze Beschreibung des Ereignisses."
 
 #: org/ict_ok/admin_utils/usermanagement/browser/details.pt:10
 msgid "baseDN"
-msgstr ""
+msgstr "baseDN"
 
 #: org/ict_ok/admin_utils/usermanagement/browser/details.pt:14
 msgid "bindDN"
-msgstr ""
+msgstr "bindDN"
 
 #: org/ict_ok/admin_utils/usermanagement/browser/details.pt:18
 #, fuzzy
@@ -2835,7 +2835,7 @@ msgstr "Attribut"
 
 #: org/ict_ok/admin_utils/usermanagement/browser/details.pt:6
 msgid "serverURL"
-msgstr ""
+msgstr "Server URL"
 
 #: org/ict_ok/admin_utils/usermanagement/browser/form1.pt:10
 #: org/ict_ok/admin_utils/usermanagement/browser/form1.pt:12
@@ -2950,11 +2950,11 @@ msgstr "<i>kein Name</i>"
 
 #: org/ict_ok/admin_utils/usermanagement/interfaces.py:174
 msgid "Notifier level"
-msgstr ""
+msgstr "Grad der Meldungen"
 
 #: org/ict_ok/admin_utils/usermanagement/interfaces.py:175
 msgid "minimum notification level"
-msgstr ""
+msgstr "minimaler Grad der Meldungen"
 
 #: org/ict_ok/admin_utils/usermanagement/interfaces.py:185
 msgid "Short notifier channels"
@@ -3167,7 +3167,7 @@ msgstr ""
 #: org/ict_ok/components/address/interfaces.py:51
 #: org/ict_ok/components/address/browser/address_details.pt:32
 msgid "Postal code"
-msgstr ""
+msgstr "PLZ"
 
 #: org/ict_ok/components/address/interfaces.py:55
 #: org/ict_ok/components/address/interfaces.py:56
@@ -3444,7 +3444,7 @@ msgstr "Resource löschen"
 #: org/ict_ok/components/physical_component/browser/physical_component_details.pt:16
 #: org/ict_ok/components/physical_media/browser/physical_media_details.pt:8
 msgid "Manufacturer"
-msgstr ""
+msgstr "Hersteller"
 
 #: org/ict_ok/components/appsoftware/interfaces.py:39
 #: org/ict_ok/components/osoftware/interfaces.py:39
@@ -3470,7 +3470,7 @@ msgstr "Beschreibung zum Menü"
 #: org/ict_ok/components/appsoftware/interfaces.py:48
 #: org/ict_ok/components/appsoftware/browser/appsoftware_details.pt:37
 msgid "Target OS"
-msgstr ""
+msgstr "Ziel-Betriebssystem"
 
 #: org/ict_ok/components/appsoftware/interfaces.py:49
 #, fuzzy
@@ -3490,7 +3490,7 @@ msgstr "[Version]"
 #: org/ict_ok/components/appsoftware/browser/appsoftware_details.pt:49
 #: org/ict_ok/components/osoftware/browser/osoftware_details.pt:33
 msgid "License key"
-msgstr ""
+msgstr "Lizenzschlüssel"
 
 #: org/ict_ok/components/appsoftware/interfaces.py:61
 #: org/ict_ok/components/osoftware/interfaces.py:61
@@ -3571,7 +3571,7 @@ msgstr ""
 
 #: org/ict_ok/components/browser/component.py:568
 msgid "Category"
-msgstr ""
+msgstr "Kategorie"
 
 #: org/ict_ok/components/browser/component.py:81
 #: org/ict_ok/components/host/browser/host.py:72
@@ -3591,7 +3591,7 @@ msgstr ""
 
 #: org/ict_ok/components/browser/components_details.pt:11
 msgid "ToDo"
-msgstr ""
+msgstr "offener Punkt"
 
 #: org/ict_ok/components/browser/components_details.pt:15
 #, fuzzy
@@ -3652,7 +3652,7 @@ msgstr "Abhängigkeitsbaum wird aufgebaut"
 #: org/ict_ok/components/location/browser/location_details.pt:20
 #: org/ict_ok/components/room/browser/room_details.pt:41
 msgid "coordinates"
-msgstr ""
+msgstr "Koordinaten"
 
 #: org/ict_ok/components/building/interfaces.py:43
 #, fuzzy
@@ -3692,7 +3692,7 @@ msgstr "Standort:&nbsp;"
 #: org/ict_ok/components/product/adapter/navigation.py:53
 #: org/ict_ok/components/contact/browser/contact_details.pt:9
 msgid "Work Order"
-msgstr ""
+msgstr "Reihenfolge"
 
 #: org/ict_ok/components/contact/browser/contact.py:107
 #, fuzzy
@@ -3816,7 +3816,7 @@ msgstr "Schnittstelle"
 #: org/ict_ok/components/contact_item/interfaces.py:35
 #: org/ict_ok/components/contact_item/browser/contact_item_details.pt:11
 msgid "WorkOrder"
-msgstr ""
+msgstr "Reihenfolge"
 
 #: org/ict_ok/components/contact_item/interfaces.py:58
 #: org/ict_ok/components/contact_item/browser/contact_item_details.pt:54
@@ -3859,7 +3859,7 @@ msgstr "Vertragsart"
 #: org/ict_ok/components/contract/interfaces.py:50
 #: org/ict_ok/components/contract/browser/contract_details.pt:33
 msgid "expiration date"
-msgstr ""
+msgstr "Ablaufdatum"
 
 #: org/ict_ok/components/contract/browser/contract.py:147
 #: org/ict_ok/components/contract/interfaces.py:55
@@ -3886,7 +3886,7 @@ msgstr "Vertragsmodell"
 
 #: org/ict_ok/components/contract/browser/contract_details.pt:57
 msgid "responsible"
-msgstr ""
+msgstr "verantwortlich"
 
 #: org/ict_ok/components/contract/browser/details.pt:6
 #, fuzzy
@@ -3997,19 +3997,19 @@ msgstr "Nächster Reiter"
 #: org/ict_ok/components/device/interfaces.py:31
 #: org/ict_ok/components/device/browser/device_details.pt:14
 msgid "CPU type"
-msgstr ""
+msgstr "CPU Typ"
 
 #: org/ict_ok/components/device/interfaces.py:32
 msgid "Text of CPU type"
-msgstr ""
+msgstr "Beschreibung der CPU"
 
 #: org/ict_ok/components/device/interfaces.py:36
 msgid "Memory size (MB)"
-msgstr ""
+msgstr "Speichergröße (MB)"
 
 #: org/ict_ok/components/device/interfaces.py:37
 msgid "Memory size in MB"
-msgstr ""
+msgstr "Speichergröße in MB"
 
 #: org/ict_ok/components/device/interfaces.py:41
 #: org/ict_ok/components/ip_address/adapter/navigation.py:51
@@ -4027,7 +4027,7 @@ msgstr "Betriebssystem"
 #: org/ict_ok/components/device/interfaces.py:51
 #: org/ict_ok/components/switch/adapter/navigation.py:67
 msgid "Application software"
-msgstr ""
+msgstr "Anwendungssoftware"
 
 #: org/ict_ok/components/device/interfaces.py:56
 #: org/ict_ok/components/happliance/adapter/navigation.py:57
@@ -4052,7 +4052,7 @@ msgstr "für _alle Benutzer"
 #: org/ict_ok/components/switch/adapter/navigation.py:55
 #: org/ict_ok/components/device/browser/device_details.pt:81
 msgid "Physical Media"
-msgstr ""
+msgstr "Medien"
 
 #: org/ict_ok/components/display_unit/adapter/navigation.py:49
 #: org/ict_ok/components/display_unit/browser/display_unit.py:160
@@ -4083,7 +4083,7 @@ msgstr "Benutzer"
 
 #: org/ict_ok/components/display_unit/browser/details.pt:6
 msgid "Display unit details [Template]"
-msgstr ""
+msgstr "Details zum Monitor [Template]"
 
 #: org/ict_ok/components/display_unit/browser/details.pt:7
 #, fuzzy
@@ -4109,19 +4109,19 @@ msgstr "Resource löschen"
 #: org/ict_ok/components/display_unit/browser/display_unit.py:66
 #: org/ict_ok/components/display_unit/browser/display_unit.py:113
 msgid "Add Display unit instance"
-msgstr ""
+msgstr "Monitor hinzufügen"
 
 #: org/ict_ok/components/display_unit/browser/display_unit.py:74
 msgid "All Display unit instances"
-msgstr ""
+msgstr "alle Monitore"
 
 #: org/ict_ok/components/display_unit/browser/display_unit_details.pt:9
 msgid "Resolution"
-msgstr ""
+msgstr "Auflösung"
 
 #: org/ict_ok/components/display_unit/interfaces.py:30
 msgid "Horizontal resolution"
-msgstr ""
+msgstr "horizontale Auflösung"
 
 #: org/ict_ok/components/display_unit/interfaces.py:31
 msgid "FlatPanel's horizontal resolution in Pixels."
@@ -4129,7 +4129,7 @@ msgstr ""
 
 #: org/ict_ok/components/display_unit/interfaces.py:35
 msgid "Vertical resolution"
-msgstr ""
+msgstr "vertikale Auflösung"
 
 #: org/ict_ok/components/display_unit/interfaces.py:36
 msgid "FlatPanel's vertical resolution in Pixels."
@@ -4189,7 +4189,7 @@ msgstr "Resource löschen"
 #: org/ict_ok/components/happliance/browser/happliance.py:58
 #: org/ict_ok/components/happliance/browser/happliance.py:97
 msgid "Add Hardware Appliance"
-msgstr ""
+msgstr "Hardware Appliance hinzufügen"
 
 #: org/ict_ok/components/happliance/browser/happliance.py:89
 #, fuzzy
@@ -4254,19 +4254,19 @@ msgstr "Utility hinzufügen"
 
 #: org/ict_ok/components/host/browser/add_hosts.pt:24
 msgid "UPS"
-msgstr ""
+msgstr "USV"
 
 #: org/ict_ok/components/host/browser/add_hosts.pt:29
 msgid "Printer"
-msgstr ""
+msgstr "Drucker"
 
 #: org/ict_ok/components/host/browser/add_hosts.pt:34
 msgid "Infrastructure"
-msgstr ""
+msgstr "Infrastruktur"
 
 #: org/ict_ok/components/host/browser/add_hosts.pt:40
 msgid "misc."
-msgstr ""
+msgstr "verschidenes"
 
 #: org/ict_ok/components/host/browser/details.pt:3
 #, fuzzy
@@ -4330,7 +4330,7 @@ msgstr ""
 #: org/ict_ok/components/host/browser/host.py:392
 #: org/ict_ok/components/ip_address/browser/ip_address.py:187
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #: org/ict_ok/components/host/browser/smartview.pt:3
 msgid "Host smartview"
@@ -4356,7 +4356,7 @@ msgstr "Systemplattform"
 
 #: org/ict_ok/components/host/interfaces.py:47
 msgid "systemname"
-msgstr ""
+msgstr "Systemname"
 
 #: org/ict_ok/components/host/special/linux_server/browser/host.py:42
 #: org/ict_ok/components/host/special/linux_server/browser/host.py:51
@@ -4668,7 +4668,7 @@ msgstr ""
 
 #: org/ict_ok/components/host/special/vmware_vm/browser/host.py:77
 msgid "Power off"
-msgstr ""
+msgstr "Strom aus"
 
 #: org/ict_ok/components/host/special/vmware_vm/browser/host.py:84
 #, fuzzy
@@ -4714,7 +4714,7 @@ msgstr "Modell"
 
 #: org/ict_ok/components/int_attachment/browser/int_attachment_details.pt:20
 msgid "Download"
-msgstr ""
+msgstr "download"
 
 #: org/ict_ok/components/int_attachment/interfaces.py:30
 #: org/ict_ok/components/int_attachment/browser/int_attachment_details.pt:9
@@ -4957,7 +4957,7 @@ msgstr "TM-Datenbank erstellen"
 #: org/ict_ok/components/ipnet/interfaces.py:56
 #: org/ict_ok/components/ipnet/browser/ipnet_details.pt:47
 msgid "Sub nets"
-msgstr ""
+msgstr "Subnetze"
 
 #: org/ict_ok/components/ipnet/adapter/navigation.py:55
 msgid "Parentnet"
@@ -5019,7 +5019,7 @@ msgstr ""
 
 #: org/ict_ok/components/isdnphone/browser/details.pt:6
 msgid "ISDN Phone details [Template]"
-msgstr ""
+msgstr "ISDN Telefone Ttemplate]"
 
 #: org/ict_ok/components/isdnphone/browser/details.pt:7
 #, fuzzy
@@ -5050,7 +5050,7 @@ msgstr "Mobiltelefon hinzufügen"
 
 #: org/ict_ok/components/isdnphone/browser/isdnphone.py:73
 msgid "All ISDN Phones"
-msgstr ""
+msgstr "alle ISDN Telefone"
 
 #: org/ict_ok/components/isdnphone/interfaces.py:30
 #: org/ict_ok/components/isdnphone/browser/isdnphone_details.pt:9
@@ -5551,7 +5551,7 @@ msgstr ""
 #: org/ict_ok/components/osoftware/interfaces.py:43
 #: org/ict_ok/components/osoftware/browser/osoftware_details.pt:15
 msgid "OS type"
-msgstr ""
+msgstr "Betriebssystem Typ"
 
 #: org/ict_ok/components/osoftware/interfaces.py:44
 #, fuzzy
@@ -5560,11 +5560,11 @@ msgstr "Betriebssystem"
 
 #: org/ict_ok/components/outlet/browser/details.pt:3
 msgid "Network outlet Details [Template]"
-msgstr ""
+msgstr "Netzwerkanschluss-Details [Template]"
 
 #: org/ict_ok/components/outlet/browser/details.pt:4
 msgid "Network outlet Details"
-msgstr ""
+msgstr "Netzwerkanschluss-Details"
 
 #: org/ict_ok/components/outlet/browser/outlet.py:100
 #, fuzzy
@@ -5584,7 +5584,7 @@ msgstr "Resource löschen"
 #: org/ict_ok/components/outlet/browser/outlet.py:48
 #: org/ict_ok/components/outlet/browser/outlet.py:55
 msgid "Add an network outlet"
-msgstr ""
+msgstr "Netzwerkanschluss hinzufügen"
 
 #: org/ict_ok/components/outlet/browser/outlet.py:86
 #, fuzzy
@@ -5612,11 +5612,11 @@ msgstr "Port"
 
 #: org/ict_ok/components/patchpanel/browser/details.pt:6
 msgid "Patch panel details [Template]"
-msgstr ""
+msgstr "Patchpanel Details [Templates]"
 
 #: org/ict_ok/components/patchpanel/browser/details.pt:7
 msgid "Patch panel details"
-msgstr ""
+msgstr "Patchpanel Details"
 
 #: org/ict_ok/components/patchpanel/browser/patchpanel.py:134
 #, fuzzy
@@ -5632,7 +5632,7 @@ msgstr "Resource löschen"
 #: org/ict_ok/components/patchpanel/browser/patchpanel.py:57
 #: org/ict_ok/components/patchpanel/browser/patchpanel.py:96
 msgid "Add Patch panel"
-msgstr ""
+msgstr "Patchpanel hinzufügen"
 
 #: org/ict_ok/components/patchpanel/browser/patchpanel.py:88
 #, fuzzy
@@ -5643,11 +5643,11 @@ msgstr "ZMI Einstellungen"
 #: org/ict_ok/components/patchpanel/browser/patchpanel_details.pt:20
 #: org/ict_ok/components/switch/browser/switch_details.pt:8
 msgid "Port quantity"
-msgstr ""
+msgstr "Anzahl der Ports"
 
 #: org/ict_ok/components/patchpanel/interfaces.py:32
 msgid "Quantity of all patch ports"
-msgstr ""
+msgstr "Gasamtanzhal der Patchports"
 
 #: org/ict_ok/components/patchpanel/interfaces.py:43
 #: org/ict_ok/components/patchpanel/browser/patchpanel_details.pt:8
@@ -5664,11 +5664,11 @@ msgstr "Eine Datei ändern"
 
 #: org/ict_ok/components/patchport/browser/details.pt:6
 msgid "Patch port details [Template]"
-msgstr ""
+msgstr "Patchport Details [Template]"
 
 #: org/ict_ok/components/patchport/browser/details.pt:7
 msgid "Patch port details"
-msgstr ""
+msgstr "Patchport Details"
 
 #: org/ict_ok/components/patchport/browser/patchport.py:108
 #, fuzzy
@@ -5684,7 +5684,7 @@ msgstr "Resource löschen"
 #: org/ict_ok/components/patchport/browser/patchport.py:56
 #: org/ict_ok/components/patchport/browser/patchport.py:96
 msgid "Add Patch port"
-msgstr ""
+msgstr "Patchport hinzufügen"
 
 #: org/ict_ok/components/patchport/browser/patchport.py:88
 #, fuzzy
@@ -5699,11 +5699,11 @@ msgstr "Eine Datei ändern"
 
 #: org/ict_ok/components/pc/browser/details.pt:6
 msgid "Personal Computer details [Template]"
-msgstr ""
+msgstr "PC Details [Template]"
 
 #: org/ict_ok/components/pc/browser/details.pt:7
 msgid "Personal Computer details"
-msgstr ""
+msgstr "PC Details"
 
 #: org/ict_ok/components/pc/browser/pc.py:110
 #, fuzzy
@@ -5781,7 +5781,7 @@ msgstr "Benutzer: ${user_title}"
 
 #: org/ict_ok/components/person/interfaces.py:36
 msgid "last name of person"
-msgstr ""
+msgstr "Nachname"
 
 #: org/ict_ok/components/person/interfaces.py:40
 #: org/ict_ok/components/person/browser/person_details.pt:20
@@ -5797,7 +5797,7 @@ msgstr "ZMI Einstellungen"
 #: org/ict_ok/components/person/interfaces.py:44
 #: org/ict_ok/components/person/browser/person_details.pt:26
 msgid "Member in OUs"
-msgstr ""
+msgstr "Mitglieder OUs"
 
 #: org/ict_ok/components/physical_component/browser/details.pt:3
 #, fuzzy
@@ -5814,7 +5814,7 @@ msgstr "Modell"
 #: org/ict_ok/components/physical_component/browser/physical_component_details.pt:28
 #: org/ict_ok/components/physical_media/browser/physical_media_details.pt:14
 msgid "Vendor"
-msgstr ""
+msgstr "Lieferant"
 
 #: org/ict_ok/components/physical_component/interfaces.py:56
 #, fuzzy
@@ -5867,7 +5867,7 @@ msgstr "Details"
 
 #: org/ict_ok/components/physical_link/browser/physical_link.py:119
 msgid "physical link Edit"
-msgstr ""
+msgstr "Verbindung ändern"
 
 #: org/ict_ok/components/physical_link/browser/physical_link.py:130
 #, fuzzy
@@ -5891,11 +5891,11 @@ msgstr ""
 #: org/ict_ok/components/physical_link/browser/physical_link.py:59
 #: org/ict_ok/components/physical_link/browser/physical_link.py:106
 msgid "Add physical link"
-msgstr ""
+msgstr "Verbindung hinzufügen"
 
 #: org/ict_ok/components/physical_link/browser/physical_link.py:67
 msgid "Create physical links wizard"
-msgstr ""
+msgstr "Verbindungsassistent"
 
 #: org/ict_ok/components/physical_link/browser/physical_link.py:98
 #, fuzzy
@@ -5904,25 +5904,25 @@ msgstr "ZMI Einstellungen"
 
 #: org/ict_ok/components/physical_link/browser/physical_link_details.pt:28
 msgid "wired"
-msgstr ""
+msgstr "verkabelt"
 
 #: org/ict_ok/components/physical_link/interfaces.py:42
 #: org/ict_ok/components/physical_link/browser/physical_link_details.pt:8
 msgid "Length"
-msgstr ""
+msgstr "Länge"
 
 #: org/ict_ok/components/physical_link/interfaces.py:43
 msgid "The length of the physical link."
-msgstr ""
+msgstr "Länge der Verbindung"
 
 #: org/ict_ok/components/physical_link/interfaces.py:48
 #: org/ict_ok/components/physical_link/browser/physical_link_details.pt:15
 msgid "Maximum length"
-msgstr ""
+msgstr "maximale Länge"
 
 #: org/ict_ok/components/physical_link/interfaces.py:49
 msgid "The maximum length of the physical link."
-msgstr ""
+msgstr "maximale Länge der Verbindung"
 
 #: org/ict_ok/components/physical_link/interfaces.py:53
 #: org/ict_ok/components/physical_link/browser/physical_link_details.pt:21
@@ -5936,7 +5936,7 @@ msgstr ""
 
 #: org/ict_ok/components/physical_link/interfaces.py:61
 msgid "Physical link is cable"
-msgstr ""
+msgstr "die Verbindung ist ein Kabel"
 
 #: org/ict_ok/components/physical_link/interfaces.py:62
 msgid "﻿Boolean indicating whether the PhysicalLink is an actual cable (TRUE) or a wireless connection (FALSE)."
@@ -5949,7 +5949,7 @@ msgstr "Dieses Objekt ist registriert als:"
 
 #: org/ict_ok/components/physical_media/browser/details.pt:7
 msgid "Physical Media details"
-msgstr ""
+msgstr "Mediendetails"
 
 #: org/ict_ok/components/physical_media/browser/physical_media.py:107
 #, fuzzy
@@ -5970,16 +5970,16 @@ msgstr "Resource löschen"
 #: org/ict_ok/components/physical_media/browser/physical_media.py:63
 #: org/ict_ok/components/physical_media/browser/physical_media.py:115
 msgid "Add Physical Media"
-msgstr ""
+msgstr "Medium hinzufügen"
 
 #: org/ict_ok/components/physical_media/browser/physical_media.py:71
 msgid "All Physical Media"
-msgstr ""
+msgstr "alle Medien"
 
 #: org/ict_ok/components/physical_media/interfaces.py:34
 #: org/ict_ok/components/physical_media/browser/physical_media_details.pt:26
 msgid "Capacity"
-msgstr ""
+msgstr "Kapazität"
 
 #: org/ict_ok/components/physical_media/interfaces.py:35
 msgid "The number of bytes that can be read from or written to a Media."
@@ -5997,7 +5997,7 @@ msgstr ""
 #: org/ict_ok/components/physical_media/interfaces.py:44
 #: org/ict_ok/components/physical_media/browser/physical_media_details.pt:38
 msgid "Dual sided"
-msgstr ""
+msgstr "beidseitig"
 
 #: org/ict_ok/components/physical_media/interfaces.py:45
 msgid "Indicating that the Media has two recording sides (TRUE) or only a single side (FALSE)."
@@ -6064,7 +6064,7 @@ msgstr ""
 
 #: org/ict_ok/components/printer/browser/details.pt:6
 msgid "Printer details [Template]"
-msgstr ""
+msgstr "Druckerdetails [template]"
 
 #: org/ict_ok/components/printer/browser/details.pt:7
 #, fuzzy
@@ -6099,7 +6099,7 @@ msgstr "Webseitenverwaltung hinzufügen"
 #: org/ict_ok/components/printer/interfaces.py:30
 #: org/ict_ok/components/printer/browser/printer_details.pt:8
 msgid "Available paper types"
-msgstr ""
+msgstr "verfügbare Papierarten"
 
 #: org/ict_ok/components/printer/interfaces.py:31
 msgid "An array of free-form strings specifying the types and sizes of paper that are currently available on the Printer."
@@ -6199,7 +6199,7 @@ msgstr "ZMI Einstellungen"
 #: org/ict_ok/components/rack/interfaces.py:31
 #: org/ict_ok/components/rack/browser/rack_details.pt:8
 msgid "Height"
-msgstr ""
+msgstr "Höhe"
 
 #: org/ict_ok/components/rack/interfaces.py:32
 #, fuzzy
@@ -6514,7 +6514,7 @@ msgstr ""
 
 #: org/ict_ok/components/site/interfaces.py:65
 msgid "Confirm"
-msgstr ""
+msgstr "zustimmen"
 
 #: org/ict_ok/components/site/interfaces.py:66
 #, fuzzy
@@ -6686,7 +6686,7 @@ msgstr ""
 #: org/ict_ok/components/snmpvalue/interfaces.py:92
 #: org/ict_ok/components/snmpvalue/browser/snmpvalue_details.pt:51
 msgid "Display unit"
-msgstr ""
+msgstr "anzeigegerät"
 
 #: org/ict_ok/components/snmpvalue/interfaces.py:98
 #: org/ict_ok/components/snmpvalue/browser/snmpvalue_details.pt:56
@@ -6729,7 +6729,7 @@ msgstr ""
 #: org/ict_ok/components/superclass/browser/superclass.py:1221
 #: org/ict_ok/components/superclass/browser/superclass.py:1230
 msgid "Pos"
-msgstr ""
+msgstr "Pos."
 
 #: org/ict_ok/components/superclass/browser/superclass.py:1251
 #: org/ict_ok/skin/menu/__init__.py:172
@@ -6813,7 +6813,7 @@ msgstr "Übersicht"
 
 #: org/ict_ok/components/superclass/browser/superclass.py:511
 msgid "normal PDF"
-msgstr ""
+msgstr "normales PDF"
 
 #: org/ict_ok/components/superclass/browser/superclass.py:518
 #, fuzzy
@@ -6875,7 +6875,7 @@ msgstr "Felderinhalt bearbeiten"
 
 #: org/ict_ok/components/superclass/browser/superclass.py:607
 msgid "as mind map"
-msgstr ""
+msgstr "als MindMap"
 
 #: org/ict_ok/components/superclass/browser/superclass.py:663
 #: org/ict_ok/components/superclass/browser/superclass.py:687
@@ -6962,7 +6962,7 @@ msgstr ""
 
 #: org/ict_ok/components/switch/browser/details.pt:7
 msgid "Switch details"
-msgstr ""
+msgstr "switchdetails"
 
 #: org/ict_ok/components/switch/browser/switch.py:132
 #, fuzzy
@@ -7138,11 +7138,11 @@ msgstr "Oid ist nicht richtig!"
 
 #: org/ict_ok/schema/interfaces.py:30
 msgid "IP-address not ok"
-msgstr ""
+msgstr "IP Adresse nicht OK"
 
 #: org/ict_ok/schema/interfaces.py:34
 msgid "Host IP-address not ok"
-msgstr ""
+msgstr "Server-IP-Adresse nicht OK"
 
 #: org/ict_ok/schema/interfaces.py:38
 msgid "Host IP-address has wrong netmask"
