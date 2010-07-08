@@ -34,6 +34,9 @@ from org.ict_ok.admin_utils.notifier.notifier import NotifyUserEvent
 #for path_split in path_splits:
 if os.path.exists('src/org/ict_ok/components/host/wf/host_nagios.xpdl'):
     xpdl_filename = 'src/org/ict_ok/components/host/wf/host_nagios.xpdl'
+else:
+    xpdl_filename = os.getenv("ICT_HOST_XPDL")
+    
 #    break
 
 package = xpdl.read(open(xpdl_filename))

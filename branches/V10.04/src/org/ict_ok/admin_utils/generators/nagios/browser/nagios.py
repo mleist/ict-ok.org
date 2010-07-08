@@ -85,7 +85,7 @@ class AdmUtilGeneratorNagiosDetails(SupernodeDetails):
     def allConfigFilesOut(self):
         """Trigger configuration by web browser
         """
-        return self.context.allConfigFilesOut()
+        return self.context.allConfigFilesOut(self.context)
 
 
 # --------------- forms ------------------------------------

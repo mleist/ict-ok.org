@@ -26,6 +26,8 @@ from zope.wfmc import xpdl
 #for path_split in path_splits:
 if os.path.exists('src/org/ict_ok/components/service/wf/service_nagios.xpdl'):
     xpdl_filename = 'src/org/ict_ok/components/service/wf/service_nagios.xpdl'
+else:
+    xpdl_filename = os.getenv("ICT_SERVICE_XPDL")
 #        break
 
 package = xpdl.read(open(xpdl_filename))

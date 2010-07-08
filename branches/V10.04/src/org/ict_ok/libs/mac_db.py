@@ -15,12 +15,17 @@ __version__ = "$Id$"
 
 
 from BTrees.IOBTree import IOBTree
+import os
 import re
 
 
 class MacDB():
     def __init__(self):
-        f = open("src/org/ict_ok/libs/oui.txt", "r") #oui: http://standards.ieee.org/regauth/oui/oui.txt
+        ouiPath = os.getenv("ICT_OUI_PATH")
+        if ouiPath is not None:
+            f = open(ouiPath, "r") #oui: http://standards.ieee.org/regauth/oui/oui.txt
+        else:
+            f = open("src/org/ict_ok/libs/oui.txt", "r") #oui: http://standards.ieee.org/regauth/oui/oui.txt
         self._data = IOBTree()
         last_mac = None
         EOF = False

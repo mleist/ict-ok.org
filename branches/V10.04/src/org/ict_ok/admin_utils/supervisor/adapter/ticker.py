@@ -60,6 +60,7 @@ class Ticker(object):
         """
         got ticker event from ticker thread every day
         """
+        self.context.appendEventHistory(u'day ticker')
         pass
 
     def triggerMonth(self):

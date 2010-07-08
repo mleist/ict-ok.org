@@ -31,12 +31,13 @@ from zope.app.container.interfaces import \
      IObjectRemovedEvent
 from zope.lifecycleevent.interfaces import \
      IObjectModifiedEvent
+from zope.app.intid.interfaces import IIntIds
 
 # ict_ok.org imports
 from org.ict_ok.components.superclass.interfaces import ISuperclass
 from org.ict_ok.components.supernode.interfaces import ISupernode
 from org.ict_ok.admin_utils.generators.nagios.interfaces import \
-     IAdmUtilGeneratorNagios, IGenNagios
+     IAdmUtilGeneratorNagios, IGenNagios, INagiosCheck
 from org.ict_ok.admin_utils.generators.generators import \
      AdmUtilGenerators
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
@@ -94,15 +95,15 @@ class AdmUtilGeneratorNagios(AdmUtilGenerators):
             else:
                 logger.warning(u"reloadDaemon Error No: %d", retInt)
         
-    def allConfigFilesOut(self):
+    def allConfigFilesOut(self, context=None):
         """make configuration file
         """
         self.touchLastConfigFile()
-        its = zapi.getRoot(self).items()
-        for (dummy_name, oobj) in its:
-            if ISupernode.providedBy(oobj):
+        uidutil = getUtility(IIntIds, context=context)
+        for (dummy_name, oobj) in uidutil.items():
+            if INagiosCheck.providedBy(oobj.object):
                 try:
-                    adapterGenNagios = IGenNagios(oobj)
+                    adapterGenNagios = IGenNagios(oobj.object)
                     if adapterGenNagios:
                         adapterGenNagios.nagiosConfigFileOut(True, None)
                 except TypeError, errText:
