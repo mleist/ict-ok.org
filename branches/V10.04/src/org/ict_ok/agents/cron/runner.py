@@ -141,12 +141,12 @@ def runner():
                     tickerAdapter.triggerYear()
         except TypeError, err:
             pass
-    for utilInterface in (IAdmUtilSupervisor,
-                          IAdmUtilEventCrossbar,
-                          IAdmUtilGeneratorSmokePing,
-                          IAdmUtilGeneratorNagios,
+    for utilInterface, utilName in ((IAdmUtilSupervisor,'AdmUtilSupervisor'),
+#                                    (IAdmUtilEventCrossbar,);
+#                                    (IAdmUtilGeneratorSmokePing,),
+#                                    (IAdmUtilGeneratorNagios,),
                           ):
-        tmp_util = sm.getUtility(utilInterface)
+        tmp_util = sm.getUtility(utilInterface, name=utilName)
         if tmp_util is not None:
             try:
                 tickerAdapter = ITicker(tmp_util)
