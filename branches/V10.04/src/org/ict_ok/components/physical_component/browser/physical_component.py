@@ -73,7 +73,7 @@ def getRoom(item, formatter):
     tooltip = u''
     if hasattr(item, 'room') and item.room is not None:
         room = item.room
-        ttid = u"room" + room.getObjectId()
+        ttid = item.getObjectId() + u"room" + room.getObjectId()
         roomFullName = room.ikName
         roomNumberStr = u''
         if len(roomFullName) > 15:
