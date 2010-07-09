@@ -69,6 +69,8 @@ def getRoom(item, formatter):
     """
     Room title for Overview
     """
+    view_html = u''
+    tooltip = u''
     if hasattr(item, 'room') and item.room is not None:
         room = item.room
         ttid = u"room" + room.getObjectId()
