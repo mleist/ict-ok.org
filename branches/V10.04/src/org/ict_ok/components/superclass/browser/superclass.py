@@ -68,6 +68,7 @@ from org.ict_ok.components.superclass.superclass import \
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.components.supernode.interfaces import IState
 from org.ict_ok.components.interfaces import IComponent
+from org.ict_ok.components.interfaces import IComponentFolder
 from org.ict_ok.admin_utils.usermanagement.usermanagement import \
      getUserTimezone, convert2UserTimezone, AdmUtilUserProperties
 from org.ict_ok.admin_utils.eventcrossbar.interfaces import \
@@ -1218,7 +1219,8 @@ class Overview(BrowserPagelet):
             if compactView:
                 return [obj for obj in
                         objectsWithInterface(self.objListInterface)
-                        if len(obj)>0]
+                        if (IComponentFolder.providedBy(obj) and len(obj)>0) \
+                            or not IComponentFolder.providedBy(obj)]
             else:
                 return objectsWithInterface(self.objListInterface)
         else:
@@ -1226,7 +1228,8 @@ class Overview(BrowserPagelet):
             if compactView:
                 return [obj for obj in
                         self.context.values()
-                        if len(obj)>0]
+                        if (IComponentFolder.providedBy(obj) and len(obj)>0) \
+                            or not IComponentFolder.providedBy(obj)]
             else:
                 return self.context.values()
 
