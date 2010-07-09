@@ -152,8 +152,8 @@ class Overview(SuperOverview):
         GetterColumn(title="",
                      getter=getStateIcon,
                      cell_formatter=raw_cell_formatter),
-        GetterColumn(title=_('Health'),
-                     getter=getHealth),
+#        GetterColumn(title=_('Health'),
+#                     getter=getHealth),
         IctGetterColumn(title=_('Title'),
                         getter=getTitle,
                         cell_formatter=link('overview.html')),
@@ -162,7 +162,7 @@ class Overview(SuperOverview):
                         cell_formatter=fsearch_user_formatter),
         IctGetterColumn(title=_('Room'),
                         getter=getRoom,
-                        cell_formatter=link('details.html')),
+                        cell_formatter=raw_cell_formatter),
         DateGetterColumn(title=_('Modified'),
                         getter=getModifiedDate,
                         subsort=True,
@@ -172,7 +172,7 @@ class Overview(SuperOverview):
                      cell_formatter=raw_cell_formatter),
         )
     pos_column_index = 1
-    sort_columns = [1, 2, 3, 4, 5]
+    sort_columns = [1, 2, 3, 4]
 
 class AllNotebooks(Overview):
     objListInterface = INotebook

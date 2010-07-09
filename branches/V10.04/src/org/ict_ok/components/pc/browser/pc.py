@@ -39,6 +39,8 @@ from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 from org.ict_ok.components.superclass.browser.superclass import \
     GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
     getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
+from org.ict_ok.components.physical_component.browser.physical_component import \
+    getRoom
 
 _ = MessageFactory('org.ict_ok')
 
@@ -128,27 +130,23 @@ class ImportXlsDataForm(ImportXlsDataComponentForm):
     factoryId = u'org.ict_ok.components.pc.pc.PersonalComputer'
     allFields = fieldsForInterface(attrInterface, [])
 
-#def getRoom(item, formatter):
-#    if item.device is not None:
-#        return item.device.room
-#    return None
 
 class Overview(SuperOverview):
     columns = (
         GetterColumn(title="",
                      getter=getStateIcon,
                      cell_formatter=raw_cell_formatter),
-        GetterColumn(title=_('Health'),
-                     getter=getHealth),
+#        GetterColumn(title=_('Health'),
+#                     getter=getHealth),
         IctGetterColumn(title=_('Title'),
                         getter=getTitle,
                         cell_formatter=link('overview.html')),
 #        IctGetterColumn(title=_('Device'),
 #                        getter=lambda i,f: i.device,
 #                        cell_formatter=link('details.html')),
-#        IctGetterColumn(title=_('Room'),
-#                        getter=getRoom,
-#                        cell_formatter=link('details.html')),
+        IctGetterColumn(title=_('Room'),
+                        getter=getRoom,
+                        cell_formatter=raw_cell_formatter),
         DateGetterColumn(title=_('Modified'),
                         getter=getModifiedDate,
                         subsort=True,
@@ -158,4 +156,4 @@ class Overview(SuperOverview):
                      cell_formatter=raw_cell_formatter),
         )
     pos_column_index = 1
-    sort_columns = [1, 2, 3, 4, 5]
+    sort_columns = [1, 2, 3, 4]
