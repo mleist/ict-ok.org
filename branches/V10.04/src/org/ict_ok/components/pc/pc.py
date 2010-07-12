@@ -30,6 +30,8 @@ from lovely.relation.property import RelationPropertyOut
 from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
+from org.ict_ok.components.host.wf.nagios import pd as WfPdNagios
+from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 from org.ict_ok.components.component import getRefAttributeNames
 from org.ict_ok.components.superclass.superclass import Superclass
 from org.ict_ok.components.device.device import Device, DeviceFolder

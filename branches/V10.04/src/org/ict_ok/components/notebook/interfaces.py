@@ -27,11 +27,6 @@ _ = MessageFactory('org.ict_ok')
 class INotebook(Interface):
     """A Notebook object."""
 
-    def trigger_online():
-        """
-        trigger workflow
-        """
-
 
 class INotebookFolder(Interface):
     """Container for Notebook objects

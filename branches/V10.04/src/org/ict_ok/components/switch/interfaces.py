@@ -43,11 +43,6 @@ class ISwitch(Interface):
 #        value_type=Choice(vocabulary='AllUnusedOrUsedPhysicalConnectorInterfaces'),
 #        default=[],
 #        required = False)
-        
-    def trigger_online():
-        """
-        trigger workflow
-        """
 
 
 class ISwitchFolder(Interface):

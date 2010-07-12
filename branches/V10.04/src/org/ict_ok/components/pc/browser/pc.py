@@ -16,10 +16,15 @@ __version__ = "$Id$"
 # python imports
 
 # zope imports
+from zope.app import zapi
+from zope.component import getUtility
 from zope.i18nmessageid import MessageFactory
+from zope.app.intid.interfaces import IIntIds
+from zope.app.pagetemplate.urlquote import URLQuote
+from zope.app.appsetup import appsetup
+from zope.security import checkPermission
 
 # z3c imports
-from z3c.form import field
 from z3c.form.browser import checkbox
 
 # ict_ok.org imports
@@ -28,17 +33,18 @@ from org.ict_ok.components.pc.interfaces import \
     IPersonalComputer, IAddPersonalComputer, IPersonalComputerFolder
 from org.ict_ok.components.pc.pc import PersonalComputer
 from org.ict_ok.components.browser.component import ComponentDetails
+from org.ict_ok.components.device.browser.device import DeviceDetails
 from org.ict_ok.components.superclass.interfaces import IBrwsOverview
 from org.ict_ok.skin.menu import GlobalMenuSubItem, GlobalMenuAddItem
 from org.ict_ok.components.superclass.browser.superclass import \
-     AddForm, DeleteForm, DisplayForm, EditForm
+     DeleteForm, DisplayForm, EditForm
 from org.ict_ok.components.superclass.browser.superclass import \
     Overview as SuperOverview
 from org.ict_ok.components.browser.component import AddComponentForm
 from org.ict_ok.components.browser.component import ImportXlsDataComponentForm
 from org.ict_ok.components.superclass.browser.superclass import \
     GetterColumn, DateGetterColumn, getStateIcon, raw_cell_formatter, \
-    getHealth, getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
+    getTitle, getModifiedDate, link, getActionBottons, IctGetterColumn
 from org.ict_ok.components.physical_component.browser.physical_component import \
     getRoom
 
@@ -65,12 +71,34 @@ class MGlobalAddPersonalComputer(GlobalMenuAddItem):
 # --------------- object details ---------------------------
 
 
-class PersonalComputerDetails(ComponentDetails):
+class PersonalComputerDetails(DeviceDetails):
     """ Class for PersonalComputer details
     """
-    omit_viewfields = ComponentDetails.omit_viewfields + []
-    omit_addfields = ComponentDetails.omit_addfields + []
-    omit_editfields = ComponentDetails.omit_editfields + []
+    omit_viewfields = DeviceDetails.omit_viewfields + []
+    omit_addfields = DeviceDetails.omit_addfields + []
+    omit_editfields = DeviceDetails.omit_editfields + []
+
+    def actions(self):
+        """
+        gives us the action dict of the object
+        """
+        try:
+            objId = getUtility(IIntIds).getId(self.context)
+        except:
+            objId = 1000
+        retList = []
+        retList.extend(DeviceDetails.actions(self))
+        if appsetup.getConfigContext().hasFeature('devmode') and \
+           checkPermission('org.ict_ok.components.host.Edit', self.context):
+            quoter = URLQuote(self.request.getURL())
+            tmpDict = {}
+            tmpDict['oid'] = u"c%strigger_online" % objId
+            tmpDict['title'] = _(u"Trigger online")
+            tmpDict['href'] = u"%s/@@trigger_online?nextURL=%s" % \
+                   (zapi.absoluteURL(self.context, self.request),
+                    quoter.quote())
+            retList.append(tmpDict)
+        return retList
 
 
 class PersonalComputerFolderDetails(ComponentDetails):

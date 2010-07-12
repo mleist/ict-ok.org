@@ -25,10 +25,6 @@ _ = MessageFactory('org.ict_ok')
 
 class IMiscPhysical(Interface):
     """A MiscPhysical object."""
-    def trigger_online():
-        """
-        trigger workflow
-        """
 
 
 class IMiscPhysicalFolder(Interface):

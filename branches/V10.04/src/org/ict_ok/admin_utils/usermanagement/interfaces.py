@@ -147,6 +147,12 @@ class IAdmUtilUserPreferences(Interface):
         description=_("Time Zone used to display your calendar"),
         values=pytz.common_timezones,
         required = False)
+    listLen = Choice(
+        title=_("List length"),
+        description=_("Max. length of list displays"),
+        default=20,
+        values=[20, 40, 60, 80, 100, 200],
+        required = False)
     compactView = Bool(
         title = _("Compact view"),
         description = _("Compact view"),

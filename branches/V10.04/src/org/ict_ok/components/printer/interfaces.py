@@ -30,11 +30,6 @@ class IPrinter(Interface):
         title = _(u'Available paper types'),
         description = _(u"An array of free-form strings specifying the types and sizes of paper that are currently available on the Printer."),
         required = False)
-        
-    def trigger_online():
-        """
-        trigger workflow
-        """
 
 
 class IPrinterFolder(Interface):

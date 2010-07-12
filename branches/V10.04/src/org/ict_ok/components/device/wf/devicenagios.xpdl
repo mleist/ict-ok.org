@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<xpdl:Package xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="hostnagios" Name="hostnagios" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+<xpdl:Package xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="devnagios" Name="devnagios" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
     <xpdl:PackageHeader>
         <xpdl:XPDLVersion>1.0</xpdl:XPDLVersion>
-        <xpdl:Vendor>Together</xpdl:Vendor>
+        <xpdl:Vendor>Ing.buero IKOM GmbH</xpdl:Vendor>
         <xpdl:Created>2007-03-09 03:59:04</xpdl:Created>
     </xpdl:PackageHeader>
     <xpdl:RedefinableHeader PublicationStatus="UNDER_TEST"/>
     <xpdl:ConformanceClass GraphConformance="NON_BLOCKED"/>
     <xpdl:WorkflowProcesses>
-        <xpdl:WorkflowProcess AccessLevel="PUBLIC" Id="host_nagios1" Name="HostNagios">
+        <xpdl:WorkflowProcess AccessLevel="PUBLIC" Id="dev_nagios1" Name="DeviceNagios">
             <xpdl:ProcessHeader>
-                <xpdl:Created>2007-03-09 04:00:01</xpdl:Created>
+                <xpdl:Created>2010-07-11</xpdl:Created>
             </xpdl:ProcessHeader>
+            <xpdl:RedefinableHeader PublicationStatus="UNDER_REVISION"/>
             <xpdl:DataFields>
                 <xpdl:DataField Id="state" IsArray="FALSE" Name="Nagios State">
                     <xpdl:DataType>
@@ -84,10 +85,10 @@
                         <xpdl:TransitionRestriction>
                             <xpdl:Split Type="XOR">
                                 <xpdl:TransitionRefs>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra1"/>
-                                    <xpdl:TransitionRef Id="host_nagios_tra3"/>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra4"/>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra9"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra1"/>
+                                    <xpdl:TransitionRef Id="dev_nagios_tra3"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra4"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra9"/>
                                 </xpdl:TransitionRefs>
                             </xpdl:Split>
                         </xpdl:TransitionRestriction>
@@ -97,7 +98,7 @@
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="dev_nagios1_par2"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Activity>
-                <xpdl:Activity Id="dev_nagios1_act11" Name="Stop Host">
+                <xpdl:Activity Id="dev_nagios1_act11" Name="Stop Device">
                     <xpdl:Implementation>
                         <xpdl:Tool Id="ict_ok_stop" Type="APPLICATION"/>
                     </xpdl:Implementation>
@@ -134,9 +135,9 @@
                             <xpdl:Join Type="XOR"/>
                             <xpdl:Split Type="XOR">
                                 <xpdl:TransitionRefs>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra11"/>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra13"/>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra5"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra11"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra13"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra5"/>
                                 </xpdl:TransitionRefs>
                             </xpdl:Split>
                         </xpdl:TransitionRestriction>
@@ -162,9 +163,9 @@
                             <xpdl:Join Type="XOR"/>
                             <xpdl:Split Type="XOR">
                                 <xpdl:TransitionRefs>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra3"/>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra12"/>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra7"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra3"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra12"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra7"/>
                                 </xpdl:TransitionRefs>
                             </xpdl:Split>
                         </xpdl:TransitionRestriction>
@@ -190,9 +191,9 @@
                             <xpdl:Join Type="XOR"/>
                             <xpdl:Split Type="XOR">
                                 <xpdl:TransitionRefs>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra10"/>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra14"/>
-                                    <xpdl:TransitionRef Id="host_nagios1_tra6"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra10"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra14"/>
+                                    <xpdl:TransitionRef Id="dev_nagios1_tra6"/>
                                 </xpdl:TransitionRefs>
                             </xpdl:Split>
                         </xpdl:TransitionRestriction>
@@ -204,91 +205,91 @@
                 </xpdl:Activity>
             </xpdl:Activities>
             <xpdl:Transitions>
-                <xpdl:Transition From="initialize" Id="host_nagios1_tra2" To="dev_nagios1_act1">
+                <xpdl:Transition From="initialize" Id="dev_nagios1_tra2" To="dev_nagios1_act1">
                     <xpdl:Condition Type="CONDITION">new_state == "2_start"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act2" Id="host_nagios1_tra1" To="dev_nagios1_act4">
+                <xpdl:Transition From="dev_nagios1_act2" Id="dev_nagios1_tra1" To="dev_nagios1_act4">
                     <xpdl:Condition Type="CONDITION">new_state=="online"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act2" Id="host_nagios_tra3" To="dev_nagios1_act5">
+                <xpdl:Transition From="dev_nagios1_act2" Id="dev_nagios_tra3" To="dev_nagios1_act5">
                     <xpdl:Condition Type="CONDITION">new_state=="offline"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act2" Id="host_nagios1_tra4" To="dev_nagios1_act6">
+                <xpdl:Transition From="dev_nagios1_act2" Id="dev_nagios1_tra4" To="dev_nagios1_act6">
                     <xpdl:Condition Type="CONDITION">new_state=="notification1"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act1" Id="host_nagios1_tra8" To="dev_nagios1_act2">
+                <xpdl:Transition From="dev_nagios1_act1" Id="dev_nagios1_tra8" To="dev_nagios1_act2">
                     <xpdl:Condition Type="CONDITION">new_state == "2_nagios_check"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act2" Id="host_nagios1_tra9" To="dev_nagios1_act11">
+                <xpdl:Transition From="dev_nagios1_act2" Id="dev_nagios1_tra9" To="dev_nagios1_act11">
                     <xpdl:Condition Type="CONDITION">new_state=="stop"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act5" Id="host_nagios1_tra3" To="dev_nagios1_act4">
+                <xpdl:Transition From="dev_nagios1_act5" Id="dev_nagios1_tra3" To="dev_nagios1_act4">
                     <xpdl:Condition Type="CONDITION">new_state=="online"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act6" Id="host_nagios1_tra10" To="dev_nagios1_act4">
+                <xpdl:Transition From="dev_nagios1_act6" Id="dev_nagios1_tra10" To="dev_nagios1_act4">
                     <xpdl:Condition Type="CONDITION">new_state=="online"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act4" Id="host_nagios1_tra11" To="dev_nagios1_act6">
+                <xpdl:Transition From="dev_nagios1_act4" Id="dev_nagios1_tra11" To="dev_nagios1_act6">
                     <xpdl:Condition Type="CONDITION">new_state=="notification1"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act5" Id="host_nagios1_tra12" To="dev_nagios1_act6">
+                <xpdl:Transition From="dev_nagios1_act5" Id="dev_nagios1_tra12" To="dev_nagios1_act6">
                     <xpdl:Condition Type="CONDITION">new_state=="notification1"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act4" Id="host_nagios1_tra13" To="dev_nagios1_act5">
+                <xpdl:Transition From="dev_nagios1_act4" Id="dev_nagios1_tra13" To="dev_nagios1_act5">
                     <xpdl:Condition Type="CONDITION">new_state=="offline"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act6" Id="host_nagios1_tra14" To="dev_nagios1_act5">
+                <xpdl:Transition From="dev_nagios1_act6" Id="dev_nagios1_tra14" To="dev_nagios1_act5">
                     <xpdl:Condition Type="CONDITION">new_state=="offline"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act4" Id="host_nagios1_tra5" To="dev_nagios1_act11">
+                <xpdl:Transition From="dev_nagios1_act4" Id="dev_nagios1_tra5" To="dev_nagios1_act11">
                     <xpdl:Condition Type="CONDITION">new_state=="stop"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act6" Id="host_nagios1_tra6" To="dev_nagios1_act11">
+                <xpdl:Transition From="dev_nagios1_act6" Id="dev_nagios1_tra6" To="dev_nagios1_act11">
                     <xpdl:Condition Type="CONDITION">new_state=="stop"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
                     </xpdl:ExtendedAttributes>
                 </xpdl:Transition>
-                <xpdl:Transition From="dev_nagios1_act5" Id="host_nagios1_tra7" To="dev_nagios1_act11">
+                <xpdl:Transition From="dev_nagios1_act5" Id="dev_nagios1_tra7" To="dev_nagios1_act11">
                     <xpdl:Condition Type="CONDITION">new_state=="stop"</xpdl:Condition>
                     <xpdl:ExtendedAttributes>
                         <xpdl:ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
@@ -296,7 +297,7 @@
                 </xpdl:Transition>
             </xpdl:Transitions>
             <xpdl:ExtendedAttributes>
-                <xpdl:ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="dev_nagios1_par1;dev_nagios1_par2;FreeTextExpressionParticipant"/>
+                <xpdl:ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="dev_nagios1_par1;dev_nagios1_par2"/>
             </xpdl:ExtendedAttributes>
         </xpdl:WorkflowProcess>
     </xpdl:WorkflowProcesses>

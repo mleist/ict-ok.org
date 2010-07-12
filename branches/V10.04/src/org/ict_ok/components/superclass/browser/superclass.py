@@ -1244,6 +1244,11 @@ class Overview(BrowserPagelet):
                 objList = []
         columnList = list(self.columns)
         containerIsOrderd = IOrderedContainer.providedBy(self.context)
+        userManagement = queryUtility(IAdmUtilUserManagement)
+        if userManagement is not None:
+            batch_size = userManagement.listLen
+        else:
+            batch_size = 50
         if containerIsOrderd:
             getterC = GetterColumn(title=_('Pos'), getter=getPosition)
             #directlyProvides(getterC, ISortableColumn)
@@ -1255,7 +1260,7 @@ class Overview(BrowserPagelet):
                 self.context, self.request, objList,
                 columns=columnList,
                 sort_on=((_('Pos'), False),),
-                batch_size=50)
+                batch_size=batch_size)
         else:
             for i in self.sort_columns:
                 directlyProvides(columnList[i], ISortableColumn)
@@ -1268,7 +1273,7 @@ class Overview(BrowserPagelet):
                 self.context, self.request, objList,
                 columns=columnList,
                 sort_on=((self.firstSortOn, False),),
-                batch_size=50)
+                batch_size=batch_size)
         formatter.cssClasses['table'] = 'listing'
         return formatter()
 

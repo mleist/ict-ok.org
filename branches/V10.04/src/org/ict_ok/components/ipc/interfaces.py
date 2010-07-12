@@ -27,11 +27,6 @@ _ = MessageFactory('org.ict_ok')
 class IIndustrialComputer(Interface):
     """A IndustrialComputer object."""
 
-    def trigger_online():
-        """
-        trigger workflow
-        """
-
 
 class IIndustrialComputerFolder(Interface):
     """Container for IndustrialComputer objects

@@ -25,6 +25,9 @@ from lovely.relation.property import FieldRelationManager
 
 # ict_ok.org imports
 from org.ict_ok.components.component import getRefAttributeNames
+from org.ict_ok.components.supernode.interfaces import IState
+from org.ict_ok.components.device.wf.nagios import pd as WfPdNagios
+from org.ict_ok.admin_utils.wfmc.wfmc import AdmUtilWFMC
 from org.ict_ok.components.device.interfaces import IDevice, IDeviceFolder
 from org.ict_ok.components.interface.interfaces import IInterface
 from org.ict_ok.components.appsoftware.interfaces import IApplicationSoftware
@@ -92,6 +95,11 @@ class Device(PhysicalComponent):
 
     fullTextSearchFields = ['cpuType']
     fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
+    
+    # Workflows
+    wf_pd_dict = {}
+    wf_pd_dict[WfPdNagios.id] = WfPdNagios
+    AdmUtilWFMC.wf_pd_dict[WfPdNagios.id] = WfPdNagios
 
     def __init__(self, **data):
         """
@@ -104,6 +112,11 @@ class Device(PhysicalComponent):
                name not in refAttributeNames:
                 setattr(self, name, value)
         self.ikRevision = __version__
+        self.workflows[WfPdNagios.id] = nagios_wf = WfPdNagios()
+        setattr(nagios_wf.workflowRelevantData, "state", "-")
+        setattr(nagios_wf.workflowRelevantData, "object", self)
+        setattr(nagios_wf.workflowRelevantData, "new_state", "2_start")
+        nagios_wf.start()
 
     def getRefAttributeNames(self):
         return getRefAttributeNames(Device)
@@ -114,6 +127,36 @@ class Device(PhysicalComponent):
         for (name, value) in data.items():
             if name in refAttributeNames:
                 setattr(self, name, value)
+
+    def trigger_online(self):
+        """
+        trigger workflow
+        """
+        print "trigger_online"
+        lastWorkItem = list(self.wf_worklist)[-1]
+        wfd = lastWorkItem.participant.activity.process.workflowRelevantData
+        wfd.new_state = "online"
+        lastWorkItem.change()
+
+    def trigger_offline(self):
+        """
+        trigger workflow
+        """
+        print "trigger_offline"
+        lastWorkItem = list(self.wf_worklist)[-1]
+        wfd = lastWorkItem.participant.activity.process.workflowRelevantData
+        wfd.new_state = "offline"
+        lastWorkItem.change()
+
+    def trigger_not1(self):
+        """
+        trigger workflow
+        """
+        print "trigger_not1"
+        lastWorkItem = list(self.wf_worklist)[-1]
+        wfd = lastWorkItem.participant.activity.process.workflowRelevantData
+        wfd.new_state = "notification1"
+        lastWorkItem.change()
 
 
 class DeviceFolder(ComponentFolder):

@@ -27,11 +27,6 @@ _ = MessageFactory('org.ict_ok')
 class IPersonalComputer(Interface):
     """A PersonalComputer object."""
 
-    def trigger_online():
-        """
-        trigger workflow
-        """
-
 
 class IPersonalComputerFolder(Interface):
     """Container for PersonalComputer objects

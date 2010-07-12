@@ -444,8 +444,8 @@ class AddComponentForm(AddForm):
         else:
             self.fields = self.allFields
         return AddForm.update(self)
-    
-    @button.buttonAndHandler(u'Cancel')
+
+    @button.buttonAndHandler(_('Cancel'))
     def handleCancel(self, action):
         """cancel was pressed"""
         session = ISession(self.request)[self._session_key]
@@ -456,6 +456,11 @@ class AddComponentForm(AddForm):
         url = absoluteURL(self.context, self.request)
         self.request.response.redirect(url)
         
+    @button.buttonAndHandler(_('Add + view'))
+    def handleAddEdit(self, action):
+        self.redirect2view = True
+        return self.handleAdd(self, action)
+    
     @button.buttonAndHandler(_('Add'), name='add')
     def handleAdd(self, action):
         """submit was pressed"""
@@ -515,8 +520,13 @@ class AddComponentForm(AddForm):
                 # mark only as finished if we get the new object
                 self._finishedAdd = True
                 session['state'] = "done" 
-            url = absoluteURL(self, self.request)
-            self.request.response.redirect(url)
+            redirect2view = getattr(self, 'redirect2view', None)
+            if redirect2view is not None and redirect2view is True:
+                url = absoluteURL(obj, self.request)
+                self.request.response.redirect(url)
+            else:
+                url = absoluteURL(self, self.request)
+                self.request.response.redirect(url)
 
 
 class ImportXlsDataComponentForm(layout.FormLayoutSupport, form.Form):

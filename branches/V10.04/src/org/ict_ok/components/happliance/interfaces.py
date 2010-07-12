@@ -27,11 +27,6 @@ _ = MessageFactory('org.ict_ok')
 class IHardwareAppliance(Interface):
     """A HardwareAppliance object."""
 
-    def trigger_online():
-        """
-        trigger workflow
-        """
-
 
 class IHardwareApplianceFolder(Interface):
     """Container for HardwareAppliance objects

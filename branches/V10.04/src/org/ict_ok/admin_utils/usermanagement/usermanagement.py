@@ -131,6 +131,20 @@ class AdmUtilUserManagement(Supernode, PluggableAuthentication):
         AdmUtilUserProperties(self.getRequest().principal).timezone = my_val
     timezone = property(get_timezone, set_timezone)
 
+    # temp. workaround for "user specific list Length" in normal form
+    def get_listLen(self):
+        """ property getter"""
+        principal = self.getRequest().principal
+        try:
+            return AdmUtilUserProperties(principal).listLen
+        except KeyError, errText:
+            AdmUtilUserProperties(principal).listLen = 20
+            return AdmUtilUserProperties(principal).listLen
+    def set_listLen(self, my_val):
+        """ property setter"""
+        principal = self.getRequest().principal
+        AdmUtilUserProperties(principal).listLen = my_val
+    listLen = property(get_listLen, set_listLen)
 
     # temp. workaround for "user specific compactView" in normal form
     def get_compactView(self):
@@ -310,6 +324,7 @@ class AdmUtilUserProperties(object):
         mapping = annotations.get(KEY)
         if mapping is None:
             blank = { 'timezone': u'',
+                      'listLen': 20,
                       'navExplanation': False,
                       'compactView': False,
                       'email': u'',
@@ -324,6 +339,7 @@ class AdmUtilUserProperties(object):
         self.mapping = mapping
             
     email = MappingProperty('email')
+    listLen = MappingProperty('listLen')
     navExplanation = MappingProperty('navExplanation')
     compactView = MappingProperty('compactView')
     startView = MappingProperty('startView')

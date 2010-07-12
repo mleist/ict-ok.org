@@ -63,6 +63,22 @@ class IDevice(Interface):
                       required=False,
                       default=[])
 
+    def trigger_online():
+        """
+        trigger workflow
+        """
+
+    def trigger_offline():
+        """
+        trigger workflow
+        """
+
+    def trigger_not1():
+        """
+        trigger workflow
+        """
+        
+
 class IDeviceFolder(Interface):
     """Container for Notebook objects
     """

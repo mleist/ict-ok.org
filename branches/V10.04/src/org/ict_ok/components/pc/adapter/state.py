@@ -16,10 +16,13 @@ __version__ = "$Id$"
 # zope imports
 from zope.interface import implements
 from zope.component import adapts
+from zope.i18nmessageid import MessageFactory
 
 # ict_ok.org imports
 from org.ict_ok.components.pc.interfaces import IPersonalComputer
 from org.ict_ok.components.supernode.interfaces import IState
+
+_ = MessageFactory('org.ict_ok')
 
 
 class State(object):
@@ -36,3 +39,33 @@ class State(object):
         """get State-Value of the Object (0-100)
         """
         return 55
+
+    def getStateDict(self):
+        """get the object state in form of a dict
+        """
+        overviewNum = 0 # 0: ok, 1: warn, 2: error
+        warnList = []
+        errorList = []
+        retDict = {}
+#        obj = removeAllProxies(self.context)
+#        owfs = obj.workflows
+#        wfrd = owfs['host_nagios1'].workflowRelevantData
+#        if wfrd.state == "offline":
+        if True:
+            if overviewNum < 1:
+                overviewNum = 1
+            mesg = _(u'Warning: ')
+            mesg += _(u"'host is offline'")
+            warnList.append(mesg)
+#        if wfrd.state == "notification1":
+#            if overviewNum < 2:
+#                overviewNum = 2
+#            mesg = _(u'Error: ')
+#            mesg += _(u"'host is in notification1'")
+#            warnList.append(mesg)
+        retDict['overview'] = ('ok', 'warn', 'error')[overviewNum]
+        retDict['warnings'] = warnList
+        retDict['errors'] = errorList
+        if overviewNum == 0:
+            return None
+        return retDict
