@@ -152,9 +152,9 @@ ndo_event_types = {
 def triggerNdoEvent(arg_dict, sitemgr):
     """
     """
-    print "triggerNdoEvent                              <-----------------"
-    import pprint
-    pprint.pprint(arg_dict)
+#    print "triggerNdoEvent                              <-----------------"
+#    import pprint
+#    pprint.pprint(arg_dict)
     #if arg_dict.has_key('114') and arg_dict['114'] == "1234567890as" \
     if False and \
        (arg_dict.has_key('1')) and \
@@ -557,8 +557,8 @@ def runner():
     sitemgr = site.getSiteManager()
     admSupervisor = sitemgr.getUtility(IAdmUtilSupervisor, name='AdmUtilSupervisor')
     #print "admSupervisor: ", admSupervisor
-    if _pQueue.qsize() > 0:
-        print "queue: ", _pQueue.qsize()
+#    if _pQueue.qsize() > 0:
+#        print "queue: ", _pQueue.qsize()
     while _pQueue.qsize() > 0:
         tmpObj = _pQueue.get()
         triggerNdoEvent(tmpObj, sitemgr)
