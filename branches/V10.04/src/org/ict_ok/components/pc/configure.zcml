@@ -168,16 +168,16 @@
 
     <!--  other adapters ================================================ -->
 
-    <adapter
+    <!--adapter
         factory=".adapter.state.State"
-        />
+        /-->
     <adapter
         factory=".adapter.navigation.Navigation"
     />
-    <adapter
+    <!--adapter
         factory=".adapter.nagios.GenNagios"
         permission="org.ict_ok.admin_utils.generators.nagios.View"
-    />
+    /-->
 
     <!--  Vocabulary stuff ============================================== -->
 

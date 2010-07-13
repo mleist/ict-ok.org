@@ -30,7 +30,6 @@ from org.ict_ok.components.component import ComponentFolder
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates
 from org.ict_ok.components.device.device import Device
-from org.ict_ok.admin_utils.generators.nagios.interfaces import INagiosCheck
 
 def AllPrinterTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IPrinter)
@@ -43,13 +42,12 @@ class Printer(Device):
     """
     the template instance
     """
-    implements(IPrinter, INagiosCheck)
+    implements(IPrinter)
     shortName = "printer"
     # for ..Contained we have to:
     __name__ = __parent__ = None
 
     paperTypesAvailable = FieldProperty(IPrinter['paperTypesAvailable'])
-    genNagios = FieldProperty(INagiosCheck['genNagios'])
 
     fullTextSearchFields = ['paperTypesAvailable']
     fullTextSearchFields.extend(Device.fullTextSearchFields)

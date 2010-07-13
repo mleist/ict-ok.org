@@ -17,8 +17,9 @@ from zope.app.generations.utility import findObjectsProviding
 
 # ict_ok.org imports
 from org.ict_ok.components.device.interfaces import IDevice
+from org.ict_ok.components.device.wf.nagios import pd as WfPdNagios
 
-generation = 1
+generation = 2
 
 def evolve(context):
     u"""
@@ -31,4 +32,9 @@ def evolve(context):
         # convert this object
         evolve_msg = "gen. %d (%s)" % \
                    (generation, evolve.__doc__.strip())
+        ikobj.workflows[WfPdNagios.id] = nagios_wf = WfPdNagios()
+        setattr(nagios_wf.workflowRelevantData, "state", "-")
+        setattr(nagios_wf.workflowRelevantData, "object", ikobj)
+        setattr(nagios_wf.workflowRelevantData, "new_state", "2_start")
+        nagios_wf.start()
         ikobj.appendHistoryEntry(evolve_msg)

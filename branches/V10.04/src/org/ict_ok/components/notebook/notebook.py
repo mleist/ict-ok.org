@@ -27,8 +27,6 @@ from org.ict_ok.components.device.device import Device, DeviceFolder
 from org.ict_ok.components.interfaces import IImportXlsData
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates, AllUnusedOrSelfComponents
-from org.ict_ok.admin_utils.generators.nagios.interfaces import INagiosCheck
-
 
 def AllNotebookTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, INotebook)
@@ -44,10 +42,8 @@ class Notebook(Device):
     """
     the template instance
     """
-    implements(INotebook, INagiosCheck)
+    implements(INotebook)
     shortName = "notebook"
-    
-    genNagios = FieldProperty(INagiosCheck['genNagios'])
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Device.fullTextSearchFields)

@@ -87,7 +87,7 @@ class DeviceDetails(ComponentDetails):
         """
         trigger workflow
         """
-        print "trigger_online@browser"
+#        print "trigger_online@browser"
         self.context.trigger_online()
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:
@@ -99,7 +99,7 @@ class DeviceDetails(ComponentDetails):
         """
         trigger workflow
         """
-        print "trigger_offline@browser"
+#        print "trigger_offline@browser"
         self.context.trigger_offline()
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:
@@ -111,7 +111,7 @@ class DeviceDetails(ComponentDetails):
         """
         trigger workflow
         """
-        print "trigger_not1@browser"
+#        print "trigger_not1@browser"
         self.context.trigger_not1()
         nextURL = self.request.get('nextURL', default=None)
         if nextURL:

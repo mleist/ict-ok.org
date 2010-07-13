@@ -39,6 +39,7 @@ from org.ict_ok.components.component import \
 from org.ict_ok.components.physical_component.physical_component import \
     PhysicalComponent
 from org.ict_ok.components.component import ComponentFolder
+from org.ict_ok.admin_utils.generators.nagios.interfaces import INagiosCheck
 
 def AllDeviceTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IDevice)
@@ -79,7 +80,7 @@ class Device(PhysicalComponent):
     """
     the template instance
     """
-    implements(IDevice)
+    implements(IDevice, INagiosCheck)
     shortName = "device"
     __name__ = __parent__ = None
     cpuType = FieldProperty(IDevice['cpuType'])
@@ -95,6 +96,8 @@ class Device(PhysicalComponent):
 
     fullTextSearchFields = ['cpuType']
     fullTextSearchFields.extend(PhysicalComponent.fullTextSearchFields)
+
+    genNagios = FieldProperty(INagiosCheck['genNagios'])
     
     # Workflows
     wf_pd_dict = {}
@@ -132,7 +135,7 @@ class Device(PhysicalComponent):
         """
         trigger workflow
         """
-        print "trigger_online"
+#        print "trigger_online"
         lastWorkItem = list(self.wf_worklist)[-1]
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "online"
@@ -142,7 +145,7 @@ class Device(PhysicalComponent):
         """
         trigger workflow
         """
-        print "trigger_offline"
+#        print "trigger_offline"
         lastWorkItem = list(self.wf_worklist)[-1]
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "offline"
@@ -152,7 +155,7 @@ class Device(PhysicalComponent):
         """
         trigger workflow
         """
-        print "trigger_not1"
+#        print "trigger_not1"
         lastWorkItem = list(self.wf_worklist)[-1]
         wfd = lastWorkItem.participant.activity.process.workflowRelevantData
         wfd.new_state = "notification1"

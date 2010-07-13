@@ -28,7 +28,6 @@ from org.ict_ok.components.ipc.interfaces \
     import IIndustrialComputer, IIndustrialComputerFolder, IAddIndustrialComputer
 from org.ict_ok.components.component import \
     AllComponents, AllComponentTemplates
-from org.ict_ok.admin_utils.generators.nagios.interfaces import INagiosCheck
 
 def AllIndustrialComputerTemplates(dummy_context):
     return AllComponentTemplates(dummy_context, IIndustrialComputer)
@@ -41,11 +40,10 @@ class IndustrialComputer(Device):
     """
     the template instance
     """
-    implements(IIndustrialComputer, INagiosCheck)
+    implements(IIndustrialComputer)
     shortName = "ipc"
     # for ..Contained we have to:
     __name__ = __parent__ = None
-    genNagios = FieldProperty(INagiosCheck['genNagios'])
 
     fullTextSearchFields = []
     fullTextSearchFields.extend(Device.fullTextSearchFields)
