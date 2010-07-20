@@ -21,17 +21,17 @@ __version__ = "$Id$"
 
 import sys
 sys.path[0:0] = [
-  '/opt/markus/ICT-OKs/ict-ok_10.04/src',
-  '/opt/markus/ICT-OKs/ict-ok_10.04/py_eggs/zdaemon-2.0.4-py2.6.egg',
-  '/opt/markus/ICT-OKs/ict-ok_10.04/py_eggs/setuptools-0.6c11-py2.6.egg',
-  '/opt/markus/ICT-OKs/ict-ok_10.04/py_eggs/ZConfig-2.8.0-py2.6.egg',
-  '/opt/markus/ICT-OKs/ict-ok_10.04/py_eggs/zc.zope3recipes-0.11.0-py2.6.egg',
+  '/opt/ict-ok_1004/src',
+  '/opt/ict-ok_1004/py_eggs/zdaemon-2.0.4-py2.6.egg',
+  '/opt/ict-ok_1004/py_eggs/setuptools-0.6c11-py2.6.egg',
+  '/opt/ict-ok_1004/py_eggs/ZConfig-2.8.0-py2.6.egg',
+  '/opt/ict-ok_1004/py_eggs/zc.zope3recipes-0.11.0-py2.6.egg',
   ]
 
 import zdaemon.zdctl
 
 if __name__ == '__main__':
     zdaemon.zdctl.main([
-        '-C', '/opt/markus/ICT-OKs/ict-ok_10.04/src/org/ict_ok/agents/cron/zdaemon.conf',
+        '-C', '/opt/ict-ok_1004/src/org/ict_ok/agents/cron/zdaemon.conf',
         ]+sys.argv[1:]
         )
