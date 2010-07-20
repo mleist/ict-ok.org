@@ -168,9 +168,9 @@
 
     <!--  other adapters ================================================ -->
 
-    <adapter
+    <!-- adapter
         factory=".adapter.state.State"
-        />
+        / -->
     <adapter
         factory=".adapter.navigation.Navigation"
         />
